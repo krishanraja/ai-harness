@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Nine candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Ten candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 9 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 9 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `build-apps-with-krish`). A smaller prior `mindmaker-os` run remains limited evidence.
+- Repository-enforced minimum-sized trigger and behavior suites: 10 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `krish-design`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 10 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `build-apps-with-krish`, `krish-design`). A smaller prior `mindmaker-os` run remains limited evidence.
 
 ## Rating method
 
@@ -49,7 +49,7 @@ Current measurable state:
 | `content-corpus` | Channel context | Strong, status-aware router plus channel references | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and named-channel canary |
 | `krish-voice` | Personal outbound voice | Deep but at 494-line limit | current | active and staged drift; no exact copy | enabled, 2026-08-03 | Structural | Progressive split plus held-out real Krish corpus for prose, email, deck, de-AI, uncertainty, and mimicry |
 | `krish-content-marketer` | Conversion strategy | Strong, bounded producer with governed learning | current; reviewed 2026-08-05 | absent | enabled stale 2026-06-11 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and conversion/voice handoff canary |
-| `krish-design` | Personal design doctrine | Strong | current | older staged archive | enabled older 2026-07-03 copy | Structural | Reference artifacts/counterexamples, responsive/accessibility trade-offs, design/UX/build collisions |
+| `krish-design` | Personal design doctrine | Strong after explicit proof/authority/handoff contracts | current | older staged archive | enabled older 2026-07-03 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Real rendered-artifact canary with Krish reaction, implementation handoff, responsive/accessibility proof, and parity |
 | `krish-build` | Technical producer doctrine | Strong after runtime proof reference | current | older staged archive | enabled older 2026-07-03 copy | Structural | Repo/environment, partial build, stale deploy, rollback, user-change preservation, and delivery suite |
 | `build-apps-with-krish` | App-delivery orchestrator | Strong after explicit phase/reset contracts | current | absent | absent | Independent suite pass: 24/24 triggers, 29/29 behaviors | Rendered multi-session app canary with real Krish reactions, implementation handoff, production readback, and rollback |
 | `ux-foundations` | Narrow generic UX reference | Thin | current | exact staged archive; no exact active copy | enabled, 2026-07-03 | Structural | Primary provenance/WCAG freshness plus lookup-only and design-collision suite |

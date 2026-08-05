@@ -190,6 +190,8 @@ $contentCorpusTriggerCases = Join-Path $Root 'evals\content-corpus-trigger-cases
 $contentCorpusBehaviorCases = Join-Path $Root 'evals\content-corpus-behavior-cases.jsonl'
 $contentMarketerTriggerCases = Join-Path $Root 'evals\krish-content-marketer-trigger-cases.jsonl'
 $contentMarketerBehaviorCases = Join-Path $Root 'evals\krish-content-marketer-behavior-cases.jsonl'
+$designTriggerCases = Join-Path $Root 'evals\krish-design-trigger-cases.jsonl'
+$designBehaviorCases = Join-Path $Root 'evals\krish-design-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -296,6 +298,11 @@ foreach ($spec in $commercialEvalSpecs) {
     Test-EvalCategoryMinimums -Records $commercialTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label "$($spec.Name) trigger suite"
     Test-EvalCategoryMinimums -Records $commercialBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label "$($spec.Name) behavior suite"
 }
+
+$designTriggers = @(Read-JsonLines -Path $designTriggerCases)
+$designBehaviors = @(Read-JsonLines -Path $designBehaviorCases)
+Test-EvalCategoryMinimums -Records $designTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'krish-design trigger suite'
+Test-EvalCategoryMinimums -Records $designBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'krish-design behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
