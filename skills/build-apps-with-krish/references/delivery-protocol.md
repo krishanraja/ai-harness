@@ -70,9 +70,10 @@ For each material surface:
 4. Verify that the artifact actually rendered and is the version being shown.
 5. Present it cold, without a persuasive walkthrough, rationale, or change log before Krish's first reaction. Apply the same rule to every revised material mock. Do not hide safety, authority, factual, or data constraints required for a responsible judgment.
 6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect. After that first reaction, reveal a concise map of prior feedback to change to evidence.
-7. If rejected, revise that surface only and repeat.
-8. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
-9. Only then begin the next material surface.
+7. If rejected, record the conceptual spine and same-spine revision count, revise that surface only, and repeat.
+8. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
+9. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
+10. Only then begin the next material surface.
 
 Gate: explicit approval of the rendered revision. Silence, approval of the idea, or approval of a prior version does not pass.
 
@@ -141,6 +142,7 @@ Apply concentrated rigor. A check belongs when its failure could change the verd
 - Render at the real container size and intended viewport. Confirm file size, modification time, revision, and visible output before presentation.
 - Keep the first reaction unanchored. Do not explain why the mock should work until Krish has given the immediate read.
 - Treat every revision as a fresh taste test. Show the revised artifact cold, collect the first reaction, then disclose what changed and why. The post-reaction change map should be terse and traceable: prior feedback, implemented change, verification evidence.
+- Track revised attempts by conceptual spine. Two consecutive rejected revisions are evidence that local refinement has stalled: return to independent concept generation and fresh-context judging instead of producing a third same-spine revision. Reset the count for the newly selected spine. Krish may explicitly ask to keep refining the current spine after seeing that consequence.
 - Number variants, fixtures, or cells when asynchronous or voice-note review will be easier by reference number.
 - Treat small visual objections as possible system evidence. A cramped label can reveal a bad content contract, spacing token, responsive rule, or component architecture.
 - Separate product philosophy, information structure, visual execution, copy stance, and implementation bugs. Fix at the lowest correct layer.
@@ -219,5 +221,6 @@ Material adaptation:
 - assigned taste, implementation, UX testing, verification, and durable decision memory to their existing owners instead of copying their doctrine;
 - added Krish's 2026-08-05 decision that each new or materially changed visual surface requires one rendered mock and explicit approval, while routine work inside a locked system proceeds autonomously.
 - added Krish's 2026-08-05 decision that every revised material mock is also shown cold, with the change log withheld until after his first reaction while safety and factual context remain visible.
+- added Krish's 2026-08-05 decision that two consecutive rejected revisions of one conceptual spine trigger fresh divergence and adversarial judging unless he explicitly asks to keep refining it.
 
 Freshness SLA: 90 days, or immediately after a direct correction to the collaboration cadence, a material build failure exposes a missing gate, or the neighboring skill boundaries change. Expiry opens a review finding; it does not silently alter the method.

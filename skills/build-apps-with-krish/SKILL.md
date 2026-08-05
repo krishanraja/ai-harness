@@ -67,6 +67,8 @@ Hard gate: present one rendered artifact and wait for Krish's explicit approval 
 
 Revision gate: show every revised material mock cold as well. Withhold the design rationale and change log until after Krish gives his first reaction, then reveal a concise map of prior feedback to change to evidence. Never withhold a safety, authority, factual, or data constraint that Krish needs in order to judge responsibly.
 
+Concept-reset gate: enforce `krish-design`'s two-revision limit. After two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
+
 Routine work inside the locked system includes applying approved tokens/components, fixing an implementation defect, wiring approved states, replacing stale content, or extending a known pattern without changing its meaning. Execute and verify these autonomously. If classification is genuinely ambiguous, surface the exact boundary question rather than assuming.
 
 Krish may explicitly override the boundary for a named task after the trade-off is clear. Record the override and its scope. Do not interpret urgency, silence, or approval of an earlier surface as a blanket waiver.
@@ -111,7 +113,7 @@ Link finalized consequential decisions to `decision-ledger`; do not copy operati
 ## Failure handling
 
 - If corpus, documentation, and live product disagree, stop dependent mutation and reconcile the authoritative source.
-- If Krish rejects a mock, record the failure signal and classification, revise that surface only, and present the next rendered version. Do not defend the artifact or progress downstream.
+- If Krish rejects a mock, record the failure signal, classification, conceptual spine, and same-spine revision count. Revise that surface only and present the next rendered version. After two consecutive rejected revisions, rerun fresh divergence for that surface unless Krish explicitly asks to keep refining the current spine. Do not defend the artifact or progress downstream.
 - If a later rule exposes a problem in an approved throwaway mock, record a carry-forward correction for implementation unless the problem invalidates the product decision itself.
 - If a test passes but the stored state, user task, or pixels fail, the phase fails. Correct the smallest root cause within authority and rerun the failed and adjacent checks.
 - If access or tooling prevents proof, preserve resumable state and report the exact unverified condition. Never convert inference into a green status.
