@@ -65,6 +65,8 @@ Treat a surface as material when the work introduces or changes any of these:
 
 Hard gate: present one rendered artifact and wait for Krish's explicit approval before implementation or the next material surface. Present it neutrally enough to preserve his first reaction. After approval, lock the artifact and continue.
 
+Revision gate: show every revised material mock cold as well. Withhold the design rationale and change log until after Krish gives his first reaction, then reveal a concise map of prior feedback to change to evidence. Never withhold a safety, authority, factual, or data constraint that Krish needs in order to judge responsibly.
+
 Routine work inside the locked system includes applying approved tokens/components, fixing an implementation defect, wiring approved states, replacing stale content, or extending a known pattern without changing its meaning. Execute and verify these autonomously. If classification is genuinely ambiguous, surface the exact boundary question rather than assuming.
 
 Krish may explicitly override the boundary for a named task after the trade-off is clear. Record the override and its scope. Do not interpret urgency, silence, or approval of an earlier surface as a blanket waiver.

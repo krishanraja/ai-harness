@@ -68,8 +68,8 @@ For each material surface:
 2. If the concept is load-bearing and genuinely novel, generate independent concept spines, score them with fresh-context adversarial judges, and synthesize the strongest while preserving real code and data constraints. Do not expose a fantasy that cannot survive the shipped system.
 3. Produce one rendered, self-contained mock of the synthesis at the intended viewport and state. Show multiple variants only when comparing them is the decision Krish must make.
 4. Verify that the artifact actually rendered and is the version being shown.
-5. Present it without a persuasive walkthrough before Krish's first reaction.
-6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect.
+5. Present it cold, without a persuasive walkthrough, rationale, or change log before Krish's first reaction. Apply the same rule to every revised material mock. Do not hide safety, authority, factual, or data constraints required for a responsible judgment.
+6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect. After that first reaction, reveal a concise map of prior feedback to change to evidence.
 7. If rejected, revise that surface only and repeat.
 8. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
 9. Only then begin the next material surface.
@@ -140,6 +140,7 @@ Apply concentrated rigor. A check belongs when its failure could change the verd
 - Show one surface and one primary state. Use alternate states within the same review only when the decision cannot be made without comparing them.
 - Render at the real container size and intended viewport. Confirm file size, modification time, revision, and visible output before presentation.
 - Keep the first reaction unanchored. Do not explain why the mock should work until Krish has given the immediate read.
+- Treat every revision as a fresh taste test. Show the revised artifact cold, collect the first reaction, then disclose what changed and why. The post-reaction change map should be terse and traceable: prior feedback, implemented change, verification evidence.
 - Number variants, fixtures, or cells when asynchronous or voice-note review will be easier by reference number.
 - Treat small visual objections as possible system evidence. A cramped label can reveal a bad content contract, spacing token, responsive rule, or component architecture.
 - Separate product philosophy, information structure, visual execution, copy stance, and implementation bugs. Fix at the lowest correct layer.
@@ -217,5 +218,6 @@ Material adaptation:
 - left CTRL product decisions, operational status, provider credentials, project identifiers, and historical tool permissions in project corpus;
 - assigned taste, implementation, UX testing, verification, and durable decision memory to their existing owners instead of copying their doctrine;
 - added Krish's 2026-08-05 decision that each new or materially changed visual surface requires one rendered mock and explicit approval, while routine work inside a locked system proceeds autonomously.
+- added Krish's 2026-08-05 decision that every revised material mock is also shown cold, with the change log withheld until after his first reaction while safety and factual context remain visible.
 
 Freshness SLA: 90 days, or immediately after a direct correction to the collaboration cadence, a material build failure exposes a missing gate, or the neighboring skill boundaries change. Expiry opens a review finding; it does not silently alter the method.
