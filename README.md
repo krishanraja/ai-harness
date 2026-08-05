@@ -27,7 +27,7 @@ The validator checks frontmatter, names, description limits, the 500-line main-f
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\Build-HarnessRelease.ps1 -ReleaseId preview
 ```
 
-The builder validates first, then creates deterministic `.skill` archives and a release manifest containing source and artifact SHA-256 hashes.
+The builder requires a clean Git tree, validates first, then creates deterministic `.skill` archives and a release manifest containing the source commit, full source-skill SHA-256, manifest SHA-256, artifact SHA-256, and working-tree state. `-AllowDirtyPreview` exists only for testing the tooling and must not be used as release evidence.
 
 ## Release boundary
 

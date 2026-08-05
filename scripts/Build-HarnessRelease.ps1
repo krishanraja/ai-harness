@@ -1,12 +1,28 @@
 param(
     [string]$Root = (Split-Path -Parent $PSScriptRoot),
     [string]$OutputDirectory = (Join-Path (Split-Path -Parent $PSScriptRoot) 'dist'),
-    [string]$ReleaseId = 'preview'
+    [string]$ReleaseId = 'preview',
+    [switch]$AllowDirtyPreview
 )
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+if ($ReleaseId -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]*$') {
+    throw 'ReleaseId must start with an alphanumeric character and contain only alphanumerics, dots, underscores, or hyphens.'
+}
+
+$commit = (& git -C $Root rev-parse HEAD 2>$null)
+if ($LASTEXITCODE -ne 0 -or -not $commit) { throw 'Release builds require a Git commit.' }
+$commit = $commit.Trim()
+
+$workingTreeChanges = @(& git -C $Root status --porcelain --untracked-files=all 2>$null)
+if ($LASTEXITCODE -ne 0) { throw 'Could not verify the Git working tree.' }
+$treeState = $(if ($workingTreeChanges.Count -eq 0) { 'clean' } else { 'dirty-preview' })
+if ($treeState -ne 'clean' -and -not $AllowDirtyPreview) {
+    throw 'Release builds require a clean working tree. Commit or remove staged, modified, and untracked files; use -AllowDirtyPreview only for non-release tooling tests.'
+}
 
 $validator = Join-Path $PSScriptRoot 'Test-Harness.ps1'
 & $validator -Root $Root
@@ -42,11 +58,22 @@ function New-DeterministicSkillArchive {
     finally { $stream.Dispose() }
 }
 
-$commit = 'UNCOMMITTED'
-try {
-    $candidate = (& git -C $Root rev-parse HEAD 2>$null)
-    if ($LASTEXITCODE -eq 0 -and $candidate) { $commit = $candidate.Trim() }
-} catch {}
+function Get-DirectoryArtifactSha256 {
+    param([IO.DirectoryInfo]$Directory)
+
+    $records = New-Object System.Collections.Generic.List[string]
+    $files = @(Get-ChildItem -LiteralPath $Directory.FullName -Recurse -File -Force | Sort-Object FullName)
+    foreach ($file in $files) {
+        $relative = $file.FullName.Substring($Directory.FullName.Length).TrimStart('\') -replace '\\', '/'
+        $fileHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
+        $records.Add("$relative`0$fileHash")
+    }
+
+    $payload = [Text.Encoding]::UTF8.GetBytes(($records -join "`n"))
+    $hasher = [Security.Cryptography.SHA256]::Create()
+    try { return ([BitConverter]::ToString($hasher.ComputeHash($payload))).Replace('-', '') }
+    finally { $hasher.Dispose() }
+}
 
 $records = New-Object System.Collections.Generic.List[object]
 $skillsRoot = Join-Path $Root 'skills'
@@ -60,7 +87,8 @@ foreach ($skill in $skillDirectories) {
         name = $skill.Name
         release_id = $ReleaseId
         source_commit = $commit
-        source_skill_sha256 = (Get-FileHash -LiteralPath $manifest -Algorithm SHA256).Hash
+        source_skill_sha256 = Get-DirectoryArtifactSha256 -Directory $skill
+        source_manifest_sha256 = (Get-FileHash -LiteralPath $manifest -Algorithm SHA256).Hash
         artifact = [IO.Path]::GetFileName($artifact)
         artifact_sha256 = (Get-FileHash -LiteralPath $artifact -Algorithm SHA256).Hash
         bytes = (Get-Item -LiteralPath $artifact).Length
@@ -68,9 +96,10 @@ foreach ($skill in $skillDirectories) {
 }
 
 $release = [ordered]@{
-    schema_version = 1
+    schema_version = 2
     release_id = $ReleaseId
     source_commit = $commit
+    working_tree = $treeState
     built_at_utc = [DateTime]::UtcNow.ToString('o')
     validation = 'passed'
     skills = $records
@@ -79,4 +108,5 @@ $release = [ordered]@{
 $releasePath = Join-Path $OutputDirectory ('release-' + $ReleaseId + '.json')
 $release | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $releasePath -Encoding UTF8
 Write-Output "BUILT $($records.Count) deterministic skill artifacts"
+Write-Output "SOURCE $commit ($treeState)"
 Write-Output "MANIFEST $releasePath"

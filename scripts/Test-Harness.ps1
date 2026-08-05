@@ -29,9 +29,20 @@ function Get-FrontmatterValue {
 $contract = Join-Path $Root 'contract\krish-operating-contract.md'
 $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
+$releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
+if (-not (Test-Path -LiteralPath $releaseBuilder -PathType Leaf)) {
+    Add-Failure 'Missing deterministic release builder.'
+}
+else {
+    $releaseBuilderRaw = [IO.File]::ReadAllText($releaseBuilder)
+    if ($releaseBuilderRaw -notmatch 'status\s+--porcelain\s+--untracked-files=all') { Add-Failure 'Release builder does not enforce or record clean-tree state.' }
+    if ($releaseBuilderRaw -notmatch 'Get-DirectoryArtifactSha256') { Add-Failure 'Release builder does not hash the complete source skill artifact.' }
+    if ($releaseBuilderRaw -notmatch 'source_manifest_sha256') { Add-Failure 'Release builder does not distinguish manifest hash from full source-skill hash.' }
+    if ($releaseBuilderRaw -notmatch 'ReleaseId\s+-notmatch') { Add-Failure 'Release builder does not constrain release identifiers.' }
+}
 
 $adapterPaths = @(
     (Join-Path $Root 'adapters\claude\CLAUDE.md'),
