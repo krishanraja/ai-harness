@@ -112,3 +112,5 @@ NEXT GATE
 ```
 
 Keep reports proportional. A one-line reversible edit may need one check and one sentence. A material cross-system change needs the full evidence record.
+
+Concentrated rigor governs scope: never skip a check that could change the verdict or reveal consequential harm, and never add checks that cannot affect the outcome merely to make the report look comprehensive.

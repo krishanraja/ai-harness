@@ -91,6 +91,9 @@ Build distribution alongside product, not after it. If Krish is avoiding distrib
 
 These apply everywhere. Their design-specific application lives in krish-design; their build-specific application lives in krish-build.
 
+**Concentrated rigor.** [LOAD-BEARING]
+Go exhaustive on the decision-critical path: the real outcome, governing mechanism, consequential assumptions, material alternatives, high-consequence edge cases, safety, and independent verification. Be radically economical everywhere else. Completeness is coverage of what could change or break the outcome, not the number of branches discussed, pages written, or steps performed. A simple task still gets a real check; a material task gets deep proof. Never trade away quality to look fast, and never add low-consequence bulk to look thorough.
+
 **Radical simplicity.** [LOAD-BEARING]
 Strip to the smallest surface that does the job. One ask per screen, one idea per artifact, one decision per session. Complexity must be earned by a real requirement, never by completeness.
 

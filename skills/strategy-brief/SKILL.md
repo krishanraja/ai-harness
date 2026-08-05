@@ -17,6 +17,8 @@ Use the lightest form that protects the outcome:
 
 Do not make routine work verbose merely to prove the skill ran.
 
+Apply concentrated rigor at every scale: cover everything capable of changing or breaking the outcome, then remove analysis and machinery that do not affect the call, execution, or proof.
+
 ## Build the route
 
 1. **Outcome:** state what will be different when the task is genuinely complete. Prefer an observable result to an activity.

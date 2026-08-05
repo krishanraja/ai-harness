@@ -18,7 +18,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 
 | Candidate | Strength | Required before production |
 |---|---|---|
-| `krish-principles` | Rich personal doctrine and explicit decision rules | Always-on trigger/behavior suite; routine-task non-overreach tests; Krish-scored decision cases; provenance record |
+| `krish-principles` | Rich personal doctrine, explicit decision rules, and confirmed concentrated-rigor default | Complete always-on trigger/behavior suite; expand routine-task non-overreach and material-depth tests; Krish-scored decision cases; provenance record |
 | `strategy-brief` | Proportionate micro/standard/material strategy and explicit verification planning | Held-out route-quality, overplanning, missing-choice, authority, and handoff tests |
 | `verification-loop` | Artifact-specific evidence hierarchy and bounded correction | Independent failure-location tests; false-success, secret-redaction, inconclusive, and two-cycle stop cases |
 | `harness-maintainer` | Curated admission/lifecycle discipline | Mis-trigger, overlap, provider import, rollback, and controlled-learning end-to-end tests |
