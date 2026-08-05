@@ -28,8 +28,10 @@ function Get-FrontmatterValue {
 
 $contract = Join-Path $Root 'contract\krish-operating-contract.md'
 $router = Join-Path $Root 'contract\skill-routing-contract.md'
+$qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
+if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
 
 $adapterPaths = @(
     (Join-Path $Root 'adapters\claude\CLAUDE.md'),

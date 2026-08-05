@@ -4,7 +4,7 @@ Canonical private source for Krish Raja's cross-client AI operating contract, pe
 
 ## Design
 
-- `contract/`: durable operating and skill-routing contracts.
+- `contract/`: durable operating, routing, and active-skill quality contracts.
 - `adapters/`: thin client-specific entry points for Claude, Cursor, and Codex.
 - `skills/`: curated active skills only. Research corpora and bulk downloaded libraries do not belong here.
 - `evals/`: trigger, routing, and behavior fixtures.
@@ -35,4 +35,4 @@ A build does not install or publish anything. Local directory-link changes, Clau
 
 ## Current status
 
-The 2026-08-05 preview contains 19 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. The release is staged for independent routing/behavior evaluation before active migration.
+The 2026-08-05 candidate set contains 20 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. `harness-maintainer` governs admission, overlap, freshness, release, and controlled learning. No candidate is labelled production until it passes `contract/active-skill-quality-standard.md`.
