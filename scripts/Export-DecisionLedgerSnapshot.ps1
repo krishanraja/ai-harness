@@ -27,6 +27,33 @@ $secretPatterns = [ordered]@{
     Jwt = '(?i)\beyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\b'
 }
 
+function ConvertTo-CanonicalJsonString {
+    param([AllowNull()][object]$Value)
+
+    if ($null -eq $Value) { return 'null' }
+    $Value = [string]$Value
+    $builder = New-Object Text.StringBuilder
+    [void]$builder.Append('"')
+    foreach ($character in $Value.ToCharArray()) {
+        switch ([int]$character) {
+            8 { [void]$builder.Append('\b'); continue }
+            9 { [void]$builder.Append('\t'); continue }
+            10 { [void]$builder.Append('\n'); continue }
+            12 { [void]$builder.Append('\f'); continue }
+            13 { [void]$builder.Append('\r'); continue }
+            34 { [void]$builder.Append('\"'); continue }
+            92 { [void]$builder.Append('\\'); continue }
+            default {
+                $codePoint = [int]$character
+                if ($codePoint -lt 32) { [void]$builder.Append(('\u{0:x4}' -f $codePoint)) }
+                else { [void]$builder.Append($character) }
+            }
+        }
+    }
+    [void]$builder.Append('"')
+    return $builder.ToString()
+}
+
 if ($InputJsonPath) {
     if (-not (Test-Path -LiteralPath $InputJsonPath -PathType Leaf)) {
         throw "Snapshot input does not exist: $InputJsonPath"
@@ -102,15 +129,22 @@ foreach ($row in $rows) {
     })
 }
 
-$snapshot = [ordered]@{
-    schema_version = 1
-    source = 'public.decision_ledger_git_snapshot_v1'
-    authoritative = $false
-    records = @($normalized | Sort-Object { $_.decision_key })
+$recordJson = New-Object System.Collections.Generic.List[string]
+foreach ($row in @($normalized | Sort-Object { $_.decision_key })) {
+    $recordJson.Add(('{' +
+        '"decision_key":' + (ConvertTo-CanonicalJsonString $row.decision_key) + ',' +
+        '"status":' + (ConvertTo-CanonicalJsonString $row.status) + ',' +
+        '"scope":' + (ConvertTo-CanonicalJsonString $row.scope) + ',' +
+        '"title":' + (ConvertTo-CanonicalJsonString $row.title) + ',' +
+        '"summary":' + (ConvertTo-CanonicalJsonString $row.summary) + ',' +
+        '"revisit":' + (ConvertTo-CanonicalJsonString $row.revisit) + ',' +
+        '"canonical_sha256":' + (ConvertTo-CanonicalJsonString $row.canonical_sha256) +
+        '}'))
 }
-
-$json = ($snapshot | ConvertTo-Json -Depth 6) -replace "`r`n", "`n"
-$json += "`n"
+$json = ('{"schema_version":1,' +
+    '"source":"public.decision_ledger_git_snapshot_v1",' +
+    '"authoritative":false,' +
+    '"records":[' + ($recordJson -join ',') + ']}' + "`n")
 $outputFull = [IO.Path]::GetFullPath($OutputPath)
 $parent = Split-Path -Parent $outputFull
 if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
