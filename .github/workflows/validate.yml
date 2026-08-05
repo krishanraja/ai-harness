@@ -1,0 +1,74 @@
+name: Validate harness
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-and-repeat-build:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out pinned source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Enforce repository text policy
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config core.autocrlf false
+          git diff --check
+
+      - name: Validate and prove deterministic packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $outA = Join-Path $env:RUNNER_TEMP 'release-a'
+          $outB = Join-Path $env:RUNNER_TEMP 'release-b'
+          $releaseId = "ci-$($env:GITHUB_SHA.Substring(0, 12))"
+
+          & .\scripts\Build-HarnessRelease.ps1 -Root $env:GITHUB_WORKSPACE -OutputDirectory $outA -ReleaseId $releaseId
+          if ($LASTEXITCODE -ne 0) { throw 'First release build failed.' }
+          & .\scripts\Build-HarnessRelease.ps1 -Root $env:GITHUB_WORKSPACE -OutputDirectory $outB -ReleaseId $releaseId
+          if ($LASTEXITCODE -ne 0) { throw 'Second release build failed.' }
+
+          $manifestA = Get-Content -LiteralPath (Join-Path $outA "release-$releaseId.json") -Raw | ConvertFrom-Json
+          $manifestB = Get-Content -LiteralPath (Join-Path $outB "release-$releaseId.json") -Raw | ConvertFrom-Json
+          $differences = @()
+          foreach ($skill in $manifestA.skills) {
+            $other = $manifestB.skills | Where-Object name -eq $skill.name
+            if (-not $other -or
+                $skill.source_skill_sha256 -ne $other.source_skill_sha256 -or
+                $skill.artifact_sha256 -ne $other.artifact_sha256) {
+              $differences += $skill.name
+            }
+          }
+
+          if ($manifestA.skills.Count -ne $manifestB.skills.Count -or $differences.Count -ne 0) {
+            throw "Repeat-build mismatch: $($differences -join ', ')"
+          }
+
+          & .\scripts\Test-HarnessReleaseInstaller.ps1 -ManifestPath (Join-Path $outA "release-$releaseId.json")
+          if ($LASTEXITCODE -ne 0) { throw 'Release installer self-test failed.' }
+
+          @(
+            '## Harness validation',
+            '',
+            "- Source: ``$($manifestA.source_commit)``",
+            "- Skills: $($manifestA.skills.Count)",
+            '- Structural/security validation: passed',
+            '- Deterministic repeat-build comparison: passed',
+            '- Installer plan/add/replacement/backup test: passed'
+          ) | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY

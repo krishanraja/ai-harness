@@ -30,6 +30,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\Build-HarnessRel
 
 The builder requires a clean Git tree, validates first, then creates deterministic `.skill` archives and a release manifest containing the source commit, full source-skill SHA-256, manifest SHA-256, artifact SHA-256, and working-tree state. `-AllowDirtyPreview` exists only for testing the tooling and must not be used as release evidence.
 
+## Plan or install a verified local release
+
+`Install-HarnessRelease.ps1` defaults to a non-mutating plan. It verifies the clean release manifest, package hashes, archive paths, and extracted full-directory hashes before reporting exact, replacement, and missing skills. `-Apply` preserves replaced directories in a release-addressed backup, installs only selected canonical names, verifies installed hashes, records the deployment, and rolls back the transaction on failure.
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\Install-HarnessRelease.ps1 `
+  -ManifestPath C:\path\to\release-v2026.08.05.1.json `
+  -TargetSkillsDirectory C:\Users\krish\.claude\skills `
+  -SurfaceId claude-code-user
+```
+
+GitHub validation runs on pull requests and `main`. A tag matching `harness-vYYYY.MM.DD.N` creates an immutable GitHub Release after another validation and repeat-build proof. Neither workflow installs or enables a client.
+
 ## Release boundary
 
 A build does not install or publish anything. Local directory-link changes, Claude cloud uploads, enable/disable actions, credential changes, and external publication require their own explicit approval and verification.

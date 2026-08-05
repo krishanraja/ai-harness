@@ -1,0 +1,82 @@
+name: Publish immutable harness release
+
+on:
+  push:
+    tags:
+      - harness-v*
+
+permissions:
+  contents: write
+
+jobs:
+  validate-build-publish:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate tag and build twice
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config core.autocrlf false
+          git diff --check
+
+          $tag = $env:GITHUB_REF_NAME
+          if ($tag -notmatch '^harness-v\d{4}\.\d{2}\.\d{2}\.\d+$') {
+            throw "Invalid release tag: $tag"
+          }
+
+          $releaseId = $tag.Substring('harness-'.Length)
+          $outA = Join-Path $env:RUNNER_TEMP 'release-a'
+          $outB = Join-Path $env:RUNNER_TEMP 'release-b'
+          & .\scripts\Build-HarnessRelease.ps1 -Root $env:GITHUB_WORKSPACE -OutputDirectory $outA -ReleaseId $releaseId
+          if ($LASTEXITCODE -ne 0) { throw 'First release build failed.' }
+          & .\scripts\Build-HarnessRelease.ps1 -Root $env:GITHUB_WORKSPACE -OutputDirectory $outB -ReleaseId $releaseId
+          if ($LASTEXITCODE -ne 0) { throw 'Second release build failed.' }
+
+          $manifestA = Get-Content -LiteralPath (Join-Path $outA "release-$releaseId.json") -Raw | ConvertFrom-Json
+          $manifestB = Get-Content -LiteralPath (Join-Path $outB "release-$releaseId.json") -Raw | ConvertFrom-Json
+          $differences = @()
+          foreach ($skill in $manifestA.skills) {
+            $other = $manifestB.skills | Where-Object name -eq $skill.name
+            if (-not $other -or
+                $skill.source_skill_sha256 -ne $other.source_skill_sha256 -or
+                $skill.artifact_sha256 -ne $other.artifact_sha256) {
+              $differences += $skill.name
+            }
+          }
+          if ($manifestA.skills.Count -ne $manifestB.skills.Count -or $differences.Count -ne 0) {
+            throw "Repeat-build mismatch: $($differences -join ', ')"
+          }
+
+          & .\scripts\Test-HarnessReleaseInstaller.ps1 -ManifestPath (Join-Path $outA "release-$releaseId.json")
+          if ($LASTEXITCODE -ne 0) { throw 'Release installer self-test failed.' }
+
+          $checksumPath = Join-Path $outA 'SHA256SUMS.txt'
+          Get-ChildItem -LiteralPath $outA -File |
+            Where-Object Name -ne 'SHA256SUMS.txt' |
+            Sort-Object Name |
+            ForEach-Object { "$(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256 | Select-Object -ExpandProperty Hash)  $($_.Name)" } |
+            Set-Content -LiteralPath $checksumPath -Encoding utf8
+
+          "RELEASE_ID=$releaseId" | Add-Content -LiteralPath $env:GITHUB_ENV
+          "RELEASE_DIRECTORY=$outA" | Add-Content -LiteralPath $env:GITHUB_ENV
+
+      - name: Publish GitHub Release assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tag = $env:GITHUB_REF_NAME
+          gh release view $tag 2>$null
+          if ($LASTEXITCODE -eq 0) { throw "Release $tag already exists; immutable releases are never overwritten." }
+
+          $assets = @(Get-ChildItem -LiteralPath $env:RELEASE_DIRECTORY -File | Sort-Object Name | ForEach-Object FullName)
+          gh release create $tag @assets --verify-tag --title $tag --notes "Validated deterministic harness release from commit $env:GITHUB_SHA. Publishing does not deploy or enable any client surface."
+          if ($LASTEXITCODE -ne 0) { throw 'GitHub Release creation failed.' }

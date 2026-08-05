@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: proposed; local automation, GitHub Actions, and wider client deployment are not yet enabled.
+Status: implementation in progress. GitHub validation/release workflows and the verified local installer are implemented; the production release and wider client deployment remain gated on skill-quality completion and surface verification.
 
 ## Decision
 
@@ -73,7 +73,7 @@ On an explicitly approved release tag:
 3. attach the immutable packages and evidence to a GitHub Release;
 4. update no client directly.
 
-The workflow should be added under `.github/workflows/` only after explicit approval because committing it enables new external automation on GitHub.
+The approved workflows are stored under `.github/workflows/`. Validation runs on pull requests and `main`; release packaging runs only when an explicitly created `harness-vYYYY.MM.DD.N` tag is pushed.
 
 ## Local update controller
 
@@ -174,9 +174,9 @@ A deletion proposal must name the exact artifact and surface, its replacement or
 
 ## Current approval boundary
 
-Approved: the one-skill Codex canary for `harness-maintainer` and its verification/rollback authority.
+Approved: the one-skill Codex canary for `harness-maintainer`; GitHub validation and tag-gated release packaging; and eventual parity deployment to Claude Cloud, Claude CLI, and Cursor CLI after the canonical set meets its quality gates.
 
-Not yet approved: GitHub Actions activation, Task Scheduler creation, wider local installation or replacement, directory relinking, Claude uploads or toggles, API deployment, and any deletion. These are separate gates, not implied by GitHub being the source of truth.
+Not approved: Task Scheduler creation, directory relinking, API deployment, and any deletion. Cloud replacements that require deleting an existing same-name entry will be presented as an exact batch before the destructive step. These gates are not implied by GitHub being the source of truth.
 
 ## Authoritative platform references
 

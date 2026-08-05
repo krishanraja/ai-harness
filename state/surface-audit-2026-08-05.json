@@ -1,9 +1,9 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-08-05T19:13:22.6073885Z",
+    "generated_at_utc":  "2026-08-05T19:20:29.7968556Z",
     "canonical":  {
                       "repository":  "krishanraja/ai-harness",
-                      "source_commit":  "300fbe77382024ac3e6f15fd6b4201fe3f5b5b8e",
+                      "source_commit":  "5f8bd30f9e7502f7481574b8bcdb20f9528fadfc",
                       "path":  "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills",
                       "skill_count":  24,
                       "skills":  [
