@@ -33,6 +33,19 @@ This producer/context distinction keeps functional overlap below the consolidati
 - Resolved the low-engagement edge case: "use your judgment" ends the interview and authorizes only work already inside the original scope.
 - Added deterministic collisions with `strategy-brief`, `ctrl-intake`, customer research, routine work, urgent work, and already-briefed work.
 
+## Human-confirmed operating decision
+
+- Decision: after a completed full `take-the-brief` interview, the agent must present the amnesia-proof summary and proposed plan, stop, and wait for Krish's explicit go before execution.
+- Exception: an earlier instruction such as "use your judgment," "run with it," or an equivalent explicit refusal of further interviewing counts as the go only for work already inside the original authority. It never waives a separate external, destructive, publication, spend, permission, or other named approval gate.
+- Finality evidence: the user-supplied source package said "Then stop. Wait for a go"; at `2026-08-05T14:05:18-04:00`, Krish replied "agreed" to the explicit recommendation that this post-brief go always be required.
+- Alternative rejected: begin automatically after presenting the plan unless Krish objects. The rejected route removes the cheapest correction point after the interview and before a mistaken interpretation becomes a deliverable.
+- Accepted trade-off: one additional interaction after a full briefing in exchange for explicit alignment; routine, urgent, already-briefed, and "use your judgment" work remains outside that friction.
+- Revisit: review on `2026-11-05`, or earlier after two direct corrections in separate tasks that this checkpoint creates unnecessary friction without improving alignment, or when Krish explicitly reverses the rule.
+- Authority granted: enforce this sequencing rule in the candidate skill and cross-client router. No client activation, external mutation, or unrelated approval is authorized.
+- CTRL evidence: two user-originated signals support the method rule, and Krish is the named owner who accepted it. Size delta to the skill and eval corpus is zero because the approved behavior was already encoded.
+- Regression evidence: `brief-behavior-004`, `brief-behavior-008`, `brief-trigger-017`, and `chain-016` cover the normal stop, explicit-delegation exception, negative trigger, and downstream approval boundary.
+- Decision Ledger: schema-valid capture remains `proposed-only` with `STORE_UNAVAILABLE` because the configured Supabase migration and client adapter are not applied and verified.
+
 ## Admission status
 
 - Lifecycle: candidate.
