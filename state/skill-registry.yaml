@@ -27,7 +27,7 @@ release_policy:
 production_active: []
 
 candidates:
-  - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 30}
+  - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: take-the-brief, role: conditional-intent-briefing-gateway, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}

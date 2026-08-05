@@ -202,6 +202,8 @@ $uxQaTriggerCases = Join-Path $Root 'evals\ux-testing-agent-trigger-cases.jsonl'
 $uxQaBehaviorCases = Join-Path $Root 'evals\ux-testing-agent-behavior-cases.jsonl'
 $toolsAccessTriggerCases = Join-Path $Root 'evals\tools-access-trigger-cases.jsonl'
 $toolsAccessBehaviorCases = Join-Path $Root 'evals\tools-access-behavior-cases.jsonl'
+$mindmakerOsTriggerCases = Join-Path $Root 'evals\mindmaker-os-trigger-cases.jsonl'
+$mindmakerOsBehaviorCases = Join-Path $Root 'evals\mindmaker-os-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -338,6 +340,11 @@ $toolsAccessTriggers = @(Read-JsonLines -Path $toolsAccessTriggerCases)
 $toolsAccessBehaviors = @(Read-JsonLines -Path $toolsAccessBehaviorCases)
 Test-EvalCategoryMinimums -Records $toolsAccessTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'tools-access trigger suite'
 Test-EvalCategoryMinimums -Records $toolsAccessBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'tools-access behavior suite'
+
+$mindmakerOsTriggers = @(Read-JsonLines -Path $mindmakerOsTriggerCases)
+$mindmakerOsBehaviors = @(Read-JsonLines -Path $mindmakerOsBehaviorCases)
+Test-EvalCategoryMinimums -Records $mindmakerOsTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'mindmaker-os trigger suite'
+Test-EvalCategoryMinimums -Records $mindmakerOsBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'mindmaker-os behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
