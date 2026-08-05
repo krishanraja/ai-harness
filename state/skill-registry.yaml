@@ -26,6 +26,8 @@ active:
   - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 30}
   - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-06-10, freshness_sla_days: 60}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 90}
+  - {name: strategy-brief, role: always-on-pre-execution-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 60}
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-03, freshness_sla_days: 60}

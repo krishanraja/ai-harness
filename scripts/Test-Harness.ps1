@@ -45,6 +45,9 @@ foreach ($adapter in $adapterPaths) {
     $adapterRaw = [IO.File]::ReadAllText($adapter)
     if ($adapterRaw -notmatch 'krish-operating-contract\.md') { Add-Failure "Adapter does not load the operating contract: $adapter" }
     if ($adapterRaw -notmatch 'skill-routing-contract\.md') { Add-Failure "Adapter does not load the routing contract: $adapter" }
+    if ($adapterRaw -notmatch 'krish-principles') { Add-Failure "Adapter does not make krish-principles always-on: $adapter" }
+    if ($adapterRaw -notmatch 'strategy-brief') { Add-Failure "Adapter does not require pre-execution strategy: $adapter" }
+    if ($adapterRaw -notmatch 'verification-loop') { Add-Failure "Adapter does not require post-execution verification: $adapter" }
 }
 
 $skillsRoot = Join-Path $Root 'skills'

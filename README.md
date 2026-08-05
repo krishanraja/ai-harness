@@ -35,4 +35,4 @@ A build does not install or publish anything. Local directory-link changes, Clau
 
 ## Current status
 
-The 2026-08-04 preview contains 17 curated skills and three thin client adapters. It is staged for independent routing/behavior evaluation before active migration.
+The 2026-08-05 preview contains 19 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. The release is staged for independent routing/behavior evaluation before active migration.

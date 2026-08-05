@@ -4,13 +4,20 @@ This file decides which skill runs, in what order, and which apparent matches mu
 
 ## Routing principles
 
-1. Apply `krish-operating-contract.md` to every request.
-2. Classify the request before loading a skill: domain context, artifact capability, validation, or standards maintenance.
+1. Apply `krish-operating-contract.md` and `krish-principles` to every request.
+2. Classify the request before loading a skill: domain context, strategy, artifact capability, validation, or standards maintenance.
 3. The narrowest applicable skill wins. A broad `mandatory` or `always` claim inside a skill never overrides this router.
 4. Use one primary writer. Validators may stack after the writer; two competing writers may not.
-5. Load domain context before an artifact skill and run verification after creation.
+5. Load domain context before an artifact skill, use `strategy-brief` before material execution, and run `verification-loop` afterward.
 6. If two skills still conflict, prefer the newer reviewed release only when its provenance and compatibility are known. Otherwise stop and record a routing collision.
-7. Record the route for material work as: `context -> producer -> verifier -> approval gate -> delivery`.
+7. Record the route for material work as: `principles -> context -> strategy -> producer -> verification -> approval gate -> delivery`.
+
+## Global chain
+
+- `krish-principles` is always on. A narrower skill may specialize it but never suppress it.
+- `strategy-brief` runs before execution. For routine reversible work it may be compressed to the objective, route, and check; for material work it produces the full brief.
+- `verification-loop` runs after execution and after any corrective change. Verification uses artifact-appropriate evidence and does not inherit permission to mutate external state.
+- Pure social conversation does not need an artificial execution report. Factual answers still require proportionate source checking when freshness or stakes demand it.
 
 ## Core routes
 
