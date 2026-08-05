@@ -32,6 +32,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | App or repository UX testing | Relevant domain skill | `ux-testing-agent` | Evidence bundle and reproducible findings |
 | Skill creation or revision | Relevant domain skill | `skill-creator` | Frontmatter, trigger, behavior, security, and packaging evals |
 | Harness/configuration audit | `mindmaker-os` when OS-related | No prose producer | Deterministic harness audit; model critique is supplemental |
+| Research, comparison, due diligence, or current external evidence | Relevant domain skill | `evidence-research` | Claim-evidence, contradiction, freshness, and citation-support checks |
 
 ## Collision rules
 

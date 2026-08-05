@@ -35,4 +35,4 @@ A build does not install or publish anything. Local directory-link changes, Clau
 
 ## Current status
 
-The 2026-08-05 candidate set contains 20 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. `harness-maintainer` governs admission, overlap, freshness, release, and controlled learning. No candidate is labelled production until it passes `contract/active-skill-quality-standard.md`.
+The 2026-08-05 candidate set contains 21 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. `harness-maintainer` governs admission, overlap, freshness, release, and controlled learning. `evidence-research` supplies decision-grade external evidence. No candidate is labelled production until it passes `contract/active-skill-quality-standard.md`.

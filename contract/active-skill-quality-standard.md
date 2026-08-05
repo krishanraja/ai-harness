@@ -2,6 +2,8 @@
 
 This is the admission bar for the curated active set. Detail alone is not quality. A skill is production-grade only when its scope is clear, its behavior is tested, its authority is bounded, and its failures improve the system without allowing the system to rewrite its own standard silently.
 
+The primary-source theory and research behind these gates is mapped in `references/harness-theory.md`.
+
 ## Lifecycle
 
 Every skill has one status:
