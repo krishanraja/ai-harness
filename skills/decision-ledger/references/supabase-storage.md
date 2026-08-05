@@ -1,8 +1,11 @@
 # Supabase storage and redacted snapshot contract
 
-Read `../../state/decision-ledger-config.yaml` before any storage operation. Its
-`live_status` is authoritative for availability; an accepted architecture or a
-migration file does not prove the production database changed.
+Before any storage operation, load the canonical decision-ledger configuration
+through the configured client adapter or approved repository. Its `live_status`
+is authoritative for availability; an accepted architecture or a migration file
+does not prove the production database changed. If that configuration is not
+available in the current client, return `STORE_UNAVAILABLE` and keep the record
+as a proposal.
 
 ## Canonical and non-canonical surfaces
 
@@ -10,7 +13,7 @@ migration file does not prove the production database changed.
   project after the named migration is applied and verified.
 - Venture systems remain authoritative for their operational facts. Store stable
   references rather than cloned task, queue, count, or deployment state.
-- `state/decision-ledger-snapshot.json` is a deterministic redacted audit and
+- The configured decision-ledger snapshot is a deterministic redacted audit and
   recovery artifact. It is never writable input and never resolves a conflict
   against Supabase.
 - Local drafts, conversation memory, ADRs, and `decisions_waiting` are evidence or
@@ -47,10 +50,11 @@ Before production application:
 
 ## Git snapshot contract
 
-Use `scripts/Export-DecisionLedgerSnapshot.ps1`. It reads only the allowlisted
-snapshot view, rejects unexpected fields and high-confidence secret patterns,
-sorts by stable decision key, and emits UTF-8/LF JSON without a volatile export
-timestamp. Identical canonical rows must produce identical bytes.
+Use the canonical snapshot exporter supplied by the configured repository. If it
+is unavailable, do not improvise an exporter. The reviewed exporter reads only
+the allowlisted snapshot view, rejects unexpected fields and high-confidence
+secret patterns, sorts by stable decision key, and emits UTF-8/LF JSON without a
+volatile export timestamp. Identical canonical rows must produce identical bytes.
 
 - `excluded`: emit no row.
 - `metadata_only`: emit key, status, scope, digest, and null redacted text.

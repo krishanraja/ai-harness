@@ -123,6 +123,18 @@ foreach ($entry in $hashes.GetEnumerator()) {
     }
 }
 
+$skillMarkdownFiles = @(Get-ChildItem -LiteralPath $skillsRoot -Recurse -File -Filter '*.md')
+foreach ($markdownFile in $skillMarkdownFiles) {
+    $relative = $markdownFile.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
+    $raw = [IO.File]::ReadAllText($markdownFile.FullName)
+    if ($raw -match '(?i)`(?:\.\./|\.\.\\|[^`/\\]+[/\\]\.\.[/\\])[^`]*`' -or $raw -match '(?i)\]\((?:\.\./|\.\.\\)') {
+        Add-Failure "$relative references a path outside its standalone skill package."
+    }
+    if ($raw -match '(?i)`(?:references?|leaves|scripts|assets)\\[^`]+`' -or $raw -match '(?i)\]\((?:references?|leaves|scripts|assets)\\') {
+        Add-Failure "$relative uses a Windows-style bundled-resource path; use forward slashes."
+    }
+}
+
 $scanExtensions = @('.md', '.mdc', '.yaml', '.yml', '.json', '.jsonl', '.ps1', '.sql')
 $scanFiles = @(Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object {
     $_.Extension.ToLowerInvariant() -in $scanExtensions -and

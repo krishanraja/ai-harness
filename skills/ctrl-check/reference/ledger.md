@@ -45,7 +45,7 @@ If the person responds to the review in the same conversation, capture it. If th
 
 ## Two rows that are not output findings
 
-**Method corrections.** When the person corrects how the work gets done rather than what one artefact says, it does not fit the six-field line and it must not be forced into one. Write it to `ledger/method-YYYY-Www.md` in the shape `DATE | ARTEFACT | CLASS | THE CORRECTION | SCOPE`, and see `ctrl-capture/leaves/method.md`.
+**Method corrections.** When the person corrects how the work gets done rather than what one artefact says, it does not fit the six-field line and it must not be forced into one. Write it to `ledger/method-YYYY-Www.md` in the shape `DATE | ARTEFACT | CLASS | THE CORRECTION | SCOPE`, then route it to the method-correction workflow owned by `ctrl-capture`.
 
 The test for which one you are looking at: **if fixing only the artefact in front of you leaves the problem intact, it is a method correction.** These are rarer, worth more, and the class most likely to be agreed with in conversation and then lost.
 

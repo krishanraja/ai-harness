@@ -29,7 +29,7 @@ Use this skill as a router to the right source and verification path. It deliber
 - Counts, workflow activation, schedules, agent status, current tasks, and credential health are always live-state facts.
 - A reviewed date never overrides a newer commit or live result.
 - Do not force freshness by touching file mtimes. Builds and syncs must identify their source commit and artifact hash.
-- When producing a skill/cloud artifact, package from a clean canonical commit and record the SHA-256 in `state/surfaces.json`.
+- When producing a skill/cloud artifact, package from a clean canonical commit and record the SHA-256 in the canonical surface-release evidence.
 
 ## Non-negotiables
 
@@ -38,4 +38,3 @@ Use this skill as a router to the right source and verification path. It deliber
 - Objective, plan, identity, and decision are distinct concepts.
 - Concept closures are durable and cross-surface; do not simulate closure with a single row update.
 - Deterministic checks beat model assertions, especially for numbers, sync parity, and completion.
-

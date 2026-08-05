@@ -14,6 +14,9 @@ Implementation consequences:
 
 - metadata must select precisely before bodies consume context;
 - main skill files stay executable and concise, with one-level references;
+- standalone packages use forward-slash paths, bundle the files they need, and do not assume access beyond their skill directory;
+- client adapters may supply shared contracts locally, while standalone skills must fail conservatively when that context is unavailable;
+- Claude Cloud chain members rely on independently precise metadata and automatic composition; a skill name in another skill's body is a handoff, not an invocation mechanism;
 - large downloaded libraries remain inactive because metadata budget and collisions can hide the personalized routes;
 - client adapters stay thin and point to one canonical contract/router.
 

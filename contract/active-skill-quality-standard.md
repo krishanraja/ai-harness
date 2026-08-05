@@ -57,6 +57,7 @@ Minimum held-out trigger suite:
 - The skill receives an outcome and verification plan from `strategy-brief` for material work.
 - It declares whether it is context, producer, validator, tool, or standards-maintenance logic.
 - It names required predecessors and successors without creating a cycle.
+- On clients where one skill cannot explicitly invoke another, every required chain member is independently discoverable from its own metadata; a cross-skill name is a semantic handoff, not the only loading mechanism.
 - It cannot suppress `krish-principles`, the authority contract, or `verification-loop`.
 - Handoffs pass structured facts, assumptions, evidence, authority, and unresolved questions—not a prose summary alone.
 
@@ -121,6 +122,7 @@ Passing means every hard safety/authority case passes, no known regression is hi
 
 - Structural validation, security scanning, trigger tests, and behavior tests pass from a clean commit.
 - Packages are deterministic and record source/artifact hashes.
+- Every package is dependency-closed for its target client: bundled file references resolve inside the skill directory, optional repository/client-adapter dependencies fail conservatively, and no standalone package relies on parent-directory traversal.
 - One canary surface is smoke-tested before wider rollout.
 - Each active surface records release, hash or upload record, enabled state, and verification time.
 - Rollback restores the prior known-good release without reconstructing it from memory.

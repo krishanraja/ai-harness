@@ -11,12 +11,7 @@ Keep the personalized harness coherent, testable, current, and small enough that
 
 This is standards-maintenance and release-governance logic. It is not a general producer and does not replace Skill Creator, domain skills, `strategy-brief`, or `verification-loop`.
 
-Read, in order:
-
-1. `../../contract/krish-operating-contract.md`
-2. `../../contract/skill-routing-contract.md`
-3. `../../contract/active-skill-quality-standard.md`
-4. `../../state/skill-registry.yaml`
+When a client adapter supplies the canonical operating contract, routing contract, active-skill quality standard, and registry, apply them as the live governing sources. A standalone package cannot navigate outside its own skill directory: use the conservative rules in this file and its bundled reference, mark unavailable registry or surface facts as unknown, and never infer production or mutation authority from missing context.
 
 Read `references/reconciliation-and-release-evidence.md` when the task inventories client surfaces, compares same-name artifacts, reviews an imported/provider skill, executes admission gates, prepares a canary, or proposes any install, upload, replacement, enablement, disablement, relink, retirement, or rollback.
 

@@ -4,9 +4,9 @@ Read only the relevant section for the artifact being produced or reviewed.
 
 ## The AI Tell Taxonomy (Detection Reference)
 
-The Hard Rules in `../SKILL.md` ban specific offences. This section is the full catalogue of AI writing tropes, for two jobs: (1) scanning any draft before delivery, and (2) reviewing or de-AI-ing text Krish pastes in. If a pattern below appears and is not an intentional Krish signature move, rewrite it.
+The Hard Rules in the main skill ban specific offences. This section is the full catalogue of AI writing tropes, for two jobs: (1) scanning any draft before delivery, and (2) reviewing or de-AI-ing text Krish pastes in. If a pattern below appears and is not an intentional Krish signature move, rewrite it.
 
-Important exception: the "Not X, Y" clarifier is a genuine Krish signature (see Signature Sentence Shapes in `../SKILL.md`). It stays. The difference between his version and the AI version: his discards a specific lazy framing and replaces it with a sharper specific one. The AI version is empty contrast ("It's not about tools, it's about mindset"). Keep the former, kill the latter.
+Important exception: the "Not X, Y" clarifier is a genuine Krish signature (see Signature Sentence Shapes in the main skill). It stays. The difference between his version and the AI version: his discards a specific lazy framing and replaces it with a sharper specific one. The AI version is empty contrast ("It's not about tools, it's about mindset"). Keep the former, kill the latter.
 
 ### Sentence-level constructions
 
@@ -19,7 +19,7 @@ Important exception: the "Not X, Y" clarifier is a genuine Krish signature (see 
 
 ### Word and phrase tells
 
-This extends the Words to Avoid list in `../SKILL.md`.
+This extends the Words to Avoid list in the main skill.
 
 - Verb inflation: harness, unleash, elevate, supercharge, navigate, foster, cultivate.
 - Adjective inflation: crucial, pivotal, vital, comprehensive, best-in-class.
