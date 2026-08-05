@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "krishanraja/ai-harness",
+    "commit": "REQUIRED_AT_BUILD",
+    "built_at_utc": "REQUIRED_AT_BUILD"
+  },
+  "skills": {
+    "mindmaker-os": {
+      "version": "0.1.0",
+      "owner": "Krish Raja",
+      "freshness_sla_days": 30,
+      "artifact_sha256": "REQUIRED_AT_BUILD",
+      "behavior_eval_sha256": "REQUIRED_AT_BUILD"
+    }
+  },
+  "surfaces": [
+    {"id": "agents-user", "client": "cursor-codex", "mode": "directory-link", "verified_sha256": null},
+    {"id": "claude-code-user", "client": "claude-code", "mode": "directory-link", "verified_sha256": null},
+    {"id": "claude-cloud", "client": "claude-ai", "mode": "versioned-zip", "verified_sha256": null},
+    {"id": "openclaw", "client": "openclaw", "mode": "commit-addressed-deploy", "verified_sha256": null}
+  ]
+}

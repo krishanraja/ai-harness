@@ -1,0 +1,14 @@
+---
+description: Durable Krish operating contract and skill router. Always apply.
+alwaysApply: true
+---
+
+# Krish harness router
+
+Read and follow `C:\Users\krish\dev\mindmaker-os\ai-harness\contract\krish-operating-contract.md`.
+
+Route skills using `C:\Users\krish\dev\mindmaker-os\ai-harness\contract\skill-routing-contract.md`.
+
+Canonical user skills are exposed through `C:\Users\krish\.agents\skills`. Use `mindmaker-os` for Mindmaker OS architecture or operations, `mindmaker` for the commercial business, `krish-voice` for outbound writing, and `ux-testing-agent` for app or repository QA.
+
+For current Mindmaker OS facts, follow the source and freshness rules in `mindmaker-os`; do not rely on remembered counts.

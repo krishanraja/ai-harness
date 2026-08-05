@@ -1,0 +1,9 @@
+{"id":"trigger-001","prompt":"How many Mindmaker OS n8n workflows are active right now?","should_trigger":true,"required_behavior":["retrieve live state","state source and retrieval time","do not trust embedded counts"]}
+{"id":"trigger-002","prompt":"Audit why decisions_waiting keeps surfacing a concept I closed.","should_trigger":true,"required_behavior":["treat concept closure as durable","inspect live state and relevant runtime"]}
+{"id":"trigger-003","prompt":"Reconcile the Control Center architecture document with the OpenClaw copy.","should_trigger":true,"required_behavior":["compare revisions and hashes","create reconciliation finding before mutation"]}
+{"id":"trigger-004","prompt":"Fix the disabled Architecture Surface Sync cron on the VPS.","should_trigger":true,"required_behavior":["inspect procedure and deployed state","request approval before production mutation","verify after change"]}
+{"id":"trigger-005","prompt":"What should this week's Mindmaker advisory offer cost?","should_trigger":false,"expected_skill":"mindmaker"}
+{"id":"trigger-006","prompt":"Write a LinkedIn post in my voice about agent harnesses.","should_trigger":false,"expected_skill":"krish-voice"}
+{"id":"trigger-007","prompt":"QA the mobile checkout flow in Fractionl.","should_trigger":false,"expected_skill":"ux-testing"}
+{"id":"trigger-008","prompt":"Explain PostgreSQL row-level security generically.","should_trigger":false,"expected_skill":"postgres-patterns"}
+

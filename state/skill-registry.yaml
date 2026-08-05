@@ -1,0 +1,89 @@
+schema_version: 1
+last_reconciled: 2026-08-04
+status: staged-preview
+
+canonical:
+  repository: krishanraja/ai-harness
+  proposed_path: C:\Users\krish\dev\mindmaker-os\ai-harness
+  local_skill_surface: C:\Users\krish\.agents\skills
+  claude_code_surface: C:\Users\krish\.claude\skills
+  cloud_surface: claude.ai/customize/skills
+
+release_policy:
+  source: clean canonical commit
+  package: deterministic versioned .skill archive
+  required_evidence:
+    - source_commit
+    - source_skill_sha256
+    - artifact_sha256
+    - validation_result
+    - behavior_eval_result
+    - installed_surface_hash_or_cloud_upload_record
+  freshness_rule: Current operational facts must be retrieved live; review dates never override newer revisions or live state.
+  mutation_rule: Uploads, enable/disable actions, replacements, deletions, rotations, and directory-link changes require explicit approval.
+
+active:
+  - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 30}
+  - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-06-10, freshness_sla_days: 60}
+  - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 90}
+  - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 60}
+  - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 60}
+  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-03, freshness_sla_days: 60}
+  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-06-10, freshness_sla_days: 45}
+  - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-06-11, freshness_sla_days: 60}
+  - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 180}
+  - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 30}
+  - {name: apify, role: web-data-tool, owner: Krish Raja, reviewed: 2026-06-15, freshness_sla_days: 60}
+  - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-check, role: standards-stage-5-7, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+
+external_managed:
+  - {name: skill-creator, provider: Anthropic, policy: Prefer current provider-managed release; do not fork without an evaluated Krish-specific need.}
+  - {name: morning, provider: Anthropic, policy: Keep only if it has a named route and demonstrated use.}
+  - {name: code-reviewer, provider: local-unprovenanced, policy: Review provenance and behavior before adding to the canonical active set.}
+  - {name: data-pipeline-architect, provider: local-unprovenanced, policy: Planning route only; review before canonicalization.}
+  - {name: data-pipeline, provider: local-unprovenanced, policy: Implementation route only; review before canonicalization.}
+
+quarantine:
+  - name: legacy-tools-access
+    reason: Credential values embedded in multiple local and cloud copies.
+    replacement: tools-access
+    next_gate: Rotate affected credentials in consumer-safe batches, scrub copies/history, then replace surfaces.
+  - name: n8n
+    reason: Oversized monolith with embedded credentials and dynamic fleet facts.
+    replacement: mindmaker-os for live routing plus future thin n8n tool skill.
+    next_gate: Extract API mechanics, remove credentials/current counts, add behavior evals.
+  - name: fleet-ops-and-krish-fleet-ops
+    reason: Conflicting stale fleet counts and deployment facts.
+    replacement: mindmaker-os live-state routing.
+    next_gate: Preserve durable procedures only; retrieve current fleet state live.
+  - name: legacy-ux-testing-agent
+    reason: Missing frontmatter, over 500 lines, embedded credentials, hardcoded app registry, and overbroad auto-fix authority.
+    replacement: ux-testing-agent
+    next_gate: Replace local and cloud copies after user approval.
+
+superseded_cloud:
+  replacement: ux-foundations
+  skills:
+    - strategy
+    - ux-design
+    - ux-concepts
+    - ux-toolkit
+    - design
+    - ux
+    - ux-principles
+    - ab-test-plan
+    - design-system-builder
+
+inactive_pending_confirmation:
+  - {name: instantly, reason: Advisory outbound is paused/retired in the current Mindmaker architecture.}
+  - {name: krish-outbound, reason: Overlaps content and outbound routes; retain only if a distinct current workflow is demonstrated.}
+
+corpus_not_active_skills:
+  - Claude Skills Ultimate Bundle
+  - supplied AI harness research markdown files
+  - legacy full Mindmaker OS manuals embedded in skill bodies
