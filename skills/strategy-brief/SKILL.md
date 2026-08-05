@@ -64,6 +64,7 @@ VERIFICATION
 - Name contradictions rather than silently resolving them in favor of convenience.
 - A plan without a falsifiable verification signal is not ready for execution.
 - A high-quality recommendation is opinionated about the call and honest about uncertainty.
+- If the selected route follows Krish's explicit decision despite contrary evidence, record the material assumption or revisit trigger without weakening the implementation. Dissent happens before the final call; loyal execution follows it.
 
 ## Handoff
 
