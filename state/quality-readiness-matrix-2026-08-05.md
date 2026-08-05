@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Fourteen candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Fifteen candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 14 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 14 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`). A smaller prior `mindmaker-os` run remains limited evidence.
+- Repository-enforced minimum-sized trigger and behavior suites: 15 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 15 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`). A smaller prior `mindmaker-os` run remains limited evidence.
 
 ## Rating method
 
@@ -54,7 +54,7 @@ Current measurable state:
 | `build-apps-with-krish` | App-delivery orchestrator | Strong after explicit phase/reset contracts | current | absent | absent | Independent suite pass: 24/24 triggers, 29/29 behaviors | Rendered multi-session app canary with real Krish reactions, implementation handoff, production readback, and rollback |
 | `ux-foundations` | Narrow generic UX reference | Thin | current | exact staged archive; no exact active copy | enabled, 2026-07-03 | Structural | Primary provenance/WCAG freshness plus lookup-only and design-collision suite |
 | `ux-testing-agent` | Evidence-first UX validator | Strong after revision, mutation, injection, evidence, and owner-boundary hardening | current; reviewed 2026-08-05 | invalid legacy directories; mandated `.Codex` path absent; no exact active copy | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors | Revision-matched preview, designated auth, injected-content, safe action, responsive/accessibility, fix-handoff, and parity canaries |
-| `tools-access` | Runtime authentication contract | Good | current | invalid/drifted legacy copies; no exact active copy | enabled legacy copy, 2026-06-13 | Structural | Choose runtime mapping; test missing access/redaction now; sensitive remediation remains deferred |
+| `tools-access` | Runtime authentication contract | Strong after access-versus-authority, tenant, session, injection, exposure, and handoff hardening | current; reviewed 2026-08-05 | invalid/drifted legacy copies; no exact active copy | enabled legacy copy, 2026-06-13 | Independent suite pass: 21/21 triggers, 23/23 behaviors | Non-secret per-service identity, multi-account, OAuth, fallback, ambiguous-readback, and parity canaries; remediation remains deferred |
 | `apify` | Narrow web-data tool | Good | current; due 2026-08-14 | absent | enabled, 2026-06-15 | Structural | Current primary API provenance, helper tests, actor drift, empty-success, cap/cost, pagination, and write-boundary suite |
 | `ctrl-intake` | Standards stages 1-2 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | Input/handoff schema, incomplete interview, conflicting examples, privacy, and anchoring-bias suite |
 | `ctrl-compile` | Standards stage 3 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | Explicit authority plus malformed intake, sparse evidence, leakage, rubric-size, and downstream schema suite |
@@ -86,7 +86,7 @@ The durable lessons in `C:\Users\krish\ctrl-corpus` belong primarily as conditio
 
 ## Release order
 
-1. Finish independent evaluation of the remaining candidate skills, prioritising `tools-access`, `mindmaker-os`, and the CTRL chain.
+1. Finish independent evaluation of the remaining candidate skills, prioritising `mindmaker-os` and the CTRL chain.
 2. Resolve only the genuinely user-owned remaining route decisions, including whether `morning` has a distinct retained purpose and any later purge/retirement set.
 3. Build deterministic packages from a clean commit.
 4. Ask Krish to choose one local canary surface and approve its exact activation/relink action.

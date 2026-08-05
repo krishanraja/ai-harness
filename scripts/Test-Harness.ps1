@@ -200,6 +200,8 @@ $voiceTriggerCases = Join-Path $Root 'evals\krish-voice-trigger-cases.jsonl'
 $voiceBehaviorCases = Join-Path $Root 'evals\krish-voice-behavior-cases.jsonl'
 $uxQaTriggerCases = Join-Path $Root 'evals\ux-testing-agent-trigger-cases.jsonl'
 $uxQaBehaviorCases = Join-Path $Root 'evals\ux-testing-agent-behavior-cases.jsonl'
+$toolsAccessTriggerCases = Join-Path $Root 'evals\tools-access-trigger-cases.jsonl'
+$toolsAccessBehaviorCases = Join-Path $Root 'evals\tools-access-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -331,6 +333,11 @@ $uxQaTriggers = @(Read-JsonLines -Path $uxQaTriggerCases)
 $uxQaBehaviors = @(Read-JsonLines -Path $uxQaBehaviorCases)
 Test-EvalCategoryMinimums -Records $uxQaTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ux-testing-agent trigger suite'
 Test-EvalCategoryMinimums -Records $uxQaBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ux-testing-agent behavior suite'
+
+$toolsAccessTriggers = @(Read-JsonLines -Path $toolsAccessTriggerCases)
+$toolsAccessBehaviors = @(Read-JsonLines -Path $toolsAccessBehaviorCases)
+Test-EvalCategoryMinimums -Records $toolsAccessTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'tools-access trigger suite'
+Test-EvalCategoryMinimums -Records $toolsAccessBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'tools-access behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
