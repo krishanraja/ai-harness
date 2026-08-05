@@ -2,19 +2,19 @@
 
 ## Verdict
 
-The 23-skill canonical set is a coherent candidate architecture, not a production library. All 23 pass the repository's structural and secret-pattern gates. None yet has both complete held-out evidence and verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. None yet has both complete held-out evidence and verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
 - Active local exact canonical artifacts: 0.
 - Exact canonical artifacts found as staged `.skill` archives: 7 skill names.
 - Canonical candidates present and enabled in Claude Cloud: 16.
-- Canonical candidates absent from Claude Cloud: 7.
+- Canonical candidates absent from Claude Cloud: 8.
 - Enabled non-canonical user skills in Claude Cloud: 16.
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 1 (`content-corpus`, 11 days overdue on 2026-08-05).
 - Candidates within 10 days of review expiry: 3 (`mindmaker`, `krish-content-marketer`, `apify`).
-- Dedicated minimum-sized trigger and behavior suites designed: 3 (`build-apps-with-krish`, `decision-ledger`, `harness-maintainer`).
+- Dedicated minimum-sized trigger and behavior suites designed: 4 (`build-apps-with-krish`, `decision-ledger`, `harness-maintainer`, `take-the-brief`).
 - Dedicated independent evidence exists for 2 skills: a smaller prior `mindmaker-os` run and a new `harness-maintainer` run. Neither is yet a complete production admission.
 
 ## Rating method
@@ -38,6 +38,7 @@ Current measurable state:
 | Candidate | Role/class | Clarity / coverage | Freshness | Local user-surface evidence | Claude Cloud | Evidence stage | Binding gate before canary |
 |---|---|---|---|---|---|---|---|
 | `krish-principles` | Always-on base doctrine | Strong | current | older staged archive; no exact active copy | enabled, older 2026-07-03 copy | Structural | Full core trigger/behavior suite plus Krish-scored decision cases |
+| `take-the-brief` | Conditional task-intent gateway | Strong after import hardening | current | absent | absent | Suite designed | Confirm provenance; execute trigger/behavior and collision suites; prove one-question turn behavior and handoff before canary |
 | `strategy-brief` | Always-on pre-execution strategy | Strong | current | absent | absent | Structural | Core route-quality, proportionality, authority, and handoff suite |
 | `verification-loop` | Always-on post-execution validator | Strong | current | active drift only | absent | Structural | Core false-success, inconclusive, secret-redaction, correction-stop, and collision suite |
 | `harness-maintainer` | Harness governance/release | Strong | current | absent | absent | Limited executed: 21/21 blind triggers; safe behavior uplift with residual evidence-field omissions | Rerun the complete behavior rubric after hardening, then clean-tree packaging and one canary |
@@ -65,11 +66,11 @@ Current measurable state:
 
 ### Keep one chained core
 
-The durable default chain is:
+The durable chain is:
 
-`krish-principles -> strategy-brief -> routed producer/tool/context skill -> verification-loop`
+`krish-principles -> take-the-brief when triggered -> strategy-brief -> routed producer/tool/context skill -> verification-loop`
 
-`harness-maintainer` governs changes to the chain. `ctrl-capture` can propose learning changes, but only a named human can accept a personal-standard change. `decision-ledger` records finalized consequential choices; it does not become a general memory sink.
+`take-the-brief` stays out of clear, urgent, routine, and already-briefed work. `harness-maintainer` governs changes to the chain. `ctrl-capture` can propose learning changes, but only a named human can accept a personal-standard change. `decision-ledger` records finalized consequential choices; it does not become a general memory sink.
 
 ### Preserve specialist ownership
 
@@ -85,7 +86,7 @@ The durable lessons in `C:\Users\krish\ctrl-corpus` belong primarily as conditio
 
 ## Release order
 
-1. Finish independent evaluation of `harness-maintainer` and the always-on core.
+1. Finish independent evaluation of `harness-maintainer`, `take-the-brief`, and the always-on core.
 2. Reconcile the four user-owned freshness questions: Mindmaker offers/ICPs, active channels, outbound status, and whether `morning` has a distinct purpose.
 3. Build deterministic packages from a clean commit.
 4. Ask Krish to choose one local canary surface and approve its exact activation/relink action.

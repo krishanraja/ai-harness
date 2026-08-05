@@ -1,0 +1,4 @@
+interface:
+  display_name: "Take the Brief"
+  short_description: "Interview for intent before owning the work"
+  default_prompt: "Use $take-the-brief to interview me one question at a time before you own this task."

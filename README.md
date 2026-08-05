@@ -6,7 +6,7 @@ Canonical private source for Krish Raja's cross-client AI operating contract, pe
 
 - `contract/`: durable operating, routing, and active-skill quality contracts.
 - `adapters/`: thin client-specific entry points for Claude, Cursor, and Codex.
-- `skills/`: curated active skills only. Research corpora and bulk downloaded libraries do not belong here.
+- `skills/`: curated candidate and admitted skills only. Research corpora and bulk downloaded libraries do not belong here.
 - `evals/`: trigger, routing, and behavior fixtures.
 - `scripts/`: validation and deterministic release tooling.
 - `state/`: lifecycle registry and cross-surface release evidence.
@@ -19,7 +19,7 @@ Dynamic operational facts are retrieved from their live sources. They are not co
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\Test-Harness.ps1
 ```
 
-The validator checks frontmatter, names, description limits, the 500-line main-file limit, reference integrity, duplicate manifests, CTRL stage numbering, adapter contracts, and high-confidence secret patterns.
+The validator checks portable frontmatter, names, description limits, the 500-line main-file limit, reference integrity, UI metadata, duplicate manifests, required held-out suites, standalone package paths, CTRL stage numbering, adapter contracts, and high-confidence secret patterns.
 
 ## Build a preview release
 
@@ -35,4 +35,4 @@ A build does not install or publish anything. Local directory-link changes, Clau
 
 ## Current status
 
-The 2026-08-05 candidate set contains 23 curated skills and three thin client adapters. `krish-principles` is always on; `strategy-brief` precedes execution and `verification-loop` follows it. `harness-maintainer` governs admission, overlap, freshness, release, and controlled learning. `build-apps-with-krish` preserves Krish's founder-in-the-loop app-delivery method across design, implementation, and verification without replacing the stage owners. `evidence-research` supplies decision-grade external evidence, while `decision-ledger` preserves finalized consequential choices without duplicating operational state. Supabase is the selected canonical decision store; its append-only migration and redacted Git snapshot tooling are designed but remain unapplied/inactive pending migration and adapter canaries. No candidate is labelled production until it passes `contract/active-skill-quality-standard.md`.
+The 2026-08-05 candidate set contains 24 curated skills and three thin client adapters. `krish-principles` is always on; `take-the-brief` conditionally elicits intent when consequential end-to-end ownership is transferred; `strategy-brief` then selects the execution route; and `verification-loop` follows execution. `harness-maintainer` governs admission, overlap, freshness, release, and controlled learning. `build-apps-with-krish` preserves Krish's founder-in-the-loop app-delivery method across design, implementation, and verification without replacing the stage owners. `evidence-research` supplies decision-grade external evidence, while `decision-ledger` preserves finalized consequential choices without duplicating operational state. Supabase is the selected canonical decision store; its append-only migration and redacted Git snapshot tooling are designed but remain unapplied/inactive pending migration and adapter canaries. No candidate is labelled production until it passes `contract/active-skill-quality-standard.md`.

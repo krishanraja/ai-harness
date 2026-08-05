@@ -6,7 +6,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 
 ## Cross-cutting gaps
 
-1. **Held-out coverage:** `mindmaker-os` has a small prior blind comparison; `harness-maintainer` now has a minimum-sized suite, a 21/21 blind trigger result, and limited behavior-uplift evidence. `build-apps-with-krish` and `decision-ledger` have minimum-sized suites designed but not independently executed. The remaining skills lack dedicated held-out evidence.
+1. **Held-out coverage:** `mindmaker-os` has a small prior blind comparison; `harness-maintainer` now has a minimum-sized suite, a 21/21 blind trigger result, and limited behavior-uplift evidence. `build-apps-with-krish`, `decision-ledger`, and `take-the-brief` have minimum-sized suites designed but not independently executed. The remaining skills lack dedicated held-out evidence.
 2. **Collision testing:** broad words such as Mindmaker, build, design, review, strategy, research, and outbound are not yet tested pairwise across every neighboring skill.
 3. **Independent qualitative judging:** Krish Voice, Principles, Design, and commercial judgment lack a held-out Krish-scored corpus and fresh-context/order-swapped comparison.
 4. **Provenance:** several cloud-derived personalized skills have review dates but no complete origin/adaptation/license record in the registry.
@@ -19,6 +19,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 | Candidate | Strength | Required before production |
 |---|---|---|
 | `krish-principles` | Rich personal doctrine, explicit decision rules, confirmed concentrated-rigor default, and direct-dissent/final-call protocol | Complete always-on trigger/behavior suite; expand routine-task non-overreach, material-depth, dissent, and final-call tests; Krish-scored decision cases; provenance record |
+| `take-the-brief` | Distinct ownership-transfer interview, adaptive one-question discipline, amnesia-proof handoff, and explicit non-trigger boundaries | Confirm source/license provenance; execute the minimum trigger/behavior suites; prove urgent, refusal, prior-brief, `ctrl-intake`, and `strategy-brief` collisions; local client canary |
 | `strategy-brief` | Proportionate micro/standard/material strategy and explicit verification planning | Held-out route-quality, overplanning, missing-choice, authority, and handoff tests |
 | `verification-loop` | Artifact-specific evidence hierarchy and bounded correction | Independent failure-location tests; false-success, secret-redaction, inconclusive, and two-cycle stop cases |
 | `harness-maintainer` | Curated admission/lifecycle discipline, perfect 21-case blind trigger classification, and behavior-driven hardening | New fresh behavior scenarios with field-level scoring; clean-tree repeat packaging; one authorized local canary with rollback evidence |
@@ -43,7 +44,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 
 ## Priority sequence
 
-1. Admit the always-on core only after its full held-out suite: Principles, Strategy Brief, Verification Loop, Harness Maintainer.
+1. Admit the always-on core and conditional intent gate only after their full held-out suites: Principles, Take the Brief, Strategy Brief, Verification Loop, Harness Maintainer.
 2. Reconcile and test the identity/business layer: Mindmaker OS, Mindmaker, Voice, Content Corpus, Content Marketer, Design, Build.
 3. Test tool/reference validators: UX Foundations, UX Testing, Tools Access (non-sensitive cases), Apify, Evidence Research.
 4. Configure and canary the consequential-decision store; then run both its lifecycle suite and the CTRL chain end to end with a real but non-sensitive standard.

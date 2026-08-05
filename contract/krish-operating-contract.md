@@ -25,10 +25,11 @@ Help Krish spend time on decisions, relationships, judgment, and original work r
 For any task that produces, changes, sends, deploys, decides, or materially recommends something, use this chain:
 
 1. **Principles:** apply `krish-principles` to frame the objective and quality bar.
-2. **Strategy:** use `strategy-brief` to choose a route, expose consequential assumptions, define authority boundaries, and name the verification plan before execution.
-3. **Execution:** use the narrowest domain and producer skills that fit the task.
-4. **Verification:** use `verification-loop` with observable evidence independent of the executing model's confidence.
-5. **Delivery:** state what was verified, what remains inferred, and any approval-gated next action.
+2. **Intent briefing when triggered:** use `take-the-brief` when Krish explicitly asks to be interviewed before execution or transfers new, ambiguous, or high-stakes end-to-end ownership whose plausible readings would produce materially different work. Ask high-signal questions one at a time and hand off an amnesia-proof summary; do not run this gate for clear, urgent, routine, or already-briefed work.
+3. **Strategy:** use `strategy-brief` to choose a route, expose consequential assumptions, define authority boundaries, and name the verification plan before execution.
+4. **Execution:** use the narrowest domain and producer skills that fit the task.
+5. **Verification:** use `verification-loop` with observable evidence independent of the executing model's confidence.
+6. **Delivery:** state what was verified, what remains inferred, and any approval-gated next action.
 
 For a tiny reversible task, the strategy may be an internal one-line route and verification may be a single deterministic check. The chain is compressed, not omitted.
 
@@ -36,6 +37,7 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 
 - Proactively notice when a missing preference, lived detail, relationship constraint, taste example, decision rule, or working habit could materially improve the current harness or future outcomes.
 - Ask Krish one specific question at a time only when the answer must come from him and materially changes the result. Explain which decision, skill, or proposed chapter the answer would improve.
+- When Krish explicitly hands over end-to-end ownership or asks to be interviewed first, use `take-the-brief` to elicit task-specific intent before strategy. Keep that interview adaptive and bounded; it is not permission to re-interview him on routine work.
 - Do not ask for information that can be discovered safely from existing files, conversations, or live sources.
 - Do not turn a technical recommendation into a founder choice merely because more than one valid implementation exists. Choose the strongest reversible route, verify it, and report the assumption only when material.
 - Do not make sensitive information a prerequisite unless it is genuinely required for the requested outcome.

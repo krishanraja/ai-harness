@@ -10,8 +10,8 @@ This was a read-only inspection of the authenticated Claude Cloud skill settings
 
 - 34 skills are uploaded and all 34 are enabled.
 - 32 are user-authored and 2 are Anthropic-managed (`morning` and `skill-creator`).
-- 16 of the 23 canonical candidates have a same-name cloud skill.
-- 7 canonical candidates are absent from cloud.
+- 16 of the 24 canonical candidates have a same-name cloud skill.
+- 8 canonical candidates are absent from cloud. `take-the-brief` was added to the local candidate set after the authenticated inventory and is absent from the observed 34-skill cloud list.
 - 16 enabled user-authored cloud skills are outside the canonical candidate set.
 - Same-name presence does not establish parity. Cloud does not expose a complete downloadable artifact hash in this view, and several representative copies materially differ from the canonical repository.
 
@@ -38,6 +38,7 @@ This was a read-only inspection of the authenticated Claude Cloud skill settings
 | `mindmaker` | present | 2026-06-10 | enabled | Near its 60-day review deadline; live business reconciliation required |
 | `mindmaker-os` | present | 2026-07-07 | enabled | Enabled 2,226-line monolith; the UI cannot fully render it and it embeds dynamic state and stale reconciliation claims |
 | `strategy-brief` | absent | - | - | Candidate exists only in the canonical repository |
+| `take-the-brief` | absent | - | - | Newly reviewed candidate exists only in the canonical repository |
 | `tools-access` | present | 2026-06-13 | enabled | Legacy credential-bearing design; sensitive remediation is deferred by user instruction |
 | `ux-foundations` | present | 2026-07-03 | enabled | Same-name only; cloud hash is unavailable |
 | `ux-testing-agent` | absent | - | - | Safer canonical replacement is not uploaded |
@@ -97,4 +98,4 @@ Do not bulk-install the Anthropic, Firecrawl, Figma, PostHog, or Sentry catalogs
 
 ## Reconciliation implication
 
-The safest sequence is canonical commit -> deterministic package -> one local canary -> held-out behavior evidence -> explicit cloud activation/replacement decision -> staged rollout with rollback evidence. Uploading the 23 candidates into the current all-enabled cloud library would increase collision risk and would not constitute alignment.
+The safest sequence is canonical commit -> deterministic package -> one local canary -> held-out behavior evidence -> explicit cloud activation/replacement decision -> staged rollout with rollback evidence. Uploading the 24 candidates into the current all-enabled cloud library would increase collision risk and would not constitute alignment.

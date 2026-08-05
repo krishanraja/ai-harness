@@ -99,6 +99,14 @@ foreach ($manifest in $manifests) {
 
     $name = Get-FrontmatterValue -Lines $lines -ClosingIndex $closing -Key 'name'
     $description = Get-FrontmatterValue -Lines $lines -ClosingIndex $closing -Key 'description'
+    $frontmatterKeys = @($lines[1..($closing - 1)] |
+        ForEach-Object { if ($_ -match '^\s*([A-Za-z0-9_-]+)\s*:') { $Matches[1] } } |
+        Where-Object { $_ } |
+        Sort-Object -Unique)
+    $unexpectedFrontmatterKeys = @($frontmatterKeys | Where-Object { $_ -notin @('name', 'description') })
+    if ($unexpectedFrontmatterKeys.Count -gt 0) {
+        Add-Failure "$relative has unsupported frontmatter fields: $($unexpectedFrontmatterKeys -join ', ')."
+    }
     if ($name -notmatch '^[a-z0-9-]{1,64}$') { Add-Failure "$relative has an invalid or missing name." }
     if ($description.Length -eq 0 -or $description.Length -gt 1024) { Add-Failure "$relative description length is invalid ($($description.Length))." }
     if ($manifest.Directory.Name -cne $name) { Add-Failure "$relative folder name does not match skill name '$name'." }
@@ -109,6 +117,16 @@ foreach ($manifest in $manifests) {
         $target = Join-Path $manifest.Directory.FullName ($match.Groups[1].Value -replace '/', '\')
         if (-not (Test-Path -LiteralPath $target -PathType Leaf)) {
             Add-Failure "$relative references missing file $($match.Groups[1].Value)."
+        }
+    }
+
+    $openAiMetadata = Join-Path $manifest.Directory.FullName 'agents\openai.yaml'
+    if (Test-Path -LiteralPath $openAiMetadata -PathType Leaf) {
+        $openAiRaw = [IO.File]::ReadAllText($openAiMetadata)
+        if ($openAiRaw -notmatch '(?m)^\s*display_name:\s*"[^"]+"\s*$') { Add-Failure "$relative has invalid agents/openai.yaml display_name metadata." }
+        if ($openAiRaw -notmatch '(?m)^\s*short_description:\s*"[^"]{25,64}"\s*$') { Add-Failure "$relative has invalid agents/openai.yaml short_description metadata." }
+        if ($openAiRaw -notmatch ('(?m)^\s*default_prompt:\s*"[^"\r\n]*\$' + [regex]::Escape($name) + '\b[^"\r\n]*"\s*$')) {
+            Add-Failure ($relative + ' agents/openai.yaml default_prompt does not explicitly invoke $' + $name + '.')
         }
     }
 
@@ -159,6 +177,10 @@ $appTriggerCases = Join-Path $Root 'evals\build-apps-with-krish-trigger-cases.js
 $appBehaviorCases = Join-Path $Root 'evals\build-apps-with-krish-behavior-cases.jsonl'
 $maintainerTriggerCases = Join-Path $Root 'evals\harness-maintainer-trigger-cases.jsonl'
 $maintainerBehaviorCases = Join-Path $Root 'evals\harness-maintainer-behavior-cases.jsonl'
+$briefTriggerCases = Join-Path $Root 'evals\take-the-brief-trigger-cases.jsonl'
+$briefBehaviorCases = Join-Path $Root 'evals\take-the-brief-behavior-cases.jsonl'
+$globalChainCases = Join-Path $Root 'evals\global-chain-cases.jsonl'
+$skillRoutingCases = Join-Path $Root 'evals\skill-routing-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -222,6 +244,16 @@ $maintainerTriggers = @(Read-JsonLines -Path $maintainerTriggerCases)
 $maintainerBehaviors = @(Read-JsonLines -Path $maintainerBehaviorCases)
 Test-EvalCategoryMinimums -Records $maintainerTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'harness-maintainer trigger suite'
 Test-EvalCategoryMinimums -Records $maintainerBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'harness-maintainer behavior suite'
+
+$briefTriggers = @(Read-JsonLines -Path $briefTriggerCases)
+$briefBehaviors = @(Read-JsonLines -Path $briefBehaviorCases)
+Test-EvalCategoryMinimums -Records $briefTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'take-the-brief trigger suite'
+Test-EvalCategoryMinimums -Records $briefBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'take-the-brief behavior suite'
+
+$globalChains = @(Read-JsonLines -Path $globalChainCases)
+$skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
+Test-EvalCategoryMinimums -Records $globalChains -Minimums @{} -Label 'global chain suite'
+Test-EvalCategoryMinimums -Records $skillRoutes -Minimums @{} -Label 'skill routing suite'
 
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
     $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)
