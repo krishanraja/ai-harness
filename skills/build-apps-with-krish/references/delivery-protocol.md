@@ -73,7 +73,7 @@ For each material surface:
 7. If rejected, record the conceptual spine and same-spine revision count, revise that surface only, and repeat.
 8. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Give generators only a sanitized divergence brief; give the fresh-context judge the complete rejected history. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
 9. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
-10. Only then begin the next material surface.
+10. Carry the lock through its planned implementation and verification gate. Keep later material surfaces paused until that gate is recorded; only then begin the next material surface.
 
 Gate: explicit approval of the rendered revision. Silence, approval of the idea, or approval of a prior version does not pass.
 

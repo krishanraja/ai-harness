@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Eight candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Nine candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -15,7 +15,7 @@ Current measurable state:
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
 - Repository-enforced minimum-sized trigger and behavior suites: 9 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 8 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `mindmaker`, `content-corpus`, `krish-content-marketer`). A smaller prior `mindmaker-os` run remains limited evidence.
+- Complete independent trigger/behavior evidence on reviewed suites: 9 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `build-apps-with-krish`). A smaller prior `mindmaker-os` run remains limited evidence.
 
 ## Rating method
 
@@ -51,7 +51,7 @@ Current measurable state:
 | `krish-content-marketer` | Conversion strategy | Strong, bounded producer with governed learning | current; reviewed 2026-08-05 | absent | enabled stale 2026-06-11 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and conversion/voice handoff canary |
 | `krish-design` | Personal design doctrine | Strong | current | older staged archive | enabled older 2026-07-03 copy | Structural | Reference artifacts/counterexamples, responsive/accessibility trade-offs, design/UX/build collisions |
 | `krish-build` | Technical producer doctrine | Strong after runtime proof reference | current | older staged archive | enabled older 2026-07-03 copy | Structural | Repo/environment, partial build, stale deploy, rollback, user-change preservation, and delivery suite |
-| `build-apps-with-krish` | App-delivery orchestrator | Strong | current | absent | absent | Suite designed | Execute full trigger/behavior suite and rendered multi-surface handoff canary with Krish approval gates |
+| `build-apps-with-krish` | App-delivery orchestrator | Strong after explicit phase/reset contracts | current | absent | absent | Independent suite pass: 24/24 triggers, 29/29 behaviors | Rendered multi-session app canary with real Krish reactions, implementation handoff, production readback, and rollback |
 | `ux-foundations` | Narrow generic UX reference | Thin | current | exact staged archive; no exact active copy | enabled, 2026-07-03 | Structural | Primary provenance/WCAG freshness plus lookup-only and design-collision suite |
 | `ux-testing-agent` | Evidence-first UX validator | Strong | current | invalid legacy directories; no exact active copy | absent | Structural | Read-only browser/repo canaries, auth/data limits, false reproduction, responsive/accessibility, fix-scope suite |
 | `tools-access` | Runtime authentication contract | Good | current | invalid/drifted legacy copies; no exact active copy | enabled legacy copy, 2026-06-13 | Structural | Choose runtime mapping; test missing access/redaction now; sensitive remediation remains deferred |
