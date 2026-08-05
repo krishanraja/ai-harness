@@ -65,13 +65,13 @@ Gate: each surface has a purpose, entry, exit, data dependency, and verification
 For each material surface:
 
 1. Lock its governing product and data rule.
-2. If the concept is load-bearing and genuinely novel, generate independent concept spines, score them with fresh-context adversarial judges, and synthesize the strongest while preserving real code and data constraints. Do not expose a fantasy that cannot survive the shipped system.
+2. If the concept is load-bearing and genuinely novel, generate independent concept spines, score them with fresh-context adversarial judges, and synthesize the strongest while preserving real code and data constraints. For post-rejection divergence, use the asymmetric context protocol below. Do not expose a fantasy that cannot survive the shipped system.
 3. Produce one rendered, self-contained mock of the synthesis at the intended viewport and state. Show multiple variants only when comparing them is the decision Krish must make.
 4. Verify that the artifact actually rendered and is the version being shown.
 5. Present it cold, without a persuasive walkthrough, rationale, or change log before Krish's first reaction. Apply the same rule to every revised material mock. Do not hide safety, authority, factual, or data constraints required for a responsible judgment.
 6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect. After that first reaction, reveal a concise map of prior feedback to change to evidence.
 7. If rejected, record the conceptual spine and same-spine revision count, revise that surface only, and repeat.
-8. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
+8. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Give generators only a sanitized divergence brief; give the fresh-context judge the complete rejected history. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
 9. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
 10. Only then begin the next material surface.
 
@@ -143,6 +143,8 @@ Apply concentrated rigor. A check belongs when its failure could change the verd
 - Keep the first reaction unanchored. Do not explain why the mock should work until Krish has given the immediate read.
 - Treat every revision as a fresh taste test. Show the revised artifact cold, collect the first reaction, then disclose what changed and why. The post-reaction change map should be terse and traceable: prior feedback, implemented change, verification evidence.
 - Track revised attempts by conceptual spine. Two consecutive rejected revisions are evidence that local refinement has stalled: return to independent concept generation and fresh-context judging instead of producing a third same-spine revision. Reset the count for the newly selected spine. Krish may explicitly ask to keep refining the current spine after seeing that consequence.
+- Build a sanitized divergence brief before fresh generation. Include the user outcome; invariant product, data, safety, accessibility, brand, and implementation constraints; and Krish's exact failure signals translated into non-solution requirements. Exclude rejected renders, screenshots, DOM or component shapes, layout descriptions, rationales, change logs, rankings, and solution-specific features. Check the brief for indirect leakage such as "do the opposite of the previous card grid."
+- Give the sanitized brief separately to independent generators that cannot inspect the rejected artifacts or one another's work. Give the adversarial judge the sanitized brief, all new candidates, the complete rejected history, and the evaluation rubric. The judge must detect disguised repetition, constraint regression, and discarded strengths before synthesis. Preserve provenance between each generator output, the judge verdict, and the rendered synthesis.
 - Number variants, fixtures, or cells when asynchronous or voice-note review will be easier by reference number.
 - Treat small visual objections as possible system evidence. A cramped label can reveal a bad content contract, spacing token, responsive rule, or component architecture.
 - Separate product philosophy, information structure, visual execution, copy stance, and implementation bugs. Fix at the lowest correct layer.
@@ -222,5 +224,6 @@ Material adaptation:
 - added Krish's 2026-08-05 decision that each new or materially changed visual surface requires one rendered mock and explicit approval, while routine work inside a locked system proceeds autonomously.
 - added Krish's 2026-08-05 decision that every revised material mock is also shown cold, with the change log withheld until after his first reaction while safety and factual context remain visible.
 - added Krish's 2026-08-05 decision that two consecutive rejected revisions of one conceptual spine trigger fresh divergence and adversarial judging unless he explicitly asks to keep refining it.
+- added Krish's 2026-08-05 decision that fresh post-rejection generators are blinded to rejected solutions and receive only a sanitized constraint-and-failure brief, while the independent judge receives the complete history.
 
 Freshness SLA: 90 days, or immediately after a direct correction to the collaboration cadence, a material build failure exposes a missing gate, or the neighboring skill boundaries change. Expiry opens a review finding; it does not silently alter the method.
