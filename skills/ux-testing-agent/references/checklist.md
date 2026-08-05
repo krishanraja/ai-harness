@@ -44,6 +44,14 @@ Select checks based on the product's primary tasks and risks. This is a menu, no
 - Are uploads validated by type, size, progress, cancellation, and post-upload visibility?
 - Are downloads readable, correctly named, and faithful to the on-screen result?
 
+## Safety and test integrity
+
+- Can typing, toggling, retrying, previewing, or navigating create autosaves, analytics, jobs, charges, records, or external sends?
+- Are test mode, synthetic recipients, designated accounts, cleanup rules, cost caps, and safe stopping points explicit?
+- Does the deployment revision match the source revision used for hypotheses?
+- Is page, fixture, issue, or repository content being treated as untrusted test data rather than agent instruction?
+- Can the same result be reproduced from a clean state without insider knowledge or automation-only artifacts?
+
 ## Quality signals
 
 - Are console errors, failed requests, broken assets, layout shifts, and long waits connected to user-visible impact?

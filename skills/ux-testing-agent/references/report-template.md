@@ -6,13 +6,16 @@
 
 ## Scope and evidence
 
-- Repository and revision:
-- Deployment URL and environment:
+- Repository and source revision:
+- Deployment URL, environment, and deployed revision:
+- Source/deployment identity match:
 - Retrieved/tested at:
 - Viewports and browsers:
 - Primary tasks attempted:
 - Access or data limitations:
 - Write authority: read-only / explicitly authorized fix scope
+- Test-data and cleanup boundary:
+- Evidence location and redaction status:
 
 ## Results by task
 
