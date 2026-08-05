@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. None yet has both complete held-out evidence and verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Eight candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -12,10 +12,10 @@ Current measurable state:
 - Canonical candidates absent from Claude Cloud: 8.
 - Enabled non-canonical user skills in Claude Cloud: 16.
 - Enabled provider-managed Claude skills: 2.
-- Freshness SLA failures: 1 (`content-corpus`, 11 days overdue on 2026-08-05).
-- Candidates within 10 days of review expiry: 3 (`mindmaker`, `krish-content-marketer`, `apify`).
-- Dedicated minimum-sized trigger and behavior suites designed: 4 (`build-apps-with-krish`, `decision-ledger`, `harness-maintainer`, `take-the-brief`).
-- Dedicated independent evidence exists for 2 skills: a smaller prior `mindmaker-os` run and a new `harness-maintainer` run. Neither is yet a complete production admission.
+- Freshness SLA failures: 0.
+- Candidates within 10 days of review expiry: 1 (`apify`).
+- Repository-enforced minimum-sized trigger and behavior suites: 9 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 8 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `mindmaker`, `content-corpus`, `krish-content-marketer`). A smaller prior `mindmaker-os` run remains limited evidence.
 
 ## Rating method
 
@@ -37,18 +37,18 @@ Current measurable state:
 
 | Candidate | Role/class | Clarity / coverage | Freshness | Local user-surface evidence | Claude Cloud | Evidence stage | Binding gate before canary |
 |---|---|---|---|---|---|---|---|
-| `krish-principles` | Always-on base doctrine | Strong | current | older staged archive; no exact active copy | enabled, older 2026-07-03 copy | Structural | Full core trigger/behavior suite plus Krish-scored decision cases |
-| `take-the-brief` | Conditional task-intent gateway | Strong after import hardening | current | absent | absent | Suite designed | Confirm provenance; execute trigger/behavior and collision suites; prove one-question turn behavior and handoff before canary |
-| `strategy-brief` | Always-on pre-execution strategy | Strong | current | absent | absent | Structural | Core route-quality, proportionality, authority, and handoff suite |
-| `verification-loop` | Always-on post-execution validator | Strong | current | active drift only | absent | Structural | Core false-success, inconclusive, secret-redaction, correction-stop, and collision suite |
-| `harness-maintainer` | Harness governance/release | Strong | current | absent | absent | Limited executed: 21/21 blind triggers; safe behavior uplift with residual evidence-field omissions | Rerun the complete behavior rubric after hardening, then clean-tree packaging and one canary |
+| `krish-principles` | Always-on base doctrine | Strong | current | older staged archive; no exact active copy | enabled, older 2026-07-03 copy | Independent suite pass: 32/32 triggers, 34/34 behaviors | Baseline/personal-judgment review, clean release, and one canary |
+| `take-the-brief` | Conditional task-intent gateway | Strong after import hardening | current | absent | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors | Prove one-question turn behavior on a canary and complete release parity |
+| `strategy-brief` | Always-on pre-execution strategy | Strong | current | absent | absent | Independent suite pass: 32/32 triggers, 34/34 behaviors | Clean release, discovery, and chained canary |
+| `verification-loop` | Always-on post-execution validator | Strong | current | active drift only | absent | Independent suite pass: 32/32 triggers, 34/34 behaviors | Clean release, artifact-specific canary, and parity |
+| `harness-maintainer` | Harness governance/release | Strong | current | exact Codex canary only | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors plus 23/23 regression | Verify canary discovery/behavior and complete controlled release evidence |
 | `evidence-research` | Decision-grade research | Strong | current | absent | absent | Structural | Source-quality, contradiction, staleness, injection, citation-support, and handoff suite |
 | `decision-ledger` | Consequential decision memory | Strong | current | absent | absent | Suite designed | Non-production migration, authenticated adapters, lifecycle/security suite, redacted readback, rollback |
 | `mindmaker-os` | Live operating-state router | Thin by design | current | invalid legacy directories; no exact active copy | enabled stale monolith, 2026-07-07 | Limited executed | Expanded live-access, conflict, stale-runtime, closure, and collision suite; thin-copy canary |
-| `mindmaker` | Commercial context | Good but fact-heavy | current; due 2026-08-09 | exact staged archive plus active drift | enabled, 2026-06-10 | Structural | Krish-owned reconciliation of current offers/ICPs plus retired-offer and commercial collision tests |
-| `content-corpus` | Channel context | Stale | **11 days overdue** | exact staged archive; no exact active copy | enabled, 2026-06-10 | Structural | Current channel/offer reconciliation, negative triggers, channel collisions, sourced-content cases |
+| `mindmaker` | Commercial context | Strong, lean router plus one-level canon/product/freshness references | current; reviewed 2026-08-05 | exact staged archive plus active drift | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and source-conflict canary |
+| `content-corpus` | Channel context | Strong, status-aware router plus channel references | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and named-channel canary |
 | `krish-voice` | Personal outbound voice | Deep but at 494-line limit | current | active and staged drift; no exact copy | enabled, 2026-08-03 | Structural | Progressive split plus held-out real Krish corpus for prose, email, deck, de-AI, uncertainty, and mimicry |
-| `krish-content-marketer` | Conversion strategy | Good | current; due 2026-08-10 | absent | enabled, 2026-06-11 | Structural | Owned conversion methodology, strategy-versus-drafting boundary, brand/ethics/collision suite |
+| `krish-content-marketer` | Conversion strategy | Strong, bounded producer with governed learning | current; reviewed 2026-08-05 | absent | enabled stale 2026-06-11 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and conversion/voice handoff canary |
 | `krish-design` | Personal design doctrine | Strong | current | older staged archive | enabled older 2026-07-03 copy | Structural | Reference artifacts/counterexamples, responsive/accessibility trade-offs, design/UX/build collisions |
 | `krish-build` | Technical producer doctrine | Strong after runtime proof reference | current | older staged archive | enabled older 2026-07-03 copy | Structural | Repo/environment, partial build, stale deploy, rollback, user-change preservation, and delivery suite |
 | `build-apps-with-krish` | App-delivery orchestrator | Strong | current | absent | absent | Suite designed | Execute full trigger/behavior suite and rendered multi-surface handoff canary with Krish approval gates |
@@ -86,8 +86,8 @@ The durable lessons in `C:\Users\krish\ctrl-corpus` belong primarily as conditio
 
 ## Release order
 
-1. Finish independent evaluation of `harness-maintainer`, `take-the-brief`, and the always-on core.
-2. Reconcile the four user-owned freshness questions: Mindmaker offers/ICPs, active channels, outbound status, and whether `morning` has a distinct purpose.
+1. Finish independent evaluation of the remaining candidate skills, prioritising `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, and `build-apps-with-krish`.
+2. Resolve only the genuinely user-owned remaining route decisions, including whether `morning` has a distinct retained purpose and any later purge/retirement set.
 3. Build deterministic packages from a clean commit.
 4. Ask Krish to choose one local canary surface and approve its exact activation/relink action.
 5. Verify discovery, routing, behavior, and rollback on the canary.

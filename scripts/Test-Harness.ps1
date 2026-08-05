@@ -184,6 +184,12 @@ $coreTriggerCases = Join-Path $Root 'evals\core-trigger-cases.jsonl'
 $coreBehaviorCases = Join-Path $Root 'evals\core-behavior-cases.jsonl'
 $globalChainCases = Join-Path $Root 'evals\global-chain-cases.jsonl'
 $skillRoutingCases = Join-Path $Root 'evals\skill-routing-cases.jsonl'
+$mindmakerTriggerCases = Join-Path $Root 'evals\mindmaker-trigger-cases.jsonl'
+$mindmakerBehaviorCases = Join-Path $Root 'evals\mindmaker-behavior-cases.jsonl'
+$contentCorpusTriggerCases = Join-Path $Root 'evals\content-corpus-trigger-cases.jsonl'
+$contentCorpusBehaviorCases = Join-Path $Root 'evals\content-corpus-behavior-cases.jsonl'
+$contentMarketerTriggerCases = Join-Path $Root 'evals\krish-content-marketer-trigger-cases.jsonl'
+$contentMarketerBehaviorCases = Join-Path $Root 'evals\krish-content-marketer-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -265,6 +271,30 @@ $coreBehaviors = @(Read-JsonLines -Path $coreBehaviorCases)
 foreach ($coreSkill in @('krish-principles', 'strategy-brief', 'verification-loop')) {
     $coreSkillBehaviors = @($coreBehaviors | Where-Object skill -eq $coreSkill)
     Test-EvalCategoryMinimums -Records $coreSkillBehaviors -Minimums @{ nominal = 10; failure_edge = 10; authority_security = 8; handoff_collision = 6 } -Label "$coreSkill core behavior suite"
+}
+
+$commercialEvalSpecs = @(
+    @{
+        Name = 'mindmaker'
+        TriggerPath = $mindmakerTriggerCases
+        BehaviorPath = $mindmakerBehaviorCases
+    },
+    @{
+        Name = 'content-corpus'
+        TriggerPath = $contentCorpusTriggerCases
+        BehaviorPath = $contentCorpusBehaviorCases
+    },
+    @{
+        Name = 'krish-content-marketer'
+        TriggerPath = $contentMarketerTriggerCases
+        BehaviorPath = $contentMarketerBehaviorCases
+    }
+)
+foreach ($spec in $commercialEvalSpecs) {
+    $commercialTriggers = @(Read-JsonLines -Path $spec.TriggerPath)
+    $commercialBehaviors = @(Read-JsonLines -Path $spec.BehaviorPath)
+    Test-EvalCategoryMinimums -Records $commercialTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label "$($spec.Name) trigger suite"
+    Test-EvalCategoryMinimums -Records $commercialBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label "$($spec.Name) behavior suite"
 }
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
