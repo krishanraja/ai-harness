@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twelve candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Thirteen candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 12 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-design`, `krish-build`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 12 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `build-apps-with-krish`, `krish-design`, `krish-build`). A smaller prior `mindmaker-os` run remains limited evidence.
+- Repository-enforced minimum-sized trigger and behavior suites: 13 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 13 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`). A smaller prior `mindmaker-os` run remains limited evidence.
 
 ## Rating method
 
@@ -47,7 +47,7 @@ Current measurable state:
 | `mindmaker-os` | Live operating-state router | Thin by design | current | invalid legacy directories; no exact active copy | enabled stale monolith, 2026-07-07 | Limited executed | Expanded live-access, conflict, stale-runtime, closure, and collision suite; thin-copy canary |
 | `mindmaker` | Commercial context | Strong, lean router plus one-level canon/product/freshness references | current; reviewed 2026-08-05 | exact staged archive plus active drift | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and source-conflict canary |
 | `content-corpus` | Channel context | Strong, status-aware router plus channel references | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and named-channel canary |
-| `krish-voice` | Personal outbound voice | Deep but at 494-line limit | current | active and staged drift; no exact copy | enabled, 2026-08-03 | Structural | Progressive split plus held-out real Krish corpus for prose, email, deck, de-AI, uncertainty, and mimicry |
+| `krish-voice` | Personal outbound voice | Strong after progressive split and fact/privacy/authority/handoff hardening | current; reviewed 2026-08-05 | active and staged drift; no exact copy | enabled older 2026-08-03 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised held-out real-Krish corpus, blind mimicry comparison, rendered deck canary, Krish acceptance, and parity |
 | `krish-content-marketer` | Conversion strategy | Strong, bounded producer with governed learning | current; reviewed 2026-08-05 | absent | enabled stale 2026-06-11 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and conversion/voice handoff canary |
 | `krish-design` | Personal design doctrine | Strong after explicit proof/authority/handoff contracts | current | older staged archive | enabled older 2026-07-03 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Real rendered-artifact canary with Krish reaction, implementation handoff, responsive/accessibility proof, and parity |
 | `krish-build` | Technical producer doctrine | Strong after runtime/authority/freshness contracts | current | older staged archive | enabled older 2026-07-03 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Real repository and bounded mutation/readback canaries, rollback proof, current artifact presentation, and parity |
@@ -86,7 +86,7 @@ The durable lessons in `C:\Users\krish\ctrl-corpus` belong primarily as conditio
 
 ## Release order
 
-1. Finish independent evaluation of the remaining candidate skills, prioritising `krish-voice`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, and the CTRL chain.
+1. Finish independent evaluation of the remaining candidate skills, prioritising `ux-testing-agent`, `tools-access`, `mindmaker-os`, and the CTRL chain.
 2. Resolve only the genuinely user-owned remaining route decisions, including whether `morning` has a distinct retained purpose and any later purge/retirement set.
 3. Build deterministic packages from a clean commit.
 4. Ask Krish to choose one local canary surface and approve its exact activation/relink action.

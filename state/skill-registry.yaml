@@ -39,7 +39,7 @@ candidates:
   - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-03, freshness_sla_days: 60}
+  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 180}

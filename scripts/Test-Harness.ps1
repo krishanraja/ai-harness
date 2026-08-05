@@ -196,6 +196,8 @@ $buildTriggerCases = Join-Path $Root 'evals\krish-build-trigger-cases.jsonl'
 $buildBehaviorCases = Join-Path $Root 'evals\krish-build-behavior-cases.jsonl'
 $researchTriggerCases = Join-Path $Root 'evals\evidence-research-trigger-cases.jsonl'
 $researchBehaviorCases = Join-Path $Root 'evals\evidence-research-behavior-cases.jsonl'
+$voiceTriggerCases = Join-Path $Root 'evals\krish-voice-trigger-cases.jsonl'
+$voiceBehaviorCases = Join-Path $Root 'evals\krish-voice-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -317,6 +319,11 @@ $researchTriggers = @(Read-JsonLines -Path $researchTriggerCases)
 $researchBehaviors = @(Read-JsonLines -Path $researchBehaviorCases)
 Test-EvalCategoryMinimums -Records $researchTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'evidence-research trigger suite'
 Test-EvalCategoryMinimums -Records $researchBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'evidence-research behavior suite'
+
+$voiceTriggers = @(Read-JsonLines -Path $voiceTriggerCases)
+$voiceBehaviors = @(Read-JsonLines -Path $voiceBehaviorCases)
+Test-EvalCategoryMinimums -Records $voiceTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'krish-voice trigger suite'
+Test-EvalCategoryMinimums -Records $voiceBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'krish-voice behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)

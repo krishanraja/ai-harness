@@ -57,8 +57,8 @@ Applies to any deck, talk, workshop, webinar, or slide artifact. Learned from a 
 
 The speaker carries the performance. Slides carry facts and numbers. Every slide-copy failure below is a version of the copy doing the speaker's job: commanding attention, narrating structure, reading the room, dropping the mic. Before writing a single slide, decide the delivery mode:
 
-- **Solo mode.** Krish presents this himself, live. First-person field material stays first-person ("my fourteen agents"), because it is the moat. Copy can run leaner because his delivery fills gaps.
-- **Transferable mode.** The deck must survive a replay, a PDF leave-behind, or another presenter. First-person material becomes attributable evidence ("from a real fleet of 14 production agents"). Every slide must be presentable by someone else reading and paraphrasing it.
+- **Solo mode.** Krish presents this himself, live. Authorised first-person field material stays first-person ("my current production fleet"), because it is the moat. Copy can run leaner because his delivery fills gaps.
+- **Transferable mode.** The deck must survive a replay, a PDF leave-behind, or another presenter. First-person material becomes attributable evidence ("from a verified production fleet"). Every slide must be presentable by someone else reading and paraphrasing it. Retrieve any current count from the task's evidence packet rather than this doctrine.
 
 Default to transferable unless told otherwise; most decks outlive the room they were built for.
 
