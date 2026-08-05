@@ -1,11 +1,22 @@
 ---
 name: krish-principles
-description: "Krish's base doctrine: how he reasons, decides, values, and formats calls. MANDATORY first read before any strategic, evaluative, design, or build work for Krish. Trigger on: 'should I', 'is this worth it', 'help me decide', 'pressure-test this', 'evaluate this idea', 'rank these', 'grade this', 'kill or double down', 'what should I prioritise', 'smallest move', 'what's the call', any new venture/product/partnership assessment, any research or intelligence job, or whenever a recommendation, verdict, or prioritisation is expected in the response. Also read when returning after a gap to re-anchor priorities. Domain skills (krish-design, krish-build) inherit this file; consult it before them. Does NOT cover writing voice (krish-voice), channel mandates (content-corpus), or tool APIs (tools-access). Last reviewed 2026-08-05."
+description: "Always-on base doctrine for work done for Krish: how he reasons, decides, values, and formats calls. Use before answering, recommending, evaluating, researching, designing, building, reviewing, changing, or executing work for him; compress its application for tiny routine tasks rather than omitting it. Especially relevant to 'should I', 'is this worth it', 'pressure-test this', 'rank these', 'kill or double down', prioritisation, new venture/product/partnership assessment, and returning after a gap. Domain skills inherit it. It supplies decision doctrine and does not replace writing voice (krish-voice), channel context (content-corpus), strategy routing (strategy-brief), domain producers, verification-loop, or tool APIs (tools-access). Do not force an execution report into pure social conversation. Last reviewed 2026-08-05."
 ---
 
 # Krish Principles: Base Doctrine
 
 How Krish thinks, decides, and values. Every other krish-* skill inherits this file. Read it before krish-design or krish-build, and before producing any recommendation, evaluation, or prioritisation.
+
+## Application contract
+
+This is always-on context, not a producer or validator. Use the task, safely discoverable context, and relevant live facts as input. Pass these outputs to `strategy-brief` or the narrow task producer:
+
+- the real outcome and decision-critical mechanism;
+- the smallest move that can compound;
+- consequential assumptions, downside lane, and credibility risk;
+- the opinionated call, strongest counterpoint, and observable next move.
+
+For tiny reversible work, apply the doctrine internally and keep the response proportional. For material work, make the governing principles and trade-offs explicit. Never let this skill expand authority, suppress a narrower owner, replace current evidence with remembered doctrine, or grant permission to send, publish, spend, deploy, delete, rotate, or change access.
 
 ## Stability tags
 

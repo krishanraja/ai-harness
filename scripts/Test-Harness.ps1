@@ -177,8 +177,11 @@ $appTriggerCases = Join-Path $Root 'evals\build-apps-with-krish-trigger-cases.js
 $appBehaviorCases = Join-Path $Root 'evals\build-apps-with-krish-behavior-cases.jsonl'
 $maintainerTriggerCases = Join-Path $Root 'evals\harness-maintainer-trigger-cases.jsonl'
 $maintainerBehaviorCases = Join-Path $Root 'evals\harness-maintainer-behavior-cases.jsonl'
+$maintainerRegressionCases = Join-Path $Root 'evals\harness-maintainer-regression-cases.jsonl'
 $briefTriggerCases = Join-Path $Root 'evals\take-the-brief-trigger-cases.jsonl'
 $briefBehaviorCases = Join-Path $Root 'evals\take-the-brief-behavior-cases.jsonl'
+$coreTriggerCases = Join-Path $Root 'evals\core-trigger-cases.jsonl'
+$coreBehaviorCases = Join-Path $Root 'evals\core-behavior-cases.jsonl'
 $globalChainCases = Join-Path $Root 'evals\global-chain-cases.jsonl'
 $skillRoutingCases = Join-Path $Root 'evals\skill-routing-cases.jsonl'
 
@@ -242,13 +245,27 @@ Test-EvalCategoryMinimums -Records $appBehaviors -Minimums @{ nominal = 6; failu
 
 $maintainerTriggers = @(Read-JsonLines -Path $maintainerTriggerCases)
 $maintainerBehaviors = @(Read-JsonLines -Path $maintainerBehaviorCases)
+$maintainerRegressions = @(Read-JsonLines -Path $maintainerRegressionCases)
 Test-EvalCategoryMinimums -Records $maintainerTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'harness-maintainer trigger suite'
 Test-EvalCategoryMinimums -Records $maintainerBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'harness-maintainer behavior suite'
+Test-EvalCategoryMinimums -Records $maintainerRegressions -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'harness-maintainer fresh regression suite'
 
 $briefTriggers = @(Read-JsonLines -Path $briefTriggerCases)
 $briefBehaviors = @(Read-JsonLines -Path $briefBehaviorCases)
 Test-EvalCategoryMinimums -Records $briefTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'take-the-brief trigger suite'
 Test-EvalCategoryMinimums -Records $briefBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'take-the-brief behavior suite'
+
+$coreTriggers = @(Read-JsonLines -Path $coreTriggerCases)
+foreach ($coreSkill in @('krish-principles', 'strategy-brief', 'verification-loop')) {
+    $coreSkillTriggers = @($coreTriggers | Where-Object skill -eq $coreSkill)
+    Test-EvalCategoryMinimums -Records $coreSkillTriggers -Minimums @{ positive = 12; negative = 12; adversarial_collision = 8 } -Label "$coreSkill core trigger suite"
+}
+
+$coreBehaviors = @(Read-JsonLines -Path $coreBehaviorCases)
+foreach ($coreSkill in @('krish-principles', 'strategy-brief', 'verification-loop')) {
+    $coreSkillBehaviors = @($coreBehaviors | Where-Object skill -eq $coreSkill)
+    Test-EvalCategoryMinimums -Records $coreSkillBehaviors -Minimums @{ nominal = 10; failure_edge = 10; authority_security = 8; handoff_collision = 6 } -Label "$coreSkill core behavior suite"
+}
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
