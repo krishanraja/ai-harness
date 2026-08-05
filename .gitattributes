@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+*.skill -text
+*.zip -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.pdf -text

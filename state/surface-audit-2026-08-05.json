@@ -1,9 +1,9 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-08-05T18:01:18.0998376Z",
+    "generated_at_utc":  "2026-08-05T19:13:22.6073885Z",
     "canonical":  {
                       "repository":  "krishanraja/ai-harness",
-                      "source_commit":  "73382ffbffb46fdc12604cb656e764a7e917376d",
+                      "source_commit":  "300fbe77382024ac3e6f15fd6b4201fe3f5b5b8e",
                       "path":  "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills",
                       "skill_count":  24,
                       "skills":  [
@@ -2614,24 +2614,24 @@
                          "ownership":  "user-managed",
                          "exists":  true,
                          "counts":  {
-                                        "artifacts_total":  9,
-                                        "unique_names":  9,
+                                        "artifacts_total":  10,
+                                        "unique_names":  10,
                                         "duplicate_names":  0,
-                                        "exact_canonical_artifacts":  0,
-                                        "exact_canonical_names":  0,
+                                        "exact_canonical_artifacts":  1,
+                                        "exact_canonical_names":  1,
                                         "drifted_canonical_artifacts":  1,
                                         "drifted_canonical_names":  1,
                                         "extra_artifacts":  8,
                                         "extra_names":  8,
                                         "invalid_artifacts":  0,
-                                        "missing_exact_canonical":  24,
-                                        "missing_canonical_by_name":  23,
-                                        "active_local":  9,
+                                        "missing_exact_canonical":  23,
+                                        "missing_canonical_by_name":  22,
+                                        "active_local":  10,
                                         "active_junction":  0,
                                         "staged_archives":  0
                                     },
                          "exact_canonical_names":  [
-
+                                                       "harness-maintainer"
                                                    ],
                          "drifted_canonical_names":  [
                                                          "verification-loop"
@@ -2657,7 +2657,6 @@
                                                          "ctrl-intake",
                                                          "decision-ledger",
                                                          "evidence-research",
-                                                         "harness-maintainer",
                                                          "krish-build",
                                                          "krish-content-marketer",
                                                          "krish-design",
@@ -2683,7 +2682,6 @@
                                                            "ctrl-intake",
                                                            "decision-ledger",
                                                            "evidence-research",
-                                                           "harness-maintainer",
                                                            "krish-build",
                                                            "krish-content-marketer",
                                                            "krish-design",
@@ -2708,16 +2706,16 @@
                                                          ],
                          "artifacts":  [
                                            {
-                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\n8n-cli",
-                                               "name":  "n8n-cli",
-                                               "folder_name":  "n8n-cli",
-                                               "relation":  "extra",
+                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\harness-maintainer",
+                                               "name":  "harness-maintainer",
+                                               "folder_name":  "harness-maintainer",
+                                               "relation":  "exact",
                                                "storage":  "active-local",
                                                "valid":  true,
                                                "error":  null,
-                                               "manifest_sha256":  "8EDE540CB5C1D52C90FA800F2256FFDF3567E259473D5782901C5E69037C1869",
-                                               "artifact_sha256":  "D653564CBF543E7A56A87372DB7D9B5B65356DC53A38FBE6B5E0109C0ED5CBA5",
-                                               "last_write_utc":  "2026-06-19T17:53:24.6803256Z",
+                                               "manifest_sha256":  "81C48353FE0371B41459427CD8014A011404CFBBB7B0D8697D838CBD318203DF",
+                                               "artifact_sha256":  "8F78C1979F82A9DD712EB2C4568690C9023D305BDC8F1714B9DDB321CD40A1B2",
+                                               "last_write_utc":  "2026-08-05T19:10:57.7603952Z",
                                                "archive_path":  null,
                                                "package_root_stripped":  null
                                            },
@@ -2732,6 +2730,20 @@
                                                "manifest_sha256":  "FBAEA313237C8031D8DB5FA1064FAC16257394CD9419547329B54DCDADC9454E",
                                                "artifact_sha256":  "9C5B1DF66F42BF5C5254BCDA1593C229AB3F1AA7B1F1DA35AC0F1B023300E287",
                                                "last_write_utc":  "2026-06-19T17:58:33.5424581Z",
+                                               "archive_path":  null,
+                                               "package_root_stripped":  null
+                                           },
+                                           {
+                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\n8n-cli",
+                                               "name":  "n8n-cli",
+                                               "folder_name":  "n8n-cli",
+                                               "relation":  "extra",
+                                               "storage":  "active-local",
+                                               "valid":  true,
+                                               "error":  null,
+                                               "manifest_sha256":  "8EDE540CB5C1D52C90FA800F2256FFDF3567E259473D5782901C5E69037C1869",
+                                               "artifact_sha256":  "D653564CBF543E7A56A87372DB7D9B5B65356DC53A38FBE6B5E0109C0ED5CBA5",
+                                               "last_write_utc":  "2026-06-19T17:53:24.6803256Z",
                                                "archive_path":  null,
                                                "package_root_stripped":  null
                                            },
@@ -2764,20 +2776,6 @@
                                                "package_root_stripped":  null
                                            },
                                            {
-                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\e2e-testing",
-                                               "name":  "e2e-testing",
-                                               "folder_name":  "e2e-testing",
-                                               "relation":  "extra",
-                                               "storage":  "active-local",
-                                               "valid":  true,
-                                               "error":  null,
-                                               "manifest_sha256":  "7E8FE72760F9274656F2B3D5A501B9535B4FE3ACD8D83A79CD15F207C21BD937",
-                                               "artifact_sha256":  "980C2C7970DA4B4B8CCC2474072F9173ED793FA4A34BEB70608FC4ECD18149D9",
-                                               "last_write_utc":  "2026-06-19T17:56:57.3454019Z",
-                                               "archive_path":  null,
-                                               "package_root_stripped":  null
-                                           },
-                                           {
                                                "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\backend-patterns",
                                                "name":  "backend-patterns",
                                                "folder_name":  "backend-patterns",
@@ -2806,20 +2804,6 @@
                                                "package_root_stripped":  null
                                            },
                                            {
-                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\design-system",
-                                               "name":  "design-system",
-                                               "folder_name":  "design-system",
-                                               "relation":  "extra",
-                                               "storage":  "active-local",
-                                               "valid":  true,
-                                               "error":  null,
-                                               "manifest_sha256":  "833451C6DB6DE6C93B48812AC1580EA50F5FFD5A0C3B80940D2B10D3B20F418B",
-                                               "artifact_sha256":  "5FBDA735480E11ABF26AA88AF1CF18AC4CBB424A219BC74924394C34A8E18813",
-                                               "last_write_utc":  "2026-06-19T17:57:30.4950540Z",
-                                               "archive_path":  null,
-                                               "package_root_stripped":  null
-                                           },
-                                           {
                                                "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\browser-qa",
                                                "name":  "browser-qa",
                                                "folder_name":  "browser-qa",
@@ -2830,6 +2814,34 @@
                                                "manifest_sha256":  "83BEC670AF287161F3D89585A15B64EE19B16742283A1B8F17FD259F88719399",
                                                "artifact_sha256":  "F8A2373E1728CCA7C658A8F4643A1322615189EBDF1B8CD3334ED25A91F589DE",
                                                "last_write_utc":  "2026-06-19T17:57:52.7436725Z",
+                                               "archive_path":  null,
+                                               "package_root_stripped":  null
+                                           },
+                                           {
+                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\e2e-testing",
+                                               "name":  "e2e-testing",
+                                               "folder_name":  "e2e-testing",
+                                               "relation":  "extra",
+                                               "storage":  "active-local",
+                                               "valid":  true,
+                                               "error":  null,
+                                               "manifest_sha256":  "7E8FE72760F9274656F2B3D5A501B9535B4FE3ACD8D83A79CD15F207C21BD937",
+                                               "artifact_sha256":  "980C2C7970DA4B4B8CCC2474072F9173ED793FA4A34BEB70608FC4ECD18149D9",
+                                               "last_write_utc":  "2026-06-19T17:56:57.3454019Z",
+                                               "archive_path":  null,
+                                               "package_root_stripped":  null
+                                           },
+                                           {
+                                               "artifact_id":  "directory:C:\\Users\\krish\\.codex\\skills\\design-system",
+                                               "name":  "design-system",
+                                               "folder_name":  "design-system",
+                                               "relation":  "extra",
+                                               "storage":  "active-local",
+                                               "valid":  true,
+                                               "error":  null,
+                                               "manifest_sha256":  "833451C6DB6DE6C93B48812AC1580EA50F5FFD5A0C3B80940D2B10D3B20F418B",
+                                               "artifact_sha256":  "5FBDA735480E11ABF26AA88AF1CF18AC4CBB424A219BC74924394C34A8E18813",
+                                               "last_write_utc":  "2026-06-19T17:57:30.4950540Z",
                                                "archive_path":  null,
                                                "package_root_stripped":  null
                                            }

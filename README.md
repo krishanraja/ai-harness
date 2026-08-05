@@ -10,6 +10,7 @@ Canonical private source for Krish Raja's cross-client AI operating contract, pe
 - `evals/`: trigger, routing, and behavior fixtures.
 - `scripts/`: validation and deterministic release tooling.
 - `state/`: lifecycle registry and cross-surface release evidence.
+- `architecture/`: the governed GitHub-to-client release, rollback, freshness, and learning design.
 
 Dynamic operational facts are retrieved from their live sources. They are not copied into skill bodies merely to make the harness feel complete.
 
@@ -32,6 +33,8 @@ The builder requires a clean Git tree, validates first, then creates determinist
 ## Release boundary
 
 A build does not install or publish anything. Local directory-link changes, Claude cloud uploads, enable/disable actions, credential changes, and external publication require their own explicit approval and verification.
+
+See `architecture/CROSS_CLIENT_RELEASE_SYSTEM.md` for the proposed automatic release and self-correction system. The design is documented but its GitHub workflows, local schedule, wider installations, cloud changes, and deletion stages are not active.
 
 ## Current status
 
