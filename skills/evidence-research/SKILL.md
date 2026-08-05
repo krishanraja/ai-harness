@@ -20,6 +20,18 @@ Before searching, state:
 - material exclusions, jurisdictions, segments, or definitions;
 - time/cost boundary and stopping rule.
 
+Persist a `RESEARCH BRIEF` before collection. It is incomplete unless it names:
+
+```text
+DECISION: [call or uncertainty]
+CHANGE CONDITIONS: [evidence that changes the call]
+BOUNDARIES: [market/segment/geography/jurisdiction/population and exclusions]
+FRESHNESS: [acceptable source/data age and retrieval requirement]
+QUALITY FLOOR: [required source/method standard]
+TIME/COST CAP: [research budget]
+STOP RULE: [saturation or decision threshold]
+```
+
 ## Source hierarchy
 
 Prefer the closest authoritative evidence:
@@ -69,6 +81,8 @@ For every decision-bearing item record:
 
 Respect quotation and copyright limits. Prefer accurate paraphrase with direct citation.
 
+Minimize private or personal data at collection time. Prefer aggregate or deidentified evidence over raw personal records; when record-level data is genuinely necessary, extract only the fields required for the named decision and preserve the applicable access, retention, and sharing boundary.
+
 ### 5. Resolve without erasing conflict
 
 When sources disagree, test whether they differ by date, definition, sample, incentive, methodology, product version, or jurisdiction. If disagreement remains, preserve it and state which decision is robust across both possibilities.
@@ -92,6 +106,8 @@ CLAIM | TYPE | EVIDENCE | CONTRARY EVIDENCE | DATE/SCOPE | CONFIDENCE | DECISION
 
 Every material recommendation must resolve to this matrix. A citation that does not support the attached claim is a failure.
 
+The matrix must preserve conflicting evidence, publication/event/data dates, retrieval time, and source scope. Never discard a conflict merely because one source wins the current recommendation.
+
 ## Edge cases
 
 - **Paywall or access block:** use an accessible primary copy, abstract, filing, repository, or report the limitation. Never imply the inaccessible source was read.
@@ -107,6 +123,19 @@ Every material recommendation must resolve to this matrix. A citation that does 
 
 ## Handoff and verification
 
-Pass `strategy-brief` the call, claim-evidence matrix, contradictions, expiry/revisit triggers, and unresolved decisions. Then run `verification-loop` to check citation support, dates, source scope, alternative explanations, and separation of fact from inference.
+Pass `strategy-brief` the call, claim-evidence matrix, contradictions, expiry/revisit triggers, unresolved decisions, and an explicit `KRISH-OWNED CHOICE` naming the strategic judgment that only Krish can make. If no such choice remains, state `KRISH-OWNED CHOICE: none` rather than inventing one. Then run `verification-loop` to check citation support, dates, source scope, alternative explanations, and separation of fact from inference.
+
+For a current domain fact, return a `FACT PACKET` to the named domain owner and writer with claim, competing claims, first-party/transaction evidence, source scope, retrieval time, confidence, expiry, and unresolved conflict. For Mindmaker commercial copy, name `mindmaker` and the selected writer explicitly.
+
+For approved execution, return an `EXECUTION EVIDENCE PACKET` to the narrow executor containing the approved decision, assumptions, supporting and contrary evidence, authority boundary, verification criteria, expiry date, and named revisit trigger. The recommendation itself is not mutation authority.
+
+## External action preparation
+
+Research may prepare an approval-ready action without performing it:
+
+- **Paid source:** identify the exact report/product, seller, current price/currency if observable, purchase URL/target, expected information value, accessible alternatives, and residual evidence limit; wait for spend approval.
+- **Expert/vendor contact:** draft the exact message or contact plan, name recipient, purpose, channel, questions, and every piece of Krish/company/customer data that would be shared; wait for contact/send approval.
+- **Account/signup:** identify the exact service, account/workspace target, terms/data implications, required fields, and alternatives; wait for account creation and terms acceptance approval.
+- **Publication:** prepare a private draft with claim/evidence boundaries, uncertainty, legal/reputational risks, and correction conditions; name the exact publication surface and `publish` action; wait for approval.
 
 Research does not authorize contacting people, purchasing reports, signing up for services, publishing findings, or mutating external systems.
