@@ -9,6 +9,29 @@ The cross-cutting layer above the tool skills. Inherits krish-principles; read t
 
 Stability tags per krish-principles: [LOAD-BEARING] is stable conviction, [IN-PLAY] is actively tested or an environment quirk that may expire.
 
+## Build task contract
+
+Act as the technical **producer**. Do not absorb product orchestration, visual taste, read-only UX diagnosis, independent code review, or outcome verification.
+
+Before any material write, deployment, paid run, or external mutation, record:
+
+```text
+TARGET: [repository/project/environment and revision]
+CURRENT RUNTIME: [observed OS, shell, paths, tools, connector/auth state]
+SOURCE OF TRUTH: [one canonical artifact or state store]
+AUTHORITY: [allowed local/external actions and remaining gates]
+PASS SIGNALS: [defined before execution]
+ROLLBACK: [specific recovery path and readiness]
+READBACK: [independent authoritative proof]
+STATUS: [confirmed | inferred | deferred | blocked]
+```
+
+Inspect the current repository instructions, worktree, runtime, and live target rather than relying on this skill's historical environment observations. Preserve all unrelated user changes.
+
+For external mutation approval, name the exact target, action, revision or payload, rollback, and readback immediately before acting. Local implementation authority never implies deploy, flag, send, publish, spend, permission, or deletion authority.
+
+Before any deployment, record `ROLLBACK READY` with the known-good artifact/revision, exact restore action, required access, and post-rollback readback. A rollback idea is not readiness. Before any metered run, define the usefulness success signal separately from platform completion, then state the sample size, hard cost/item cap, and approval point.
+
 ---
 
 ## 1. Build doctrine
@@ -38,8 +61,8 @@ Correction loops that fire only on failure are half a loop. When something works
 
 ## 2. Determinism in practice
 
-**Never re-run the assembler.** [LOAD-BEARING]
-When a build has an assembly step that applies edits (an assemble.py, a merge script), re-running it double-applies edits and can crash silently. Once assembled, all edits go directly to the canonical output source (the current vN.html), which is then copied to outputs. Identify which file is the source of truth at the start of any session touching an existing build, and state it.
+**Never re-run a non-idempotent assembler without proof.** [LOAD-BEARING]
+Inspect what the assembly step does and which artifact is canonical. If a rerun can double-apply edits, do not rerun it; edit the canonical assembled source surgically and verify no duplicate application. Identify and state the source of truth at the start of any session touching an existing build.
 
 **Presenting is a separate step from creating.** [LOAD-BEARING]
 create_file writes to disk; present_files puts it in front of Krish. They are two explicit steps, always. The proven failure: a file written but not presented, and Krish reacting to the previous version. Never end a build turn without presenting the current file.
@@ -54,11 +77,11 @@ When iterating a document (v6 to v7), the new version is a new file with the ver
 **Publishable on the page, service-role never.** [LOAD-BEARING]
 Static pages authenticate with the publishable key only. The service-role key is platform-injected into functions and never appears in page-side code, chat, or committed files. This decouples pages from secret rotation.
 
-**Anything pasted gets rotated.** [LOAD-BEARING]
-A live secret pasted into a session is compromised by default. Flag it at the moment it appears, keep a value-free list of affected credential families and locations, and close the session with the rotation reminder. Secrets and private infrastructure details never go into memory files or skill files; they belong in the approved managed secret store and follow the tools-access contract.
+**Anything pasted enters remediation.** [LOAD-BEARING]
+A live secret pasted into a session is compromised by default. Do not echo it. Record only the credential family and affected locations, contain further exposure, and propose the exact rotate or revoke action through `tools-access`. Rotation remains a separate action-time approval. Secrets and private infrastructure details never enter memory, skills, fixtures, reports, logs, or committed files.
 
-**curl over Python urllib for Cloudflare-fronted hosts.** [IN-PLAY]
-Cloudflare blocks urllib (1010) where curl passes. Build JSON with Python, transport with curl. Sites blocking curl too (403 behind Cloudflare) need a different route entirely (an API, a sibling property on the same codebase, or a scraper actor per the apify skill).
+**Diagnose the current transport, do not canonize a workaround.** [IN-PLAY]
+If one HTTP client fails while another succeeds, inspect the current status, media type, body, proxy/CDN behavior, and supported provider route. Use a reviewed API or tool path where available. A historical curl/urllib result is evidence for one incident, not permanent environment truth.
 
 **Trust the body, not the status code.** [LOAD-BEARING]
 The green-checkmark rule from krish-principles, applied: HTTP 200 wrapping an HTML error page, an ads.txt that is really a 404 page, a SUCCEEDED run with an empty dataset. Read the first lines of the actual response body before believing any check passed.
@@ -85,20 +108,19 @@ A file marked done has no placeholders, no internal notes, no stale claims, and 
 **Use the app-runtime proof patterns when the boundary is fragile.** [LOAD-BEARING]
 Read `references/app-runtime-verification.md` when work involves a remote database mutation, a component fixture-render harness, an authenticated user path, an edge or serverless function, SPA shell caching, or a build-time environment flag. It supplies bounded procedures and evidence requirements; it never grants production authority or replaces a current provider-specific tool reference.
 
+After every located failure, correct the smallest root cause within authority, rerun the failed and adjacent checks, and update resumable state. A false HTTP success must be rerun after repair. An incomplete persistence bug also requires the historical affected-record range to be assessed before old data is called valid.
+
 ---
 
 ## 5. Environment truth
 
-Facts about Krish's environment. All [IN-PLAY] by nature: re-verify any of these that look stale, and update this section when one expires.
+Environment truth is retrieved, not embedded. At task time inspect the actual OS, shell, path semantics, repository instructions, worktree, available tools, connector health, target identity, deployment revision, auth posture, and supported provider mechanics. Record retrieval time and scope when a fact can change.
 
-- **OS**: Windows, with Claude Code via WSL. Repos and working paths are WSL Linux paths, never Windows paths.
-- **VPS**: use the configured SSH alias and key authentication. Resolve current host, user, and privilege details from the approved runtime configuration; never restate credentials here.
-- **Shell in this environment**: dash, not bash. No here-strings. Check before using bashisms.
-- **No em dashes anywhere, including code.** Comments, strings, generated copy inside code, skill text: everywhere. This is [LOAD-BEARING], not environmental.
-- **Google Drive connector is unreliable for this user** (persistent -32000 errors and permission-blocked fetches in the record). Do not build a plan that depends on Drive reads or writes. Deliver .docx to /mnt/user-data/outputs and Krish drags into Drive; fonts (Space Grotesk, Inter, JetBrains Mono) resolve from the Google Fonts catalog on import. Confirm the connector is restored before trusting it again.
-- **localStorage silently fails in artifact sandboxes.** Use the environment's persistent storage API in artifacts; state the substitution when the spec asked for localStorage.
-- **Document builds**: docx via the established build-script pattern with programmatic validation and a rendered check before delivery. Consult the public docx, pptx, pdf skills for mechanics.
-- **Distribution of these skills**: build versioned artifacts from the canonical private repository and verify their hashes on each surface. MCPMarket is an optional distribution target, not the source of truth; its private GitHub auto-sync currently depends on plan capability. Cloud uploads and enable/disable changes require approval.
+- Never force WSL, Windows, Bash, PowerShell, a connector, a storage API, or a transport based on an older success or failure.
+- When a requested mechanism is unavailable, verify bounded alternatives and report the substitution; do not silently change the product contract.
+- No em dashes anywhere, including code comments and generated copy. This is durable style doctrine, not environment state.
+- For document builds, use the current reviewed document skill and established project pattern, then validate hard constraints, render, inspect, and present the current artifact.
+- For harness distribution, defer to `harness-maintainer`; this build skill does not infer upload, relink, enable/disable, or cloud authority.
 
 ---
 
@@ -111,3 +133,24 @@ Facts about Krish's environment. All [IN-PLAY] by nature: re-verify any of these
 - **apify**: reviewed Apify mechanics. Load other per-tool skills only after provenance and security review.
 - **code-reviewer**: post-build review standards for React and Supabase work.
 - **mindmaker-os**: architecture facts (SSOT, model tiering, approval lanes). Never restate its canon.
+
+## Routing, destructive actions, and completion
+
+| Need | Route |
+|---|---|
+| Connected product rules, multiple surfaces, and lifecycle state | `build-apps-with-krish`; receive its canonical state artifact and approved revisions |
+| New material visual decision | `krish-design`; a bounded feasibility spike may test one technical premise but may not become the product |
+| Locked implementation or technical artifact | `krish-build` |
+| Read-only deployed UX audit | `ux-testing-agent` |
+| Material code review | `code-reviewer` after mechanical checks |
+| Independent outcome verdict | `verification-loop` after runtime proof and code review |
+
+For a material handoff, pass target/revision, approved artifact or specification, state fixtures, authority, tests, runtime evidence, rollback/readback, pre-existing failures, and open risks.
+
+Deletion is always a separate exact action-time approval, even when the target appears generated, stale, recoverable, or safe. Resolve the literal target, dependencies, and recovery first; then ask Krish to approve deletion of that exact target. Never self-authorize deletion from cleanup language or safety evidence.
+
+When safe authenticated proof is unavailable, verify every ungated mechanic, preserve the canonical resumable state and exactly one next action, name the missing access, and keep the gated outcome unverified.
+
+Build completion requires focused and adjacent checks, applicable runtime proof, authoritative state readback, current rendered evidence when visual, code review for material changes, `verification-loop`, rollback readiness, current artifact presentation, and a literal status that separates built, committed, merged, deployed, live, and verified.
+
+A material React, data, or Supabase implementation is not locally complete until the applicable fixture, emulator, local runtime, designated preview, or bounded authenticated path has been actively exercised. Do not defer available runtime proof merely because static, unit, or build checks pass; defer only the exact inaccessible boundary and name it.
