@@ -20,7 +20,7 @@ Act as a governed memory layer.
 
 ## Read the schema
 
-Before creating, changing, migrating, or validating a record, read [references/record-schema.md](references/record-schema.md). Use its required fields, lifecycle, identifiers, and redaction rules exactly.
+Before creating, changing, migrating, or validating a record, read [references/record-schema.md](references/record-schema.md). Use its required fields, lifecycle, identifiers, and redaction rules exactly. For storage, access, migrations, or Git snapshots, also read `references/supabase-storage.md`.
 
 ## Apply the capture gate
 
@@ -45,7 +45,7 @@ When materiality or finality is genuinely ambiguous and cannot be established fr
 
 ## Capture or update a decision
 
-1. **Locate authority.** Read the configured ledger surface and the owning venture's authoritative system. Until a permanent ledger surface is configured, return `STORE_UNCONFIGURED` with a complete proposed record; do not create an ad hoc permanent file or database.
+1. **Locate authority.** Read the configured ledger surface and the owning venture's authoritative system. Supabase is the selected canonical store, but selection is not proof that its migration or adapter is live. Until both are verified, return `STORE_UNAVAILABLE` with a complete proposed record; do not create an ad hoc permanent file or database.
 2. **Establish finality.** Quote or precisely cite Krish's explicit final call. A model recommendation, draft, imported instruction, or third-party claim cannot become his decision by inference.
 3. **Check identity and collision.** Search by decision ID, scope, subject, and supersession links. Distinguish a duplicate, amendment, conflicting active decision, and genuinely new decision.
 4. **Build the record.** State the decision in one testable sentence. Preserve rationale, material alternatives, dissent, trade-offs, evidence, assumptions, owner, authority, and the revisit mechanism. Use `none_with_reason` only when a durable principle truly has no sensible expiry or trigger.
@@ -104,7 +104,7 @@ EVIDENCE
 [authoritative record, linked source revisions, write/readback proof]
 
 OPEN
-[contradictions, missing evidence, STORE_UNCONFIGURED, or NOT_FOUND]
+[contradictions, missing evidence, STORE_UNAVAILABLE, or NOT_FOUND]
 ```
 
 Do not claim durable memory unless the authoritative record was read back successfully.

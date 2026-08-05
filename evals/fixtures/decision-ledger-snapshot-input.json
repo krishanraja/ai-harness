@@ -1,0 +1,20 @@
+[
+  {
+    "decision_key": "DEC-20260805-zeta-route",
+    "status": "active",
+    "scope": "harness",
+    "title": "Canonical harness route",
+    "summary": "Use the private harness repository as the cross-client source.",
+    "revisit": "Review if a client cannot consume a verified release.",
+    "canonical_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+    "decision_key": "DEC-20260804-alpha-policy",
+    "status": "conditional",
+    "scope": "cross_venture",
+    "title": null,
+    "summary": null,
+    "revisit": null,
+    "canonical_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+]

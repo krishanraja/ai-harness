@@ -93,12 +93,6 @@ foreach ($manifest in $manifests) {
     if ($manifest.Directory.Name -cne $name) { Add-Failure "$relative folder name does not match skill name '$name'." }
     if ($description -notmatch '(?i)\b(use|trigger|invoke|when|asks?|request|for)\b') { $warnings.Add("$relative description may lack trigger language.") }
 
-    foreach ($entry in $secretPatterns.GetEnumerator()) {
-        if ([regex]::IsMatch($raw, $entry.Value)) {
-            Add-Failure "$relative contains a high-confidence $($entry.Key) pattern."
-        }
-    }
-
     $referenceMatches = [regex]::Matches($raw, '(?i)`((?:references?|leaves)/[^`#\s]+\.md)(?:#[^`]*)?`')
     foreach ($match in $referenceMatches) {
         $target = Join-Path $manifest.Directory.FullName ($match.Groups[1].Value -replace '/', '\')
@@ -115,6 +109,83 @@ foreach ($manifest in $manifests) {
 foreach ($entry in $hashes.GetEnumerator()) {
     if ($entry.Value.Count -gt 1) {
         Add-Failure "Exact duplicate skill manifests: $($entry.Value -join ', ')."
+    }
+}
+
+$scanExtensions = @('.md', '.mdc', '.yaml', '.yml', '.json', '.jsonl', '.ps1', '.sql')
+$scanFiles = @(Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object {
+    $_.Extension.ToLowerInvariant() -in $scanExtensions -and
+    $_.FullName -notmatch '[\\/](?:\.git|dist)[\\/]'
+})
+foreach ($file in $scanFiles) {
+    $relative = $file.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
+    $raw = [IO.File]::ReadAllText($file.FullName)
+    foreach ($entry in $secretPatterns.GetEnumerator()) {
+        if ([regex]::IsMatch($raw, $entry.Value)) {
+            Add-Failure "$relative contains a high-confidence $($entry.Key) pattern."
+        }
+    }
+}
+
+$decisionConfig = Join-Path $Root 'state\decision-ledger-config.yaml'
+$decisionStorageReference = Join-Path $Root 'skills\decision-ledger\references\supabase-storage.md'
+$snapshotExporter = Join-Path $Root 'scripts\Export-DecisionLedgerSnapshot.ps1'
+$snapshotFixture = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-input.json'
+$snapshotExpected = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-expected.json'
+
+foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
+    if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
+        Add-Failure "Missing decision-ledger storage artifact: $required"
+    }
+}
+
+if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
+    $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)
+    if ($decisionConfigRaw -notmatch '(?m)^\s*type:\s*supabase-postgres\s*$') {
+        Add-Failure 'Decision ledger is not configured for the selected Supabase canonical store.'
+    }
+    if ($decisionConfigRaw -notmatch '(?m)^\s*live_status:\s*not-applied\s*$') {
+        $warnings.Add('Decision-ledger migration status changed; require live readback evidence before treating the store as available.')
+    }
+}
+
+if ((Test-Path -LiteralPath $snapshotExporter -PathType Leaf) -and
+    (Test-Path -LiteralPath $snapshotFixture -PathType Leaf) -and
+    (Test-Path -LiteralPath $snapshotExpected -PathType Leaf)) {
+    $tempSnapshot = Join-Path ([IO.Path]::GetTempPath()) ("decision-ledger-snapshot-$([guid]::NewGuid().ToString('N')).json")
+    $tempUnsafeInput = Join-Path ([IO.Path]::GetTempPath()) ("decision-ledger-unsafe-$([guid]::NewGuid().ToString('N')).json")
+    try {
+        & $snapshotExporter -InputJsonPath $snapshotFixture -OutputPath $tempSnapshot | Out-Null
+        if (-not (Test-Path -LiteralPath $tempSnapshot -PathType Leaf)) {
+            Add-Failure 'Decision-ledger snapshot exporter did not write its deterministic fixture output.'
+        }
+        elseif ([IO.File]::ReadAllText($tempSnapshot) -ne [IO.File]::ReadAllText($snapshotExpected)) {
+            Add-Failure 'Decision-ledger snapshot output differs from the reviewed deterministic fixture.'
+        }
+
+        $secondRun = @(& $snapshotExporter -InputJsonPath $snapshotFixture -OutputPath $tempSnapshot)
+        if (($secondRun -join "`n") -notmatch '^UNCHANGED ') {
+            Add-Failure 'Decision-ledger snapshot exporter rewrote byte-identical output.'
+        }
+
+        $unsafeParsed = ConvertFrom-Json -InputObject ([IO.File]::ReadAllText($snapshotFixture))
+        $unsafeRows = @($unsafeParsed | ForEach-Object { $_ })
+        $unsafeRows[0].summary = 'prefix-' + 'sk_' + 'user_' + ('A' * 24)
+        [IO.File]::WriteAllText($tempUnsafeInput, ($unsafeRows | ConvertTo-Json -Depth 6), [Text.UTF8Encoding]::new($false))
+        $unsafeRejected = $false
+        try {
+            & $snapshotExporter -InputJsonPath $tempUnsafeInput -OutputPath $tempSnapshot | Out-Null
+        }
+        catch {
+            $unsafeRejected = $_.Exception.Message -match 'high-confidence GenericSecretKey'
+        }
+        if (-not $unsafeRejected) {
+            Add-Failure 'Decision-ledger snapshot exporter did not reject a high-confidence secret pattern.'
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $tempSnapshot) { Remove-Item -LiteralPath $tempSnapshot -Force }
+        if (Test-Path -LiteralPath $tempUnsafeInput) { Remove-Item -LiteralPath $tempUnsafeInput -Force }
     }
 }
 

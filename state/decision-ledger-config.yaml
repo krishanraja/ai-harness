@@ -1,12 +1,29 @@
-schema_version: 1
-status: storage-decision-required
+schema_version: 2
+status: schema-designed-migration-unapplied
 scope: finalized-consequential-decisions
 owner: Krish Raja
 
 canonical_store:
-  type: pending-user-choice
-  location: null
-  mutation_policy: Do not invent a permanent store. Draft a schema-valid proposed record and return STORE_UNCONFIGURED.
+  type: supabase-postgres
+  project_alias: mindmaker-os-control-center
+  repository: krishanraja/control-center
+  migration: supabase/migrations/20260805160000_decision_ledger.sql
+  records_table: public.decision_ledger_records
+  events_table: public.decision_ledger_events
+  current_view: public.decision_ledger_current_v1
+  snapshot_view: public.decision_ledger_git_snapshot_v1
+  access: service-role-only-through-approved-server-side-adapter
+  live_status: not-applied
+  mutation_policy: Until migration and adapter readback are verified, draft a schema-valid proposed record and return STORE_UNAVAILABLE. Never fall back to anon, a local file, or the Git snapshot.
+
+git_snapshot:
+  authoritative: false
+  classification: explicitly-redacted-allowlist
+  output: state/decision-ledger-snapshot.json
+  generator: scripts/Export-DecisionLedgerSnapshot.ps1
+  source_view: public.decision_ledger_git_snapshot_v1
+  live_status: not-generated
+  personal_scope_policy: excluded
 
 source_boundaries:
   venture_operational_state: Reference the owning venture's existing source of truth; do not clone live state.
@@ -15,8 +32,10 @@ source_boundaries:
   ctrl_observation_ledger: Observations and proposed standard changes owned by ctrl-capture; link accepted decisions.
 
 release_gate:
-  - Choose the canonical storage surface and recovery model.
-  - Define read and write adapters for Claude, Cursor, Codex, and cloud.
+  - Review and apply the migration to a non-production target with rollback evidence.
+  - Verify append-only enforcement, event hashes, lifecycle transitions, privileges, and deterministic redaction.
+  - Apply the migration to production only with action-time approval and post-write readback.
+  - Define authenticated server-side adapters for Claude, Cursor, Codex, and cloud; never distribute the service-role key.
   - Validate redaction, append-only history, reciprocal supersession links, and authoritative readback.
   - Pass held-out trigger, behavior, authority, collision, and handoff cases.
   - Canary one client before broader activation.
