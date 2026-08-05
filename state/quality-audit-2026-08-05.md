@@ -23,6 +23,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 | `verification-loop` | Artifact-specific evidence hierarchy and bounded correction | Independent failure-location tests; false-success, secret-redaction, inconclusive, and two-cycle stop cases |
 | `harness-maintainer` | Curated admission/lifecycle discipline | Mis-trigger, overlap, provider import, rollback, and controlled-learning end-to-end tests |
 | `evidence-research` | Missing cross-domain evidence workflow now covered | Primary-source, contradiction, stale source, paywall, correlated-source, PDF/table, and citation-support evals |
+| `decision-ledger` | Distinct finalized-decision lifecycle, append-only history, source boundaries, and minimum designed trigger/behavior suites | Choose canonical store and recovery model; implement adapters; execute held-out suites and collision tests; prove cross-client recall, reciprocal supersession, redaction, and readback before admission |
 | `mindmaker-os` | Thin live-state router with good source boundaries | Expand beyond 8 trigger and 5 behavior cases; live-access failure, source conflict, concept closure, and stale-runtime cases |
 | `mindmaker` | Detailed commercial distinction and durable/volatile markers | Reconcile against post-June portfolio changes; split volatile sections; commercial collision and retired-offer tests |
 | `content-corpus` | Strong channel mandates and voice pairing | Reconcile current channels/offers; negative triggers; channel collision and sourced-content evals |
@@ -45,7 +46,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 1. Admit the always-on core only after its full held-out suite: Principles, Strategy Brief, Verification Loop, Harness Maintainer.
 2. Reconcile and test the identity/business layer: Mindmaker OS, Mindmaker, Voice, Content Corpus, Content Marketer, Design, Build.
 3. Test tool/reference validators: UX Foundations, UX Testing, Tools Access (non-sensitive cases), Apify, Evidence Research.
-4. Run the CTRL chain end to end with a real but non-sensitive standard and durable ledger location.
+4. Configure and canary the consequential-decision store; then run both its lifecycle suite and the CTRL chain end to end with a real but non-sensitive standard.
 5. Canary one local client before any cloud replacement or bulk-library retirement.
 
 No candidate should be promoted by lowering the gate. Failed cases become explicit work and regression fixtures.

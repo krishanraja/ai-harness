@@ -33,6 +33,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | Skill creation or revision | Relevant domain skill | `skill-creator` | Frontmatter, trigger, behavior, security, and packaging evals |
 | Harness/configuration audit | `mindmaker-os` when OS-related | No prose producer | Deterministic harness audit; model critique is supplemental |
 | Research, comparison, due diligence, or current external evidence | Relevant domain skill | `evidence-research` | Claim-evidence, contradiction, freshness, and citation-support checks |
+| Record, recall, review, supersede, or reverse a finalized consequential decision | Owning domain skill; `mindmaker-os` for live OS state | `decision-ledger` | Authoritative readback, lifecycle-link, redaction, and trigger check |
 
 ## Collision rules
 
@@ -41,6 +42,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 - `krish-voice` owns final prose voice. `krish-content-marketer` owns strategy and angle selection; it does not override the voice pass.
 - `mindmaker-os` owns operating-system architecture and live-state routing. `mindmaker` owns the commercial brand. Load both only when the work genuinely crosses the boundary.
 - `code-reviewer`, `ctrl-check`, and deterministic tests are validators, not competing producers.
+- `decision-ledger` stores finalized consequential choices. `mindmaker-os` owns the unresolved `decisions_waiting` queue and concept-closure runtime; the Assumption Ledger owns falsifiable beliefs; `ctrl-capture` owns observations and proposed standard changes. Link these artifacts without merging their state.
 - Generic marketplace skills never become always-on merely because they are installed. They must occupy a named route here first.
 
 ## CTRL standards chain

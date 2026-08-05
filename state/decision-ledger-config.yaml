@@ -1,0 +1,22 @@
+schema_version: 1
+status: storage-decision-required
+scope: finalized-consequential-decisions
+owner: Krish Raja
+
+canonical_store:
+  type: pending-user-choice
+  location: null
+  mutation_policy: Do not invent a permanent store. Draft a schema-valid proposed record and return STORE_UNCONFIGURED.
+
+source_boundaries:
+  venture_operational_state: Reference the owning venture's existing source of truth; do not clone live state.
+  mindmaker_decisions_waiting: Unresolved operational queue owned by Mindmaker OS; not a finalized decision record.
+  assumption_ledger: Falsifiable beliefs owned by krish-principles; link rather than duplicate.
+  ctrl_observation_ledger: Observations and proposed standard changes owned by ctrl-capture; link accepted decisions.
+
+release_gate:
+  - Choose the canonical storage surface and recovery model.
+  - Define read and write adapters for Claude, Cursor, Codex, and cloud.
+  - Validate redaction, append-only history, reciprocal supersession links, and authoritative readback.
+  - Pass held-out trigger, behavior, authority, collision, and handoff cases.
+  - Canary one client before broader activation.
