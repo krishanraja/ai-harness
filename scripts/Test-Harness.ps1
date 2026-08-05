@@ -132,12 +132,66 @@ $decisionStorageReference = Join-Path $Root 'skills\decision-ledger\references\s
 $snapshotExporter = Join-Path $Root 'scripts\Export-DecisionLedgerSnapshot.ps1'
 $snapshotFixture = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-input.json'
 $snapshotExpected = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-expected.json'
+$appTriggerCases = Join-Path $Root 'evals\build-apps-with-krish-trigger-cases.jsonl'
+$appBehaviorCases = Join-Path $Root 'evals\build-apps-with-krish-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
         Add-Failure "Missing decision-ledger storage artifact: $required"
     }
 }
+
+function Read-JsonLines {
+    param([string]$Path)
+
+    $records = New-Object System.Collections.Generic.List[object]
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        Add-Failure "Missing JSONL evaluation file: $Path"
+        return @()
+    }
+
+    $lineNumber = 0
+    foreach ($line in [IO.File]::ReadAllLines($Path)) {
+        $lineNumber++
+        if ([string]::IsNullOrWhiteSpace($line)) { continue }
+        try {
+            $records.Add(($line | ConvertFrom-Json))
+        }
+        catch {
+            Add-Failure "Invalid JSONL at $Path line $lineNumber."
+        }
+    }
+    return $records.ToArray()
+}
+
+function Test-EvalCategoryMinimums {
+    param(
+        [object[]]$Records,
+        [hashtable]$Minimums,
+        [string]$Label
+    )
+
+    $ids = @($Records | ForEach-Object { $_.id })
+    if (@($ids | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -gt 0) {
+        Add-Failure "$Label contains a case without an id."
+    }
+    $duplicates = @($ids | Group-Object | Where-Object { $_.Count -gt 1 })
+    if ($duplicates.Count -gt 0) {
+        Add-Failure "$Label contains duplicate ids: $($duplicates.Name -join ', ')."
+    }
+
+    foreach ($category in $Minimums.Keys) {
+        $count = @($Records | Where-Object { $_.category -eq $category }).Count
+        if ($count -lt $Minimums[$category]) {
+            Add-Failure "$Label needs at least $($Minimums[$category]) '$category' cases; found $count."
+        }
+    }
+}
+
+$appTriggers = @(Read-JsonLines -Path $appTriggerCases)
+$appBehaviors = @(Read-JsonLines -Path $appBehaviorCases)
+Test-EvalCategoryMinimums -Records $appTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'build-apps-with-krish trigger suite'
+Test-EvalCategoryMinimums -Records $appBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'build-apps-with-krish behavior suite'
 
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
     $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Apps with Krish"
+  short_description: "Founder-led app delivery from mock to proof"
+  default_prompt: "Use $build-apps-with-krish to take this app from product rules through approved mocks, implementation, and verified delivery."

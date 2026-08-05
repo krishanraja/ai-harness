@@ -29,6 +29,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | Content strategy or angle generation | Relevant domain skill, then `content-corpus` | `krish-content-marketer` | `krish-voice` only when drafting the final artifact |
 | Software implementation | Relevant domain skill | `krish-build` | Tests/build, then `code-reviewer` for material changes |
 | Product or interface design | Relevant domain skill | `krish-design` | `ux-foundations`, then observable browser/UX QA |
+| New app or material cross-surface product redesign | Relevant domain skill | `build-apps-with-krish` orchestrates; `krish-design` and `krish-build` own their stages | Stage gates, `verification-loop`, then `ux-testing-agent` for release tasks |
 | App or repository UX testing | Relevant domain skill | `ux-testing-agent` | Evidence bundle and reproducible findings |
 | Skill creation or revision | Relevant domain skill | `skill-creator` | Frontmatter, trigger, behavior, security, and packaging evals |
 | Harness/configuration audit | `mindmaker-os` when OS-related | No prose producer | Deterministic harness audit; model critique is supplemental |
@@ -42,6 +43,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 - `krish-voice` owns final prose voice. `krish-content-marketer` owns strategy and angle selection; it does not override the voice pass.
 - `mindmaker-os` owns operating-system architecture and live-state routing. `mindmaker` owns the commercial brand. Load both only when the work genuinely crosses the boundary.
 - `code-reviewer`, `ctrl-check`, and deterministic tests are validators, not competing producers.
+- `build-apps-with-krish` owns the stateful journey across connected surfaces or multiple material app-delivery stages. `krish-design` still owns visual taste and the one-rendered-surface approval gate; `krish-build` still owns implementation. Route an isolated design, code, or QA task directly to its narrow owner. Generic app-building skills may supply a bounded mechanic but never replace this personalized orchestrator.
 - `decision-ledger` stores finalized consequential choices. `mindmaker-os` owns the unresolved `decisions_waiting` queue and concept-closure runtime; the Assumption Ledger owns falsifiable beliefs; `ctrl-capture` owns observations and proposed standard changes. Link these artifacts without merging their state.
 - Generic marketplace skills never become always-on merely because they are installed. They must occupy a named route here first.
 
