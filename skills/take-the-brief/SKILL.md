@@ -40,7 +40,7 @@ Read `references/questions.md` before selecting questions or following up.
 - Ask one question, then stop and wait.
 - Ask the question whose likely answers would most change the route.
 - Cover the real goal, personal why, constraints, clear win, and desired feeling across the interview; do not force one question per territory.
-- Follow up when an answer reveals a material gap, contradiction, or opportunity. A follow-up does not count against the five-question ceiling.
+- Follow up when an answer reveals a material gap, contradiction, or opportunity. Label it as a follow-up and keep it outside the five-question count; a follow-up does not consume one of the five questions.
 - If Krish explicitly requested five questions, ask five unless he ends the interview or no remaining question passes the signal test. Otherwise five is a ceiling, not a target.
 - Name contradictions plainly and neutrally. Never silently resolve them.
 - Do not stack questions, ask permission disguised as a question, or solicit credentials and unnecessary sensitive detail.
@@ -57,9 +57,13 @@ Return, in order:
 2. a short proposed plan with the first step concrete and expensive-to-reverse steps flagged;
 3. unresolved facts and whether each blocks execution.
 
-Preserve Krish's wording verbatim for `WHAT IT FEELS LIKE`. State `WHAT I ALMOST GOT WRONG` honestly; it is evidence that the interview changed the work. Never fill an unknown with a plausible guess.
+Preserve Krish's wording verbatim for `WHAT IT FEELS LIKE`, including after a correction; never tidy or paraphrase it. State `WHAT I ALMOST GOT WRONG` honestly; it is evidence that the interview changed the work. Never fill an unknown with a plausible guess.
 
 After a completed interview, stop and wait for Krish's go or correction before execution. A correction updates the handoff; it does not require restarting the whole interview unless it changes the underlying goal.
+
+## Verification inheritance
+
+The interview does not prove the work succeeded. Carry the real goal, clear-win signal, verbatim felt result when load-bearing, material assumptions, and constraints through `strategy-brief` into `verification-loop`. The verifier uses observable evidence for objective criteria and reserves Krish's judgment for intent, taste, felt result, or relationship criteria only he can assess. Existence of a deliverable is never sufficient proof.
 
 ## Authority and privacy
 

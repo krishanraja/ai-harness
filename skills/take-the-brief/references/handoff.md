@@ -50,7 +50,7 @@ Propose five or six lines at most:
 2. Order the remaining stages by dependency.
 3. State material assumptions left by the interview.
 4. Flag expensive-to-reverse or approval-gated steps.
-5. Name the observable clear-win signal that will pass to `verification-loop`.
+5. Name the observable clear-win signal and preserve the real goal, verbatim felt result when load-bearing, material assumptions, and constraints that must pass through `strategy-brief` to `verification-loop`.
 
 This is a briefing plan, not a replacement for `strategy-brief`. The strategy layer operationalizes the route, authority, alternatives, and verification evidence before material execution.
 

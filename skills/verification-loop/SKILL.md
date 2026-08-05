@@ -1,6 +1,6 @@
 ---
 name: verification-loop
-description: Independent post-execution quality gate for Krish. Use after producing or changing an artifact, codebase, dataset, automation, deployment, cloud setting, browser flow, research conclusion, or strategic recommendation; after every corrective change; and before claiming completion, readiness, parity, or successful delivery. Select observable checks appropriate to the artifact, locate failures, correct only within existing authority, rerun the failed checks, and separate verified facts from inference. Never expose matched secret values or treat self-critique as independent proof.
+description: Independent post-execution quality gate for Krish. Use after producing or changing an artifact, codebase, dataset, automation, deployment, cloud setting, browser flow, research conclusion, or strategic recommendation; after every corrective change; and before claiming completion, readiness, parity, or successful delivery. Select observable checks appropriate to the artifact, locate failures, correct only within existing authority, rerun the failed checks, and separate verified facts from inference. Do not activate merely to certify an unexecuted future plan when no recommendation, artifact, action, or observable outcome exists; strategy-brief owns that route. Never expose matched secret values or treat self-critique as independent proof.
 ---
 
 # Verification Loop
@@ -18,6 +18,8 @@ Receive:
 - planned independent signal and pass/fail definition.
 
 If those are missing, reconstruct the smallest adequate verification plan before judging the result.
+
+Pass/fail criteria must exist before the verification action begins. If there is not yet an executed action, recommendation, artifact, or observable outcome, return the task to `strategy-brief`; a future plan cannot be verified.
 
 ## Evidence hierarchy
 
@@ -54,6 +56,7 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 - Verify visible result, persisted state, recovery behavior, and relevant console/network signals.
 - Reproduce a defect from a clean state before calling it confirmed.
 - Use `ux-testing-agent` for a full UX audit.
+- For a deployed form or interaction change, explicitly exercise recovery from interruption, validation failure, and retry when those can affect the outcome.
 
 ### Data, databases, and pipelines
 
@@ -78,7 +81,15 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 
 - Validate structure, triggers, security, references, behavior fixtures, and deterministic packaging.
 - Compare source commit, source hash, artifact hash, installed surface, and enabled cloud record.
+- Record the prior known-good rollback artifact before replacement.
+- In a fresh client session, test discovery, trigger routing, required behavior, coexistence with unrelated skills, and rollback; byte parity alone is not production parity.
 - A newer timestamp without matching provenance is not freshness evidence.
+
+### Personal taste and qualitative work
+
+- Run deterministic structure, content, accessibility, and owned-rubric checks first.
+- Ask Krish only for the decisive personal taste or intent judgment that cannot be established objectively.
+- Record objective evidence and subjective judgment separately; never make Krish repeat deterministic checks or let model taste certify his taste.
 
 ## Correction loop
 
@@ -87,10 +98,21 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 3. For a failure, quote or locate the evidence without exposing sensitive values.
 4. Identify the smallest root-cause correction within current authority.
 5. Apply the correction only if implementation was authorized.
-6. Rerun the failed check and relevant adjacent checks.
+6. Rerun the original user-visible task or failure reproduction plus relevant adjacent regression checks.
 7. Stop after two unsuccessful correction cycles on the same condition and surface the blocker; do not thrash or lower the bar.
 
 Verification does not expand authority. A verifier may diagnose a production or cloud failure without being allowed to mutate it.
+
+If the failed check passes after correction but an adjacent route breaks, the overall verdict remains failed. Revert or correct within existing authority, then rerun both the original and adjacent checks. If correction is not authorized, preserve the evidence and surface the exact gate.
+
+If authoritative readback becomes unavailable after a mutation, preserve the exact known action and all local/request evidence, mark readback inconclusive, and make no further mutation until state can be established. If two deployment/version sources conflict, record both revision identifiers, scopes, and observation times; prefer authoritative target readback when available and remain inconclusive while the conflict persists.
+
+## Specialist handoffs
+
+- Disputed research claims -> hand the claims, source dates/scopes, and decision need to `evidence-research`; receive its claim-evidence matrix, then resume the verdict with facts, inference, and unknowns separated.
+- Material independent code review -> hand relevant diff, risks, runtime evidence, and deterministic test results to `code-reviewer` when that validator is admitted/available; merge its findings without turning review into a build step or discarding direct runtime proof.
+- Harness byte parity with wrong trigger routing -> mark the surface canary failed, preserve both the candidate package and prior known-good rollback artifact, and hand the collision evidence to `harness-maintainer`; never edit active metadata ad hoc.
+- A failure suggesting a durable personal-standard change -> keep the artifact verdict against the current standard and send the observation plus evidence to `ctrl-capture`. Human acceptance and a new regression case are required before a future release changes the standard.
 
 ## Completion report
 
@@ -112,5 +134,7 @@ NEXT GATE
 ```
 
 Keep reports proportional. A one-line reversible edit may need one check and one sentence. A material cross-system change needs the full evidence record.
+
+Even the proportional one-line report states `pass` or `fail` plainly after the bounded readback/diff check.
 
 Concentrated rigor governs scope: never skip a check that could change the verdict or reveal consequential harm, and never add checks that cannot affect the outcome merely to make the report look comprehensive.
