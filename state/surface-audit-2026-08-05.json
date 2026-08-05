@@ -1,11 +1,11 @@
 {
     "schema_version":  2,
-    "generated_at_utc":  "2026-08-05T17:42:09.4924311Z",
+    "generated_at_utc":  "2026-08-05T18:01:18.0998376Z",
     "canonical":  {
                       "repository":  "krishanraja/ai-harness",
-                      "source_commit":  "0e76b07b317ee3cac5c2fb12c17d5435c6cec157",
+                      "source_commit":  "73382ffbffb46fdc12604cb656e764a7e917376d",
                       "path":  "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills",
-                      "skill_count":  23,
+                      "skill_count":  24,
                       "skills":  [
                                      {
                                          "artifact_id":  "directory:C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills\\apify",
@@ -217,6 +217,17 @@
                                          "error":  null
                                      },
                                      {
+                                         "artifact_id":  "directory:C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills\\take-the-brief",
+                                         "name":  "take-the-brief",
+                                         "folder_name":  "take-the-brief",
+                                         "manifest_sha256":  "077ACE30E5C1AA0B6EBCCCB04EC0B3427A5D2BFD5321E3C2F7F71FF5E3A508CD",
+                                         "artifact_sha256":  "E1DF7698E61E58534E1586B3C43A9E792F16ADC0CBE1CFDB23DCB7717667907B",
+                                         "last_write_utc":  "2026-08-05T17:49:15.8001051Z",
+                                         "storage":  "canonical-local",
+                                         "valid":  true,
+                                         "error":  null
+                                     },
+                                     {
                                          "artifact_id":  "directory:C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\skills\\tools-access",
                                          "name":  "tools-access",
                                          "folder_name":  "tools-access",
@@ -293,8 +304,8 @@
                                         "extra_artifacts":  8,
                                         "extra_names":  8,
                                         "invalid_artifacts":  0,
-                                        "missing_exact_canonical":  19,
-                                        "missing_canonical_by_name":  13,
+                                        "missing_exact_canonical":  20,
+                                        "missing_canonical_by_name":  14,
                                         "active_local":  9,
                                         "active_junction":  0,
                                         "staged_archives":  9
@@ -340,6 +351,7 @@
                                                          "mindmaker",
                                                          "mindmaker-os",
                                                          "strategy-brief",
+                                                         "take-the-brief",
                                                          "tools-access",
                                                          "ux-testing-agent",
                                                          "verification-loop"
@@ -356,6 +368,7 @@
                                                            "mindmaker",
                                                            "mindmaker-os",
                                                            "strategy-brief",
+                                                           "take-the-brief",
                                                            "tools-access",
                                                            "ux-testing-agent"
                                                        ],
@@ -648,8 +661,8 @@
                                         "extra_artifacts":  15,
                                         "extra_names":  15,
                                         "invalid_artifacts":  2,
-                                        "missing_exact_canonical":  18,
-                                        "missing_canonical_by_name":  12,
+                                        "missing_exact_canonical":  19,
+                                        "missing_canonical_by_name":  13,
                                         "active_local":  17,
                                         "active_junction":  0,
                                         "staged_archives":  11
@@ -702,6 +715,7 @@
                                                          "krish-voice",
                                                          "mindmaker-os",
                                                          "strategy-brief",
+                                                         "take-the-brief",
                                                          "tools-access",
                                                          "ux-testing-agent",
                                                          "verification-loop"
@@ -716,6 +730,7 @@
                                                            "krish-voice",
                                                            "mindmaker-os",
                                                            "strategy-brief",
+                                                           "take-the-brief",
                                                            "tools-access",
                                                            "ux-testing-agent",
                                                            "verification-loop"
@@ -1151,8 +1166,8 @@
                                         "extra_artifacts":  71,
                                         "extra_names":  71,
                                         "invalid_artifacts":  5,
-                                        "missing_exact_canonical":  18,
-                                        "missing_canonical_by_name":  10,
+                                        "missing_exact_canonical":  19,
+                                        "missing_canonical_by_name":  11,
                                         "active_local":  34,
                                         "active_junction":  43,
                                         "staged_archives":  12
@@ -1263,6 +1278,7 @@
                                                          "krish-voice",
                                                          "mindmaker-os",
                                                          "strategy-brief",
+                                                         "take-the-brief",
                                                          "tools-access",
                                                          "ux-testing-agent",
                                                          "verification-loop"
@@ -1276,6 +1292,7 @@
                                                            "krish-content-marketer",
                                                            "mindmaker-os",
                                                            "strategy-brief",
+                                                           "take-the-brief",
                                                            "tools-access",
                                                            "ux-testing-agent"
                                                        ],
@@ -2607,8 +2624,8 @@
                                         "extra_artifacts":  8,
                                         "extra_names":  8,
                                         "invalid_artifacts":  0,
-                                        "missing_exact_canonical":  23,
-                                        "missing_canonical_by_name":  22,
+                                        "missing_exact_canonical":  24,
+                                        "missing_canonical_by_name":  23,
                                         "active_local":  9,
                                         "active_junction":  0,
                                         "staged_archives":  0
@@ -2649,6 +2666,7 @@
                                                          "mindmaker",
                                                          "mindmaker-os",
                                                          "strategy-brief",
+                                                         "take-the-brief",
                                                          "tools-access",
                                                          "ux-foundations",
                                                          "ux-testing-agent",
@@ -2674,6 +2692,7 @@
                                                            "mindmaker",
                                                            "mindmaker-os",
                                                            "strategy-brief",
+                                                           "take-the-brief",
                                                            "tools-access",
                                                            "ux-foundations",
                                                            "ux-testing-agent"
@@ -2833,8 +2852,8 @@
                                         "extra_artifacts":  59,
                                         "extra_names":  59,
                                         "invalid_artifacts":  4,
-                                        "missing_exact_canonical":  23,
-                                        "missing_canonical_by_name":  20,
+                                        "missing_exact_canonical":  24,
+                                        "missing_canonical_by_name":  21,
                                         "active_local":  66,
                                         "active_junction":  0,
                                         "staged_archives":  0
@@ -2928,6 +2947,7 @@
                                                          "mindmaker",
                                                          "mindmaker-os",
                                                          "strategy-brief",
+                                                         "take-the-brief",
                                                          "tools-access",
                                                          "ux-foundations",
                                                          "ux-testing-agent",
@@ -2951,6 +2971,7 @@
                                                            "krish-principles",
                                                            "mindmaker-os",
                                                            "strategy-brief",
+                                                           "take-the-brief",
                                                            "ux-foundations",
                                                            "ux-testing-agent",
                                                            "verification-loop"

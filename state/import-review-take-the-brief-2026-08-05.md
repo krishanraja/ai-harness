@@ -39,7 +39,7 @@ This producer/context distinction keeps functional overlap below the consolidati
 - Structural/security validation: passed the repository validator with 24 skills, three adapters, portable frontmatter, reference integrity, UI metadata, standalone-path checks, and no high-confidence secret match.
 - Trigger suite: minimum-sized suite designed; not independently executed.
 - Behavior suite: minimum-sized suite designed; not independently executed.
-- Package preview: passed as a non-release `dirty-preview`; the archive contains only `SKILL.md`, two one-level references, and `agents/openai.yaml`. Preview source-skill SHA-256 was `E1DF7698E61E58534E1586B3C43A9E792F16ADC0CBE1CFDB23DCB7717667907B` and archive SHA-256 was `8C201204EDC04FCBBA0C034AC7D677EC6611C52FC64ABDCBA71EB950F993C18E`. Clean-tree reproducibility remains pending.
+- Package reproducibility: passed in two independent clean builds from commit `73382ffbffb46fdc12604cb656e764a7e917376d`; the archive contains only `SKILL.md`, two one-level references, and `agents/openai.yaml`. Source-skill SHA-256 is `E1DF7698E61E58534E1586B3C43A9E792F16ADC0CBE1CFDB23DCB7717667907B` and package SHA-256 is `8C201204EDC04FCBBA0C034AC7D677EC6611C52FC64ABDCBA71EB950F993C18E` in both builds.
 - Client canary: not run and not authorized by this review.
 
 ## Production blockers
@@ -47,5 +47,4 @@ This producer/context distinction keeps functional overlap below the consolidati
 1. Confirm private-use provenance is sufficient or record the original author/license before any distribution.
 2. Execute blind trigger classification and fresh-context behavior comparison without answer-key leakage.
 3. Pass the `ctrl-intake`, `strategy-brief`, urgent-task, explicit-refusal, and already-briefed collision cases.
-4. Build deterministic standalone artifacts from a clean commit.
-5. Run one explicitly approved client canary with discovery, routing, behavior, and rollback evidence.
+4. Run one explicitly approved client canary with discovery, routing, behavior, and rollback evidence.
