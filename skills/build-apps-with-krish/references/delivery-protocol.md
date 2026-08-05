@@ -65,13 +65,14 @@ Gate: each surface has a purpose, entry, exit, data dependency, and verification
 For each material surface:
 
 1. Lock its governing product and data rule.
-2. Produce one rendered, self-contained mock at the intended viewport and state.
-3. Verify that the artifact actually rendered and is the version being shown.
-4. Present it without a persuasive walkthrough before Krish's first reaction.
-5. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect.
-6. If rejected, revise that surface only and repeat.
-7. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
-8. Only then begin the next material surface.
+2. If the concept is load-bearing and genuinely novel, generate independent concept spines, score them with fresh-context adversarial judges, and synthesize the strongest while preserving real code and data constraints. Do not expose a fantasy that cannot survive the shipped system.
+3. Produce one rendered, self-contained mock of the synthesis at the intended viewport and state. Show multiple variants only when comparing them is the decision Krish must make.
+4. Verify that the artifact actually rendered and is the version being shown.
+5. Present it without a persuasive walkthrough before Krish's first reaction.
+6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect.
+7. If rejected, revise that surface only and repeat.
+8. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
+9. Only then begin the next material surface.
 
 Gate: explicit approval of the rendered revision. Silence, approval of the idea, or approval of a prior version does not pass.
 
@@ -135,6 +136,7 @@ Apply concentrated rigor. A check belongs when its failure could change the verd
 ## 3. Mock and review protocol
 
 - Use the cheapest rendered medium capable of answering the decision: self-contained HTML, a fixture-rendered component, a high-fidelity prototype, or an on-device feel test.
+- For novel concepts, keep divergent generation and adversarial judging upstream of the human review. Present the synthesized candidate, not a wall of agent output. Preserve judge disagreement and the best rejected feature as decision evidence.
 - Show one surface and one primary state. Use alternate states within the same review only when the decision cannot be made without comparing them.
 - Render at the real container size and intended viewport. Confirm file size, modification time, revision, and visible output before presentation.
 - Keep the first reaction unanchored. Do not explain why the mock should work until Krish has given the immediate read.

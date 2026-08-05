@@ -42,15 +42,16 @@ Discover available facts from files and live systems. Ask Krish only for consequ
 ## Operating rules
 
 1. **Lock the governing rule before execution.** State what the feature may claim, what the data can support, the empty/error behavior, and the material fork. Correct implementation of a fuzzy rule is still wrong.
-2. **Work one material visual surface at a time.** Enforce the approval boundary owned by `krish-design`: rendered artifact, Krish's unanchored reaction, explicit lock, then the next surface. Never batch later surfaces on an unapproved foundation.
-3. **Do not code a material visual decision before its mock is locked.** Cheap feasibility spikes may test a premise, but they do not silently become the product.
-4. **Continue routine work autonomously.** Repairs and extensions that stay inside an approved layout, interaction model, component library, and responsive doctrine do not need a new taste gate. If the change alters what the surface is, how it works, or how it feels, treat it as material.
-5. **Record the lock immediately.** Preserve the decision, rationale, date, artifact revision, rejected alternative, and any carry-forward condition. Approval applies only to the reviewed artifact and scope.
-6. **Promote recurring fixes into the system.** A repeated visual or content failure becomes a token, component, content-contract, lint, fixture, or test rule. Do not keep patching frames.
-7. **Design and test the real state range.** Include minimum, maximum, empty, quiet, loading, error, stale, adversarial, long-content, and narrow/wide viewport states as applicable.
-8. **Keep one resumable state source.** Update it at phase transitions and before long or risky operations. It must state completed work, current in-flight work, open approvals, evidence, and exactly one next action.
-9. **Drive through locked execution.** Do not pause at routine milestones or ask what to do next. Pause only for a genuine founder decision, approval wall, missing authority, or evidence-backed blocker.
-10. **Keep completion language literal.** Built, merged, deployed, live, and verified are different states. Claim each only from its own evidence.
+2. **Diverge before committing to a novel concept.** For a load-bearing surface with no approved pattern, generate independent concept spines, judge them adversarially in fresh context where available, and synthesize the strongest. Then present one rendered synthesis to Krish unless comparison itself is the decision. One mock must not mean one unchallenged guess.
+3. **Work one material visual surface at a time.** Enforce the approval boundary owned by `krish-design`: rendered artifact, Krish's unanchored reaction, explicit lock, then the next surface. Never batch later surfaces on an unapproved foundation.
+4. **Do not code a material visual decision before its mock is locked.** Cheap feasibility spikes may test a premise, but they do not silently become the product.
+5. **Continue routine work autonomously.** Repairs and extensions that stay inside an approved layout, interaction model, component library, and responsive doctrine do not need a new taste gate. If the change alters what the surface is, how it works, or how it feels, treat it as material.
+6. **Record the lock immediately.** Preserve the decision, rationale, date, artifact revision, rejected alternative, and any carry-forward condition. Approval applies only to the reviewed artifact and scope.
+7. **Promote recurring fixes into the system.** A repeated visual or content failure becomes a token, component, content-contract, lint, fixture, or test rule. Do not keep patching frames.
+8. **Design and test the real state range.** Include minimum, maximum, empty, quiet, loading, error, stale, adversarial, long-content, and narrow/wide viewport states as applicable.
+9. **Keep one resumable state source.** Update it at phase transitions and before long or risky operations. It must state completed work, current in-flight work, open approvals, evidence, and exactly one next action.
+10. **Drive through locked execution.** Do not pause at routine milestones or ask what to do next. Pause only for a genuine founder decision, approval wall, missing authority, or evidence-backed blocker.
+11. **Keep completion language literal.** Built, merged, deployed, live, and verified are different states. Claim each only from its own evidence.
 
 ## Material visual approval boundary
 
