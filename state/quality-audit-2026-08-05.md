@@ -6,13 +6,13 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 
 ## Cross-cutting gaps
 
-1. **Held-out coverage:** only `mindmaker-os` has a small blind trigger/behavior comparison. Routing fixtures mention other skills but do not independently establish their trigger precision or behavior.
+1. **Held-out coverage:** `mindmaker-os` has a small prior blind comparison; `harness-maintainer` now has a minimum-sized suite, a 21/21 blind trigger result, and limited behavior-uplift evidence. `build-apps-with-krish` and `decision-ledger` have minimum-sized suites designed but not independently executed. The remaining skills lack dedicated held-out evidence.
 2. **Collision testing:** broad words such as Mindmaker, build, design, review, strategy, research, and outbound are not yet tested pairwise across every neighboring skill.
 3. **Independent qualitative judging:** Krish Voice, Principles, Design, and commercial judgment lack a held-out Krish-scored corpus and fresh-context/order-swapped comparison.
 4. **Provenance:** several cloud-derived personalized skills have review dates but no complete origin/adaptation/license record in the registry.
 5. **Freshness:** Mindmaker and Content Corpus predate later portfolio/channel changes and require live business reconciliation before admission.
 6. **End-to-end chains:** CTRL, strategy→execution→verification, content→voice, design→build→UX QA, and local→cloud release have not yet passed full handoff tests.
-7. **Client parity:** no canonical candidate is installed from this repository yet, so cross-client behavior and hash parity remain unverified.
+7. **Client parity:** no active local directory exactly matches a canonical candidate. Seven exact canonical names exist only as staged `.skill` archives, while all 34 Claude Cloud skills are enabled and 16 enabled user skills sit outside the candidate set. Cross-client behavior and release parity remain unverified.
 
 ## Per-skill admission work
 
@@ -21,7 +21,7 @@ The curated candidate set is structurally valid and secret-free, but it is not y
 | `krish-principles` | Rich personal doctrine, explicit decision rules, confirmed concentrated-rigor default, and direct-dissent/final-call protocol | Complete always-on trigger/behavior suite; expand routine-task non-overreach, material-depth, dissent, and final-call tests; Krish-scored decision cases; provenance record |
 | `strategy-brief` | Proportionate micro/standard/material strategy and explicit verification planning | Held-out route-quality, overplanning, missing-choice, authority, and handoff tests |
 | `verification-loop` | Artifact-specific evidence hierarchy and bounded correction | Independent failure-location tests; false-success, secret-redaction, inconclusive, and two-cycle stop cases |
-| `harness-maintainer` | Curated admission/lifecycle discipline | Mis-trigger, overlap, provider import, rollback, and controlled-learning end-to-end tests |
+| `harness-maintainer` | Curated admission/lifecycle discipline, perfect 21-case blind trigger classification, and behavior-driven hardening | New fresh behavior scenarios with field-level scoring; clean-tree repeat packaging; one authorized local canary with rollback evidence |
 | `evidence-research` | Missing cross-domain evidence workflow now covered | Primary-source, contradiction, stale source, paywall, correlated-source, PDF/table, and citation-support evals |
 | `decision-ledger` | Distinct finalized-decision lifecycle, Supabase canonical-store design, append-only history, explicit redacted-snapshot contract, source boundaries, and minimum designed trigger/behavior suites | Apply and test migration on non-production; implement authenticated adapters; execute held-out suites and collision tests; prove cross-client recall, reciprocal supersession, privilege isolation, deterministic redaction, rollback, and readback before admission |
 | `mindmaker-os` | Thin live-state router with good source boundaries | Expand beyond 8 trigger and 5 behavior cases; live-access failure, source conflict, concept closure, and stale-runtime cases |

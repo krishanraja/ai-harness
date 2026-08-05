@@ -18,6 +18,8 @@ Read, in order:
 3. `../../contract/active-skill-quality-standard.md`
 4. `../../state/skill-registry.yaml`
 
+Read `references/reconciliation-and-release-evidence.md` when the task inventories client surfaces, compares same-name artifacts, reviews an imported/provider skill, executes admission gates, prepares a canary, or proposes any install, upload, replacement, enablement, disablement, relink, retirement, or rollback.
+
 ## Curated-only policy
 
 - Production routing exposes only skills that pass every applicable quality gate.
@@ -66,11 +68,11 @@ Add positive, negative, adversarial, collision, nominal, failure, authority, sec
 
 ### 6. Verify independently
 
-Run structural/security gates, blind trigger classification, behavior comparison against the baseline, pairwise collision tests, deterministic packaging, and fresh-context qualitative judging. Personal doctrine or taste changes require Krish's judgment.
+From a clean tree, run structural and security gates, blind trigger classification, behavior comparison against the baseline, pairwise collision tests, deterministic packaging, and fresh-context qualitative judging. Record failures individually; a hard authority or safety failure cannot be averaged away. Personal doctrine or taste changes require Krish's judgment.
 
 ### 7. Release progressively
 
-Build from a clean commit. Smoke-test one canary client, record hashes/upload evidence, then propose the next surface. Activation, replacement, disablement, deletion, and directory-link changes require their named approval gates.
+Build from a clean commit. Smoke-test one canary client and record the source commit, source-skill hash, artifact hash, installed hash or cloud upload record, client, enabled state, verification time, and prior known-good rollback artifact. Keep `production_active` empty until the applicable admission and canary gates pass. Then propose the next exact surface mutation. Activation, replacement, disablement, deletion, and directory-link changes require their named approval gates; readiness is not authority.
 
 ### 8. Learn without self-authoring
 
@@ -89,6 +91,8 @@ Propose a new skill only if all answers are yes:
 7. Would a chapter/reference/router change be materially worse?
 
 If any answer is no, improve the existing layer or keep the knowledge as corpus.
+
+If a new skill is justified, hand content architecture to `skill-creator`; retain ownership here for registry, routing, evaluation, admission, release, and rollback. When one named provider skill has passed review and Krish approves one target, hand installation mechanics to `skill-installer`. Installation does not imply enablement or production admission.
 
 ## Output
 

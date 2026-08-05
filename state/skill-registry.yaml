@@ -35,7 +35,7 @@ candidates:
   - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 60}
+  - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-03, freshness_sla_days: 60}

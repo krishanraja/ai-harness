@@ -134,6 +134,8 @@ $snapshotFixture = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-inpu
 $snapshotExpected = Join-Path $Root 'evals\fixtures\decision-ledger-snapshot-expected.json'
 $appTriggerCases = Join-Path $Root 'evals\build-apps-with-krish-trigger-cases.jsonl'
 $appBehaviorCases = Join-Path $Root 'evals\build-apps-with-krish-behavior-cases.jsonl'
+$maintainerTriggerCases = Join-Path $Root 'evals\harness-maintainer-trigger-cases.jsonl'
+$maintainerBehaviorCases = Join-Path $Root 'evals\harness-maintainer-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -192,6 +194,11 @@ $appTriggers = @(Read-JsonLines -Path $appTriggerCases)
 $appBehaviors = @(Read-JsonLines -Path $appBehaviorCases)
 Test-EvalCategoryMinimums -Records $appTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'build-apps-with-krish trigger suite'
 Test-EvalCategoryMinimums -Records $appBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'build-apps-with-krish behavior suite'
+
+$maintainerTriggers = @(Read-JsonLines -Path $maintainerTriggerCases)
+$maintainerBehaviors = @(Read-JsonLines -Path $maintainerBehaviorCases)
+Test-EvalCategoryMinimums -Records $maintainerTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'harness-maintainer trigger suite'
+Test-EvalCategoryMinimums -Records $maintainerBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'harness-maintainer behavior suite'
 
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
     $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)

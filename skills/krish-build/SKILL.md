@@ -1,6 +1,6 @@
 ---
 name: krish-build
-description: "Krish's build-and-ship doctrine, the layer above individual tool skills. Use before writing code, running a build pipeline, deploying, committing, handling secrets or keys, wiring data, or shipping a technical artifact for Krish. Trigger on: 'build this', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'run the pipeline', 'set this up', 'wire this', 'secrets', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery of .docx/.pptx/.html builds, or multi-step technical execution. Covers determinism, idempotency, build gates, runtime-only secrets, programmatic validation, targeted repair, and environment truth. Load krish-principles first. Use tools-access for secure authentication and a reviewed per-tool skill for API mechanics. Last reviewed 2026-08-04."
+description: "Krish's build-and-ship doctrine, the layer above individual tool skills. Use before writing code, running a build pipeline, deploying, committing, handling secrets or keys, wiring data, or shipping a technical artifact for Krish. Trigger on: 'build this', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'run the pipeline', 'set this up', 'wire this', 'secrets', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery of .docx/.pptx/.html builds, or multi-step technical execution. Covers determinism, idempotency, build gates, runtime-only secrets, programmatic validation, targeted repair, and environment truth. Load krish-principles first. Use tools-access for secure authentication and a reviewed per-tool skill for API mechanics. Last reviewed 2026-08-05."
 ---
 
 # Krish Build: How It Gets Built and Shipped
@@ -81,6 +81,9 @@ When a brief, a memory, or a summary contradicts the live system (the actual fil
 
 **Deliverables ship external-ready.** [LOAD-BEARING]
 A file marked done has no placeholders, no internal notes, no stale claims, and has passed the visual QA scan (krish-design section 7). Filesystem-safe filenames: no colons, replace with dashes.
+
+**Use the app-runtime proof patterns when the boundary is fragile.** [LOAD-BEARING]
+Read `references/app-runtime-verification.md` when work involves a remote database mutation, a component fixture-render harness, an authenticated user path, an edge or serverless function, SPA shell caching, or a build-time environment flag. It supplies bounded procedures and evidence requirements; it never grants production authority or replaces a current provider-specific tool reference.
 
 ---
 
