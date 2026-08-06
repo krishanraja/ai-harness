@@ -216,6 +216,8 @@ $ctrlCaptureTriggerCases = Join-Path $Root 'evals\ctrl-capture-trigger-cases.jso
 $ctrlCaptureBehaviorCases = Join-Path $Root 'evals\ctrl-capture-behavior-cases.jsonl'
 $decisionLedgerTriggerCases = Join-Path $Root 'evals\decision-ledger-trigger-cases.jsonl'
 $decisionLedgerBehaviorCases = Join-Path $Root 'evals\decision-ledger-behavior-cases.jsonl'
+$uxFoundationsTriggerCases = Join-Path $Root 'evals\ux-foundations-trigger-cases.jsonl'
+$uxFoundationsBehaviorCases = Join-Path $Root 'evals\ux-foundations-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -387,6 +389,11 @@ $decisionLedgerTriggers = @(Read-JsonLines -Path $decisionLedgerTriggerCases)
 $decisionLedgerBehaviors = @(Read-JsonLines -Path $decisionLedgerBehaviorCases)
 Test-EvalCategoryMinimums -Records $decisionLedgerTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'decision-ledger trigger suite'
 Test-EvalCategoryMinimums -Records $decisionLedgerBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'decision-ledger behavior suite'
+
+$uxFoundationsTriggers = @(Read-JsonLines -Path $uxFoundationsTriggerCases)
+$uxFoundationsBehaviors = @(Read-JsonLines -Path $uxFoundationsBehaviorCases)
+Test-EvalCategoryMinimums -Records $uxFoundationsTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ux-foundations trigger suite'
+Test-EvalCategoryMinimums -Records $uxFoundationsBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ux-foundations behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)

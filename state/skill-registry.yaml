@@ -42,7 +42,7 @@ candidates:
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
-  - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-07-03, freshness_sla_days: 180}
+  - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: web-data-tool, owner: Krish Raja, reviewed: 2026-06-15, freshness_sla_days: 60}

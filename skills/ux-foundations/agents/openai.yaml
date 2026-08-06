@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Foundations"
+  short_description: "Verify generic UX and accessibility fundamentals"
+  default_prompt: "Use $ux-foundations to check this generic UX or accessibility principle against its current primary source."
