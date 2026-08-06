@@ -1,116 +1,77 @@
 # Writing the package
 
-## The description is 80 percent of the skill
+## Description: route before execution
 
-The body cannot be read until the description has already decided to trigger. Roughly 1024 characters is the entire triggering surface and that is where the effort goes.
+The description is the always-visible routing surface. Make it concise but comprehensive enough to select the skill without opening the body.
 
-Five rules:
+Include:
 
-**1. First sentence, third person, under 100 characters, ends with a full stop.** "Generates board updates in the leader's voice." Not "I generate" and not "You can use this to."
+1. what the skill does in task language;
+2. several authorised real-world phrasings, including casual/partial requests;
+3. adjacent contexts that should route elsewhere;
+4. adversarial guard situations that should trigger the skill to refuse or preserve a boundary;
+5. the review date when the local governance convention requires it.
 
-**2. Five or more trigger phrases, in their actual language.** Take them from the transcript. Include the casual version, the partial request, and the adjacent topic they will use when they have forgotten what this is called.
+Use third-person declarative wording when the target router expects metadata, but validate the actual current target contract rather than hardcoding one character limit across clients. Do not copy a generic description across overlapping skills, and do not make every skill pushy. Both over-triggering and under-triggering are defects.
 
-> Use whenever [phrase 1], [phrase 2], [phrase 3], [phrase 4], or [phrase 5].
+Test the description against the currently loaded catalog, not in isolation. The private routing suite must meet the active quality standard—currently at least 8 positive, 8 negative, and 5 adversarial-collision cases—then pass as a complete regression after corrections.
 
-Real users type messily. If every trigger phrase is a clean command, it will not fire on anything anyone actually types.
+## Body: operational and economical
 
-**3. Push language.** "Do not produce X without consulting this skill first." Or "If in doubt, use this skill." The failure mode is under-triggering, not over-triggering, so descriptions should lean pushy.
+Write instructions in imperative form. Assume the model is capable; include only task-specific knowledge, fragile sequences, evidence-backed judgment, and necessary safeguards.
 
-**4. Third person throughout.** The description is read by a router deciding what to load, not by a person being addressed.
+- Do not restate the description in the body.
+- Give each subject-specific directive a valid `[C…]` or `[E…]` pointer and retain its situation.
+- Give substantive directives their evidence-backed reason when the reason affects judgment or extension to edge cases.
+- Label generic safety, packaging, and platform mechanics as governance rather than pretending the subject said them.
+- Use `NOT ESTABLISHED: <gap>` or omit the claim when no allowed pointer exists; record the gap in the build manifest.
+- Preserve AWAITING, untested, deleted, contradictory, and withdrawn exclusions.
+- Use direct reference links with when-to-read guidance and no required multi-hop chain.
+- Match freedom to fragility: narrative guidance for judgment; schemas/checklists for repeatable work; tested scripts for error-prone mechanics.
 
-**5. Under 1024 characters total.** Hard limit.
+Choose sections because the task needs them, not because a template listed them. Common useful sections are workflow, decision rules, surface routing, gotchas, output contract, verification, learning handoff, and references.
 
-Test it: write twenty realistic queries, including ones this skill should **not** handle, and check it fires on the right ones against everything else already loaded. Trigger accuracy is the number that matters and it is the one nobody measures.
+## Situated rules and fallback
 
-## The body
+Write the complete situation into the directive:
 
-**Imperative, no hedging.** "Use the client's name in the opening" not "you should consider using." No "consider", "it might be helpful", "you can". Hedging in an instruction file reads as optional and gets treated as optional.
+> For weekly progress updates on this engagement, lead with the decision [E12].
 
-**Every hard rule carries its reason in the next sentence.**
+Do not write:
 
-Bad:
-> NEVER use bullet points.
+> Never produce a deck.
 
-Good:
-> Avoid bullet points here. The board reads this as a continuous argument and bullets fragment it into a list of unrelated facts [C4].
+For every situated directive, write its adjacent else branch. For an uncovered surface or situation, route to a relevant accepted core criterion if it truly applies. Otherwise state `NOT ESTABLISHED`, ask the owner a bounded question, or send new standards evidence through `ctrl-intake`/`ctrl-compile`. Never choose the closest rule merely to avoid an empty result.
 
-The reason is what lets a model handle the case nobody wrote down. Without it you get literal compliance and no judgment, which is worse than no rule at all in any situation the rule did not anticipate.
+## Voice and exemplars
 
-**Under 500 lines.** Push detail into references.
+Use a real excerpt only when authorship, situation, purpose, audience, retention, and runtime inclusion are authorised. Reproduce it exactly or use an explicitly approved redacted derivative; never silently polish it or fabricate a quote.
 
-**Do not restate the description.** The first paragraph of the body must be different language doing a different job.
+Do not confuse known authorship with universal preference. A sample shows what the subject produced in that context. The compiled voice criterion determines whether and where it governs.
 
-**Every imperative ends with a pointer.** `[C3]` or `[E7f2]`. No exceptions. `NOT ESTABLISHED:` is always available when you have no pointer.
+Keep sealed holdout items, rejected/accepted answer keys, judge rubrics, and private raw artifacts out of runtime. User-facing documentation may contain only non-secret smoke prompts without answer keys, held-out ids, judge rubrics, or private fixtures. Synthetic fixtures may test mechanics only and must not be attributed to the subject.
 
-## Required sections, this order
+## Gotchas and output contracts
 
-```
-## When this skill activates
-## Workflow
-## Voice and tone
-## Gotchas
-## Output format
-## Learning loop
-## References
-```
+A gotcha needs witnessed or accepted evidence. Name the recognizable failure, its consequence, the correction, situation, and pointer. Do not add generic AI-writing dislikes unless the compiled subject standard or an explicitly separate organizational policy establishes them.
 
-**`## When this skill activates`** is operational context, not a restatement of the triggers. What situation are they actually in.
+Output format should be only as rigid as the evidence requires. Preserve fixed schemas exactly when downstream systems depend on them; use higher freedom when judgment and surface context matter.
 
-**`## Workflow`** is numbered steps with the reasoning attached.
+## Learning handoff
 
-**`## Voice and tone`** carries the structural rules and their hard rules verbatim. Include a fenced sample labelled `// target voice register` **only when a real sample exists**, either from their profile or a passage they quoted verbatim, reproduced word for word. If none exists, describe the register in prose and include no fenced block. Never invent a quotation and present it as their writing.
+Runtime feedback is evidence, not an automatic rule change. Record kept/edited/rejected outcomes only within authorised logging scope, with artifact/criterion/version ids and privacy limits. Recurring verified corrections go to `ctrl-capture`; an accepted change then returns through Compile, Build, independent evaluation, and controlled release. The package never edits itself.
 
-**`## Gotchas`** describes the mistake before prescribing the correction. "The model will open with a summary of last quarter. He already knows last quarter. Open with the number that moved [C2]." A gotcha that only states the correction leaves the reader unable to recognise the situation.
+## Private evaluation design
 
-**`## Output format`** is a template or a structural guide, fenced where it helps.
+Keep evaluation beside, not inside, runtime. Use the active harness standard—currently at least:
 
-**`## Learning loop`**, four to six lines, honest:
+- routing: 8 positive, 8 negative, 5 adversarial-collision;
+- behavior: 6 nominal, 8 failure/edge, 5 authority/security, 4 handoff/collision.
 
-> After each run, note whether they kept it, edited it, or rejected it, and capture the single biggest correction in one line.
-> Recurring corrections graduate into new Gotchas entries, which is where this skill actually gets sharper.
-> Bring those corrections back so the standard can be updated properly.
-> This does not update itself. It sharpens only when its runs are fed back.
+Cases should be realistic, messy, disjoint from source examples where possible, and cover neighboring skill collisions. The executor receives the skill and blind scenarios, never expected answers. A fresh judge receives the expectations and executor output. Hard authority/security failures cannot be averaged away.
 
-Never claim auto-update. The claim is checkable and it is false, and the person will check.
+After a failure, record the before result, smallest contract correction, focused rerun, and complete regression. A package passes only when every case and required validator passes on the frozen candidate bytes.
 
-**`## References`** points one level deep, each line saying when to read it:
+## Final personalization check
 
-> Read [rubric/core.md](rubric/core.md) before judging anything.
-
-## Test prompts, exactly three
-
-Messy, realistic, varied. The way someone types at nine on a Monday.
-
-Good:
-> ok so my sales team just posted their updates in slack and I need to get the board update done before my 10am. the usual format, pipeline is looking rough this week tbh. can you pull it together?
-
-Bad, and reject this style:
-> Please create a board update from the sales team data.
-
-Checklist for the three together:
-- at least one typo or casual abbreviation
-- at least one piece of irrelevant context
-- one trigger phrase inside a natural sentence rather than as a command
-- three different shapes: a question, a statement, a fragment
-- at least one that omits something important
-- none structured like the examples in the description
-
-## The words to avoid
-
-These are the constructions that mark a document as machine-written regardless of what it says. Zero of them, anywhere in the package:
-
-Em dashes. "In today's fast-paced world" and every variant. "It's not just X, it's Y." "Whether you're X or Y." "Let's dive in", "let's explore", "buckle up." "Unlock", "unleash", "supercharge", "elevate", "harness" as verbs. "Game changer", "seamless", "robust", "leverage", "synergy." "Delve", "tapestry", "testament to", "underscores", "pivotal." "The result?" or "The best part?" standing alone as a line. Rule-of-three lists where the third item is filler. Any sentence starting "Remember," or "Ultimately,."
-
-Two structural tells worth checking by counting:
-
-**Verbosity.** Models write two to three times as much as humans even under an explicit word cap, and the extra is mostly restatement. If a section is much longer than its neighbours, it is padding.
-
-**Sentence length variance.** Five consecutive sentences of similar length is a machine rhythm. Humans vary, and they vary most when they care.
-
-## The check that catches what the list cannot
-
-**Could this have been written for anyone?**
-
-If you could swap the name and publish it verbatim, it is not a skill about this person, it is a template with their name on it. This is the highest-consequence check in the file and the one no regex can run.
-
-The answer is always the same: go back to the exemplars and the criteria and use their actual words. A package built from evidence cannot be generic, because the evidence was not.
+Ask whether the package's subject-specific behavior could have been produced by swapping in another person's name. If yes, either the compiled evidence is too thin or the build discarded its useful distinctions. Do not fix this by adding personal data or invented quirks; return the exact evidence gap.

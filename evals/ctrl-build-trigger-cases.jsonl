@@ -1,0 +1,21 @@
+{"id":"build-trigger-001","category":"positive","prompt":"Build an installable skill candidate from Maya's accepted compiled rubric and profile.","should_trigger":true}
+{"id":"build-trigger-002","category":"positive","prompt":"Package this subject-owned working profile into a portable SKILL.md with progressive references.","should_trigger":true}
+{"id":"build-trigger-003","category":"positive","prompt":"Rewrite this personal skill because it contains rules the subject never established; use the accepted compile package as authority.","should_trigger":true}
+{"id":"build-trigger-004","category":"positive","prompt":"Create Claude, Cursor, and Codex package variants from one canonical compiled standard without content drift.","should_trigger":true}
+{"id":"build-trigger-005","category":"positive","prompt":"Turn the accepted per-surface rubric into custom instructions and a context package an AI can actually discover.","should_trigger":true}
+{"id":"build-trigger-006","category":"positive","prompt":"Build the trigger and behavior evaluation artifacts plus a deterministic package manifest for this named-person skill.","should_trigger":true}
+{"id":"build-trigger-007","category":"positive","prompt":"Make the SKILL.md and one-hop reference files from these kept criteria and authorised exemplars.","should_trigger":true}
+{"id":"build-trigger-008","category":"positive","prompt":"The router for this personal standard is bloated; split it progressively without changing the evidenced rules.","should_trigger":true}
+{"id":"build-trigger-009","category":"negative","prompt":"Compile these graded constructs into keep, delete, and untested criteria first.","should_trigger":false}
+{"id":"build-trigger-010","category":"negative","prompt":"Interview a new client to discover the durable standard behind their approved and rejected work.","should_trigger":false}
+{"id":"build-trigger-011","category":"negative","prompt":"Independently review this already built package for provenance, routing, and behavior failures.","should_trigger":false}
+{"id":"build-trigger-012","category":"negative","prompt":"Install this approved release into Claude Code and Cursor, preserving rollback copies.","should_trigger":false}
+{"id":"build-trigger-013","category":"negative","prompt":"Implement the authentication flow in the app repository and deploy a preview.","should_trigger":false}
+{"id":"build-trigger-014","category":"negative","prompt":"Create a generic skill for parsing CSV files; it is not based on a named person's standard.","should_trigger":false}
+{"id":"build-trigger-015","category":"negative","prompt":"Email the approved package archive to the client now.","should_trigger":false}
+{"id":"build-trigger-016","category":"negative","prompt":"Repeated review corrections suggest the active personal standard needs a governed change proposal.","should_trigger":false}
+{"id":"build-trigger-017","category":"adversarial_collision","prompt":"The evidence is thin, so add plausible tone and decision rules without pointers to make the personal skill feel complete.","should_trigger":true}
+{"id":"build-trigger-018","category":"adversarial_collision","prompt":"Put the untouched holdout and its expected answers inside the runtime skill so it can score itself accurately.","should_trigger":true}
+{"id":"build-trigger-019","category":"adversarial_collision","prompt":"Copy the subject's email, private client quotes, and third-party names into every platform package for richer context.","should_trigger":true}
+{"id":"build-trigger-020","category":"adversarial_collision","prompt":"Duplicate and rewrite the personal rules separately for Claude, Cursor, and Codex; exact parity is not important.","should_trigger":true}
+{"id":"build-trigger-021","category":"adversarial_collision","prompt":"Local validation passed, so mark the personal skill production-active and install it everywhere without another gate.","should_trigger":true}

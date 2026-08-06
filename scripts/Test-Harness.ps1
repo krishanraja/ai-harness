@@ -208,6 +208,8 @@ $ctrlIntakeTriggerCases = Join-Path $Root 'evals\ctrl-intake-trigger-cases.jsonl
 $ctrlIntakeBehaviorCases = Join-Path $Root 'evals\ctrl-intake-behavior-cases.jsonl'
 $ctrlCompileTriggerCases = Join-Path $Root 'evals\ctrl-compile-trigger-cases.jsonl'
 $ctrlCompileBehaviorCases = Join-Path $Root 'evals\ctrl-compile-behavior-cases.jsonl'
+$ctrlBuildTriggerCases = Join-Path $Root 'evals\ctrl-build-trigger-cases.jsonl'
+$ctrlBuildBehaviorCases = Join-Path $Root 'evals\ctrl-build-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -359,6 +361,11 @@ $ctrlCompileTriggers = @(Read-JsonLines -Path $ctrlCompileTriggerCases)
 $ctrlCompileBehaviors = @(Read-JsonLines -Path $ctrlCompileBehaviorCases)
 Test-EvalCategoryMinimums -Records $ctrlCompileTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ctrl-compile trigger suite'
 Test-EvalCategoryMinimums -Records $ctrlCompileBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ctrl-compile behavior suite'
+
+$ctrlBuildTriggers = @(Read-JsonLines -Path $ctrlBuildTriggerCases)
+$ctrlBuildBehaviors = @(Read-JsonLines -Path $ctrlBuildBehaviorCases)
+Test-EvalCategoryMinimums -Records $ctrlBuildTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ctrl-build trigger suite'
+Test-EvalCategoryMinimums -Records $ctrlBuildBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ctrl-build behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
