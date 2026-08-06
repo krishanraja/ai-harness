@@ -1,0 +1,4 @@
+interface:
+  display_name: "n8n Operator"
+  short_description: "Build and operate n8n workflows safely"
+  default_prompt: "Use $n8n-operator to diagnose this n8n workflow and propose a verified, rollback-ready fix."

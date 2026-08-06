@@ -51,6 +51,7 @@ For a tiny edit, compress this mentally. For material external work, missing loc
 
 - For every substantive draft or voice review, read `references/voice-doctrine.md`.
 - For long-form, social, correspondence, angle-expression, editing, or data/quote handling, read the matching section of `references/formats-and-workflow.md`.
+- For cold outreach, a named-prospect sales email, or an Instantly sequence, read `references/outbound-email-voice.md` after the approved strategy packet from `krish-content-marketer`.
 - For de-AI review, read `references/ai-tells-and-decks.md#the-ai-tell-taxonomy-detection-reference`.
 - For a deck, talk, workshop, webinar, or slide artifact, read `references/ai-tells-and-decks.md#deck-and-slide-copy-doctrine`.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Instantly Operator"
+  short_description: "Operate Instantly API workflows safely"
+  default_prompt: "Use $instantly-operator to prepare this Instantly operation with live API verification and an approval-safe execution plan."

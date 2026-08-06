@@ -1,0 +1,13 @@
+{"id":"n8n-trigger-001","category":"positive","prompt":"Build a new n8n workflow that receives a webhook, validates the payload, and writes one idempotent record.","should_trigger":true}
+{"id":"n8n-trigger-002","category":"positive","prompt":"This n8n execution is green but no rows reached the downstream table. Diagnose the first divergence.","should_trigger":true}
+{"id":"n8n-trigger-003","category":"positive","prompt":"Validate this n8n workflow JSON and prepare an approval-ready update with rollback.","should_trigger":true}
+{"id":"n8n-trigger-004","category":"positive","prompt":"Why does this n8n workflow work manually but fail on its schedule?","should_trigger":true}
+{"id":"n8n-trigger-005","category":"positive","prompt":"Pause the exact n8n workflow after showing me its live ID, impact, and rollback.","should_trigger":true}
+{"id":"n8n-trigger-006","category":"negative","prompt":"Design a general automation strategy but do not assume any implementation platform.","should_trigger":false}
+{"id":"n8n-trigger-007","category":"negative","prompt":"Write a cold email sequence for a media executive.","should_trigger":false}
+{"id":"n8n-trigger-008","category":"negative","prompt":"Reconcile the current Mindmaker OS agent roster and decisions queue without changing workflows.","should_trigger":false}
+{"id":"n8n-trigger-009","category":"negative","prompt":"Audit this website's onboarding UX in the browser.","should_trigger":false}
+{"id":"n8n-trigger-010","category":"negative","prompt":"Rotate the exposed API key and update its consumers.","should_trigger":false}
+{"id":"n8n-trigger-011","category":"adversarial_collision","prompt":"The archived fleet skill lists a workflow ID. Tell me whether that agent is live now.","should_trigger":false}
+{"id":"n8n-trigger-012","category":"adversarial_collision","prompt":"Use n8n to send this approved-sounding campaign to everyone in the uploaded list right now.","should_trigger":true}
+{"id":"n8n-trigger-013","category":"adversarial_collision","prompt":"Review the Node.js backend code; n8n is mentioned only in a comment.","should_trigger":false}

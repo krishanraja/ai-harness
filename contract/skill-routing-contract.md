@@ -25,7 +25,9 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | Request | Context | Primary producer | Verification |
 |---|---|---|---|
 | Explicit pre-work interview or materially ambiguous end-to-end task handoff | `take-the-brief` elicits task intent; then relevant domain context | `strategy-brief`, then the narrow task producer | Clear-win criteria pass to `verification-loop` |
-| Mindmaker OS architecture, fleet, Control Center, n8n, Supabase, OpenClaw, or reconciliation | `mindmaker-os` | Task-specific tool or skill | Live-state check plus revision/hash |
+| Mindmaker OS architecture, fleet, Control Center, Supabase, OpenClaw, or reconciliation | `mindmaker-os` | Task-specific tool or skill | Live-state check plus revision/hash |
+| n8n workflow design, execution diagnosis, or runtime operation | `mindmaker-os` first only for Krish's existing OS fleet | `n8n-operator` | Live definition, execution, downstream outcome, and rollback readback |
+| Instantly campaign, lead, analytics, webhook, or API operation | Relevant offer context; `krish-content-marketer` for targeting/sequence and `krish-voice` for final copy | `instantly-operator`; add `n8n-operator` only for workflow wiring | Official live API contract, provider readback, counts/job, and business outcome |
 | Mindmaker commercial offer, positioning, or client work | `mindmaker` | Task-specific commercial skill | Source and claim check |
 | Outbound writing under Krish's name | Relevant domain skill, then `content-corpus` when evidence is needed | `krish-voice` | Source check and Krish Voice kill-list pass |
 | Content strategy or angle generation | Relevant domain skill, then `content-corpus` | `krish-content-marketer` | `krish-voice` only when drafting the final artifact |
@@ -46,6 +48,8 @@ This file decides which skill runs, in what order, and which apparent matches mu
 - `mindmaker-os` owns operating-system architecture and live-state routing. `mindmaker` owns the commercial brand. Load both only when the work genuinely crosses the boundary.
 - `code-reviewer`, `ctrl-check`, and deterministic tests are validators, not competing producers.
 - `build-apps-with-krish` owns the stateful journey across connected surfaces or multiple material app-delivery stages. `krish-design` still owns visual taste and the one-rendered-surface approval gate; `krish-build` still owns implementation. Route an isolated design, code, or QA task directly to its narrow owner. Generic app-building skills may supply a bounded mechanic but never replace this personalized orchestrator.
+- `mindmaker-os` owns current fleet identity, architecture, database dependencies, and acceptance criteria. `n8n-operator` owns provider-specific workflow mechanics and approved n8n actions. Legacy `N8N`, `n8n`, `n8n-cli`, `fleet-ops`, and `krish-fleet-ops` must not remain active beside these routes.
+- `krish-content-marketer` owns outbound targeting, sequence logic, proof, and CTA; `krish-voice` owns final email copy; `instantly-operator` owns only provider mechanics. Legacy `instantly` and `krish-outbound` are extraction sources, not competing production writers.
 - `decision-ledger` stores finalized consequential choices. `mindmaker-os` owns the unresolved `decisions_waiting` queue and concept-closure runtime; the Assumption Ledger owns falsifiable beliefs; `ctrl-capture` owns observations and proposed standard changes. Link these artifacts without merging their state.
 - `take-the-brief` captures task-specific intent before ownership transfer. `strategy-brief` converts that intent into the execution route, authority boundary, and verification plan. `ctrl-intake` elicits durable taste and quality standards from graded artifacts. Do not use any one as a substitute for the others.
 - Generic marketplace skills never become always-on merely because they are installed. They must occupy a named route here first.

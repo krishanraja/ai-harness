@@ -45,6 +45,8 @@ Fail the draft if the buyer cannot recognise their situation early, the cost is 
 
 ## Workflow
 
+For cold outreach, named-prospect email, or a multi-step outbound sequence, read `references/outbound-email-strategy.md` before selecting the argument, sequence job, proof, or CTA. This skill owns the conversion strategy; `krish-voice` owns the final words.
+
 1. **State the behavioural objective.** Complete: "After this asset, the buyer should __ because __."
 2. **Build the evidence spine.** Name each source artifact and Krish's authority to use it. Separate observed facts, sourced facts, owner-provided claims, assumptions, and missing proof. Never manufacture an outcome, quote, number, customer detail, or guarantee.
 3. **Locate the commercial tension.** Identify the costly status quo, trade-off, timing change, or missed opportunity. Do not invent urgency.

@@ -1,12 +1,15 @@
 schema_version: 1
-last_reconciled: 2026-08-05
+last_reconciled: 2026-08-06
 status: candidate-set
 
 canonical:
   repository: krishanraja/ai-harness
   proposed_path: C:\Users\krish\dev\mindmaker-os\ai-harness
-  local_skill_surface: C:\Users\krish\.agents\skills
-  claude_code_surface: C:\Users\krish\.claude\skills
+  local_skill_surfaces:
+    - {client: cursor, path: 'C:\Users\krish\.cursor\skills', policy: release-managed-canonical-set}
+    - {client: claude-desktop-code, path: 'C:\Users\krish\.claude\skills', policy: release-managed-canonical-set}
+    - {client: codex, path: 'C:\Users\krish\.codex\skills', policy: release-managed-canonical-set-excluding-system}
+    - {client: shared-agents, path: 'C:\Users\krish\.agents\skills', policy: third-party-catalog-not-canonical-deployment}
   cloud_surface: claude.ai/customize/skills
 
 release_policy:
@@ -46,6 +49,8 @@ candidates:
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
+  - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
+  - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
   - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -66,12 +71,16 @@ quarantine:
     next_gate: Rotate affected credentials in consumer-safe batches, scrub copies/history, then replace surfaces.
   - name: n8n
     reason: Oversized monolith with embedded credentials and dynamic fleet facts.
-    replacement: mindmaker-os for live routing plus future thin n8n tool skill.
-    next_gate: Extract API mechanics, remove credentials/current counts, add behavior evals.
+    replacement: mindmaker-os for live routing plus n8n-operator for provider mechanics.
+    next_gate: Candidate operator must pass held-out evaluation and canary before legacy copies are retired.
   - name: fleet-ops-and-krish-fleet-ops
     reason: Conflicting stale fleet counts and deployment facts.
-    replacement: mindmaker-os live-state routing.
-    next_gate: Preserve durable procedures only; retrieve current fleet state live.
+    replacement: mindmaker-os live-state routing plus its fleet-reconciliation reference; n8n-operator for workflow mechanics.
+    next_gate: Candidate release and canary, then retire exact legacy copies after approval.
+  - name: n8n-cli
+    reason: Unprovenanced command catalogue with destructive operations, local credential storage guidance, and no authority or downstream verification contract.
+    replacement: n8n-operator.
+    next_gate: Preserve only mechanics independently confirmed against official n8n sources; do not activate beside the operator.
   - name: legacy-ux-testing-agent
     reason: Missing frontmatter, over 500 lines, embedded credentials, hardcoded app registry, and overbroad auto-fix authority.
     replacement: ux-testing-agent
@@ -90,9 +99,19 @@ superseded_cloud:
     - ab-test-plan
     - design-system-builder
 
-inactive_pending_confirmation:
-  - {name: instantly, reason: Advisory outbound is paused/retired in the current Mindmaker architecture.}
-  - {name: krish-outbound, reason: Overlaps content and outbound routes; retain only if a distinct current workflow is demonstrated.}
+temporary_cloud_extraction:
+  - {name: instantly, reason: Unique provider mechanics extracted into instantly-operator; retain only until candidate evaluation and approved cloud replacement.}
+  - {name: krish-outbound, reason: Personalized outbound strategy and voice extracted into the existing content and voice owners; retain only until candidate evaluation and approved retirement.}
+
+evaluation_evidence:
+  n8n-operator:
+    full_suite: {trigger: 12/13, behavior: 15/16, hard_failures: 0, note: Fresh-context stochastic run followed by explicit contract corrections.}
+    closing_regression: {trigger: 1/1, behavior: 1/1, hard_failures: 0, result: pass}
+  instantly-operator:
+    full_suite: {trigger: 13/13, behavior: 12/16, hard_failures: 0, note: Fresh-context run followed by explicit contract corrections.}
+    closing_regressions:
+      - {behavior: 2/4, hard_failures: 0, note: Two misses were made explicit and rerun.}
+      - {behavior: 2/2, hard_failures: 0, result: pass}
 
 corpus_not_active_skills:
   - Claude Skills Ultimate Bundle

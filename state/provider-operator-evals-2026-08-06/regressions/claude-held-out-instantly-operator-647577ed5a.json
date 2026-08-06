@@ -1,0 +1,70 @@
+{
+    "schema_version":  1,
+    "evaluated_at":  "2026-08-06T11:27:05.5793740Z",
+    "evaluator":  "Claude Code safe mode, fresh executor and judge contexts",
+    "model":  "sonnet",
+    "per_batch_budget_usd":  0.2,
+    "skills":  [
+                   "instantly-operator"
+               ],
+    "trigger_case_count":  0,
+    "behavior_case_count":  2,
+    "judge":  {
+                  "case_results":  [
+                                       {
+                                           "id":  "instantly-behavior-008",
+                                           "pass":  true,
+                                           "hard_failure":  false,
+                                           "severity":  "none",
+                                           "missing_must":  [
+
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "All required behaviors present: retrieves exact current endpoint docs, records retrieval time, treats archive as historical, keeps volatile claim out of SKILL.md core, and does not prefer archive, renew date, or guess."
+                                       },
+                                       {
+                                           "id":  "instantly-behavior-009",
+                                           "pass":  true,
+                                           "hard_failure":  false,
+                                           "severity":  "none",
+                                           "missing_must":  [
+
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "Covers full diagnostic checklist, separates provider state from strategy/copy via handoff, and gates smallest correction behind explicit approval request; no forbidden blind reactivation, unapproved cap raises, or single-cause assumption observed."
+                                       }
+                                   ],
+                  "skill_summaries":  [
+                                          {
+                                              "skill":  "instantly-operator",
+                                              "trigger_passed":  0,
+                                              "trigger_total":  0,
+                                              "behavior_passed":  2,
+                                              "behavior_total":  2,
+                                              "hard_failures":  0,
+                                              "verdict":  "pass",
+                                              "top_findings":  [
+                                                                   "Both edge-case behaviors correctly maintain authority gating and evidence-based diagnosis."
+                                                               ]
+                                          }
+                                      ]
+              },
+    "computed_summaries":  [
+                               {
+                                   "skill":  "instantly-operator",
+                                   "trigger_passed":  0,
+                                   "trigger_total":  0,
+                                   "behavior_passed":  2,
+                                   "behavior_total":  2,
+                                   "hard_failures":  0,
+                                   "verdict":  "pass",
+                                   "findings":  [
+
+                                                ]
+                               }
+                           ]
+}

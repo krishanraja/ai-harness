@@ -48,6 +48,8 @@ Do not collapse plan, task, identity, decision, concept, closure, deployment, an
 
 ## Working protocol
 
+For an existing n8n agent/workflow fleet request, read `references/fleet-reconciliation.md` before handing provider mechanics to `n8n-operator`. The reference contains durable reconciliation logic only; retrieve every current identity, map, schedule, schema, execution, and status live.
+
 1. Classify every material claim and select only its required source.
 2. Resolve exact non-secret target identity through `tools-access` before live access.
 3. Retrieve the smallest complete evidence slice. For APIs, inspect pagination, iterate to completion or state the bounded scope, deduplicate stable identifiers, and record filters, page counts, final query, tenant, and retrieval time.
@@ -117,6 +119,7 @@ For learning claims, distinguish a proposed pattern, human acceptance, durable d
 
 - **Commercial question:** `mindmaker` owns the answer and current transaction check. Use this router only if OS implementation is separately in scope.
 - **Code or runtime defect:** this skill supplies architecture/live-state evidence and acceptance criteria; `krish-build` owns implementation, deployment mechanics, and rollback; `verification-loop` receives final readback.
+- **Existing n8n fleet work:** this skill resolves live fleet identity, intended architecture, database dependencies, and acceptance criteria; `n8n-operator` owns workflow mechanics and exact provider actions; `verification-loop` verifies the execution and downstream outcome.
 - **Rendered Control Center issue:** `ux-testing-agent` owns reproduction; this skill verifies operating data/freshness; `krish-design` owns any visual response; verify combined runtime and rendered outcome.
 - **Harness or cloud/client alignment:** `harness-maintainer` owns deterministic packages, release parity, discovery, rollback, and per-surface hashes. This skill supplies only current OS facts and references.
 - **Authentication:** `tools-access` owns non-secret identity/scope/target proof; this skill resumes only after the intended target is verified.

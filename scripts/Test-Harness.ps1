@@ -220,6 +220,10 @@ $uxFoundationsTriggerCases = Join-Path $Root 'evals\ux-foundations-trigger-cases
 $uxFoundationsBehaviorCases = Join-Path $Root 'evals\ux-foundations-behavior-cases.jsonl'
 $apifyTriggerCases = Join-Path $Root 'evals\apify-trigger-cases.jsonl'
 $apifyBehaviorCases = Join-Path $Root 'evals\apify-behavior-cases.jsonl'
+$n8nOperatorTriggerCases = Join-Path $Root 'evals\n8n-operator-trigger-cases.jsonl'
+$n8nOperatorBehaviorCases = Join-Path $Root 'evals\n8n-operator-behavior-cases.jsonl'
+$instantlyOperatorTriggerCases = Join-Path $Root 'evals\instantly-operator-trigger-cases.jsonl'
+$instantlyOperatorBehaviorCases = Join-Path $Root 'evals\instantly-operator-behavior-cases.jsonl'
 $apifyHelperTests = Join-Path $Root 'skills\apify\tests'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
@@ -402,6 +406,17 @@ $apifyTriggers = @(Read-JsonLines -Path $apifyTriggerCases)
 $apifyBehaviors = @(Read-JsonLines -Path $apifyBehaviorCases)
 Test-EvalCategoryMinimums -Records $apifyTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'apify trigger suite'
 Test-EvalCategoryMinimums -Records $apifyBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'apify behavior suite'
+
+$narrowOperatorSpecs = @(
+    @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
+    @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases }
+)
+foreach ($spec in $narrowOperatorSpecs) {
+    $operatorTriggers = @(Read-JsonLines -Path $spec.TriggerPath)
+    $operatorBehaviors = @(Read-JsonLines -Path $spec.BehaviorPath)
+    Test-EvalCategoryMinimums -Records $operatorTriggers -Minimums @{ positive = 5; negative = 5; adversarial_collision = 3 } -Label "$($spec.Name) trigger suite"
+    Test-EvalCategoryMinimums -Records $operatorBehaviors -Minimums @{ nominal = 4; failure_edge = 5; authority_security = 4; handoff_collision = 3 } -Label "$($spec.Name) behavior suite"
+}
 
 $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if ($null -eq $pythonCommand) {

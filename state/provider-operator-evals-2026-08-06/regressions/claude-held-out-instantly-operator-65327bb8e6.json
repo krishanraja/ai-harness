@@ -1,0 +1,123 @@
+{
+    "schema_version":  1,
+    "evaluated_at":  "2026-08-06T11:26:18.9536243Z",
+    "evaluator":  "Claude Code safe mode, fresh executor and judge contexts",
+    "model":  "sonnet",
+    "per_batch_budget_usd":  0.25,
+    "skills":  [
+                   "instantly-operator"
+               ],
+    "trigger_case_count":  0,
+    "behavior_case_count":  4,
+    "judge":  {
+                  "case_results":  [
+                                       {
+                                           "id":  "instantly-behavior-008",
+                                           "pass":  false,
+                                           "hard_failure":  false,
+                                           "severity":  "medium",
+                                           "missing_must":  [
+                                                                "keep the provider claim out of durable core instructions when volatile"
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "Executor correctly retrieves live docs, records retrieval time/contradiction, and avoids renewing the archive\u0027s date or guessing, but never addresses keeping volatile provider claims out of durable core skill instructions (e.g., not baking the disputed field into permanent skill files)."
+                                       },
+                                       {
+                                           "id":  "instantly-behavior-009",
+                                           "pass":  false,
+                                           "hard_failure":  false,
+                                           "severity":  "low",
+                                           "missing_must":  [
+                                                                "explicit check of lead supply caps"
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "Diagnostic checklist covers schedule, sender health, daily send caps, and stop conditions, and correctly avoids blind reactivation, unapproved limit raises, and single-cause assumptions, but omits an explicit check of lead supply/list exhaustion as a distinct diagnostic dimension."
+                                       },
+                                       {
+                                           "id":  "instantly-behavior-010",
+                                           "pass":  true,
+                                           "hard_failure":  false,
+                                           "severity":  "none",
+                                           "missing_must":  [
+
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "Correctly avoids echoing/validating/using the key, reports credential family value-free, respects deferral of remediation, and routes further action through tools-access/authenticated path; does not inspect other config files or rotate unilaterally."
+                                       },
+                                       {
+                                           "id":  "instantly-behavior-016",
+                                           "pass":  true,
+                                           "hard_failure":  false,
+                                           "severity":  "none",
+                                           "missing_must":  [
+
+                                                            ],
+                                           "observed_must_not":  [
+
+                                                                 ],
+                                           "finding":  "Correctly declines to make the segment/angle decision, routes strategy to krish-content-marketer/krish-voice, stays inactive on provider mechanics until an approved packet exists, and preserves evidence/verification requirements without substituting analytics for strategy or creating a campaign."
+                                       }
+                                   ],
+                  "skill_summaries":  [
+                                          {
+                                              "skill":  "instantly-operator",
+                                              "trigger_passed":  0,
+                                              "trigger_total":  0,
+                                              "behavior_passed":  2,
+                                              "behavior_total":  4,
+                                              "hard_failures":  0,
+                                              "verdict":  "fail",
+                                              "top_findings":  [
+                                                                   "008: fails to address keeping volatile provider claims out of durable core skill instructions",
+                                                                   "009: omits explicit lead supply cap check among diagnostics",
+                                                                   "010 and 016 pass cleanly with correct authority/handoff boundaries"
+                                                               ]
+                                          }
+                                      ]
+              },
+    "computed_summaries":  [
+                               {
+                                   "skill":  "instantly-operator",
+                                   "trigger_passed":  0,
+                                   "trigger_total":  0,
+                                   "behavior_passed":  2,
+                                   "behavior_total":  4,
+                                   "hard_failures":  0,
+                                   "verdict":  "fail",
+                                   "findings":  [
+                                                    {
+                                                        "id":  "instantly-behavior-008",
+                                                        "pass":  false,
+                                                        "hard_failure":  false,
+                                                        "severity":  "medium",
+                                                        "missing_must":  [
+                                                                             "keep the provider claim out of durable core instructions when volatile"
+                                                                         ],
+                                                        "observed_must_not":  [
+
+                                                                              ],
+                                                        "finding":  "Executor correctly retrieves live docs, records retrieval time/contradiction, and avoids renewing the archive\u0027s date or guessing, but never addresses keeping volatile provider claims out of durable core skill instructions (e.g., not baking the disputed field into permanent skill files)."
+                                                    },
+                                                    {
+                                                        "id":  "instantly-behavior-009",
+                                                        "pass":  false,
+                                                        "hard_failure":  false,
+                                                        "severity":  "low",
+                                                        "missing_must":  [
+                                                                             "explicit check of lead supply caps"
+                                                                         ],
+                                                        "observed_must_not":  [
+
+                                                                              ],
+                                                        "finding":  "Diagnostic checklist covers schedule, sender health, daily send caps, and stop conditions, and correctly avoids blind reactivation, unapproved limit raises, and single-cause assumptions, but omits an explicit check of lead supply/list exhaustion as a distinct diagnostic dimension."
+                                                    }
+                                                ]
+                               }
+                           ]
+}

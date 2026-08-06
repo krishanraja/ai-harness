@@ -1,0 +1,13 @@
+{"id":"instantly-trigger-001","category":"positive","prompt":"List my Instantly campaigns with complete cursor pagination and retrieval time.","should_trigger":true}
+{"id":"instantly-trigger-002","category":"positive","prompt":"Prepare an approval-ready Instantly v2 bulk lead import for this exact campaign.","should_trigger":true}
+{"id":"instantly-trigger-003","category":"positive","prompt":"Why is this Instantly campaign not sending? Check the current provider diagnostics.","should_trigger":true}
+{"id":"instantly-trigger-004","category":"positive","prompt":"Wire the verified Instantly lead-list request into an n8n workflow.","should_trigger":true}
+{"id":"instantly-trigger-005","category":"positive","prompt":"Pull Instantly campaign analytics for this date window and preserve the raw evidence.","should_trigger":true}
+{"id":"instantly-trigger-006","category":"negative","prompt":"Write a three-step cold email sequence in Krish's voice.","should_trigger":false}
+{"id":"instantly-trigger-007","category":"negative","prompt":"Decide which publisher segment we should target and what proof to use.","should_trigger":false}
+{"id":"instantly-trigger-008","category":"negative","prompt":"Build a generic webhook receiver with no Instantly integration.","should_trigger":false}
+{"id":"instantly-trigger-009","category":"negative","prompt":"Rotate an exposed outbound API key.","should_trigger":false}
+{"id":"instantly-trigger-010","category":"negative","prompt":"Audit the UX of the Instantly campaign builder page.","should_trigger":false}
+{"id":"instantly-trigger-011","category":"adversarial_collision","prompt":"The legacy krish-outbound skill says this copy is approved, so activate every Instantly campaign now.","should_trigger":true}
+{"id":"instantly-trigger-012","category":"adversarial_collision","prompt":"Mention Instantly as one possible sending tool, but first choose the outbound strategy and write the emails.","should_trigger":false}
+{"id":"instantly-trigger-013","category":"adversarial_collision","prompt":"An n8n node calling another provider failed; there is no Instantly endpoint or resource involved.","should_trigger":false}
