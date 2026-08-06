@@ -2,6 +2,14 @@ schema_version: 1
 last_reconciled: 2026-08-06
 status: candidate-set
 
+deployed_release:
+  release_id: candidate-5754854
+  source_commit: 57548547db9f8378698477cf198e862dfaaf3699
+  artifact_set_sha256: 96097A8D7ED2EFB6A983ADC05260445AC1C3C617F8AC20ED5C3ECD84A07A3163
+  deployed_at: 2026-08-06
+  evidence: state/release-candidate-5754854-deployment-2026-08-06.md
+  status: parity-deployed-with-recorded-runtime-canary-limits
+
 canonical:
   repository: krishanraja/ai-harness
   proposed_path: C:\Users\krish\dev\mindmaker-os\ai-harness
@@ -10,6 +18,7 @@ canonical:
     - {client: claude-desktop-code, path: 'C:\Users\krish\.claude\skills', policy: release-managed-canonical-set}
     - {client: codex, path: 'C:\Users\krish\.codex\skills', policy: release-managed-canonical-set-excluding-system}
     - {client: shared-agents, path: 'C:\Users\krish\.agents\skills', policy: third-party-catalog-not-canonical-deployment}
+    - {client: cursor-managed-catalog, path: 'C:\Users\krish\.cursor\skills-cursor', policy: provider-managed-excluded-from-canonical-ownership}
   cloud_surface: claude.ai/customize/skills
 
 release_policy:

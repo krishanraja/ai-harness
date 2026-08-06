@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: implementation in progress. GitHub validation/release workflows and the verified local installer are implemented; the production release and wider client deployment remain gated on skill-quality completion and surface verification.
+Status: candidate `candidate-5754854` was deployed on 2026-08-06 from clean commit `57548547db9f8378698477cf198e862dfaaf3699`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest; Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills and passed a fresh-chat routing canary. Automatic scheduling and unattended Claude Cloud mutation remain intentionally inactive.
 
 ## Decision
 
@@ -100,8 +100,8 @@ The approved Codex canary proved why step 7 matters: a normal Windows Git checko
 | Codex | `C:\Users\krish\.codex\skills` | Verified physical release extraction; validate in a new task |
 | Claude Code | `C:\Users\krish\.claude\skills` | Verified physical release extraction; preserve existing junctions until individually reconciled |
 | Cursor | `C:\Users\krish\.cursor\skills` | Treat as the primary canary target, then prove editor and CLI discovery |
-| Cursor legacy/secondary | `C:\Users\krish\.cursor\skills-cursor` | Preserve and reconcile; do not keep as a second writable source |
-| Shared agent library | `C:\Users\krish\.agents\skills` | Treat as a library/compatibility surface until each consuming client is proven |
+| Cursor-managed catalog | `C:\Users\krish\.cursor\skills-cursor` | Provider-managed product assets with Cursor management manifests; exclude from canonical ownership and do not purge as user duplicates |
+| Shared agent library | `C:\Users\krish\.agents\skills` | Third-party library only; canonical-name collisions are quarantined and the remaining catalog is demand-reviewed |
 
 Do not point all clients directly at the Git working tree. Client-specific caches, provider-managed skills, different discovery rules, and accidental local edits make that deceptively fragile. Physical release artifacts plus parity records give the same content with a real rollback boundary.
 
@@ -174,9 +174,9 @@ A deletion proposal must name the exact artifact and surface, its replacement or
 
 ## Current approval boundary
 
-Approved: the one-skill Codex canary for `harness-maintainer`; GitHub validation and tag-gated release packaging; and eventual parity deployment to Claude Cloud, Claude CLI, and Cursor CLI after the canonical set meets its quality gates.
+Executed under exact approval on 2026-08-06: verified parity deployment to the three local user surfaces; reversible quarantine of the named local extras and shared canonical-name collisions; replacement of the three changed Claude Cloud owners; upload of the two new provider operators; and retirement of the four named Cloud legacy skills.
 
-Not approved: Task Scheduler creation, directory relinking, API deployment, and any deletion. Cloud replacements that require deleting an existing same-name entry will be presented as an exact batch before the destructive step. These gates are not implied by GitHub being the source of truth.
+Not approved: Task Scheduler creation, directory relinking, API deployment, automatic Cloud mutation, permanent deletion of any local quarantine, or a new GitHub tag/release. These gates are not implied by GitHub being the source of truth.
 
 ## Authoritative platform references
 
