@@ -3,12 +3,12 @@ last_reconciled: 2026-08-06
 status: candidate-set
 
 deployed_release:
-  release_id: candidate-deb472b
-  source_commit: deb472bc4a1675f412fe86445d2cc7ab344050d4
-  artifact_set_sha256: 64B25BDDA4051912A6DD0D289A123853633670AE1FAD212E4902A6DBF8EF6BE8
+  release_id: candidate-60ac77d
+  source_commit: 60ac77d1fc8f73f3bd572d3fab2f11179560c477
+  artifact_set_sha256: F792C881B4CE8E167FA6B3B2B0C93D74271BA015134011C7A029FFC8CCAC889D
   deployed_at: 2026-08-06
-  evidence: state/release-candidate-deb472b-deployment-2026-08-06.md
-  status: parity-deployed-with-cloud-voice-route-canaries-and-recorded-local-runtime-limits
+  evidence: state/release-candidate-60ac77d-deployment-2026-08-06.md
+  status: parity-deployed-with-durable-schedule-invariant
 
 canonical:
   repository: krishanraja/ai-harness
