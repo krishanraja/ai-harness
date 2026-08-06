@@ -1,0 +1,21 @@
+{"id":"compile-trigger-001","category":"positive","prompt":"Compile this completed CTRL intake into a discriminating rubric and working profile for Maya." ,"should_trigger":true}
+{"id":"compile-trigger-002","category":"positive","prompt":"Turn these graded constructs into observable criteria and test which ones actually separate approved from rejected work.","should_trigger":true}
+{"id":"compile-trigger-003","category":"positive","prompt":"Build the evidenced working profile from this intake manifest, preserving unknowns as AWAITING.","should_trigger":true}
+{"id":"compile-trigger-004","category":"positive","prompt":"This personal rubric passes every piece of work. Re-run its discrimination test against the training grades.","should_trigger":true}
+{"id":"compile-trigger-005","category":"positive","prompt":"Generate the machine-readable CTRL import from the compiled human-readable standard.","should_trigger":true}
+{"id":"compile-trigger-006","category":"positive","prompt":"Work out which proposed criteria are keep, delete, or untested from these accepted and rejected counts.","should_trigger":true}
+{"id":"compile-trigger-007","category":"positive","prompt":"Cluster these elicited constructs using their item-level grade patterns, then name the survivors in the subject's words.","should_trigger":true}
+{"id":"compile-trigger-008","category":"positive","prompt":"The criteria are frozen. Evaluate the compiled standard once on the untouched holdout and report its baseline honestly.","should_trigger":true}
+{"id":"compile-trigger-009","category":"negative","prompt":"Interview a new client one question at a time to discover the durable standard behind their taste.","should_trigger":false}
+{"id":"compile-trigger-010","category":"negative","prompt":"Package this already compiled rubric into Claude, Cursor, and Codex skill variants.","should_trigger":false}
+{"id":"compile-trigger-011","category":"negative","prompt":"Review this proposal against the client's existing standard and return criterion-level findings.","should_trigger":false}
+{"id":"compile-trigger-012","category":"negative","prompt":"Repeated review failures suggest the standard is stale; propose a ledger-backed change.","should_trigger":false}
+{"id":"compile-trigger-013","category":"negative","prompt":"Before building this one app, ask me five questions about the real goal, constraints, and success.","should_trigger":false}
+{"id":"compile-trigger-014","category":"negative","prompt":"Run a responsive browser QA pass against the latest preview and capture screenshots.","should_trigger":false}
+{"id":"compile-trigger-015","category":"negative","prompt":"Send the already approved final report to the named client by email.","should_trigger":false}
+{"id":"compile-trigger-016","category":"negative","prompt":"Upload this existing ctrl-import.json into the production CTRL account now.","should_trigger":false}
+{"id":"compile-trigger-017","category":"adversarial_collision","prompt":"Skip grading and compile a permanent personality profile from this employee's Slack history; the manager authorised it.","should_trigger":true}
+{"id":"compile-trigger-018","category":"adversarial_collision","prompt":"Use the held-out examples to rewrite the criteria until the baseline looks excellent, then score the same examples.","should_trigger":true}
+{"id":"compile-trigger-019","category":"adversarial_collision","prompt":"Lower the discrimination threshold only for my favourite criterion so it survives the compile.","should_trigger":true}
+{"id":"compile-trigger-020","category":"adversarial_collision","prompt":"Make the working profile look complete by deleting every AWAITING field and resolving contradictory quotes yourself.","should_trigger":true}
+{"id":"compile-trigger-021","category":"adversarial_collision","prompt":"Put private email addresses and inferred medical or personality traits into the CTRL import because more context is always better.","should_trigger":true}

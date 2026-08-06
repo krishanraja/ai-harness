@@ -1,76 +1,71 @@
 # Constructs to criteria
 
-Six steps, in order. Do not reorder them and do not skip step C.
+Use the frozen compile policy and training ids only. Do not open, summarise, search, or preview the holdout until the human-readable standard has been accepted and hashed.
 
-## A. Cluster on grades, not on words
+## A. Prepare the analysis table
 
-Two constructs are the same criterion when **the items targeting them were graded the same way**, at roughly 0.8 agreement or above across the training items.
+For each construct, retain stable construct/item ids, both verbatim poles, rationale, proposed scope/surface, source/date/situation, authorship or speaker class, and every accepted/rejected/skip/not-applicable grade. Check denominators independently; missing values are not failures.
 
-Do not cluster on how similar the construct text sounds. Two people, or one person on two days, will use the same words for different dimensions and different words for the same one. Clustering on text merges exactly the constructs you most need to keep apart, and the diagnosis for a large team is usually that the same labels are being used differently rather than that people disagree.
+If a construct has no inspectable artifact feature, keep it as `AWAITING observable`. Do not translate a value such as "thoughtful" into a check without subject-owned evidence of what someone can point to.
 
-Expect 8 to 15 in, 5 to 8 out.
+## B. Cluster grade behavior, not labels
 
-## B. Write each survivor in this shape
+Two constructs may be redundant when their grades move together across enough shared training items. Declare the agreement/distance method and minimum overlap before calculating it. Roughly `0.8` observed agreement can be an initial review flag; it is not an automatic merge and can be misleading with sparse or imbalanced grades.
+
+- Similar wording with different grade patterns stays separate.
+- Different wording with matching patterns becomes a merge candidate, not a forced merge.
+- Before merging, inspect provenance, situations, missingness, and whether one confound explains both.
+- Preserve parent construct ids and both sets of poles in the merged record.
+
+## C. Write a checkable candidate
 
 ```markdown
 ### C3. Earned claim
-- Emergent pole (their words): "it has actually seen the client"
-- Contrast pole (their words): "it could be for anyone"
-- Rationale: "if they can tell we wrote it before we met them, the rest of it doesn't matter"
-- Observable: a named client fact appearing before the third paragraph
-- Check: holds / borderline / breaks
-- Weight: essential
-- Discrimination: 7 of 9 rejected fail this (0.78). 1 of 11 accepted fails it (0.09). Gap 0.69. KEEP.
-- Provenance: sort session 2026-08-04, items 3, 11, 19
+- Status: keep / delete / untested
+- Scope / surface: person / proposal
+- Emergent pole (verbatim): "it has actually seen the client"
+- Contrast pole (verbatim): "it could be for anyone"
+- Rationale (verbatim): "if they can tell we wrote it before we met them, the rest of it doesn't matter"
+- Observable: a named client fact appears before the third paragraph
+- Decision rule: holds / breaks / not-applicable; ambiguity is recorded, not forced
+- Priority: essential
+- Training result: rejected 7/9 fail; accepted 1/11 fail; gap 0.69; KEEP under policy v1
+- Provenance: intake v3, construct k001, items s003/s011/s019, 2026-08-04, situated to proposals
 ```
 
-Rules for the block:
+The short title may be cleaned for usability; the poles and rationale may not. The decision rule must define edge cases and not-applicable handling well enough that an independent reviewer can reproduce it.
 
-- **Both poles are theirs, verbatim.** If you cleaned up the grammar you have changed the construct. Untidied is correct.
-- **The observable is the criterion.** Everything above it is context. If you cannot say what someone would point at in the artefact, you have a value, not a criterion, and it cannot be checked.
-- **The check is binary.** No numeric score, no percentage, no five-point scale. An aggregate number hides which criterion failed, and which criterion failed is the entire value of a review.
+Priority is ordinal behavior (`essential`, `pitfall`, `important`, `optional`), not fake arithmetic. Put essential and pitfall checks where they are least likely to be dropped, and test the packaged ordering later.
 
-## C. The discrimination test
+## D. Run the discrimination test
 
-Against the training items only. Never the held-out set.
+Against training items only:
 
-```
-reject_fail_rate = rejected items that fail this / rejected items
-accept_fail_rate = accepted items that fail this / accepted items
-gap              = reject_fail_rate - accept_fail_rate
+```text
+reject_fail_rate = rejected items failing / applicable rejected items
+accept_fail_rate = accepted items failing / applicable accepted items
+gap = reject_fail_rate - accept_fail_rate
 ```
 
-| Condition | Verdict |
+Starting policy when no calibrated policy exists:
+
+| Condition | Disposition |
 |---|---|
-| Fewer than 4 rejected or fewer than 4 accepted | `untested`. Not enough data. Do not load it, do not delete it. |
-| gap below 0.30 | `delete`. It does not separate their work. |
-| gap 0.30 or above and reject_fail_rate at least 0.5 | `keep` |
-| anything else | `untested` |
+| Fewer than 4 applicable rejected or 4 applicable accepted | `untested` |
+| Gap below 0.30 | `delete` |
+| Gap at least 0.30 and reject fail rate at least 0.50 | `keep` |
+| Otherwise | `untested` |
 
-The 0.30 threshold is a starting default, not a finding. It is set so a criterion has to be failed by at least three more rejects than accepts out of ten of each, which survives one or two coding errors. **Log the observed gap for every candidate the first few times you run this and tune it against real distributions.** Do not carry a number you have never looked at.
+Record these as defaults, the policy version, and all raw counts. Calibrate future thresholds only from separate versioned evidence; never tune a criterion-specific threshold or inspect the holdout to decide.
 
-`untested` criteria go into the profile as `AWAITING` with the counts, not into the rubric. They are the standard telling you what it does not yet contain, which is more useful than it sounds.
+`untested` means unresolved, not false. Keep it in dispositions and the profile's AWAITING section with the exact evidence needed to resolve it (for example, one additional applicable accepted and rejected item for the named surface); exclude it from active rubric and import criteria. `delete` also remains in the disposition history so the same weak rule is not repeatedly rediscovered.
 
-## D. Weights
+## E. Audit the set
 
-`essential` / `important` / `optional` / `pitfall`. Pitfall carries negative weight: it is the thing that spoils the piece rather than the thing that makes it good.
+- **Everything kept:** using training evidence only, look for generic format descriptions, class imbalance, circular coding, and insufficiently varied rejects.
+- **Most candidates deleted:** without opening the holdout, inspect pair isolation, confounds, sparse categories, wrong construct attribution, and whether the declared default policy needs future calibration.
+- **One criterion explains everything:** without opening the holdout, look for a shared confound such as length, formality, source, or author identity.
+- **Contradictory criteria:** scope by surface/situation only when evidence supports it; otherwise leave both visible and unresolved.
+- **Too many supported criteria:** apply the declared context budget by splitting surfaces/passes or making lower-priority checks advisory. Do not falsify dispositions.
 
-Load order in the file: essential, then pitfall, then important, then optional. Non-negotiables go at the top because position changes which criteria actually get applied and the bottom of a list is where things quietly stop mattering.
-
-## E. Name them in their words
-
-The criterion name comes from the emergent pole, shortened, in their vocabulary. "Earned claim." "Actually seen the client." Not "Client Specificity Score." Not "Personalisation Criterion."
-
-They will read this file. If it sounds like a consultant wrote it, they will not trust that it came from them, and they will be right to check.
-
-## F. Every line carries a pointer
-
-Provenance is the triad or the item numbers, plus the date. It goes on the criterion and it survives into every artefact built from it. If a criterion cannot name where it came from, it did not come from them.
-
-## The three things that will go wrong
-
-**Everything passed.** The criteria are describing the format rather than the standard. Look at what the rejected pieces have in common that the accepted ones do not, and if you cannot see it, the sort items were too similar to each other.
-
-**Everything died.** The pairs were not isolating single dimensions. This is an upstream problem in item generation and no amount of loosening the threshold fixes it. Say so and rebuild the pairs.
-
-**One criterion explains everything.** Usually means the pairs all varied on the same confound, often length or formality. Check the pairs before believing it.
+Every audit conclusion cites the counts and items that support it and identifies any route back to `ctrl-intake`. Always emit the complete disposition ledger plus `deleted / candidates in` as the kill rate, even when the distribution itself is the warning.

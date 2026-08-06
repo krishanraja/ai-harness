@@ -47,7 +47,7 @@ candidates:
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: web-data-tool, owner: Krish Raja, reviewed: 2026-06-15, freshness_sla_days: 60}
   - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
   - {name: ctrl-check, role: standards-stage-5-7, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
   - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}

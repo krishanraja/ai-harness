@@ -206,6 +206,8 @@ $mindmakerOsTriggerCases = Join-Path $Root 'evals\mindmaker-os-trigger-cases.jso
 $mindmakerOsBehaviorCases = Join-Path $Root 'evals\mindmaker-os-behavior-cases.jsonl'
 $ctrlIntakeTriggerCases = Join-Path $Root 'evals\ctrl-intake-trigger-cases.jsonl'
 $ctrlIntakeBehaviorCases = Join-Path $Root 'evals\ctrl-intake-behavior-cases.jsonl'
+$ctrlCompileTriggerCases = Join-Path $Root 'evals\ctrl-compile-trigger-cases.jsonl'
+$ctrlCompileBehaviorCases = Join-Path $Root 'evals\ctrl-compile-behavior-cases.jsonl'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -352,6 +354,11 @@ $ctrlIntakeTriggers = @(Read-JsonLines -Path $ctrlIntakeTriggerCases)
 $ctrlIntakeBehaviors = @(Read-JsonLines -Path $ctrlIntakeBehaviorCases)
 Test-EvalCategoryMinimums -Records $ctrlIntakeTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ctrl-intake trigger suite'
 Test-EvalCategoryMinimums -Records $ctrlIntakeBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ctrl-intake behavior suite'
+
+$ctrlCompileTriggers = @(Read-JsonLines -Path $ctrlCompileTriggerCases)
+$ctrlCompileBehaviors = @(Read-JsonLines -Path $ctrlCompileBehaviorCases)
+Test-EvalCategoryMinimums -Records $ctrlCompileTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ctrl-compile trigger suite'
+Test-EvalCategoryMinimums -Records $ctrlCompileBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ctrl-compile behavior suite'
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
