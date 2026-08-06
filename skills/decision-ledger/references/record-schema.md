@@ -70,7 +70,9 @@ events:
     source_ref: "final authorization"
 ```
 
-Never replace `rationale`, `alternatives`, `dissent`, or `tradeoffs` in place. A later interpretation belongs in an event, review artifact, or replacement decision.
+Never replace `rationale`, `alternatives`, `dissent`, or `tradeoffs` in place. A later interpretation belongs in an event, review artifact, or replacement decision and is labelled hindsight/new evidence so it cannot be mistaken for the original reasoning.
+
+A reversal is represented by a new active decision record for the new call plus an append-only reversal/status event on the original. Both records carry reciprocal links and are read back; a reversed original without a new active call is incomplete.
 
 ## Collision rules
 
@@ -85,6 +87,7 @@ Never replace `rationale`, `alternatives`, `dissent`, or `tradeoffs` in place. A
 ## Privacy and integrity
 
 - Redact credential values, tokens, cookies, private keys, and unnecessary personal data before persistence.
+- For a lawful privacy request concerning an existing record, prefer an append-only reversal/supersession plus an authorised redacted, metadata-only, or excluded view when that satisfies the request. Do not confuse view redaction with deletion of canonical history; exceptional erasure follows the separately authorised recovery/link-repair process.
 - Use stable symbolic references for secrets or private source systems.
 - Preserve source hashes, commit IDs, record IDs, or immutable URLs when available.
 - A successful write without authoritative readback leaves the operation `proposed-only` or `inconclusive`.

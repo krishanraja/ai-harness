@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twenty-one candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twenty-two candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 21 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 21 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`).
+- Repository-enforced minimum-sized trigger and behavior suites: 22 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, `decision-ledger`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 22 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, `decision-ledger`).
 
 ## Rating method
 
@@ -43,7 +43,7 @@ Current measurable state:
 | `verification-loop` | Always-on post-execution validator | Strong | current | active drift only | absent | Independent suite pass: 32/32 triggers, 34/34 behaviors | Clean release, artifact-specific canary, and parity |
 | `harness-maintainer` | Harness governance/release | Strong | current | exact Codex canary only | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors plus 23/23 regression | Verify canary discovery/behavior and complete controlled release evidence |
 | `evidence-research` | Decision-grade research | Strong after research-contract, privacy, authority, and handoff hardening | current; reviewed 2026-08-05 | absent | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors | Live dynamic-page/PDF/private-data canary with citation readback, injection resistance, owner handoff, and parity |
-| `decision-ledger` | Consequential decision memory | Strong | current | absent | absent | Suite designed | Non-production migration, authenticated adapters, lifecycle/security suite, redacted readback, rollback |
+| `decision-ledger` | Consequential decision memory | Strong after routing, lifecycle, retry, assumption, snapshot, privacy, and deletion-alternative hardening | current; reviewed 2026-08-05 | absent | absent | Independent suite pass: 21/21 triggers, 27/27 behaviors in disjoint complete batches | Approved non-production migration, authenticated server adapters, live lifecycle/privilege/security/redaction/readback/rollback proof, client canary, and parity |
 | `mindmaker-os` | Live operating-state router | Strong, thin claim-authority router after live-state, closure, reconciliation, and handoff hardening | current; reviewed 2026-08-05 | invalid legacy directories; no exact active copy | enabled stale monolith, 2026-07-07 | Independent suite pass: 21/21 triggers, 23/23 behaviors | Live Supabase/n8n/VPS/deploy/closure/self-heal canaries, architecture-doc reconciliation, thin-copy canary, and parity |
 | `mindmaker` | Commercial context | Strong, lean router plus one-level canon/product/freshness references | current; reviewed 2026-08-05 | exact staged archive plus active drift | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and source-conflict canary |
 | `content-corpus` | Channel context | Strong, status-aware router plus channel references | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled stale 2026-06-10 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Baseline comparison, clean package, and named-channel canary |

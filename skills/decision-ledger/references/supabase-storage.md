@@ -54,13 +54,17 @@ Use the canonical snapshot exporter supplied by the configured repository. If it
 is unavailable, do not improvise an exporter. The reviewed exporter reads only
 the allowlisted snapshot view, rejects unexpected fields and high-confidence
 secret patterns, sorts by stable decision key, and emits UTF-8/LF JSON without a
-volatile export timestamp. Identical canonical rows must produce identical bytes.
+volatile generation or export timestamp anywhere in the output. Identical canonical rows must produce identical bytes.
+
+Every snapshot result explicitly reports that rows were sorted by `decision_key` and no generation/export timestamp or other volatile field was emitted, then runs two exports over the same allowlisted rows in different source order and compares the full bytes. Sorting alone is not sufficient proof.
 
 - `excluded`: emit no row.
 - `metadata_only`: emit key, status, scope, digest, and null redacted text.
 - `summary`: emit only the explicitly authored redacted title, summary, and
   revisit text.
 - `personal` scope: always excluded from Git, regardless of requested policy.
+
+If a supposedly redacted row contains a forbidden field or high-confidence credential pattern, reject the full export and leave the prior snapshot bytes untouched. Report only the stable decision key, field/type, and canonical source event id. Never locally redact or emit a cleaned derivative, because that would diverge from the canonical event; require a corrected append-only canonical snapshot event before regenerating.
 
 Inspect the diff before committing a new snapshot. A digest proves the snapshot's
 relationship to a canonical event head; it does not make the snapshot canonical.
