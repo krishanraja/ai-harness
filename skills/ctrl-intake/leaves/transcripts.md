@@ -6,7 +6,7 @@ What to do with call recordings, meeting notes, Fireflies or Granola transcripts
 
 **A transcript is a rich source of candidates and a poor source of truth.**
 
-This is not a caution, it is the operating rule. What people say about their own behaviour and what they do diverge by 10 to 30 percent on anything they feel judged about. The mechanism splits in two: some of it is conscious impression management, which anonymity reduces, and some of it is genuine mis-remembering, which persists under full anonymity and cannot be designed away.
+This is not a caution, it is the operating rule. What people say about their own behaviour can diverge from how they grade concrete work. Use transcript material to choose what to test, not as proof of a standing preference.
 
 So a transcript tells you what to test. It does not tell you what is true.
 
@@ -44,7 +44,7 @@ Nothing in that sentence was misquoted. The quote was accurate, the date was rig
 
 Three things, and they are worth the read:
 
-- **Prior knowledge, with the consequence attached.** Watch what they do, not what they claim. Someone who built their own scheduled briefing between two calls is an expert and scaffolding will read as condescension. Someone who has never opened the settings page is a novice and skipping the explanation will lose them. Grade each domain expert or novice and write the consequence next to it. Scaffolding that helps a beginner measurably hurts an expert, and prior knowledge is the individual difference that actually predicts this, unlike every trait model.
+- **Prior knowledge, with the consequence attached.** Watch what they do, not what they claim. Someone who built their own scheduled briefing may need less scaffolding in that domain; someone who has never opened the settings page may need more. Record the evidence, domain, consequence to test, and date rather than assigning a global expert/novice identity.
 - **Decision rights.** Who signs off what. This is usually stated plainly and rarely wrong.
 - **Delivery constraints already discovered.** Which tool, which channel, what was already tried and failed. Write these down with the date so nobody rediscovers them.
 
@@ -66,7 +66,7 @@ That is a four-item sort. It is thin and it is real, which beats thick and inven
 
 ## Pasted writing
 
-If they paste real writing, that is ground truth for voice and it beats anything they say about their own style.
+If they paste writing with known authorship, it is evidence of what they produced in that situation. It is stronger voice evidence than abstract adjectives, but it is not automatically current, preferred, or authorised for every audience.
 
 Take from it: sentence shapes with real examples, verbatim sentences worth keeping, the words they actually use, the constructions that never appear. Do not take adjectives. Do not build a dimension table of enums. A voice standard is exemplars, shapes and a kill list, and the moment it becomes a set of labels it has stopped describing anyone in particular.
 

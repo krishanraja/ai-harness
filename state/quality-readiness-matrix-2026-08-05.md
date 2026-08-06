@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Sixteen candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Seventeen candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 16 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 16 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`).
+- Repository-enforced minimum-sized trigger and behavior suites: 17 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 17 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`).
 
 ## Rating method
 
@@ -56,7 +56,7 @@ Current measurable state:
 | `ux-testing-agent` | Evidence-first UX validator | Strong after revision, mutation, injection, evidence, and owner-boundary hardening | current; reviewed 2026-08-05 | invalid legacy directories; mandated `.Codex` path absent; no exact active copy | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors | Revision-matched preview, designated auth, injected-content, safe action, responsive/accessibility, fix-handoff, and parity canaries |
 | `tools-access` | Runtime authentication contract | Strong after access-versus-authority, tenant, session, injection, exposure, and handoff hardening | current; reviewed 2026-08-05 | invalid/drifted legacy copies; no exact active copy | enabled legacy copy, 2026-06-13 | Independent suite pass: 21/21 triggers, 23/23 behaviors | Non-secret per-service identity, multi-account, OAuth, fallback, ambiguous-readback, and parity canaries; remediation remains deferred |
 | `apify` | Narrow web-data tool | Good | current; due 2026-08-14 | absent | enabled, 2026-06-15 | Structural | Current primary API provenance, helper tests, actor drift, empty-success, cap/cost, pagination, and write-boundary suite |
-| `ctrl-intake` | Standards stages 1-2 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | Input/handoff schema, incomplete interview, conflicting examples, privacy, and anchoring-bias suite |
+| `ctrl-intake` | Standards stages 1-2 | Strong after consent, privacy, holdout, facilitation, evidence, and handoff hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised live/self-serve/thin/confound/withdrawal canaries, participant confirmation, compile handoff, and parity |
 | `ctrl-compile` | Standards stage 3 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | Explicit authority plus malformed intake, sparse evidence, leakage, rubric-size, and downstream schema suite |
 | `ctrl-build` | Standards stage 4 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | Package schema, reference integrity, client variants, and no-restatement regression suite |
 | `ctrl-check` | Standards stages 5-7 | Good | current | exact staged archive; no exact active copy | enabled, 2026-08-05 | Structural | External-standard contract, fresh-context judging, missing rubric, bias, provenance, and ledger-write suite |

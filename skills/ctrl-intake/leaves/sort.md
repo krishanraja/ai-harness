@@ -31,7 +31,7 @@ Ten of the thirty never train anything. They are the test.
 > Most of these are deliberately mediocre. Some of them are yours. Rejecting a lot of them is the normal result and it is the useful one.
 > Some of these are a test and I will not tell you which. There is no right answer and nobody else sees this.
 
-Every clause is doing work. Pre-normalising the reject is the highest-efficacy debiasing move measured. "Some of them are yours" stops them pattern-matching for the trap. "Nobody else sees this" is the anonymity assurance, and it has to be specific about who does not see it, because vague reassurance measurably underperforms.
+Each clause has a purpose: make rejection safe, reduce trap-detection, disclose the hidden test without identifying items, and state the actual audience. Adapt only when the consent and privacy reality differs; never promise anonymity that the workflow does not provide.
 
 ## The question, every time
 

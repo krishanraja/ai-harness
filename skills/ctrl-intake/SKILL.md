@@ -1,54 +1,107 @@
 ---
 name: ctrl-intake
-description: Elicit a person's actual standard by having them grade real work, never by asking them to describe it. Use when setting up a new client or colleague, running an onboarding or discovery session, capturing how someone judges work, working out what good looks like to them, building a working profile, processing call transcripts or meeting recordings into usable context, or when an AI output does not sound like someone and you need to find out what they actually want. Also use before writing any skill, project instruction, or profile for a named individual. Trigger on "set up a new client", "onboard", "discovery session", "what does good look like to them", "build their profile", "capture their standard", "process this transcript", "it does not sound like them", "work out what they want", "kick off with", "intake". Do not write a profile for anyone without running this skill first. Guessing produces a profile that is confidently wrong, and they will see it before you do.
+description: "Elicits a named person's reusable quality or taste standard from their grading of real work. Use for durable standards onboarding, triadic elicitation, repertory-grid sessions, self-serve sorts, approved/rejected artifact comparison, transcript-to-candidate extraction, or repairing a personal profile that inferred rules the subject never established. Also trigger when someone asks to skip grading, infer personality or permanent rules from one source, reuse private material without scope, contaminate a holdout, or supply the desired construct; this skill enforces the refusal. Do not use for a one-task goals-and-constraints interview (`take-the-brief`), compiling an existing intake (`ctrl-compile`), packaging (`ctrl-build`), reviewing (`ctrl-check`), or ledger-based standard changes (`ctrl-capture`). Last reviewed 2026-08-05."
 ---
 
 # CTRL Intake
 
-This is stage 1 and 2 of the chain. It produces the raw material every later stage depends on, and it is the only stage where a human is in the room.
+Stages 1 and 2 of the standards chain: INGEST and SORT. Produce evidence and graded distinctions, never the profile, rubric, or standing rules.
 
-You are not collecting opinions. You are collecting graded behaviour. What someone says about their own standard and what they actually do diverge by 10 to 30 percent on anything they feel judged about, and one published study found participants self-reporting 65 percent on a dimension the logs put at 47 percent. Same people, same study. Design around that gap rather than hoping it is not there.
+The subject must make every judgment. An AI may facilitate neutral questions one at a time, randomise items, record exact words, validate schemas, and preserve gaps. It may not answer for the subject, name the dimension in advance, infer personality, or convert ungraded material into their standard.
 
-## Which file to read
+## Intake contract
 
-| The situation | Read |
+Before reading source material, persist:
+
+```text
+INTAKE
+SUBJECT + OWNER: [whose judgment, and who can approve its standard]
+PURPOSE + SURFACES: [reusable work types this may govern]
+AUTHORISED SOURCES: [exact files/folders/date range and authorship class]
+PROCESSING CONSENT: [what may be derived and retained]
+AUDIENCE: [who may see raw and derived outputs]
+PRIVACY: [redaction/pseudonymisation and third-party exclusions]
+RETENTION / WITHDRAWAL: [duration and derivative handling]
+METHOD: [live / self-serve sort / transcript candidates / thin comparison]
+CORPUS SPLIT: [training/elicitation versus untouched holdout]
+STATUS: [draft / provisional / ready for compile]
+```
+
+Subject consent to take part is not consent to publish, share broadly, train unrelated systems, or profile other speakers. A manager may supply authorised role/task requirements, clearly labelled as the manager's requirements; those are not the employee's personal judgment.
+
+## Route to the right method
+
+| Situation | Read |
 |---|---|
-| They will sit for a live session and can send you real work first | `leaves/live-session.md` |
-| They will not sit for a session, or you have no facilitator | `leaves/sort.md` |
-| You have call recordings, meeting transcripts, or their writing, and nothing else yet | `leaves/transcripts.md` |
+| Subject can grade real work in a facilitated session | `leaves/live-session.md` |
+| Subject needs a self-serve or asynchronous instrument | `leaves/sort.md` |
+| Transcripts, recordings, emails, or writing exist before grading | `leaves/transcripts.md` |
 
-Most engagements need two. Transcripts first to build the candidate pool, then a live session or a sort to grade it. Read them in that order. Never skip straight from transcripts to a profile.
+Usually extract candidates from authorised transcripts first, then validate them through a live session or sort. Transcript candidates never become rules by themselves.
 
-## Three rules that always apply
+## Evidence invariants
 
-**1. A transcript produces candidates. Only grading produces rules.**
-Anything you extract from something someone said is a candidate, marked situated, carrying the exact quote and the situation it was said in. It is not a preference until they have separated two pieces of work on it. This is the single rule that prevents the failure this skill exists to prevent: a comment about one document becoming a standing rule about all documents.
+1. **Grading establishes distinctions.** Statements, writing, and behavior produce candidates or exemplars. A reusable criterion needs the subject to distinguish work on that dimension.
+2. **Never supply the construct.** Ask which items group together and why. If the facilitator names `clarity`, the response is anchored to the facilitator's judgment.
+3. **Situation is part of the evidence.** Preserve source, date, speaker/authorship, verbatim span, situation, sensitivity, and allowed audience.
+4. **Contradictions remain.** Never choose, average, or silently reconcile them before grading.
+5. **AWAITING is a result.** State what is not established and the observation that would fill it.
+6. **Holdout stays untouched.** Select it before analysis, keep whole matched pairs together, and never use it to write candidates, criteria, or examples.
+7. **Unknown authorship stays unknown.** Distinguish `produced by subject`, `signed off by subject`, `received`, and `uncertain`. Only known-own text can evidence their writing mechanics.
+8. **Skips are missing data.** Honour skip/withdrawal, exclude it from scoring, and never infer rejection.
 
-**2. Never supply the dimension.**
-Do not offer them a construct, not even to help them along. The moment you name the axis, you are measuring your judgment instead of theirs. Ask which two of three go together and let them tell you why. If they stall, ask for the two most similar and what the third one is instead.
+## Corpus and holdout viability
 
-**3. An empty field is honest. An invented one is not.**
-Any field you cannot evidence reads `AWAITING` with one line on what would fill it. It does not read as a guess and it does not silently disappear. A flagged gap is useful and someone will fill it. An invented rule spreads, and the person it is about is the one who finds it.
+Do not use a fixed holdout count that consumes the corpus.
 
-## What you produce
+- For a full measured engagement, collect enough work to leave roughly 10 to 14 varied items for elicitation/training and a separate 6 to 10 item holdout, keeping matched pairs intact.
+- With 10 to 14 total items, reserve a smaller untouched subset that leaves viable elicitation material and mark the downstream baseline limited.
+- With four items, run a thin comparison or collect more. Do not claim a measured baseline, and output an explicit `AWAITING` list naming every construct, contrast, surface, provenance, or holdout gap still needed.
+- If no honest untouched set exists, set `holdout_status: none` and `STATUS: provisional`. Never train and test on the same work.
 
-Write into a folder named for the person, `<firstname>-<lastname>/`:
+## Workflow
 
-- `evidence.jsonl`, one row per thing they actually said or did, with the verbatim quote, the source, the date, and whether it was situated
-- `constructs.md`, the dimensions they judge on, in their words, with both poles
-- `grades.jsonl`, every artefact you showed them and what they said about it
-- `session-notes.md`, what happened, what you could not get, what to ask next time
+1. Confirm the intake contract and authorised storage before source access.
+2. Inventory artifacts with stable ids, provenance, authorship class, situation, sensitivity, and eligibility for grading/holdout.
+3. Create the corpus split before reading content deeply. Record the randomisation or selection method.
+4. Extract transcript candidates only when applicable; retain quotes and leave contrast poles empty.
+5. Run neutral triads, matched-pair sorts, or a thin comparison. Ask one question, wait, and preserve exact wording.
+6. For each distinction, ask for the subject's contrast pole, why it matters, and what someone could point at in work to see it present or absent. Keep rationale separate from observable.
+7. Use manipulation checks to detect confounded pairs. If two of three fail, stop the compile handoff, preserve responses, redesign affected pairs, and rerun.
+8. Validate schemas, unique ids, source links, holdout isolation, consent scope, AWAITING fields, contradictions, and withdrawal state.
+9. Freeze the raw intake version and hand a manifest to `ctrl-compile`.
 
-Nothing else. Do not write a summary document. The summary is what the next stage produces and writing one now anchors it on your reading rather than their grading.
+## Privacy and edge cases
 
-## When you cannot get something
+- Confidential or third-party content: exclude it or create an authorised redacted derivative. Keep source access separate from derived outputs and record audience, retention, and deletion boundary.
+- Multi-speaker recording: name the subject, separate speakers, exclude uninvolved data, and store only necessary extracts.
+- Source withdrawal: identify derived rows and holdout effects, remove or quarantine through the agreed exact path, preserve an audit event, and downgrade evidence status.
+- Downstream sharing: name exact recipient/audience and fields; pseudonymise or redact nonessential data; require sharing approval.
+- Case-study/publication request: treat it as a separate purpose and action. Prepare a deidentified aggregate with reidentification risk, then require subject and publication approval.
+- Confounded item pair: discard its inference, not the participant response. Preserve the evidence and rebuild the instrument.
 
-Say which field you could not fill and why. Do not reason from what you did get to what you did not. Observed preferences are not the same thing as the dimensions someone judges on, and the gap between them is exactly where a confidently wrong profile comes from.
+## Outputs and handoff
 
-## What comes next
+Write only inside the authorised subject folder:
 
-Run `ctrl-compile` on this folder. It turns constructs into criteria and tells you which ones survive a discrimination test.
+```text
+<subject>/
+  intake-manifest.json
+  evidence.jsonl
+  constructs.md
+  grades.jsonl
+  session-notes.md
+```
 
-## Keywords
+The manifest records schemas/versions, subject/owner, purpose/surfaces, authorised-source classes, privacy/retention, item ids, split and holdout status, manipulation-check result, contradictions, AWAITING fields, withdrawn/quarantined ids, and exact files/hashes handed to compile.
 
-intake, onboarding, discovery, elicitation, repertory grid, triadic, working profile, standard, taste, judgment, what good looks like, client setup, kick off, transcript, meeting notes, sort, grading
+Preserve raw evidence immutably as a versioned input; corrections create a new version or audit event rather than rewriting history. Do not write a summary or profile in this stage.
+
+## Chain boundaries
+
+- One task's real goal, why, constraints, success, and handoff interview: `take-the-brief`; do not create a durable person profile.
+- Completed intake to tested criteria/profile: `ctrl-compile`; keep holdout isolated.
+- Existing ledger or repeated gate evidence proposing a change: `ctrl-capture`; use fresh intake only when new elicitation is approved and genuinely required.
+- Known-authorship voice mechanics: hand a bounded derived packet to the relevant voice owner only with authorised purpose/audience; candidate judgment rules still require grading.
+
+Completion means the evidence packet is authorised, provenance-complete, schema-valid, honestly limited, holdout-safe, and ready for `ctrl-compile`. It does not mean the person's standard has already been inferred.

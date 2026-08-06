@@ -4,15 +4,15 @@ Ninety minutes, one person, their own work in front of them. This is the highest
 
 ## The precondition, and it is hard
 
-**Before the session they send 10 to 14 real pieces of their own past work, split into two piles: would sign this off today, and would not.** No explanation, no annotation. Just two piles.
+**Before the session, collect enough real work to support both elicitation and an untouched holdout. Aim for 10 to 14 varied elicitation/training pieces plus 6 to 10 held-out items when the corpus permits.** The subject separates supplied work into would-sign-off and would-not-sign-off piles without explaining them yet.
 
 If they arrive without the piles, reschedule. Do not run this on description alone. Asking an expert what makes good work produces a plausible, generic, useless answer, because the knowledge is not consciously available on demand. It only surfaces against specific artefacts. Without the piles you have a conversation, not an elicitation, and you will write the rubric yourself and attribute it to them.
 
-**Reserve the held-out set on day one.** Take ten pieces out of their piles at random before you look at anything, and never show them in the session. That is the only honest measurement that will ever exist. Reserve them on day one or there is no measurement, only usage.
+**Reserve the held-out set before analysis.** Keep matched pairs intact and never show held-out items in elicitation. Do not reserve a fixed ten when that would starve the session: with only 10 to 14 total pieces, retain a smaller viable untouched subset and mark the baseline limited; with no untouched set, mark it provisional.
 
-## Do not send an agenda
+## Do not pre-name the constructs
 
-An agenda invites them to prepare a theory of their own method. The whole point of the instrument is to bypass that. Concurrent verbalisation while looking at something does not alter how someone thinks. Asking them to explain, justify or introspect produces a reconstruction, and the reconstruction is contaminated.
+Send logistics, purpose, consent, privacy, and what material to bring. Do not send candidate dimensions, held-out identities, or a theory of their method; that anchors the distinctions. Ask for observable reasons while the subject examines real work rather than abstract self-description.
 
 ## The opening, say roughly this
 
@@ -36,7 +36,7 @@ Then the move the whole session turns on:
 
 That gap is the tacit judgment you are hunting. Present may contrast with performing, not with absent. Careful may contrast with slow, not with careless. A construct with a dictionary antonym as its contrast pole has not been elicited, it has been guessed, and the next stage will reject it.
 
-Expect 6 to 9 constructs in 25 minutes, 8 to 15 across the session. If two constructs match above roughly 80 percent, they are one construct and you will merge them later.
+Treat 6 to 9 early constructs and 8 to 15 across a session as planning heuristics, not success targets. Similar wording does not prove two constructs are the same; `ctrl-compile` tests whether their item-level grades actually move together.
 
 Fallbacks when a triad stalls: compare two and ask for a contrasting third, or describe one in a single word and ask for its opposite.
 
@@ -74,7 +74,7 @@ Say this before you start, and mean it:
 
 > Most of these are deliberately mediocre. Rejecting a lot of them is the normal result and it is the useful one.
 
-That preamble is not politeness. Pre-normalising the undesirable answer is the highest-efficacy debiasing move measured across 121 experiments, and without it you get the polite answer.
+That preamble is not decoration. It reduces the social pressure to approve deliberately mediocre work. Record the actual reject/skip pattern rather than assuming the preamble worked.
 
 ## Minutes 70 to 90: gaps only
 
@@ -88,9 +88,9 @@ If constructs are still thin, ask for six specific incidents. Not the method, sp
 ## Never, in a session
 
 - Never ask them to rate their own confidence at anything.
-- Never ask about learning style or personality type. Learning styles are dead at an effect size of 0.04 and personality matching has no controlled evidence of improving any outcome.
+- Never turn learning-style or personality labels into a work standard. They are not observed artifact criteria and create broad personal claims this method cannot establish.
 - Never ask them to describe their working style in the abstract. People are poor witnesses to their own habits.
-- Never let an AI run the elicitation. Models elicit less than half of implicit requirements and are worst at exactly the style-related dimensions this session exists to surface. Use the AI to run the grading, not the eliciting.
+- Never let an AI answer the elicitation. An AI may facilitate neutral questions one at a time and record responses, but the subject must grade, name poles, and supply observables.
 - Never end without the next thing scheduled.
 
 ## Budget, honestly
