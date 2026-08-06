@@ -112,6 +112,8 @@ Do not point all clients directly at the Git working tree. Client-specific cache
 
 After the updater passes manual canaries, run a read-only release check daily and a full drift audit weekly. Downloading and staging can be automatic. Replacement, first installation on a new surface, activation, deletion, and rollback-policy changes remain approval-gated until a stable history justifies narrowing those gates.
 
+Every present or future harness-maintenance schedule must explicitly test complete supporting-file preservation, repeat-identical standard and Perplexity transport layouts, and paired-resource loading for routes that require multiple files. While the `ctrl-intake` voice route exists, its scheduled regression must prove that `leaves/voice.md` and `leaves/transcripts.md` load together and preserve authorization, withdrawal, exact-owner handoff, one-question behavior, and the required stop condition. Read the stored schedule prompt back after creation or revision; a generic freshness instruction does not satisfy this invariant.
+
 Use Windows Task Scheduler under Krish's normal account with a dedicated script path, least privilege, a single-instance lock, bounded runtime, and logs outside the skill directories. Do not store a GitHub token in the task command; use the authenticated GitHub CLI or Windows Credential Manager.
 
 ## Claude account: web and Desktop

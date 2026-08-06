@@ -73,6 +73,18 @@ Build from a clean commit. Smoke-test one canary client and record the source co
 
 Log failures and corrections. Route possible standard changes through `ctrl-capture`; require a named human decision and a regression test before release.
 
+## Scheduled-audit invariant
+
+Every future recurring harness audit, freshness check, or parity schedule must carry the portable-resource edge case explicitly; inheriting a generic "check skills" instruction is not sufficient. Its prompt and acceptance criteria must require:
+
+- complete supporting-file preservation for every multi-file skill, including named `references/` and `leaves/` paths;
+- repeat-identical builds of both transport layouts: the standard `.skill` archive with a top-level skill directory and the Perplexity ZIP with `SKILL.md` at the archive root;
+- a held-out paired-resource canary whenever a route depends on more than one file, proving every required file loaded together and that the route's authority, handoff, and stop conditions survived packaging;
+- an explicit `ctrl-intake` voice-route regression while that route exists: load that skill's voice and transcript leaves together, retain authorization and withdrawal boundaries, name the exact downstream voice owner, ask one question, and stop when the contract requires it;
+- separate local byte-parity evidence from cloud inventory and behavioral evidence, without treating names or update dates as hashes.
+
+When creating or revising a harness schedule, read the saved prompt back and reject the schedule as incomplete if any applicable item is absent. This invariant applies to harness-maintenance schedules, not unrelated calendar events or business automations.
+
 ## Missing-skill test
 
 Propose a new skill only if all answers are yes:
