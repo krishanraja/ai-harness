@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apify Operator"
+  short_description: "Select and run Apify Actors with bounded spend"
+  default_prompt: "Use $apify to prepare or operate this Apify collection with current Actor facts, explicit spend authority, provenance, and verification."

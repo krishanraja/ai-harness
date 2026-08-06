@@ -45,7 +45,7 @@ candidates:
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: apify, role: web-data-tool, owner: Krish Raja, reviewed: 2026-06-15, freshness_sla_days: 60}
+  - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}

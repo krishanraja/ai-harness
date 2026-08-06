@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twenty-three candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates and now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -13,9 +13,9 @@ Current measurable state:
 - Enabled non-canonical user skills in Claude Cloud: 16.
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
-- Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 23 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-foundations`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, `decision-ledger`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 23 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-foundations`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, `decision-ledger`).
+- Candidates within 10 days of review expiry: 0.
+- Repository-enforced minimum-sized trigger and behavior suites: all 24 canonical skills.
+- Complete independent trigger/behavior evidence on reviewed suites: all 24 canonical skills.
 
 ## Rating method
 
@@ -55,7 +55,7 @@ Current measurable state:
 | `ux-foundations` | Narrow generic UX reference | Strong after primary-source, authority-class, unit, exception, experiment, privacy, and handoff hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-07-03 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors in disjoint complete batches | Live current-source outage, confidential artifact, web/Apple/Android, design collision, implementation/QA handoff, and parity canaries |
 | `ux-testing-agent` | Evidence-first UX validator | Strong after revision, mutation, injection, evidence, and owner-boundary hardening | current; reviewed 2026-08-05 | invalid legacy directories; mandated `.Codex` path absent; no exact active copy | absent | Independent suite pass: 21/21 triggers, 23/23 behaviors | Revision-matched preview, designated auth, injected-content, safe action, responsive/accessibility, fix-handoff, and parity canaries |
 | `tools-access` | Runtime authentication contract | Strong after access-versus-authority, tenant, session, injection, exposure, and handoff hardening | current; reviewed 2026-08-05 | invalid/drifted legacy copies; no exact active copy | enabled legacy copy, 2026-06-13 | Independent suite pass: 21/21 triggers, 23/23 behaviors | Non-secret per-service identity, multi-account, OAuth, fallback, ambiguous-readback, and parity canaries; remediation remains deferred |
-| `apify` | Narrow web-data tool | Good | current; due 2026-08-14 | absent | enabled, 2026-06-15 | Structural | Current primary API provenance, helper tests, actor drift, empty-success, cap/cost, pagination, and write-boundary suite |
+| `apify` | Approval-gated web-data operator | Strong after current-source, live-selection, spend, retry, pagination, privacy, provenance, helper, and handoff hardening | current; reviewed 2026-08-05 | absent | enabled older 2026-06-15 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors in disjoint complete batches; 8/8 offline helper tests | Approved low-cap non-production Actor run with live identity/build/schema/pricing, billing/dataset/empty/failure readback, downstream non-mutation proof, canary, and parity |
 | `ctrl-intake` | Standards stages 1-2 | Strong after consent, privacy, holdout, facilitation, evidence, and handoff hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised live/self-serve/thin/confound/withdrawal canaries, participant confirmation, compile handoff, and parity |
 | `ctrl-compile` | Standards stage 3 | Strong after admission, leakage, policy, owner, privacy, baseline, import, and handoff hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised real-artifact compile, corrupt-manifest/leakage/withdrawal canaries, subject acceptance, pinned target schema, deterministic regeneration, one-open holdout, downstream readback, and parity |
 | `ctrl-build` | Standards stage 4 | Strong after runtime/eval separation, provenance, privacy, adapter, deterministic-build, and release-boundary hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors in disjoint complete batches | Real accepted-Compile package, deterministic rebuild, target validators, injected/private fixtures, subject acceptance, independent check, per-surface canaries, and parity |
@@ -86,10 +86,9 @@ The durable lessons in `C:\Users\krish\ctrl-corpus` belong primarily as conditio
 
 ## Release order
 
-1. Finish independent evaluation of the remaining candidate skills, prioritising the CTRL chain and remaining narrow reference/tool skills.
-2. Resolve only the genuinely user-owned remaining route decisions, including whether `morning` has a distinct retained purpose and any later purge/retirement set.
-3. Build deterministic packages from a clean commit.
-4. Ask Krish to choose one local canary surface and approve its exact activation/relink action.
-5. Verify discovery, routing, behavior, and rollback on the canary.
-6. Present the cloud replacement/disablement set for explicit approval.
-7. Roll out one surface at a time; never infer parity from names or dates.
+1. Resolve only the genuinely user-owned remaining route decisions, including whether `morning` has a distinct retained purpose and any later purge/retirement set.
+2. Build deterministic packages from a clean commit.
+3. Ask Krish to choose one local canary surface and approve its exact activation/relink action.
+4. Verify discovery, routing, behavior, and rollback on the canary.
+5. Present the cloud replacement/disablement set for explicit approval.
+6. Roll out one surface at a time; never infer parity from names or dates.

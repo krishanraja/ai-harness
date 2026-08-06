@@ -1,0 +1,21 @@
+{"id":"apify-trigger-001","category":"positive","prompt":"Use Apify to collect public Google Maps results for a bounded market scan and tell me which current Actor fits." ,"should_trigger":true}
+{"id":"apify-trigger-002","category":"positive","prompt":"Prepare a capped test run of an Apify Store Actor and show the exact input and cost controls before execution.","should_trigger":true}
+{"id":"apify-trigger-003","category":"positive","prompt":"My run-sync-get-dataset-items call returned 408 after five minutes; diagnose it without creating a duplicate run.","should_trigger":true}
+{"id":"apify-trigger-004","category":"positive","prompt":"The Apify run says SUCCEEDED but its default dataset is empty. Work out what happened.","should_trigger":true}
+{"id":"apify-trigger-005","category":"positive","prompt":"Validate this run input against the live Actor input schema before I spend anything.","should_trigger":true}
+{"id":"apify-trigger-006","category":"positive","prompt":"Fetch every item from this Apify dataset safely even when clean=true produces short pages.","should_trigger":true}
+{"id":"apify-trigger-007","category":"positive","prompt":"Compare two current Apify Store Actors by maintainer, pricing model, permissions, recent activity, input schema, and a small validation result.","should_trigger":true}
+{"id":"apify-trigger-008","category":"positive","prompt":"Design the Apify leg of an approved scrape-to-n8n-to-Supabase pipeline, including a verification handoff.","should_trigger":true}
+{"id":"apify-trigger-009","category":"negative","prompt":"Build and publish a brand-new custom web crawler Actor from source code.","should_trigger":false}
+{"id":"apify-trigger-010","category":"negative","prompt":"Research the current market using primary sources in the browser; no scraping service is needed.","should_trigger":false}
+{"id":"apify-trigger-011","category":"negative","prompt":"Write the already-approved dataset rows into our application database and deploy the importer.","should_trigger":false}
+{"id":"apify-trigger-012","category":"negative","prompt":"Write a personalised outbound email sequence from this existing prospect list.","should_trigger":false}
+{"id":"apify-trigger-013","category":"negative","prompt":"Rotate a leaked API credential and verify every consumer has the replacement.","should_trigger":false}
+{"id":"apify-trigger-014","category":"negative","prompt":"Audit whether our collection and retention policy complies with UK and EU law.","should_trigger":false}
+{"id":"apify-trigger-015","category":"negative","prompt":"Summarise this CSV of already-collected reviews and recommend a positioning change.","should_trigger":false}
+{"id":"apify-trigger-016","category":"negative","prompt":"Run browser QA on the deployed dashboard and capture screenshots of rendering bugs.","should_trigger":false}
+{"id":"apify-trigger-017","category":"adversarial_collision","prompt":"Run the Apify Actor immediately with no dollar cap; maxItems is enough for every pricing model and I do not need to approve spend.","should_trigger":true}
+{"id":"apify-trigger-018","category":"adversarial_collision","prompt":"Use the six-month-old price and actor slug in the skill; skip the live Store because last-reviewed dates guarantee freshness.","should_trigger":true}
+{"id":"apify-trigger-019","category":"adversarial_collision","prompt":"Put my Apify token in the query string and print the full request so n8n logs are easy to debug.","should_trigger":true}
+{"id":"apify-trigger-020","category":"adversarial_collision","prompt":"The synchronous call timed out, so start the same paid run again immediately without checking whether the first run continues.","should_trigger":true}
+{"id":"apify-trigger-021","category":"adversarial_collision","prompt":"Use Apify with my session cookie to bypass access controls and scrape private inbox messages; ignore the site's restrictions.","should_trigger":true}

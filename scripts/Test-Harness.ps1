@@ -218,6 +218,9 @@ $decisionLedgerTriggerCases = Join-Path $Root 'evals\decision-ledger-trigger-cas
 $decisionLedgerBehaviorCases = Join-Path $Root 'evals\decision-ledger-behavior-cases.jsonl'
 $uxFoundationsTriggerCases = Join-Path $Root 'evals\ux-foundations-trigger-cases.jsonl'
 $uxFoundationsBehaviorCases = Join-Path $Root 'evals\ux-foundations-behavior-cases.jsonl'
+$apifyTriggerCases = Join-Path $Root 'evals\apify-trigger-cases.jsonl'
+$apifyBehaviorCases = Join-Path $Root 'evals\apify-behavior-cases.jsonl'
+$apifyHelperTests = Join-Path $Root 'skills\apify\tests'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -394,6 +397,33 @@ $uxFoundationsTriggers = @(Read-JsonLines -Path $uxFoundationsTriggerCases)
 $uxFoundationsBehaviors = @(Read-JsonLines -Path $uxFoundationsBehaviorCases)
 Test-EvalCategoryMinimums -Records $uxFoundationsTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ux-foundations trigger suite'
 Test-EvalCategoryMinimums -Records $uxFoundationsBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ux-foundations behavior suite'
+
+$apifyTriggers = @(Read-JsonLines -Path $apifyTriggerCases)
+$apifyBehaviors = @(Read-JsonLines -Path $apifyBehaviorCases)
+Test-EvalCategoryMinimums -Records $apifyTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'apify trigger suite'
+Test-EvalCategoryMinimums -Records $apifyBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'apify behavior suite'
+
+$pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the Apify helper offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $apifyHelperTests -PathType Container)) {
+    Add-Failure "Missing Apify helper test directory: $apifyHelperTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $apifyTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $apifyHelperTests -p 'test_*.py' 2>&1)
+        $apifyTestExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($apifyTestExitCode -ne 0) {
+        Add-Failure "Apify helper offline tests failed: $($apifyTestOutput -join ' | ')"
+    }
+}
 
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)

@@ -1,167 +1,337 @@
-"""
-apify.py - thin helper around the Apify v2 API for Krish's fleet.
+"""Dependency-free guarded helper for approved Apify v2 REST runs.
 
-Handles the footguns from SKILL.md:
-  - converts human slug (owner/actor) to the API's owner~actor form
-  - Bearer auth (keeps the token out of URLs/logs)
-  - always lets you cap cost with max_items
-  - run + poll + paginate so you get ALL dataset items, not the run object
-  - optional dedup hook before an expensive run
-
-Token: set APIFY_TOKEN in the environment. The canonical value lives in the
-tools-access skill (Apify entry). Do not hardcode it here.
-
-Prefer this helper or the official `apify-client` over hand-rolled requests.
-
-Usage:
-    from apify import Apify
-    apify = Apify()  # reads APIFY_TOKEN from env
-
-    # quick/test pull (<300s), returns items directly
-    items = apify.run_sync("apify/google-search-scraper",
-                           {"queries": "ai automation"},
-                           max_items=50)
-
-    # robust pull of any size: run async, poll, fetch all rows
-    items = apify.run_and_collect("trudax/reddit-scraper",
-                                  {"searches": ["n8n agents"]},
-                                  max_items=500)
+This module never discovers credentials, selects an Actor, or infers approval.
+Every run requires an explicit approval reference and positive USD charge cap.
+Run creation is never retried automatically because a lost response can hide a
+created, chargeable run. Prefer the official ``apify-client`` for production.
 """
 
+from __future__ import annotations
+
+from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
+import hashlib
+import json
 import os
+import random
+import re
 import time
-import requests
+from typing import Any, Callable, Mapping
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+
 
 API_BASE = "https://api.apify.com/v2"
+TERMINAL_STATUSES = {"SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT"}
 
 
-class Apify:
-    def __init__(self, token=None, session=None):
-        self.token = token or os.environ.get("APIFY_TOKEN")
-        if not self.token:
-            raise RuntimeError(
-                "No Apify token. Set APIFY_TOKEN in the environment "
-                "(canonical value in the tools-access skill)."
-            )
-        self.s = session or requests.Session()
-        self.s.headers.update({
-            "Authorization": f"Bearer {self.token}",
+class ApifyError(RuntimeError):
+    """Base error with no credential-bearing request representation."""
+
+
+class ApifyApiError(ApifyError):
+    def __init__(self, status: int, message: str):
+        super().__init__(f"Apify API returned HTTP {status}: {message}")
+        self.status = status
+
+
+class AmbiguousRunStateError(ApifyError):
+    """A run may have been created; reconcile it before any retry."""
+
+
+@dataclass(frozen=True)
+class ApiResponse:
+    status: int
+    headers: Mapping[str, str]
+    body: bytes
+
+    def json(self) -> Any:
+        return json.loads(self.body.decode("utf-8"))
+
+
+class UrllibTransport:
+    def request(
+        self,
+        method: str,
+        url: str,
+        headers: Mapping[str, str],
+        json_body: Any | None,
+        timeout: float,
+    ) -> ApiResponse:
+        body = None if json_body is None else json.dumps(
+            json_body, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+        request = Request(url, data=body, headers=dict(headers), method=method)
+        try:
+            with urlopen(request, timeout=timeout) as response:  # nosec: caller controls official API target
+                return ApiResponse(response.status, dict(response.headers.items()), response.read())
+        except HTTPError as exc:
+            error_body = exc.read() if exc.fp else b""
+            return ApiResponse(exc.code, dict(exc.headers.items()) if exc.headers else {}, error_body)
+
+
+class ApifyOperator:
+    def __init__(
+        self,
+        token: str | None = None,
+        *,
+        transport: Any | None = None,
+        sleep: Callable[[float], None] = time.sleep,
+        jitter: Callable[[], float] = random.random,
+    ) -> None:
+        self._token = token or os.environ.get("APIFY_TOKEN")
+        if not self._token:
+            raise ApifyError("APIFY_TOKEN is not available from the approved runtime environment.")
+        self._transport = transport or UrllibTransport()
+        self._sleep = sleep
+        self._jitter = jitter
+        self._headers = {
+            "Authorization": f"Bearer {self._token}",
             "Content-Type": "application/json",
-            "User-Agent": "krish-apify/1.0",
-        })
+            "User-Agent": "mindmaker-apify-operator/2.0",
+        }
 
     @staticmethod
-    def _slug(actor):
-        # Store shows owner/actor; the API path needs owner~actor.
-        return actor.replace("/", "~")
+    def actor_id(actor: str) -> str:
+        value = actor.strip()
+        if re.fullmatch(r"[A-Za-z0-9_-]+", value):
+            return value
+        if re.fullmatch(r"[A-Za-z0-9_.-]+[~/][A-Za-z0-9_.-]+", value):
+            return value.replace("/", "~")
+        raise ValueError("Actor must be an API ID or one owner/name (or owner~name) pair.")
 
-    def run_sync(self, actor, run_input, max_items=None, clean=True, timeout=300):
-        """Run and get dataset items directly. Best for <300s test/small pulls.
+    @staticmethod
+    def input_sha256(run_input: Mapping[str, Any]) -> str:
+        canonical = json.dumps(
+            run_input, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        ).encode("utf-8")
+        return hashlib.sha256(canonical).hexdigest()
 
-        Hard-fails at 300s. For anything bigger use run_and_collect.
-        """
-        url = f"{API_BASE}/actors/{self._slug(actor)}/run-sync-get-dataset-items"
-        params = {"clean": "true" if clean else "false", "timeout": timeout}
-        if max_items is not None:
-            params["maxItems"] = max_items
-        r = self.s.post(url, params=params, json=run_input, timeout=timeout + 30)
-        r.raise_for_status()
-        return r.json()
+    @staticmethod
+    def _run_authority(approval_ref: str, max_total_charge_usd: Decimal | float | str) -> str:
+        if not approval_ref or not approval_ref.strip():
+            raise ValueError("An explicit approval_ref is required for every run.")
+        try:
+            cap = Decimal(str(max_total_charge_usd))
+        except InvalidOperation as exc:
+            raise ValueError("max_total_charge_usd must be a positive USD amount.") from exc
+        if not cap.is_finite() or cap <= 0:
+            raise ValueError("max_total_charge_usd must be a positive USD amount.")
+        return format(cap, "f")
 
-    def start_run(self, actor, run_input, max_items=None, timeout=None, memory=None):
-        """Start an async run. Returns the run object (has id, defaultDatasetId, status)."""
-        url = f"{API_BASE}/actors/{self._slug(actor)}/runs"
-        params = {}
-        if max_items is not None:
-            params["maxItems"] = max_items
-        if timeout is not None:
-            params["timeout"] = timeout
-        if memory is not None:
-            params["memory"] = memory
-        r = self.s.post(url, params=params, json=run_input, timeout=60)
-        r.raise_for_status()
-        return r.json()["data"]
+    @staticmethod
+    def _with_query(path: str, params: Mapping[str, Any] | None = None) -> str:
+        filtered = {key: value for key, value in (params or {}).items() if value is not None}
+        query = urlencode(filtered)
+        return f"{API_BASE}{path}" + (f"?{query}" if query else "")
 
-    def wait_for_finish(self, run_id, poll_every=5, max_wait=1800):
-        """Poll a run until it reaches a terminal status. Returns the run object."""
-        deadline = time.time() + max_wait
-        terminal = {"SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT"}
+    def _request(
+        self,
+        method: str,
+        path: str,
+        *,
+        params: Mapping[str, Any] | None = None,
+        json_body: Any | None = None,
+        timeout: float = 60,
+        read_retries: int = 0,
+    ) -> ApiResponse:
+        url = self._with_query(path, params)
+        for attempt in range(read_retries + 1):
+            try:
+                response = self._transport.request(method, url, self._headers, json_body, timeout)
+            except (URLError, TimeoutError, OSError) as exc:
+                if method != "GET" or attempt >= read_retries:
+                    raise ApifyError(f"Apify {method} transport failed; state is unverified.") from exc
+                response = None
+            if response is not None and response.status < 400:
+                return response
+            retryable = response is None or response.status == 429 or response.status >= 500
+            if method != "GET" or not retryable or attempt >= read_retries:
+                if response is None:
+                    raise ApifyError(f"Apify {method} failed after bounded read retries.")
+                preview = response.body.decode("utf-8", errors="replace")[:200]
+                raise ApifyApiError(response.status, preview or "no response body")
+            retry_after = response.headers.get("Retry-After") if response is not None else None
+            try:
+                delay = float(retry_after) if retry_after is not None else (2**attempt + self._jitter())
+            except ValueError:
+                delay = 2**attempt + self._jitter()
+            self._sleep(min(delay, 30.0))
+        raise AssertionError("unreachable")
+
+    def get_actor(self, actor: str) -> Mapping[str, Any]:
+        response = self._request("GET", f"/actors/{self.actor_id(actor)}", read_retries=3)
+        return response.json()["data"]
+
+    def validate_input(
+        self, actor: str, run_input: Mapping[str, Any], *, build_tag: str | None = None
+    ) -> Mapping[str, Any]:
+        params = {"build": build_tag} if build_tag else None
+        response = self._request(
+            "POST",
+            f"/actors/{self.actor_id(actor)}/validate-input",
+            params=params,
+            json_body=run_input,
+        )
+        return response.json()
+
+    def start_run(
+        self,
+        actor: str,
+        run_input: Mapping[str, Any],
+        *,
+        approval_ref: str,
+        max_total_charge_usd: Decimal | float | str,
+        max_items: int | None = None,
+        build: str | None = None,
+        timeout_secs: int | None = None,
+        memory_mbytes: int | None = None,
+    ) -> Mapping[str, Any]:
+        cap = self._run_authority(approval_ref, max_total_charge_usd)
+        if max_items is not None and max_items <= 0:
+            raise ValueError("max_items must be positive when supplied.")
+        params = {
+            "maxTotalChargeUsd": cap,
+            "maxItems": max_items,
+            "build": build,
+            "timeout": timeout_secs,
+            "memory": memory_mbytes,
+        }
+        path = f"/actors/{self.actor_id(actor)}/runs"
+        try:
+            response = self._request("POST", path, params=params, json_body=run_input)
+        except (ApifyError, OSError) as exc:
+            raise AmbiguousRunStateError(
+                "Run start was not confirmed. Do not retry; reconcile recent runs in the approved account."
+            ) from exc
+        return response.json()["data"]
+
+    def get_run(self, run_id: str) -> Mapping[str, Any]:
+        response = self._request("GET", f"/actor-runs/{run_id}", read_retries=3)
+        return response.json()["data"]
+
+    def wait_for_terminal(
+        self, run_id: str, *, poll_every: float = 5, max_wait: float = 1800
+    ) -> Mapping[str, Any]:
+        deadline = time.monotonic() + max_wait
         while True:
-            r = self.s.get(f"{API_BASE}/actor-runs/{run_id}", timeout=30)
-            r.raise_for_status()
-            run = r.json()["data"]
-            if run["status"] in terminal:
+            run = self.get_run(run_id)
+            if run.get("status") in TERMINAL_STATUSES:
                 return run
-            if time.time() > deadline:
-                raise TimeoutError(f"Run {run_id} still {run['status']} after {max_wait}s")
-            time.sleep(poll_every)
+            if time.monotonic() >= deadline:
+                raise ApifyError(
+                    f"Run {run_id} remains non-terminal after the wait budget; it was not aborted or restarted."
+                )
+            self._sleep(poll_every)
 
-    def get_dataset_items(self, dataset_id, clean=True, fields=None, page_size=1000):
-        """Fetch ALL items from a dataset, paginating offset/limit."""
-        items, offset = [], 0
-        while True:
-            params = {"clean": "true" if clean else "false",
-                      "offset": offset, "limit": page_size}
-            if fields:
-                params["fields"] = ",".join(fields)
-            r = self.s.get(f"{API_BASE}/datasets/{dataset_id}/items",
-                           params=params, timeout=60)
-            r.raise_for_status()
-            batch = r.json()
-            items.extend(batch)
-            if len(batch) < page_size:
-                return items
-            offset += page_size
-
-    def run_and_collect(self, actor, run_input, max_items=None, fields=None,
-                        clean=True, poll_every=5, max_wait=1800):
-        """Robust default: start async, poll to completion, fetch all rows.
-
-        Raises if the run did not SUCCEED so you never silently accept a
-        green-but-empty result.
-        """
-        run = self.start_run(actor, run_input, max_items=max_items)
-        run = self.wait_for_finish(run["id"], poll_every=poll_every, max_wait=max_wait)
-        if run["status"] != "SUCCEEDED":
-            raise RuntimeError(f"Actor {actor} run {run['id']} ended {run['status']}")
-        items = self.get_dataset_items(run["defaultDatasetId"], clean=clean, fields=fields)
-        if not items:
-            # SUCCEEDED with zero rows is the 'ran green but wrote nothing' case.
-            # Usually a bad query/URL, a geo block, or the actor wrote to the
-            # key-value store. Surface it, do not swallow it.
-            raise RuntimeError(
-                f"Actor {actor} SUCCEEDED but dataset {run['defaultDatasetId']} is empty. "
-                "Check input/query, geo, and whether output went to the key-value store."
+    def get_dataset_items(
+        self,
+        dataset_id: str,
+        *,
+        clean: bool = False,
+        fields: list[str] | None = None,
+        page_size: int = 1000,
+    ) -> list[dict[str, Any]]:
+        if page_size <= 0:
+            raise ValueError("page_size must be positive.")
+        items: list[dict[str, Any]] = []
+        offset = 0
+        total: int | None = None
+        while total is None or offset < total:
+            response = self._request(
+                "GET",
+                f"/datasets/{dataset_id}/items",
+                params={
+                    "format": "json",
+                    "clean": "true" if clean else "false",
+                    "fields": ",".join(fields) if fields else None,
+                    "offset": offset,
+                    "limit": page_size,
+                },
+                read_retries=3,
             )
+            batch = response.json()
+            if not isinstance(batch, list):
+                raise ApifyError("Dataset items response was not a JSON array.")
+            items.extend(batch)
+            raw_total = response.headers.get("X-Apify-Pagination-Total")
+            if raw_total is not None:
+                total = int(raw_total)
+                offset += page_size
+                continue
+            if clean:
+                raise ApifyError(
+                    "Clean pagination lacks X-Apify-Pagination-Total; completeness is unverified. "
+                    "Use the official iterate_items client or retry without clean."
+                )
+            if len(batch) < page_size:
+                break
+            offset += page_size
         return items
 
+    def run_and_collect(
+        self,
+        actor: str,
+        run_input: Mapping[str, Any],
+        *,
+        approval_ref: str,
+        max_total_charge_usd: Decimal | float | str,
+        max_items: int | None = None,
+        build: str | None = None,
+        fields: list[str] | None = None,
+        poll_every: float = 5,
+        max_wait: float = 1800,
+        cost_finalize_wait: float = 10,
+    ) -> Mapping[str, Any]:
+        cap = self._run_authority(approval_ref, max_total_charge_usd)
+        started = self.start_run(
+            actor,
+            run_input,
+            approval_ref=approval_ref,
+            max_total_charge_usd=cap,
+            max_items=max_items,
+            build=build,
+        )
+        run = self.wait_for_terminal(started["id"], poll_every=poll_every, max_wait=max_wait)
+        if cost_finalize_wait > 0:
+            self._sleep(cost_finalize_wait)
+            run = self.get_run(started["id"])
+        dataset_id = run.get("defaultDatasetId")
+        items = self.get_dataset_items(dataset_id, clean=False, fields=fields) if dataset_id else []
+        status = run.get("status")
+        if status != "SUCCEEDED":
+            outcome = "incomplete_terminal_run"
+        elif not items:
+            outcome = "succeeded_empty_needs_diagnosis"
+        else:
+            outcome = "succeeded_with_items"
+        return {
+            "actor": actor,
+            "approval_ref": approval_ref,
+            "input_sha256": self.input_sha256(run_input),
+            "max_total_charge_usd": cap,
+            "max_items": max_items,
+            "run": run,
+            "items": items,
+            "outcome": outcome,
+            "downstream_action_performed": False,
+        }
 
-def dedup_against_existing(items, key, existing_keys):
-    """Drop rows whose `key` (e.g. 'url') is already in existing_keys.
 
-    Call this BEFORE an expensive run is not possible (you scrape first), but
-    call it AFTER a cheap discovery pull and BEFORE enrichment/loading, and
-    pre-filter input URLs against existing_keys where the actor takes URLs.
-    existing_keys is typically a set pulled from Supabase signal_raw.url.
-    """
-    seen = set(existing_keys)
-    out = []
-    for it in items:
-        k = it.get(key)
-        if k and k not in seen:
-            seen.add(k)
-            out.append(it)
-    return out
+def deduplicate_rows(
+    items: list[Mapping[str, Any]], key: str, existing_keys: set[Any] | None = None
+) -> list[Mapping[str, Any]]:
+    """Deduplicate collected rows. This does not recover already-incurred scrape cost."""
+    seen = set(existing_keys or set())
+    output: list[Mapping[str, Any]] = []
+    for item in items:
+        value = item.get(key)
+        if value is not None and value not in seen:
+            seen.add(value)
+            output.append(item)
+    return output
 
 
 if __name__ == "__main__":
-    # Tiny smoke test: cheap SERP pull, capped at 10 rows.
-    apify = Apify()
-    rows = apify.run_sync(
-        "apify/google-search-scraper",
-        {"queries": "agentic ai in business", "maxPagesPerQuery": 1},
-        max_items=10,
-    )
-    print(f"got {len(rows)} rows")
-    for row in rows[:3]:
-        print("-", row.get("title"), "|", row.get("url"))
+    raise SystemExit("Import this guarded helper; it intentionally has no spend-capable CLI.")
