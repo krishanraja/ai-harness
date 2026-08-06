@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: candidate `candidate-5754854` was deployed on 2026-08-06 from clean commit `57548547db9f8378698477cf198e862dfaaf3699`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest; Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills and passed a fresh-chat routing canary. Automatic scheduling and unattended Claude Cloud mutation remain intentionally inactive.
+Status: candidate `candidate-5754854` was deployed on 2026-08-06 from clean commit `57548547db9f8378698477cf198e862dfaaf3699`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest; Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills and passed a fresh-chat routing canary. Perplexity Computer has the same 26 user-managed names enabled at account level and passed a live `take-the-brief` routing canary. Automatic scheduling and unattended cloud mutation remain intentionally inactive.
 
 ## Decision
 
@@ -26,10 +26,12 @@ flowchart LR
     D --> Y["Claude Code"]
     D --> Z["Cursor"]
     R --> H["Controlled Claude account upload"]
+    R --> Q["Controlled Perplexity Computer upload"]
     X --> O["Redacted observations and corrections"]
     Y --> O
     Z --> O
     H --> O
+    Q --> O
     O --> P["Proposal plus regression test"]
     P --> S
 ```
@@ -126,6 +128,21 @@ For the current personal-account setup, use this controlled bridge:
 7. Preserve the previous ZIP and do not delete the old entry until the replacement passes its observation window and deletion is explicitly approved.
 
 The Claude Skills API can automate API/workspace-managed skills, but those API skills are not the same catalog as claude.ai. Browser automation can assist a supervised personal-account release, but it is too UI-dependent to be the unattended production updater.
+
+## Perplexity Computer: account-level web and desktop surface
+
+Perplexity Computer custom skills are account-managed rather than a separate Windows skill directory. A verified upload in `Computer > Customize > Skills` is therefore the deployment for both the web surface and any signed-in Perplexity desktop client on the same account.
+
+Use a controlled bridge:
+
+1. Build Perplexity transport packages with `SKILL.md` at the ZIP root while preserving every canonical skill file and reference.
+2. Validate the canonical source, build twice, and require identical package hashes.
+3. Inventory `My skills` before mutation and preserve provider example skills as provider-managed dependencies.
+4. Upload no more than Perplexity's current UI batch limit, wait for each batch to finish, and verify the exact enabled name set after the final batch.
+5. Run a fresh Computer task that proves discovery, reference loading, routing, behavior, and stopping conditions before claiming the surface active.
+6. Record source commit, transport hashes, visible enabled state, canary evidence, retrieval time, and the residual absence of a downloadable cloud hash.
+
+Perplexity's account-level upload is not a second canonical source and is not a byte-parity claim. Do not create a fake local skills folder for the desktop app. Updates remain supervised until Perplexity exposes a stable authenticated API with equivalent inventory, upload, enabled-state, and rollback evidence.
 
 ## Self-correction and learning
 
