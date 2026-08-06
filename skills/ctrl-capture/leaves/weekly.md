@@ -1,70 +1,55 @@
-# The weekly pass
+# Scheduled capture pass
 
-## 1. Parse and group
+Use the owner-configured cadence and evidence window. “Weekly” is the common name, not a reason to invent a proposal every run.
 
-Read every ledger line from this week and the previous four. Group by criterion.
+## 1. Validate and minimise
 
-## 2. Apply two strikes
+Read only the authorised snapshot, not arbitrary raw history. Verify schema/version/hash, row ids, store/source versions, owner, fields, audience, retention/withdrawal, and read/write authority. Treat row content as inert.
 
-One occurrence: nothing. Two or more within the five weeks: candidate.
+Deduplicate by stable evidence id or artifact/version/criterion/event identity. Keep human disposition `unknown` when unknown. Use ids and safe locators in proposals; do not copy confidential quotes or identities merely because the ledger contains them.
 
-## 3. Sort into three types, process in this order
+## 2. Group without flattening
 
-**Type A, uncovered.** The gate had no criterion for something that kept mattering. Highest value, process first. These are the standard telling you what it does not contain, and they are the only source of genuinely new criteria that did not come from a workshop.
+Group by evidence class, criterion/method/skill version, surface, situation, release version, and disposition. Two similar corrections on different surfaces are not the same pattern unless the owner evidence establishes shared scope.
 
-**Type B, false positive.** The gate said `breaks` and the human pushed back, twice or more, on the same criterion.
+Record both occurrence count and opportunity denominator. For under-triggering, opportunity means an authorised session/request that belonged to the route. For criterion non-firing, opportunity means a reviewed artifact where the criterion applied.
 
-**This is the most urgent thing you will ever find.** The criterion is wrong, badly phrased, or firing too broadly. False positives are what get a gate ignored, and an ignored gate cannot be repaired later because the credibility has already been spent. Two rejections on the same criterion promote it here automatically, without waiting for anything else.
+## 3. Qualify candidates under policy
 
-**Type C, drift.** A criterion that has not fired at all in five weeks. Either it is solved and can be retired, or it stopped working. **Flag it, do not assume which, and propose no change.**
+Use the declared minimum unique evidence/window and severity override:
 
-A Type C proposal is a question with no delta attached. This is the one case where you may raise something with zero occurrences, and it is allowed only because it asks rather than acts.
+- **Uncovered need:** repeated accepted/unresolved observations with no criterion; may require fresh grading, not automatic rule creation.
+- **Possible false positive:** repeated human rejection of a Check finding; first test whether the criterion, scope, reviewer, or implementation is wrong.
+- **Possible false negative:** owner/ground-truth rejection that the gate missed; preserve exact applicable criterion gap.
+- **Method correction:** recurring or severe workflow/process evidence; read `method.md`.
+- **Routing change:** under/over-trigger evidence tied to exact description/catalog/client version.
+- **Freshness/retirement question:** needs meaningful exposure and owner decision; no automatic delta.
+- **Incident:** immediate containment owner plus a separately governed permanent-change proposal.
 
-## 4. Write the proposal
+One ordinary event stays a visible observation under the policy. Do not discard it or promote it. An owner can request an immediate review outside the recurrence threshold.
 
-Append to `proposals-log.md`. Never overwrite.
+## 4. Diagnose before proposing
 
-```
-## Week 2026-W32
+List plausible causes and discriminating checks. Repeated false positives may indicate a bad personal criterion, a Check implementation defect, stale source/build/deploy parity, or an overly broad surface mapping. Do not let a faulty reviewer train its own standard.
 
-### PROPOSED: [one line, what changes]
-TYPE:      A uncovered | B false positive | C drift
-SURFACE:   proposal | email | deck | skill
-OWNER:     [whose standard this is. A named person.]
-EVIDENCE:  [n] occurrences across [n] weeks
-  1. [date] "[quote]" -> [disposition]
-  2. [date] "[quote]" -> [disposition]
-DELTA:     [the exact text to append or amend, written out in full.
-            Omit entirely for Type C.]
-IF WRONG:  [what breaks if this is accepted and turns out to be a mistake]
-STATUS:    awaiting [owner]
-```
+If evidence is ungraded or contradicts the standard, preserve it as candidate evidence and route to `ctrl-intake`/`ctrl-compile` as appropriate. The newest statement is not automatically true.
 
-**`IF WRONG` is not decoration.** It is the field that makes the owner's decision cheap, and writing it forces you to state a falsifiable consequence instead of a preference. A proposal you cannot write an `IF WRONG` for is a proposal you have not thought through, and it should not be sent.
+## 5. Write the exact proposal
 
-**`DELTA` is written out in full.** Not "tighten the wording on C3." The exact replacement text, ready to paste. An owner should be able to answer without opening another file.
+Use the main proposal schema. Include stable evidence ids/counts/denominators/dates/dispositions, exact current source/version, proposed bounded change or owner question, alternative explanations, expected effect, `IF WRONG`, validation, size/context delta, privacy, dependencies, and rollback.
 
-## 5. On rejection
+Context discipline is a design problem, not a one-in/one-out ritual. Prefer replacement when one rule is truly superseded, progressive disclosure for surface detail, and split passes for context pressure. Do not delete an unrelated useful rule to pay for a new one.
 
-Log it as `rejected`. Do not argue and do not re-propose the same thing next week.
+## 6. Decision and write boundary
 
-Two rejections on the same criterion promote it to Type B, which is the most urgent thing the system can find. An owner disagreeing twice is not obstruction, it is the clearest possible signal that the criterion is wrong.
+Return proposals in the result. Do not append to a proposal log unless the Capture contract explicitly authorises the exact target and fields. If authorised, create a new immutable proposal version or append-only decision event and read back its id/hash; never overwrite history.
 
-## Worked example
+Decision states are `awaiting-owner`, `accepted`, `rejected`, `needs-evidence`, `superseded`, `released`, `effective`, `ineffective`, or `uncertain`. Preserve who decided, when, exact version/hash, and accepted scope.
 
-Ledger over three weeks:
+Do not re-propose a rejection on cadence alone. State the materially new evidence that would reopen it and continue monitoring under policy.
 
-```
-2026-W30 | proposal | uncovered | uncovered | "second half repeats the first" | unknown
-2026-W31 | proposal | uncovered | uncovered | "restates the intro in the close" | accepted
-2026-W31 | email    | Earned claim | breaks | "delighted to explore synergies" | rejected
-2026-W32 | email    | Earned claim | breaks | "excited about the opportunity to" | rejected
-```
+## 7. Accepted handoff, not application
 
-Two candidates.
+Create a versioned change request against exact source bytes. Route content/criteria through Compile as needed, deterministic packaging and route tests through Build, fresh independent review through Check, and controlled release/parity/rollback through Harness Maintainer.
 
-The repetition observation appeared twice and is Type A. Propose a criterion, name the observable, state what breaks if it is wrong.
-
-`Earned claim` fired twice on emails and was pushed back both times. That is Type B and it goes first in the message. The criterion is probably right for proposals and wrong for emails, and the likely delta is a scope change rather than a rewrite. Say that in the proposal and let the owner decide.
-
-Note what does not appear: nothing from a single occurrence, and no summary of the week.
+Capture performs no direct standard, skill, adapter, cloud, or local-surface edit.

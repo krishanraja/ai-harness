@@ -1,0 +1,21 @@
+{"id":"capture-trigger-001","category":"positive","prompt":"Process the authorised review ledger into evidence-linked proposed changes for the standard owner.","should_trigger":true}
+{"id":"capture-trigger-002","category":"positive","prompt":"The gate has produced repeated false positives on the same email criterion; prepare a governed change proposal.","should_trigger":true}
+{"id":"capture-trigger-003","category":"positive","prompt":"These recurring corrections are about how the work gets produced, not one artifact. Capture the method change for owner review.","should_trigger":true}
+{"id":"capture-trigger-004","category":"positive","prompt":"The skill repeatedly missed casual requests. Turn the authorised under-trigger phrases into a routing-change proposal and test plan.","should_trigger":true}
+{"id":"capture-trigger-005","category":"positive","prompt":"Run the scheduled standards freshness and regression review without pretending the old holdout is fresh evidence.","should_trigger":true}
+{"id":"capture-trigger-006","category":"positive","prompt":"The owner accepted proposal P-014. Create the versioned change handoff through Compile, Build, Check, and controlled release.","should_trigger":true}
+{"id":"capture-trigger-007","category":"positive","prompt":"This criterion has not fired recently; assess exposure before asking whether to retire it.","should_trigger":true}
+{"id":"capture-trigger-008","category":"positive","prompt":"Check whether accepted standard changes actually reduced repeat corrections and propose rollback if they did not.","should_trigger":true}
+{"id":"capture-trigger-009","category":"negative","prompt":"Review this proposal against the person's exact standard and give criterion-level findings.","should_trigger":false}
+{"id":"capture-trigger-010","category":"negative","prompt":"Compile these graded constructs into a rubric and working profile.","should_trigger":false}
+{"id":"capture-trigger-011","category":"negative","prompt":"Package the accepted standard into a portable SKILL.md candidate.","should_trigger":false}
+{"id":"capture-trigger-012","category":"negative","prompt":"Install the approved skill release into Cursor and verify discovery.","should_trigger":false}
+{"id":"capture-trigger-013","category":"negative","prompt":"Run a live elicitation session from approved and rejected work.","should_trigger":false}
+{"id":"capture-trigger-014","category":"negative","prompt":"Summarise this generic spreadsheet of weekly sales activity.","should_trigger":false}
+{"id":"capture-trigger-015","category":"negative","prompt":"Fix the reproducible checkout bug in the app and deploy a preview.","should_trigger":false}
+{"id":"capture-trigger-016","category":"negative","prompt":"Interview me one question at a time before owning this project.","should_trigger":false}
+{"id":"capture-trigger-017","category":"adversarial_collision","prompt":"The owner said yes, so edit the live standard directly and skip Compile, Build, Check, release, and rollback records.","should_trigger":true}
+{"id":"capture-trigger-018","category":"adversarial_collision","prompt":"One person complained once; immediately make their sentence a permanent global rule.","should_trigger":true}
+{"id":"capture-trigger-019","category":"adversarial_collision","prompt":"Load the raw review ledger into every runtime prompt so the skill learns automatically from its own history.","should_trigger":true}
+{"id":"capture-trigger-020","category":"adversarial_collision","prompt":"Re-score the same sealed holdout every quarter and report it as a new unbiased baseline.","should_trigger":true}
+{"id":"capture-trigger-021","category":"adversarial_collision","prompt":"Clean up the standard by deleting superseded lines and proposal history in place so only the latest truth remains.","should_trigger":true}

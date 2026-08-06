@@ -1,69 +1,66 @@
-# The quarterly pass
+# Scheduled freshness and regression pass
 
-Every thirteenth run, alongside the weekly one. This is the pass that catches the standard being quietly wrong rather than incomplete.
+Run on the owner-configured cadence. The purpose is to distinguish source change, evaluator change, deployment drift, changing work mix, and real standard drift—not to manufacture quarterly movement.
 
-## Re-score the held-out set
+## Establish version and exposure
 
-Run the current rubric against the ten held-back graded items and compare to what the person actually said.
+Record:
 
-Treat **"would not send" as the positive class**, because catching what they would reject is the job:
+- accepted source standard version/hash;
+- built package/release hash;
+- deployed revision and observed runtime per surface;
+- prior known-good and rollback state;
+- review count by applicable surface/criterion;
+- human dispositions and opportunity denominators;
+- evaluation-set identity and first-open history.
 
+Do not compare metrics until source/build/deploy/runtime identity and exposure are known. A stale surface can look like a bad criterion.
+
+## Holdout versus regression
+
+A sealed holdout is opened once to estimate a frozen package. After first open, label it a disclosed regression set. It may compare versions for regression, but its repeated score is not a new unbiased baseline and it must never train revisions.
+
+For a new unbiased estimate, reserve a new untouched set before analysis. Record ids/hash, selection, class balance, first-open time, and separation from training and runtime exemplars.
+
+## Metrics
+
+When ground truth and gate outputs exist, report raw confusion counts and denominators before rates:
+
+```text
+TP = owner rejects; gate breaks
+FP = owner accepts; gate breaks
+FN = owner rejects; gate holds
+TN = owner accepts; gate holds
 ```
-TP = they said would_not_send, gate said breaks
-FP = they said send,           gate said breaks
-FN = they said would_not_send, gate said holds
-TN = they said send,           gate said holds
 
+Then, only with non-zero denominators:
+
+```text
 precision = TP / (TP + FP)
-recall    = TP / (TP + FN)
-TNR       = TN / (TN + FP)
+recall = TP / (TP + FN)
+TNR = TN / (TN + FP)
 ```
 
-**Report all three separately. Never a single agreement number.** Raw agreement is misleading whenever the classes are unbalanced, and they always are. A gate that says `holds` to everything scores well on agreement and is worthless.
+If a denominator is zero, report `undefined`, not 0 or 1. Include sample/class counts, missing/unknown dispositions, standard/reviewer versions, and whether results are fresh holdout, disclosed regression, or live monitoring. Do not collapse to one agreement number or promise a target unsupported by this subject/surface.
 
-The false positive count is the one to watch. It is the number that predicts whether people keep using the gate.
+## Diagnose change
 
-## Check for decay
+Compare frozen and candidate versions on the disclosed regression set, then seek independent fresh evidence. Improvement requires better agreement with owner judgments under comparable exposure, not merely agreement with the prior gate.
 
-Compare against the previous quarter. **True negative rate falls as the generator improves**, which is the finding that most threatens this whole architecture: as the work getting produced gets better, the gate sees fewer clear failures and its ability to spot the remaining ones degrades.
+Track false positives, false negatives, uncovered observations, routing misses, and repeat method corrections. Separate changed work mix and reviewer implementation from changed owner standard.
 
-Recalibration is a scheduled event, not a response to complaints. If you wait for someone to complain, the gate has already lost the room.
+## Freshness and retirement
 
-Honest expectations: uncalibrated agreement on long-form judgment runs somewhere between 56 and 73 percent. Above 90 is achievable when calibrated on one person's labels in a narrow domain, and it is precedented mostly on much simpler tasks than this. Do not promise better before you measure.
+For a non-firing criterion, report applicable opportunity count, last meaningful exposure, last human confirmation, consequence if removed, dependencies, and any evidence that it is preventative. With zero/unknown opportunities, make no retirement inference.
 
-## Re-score old labels when the rubric changed
+Ask the owner `retain / revise / gather evidence / retire`; do not retire automatically. An accepted retirement still goes through versioned Compile/Build/fresh Check/release and rollback gates.
 
-Keep a frozen regression set: a fixed sample of graded items scored against both the frozen rubric and the current one.
+## Post-release effectiveness
 
-**Divergence between the two separates a standard genuinely rising from a standard drifting.** Without it you cannot tell the difference, and they feel identical from the inside. A standard that has risen agrees with the person more than it used to. A standard that has drifted agrees with itself more than it used to.
+Verify the intended release is actually active on each measured surface. Compare pre/post recurrence and false positives using opportunity denominators and a declared window. Mark:
 
-## Report retirements
+- `effective`: target recurrence declined without unacceptable new failures;
+- `ineffective`: target persists or worsens under adequate exposure;
+- `uncertain`: exposure, parity, disposition, or time is insufficient.
 
-Criteria that have not fired in a quarter and were not resolved by a Type C proposal. List them with their last-fired date and ask the owner directly: retire, or fix?
-
-Do not retire anything yourself. A criterion that stopped firing might be the one thing preventing a failure nobody has seen recently, which is what success looks like.
-
-## The report
-
-```
-QUARTERLY, [person], [date]
-
-HELD-OUT SET, n=10
-  precision  0.80  (was 0.75)
-  recall     0.80  (was 0.80)
-  TNR        0.90  (was 0.95)  <- decay, watch this
-
-REGRESSION SET, n=20
-  frozen rubric agrees with them on 15
-  current rubric agrees with them on 17
-  the standard rose
-
-CRITERIA
-  7 current, 1 added this quarter, 0 retired
-  C5 "Named owner" has not fired in 14 weeks
-
-FOR [owner]
-  1. Retire C5, or is it still doing work?
-```
-
-Four numbers, one question. Anything longer will not be read, and a quarterly report that goes unread is how a standard drifts for a year before anyone notices.
+Preserve the original proposal and decision. An ineffective change produces an owner rollback/new-diagnosis proposal, not a silent rewrite.

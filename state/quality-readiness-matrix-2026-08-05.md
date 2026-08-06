@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twenty candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
+The 24-skill canonical set is a coherent candidate architecture, not a production library. All 24 pass the repository's structural and secret-pattern gates. Twenty-one candidates now have complete independent trigger/behavior evidence on their reviewed suites, but none yet has verified active-surface parity, so `production_active` correctly remains empty.
 
 Current measurable state:
 
@@ -14,8 +14,8 @@ Current measurable state:
 - Enabled provider-managed Claude skills: 2.
 - Freshness SLA failures: 0.
 - Candidates within 10 days of review expiry: 1 (`apify`).
-- Repository-enforced minimum-sized trigger and behavior suites: 20 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, the three always-on core skills, and the three commercial/content skills).
-- Complete independent trigger/behavior evidence on reviewed suites: 20 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`).
+- Repository-enforced minimum-sized trigger and behavior suites: 21 skills (`build-apps-with-krish`, `harness-maintainer`, `take-the-brief`, `evidence-research`, `krish-voice`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`, the three always-on core skills, and the three commercial/content skills).
+- Complete independent trigger/behavior evidence on reviewed suites: 21 skills (`krish-principles`, `take-the-brief`, `strategy-brief`, `verification-loop`, `harness-maintainer`, `evidence-research`, `mindmaker`, `content-corpus`, `krish-content-marketer`, `krish-voice`, `build-apps-with-krish`, `krish-design`, `krish-build`, `ux-testing-agent`, `tools-access`, `mindmaker-os`, `ctrl-intake`, `ctrl-compile`, `ctrl-build`, `ctrl-check`, `ctrl-capture`).
 
 ## Rating method
 
@@ -60,7 +60,7 @@ Current measurable state:
 | `ctrl-compile` | Standards stage 3 | Strong after admission, leakage, policy, owner, privacy, baseline, import, and handoff hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised real-artifact compile, corrupt-manifest/leakage/withdrawal canaries, subject acceptance, pinned target schema, deterministic regeneration, one-open holdout, downstream readback, and parity |
 | `ctrl-build` | Standards stage 4 | Strong after runtime/eval separation, provenance, privacy, adapter, deterministic-build, and release-boundary hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors in disjoint complete batches | Real accepted-Compile package, deterministic rebuild, target validators, injected/private fixtures, subject acceptance, independent check, per-surface canaries, and parity |
 | `ctrl-check` | Standards stages 5-7 | Strong after independence, full-coverage, validator, provenance, privacy, logging, and action-boundary hardening | current; reviewed 2026-08-05 | exact staged archive; no exact active copy | enabled older 2026-08-05 copy | Independent suite pass: 21/21 triggers, 23/23 behaviors | Real frozen standard/submission, owner agreement, stale/withdrawn/injection/contamination/current-fact canaries, approved ledger readback, false-positive monitoring, and parity |
-| `ctrl-capture` | Standards stage 9 | Good | current | Stage 8 staged drift; no exact active copy | enabled Stage 9 copy, 2026-08-05 | Structural | Persistent ledger contract, Stage 8-to-9 handoff, decay, duplicate signal, rejection, and rollback suite |
+| `ctrl-capture` | Standards stage 9 | Strong after proposal-only, evidence-policy, privacy, versioning, holdout, release, and effectiveness hardening | current; reviewed 2026-08-05 | Stage 8 staged drift; no exact active copy | enabled older Stage 9 copy, 2026-08-05 | Independent suite pass: 21/21 triggers, 23/23 behaviors | Authorised live snapshot, owner decisions, genuine output/method/routing patterns, full accepted change path, release/parity readback, exposure monitoring, severe incident, and rollback |
 
 ## Architecture conclusions
 

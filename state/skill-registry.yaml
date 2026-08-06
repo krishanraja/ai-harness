@@ -50,7 +50,7 @@ candidates:
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-check, role: standards-stage-5-7, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-08-04, freshness_sla_days: 90}
+  - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
 
 external_managed:
   - {name: skill-creator, provider: Anthropic, policy: Prefer current provider-managed release; do not fork without an evaluated Krish-specific need.}

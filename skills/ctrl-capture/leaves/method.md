@@ -1,81 +1,41 @@
 # Method corrections
 
-There are two kinds of correction and only one of them has a home in the output ledger.
+A method correction concerns how a class of work is produced—sequence, stance, omission, or authority boundary—rather than only one artifact passage.
 
-**Output correction:** "this draft is wrong." It has a surface, a criterion and a verdict. It fits the six-field line and it becomes a criterion.
+## Recognition test
 
-**Method correction:** "the way you produce drafts is wrong." It has no surface, no criterion and no verdict. It does not fit the line at all, so unless something catches it, it gets agreed with in conversation and lost.
+Ask: if only the current artifact were fixed, would the same production problem remain likely on the next comparable task? If yes, record a method candidate. Preserve the narrowest surface/situation supported; phrases such as “always” do not themselves prove universal scope.
 
-That second class is the one that matters most. Output corrections are what any user produces. **Method corrections are what an expert produces**, they are rarer, they are worth far more per instance, and under a design with only one ledger they are the ones guaranteed to be forgotten. Someone who has to give the same structural note three times concludes, correctly, that nothing is listening.
+Useful classes:
 
-## Recognising one
+- `omission`: a required input/pass/handoff was absent;
+- `stance`: ingredients were present but the decision posture was wrong;
+- `sequence`: correct steps occurred in a harmful order;
+- `boundary`: the system acted inside/outside authority incorrectly;
+- `verification`: work was declared complete without the needed proof.
 
-A method correction is about the process, the shape of the work, the order things happened in, or where the system drew a boundary. Signals in the person's phrasing:
+## Evidence record
 
-- "you always" or "you keep" or "every time"
-- "why is this outside the document" or "that should be in the file"
-- "I asked for X and got Y" where Y was competent
-- "stop doing" or "start doing" attached to a habit rather than a sentence
-- a correction that would apply identically to the next five things you produce
+Use stable evidence ids, artifact/method version, class, safe exact correction or authorised redacted derivative, surface/situation, human disposition, consequence, and privacy boundary. Do not force method evidence into an output-criterion row.
 
-The test: **if fixing only the artefact in front of you leaves the problem intact, it is a method correction.**
+Two matching events may meet one program's recurrence policy, but the configured threshold and severity override govern. One severe boundary/privacy event may justify immediate containment and owner proposal; it still does not auto-change the method.
 
-## The line
+## Proposal
 
-```
-DATE | ARTEFACT | CLASS | THE CORRECTION | SCOPE
-```
+Name the exact skill, workflow, adapter, or operating contract that owns the method. Include:
 
-`CLASS` is one of four:
+- current and proposed bounded behavior;
+- evidence ids and narrow scope;
+- alternative diagnosis;
+- expected effect and `IF WRONG`;
+- exact reproducer or focused failure fixture, expected result, and the named complete regression that must also pass;
+- size/context delta and progressive-disclosure plan;
+- owner, dependencies, rollback, and release gates.
 
-| Class | Means |
-|---|---|
-| `omission` | something that should have been there was not |
-| `stance` | the work was right and the framing was wrong |
-| `sequence` | right things, wrong order |
-| `boundary` | acted outside, or inside, where it should have |
+The owner of the affected method decides. The subject of one artifact is not automatically the method owner, and the system operator is not the default owner.
 
-`THE CORRECTION` is their words, verbatim. Not your paraphrase of what they meant. The paraphrase is where the information goes.
+## No self-training
 
-`SCOPE` is which artefacts this applies to, at **the narrowest reading that fits what they said**. A method correction is situated exactly like any other statement and generalising it is the same failure as turning one comment about a progress report into "never produce a deck."
+Do not mine the agent's own recent outputs for flattering “improvements.” Method candidates come from authorised human correction, independent review evidence, reproducible failures, or explicit governance incidents. A Check implementation defect routes to its builder/harness owner and must not automatically change the personal criterion.
 
-## Two strikes still applies
-
-One method correction is an observation. Log it, do not act, do not mention it.
-
-Two of the same class is a proposal. The difference from an output correction is what the proposal changes: a method proposal amends a **skill**, not a criterion.
-
-The narrow scope also protects you here. If two corrections are the same class but different scopes, they are not the same finding, and merging them produces a rule broader than anything the person actually said.
-
-## Worked example
-
-Over two artefacts, the same person says:
-
-```
-2026-08-04 | spec rev 2 | omission | "why dont you bake the counter points in to the brief" | documents I hand to another agent
-2026-08-04 | spec rev 3 | omission | same class, second occurrence | same
-```
-
-Two strikes, class `omission`, scope stated narrowly. The proposal is not "add a caveats paragraph," which fixes the instance. It is a structural change to how that class of document gets produced, which fixes the class.
-
-Note what makes this expensive to lose: the correction was about the shape of every future document, it was given twice, and the entire cost of catching it was two four-field lines.
-
-## The size obligation
-
-Every method proposal states its size delta, and a positive one carries a deletion.
-
-The binding constraint is context occupied, not tokens spent. A skill that grows every week eventually stops being loadable and degrades everything loaded beside it. New leaf means the router got shorter. New gotcha means one that has not fired in a quarter comes out. New skill means you are at the cap and should split a leaf instead.
-
-A weekly pass that only adds looks like progress for about four months.
-
-## What this never becomes
-
-**Never a self-review.** Do not read your own recent work looking for method problems. A model reviewing its own output for what to improve degrades measurably and writes a confident changelog while doing it. Method corrections come from the person, from the ledger, or they do not exist.
-
-**Never applied without a yes.** Automate the collecting, the grouping, the two-strikes filter, the exact delta, the `IF WRONG` and the size delta. Never the acceptance. A skill that changes without a decision is a skill nobody owns.
-
-## The measure
-
-Not corrections captured. **Repeat corrections declining.**
-
-If the same class keeps arriving after it was accepted and applied, the delta was wrong, or it went into a file that does not load when it needs to. Report that, because it is the only signal that distinguishes a loop that is working from a loop that is running.
+After acceptance, route through the normal versioned Compile/Build/Check/release path as applicable. Monitor the actually deployed version under comparable exposure. Success means the same correction declines without unacceptable new failures, not that the proposal was captured or merged.
