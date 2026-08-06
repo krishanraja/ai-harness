@@ -1,79 +1,61 @@
-# The judgement pass
+# Criterion-level judgment
 
-Runs only after the mechanical pass. Reads only the criteria in the loaded rubric, plus the two house lenses declared at the bottom of this file.
+Run in a fresh isolated context after the standard bundle is validated and before any review history is loaded. Freeze standard and submission hashes across every pass.
 
-## Load order
+## Load the standard bundle first
 
-Read `rubric/core.md`, then the surface leaf. **Before the submission.** If you have already read the submission, you have already formed an impression, and checking an impression against criteria is not the same operation as scoring criteria.
+Load only:
 
-## Retrieve exemplars
+- accepted applicable criteria and their decision rules, priority, surface, situation, and pointers;
+- AWAITING, not-applicable, untested, withdrawn, and contradiction boundaries;
+- minimal runtime-authorised exemplars with ids and situations;
+- review policy and current status.
 
-Pull three to five of their own graded items from `exemplars/`, chosen as the closest matches to what you are reviewing, and read them with the verdict and the line they wrote about each.
+Never load sealed holdout items, expected answers, judge rubrics, past ledger verdicts, or unauthorised exemplars. If a runtime exemplar is not in the manifest, exclude it. If an exemplar is actually a holdout item, stop, preserve its first-open state, and return exact contamination evidence to `ctrl-build`.
 
-Do not run this pass with the rubric alone. Retrieved exemplars moved one judging benchmark from 54.9 to 81.7 percent, which is a bigger effect than anything achieved by rewriting the rubric. A criterion describes the standard. An exemplar demonstrates it, and there is information in the demonstration that the description does not carry.
+## Evidence before verdict
 
-## Quote before you score
+For every applicable criterion, cite the smallest exact passage and stable locator before judging it. For whole-artifact properties, cite the relevant set of locators and explain why no single span suffices.
 
-For every criterion, quote the exact passage first. Then score it.
+Use exactly the criterion's decision rule:
 
-If you cannot quote a specific passage, write `insufficient evidence` and move on. You may not score a criterion you cannot point at.
+- `holds`: the cited evidence satisfies it;
+- `breaks`: the cited evidence violates it;
+- `not-applicable`: the criterion does not govern this surface/situation;
+- `insufficient-evidence`: required submission/source information is missing.
 
-This is the mechanism that makes the difference between a review and a plausible essay about a review. The measured problem is specific: evaluation attends to the source three to five times less than generation does and barely reads the candidate answer. The quote is a forcing function against that, and it is the only one that works.
+For the last two, name the reason and exact evidence that would resolve the status. Do not turn absence into a failure or quote unrelated text.
 
-## Score
+## Complete coverage
 
-- `holds`: quote the passage that carries it
-- `borderline`: name the single change that moves it to holds, or score it `breaks`
-- `breaks`: quote the passage, name the criterion
+Review every applicable accepted criterion. When the set exceeds one reliable pass, declare the pass budget, partition by stable criterion ids, use independent contexts over the same hashes, and merge the per-criterion records. Preserve disagreements rather than forcing consensus. Never discard later/lower-priority criteria merely to fit context.
 
-Seven criteria maximum. Essential first, then pitfall, then important. If the rubric has more than seven for this surface, it should have been split into two passes and you should say so.
+Do not return an aggregate score. Prioritise material breaks in the owner summary without erasing the full criterion table.
 
-## The three lenses
+## House advisories
 
-Run them **independently**. Write each verdict before reading the next lens's criteria. Do not let them inform each other and do not let them debate. Debate measurably degrades consistency and the degradation does not recover.
+Evidence quality, genericness, accessibility, or organisation style can be useful when separately authorised. Report each as `HOUSE ADVISORY`, name its non-subject policy/source, and keep it advisory unless an authorised governance policy says otherwise.
 
-**Lens 1: Standard.** Against the person's compiled criteria, and only those. This is the lens that can block, once the criteria have been measured. Everything it says is labelled **their rule** and names them.
+If a subject criterion holds but a house advisory objects, report both and the owner decision point. Do not average them into `borderline`, overwrite the personal standard, or imply that the house lens came from the subject.
 
-**Lens 2: Evidence.** Is every claim earned, every number sourced, every quote real. Labelled **house check**. **Advisory only, permanently.**
+An uncovered semantic observation is also advisory. Describe it without scoring and propose it to the ledger only under the privacy/authority contract. Repetition may later go to `ctrl-capture`; it does not become a rule during review.
 
-**Lens 3: Signature.** Could this have been written by anyone. Labelled **house check**. **Advisory only, permanently.**
+## Claims and current truth
 
-Lenses 2 and 3 are house-level and written rather than elicited from this person. They earn their place because the failures they catch are real and common. They may not block, and they may never be reported as the person's own rule. Somebody will eventually read a house check attributed to them, disagree with it, and lose confidence in everything else in the review. Label them correctly and that never happens.
+Source presence and factual truth are separate checks. A citation can exist and still be stale, weak, or irrelevant. For a current or high-stakes claim, hand verification to `evidence-research` or consult an authorised current primary source, then record the source/date and limit. If that route is unavailable or unauthorised, label the claim `unverified`; do not approve it from memory.
 
-## Where lenses disagree
+Research findings remain factual evidence or house policy. They do not become the subject's preference unless the CTRL evidence chain establishes that.
 
-Do not average and do not pick. Report the disagreement and escalate:
+## Proposed revisions
 
-> Standard and Signature disagree on the opening. Standard holds it against C2. Signature reads it as generic. Worth a human look.
+When improvement is requested, propose the smallest passage-level change that resolves each material `breaks` while preserving supported meaning, facts, citations, voice, and situation. Link the patch to the exact original passage and criterion.
 
-Disagreement between independent verifiers is signal, not noise. Verifiers that agree are right far more often than verifiers that split, and flattening a split into a single verdict throws away the most useful thing the panel produced.
+Treat proposed text as a new frozen artifact. Rerun applicable mechanical checks, provenance, the failed criterion, and any criterion the change may affect. Report the recheck; do not mutate, send, or publish the original.
 
-## Never invent a criterion
+If a safe fix requires new facts, subject judgment, design decisions, or code, route to the correct owner instead of inventing it.
 
-If the piece has an obvious problem and no criterion covers it, say so as an uncovered observation:
+## Decision rights
 
-> Not covered by the rubric: the second half repeats the first. Flagging, not scoring.
+Check reports evidence. The authorised human decides whether to accept a patch, send/publish, or change gate disposition. A clean review means no identified break under the named standard/version and reviewed evidence; it is not a guarantee.
 
-Then log it as `uncovered` in the ledger. **Uncovered lines are the most valuable rows in the ledger**, because they are the standard telling you what it does not yet contain, and `ctrl-capture` processes them first.
-
-What you must not do is score it anyway against a criterion you made up on the spot. A rule system that fires outside its elicited envelope will fail silently, and this one will too.
-
-## When you cannot tell
-
-Say which criterion you could not evaluate and why. Do not guess.
-
-A confident wrong review carrying someone's name costs more credibility than no review at all. If the submission type is genuinely novel, route to `rubric/general.md` and flag that you did.
-
-## Revision
-
-Every `breaks` carries a rewrite of that specific passage. Not the whole document, and not more than two passages.
-
-A gate that only says no gets bypassed. That is not a prediction, it is what happens, and it happens within about a fortnight. The revision is what keeps the gate in the workflow.
-
-**Anything you rewrite goes back through the mechanical pass and the provenance pass before it ships.** Your own revision is not exempt from the checks that caught the original, and a revision that skips them is an ungated write into a document that was being gated.
-
-## Disposition
-
-A criterion is `advisory` until its false-positive rate has been measured. Ship at warning level, watch the first ten reviews, tune the noise, and promote to blocking only once the false positives are gone.
-
-An untrusted gate is worse than no gate. It consumes the authority you would need to introduce a real one later, and you only get to spend that once.
+Do not automatically make a criterion blocking after a run count or absence of complaints. Blocking requires explicit owner policy, measured false positives with feedback capture, appeal/override, monitoring, rollback, and governance approval.
