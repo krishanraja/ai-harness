@@ -3,12 +3,12 @@ last_reconciled: 2026-08-06
 status: candidate-set
 
 deployed_release:
-  release_id: candidate-5754854
-  source_commit: 57548547db9f8378698477cf198e862dfaaf3699
-  artifact_set_sha256: 96097A8D7ED2EFB6A983ADC05260445AC1C3C617F8AC20ED5C3ECD84A07A3163
+  release_id: candidate-deb472b
+  source_commit: deb472bc4a1675f412fe86445d2cc7ab344050d4
+  artifact_set_sha256: 64B25BDDA4051912A6DD0D289A123853633670AE1FAD212E4902A6DBF8EF6BE8
   deployed_at: 2026-08-06
-  evidence: state/release-candidate-5754854-deployment-2026-08-06.md
-  status: parity-deployed-with-recorded-runtime-canary-limits
+  evidence: state/release-candidate-deb472b-deployment-2026-08-06.md
+  status: parity-deployed-with-cloud-voice-route-canaries-and-recorded-local-runtime-limits
 
 canonical:
   repository: krishanraja/ai-harness
@@ -19,7 +19,9 @@ canonical:
     - {client: codex, path: 'C:\Users\krish\.codex\skills', policy: release-managed-canonical-set-excluding-system}
     - {client: shared-agents, path: 'C:\Users\krish\.agents\skills', policy: third-party-catalog-not-canonical-deployment}
     - {client: cursor-managed-catalog, path: 'C:\Users\krish\.cursor\skills-cursor', policy: provider-managed-excluded-from-canonical-ownership}
-  cloud_surface: claude.ai/customize/skills
+  cloud_surfaces:
+    - claude.ai/customize/skills
+    - perplexity.ai/computer/skills
 
 release_policy:
   source: clean canonical commit
@@ -60,7 +62,7 @@ candidates:
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
   - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
-  - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 90}
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-check, role: standards-stage-5-7, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}

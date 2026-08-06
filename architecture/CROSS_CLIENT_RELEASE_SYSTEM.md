@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: candidate `candidate-5754854` was deployed on 2026-08-06 from clean commit `57548547db9f8378698477cf198e862dfaaf3699`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest; Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills and passed a fresh-chat routing canary. Perplexity Computer has the same 26 user-managed names enabled at account level and passed a live `take-the-brief` routing canary. Automatic scheduling and unattended cloud mutation remain intentionally inactive.
+Status: candidate `candidate-deb472b` was deployed on 2026-08-06 from clean commit `deb472bc4a1675f412fe86445d2cc7ab344050d4`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest. Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills; Perplexity Computer has exactly the same 26 user-managed names enabled. Both cloud surfaces passed live `ctrl-intake` voice-route canaries that loaded the voice and transcript leaves together, asked one authority question, and stopped. Automatic scheduling and unattended cloud mutation remain intentionally inactive.
 
 ## Decision
 

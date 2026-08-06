@@ -33,3 +33,9 @@ Readback classification: 26 present and enabled; zero missing; zero extra user-m
 Perplexity Computer skills are account-level. The signed-in Windows client consumes the same account surface; there is no separate user skill directory to populate or declare canonical. A client refresh or restart may be required before a previously open desktop window displays the newest account state.
 
 Perplexity exposes no downloadable installed-package hash. Exact byte parity inside the cloud is therefore not claimed. Evidence consists of the clean canonical source, repeat-identical retained transport artifacts, visible exact enabled-name readback, and the live routing/reference/behavior canary. GitHub remains the only editable canonical source.
+
+## CTRL Intake voice-route refresh
+
+On 2026-08-06, `ctrl-intake` was replaced from clean candidate `candidate-deb472b` at commit `deb472bc4a1675f412fe86445d2cc7ab344050d4` using `ctrl-intake-candidate-deb472b-perplexity.zip` (SHA-256 `4BC76DB7817F36F7325B19F84491FE2A6B80AF34CD07D8C6764D119D875FCE69`). The file readback showed `SKILL.md`, `leaves/live-session.md`, `leaves/sort.md`, `leaves/transcripts.md`, and `leaves/voice.md`.
+
+A fresh Computer task explicitly invoking the mixed-authorship voice route named both `ctrl-intake/leaves/voice.md` and `ctrl-intake/leaves/transcripts.md`, stated that they must be loaded together, asked exactly one authorization/owner question, and stopped. A final inventory readback returned 26 enabled canonical names, zero missing, and zero extra user-managed names. The task evidence is retained at `https://www.perplexity.ai/computer/tasks/d5605361-58d7-4bed-b52e-38bad0b3be64`.
