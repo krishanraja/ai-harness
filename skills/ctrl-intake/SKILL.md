@@ -1,6 +1,6 @@
 ---
 name: ctrl-intake
-description: "Elicits a named person's reusable quality or taste standard from their grading of real work. Use for durable standards onboarding, triadic elicitation, repertory-grid sessions, self-serve sorts, approved/rejected artifact comparison, transcript-to-candidate extraction, or repairing a personal profile that inferred rules the subject never established. Also trigger when someone asks to skip grading, infer personality or permanent rules from one source, reuse private material without scope, contaminate a holdout, or supply the desired construct; this skill enforces the refusal. Do not use for a one-task goals-and-constraints interview (`take-the-brief`), compiling an existing intake (`ctrl-compile`), packaging (`ctrl-build`), reviewing (`ctrl-check`), or ledger-based standard changes (`ctrl-capture`). Last reviewed 2026-08-05."
+description: "Elicits a named person's reusable quality or taste standard from their grading of real work. Use for durable standards onboarding, triadic elicitation, repertory-grid sessions, self-serve sorts, approved/rejected artifact comparison, transcript-to-candidate extraction, building a voice or writing-style standard from a corpus of someone's own writing (including a client's), or repairing a personal profile that inferred rules the subject never established. Also trigger when someone asks to skip grading, infer personality or permanent rules from one source, reuse private material without scope, contaminate a holdout, or supply the desired construct; this skill enforces the refusal. Do not use for a one-task goals-and-constraints interview (`take-the-brief`), compiling an existing intake (`ctrl-compile`), packaging (`ctrl-build`), reviewing (`ctrl-check`), or ledger-based standard changes (`ctrl-capture`). Last reviewed 2026-08-05."
 ---
 
 # CTRL Intake
@@ -36,8 +36,11 @@ Subject consent to take part is not consent to publish, share broadly, train unr
 | Subject can grade real work in a facilitated session | `leaves/live-session.md` |
 | Subject needs a self-serve or asynchronous instrument | `leaves/sort.md` |
 | Transcripts, recordings, emails, or writing exist before grading | `leaves/transcripts.md` |
+| A body of the subject's own writing must become a voice standard | `leaves/voice.md` |
 
 Usually extract candidates from authorised transcripts first, then validate them through a live session or sort. Transcript candidates never become rules by themselves.
+
+The voice route is a corpus-to-shapes extraction that still ends in grading. Before starting it, load both `leaves/voice.md` and `leaves/transcripts.md`; never substitute corpus extraction for a sort.
 
 ## Evidence invariants
 
@@ -102,6 +105,6 @@ Preserve raw evidence immutably as a versioned input; corrections create a new v
 - One task's real goal, why, constraints, success, and handoff interview: `take-the-brief`; do not create a durable person profile.
 - Completed intake to tested criteria/profile: `ctrl-compile`; keep holdout isolated.
 - Existing ledger or repeated gate evidence proposing a change: `ctrl-capture`; use fresh intake only when new elicitation is approved and genuinely required.
-- Known-authorship voice mechanics: hand a bounded derived packet to the relevant voice owner only with authorised purpose/audience; candidate judgment rules still require grading.
+- Known-authorship voice mechanics: load both voice-route leaves, then hand a bounded derived packet to the exact named voice owner only with authorised purpose/audience. Use `krish-voice` when Krish is the subject; otherwise name the client or subject's designated voice owner. Candidate judgment rules still require grading, and final prose verification may use only graded evidence within the packet's stated surface.
 
 Completion means the evidence packet is authorised, provenance-complete, schema-valid, honestly limited, holdout-safe, and ready for `ctrl-compile`. It does not mean the person's standard has already been inferred.

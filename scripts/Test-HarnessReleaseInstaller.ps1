@@ -6,6 +6,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
 if (-not $InstallerPath) { $InstallerPath = Join-Path $PSScriptRoot 'Install-HarnessRelease.ps1' }
 $testId = [Guid]::NewGuid().ToString('N')
 $testRoot = Join-Path ([IO.Path]::GetTempPath()) "ai-harness-installer-test-$testId"
@@ -13,6 +15,25 @@ $target = Join-Path $testRoot 'skills'
 $selected = @('harness-maintainer', 'take-the-brief')
 
 try {
+    $release = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $ctrlIntake = @($release.skills | Where-Object name -eq 'ctrl-intake')
+    if ($ctrlIntake.Count -ne 1) { throw 'Release manifest must contain exactly one ctrl-intake record.' }
+    $perplexityPath = Join-Path (Split-Path -Parent $ManifestPath) $ctrlIntake[0].perplexity_artifact
+    if (-not (Test-Path -LiteralPath $perplexityPath -PathType Leaf)) { throw 'Perplexity transport is missing.' }
+    if ((Get-FileHash -LiteralPath $perplexityPath -Algorithm SHA256).Hash -ne $ctrlIntake[0].perplexity_artifact_sha256) {
+        throw 'Perplexity transport hash does not match the release manifest.'
+    }
+    $perplexityArchive = [IO.Compression.ZipFile]::OpenRead($perplexityPath)
+    try {
+        $perplexityEntries = @($perplexityArchive.Entries | Where-Object Name | ForEach-Object FullName)
+        if ('SKILL.md' -notin $perplexityEntries) { throw 'Perplexity transport does not place SKILL.md at the archive root.' }
+        if ('leaves/voice.md' -notin $perplexityEntries) { throw 'Perplexity transport dropped the ctrl-intake voice leaf.' }
+        if (@($perplexityEntries | Where-Object { $_ -like 'ctrl-intake/*' }).Count -ne 0) {
+            throw 'Perplexity transport incorrectly wraps files in a skill directory.'
+        }
+    }
+    finally { $perplexityArchive.Dispose() }
+
     $plan = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected)
     if (Test-Path -LiteralPath $target) { throw 'Plan-only mode created the target directory.' }
     if (-not ($plan -match 'PLAN_ONLY .*add=2')) { throw 'Plan-only mode did not report two missing skills.' }
@@ -36,7 +57,7 @@ try {
     $final = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected)
     if (-not ($final -match 'PLAN_ONLY .*exact=2')) { throw 'Replacement did not restore exact release parity.' }
 
-    Write-Output 'INSTALLER SELF-TEST PASSED: plan-only, add, exact parity, replacement, backup preservation.'
+    Write-Output 'INSTALLER SELF-TEST PASSED: portable root package, leaf preservation, plan-only, add, exact parity, replacement, backup preservation.'
 }
 finally {
     $testFull = [IO.Path]::GetFullPath($testRoot)

@@ -41,6 +41,8 @@ else {
     if ($releaseBuilderRaw -notmatch 'status\s+--porcelain\s+--untracked-files=all') { Add-Failure 'Release builder does not enforce or record clean-tree state.' }
     if ($releaseBuilderRaw -notmatch 'Get-DirectoryArtifactSha256') { Add-Failure 'Release builder does not hash the complete source skill artifact.' }
     if ($releaseBuilderRaw -notmatch 'source_manifest_sha256') { Add-Failure 'Release builder does not distinguish manifest hash from full source-skill hash.' }
+    if ($releaseBuilderRaw -notmatch 'FilesAtArchiveRoot') { Add-Failure 'Release builder does not produce a root-level portable cloud package.' }
+    if ($releaseBuilderRaw -notmatch 'perplexity_artifact_sha256') { Add-Failure 'Release builder does not record the Perplexity transport hash.' }
     if ($releaseBuilderRaw -notmatch 'ReleaseId\s+-notmatch') { Add-Failure 'Release builder does not constrain release identifiers.' }
 }
 

@@ -46,7 +46,8 @@ jobs:
             $other = $manifestB.skills | Where-Object name -eq $skill.name
             if (-not $other -or
                 $skill.source_skill_sha256 -ne $other.source_skill_sha256 -or
-                $skill.artifact_sha256 -ne $other.artifact_sha256) {
+                $skill.artifact_sha256 -ne $other.artifact_sha256 -or
+                $skill.perplexity_artifact_sha256 -ne $other.perplexity_artifact_sha256) {
               $differences += $skill.name
             }
           }

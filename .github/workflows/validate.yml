@@ -51,7 +51,8 @@ jobs:
             $other = $manifestB.skills | Where-Object name -eq $skill.name
             if (-not $other -or
                 $skill.source_skill_sha256 -ne $other.source_skill_sha256 -or
-                $skill.artifact_sha256 -ne $other.artifact_sha256) {
+                $skill.artifact_sha256 -ne $other.artifact_sha256 -or
+                $skill.perplexity_artifact_sha256 -ne $other.perplexity_artifact_sha256) {
               $differences += $skill.name
             }
           }
@@ -69,6 +70,6 @@ jobs:
             "- Source: ``$($manifestA.source_commit)``",
             "- Skills: $($manifestA.skills.Count)",
             '- Structural/security validation: passed',
-            '- Deterministic repeat-build comparison: passed',
+            '- Deterministic repeat-build comparison: standard and Perplexity transports passed',
             '- Installer plan/add/replacement/backup test: passed'
           ) | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY

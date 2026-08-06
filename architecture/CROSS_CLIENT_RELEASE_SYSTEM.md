@@ -51,7 +51,8 @@ Advancement is evidence-based. `active`, retirement, and deletion are user-owned
 5. Never put credentials, browser sessions, live customer data, or unredacted observations in Git. Use each client's credential store or environment and keep secret scanning enabled.
 6. Tag approved releases as `harness-vYYYY.MM.DD.N`. Build from the exact clean tagged commit.
 7. Publish these GitHub Release assets:
-   - every deterministic `.skill` archive;
+   - every deterministic `.skill` archive for directory-based Agent Skills clients and Claude Cloud;
+   - every deterministic `-perplexity.zip` archive with `SKILL.md` at the ZIP root;
    - `release-<id>.json` containing source and artifact hashes;
    - a checksum file covering the manifest and all archives;
    - evaluation and security summaries that contain no secrets.
@@ -135,7 +136,7 @@ Perplexity Computer custom skills are account-managed rather than a separate Win
 
 Use a controlled bridge:
 
-1. Build Perplexity transport packages with `SKILL.md` at the ZIP root while preserving every canonical skill file and reference.
+1. Build Perplexity transport packages with `scripts/Build-HarnessRelease.ps1`; each `-perplexity.zip` places `SKILL.md` at the ZIP root while preserving every canonical skill file and reference.
 2. Validate the canonical source, build twice, and require identical package hashes.
 3. Inventory `My skills` before mutation and preserve provider example skills as provider-managed dependencies.
 4. Upload no more than Perplexity's current UI batch limit, wait for each batch to finish, and verify the exact enabled name set after the final batch.
@@ -143,6 +144,12 @@ Use a controlled bridge:
 6. Record source commit, transport hashes, visible enabled state, canary evidence, retrieval time, and the residual absence of a downloadable cloud hash.
 
 Perplexity's account-level upload is not a second canonical source and is not a byte-parity claim. Do not create a fake local skills folder for the desktop app. Updates remain supervised until Perplexity exposes a stable authenticated API with equivalent inventory, upload, enabled-state, and rollback evidence.
+
+## Portable supporting-file contract
+
+Supporting files such as `references/*.md` and `leaves/*.md` are canonical skill resources, not client-specific source. `SKILL.md` must name the exact relative path and the condition that requires loading it. The validator rejects missing or Windows-style resource paths, the release builder preserves the complete directory in both transport forms, and repeat-build checks compare hashes for both forms.
+
+Do not flatten a healthy multi-file skill merely because one provider uses different terminology. Progressive disclosure is the intended behavior. If a client fails a held-out resource-loading canary, keep the canonical multi-file source and add a deterministic client adapter or flattened fallback only for that proven limitation.
 
 ## Self-correction and learning
 

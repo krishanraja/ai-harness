@@ -33,7 +33,8 @@ New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 function New-DeterministicSkillArchive {
     param(
         [IO.DirectoryInfo]$SkillDirectory,
-        [string]$Destination
+        [string]$Destination,
+        [switch]$FilesAtArchiveRoot
     )
 
     $destinationFull = [IO.Path]::GetFullPath($Destination)
@@ -44,7 +45,7 @@ function New-DeterministicSkillArchive {
             $files = @(Get-ChildItem -LiteralPath $SkillDirectory.FullName -Recurse -File | Sort-Object FullName)
             foreach ($file in $files) {
                 $relative = $file.FullName.Substring($SkillDirectory.FullName.Length).TrimStart('\') -replace '\\', '/'
-                $entryName = $SkillDirectory.Name + '/' + $relative
+                $entryName = $(if ($FilesAtArchiveRoot) { $relative } else { $SkillDirectory.Name + '/' + $relative })
                 $entry = $archive.CreateEntry($entryName, [IO.Compression.CompressionLevel]::Optimal)
                 $entry.LastWriteTime = [DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
                 $entryStream = $entry.Open()
@@ -81,7 +82,9 @@ $skillDirectories = @(Get-ChildItem -LiteralPath $skillsRoot -Directory | Where-
 
 foreach ($skill in $skillDirectories) {
     $artifact = Join-Path $OutputDirectory ($skill.Name + '-' + $ReleaseId + '.skill')
+    $perplexityArtifact = Join-Path $OutputDirectory ($skill.Name + '-' + $ReleaseId + '-perplexity.zip')
     New-DeterministicSkillArchive -SkillDirectory $skill -Destination $artifact
+    New-DeterministicSkillArchive -SkillDirectory $skill -Destination $perplexityArtifact -FilesAtArchiveRoot
     $manifest = Join-Path $skill.FullName 'SKILL.md'
     $records.Add([pscustomobject]@{
         name = $skill.Name
@@ -92,11 +95,14 @@ foreach ($skill in $skillDirectories) {
         artifact = [IO.Path]::GetFileName($artifact)
         artifact_sha256 = (Get-FileHash -LiteralPath $artifact -Algorithm SHA256).Hash
         bytes = (Get-Item -LiteralPath $artifact).Length
+        perplexity_artifact = [IO.Path]::GetFileName($perplexityArtifact)
+        perplexity_artifact_sha256 = (Get-FileHash -LiteralPath $perplexityArtifact -Algorithm SHA256).Hash
+        perplexity_bytes = (Get-Item -LiteralPath $perplexityArtifact).Length
     })
 }
 
 $release = [ordered]@{
-    schema_version = 2
+    schema_version = 3
     release_id = $ReleaseId
     source_commit = $commit
     working_tree = $treeState
@@ -107,6 +113,6 @@ $release = [ordered]@{
 
 $releasePath = Join-Path $OutputDirectory ('release-' + $ReleaseId + '.json')
 $release | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $releasePath -Encoding UTF8
-Write-Output "BUILT $($records.Count) deterministic skill artifacts"
+Write-Output "BUILT $($records.Count) skill records and $($records.Count * 2) deterministic transport artifacts"
 Write-Output "SOURCE $commit ($treeState)"
 Write-Output "MANIFEST $releasePath"
