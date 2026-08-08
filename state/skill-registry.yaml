@@ -1,14 +1,14 @@
 schema_version: 1
 last_reconciled: 2026-08-07
-status: candidate-set
+status: governed-production-set
 
 deployed_release:
-  release_id: candidate-60ac77d
-  source_commit: 60ac77d1fc8f73f3bd572d3fab2f11179560c477
-  artifact_set_sha256: F792C881B4CE8E167FA6B3B2B0C93D74271BA015134011C7A029FFC8CCAC889D
-  deployed_at: 2026-08-06
-  evidence: state/release-candidate-60ac77d-deployment-2026-08-06.md
-  status: parity-deployed-with-durable-schedule-invariant
+  release_id: 8f221b5
+  source_commit: 8f221b5ad487a5226c22ddf69ef5aac5aba99925
+  artifact_set_sha256: 215F5AD2B093B89F5F15C45C3DE4D12386060815A64450227D70A72892A3E520
+  deployed_at: 2026-08-07
+  evidence: state/release-8f221b5-deployment-2026-08-07.md
+  status: parity-deployed-with-mobile-web-and-portable-design-retrieval
 
 canonical:
   repository: krishanraja/ai-harness
@@ -38,9 +38,36 @@ release_policy:
   admission_standard: contract/active-skill-quality-standard.md
   curated_only: true
 
-production_active: []
+production_active:
+  - apify
+  - build-apps-with-krish
+  - content-corpus
+  - ctrl-build
+  - ctrl-capture
+  - ctrl-check
+  - ctrl-compile
+  - ctrl-intake
+  - decision-ledger
+  - design-intelligence-search
+  - evidence-research
+  - harness-maintainer
+  - instantly-operator
+  - krish-build
+  - krish-content-marketer
+  - krish-design
+  - krish-principles
+  - krish-voice
+  - mindmaker
+  - mindmaker-os
+  - n8n-operator
+  - strategy-brief
+  - take-the-brief
+  - tools-access
+  - ux-foundations
+  - ux-testing-agent
+  - verification-loop
 
-candidates:
+production:
   - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -80,7 +107,7 @@ quarantine:
   - name: mobile-app-ui-design
     reason: Broad generic auto-trigger collides with krish-design and build-apps-with-krish; hard-coded aesthetic, breakpoint, component, and accessibility prescriptions are not current-source or Krish-specific. Found enabled in Claude Cloud and present only on the Cursor local surface on 2026-08-07.
     replacement: krish-design mobile-web reliability floor plus optional manual-only design-intelligence-search retrieval.
-    next_gate: Obtain exact action-time approval to remove the Claude Cloud skill and Cursor directory after the replacement release is installed and canaried.
+    next_gate: Replacement is installed and canaried. Claude Cloud copy is disabled and the Cursor copy is archived outside the active directory; retain both only for rollback unless Krish separately approves permanent deletion.
   - name: legacy-tools-access
     reason: Credential values embedded in multiple local and cloud copies.
     replacement: tools-access
