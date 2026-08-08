@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+  "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+  "tag_observed": "v2.14.1",
+  "retrieved_at": "2026-08-07",
+  "license": "MIT",
+  "upstream_skill_version": "2.13.0",
+  "upstream_plugin_version": "2.13.0",
+  "upstream_cli_repo_version": "2.5.0",
+  "npm_cli_version_observed": "2.14.1",
+  "adaptation": "Pinned data and Python engine only. Upstream trigger, workflow, persistence, installer, standards authority, implementation, and QA claims are suppressed by the canonical adapter.",
+  "vendor_directory_sha256": "9D1A0F3C3DBFE96D6BFE54B656C216A30323C3815197409BCAC034481B0C6807",
+  "hash_normalization": "CRLF is normalized to LF for cross-platform integrity; paths are POSIX-relative and sorted case-insensitively."
+}

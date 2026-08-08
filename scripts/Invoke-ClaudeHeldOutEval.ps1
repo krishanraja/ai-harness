@@ -144,6 +144,9 @@ foreach ($name in $SkillName) {
     $files = [System.Collections.Generic.List[object]]::new()
     foreach ($file in Get-ChildItem -LiteralPath $skillRoot -Recurse -File | Sort-Object FullName) {
         $relative = $file.FullName.Substring($skillRoot.Length).TrimStart('\', '/') -replace '\\', '/'
+        # Vendored executable/data payloads are deterministically tested elsewhere. Sending them to
+        # the semantic evaluator bloats context and lets third-party corpus rows drown the control plane.
+        if ($relative -like 'scripts/vendor/*') { continue }
         $files.Add([ordered]@{
             path = $relative
             content = [IO.File]::ReadAllText($file.FullName)

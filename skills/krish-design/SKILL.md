@@ -48,6 +48,8 @@ For any load-bearing fresh divergence, produce at least three independent concep
 
 Before rendering a divergent synthesis, prove that its interaction, information, and state model are feasible with the real code and data constraints. For a tiebreaker, randomize the anonymized candidate order again and preserve the material minority rationale.
 
+When one exploration arm would benefit from a broader pattern vocabulary, explicitly delegate a bounded query to `design-intelligence-search`. Name the decision, product and user, surface, existing system, search need, concept arm, stack if relevant, and constraints. Keep the returned corpus inside that arm until divergence is judged; never give the same preset packet to every generator. Treat every result as an advisory candidate: this skill still decides fit against Krish's taste, approved tokens, real product truth, and current evidence.
+
 **The verdict sits where the user acts.** [LOAD-BEARING]
 Never bury the conclusion in a summary box at the bottom. Place the verdict, the response, the answer directly at the point of interaction (under the chips they click, beside the control they touch). If the user has to scroll to find out what their action meant, the layout failed. Proven in the record: relocating a curveball response from a distant verdict box to directly under the clickable chips.
 
@@ -164,6 +166,7 @@ Across any series (dossiers, episode assets, workshop pages): hold the structura
 
 - **Data honesty:** if the intended state needs data the product cannot reliably provide, fail the concept. Design and render an intentional sparse/default fallback and surface the material product fork. Never mock representative data as if it were live.
 - **Range proof:** test representative, empty, loading, stale, error, adversarial, long-content, translated, and quiet states as applicable at both narrow and wide intended viewports. Fix the lowest shared content-contract, responsive, or component rule; do not add nested scrollbars or shrink type into illegibility.
+- **Mobile-web reliability floor:** derive responsive changes from content and task failure rather than a copied device list; preserve semantic task and status across layouts; support touch, keyboard, coarse/fine pointers, zoom, orientation, virtual keyboards, dynamic browser chrome, safe-area/display-mode differences, retry and input preservation. Treat `vh`/`svh`/`lvh`/`dvh`, fixed/sticky controls, current accessibility thresholds, Core Web Vitals, and browser support as current-source decisions. For release-critical flows, verify representative state and performance on physical devices; when both audiences matter, include actual WebKit iOS Safari and Chromium Android Chrome paths. Emulation helps diagnose but is not final proof.
 - **Stale-render recovery:** verify artifact revision, file size, and modification time; render through a fresh self-contained path; inspect high-resolution pixels; keep the visual verdict unverified until the current artifact is actually seen.
 - **Private evidence:** redact or recapture screenshots with safe test data while preserving route, viewport, revision, and reproduction steps. If safe evidence is impossible, report the limitation and keep the affected verdict unverified. Never commit or upload customer/session material.
 - **Ethical interaction:** refuse dark patterns, hidden or preselected consent, misleading hierarchy, and designs that obscure a user's real choice. Make the action and consequence legible, offer an ethical alternative, and state the business trade-off explicitly.
@@ -180,6 +183,7 @@ Across any series (dossiers, episode assets, workshop pages): hold the structura
 | Read-only deployed UX audit | `ux-testing-agent`; supply this doctrine only as evaluation context and require reproducible evidence with route, viewport, revision, steps, expected result, observed result, and artifact |
 | Final on-page words | `krish-voice` |
 | Generic accessibility/usability lookup | `ux-foundations` beneath this personalized design owner |
+| Bounded pattern, palette, type, landing, chart, motion, or mobile-web candidate retrieval for one named concept arm | `design-intelligence-search` beneath this personalized design owner; retain taste and standards authority here |
 
 After any copy, accessibility, design, or implementation handoff, inspect and verify the combined rendered result. A handoff is not completion.
 

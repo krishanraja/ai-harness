@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-08-06
+last_reconciled: 2026-08-07
 status: candidate-set
 
 deployed_release:
@@ -58,6 +58,7 @@ candidates:
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-08-07, freshness_sla_days: 30}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
@@ -76,6 +77,10 @@ external_managed:
   - {name: data-pipeline, provider: local-unprovenanced, policy: Implementation route only; review before canonicalization.}
 
 quarantine:
+  - name: mobile-app-ui-design
+    reason: Broad generic auto-trigger collides with krish-design and build-apps-with-krish; hard-coded aesthetic, breakpoint, component, and accessibility prescriptions are not current-source or Krish-specific. Found enabled in Claude Cloud and present only on the Cursor local surface on 2026-08-07.
+    replacement: krish-design mobile-web reliability floor plus optional manual-only design-intelligence-search retrieval.
+    next_gate: Obtain exact action-time approval to remove the Claude Cloud skill and Cursor directory after the replacement release is installed and canaried.
   - name: legacy-tools-access
     reason: Credential values embedded in multiple local and cloud copies.
     replacement: tools-access
@@ -125,6 +130,7 @@ evaluation_evidence:
       - {behavior: 2/2, hard_failures: 0, result: pass}
 
 corpus_not_active_skills:
+  - mobile-app-ui-design
   - Claude Skills Ultimate Bundle
   - supplied AI harness research markdown files
   - legacy full Mindmaker OS manuals embedded in skill bodies

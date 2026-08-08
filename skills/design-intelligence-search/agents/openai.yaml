@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design Intelligence Search"
+  short_description: "Bounded UI pattern and mobile-web candidate search"
+  default_prompt: "Use $design-intelligence-search to retrieve advisory UI candidates for a design task already owned by krish-design."
+
+policy:
+  allow_implicit_invocation: false

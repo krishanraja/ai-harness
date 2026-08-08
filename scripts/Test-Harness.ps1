@@ -226,6 +226,11 @@ $n8nOperatorTriggerCases = Join-Path $Root 'evals\n8n-operator-trigger-cases.jso
 $n8nOperatorBehaviorCases = Join-Path $Root 'evals\n8n-operator-behavior-cases.jsonl'
 $instantlyOperatorTriggerCases = Join-Path $Root 'evals\instantly-operator-trigger-cases.jsonl'
 $instantlyOperatorBehaviorCases = Join-Path $Root 'evals\instantly-operator-behavior-cases.jsonl'
+$designIntelligenceTriggerCases = Join-Path $Root 'evals\design-intelligence-search-trigger-cases.jsonl'
+$designIntelligenceBehaviorCases = Join-Path $Root 'evals\design-intelligence-search-behavior-cases.jsonl'
+$designIntelligenceTests = Join-Path $Root 'skills\design-intelligence-search\scripts\tests'
+$designIntelligenceVendorRoot = Join-Path $Root 'skills\design-intelligence-search\scripts\vendor\ui-ux-pro-max'
+$designIntelligenceMetadata = Join-Path $Root 'skills\design-intelligence-search\agents\openai.yaml'
 $apifyHelperTests = Join-Path $Root 'skills\apify\tests'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
@@ -411,7 +416,8 @@ Test-EvalCategoryMinimums -Records $apifyBehaviors -Minimums @{ nominal = 6; fai
 
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
-    @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases }
+    @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },
+    @{ Name = 'design-intelligence-search'; TriggerPath = $designIntelligenceTriggerCases; BehaviorPath = $designIntelligenceBehaviorCases }
 )
 foreach ($spec in $narrowOperatorSpecs) {
     $operatorTriggers = @(Read-JsonLines -Path $spec.TriggerPath)
@@ -421,6 +427,52 @@ foreach ($spec in $narrowOperatorSpecs) {
 }
 
 $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+
+if (-not (Test-Path -LiteralPath $designIntelligenceMetadata -PathType Leaf)) {
+    Add-Failure 'Missing design-intelligence-search OpenAI metadata.'
+}
+elseif ([IO.File]::ReadAllText($designIntelligenceMetadata) -notmatch '(?m)^\s*allow_implicit_invocation:\s*false\s*$') {
+    Add-Failure 'design-intelligence-search is not explicitly manual-only in agents/openai.yaml.'
+}
+
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the design-intelligence-search offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $designIntelligenceTests -PathType Container)) {
+    Add-Failure "Missing design-intelligence-search test directory: $designIntelligenceTests"
+}
+elseif (-not (Test-Path -LiteralPath (Join-Path $designIntelligenceVendorRoot 'scripts\validate_data.py') -PathType Leaf)) {
+    Add-Failure 'Missing pinned UI/UX Pro Max data validator.'
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $designIntelligenceTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $designIntelligenceTests -p 'test_*.py' 2>&1)
+        $designIntelligenceTestExitCode = $LASTEXITCODE
+        Push-Location $designIntelligenceVendorRoot
+        try {
+            $designIntelligenceVendorTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s 'scripts\tests' -p 'test_*.py' 2>&1)
+            $designIntelligenceVendorTestExitCode = $LASTEXITCODE
+            $designIntelligenceValidationOutput = @(& $pythonCommand.Source -B 'scripts\validate_data.py' 2>&1)
+            $designIntelligenceValidationExitCode = $LASTEXITCODE
+        }
+        finally { Pop-Location }
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($designIntelligenceTestExitCode -ne 0) {
+        Add-Failure "design-intelligence-search adapter tests failed: $($designIntelligenceTestOutput -join ' | ')"
+    }
+    if ($designIntelligenceVendorTestExitCode -ne 0) {
+        Add-Failure "Pinned UI/UX Pro Max tests failed: $($designIntelligenceVendorTestOutput -join ' | ')"
+    }
+    if ($designIntelligenceValidationExitCode -ne 0) {
+        Add-Failure "Pinned UI/UX Pro Max data validation failed: $($designIntelligenceValidationOutput -join ' | ')"
+    }
+}
+
 if ($null -eq $pythonCommand) {
     Add-Failure 'Python is unavailable for the Apify helper offline regression suite.'
 }

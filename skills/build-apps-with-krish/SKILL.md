@@ -23,6 +23,8 @@ Stage owners remain authoritative:
 
 Suppress generic app-building or marketplace skills unless they provide a bounded mechanic that a stage owner deliberately selects. They never replace this personalized route.
 
+`design-intelligence-search` is the admitted exception for pinned read-only design retrieval. Invoke it only through `krish-design` or an explicit orchestration delegation, for one named evidence need and one concept arm. It may supply candidates and a mobile-web evidence envelope; it may not choose taste, set current standards, persist a competing design system, implement, test, or approve a surface.
+
 For a new app, material redesign, or workflow spanning multiple connected surfaces, read `references/delivery-protocol.md` before planning the phases. For an isolated task inside an already locked direction, leave this skill and route directly to the narrow owner.
 
 ## Inputs and preflight
