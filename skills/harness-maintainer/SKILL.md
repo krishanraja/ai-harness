@@ -28,6 +28,8 @@ Read `references/reconciliation-and-release-evidence.md` when the task inventori
 
 Capture the request, mis-trigger, failure, stale claim, client drift, or missing capability. Record evidence and affected surfaces without changing them.
 
+Inventory every available personalized surface before deciding direction. GitHub is the governed release authority, but it is not presumed to contain the newest valid edit. Compare each divergent artifact with the last proven deployment record and preserve the unique bytes until the change is explicitly promoted, merged, or retired. Cloud dates, local timestamps, and larger files are discovery signals only.
+
 ### 2. Diagnose the layer
 
 Classify the cause:
@@ -51,6 +53,7 @@ For imported or provider-managed material, record source, license, maintainer, r
 
 ### 4. Stage the smallest coherent change
 
+- Reconcile every divergent source into one decision record: `promote-to-canonical`, `merge-into-canonical`, `retire-local-drift`, or `replace-approved`, bound to the current and candidate hashes.
 - Keep volatile facts live and durable doctrine versioned.
 - Maintain progressive disclosure and one-level references.
 - Preserve explicit inputs, outputs, handoffs, authority, and completion criteria.
@@ -67,7 +70,7 @@ From a clean tree, run structural and security gates, blind trigger classificati
 
 ### 7. Release progressively
 
-Build from a clean commit. Smoke-test one canary client and record the source commit, source-skill hash, artifact hash, installed hash or cloud upload record, client, enabled state, verification time, and prior known-good rollback artifact. Keep `production_active` empty until the applicable admission and canary gates pass. Then propose the next exact surface mutation. Activation, replacement, disablement, deletion, and directory-link changes require their named approval gates; readiness is not authority.
+Build from a clean commit. Smoke-test one canary client and record the source commit, source-skill hash, artifact hash, installed hash or cloud upload record, client, enabled state, verification time, and prior known-good rollback artifact. A local installer may replace a differing directory only when it still matches the last proven deployment record or an explicit release-bound reconciliation record matches both the current and candidate hashes. Unknown drift is a hard stop, not an automatic backup-and-overwrite path. Keep `production_active` empty until the applicable admission and canary gates pass. Then propose the next exact surface mutation. Activation, replacement, disablement, deletion, and directory-link changes require their named approval gates; readiness is not authority.
 
 ### 8. Learn without self-authoring
 

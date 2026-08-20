@@ -12,6 +12,8 @@ param(
 
     [string]$ArtifactsDirectory,
     [string]$BackupRoot,
+    [string]$ExpectedDeploymentRecordPath,
+    [string]$ReconciliationRecordPath,
     [string[]]$Skills = @(),
     [switch]$Apply
 )
@@ -103,6 +105,67 @@ if ([IO.Path]::GetFileName($targetFull) -ne 'skills') { throw 'TargetSkillsDirec
 if (-not $BackupRoot) { $BackupRoot = Join-Path (Split-Path -Parent $targetFull) 'skills.harness-backups' }
 $backupFull = [IO.Path]::GetFullPath($BackupRoot)
 
+$baselineHashes = @{}
+if ($ExpectedDeploymentRecordPath) {
+    $expectedRecordFull = [IO.Path]::GetFullPath($ExpectedDeploymentRecordPath)
+    if (-not (Test-Path -LiteralPath $expectedRecordFull -PathType Leaf)) {
+        throw "Expected deployment record not found: $expectedRecordFull"
+    }
+    $expectedRecord = Get-Content -LiteralPath $expectedRecordFull -Raw | ConvertFrom-Json
+    if ($expectedRecord.surface_id -ne $SurfaceId) {
+        throw "Expected deployment record surface '$($expectedRecord.surface_id)' does not match '$SurfaceId'."
+    }
+    if ([IO.Path]::GetFullPath([string]$expectedRecord.target).TrimEnd('\') -ne $targetFull) {
+        throw 'Expected deployment record target does not match TargetSkillsDirectory.'
+    }
+    foreach ($entry in @($expectedRecord.skills)) {
+        if (-not $entry.name -or [string]$entry.installed_sha256 -notmatch '^[A-Fa-f0-9]{64}$') {
+            throw 'Expected deployment record contains an invalid skill hash entry.'
+        }
+        if ($baselineHashes.ContainsKey([string]$entry.name)) {
+            throw "Expected deployment record contains duplicate skill '$($entry.name)'."
+        }
+        $baselineHashes[[string]$entry.name] = ([string]$entry.installed_sha256).ToUpperInvariant()
+    }
+}
+
+$reconciledDrift = @{}
+if ($ReconciliationRecordPath) {
+    $reconciliationFull = [IO.Path]::GetFullPath($ReconciliationRecordPath)
+    if (-not (Test-Path -LiteralPath $reconciliationFull -PathType Leaf)) {
+        throw "Reconciliation record not found: $reconciliationFull"
+    }
+    $reconciliation = Get-Content -LiteralPath $reconciliationFull -Raw | ConvertFrom-Json
+    if ($reconciliation.schema_version -ne 1 -or $reconciliation.surface_id -ne $SurfaceId) {
+        throw 'Reconciliation record schema or surface does not match this installation.'
+    }
+    if ([IO.Path]::GetFullPath([string]$reconciliation.target).TrimEnd('\') -ne $targetFull) {
+        throw 'Reconciliation record target does not match TargetSkillsDirectory.'
+    }
+    if ($reconciliation.candidate_release_id -ne $release.release_id -or
+        $reconciliation.candidate_source_commit -ne $release.source_commit) {
+        throw 'Reconciliation record is not bound to this candidate release and source commit.'
+    }
+    $approvalTime = [DateTime]::MinValue
+    if ([string]::IsNullOrWhiteSpace([string]$reconciliation.approved_by) -or
+        [string]::IsNullOrWhiteSpace([string]$reconciliation.rationale) -or
+        -not [DateTime]::TryParse([string]$reconciliation.approved_at_utc, [ref]$approvalTime)) {
+        throw 'Reconciliation record must name the approver, rationale, and a valid approval timestamp.'
+    }
+    foreach ($entry in @($reconciliation.skills)) {
+        if (-not $entry.name -or
+            [string]$entry.current_sha256 -notmatch '^[A-Fa-f0-9]{64}$' -or
+            [string]$entry.candidate_sha256 -notmatch '^[A-Fa-f0-9]{64}$' -or
+            [string]$entry.decision -notin @('promote-to-canonical', 'merge-into-canonical', 'retire-local-drift', 'replace-approved')) {
+            throw 'Reconciliation record contains an invalid skill decision.'
+        }
+        if ($reconciledDrift.ContainsKey([string]$entry.name)) {
+            throw "Reconciliation record contains duplicate skill '$($entry.name)'."
+        }
+        $reconciledDrift[[string]$entry.name] = $entry
+    }
+}
+
 $manifestSkills = @($release.skills)
 if ($Skills.Count -gt 0) {
     $unknown = @($Skills | Where-Object { $_ -notin $manifestSkills.name })
@@ -140,7 +203,26 @@ try {
                 throw "Refusing to replace reparse-point target without a separate migration: $target"
             }
             $installedHash = Get-DirectoryArtifactSha256 -Directory $targetItem
-            $relation = $(if ($installedHash -eq $skill.source_skill_sha256) { 'exact' } else { 'replace' })
+            if ($installedHash -eq $skill.source_skill_sha256) {
+                $relation = 'exact'
+            }
+            elseif ($baselineHashes.ContainsKey([string]$skill.name) -and
+                $installedHash -eq $baselineHashes[[string]$skill.name]) {
+                $relation = 'replace-known-baseline'
+            }
+            elseif ($reconciledDrift.ContainsKey([string]$skill.name)) {
+                $decision = $reconciledDrift[[string]$skill.name]
+                if ($installedHash -eq ([string]$decision.current_sha256).ToUpperInvariant() -and
+                    [string]$skill.source_skill_sha256 -eq ([string]$decision.candidate_sha256).ToUpperInvariant()) {
+                    $relation = 'replace-reconciled'
+                }
+                else {
+                    $relation = 'unreconciled-drift'
+                }
+            }
+            else {
+                $relation = 'unreconciled-drift'
+            }
         }
 
         $plan.Add([pscustomobject][ordered]@{
@@ -159,8 +241,13 @@ try {
     }
 
     if (-not $Apply) {
-        Write-Output "PLAN_ONLY surface=$SurfaceId release=$($release.release_id) exact=$(@($plan | Where-Object relation -eq 'exact').Count) replace=$(@($plan | Where-Object relation -eq 'replace').Count) add=$(@($plan | Where-Object relation -eq 'missing').Count)"
+        Write-Output "PLAN_ONLY surface=$SurfaceId release=$($release.release_id) exact=$(@($plan | Where-Object relation -eq 'exact').Count) replace_known=$(@($plan | Where-Object relation -eq 'replace-known-baseline').Count) replace_reconciled=$(@($plan | Where-Object relation -eq 'replace-reconciled').Count) unreconciled=$(@($plan | Where-Object relation -eq 'unreconciled-drift').Count) add=$(@($plan | Where-Object relation -eq 'missing').Count)"
         return
+    }
+
+    $unreconciled = @($plan | Where-Object relation -eq 'unreconciled-drift')
+    if ($unreconciled.Count -gt 0) {
+        throw "Refusing to overwrite unreconciled drift on surface '$SurfaceId': $($unreconciled.name -join ', '). Promote, merge, or retire each source explicitly and supply a release-bound reconciliation record."
     }
 
     New-Item -ItemType Directory -Force -Path $targetFull | Out-Null
@@ -169,7 +256,7 @@ try {
 
     foreach ($item in ($plan | Where-Object relation -ne 'exact')) {
         $backup = $null
-        if ($item.relation -eq 'replace') {
+        if ($item.relation -like 'replace-*') {
             $backup = Join-Path $releaseBackup $item.name
             Move-Item -LiteralPath $item.target -Destination $backup
         }

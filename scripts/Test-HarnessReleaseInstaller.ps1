@@ -40,15 +40,64 @@ try {
 
     $install = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected -Apply)
     if (-not ($install -match 'DEPLOYED .*changed=2')) { throw 'Initial fixture deployment did not change two skills.' }
+    $recordLine = @($install | Where-Object { $_ -like 'RECORD *' })
+    if ($recordLine.Count -ne 1) { throw 'Initial fixture deployment did not return one deployment record.' }
+    $deploymentRecord = $recordLine[0].Substring('RECORD '.Length)
 
     $exact = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected)
     if (-not ($exact -match 'PLAN_ONLY .*exact=2')) { throw 'Post-install plan did not report exact parity.' }
 
     $driftFile = Join-Path $target 'harness-maintainer\DRIFT-TEST.txt'
     Set-Content -LiteralPath $driftFile -Value 'fixture drift' -Encoding utf8
-    $replacement = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected -Apply)
-    if (-not ($replacement -match 'DEPLOYED .*changed=1')) { throw 'Drift replacement did not change exactly one skill.' }
-    if (Test-Path -LiteralPath $driftFile) { throw 'Drifted live directory was not replaced by the release.' }
+    $driftPlan = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected -ExpectedDeploymentRecordPath $deploymentRecord)
+    if (-not ($driftPlan -match 'PLAN_ONLY .*unreconciled=1')) { throw 'Unknown local drift was not classified as unreconciled.' }
+
+    $refused = $false
+    try {
+        & $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected -ExpectedDeploymentRecordPath $deploymentRecord -Apply | Out-Null
+    }
+    catch {
+        if ($_.Exception.Message -notlike '*Refusing to overwrite unreconciled drift*') { throw }
+        $refused = $true
+    }
+    if (-not $refused) { throw 'Installer overwrote unknown local drift without reconciliation.' }
+    if (-not (Test-Path -LiteralPath $driftFile)) { throw 'Refused installation changed the drifted live directory.' }
+
+    $release = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $candidate = @($release.skills | Where-Object name -eq 'harness-maintainer')
+    if ($candidate.Count -ne 1) { throw 'Release manifest must contain one harness-maintainer record.' }
+    $hashRecords = New-Object System.Collections.Generic.List[string]
+    $driftDirectory = Get-Item -LiteralPath (Join-Path $target 'harness-maintainer')
+    foreach ($file in @(Get-ChildItem -LiteralPath $driftDirectory.FullName -Recurse -File -Force | Sort-Object FullName)) {
+        $relative = $file.FullName.Substring($driftDirectory.FullName.Length).TrimStart('\') -replace '\\', '/'
+        $hashRecords.Add("$relative`0$((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash)")
+    }
+    $payload = [Text.Encoding]::UTF8.GetBytes(($hashRecords -join "`n"))
+    $hasher = [Security.Cryptography.SHA256]::Create()
+    try { $currentDriftHash = ([BitConverter]::ToString($hasher.ComputeHash($payload))).Replace('-', '') }
+    finally { $hasher.Dispose() }
+
+    $reconciliationPath = Join-Path $testRoot 'reconciliation.json'
+    [ordered]@{
+        schema_version = 1
+        surface_id = 'fixture'
+        target = [IO.Path]::GetFullPath($target).TrimEnd('\')
+        candidate_release_id = $release.release_id
+        candidate_source_commit = $release.source_commit
+        approved_at_utc = [DateTime]::UtcNow.ToString('o')
+        approved_by = 'installer-self-test'
+        rationale = 'Prove that an exact, release-bound reconciliation permits only the named fixture replacement.'
+        skills = @([ordered]@{
+            name = 'harness-maintainer'
+            current_sha256 = $currentDriftHash
+            candidate_sha256 = $candidate[0].source_skill_sha256
+            decision = 'replace-approved'
+        })
+    } | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $reconciliationPath -Encoding utf8
+
+    $replacement = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected -ExpectedDeploymentRecordPath $deploymentRecord -ReconciliationRecordPath $reconciliationPath -Apply)
+    if (-not ($replacement -match 'DEPLOYED .*changed=1')) { throw 'Reconciled drift replacement did not change exactly one skill.' }
+    if (Test-Path -LiteralPath $driftFile) { throw 'Explicitly reconciled drift was not replaced by the release.' }
 
     $backupRoot = Join-Path $testRoot 'skills.harness-backups\fixture'
     $preserved = @(Get-ChildItem -LiteralPath $backupRoot -Recurse -File -Filter 'DRIFT-TEST.txt')
@@ -57,7 +106,7 @@ try {
     $final = @(& $InstallerPath -ManifestPath $ManifestPath -TargetSkillsDirectory $target -SurfaceId fixture -Skills $selected)
     if (-not ($final -match 'PLAN_ONLY .*exact=2')) { throw 'Replacement did not restore exact release parity.' }
 
-    Write-Output 'INSTALLER SELF-TEST PASSED: portable root package, leaf preservation, plan-only, add, exact parity, replacement, backup preservation.'
+    Write-Output 'INSTALLER SELF-TEST PASSED: portable root package, leaf preservation, plan-only, add, exact parity, unknown-drift refusal, release-bound reconciliation, replacement, backup preservation.'
 }
 finally {
     $testFull = [IO.Path]::GetFullPath($testRoot)

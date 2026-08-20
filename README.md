@@ -32,13 +32,14 @@ The builder requires a clean Git tree, validates first, then creates determinist
 
 ## Plan or install a verified local release
 
-`Install-HarnessRelease.ps1` defaults to a non-mutating plan. It verifies the clean release manifest, package hashes, archive paths, and extracted full-directory hashes before reporting exact, replacement, and missing skills. `-Apply` preserves replaced directories in a release-addressed backup, installs only selected canonical names, verifies installed hashes, records the deployment, and rolls back the transaction on failure.
+`Install-HarnessRelease.ps1` defaults to a non-mutating plan. It verifies the clean release manifest, package hashes, archive paths, and extracted full-directory hashes before reporting exact, known-baseline replacement, explicitly reconciled replacement, unreconciled drift, and missing skills. `-Apply` refuses every unknown drift before mutation. A differing directory may be replaced only when it still matches the named prior deployment record or a release-bound reconciliation record matches both its current hash and the candidate hash. Approved replacements are backed up, installed, hash-verified, recorded, and transactionally rolled back on failure.
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\Install-HarnessRelease.ps1 `
   -ManifestPath C:\path\to\release-v2026.08.05.1.json `
   -TargetSkillsDirectory C:\Users\krish\.claude\skills `
-  -SurfaceId claude-code-user
+  -SurfaceId claude-code-user `
+  -ExpectedDeploymentRecordPath C:\path\to\prior\deployment-record.json
 ```
 
 GitHub validation runs on pull requests and `main`. A tag matching `harness-vYYYY.MM.DD.N` creates an immutable GitHub Release after another validation and repeat-build proof. Neither workflow installs or enables a client.

@@ -1,32 +1,38 @@
 # Cross-client release and learning system
 
-Status: candidate `candidate-60ac77d` was deployed on 2026-08-06 from clean commit `60ac77d1fc8f73f3bd572d3fab2f11179560c477`. Cursor, Claude Code/Desktop, and Codex are byte-exact against the 26-skill manifest. Claude Cloud has the same 26 user-managed names plus two Anthropic-managed skills; Perplexity Computer has exactly the same 26 user-managed names enabled. The `harness-maintainer` schedule invariant is present on every surface, its held-out behavior case passed, and the active weekly audit contains the edge case. Automatic unattended cloud mutation remains intentionally inactive.
+Status: release `8f221b5` is the last recorded deployment, with 27 personalized skills. A live audit on 2026-08-20 found later user-authored content doctrine on the Claude local surface and invalid full-manual drift in `mindmaker-os` on local Claude/Cursor. This exposed a one-way-sync flaw. The system now treats every personalized surface as an inbound change candidate while retaining GitHub as the only governed release authority. Unknown drift is never overwritten. Automatic unattended cloud mutation remains intentionally inactive.
 
 ## Decision
 
-GitHub is the canonical source of truth, not a live-mounted skills folder. Clients consume immutable, commit-addressed release artifacts after validation, approval, installation, and surface-specific verification.
+GitHub is the canonical **release authority**, not an assumption that repository bytes are always newest. Any personalized surface may contain a legitimate later edit. Clients still consume immutable, commit-addressed release artifacts, but only after an inbound inventory and explicit reconciliation has promoted, merged, or retired every divergence.
 
 This separation is deliberate:
 
-- `main` contains the best current candidate source, tests, contracts, and evidence.
+- `main` contains the best **reconciled** candidate source, tests, contracts, and evidence.
 - A release tag identifies an immutable candidate for deployment.
 - A per-surface deployment record identifies what is actually installed and proven.
-- Feedback creates proposed changes and regression cases; it never silently rewrites active instructions.
+- Surface edits and feedback create preserved candidate changes and regression cases; they never silently rewrite active instructions or get silently erased by rollout.
 
-The repository therefore powers every client without allowing one bad edit, failed download, line-ending conversion, or misunderstood preference to corrupt all clients at once.
+The repository therefore powers every client without allowing either one bad edit to spread everywhere or one legitimate later edit to be wiped out by an older release.
 
 ## System shape
 
 ```mermaid
 flowchart LR
-    S["GitHub: candidate source"] --> C["CI: security, structure, routing, behavior, repeat-build checks"]
+    X["Codex"] --> I["Inbound inventory and hash comparison"]
+    Y["Claude local/cloud"] --> I
+    Z["Cursor"] --> I
+    Q["Perplexity"] --> I
+    I --> J["Human-governed promote, merge, or retire decision"]
+    J --> S["GitHub: reconciled candidate source"]
+    S --> C["CI: security, structure, routing, behavior, repeat-build checks"]
     C --> R["Immutable approved release: tag, manifest, checksums, packages"]
     R --> D["Deployment controller: stage, verify, back up, install, smoke-test"]
-    D --> X["Codex"]
-    D --> Y["Claude Code"]
-    D --> Z["Cursor"]
+    D --> X
+    D --> Y
+    D --> Z
     R --> H["Controlled Claude account upload"]
-    R --> Q["Controlled Perplexity Computer upload"]
+    R --> Q
     X --> O["Redacted observations and corrections"]
     Y --> O
     Z --> O
@@ -44,7 +50,7 @@ Advancement is evidence-based. `active`, retirement, and deletion are user-owned
 
 ## Repository and GitHub setup
 
-1. Keep `krishanraja/ai-harness` private and make it the only editable canonical copy.
+1. Keep `krishanraja/ai-harness` private and make it the only repository allowed to produce an approved release. Surface edits remain preserved inbound candidates until reconciled here.
 2. Preserve repository text as LF using the committed `.gitattributes`; still deploy from deterministic archives because Git configuration and non-Git transports are client-specific.
 3. Protect `main`. Require the harness validation check and the deterministic repeat-build check before merge. Do not permit a failed check to be bypassed for a production release.
 4. Give GitHub Actions read-only repository permissions by default. Grant narrowly scoped release-write permission only to the release job.
@@ -83,16 +89,17 @@ The approved workflows are stored under `.github/workflows/`. Validation runs on
 Use one updater implementation with per-client adapters. It should poll the latest **approved release**, never raw `main`, and use this transaction:
 
 1. Acquire a single-run lock.
-2. Read the current per-surface deployment record.
-3. Download the pinned release manifest and requested artifacts to a new staging directory.
-4. Verify the release ID, source commit, validation status, package SHA-256, safe archive paths, and extracted full-directory SHA-256.
-5. Refuse a downgrade, dirty package, unknown skill, missing dependency, unexpected existing target, or hash mismatch.
-6. Preserve a byte-exact previous known-good copy and its deployment record.
-7. Install by extracting the verified archive to a sibling temporary directory and then swapping the exact skill directory. Do not install from a Git checkout.
-8. Verify the installed full-directory hash.
-9. Start a fresh client task/session and run discovery, positive trigger, negative trigger, chained behavior, and coexistence smoke tests.
-10. If any check fails, restore the prior copy and record the failure. Do not continue to the next surface.
-11. If checks pass, record surface, skill, release, commit, hashes, test results, and timestamp.
+2. Hash the current surface and compare it with the current per-surface deployment record. Preserve every unknown divergence as an inbound candidate.
+3. Require each divergence to be explicitly promoted, merged, or retired in a reconciliation record bound to the current hash, candidate release, source commit, and candidate hash.
+4. Download the pinned release manifest and requested artifacts to a new staging directory.
+5. Verify the release ID, source commit, validation status, package SHA-256, safe archive paths, and extracted full-directory SHA-256.
+6. Refuse a downgrade, dirty package, unknown skill, missing dependency, unexpected existing target, hash mismatch, or unreconciled drift. A backup does not turn an unknown overwrite into an approved one.
+7. Preserve a byte-exact previous known-good copy and its deployment record.
+8. Install by extracting the verified archive to a sibling temporary directory and then swapping the exact skill directory. Do not install from a Git checkout.
+9. Verify the installed full-directory hash.
+10. Start a fresh client task/session and run discovery, positive trigger, negative trigger, chained behavior, and coexistence smoke tests.
+11. If any check fails, restore the prior copy and record the failure. Do not continue to the next surface.
+12. If checks pass, record surface, skill, release, commit, hashes, reconciliation decisions, test results, and timestamp.
 
 The approved Codex canary proved why step 7 matters: a normal Windows Git checkout converted LF to CRLF, producing text-equivalent but byte-different files. Extracting the deterministic release package preserved the reviewed bytes exactly.
 
@@ -110,7 +117,7 @@ Do not point all clients directly at the Git working tree. Client-specific cache
 
 ### Scheduling recommendation
 
-After the updater passes manual canaries, run a read-only release check daily and a full drift audit weekly. Downloading and staging can be automatic. Replacement, first installation on a new surface, activation, deletion, and rollback-policy changes remain approval-gated until a stable history justifies narrowing those gates.
+Run a read-only inbound change sentinel daily and a full drift, freshness, dependency, and behavior audit weekly. The daily check inventories all available local and authenticated cloud surfaces, compares them with the last deployment records, and opens a preserved candidate when it sees novel bytes or observable cloud content. Downloading and staging can be automatic. Replacement, first installation on a new surface, activation, deletion, and rollback-policy changes remain approval-gated.
 
 Every present or future harness-maintenance schedule must explicitly test complete supporting-file preservation, repeat-identical standard and Perplexity transport layouts, and paired-resource loading for routes that require multiple files. While the `ctrl-intake` voice route exists, its scheduled regression must prove that `leaves/voice.md` and `leaves/transcripts.md` load together and preserve authorization, withdrawal, exact-owner handoff, one-question behavior, and the required stop condition. Read the stored schedule prompt back after creation or revision; a generic freshness instruction does not satisfy this invariant.
 
@@ -145,7 +152,7 @@ Use a controlled bridge:
 5. Run a fresh Computer task that proves discovery, reference loading, routing, behavior, and stopping conditions before claiming the surface active.
 6. Record source commit, transport hashes, visible enabled state, canary evidence, retrieval time, and the residual absence of a downloadable cloud hash.
 
-Perplexity's account-level upload is not a second canonical source and is not a byte-parity claim. Do not create a fake local skills folder for the desktop app. Updates remain supervised until Perplexity exposes a stable authenticated API with equivalent inventory, upload, enabled-state, and rollback evidence.
+Perplexity's account-level upload is not a second release authority and is not a byte-parity claim. Its observable content may still be an inbound change candidate and must be preserved for review rather than overwritten by assumption. Do not create a fake local skills folder for the desktop app. Updates remain supervised until Perplexity exposes a stable authenticated API with equivalent inventory, upload, enabled-state, and rollback evidence.
 
 ## Portable supporting-file contract
 
@@ -170,7 +177,7 @@ Never learn from a single unconfirmed inference, copy live operational facts int
 ## Freshness loop
 
 - Each canonical skill has an owner, last-reviewed date, and freshness SLA in `state/skill-registry.yaml`.
-- A weekly audit opens a proposal when an SLA expires, a dependency changes, a provider changes its format, an evaluation declines, or deployed hashes drift.
+- A daily sentinel opens an inbound candidate when local hashes or observable cloud content differ from the last proven deployment; a weekly deep audit additionally opens a proposal when an SLA expires, a dependency changes, a provider changes its format, or an evaluation declines.
 - Dynamic facts are fetched from their live authoritative source at task time; a recent `Last Updated` label cannot make copied facts authoritative.
 - Re-run the complete suite after any model/client update that could affect discovery or instruction following.
 - Review overlap and recall as the active set grows. More active skills can reduce correct selection, so bundles are routed by role/task instead of enabling everything everywhere.

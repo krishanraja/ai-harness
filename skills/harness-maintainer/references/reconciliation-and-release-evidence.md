@@ -18,7 +18,9 @@ For every artifact, record:
 
 Classify each artifact and name separately as exact, semantic drift, byte/artifact drift, extra, missing, invalid, junction-backed, or provider-managed. A name, size, line count, UI date, filesystem timestamp, or `Last Updated` claim never establishes parity. Audit a junction target once and report apparent copies separately from independent copies. Preserve every link while observing.
 
-When bytes differ, identify the canonical source, compare file lists and normalized text as well as hashes, locate affected references or consumers, and keep both copies unchanged while staging migration. Do not assume that the newer, larger, or cloud-hosted copy is better.
+When bytes differ, compare every source candidate with the last proven deployment record, compare file lists and normalized text as well as hashes, locate affected references or consumers, and keep every unique copy unchanged while staging reconciliation. GitHub becomes authoritative for the next rollout only after the divergent change is explicitly promoted, merged, or retired and passes the gates. Do not assume that the repository, newer, larger, or cloud-hosted copy is better.
+
+Record each resolved divergence with the surface and target, current full-directory hash, candidate release and source commit, candidate full-directory hash, decision (`promote-to-canonical`, `merge-into-canonical`, `retire-local-drift`, or `replace-approved`), approver, rationale, and timestamp. An installer must refuse unknown drift even when it can create a backup; backup is recovery evidence, not reconciliation authority.
 
 Normalized-text equality never establishes parity. If a transport such as a Git checkout changes LF to CRLF, classify the target as byte drift and reject parity. Preserve or restore the prior target, install the deterministic package bytes rather than the transport-mutated checkout, then recompute and compare the full-directory hash. Never weaken the manifest hash to accommodate transport behavior.
 
