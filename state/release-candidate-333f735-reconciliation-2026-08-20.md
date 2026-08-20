@@ -57,6 +57,26 @@ Post-install full-release plans:
 
 The invalid full-manual `mindmaker-os` copies were not replaced, promoted, or deleted. The Claude-local extra `ui-ux-pro-max` was not changed.
 
+## Cloud deployment
+
+Krish approved replacement only after an objective no-clobber comparison confirmed that each candidate preserved the useful prior material and added either confirmed newer doctrine or stricter synchronization safety. The four exact standard packages were then replaced in Claude Cloud and the four exact Perplexity root-layout ZIPs were replaced in Perplexity Computer.
+
+Claude Cloud verification:
+
+- `content-corpus`: last-updated date `2026-08-20`; enabled; three files; new Paid/Built and reviewed-date anchors visible.
+- `harness-maintainer`: last-updated date `2026-08-20`; enabled; two files; inbound-inventory and unknown-drift hard-stop anchors visible.
+- `mindmaker`: last-updated date `2026-08-20`; enabled; four files; reviewed-date and paid-Maven-retirement anchors visible.
+- `krish-voice`: last-updated date `2026-08-20`; enabled; five files; updated review anchor visible.
+
+Perplexity Computer verification:
+
+- `content-corpus`: enabled; updated timestamp visible; `SKILL.md`, `editorial-channels.md`, and `maven-and-outbound.md` visible; Paid/Built and `2026-08-20` review anchors visible.
+- `harness-maintainer`: enabled; updated timestamp visible; `SKILL.md` and `reconciliation-and-release-evidence.md` visible; inbound-inventory and unknown-drift hard-stop anchors visible.
+- `mindmaker`: enabled; updated timestamp visible; `SKILL.md` plus all three named references visible; `2026-08-20` review and paid-Maven-retirement anchors visible.
+- `krish-voice`: enabled; updated timestamp visible; `SKILL.md` plus all four named references visible; `2026-08-20` review anchor visible.
+
+Cloud surfaces do not expose deterministic directory hashes. Their evidence therefore binds the exact uploaded package hashes above to the observed post-replacement name, enabled state, updated timestamp, file tree, and distinctive content anchors. No unrelated cloud skill was replaced, enabled, disabled, or deleted. `mindmaker-os`, `mobile-app-ui-design`, provider-managed skills, and every non-target personalized skill were left unchanged.
+
 ## Recurring monitor
 
 The existing automation ID `weekly-ai-harness-freshness-audit` was updated in place because a thread supports one active heartbeat. It now runs daily at 08:30 and combines:
@@ -69,6 +89,4 @@ Its stored prompt was read back and contains the no-canonical-assumption rule, d
 ## Remaining approval boundaries
 
 - Candidate source has not yet been tagged as an immutable GitHub Release.
-- Claude Cloud and Perplexity Computer still require supervised replacement of the four named skills from their exact transport packages and fresh-task readback.
-- No cloud skill was uploaded, replaced, enabled, disabled, or deleted in this reconciliation step.
 - The deferred Mindmaker OS architecture and local `mindmaker-os` divergence require a separate decision after Krish updates the architecture document.
