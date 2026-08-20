@@ -69,19 +69,19 @@ production_active:
 
 production:
   - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
+  - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: take-the-brief, role: conditional-intent-briefing-gateway, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: strategy-brief, role: always-on-pre-execution-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
+  - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 30}
   - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
-  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 45}
+  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 60}
+  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}

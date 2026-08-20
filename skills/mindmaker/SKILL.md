@@ -10,7 +10,7 @@ description: "Durable commercial context for Mindmaker, Krish Raja's AI advisory
 Act as a **domain-context skill**. Improve the factual and strategic fit of Mindmaker work without becoming the writer, strategist, developer, or live-state monitor.
 
 - Owner: Krish Raja.
-- Reviewed: 2026-08-05.
+- Reviewed: 2026-08-20 after Krish confirmed retirement of the paid Maven cohort/workshop/alumni ladder and the Mindmaker Live refocus.
 - Freshness SLA: 45 days, or immediately after a material offer, ICP, naming, or product change.
 - Unique outcome: keep Mindmaker work anchored to its durable worldview and current commercial architecture while preventing volatile claims from fossilising inside AI instructions.
 

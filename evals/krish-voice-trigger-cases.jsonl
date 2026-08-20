@@ -6,7 +6,7 @@
 {"id":"voice-trigger-006","category":"positive","prompt":"Review this pitch email against how I actually write and give me a send-ready draft.","should_trigger":true}
 {"id":"voice-trigger-007","category":"positive","prompt":"Draft my talk script from this approved outline and evidence packet.","should_trigger":true}
 {"id":"voice-trigger-008","category":"positive","prompt":"Does this paragraph sound like AI or like me? Rewrite only what fails.","should_trigger":true}
-{"id":"voice-trigger-009","category":"negative","prompt":"Find five conversion angles for the next Mindmaker cohort, but do not draft any copy.","should_trigger":false,"expected_route":["mindmaker","content-corpus","krish-content-marketer"]}
+{"id":"voice-trigger-009","category":"negative","prompt":"Find five conversion angles for a free Mindmaker Lightning Lesson that leads into CTRL, but do not draft any copy.","should_trigger":false,"expected_route":["mindmaker","content-corpus","krish-content-marketer"]}
 {"id":"voice-trigger-010","category":"negative","prompt":"What is Signal & Noise for, who does it serve, and is it active now?","should_trigger":false,"expected_route":["content-corpus","evidence-research"]}
 {"id":"voice-trigger-011","category":"negative","prompt":"Verify the latest enterprise AI adoption statistic and give me primary sources.","should_trigger":false,"expected_route":["evidence-research"]}
 {"id":"voice-trigger-012","category":"negative","prompt":"Redesign the visual hierarchy and spacing of this existing slide without changing the words.","should_trigger":false,"expected_route":["krish-design"]}

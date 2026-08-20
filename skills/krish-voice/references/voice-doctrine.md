@@ -42,7 +42,7 @@ Choose the gear deliberately. If the audience or purpose makes the choice conseq
 - Zero flattery and zero deference. State the observation, consequence, and ask.
 - Risk and implementation reality matter more than novelty.
 
-### Gear B: builder economy
+### Gear B: Built
 
 - Scrappy, fast, and momentum-driven.
 - Dry British humour, self-awareness, and occasional irreverence.

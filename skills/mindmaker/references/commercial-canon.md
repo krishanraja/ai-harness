@@ -31,7 +31,7 @@ Use these as durable families, then verify the current segmentation in the priva
 - **Executive teams:** leadership groups that need alignment, priorities, and an operating path rather than scattered experiments.
 - **AI products:** organisations commercialising an AI product or redesigning a revenue engine around AI.
 - **Capital and portfolio operators:** investors or operating partners assessing and improving AI readiness across a fund or portfolio. Treat this as a framing of enterprise work when current canon does so, not automatically as a separate offer.
-- **Alumni:** a retention and continuity layer for people who have completed a paid Mindmaker experience.
+- **Editorial and product-led learners:** leaders who enter through Mindmaker Live or a free Maven Lightning Lesson before deciding whether CTRL or managed advisory is useful.
 
 Never call a buyer a beginner. Reflect the accountable moment and practical gap without mocking competence. For outbound or sales copy, retrieve the current ICP document and the person's actual language.
 
@@ -39,23 +39,22 @@ Never call a buyer a beginner. Reflect the accountable moment and practical gap 
 
 The reviewed intended architecture contains these families:
 
-- **The AI-Fluent Executive:** the flagship live cohort for individual leaders.
-- **Mindmaker workshops:** five focused one-day workshops that can stand alone and feed the cohort.
+- **Mindmaker Live:** the content venture, with the commissioned formats Paid and Built and an intended paid-subscription model. Retrieve the live publication before making current tier, price, access, or cadence claims.
+- **Maven Lightning Lessons:** free education only. These lessons feed CTRL at `makeyourmindup.ai` and Mindmaker Live subscriptions; they are not a paid cohort, workshop ladder, or alumni programme.
 - **The Signal Session:** a focused enterprise or capital decision session.
 - **The Revenue Architecture:** a deeper commercial-engine engagement.
 - **The AI Immersion:** an executive-team learning and alignment experience.
-- **Alumni continuity:** retention and ongoing access after a paid experience, when current canon and availability support it.
 - **CTRL:** a standalone Mindmaker software product that may also support service experiences. Read `references/ctrl-product.md` before making product claims.
 
-The current internal commercial documentation reviewed on 2026-08-05 describes a four-week cohort arc and five workshops. Treat that as intended architecture, not a permanent public promise. Retrieve the live website, Maven, and transaction surface for duration, syllabus, names, dates, seats, guarantees, inclusions, and prices.
+Krish retired the paid Maven cohort, workshop, and alumni ladder on 2026-08-11 and confirmed that decision as durable doctrine on 2026-08-20. Older documents, pages, or transaction artifacts describing that ladder are historical or rollout-conflict evidence, not current intent. Report the discrepancy; do not revive the offers or silently mutate the live surface.
 
 Do not turn every surface into a rigid linear ladder. A person may enter through editorial, education, software, a relationship, or enterprise work. Describe the actual route supported by current evidence.
 
 ## Commercial motion
 
 - The official website is the primary customer-facing decision surface.
-- Maven is the marketplace and transaction surface for Maven-hosted education.
-- Mindmaker's editorial surfaces build trust and literacy; they feed the business without becoming disguised sales copy.
+- Maven is the discovery and delivery surface for free Lightning Lessons. Verify the live lesson and destination before customer-facing work.
+- Mindmaker Live builds trust and literacy through Paid and Built; it feeds the business without becoming disguised sales copy.
 - Outbound and relationship channels move a specific opportunity forward using actual recipient context.
 - Enterprise work may use direct inquiry, proposal, invoice, or another approved transaction route. Verify the current mechanism.
 - CTRL is a parallel product-led route, not merely a bonus attached to services.
@@ -79,7 +78,10 @@ For voice mechanics, use `krish-voice`. For conversion structure, use `krish-con
 Use current canonical names exactly when current first-party evidence confirms them. At review time, the established names include:
 
 - Mindmaker
-- The AI-Fluent Executive
+- Mindmaker Live
+- Paid
+- Built
+- Lightning Lessons
 - The Signal Session
 - The Revenue Architecture
 - The AI Immersion
@@ -88,6 +90,6 @@ Use current canonical names exactly when current first-party evidence confirms t
 - Edge
 - Daily Briefing
 
-Do not casually revive known historical working names such as "AI Decision Cohort," "Mindmaker Sprints," "Mindmaker Bootcamp," or "Mindmaker for Leaders." If a live official surface uses a different name, report the discrepancy rather than rewriting one source from another.
+Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmaker workshops," "AI Decision Cohort," "Mindmaker Sprints," "Mindmaker Bootcamp," or "Mindmaker for Leaders." Techonomic and The Builder Economy are also retired as brands; their useful editorial registers now live inside Paid and Built. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
 
 Do not relitigate an established canonical name during an ordinary copy task. Apply naming criteria only when Krish explicitly asks to name, rename, or reposition something.

@@ -8,7 +8,7 @@
 {"id":"marketer-trigger-008","category":"positive","prompt":"Create a conversion plan for a Maven page after the live offer facts and channel constraints are supplied.","should_trigger":true}
 {"id":"marketer-trigger-009","category":"negative","prompt":"Rewrite this approved argument in Krish's voice and remove the em dashes.","should_trigger":false,"expected_route":["krish-voice"]}
 {"id":"marketer-trigger-010","category":"negative","prompt":"Which named editorial channel should own this AI-media idea?","should_trigger":false,"expected_route":["content-corpus"]}
-{"id":"marketer-trigger-011","category":"negative","prompt":"What is the current public price and next date for the Mindmaker cohort?","should_trigger":false,"expected_route":["mindmaker","evidence-research"]}
+{"id":"marketer-trigger-011","category":"negative","prompt":"Is this Maven page still offering a paid Mindmaker cohort even though the current doctrine says free lessons only?","should_trigger":false,"expected_route":["mindmaker","evidence-research"]}
 {"id":"marketer-trigger-012","category":"negative","prompt":"Verify whether this market-size statistic is supported by the primary report.","should_trigger":false,"expected_route":["evidence-research"]}
 {"id":"marketer-trigger-013","category":"negative","prompt":"Implement the approved hero section in React and run the browser tests.","should_trigger":false,"expected_route":["krish-build","verification-loop"]}
 {"id":"marketer-trigger-014","category":"negative","prompt":"Design a new pricing-card visual direction and render one option for review.","should_trigger":false,"expected_route":["krish-design"]}

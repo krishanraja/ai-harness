@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding what a Techonomic, The Builder Economy, Signal & Noise, Mindmaker Live, Maven, lead-email, or visibility asset is for, who it serves, what form it takes, or how one signal should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
+description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding what a Paid, Built, Signal & Noise, Mindmaker Live, Maven, lead-email, or visibility asset is for, who it serves, what form it takes, or how one signal should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
 ---
 
 # Content corpus
@@ -10,14 +10,14 @@ description: "Channel-context router for Krish Raja's named editorial, audio, ed
 Act as a **domain-context skill** for channels. `krish-voice` owns how Krish writes. This skill owns what each named channel is for, who it serves, which format fits, and what quality bar it must clear.
 
 - Owner: Krish Raja.
-- Reviewed: 2026-08-05.
+- Reviewed: 2026-08-20 after Krish confirmed the 2026-08-11 editorial and Maven refocus as durable business doctrine.
 - Freshness SLA: 45 days, or immediately after a channel, audience, format, or distribution decision changes.
 - Unique outcome: prevent generic content from being relabelled across channels and prevent dormant, pre-launch, or inaccessible surfaces from being treated as active.
 
 ## Load only what the task needs
 
-- Read `references/editorial-channels.md` for Techonomic, The Builder Economy, Signal & Noise, or Mindmaker Live.
-- Read `references/maven-and-outbound.md` for Maven course copy, lead/customer emails, speaking, podcast, press, or visibility outreach.
+- Read `references/editorial-channels.md` for Mindmaker Live and its two formats, Paid and Built, or for the Signal & Noise channel.
+- Read `references/maven-and-outbound.md` for Maven lesson copy, lead/customer emails, speaking, podcast, press, or visibility outreach.
 - Load `mindmaker` before making Mindmaker offer, ICP, pricing, availability, or product claims.
 - Load `krish-voice` before drafting final prose. Load `krish-content-marketer` when the asset's job is to change buyer behaviour.
 
@@ -66,11 +66,11 @@ Failure on any one standard blocks publication. If the piece lacks an owned arti
 
 | Intent | Instrument | Characteristic move |
 |---|---|---|
-| Follow the money through a digital-economy shift | Techonomic | ask who pays and trace the mechanism |
-| Understand the human reason someone built | The Builder Economy | reach the why beneath the why |
-| Stress-test conventional AI/media wisdom with informed foils | Signal & Noise | no-BS call, devil's advocate, what-if |
-| Orient a busy executive to what changed and why it matters | Mindmaker Live | prioritised signal plus operator so-what |
-| Convert a browsing leader on a course or workshop | Maven sales surface | legibility, concrete outcome, proof, verified offer facts |
+| Follow the money through a digital-economy shift | **Paid** (Mindmaker Live) | ask who pays and trace the mechanism |
+| Understand the human reason someone built | **Built** (Mindmaker Live) | reach the why beneath the why |
+| Air a finished Paid or Built piece as a live argument | Signal & Noise (a channel) | no-BS call, devil's advocate, what-if |
+| Orient a busy executive to what changed and why it matters | the Mindmaker Live weekly brief | prioritised signal plus operator so-what |
+| Get a leader to a free lesson that leads into CTRL | Maven (free lessons only) | legibility, concrete outcome, proof, verified offer facts |
 | Move a lead, customer, guest, talk, or press relationship | Outbound/visibility | listening specificity and one low-friction next step |
 
 Channel selection does not establish channel status. Verify both independently.
