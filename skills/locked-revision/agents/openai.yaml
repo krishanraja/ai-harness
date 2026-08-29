@@ -1,0 +1,4 @@
+interface:
+  display_name: "Locked Revision"
+  short_description: "Apply surgical changes without regressions"
+  default_prompt: "Use $locked-revision to change only the approved parts of this final artifact and verify nothing else changed."

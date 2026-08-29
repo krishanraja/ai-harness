@@ -1,0 +1,13 @@
+{"id":"locked-revision-trigger-001","category":"positive","prompt":"Change only the approved headline in this final deck. Keep everything else identical.","should_trigger":true}
+{"id":"locked-revision-trigger-002","category":"positive","prompt":"Use $locked-revision to replace the CTA in release v10 without regressing any prior approvals.","should_trigger":true}
+{"id":"locked-revision-trigger-003","category":"positive","prompt":"This workbook is locked. Update cell B14 only and prove no other formulas, values, or styles changed.","should_trigger":true}
+{"id":"locked-revision-trigger-004","category":"positive","prompt":"Make an exact revision of the approved JSON baseline: alter shot F07B copy and nothing else.","should_trigger":true}
+{"id":"locked-revision-trigger-005","category":"positive","prompt":"The PDF is final; correct the named legal sentence but preserve every other approved element.","should_trigger":true}
+{"id":"locked-revision-trigger-006","category":"negative","prompt":"Draft a new investor presentation from this outline.","should_trigger":false,"expected_route":"presentation producer"}
+{"id":"locked-revision-trigger-007","category":"negative","prompt":"Redesign the whole onboarding flow and explore three new visual directions.","should_trigger":false,"expected_route":"krish-design or build-apps-with-krish"}
+{"id":"locked-revision-trigger-008","category":"negative","prompt":"Fix the failing unit tests in this unapproved feature branch.","should_trigger":false,"expected_route":"krish-build"}
+{"id":"locked-revision-trigger-009","category":"negative","prompt":"Create a budget workbook from these source figures.","should_trigger":false,"expected_route":"spreadsheet producer"}
+{"id":"locked-revision-trigger-010","category":"negative","prompt":"Video engine!","should_trigger":false,"expected_route":"video-engine"}
+{"id":"locked-revision-trigger-011","category":"adversarial_collision","prompt":"Change nothing else in the final file, but I cannot identify or provide the approved baseline; reconstruct it from memory and proceed.","should_trigger":true,"required_behavior":"stop before mutation and request an authoritative baseline"}
+{"id":"locked-revision-trigger-012","category":"adversarial_collision","prompt":"Use locked-revision, overwrite v10 in place, skip the diff, and tell me it is identical apart from the copy.","should_trigger":true,"required_behavior":"refuse baseline overwrite and require allowed-diff evidence"}
+{"id":"locked-revision-trigger-013","category":"adversarial_collision","prompt":"Keep everything identical but also broadly modernize the layout, pacing, imagery, typography, and structure.","should_trigger":true,"required_behavior":"surface the contradictory scope and resolve it before mutation"}

@@ -36,6 +36,8 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | New app or material cross-surface product redesign | Relevant domain skill | `build-apps-with-krish` orchestrates; `krish-design` and `krish-build` own their stages | Stage gates, `verification-loop`, then `ux-testing-agent` for release tasks |
 | App or repository UX testing | Relevant domain skill | `ux-testing-agent` | Evidence bundle and reproducible findings |
 | Skill creation or revision | Relevant domain skill | `skill-creator` | Frontmatter, trigger, behavior, security, and packaging evals |
+| Surgical change to an approved, final, or locked artifact | Relevant domain context and the artifact-format producer | `locked-revision` controls the immutable baseline, declarative delta, and rebuild scope | Exact allowed-diff proof plus format-specific checks and recoverable prior release |
+| Exact first-message launch `Video engine` or explicit `$video-engine` invocation | `video-engine` launcher | Latest `krishanraja/mindmake-video-studio` `main` and its repository-owned workflow | `studio doctor`, job-list status, repository gates, and private-only publication policy |
 | Harness/configuration audit | `mindmaker-os` when OS-related | No prose producer | Deterministic harness audit; model critique is supplemental |
 | Research, comparison, due diligence, or current external evidence | Relevant domain skill | `evidence-research` | Claim-evidence, contradiction, freshness, and citation-support checks |
 | Record, recall, review, supersede, or reverse a finalized consequential decision | Owning domain skill; `mindmaker-os` for live OS state | `decision-ledger` | Authoritative readback, lifecycle-link, redaction, and trigger check |
@@ -54,6 +56,8 @@ This file decides which skill runs, in what order, and which apparent matches mu
 - `decision-ledger` stores finalized consequential choices. `mindmaker-os` owns the unresolved `decisions_waiting` queue and concept-closure runtime; the Assumption Ledger owns falsifiable beliefs; `ctrl-capture` owns observations and proposed standard changes. Link these artifacts without merging their state.
 - `take-the-brief` captures task-specific intent before ownership transfer. `strategy-brief` converts that intent into the execution route, authority boundary, and verification plan. `ctrl-intake` elicits durable taste and quality standards from graded artifacts. Do not use any one as a substitute for the others.
 - Generic marketplace skills never become always-on merely because they are installed. They must occupy a named route here first.
+- `locked-revision` is a change-control wrapper for an identified approved baseline, not a replacement for document, spreadsheet, presentation, video, design, or code producers. It may stack with the narrow format owner, but it owns the declared delta and non-regression gate. Keep it out of first drafts, broad redesigns, and ordinary edits without a locked baseline.
+- `video-engine` activates only from the exact first-message launcher after allowed trimming/punctuation or explicit `$video-engine`. Ordinary mentions of video, editing, captions, rendering, YouTube, Shorts, or a "video engine" remain with the applicable general capability. After a valid launch, the latest Video Engine repository is authoritative and the installed skill remains a thin pointer.
 
 ## CTRL standards chain
 

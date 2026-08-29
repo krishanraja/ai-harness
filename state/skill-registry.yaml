@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-08-07
+last_reconciled: 2026-08-29
 status: governed-production-set
 
 deployed_release:
@@ -57,6 +57,7 @@ production_active:
   - krish-design
   - krish-principles
   - krish-voice
+  - locked-revision
   - mindmaker
   - mindmaker-os
   - n8n-operator
@@ -66,6 +67,7 @@ production_active:
   - ux-foundations
   - ux-testing-agent
   - verification-loop
+  - video-engine
 
 production:
   - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
@@ -81,10 +83,12 @@ production:
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 60}
+  - {name: locked-revision, role: immutable-baseline-surgical-revision-controller, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 90}
   - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: video-engine, role: exact-phrase-mindmaker-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
   - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-08-07, freshness_sla_days: 30}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}

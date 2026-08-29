@@ -228,10 +228,15 @@ $instantlyOperatorTriggerCases = Join-Path $Root 'evals\instantly-operator-trigg
 $instantlyOperatorBehaviorCases = Join-Path $Root 'evals\instantly-operator-behavior-cases.jsonl'
 $designIntelligenceTriggerCases = Join-Path $Root 'evals\design-intelligence-search-trigger-cases.jsonl'
 $designIntelligenceBehaviorCases = Join-Path $Root 'evals\design-intelligence-search-behavior-cases.jsonl'
+$lockedRevisionTriggerCases = Join-Path $Root 'evals\locked-revision-trigger-cases.jsonl'
+$lockedRevisionBehaviorCases = Join-Path $Root 'evals\locked-revision-behavior-cases.jsonl'
+$videoEngineTriggerCases = Join-Path $Root 'evals\video-engine-trigger-cases.jsonl'
+$videoEngineBehaviorCases = Join-Path $Root 'evals\video-engine-behavior-cases.jsonl'
 $designIntelligenceTests = Join-Path $Root 'skills\design-intelligence-search\scripts\tests'
 $designIntelligenceVendorRoot = Join-Path $Root 'skills\design-intelligence-search\scripts\vendor\ui-ux-pro-max'
 $designIntelligenceMetadata = Join-Path $Root 'skills\design-intelligence-search\agents\openai.yaml'
 $apifyHelperTests = Join-Path $Root 'skills\apify\tests'
+$lockedRevisionTests = Join-Path $Root 'skills\locked-revision\tests'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -417,7 +422,9 @@ Test-EvalCategoryMinimums -Records $apifyBehaviors -Minimums @{ nominal = 6; fai
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
     @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },
-    @{ Name = 'design-intelligence-search'; TriggerPath = $designIntelligenceTriggerCases; BehaviorPath = $designIntelligenceBehaviorCases }
+    @{ Name = 'design-intelligence-search'; TriggerPath = $designIntelligenceTriggerCases; BehaviorPath = $designIntelligenceBehaviorCases },
+    @{ Name = 'locked-revision'; TriggerPath = $lockedRevisionTriggerCases; BehaviorPath = $lockedRevisionBehaviorCases },
+    @{ Name = 'video-engine'; TriggerPath = $videoEngineTriggerCases; BehaviorPath = $videoEngineBehaviorCases }
 )
 foreach ($spec in $narrowOperatorSpecs) {
     $operatorTriggers = @(Read-JsonLines -Path $spec.TriggerPath)
@@ -491,6 +498,27 @@ else {
     }
     if ($apifyTestExitCode -ne 0) {
         Add-Failure "Apify helper offline tests failed: $($apifyTestOutput -join ' | ')"
+    }
+}
+
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the locked-revision offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $lockedRevisionTests -PathType Container)) {
+    Add-Failure "Missing locked-revision test directory: $lockedRevisionTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $lockedRevisionTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $lockedRevisionTests -p 'test_*.py' 2>&1)
+        $lockedRevisionTestExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($lockedRevisionTestExitCode -ne 0) {
+        Add-Failure "locked-revision offline tests failed: $($lockedRevisionTestOutput -join ' | ')"
     }
 }
 
