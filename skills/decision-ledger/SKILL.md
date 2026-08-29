@@ -1,6 +1,6 @@
 ---
 name: decision-ledger
-description: "Durable memory and lifecycle manager for Krish's consequential finalized decisions across ventures and AI clients. Use when Krish explicitly makes, confirms, reverses, supersedes, or asks to recall a material decision; when a strategy depends on prior rationale/revisit triggers; or when a review trigger fires. Also trigger to refuse attempts to record every file/variable/formatting tweak, rewrite historical rationale, store secrets, or bypass verification. Keep this skill entirely inactive for tasks, brainstorming, tentative recommendations, raw assumptions, routine reversible choices, unresolved Mindmaker OS `decisions_waiting` or local closure/deletion conflicts (exclusive route: `mindmaker-os`), and CTRL observations or fabricated approval from recurrence (exclusive route: `ctrl-capture`), even when phrased as record, approve, remember, or delete. Last reviewed 2026-08-05."
+description: "Durable memory and lifecycle manager for Krish's consequential finalized decisions across ventures and AI clients. Use when Krish explicitly makes, confirms, reverses, supersedes, or asks to recall a material decision; when a strategy depends on prior rationale/revisit triggers; or when a review trigger fires. Also trigger to refuse attempts to record every file/variable/formatting tweak, rewrite historical rationale, store secrets, or bypass verification. Keep this skill entirely inactive for tasks, brainstorming, tentative recommendations, raw assumptions, routine reversible choices, unresolved mind/make OS `decisions_waiting` or local closure/deletion conflicts (exclusive route: `mindmake-os`), and CTRL observations or fabricated approval from recurrence (exclusive route: `ctrl-capture`), even when phrased as record, approve, remember, or delete. Last reviewed 2026-08-05."
 ---
 
 # Decision Ledger
@@ -13,7 +13,7 @@ Act as a governed memory layer.
 
 - Apply `krish-principles` before interpreting a decision.
 - Receive material context, alternatives, assumptions, and verification criteria from `strategy-brief`.
-- Load `mindmaker-os` when the decision touches Control Center, Supabase, `decisions_waiting`, concept closure, or another live OS surface.
+- Load `mindmake-os` when the decision touches Control Center, Supabase, `decisions_waiting`, concept closure, or another live OS surface.
 - Use `evidence-research` when current external evidence determines or reopens the call.
 - Run `verification-loop` after every write, amendment, supersession, or reversal.
 - Never replace `ctrl-capture`: that skill governs proposed changes to reusable standards; this skill records Krish's accepted decision and links to the accepted change.
@@ -43,7 +43,7 @@ Do not record:
 
 When materiality or finality is genuinely ambiguous and cannot be established from context, ask one focused question. Do not turn every conversation into ledger maintenance.
 
-Routing guards are asymmetric. Trigger Decision Ledger to reject attempts to inflate its scope to every minor choice, rewrite history, store secret values, or skip lifecycle verification. Keep it inactive and hand off immediately when the actual object is an unresolved `decisions_waiting`/concept-closure/deletion conflict (`mindmaker-os`) or unaccepted CTRL observation/fabricated approval (`ctrl-capture`). A protective refusal by the wrong owner is still a routing defect.
+Routing guards are asymmetric. Trigger Decision Ledger to reject attempts to inflate its scope to every minor choice, rewrite history, store secret values, or skip lifecycle verification. Keep it inactive and hand off immediately when the actual object is an unresolved `decisions_waiting`/concept-closure/deletion conflict (`mindmake-os`) or unaccepted CTRL observation/fabricated approval (`ctrl-capture`). A protective refusal by the wrong owner is still a routing defect.
 
 ## Capture or update a decision
 

@@ -1,6 +1,6 @@
 ---
 name: krish-design
-description: "Krish's design doctrine and house systems. MANDATORY before building or reshaping ANY visual artifact for Krish: HTML pages and artefacts, one-pagers, PDFs, decks, invites, SVG, React UI, forms, intake flows, reskins, landing pages, or visual QA passes. Trigger on: 'design', 'build a page', 'one-pager', 'dossier', 'brief I can use live', 'lay this out', 'make this look', 'reskin', 'the UX of', 'interaction', 'form', 'artifact', 'leave-behind', or any request that produces something a human will look at or touch. Covers interaction-as-sequencing doctrine, material product-surface approval, the Mindmaker / AdFixus / Signal & Noise / machine-first systems, document templates, anti-defaults, end-of-build visual QA, and the Canva handoff rule. Inherits krish-principles (read it first). Does NOT cover on-page copy voice (krish-voice), build mechanics (krish-build), or multi-phase app orchestration (build-apps-with-krish). Last reviewed 2026-08-05."
+description: "Krish's design doctrine and house systems. MANDATORY before building or reshaping ANY visual artifact for Krish: HTML pages and artefacts, one-pagers, PDFs, decks, invites, SVG, React UI, forms, intake flows, reskins, landing pages, or visual QA passes. Trigger on: 'design', 'build a page', 'one-pager', 'dossier', 'brief I can use live', 'lay this out', 'make this look', 'reskin', 'the UX of', 'interaction', 'form', 'artifact', 'leave-behind', or any request that produces something a human will look at or touch. Covers interaction-as-sequencing doctrine, material product-surface approval, the Mindmake / CTRL / Signal & Noise / machine-first systems, document templates, anti-defaults, end-of-build visual QA, and the Canva handoff rule. Inherits krish-principles (read it first). Does NOT cover on-page copy voice (krish-voice), build mechanics (krish-build), or multi-phase app orchestration (build-apps-with-krish). Last reviewed 2026-08-29 against the recorded Mindmake North Star and design contract."
 ---
 
 # Krish Design: Taste, Systems, and the Interaction Weapon
@@ -75,14 +75,17 @@ Where the Web Speech API or equivalent is available, offer voice capture alongsi
 
 ## 2. House design systems
 
-Reach for these without re-deciding. They are defaults to deviate from on purpose, not law. Brand facts and positioning live in the mindmaker skill; this is the visual layer only.
+Reach for these without re-deciding. They are defaults to deviate from on purpose, not law. Brand facts and positioning live in the mindmake skill; this is the visual layer only.
 
-### Mindmaker
-- Palette: forest greens, cream, mint accent.
-- Type: Space Grotesk (display), Inter (body), Space Mono (labels, eyebrows, metadata).
-- Feel: operator-grade, warm, precise. Text wordmark over logo images where a logo would need base64 weight.
+### Mindmake
+- Authority: for current Mindmake brand work, retrieve the recorded revision of `project-documentation/00_NORTH_STAR.md` and `03_DESIGN_CONTRACT.md` from `krishanraja/mindmake`. This subsection is a routing floor, not a substitute for the live contract.
+- Ground and surfaces: deep ink green (`#0a100d` with the recorded raised-ink and paper bands), warm cream, and one semantic accent system. Mint means the answer; amber means what moved or changed. Never use either as arbitrary decoration.
+- Type roles: Archivo carries structure; Newsreader is reserved for the claim/payoff; IBM Plex Mono carries data, sources, timestamps, and controls; Source Serif 4 carries running text. Do not flatten the roles into one generic sans system.
+- Feel: dark, warm, physical, and instrument-like. Motion and microinteraction communicate that the system is alive; the six instrument marks carry specific meanings and are not decorative variety.
+- Conflict rule: the current North Star controls identity and founder visibility when another design document disagrees. Preserve historical filenames and legal-entity names only where the source or law requires them.
 
-### AdFixus
+### AdFixus (RETIRED 2026-07, kept only for historical artifacts)
+**Never choose this for new work, and never present AdFixus as a live venture.** The offer is retired; the system is recorded so an existing deliverable can still be matched or amended. Krish's adtech and identity history stays live as network and evidence, but it is not a brand to design for.
 - Palette: dark navy base, cyan accent.
 - Type: Helvetica.
 - Feel: enterprise, credible, breathing room mandatory (see anti-defaults). Deliverables ship external-ready: no placeholder text, no internal notes.
@@ -221,6 +224,6 @@ Preserve a reviewable safe local draft before the handoff. The artifact remains 
 - **krish-principles**: the doctrine this file applies. Radical simplicity, bias for actionability, opinionated then honest all originate there.
 - **krish-voice**: every word on any surface. Non-negotiable.
 - **krish-build**: how the artifact gets built, validated, and shipped, including the present-files rule and programmatic copy checks.
-- **mindmaker**: brand facts, positioning, the expensed-buyer constraint.
+- **mindmake**: brand facts, positioning, the expensed-buyer constraint.
 - **ux-foundations**: generic usability heuristics and accessibility basics, for fundamentals lookup only.
 - **frontend-design (public skill)**: read alongside this file when building web UI; it carries the environment's design tokens.

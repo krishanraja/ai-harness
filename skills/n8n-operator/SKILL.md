@@ -1,6 +1,6 @@
 ---
 name: n8n-operator
-description: "Approval-gated producer and operator for n8n workflow architecture, workflow JSON, node/data-flow design, validation, execution diagnosis, activation, updates, and rollback. Use when a request explicitly concerns operating or building an n8n workflow/runtime. MUST NOT trigger for a fleet agent's identity, liveness, health, or architecture merely because an archive mentions n8n or a workflow ID; `mindmaker-os` owns that question and may call this skill later for live n8n execution evidence. Use `krish-content-marketer` and `krish-voice` for campaign judgment or copy. Do not use for generic automation strategy without an n8n target, credentials, final prose, or harness maintenance. Never treat a cached workflow map, copied endpoint, green execution, or successful API response as proof of live correctness. Last reviewed 2026-08-06."
+description: "Approval-gated producer and operator for n8n workflow architecture, workflow JSON, node/data-flow design, validation, execution diagnosis, activation, updates, and rollback. Use when a request explicitly concerns operating or building an n8n workflow/runtime. MUST NOT trigger for a fleet agent's identity, liveness, health, or architecture merely because an archive mentions n8n or a workflow ID; `mindmake-os` owns that question and may call this skill later for live n8n execution evidence. Use `krish-content-marketer` and `krish-voice` for campaign judgment or copy. Do not use for generic automation strategy without an n8n target, credentials, final prose, or harness maintenance. Never treat a cached workflow map, copied endpoint, green execution, or successful API response as proof of live correctness. Last reviewed 2026-08-06."
 ---
 
 # n8n Operator
@@ -9,11 +9,11 @@ Build or operate the smallest reliable n8n change, preserve the live workflow be
 
 ## Role and chain
 
-Act as the n8n-specific producer/operator. `mindmaker-os` owns current fleet identity and architecture; `strategy-brief` supplies the outcome and verification plan; `tools-access` proves the non-secret tenant and scope; `krish-build` owns cross-system implementation doctrine; `verification-loop` closes the result.
+Act as the n8n-specific producer/operator. `mindmake-os` owns current fleet identity and architecture; `strategy-brief` supplies the outcome and verification plan; `tools-access` proves the non-secret tenant and scope; `krish-build` owns cross-system implementation doctrine; `verification-loop` closes the result.
 
-For Krish's existing fleet, load `mindmaker-os` before this skill and keep all workflow IDs, schedules, counts, schemas, activation states, MCP availability, and deployment facts live. For a net-new standalone workflow, `mindmaker-os` is unnecessary unless it joins that fleet.
+For Krish's existing fleet, load `mindmake-os` before this skill and keep all workflow IDs, schedules, counts, schemas, activation states, MCP availability, and deployment facts live. For a net-new standalone workflow, `mindmake-os` is unnecessary unless it joins that fleet.
 
-Do not trigger this skill merely because an archived fleet document contains a workflow ID or the word n8n. A question about whether an agent is live, healthy, or part of the current OS belongs to `mindmaker-os`; add this skill only when live n8n workflow or execution evidence is actually required. A general service or application build belongs to `krish-build` until n8n is selected as the implementation target.
+Do not trigger this skill merely because an archived fleet document contains a workflow ID or the word n8n. A question about whether an agent is live, healthy, or part of the current OS belongs to `mindmake-os`; add this skill only when live n8n workflow or execution evidence is actually required. A general service or application build belongs to `krish-build` until n8n is selected as the implementation target.
 
 Read:
 
@@ -126,7 +126,7 @@ Apply these as completion conditions, not optional advice:
 - Activation not approved: report validation separately; show schedule/webhook impact and rollback; keep the trigger inactive and request exact approval immediately before activation.
 - Duplicate-capable retry: inspect completed recipients/writes and idempotency evidence, isolate a provably safe retry subset or block the retry, then request exact send-capable approval.
 - Untrusted/community node: keep it inactive; inspect publisher/provenance, requested permissions, dependency and maintenance risk, and built-in or reviewed alternatives; request installation and permissions approval only after that review.
-- Fleet-health question: let `mindmaker-os` resolve identity; compare live workflow/execution evidence with the downstream outcome; return provider evidence to `verification-loop` without changing the workflow.
+- Fleet-health question: let `mindmake-os` resolve identity; compare live workflow/execution evidence with the downstream outcome; return provider evidence to `verification-loop` without changing the workflow.
 - Instantly handoff: receive the current provider request/response contract from `instantly-operator`; own only n8n item schemas, retries, branching, and readback; verify the provider and workflow outcomes separately.
 - General build handoff: return primary implementation ownership to `krish-build`; invoke this skill only after n8n is chosen; preserve the strategy-to-verification chain.
 

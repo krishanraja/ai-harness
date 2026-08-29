@@ -2,17 +2,17 @@
 
 ## Purpose
 
-Use this reference whenever a Mindmaker fact may have changed, appears in customer-facing work, affects a transaction, or conflicts across sources. The goal is not to select one universal source of truth. The goal is to select the authoritative source for the question being asked.
+Use this reference whenever a Mindmake fact may have changed, appears in customer-facing work, affects a transaction, or conflicts across sources. The goal is not to select one universal source of truth. The goal is to select the authoritative source for the question being asked.
 
 ## Source-by-question matrix
 
 | Question | Authoritative evidence | What it proves |
 |---|---|---|
-| What the business intends | current private Mindmaker commercial documentation and explicit Krish decision | intended architecture |
+| What the business intends | current private Mindmake commercial documentation and explicit Krish decision | intended architecture |
 | What a customer can currently see | live official website, Maven, Substack, CTRL, or other named first-party surface | published claim at retrieval time |
 | What a customer can currently buy | live checkout, Maven enrolment, approved proposal/invoice configuration, or billing system | transaction state at retrieval time |
 | What the product currently does | live product plus current implementation evidence | observable and implemented capability |
-| What Mindmaker OS is running | live runtime sources routed through `mindmaker-os` | internal operating state |
+| What mind/make OS is running | live runtime sources routed through `mindmake-os` | internal operating state |
 | What happened historically | dated repository history, decision record, or archived artifact | historical state only |
 | What Krish wants changed | direct current instruction or accepted decision record | desired next state, not completed state |
 

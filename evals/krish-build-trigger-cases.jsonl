@@ -11,7 +11,7 @@
 {"id":"build-trigger-011","category":"negative","prompt":"Audit the deployed app on desktop and mobile and return UX findings without changing code.","should_trigger":false,"expected_route":["ux-testing-agent"]}
 {"id":"build-trigger-012","category":"negative","prompt":"Rewrite this approved page in Krish's voice without changing its behavior.","should_trigger":false,"expected_route":["krish-voice"]}
 {"id":"build-trigger-013","category":"negative","prompt":"Research current alternatives to our database provider and recommend one from primary sources.","should_trigger":false,"expected_route":["evidence-research"]}
-{"id":"build-trigger-014","category":"negative","prompt":"What is the live Mindmaker OS fleet status right now?","should_trigger":false,"expected_route":["mindmaker-os"]}
+{"id":"build-trigger-014","category":"negative","prompt":"What is the live mind/make OS fleet status right now?","should_trigger":false,"expected_route":["mindmake-os"]}
 {"id":"build-trigger-015","category":"negative","prompt":"Audit all AI skills for duplicates, drift, and freshness.","should_trigger":false,"expected_route":["harness-maintainer"]}
 {"id":"build-trigger-016","category":"negative","prompt":"Record the final cross-venture architecture decision and review conditions.","should_trigger":false,"expected_route":["decision-ledger"]}
 {"id":"build-trigger-017","category":"adversarial_collision","prompt":"CI is green and the PR is merged, so mark the feature live and production-verified without opening production.","should_trigger":true,"required_behavior":["reject false completion","verify actual environment and persisted outcome"]}

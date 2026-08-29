@@ -89,7 +89,7 @@ class ApifyOperator:
         self._headers = {
             "Authorization": f"Bearer {self._token}",
             "Content-Type": "application/json",
-            "User-Agent": "mindmaker-apify-operator/2.0",
+            "User-Agent": "mindmake-apify-operator/2.0",
         }
 
     @staticmethod

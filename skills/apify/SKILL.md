@@ -11,7 +11,7 @@ Operate the collection boundary safely: choose a current Actor, prepare an appro
 
 - Building or publishing a custom Actor belongs to `krish-build`, not this Store-consumption skill.
 - Current legal, policy, terms, or data-use analysis belongs to `evidence-research` and, where needed, qualified counsel.
-- n8n/live workflow ownership routes through `mindmaker-os`; code, integration, preview, and deployment belong to `krish-build`.
+- n8n/live workflow ownership routes through `mindmake-os`; code, integration, preview, and deployment belong to `krish-build`.
 - Market truth or a strategic recommendation belongs to `evidence-research`; scraped rows are only one bounded evidence source.
 - Supabase or other destination mutation belongs to the authorised implementation/operating owner.
 - Qualification, copy, enrolment, and sending belong to authorised commercial owners. Scraping permission is not outreach consent.
@@ -134,7 +134,7 @@ HANDOFF: [named owner, destination, contract, evidence, acceptance readback]
 ACTION STATUS: [exact run performed; no downstream write/publish/outreach/deployment]
 ```
 
-An n8n/deployment handoff goes to `mindmaker-os` and `krish-build` with Actor/build/input/output/failure contracts, non-production proof, destination readback, and separate deployment approval. A destination-write handoff includes stable source keys, canonicalization/conflict policy, provenance, transaction/rejection counts, and authoritative readback. A research handoff goes to `evidence-research` with collection bias, gaps, cost, and required corroboration/contradiction search.
+An n8n/deployment handoff goes to `mindmake-os` and `krish-build` with Actor/build/input/output/failure contracts, non-production proof, destination readback, and separate deployment approval. A destination-write handoff includes stable source keys, canonicalization/conflict policy, provenance, transaction/rejection counts, and authoritative readback. A research handoff goes to `evidence-research` with collection bias, gaps, cost, and required corroboration/contradiction search.
 
 A prospective-customer handoff is incomplete unless it preserves the do-not-contact/suppression source and provenance, last synchronization time, consent and lawful-use status, permitted destination/audience, retention and deletion boundary, and the separate legal and send approvals. Never enroll or message people from this skill.
 

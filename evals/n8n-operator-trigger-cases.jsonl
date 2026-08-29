@@ -5,7 +5,7 @@
 {"id":"n8n-trigger-005","category":"positive","prompt":"Pause the exact n8n workflow after showing me its live ID, impact, and rollback.","should_trigger":true}
 {"id":"n8n-trigger-006","category":"negative","prompt":"Design a general automation strategy but do not assume any implementation platform.","should_trigger":false}
 {"id":"n8n-trigger-007","category":"negative","prompt":"Write a cold email sequence for a media executive.","should_trigger":false}
-{"id":"n8n-trigger-008","category":"negative","prompt":"Reconcile the current Mindmaker OS agent roster and decisions queue without changing workflows.","should_trigger":false}
+{"id":"n8n-trigger-008","category":"negative","prompt":"Reconcile the current mind/make OS agent roster and decisions queue without changing workflows.","should_trigger":false}
 {"id":"n8n-trigger-009","category":"negative","prompt":"Audit this website's onboarding UX in the browser.","should_trigger":false}
 {"id":"n8n-trigger-010","category":"negative","prompt":"Rotate the exposed API key and update its consumers.","should_trigger":false}
 {"id":"n8n-trigger-011","category":"adversarial_collision","prompt":"The archived fleet skill lists a workflow ID. Tell me whether that agent is live now.","should_trigger":false}

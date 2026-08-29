@@ -44,6 +44,8 @@ else {
     if ($releaseBuilderRaw -notmatch 'FilesAtArchiveRoot') { Add-Failure 'Release builder does not produce a root-level portable cloud package.' }
     if ($releaseBuilderRaw -notmatch 'perplexity_artifact_sha256') { Add-Failure 'Release builder does not record the Perplexity transport hash.' }
     if ($releaseBuilderRaw -notmatch 'ReleaseId\s+-notmatch') { Add-Failure 'Release builder does not constrain release identifiers.' }
+    if ($releaseBuilderRaw -notmatch 'sha256-path-nul-file-sha256-ordinal-v1') { Add-Failure 'Release builder does not version the runtime-independent artifact hash.' }
+    if ($releaseBuilderRaw -notmatch 'StringComparer]::Ordinal') { Add-Failure 'Release builder does not use explicit ordinal collation.' }
 }
 
 $adapterPaths = @(
@@ -186,8 +188,8 @@ $coreTriggerCases = Join-Path $Root 'evals\core-trigger-cases.jsonl'
 $coreBehaviorCases = Join-Path $Root 'evals\core-behavior-cases.jsonl'
 $globalChainCases = Join-Path $Root 'evals\global-chain-cases.jsonl'
 $skillRoutingCases = Join-Path $Root 'evals\skill-routing-cases.jsonl'
-$mindmakerTriggerCases = Join-Path $Root 'evals\mindmaker-trigger-cases.jsonl'
-$mindmakerBehaviorCases = Join-Path $Root 'evals\mindmaker-behavior-cases.jsonl'
+$mindmakeTriggerCases = Join-Path $Root 'evals\mindmake-trigger-cases.jsonl'
+$mindmakeBehaviorCases = Join-Path $Root 'evals\mindmake-behavior-cases.jsonl'
 $contentCorpusTriggerCases = Join-Path $Root 'evals\content-corpus-trigger-cases.jsonl'
 $contentCorpusBehaviorCases = Join-Path $Root 'evals\content-corpus-behavior-cases.jsonl'
 $contentMarketerTriggerCases = Join-Path $Root 'evals\krish-content-marketer-trigger-cases.jsonl'
@@ -204,8 +206,8 @@ $uxQaTriggerCases = Join-Path $Root 'evals\ux-testing-agent-trigger-cases.jsonl'
 $uxQaBehaviorCases = Join-Path $Root 'evals\ux-testing-agent-behavior-cases.jsonl'
 $toolsAccessTriggerCases = Join-Path $Root 'evals\tools-access-trigger-cases.jsonl'
 $toolsAccessBehaviorCases = Join-Path $Root 'evals\tools-access-behavior-cases.jsonl'
-$mindmakerOsTriggerCases = Join-Path $Root 'evals\mindmaker-os-trigger-cases.jsonl'
-$mindmakerOsBehaviorCases = Join-Path $Root 'evals\mindmaker-os-behavior-cases.jsonl'
+$mindmakeOsTriggerCases = Join-Path $Root 'evals\mindmake-os-trigger-cases.jsonl'
+$mindmakeOsBehaviorCases = Join-Path $Root 'evals\mindmake-os-behavior-cases.jsonl'
 $ctrlIntakeTriggerCases = Join-Path $Root 'evals\ctrl-intake-trigger-cases.jsonl'
 $ctrlIntakeBehaviorCases = Join-Path $Root 'evals\ctrl-intake-behavior-cases.jsonl'
 $ctrlCompileTriggerCases = Join-Path $Root 'evals\ctrl-compile-trigger-cases.jsonl'
@@ -322,9 +324,9 @@ foreach ($coreSkill in @('krish-principles', 'strategy-brief', 'verification-loo
 
 $commercialEvalSpecs = @(
     @{
-        Name = 'mindmaker'
-        TriggerPath = $mindmakerTriggerCases
-        BehaviorPath = $mindmakerBehaviorCases
+        Name = 'mindmake'
+        TriggerPath = $mindmakeTriggerCases
+        BehaviorPath = $mindmakeBehaviorCases
     },
     @{
         Name = 'content-corpus'
@@ -374,10 +376,10 @@ $toolsAccessBehaviors = @(Read-JsonLines -Path $toolsAccessBehaviorCases)
 Test-EvalCategoryMinimums -Records $toolsAccessTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'tools-access trigger suite'
 Test-EvalCategoryMinimums -Records $toolsAccessBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'tools-access behavior suite'
 
-$mindmakerOsTriggers = @(Read-JsonLines -Path $mindmakerOsTriggerCases)
-$mindmakerOsBehaviors = @(Read-JsonLines -Path $mindmakerOsBehaviorCases)
-Test-EvalCategoryMinimums -Records $mindmakerOsTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'mindmaker-os trigger suite'
-Test-EvalCategoryMinimums -Records $mindmakerOsBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'mindmaker-os behavior suite'
+$mindmakeOsTriggers = @(Read-JsonLines -Path $mindmakeOsTriggerCases)
+$mindmakeOsBehaviors = @(Read-JsonLines -Path $mindmakeOsBehaviorCases)
+Test-EvalCategoryMinimums -Records $mindmakeOsTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'mindmake-os trigger suite'
+Test-EvalCategoryMinimums -Records $mindmakeOsBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'mindmake-os behavior suite'
 
 $ctrlIntakeTriggers = @(Read-JsonLines -Path $ctrlIntakeTriggerCases)
 $ctrlIntakeBehaviors = @(Read-JsonLines -Path $ctrlIntakeBehaviorCases)

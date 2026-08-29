@@ -6,6 +6,24 @@ param(
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+$script:ArtifactHashAlgorithm = 'sha256-path-nul-file-sha256-ordinal-v1'
+
+function Get-OrdinalSortedStrings {
+    param([string[]]$Values)
+
+    $copy = [string[]]@($Values)
+    [Array]::Sort($copy, [StringComparer]::Ordinal)
+    return $copy
+}
+
+function Get-OrdinalSortedFiles {
+    param([string]$DirectoryPath)
+
+    $paths = [string[]]@(Get-ChildItem -LiteralPath $DirectoryPath -Recurse -File -Force | ForEach-Object FullName)
+    [Array]::Sort($paths, [StringComparer]::Ordinal)
+    return @($paths | ForEach-Object { Get-Item -LiteralPath $_ -Force })
+}
+
 $surfaceDefinitions = @(
     [ordered]@{ id = 'cursor-primary'; client = 'cursor'; path = 'C:\Users\krish\.cursor\skills'; ownership = 'user-managed' },
     [ordered]@{ id = 'cursor-secondary'; client = 'cursor'; path = 'C:\Users\krish\.cursor\skills-cursor'; ownership = 'user-managed' },
@@ -25,7 +43,7 @@ function Get-Sha256ForBytes {
 function Get-ArtifactSha256FromRecords {
     param([string[]]$Records)
 
-    $payload = [Text.Encoding]::UTF8.GetBytes((@($Records | Sort-Object) -join "`n"))
+    $payload = [Text.Encoding]::UTF8.GetBytes(((Get-OrdinalSortedStrings -Values $Records) -join "`n"))
     return Get-Sha256ForBytes -Bytes $payload
 }
 
@@ -41,7 +59,7 @@ function Get-DirectoryArtifactSha256 {
     param([IO.DirectoryInfo]$Directory)
 
     $records = New-Object System.Collections.Generic.List[string]
-    $files = @(Get-ChildItem -LiteralPath $Directory.FullName -Recurse -File -Force | Sort-Object FullName)
+    $files = @(Get-OrdinalSortedFiles -DirectoryPath $Directory.FullName)
     foreach ($file in $files) {
         $relative = $file.FullName.Substring($Directory.FullName.Length).TrimStart('\') -replace '\\', '/'
         $fileHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
@@ -75,6 +93,7 @@ function Get-ActiveSkillRecords {
             name = $skillName
             folder_name = $directory.Name
             manifest_sha256 = (Get-FileHash -LiteralPath $manifest -Algorithm SHA256).Hash
+            artifact_hash_algorithm = $ArtifactHashAlgorithm
             artifact_sha256 = Get-DirectoryArtifactSha256 -Directory $directory
             last_write_utc = $directory.LastWriteTimeUtc.ToString('o')
             storage = $(if ($isJunction) { $JunctionStorage } else { $LocalStorage })
@@ -96,6 +115,7 @@ function Get-ArchiveSkillRecord {
         name = $null
         folder_name = $null
         manifest_sha256 = $null
+        artifact_hash_algorithm = $ArtifactHashAlgorithm
         artifact_sha256 = $null
         last_write_utc = $ArchiveFile.LastWriteTimeUtc.ToString('o')
         storage = $Storage
@@ -232,6 +252,7 @@ foreach ($definition in $surfaceDefinitions) {
             valid = $artifact.valid
             error = $artifact.error
             manifest_sha256 = $artifact.manifest_sha256
+            artifact_hash_algorithm = $artifact.artifact_hash_algorithm
             artifact_sha256 = $artifact.artifact_sha256
             last_write_utc = $artifact.last_write_utc
             archive_path = $artifact.archive_path
@@ -300,14 +321,21 @@ try {
 } catch {}
 
 $audit = [ordered]@{
-    schema_version = 2
+    schema_version = 3
     generated_at_utc = [DateTime]::UtcNow.ToString('o')
     canonical = [ordered]@{
         repository = 'krishanraja/ai-harness'
         source_commit = $commit
+        artifact_hash_algorithm = $ArtifactHashAlgorithm
         path = $canonicalRoot
         skill_count = $canonicalRecords.Count
         skills = $canonicalRecords
+    }
+    runtime = [ordered]@{
+        powershell = $PSVersionTable.PSVersion.ToString()
+        dotnet = [Environment]::Version.ToString()
+        locale = [Globalization.CultureInfo]::CurrentCulture.Name
+        collation = 'StringComparer.Ordinal'
     }
     definitions = [ordered]@{
         active = 'A directory with a root SKILL.md; junctions are reported separately from local directories.'

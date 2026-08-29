@@ -1,5 +1,5 @@
 {"id":"design-trigger-001","category":"positive","prompt":"Design one materially new dashboard surface, render it at the real desktop viewport, and wait for my unanchored reaction before code.","should_trigger":true}
-{"id":"design-trigger-002","category":"positive","prompt":"Create a two-page Mindmaker sales one-pager with an evidence-led narrative and verify the rendered PDF.","should_trigger":true}
+{"id":"design-trigger-002","category":"positive","prompt":"Create a two-page Mindmake sales one-pager with an evidence-led narrative and verify the rendered PDF.","should_trigger":true}
 {"id":"design-trigger-003","category":"positive","prompt":"Reskin this approved capture flow for AdFixus without losing its one-question sequencing and persistence affordances.","should_trigger":true}
 {"id":"design-trigger-004","category":"positive","prompt":"Design a mobile intake that is usable one-handed, saves every answer, and asks one thing per screen.","should_trigger":true}
 {"id":"design-trigger-005","category":"positive","prompt":"The current page looks like generic AI glassmorphism. Give it a distinctive machine-first visual system grounded in real product output.","should_trigger":true}

@@ -6,7 +6,7 @@
 {"id":"uxf-trigger-006","category":"positive","prompt":"Give me the generic keyboard and visible-focus fundamentals for this form pattern, with the relevant WCAG sources.","should_trigger":true}
 {"id":"uxf-trigger-007","category":"positive","prompt":"What is the minimum sound structure for an A/B test before it launches?","should_trigger":true}
 {"id":"uxf-trigger-008","category":"positive","prompt":"Tell me whether this accessibility statement is normative WCAG, an advisory technique, a platform guideline, or a heuristic.","should_trigger":true}
-{"id":"uxf-trigger-009","category":"negative","prompt":"Design my new Mindmaker dashboard in my visual taste and produce high-fidelity mockups.","should_trigger":false}
+{"id":"uxf-trigger-009","category":"negative","prompt":"Design my new Mindmake dashboard in my visual taste and produce high-fidelity mockups.","should_trigger":false}
 {"id":"uxf-trigger-010","category":"negative","prompt":"Open the deployed app and run end-to-end browser QA with screenshots and reproduction steps.","should_trigger":false}
 {"id":"uxf-trigger-011","category":"negative","prompt":"Fix the React focus trap and deploy a preview build.","should_trigger":false}
 {"id":"uxf-trigger-012","category":"negative","prompt":"Choose the typography, spacing, hierarchy, and palette Krish would prefer for this dossier.","should_trigger":false}

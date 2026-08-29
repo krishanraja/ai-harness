@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: release `8f221b5` is the last recorded deployment, with 27 personalized skills. A live audit on 2026-08-20 found later user-authored content doctrine on the Claude local surface and invalid full-manual drift in `mindmaker-os` on local Claude/Cursor. This exposed a one-way-sync flaw. The system now treats every personalized surface as an inbound change candidate while retaining GitHub as the only governed release authority. Unknown drift is never overwritten. Automatic unattended cloud mutation remains intentionally inactive.
+Status: `harness-v2026.08.29.1` is the latest immutable approved release and is proven on the additional Codex machine. The 2026-08-29 inbound reconciliation found newer source-backed Mindmake doctrine on this machine's Claude surface, preserved it as a candidate, and rejected unproven vendored UI drift whose bytes no longer matched its pinned provenance. GitHub remains the release authority only after reconciliation; no timestamp, client, or repository location wins automatically.
 
 ## Decision
 
@@ -115,6 +115,11 @@ The approved Codex canary proved why step 7 matters: a normal Windows Git checko
 
 Do not point all clients directly at the Git working tree. Client-specific caches, provider-managed skills, different discovery rules, and accidental local edits make that deceptively fragile. Physical release artifacts plus parity records give the same content with a real rollback boundary.
 
+### Multiple local machines
+
+Treat every machine as a separately identified deployment and inbound-candidate surface. A remote machine may fetch an approved immutable release and may push preserved observations, hashes, tests, or a candidate branch, but its unattended schedule must never overwrite `main`, retag a release, or assume its local bytes are superior.
+
+The central reconciler must fetch all remote branches and tags before building a candidate, compare each machine's complete normalized path/file-hash set with its last deployment record, and preserve changes that descend from neither baseline. If two machines changed the same skill, merge by source authority, behavior, and regression evidence; never by timestamp. Only a clean reconciled commit that passes the full release gates may become a new tag. Each machine then consumes that new release through its own backup, install, and canary record.
 ### Scheduling recommendation
 
 Run a read-only inbound change sentinel daily and a full drift, freshness, dependency, and behavior audit weekly. The daily check inventories all available local and authenticated cloud surfaces, compares them with the last deployment records, and opens a preserved candidate when it sees novel bytes or observable cloud content. Downloading and staging can be automatic. Replacement, first installation on a new surface, activation, deletion, and rollback-policy changes remain approval-gated.
@@ -207,9 +212,7 @@ A deletion proposal must name the exact artifact and surface, its replacement or
 
 ## Current approval boundary
 
-Executed under exact approval on 2026-08-06: verified parity deployment to the three local user surfaces; reversible quarantine of the named local extras and shared canonical-name collisions; replacement of the three changed Claude Cloud owners; upload of the two new provider operators; and retirement of the four named Cloud legacy skills.
-
-Not approved: Task Scheduler creation, directory relinking, API deployment, automatic Cloud mutation, permanent deletion of any local quarantine, or a new GitHub tag/release. These gates are not implied by GitHub being the source of truth.
+Approved by Krish on 2026-08-29 for this reconciliation: ingest the additional Codex machine's GitHub release evidence; preserve and reconcile Claude's newer source-backed changes; create and push a new immutable release after all gates pass; and deploy that verified release to every reachable local and authenticated cloud surface. The approval does not authorise permanent deletion, credential rotation, publication unrelated to the harness, or overwriting an unexplained divergence. Replaced local skill directories must remain recoverable through deployment backups; cloud deletion remains separately gated.
 
 ## Authoritative platform references
 

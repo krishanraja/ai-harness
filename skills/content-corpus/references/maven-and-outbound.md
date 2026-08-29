@@ -10,11 +10,11 @@
 
 ## Maven sales surface
 
-**Refocused 2026-08-11 and confirmed by Krish on 2026-08-20: the paid ladder that used to live here is retired.** There are no workshops, no cohort, and no alumni pass. Maven now hosts **free Lightning Lessons only**, and their job is to feed CTRL at makeyourmindup.ai and subscriptions to Mindmaker Live. Any older copy quoting a workshop or cohort price is historical evidence, not current copy, and must not be reproduced as a live offer.
+**Refocused 2026-08-11 and confirmed by Krish on 2026-08-20: the paid ladder that used to live here is retired.** There are no workshops, no cohort, and no alumni pass. Maven now hosts **free Lightning Lessons only**, and their job is to feed CTRL at makeyourmindup.ai and subscriptions to Mindmake's publication. Any older copy quoting a workshop or cohort price is historical evidence, not current copy, and must not be reproduced as a live offer.
 
 Maven is a direct-response surface. Its job is to help a browsing leader recognise their situation, understand the concrete outcome, trust the proof, and make the next buying decision. Unlike the editorial channels, selling is explicit.
 
-Load `mindmaker` and retrieve the live Maven product before drafting. Do not use this reference for current lesson names, dates, availability, syllabus, inclusions, field limits, or destination URLs. If a live surface still presents a paid cohort, workshop, or alumni pass, report a rollout contradiction instead of treating it as current doctrine or silently changing the surface.
+Load `mindmake` and retrieve the live Maven product before drafting. Do not use this reference for current lesson names, dates, availability, syllabus, inclusions, field limits, or destination URLs. If a live surface still presents a paid cohort, workshop, or alumni pass, report a rollout contradiction instead of treating it as current doctrine or silently changing the surface.
 
 **Buyer posture:** speak to a senior leader accountable for AI who may feel a private gap between fluent discussion and hands-on capability. Never call them a beginner or point wit at their competence. The experience is often expensed, so keep the surface professional and aspirational rather than survivalist.
 
@@ -35,7 +35,7 @@ Never manufacture urgency or scarcity. Validate every platform field against the
 
 ## Naming and established names
 
-Do not relitigate an established current offer name during an ordinary copy task. Use the current name exactly after verifying it through `mindmaker` and first-party evidence.
+Do not relitigate an established current offer name during an ordinary copy task. Use the current name exactly after verifying it through `mindmake` and first-party evidence.
 
 When Krish explicitly asks to name or rename a net-new offer:
 

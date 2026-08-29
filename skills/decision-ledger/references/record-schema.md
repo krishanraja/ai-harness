@@ -82,7 +82,7 @@ A reversal is represented by a new active decision record for the new call plus 
 - `decisions_waiting`: an unresolved queue item, not a finalized ledger decision.
 - Assumption Ledger: falsifiable belief, not a choice. Link it when it supports a decision.
 - CTRL observation ledger: evidence for a proposed standard change, not the accepted change itself.
-- Concept closure: use `mindmaker-os` to verify the cross-surface closure; link the verified closure event when it embodies a material decision.
+- Concept closure: use `mindmake-os` to verify the cross-surface closure; link the verified closure event when it embodies a material decision.
 
 ## Privacy and integrity
 

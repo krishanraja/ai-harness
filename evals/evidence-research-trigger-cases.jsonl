@@ -9,7 +9,7 @@
 {"id":"research-trigger-009","category":"negative","prompt":"What is the capital of France?","should_trigger":false,"expected_route":["direct stable answer"]}
 {"id":"research-trigger-010","category":"negative","prompt":"Implement the approved API client and run its tests.","should_trigger":false,"expected_route":["krish-build"]}
 {"id":"research-trigger-011","category":"negative","prompt":"Rewrite this sourced conclusion in Krish's voice.","should_trigger":false,"expected_route":["krish-voice"]}
-{"id":"research-trigger-012","category":"negative","prompt":"What agents are running in Mindmaker OS right now?","should_trigger":false,"expected_route":["mindmaker-os"]}
+{"id":"research-trigger-012","category":"negative","prompt":"What agents are running in mind/make OS right now?","should_trigger":false,"expected_route":["mindmake-os"]}
 {"id":"research-trigger-013","category":"negative","prompt":"Audit the deployed app for UX issues without changing anything.","should_trigger":false,"expected_route":["ux-testing-agent"]}
 {"id":"research-trigger-014","category":"negative","prompt":"Record the final decision and its reversal conditions.","should_trigger":false,"expected_route":["decision-ledger"]}
 {"id":"research-trigger-015","category":"negative","prompt":"Summarize only the document I supplied; do not verify or add external facts.","should_trigger":false,"expected_route":["document analysis"]}

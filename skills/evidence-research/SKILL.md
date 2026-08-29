@@ -125,7 +125,7 @@ The matrix must preserve conflicting evidence, publication/event/data dates, ret
 
 Pass `strategy-brief` the call, claim-evidence matrix, contradictions, expiry/revisit triggers, unresolved decisions, and an explicit `KRISH-OWNED CHOICE` naming the strategic judgment that only Krish can make. If no such choice remains, state `KRISH-OWNED CHOICE: none` rather than inventing one. Then run `verification-loop` to check citation support, dates, source scope, alternative explanations, and separation of fact from inference.
 
-For a current domain fact, return a `FACT PACKET` to the named domain owner and writer with claim, competing claims, first-party/transaction evidence, source scope, retrieval time, confidence, expiry, and unresolved conflict. For Mindmaker commercial copy, name `mindmaker` and the selected writer explicitly.
+For a current domain fact, return a `FACT PACKET` to the named domain owner and writer with claim, competing claims, first-party/transaction evidence, source scope, retrieval time, confidence, expiry, and unresolved conflict. For Mindmake commercial copy, name `mindmake` and the selected writer explicitly.
 
 For approved execution, return an `EXECUTION EVIDENCE PACKET` to the narrow executor containing the approved decision, assumptions, supporting and contrary evidence, authority boundary, verification criteria, expiry date, and named revisit trigger. The recommendation itself is not mutation authority.
 

@@ -9,6 +9,32 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+$script:ArtifactHashAlgorithm = 'sha256-path-nul-file-sha256-ordinal-v1'
+
+function Get-OrdinalSortedStrings {
+    param([string[]]$Values)
+
+    $copy = [string[]]@($Values)
+    [Array]::Sort($copy, [StringComparer]::Ordinal)
+    return $copy
+}
+
+function Get-OrdinalSortedFiles {
+    param(
+        [string]$DirectoryPath,
+        [switch]$Force
+    )
+
+    $items = $(if ($Force) {
+        Get-ChildItem -LiteralPath $DirectoryPath -Recurse -File -Force
+    } else {
+        Get-ChildItem -LiteralPath $DirectoryPath -Recurse -File
+    })
+    $paths = [string[]]@($items | ForEach-Object FullName)
+    [Array]::Sort($paths, [StringComparer]::Ordinal)
+    return @($paths | ForEach-Object { Get-Item -LiteralPath $_ -Force })
+}
+
 if ($ReleaseId -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]*$') {
     throw 'ReleaseId must start with an alphanumeric character and contain only alphanumerics, dots, underscores, or hyphens.'
 }
@@ -42,7 +68,7 @@ function New-DeterministicSkillArchive {
     try {
         $archive = New-Object IO.Compression.ZipArchive($stream, [IO.Compression.ZipArchiveMode]::Create, $false)
         try {
-            $files = @(Get-ChildItem -LiteralPath $SkillDirectory.FullName -Recurse -File | Sort-Object FullName)
+            $files = @(Get-OrdinalSortedFiles -DirectoryPath $SkillDirectory.FullName)
             foreach ($file in $files) {
                 $relative = $file.FullName.Substring($SkillDirectory.FullName.Length).TrimStart('\') -replace '\\', '/'
                 $entryName = $(if ($FilesAtArchiveRoot) { $relative } else { $SkillDirectory.Name + '/' + $relative })
@@ -63,14 +89,14 @@ function Get-DirectoryArtifactSha256 {
     param([IO.DirectoryInfo]$Directory)
 
     $records = New-Object System.Collections.Generic.List[string]
-    $files = @(Get-ChildItem -LiteralPath $Directory.FullName -Recurse -File -Force | Sort-Object FullName)
+    $files = @(Get-OrdinalSortedFiles -DirectoryPath $Directory.FullName -Force)
     foreach ($file in $files) {
         $relative = $file.FullName.Substring($Directory.FullName.Length).TrimStart('\') -replace '\\', '/'
         $fileHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
         $records.Add("$relative`0$fileHash")
     }
 
-    $payload = [Text.Encoding]::UTF8.GetBytes(($records -join "`n"))
+    $payload = [Text.Encoding]::UTF8.GetBytes(((Get-OrdinalSortedStrings -Values $records.ToArray()) -join "`n"))
     $hasher = [Security.Cryptography.SHA256]::Create()
     try { return ([BitConverter]::ToString($hasher.ComputeHash($payload))).Replace('-', '') }
     finally { $hasher.Dispose() }
@@ -78,7 +104,11 @@ function Get-DirectoryArtifactSha256 {
 
 $records = New-Object System.Collections.Generic.List[object]
 $skillsRoot = Join-Path $Root 'skills'
-$skillDirectories = @(Get-ChildItem -LiteralPath $skillsRoot -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') } | Sort-Object Name)
+$skillDirectoryByName = @{}
+foreach ($directory in @(Get-ChildItem -LiteralPath $skillsRoot -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') })) {
+    $skillDirectoryByName[$directory.Name] = $directory
+}
+$skillDirectories = @((Get-OrdinalSortedStrings -Values ([string[]]@($skillDirectoryByName.Keys))) | ForEach-Object { $skillDirectoryByName[$_] })
 
 foreach ($skill in $skillDirectories) {
     $artifact = Join-Path $OutputDirectory ($skill.Name + '-' + $ReleaseId + '.skill')
@@ -90,6 +120,7 @@ foreach ($skill in $skillDirectories) {
         name = $skill.Name
         release_id = $ReleaseId
         source_commit = $commit
+        artifact_hash_algorithm = $ArtifactHashAlgorithm
         source_skill_sha256 = Get-DirectoryArtifactSha256 -Directory $skill
         source_manifest_sha256 = (Get-FileHash -LiteralPath $manifest -Algorithm SHA256).Hash
         artifact = [IO.Path]::GetFileName($artifact)
@@ -102,8 +133,9 @@ foreach ($skill in $skillDirectories) {
 }
 
 $release = [ordered]@{
-    schema_version = 3
+    schema_version = 4
     release_id = $ReleaseId
+    artifact_hash_algorithm = $ArtifactHashAlgorithm
     source_commit = $commit
     working_tree = $treeState
     built_at_utc = [DateTime]::UtcNow.ToString('o')
@@ -112,7 +144,8 @@ $release = [ordered]@{
 }
 
 $releasePath = Join-Path $OutputDirectory ('release-' + $ReleaseId + '.json')
-$release | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $releasePath -Encoding UTF8
+$releaseJson = $release | ConvertTo-Json -Depth 5
+[IO.File]::WriteAllText($releasePath, $releaseJson + "`n", [Text.UTF8Encoding]::new($false))
 Write-Output "BUILT $($records.Count) skill records and $($records.Count * 2) deterministic transport artifacts"
 Write-Output "SOURCE $commit ($treeState)"
 Write-Output "MANIFEST $releasePath"

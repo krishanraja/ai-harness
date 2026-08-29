@@ -1,6 +1,6 @@
 ---
 name: video-engine
-description: "Launch Krishan Raja's Mindmaker Video Engine. Invoke only when the first user message, after trimming whitespace and terminal punctuation, is exactly 'Video engine' (case-insensitive), or when the user explicitly invokes $video-engine. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
+description: "Launch Krishan Raja's Mindmake Video Engine. Invoke only when the first user message, after trimming whitespace and terminal punctuation, is exactly 'Video engine' (case-insensitive), or when the user explicitly invokes $video-engine. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
 ---
 
 # Video Engine launcher

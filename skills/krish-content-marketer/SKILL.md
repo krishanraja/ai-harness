@@ -29,7 +29,7 @@ Before producing, establish:
 - live commercial facts where any claim may have changed;
 - authority boundary and approval point.
 
-If the task names a Mindmaker offer or CTRL, load `mindmaker`. If it names a channel, load `content-corpus`. Retrieve current or contestable evidence through `evidence-research`. Use `krish-voice` only when drafting or editing final prose.
+If the task names a Mindmake offer or CTRL, load `mindmake`. If it names a channel, load `content-corpus`. Retrieve current or contestable evidence through `evidence-research`. Use `krish-voice` only when drafting or editing final prose.
 
 ## Buyer clarity gate
 
@@ -93,7 +93,7 @@ Do not treat a familiar example or old successful asset as proof that its volati
 | What the asset should argue or how it should convert | this skill |
 | How final prose should sound | `krish-voice` |
 | What a named channel is for | `content-corpus` |
-| Current Mindmaker/CTRL offer or ICP truth | `mindmaker` |
+| Current Mindmake/CTRL offer or ICP truth | `mindmake` |
 | Current market/company evidence | `evidence-research` |
 | Product or page design | `krish-design` |
 | Implementation | `krish-build` |

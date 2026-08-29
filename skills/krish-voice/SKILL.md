@@ -1,6 +1,6 @@
 ---
 name: krish-voice
-description: "Final-prose voice owner for material drafted, edited, reviewed, or humanised under Krish's name. Use for emails, follow-ups, pitch notes, op-eds, LinkedIn posts, newsletters, podcast or talk scripts, deck and slide copy, workshop copy, voice review, de-AI work, or a requested rewrite that must sound like Krish. Also use after domain, channel, research, or conversion owners hand off approved facts and argument for final wording. Do not lead factual research, live channel status, content or conversion angle selection, visual design, implementation, sending, scheduling, or publication. For strategy-only work with no prose draft, route to the relevant domain owner, content-corpus, and krish-content-marketer. Preserve locked meaning and evidence, protect private source material, and never treat draft approval as action authority. Last reviewed 2026-08-20."
+description: "Final-prose voice owner for material drafted, edited, reviewed, or humanised under Krish's name. Use for emails, follow-ups, pitch notes, op-eds, LinkedIn posts, newsletters, podcast or talk scripts, deck and slide copy, workshop copy, voice review, de-AI work, or a requested rewrite that must sound like Krish. Also use after domain, channel, research, or conversion owners hand off approved facts and argument for final wording. Do not lead factual research, live channel status, content or conversion angle selection, visual design, implementation, sending, scheduling, or publication. For strategy-only work with no prose draft, route to the relevant domain owner, content-corpus, and krish-content-marketer. Preserve locked meaning and evidence, protect private source material, and never treat draft approval as action authority. Last reviewed 2026-08-29 against the recorded Mindmake North Star, publication canon, and voice rules."
 ---
 
 # Krish Voice
@@ -17,7 +17,7 @@ Respect upstream ownership:
 
 | Input | Owner |
 |---|---|
-| Current domain, product, offer, or operational fact | Relevant domain skill, such as `mindmaker`, or `evidence-research` |
+| Current domain, product, offer, or operational fact | Relevant domain skill, such as `mindmake`, or `evidence-research` |
 | Named channel mandate, format, current status, and editorial versus sales boundary | `content-corpus` |
 | Buyer argument, conversion mechanism, objection, and proof order | `krish-content-marketer` |
 | Final wording, cadence, voice, and AI-tell removal | `krish-voice` |
@@ -103,7 +103,7 @@ When a condition below appears, name and execute every applicable safeguard in t
 | Draft may be sent, posted, scheduled, or published | Deliver the inspectable draft first; when proposing execution, name the exact recipient or account, subject or post, audience/visibility, payload, and exact external action; wait for action-time approval. |
 | Personal detail might strengthen a draft | Omit it or ask a specific inclusion question, explain its argumentative job, and offer a least-revealing alternative. |
 | Only voice sample has unknown authorship or may be generated | Mark provenance uncertainty, compare it with authorised known-Krish material if available, avoid durable learning, and deliver only provisional edits with the limits stated. |
-| Mindmaker landing or sales page | Load `mindmaker` for current facts, `content-corpus` for surface mandate and constraints, `krish-content-marketer` for buyer argument, `krish-voice` for final words, then `verification-loop`. |
+| Mindmake landing or sales page | Load `mindmake` for current facts, `content-corpus` for surface mandate and constraints, `krish-content-marketer` for buyer argument, `krish-voice` for final words, then `verification-loop`. |
 
 ## Workflow
 
@@ -204,14 +204,14 @@ Do not self-certify exact identity from the draft you just wrote. Without indepe
 
 ## Handoffs and action authority
 
-- Mindmaker or another named offer: load the current domain owner before prose.
+- Mindmake or another named offer: load the current domain owner before prose.
 - Named editorial, audio, education, or sales surface: let `content-corpus` own status, mandate, and editorial-versus-sales boundary; after drafting, verify both cited claims and suitability for that channel.
 - Unsettled landing page, campaign, objection, proof order, or conversion angle: let `krish-content-marketer` own the argument, then accept its final-prose handoff.
 - Current or contested evidence: preserve the `evidence-research` matrix and expiry.
 - Visual artifact: let `krish-design` own hierarchy and rendered fit; verify the combined result.
 - Final artifact: run `verification-loop`; do not let self-review stand in for independent proof.
 
-When one request spans roles, execute the complete chain rather than stopping after the first handoff. A Mindmaker landing-page request always routes `mindmaker` for current facts, `content-corpus` for surface mandate and constraints, `krish-content-marketer` for the buyer argument, `krish-voice` for final prose, and `verification-loop` for claim, conversion, voice, channel-suitability, and authority proof.
+When one request spans roles, execute the complete chain rather than stopping after the first handoff. A Mindmake landing-page request always routes `mindmake` for current facts, `content-corpus` for surface mandate and constraints, `krish-content-marketer` for the buyer argument, `krish-voice` for final prose, and `verification-loop` for claim, conversion, voice, channel-suitability, and authority proof.
 
 Writing, editing, or approving words never authorises sending, posting, scheduling, uploading, or publishing them. If execution is proposed, present the final readback and name the exact recipient/account, subject or post, audience/visibility, payload, and action. Wait for action-time approval. Never infer the account or target, and preserve an editable draft.
 

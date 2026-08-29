@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding what a Paid, Built, Signal & Noise, Mindmaker Live, Maven, lead-email, or visibility asset is for, who it serves, what form it takes, or how one signal should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
+description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
 ---
 
 # Content corpus
@@ -10,15 +10,15 @@ description: "Channel-context router for Krish Raja's named editorial, audio, ed
 Act as a **domain-context skill** for channels. `krish-voice` owns how Krish writes. This skill owns what each named channel is for, who it serves, which format fits, and what quality bar it must clear.
 
 - Owner: Krish Raja.
-- Reviewed: 2026-08-20 after Krish confirmed the 2026-08-11 editorial and Maven refocus as durable business doctrine.
+- Reviewed: 2026-08-29 against the Mindmake canon at github.com/krishanraja/mindmake, project-documentation/02_PUBLICATION.md, which is the authority for this skill.
 - Freshness SLA: 45 days, or immediately after a channel, audience, format, or distribution decision changes.
 - Unique outcome: prevent generic content from being relabelled across channels and prevent dormant, pre-launch, or inaccessible surfaces from being treated as active.
 
 ## Load only what the task needs
 
-- Read `references/editorial-channels.md` for Mindmaker Live and its two formats, Paid and Built, or for the Signal & Noise channel.
+- Read `references/editorial-channels.md` for Mindmake's publication and its two channels, The Money of AI and Built with AI, or for the Signal & Noise channel.
 - Read `references/maven-and-outbound.md` for Maven lesson copy, lead/customer emails, speaking, podcast, press, or visibility outreach.
-- Load `mindmaker` before making Mindmaker offer, ICP, pricing, availability, or product claims.
+- Load `mindmake` before making Mindmake offer, ICP, pricing, availability, or product claims.
 - Load `krish-voice` before drafting final prose. Load `krish-content-marketer` when the asset's job is to change buyer behaviour.
 
 Do not load every playbook by default.
@@ -66,10 +66,10 @@ Failure on any one standard blocks publication. If the piece lacks an owned arti
 
 | Intent | Instrument | Characteristic move |
 |---|---|---|
-| Follow the money through a digital-economy shift | **Paid** (Mindmaker Live) | ask who pays and trace the mechanism |
-| Understand the human reason someone built | **Built** (Mindmaker Live) | reach the why beneath the why |
-| Air a finished Paid or Built piece as a live argument | Signal & Noise (a channel) | no-BS call, devil's advocate, what-if |
-| Orient a busy executive to what changed and why it matters | the Mindmaker Live weekly brief | prioritised signal plus operator so-what |
+| Follow the money through a digital-economy shift | **The Money of AI** | ask who pays and trace the mechanism |
+| Understand the human reason someone built | **Built with AI** | reach the why beneath the why |
+| Air a finished The Money of AI or Built with AI piece as a live argument | Signal & Noise (distribution/discussion, not a publication channel) | no-BS call, devil's advocate, what-if |
+| Orient a busy executive to what changed and why it matters | choose the fitting publication channel after applying its mandate | prioritised signal plus operator so-what |
 | Get a leader to a free lesson that leads into CTRL | Maven (free lessons only) | legibility, concrete outcome, proof, verified offer facts |
 | Move a lead, customer, guest, talk, or press relationship | Outbound/visibility | listening specificity and one low-friction next step |
 
@@ -83,14 +83,14 @@ Channel selection does not establish channel status. Verify both independently.
 - Use the recipient's or guest's actual language when authorised. Generic personalisation is not listening specificity.
 - Never state a channel cadence, host lineup, launch state, URL health, pricing, programme structure, or publication status from this skill alone.
 - Never send or publish automatically. Deliver drafts to the user or approved draft surface.
-- For sales work on Maven or another named Mindmaker surface, load `mindmaker` for current offer facts, hand conversion structure to `krish-content-marketer`, hand final prose to `krish-voice`, then rerun domain, channel, conversion, and voice checks.
+- For sales work on Maven or another named Mindmake surface, load `mindmake` for current offer facts, hand conversion structure to `krish-content-marketer`, hand final prose to `krish-voice`, then rerun domain, channel, conversion, and voice checks.
 
 ## Collision and handoff rules
 
-- For a landing or sales asset that invokes any named channel, use the explicit chain `content-corpus -> mindmaker fact check -> krish-content-marketer -> krish-voice -> verification-loop`. State the final-prose handoff to `krish-voice`; a later voice check is not a substitute for the handoff.
+- For a landing or sales asset that invokes any named channel, use the explicit chain `content-corpus -> mindmake fact check -> krish-content-marketer -> krish-voice -> verification-loop`. State the final-prose handoff to `krish-voice`; a later voice check is not a substitute for the handoff.
 - Structure or conversion problem: `krish-content-marketer` leads.
 - Voice-mechanics problem: `krish-voice` leads.
-- Current Mindmaker offer or buyer fact: `mindmaker` supplies context.
+- Current Mindmake offer or buyer fact: `mindmake` supplies context.
 - Current external claim or channel status: `evidence-research` or first-party retrieval supplies evidence.
 - Platform/API execution: the relevant tool skill acts only after the plan and authority gate.
 - Final check: `verification-loop` validates source support, format, channel fit, and claimed delivery.
@@ -124,4 +124,4 @@ Do not silently edit memory or universalise one ambiguous reaction.
 
 ## Completion contract
 
-The channel-context pass is complete only when the surface status is evidenced, the selected channel has a native angle and form, the source artifact is real and usable, material claims are sourced, the correct producer and validator are named, and no publication or send is implied without proof. Deliver the draft together with its evidence notes. Whenever any current Mindmaker offer fact appears, load `mindmaker` and verify that fact regardless of which named channel carries it.
+The channel-context pass is complete only when the surface status is evidenced, the selected channel has a native angle and form, the source artifact is real and usable, material claims are sourced, the correct producer and validator are named, and no publication or send is implied without proof. Deliver the draft together with its evidence notes. Whenever any current Mindmake offer fact appears, load `mindmake` and verify that fact regardless of which named channel carries it.

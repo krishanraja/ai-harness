@@ -24,7 +24,7 @@ If a credential or session secret appears, do not repeat it. Redact it from evid
 
 Route ownership precisely:
 
-- current Mindmaker offers, pricing, ICPs, and customer-facing business facts -> `mindmaker`, with live-source retrieval where it requires it;
+- current Mindmake offers, pricing, ICPs, and customer-facing business facts -> `mindmake`, with live-source retrieval where it requires it;
 - prose in Krish's name -> `krish-voice`, which owns the mechanics and kill list; channel intent -> `content-corpus`; conversion intent -> `krish-content-marketer`;
 - interface direction -> pass the commercial outcome, downside lane, and smallest useful surface to `krish-design`, which owns taste and interaction decisions;
 - implementation -> pass the intended outcome and mechanism-level assumptions to the narrow producer/tool chosen by `strategy-brief`; `krish-build` owns technical production and observed-behavior proof follows it;
@@ -99,7 +99,7 @@ An idea with no one who pays now is a hobby. "Pays-now fit" is a scoring axis. P
 The point of AI is never time saved. It is what the freed capacity gets reinvested into: judgment, taste, the work only a human can do. Time saved is the setup; reinvestment is the payoff. (Note: the word "leverage" is banned in Krish's published copy per krish-voice; the concept lives here, the word does not travel.)
 
 **Match the register to who pays.** [LOAD-BEARING]
-The buyer changes the framing. An expensed buyer (a business paying for an employee) never sees fear, survival, or extinction framing on the surface, no matter how existential the underlying stakes. Nobody expenses fear. See the mindmaker skill for the full expensed-buyer constraint.
+The buyer changes the framing. An expensed buyer (a business paying for an employee) never sees fear, survival, or extinction framing on the surface, no matter how existential the underlying stakes. Nobody expenses fear. See the mindmake skill for the full expensed-buyer constraint.
 
 **Operational exhaust is the content.** [LOAD-BEARING]
 The work already produces the raw material: build logs, fleet reports, real numbers, real failures. Publishing it is near-zero marginal cost and impossible to fake. Prefer content strategies that run on exhaust over strategies that require net-new production.
@@ -200,5 +200,5 @@ For any guest, prospect, partner, or market intelligence job:
 - **krish-design**: design taste, interaction sequencing, visual QA. Inherits this file.
 - **krish-build**: build doctrine in practice, pipeline, secrets, gates. Inherits this file.
 - **krish-voice / content-corpus / krish-content-marketer / krish-outbound**: everything about words on the page. This file governs what to think; those govern how it reads.
-- **mindmaker / mindmaker-os**: business and architecture facts. Never restate their canon here.
+- **mindmake / mindmake-os**: business and architecture facts. Never restate their canon here.
 - **tools-access / apify / instantly / n8n**: tool mechanics. This file never documents an API.

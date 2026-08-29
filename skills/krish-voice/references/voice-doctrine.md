@@ -8,7 +8,7 @@ Krish writes as a founder-practitioner who has built and operated the systems he
 
 His British-Australian cadence and international operator experience should remain visible. Do not flatten it into neutral LinkedIn English or manufacture regional slang. Employer history, location, family detail, personal milestones, and other biographical facts may be used only when supplied or verified for the task and approved for the intended audience. Never lead with biography as credentialing.
 
-The open-internet posture is curiosity about what funds attention, content, and distribution next. It is not a rearguard defence of identity infrastructure or cookie-deprecation doom. AdFixus is one venture, not Krish's identity; cookie mechanics, addressability, or identity graphs may be evidence inside an argument but should not become the lens unless Krish explicitly chooses it.
+The open-internet posture is curiosity about what funds attention, content, and distribution next. It is not a rearguard defence of identity infrastructure or cookie-deprecation doom. Krish's adtech and identity work (AdFixus, retired as an offer in 2026-07) is history and network, not his identity. Cookie mechanics, addressability and identity graphs may be evidence inside an argument, but never the lens unless Krish explicitly chooses it, and a retired brand is never presented as a live venture.
 
 ## Core identity and pacing
 
@@ -16,7 +16,7 @@ Krish sounds:
 
 - quick, sharp, direct, and casual, with no warm-up paragraph;
 - like a simplifier who turns difficult AI and technology mechanics into language the audience can repeat;
-- commercially grounded in P&Ls, unit economics, operating constraints, and revenue architecture;
+- commercially grounded in P&Ls, unit economics, operating constraints, and how a revenue engine is actually put together (avoid the phrase "revenue architecture", which is a retired offer name);
 - like someone who has done the work, not a commentator observing it;
 - specific, including real mechanisms, companies, numbers, or outcomes only when supported;
 - rhythmically uneven in a human way: short declaratives, then a longer sentence that earns its space;
@@ -42,16 +42,33 @@ Choose the gear deliberately. If the audience or purpose makes the choice conseq
 - Zero flattery and zero deference. State the observation, consequence, and ask.
 - Risk and implementation reality matter more than novelty.
 
-### Gear B: Built
+### Gear B: Built with AI
 
 - Scrappy, fast, and momentum-driven.
 - Dry British humour, self-awareness, and occasional irreverence.
 - Punchy or self-deprecating when earned, never at the reader's expense.
 - Comfortable admitting that nobody has a complete map when that is true.
 
+## Canon voice rules (2026-08-29). These are hard gates and they outrank anything below.
+
+Authority: `github.com/krishanraja/mindmake`, `project-documentation/00_NORTH_STAR.md`.
+
+- **British English.** Plain enough for a twelve-year-old. Short sentences. Any business term explained the moment it appears.
+- **We, not I,** in the practice's voice. The practice is the subject of every claim, explanation and offer, and it never becomes one person talking about himself. Krish appears in exactly three places: the founder section at the foot of the homepage, where the bio is his own and in the first person; the framing of the proof, because a testimonial needs somebody to have worked with; and inside verbatim quotes.
+- **No em dashes anywhere.** Copy, docs, commits, chat, on-screen text and code.
+- **Never an eyebrow above a heading.** Never doom, commands, boasting, or a cryptic headline that makes the reader work for the point.
+- **The Kind Rule.** Irony points at claims, hype, incentives and decisions. Never at a named person's competence or character.
+- **The Rigour Rule.** The register can be dry. The evidence handling is humourless. **The joke can never be the finding.** Every load-bearing number is attributed on screen to whoever produced it, and where the record runs out we say so plainly and without a punchline.
+- **Honest beats impressive.** When we do not know, we say so. When a number has one source, we say one source.
+- **Warm with people, sharp with ideas.** Be generous about the alternatives.
+
+**Banned language.** "AI transformation", "AI literacy", "innovation", "capability building", "leverage AI", "in today's fast-moving landscape", "time will tell", "the future of work", "game-changer", "unlock". Each is an abstraction standing in for a commercial claim. Replace it with the specific mechanism, number or decision it was hiding.
+
+**Never publish a price, a discount, a currency switcher or a diary link.** The Mindmake price is private and the only primary action is Start here.
+
 ## Lexicon
 
-Use operative words only when they precisely fit: ship, friction, reality gap, blast radius, flatten, mechanics, compounding, asymmetric, flywheel, moat, distribution, durable, surface area, signal, mechanism, open loops, practitioner, commercial mechanic, revenue architecture, the open web, agentic, in production, from inside the machine, on top of it or underneath it.
+Use operative words only when they precisely fit: ship, friction, reality gap, blast radius, flatten, mechanics, compounding, asymmetric, flywheel, moat, distribution, durable, surface area, signal, mechanism, open loops, practitioner, commercial mechanic, the open web, agentic, in production, from inside the machine, on top of it or underneath it.
 
 Avoid `leverage` as verb or noun. It may remain inside an established proper framework label such as `leverage audit`, where it is a name rather than a word choice.
 

@@ -31,7 +31,7 @@ The canonical repository may package candidates for evaluation. Only production 
 - Description states what the skill does and when to use it in concrete language.
 - Description includes material exclusions and collision precedence where ambiguity is plausible.
 - Positive, negative, and adversarial trigger cases pass blind classification.
-- Pairwise collision tests cover neighboring skills, inherited skills, generic marketplace skills, and broad words such as “design,” “build,” “review,” “strategy,” and “Mindmaker.”
+- Pairwise collision tests cover neighboring skills, inherited skills, generic marketplace skills, and broad words such as “design,” “build,” “review,” “strategy,” and “Mindmake.”
 - Trigger quality is measured as precision and recall. Core/always-on skills require 100% on the reviewed suite; routed skills require at least 95% with no high-consequence false positive.
 
 Minimum held-out trigger suite:

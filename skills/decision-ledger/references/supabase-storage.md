@@ -9,7 +9,7 @@ as a proposal.
 
 ## Canonical and non-canonical surfaces
 
-- Canonical records and events live in the configured Mindmaker OS Supabase
+- Canonical records and events live in the configured mind/make OS Supabase
   project after the named migration is applied and verified.
 - Venture systems remain authoritative for their operational facts. Store stable
   references rather than cloned task, queue, count, or deployment state.

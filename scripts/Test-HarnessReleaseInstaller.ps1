@@ -68,9 +68,11 @@ try {
     if ($candidate.Count -ne 1) { throw 'Release manifest must contain one harness-maintainer record.' }
     $hashRecords = New-Object System.Collections.Generic.List[string]
     $driftDirectory = Get-Item -LiteralPath (Join-Path $target 'harness-maintainer')
-    foreach ($file in @(Get-ChildItem -LiteralPath $driftDirectory.FullName -Recurse -File -Force | Sort-Object FullName)) {
-        $relative = $file.FullName.Substring($driftDirectory.FullName.Length).TrimStart('\') -replace '\\', '/'
-        $hashRecords.Add("$relative`0$((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash)")
+    $driftPaths = [string[]]@(Get-ChildItem -LiteralPath $driftDirectory.FullName -Recurse -File -Force | ForEach-Object FullName)
+    [Array]::Sort($driftPaths, [StringComparer]::Ordinal)
+    foreach ($filePath in $driftPaths) {
+        $relative = $filePath.Substring($driftDirectory.FullName.Length).TrimStart('\') -replace '\\', '/'
+        $hashRecords.Add("$relative`0$((Get-FileHash -LiteralPath $filePath -Algorithm SHA256).Hash)")
     }
     $payload = [Text.Encoding]::UTF8.GetBytes(($hashRecords -join "`n"))
     $hasher = [Security.Cryptography.SHA256]::Create()
@@ -84,6 +86,7 @@ try {
         target = [IO.Path]::GetFullPath($target).TrimEnd('\')
         candidate_release_id = $release.release_id
         candidate_source_commit = $release.source_commit
+        artifact_hash_algorithm = $release.artifact_hash_algorithm
         approved_at_utc = [DateTime]::UtcNow.ToString('o')
         approved_by = 'installer-self-test'
         rationale = 'Prove that an exact, release-bound reconciliation permits only the named fixture replacement.'

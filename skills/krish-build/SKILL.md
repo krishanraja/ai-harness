@@ -129,10 +129,10 @@ Environment truth is retrieved, not embedded. At task time inspect the actual OS
 - **krish-principles**: the doctrine this file applies, including the green-checkmark rule and test-small.
 - **krish-design**: what the artifact should look like and the visual QA scan; this file covers how it gets built and shipped.
 - **tools-access**: the runtime-only authentication contract. It contains no credential values and is the first stop for authenticated calls.
-- **mindmaker-os**: live fleet, n8n, deployment, and operational-state routing.
+- **mindmake-os**: live fleet, n8n, deployment, and operational-state routing.
 - **apify**: reviewed Apify mechanics. Load other per-tool skills only after provenance and security review.
 - **code-reviewer**: post-build review standards for React and Supabase work.
-- **mindmaker-os**: architecture facts (SSOT, model tiering, approval lanes). Never restate its canon.
+- **mindmake-os**: architecture facts (SSOT, model tiering, approval lanes). Never restate its canon.
 
 ## Routing, destructive actions, and completion
 

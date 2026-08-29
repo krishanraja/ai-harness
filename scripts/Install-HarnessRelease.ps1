@@ -22,18 +22,36 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+$script:ArtifactHashAlgorithm = 'sha256-path-nul-file-sha256-ordinal-v1'
+
+function Get-OrdinalSortedStrings {
+    param([string[]]$Values)
+
+    $copy = [string[]]@($Values)
+    [Array]::Sort($copy, [StringComparer]::Ordinal)
+    return $copy
+}
+
+function Get-OrdinalSortedFiles {
+    param([string]$DirectoryPath)
+
+    $paths = [string[]]@(Get-ChildItem -LiteralPath $DirectoryPath -Recurse -File -Force | ForEach-Object FullName)
+    [Array]::Sort($paths, [StringComparer]::Ordinal)
+    return @($paths | ForEach-Object { Get-Item -LiteralPath $_ -Force })
+}
+
 function Get-DirectoryArtifactSha256 {
     param([IO.DirectoryInfo]$Directory)
 
     $records = New-Object System.Collections.Generic.List[string]
-    $files = @(Get-ChildItem -LiteralPath $Directory.FullName -Recurse -File -Force | Sort-Object FullName)
+    $files = @(Get-OrdinalSortedFiles -DirectoryPath $Directory.FullName)
     foreach ($file in $files) {
         $relative = $file.FullName.Substring($Directory.FullName.Length).TrimStart('\') -replace '\\', '/'
         $fileHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
         $records.Add("$relative`0$fileHash")
     }
 
-    $payload = [Text.Encoding]::UTF8.GetBytes(($records -join "`n"))
+    $payload = [Text.Encoding]::UTF8.GetBytes(((Get-OrdinalSortedStrings -Values $records.ToArray()) -join "`n"))
     $hasher = [Security.Cryptography.SHA256]::Create()
     try { return ([BitConverter]::ToString($hasher.ComputeHash($payload))).Replace('-', '') }
     finally { $hasher.Dispose() }
@@ -97,6 +115,14 @@ if ($release.validation -ne 'passed' -or $release.working_tree -ne 'clean') {
 if (-not $release.release_id -or -not $release.source_commit -or -not $release.skills) {
     throw 'Release manifest is missing required identity fields.'
 }
+if ($release.artifact_hash_algorithm -ne $ArtifactHashAlgorithm) {
+    throw "Unsupported or missing release artifact hash algorithm: $($release.artifact_hash_algorithm)"
+}
+foreach ($skill in @($release.skills)) {
+    if ($skill.artifact_hash_algorithm -ne $ArtifactHashAlgorithm) {
+        throw "Skill $($skill.name) does not name the required artifact hash algorithm."
+    }
+}
 
 if (-not $ArtifactsDirectory) { $ArtifactsDirectory = Split-Path -Parent $manifestFull }
 $artifactsFull = [IO.Path]::GetFullPath($ArtifactsDirectory)
@@ -112,6 +138,9 @@ if ($ExpectedDeploymentRecordPath) {
         throw "Expected deployment record not found: $expectedRecordFull"
     }
     $expectedRecord = Get-Content -LiteralPath $expectedRecordFull -Raw | ConvertFrom-Json
+    if ($expectedRecord.artifact_hash_algorithm -and $expectedRecord.artifact_hash_algorithm -ne $ArtifactHashAlgorithm) {
+        throw 'Expected deployment record uses a different artifact hash algorithm.'
+    }
     if ($expectedRecord.surface_id -ne $SurfaceId) {
         throw "Expected deployment record surface '$($expectedRecord.surface_id)' does not match '$SurfaceId'."
     }
@@ -136,6 +165,9 @@ if ($ReconciliationRecordPath) {
         throw "Reconciliation record not found: $reconciliationFull"
     }
     $reconciliation = Get-Content -LiteralPath $reconciliationFull -Raw | ConvertFrom-Json
+    if ($reconciliation.artifact_hash_algorithm -and $reconciliation.artifact_hash_algorithm -ne $ArtifactHashAlgorithm) {
+        throw 'Reconciliation record uses a different artifact hash algorithm.'
+    }
     if ($reconciliation.schema_version -ne 1 -or $reconciliation.surface_id -ne $SurfaceId) {
         throw 'Reconciliation record schema or surface does not match this installation.'
     }
@@ -281,6 +313,7 @@ try {
         target = $targetFull
         release_id = $release.release_id
         source_commit = $release.source_commit
+        artifact_hash_algorithm = $ArtifactHashAlgorithm
         deployed_at_utc = [DateTime]::UtcNow.ToString('o')
         backup_directory = $releaseBackup
         result = 'installed-and-hash-verified'

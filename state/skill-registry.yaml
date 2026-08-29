@@ -2,6 +2,21 @@ schema_version: 1
 last_reconciled: 2026-08-29
 status: governed-production-set
 
+candidate_reconciliation:
+  expected_skill_count: 29
+  base_release: v2026.08.29.1
+  base_source_commit: bf9861c9c2823866835b002b3fe8826a3694113f
+  inbound_codex_surface: codex-surface-07a67cda9f99
+  inbound_mindmake_source_commit: 1f7241b152c2912298d8a397bee266e257b97e15
+  inbound_claude_snapshot: C:\Users\krish\.scratch\ai-harness-reconcile-2026-08-29-claude-snapshot\skills
+  candidate_artifact_set_sha256: 7B13998DD29B2AAFFB628CE49227FF68B642A267B1EC5BFFFE87FC1EC7906CE6
+  artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
+  status: precommit-gates-passed
+  evidence: state/reconciliation-2026-08-29-additional-codex-and-claude.md
+  admitted: source-backed Mindmake rename, commercial canon, publication routing, voice doctrine, current design-contract routing, and compatible mechanical references
+  suppressed: unproven design-intelligence-search vendor-byte drift and broad ui-ux-pro-max collision
+
+
 deployed_release:
   release_id: 8f221b5
   source_commit: 8f221b5ad487a5226c22ddf69ef5aac5aba99925
@@ -77,8 +92,8 @@ production_active:
   - krish-principles
   - krish-voice
   - locked-revision
-  - mindmaker
-  - mindmaker-os
+  - mindmake
+  - mindmake-os
   - n8n-operator
   - strategy-brief
   - take-the-brief
@@ -89,8 +104,8 @@ production_active:
   - video-engine
 
 production:
-  - {name: mindmaker-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: mindmaker, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 45}
+  - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
+  - {name: mindmake, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: take-the-brief, role: conditional-intent-briefing-gateway, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: strategy-brief, role: always-on-pre-execution-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -107,7 +122,7 @@ production:
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: video-engine, role: exact-phrase-mindmaker-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
+  - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
   - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-08-07, freshness_sla_days: 30}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
@@ -137,11 +152,11 @@ quarantine:
     next_gate: Rotate affected credentials in consumer-safe batches, scrub copies/history, then replace surfaces.
   - name: n8n
     reason: Oversized monolith with embedded credentials and dynamic fleet facts.
-    replacement: mindmaker-os for live routing plus n8n-operator for provider mechanics.
+    replacement: mindmake-os for live routing plus n8n-operator for provider mechanics.
     next_gate: Candidate operator must pass held-out evaluation and canary before legacy copies are retired.
   - name: fleet-ops-and-krish-fleet-ops
     reason: Conflicting stale fleet counts and deployment facts.
-    replacement: mindmaker-os live-state routing plus its fleet-reconciliation reference; n8n-operator for workflow mechanics.
+    replacement: mindmake-os live-state routing plus its fleet-reconciliation reference; n8n-operator for workflow mechanics.
     next_gate: Candidate release and canary, then retire exact legacy copies after approval.
   - name: n8n-cli
     reason: Unprovenanced command catalogue with destructive operations, local credential storage guidance, and no authority or downstream verification contract.
@@ -183,4 +198,4 @@ corpus_not_active_skills:
   - mobile-app-ui-design
   - Claude Skills Ultimate Bundle
   - supplied AI harness research markdown files
-  - legacy full Mindmaker OS manuals embedded in skill bodies
+  - legacy full mind/make OS manuals embedded in skill bodies
