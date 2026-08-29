@@ -9,29 +9,30 @@ candidate_reconciliation:
   inbound_codex_surface: codex-surface-07a67cda9f99
   inbound_mindmake_source_commit: 1f7241b152c2912298d8a397bee266e257b97e15
   inbound_claude_snapshot: C:\Users\krish\.scratch\ai-harness-reconcile-2026-08-29-claude-snapshot\skills
-  candidate_artifact_set_sha256: 7B13998DD29B2AAFFB628CE49227FF68B642A267B1EC5BFFFE87FC1EC7906CE6
+  candidate_artifact_set_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  status: precommit-gates-passed
-  evidence: state/reconciliation-2026-08-29-additional-codex-and-claude.md
+  status: approved-released-and-deployed
+  evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
   admitted: source-backed Mindmake rename, commercial canon, publication routing, voice doctrine, current design-contract routing, and compatible mechanical references
   suppressed: unproven design-intelligence-search vendor-byte drift and broad ui-ux-pro-max collision
 
 
 deployed_release:
-  release_id: 8f221b5
-  source_commit: 8f221b5ad487a5226c22ddf69ef5aac5aba99925
-  artifact_set_sha256: 215F5AD2B093B89F5F15C45C3DE4D12386060815A64450227D70A72892A3E520
-  deployed_at: 2026-08-07
-  evidence: state/release-8f221b5-deployment-2026-08-07.md
-  status: parity-deployed-with-mobile-web-and-portable-design-retrieval
+  release_id: v2026.08.29.3
+  source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+  artifact_set_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
+  artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
+  deployed_at: 2026-08-29
+  evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+  status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
 
 latest_approved_release:
-  release_id: v2026.08.29.1
-  tag: harness-v2026.08.29.1
-  source_commit: bf9861c9c2823866835b002b3fe8826a3694113f
+  release_id: v2026.08.29.3
+  tag: harness-v2026.08.29.3
+  source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
   immutable: true
-  manifest_sha256: 1B29EE7DD3D63F1484570919104DDF4740FB0F73C195AE002C3EBD982C13E954
-  checksum_sha256: B11090ADF31CC99E4A2BE77A2A8F1746FEC100C9B630E4A256C79639B0DFCCC2
+  manifest_sha256: AD15B2FFF963564B29354E8C6CE3566D83C020C72750A8A80F45E41414AEB693
+  checksum_sha256: 75BE014DA45222C6F8860F0A98E91798258367E4ABC4BD72F96FB3DEE5762A2C
   approved_at: 2026-08-29
 
 surface_deployments:
@@ -43,6 +44,44 @@ surface_deployments:
     deployed_at: 2026-08-29
     evidence: state/release-v2026.08.29.1-deployment-2026-08-29.md
     status: installed-hash-verified-and-fresh-task-canaried
+  cursor-primary:
+    release_id: v2026.08.29.3
+    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    installed_skill_count: 29
+    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    status: installed-hash-verified
+  claude-code-user:
+    release_id: v2026.08.29.3
+    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    installed_skill_count: 29
+    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    status: installed-hash-verified
+  codex-current:
+    release_id: v2026.08.29.3
+    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    installed_skill_count: 29
+    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    status: installed-hash-verified-system-preserved
+  claude-cloud:
+    release_id: v2026.08.29.3
+    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    installed_skill_count: 29
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    status: exact-names-enabled-and-patched-content-observed
+  perplexity-cloud:
+    release_id: v2026.08.29.3
+    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    installed_skill_count: 29
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    status: exact-names-enabled-and-patched-content-observed
 
 canonical:
   repository: krishanraja/ai-harness
@@ -145,7 +184,7 @@ quarantine:
   - name: mobile-app-ui-design
     reason: Broad generic auto-trigger collides with krish-design and build-apps-with-krish; hard-coded aesthetic, breakpoint, component, and accessibility prescriptions are not current-source or Krish-specific. Found enabled in Claude Cloud and present only on the Cursor local surface on 2026-08-07.
     replacement: krish-design mobile-web reliability floor plus optional manual-only design-intelligence-search retrieval.
-    next_gate: Replacement is installed and canaried. Claude Cloud copy is disabled and the Cursor copy is archived outside the active directory; retain both only for rollback unless Krish separately approves permanent deletion.
+    next_gate: Replacement is installed. Claude Cloud copy is removed and the local copy is outside every active route; dated local backups remain recoverable.
   - name: legacy-tools-access
     reason: Credential values embedded in multiple local and cloud copies.
     replacement: tools-access
