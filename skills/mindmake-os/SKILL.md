@@ -42,9 +42,18 @@ Nearest first. Read the section you need, not the whole file.
 1. `C:\Users\krish\control-center\docs\MINDMAKER_OS_ARCHITECTURE.md` — local, fastest.
 2. VPS source of truth: `/root/.openclaw/workspace/MINDMAKER_OS_ARCHITECTURE.md`
 3. VPS repo clone: `/root/Projects/control-center/docs/MINDMAKER_OS_ARCHITECTURE.md`
-4. VPS Claude skill: `/root/.claude/skills/mindmake-os/SKILL.md`
-5. VPS openclaw skill: `/root/.openclaw/skills/mindmake-os/SKILL.md`
+4. VPS Claude skill: `/root/.claude/skills/mindmaker-os/SKILL.md`
+5. VPS openclaw skill: `/root/.openclaw/skills/mindmaker-os/SKILL.md`
 6. Google Drive, by id `1F0srFZSS-Nvg2RlUG84zVSvuiN9o8zDc`
+
+**Paths 4 and 5 say `mindmaker-os`, and that is correct. Do not "fix" them.**
+Those directory names are what `sync-architecture-surfaces.py` and
+`sync-to-drive.py` key off, so they are infrastructure, not a brand. A rename
+sweep rewrote them to `mindmake-os` on 2026-08-29 and pointed this router at two
+paths that do not exist, which is the exact failure this file exists to prevent.
+Verified against the live box: only `mindmaker-os` exists on both. The Windows
+directory holding THIS file is `mindmake-os`, because it is not a sync surface
+and nothing keys off it.
 
 Read a section with a targeted `grep -n "^## "` then `sed -n 'START,ENDp'`. Do not `cat`
 the whole file into context.
