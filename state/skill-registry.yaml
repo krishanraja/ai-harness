@@ -10,6 +10,25 @@ deployed_release:
   evidence: state/release-8f221b5-deployment-2026-08-07.md
   status: parity-deployed-with-mobile-web-and-portable-design-retrieval
 
+latest_approved_release:
+  release_id: v2026.08.29.1
+  tag: harness-v2026.08.29.1
+  source_commit: bf9861c9c2823866835b002b3fe8826a3694113f
+  immutable: true
+  manifest_sha256: 1B29EE7DD3D63F1484570919104DDF4740FB0F73C195AE002C3EBD982C13E954
+  checksum_sha256: B11090ADF31CC99E4A2BE77A2A8F1746FEC100C9B630E4A256C79639B0DFCCC2
+  approved_at: 2026-08-29
+
+surface_deployments:
+  codex-surface-07a67cda9f99:
+    release_id: v2026.08.29.1
+    source_commit: bf9861c9c2823866835b002b3fe8826a3694113f
+    installed_skill_count: 29
+    installed_ordinal_aggregate_sha256: 1C45506654DCEAE3FC5AB30FBD256265D5ED8759F3F3B0FDC8A26122AC6C498A
+    deployed_at: 2026-08-29
+    evidence: state/release-v2026.08.29.1-deployment-2026-08-29.md
+    status: installed-hash-verified-and-fresh-task-canaried
+
 canonical:
   repository: krishanraja/ai-harness
   proposed_path: C:\Users\krish\dev\mindmaker-os\ai-harness
