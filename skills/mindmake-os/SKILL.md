@@ -35,7 +35,7 @@ There is exactly one surface (ruling, Krish, 2026-09-07). Read the section you n
 not the whole file.
 
 1. A checkout of `krishanraja/control-center`, file `docs/MINDMAKE_OS_ARCHITECTURE.md`.
-   On Krish's Windows machine that is `C:\Users\krish\control-center\docs\MINDMAKE_OS_ARCHITECTURE.md`;
+   On Krish's Windows machine that is `C:\Users\krish\dev\mindmaker-os\control-center\docs\MINDMAKE_OS_ARCHITECTURE.md`;
    on the VPS it is `/root/Projects/control-center/docs/MINDMAKE_OS_ARCHITECTURE.md` after
    `git pull --ff-only`. A checkout is not a copy: it follows `main`.
 2. No checkout: fetch the raw file.
