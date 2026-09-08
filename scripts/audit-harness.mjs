@@ -30,6 +30,7 @@ import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync, statSy
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
+import { ROUTER_PROMPT_SHA } from './lib/router-prompt.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -286,13 +287,23 @@ let instrumentValid = true
       }).filter((r) => r && r.control)
     : []
   const latest = controls.sort((a, b) => String(a.measured_at).localeCompare(String(b.measured_at))).pop()
+  // The prompt the control was taken against, compared to the one in the tree.
+  // Without this a control clears an instrument it never ran on: rewriting the
+  // router prompt changes what is being measured and leaves every other field
+  // in the file looking current. It fails closed. A control with no stamp
+  // predates the stamp and cannot vouch for anything.
+  const currentPrompt = ROUTER_PROMPT_SHA
   if (latest) {
     const d = Math.abs((latest.control.recall_a ?? 0) - (latest.control.recall_b ?? 0))
+    const stamp = latest.router_prompt_sha256 || latest.control.router_prompt_sha256 || null
     if (d > 0.1) {
       instrumentValid = false
       F('instrument', 'trigger eval harness', `A control over ${latest.cases_run} identical cases moved recall by ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b}${latest.control.recall_b < latest.control.recall_a ? ', with the stronger model scoring lower' : ''}. The instrument is a larger variable than the subject, so no accuracy figure it produces describes a skill.`, 'Fix scripts/eval.mjs before reading any of its numbers as quality: a more capable model doing worse at a classification task is a prompt problem. Do not write these figures into the registry.')
+    } else if (stamp !== currentPrompt) {
+      instrumentValid = false
+      F('instrument', 'trigger eval harness', `The most recent control passed at a recall delta of ${d.toFixed(3)}, but it was taken against router prompt ${stamp || 'an unstamped version'} while scripts/eval.mjs now sends ${currentPrompt}. It does not describe the current instrument.`, 'Run scripts/eval.mjs with --compare against the current prompt. A control cannot vouch for a prompt it never ran on, so accuracy stays unreported until it does.')
     } else {
-      N(`Control: recall moved only ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b}, so the instrument is stable enough to read.`)
+      N(`Control: recall moved only ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b} on router prompt ${currentPrompt}, so the instrument is stable enough to read.`)
     }
   } else {
     N('No control run in state/evals yet, so no eval number has been validated as measuring the skills rather than the harness.')
