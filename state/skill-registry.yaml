@@ -30,6 +30,21 @@ latest_approved_release:
   release_id: v2026.09.08.2
   tag: harness-v2026.09.08.2
   source_commit: a27170f03ec683b8c3e4abef0adf6f6cba7e37e0
+  # APPROVED BUT NOT YET PUBLISHED. The tag is created locally and could not be
+  # pushed: this session's git credential is scoped to branch pushes on this
+  # repository and GitHub returns 403 on refs/tags. release.yml fires on the tag
+  # push, so no artifacts exist yet and no surface can install this.
+  #
+  # Recorded as pending rather than left to look published, because every surface
+  # is now correctly reported as behind an approved release, and a reader has to
+  # be able to tell "behind because it has not installed" from "behind because
+  # there is nothing to install". This is the second kind.
+  #
+  #   git push origin harness-v2026.09.08.2
+  #
+  # After that push, release.yml builds and publishes, and manifest_sha256 and
+  # checksum_sha256 belong in this block from the published manifest.
+  published: false
   immutable: true
   skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1

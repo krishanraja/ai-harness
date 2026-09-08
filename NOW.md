@@ -2,7 +2,7 @@
 repo: krishanraja/ai-harness
 product: The harness
 as_of: 2026-09-08
-head: ad65407
+head: 61604d4
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -34,17 +34,21 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 
 ## Where it is right now (as of 2026-09-08)
 
-- **Live** as the canon for 29 curated skills at release `v2026.08.29.3`, with deterministic packaging (`sha256-path-nul-file-sha256-ordinal-v1`) and CI on every push (`.github/workflows/validate.yml`, `release.yml`, both `windows-latest`).
-- **Rendered, since 2026-09-08.** `scripts/render.mjs` writes the three client adapters from `contract/templates/`, and the canon block into all nine fleet repositories' `AGENTS.md`. Two renders from one commit are byte-identical, proven in `harness-steward.yml`. Content outside the markers is never read or written.
-- **Portable, since 2026-09-08.** `contract/paths.yaml` is the only file allowed to carry an absolute path, with three surfaces defined: `windows-primary`, `windows-codex`, `cloud-linux`. `validate-surfaces.mjs` fails if one creeps back into the canon.
-- **In the docs steward fleet, since 2026-09-08.** This file and `docs/history/LOG.md` are maintained the same way the other eight repositories are. The registry is a truth file: the steward reads it and never writes it.
-- **Waiting on evidence, not code**: 27 of 29 skills have no `evaluation_evidence` row in the registry, though 19 have result files in `state/` that were never folded in. The 1,374 eval cases in `evals/` run only by hand, on Windows, against `claude.exe`.
-- **Seven skills are past their freshness SLA** as of today: `evidence-research`, `decision-ledger`, `tools-access`, `apify` (all due 2026-09-04), `n8n-operator`, `instantly-operator` (2026-09-05) and `design-intelligence-search` (2026-09-06). Expiry opens a finding; it never silently rewrites a skill.
-- **A known surface gap**: `codex-surface-07a67cda9f99` sits on `v2026.08.29.1` while the fleet is on `v2026.08.29.3`. It is recorded rather than silently reconciled, because it is a machine this repository cannot see.
-- **Two ungoverned runtime skills** (`gladstone-ledger-update`, `import-memory`) appear in no registry section, and the five CTRL skills exist both here and in `mm-ctrl/skills/`, whose README still claims to be the canonical home. Both are queued for the reconciler.
-- **Blocked until three secrets exist**: `CLAUDE_CODE_OAUTH_TOKEN` on this repository and on `AEO-Engine` (the other eight have it, confirmed against the secrets API), and `FLEET_TOKEN` here so the reconciler can read and write ten repositories from one job. Until then the reconciler runs only when a person triggers it.
+- **Live** as the canon for 29 curated skills. Four client surfaces are installed and byte-verified at `v2026.09.08.1`: `claude-code-user`, `cursor-primary`, `codex-current` on LORIMER, and `codex-surface-07a67cda9f99` on SURFACE. All four agree on the same tree aggregate and all 29 per-skill hashes match the manifest.
+- **`v2026.09.08.2` is approved and NOT published.** The tag exists only locally; the credential available to the cloud session is scoped to branch pushes and GitHub returns 403 on `refs/tags`. `release.yml` fires on the tag push, so no artifacts exist and no surface can install it. One command clears it: `git push origin harness-v2026.09.08.2`. Until then every surface is correctly reported as behind an approved release, and the reason is that there is nothing to install rather than that nobody installed it.
+- **Rendered.** `scripts/render.mjs` writes the three client adapters and the canon block into all ten fleet repositories' `AGENTS.md`. Two renders from one commit are byte-identical, proven in CI. Content outside the markers is never read or written.
+- **Portable.** `contract/paths.yaml` is the only file allowed to carry an absolute path. `validate-surfaces.mjs` fails if one creeps back into the canon.
+- **The trigger eval instrument is invalid and its numbers are suppressed.** A control over 120 identical cases moved recall by 0.250 between Haiku 4.5 and Sonnet 5, with the stronger model scoring lower. The cause was three routing rules of the harness's own sitting above the skill descriptions, which no client sends; they are removed and the fix is unmeasured. `audit-harness.mjs` refuses to report accuracy until a control run against the current router prompt shows a delta at or under 0.1, and a control now carries `router_prompt_sha256` so it cannot vouch for a prompt it never ran on.
+- **Seven skills are past their freshness SLA**: `evidence-research`, `decision-ledger`, `tools-access`, `apify` (due 2026-09-04), `n8n-operator`, `instantly-operator` (2026-09-05), `design-intelligence-search` (2026-09-06). Expiry opens a finding; it never silently rewrites a skill.
+- **Three skills have no named route**: `harness-maintainer`, `tools-access`, `apify`.
+- **Two cloud surfaces are two releases behind**: `claude-cloud` and `perplexity-cloud`, both on `v2026.08.29.3`. Uploading to those is a browser action and is the one manual step in the system.
+- **Two host gaps, neither ours.** Codex reports shortening skill descriptions to fit its context budget, and every trigger contract here lives in description text. The Video Engine launches under Codex on LORIMER and then cannot run, because the engine contract pins Node 24 and the host has another.
 
 ## What changed recently
+
+- 2026-09-08 **A launcher that could not launch, and three canaries that passed for the wrong reason.** `v2026.09.08.1` installed with perfect byte parity on four surfaces carrying `allow_implicit_invocation: false` on `video-engine`. That flag does not narrow which message starts the engine, it stops any message starting it, and on Codex it removes the skill from the discoverable catalog. SURFACE sent the exact phrase in a fresh task and nothing happened, twice, while both negative canaries passed because a skill that cannot fire also cannot fire wrongly. No cloud check found it. `audit-harness.mjs` now has an `unreachable-trigger` class, and `docs/harness/MACHINE-JOB.md` requires at least one positive canary per release.
+- 2026-09-08 **The aggregate mismatch was the cloud's, not the machines'.** Two Windows hosts disagreed with `reconcile-surface.mjs` and I recorded it as the two sides walking different roots. Four independent computations agreed and the cloud was the outlier: the Node reimplementation used raw digest bytes instead of uppercase hex and no separator between records, having been written from the name of the algorithm rather than from `Get-DirectoryArtifactSha256`. It produced a stable, plausible, entirely different number, which is the worst kind of wrong. Fixed, and `scripts/check-aggregate.mjs` holds the two implementations together on every push with a differential test per axis. That test then found a third axis I had claimed was load-bearing and is not.
+- 2026-09-08 **The eval numbers were invalid and were reported as real.** Accuracy of 0.67 to 0.83 was reported as describing the skills. A control proved it described the harness. Both the finding and the fix are in, and the audit now refuses the numbers rather than trusting the fix.
 
 - 2026-09-08 **The docs steward had been failing on every push since it shipped.** `anthropics/claude-code-action@v1` accepts `schedule`, `workflow_dispatch` and the pull-request family, and refuses `push` with "Unsupported event type". Nobody read the log because the load-bearing path was fine: the nightly run reconciled `fractionl-pulse` cleanly at 22:52 UTC on 7 September. So the push trigger produced one failed run per merge and no work, which is the worst of both, noise that trains you to ignore the light. A push now runs the digest and the strict validator only, and the validator is fatal there, so a merge that breaks `NOW.md` is caught at the merge instead of eight hours later.
 - 2026-09-08 **The reconciler: changes flow both ways.** `scripts/reconcile.mjs` reads every fleet repository's block nightly and classifies it as `exact`, `canon-moved`, `inbound-edit`, `both-moved` or `missing`, arithmetically, because the marker carries the sha256 of the body it introduces. Canon movement opens one pull request per repository. An edit made inside the markers is never overwritten: it becomes a proposal on this repository carrying the diff, deduped by target so a nightly run does not file the same thing thirty times. Proven live: a block edited in `contentarchives`, the reconciler run against it, the edit still on `main` afterwards, the proposal filed as issue #3, a second run correctly filing nothing.
@@ -60,8 +64,17 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 
 ## What is next and what is waiting on Krish
 
-- Next: the observer, which collates `Ruling (Krish, YYYY-MM-DD):` lines from commit bodies across the fleet, session metadata, inbound edits and machine reports into an append-only ledger, and turns recurring evidence into one proposal a week.
-- Waiting on Krish: `CLAUDE_CODE_OAUTH_TOKEN` on this repository and on `AEO-Engine`, and `FLEET_TOKEN` here (a fine-grained PAT with contents and pull-requests write on the ten fleet repositories) so the reconciler can run unattended. Then: seven skills need a review pass to clear their freshness SLA; three skills need a route or retirement; `mm-ctrl/skills/` needs a ruling on whether it becomes a pointer or keeps a genuine fork.
+Waiting on Krish, in order of how much it blocks:
+
+1. **`git push origin harness-v2026.09.08.2`.** The release is approved and cannot publish itself from the cloud. Nothing reaches a machine until this runs.
+2. **Rotate three access tokens** exposed in a chat transcript on 2026-09-08 (Supabase, Vercel, GitHub personal), and the production credential still in `mm-ctrl` git history at commit `8174677`. `FLEET_TOKEN` on this repository was minted separately and is not affected.
+3. **A ruling on loose files inside two managed roots**: 62 beside `C:\Users\krish\.claude\skills` (53 third-party marketing `.md`, 9 `.skill` archives) and 11 beside `C:\Users\krish\.cursor\skills`. The installer walks directories and has never seen them, so they cannot be reported as drift.
+4. **A ruling on `mm-ctrl/skills/`**, whose README still claims to be the canonical home of the five CTRL skills.
+5. **Seven freshness reviews and three routing decisions**, listed above.
+
+Ruled and closed on 2026-09-08: `C:\Users\krish\.agents\skills` holds 63 entries, zero canonical, nine that the routing contract forbids, and **nothing reads it**. No client config points there and no instruction file names it. The forbidden skills are inert. It stays a third-party catalog.
+
+Next without Krish: run the eval control against the corrected router prompt, which is the only thing that can say whether the instrument is now valid.
 
 ## Read next
 
