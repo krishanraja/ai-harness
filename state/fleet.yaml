@@ -1,0 +1,100 @@
+# The surface list.
+#
+# A surface is anywhere the canon has to arrive: a repository whose AGENTS.md
+# carries the canon block, a client adapter rendered from the templates, or a
+# machine that installs a release and reports back.
+#
+# The repos list is asserted against krishanraja/control-center
+# docs/steward/fleet.json by scripts/validate-surfaces.mjs, so the docs steward
+# and the harness steward cannot drift apart without a failing check.
+
+schema_version: 1
+owner: krishanraja
+
+repos:
+  - name: ai-harness
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, contract/krish-operating-contract.md, contract/skill-routing-contract.md]
+    note: The canon repository. It carries the block like everyone else so no surface is exempt.
+
+  - name: control-center
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/steward/RUNBOOK.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
+
+  - name: mm-ctrl
+    canon_target: AGENTS.md
+    entry: CLAUDE.md
+    rules_files: [CLAUDE.md, project-documentation/AGENT_BRIEFING.md]
+
+  - name: mindmake
+    canon_target: AGENTS.md
+    entry: CLAUDE.md
+    rules_files: [CLAUDE.md, project-documentation/06_CURRENT_STATE.md]
+
+  - name: fractionl-circle
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, AGENT_BRIEFING.md, docs/DELIVERY_STATE.md]
+
+  - name: fractionl-pulse
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/AGENT_BRIEFING.md, docs/DOCUMENTATION_GOVERNANCE.md]
+
+  - name: full-time
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/19-release-state.md]
+
+  - name: mindmake-video-studio
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, CLAUDE.md, docs/CAROUSEL_ENGINE_STATE.md]
+    note: >-
+      Two findings recorded rather than fixed here. GitHub renamed this repository to
+      krishanraja/content-engine on an unknown date and redirects transparently, so both
+      fleet manifests, the build-signal registry and this repo's own NOW.md still name
+      mindmake-video-studio; renaming needs one deliberate coordinated change, not a side
+      effect. Repository-scoped skills under .agents/skills are deliberate and not drift:
+      the engine is client-neutral by design.
+
+  - name: contentarchives
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, RESUME.md]
+
+  - name: AEO-Engine
+    checkout: aeo-engine
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/PACKET.md, docs/STATE.md]
+    note: The docs steward fleet spells it AEO-Engine; the repository itself is aeo-engine. Parity is compared case-insensitively rather than one manifest quietly renaming the other.
+
+adapters:
+  - id: claude
+    template: contract/templates/adapter-claude.md
+    output: adapters/claude/CLAUDE.md
+    surface: windows-primary
+  - id: codex
+    template: contract/templates/adapter-codex.md
+    output: adapters/codex/AGENTS.md
+    surface: windows-primary
+  - id: cursor
+    template: contract/templates/adapter-cursor.mdc
+    output: adapters/cursor/krish-core.mdc
+    surface: windows-primary
+
+machines:
+  - id: windows-primary
+    clients: [claude-code-user, cursor-primary, claude-desktop]
+    reports: pull-and-report
+  - id: windows-codex
+    clients: [codex-surface-07a67cda9f99]
+    reports: pull-and-report
+    note: Known gap. This surface installed v2026.08.29.1 while the fleet is on v2026.08.29.3.
+  - id: cloud-linux
+    clients: [github-actions, claude-code-web]
+    reports: rendered-per-run
+    note: Ephemeral. Renders from the commit it checks out, so it is never behind by construction.
