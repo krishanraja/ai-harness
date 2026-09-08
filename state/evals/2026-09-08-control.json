@@ -1,0 +1,19 @@
+{
+  "run": "2026-09-08-control",
+  "measured_at": "2026-09-08T14:44:53Z",
+  "verdict": "instrument-not-valid",
+  "cases_run": 120,
+  "control": {
+    "model_a": "claude-haiku-4-5-20251001",
+    "accuracy_a": 0.758,
+    "recall_a": 0.597,
+    "model_b": "claude-sonnet-5",
+    "accuracy_b": 0.608,
+    "recall_b": 0.347,
+    "recall_delta": 0.25
+  },
+  "usage": { "input": 6138, "output": 13751, "cache_read": 1563065, "cache_write": 13135 },
+  "cache_effectiveness": 0.996,
+  "reading": "Recall moves 0.250 between models over identical cases, and the stronger model scores LOWER. A more capable model doing worse at a classification task is a prompt problem, not a subject problem: scripts/eval.mjs mis-specifies the routing task rather than measuring it. Until that is fixed no accuracy figure from this harness may be read as a statement about a skill, and none may be written into state/skill-registry.yaml.",
+  "supersedes_reading_of": "The first full run of 613 cases on 2026-09-08 reported per-skill accuracy between 0.81 and 1.0. Those numbers stand as a record of what this harness produced and must not be quoted as skill quality."
+}
