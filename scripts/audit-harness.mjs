@@ -131,6 +131,50 @@ for (const [name, t] of Object.entries(skillText)) {
   if (hits.length) F('volatile-path', name, `skills/${name}/SKILL.md carries a machine-specific absolute path on ${hits.length === 1 ? `line ${hits[0]}` : `lines ${hits.slice(0, 6).join(', ')}${hits.length > 6 ? ' and more' : ''}`}.`, 'Replace it with a named root from contract/paths.yaml, resolved at render time.')
 }
 
+// ------------------------------- self-executing authority and volatile facts, Gates 3 and 5
+//
+// Added 2026-09-08 after the SURFACE machine job caught something this audit did
+// not. It refused to install a new mindmake-os because the skill instructed
+// deletion of any rediscovered copy and direct pushes to another repository's
+// main, both irreversible external mutations that the operating contract
+// reserves for explicit scoped approval, and because it embedded a cron
+// schedule while claiming to carry no fact that can go stale.
+//
+// Structure and paths were all this audit checked. A skill can pass every
+// structural gate and still tell an agent to delete something, so these three
+// checks close that gap in the cloud rather than leaving it to one host.
+// Precise on purpose, at the cost of missing some cases. The first draft of
+// these checks flagged the word "cron" in a section-map row and krish-voice
+// saying "drop subject pronouns", which is exactly the noise that teaches you
+// to stop reading the report. A check that fires rarely and correctly is worth
+// more than one that fires often and is usually wrong.
+
+// A clock time with a zone, or a real cron expression. The bare words "cron",
+// "weekly" or "each week" describe a thing; a time is the fact that goes stale.
+const CLOCK = /\b\d{1,2}:\d{2}\s*(?:UTC|GMT|AEST|AEDT|Z)\b/
+const CRON_EXPR = /(?:^|[\s`"'(])[\d*][\d*\/,-]*\s+[\d*][\d*\/,-]*\s+[\d*][\d*\/,-]*\s+[\d*][\d*\/,-]*\s+[\d*][\d*\/,-]*(?:[\s`"')]|$)/
+
+// An imperative destructive verb whose object is a real resource, not prose.
+const DESTRUCTIVE_IMPERATIVE = /^\s*(?:[-*]\s*|\d+\.\s*)?(delete|purge|wipe|uninstall|revoke)\b/i
+const RESOURCE = /\b(file|files|copy|copies|directory|folder|repo|repository|branch|key|token|credential|secret|record|row|table|skill|mirror|snapshot|backup|them|it)\b/i
+const HEDGED = /\b(approval|approve|ask|confirm|permission|explicit|gate|never|do not|don't|stop|report|only after|must not)\b/i
+
+const NEVER_STALE = /\b(can never go stale|cannot go stale|never goes stale|no fact that can go stale|does not go stale)\b/i
+const DIRECT_PUSH = /\bdirect push\b|\bpush (?:straight |directly )?to `?main`?\b/i
+
+for (const [name, t] of Object.entries(skillText)) {
+  t.split('\n').forEach((line, i) => {
+    const at = `skills/${name}/SKILL.md:${i + 1}`
+    const trimmed = line.trim()
+    if (DESTRUCTIVE_IMPERATIVE.test(trimmed) && RESOURCE.test(trimmed) && !HEDGED.test(trimmed)) {
+      F('self-executing-authority', name, `${at} instructs a destructive action on a resource with no approval gate: "${trimmed.slice(0, 120)}"`, 'The operating contract reserves deletion, uninstallation and revocation for explicit scoped approval. Say report and stop, or name the gate.')
+    }
+    if (DIRECT_PUSH.test(line)) F('self-executing-authority', name, `${at} instructs a direct push: "${trimmed.slice(0, 120)}"`, "Pushing straight to a branch is the owning repository's call to permit, not a skill's to instruct. Say pull request, and defer to that repository's own rules.")
+    if (CLOCK.test(line) || CRON_EXPR.test(line)) F('volatile-fact', name, `${at} embeds a clock time or a cron expression: "${trimmed.slice(0, 120)}"`, 'Gate 3 forbids embedding a volatile schedule that can be retrieved live. Name where the schedule is defined instead of restating it.')
+    if (NEVER_STALE.test(line)) F('self-refuting', name, `${at} claims it cannot go stale: "${trimmed.slice(0, 120)}"`, 'Anything carrying section numbers, repository names or dates can go stale. Say what would make it wrong instead of claiming nothing could.')
+  })
+}
+
 // ------------------------------------------------------ routing coverage, Gate 1
 for (const r of rows) {
   if (!routing.includes(`\`${r.name}\``)) F('unrouted', r.name, `${r.name} is in the registry but never named in contract/skill-routing-contract.md.`, 'Give it a named route, or move it out of the production set. A skill nothing routes to is a skill nothing runs.')

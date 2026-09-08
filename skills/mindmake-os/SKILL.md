@@ -1,6 +1,6 @@
 ---
 name: mindmake-os
-description: "Truth router into the mind/make OS architecture. Use before any structural decision about the OS: the agent fleet, Supabase schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, or portfolio context. It carries NO architecture claims of its own; it names the authority and routes you to the right section, so it can never go stale. Also use to resolve which source wins when the business and the OS disagree. Do not use for Mindmake commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), or n8n mechanics (`n8n-operator`)."
+description: "Truth router into the mind/make OS architecture. Use before any structural decision about the OS: the agent fleet, Supabase schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, or portfolio context. It carries NO architecture claims of its own; it names the authority and routes you to the right section, so an OS change does not make it wrong. Also use to resolve which source wins when the business and the OS disagree. Do not use for Mindmake commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), or n8n mechanics (`n8n-operator`)."
 ---
 
 # mind/make OS, truth router
@@ -44,9 +44,13 @@ not the whole file.
 Read a section with a targeted `grep -n "^## "` then `sed -n 'START,ENDp'` (or fetch and
 search the same way). Do not load the whole file into context.
 
-**Retired and deleted on 2026-09-07:** the VPS workspace copy, the three VPS skill bodies,
-the Google Drive mirror, and the sync scripts. If you find any of them, they are stale by
-definition: delete them, never maintain them, never sync to them.
+**Any other copy is stale by definition.** Only the surface above is authoritative. If you
+find an architecture doc elsewhere, a VPS workspace copy, a Drive mirror, a skill body
+carrying the architecture, do not read it and do not sync to it. Report where you found it
+and stop. Deleting it is an irreversible external mutation and needs Krish's explicit
+approval for that named target, like any other deletion; this router does not carry that
+approval and cannot grant it. Section `## 0c` of the architecture doc records which copies
+have already been retired and when.
 
 ## Section map
 
@@ -80,15 +84,17 @@ have moved.** Those carry the dated rulings that override older prose elsewhere 
 
 ## Changing the architecture doc
 
-Edit it on GitHub `main`, by PR or by direct push. That is the whole procedure. There is
-nothing to sync and no other copy to update.
+Edit it in `krishanraja/control-center` by pull request, following that repository's own
+rules in its `AGENTS.md`. There is nothing to sync and no other copy to update. Pushing
+straight to `main` is that repository's call to permit, not this router's to instruct.
 
-**The engine writes the record; people write the rulings.** Every Sunday 13:00 UTC the
-Control Center cron `api/architecture/weekly.ts` writes the week's builds as one dated entry
-at the top of `## 20.` and stamps `**Last engine refresh:**` in the header. The Monday
-scorecard note reads that stamp back and says when it is stale. A ruling, a new agent, a
-retired component or a new table is still a human edit, under `## 0a`, `## 0b`, `## 0c` or
-the section it belongs to.
+**The engine writes the record; people write the rulings.** A Control Center cron writes
+each week's builds as one dated entry at the top of `## 20.` and stamps
+`**Last engine refresh:**` in the header; the Monday scorecard note reads that stamp back
+and says when it is stale. For which job does it and on what schedule, read `## 21.` of the
+architecture doc rather than trusting a time written here. A ruling, a new agent, a retired
+component or a new table is still a human edit, under `## 0a`, `## 0b`, `## 0c` or the
+section it belongs to.
 
 ## Related skills
 
@@ -97,5 +103,7 @@ publication's two channels. `krish-voice` for final prose. `n8n-operator` for wo
 mechanics. `tools-access` for authenticated access. `decision-ledger` for recording a
 finalised decision.
 
-*Router rewritten 2026-09-07 for the one-surface ruling. It carries no fact that can go
-stale, so it does not need to change when the OS does.*
+*Router rewritten 2026-09-07 for the one-surface ruling, corrected 2026-09-08. It carries
+no architecture facts, so it does not need to change when the OS does. It does carry
+section numbers and repository names, which can move: if a section map entry does not
+match the doc, the doc is right and this router is stale.*
