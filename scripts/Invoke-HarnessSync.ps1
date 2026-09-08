@@ -12,6 +12,18 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+# This script is PowerShell 7 only, and it was failing to say so. Under Windows
+# PowerShell 5.1 the release query returns nothing, because 5.1 ConvertFrom-Json
+# emits a JSON array as one object instead of enumerating it, so every release
+# was filtered out and the run died on 'No immutable harness-v release was
+# found'. That message accuses GitHub of the interpreter's bug. Get-PlanResult
+# also shells out to pwsh, so 5.1 could never finish an install even if the
+# query worked. Refuse up front and name the real cause.
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    throw "This script requires PowerShell 7 or later and is running on $($PSVersionTable.PSVersion). Windows PowerShell 5.1 silently returns zero releases here and cannot run the installer. Point the scheduled task at pwsh.exe."
+}
+
 $PSNativeCommandUseErrorActionPreference = $false
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -923,16 +935,37 @@ try {
         $noopSurfaces = New-Object System.Collections.Generic.List[object]
         $noopDrift = $false
         foreach ($surface in @($hostDefinition.Surfaces)) {
-            $parity = Get-SurfaceParity -Surface $surface -Manifest $manifest -ArtifactsDirectory $artifactsDirectory
-            $drifted = ($parity.per_skill_mismatches.Count -gt 0) -or (-not $parity.aggregate_matches_release)
-            if ($drifted) { $noopDrift = $true }
-            $noopSurfaces.Add([pscustomobject]@{
-                id = $surface.Id
-                client = $surface.Client
-                install = 'not-required'
-                parity = $parity
-                verified = -not $drifted
-            })
+            # Get-SurfaceParity throws on a surface carrying content the manifest
+            # does not describe, and LORIMER has exactly that: 62 unrelated files
+            # at the root of .claude\skills and 11 at the root of .cursor\skills.
+            # Letting that exception escape cost the run everything it came for.
+            # It died on the first surface, wrote surfaces=[] and an error string,
+            # and never measured the other two, so the change that exists to name
+            # the drifted surface and skill named nothing instead. Record the
+            # failure against its own surface, keep measuring, and still block.
+            try {
+                $parity = Get-SurfaceParity -Surface $surface -Manifest $manifest -ArtifactsDirectory $artifactsDirectory
+                $drifted = ($parity.per_skill_mismatches.Count -gt 0) -or (-not $parity.aggregate_matches_release)
+                if ($drifted) { $noopDrift = $true }
+                $noopSurfaces.Add([pscustomobject]@{
+                    id = $surface.Id
+                    client = $surface.Client
+                    install = 'not-required'
+                    parity = $parity
+                    verified = -not $drifted
+                })
+            }
+            catch {
+                $noopDrift = $true
+                $noopSurfaces.Add([pscustomobject]@{
+                    id = $surface.Id
+                    client = $surface.Client
+                    install = 'not-required'
+                    parity = $null
+                    verified = $false
+                    unmeasurable = $_.Exception.Message
+                })
+            }
         }
         $noopStatus = 'no-op-verified'
         $noopHeartbeat = 'ok'
@@ -946,7 +979,12 @@ try {
         Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
         Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $noopHeartbeat
         if ($noopDrift) {
-            Write-Error "Parity drifted on an installed surface with no release to apply. See $(Join-Path $runDirectory 'run.json')."
+            # Write-Error is terminating here because ErrorActionPreference is
+            # Stop, so this threw into the outer catch, the catch rewrote run.json
+            # and dispatched a SECOND blocked heartbeat, and the exit below was
+            # never reached. The exit status was right by accident. Say it without
+            # throwing, then exit deliberately.
+            Write-Error -Message "Parity drifted on an installed surface with no release to apply. See $(Join-Path $runDirectory 'run.json')." -ErrorAction Continue
             exit 1
         }
         return
