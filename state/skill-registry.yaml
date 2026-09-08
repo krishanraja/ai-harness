@@ -29,22 +29,24 @@ deployed_release:
 latest_approved_release:
   release_id: v2026.09.08.2
   tag: harness-v2026.09.08.2
-  source_commit: a27170f03ec683b8c3e4abef0adf6f6cba7e37e0
-  # APPROVED BUT NOT YET PUBLISHED. The tag is created locally and could not be
-  # pushed: this session's git credential is scoped to branch pushes on this
-  # repository and GitHub returns 403 on refs/tags. release.yml fires on the tag
-  # push, so no artifacts exist yet and no surface can install this.
+  source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
+  # The skills tree is byte-identical to a27170f, which is where it was approved.
+  # The tag sits on a later commit only because tooling, documentation and the
+  # canary instrument landed in between; no skill moved. Both hash to
+  # 9D3F2E69..., which is the field below and is what an installer compares.
   #
-  # Recorded as pending rather than left to look published, because every surface
-  # is now correctly reported as behind an approved release, and a reader has to
-  # be able to tell "behind because it has not installed" from "behind because
-  # there is nothing to install". This is the second kind.
-  #
-  #   git push origin harness-v2026.09.08.2
-  #
-  # After that push, release.yml builds and publishes, and manifest_sha256 and
-  # checksum_sha256 belong in this block from the published manifest.
-  published: false
+  # Published 2026-09-08T15:45:40Z, 60 assets, by release.yml on the
+  # workflow_dispatch path. That path exists because a tag push needs a
+  # credential a cloud session does not have, so this release was approved and
+  # unpublishable for about an hour. The workflow creates its own tag now.
+  published: true
+  published_at: 2026-09-08T15:45:40Z
+  assets: 60
+  # Deliberately absent until a machine reports it. The installer computes the
+  # manifest hash while verifying the download, so the value belongs in the
+  # first deployment record rather than being copied from here. A hash this file
+  # asserts and nothing checked is not evidence.
+  manifest_sha256: pending-first-install
   immutable: true
   skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
