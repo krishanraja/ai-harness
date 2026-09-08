@@ -88,6 +88,55 @@ try {
   check(namedRun.status === 1, `wrong-skill naming the forbidden skill should fail, exited ${namedRun.status}`)
   check(namedRun.stderr.includes(ordinaryNegative.id), 'the named-the-target failure did not name the canary')
 
+  // A POSITIVE coming back not-fired is the single most important failure this
+  // instrument detects, and it was not covered: the only flipped case was a
+  // negative. A verifier that had lost its positive handling entirely would
+  // have passed the suite.
+  const positiveCase = sheet.cases.find((canary) => canary.should_trigger)
+  const deadPositive = structuredClone(passing)
+  deadPositive.results.find((result) => result.id === positiveCase.id).outcome = 'not-fired'
+  const deadPositivePath = join(scratch, 'dead-positive.json')
+  writeFileSync(deadPositivePath, JSON.stringify(deadPositive, null, 2) + '\n')
+  const deadPositiveRun = run(['--verify', deadPositivePath])
+  check(deadPositiveRun.status === 1, `a positive returning not-fired must fail, exited ${deadPositiveRun.status}`)
+  check(deadPositiveRun.stderr.includes(positiveCase.id), 'the dead-positive failure did not name the canary')
+
+  // The 2026-09-08 SURFACE shape exactly: the positive is unreachable and the
+  // negatives all "pass". The negatives must be voided and the skill reported
+  // unmeasured. This is the rule the whole file exists for and nothing tested it.
+  const unreachablePositive = structuredClone(passing)
+  for (const result of unreachablePositive.results) {
+    const canary = sheet.cases.find((x) => x.id === result.id)
+    if (canary.skill !== positiveCase.skill) continue
+    result.outcome = canary.should_trigger ? 'unreachable' : 'not-fired'
+    result.note = canary.should_trigger ? 'absent from the client catalog' : 'nothing loaded'
+  }
+  const unreachablePath = join(scratch, 'unreachable-positive.json')
+  writeFileSync(unreachablePath, JSON.stringify(unreachablePositive, null, 2) + '\n')
+  const unreachableRun = run(['--verify', unreachablePath])
+  check(unreachableRun.status === 1, `an unreachable positive must fail, exited ${unreachableRun.status}`)
+  check(unreachableRun.stderr.includes('void') || unreachableRun.stdout.includes('Void'), 'the unreachable-positive run did not void the negatives')
+  check(unreachableRun.stderr.includes('unmeasured'), 'the unreachable-positive run did not report the skill unmeasured')
+
+  // A duplicated id is a malformed report, not a failing one, so exit 2.
+  const duplicated = structuredClone(passing)
+  duplicated.results.push(structuredClone(duplicated.results[0]))
+  const duplicatedPath = join(scratch, 'duplicated.json')
+  writeFileSync(duplicatedPath, JSON.stringify(duplicated, null, 2) + '\n')
+  const duplicatedRun = run(['--verify', duplicatedPath])
+  check(duplicatedRun.status === 2, `a duplicated id must be refused as malformed, exited ${duplicatedRun.status}`)
+
+  // --record is the mode Invoke-HarnessSync.ps1 actually calls, and it was
+  // never exercised. Check the round trip writes the verdict, since a recorded
+  // failure that reads as a pass is the worst outcome this file can produce.
+  const recordDir = join(scratch, 'record-root')
+  const recordRun = run(['--record', deadPositivePath, '--out-dir', recordDir])
+  check(recordRun.status === 1, `--record of a failing report must exit 1, exited ${recordRun.status}`)
+  const written = join(recordDir, `${release}-${passing.surface}.json`)
+  const recorded = JSON.parse(readFileSync(written, 'utf8'))
+  check(recorded.verdict === 'failed', `recorded verdict was ${recorded.verdict}, expected failed`)
+  check(Array.isArray(recorded.failures) && recorded.failures.length > 0, 'recorded file carried no failures')
+
   const incomplete = structuredClone(passing)
   const removed = incomplete.results.pop()
   const incompletePath = join(scratch, 'incomplete.json')

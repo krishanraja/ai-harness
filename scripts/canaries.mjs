@@ -423,7 +423,12 @@ if (args.includes('--sheet-json')) {
     console.log(`\nCanary report accepted: ${v.covered.length} skills exercised on ${v.report.surface}, ${v.positivePassed.length} with a passing positive.`)
   }
   if (args.includes('--record')) {
-    const dir = join(HARNESS, 'state/canaries')
+    // --out-dir exists for the regression suite. Without it the tests wrote a
+    // report into the repository's own state/canaries and deleted it again,
+    // which leaves a stray file behind on any failure. A stray file dirties the
+    // working tree, and Invoke-HarnessSync.ps1 refuses to run on a dirty tree,
+    // so a failed test run would have wedged the daily job on both machines.
+    const dir = flag('--out-dir') || join(HARNESS, 'state/canaries')
     mkdirSync(dir, { recursive: true })
     const dest = join(dir, `${v.report.release}-${v.report.surface}.json`)
     // The verdict is written into the file so a reader of state/canaries/ can
