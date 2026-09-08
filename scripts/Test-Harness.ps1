@@ -129,7 +129,27 @@ foreach ($manifest in $manifests) {
         $openAiRaw = [IO.File]::ReadAllText($openAiMetadata)
         if ($openAiRaw -notmatch '(?m)^\s*display_name:\s*"[^"]+"\s*$') { Add-Failure "$relative has invalid agents/openai.yaml display_name metadata." }
         if ($openAiRaw -notmatch '(?m)^\s*short_description:\s*"[^"]{25,64}"\s*$') { Add-Failure "$relative has invalid agents/openai.yaml short_description metadata." }
-        if ($openAiRaw -notmatch ('(?m)^\s*default_prompt:\s*"[^"\r\n]*\$' + [regex]::Escape($name) + '\b[^"\r\n]*"\s*$')) {
+        if ($name -eq 'video-engine') {
+            # The one documented exception, added 2026-09-08 with the trigger
+            # narrowing. Every other skill's default prompt should invoke it by
+            # name, but this skill's contract explicitly forbids $video-engine as
+            # a trigger: krishanraja/mindmake-video-studio main, which this skill
+            # names as its only authority, accepts nothing but the exact first
+            # message. A default prompt saying $video-engine would tell the
+            # client to send something the contract rejects. So assert the
+            # opposite: it must be the exact launch phrase and must not carry the
+            # dollar form.
+            if ($openAiRaw -notmatch '(?m)^\s*default_prompt:\s*"Video engine"\s*$') {
+                Add-Failure ($relative + ' agents/openai.yaml default_prompt must be exactly "Video engine", the only string its trigger contract accepts.')
+            }
+            if ($openAiRaw -match '\$video-engine') {
+                Add-Failure ($relative + ' agents/openai.yaml still names $video-engine, which the trigger contract rejects.')
+            }
+            if ($openAiRaw -notmatch '(?m)^\s*allow_implicit_invocation:\s*false\s*$') {
+                Add-Failure ($relative + ' agents/openai.yaml must set allow_implicit_invocation: false; implicit invocation is the trigger collision itself.')
+            }
+        }
+        elseif ($openAiRaw -notmatch ('(?m)^\s*default_prompt:\s*"[^"\r\n]*\$' + [regex]::Escape($name) + '\b[^"\r\n]*"\s*$')) {
             Add-Failure ($relative + ' agents/openai.yaml default_prompt does not explicitly invoke $' + $name + '.')
         }
     }
