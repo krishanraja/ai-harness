@@ -20,25 +20,36 @@ Successful. Two skills replaced and hash-verified. Live surface reads 29 skills,
 - Rollback: `C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.09.08.1-20260908T142007Z-ba7ae26e`
 - Deployment record: the same directory, `deployment-record.json`
 
-## The aggregate did not match, and that was the check's fault
+## The aggregate did not match, and the cloud was the one that was wrong
 
 The host reported a full-tree aggregate of
 `F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441`. It was asked to match
 `4CBF02F37D011B630655C5A9F38054908A3F31F50DDF3FA241288411BD408299`, computed by
-`scripts/reconcile-surface.mjs` over the same release. It does not.
+`scripts/reconcile-surface.mjs` over the same release. It did not.
 
-Both sides count 139 files. Every per-skill hash on the host is exact and its own audit
-reports zero drift, so the bytes agree. Eighteen path and encoding conventions were tried
-against the host's value from the cloud and none reproduced it, which rules out a formatting
-difference and leaves the only remaining explanation: the two sides walk different roots and
-disagree about which files belong, with equal counts hiding it.
+I first recorded this as the two sides walking different roots and disagreeing about which
+files belong. **That was wrong**, and the correction is worth more than the original note.
 
-This is the second time a cloud-computed aggregate was handed to a Windows host as a
-cross-check and did not match. The first was LORIMER on 2026-09-08. Neither occasion found a
-byte wrong. The conclusion is about the check, not the trees: an aggregate is only meaningful
-against another aggregate written by the same implementation, so it compares a surface to its
-own deployment record and nothing else. Per-file classification is the parity contract.
-`reconcile-surface.mjs` now says so in its own output.
+LORIMER later computed the same `F7C08490...` from the release artifacts before installing,
+and all three of its client surfaces reproduced it after installing. Four independent
+computations, one outlier: mine. Reading
+`Get-DirectoryArtifactSha256` in `scripts/Install-HarnessRelease.ps1`, which is the
+authority, the Node reimplementation was wrong on two axes.
+
+| | Authority | What the Node version did |
+|---|---|---|
+| file digest inside the record | uppercase hex string | raw 32 digest bytes |
+| between records | joined with a newline | nothing, concatenated |
+| hashing | one hash over the joined UTF-8 payload | a rolling update per record |
+
+Corrected the same day, and it now reproduces `F7C08490...` exactly.
+`scripts/check-aggregate.mjs` holds the two implementations together on every push, with a
+differential test that proves each axis is load-bearing.
+
+The lesson is not the one I first drew. The aggregate IS comparable across
+implementations, which is the whole reason for reimplementing it. What failed was writing
+the reimplementation from the NAME of the algorithm rather than from the algorithm, and
+then trusting the resulting number over two machines that disagreed with it.
 
 ## Canaries
 

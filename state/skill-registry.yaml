@@ -58,11 +58,10 @@ surface_deployments:
     source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
     installed_skill_count: 29
     installed_file_count: 139
-    # Written by the host's own tooling and not reproducible by
-    # scripts/reconcile-surface.mjs, which reports 4CBF02F3... over the same 139
-    # files of the same release with every per-skill hash exact. The two walk
-    # different roots. Recorded as this host's own baseline, which is the only
-    # comparison the number is good for. See the note in reconcile-surface.mjs.
+    # Agreed by all four client surfaces and by the release artifacts before
+    # install. scripts/reconcile-surface.mjs disagreed on 2026-09-08 because its
+    # reimplementation of the algorithm was wrong, not because anything here was;
+    # it now reproduces this value exactly, held by scripts/check-aggregate.mjs.
     installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-08
@@ -74,29 +73,35 @@ surface_deployments:
     # over: this surface is the only place it was visible.
     status: installed-hash-verified-canary-b-failed-on-release-defect
   cursor-primary:
-    release_id: v2026.08.29.3
-    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    release_id: v2026.09.08.1
+    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
     installed_skill_count: 29
-    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
-    deployed_at: 2026-08-29
-    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+    installed_file_count: 139
+    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    per_skill_hashes_exact: 29
+    deployed_at: 2026-09-08
+    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
     status: installed-hash-verified
   claude-code-user:
-    release_id: v2026.08.29.3
-    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    release_id: v2026.09.08.1
+    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
     installed_skill_count: 29
-    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
-    deployed_at: 2026-08-29
-    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: installed-hash-verified
+    installed_file_count: 139
+    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    per_skill_hashes_exact: 29
+    deployed_at: 2026-09-08
+    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
+    status: installed-hash-verified-and-fresh-task-canaried
   codex-current:
-    release_id: v2026.08.29.3
-    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    release_id: v2026.09.08.1
+    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
     installed_skill_count: 29
-    installed_ordinal_aggregate_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
-    deployed_at: 2026-08-29
-    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: installed-hash-verified-system-preserved
+    installed_file_count: 139
+    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    per_skill_hashes_exact: 29
+    deployed_at: 2026-09-08
+    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
+    status: installed-hash-verified-and-fresh-task-canaried
   claude-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522

@@ -95,6 +95,13 @@ jobs:
       - name: Surfaces valid
         run: node scripts/validate-surfaces.mjs --fleet-json .steward/fleet.json
 
+      # The Node reimplementation of the release hash must keep agreeing with
+      # the PowerShell that runs on the machines. It stopped agreeing once,
+      # silently, and the disagreement read as drift on two hosts rather than as
+      # a bug here. Deterministic, free, no network.
+      - name: The aggregate still matches the Windows construction
+        run: node scripts/check-aggregate.mjs
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail

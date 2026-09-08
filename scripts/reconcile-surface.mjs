@@ -14,11 +14,20 @@
  * reconciler's inbound-edit rule: unknown drift is a hard stop, not an
  * automatic backup-and-overwrite path.
  *
- * The hash is the repository's own `sha256-path-nul-file-sha256-ordinal-v1`:
- * for each record sorted by ordinal path comparison, concatenate the UTF-8
- * portable path, one NUL byte, and the raw 32 bytes of that file's SHA-256,
- * then SHA-256 the concatenation. Reimplemented here so a Linux job produces
- * the same aggregate a Windows host does, which is the whole point.
+ * The hash is the repository's own `sha256-path-nul-file-sha256-ordinal-v1`,
+ * defined by Get-DirectoryArtifactSha256 in scripts/Install-HarnessRelease.ps1,
+ * which is the authority. Each file contributes a RECORD string: the portable
+ * relative path, one NUL character, and that file's SHA-256 as UPPERCASE HEX.
+ * The records are ordinal-sorted AS STRINGS, joined with a newline, UTF-8
+ * encoded, and hashed once.
+ *
+ * Read that carefully, because I wrote this reimplementation from the name of
+ * the algorithm rather than from the algorithm, and got three things wrong at
+ * once: raw digest bytes instead of a hex string, no separator between records,
+ * and sorting by path instead of by the composed record. It produced a stable,
+ * plausible, entirely different number, which was then handed to two Windows
+ * hosts as a cross-check and disagreed with both. Verified against the live
+ * value from four independent surfaces before this comment was written.
  *
  *   node scripts/reconcile-surface.mjs --snapshot <dir>   [--surface <id>] [--out <path>]
  *   node scripts/reconcile-surface.mjs --manifest <json>  [--surface <id>] [--out <path>]
@@ -70,16 +79,21 @@ function walk(root, base = root, out = []) {
   return out
 }
 
-/** The repository's own aggregate, reimplemented so any host can be compared from anywhere. */
+/**
+ * The repository's own aggregate, reimplemented so any host can be compared
+ * from anywhere. Mirrors Get-DirectoryArtifactSha256 exactly; see the header.
+ *
+ * Every line here matters and each one was wrong on the first attempt:
+ * uppercase hex rather than raw bytes, a NUL CHARACTER inside a string rather
+ * than a NUL byte between buffers, sorting the composed records rather than the
+ * paths, a newline join, and one hash over the whole payload rather than a
+ * rolling update per record.
+ */
+const NUL = String.fromCharCode(0)
 function aggregate(records) {
-  const sorted = [...records].sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0))
-  const h = createHash('sha256')
-  for (const r of sorted) {
-    h.update(Buffer.from(r.path, 'utf8'))
-    h.update(Buffer.from([0]))
-    h.update(r.digest)
-  }
-  return h.digest('hex').toUpperCase()
+  const lines = records.map((r) => `${r.path}${NUL}${r.digest.toString('hex').toUpperCase()}`)
+  lines.sort()
+  return createHash('sha256').update(Buffer.from(lines.join('\n'), 'utf8')).digest('hex').toUpperCase()
 }
 
 // --------------------------------------------------------------- canonical
@@ -143,23 +157,12 @@ if (recorded) {
   const matchesRecord = recorded.installed_ordinal_aggregate_sha256 === surfaceAgg
   p(`- Matches its own last deployment record: **${matchesRecord ? 'yes' : 'no'}**`)
 }
-p()
-// Both comparisons above are same-side: this script's aggregate against an
-// aggregate this script wrote. That is the only way the number is worth
-// anything, and it is worth stating in the output because the mistake is easy
-// and was made twice.
-//
-// On 2026-09-08 and again on 2026-09-09 an aggregate computed here was handed
-// to a Windows host and asked to match what its own tooling reported. It did
-// not, either time. SURFACE reported F7C08490... over 139 files while this
-// script reported 4CBF02F3... over 139 files of the same release, with the
-// host's per-skill hashes all exact and its audit reporting zero drift.
-// Eighteen path and encoding conventions were tried against the host's value
-// and none reproduced it, so the two sides are hashing different file sets, not
-// the same set differently. Equal counts hid that.
-//
-// The bytes were never in question on either occasion. The check was.
-p('> The aggregate compares this surface to its own deployment record, written by this script. It is not comparable to a figure computed by a host\'s own tooling: the two walk different roots and disagree on which files belong. Per-file classification below is the parity contract. A host reporting every skill exact and an aggregate that differs from this one is reporting agreement, not drift.')
+// The aggregate IS comparable across implementations, and that is the point of
+// reimplementing it. It disagreed with two Windows hosts on 2026-09-08 because
+// this file's version of the algorithm was wrong, not because the trees were.
+// Fixed and verified against the live value from four surfaces the same day.
+// Per-file classification below stays the useful output, because it says WHICH
+// file, but a matching aggregate now means what it claims to mean.
 p()
 p('| Class | Files | Skills |')
 p('|---|---:|---|')
