@@ -52,7 +52,13 @@ repos:
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, CLAUDE.md, docs/CAROUSEL_ENGINE_STATE.md]
-    note: Repository-scoped skills under .agents/skills are deliberate; the engine is client-neutral by design.
+    note: >-
+      Two findings recorded rather than fixed here. GitHub renamed this repository to
+      krishanraja/content-engine on an unknown date and redirects transparently, so both
+      fleet manifests, the build-signal registry and this repo's own NOW.md still name
+      mindmake-video-studio; renaming needs one deliberate coordinated change, not a side
+      effect. Repository-scoped skills under .agents/skills are deliberate and not drift:
+      the engine is client-neutral by design.
 
   - name: contentarchives
     canon_target: AGENTS.md
