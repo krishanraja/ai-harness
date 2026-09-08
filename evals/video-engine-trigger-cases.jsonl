@@ -14,3 +14,5 @@
 {"id": "video-engine-trigger-014", "category": "negative", "prompt": "video engine.", "should_trigger": false, "note": "A trailing full stop is not whitespace."}
 {"id": "video-engine-trigger-015", "category": "negative", "prompt": "Video engine\nplease start", "should_trigger": false, "note": "A second line fails: the complete message must equal the phrase."}
 {"id": "video-engine-trigger-016", "category": "positive", "prompt": "\tVideo engine\n", "should_trigger": true, "note": "Leading and trailing whitespace is trimmed, and only whitespace."}
+{"id": "video-engine-trigger-017", "category": "positive", "prompt": "VIDEO ENGINE", "should_trigger": true, "note": "Case-insensitive, and without the exclamation mark that case 003 now rejects."}
+{"id": "video-engine-trigger-018", "category": "positive", "prompt": "vIdEo EnGiNe", "should_trigger": true, "note": "Case-insensitive across every character, not just the first of each word."}
