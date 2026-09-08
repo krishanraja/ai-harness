@@ -86,6 +86,20 @@ export function parseYaml(text) {
       pos++
       const key = m[1].trim()
       const inline = m[2].trim()
+      // Block scalars: > and >- fold newlines to spaces, | and |- keep them.
+      if (/^[>|]-?$/.test(inline)) {
+        const fold = inline.startsWith('>')
+        const next0 = lines[pos]
+        if (!next0 || indentOf(next0) <= li) { out[key] = ''; continue }
+        const bodyIndent = indentOf(next0)
+        const parts = []
+        while (pos < lines.length && indentOf(lines[pos]) >= bodyIndent) {
+          parts.push(lines[pos].body.slice(bodyIndent))
+          pos++
+        }
+        out[key] = fold ? parts.join(' ') : parts.join('\n')
+        continue
+      }
       if (inline !== '') { out[key] = scalar(inline); continue }
       const next = lines[pos]
       if (!next || indentOf(next) <= indent) { out[key] = null; continue }
