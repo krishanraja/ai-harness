@@ -75,6 +75,12 @@ export class Gh {
     return this.req('POST', `/repos/${this.owner}/${repo}/git/refs`, { ref: `refs/heads/${branch}`, sha: fromSha })
   }
 
+  /** Move a branch to a commit, discarding what was on it. */
+  async resetBranch(repo, branch, sha) {
+    if (this.dryRun) return { dryRun: true }
+    return this.req('PATCH', `/repos/${this.owner}/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { sha, force: true })
+  }
+
   async putFile(repo, path, text, { branch, message, sha }) {
     if (this.dryRun) return { dryRun: true }
     return this.req('PUT', `/repos/${this.owner}/${repo}/contents/${encodeURI(path)}`, {
