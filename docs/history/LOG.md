@@ -7,6 +7,14 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-09-08
 
+- SURFACE installed `v2026.09.08.2` with 29 of 29 per-skill hashes and the
+  139-file release aggregate matching. The first full Codex canary sheet was
+  recorded as a failure rather than corrected to expectation.
+- Machine release work moved into `scripts/Invoke-HarnessSync.ps1` and the
+  `Mindmake AI Harness Sync` Windows Scheduled Task. It plans before applying,
+  passes the previous deployment record, stops on unknown drift, verifies direct
+  manifest parity, records observable canaries, opens an evidence pull request
+  and sends a cloud heartbeat. Cursor canaries remain manual.
 - The reconciler and the harness audit added (`scripts/reconcile.mjs`,
   `scripts/audit-harness.mjs`), both wired into `harness-steward.yml` nightly.
   The reconciler writes only through pull requests and never overwrites an edit

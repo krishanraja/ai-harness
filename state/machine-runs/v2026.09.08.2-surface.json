@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run_id": "20260908T172452Z",
+  "host": "SURFACE",
+  "host_evidence": "COMPUTERNAME is SURFACE, the Codex skills root exists, and the Claude Code and Cursor harness roots do not exist.",
+  "mode": "verification-only",
+  "canaries_requested": false,
+  "heartbeat_enabled": false,
+  "pull_request_enabled": false,
+  "started_at_utc": "2026-09-08T17:24:52.6565853Z",
+  "status": "completed",
+  "surfaces": [
+    {
+      "surface": "codex-surface-07a67cda9f99",
+      "client": "codex",
+      "install": "already-current",
+      "parity": {
+        "surface": "codex-surface-07a67cda9f99",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05",
+        "release_aggregate": "9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1"
+      },
+      "rollback_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-surface-07a67cda9f99\\v2026.09.08.2-20260908T155937Z-60f0fe0d",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.08.2-codex-surface-07a67cda9f99.json"
+    }
+  ],
+  "release": "v2026.09.08.2",
+  "assets": {
+    "asset_count": 60,
+    "checksum_count": 59,
+    "mismatches": 0
+  },
+  "manifest_sha256": "B6780D886B5B1A0688A1D7DDA29B25ED6F50B718156AEF2006632BA940F1952E",
+  "completed_at_utc": "2026-09-08T17:25:57.4876912Z"
+}

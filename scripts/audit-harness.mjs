@@ -302,12 +302,17 @@ for (const f of readdirSync(join(HARNESS, 'evals')).filter((x) => /-trigger-case
 // skill -> Set of surfaces where a positive fired, and skill -> newest date
 const provenOn = new Map()
 const lastSeen = new Map()
-const unreachableOn = []
+const unreachableOn = new Map()
 for (const r of canaryReports) {
   for (const res of r.results || []) {
     const meta = idToSkill.get(res.id)
     if (!meta) continue
-    if (res.outcome === 'unreachable') unreachableOn.push({ skill: meta.skill, surface: r.surface, release: r.release })
+    if (res.outcome === 'unreachable') {
+      const key = `${meta.skill}\0${r.surface}\0${r.release}`
+      const existing = unreachableOn.get(key)
+      if (existing) existing.canaries++
+      else unreachableOn.set(key, { skill: meta.skill, surface: r.surface, release: r.release, canaries: 1 })
+    }
     if (!meta.positive || res.outcome !== 'fired') continue
     if (!provenOn.has(meta.skill)) provenOn.set(meta.skill, new Set())
     provenOn.get(meta.skill).add(r.surface)
@@ -316,10 +321,30 @@ for (const r of canaryReports) {
   }
 }
 
-// An unreachable skill is the sharpest finding this instrument can produce: the
-// bytes are right and the client cannot see it. It is never a trigger declining.
-for (const u of unreachableOn) {
-  F('unreachable-on-surface', `${u.skill} on ${u.surface}`, `A canary reported ${u.skill} unreachable on ${u.surface} at ${u.release}: the client could not see the skill at all.`, 'This is not a trigger declining. Check the adapter\'s allow_implicit_invocation and the installed catalog. Byte parity does not imply reachability, and only a positive canary can tell them apart.')
+// For a manual-only skill, `unreachable` on an IMPLICIT route is the contract
+// holding, not a defect. design-intelligence-search sets
+// allow_implicit_invocation: false and says "Manual-only ... Never trigger
+// directly", so a client that cannot route to it is doing what it was told.
+//
+// The canary sheet now sends such a skill its EXPLICIT invocation as the
+// load-bearing positive and inverts the implicit case into a containment test,
+// so this exclusion is narrow: it suppresses the finding only where being
+// unreachable IS the specification. If the explicit positive also comes back
+// unreachable, provenOn stays empty and the uncanaried finding below says so.
+const manualOnlySkills = new Set(skillDirs.filter((d) => {
+  const adapter = join(HARNESS, 'skills', d, 'agents/openai.yaml')
+  return existsSync(adapter) && /^\s*allow_implicit_invocation:\s*false\s*$/m.test(readFileSync(adapter, 'utf8'))
+}))
+
+// An unreachable skill is otherwise the sharpest finding this instrument can
+// produce: the bytes are right and the client cannot see it. It is never a
+// trigger declining.
+for (const u of unreachableOn.values()) {
+  if (manualOnlySkills.has(u.skill)) {
+    N(`${u.skill} reported unreachable by ${u.canaries} implicit ${u.canaries === 1 ? 'canary' : 'canaries'} on ${u.surface}. That is its contract: it is manual-only and the client is correctly unable to route to it. Its explicit invocation is what proves it works.`)
+    continue
+  }
+  F('unreachable-on-surface', `${u.skill} on ${u.surface}`, `${u.canaries} ${u.canaries === 1 ? 'canary' : 'canaries'} reported ${u.skill} unreachable on ${u.surface} at ${u.release}: the client could not see the skill at all.`, 'This is not a trigger declining. Check the adapter\'s allow_implicit_invocation and the installed catalog. Byte parity does not imply reachability, and only a positive canary can tell them apart.')
 }
 
 const CORE = new Set(['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief'])
@@ -362,6 +387,8 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   // precisely because they failed silently. So it is named and reported missing
   // rather than quietly added.
   const EXPECTED_CLOCKS = {
+    'harness-sync-lorimer': 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on LORIMER',
+    'harness-sync-surface': 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE',
     observer: 'scripts/observe.mjs, nightly in harness-steward.yml',
     'session-feed': 'a scheduled Routine collecting Claude Code session metadata, never created',
   }
@@ -381,6 +408,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
         continue
       }
       const age = Math.round((Date.now() - new Date(beat.last_run)) / 3600000)
+      if (beat.status === 'blocked') F('heartbeat', who, `${who} last reported a blocked machine run at ${beat.last_run}.`, 'Read the machine evidence pull request. A current clock proves the task ran; it does not turn a refused install or failed canary into health.')
       if (age > 48) F('heartbeat', who, `${who} last ran ${beat.last_run}, ${age} hours ago, past the 48 hour limit.`, 'Check the workflow. A silent clock is the failure mode this watchdog exists for, so treat a stale heartbeat as an outage rather than as noise.')
       else N(`${who} heartbeat is ${age} hours old.`)
     }
