@@ -1,6 +1,6 @@
 ---
 name: video-engine
-description: "Launch Krishan Raja's Mindmake Video Engine. Invoke only when the first user message, after trimming whitespace and terminal punctuation, is exactly 'Video engine' (case-insensitive), or when the user explicitly invokes $video-engine. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
+description: "Launch Krishan Raja's Mindmake Video Engine only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not invoke this skill. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
 ---
 
 # Video Engine launcher
@@ -9,7 +9,15 @@ Use this as a thin launcher. GitHub `krishanraja/mindmake-video-studio` `main` i
 
 ## Trigger contract
 
-- Start a new Video Engine session only when the first user message is exactly `Video engine`, ignoring case, surrounding whitespace, and terminal punctuation such as `Video engine!`, or when the user explicitly writes `$video-engine`.
+Start a new Video Engine session only when both are true:
+
+1. The current message is the first user-authored message in a new chat.
+2. After removing leading and trailing whitespace only, its complete contents equal `Video engine`, case-insensitively.
+
+`Video engine`, `VIDEO ENGINE` and ` Video engine ` pass. Everything else fails, including `Video engine!`, `Video engine please`, a message carrying another line, a quoted mention, `$video-engine`, and the exact words on a later turn.
+
+This matches `krishanraja/mindmake-video-studio` `main` exactly, which this file names as the only authority. Narrowed here on 2026-09-08: the canon had been declaring a wider trigger than the repository it defers to, which the SURFACE reconciliation caught as a standing collision.
+
 - Do not activate from phrases such as `video edit`, `edit this video`, `generate a video`, `my video engine`, `how does the video engine work?`, or any unrelated mention of video production.
 - If this skill was selected but the trigger contract is not satisfied, stop applying it immediately. Do not fetch the repository, run the CLI, inspect Video Engine state, or redirect the request. Handle the request normally with the relevant general capability.
 - After a valid launch, follow-up turns in that same chat may continue the active Video Engine workflow without repeating the launch phrase.
