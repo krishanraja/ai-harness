@@ -8,8 +8,16 @@
 # every surface is accounted for, and that no machine-specific path has crept
 # back in.
 #
-# It never writes. Rendering into repositories is the reconciler's job and it
-# does that through pull requests. This is the gate that runs before any of it.
+# Three jobs, in order of how much they are allowed to do:
+#
+#   surfaces    never writes. The gate. Runs on every push and pull request.
+#   audit       never writes. The canon audits itself against its own quality
+#               standard nightly and reports findings. A finding is a decision
+#               for a person, never a silent edit: "review-date expiry opens a
+#               finding; it does not silently rewrite a skill."
+#   reconcile   writes, and only ever through a pull request on a named branch.
+#               Nightly. An edit made inside the markers in a repository is
+#               NEVER overwritten; it becomes a proposal against the canon.
 #
 # Runs on ubuntu with no dependencies. Nothing here needs a machine to be awake
 # or a browser to be open, which is the whole point.
@@ -25,6 +33,12 @@ on:
     # fleet has already landed, so parity is checked against today's state.
     - cron: "40 20 * * *"
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Classify every surface and report, open nothing"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -73,3 +87,70 @@ jobs:
             exit 1
           }
           echo "Two renders from one commit, byte-identical."
+
+  # The canon is not exempt from the treatment it gives everyone else.
+  audit:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: surfaces
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Audit the harness against its own quality standard
+        run: node scripts/audit-harness.mjs --out audit.md
+      - name: Put the findings in the run summary
+        if: always()
+        run: cat audit.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: harness-audit
+          path: audit.md
+          retention-days: 30
+
+  # The only job here that writes anything, and only ever as a pull request.
+  reconcile:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: surfaces
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Fail loud rather than quietly doing nothing. A night the reconciler did
+      # not run must never look like a night with no drift.
+      - name: The fleet credential must exist
+        env:
+          HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
+        run: |
+          if [ "$HAS_TOKEN" != "true" ]; then
+            echo "::error::FLEET_TOKEN is not set. The reconciler reads and writes ten repositories from this one job. Add a fine-grained PAT with contents and pull-requests write on the fleet as the repository secret FLEET_TOKEN."
+            exit 1
+          fi
+
+      - name: Reconcile every surface
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run || false }}
+        run: |
+          set -euo pipefail
+          if [ "$DRY_RUN" = "true" ]; then
+            node scripts/reconcile.mjs --dry-run --out reconcile.md
+          else
+            node scripts/reconcile.mjs --out reconcile.md
+          fi
+
+      - name: Put the reconciliation in the run summary
+        if: always()
+        run: cat reconcile.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canon-reconciliation
+          path: reconcile.md
+          retention-days: 30
