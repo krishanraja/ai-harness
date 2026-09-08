@@ -237,10 +237,37 @@ if (unevidenced.length) {
     'Run scripts/eval.mjs, which writes to state/evals/ where this audit reads it. A number in a file nobody reads is not a measurement.')
 }
 
+// An eval run whose own control says the instrument is unstable is not
+// evidence, and must not close the coverage finding or be read as a statement
+// about a skill. Checked before the Gate 2 bar is applied, because applying a
+// bar to an invalid number is worse than having no number: it manufactures a
+// verdict.
+let instrumentValid = true
+{
+  const controls = existsSync(evalsDir)
+    ? readdirSync(evalsDir).filter((f) => f.endsWith('.json')).map((f) => {
+        try { return JSON.parse(readFileSync(join(evalsDir, f), 'utf8')) } catch { return null }
+      }).filter((r) => r && r.control)
+    : []
+  const latest = controls.sort((a, b) => String(a.measured_at).localeCompare(String(b.measured_at))).pop()
+  if (latest) {
+    const d = Math.abs((latest.control.recall_a ?? 0) - (latest.control.recall_b ?? 0))
+    if (d > 0.1) {
+      instrumentValid = false
+      F('instrument', 'trigger eval harness', `A control over ${latest.cases_run} identical cases moved recall by ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b}${latest.control.recall_b < latest.control.recall_a ? ', with the stronger model scoring lower' : ''}. The instrument is a larger variable than the subject, so no accuracy figure it produces describes a skill.`, 'Fix scripts/eval.mjs before reading any of its numbers as quality: a more capable model doing worse at a classification task is a prompt problem. Do not write these figures into the registry.')
+    } else {
+      N(`Control: recall moved only ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b}, so the instrument is stable enough to read.`)
+    }
+  } else {
+    N('No control run in state/evals yet, so no eval number has been validated as measuring the skills rather than the harness.')
+  }
+}
+
 // Gate 2: 100 percent on core and always-on skills, at least 95 percent on
-// routed ones, with no high-consequence false positive.
+// routed ones, with no high-consequence false positive. Skipped entirely when
+// the instrument has not been shown to be valid.
 const CORE = new Set(['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief'])
-for (const [name, s] of measured) {
+for (const [name, s] of instrumentValid ? measured : []) {
   const bar = CORE.has(name) ? 1 : 0.95
   if (s.accuracy !== null && s.accuracy < bar) {
     F('trigger-accuracy', name, `Measured accuracy ${s.accuracy} against a Gate 2 bar of ${bar} for ${CORE.has(name) ? 'a core' : 'a routed'} skill, over ${s.cases} cases (${s.run}).`, 'Tighten the description or the routing entry, then re-run. Lowering the bar to manufacture a pass is the one thing Gate 7 forbids outright.')
