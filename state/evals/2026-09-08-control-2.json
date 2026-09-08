@@ -1,0 +1,34 @@
+{
+  "run": "2026-09-08-control-2",
+  "measured_at": "2026-09-08",
+  "router_prompt_sha256": "e625e1579659a829",
+  "verdict": "instrument-still-not-valid",
+  "cases_run": 120,
+  "control": {
+    "model_a": "claude-haiku-4-5-20251001",
+    "accuracy_a": 0.767,
+    "recall_a": 0.611,
+    "model_b": "claude-sonnet-5",
+    "accuracy_b": 0.692,
+    "recall_b": 0.486,
+    "recall_delta": 0.125,
+    "accuracy_delta": 0.075
+  },
+  "previous_control": {
+    "run": "2026-09-08-control",
+    "router_prompt_sha256": null,
+    "recall_delta": 0.25,
+    "accuracy_delta": 0.15
+  },
+  "change_under_test": "Removed three routing rules that sat between the instruction and the skill descriptions: narrowest skill wins, load nothing on a mere mention, an exact-phrase trigger fires only on that phrase. They were written for this harness and no client sends them.",
+  "reading": "The diagnosis was half right and the fix is not sufficient. Recall delta halved, 0.250 to 0.125, and accuracy delta halved, 0.150 to 0.075, so the injected rules were a large part of what the instrument was measuring. But 0.125 is still above the 0.1 bar, the stronger model still scores LOWER, and the audit still refuses these numbers. It refused a fix I argued for, on evidence, which is the only reason the bar is worth having.",
+  "what_the_shape_says": "Precision is 1.000 for all five skills under both models. Recall is 0.611 and 0.486. Perfect precision with poor recall is not the signature of ambiguous descriptions, which would cost precision by firing on the wrong things. It is the signature of a router that will not fire at all unless it is very sure. So the remaining variable is unlikely to be the descriptions, which is the thing Gate 2 wants to measure, and more likely the framing: one isolated message, no conversation, no tools, and a JSON-only answer, where declining to load anything is always the safe reply. A real client sees a session, not a sentence.",
+  "next_hypothesis": "Test the framing rather than the wording. Give the router the same case as a turn in a conversation rather than a bare string, and let it answer in the shape a client actually routes in. If recall rises and the delta closes, the harness was the variable all along. If recall stays low under both models with the delta closed, then the descriptions genuinely under-trigger and that is a real finding about the skills, which is the answer this whole apparatus was built to produce.",
+  "not_to_be_read_as": "A measurement of any skill. krish-principles reads recall 0.368 here and that number describes this harness, not that skill.",
+  "cost": {
+    "cache_effectiveness": 0.996,
+    "cache_read_tokens": 1543668,
+    "input_tokens": 6138,
+    "note": "99.6 percent of input served from cache across 240 calls. The caching half of this runner works; the measuring half does not."
+  }
+}
