@@ -26,6 +26,7 @@
  * instrument produces and is always kept.
  *
  *   node scripts/canaries.mjs --sheet [--release <id>] [--surface <id>] [--out <path>]
+ *   node scripts/canaries.mjs --sheet-json [--release <id>]
  *   node scripts/canaries.mjs --verify <report.json>
  *   node scripts/canaries.mjs --record <report.json>
  *
@@ -139,6 +140,29 @@ const tier3 = rotation(suites.filter((s) => !(s in TIER1)), 3)
 const selected = [...new Set([...Object.keys(TIER1).filter((s) => suites.includes(s)), ...changed.skills, ...tier3])]
 
 // ------------------------------------------------------------------ the sheet
+function sheetObject() {
+  const cases = []
+  for (const skill of selected) {
+    for (const c of pick(skill)) {
+      cases.push({
+        id: c.id,
+        skill,
+        prompt: c.prompt,
+        role: c.role,
+        load_bearing: c.load_bearing,
+        should_trigger: c.should_trigger === true,
+        expected_route: c.expected_route || null,
+      })
+    }
+  }
+  return {
+    schema_version: 1,
+    release: RELEASE,
+    skills: selected,
+    cases,
+  }
+}
+
 function sheet() {
   const out = []
   const p = (s = '') => out.push(s)
@@ -216,13 +240,36 @@ function verify(reportPath) {
   // Per skill: did a load-bearing positive actually pass on this surface?
   const positivePassed = new Set()
   const sawSkill = new Set()
+  const seenIds = new Set()
+  const outcomeFailures = []
   for (const r of results) {
     const c = byId.get(r.id)
     if (!c) { notes.push(`${r.id} is not on this release's sheet; recorded, not counted.`); continue }
+    if (seenIds.has(r.id)) { problems.push(`${r.id} appears more than once.`); continue }
+    seenIds.add(r.id)
     if (!OUTCOMES.has(r.outcome)) { problems.push(`${r.id} has outcome "${r.outcome}", which is not one of the four.`); continue }
     sawSkill.add(c.skill)
     if (c.load_bearing && c.should_trigger === true && r.outcome === 'fired') positivePassed.add(c.skill)
+
+    if (c.should_trigger === true && r.outcome !== 'fired') {
+      outcomeFailures.push(`${r.id}: expected ${c.skill} to fire, observed ${r.outcome}.`)
+    } else if (c.should_trigger !== true && c.expected_route) {
+      const routeValues = Array.isArray(c.expected_route) ? c.expected_route : [c.expected_route]
+      const allowed = routeValues
+        .flatMap((value) => String(value).split(/\s+or\s+|,/i))
+        .map((x) => x.trim())
+        .filter(Boolean)
+      const named = String(r.note || '').toLowerCase()
+      if (r.outcome !== 'wrong-skill' || !allowed.some((skill) => named.includes(skill.toLowerCase()))) {
+        outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${allowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
+      }
+    } else if (c.should_trigger !== true && r.outcome !== 'not-fired') {
+      outcomeFailures.push(`${r.id}: expected not-fired, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
+    }
   }
+
+  const missing = [...byId.keys()].filter((id) => !seenIds.has(id))
+  if (missing.length) problems.push(`Missing results for ${missing.join(', ')}.`)
 
   // The rule. A negative or collision result on a skill with no passing
   // positive is vacuous, and saying so is the whole point of this file.
@@ -243,7 +290,7 @@ function verify(reportPath) {
   // nobody can act on later, which is the shape of the thing being replaced.
   //
   // So it is a failure, it is loud, it is recorded, and it exits non-zero.
-  const failing = []
+  const failing = [...outcomeFailures]
   for (const skill of sawSkill) {
     if (!positivePassed.has(skill)) {
       const pos = results.filter((r) => byId.get(r.id)?.skill === skill && byId.get(r.id)?.should_trigger === true)
@@ -261,7 +308,9 @@ function verify(reportPath) {
 }
 
 // -------------------------------------------------------------------- run
-if (args.includes('--sheet')) {
+if (args.includes('--sheet-json')) {
+  process.stdout.write(JSON.stringify(sheetObject(), null, 2) + '\n')
+} else if (args.includes('--sheet')) {
   const text = sheet()
   const out = flag('--out')
   if (out) { mkdirSync(join(out, '..'), { recursive: true }); writeFileSync(out, text) }
@@ -307,6 +356,6 @@ if (args.includes('--sheet')) {
   }
   if (v.failing.length) process.exit(1)
 } else {
-  console.error('canaries: --sheet, --verify <report.json>, or --record <report.json>.')
+  console.error('canaries: --sheet, --sheet-json, --verify <report.json>, or --record <report.json>.')
   process.exit(2)
 }

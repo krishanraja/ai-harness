@@ -2,7 +2,7 @@
 repo: krishanraja/ai-harness
 product: The harness
 as_of: 2026-09-08
-head: 61604d4
+head: f98ef85
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -27,24 +27,28 @@ Angles a writer can use without asking Krish:
 - **The instructions are versioned like code, not typed into a chat.** Every skill has an owner, a reviewed date, a freshness SLA, a named route and a status. Nothing is always-on because it claims to be; it is always-on because the router says so.
 - **The canon reached the work only on 2026-09-08.** For months the governance was excellent and had never left the repository: no renderer existed, and the eight product repositories referenced the canon zero times. The gap between "we have standards" and "the standards are in the room where the work happens" is the whole story, and it is the same gap in most organisations.
 - **Absolute paths were the tell.** 26 files carried one Windows machine's paths, including shipped canon, which meant the contract was only literally correct on one laptop. Named roots fixed it. A rule that only works in one place is not a rule, it is a habit.
-- **Nothing here trusts a machine being awake.** Every scheduled job runs in the cloud on Linux with no browser and no local dependency. Machines pull releases and report parity back; they are never pushed to.
+- **Cloud governance does not depend on a machine being awake.** Rendering, validation, audit and reconciliation stay on Linux in GitHub Actions. A small Windows task now owns only machine deployment and live-client canaries, and its cloud heartbeat makes a stopped machine clock visible.
 - **The measurements exist and the register does not carry them.** 19 per-skill evaluation result files sit in `state/` as loose markdown from 5 August; only two skills, `n8n-operator` and `instantly-operator`, have their numbers folded into the registry. So the file a reader consults to ask "is this skill any good" answers for two of twenty-nine. 1,374 eval cases across 59 files still run only by hand, on Windows. Seven skills are past their freshness SLA today. That is written down rather than smoothed over, which is the point.
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured.
 
 ## Where it is right now (as of 2026-09-08)
 
-- **Live** as the canon for 29 curated skills. Four client surfaces are installed and byte-verified at `v2026.09.08.1`: `claude-code-user`, `cursor-primary`, `codex-current` on LORIMER, and `codex-surface-07a67cda9f99` on SURFACE. All four agree on the same tree aggregate and all 29 per-skill hashes match the manifest.
-- **`v2026.09.08.2` is published**, tag `harness-v2026.09.08.2` on `c5141ef`, 60 assets, 2026-09-08. Its skills tree is byte-identical to where it was approved at `a27170f`; the tag sits later only because tooling and the canary instrument landed in between, and both hash to `9D3F2E69...`. It carries the `video-engine` launcher fix, so it is the install target and `v2026.09.08.1` is the rollback target. `manifest_sha256` is deliberately left as `pending-first-install`: the installer computes it while verifying the download, so it belongs in the first deployment record rather than being asserted here and checked by nobody. **No surface has installed it yet**, which is why all six read as behind.
+- **Live** as the canon for 29 curated skills. SURFACE's `codex-surface-07a67cda9f99` installed and byte-verified `v2026.09.08.2` on 2026-09-08. The recorded LORIMER surfaces remain on `v2026.09.08.1` until the same machine job runs there.
+- **`v2026.09.08.2` is published and installed on SURFACE**, tag `harness-v2026.09.08.2` on `c5141ef`, 60 assets, 2026-09-08. Its 29 skills and 139 files match every per-skill manifest hash and the release tree aggregate `9D3F2E69...`. The verified manifest SHA-256 is `B6780D886B5B1A0688A1D7DDA29B25ED6F50B718156AEF2006632BA940F1952E`. It carries the `video-engine` launcher fix, and `v2026.09.08.1` remains the rollback target.
 - **Rendered.** `scripts/render.mjs` writes the three client adapters and the canon block into all ten fleet repositories' `AGENTS.md`. Two renders from one commit are byte-identical, proven in CI. Content outside the markers is never read or written.
 - **Portable.** `contract/paths.yaml` is the only file allowed to carry an absolute path. `validate-surfaces.mjs` fails if one creeps back into the canon.
 - **Canaries are the instrument, as of Krish's ruling on 2026-09-08.** The trigger eval harness is deleted: `scripts/eval.mjs`, its shared router prompt, and the weekly CI job. It was measured against itself twice and failed both times, while four canaries on two Windows hosts found four real defects in an hour that 613 automated cases missed over two days. `scripts/canaries.mjs` renders a deterministic sheet per release, verifies a submitted report, and enforces the rule the failure taught: **a negative canary is void on a surface where no positive passed**, because a skill that cannot fire also cannot fire wrongly. Doctrine in `contract/canary-contract.md`. The 613 trigger cases are kept and are now the corpus canaries are selected from; the 767 behaviour cases have never been run by anything and are marked as such rather than counted.
+- **The first full `v2026.09.08.2` SURFACE canary report is a recorded failure.** The live Codex client fired positives for six of seven selected skills. `design-intelligence-search` fired neither positive and is unmeasured on that surface. `take-the-brief`, `video-engine`, `mindmake-os` and `mindmake` also produced containment failures. The report is preserved in `state/canaries/`; no expected result was substituted for an observed one.
+- **Machine reconciliation is automated.** `scripts/Invoke-HarnessSync.ps1` identifies the host, verifies release assets, passes the previous deployment record, plans before applying, checks parity directly, runs supported headless canaries, opens an evidence pull request and sends a heartbeat. A Windows Scheduled Task owns the local clock. Cursor canary execution remains manual because no supported headless Cursor client exposes skill invocation evidence.
 - **Seven skills are past their freshness SLA**: `evidence-research`, `decision-ledger`, `tools-access`, `apify` (due 2026-09-04), `n8n-operator`, `instantly-operator` (2026-09-05), `design-intelligence-search` (2026-09-06). Expiry opens a finding; it never silently rewrites a skill.
 - **Three skills have no named route**: `harness-maintainer`, `tools-access`, `apify`.
 - **Two cloud surfaces are two releases behind**: `claude-cloud` and `perplexity-cloud`, both on `v2026.08.29.3`. Uploading to those is a browser action and is the one manual step in the system.
 - **Two host gaps, neither ours.** Codex reports shortening skill descriptions to fit its context budget, and every trigger contract here lives in description text. The Video Engine launches under Codex on LORIMER and then cannot run, because the engine contract pins Node 24 and the host has another.
 
 ## What changed recently
+
+- 2026-09-08 **SURFACE installed `v2026.09.08.2`, and the manual procedure became a machine job.** The release verified at 60 assets, 29 skills, 139 files, all 29 per-skill hashes and aggregate `9D3F2E69...`. `scripts/Invoke-HarnessSync.ps1` now performs governed plan, apply, parity, canary, evidence pull request and heartbeat work for the declared surfaces. The first full Codex canary report is retained as a failure, including a positive `video-engine` launch and the containment defects it exposed.
 
 - 2026-09-08 **Canaries replace the trigger eval harness, by ruling.** Why: the harness was measured against itself twice and failed both times. Two controls over the same 120 cases moved recall 0.250 and then 0.125 between two models, with the stronger model scoring lower each time, which is a property of the prompt rather than of the skills. On the same day four canaries on two Windows hosts found a skill instructing a self-executing deletion, a direct push to another repository's main, an embedded cron schedule in canon claiming it could not go stale, and a launcher installed with byte-perfect parity that could not launch. 613 automated cases over two days found none of them. `scripts/eval.mjs` is deleted; `scripts/canaries.mjs` and `contract/canary-contract.md` take its place, and the audit now reports canary coverage instead of accuracy. The honest first number is that 28 of 29 skills have never had a positive canary fire anywhere, which is a large true number replacing a small invented one.
 - 2026-09-08 **A release can no longer be approved and then unpublishable.** Why: `release.yml` fired only on a tag push, and a cloud session cannot push a tag, so `v2026.09.08.2` was approved with the launcher fix in it and could reach no machine. It now also accepts `workflow_dispatch` and creates the tag itself, with the name validation, the twice-built manifest comparison, the installer self-test and the never-overwrite rule all unchanged.
@@ -69,15 +73,16 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 
 Waiting on Krish, in order of how much it blocks:
 
-1. **`git push origin harness-v2026.09.08.2`.** The release is approved and cannot publish itself from the cloud. Nothing reaches a machine until this runs.
-2. **Rotate three access tokens** exposed in a chat transcript on 2026-09-08 (Supabase, Vercel, GitHub personal), and the production credential still in `mm-ctrl` git history at commit `8174677`. `FLEET_TOKEN` on this repository was minted separately and is not affected.
-3. **A ruling on loose files inside two managed roots**: 62 beside `C:\Users\krish\.claude\skills` (53 third-party marketing `.md`, 9 `.skill` archives) and 11 beside `C:\Users\krish\.cursor\skills`. The installer walks directories and has never seen them, so they cannot be reported as drift.
-4. **A ruling on `mm-ctrl/skills/`**, whose README still claims to be the canonical home of the five CTRL skills.
-5. **Seven freshness reviews and three routing decisions**, listed above.
+1. **Review and merge the machine automation pull request.** Until the heartbeat workflow reaches `main`, local dispatches are accepted by GitHub but cannot update the cloud clock. Run the same setup on LORIMER after merge.
+2. **Rule on the recorded canary failures.** The installed bytes are correct. The live client evidence says several trigger boundaries are not, and a new release is the governed correction path.
+3. **Rotate three access tokens** exposed in a chat transcript on 2026-09-08 (Supabase, Vercel, GitHub personal), and the production credential still in `mm-ctrl` git history at commit `8174677`. `FLEET_TOKEN` on this repository was minted separately and is not affected.
+4. **A ruling on loose files inside two managed roots**: 62 beside `C:\Users\krish\.claude\skills` (53 third-party marketing `.md`, 9 `.skill` archives) and 11 beside `C:\Users\krish\.cursor\skills`. The installer walks directories and has never seen them, so they cannot be reported as drift.
+5. **A ruling on `mm-ctrl/skills/`**, whose README still claims to be the canonical home of the five CTRL skills.
+6. **Seven freshness reviews and three routing decisions**, listed above.
 
 Ruled and closed on 2026-09-08: `C:\Users\krish\.agents\skills` holds 63 entries, zero canonical, nine that the routing contract forbids, and **nothing reads it**. No client config points there and no instruction file names it. The forbidden skills are inert. It stays a third-party catalog.
 
-Next without Krish: run the eval control against the corrected router prompt, which is the only thing that can say whether the instrument is now valid.
+Next without Krish: keep recording the canary failures and let the audit age the machine clocks. Do not revive the retired trigger evaluator as authority.
 
 ## Read next
 
@@ -94,6 +99,6 @@ Next without Krish: run the eval control against the corrected router prompt, wh
 
 - Any `reviewed` date in `state/skill-registry.yaml` older than its `freshness_sla_days`. Seven are expired today; they are findings, not facts.
 - The absence of an `evaluation_evidence` row read as "not measured". For 19 skills it means measured on 5 August and never filed. `node scripts/audit-harness.mjs` names which is which.
-- `surface_deployments.codex-surface-07a67cda9f99`: correct as of 2026-08-29 and two releases behind since.
+- `surface_deployments.codex-surface-07a67cda9f99`: stale until the machine deployment evidence for `v2026.09.08.2` is folded back into the registry.
 - `mm-ctrl/skills/README.md`: its claim to be "the canonical, versioned home" of the CTRL skills is contested by this repository and unresolved.
-- The seven PowerShell scripts in `scripts/` as a description of how the harness is maintained. They still build, test and install releases on Windows, but nothing scheduled depends on them any more.
+- Any individual PowerShell script as the whole maintenance procedure. `docs/harness/MACHINE-JOB.md` is the authority, and the scheduled machine path begins at `scripts/Invoke-HarnessSync.ps1`.

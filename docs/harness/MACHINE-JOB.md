@@ -163,6 +163,64 @@ It refuses a malformed report outright, and it **records a failing one and exits
 non-zero**, because a canary failure is the most valuable thing this instrument
 produces and must never be the thing that gets thrown away.
 
+## Automatic machine reconciliation
+
+`scripts/Invoke-HarnessSync.ps1` performs this procedure without making a
+governance decision. It identifies LORIMER or SURFACE from the computer name and
+the exact owned roots above. Any other shape is ambiguous and stops. It never
+targets Cursor's `skills-cursor` product surface or the inert `.agents` catalog.
+
+On a new approved release it:
+
+1. Uses authenticated GitHub REST endpoints to find and download the latest
+   immutable `harness-v*` release.
+2. Verifies every downloaded asset against `SHA256SUMS.txt`.
+3. Finds each surface's newest deployment record and passes it as
+   `-ExpectedDeploymentRecordPath`.
+4. Plans every owned surface without `-Apply`, applies only a clean plan, and
+   leaves any surface with unknown drift untouched.
+5. Verifies every per-skill hash and the full tree aggregate directly against
+   the release manifest.
+6. Runs observable canaries on clients with a supported headless interface and
+   records failures without converting them into success.
+7. Commits machine evidence to a named branch and opens a pull request. The
+   machine task never pushes to `main`.
+8. Sends a repository dispatch heartbeat. The cloud workflow records that clock
+   in `state/heartbeats.json`, where the harness audit treats 48 hours of silence
+   as an outage.
+
+If every local surface already reports the latest release, it performs no
+download, install, canary, commit, or pull request. It still sends the heartbeat
+that proves the machine task remains alive.
+
+Register or repair the daily task from an interactive PowerShell session:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Invoke-HarnessSync.ps1 -RegisterScheduledTask
+```
+
+It registers `Mindmake AI Harness Sync` for 08:30 local time under the current
+user, with wake and network requirements, battery execution allowed and a
+four-hour limit. Run it by hand with:
+
+```powershell
+Start-ScheduledTask -TaskName 'Mindmake AI Harness Sync'
+```
+
+Then inspect the operating-system result, not merely the registration:
+
+```powershell
+Get-ScheduledTaskInfo -TaskName 'Mindmake AI Harness Sync'
+```
+
+The task uses the signed-in user's existing GitHub and client credentials. It
+does not store a token in its action, arguments, working directory, or reports.
+
+Cursor remains manual for canaries. Cursor has no supported headless client
+that exposes skill invocation as observable output, so the automatic job records
+that surface as `manual-required` instead of pretending a result. Installation
+and byte parity remain automatic.
+
 ## Known gaps on the machines
 
 - **Codex truncates skill descriptions.** It reports "Skill descriptions were

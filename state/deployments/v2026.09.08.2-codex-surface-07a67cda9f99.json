@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "surface_id": "codex-surface-07a67cda9f99",
+  "target": "C:\\Users\\krish\\.codex\\skills",
+  "release_id": "v2026.09.08.2",
+  "source_commit": "c5141efa028abdc0683ae5ac116f05d43c1f62b4",
+  "artifact_hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+  "deployed_at_utc": "2026-09-08T15:59:43.3135014Z",
+  "backup_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-surface-07a67cda9f99\\v2026.09.08.2-20260908T155937Z-60f0fe0d",
+  "result": "installed-and-hash-verified",
+  "skills": [
+    {
+      "name": "apify",
+      "action": "exact",
+      "installed_sha256": "CE780711051C675E5AD0B77C76FBAED5B2E2B4C62214879A6C39A7ECF14FE8CF",
+      "package_sha256": "3AE22A5E9EC30315C632F95DAB24EA74A5821D915A3F910EBCD5D8885ADEB214"
+    },
+    {
+      "name": "build-apps-with-krish",
+      "action": "exact",
+      "installed_sha256": "842955FDFB2C3079E0916B50AEA8BB4E3265DFE2ACC1061D83794394354B9AA7",
+      "package_sha256": "022C27CFD76FFBB7D2622825403B53AF8D8815B4DE265B632782B66B1DE75317"
+    },
+    {
+      "name": "content-corpus",
+      "action": "exact",
+      "installed_sha256": "8D5DAEC3B5EFF729FD67250A9DD454F6B2B02FE90E3958EA4DC0D09933E551D4",
+      "package_sha256": "26E24162CA429152A39E1D2231F8D71475937AA91284E30ECA2D2EFFB98FA41F"
+    },
+    {
+      "name": "ctrl-build",
+      "action": "exact",
+      "installed_sha256": "5A5AEEC045419AA5E944FC4A67A4EB25B0EE40F2F0A9D65AD25529296D7F7FDD",
+      "package_sha256": "BE630DA6B66CE873F0CFF6A7592D7DFB6595659F54D22BDA4456CD131CCD6C2C"
+    },
+    {
+      "name": "ctrl-capture",
+      "action": "exact",
+      "installed_sha256": "29948944065069247F0EA28CDD08A9718B5629DDAF65DE0D89BA435DBDC5DF88",
+      "package_sha256": "167B57DC4D03EA1BE16F6533BD90667E8501A2381CAF851BB07DCF975B827273"
+    },
+    {
+      "name": "ctrl-check",
+      "action": "exact",
+      "installed_sha256": "24C090A1F850361838762DE6FD3E153C865CF96F20A93A7C89E2FBFB13882519",
+      "package_sha256": "C00C7651023B2B6309DAFCFA5B1044F3DD3578F3641AEDAC0F425E96FC3E1EE5"
+    },
+    {
+      "name": "ctrl-compile",
+      "action": "exact",
+      "installed_sha256": "1312DBF353185F81756DCDB79B8458D3C34A4290748F9EE4FF302283F21B475F",
+      "package_sha256": "90504FD87BE2DC68281D8C1FA27EB3DF4DD7F02DBC8460AAD6623F69E64F8D4F"
+    },
+    {
+      "name": "ctrl-intake",
+      "action": "exact",
+      "installed_sha256": "12E7DD50061D6EEA6ADAB185BD3DD6D73257E441F0EA066D83360A6DE9A20D96",
+      "package_sha256": "8B6C8125760551BA1F1594203450BDA1A69ECB6266F811A9B000AB38ADE705F5"
+    },
+    {
+      "name": "decision-ledger",
+      "action": "exact",
+      "installed_sha256": "9CA9C185376BC7C35935F30B0BAA6BF321C41EC810DDACDD75422682ED60E42F",
+      "package_sha256": "5CA2B95AD6DDBB69304FCE404E67F5D78204F834684E4C0BD4543C81CA867CCC"
+    },
+    {
+      "name": "design-intelligence-search",
+      "action": "exact",
+      "installed_sha256": "56A67098D7FC951D94588C2CEBB9E94DB43C259B66D280192152BA4972E35426",
+      "package_sha256": "7675D762A18F96072782C90A5CEAF8EFB2745392C5E3E9CFC91969E518E6230F"
+    },
+    {
+      "name": "evidence-research",
+      "action": "exact",
+      "installed_sha256": "4E651DE03505F525CE9D4379E439855CC7E3605AB834E518755B6507B1CEDDA6",
+      "package_sha256": "C585BDF4AAAB8BB9929A0B732466BBBAAC6535CCC00771DA5A5FC22C44772975"
+    },
+    {
+      "name": "harness-maintainer",
+      "action": "exact",
+      "installed_sha256": "D83333DAFE19FB96635DF49BC28BF80A1CAEAACAA60332CD0B7FC13571C409E5",
+      "package_sha256": "3AE0AACBF448F4262A84B053CED1F5749FD87C902886942F6250433C01CA5B6E"
+    },
+    {
+      "name": "instantly-operator",
+      "action": "exact",
+      "installed_sha256": "4010337A55089D942CC7D6186C6D4C4AFC6B5EAE149B0CE2F4BFAD03D007C0CC",
+      "package_sha256": "FA23F5B65074F3E1A518353A24D61A4A2C35B3C8DA85CF8B830B1C27B9E213D8"
+    },
+    {
+      "name": "krish-build",
+      "action": "exact",
+      "installed_sha256": "1061D2A18BC992E2009377AEE74334433236492F576614A3FFF0D1692D316A78",
+      "package_sha256": "5EF81436C885EF3C6E801E638801DB7FC432AA0221479E77045D30092161A2F4"
+    },
+    {
+      "name": "krish-content-marketer",
+      "action": "exact",
+      "installed_sha256": "CE5821C98CA846BB38A623DBC58508C1D2DCED8F872E6966212227205C08DF73",
+      "package_sha256": "E47424AA82E6838A46DF27F1400A54B7EC66BD2876422709A38EA20F3EC18831"
+    },
+    {
+      "name": "krish-design",
+      "action": "exact",
+      "installed_sha256": "B1124E0249DC7735C5C343E12CE35023EBE3339E8339C2981FABBC866392087B",
+      "package_sha256": "97C423A6F82E1D3FF34A1796FCEA96160B2CDBF440E906EE63F35E3164327EFD"
+    },
+    {
+      "name": "krish-principles",
+      "action": "exact",
+      "installed_sha256": "4B1436BA3E226A64474D5B4A8FB0FF5715CABF93C5966E161F7359B07726F15D",
+      "package_sha256": "7F427CADD164ED794B82AD74EDC2D6FA2704E3A0FFCD3DD04C028022C4996AB7"
+    },
+    {
+      "name": "krish-voice",
+      "action": "exact",
+      "installed_sha256": "D3E5B01C1160323A8D027B7B41C9AB8644CE8B98980D2024367F56E959F8F570",
+      "package_sha256": "5133C0F1930B0B0078E5FC764AEF904DCFE2AA080742A86C6EF36FA68736390E"
+    },
+    {
+      "name": "locked-revision",
+      "action": "exact",
+      "installed_sha256": "05CC9DBB8AF839A789091857640880A1183F73E8A7187F35FA5EB65242A4E9B9",
+      "package_sha256": "A43AC25606AB9506D4F42752880F26937A30A8E916171DF2A350CBD4C4AFEB40"
+    },
+    {
+      "name": "mindmake",
+      "action": "exact",
+      "installed_sha256": "D4076EE99318A6F2DAE4504399BEB62B7AF0B96F4D5BD9DBD4C9EC260C0F1F73",
+      "package_sha256": "86FB88B1F23145A4A452E3A0AE648691F75C65F7945CF7EB6186317E9E5FC5AA"
+    },
+    {
+      "name": "mindmake-os",
+      "action": "exact",
+      "installed_sha256": "9D178DB64A748E51FBC39916348124DF35A12543B702F2254BB98237C9685BB3",
+      "package_sha256": "B4E9BE6437EF9BC5120477F2EB80816B3A6A674CADD664289DBE3F55A85188D0"
+    },
+    {
+      "name": "n8n-operator",
+      "action": "exact",
+      "installed_sha256": "6CD6E30E6C08B1B97AA995274F602CEE616F31F9EC6C67DDD93DA0B0AFD7301B",
+      "package_sha256": "32E55AFDB2483B8A621090601E30A26438DA123CE8190727F8EA5694F2D80AE5"
+    },
+    {
+      "name": "strategy-brief",
+      "action": "exact",
+      "installed_sha256": "242DB6C978A7D51E66AD4E5D372D5EB212CA5CA8230A760FA0BD99C915AA9BEF",
+      "package_sha256": "08220E17669A6828F91307D8A26D52126213EA9536C6C359946D5B089BD5278D"
+    },
+    {
+      "name": "take-the-brief",
+      "action": "exact",
+      "installed_sha256": "26F365B00FFC27540EF2E539EDB59913F40ACAB020612FA09336055F195D5246",
+      "package_sha256": "76014CC60D69EFB769A0BF3DD2CC2B5E89DB7089322FF9D257BB9F1FAC663179"
+    },
+    {
+      "name": "tools-access",
+      "action": "exact",
+      "installed_sha256": "59CC150F05B4C7CB675158D34C33ED9A81EE7D3B8B03606E063C0955700B8C37",
+      "package_sha256": "8932E2FB809C7129F7B3EA30A66DC5074740EF06D357D084363C559831BEC682"
+    },
+    {
+      "name": "ux-foundations",
+      "action": "exact",
+      "installed_sha256": "4B5655B14BCBD53859E29CE05DEF5E74C5A6BF5266929DFD92AC8233594BA36A",
+      "package_sha256": "17B5E0101FBBC8AABAA55CC228CBD1081C36ED7FB976F63946CF84C7C78D0699"
+    },
+    {
+      "name": "ux-testing-agent",
+      "action": "exact",
+      "installed_sha256": "103834198F62267628253FDB5FFC1856A5312D2C3E37BAE389063078643434B2",
+      "package_sha256": "852CCB736EC935438C37286398A2534DA81A72AF8B134C081780ADE266C633A5"
+    },
+    {
+      "name": "verification-loop",
+      "action": "exact",
+      "installed_sha256": "BC900646408F7B2E4967D674B267770FBF3EF667BC1DA7ED6D44EB13C9F71D91",
+      "package_sha256": "DE3564B79632F94942C7396C425691FDB15E0B222134FE18AB048D1A400603EF"
+    },
+    {
+      "name": "video-engine",
+      "action": "replace-known-baseline",
+      "installed_sha256": "73D352DD7B9D960A7CAB4FF0C99DE40DF8A2721CB3469803EFB58845F631A877",
+      "package_sha256": "9E4B0E5DA7FC9CF72910CF267D72DCF2E8EFAB1589238E1F560DE9227B31069D"
+    }
+  ]
+}
