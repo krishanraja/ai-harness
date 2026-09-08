@@ -53,8 +53,8 @@ function header(repo, meta) {
     '',
     '**Read `NOW.md` first.** It is the current state of this repository in one file: what',
     'it is, who it is for, what changed recently, what is waiting, and what not to trust.',
-    'It is reconciled against the code on every push to `main` and nightly, so it is never',
-    `older than the tree. Chronology lives in \`${history}\`.`,
+    'It is validated on every push to `main` and reconciled against the code nightly, so it',
+    `is never more than a day behind the tree. Chronology lives in \`${history}\`.`,
   ]
   if (own.length) {
     lines.push('', `This repository's own rules and deeper state: ${own.join(', ')}. They outrank the`, 'canon below on anything specific to this repository.')
