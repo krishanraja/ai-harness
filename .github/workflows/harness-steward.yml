@@ -32,6 +32,9 @@ on:
     # 06:40 Brisbane. Late enough that the docs steward's nightly pass over the
     # fleet has already landed, so parity is checked against today's state.
     - cron: "40 20 * * *"
+    # 07:40 Brisbane on Sunday. The weekly proposal, an hour after that night's
+    # observation so it reads a ledger that includes the day just finished.
+    - cron: "40 21 * * 0"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -154,3 +157,124 @@ jobs:
           name: canon-reconciliation
           path: reconcile.md
           retention-days: 30
+
+  # The learning half. Reads what happened; never decides what it means.
+  observe:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: surfaces
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: The fleet credential must exist
+        env:
+          HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
+        run: |
+          if [ "$HAS_TOKEN" != "true" ]; then
+            echo "::error::FLEET_TOKEN is not set. An observer that records nothing looks exactly like a quiet night, so this fails rather than passing."
+            exit 1
+          fi
+
+      # The audit and the reconciler write findings the observer folds into the
+      # same ledger, so the weekly proposer reads one stream and not four.
+      - name: Collect this run's findings
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: |
+          set -euo pipefail
+          node scripts/audit-harness.mjs --out audit.md > /dev/null
+          node scripts/reconcile.mjs --dry-run --out reconcile.md > /dev/null
+
+      - name: Observe
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: node scripts/observe.mjs
+
+      # Committed, so the ledger is diffable and cannot be quietly rewritten.
+      # Append-only by construction: every line carries a stable id and the
+      # script never rewrites an existing one.
+      - name: Commit the ledger
+        run: |
+          set -euo pipefail
+          rm -f audit.md reconcile.md
+          if git diff --quiet -- state/; then
+            echo "Nothing new observed. Committing nothing is the correct outcome."
+            exit 0
+          fi
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add state/observations state/heartbeats.json
+          git commit \
+            -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
+            -m "Appended by scripts/observe.mjs. Evidence only; nothing here is a decision."
+          git push origin HEAD:main
+
+  # Sundays: what the evidence has earned, and nothing more.
+  propose:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
+    needs: observe
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Deterministic in. The brief says what crossed a threshold and quotes the
+      # evidence; it never says what the answer is.
+      - name: Build the brief
+        run: node scripts/propose.mjs --out brief.md
+
+      - name: Put the brief in the run summary
+        run: cat brief.md >> "$GITHUB_STEP_SUMMARY"
+
+      # A week with nothing earned opens nothing, which is what makes an open
+      # proposal mean something when there is one.
+      - name: Decide whether anything was earned
+        id: earned
+        run: |
+          if grep -q '^## Nothing was earned this week' brief.md; then
+            echo "any=false" >> "$GITHUB_OUTPUT"
+            echo "Nothing earned. Opening nothing."
+          else
+            echo "any=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Model in the middle.
+      - name: Write the proposals
+        if: steps.earned.outputs.any == 'true'
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            You are the harness proposer for krishanraja/ai-harness.
+            Read brief.md in the working directory. It is deterministic output: which clusters of observed evidence crossed a threshold, quoted with their sources. It does not tell you what to do, and nothing in this prompt overrides the repository's own contracts.
+            Read contract/active-skill-quality-standard.md (especially Gate 10), contract/skill-routing-contract.md, and skills/ctrl-capture/SKILL.md before writing anything.
+            For each block in the brief, decide the cheapest sufficient layer that should change, using the six classes the brief lists. "Nothing changes" is a valid and often correct answer, especially for blocks marked backfill; say so and say why rather than manufacturing a change.
+            Write your proposals to docs/proposals/YYYY-MM-DD.md (today's date), one section per block, each in ctrl-capture's stage 9 shape: EVIDENCE, ALTERNATIVE EXPLANATIONS, IF WRONG, VALIDATION, PRIOR KNOWN-GOOD + ROLLBACK.
+            Then open ONE pull request from a branch named harness/proposals-YYYY-MM-DD containing only that file.
+            Never edit a skill, the registry, a contract, or an eval case in this run. You propose; a named human accepts. Never move a reviewed date. Never write an em dash. Never print a secret.
+            Nobody is watching this session. Do not ask questions. If you cannot write a defensible proposal for a block, say that in the file and move on.
+          claude_args: |
+            --max-turns 40
+            --allowedTools "Bash(git:*),Bash(node:*),Bash(cat:*),Bash(ls:*),Bash(date:*),Bash(gh:*),Read,Write,Edit,Glob,Grep"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: weekly-brief
+          path: brief.md
+          retention-days: 90
