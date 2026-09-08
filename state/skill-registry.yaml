@@ -27,30 +27,48 @@ deployed_release:
   status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
 
 latest_approved_release:
+  release_id: v2026.09.08.2
+  tag: harness-v2026.09.08.2
+  source_commit: a27170f03ec683b8c3e4abef0adf6f6cba7e37e0
+  immutable: true
+  skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+  artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
+  approved_at: 2026-09-08
+  approved_by: Krish Raja
+  approval_basis: >-
+    Standing instruction of 2026-09-08 to complete the outstanding work, applied
+    to a change he had already ruled on. Recorded as the basis rather than left
+    implied, because an approval line that cannot say what it rests on is not a
+    record.
+  approval_note: >-
+    One skill changes and it restores a behaviour the 2026-09-08 ruling always
+    intended. video-engine set allow_implicit_invocation: false, which does not
+    narrow which message starts the engine, it stops any message starting it,
+    and on Codex it also removes the skill from the discoverable catalog. SURFACE
+    proved it: the exact phrase started nothing, twice, while both negative
+    canaries passed for the wrong reason. Narrowness stays in the description,
+    which names the exact match and every excluded form. Everything else in this
+    release is tooling, documentation and recorded evidence.
+  supersedes_reason: >-
+    v2026.09.08.1 is byte-verified on four surfaces and carries a launcher that
+    cannot launch on Codex. It stays the rollback target and must not be the
+    install target.
+
+
+superseded_approved_release:
   release_id: v2026.09.08.1
   tag: harness-v2026.09.08.1
   source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
   immutable: true
   manifest_sha256: 66188213989BABF75CBC37AD106E8308BA7BED1C32545D9911F0C26BBCE6F200
   checksum_sha256: 145717E97E67D4139C0DA284198F130FCC475482D7EA6129B838180C414425BA
+  skills_tree_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
   approved_at: 2026-09-08
-  approved_by: Krish Raja
-  approval_note: >-
-    Clears both blockers the SURFACE reconciliation of 2026-09-08 raised. The
-    mindmake-os candidate no longer instructs deletion or a direct push and no
-    longer embeds a schedule; the video-engine trigger now matches the Video
-    Studio repository it defers to, with the validator and eighteen regression
-    cases moved with it.
+  note: >-
+    Installed and byte-verified on all four client surfaces, then found to carry
+    a video-engine launcher that cannot launch on Codex. Retained as the rollback
+    target. Its aggregate is the attested vector in scripts/check-aggregate.mjs.
 
-superseded_approved_release:
-  release_id: v2026.08.29.3
-  tag: harness-v2026.08.29.3
-  source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
-  immutable: true
-  manifest_sha256: AD15B2FFF963564B29354E8C6CE3566D83C020C72750A8A80F45E41414AEB693
-  checksum_sha256: 75BE014DA45222C6F8860F0A98E91798258367E4ABC4BD72F96FB3DEE5762A2C
-  approved_at: 2026-08-29
-  note: Retained as the prior known-good release and the rollback target.
 
 surface_deployments:
   codex-surface-07a67cda9f99:
