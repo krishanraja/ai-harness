@@ -190,7 +190,7 @@ function sheet() {
   }, null, 2))
   p('```')
   p()
-  p('Then `node scripts/canaries.mjs --record <that file>`. It refuses a report whose negatives are not backed by a positive pass.')
+  p('Then `node scripts/canaries.mjs --record <that file>`. A malformed report is refused and stored nowhere. A FAILING report is recorded, marked, and exits non-zero: a canary failure is the most valuable thing this produces and is never the thing that gets discarded.')
   return out.join('\n') + '\n'
 }
 
