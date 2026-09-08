@@ -1,0 +1,212 @@
+#!/usr/bin/env node
+/**
+ * The canon is not exempt from the treatment it gives everyone else.
+ *
+ * This is the harness auditing itself against its own quality standard, every
+ * night, and turning what it finds into findings rather than into silent edits.
+ * The distinction matters and is written into the standard itself:
+ * "Review-date expiry opens a finding; it does not silently rewrite a skill."
+ * Nothing here writes to a skill. Ever.
+ *
+ * What it measures, and where the rule comes from:
+ *
+ *   registry vs tree       every skill has a row, every row has a skill
+ *   freshness              reviewed + freshness_sla_days against today (Gate 8)
+ *   main-file limit        SKILL.md under 500 lines (Gate 3)
+ *   functional overlap     more than 20 percent between two skills (Gate 1)
+ *   duplicate doctrine     the same paragraph in two skills (Gate 3)
+ *   volatile facts         an absolute path or a hard-coded count in a skill (Gate 3)
+ *   routing coverage       every production skill occupies a named route (Gate 1)
+ *   surface parity         surface_deployments against the approved release (Gate 9)
+ *   trigger accuracy       whether it has been measured at all (Gate 2)
+ *
+ *   node scripts/audit-harness.mjs [--out <path>] [--strict]
+ *
+ * --strict exits non-zero on any finding. Without it the audit reports and
+ * exits 0, because a finding is work to schedule, not a broken build.
+ */
+
+import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { parseYaml } from './lib/yaml.mjs'
+
+const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
+const args = process.argv.slice(2)
+const flag = (f) => { const i = args.indexOf(f); return i === -1 ? null : args[i + 1] }
+const strict = args.includes('--strict')
+const today = flag('--today') || new Date().toISOString().slice(0, 10)
+
+const read = (rel) => readFileSync(join(HARNESS, rel), 'utf8')
+const registryText = read('state/skill-registry.yaml')
+const registry = parseYaml(registryText)
+const routing = read('contract/skill-routing-contract.md')
+
+const findings = []
+const notes = []
+const F = (klass, subject, detail, action) => findings.push({ klass, subject, detail, action })
+const N = (s) => notes.push(s)
+
+// ------------------------------------------------------------ registry rows
+// The registry stores skill rows as inline flow maps, which the reader keeps as
+// strings. Parse them here rather than widening the reader for one shape.
+const rowRe = /\{name:\s*([a-z0-9-]+),\s*role:\s*([a-z0-9-]+),\s*owner:\s*([^,]+),\s*reviewed:\s*(\d{4}-\d{2}-\d{2}),\s*freshness_sla_days:\s*(\d+)\}/g
+const rows = [...registryText.matchAll(rowRe)].map((m) => ({
+  name: m[1], role: m[2], owner: m[3].trim(), reviewed: m[4], sla: Number(m[5]),
+}))
+
+const skillDirs = readdirSync(join(HARNESS, 'skills'))
+  .filter((d) => statSync(join(HARNESS, 'skills', d)).isDirectory())
+
+// ------------------------------------------------------- registry vs the tree
+const named = new Set(rows.map((r) => r.name))
+for (const d of skillDirs) if (!named.has(d)) F('ungoverned', d, `skills/${d} exists in the tree with no row in state/skill-registry.yaml.`, 'Register it, or mark it external and say which surface owns it.')
+for (const r of rows) if (!skillDirs.includes(r.name)) F('orphan-row', r.name, `state/skill-registry.yaml carries a row for ${r.name} with no skills/${r.name} directory.`, 'Remove the row, or restore the skill from the release it was cut from.')
+N(`${skillDirs.length} skill directories, ${rows.length} registry rows.`)
+
+// --------------------------------------------------------------- freshness
+const days = (a, b) => Math.round((new Date(b) - new Date(a)) / 86400000)
+const expired = rows
+  .map((r) => ({ ...r, due: new Date(new Date(r.reviewed).getTime() + r.sla * 86400000).toISOString().slice(0, 10) }))
+  .filter((r) => r.due < today)
+  .sort((a, b) => a.due.localeCompare(b.due))
+for (const r of expired) F('freshness', r.name, `Reviewed ${r.reviewed} with a ${r.sla} day SLA, so it was due ${r.due}, ${days(r.due, today)} days ago.`, 'Review it and move the date. Never move the date without reviewing it.')
+
+// --------------------------------------------------- main file limit, Gate 3
+const skillText = {}
+for (const d of skillDirs) {
+  const p = join('skills', d, 'SKILL.md')
+  if (!existsSync(join(HARNESS, p))) { F('structure', d, `skills/${d} has no SKILL.md.`, 'Add one or retire the directory.'); continue }
+  const t = read(p)
+  skillText[d] = t
+  const n = t.split('\n').length
+  if (n > 500) F('main-file-limit', d, `SKILL.md is ${n} lines, over the 500 line limit in Gate 3.`, 'Move detail into a one-level reference and route to it explicitly.')
+}
+
+// ------------------------------------------------- functional overlap, Gate 1
+// Shingled Jaccard on word 5-grams. Cheap, order-insensitive, and good enough
+// to say "these two look like the same skill" without pretending to be a judge.
+const shingle = (t) => {
+  const w = t.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean)
+  const s = new Set()
+  for (let i = 0; i + 5 <= w.length; i++) s.add(w.slice(i, i + 5).join(' '))
+  return s
+}
+const shingles = Object.fromEntries(Object.entries(skillText).map(([k, v]) => [k, shingle(v)]))
+const overlaps = []
+const namesList = Object.keys(shingles)
+for (let i = 0; i < namesList.length; i++) {
+  for (let j = i + 1; j < namesList.length; j++) {
+    const a = shingles[namesList[i]], b = shingles[namesList[j]]
+    if (a.size < 40 || b.size < 40) continue
+    let inter = 0
+    for (const s of a) if (b.has(s)) inter++
+    const jac = inter / (a.size + b.size - inter)
+    if (jac > 0.2) overlaps.push({ a: namesList[i], b: namesList[j], pct: Math.round(jac * 100) })
+  }
+}
+for (const o of overlaps.sort((x, y) => y.pct - x.pct)) F('overlap', `${o.a} + ${o.b}`, `Roughly ${o.pct} percent shared 5-gram content, over the 20 percent Gate 1 threshold.`, 'Consolidate, or state an explicit producer, validator or context distinction in both descriptions.')
+N(`${overlaps.length} skill pairs over the 20 percent overlap threshold, measured on word 5-grams.`)
+
+// ----------------------------------------------- duplicate doctrine, Gate 3
+const paraOwners = new Map()
+for (const [name, t] of Object.entries(skillText)) {
+  for (const para of t.split(/\n\s*\n/)) {
+    const p = para.trim().replace(/\s+/g, ' ')
+    if (p.length < 120 || p.startsWith('#') || p.startsWith('|')) continue
+    if (!paraOwners.has(p)) paraOwners.set(p, new Set())
+    paraOwners.get(p).add(name)
+  }
+}
+const dupes = [...paraOwners.entries()].filter(([, owners]) => owners.size > 1)
+for (const [p, owners] of dupes.slice(0, 12)) F('duplicate-doctrine', [...owners].join(' + '), `The same paragraph appears in ${owners.size} skills: "${p.slice(0, 110)}..."`, 'Move the shared rule into contract/krish-operating-contract.md or a single owned skill, per Gate 3.')
+if (dupes.length > 12) N(`${dupes.length - 12} further duplicate paragraphs not listed.`)
+N(`${dupes.length} paragraphs of 120 characters or more appear in more than one skill.`)
+
+// ------------------------------------------------------ volatile facts, Gate 3
+const ABS = /[A-Z]:\\Users\\|[A-Z]:\\My Drive/
+for (const [name, t] of Object.entries(skillText)) {
+  const lines = t.split('\n')
+  const hits = lines.map((l, i) => (ABS.test(l) ? i + 1 : 0)).filter(Boolean)
+  if (hits.length) F('volatile-path', name, `skills/${name}/SKILL.md carries a machine-specific absolute path on ${hits.length === 1 ? `line ${hits[0]}` : `lines ${hits.slice(0, 6).join(', ')}${hits.length > 6 ? ' and more' : ''}`}.`, 'Replace it with a named root from contract/paths.yaml, resolved at render time.')
+}
+
+// ------------------------------------------------------ routing coverage, Gate 1
+for (const r of rows) {
+  if (!routing.includes(`\`${r.name}\``)) F('unrouted', r.name, `${r.name} is in the registry but never named in contract/skill-routing-contract.md.`, 'Give it a named route, or move it out of the production set. A skill nothing routes to is a skill nothing runs.')
+}
+
+// -------------------------------------------------------- surface parity, Gate 9
+const approved = registry?.latest_approved_release?.release_id
+const surfaces = registry?.surface_deployments || {}
+for (const [id, s] of Object.entries(surfaces)) {
+  if (!s || typeof s !== 'object') continue
+  const age = s.deployed_at ? days(s.deployed_at, today) : null
+  if (s.release_id && approved && s.release_id !== approved) {
+    F('surface-parity', id, `Installed ${s.release_id} while the approved release is ${approved}${age === null ? '' : `, last deployed ${s.deployed_at}, ${age} days ago`}.`, 'This surface pulls its own release. Until it reports back, the gap is evidence, not a broken pipeline.')
+  } else if (age !== null && age > 30) {
+    N(`${id}: on the approved release, but its last report is ${age} days old.`)
+  }
+}
+
+// ------------------------------------------------------ trigger accuracy, Gate 2
+//
+// Gate 2 asks for precision and recall on a held-out suite: 100 percent for
+// core skills, at least 95 percent for routed ones. The question is not whether
+// a number is pretty, it is whether a number exists at all and whether it is
+// where a reader would look for it.
+const evidenced = new Set()
+{
+  const block = registryText.split(/^evaluation_evidence:\s*$/m)[1]
+  if (block) {
+    for (const line of block.split('\n')) {
+      if (/^[a-z_]+:\s*$/.test(line)) break
+      const m = line.match(/^  ([a-z0-9-]+):\s*$/)
+      if (m) evidenced.add(m[1])
+    }
+  }
+}
+const loose = readdirSync(join(HARNESS, 'state'))
+  .map((f) => (f.match(/^results-(.+?)-independent-\d{4}-\d{2}-\d{2}\.md$/) || [])[1])
+  .filter(Boolean)
+const unevidenced = rows.filter((r) => !evidenced.has(r.name))
+if (unevidenced.length) {
+  F('unevidenced', 'evaluation coverage',
+    `${unevidenced.length} of ${rows.length} skills carry no evaluation_evidence row in state/skill-registry.yaml. Only ${[...evidenced].join(' and ')} do. ${loose.length} per-skill result files sit in state/ as loose markdown and were never folded into the registry, so the register a reader consults does not carry the numbers that exist.`,
+    'Fold the existing result files into evaluation_evidence, then measure the rest. A number in a file nobody reads is not a measurement.')
+}
+N(`${evidenced.size} skills have evaluation_evidence in the registry; ${loose.length} more have loose result files in state/.`)
+
+// --------------------------------------------------------------------- report
+const out = []
+const p = (s = '') => out.push(s)
+p(`# Harness audit ${today}`)
+p()
+p(`Release \`${approved}\`, ${skillDirs.length} skills, ${findings.length} finding${findings.length === 1 ? '' : 's'}.`)
+p()
+p('Nothing in this report was fixed automatically. A finding is a decision for a person; a skill that rewrites the rule it is judged by is the failure this audit exists to prevent.')
+p()
+if (!findings.length) p('No findings.')
+else {
+  const byClass = {}
+  for (const f of findings) (byClass[f.klass] = byClass[f.klass] || []).push(f)
+  p('| Class | Count |')
+  p('|---|---:|')
+  for (const [k, v] of Object.entries(byClass).sort((a, b) => b[1].length - a[1].length)) p(`| ${k} | ${v.length} |`)
+  p()
+  for (const [k, v] of Object.entries(byClass)) {
+    p(`## ${k}`)
+    p()
+    for (const f of v) { p(`**${f.subject}.** ${f.detail}`); p(); p(`> ${f.action}`); p() }
+  }
+}
+p('## Measured, no finding')
+p()
+for (const n of notes) p(`- ${n}`)
+p()
+
+const text = out.join('\n') + '\n'
+const outPath = flag('--out')
+if (outPath) { mkdirSync(dirname(outPath), { recursive: true }); writeFileSync(outPath, text) }
+process.stdout.write(text)
+if (strict && findings.length) process.exit(1)

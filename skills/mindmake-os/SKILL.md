@@ -34,10 +34,10 @@ architecture doc is stale; fix the doc rather than working around it.
 There is exactly one surface (ruling, Krish, 2026-09-07). Read the section you need,
 not the whole file.
 
-1. A checkout of `krishanraja/control-center`, file `docs/MINDMAKE_OS_ARCHITECTURE.md`.
-   On Krish's Windows machine that is `C:\Users\krish\dev\mindmaker-os\control-center\docs\MINDMAKE_OS_ARCHITECTURE.md`;
-   on the VPS it is `/root/Projects/control-center/docs/MINDMAKE_OS_ARCHITECTURE.md` after
-   `git pull --ff-only`. A checkout is not a copy: it follows `main`.
+1. A checkout of `krishanraja/control-center`, file `docs/MINDMAKE_OS_ARCHITECTURE.md`,
+   under the `ventures_root` for the surface you are on (`contract/paths.yaml` resolves
+   the name; do not carry another machine's path in your head). Run `git pull --ff-only`
+   first. A checkout is not a copy: it follows `main`.
 2. No checkout: fetch the raw file.
    `https://raw.githubusercontent.com/krishanraja/control-center/main/docs/MINDMAKE_OS_ARCHITECTURE.md`
 

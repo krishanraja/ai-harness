@@ -26,9 +26,9 @@ the checks next to it, and report what was verified separately from what stays i
 sources disagree, stop destructive work, report the conflict, and open a reconciliation
 finding rather than picking the convenient one.
 
-**Secrets.** Never write a credential into source, documentation, logs, reports,
-screenshots or chat. Refer to secrets by symbolic name and retrieve them at execution
-time. A secret found in the tree is already exposed: report its location without the
+**Secrets.** Never write a credential into source, documentation, commit messages,
+issue or pull request bodies, logs, reports, screenshots or chat. Refer to secrets by
+symbolic name and retrieve them at execution time. A secret found in the tree is already exposed: report its location without the
 value, rotate it, scrub the copies, and add the gate that stops the next one.
 
 **Corrections are the training data.** When Krish overrules a decision, record it in the

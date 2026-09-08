@@ -18,7 +18,7 @@ Use this as a thin launcher. GitHub `krishanraja/mindmake-video-studio` `main` i
 
 1. Obtain the latest `main` commit from GitHub into a disposable checkout under the current task's `work/` directory. Never use an unrelated or stale local clone as authority.
 2. Read the checkout's `AGENTS.md` and `.agents/skills/mindmake-video/SKILL.md` completely before operating the engine.
-3. Use `G:\My Drive\Ventures\Active\Mindmaker\04_Content\Video Engine` as the media inbox/base path. Media stays outside GitHub.
+3. Use `drive_root/Ventures/Active/Mindmaker/04_Content/Video Engine` as the media inbox and base path, with `drive_root` resolved for your surface from `contract/paths.yaml`. Where that root is null the engine has no media surface: say so and stop rather than substituting a local directory. Media stays outside GitHub.
 4. Run `studio doctor` and the job-list form of `studio status`. Report blockers plainly; never bypass a hard gate.
 5. If the user only said `Video engine`, return a concise operating brief with current system health and the most useful next choices: weekly radar, create a video, resume/review a job, or import feedback/analytics. Recommend the strongest next action rather than asking a context-free question.
 

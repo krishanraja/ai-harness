@@ -7,6 +7,20 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-09-08
 
+- The reconciler and the harness audit added (`scripts/reconcile.mjs`,
+  `scripts/audit-harness.mjs`), both wired into `harness-steward.yml` nightly.
+  The reconciler writes only through pull requests and never overwrites an edit
+  made inside the markers; the audit never writes at all.
+- Proposal issue #3 opened and resolved the same day: a block edit in
+  `contentarchives` widening the secrets rule to cover commit messages and issue
+  and pull request bodies. Resolved as option 1, the edit belonging in the canon
+  rather than in one copy of it, so `contract/templates/canon-block.md` carries
+  it and all ten surfaces re-render.
+- `NOW.md` corrected. It had claimed trigger accuracy read `unmeasured` for all
+  29 skills, inherited from a plan document rather than read from the registry.
+  The registry carries `evaluation_evidence` for `n8n-operator` and
+  `instantly-operator` only, while 19 per-skill result files from 2026-08-05 sit
+  in `state/` and were never folded in.
 - `NOW.md` and this log created. ai-harness joined the docs steward fleet as its
   ninth repository (`control-center` `docs/steward/fleet.json`), so the canon is
   maintained the same way it asks every other repository to be maintained. The
