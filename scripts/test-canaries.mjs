@@ -59,6 +59,35 @@ try {
   check(failRun.status === 1, `failing report exited ${failRun.status}, expected 1`)
   check(failRun.stderr.includes(ordinaryNegative.id), 'failing report did not name the incorrect canary')
 
+  // The case SURFACE actually hit on 2026-09-08, and the one the suite did not
+  // cover, which is why a semantic change to it passed the tests unchanged.
+  //
+  // A negative case asserts ONE thing: the target must not fire. It does not
+  // assert that nothing fires. `VIDEO ENGINE!` correctly did not load
+  // video-engine and did load other doctrine skills, which is the always-on set
+  // behaving as designed, and the checker called that a containment failure.
+  const otherSkillFired = structuredClone(passing)
+  const on = otherSkillFired.results.find((result) => result.id === ordinaryNegative.id)
+  on.outcome = 'wrong-skill'
+  on.note = 'krish-principles loaded, which is the always-on doctrine set doing its job.'
+  const otherPath = join(scratch, 'other-skill-fired.json')
+  writeFileSync(otherPath, JSON.stringify(otherSkillFired, null, 2) + '\n')
+  const otherRun = run(['--verify', otherPath])
+  check(otherRun.status === 0, `a negative case where a DIFFERENT skill fired should pass, exited ${otherRun.status}: ${otherRun.stderr}`)
+
+  // The other half of the same rule: naming the forbidden skill itself is still
+  // a failure, however the outcome is labelled. Without this, "wrong-skill" is
+  // an escape hatch that launders a containment breach into a pass.
+  const namedTheTarget = structuredClone(passing)
+  const nt = namedTheTarget.results.find((result) => result.id === ordinaryNegative.id)
+  nt.outcome = 'wrong-skill'
+  nt.note = `${ordinaryNegative.skill} loaded.`
+  const namedPath = join(scratch, 'named-the-target.json')
+  writeFileSync(namedPath, JSON.stringify(namedTheTarget, null, 2) + '\n')
+  const namedRun = run(['--verify', namedPath])
+  check(namedRun.status === 1, `wrong-skill naming the forbidden skill should fail, exited ${namedRun.status}`)
+  check(namedRun.stderr.includes(ordinaryNegative.id), 'the named-the-target failure did not name the canary')
+
   const incomplete = structuredClone(passing)
   const removed = incomplete.results.pop()
   const incompletePath = join(scratch, 'incomplete.json')

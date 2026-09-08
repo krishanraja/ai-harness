@@ -321,9 +321,29 @@ for (const r of canaryReports) {
   }
 }
 
-// An unreachable skill is the sharpest finding this instrument can produce: the
-// bytes are right and the client cannot see it. It is never a trigger declining.
+// For a manual-only skill, `unreachable` on an IMPLICIT route is the contract
+// holding, not a defect. design-intelligence-search sets
+// allow_implicit_invocation: false and says "Manual-only ... Never trigger
+// directly", so a client that cannot route to it is doing what it was told.
+//
+// The canary sheet now sends such a skill its EXPLICIT invocation as the
+// load-bearing positive and inverts the implicit case into a containment test,
+// so this exclusion is narrow: it suppresses the finding only where being
+// unreachable IS the specification. If the explicit positive also comes back
+// unreachable, provenOn stays empty and the uncanaried finding below says so.
+const manualOnlySkills = new Set(skillDirs.filter((d) => {
+  const adapter = join(HARNESS, 'skills', d, 'agents/openai.yaml')
+  return existsSync(adapter) && /^\s*allow_implicit_invocation:\s*false\s*$/m.test(readFileSync(adapter, 'utf8'))
+}))
+
+// An unreachable skill is otherwise the sharpest finding this instrument can
+// produce: the bytes are right and the client cannot see it. It is never a
+// trigger declining.
 for (const u of unreachableOn.values()) {
+  if (manualOnlySkills.has(u.skill)) {
+    N(`${u.skill} reported unreachable by ${u.canaries} implicit ${u.canaries === 1 ? 'canary' : 'canaries'} on ${u.surface}. That is its contract: it is manual-only and the client is correctly unable to route to it. Its explicit invocation is what proves it works.`)
+    continue
+  }
   F('unreachable-on-surface', `${u.skill} on ${u.surface}`, `${u.canaries} ${u.canaries === 1 ? 'canary' : 'canaries'} reported ${u.skill} unreachable on ${u.surface} at ${u.release}: the client could not see the skill at all.`, 'This is not a trigger declining. Check the adapter\'s allow_implicit_invocation and the installed catalog. Byte parity does not imply reachability, and only a positive canary can tell them apart.')
 }
 

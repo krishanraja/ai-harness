@@ -42,11 +42,11 @@ latest_approved_release:
   published: true
   published_at: 2026-09-08T15:45:40Z
   assets: 60
-  # Deliberately absent until a machine reports it. The installer computes the
-  # manifest hash while verifying the download, so the value belongs in the
-  # first deployment record rather than being copied from here. A hash this file
-  # asserts and nothing checked is not evidence.
-  manifest_sha256: pending-first-install
+  # Reported by SURFACE on 2026-09-08 while verifying the download, which is the
+  # only way this value becomes evidence rather than an assertion copied off a
+  # release page. 60 assets downloaded, 59 checksums verified, zero mismatches.
+  manifest_sha256: B6780D886B5B1A0688A1D7DDA29B25ED6F50B718156AEF2006632BA940F1952E
+  manifest_sha256_source: codex-surface-07a67cda9f99 first install, 2026-09-08
   immutable: true
   skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1

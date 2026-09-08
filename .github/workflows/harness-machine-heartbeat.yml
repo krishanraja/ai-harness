@@ -31,6 +31,16 @@ jobs:
         run: node scripts/record-machine-heartbeat.mjs --clock "$CLOCK" --status "$STATUS" --release "$RELEASE"
 
       - name: Commit the clock
+        # CLOCK comes through the environment rather than being interpolated
+        # into the script. The previous line put the raw client_payload straight
+        # into a git commit -m, which is a shell injection shape. It was not
+        # exploitable, because the validate step above allowlists the clock name
+        # and a failing step stops the job before this one runs, but that safety
+        # was an accident of step ordering rather than a property of this step.
+        # A later edit adding continue-on-error, or reordering, would have made
+        # it live with nothing to catch it.
+        env:
+          CLOCK: ${{ github.event.client_payload.clock }}
         run: |
           set -euo pipefail
           git config user.name "Harness machine clock"
@@ -40,7 +50,7 @@ jobs:
             echo "The clock did not change."
             exit 0
           fi
-          git commit -m "chore(heartbeat): record ${{ github.event.client_payload.clock }}"
+          git commit -m "chore(heartbeat): record ${CLOCK}"
           for attempt in 1 2 3; do
             if git pull --rebase origin main && git push origin HEAD:main; then
               exit 0

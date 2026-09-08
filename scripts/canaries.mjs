@@ -114,6 +114,32 @@ function rotation(pool, n) {
  * At most four, and a positive is mandatory: a set with no positive cannot
  * produce evidence, only the appearance of it.
  */
+/**
+ * Is this skill invoked only by name, never by the client routing to it?
+ *
+ * It matters because an implicit positive canary for such a skill CANNOT pass,
+ * and a canary that cannot pass is a check that reports failure forever while
+ * measuring nothing. SURFACE hit exactly this on 2026-09-08: all four
+ * design-intelligence-search canaries came back `unreachable` because the skill
+ * is absent from the Codex catalog BY DESIGN, its adapter setting
+ * allow_implicit_invocation: false and its description saying "Manual-only ...
+ * Never trigger directly from a user's request".
+ *
+ * That is the skill working. Reporting it as a failure is the same defect as
+ * the video-engine flag: a test whose passing condition the design forbids.
+ */
+function manualOnly(skill) {
+  const adapter = join(HARNESS, 'skills', skill, 'agents/openai.yaml')
+  if (!existsSync(adapter)) return null
+  const text = readFileSync(adapter, 'utf8')
+  if (!/^\s*allow_implicit_invocation:\s*false\s*$/m.test(text)) return null
+  // The adapter's own default_prompt IS the explicit invocation. Using it means
+  // the canary sends what the client would send, rather than a phrase invented
+  // here that nothing else agrees with.
+  const m = text.match(/^\s*default_prompt:\s*"([^"]+)"\s*$/m)
+  return { prompt: m ? m[1] : null }
+}
+
 function pick(skill) {
   const all = casesFor(skill)
   const shortest = (a, b) => String(a.prompt || '').length - String(b.prompt || '').length
@@ -122,12 +148,44 @@ function pick(skill) {
   const negatives = all.filter((c) => c.category === 'negative')
 
   const chosen = []
-  // The canonical form first: the shortest positive is almost always the plain
-  // way a person would actually ask.
-  if (positives[0]) chosen.push({ ...positives[0], role: 'positive', load_bearing: true })
-  // One more positive from the other end, to catch a trigger that only works
-  // for the exact canonical phrasing.
-  if (positives.length > 1) chosen.push({ ...positives[positives.length - 1], role: 'positive', load_bearing: true })
+  const manual = manualOnly(skill)
+  if (manual) {
+    // One positive, and it is the EXPLICIT invocation. The trigger cases were
+    // written for implicit routing and cannot fire this skill on any client
+    // that honours its adapter, so selecting them would guarantee a failure
+    // that says nothing.
+    if (manual.prompt) {
+      chosen.push({
+        id: `${skill}-explicit-001`,
+        prompt: manual.prompt,
+        should_trigger: true,
+        category: 'explicit',
+        role: 'positive-explicit',
+        load_bearing: true,
+      })
+    }
+    // And one implicit positive, INVERTED: this skill must NOT be reachable by
+    // routing. `unreachable` or `not-fired` is the pass. That is the actual
+    // containment property, and it was never being tested before, because the
+    // same case was being asserted the other way round.
+    if (positives[0]) {
+      chosen.push({
+        ...positives[0],
+        id: `${positives[0].id}`,
+        should_trigger: false,
+        role: 'containment',
+        load_bearing: false,
+        containment_note: 'Manual-only: routing to this skill implicitly is the failure, not the pass.',
+      })
+    }
+  } else {
+    // The canonical form first: the shortest positive is almost always the plain
+    // way a person would actually ask.
+    if (positives[0]) chosen.push({ ...positives[0], role: 'positive', load_bearing: true })
+    // One more positive from the other end, to catch a trigger that only works
+    // for the exact canonical phrasing.
+    if (positives.length > 1) chosen.push({ ...positives[positives.length - 1], role: 'positive', load_bearing: true })
+  }
   // The sharpest negative is a collision: another skill could plausibly claim it.
   const c = collisions.find((x) => x.expected_route || x.neighbor) || collisions[0]
   if (c) chosen.push({ ...c, role: 'collision', load_bearing: false })
@@ -190,8 +248,12 @@ function sheet() {
     for (const c of chosen) {
       n++
       const expect = c.should_trigger === true
-        ? `\`fired\`, ${skill}`
-        : c.expected_route ? `not ${skill}; \`wrong-skill\` naming \`${c.expected_route}\` is the correct outcome here` : '`not-fired`'
+        ? (c.role === 'positive-explicit' ? `\`fired\`, ${skill}. This is the EXPLICIT invocation, the only way a manual-only skill can be reached.` : `\`fired\`, ${skill}`)
+        : c.role === 'containment'
+          ? `\`unreachable\` or \`not-fired\`. ${skill} is manual-only, so the client routing to it here would be the failure.`
+          : c.expected_route
+            ? `not ${skill}; \`wrong-skill\` naming \`${c.expected_route}\` is the correct outcome here`
+            : `not ${skill}. \`not-fired\` or \`wrong-skill\` naming any OTHER skill both pass; only ${skill} firing is a failure.`
       p(`| ${c.id} | \`${String(c.prompt).replace(/\|/g, '\\|').replace(/\n/g, ' ⏎ ')}\` | ${expect} | ${c.load_bearing ? '**yes**' : 'no'} |`)
     }
     p()
@@ -263,8 +325,28 @@ function verify(reportPath) {
       if (r.outcome !== 'wrong-skill' || !allowed.some((skill) => named.includes(skill.toLowerCase()))) {
         outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${allowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
       }
-    } else if (c.should_trigger !== true && r.outcome !== 'not-fired') {
-      outcomeFailures.push(`${r.id}: expected not-fired, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
+    } else if (c.should_trigger !== true) {
+      // A negative case asserts ONE thing: the target skill must not fire. It
+      // does not assert that nothing fires.
+      //
+      // The first version demanded `not-fired` here, and SURFACE reported four
+      // "containment failures" against it on 2026-09-08: `VIDEO ENGINE!`
+      // correctly did not load video-engine and did load other doctrine skills,
+      // which is the always-on set behaving exactly as designed. The case was
+      // passing and the checker called it a failure, which is the same shape as
+      // every other defect corrected that day: a check that cannot be satisfied
+      // by correct behaviour.
+      //
+      // So `wrong-skill` is a PASS, provided the skill it names is not the
+      // target. `unreachable` is neither: the target did not fire, but for a
+      // reason that says nothing about the trigger, and the vacuity rule below
+      // already voids it.
+      const named = String(r.note || '').toLowerCase()
+      if (r.outcome === 'fired') {
+        outcomeFailures.push(`${r.id}: ${c.skill} fired on a message that must not trigger it${r.note ? ` (${r.note})` : ''}.`)
+      } else if (r.outcome === 'wrong-skill' && named.includes(c.skill.toLowerCase())) {
+        outcomeFailures.push(`${r.id}: reported wrong-skill but the note names ${c.skill}, which is the skill this case forbids${r.note ? ` (${r.note})` : ''}.`)
+      }
     }
   }
 
