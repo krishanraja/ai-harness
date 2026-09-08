@@ -3,8 +3,25 @@ interface:
   short_description: "Launch the Mindmake video production engine"
   default_prompt: "Video engine"
 policy:
-  # The trigger is the exact first message and nothing else, matching
-  # krishanraja/mindmake-video-studio main. Implicit invocation would let the
-  # client start the engine from something that is not that message, which is
-  # the collision narrowed out on 2026-09-08.
-  allow_implicit_invocation: false
+  # This read `false` between 2026-09-08 and 2026-09-09, and it was wrong.
+  #
+  # The 2026-09-08 ruling narrowed WHAT matches: the trigger is the exact first
+  # user message `Video engine` and nothing else, matching
+  # krishanraja/mindmake-video-studio main, which this skill names as its only
+  # authority. Setting this flag to false did not narrow the trigger. It deleted
+  # it. On Codex the flag drops the skill from the discoverable catalog, so the
+  # exact phrase could not fire it either, and a launcher that cannot launch
+  # fails the positive half of its own contract.
+  #
+  # SURFACE caught it on 2026-09-09: canary B sent the exact phrase in a fresh
+  # task twice and the engine did not start, while canaries C (`Video engine!`)
+  # and D (the dollar form) passed only because nothing could start at all.
+  #
+  # Upstream is explicit that this is a launcher: "The phrase `Video engine` is
+  # a narrow launcher outside this repository. Do not interpret incidental
+  # references to video editing as permission to start a production workflow."
+  # Narrow, and a launcher. Narrowness is carried by the description, which
+  # states the exact-match rule and names every excluded form. That is the layer
+  # that can tell `Video engine` from `Video engine!`. This flag cannot: it is
+  # not a matcher, it is an on switch.
+  allow_implicit_invocation: true

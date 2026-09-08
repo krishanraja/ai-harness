@@ -145,8 +145,17 @@ foreach ($manifest in $manifests) {
             if ($openAiRaw -match '\$video-engine') {
                 Add-Failure ($relative + ' agents/openai.yaml still names $video-engine, which the trigger contract rejects.')
             }
-            if ($openAiRaw -notmatch '(?m)^\s*allow_implicit_invocation:\s*false\s*$') {
-                Add-Failure ($relative + ' agents/openai.yaml must set allow_implicit_invocation: false; implicit invocation is the trigger collision itself.')
+            # This assertion demanded `false` for one day and was wrong for all
+            # of it. Implicit invocation is not the collision; it is the on
+            # switch. Turning it off does not narrow which message starts the
+            # engine, it stops any message starting it, and on Codex it also
+            # drops the skill from the discoverable catalog. SURFACE proved it
+            # on 2026-09-09: the exact phrase in a fresh task started nothing
+            # twice. Narrowness belongs to the description, which names the
+            # exact match and every excluded form; this flag cannot tell them
+            # apart. So assert the launcher can launch.
+            if ($openAiRaw -notmatch '(?m)^\s*allow_implicit_invocation:\s*true\s*$') {
+                Add-Failure ($relative + ' agents/openai.yaml must set allow_implicit_invocation: true. Its description declares a positive trigger, and false removes the skill from the catalog, so the exact phrase cannot fire it either.')
             }
         }
         elseif ($openAiRaw -notmatch ('(?m)^\s*default_prompt:\s*"[^"\r\n]*\$' + [regex]::Escape($name) + '\b[^"\r\n]*"\s*$')) {

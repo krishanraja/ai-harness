@@ -180,6 +180,42 @@ for (const r of rows) {
   if (!routing.includes(`\`${r.name}\``)) F('unrouted', r.name, `${r.name} is in the registry but never named in contract/skill-routing-contract.md.`, 'Give it a named route, or move it out of the production set. A skill nothing routes to is a skill nothing runs.')
 }
 
+// ------------------------------------------- reachable triggers, Gates 1 and 2
+//
+// A skill's description declares when it should fire. agents/openai.yaml decides
+// whether the client may fire it at all. Those two can disagree, and when they
+// do the description wins on paper and the flag wins in production, so the skill
+// silently does nothing.
+//
+// That is not hypothetical. video-engine declared "launch when the first message
+// equals `Video engine`" while its adapter set allow_implicit_invocation: false,
+// which on Codex removes the skill from the discoverable catalog. The positive
+// half of its own contract was unreachable for a day and every negative test
+// still passed, because a skill that cannot start also cannot start wrongly.
+// SURFACE found it by sending the exact phrase. Nothing in the cloud did.
+//
+// The distinction the check makes is between a description that promises to fire
+// on something the user says, and one that says it is invoked only by another
+// skill or by name. design-intelligence-search is the second kind: "Manual-only
+// ... Never trigger directly from a user's ... request". false is correct there.
+const MANUAL_ONLY = /\bmanual[- ]only\b|\bonly when\b[^.]{0,80}\bexplicitly delegat|\bnever trigger directly\b|\binvoked only by\b/i
+const POSITIVE_TRIGGER = /\b(use|launch|start|invoke|trigger|run)\b[^.]{0,120}\bwhen\b/i
+for (const dir of skillDirs) {
+  const adapterPath = join(HARNESS, 'skills', dir, 'agents/openai.yaml')
+  if (!existsSync(adapterPath)) continue
+  const adapter = readFileSync(adapterPath, 'utf8')
+  if (!/^\s*allow_implicit_invocation:\s*false\s*$/m.test(adapter)) continue
+  const desc = (skillText[dir] || '').match(/description:\s*"([^"]*)"/)?.[1] || ''
+  if (MANUAL_ONLY.test(desc)) continue
+  if (!POSITIVE_TRIGGER.test(desc)) continue
+  F(
+    'unreachable-trigger',
+    dir,
+    `${dir} declares a positive trigger in its description but its agents/openai.yaml sets allow_implicit_invocation: false, which stops the client firing it on anything the user says.`,
+    'Either set the flag true and let the description carry the narrowness, or rewrite the description as manual-only. As it stands the skill cannot fire, and every negative trigger test passes for the wrong reason.',
+  )
+}
+
 // -------------------------------------------------------- surface parity, Gate 9
 const approved = registry?.latest_approved_release?.release_id
 const surfaces = registry?.surface_deployments || {}
