@@ -1,16 +1,17 @@
 {
   "run": "2026-09-08-triggers",
-  "measured_at": "2026-09-08T14:44:53.774Z",
+  "measured_at": "2026-09-08T15:26:34.030Z",
   "model": "claude-haiku-4-5-20251001",
-  "source_commit": "912bf55f8e3814c01c7bb2f0a040fc2ef53e363a",
+  "router_prompt_sha256": "e625e1579659a829",
+  "source_commit": "d8843bcfb49c7a8d746197971b64d44cc7d77570",
   "cases_run": 120,
   "cases_available": 613,
   "aborted": null,
   "usage": {
     "input": 6138,
-    "output": 13751,
-    "cache_read": 1563065,
-    "cache_write": 13135
+    "output": 12172,
+    "cache_read": 1543668,
+    "cache_write": 12972
   },
   "cache_effectiveness": 0.996,
   "by_skill": {
@@ -59,15 +60,15 @@
       "accuracy": 0.625
     },
     "strategy-brief": {
-      "tp": 8,
+      "tp": 9,
       "fp": 0,
       "tn": 10,
-      "fn": 4,
+      "fn": 3,
       "errors": 0,
       "cases": 22,
       "precision": 1,
-      "recall": 0.667,
-      "accuracy": 0.818
+      "recall": 0.75,
+      "accuracy": 0.864
     }
   },
   "failures": [
@@ -87,7 +88,7 @@
       "fired": false,
       "picked": [
         "krish-build",
-        "krish-principles"
+        "tools-access"
       ]
     },
     {
@@ -105,9 +106,8 @@
       "expected": true,
       "fired": false,
       "picked": [
-        "take-the-brief",
-        "krish-principles",
-        "strategy-brief"
+        "strategy-brief",
+        "take-the-brief"
       ]
     },
     {
@@ -118,8 +118,9 @@
       "fired": false,
       "picked": [
         "krish-principles",
+        "strategy-brief",
         "krish-build",
-        "strategy-brief"
+        "verification-loop"
       ]
     },
     {
@@ -181,6 +182,7 @@
       "expected": true,
       "fired": false,
       "picked": [
+        "krish-principles",
         "strategy-brief"
       ]
     },
@@ -192,7 +194,9 @@
       "fired": false,
       "picked": [
         "krish-principles",
-        "strategy-brief"
+        "strategy-brief",
+        "mindmake",
+        "evidence-research"
       ]
     },
     {
@@ -201,7 +205,9 @@
       "category": "adversarial_collision",
       "expected": true,
       "fired": false,
-      "picked": []
+      "picked": [
+        "krish-principles"
+      ]
     },
     {
       "id": "principles-trigger-002",
@@ -209,7 +215,10 @@
       "category": "positive",
       "expected": true,
       "fired": false,
-      "picked": []
+      "picked": [
+        "krish-build",
+        "verification-loop"
+      ]
     },
     {
       "id": "principles-trigger-004",
@@ -228,18 +237,8 @@
       "expected": true,
       "fired": false,
       "picked": [
-        "strategy-brief"
-      ]
-    },
-    {
-      "id": "principles-trigger-006",
-      "target": "krish-principles",
-      "category": "positive",
-      "expected": true,
-      "fired": false,
-      "picked": [
         "strategy-brief",
-        "take-the-brief"
+        "evidence-research"
       ]
     },
     {
@@ -251,8 +250,18 @@
       "picked": [
         "n8n-operator",
         "mindmake-os",
-        "tools-access",
         "verification-loop"
+      ]
+    },
+    {
+      "id": "principles-trigger-009",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "strategy-brief",
+        "take-the-brief"
       ]
     },
     {
@@ -279,7 +288,9 @@
       "category": "adversarial_collision",
       "expected": true,
       "fired": false,
-      "picked": []
+      "picked": [
+        "strategy-brief"
+      ]
     },
     {
       "id": "principles-trigger-028",
@@ -299,6 +310,7 @@
       "expected": true,
       "fired": false,
       "picked": [
+        "strategy-brief",
         "apify"
       ]
     },
@@ -346,26 +358,17 @@
       "category": "positive",
       "expected": true,
       "fired": false,
-      "picked": []
-    },
-    {
-      "id": "strategy-trigger-010",
-      "target": "strategy-brief",
-      "category": "positive",
-      "expected": true,
-      "fired": false,
       "picked": [
-        "take-the-brief",
-        "krish-principles"
+        "harness-maintainer"
       ]
     }
   ],
   "control": {
     "model_a": "claude-haiku-4-5-20251001",
     "model_b": "claude-sonnet-5",
-    "accuracy_a": 0.758,
-    "accuracy_b": 0.608,
-    "recall_a": 0.597,
-    "recall_b": 0.347
+    "accuracy_a": 0.767,
+    "accuracy_b": 0.692,
+    "recall_a": 0.611,
+    "recall_b": 0.486
   }
 }
