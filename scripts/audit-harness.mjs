@@ -217,6 +217,41 @@ for (const dir of skillDirs) {
   )
 }
 
+// ------------------------------------------- description budget, Gates 1 and 2
+//
+// Every trigger contract in this harness lives in description text. Codex
+// reported on 2026-09-08: "Skill descriptions were shortened to fit the skills
+// context budget." A truncated description is a silently rewritten contract, and
+// the exclusions are the part most likely to be cut, because they come last.
+//
+// video-engine is the sharp case. Its description spends most of its length on
+// what must NOT trigger it: terminal punctuation, extra words, quoted mentions,
+// later turns, the dollar form, and any ordinary request that merely mentions
+// video. Truncate that and the narrow launcher becomes a wide one, on the client
+// where truncation was actually observed. It held on 2026-09-08 and nothing
+// guarantees it holds next time.
+//
+// No published budget exists, so this cannot check a real limit. What it can do
+// is keep the total from growing unnoticed and name the skills carrying the most
+// risk, so the answer to "did we get closer to the cliff this month" is a number.
+{
+  const lens = []
+  for (const d of skillDirs) {
+    const fm = (skillText[d] || '').match(/^---\n([\s\S]*?)\n---/)
+    if (!fm) continue
+    const m = fm[1].match(/description:\s*"([\s\S]*?)"\s*$/m) || fm[1].match(/description:\s*(.+)$/m)
+    const desc = (m ? m[1] : '').replace(/\s+/g, ' ').trim()
+    if (desc) lens.push({ name: d, len: desc.length, negated: /\bnever\b|\bmust not\b|\bdo not\b|\bnot\b/i.test(desc) })
+  }
+  const total = lens.reduce((s, r) => s + r.len, 0)
+  // The router block measured 5,991 tokens on 2026-09-08 against Codex's
+  // unpublished budget. Recorded as the observation it is, not as a limit.
+  N(`Skill descriptions total ${total.toLocaleString()} characters across ${lens.length} skills, longest ${Math.max(...lens.map((r) => r.len))}. Codex reports shortening these to fit its context budget, so the total is the exposure.`)
+  for (const r of lens.filter((r) => r.len > 900 && r.negated).sort((a, b) => b.len - a.len)) {
+    F('description-budget', r.name, `Its description is ${r.len} characters and carries negative trigger conditions, on a client that reports shortening descriptions to fit a context budget. Exclusions sit at the end of a description and are what a truncation removes first.`, 'Shorten it, or move the exclusions ahead of the elaboration so a cut removes detail rather than the contract. A trigger that only holds while the text survives intact is not enforced.')
+  }
+}
+
 // -------------------------------------------------------- surface parity, Gate 9
 const approved = registry?.latest_approved_release?.release_id
 const surfaces = registry?.surface_deployments || {}
