@@ -161,7 +161,17 @@ for (const repo of fleet.repos) {
 
     const base = (await gh.defaultBranch(name)).branch
     const baseSha = await gh.headSha(name, base)
-    if (!(await gh.branchExists(name, BRANCH))) await gh.createBranch(name, BRANCH, baseSha)
+    if (!(await gh.branchExists(name, BRANCH))) {
+      await gh.createBranch(name, BRANCH, baseSha)
+    } else if (!(await gh.findPull(name, BRANCH, base))) {
+      // The sync branch survives a merge, so on the next canon change it is
+      // still sitting on a base that has moved on, and the pull request opens
+      // with conflicts in a file this script is the sole author of. Its only
+      // content is the regenerated block, so resetting it to base loses
+      // nothing. Only ever done when no pull request is open on it, because
+      // that would be rewriting something a person may be reading.
+      await gh.resetBranch(name, BRANCH, baseSha)
+    }
 
     // Re-read on the sync branch so an open pull request updates rather than conflicts.
     const onBranch = await gh.getFile(name, target, BRANCH)
