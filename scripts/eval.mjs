@@ -44,6 +44,20 @@ const flag = (f) => { const i = args.indexOf(f); return i === -1 ? null : args[i
 const dryRun = args.includes('--dry-run')
 
 const MODEL = flag('--model') || 'claude-haiku-4-5-20251001'
+/**
+ * A second model over the same cases, to tell the instrument from the subject.
+ *
+ * The first run scored recall between 0.67 and 0.83 against a Gate 2 bar of
+ * 0.95. That is either the descriptions under-triggering or this harness being
+ * a poor stand-in for a real client, and a single number cannot say which. Two
+ * models over identical cases can: if recall moves a lot, the instrument is
+ * the variable and these numbers say little about the skills. If it barely
+ * moves, the descriptions are the variable.
+ *
+ * Reported side by side and never averaged. Averaging two instruments is how
+ * you get one number that describes neither.
+ */
+const COMPARE = flag('--compare')
 const ONLY = flag('--skill')
 const LIMIT = Number(flag('--limit') || 0)
 const TOKEN_CAP = Number(flag('--max-tokens') || 4_000_000)
@@ -123,14 +137,19 @@ const usage = { input: 0, output: 0, cache_read: 0, cache_write: 0 }
 const results = []
 let aborted = null
 
-const call = async (prompt) => {
+const call = async (prompt, model = MODEL) => {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: MODEL, max_tokens: 200, system: SYSTEM, messages: [{ role: 'user', content: prompt }] }),
+    body: JSON.stringify({ model, max_tokens: 200, system: SYSTEM, messages: [{ role: 'user', content: prompt }] }),
   })
   if (!res.ok) throw new Error(`${res.status} ${(await res.text()).slice(0, 200)}`)
   return res.json()
+}
+
+const pickedFrom = (r) => {
+  const text = (r.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('')
+  try { return JSON.parse(text.match(/\{[\s\S]*\}/)?.[0] || '{}').skills || [] } catch { return [] }
 }
 
 for (const [i, c] of selected.entries()) {
@@ -143,12 +162,21 @@ for (const [i, c] of selected.entries()) {
     usage.cache_read += r.usage?.cache_read_input_tokens || 0
     usage.cache_write += r.usage?.cache_creation_input_tokens || 0
 
-    const text = (r.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('')
-    let picked = []
-    try { picked = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0] || '{}').skills || [] } catch { /* unparseable answer is a fail, not a crash */ }
+    const picked = pickedFrom(r)
     const fired = picked.includes(c.target)
     const expected = c.should_trigger === true
-    results.push({ id: c.id, suite: c.suite, target: c.target, category: c.category, expected, fired, picked, pass: fired === expected })
+    const row = { id: c.id, suite: c.suite, target: c.target, category: c.category, expected, fired, picked, pass: fired === expected }
+    if (COMPARE) {
+      const r2 = await call(String(c.prompt ?? c.scenario ?? ''), COMPARE)
+      usage.input += r2.usage?.input_tokens || 0
+      usage.output += r2.usage?.output_tokens || 0
+      usage.cache_read += r2.usage?.cache_read_input_tokens || 0
+      usage.cache_write += r2.usage?.cache_creation_input_tokens || 0
+      const p2 = pickedFrom(r2)
+      row.compareFired = p2.includes(c.target)
+      row.comparePass = row.compareFired === expected
+    }
+    results.push(row)
   } catch (e) {
     results.push({ id: c.id, suite: c.suite, target: c.target, category: c.category, expected: c.should_trigger === true, error: e.message, pass: false })
   }
@@ -203,6 +231,22 @@ console.log('\n| Skill | Cases | Precision | Recall | Accuracy | Errors |')
 console.log('|---|---:|---:|---:|---:|---:|')
 for (const [n, s] of Object.entries(bySkill).sort((a, b) => (a[1].accuracy ?? 1) - (b[1].accuracy ?? 1))) {
   console.log(`| ${n} | ${s.cases} | ${s.precision ?? ''} | ${s.recall ?? ''} | ${s.accuracy ?? ''} | ${s.errors || ''} |`)
+}
+if (COMPARE) {
+  const a = results.filter((r) => r.pass).length / results.length
+  const b = results.filter((r) => r.comparePass).length / results.length
+  const posA = results.filter((r) => r.expected)
+  const recallA = posA.filter((r) => r.fired).length / (posA.length || 1)
+  const recallB = posA.filter((r) => r.compareFired).length / (posA.length || 1)
+  console.log(`\nControl, same ${results.length} cases, two models, reported side by side and never averaged:`)
+  console.log(`  ${MODEL.padEnd(32)} accuracy ${a.toFixed(3)}  recall ${recallA.toFixed(3)}`)
+  console.log(`  ${COMPARE.padEnd(32)} accuracy ${b.toFixed(3)}  recall ${recallB.toFixed(3)}`)
+  const delta = Math.abs(recallA - recallB)
+  console.log(delta > 0.1
+    ? `  Recall moves ${delta.toFixed(3)} between models. The instrument is a large variable here, so these numbers describe this harness at least as much as they describe the skills.`
+    : `  Recall moves only ${delta.toFixed(3)} between models. The instrument is stable, so the shortfall is in the descriptions rather than in this harness.`)
+  payload.control = { model_a: MODEL, model_b: COMPARE, accuracy_a: +a.toFixed(3), accuracy_b: +b.toFixed(3), recall_a: +recallA.toFixed(3), recall_b: +recallB.toFixed(3) }
+  writeFileSync(outPath, JSON.stringify(payload, null, 2) + '\n')
 }
 console.log(`\nWritten: ${outPath.replace(HARNESS + '/', '')}`)
 console.log('Nothing in state/skill-registry.yaml was changed. A measurement is evidence; changing the register is a decision.')
