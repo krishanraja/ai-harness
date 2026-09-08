@@ -144,6 +144,23 @@ if (recorded) {
   p(`- Matches its own last deployment record: **${matchesRecord ? 'yes' : 'no'}**`)
 }
 p()
+// Both comparisons above are same-side: this script's aggregate against an
+// aggregate this script wrote. That is the only way the number is worth
+// anything, and it is worth stating in the output because the mistake is easy
+// and was made twice.
+//
+// On 2026-09-08 and again on 2026-09-09 an aggregate computed here was handed
+// to a Windows host and asked to match what its own tooling reported. It did
+// not, either time. SURFACE reported F7C08490... over 139 files while this
+// script reported 4CBF02F3... over 139 files of the same release, with the
+// host's per-skill hashes all exact and its audit reporting zero drift.
+// Eighteen path and encoding conventions were tried against the host's value
+// and none reproduced it, so the two sides are hashing different file sets, not
+// the same set differently. Equal counts hid that.
+//
+// The bytes were never in question on either occasion. The check was.
+p('> The aggregate compares this surface to its own deployment record, written by this script. It is not comparable to a figure computed by a host\'s own tooling: the two walk different roots and disagree on which files belong. Per-file classification below is the parity contract. A host reporting every skill exact and an aggregate that differs from this one is reporting agreement, not drift.')
+p()
 p('| Class | Files | Skills |')
 p('|---|---:|---|')
 p(`| exact | ${exact.length} | |`)
