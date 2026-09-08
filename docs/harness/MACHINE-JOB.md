@@ -122,18 +122,46 @@ reach them, and those are different failures. `v2026.09.08.1` installed with
 perfect byte parity on four surfaces while the Video Engine launcher could not
 launch at all, because the release carried `allow_implicit_invocation: false`.
 
-Run at least one POSITIVE canary per release. Negative canaries pass for free
-when a skill cannot fire at all, which is how that defect survived three of them.
+Canaries are the instrument for trigger behaviour, as of Krish's ruling on
+2026-09-08. The trigger eval harness that used to answer this question was
+retired the same day; `contract/canary-contract.md` says why.
 
-| | Send, in a fresh task | Expect |
-|---|---|---|
-| A | a question about the OS architecture | routes to the architecture doc; no delete instruction, no cron time, no hard-coded Windows path in the skill itself |
-| B | `Video engine` | launches |
-| C | `Video engine!` | does not launch |
-| D | the dollar form of the name | does not launch |
+Get the sheet for the release you just installed:
 
-Canary A resolving a Windows path from the machine's real checkout is correct.
-The test is whether the skill *carries* one.
+```
+node scripts/canaries.mjs --sheet
+```
+
+It names the skills, the exact messages, and which results are load-bearing.
+Send each as the **first message in a fresh task**. Record what happened, not
+what should have happened, using only these four outcomes:
+
+| Outcome | Meaning |
+|---|---|
+| `fired` | The skill loaded and ran |
+| `not-fired` | Nothing loaded |
+| `wrong-skill` | A different skill loaded; name it |
+| `unreachable` | Absent from the client's catalog, or the client refused |
+
+`not-fired` and `unreachable` look identical from the outside and mean opposite
+things. Keeping them apart is the whole reason the 2026-09-08 defect is
+findable at all.
+
+**Run the positive canaries. They are the only ones that prove anything.** On
+SURFACE both negative canaries for `video-engine` passed while the positive
+failed, and they passed because the skill could not fire at all. A skill that
+cannot fire also cannot fire wrongly, so every negative there was vacuous and
+read as health.
+
+Write one report per surface and record it:
+
+```
+node scripts/canaries.mjs --record state/canaries/<release>-<surface>.json
+```
+
+It refuses a malformed report outright, and it **records a failing one and exits
+non-zero**, because a canary failure is the most valuable thing this instrument
+produces and must never be the thing that gets thrown away.
 
 ## Known gaps on the machines
 

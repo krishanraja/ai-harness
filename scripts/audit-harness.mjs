@@ -18,7 +18,7 @@
  *   volatile facts         an absolute path or a hard-coded count in a skill (Gate 3)
  *   routing coverage       every production skill occupies a named route (Gate 1)
  *   surface parity         surface_deployments against the approved release (Gate 9)
- *   trigger accuracy       whether it has been measured at all (Gate 2)
+ *   canary coverage        which skills a positive canary has actually fired on (Gate 2)
  *
  *   node scripts/audit-harness.mjs [--out <path>] [--strict]
  *
@@ -30,7 +30,6 @@ import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync, statSy
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
-import { ROUTER_PROMPT_SHA } from './lib/router-prompt.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -265,108 +264,77 @@ for (const [id, s] of Object.entries(surfaces)) {
   }
 }
 
-// ------------------------------------------------------ trigger accuracy, Gate 2
+// ---------------------------------------------------- canary coverage, Gate 2
 //
-// Gate 2 asks for precision and recall on a held-out suite: 100 percent for
-// core skills, at least 95 percent for routed ones. The question is not whether
-// a number is pretty, it is whether a number exists at all and whether it is
-// where a reader would look for it.
-const evidenced = new Set()
-{
-  const block = registryText.split(/^evaluation_evidence:\s*$/m)[1]
-  if (block) {
-    for (const line of block.split('\n')) {
-      if (/^[a-z_]+:\s*$/.test(line)) break
-      const m = line.match(/^  ([a-z0-9-]+):\s*$/)
-      if (m) evidenced.add(m[1])
-    }
-  }
-}
-const loose = readdirSync(join(HARNESS, 'state'))
-  .map((f) => (f.match(/^results-(.+?)-independent-\d{4}-\d{2}-\d{2}\.md$/) || [])[1])
-  .filter(Boolean)
-// state/evals/ is the machine-written half, added 2026-09-08. The audit reads
-// the directory rather than only the registry, so a result written by
-// scripts/eval.mjs can never again be produced and then orphaned, which is what
-// happened to the nineteen loose files from 5 August.
-const measured = new Map()
-let latestRun = null
-const evalsDir = join(HARNESS, 'state/evals')
-if (existsSync(evalsDir)) {
-  for (const f of readdirSync(evalsDir).filter((x) => x.endsWith('.json')).sort()) {
-    try {
-      const r = JSON.parse(readFileSync(join(evalsDir, f), 'utf8'))
-      latestRun = { file: f, measured_at: r.measured_at, model: r.model, cases: r.cases_run, aborted: r.aborted }
-      for (const [name, s] of Object.entries(r.by_skill || {})) measured.set(name, { ...s, run: f })
-    } catch { W(`state/evals/${f} does not parse as JSON`) }
-  }
-}
+// Gate 2 used to be answered by scripts/eval.mjs: 613 cases against the API,
+// precision and recall per skill. Krish retired it on 2026-09-08 after two
+// controls showed the apparatus was a larger variable than the skills, and
+// after four canaries on two Windows hosts found in an hour what 613 automated
+// cases had missed over two days, including a launcher that could not launch.
+//
+// So the evidence is now what a real client did on a real surface, and this
+// section reads state/canaries/ instead of state/evals/. The doctrine is in
+// contract/canary-contract.md and the mechanism is scripts/canaries.mjs.
+//
+// The one rule that decides everything: a negative result is void on a surface
+// where no positive passed, because a skill that cannot fire also cannot fire
+// wrongly. So a skill's coverage counts only surfaces where a POSITIVE canary
+// fired. That is why the count below is not simply "did we run something".
+const canaryDir = join(HARNESS, 'state/canaries')
+const canaryReports = existsSync(canaryDir)
+  ? readdirSync(canaryDir).filter((f) => f.endsWith('.json')).map((f) => {
+      try { return { file: f, ...JSON.parse(readFileSync(join(canaryDir, f), 'utf8')) } } catch { return null }
+    }).filter(Boolean)
+  : []
 
-const unevidenced = rows.filter((r) => !evidenced.has(r.name) && !measured.has(r.name))
-if (unevidenced.length) {
-  F('unevidenced', 'evaluation coverage',
-    `${unevidenced.length} of ${rows.length} skills have no evaluation evidence anywhere: no evaluation_evidence row in state/skill-registry.yaml and no measurement in state/evals/. ${loose.length} per-skill result files sit in state/ as loose markdown from 2026-08-05 and were never folded in.`,
-    'Run scripts/eval.mjs, which writes to state/evals/ where this audit reads it. A number in a file nobody reads is not a measurement.')
-}
-
-// An eval run whose own control says the instrument is unstable is not
-// evidence, and must not close the coverage finding or be read as a statement
-// about a skill. Checked before the Gate 2 bar is applied, because applying a
-// bar to an invalid number is worse than having no number: it manufactures a
-// verdict.
-let instrumentValid = true
-{
-  const controls = existsSync(evalsDir)
-    ? readdirSync(evalsDir).filter((f) => f.endsWith('.json')).map((f) => {
-        try { return JSON.parse(readFileSync(join(evalsDir, f), 'utf8')) } catch { return null }
-      }).filter((r) => r && r.control)
-    : []
-  const latest = controls.sort((a, b) => String(a.measured_at).localeCompare(String(b.measured_at))).pop()
-  // The prompt the control was taken against, compared to the one in the tree.
-  // Without this a control clears an instrument it never ran on: rewriting the
-  // router prompt changes what is being measured and leaves every other field
-  // in the file looking current. It fails closed. A control with no stamp
-  // predates the stamp and cannot vouch for anything.
-  const currentPrompt = ROUTER_PROMPT_SHA
-  if (latest) {
-    const d = Math.abs((latest.control.recall_a ?? 0) - (latest.control.recall_b ?? 0))
-    const stamp = latest.router_prompt_sha256 || latest.control.router_prompt_sha256 || null
-    if (d > 0.1) {
-      instrumentValid = false
-      F('instrument', 'trigger eval harness', `A control over ${latest.cases_run} identical cases moved recall by ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b}${latest.control.recall_b < latest.control.recall_a ? ', with the stronger model scoring lower' : ''}. The instrument is a larger variable than the subject, so no accuracy figure it produces describes a skill.`, 'Fix scripts/eval.mjs before reading any of its numbers as quality: a more capable model doing worse at a classification task is a prompt problem. Do not write these figures into the registry.')
-    } else if (stamp !== currentPrompt) {
-      instrumentValid = false
-      F('instrument', 'trigger eval harness', `The most recent control passed at a recall delta of ${d.toFixed(3)}, but it was taken against router prompt ${stamp || 'an unstamped version'} while scripts/eval.mjs now sends ${currentPrompt}. It does not describe the current instrument.`, 'Run scripts/eval.mjs with --compare against the current prompt. A control cannot vouch for a prompt it never ran on, so accuracy stays unreported until it does.')
-    } else {
-      N(`Control: recall moved only ${d.toFixed(3)} between ${latest.control.model_a} and ${latest.control.model_b} on router prompt ${currentPrompt}, so the instrument is stable enough to read.`)
-    }
-  } else {
-    N('No control run in state/evals yet, so no eval number has been validated as measuring the skills rather than the harness.')
+// A canary id carries its skill as the suite prefix, and the suite files are
+// the authority for which is which. Built from the tree rather than parsed out
+// of the id, so a renamed suite cannot silently orphan its evidence.
+const idToSkill = new Map()
+for (const f of readdirSync(join(HARNESS, 'evals')).filter((x) => /-trigger-cases\.jsonl$/.test(x))) {
+  const skill = f.replace(/-trigger-cases\.jsonl$/, '')
+  for (const line of readFileSync(join(HARNESS, 'evals', f), 'utf8').split('\n')) {
+    if (!line.trim()) continue
+    try { const c = JSON.parse(line); if (c.id) idToSkill.set(c.id, { skill, positive: c.should_trigger === true }) } catch { /* a malformed line is not evidence */ }
   }
 }
 
-// Gate 2: 100 percent on core and always-on skills, at least 95 percent on
-// routed ones, with no high-consequence false positive. Skipped entirely when
-// the instrument has not been shown to be valid.
+// skill -> Set of surfaces where a positive fired, and skill -> newest date
+const provenOn = new Map()
+const lastSeen = new Map()
+const unreachableOn = []
+for (const r of canaryReports) {
+  for (const res of r.results || []) {
+    const meta = idToSkill.get(res.id)
+    if (!meta) continue
+    if (res.outcome === 'unreachable') unreachableOn.push({ skill: meta.skill, surface: r.surface, release: r.release })
+    if (!meta.positive || res.outcome !== 'fired') continue
+    if (!provenOn.has(meta.skill)) provenOn.set(meta.skill, new Set())
+    provenOn.get(meta.skill).add(r.surface)
+    const d = String(r.ran_at || '').slice(0, 10)
+    if (d && (!lastSeen.has(meta.skill) || lastSeen.get(meta.skill) < d)) lastSeen.set(meta.skill, d)
+  }
+}
+
+// An unreachable skill is the sharpest finding this instrument can produce: the
+// bytes are right and the client cannot see it. It is never a trigger declining.
+for (const u of unreachableOn) {
+  F('unreachable-on-surface', `${u.skill} on ${u.surface}`, `A canary reported ${u.skill} unreachable on ${u.surface} at ${u.release}: the client could not see the skill at all.`, 'This is not a trigger declining. Check the adapter\'s allow_implicit_invocation and the installed catalog. Byte parity does not imply reachability, and only a positive canary can tell them apart.')
+}
+
 const CORE = new Set(['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief'])
-for (const [name, s] of instrumentValid ? measured : []) {
-  const bar = CORE.has(name) ? 1 : 0.95
-  if (s.accuracy !== null && s.accuracy < bar) {
-    F('trigger-accuracy', name, `Measured accuracy ${s.accuracy} against a Gate 2 bar of ${bar} for ${CORE.has(name) ? 'a core' : 'a routed'} skill, over ${s.cases} cases (${s.run}).`, 'Tighten the description or the routing entry, then re-run. Lowering the bar to manufacture a pass is the one thing Gate 7 forbids outright.')
-  }
-  if (s.fp > 0 && CORE.has(name) === false && s.precision !== null && s.precision < 1) {
-    N(`${name}: ${s.fp} false positive(s), precision ${s.precision}. Gate 2 forbids a high-consequence false positive; check whether any of these is one.`)
-  }
+const neverProven = rows.map((r) => r.name).filter((n) => !provenOn.has(n))
+if (neverProven.length) {
+  const core = neverProven.filter((n) => CORE.has(n))
+  F('uncanaried', 'coverage', `${neverProven.length} of ${rows.length} skills have never had a positive canary fire on any surface${core.length ? `, including ${core.length} core skill(s): ${core.join(', ')}` : ''}.`, 'Run `node scripts/canaries.mjs --sheet` and work the sheet on a machine, then `--record` the report. Coverage is expected to be partial; it is reported as a number rather than left as an impression, and absence is never read as health.')
 }
-if (latestRun) {
-  const age = days(latestRun.measured_at.slice(0, 10), today)
-  if (latestRun.aborted) F('eval-run', 'last evaluation run', `${latestRun.file} aborted: ${latestRun.aborted}`, 'Raise the cap or narrow the run, then re-run. A partial run scores only what it reached.')
-  if (age > 35) F('eval-run', 'evaluation freshness', `The newest measurement in state/evals/ is ${latestRun.file}, ${age} days old.`, 'Gate 8 treats an expired measurement like an expired review. Re-run the suite.')
-  N(`${measured.size} skills measured in ${latestRun.file} (${latestRun.cases} cases, ${latestRun.model}, ${age} days old).`)
-} else {
-  N('state/evals/ holds no run yet, so every trigger-accuracy number is still an assertion.')
+for (const [skill, d] of lastSeen) {
+  const age = days(d, today)
+  if (age > 60) F('canary-stale', skill, `Its last passing positive canary was ${d}, ${age} days ago, on ${[...provenOn.get(skill)].join(', ')}.`, 'Re-run it. Gate 8 treats an expired measurement the way it treats an expired review.')
 }
-N(`${evidenced.size} skills have evaluation_evidence in the registry; ${loose.length} more have loose result files in state/.`)
+N(`${provenOn.size} of ${rows.length} skills have a positive canary that fired on at least one surface, across ${canaryReports.length} report(s) in state/canaries/.`)
+if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger behaviour is measured yet, which is the honest state after retiring the eval harness rather than a regression.')
+
 
 // -------------------------------------------------------- the other clock
 //

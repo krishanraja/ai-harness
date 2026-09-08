@@ -42,21 +42,6 @@ on:
         required: false
         type: boolean
         default: false
-      eval_token_cap:
-        description: "Hard token ceiling for the trigger suite; the run aborts rather than overspending"
-        required: false
-        type: string
-        default: "4000000"
-      eval_compare_model:
-        description: "Second model over the same cases, to tell the instrument from the subject. Empty to skip."
-        required: false
-        type: string
-        default: ""
-      eval_limit:
-        description: "Cases to run, 0 for all. Use a subset for a control run."
-        required: false
-        type: string
-        default: "0"
 
 permissions:
   contents: read
@@ -341,75 +326,3 @@ jobs:
   # measurement is not something to take every night. It fails loudly on a
   # missing key rather than skipping, but only on the weekly and dispatch paths,
   # so a missing key never breaks the nightly.
-  evals:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
-    needs: surfaces
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: The API key must exist
-        env:
-          HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
-        run: |
-          if [ "$HAS_KEY" != "true" ]; then
-            echo "::error::ANTHROPIC_API_KEY is not set. Trigger accuracy has read as unmeasured since August precisely because nothing could run unattended. Add the key as a repository secret."
-            exit 1
-          fi
-
-      - name: Run the trigger suite
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          set -euo pipefail
-          ARGS="--max-tokens ${{ inputs.eval_token_cap || 4000000 }}"
-          if [ -n "${{ inputs.eval_compare_model }}" ]; then ARGS="$ARGS --compare ${{ inputs.eval_compare_model }}"; fi
-          if [ "${{ inputs.eval_limit || 0 }}" != "0" ]; then ARGS="$ARGS --limit ${{ inputs.eval_limit }}"; fi
-          node scripts/eval.mjs $ARGS | tee eval.md
-          cat eval.md >> "$GITHUB_STEP_SUMMARY"
-
-      # Committed so the audit can read it, and so a measurement is never
-      # produced and then orphaned the way the 5 August results were.
-      - name: Commit the measurement
-        run: |
-          set -euo pipefail
-          rm -f eval.md
-          git config user.name "Claude"
-          git config user.email "noreply@anthropic.com"
-          # `git diff` does not report untracked files, and a measurement is
-          # always a NEW file at state/evals/<date>-triggers.json. So the old
-          # check said "nothing changed" after every successful run and threw
-          # the results away. Stage first, then ask the index.
-          git add -A state/evals
-          if git diff --cached --quiet -- state/evals; then
-            echo "::warning::eval.mjs produced no file at state/evals. That is a defect, not a quiet run: the job reported success and measured nothing."
-            exit 0
-          fi
-          git commit \
-            -m "chore(evals): $(date -u +%Y-%m-%d) trigger accuracy" \
-            -m "Written by scripts/eval.mjs. Evidence only. The registry is unchanged: a measurement is evidence, changing the register is a decision."
-          # The observe job commits to main in the same run, so this checkout is
-          # usually behind by the time it gets here. Rebase rather than fail, and
-          # retry once: two jobs appending different files is not a conflict.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git rebase origin/main && git push origin HEAD:main && exit 0
-            echo "push attempt ${attempt} lost a race, retrying"
-            sleep 5
-          done
-          echo "::error::Could not push the measurement after three attempts."
-          exit 1
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: trigger-evals
-          path: state/evals/
-          retention-days: 90

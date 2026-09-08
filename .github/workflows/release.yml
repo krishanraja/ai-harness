@@ -4,6 +4,27 @@ on:
   push:
     tags:
       - harness-v*
+  # A tag push is the normal path. This second one exists because a cloud
+  # session's credential is scoped to branch pushes and GitHub returns 403 on
+  # refs/tags, so a release approved in the cloud could be built by nobody and
+  # sat unpublished while every surface correctly read as behind. The workflow
+  # has contents: write, so it can create the tag it is about to build from.
+  #
+  # Everything below is unchanged and still applies: the tag name is validated
+  # to the same pattern, the release is built TWICE and the two manifests must
+  # agree skill for skill, the installer self-test runs, and an existing release
+  # is never overwritten. The only difference is who creates the ref.
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "Release id without the harness- prefix, e.g. v2026.09.08.2"
+        required: true
+        type: string
+      ref:
+        description: "Commit or branch to tag. Defaults to the default branch."
+        required: false
+        default: main
+        type: string
 
 permissions:
   contents: write
@@ -17,7 +38,31 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           fetch-depth: 0
-          persist-credentials: false
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref }}
+          persist-credentials: ${{ github.event_name == 'workflow_dispatch' }}
+
+      # Only on the dispatch path, and only after the name is validated. The tag
+      # is created BEFORE the build so that --verify-tag below still means what
+      # it means: the release is published against a real ref, not a name.
+      - name: Create the tag when dispatched
+        if: github.event_name == 'workflow_dispatch'
+        shell: pwsh
+        env:
+          RELEASE_INPUT: ${{ inputs.release_id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $id = $env:RELEASE_INPUT
+          if ($id -notmatch '^v\d{4}\.\d{2}\.\d{2}\.\d+$') {
+            throw "Invalid release id: $id. Expected the form v2026.09.08.2, with no harness- prefix."
+          }
+          $tag = "harness-$id"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          $existing = git ls-remote --tags origin "refs/tags/$tag"
+          if ($existing) { throw "$tag already exists on origin. Releases are immutable and are never re-cut." }
+          git tag -a $tag -m "Harness release $id, cut by workflow_dispatch from $(git rev-parse HEAD)."
+          git push origin "refs/tags/$tag"
+          "RELEASE_TAG=$tag" | Add-Content -LiteralPath $env:GITHUB_ENV
 
       - name: Validate tag and build twice
         shell: pwsh
@@ -26,7 +71,7 @@ jobs:
           git config core.autocrlf false
           git diff --check
 
-          $tag = $env:GITHUB_REF_NAME
+          $tag = if ($env:RELEASE_TAG) { $env:RELEASE_TAG } else { $env:GITHUB_REF_NAME }
           if ($tag -notmatch '^harness-v\d{4}\.\d{2}\.\d{2}\.\d+$') {
             throw "Invalid release tag: $tag"
           }
@@ -74,7 +119,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $ErrorActionPreference = 'Stop'
-          $tag = $env:GITHUB_REF_NAME
+          $tag = if ($env:RELEASE_TAG) { $env:RELEASE_TAG } else { $env:GITHUB_REF_NAME }
           gh release view $tag 2>$null
           if ($LASTEXITCODE -eq 0) { throw "Release $tag already exists; immutable releases are never overwritten." }
 

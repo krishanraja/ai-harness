@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.08.1",
+  "surface": "codex-current",
+  "client": "codex",
+  "ran_at": "2026-09-08",
+  "ran_by": "Krish Raja",
+  "scope": "Only results whose sent message maps exactly to a case id are recorded. Other canaries were run on this surface and are described in the deployment evidence for this release; they are not invented into ids they do not match.",
+  "results": [
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "launched, fetched the studio repo and drove the engine CLI"
+    }
+  ],
+  "verdict": "passed",
+  "failures": [],
+  "void_results": []
+}
