@@ -213,11 +213,49 @@ const evidenced = new Set()
 const loose = readdirSync(join(HARNESS, 'state'))
   .map((f) => (f.match(/^results-(.+?)-independent-\d{4}-\d{2}-\d{2}\.md$/) || [])[1])
   .filter(Boolean)
-const unevidenced = rows.filter((r) => !evidenced.has(r.name))
+// state/evals/ is the machine-written half, added 2026-09-08. The audit reads
+// the directory rather than only the registry, so a result written by
+// scripts/eval.mjs can never again be produced and then orphaned, which is what
+// happened to the nineteen loose files from 5 August.
+const measured = new Map()
+let latestRun = null
+const evalsDir = join(HARNESS, 'state/evals')
+if (existsSync(evalsDir)) {
+  for (const f of readdirSync(evalsDir).filter((x) => x.endsWith('.json')).sort()) {
+    try {
+      const r = JSON.parse(readFileSync(join(evalsDir, f), 'utf8'))
+      latestRun = { file: f, measured_at: r.measured_at, model: r.model, cases: r.cases_run, aborted: r.aborted }
+      for (const [name, s] of Object.entries(r.by_skill || {})) measured.set(name, { ...s, run: f })
+    } catch { W(`state/evals/${f} does not parse as JSON`) }
+  }
+}
+
+const unevidenced = rows.filter((r) => !evidenced.has(r.name) && !measured.has(r.name))
 if (unevidenced.length) {
   F('unevidenced', 'evaluation coverage',
-    `${unevidenced.length} of ${rows.length} skills carry no evaluation_evidence row in state/skill-registry.yaml. Only ${[...evidenced].join(' and ')} do. ${loose.length} per-skill result files sit in state/ as loose markdown and were never folded into the registry, so the register a reader consults does not carry the numbers that exist.`,
-    'Fold the existing result files into evaluation_evidence, then measure the rest. A number in a file nobody reads is not a measurement.')
+    `${unevidenced.length} of ${rows.length} skills have no evaluation evidence anywhere: no evaluation_evidence row in state/skill-registry.yaml and no measurement in state/evals/. ${loose.length} per-skill result files sit in state/ as loose markdown from 2026-08-05 and were never folded in.`,
+    'Run scripts/eval.mjs, which writes to state/evals/ where this audit reads it. A number in a file nobody reads is not a measurement.')
+}
+
+// Gate 2: 100 percent on core and always-on skills, at least 95 percent on
+// routed ones, with no high-consequence false positive.
+const CORE = new Set(['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief'])
+for (const [name, s] of measured) {
+  const bar = CORE.has(name) ? 1 : 0.95
+  if (s.accuracy !== null && s.accuracy < bar) {
+    F('trigger-accuracy', name, `Measured accuracy ${s.accuracy} against a Gate 2 bar of ${bar} for ${CORE.has(name) ? 'a core' : 'a routed'} skill, over ${s.cases} cases (${s.run}).`, 'Tighten the description or the routing entry, then re-run. Lowering the bar to manufacture a pass is the one thing Gate 7 forbids outright.')
+  }
+  if (s.fp > 0 && CORE.has(name) === false && s.precision !== null && s.precision < 1) {
+    N(`${name}: ${s.fp} false positive(s), precision ${s.precision}. Gate 2 forbids a high-consequence false positive; check whether any of these is one.`)
+  }
+}
+if (latestRun) {
+  const age = days(latestRun.measured_at.slice(0, 10), today)
+  if (latestRun.aborted) F('eval-run', 'last evaluation run', `${latestRun.file} aborted: ${latestRun.aborted}`, 'Raise the cap or narrow the run, then re-run. A partial run scores only what it reached.')
+  if (age > 35) F('eval-run', 'evaluation freshness', `The newest measurement in state/evals/ is ${latestRun.file}, ${age} days old.`, 'Gate 8 treats an expired measurement like an expired review. Re-run the suite.')
+  N(`${measured.size} skills measured in ${latestRun.file} (${latestRun.cases} cases, ${latestRun.model}, ${age} days old).`)
+} else {
+  N('state/evals/ holds no run yet, so every trigger-accuracy number is still an assertion.')
 }
 N(`${evidenced.size} skills have evaluation_evidence in the registry; ${loose.length} more have loose result files in state/.`)
 
