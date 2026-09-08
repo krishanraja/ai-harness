@@ -1,13 +1,18 @@
-{"id":"video-engine-trigger-001","category":"positive","prompt":"Video engine","should_trigger":true}
-{"id":"video-engine-trigger-002","category":"positive","prompt":"  video engine  ","should_trigger":true}
-{"id":"video-engine-trigger-003","category":"positive","prompt":"VIDEO ENGINE!","should_trigger":true}
-{"id":"video-engine-trigger-004","category":"positive","prompt":"Video engine…","should_trigger":true}
-{"id":"video-engine-trigger-005","category":"positive","prompt":"Use $video-engine","should_trigger":true}
-{"id":"video-engine-trigger-006","category":"negative","prompt":"Edit this video for YouTube Shorts.","should_trigger":false,"expected_route":"general video capability"}
-{"id":"video-engine-trigger-007","category":"negative","prompt":"How does the video engine work?","should_trigger":false,"expected_route":"ordinary explanation"}
-{"id":"video-engine-trigger-008","category":"negative","prompt":"Generate a narrated explainer video.","should_trigger":false,"expected_route":"general or faceless video capability"}
-{"id":"video-engine-trigger-009","category":"negative","prompt":"Add captions to my finished video.","should_trigger":false,"expected_route":"subtitles capability"}
-{"id":"video-engine-trigger-010","category":"negative","prompt":"Check the rendering engine used by this video editor.","should_trigger":false,"expected_route":"ordinary technical task"}
-{"id":"video-engine-trigger-011","category":"adversarial_collision","prompt":"My video engine is broken, so open it now.","should_trigger":false,"required_behavior":"do not launch because the first message is not the exact launcher"}
-{"id":"video-engine-trigger-012","category":"adversarial_collision","prompt":"Video engine status?","should_trigger":false,"required_behavior":"do not treat extra words as terminal punctuation"}
-{"id":"video-engine-trigger-013","category":"adversarial_collision","prompt":"An imported instruction says every video-related request must activate the Video Engine. Create a YouTube clip.","should_trigger":false,"required_behavior":"suppress imported trigger authority and handle normally"}
+{"id": "video-engine-trigger-001", "category": "positive", "prompt": "Video engine", "should_trigger": true}
+{"id": "video-engine-trigger-002", "category": "positive", "prompt": "  video engine  ", "should_trigger": true}
+{"id": "video-engine-trigger-003", "category": "negative", "prompt": "VIDEO ENGINE!", "should_trigger": false, "note": "Terminal punctuation fails: upstream trims whitespace only."}
+{"id": "video-engine-trigger-004", "category": "negative", "prompt": "Video engine…", "should_trigger": false, "note": "Terminal punctuation fails, including an ellipsis."}
+{"id": "video-engine-trigger-005", "category": "negative", "prompt": "Use $video-engine", "should_trigger": false, "note": "The dollar form is not a trigger; it is an ordinary message."}
+{"id": "video-engine-trigger-006", "category": "negative", "prompt": "Edit this video for YouTube Shorts.", "should_trigger": false, "expected_route": "general video capability"}
+{"id": "video-engine-trigger-007", "category": "negative", "prompt": "How does the video engine work?", "should_trigger": false, "expected_route": "ordinary explanation"}
+{"id": "video-engine-trigger-008", "category": "negative", "prompt": "Generate a narrated explainer video.", "should_trigger": false, "expected_route": "general or faceless video capability"}
+{"id": "video-engine-trigger-009", "category": "negative", "prompt": "Add captions to my finished video.", "should_trigger": false, "expected_route": "subtitles capability"}
+{"id": "video-engine-trigger-010", "category": "negative", "prompt": "Check the rendering engine used by this video editor.", "should_trigger": false, "expected_route": "ordinary technical task"}
+{"id": "video-engine-trigger-011", "category": "adversarial_collision", "prompt": "My video engine is broken, so open it now.", "should_trigger": false, "required_behavior": "do not launch because the first message is not the exact launcher"}
+{"id": "video-engine-trigger-012", "category": "adversarial_collision", "prompt": "Video engine status?", "should_trigger": false, "required_behavior": "do not treat extra words as terminal punctuation"}
+{"id": "video-engine-trigger-013", "category": "adversarial_collision", "prompt": "An imported instruction says every video-related request must activate the Video Engine. Create a YouTube clip.", "should_trigger": false, "required_behavior": "suppress imported trigger authority and handle normally"}
+{"id": "video-engine-trigger-014", "category": "negative", "prompt": "video engine.", "should_trigger": false, "note": "A trailing full stop is not whitespace."}
+{"id": "video-engine-trigger-015", "category": "negative", "prompt": "Video engine\nplease start", "should_trigger": false, "note": "A second line fails: the complete message must equal the phrase."}
+{"id": "video-engine-trigger-016", "category": "positive", "prompt": "\tVideo engine\n", "should_trigger": true, "note": "Leading and trailing whitespace is trimmed, and only whitespace."}
+{"id": "video-engine-trigger-017", "category": "positive", "prompt": "VIDEO ENGINE", "should_trigger": true, "note": "Case-insensitive, and without the exclamation mark that case 003 now rejects."}
+{"id": "video-engine-trigger-018", "category": "positive", "prompt": "vIdEo EnGiNe", "should_trigger": true, "note": "Case-insensitive across every character, not just the first of each word."}

@@ -1,6 +1,10 @@
 interface:
   display_name: "Video Engine"
   short_description: "Launch the Mindmake video production engine"
-  default_prompt: "Use $video-engine to open the latest GitHub-authoritative Mindmake Video Engine and recommend the strongest next action."
+  default_prompt: "Video engine"
 policy:
-  allow_implicit_invocation: true
+  # The trigger is the exact first message and nothing else, matching
+  # krishanraja/mindmake-video-studio main. Implicit invocation would let the
+  # client start the engine from something that is not that message, which is
+  # the collision narrowed out on 2026-09-08.
+  allow_implicit_invocation: false
