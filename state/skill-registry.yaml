@@ -27,6 +27,22 @@ deployed_release:
   status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
 
 latest_approved_release:
+  release_id: v2026.09.08.1
+  tag: harness-v2026.09.08.1
+  source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
+  immutable: true
+  manifest_sha256: 66188213989BABF75CBC37AD106E8308BA7BED1C32545D9911F0C26BBCE6F200
+  checksum_sha256: 145717E97E67D4139C0DA284198F130FCC475482D7EA6129B838180C414425BA
+  approved_at: 2026-09-08
+  approved_by: Krish Raja
+  approval_note: >-
+    Clears both blockers the SURFACE reconciliation of 2026-09-08 raised. The
+    mindmake-os candidate no longer instructs deletion or a direct push and no
+    longer embeds a schedule; the video-engine trigger now matches the Video
+    Studio repository it defers to, with the validator and eighteen regression
+    cases moved with it.
+
+superseded_approved_release:
   release_id: v2026.08.29.3
   tag: harness-v2026.08.29.3
   source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
@@ -34,6 +50,7 @@ latest_approved_release:
   manifest_sha256: AD15B2FFF963564B29354E8C6CE3566D83C020C72750A8A80F45E41414AEB693
   checksum_sha256: 75BE014DA45222C6F8860F0A98E91798258367E4ABC4BD72F96FB3DEE5762A2C
   approved_at: 2026-08-29
+  note: Retained as the prior known-good release and the rollback target.
 
 surface_deployments:
   codex-surface-07a67cda9f99:
