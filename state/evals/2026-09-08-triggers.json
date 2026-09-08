@@ -1,0 +1,371 @@
+{
+  "run": "2026-09-08-triggers",
+  "measured_at": "2026-09-08T14:44:53.774Z",
+  "model": "claude-haiku-4-5-20251001",
+  "source_commit": "912bf55f8e3814c01c7bb2f0a040fc2ef53e363a",
+  "cases_run": 120,
+  "cases_available": 613,
+  "aborted": null,
+  "usage": {
+    "input": 6138,
+    "output": 13751,
+    "cache_read": 1563065,
+    "cache_write": 13135
+  },
+  "cache_effectiveness": 0.996,
+  "by_skill": {
+    "apify": {
+      "tp": 10,
+      "fp": 0,
+      "tn": 8,
+      "fn": 3,
+      "errors": 0,
+      "cases": 21,
+      "precision": 1,
+      "recall": 0.769,
+      "accuracy": 0.857
+    },
+    "build-apps-with-krish": {
+      "tp": 10,
+      "fp": 0,
+      "tn": 9,
+      "fn": 5,
+      "errors": 0,
+      "cases": 24,
+      "precision": 1,
+      "recall": 0.667,
+      "accuracy": 0.792
+    },
+    "content-corpus": {
+      "tp": 8,
+      "fp": 0,
+      "tn": 8,
+      "fn": 5,
+      "errors": 0,
+      "cases": 21,
+      "precision": 1,
+      "recall": 0.615,
+      "accuracy": 0.762
+    },
+    "krish-principles": {
+      "tp": 7,
+      "fp": 0,
+      "tn": 13,
+      "fn": 12,
+      "errors": 0,
+      "cases": 32,
+      "precision": 1,
+      "recall": 0.368,
+      "accuracy": 0.625
+    },
+    "strategy-brief": {
+      "tp": 8,
+      "fp": 0,
+      "tn": 10,
+      "fn": 4,
+      "errors": 0,
+      "cases": 22,
+      "precision": 1,
+      "recall": 0.667,
+      "accuracy": 0.818
+    }
+  },
+  "failures": [
+    {
+      "id": "apify-trigger-018",
+      "target": "apify",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "apify-trigger-019",
+      "target": "apify",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-build",
+        "krish-principles"
+      ]
+    },
+    {
+      "id": "apify-trigger-021",
+      "target": "apify",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "app-trigger-004",
+      "target": "build-apps-with-krish",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "take-the-brief",
+        "krish-principles",
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "app-trigger-019",
+      "target": "build-apps-with-krish",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-principles",
+        "krish-build",
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "app-trigger-020",
+      "target": "build-apps-with-krish",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "app-trigger-022",
+      "target": "build-apps-with-krish",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "decision-ledger"
+      ]
+    },
+    {
+      "id": "app-trigger-023",
+      "target": "build-apps-with-krish",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-principles",
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "corpus-trigger-007",
+      "target": "content-corpus",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "strategy-brief",
+        "krish-principles"
+      ]
+    },
+    {
+      "id": "corpus-trigger-008",
+      "target": "content-corpus",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-principles",
+        "strategy-brief",
+        "take-the-brief"
+      ]
+    },
+    {
+      "id": "corpus-trigger-017",
+      "target": "content-corpus",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "corpus-trigger-020",
+      "target": "content-corpus",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-principles",
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "corpus-trigger-021",
+      "target": "content-corpus",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "principles-trigger-002",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "principles-trigger-004",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-voice"
+      ]
+    },
+    {
+      "id": "principles-trigger-005",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "strategy-brief"
+      ]
+    },
+    {
+      "id": "principles-trigger-006",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "strategy-brief",
+        "take-the-brief"
+      ]
+    },
+    {
+      "id": "principles-trigger-008",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "n8n-operator",
+        "mindmake-os",
+        "tools-access",
+        "verification-loop"
+      ]
+    },
+    {
+      "id": "principles-trigger-011",
+      "target": "krish-principles",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "principles-trigger-025",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "krish-voice"
+      ]
+    },
+    {
+      "id": "principles-trigger-027",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "principles-trigger-028",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "mindmake-os",
+        "tools-access"
+      ]
+    },
+    {
+      "id": "principles-trigger-029",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "apify"
+      ]
+    },
+    {
+      "id": "principles-trigger-030",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "ctrl-check"
+      ]
+    },
+    {
+      "id": "principles-trigger-031",
+      "target": "krish-principles",
+      "category": "adversarial_collision",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "strategy-trigger-003",
+      "target": "strategy-brief",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "take-the-brief"
+      ]
+    },
+    {
+      "id": "strategy-trigger-006",
+      "target": "strategy-brief",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "locked-revision"
+      ]
+    },
+    {
+      "id": "strategy-trigger-008",
+      "target": "strategy-brief",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": []
+    },
+    {
+      "id": "strategy-trigger-010",
+      "target": "strategy-brief",
+      "category": "positive",
+      "expected": true,
+      "fired": false,
+      "picked": [
+        "take-the-brief",
+        "krish-principles"
+      ]
+    }
+  ],
+  "control": {
+    "model_a": "claude-haiku-4-5-20251001",
+    "model_b": "claude-sonnet-5",
+    "accuracy_a": 0.758,
+    "accuracy_b": 0.608,
+    "recall_a": 0.597,
+    "recall_b": 0.347
+  }
+}
