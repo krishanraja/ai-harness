@@ -42,6 +42,11 @@ on:
         required: false
         type: boolean
         default: false
+      eval_token_cap:
+        description: "Hard token ceiling for the trigger suite; the run aborts rather than overspending"
+        required: false
+        type: string
+        default: "4000000"
 
 permissions:
   contents: read
@@ -308,4 +313,66 @@ jobs:
         with:
           name: weekly-brief
           path: brief.md
+          retention-days: 90
+
+  # Weekly: turn "trigger accuracy" from an assertion into a number.
+  #
+  # Separate from the nightly chain because it costs money and because a
+  # measurement is not something to take every night. It fails loudly on a
+  # missing key rather than skipping, but only on the weekly and dispatch paths,
+  # so a missing key never breaks the nightly.
+  evals:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
+    needs: surfaces
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: The API key must exist
+        env:
+          HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+        run: |
+          if [ "$HAS_KEY" != "true" ]; then
+            echo "::error::ANTHROPIC_API_KEY is not set. Trigger accuracy has read as unmeasured since August precisely because nothing could run unattended. Add the key as a repository secret."
+            exit 1
+          fi
+
+      - name: Run the trigger suite
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -euo pipefail
+          node scripts/eval.mjs --max-tokens "${{ inputs.eval_token_cap || 4000000 }}" | tee eval.md
+          cat eval.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Committed so the audit can read it, and so a measurement is never
+      # produced and then orphaned the way the 5 August results were.
+      - name: Commit the measurement
+        run: |
+          set -euo pipefail
+          rm -f eval.md
+          if git diff --quiet -- state/evals; then
+            echo "No new measurement to commit."
+            exit 0
+          fi
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add state/evals
+          git commit \
+            -m "chore(evals): $(date -u +%Y-%m-%d) trigger accuracy" \
+            -m "Written by scripts/eval.mjs. Evidence only. The registry is unchanged: a measurement is evidence, changing the register is a decision."
+          git push origin HEAD:main
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trigger-evals
+          path: state/evals/
           retention-days: 90
