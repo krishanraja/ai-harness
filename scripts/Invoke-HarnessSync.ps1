@@ -54,6 +54,33 @@ function Assert-NativeSuccess {
     }
 }
 
+function Assert-RunningSyncScriptOnGitRef {
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern('^[A-Za-z0-9._/-]+$')]
+        [string]$GitRef
+    )
+
+    $relativeScript = 'scripts/Invoke-HarnessSync.ps1'
+    $runningBlobResult = Invoke-NativeCapture -FilePath 'git' -Arguments @('hash-object', '--', $relativeScript)
+    Assert-NativeSuccess -Result $runningBlobResult -Label 'Hash running sync script'
+    $runningBlob = $runningBlobResult.Text.Trim()
+
+    $refBlobResult = Invoke-NativeCapture -FilePath 'git' -Arguments @('rev-parse', '--verify', "${GitRef}:$relativeScript")
+    if ($refBlobResult.ExitCode -ne 0) {
+        throw "The running sync script is not present on $GitRef. Refusing to switch branches because the next scheduled run would lose its entry point."
+    }
+    $refBlob = $refBlobResult.Text.Trim()
+    if ($runningBlob -notmatch '^[0-9a-f]{40,64}$' -or $refBlob -notmatch '^[0-9a-f]{40,64}$') {
+        throw "Could not establish valid Git object IDs for the running sync script and $GitRef."
+    }
+    if ($runningBlob -cne $refBlob) {
+        throw "The running sync script is not byte-exact on $GitRef. Refusing to switch branches until this tested revision is present there."
+    }
+
+    return [pscustomobject]@{ git_ref = $GitRef; running_blob = $runningBlob; ref_blob = $refBlob }
+}
+
 function Write-JsonFile {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -930,6 +957,7 @@ try {
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
         if ($repoStatus.Text.Trim()) { throw 'Repository working tree is dirty. Nothing was installed.' }
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
+        Assert-RunningSyncScriptOnGitRef -GitRef 'origin/main' | Out-Null
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')) -Label 'Switch to main'
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('pull', '--ff-only', 'origin', 'main')) -Label 'Fast-forward main'
     }
