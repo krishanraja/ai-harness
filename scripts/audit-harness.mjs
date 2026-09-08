@@ -177,6 +177,31 @@ if (unevidenced.length) {
 }
 N(`${evidenced.size} skills have evaluation_evidence in the registry; ${loose.length} more have loose result files in state/.`)
 
+// -------------------------------------------------------- the other clock
+//
+// Two clocks, each watching the other. The observer writes a heartbeat; this
+// audit reads it and opens a finding when it has gone quiet. The three weekly
+// Documentation Refresh Routines died by simply stopping, and nothing noticed
+// for weeks, because nothing was watching them. A scheduled job with no
+// watchdog is a scheduled job you will eventually stop trusting.
+{
+  const hbPath = join(HARNESS, 'state/heartbeats.json')
+  if (!existsSync(hbPath)) {
+    N('state/heartbeats.json does not exist yet, so the observer has never run.')
+  } else {
+    const hb = JSON.parse(readFileSync(hbPath, 'utf8'))
+    for (const [who, beat] of Object.entries(hb)) {
+      if (!beat || !beat.last_run) {
+        F('heartbeat', who, `${who} has an entry in state/heartbeats.json with no last_run.`, 'Fix the writer, or remove the entry so it stops looking like a live clock.')
+        continue
+      }
+      const age = Math.round((Date.now() - new Date(beat.last_run)) / 3600000)
+      if (age > 48) F('heartbeat', who, `${who} last ran ${beat.last_run}, ${age} hours ago, past the 48 hour limit.`, 'Check the workflow. A silent clock is the failure mode this watchdog exists for, so treat a stale heartbeat as an outage rather than as noise.')
+      else N(`${who} heartbeat is ${age} hours old.`)
+    }
+  }
+}
+
 // --------------------------------------------------------------------- report
 const out = []
 const p = (s = '') => out.push(s)
