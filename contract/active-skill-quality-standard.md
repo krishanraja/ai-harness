@@ -59,7 +59,7 @@ Minimum held-out trigger suite:
 - It names required predecessors and successors without creating a cycle.
 - On clients where one skill cannot explicitly invoke another, every required chain member is independently discoverable from its own metadata; a cross-skill name is a semantic handoff, not the only loading mechanism.
 - It cannot suppress `krish-principles`, the authority contract, or `verification-loop`.
-- Handoffs pass structured facts, assumptions, evidence, authority, and unresolved questions—not a prose summary alone.
+- Handoffs pass structured facts, assumptions, evidence, authority, and unresolved questions, not a prose summary alone.
 
 ## Gate 5: authority, safety, and security
 

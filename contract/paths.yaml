@@ -1,0 +1,56 @@
+# Named roots for the harness canon.
+#
+# This file is the only place in the repository where an absolute path is
+# allowed to exist. Canon prose says "the harness root"; the renderer resolves
+# the name against the surface it is rendering for. That is what makes the
+# canon portable: a Linux cloud job, a Windows laptop and a container all read
+# the same contract and each gets paths that exist for them.
+#
+# Adding a machine is adding a surface here. Nothing else changes.
+
+schema_version: 1
+
+roots:
+  harness_root:
+    what: The ai-harness working copy. Contracts, skills and state live here.
+  ventures_root:
+    what: Parent directory holding every venture repository checkout.
+  scratch_root:
+    what: Scratch, QA, temporary files and screenshots. Never a deliverable.
+  drive_root:
+    what: Drive tree holding deliverables, cross-venture knowledge and personal records.
+  user_skills_root:
+    what: Where installed canonical user skills are exposed to the client.
+  rules_file:
+    what: The file-routing rules the operating contract defers to.
+
+surfaces:
+  windows-primary:
+    what: Krish's main Windows machine. Claude Code, Cursor and Codex all read from here.
+    os: windows
+    harness_root: C:\Users\krish\dev\mindmaker-os\ai-harness
+    ventures_root: C:\Users\krish\dev
+    scratch_root: C:\Users\krish\.scratch
+    drive_root: G:\My Drive
+    user_skills_root: C:\Users\krish\.agents\skills
+    rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
+
+  windows-codex:
+    what: The second Windows machine, Codex primary. Same layout, tracked separately because it deploys on its own clock.
+    os: windows
+    harness_root: C:\Users\krish\dev\mindmaker-os\ai-harness
+    ventures_root: C:\Users\krish\dev
+    scratch_root: C:\Users\krish\.scratch
+    drive_root: G:\My Drive
+    user_skills_root: C:\Users\krish\.agents\skills
+    rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
+
+  cloud-linux:
+    what: Claude Code on the web and GitHub Actions runners. Ephemeral, no Drive, one checkout per repository.
+    os: linux
+    harness_root: /home/user/ai-harness
+    ventures_root: /home/user
+    scratch_root: /tmp/scratch
+    drive_root: null
+    user_skills_root: /home/user/.agents/skills
+    rules_file: null

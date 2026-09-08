@@ -11,3 +11,5 @@ When Krish explicitly requests a pre-work interview or transfers new, materially
 Canonical user skills are exposed through `C:\Users\krish\.agents\skills`. Use `mindmake-os` for mind/make OS architecture or operations, `mindmake` for the commercial business, `krish-voice` for outbound writing, and `ux-testing-agent` for app or repository QA.
 
 For current mind/make OS facts, follow the source and freshness rules in `mindmake-os`; do not rely on remembered counts.
+
+When Krish overrules a decision, record it in the commit body as `Ruling (Krish, YYYY-MM-DD): the ruling, in one line`. The harness reads those lines across every repository.

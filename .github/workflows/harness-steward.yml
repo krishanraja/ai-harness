@@ -1,0 +1,75 @@
+# Harness steward: keeps the canon renderable, portable and self-consistent.
+#
+# Why this exists: the canon was well governed and had never reached a product
+# repository. There was no renderer, the three client adapters were hand-kept
+# near-duplicates, and twenty-six files carried one machine's absolute paths,
+# so the contract was only correct on one laptop. This job proves, on every
+# push and once a night, that the canon still renders byte-identically, that
+# every surface is accounted for, and that no machine-specific path has crept
+# back in.
+#
+# It never writes. Rendering into repositories is the reconciler's job and it
+# does that through pull requests. This is the gate that runs before any of it.
+#
+# Runs on ubuntu with no dependencies. Nothing here needs a machine to be awake
+# or a browser to be open, which is the whole point.
+
+name: Harness steward
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # 06:40 Brisbane. Late enough that the docs steward's nightly pass over the
+    # fleet has already landed, so parity is checked against today's state.
+    - cron: "40 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-steward-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  surfaces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The docs steward's fleet manifest, so the two stewards cannot name
+      # different repositories without a failing check. Sparse and shallow:
+      # one file, no history.
+      - name: Fetch the docs steward fleet manifest
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/krishanraja/control-center.git .steward-src
+          git -C .steward-src sparse-checkout set docs/steward
+          mkdir -p .steward
+          cp .steward-src/docs/steward/fleet.json .steward/fleet.json
+          rm -rf .steward-src
+          echo "fleet manifest: $(wc -c < .steward/fleet.json) bytes"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Render is byte-stable
+        run: node scripts/render.mjs --check
+
+      - name: Surfaces valid
+        run: node scripts/validate-surfaces.mjs --fleet-json .steward/fleet.json
+
+      - name: Render twice and prove the second run changes nothing
+        run: |
+          set -euo pipefail
+          node scripts/render.mjs > /dev/null
+          node scripts/render.mjs > /dev/null
+          git diff --exit-code -- adapters/ || {
+            echo "::error::Rendering is not deterministic. Two runs from one commit produced different bytes."
+            exit 1
+          }
+          echo "Two renders from one commit, byte-identical."

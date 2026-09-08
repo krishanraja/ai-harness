@@ -77,14 +77,24 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 
 ## File routing
 
-Follow `G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md`. Never create loose files in `C:\Users\krish\`.
+Follow the file-routing rules named in `contract/paths.yaml` as `rules_file` for the
+surface you are on. Never create loose files at the home root.
+
+Paths in this contract are named roots, not absolute paths, so the same contract is
+correct on a Windows laptop, a Linux container and a cloud runner.
+`contract/paths.yaml` is the only place a machine-specific path is allowed to exist,
+and `scripts/render.mjs` resolves the names when it writes a surface. Adding a machine
+means adding a surface there; the contract does not change.
 
 First match wins:
 
-1. Code/repo/build: `C:\Users\krish\dev\<venture>\`
-2. AI-training corpus: `C:\Users\krish\dev\<venture>\_corpus\`
-3. Personal wealth, investments, family, legal, or media: `G:\My Drive\Personal\{Investments|Legal|Family|Media}\`
-4. Scratch, QA, temporary files, and screenshots: `C:\Users\krish\.scratch\`
-5. Cross-venture timeless IP: `G:\My Drive\Ventures\_Knowledge\<sub>\`
-6. Single-venture deliverable: the venture's numbered directory under `G:\My Drive\Ventures\Active\`
+1. Code, repository, build: `ventures_root/<venture>/`
+2. AI-training corpus: `ventures_root/<venture>/_corpus/`
+3. Personal wealth, investments, family, legal or media: `drive_root/Personal/{Investments|Legal|Family|Media}/`
+4. Scratch, QA, temporary files and screenshots: `scratch_root/`
+5. Cross-venture timeless IP: `drive_root/Ventures/_Knowledge/<sub>/`
+6. Single-venture deliverable: the venture's numbered directory under `drive_root/Ventures/Active/`
 7. If unsure, ask or flag; do not dump at the home root.
+
+Where a named root is null for the surface, that route is unavailable there. Say so and
+stop rather than inventing a local substitute.

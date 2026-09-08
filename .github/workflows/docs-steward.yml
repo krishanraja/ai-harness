@@ -1,0 +1,36 @@
+# Docs steward caller. The procedure, schema and scripts live in
+# krishanraja/control-center (docs/steward/); this file only calls them.
+#
+# The canon repository is not exempt from the treatment it gives everyone else:
+# it carries NOW.md and docs/history/LOG.md like the other eight, so "what is
+# the harness right now" is answerable from one file by any agent.
+#
+# 06:50 Brisbane, last in the nightly sequence, after the eight product repos.
+
+name: Docs steward
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "50 20 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Digest and validate only; Claude does not run and nothing is pushed"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  steward:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'docs(steward):') }}
+    uses: krishanraja/control-center/.github/workflows/docs-steward.yml@main
+    with:
+      dry_run: ${{ inputs.dry_run || false }}
+    secrets: inherit
