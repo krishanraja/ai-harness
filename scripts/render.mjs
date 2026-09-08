@@ -99,6 +99,24 @@ export function renderBlock(repo, rendered = canonDate()) {
 }
 
 /**
+ * The block to write into a file that may already carry one.
+ *
+ * When the body is unchanged, the existing rendered date is kept. "rendered" is
+ * the date this body was produced, not the date the renderer last ran, so a
+ * canon commit that does not change a repository's block must not restamp ten
+ * files with a new date. Churn drowns the signal, and the signal is the point.
+ */
+export function blockFor(existing, repo, date) {
+  const next = renderBlock(repo, date)
+  const had = inspect(existing || '')
+  const now = inspect(next)
+  if (had.present && had.intact && now.present && had.sha === now.sha && had.release === now.release) {
+    return renderBlock(repo, had.rendered)
+  }
+  return next
+}
+
+/**
  * Splice the block into a file, touching nothing else. Returns the new text.
  * A file with no markers gains them at the end, after its own content, so the
  * repository's own words always come first.

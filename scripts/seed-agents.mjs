@@ -18,7 +18,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
-import { renderBlock, splice } from './render.mjs'
+import { blockFor, splice } from './render.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -64,12 +64,12 @@ function header(repo, meta) {
 
 let seeded = 0, spliced = 0
 for (const repo of fleet.repos) {
-  const dir = join(root, repo.name)
+  const dir = join(root, repo.checkout || repo.name)
   if (!existsSync(dir)) { console.log(`skip  ${repo.name} (no checkout at ${dir})`); continue }
   const target = join(dir, repo.canon_target)
   let text = existsSync(target) ? readFileSync(target, 'utf8') : null
   if (text === null) { text = header(repo, fm(dir)) + '\n'; seeded++ }
-  const after = splice(text, renderBlock(repo))
+  const after = splice(text, blockFor(existsSync(target) ? readFileSync(target, 'utf8') : '', repo))
   const before = existsSync(target) ? readFileSync(target, 'utf8') : null
   if (after === before) { console.log(`ok    ${repo.name}/${repo.canon_target}`); continue }
   spliced++

@@ -111,11 +111,12 @@ if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
   W('control-center docs/steward/fleet.json not reachable, so repo parity was not checked')
 } else {
   const docs = JSON.parse(readFileSync(fleetJsonPath, 'utf8'))
-  const docsNames = new Set(docs.repos.map((r) => r.name))
-  const hereNames = new Set(fleet.repos.map((r) => r.name))
+  const lc = (n) => n.toLowerCase()
+  const docsNames = new Set(docs.repos.map((r) => lc(r.name)))
+  const hereNames = new Set(fleet.repos.map((r) => lc(r.name)))
   for (const n of docsNames) if (!hereNames.has(n)) F(`${n} is in the docs steward fleet but not in state/fleet.yaml`)
-  for (const n of hereNames) if (!docsNames.has(n) && n !== 'ai-harness') F(`${n} is in state/fleet.yaml but not in the docs steward fleet`)
-  if (!hereNames.has('ai-harness')) F('state/fleet.yaml does not carry ai-harness; the canon must not be exempt from its own treatment')
+  for (const n of hereNames) if (!docsNames.has(n) && n !== lc('ai-harness')) F(`${n} is in state/fleet.yaml but not in the docs steward fleet`)
+  if (!hereNames.has(lc('ai-harness'))) F('state/fleet.yaml does not carry ai-harness; the canon must not be exempt from its own treatment')
   O(`repo parity with docs/steward/fleet.json: ${docsNames.size} steward repos, ${hereNames.size} harness surfaces`)
 }
 
@@ -123,7 +124,7 @@ if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
 const reposRoot = flag('--repos-root') || join(HARNESS, '..')
 let checked = 0
 for (const repo of fleet.repos) {
-  const target = join(reposRoot, repo.name, repo.canon_target)
+  const target = join(reposRoot, repo.checkout || repo.name, repo.canon_target)
   if (!existsSync(target)) continue
   const text = readFileSync(target, 'utf8')
   if (!text.includes(START)) continue
