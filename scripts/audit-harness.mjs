@@ -376,11 +376,37 @@ N(`${evidenced.size} skills have evaluation_evidence in the registry; ${loose.le
 // for weeks, because nothing was watching them. A scheduled job with no
 // watchdog is a scheduled job you will eventually stop trusting.
 {
+  // The clocks that are SUPPOSED to exist, named here rather than discovered.
+  //
+  // Until now this loop iterated whatever keys the file happened to contain, so
+  // a clock that never started was invisible: no entry, no finding, silence
+  // reading as health. That is the exact failure this watchdog exists to catch,
+  // reproduced inside the watchdog. A writer that has never written once is a
+  // worse outage than one that stopped, and it was the only kind that could not
+  // be seen.
+  //
+  // session-feed is the second half of "two clocks, each watching the other".
+  // It has never run. It would collect Claude Code session metadata, which is
+  // the one learning-loop input reachable for laptop sessions as well as cloud
+  // ones, and its heartbeat is what would let this audit fail loudly if the
+  // feed went quiet. Creating it is a standing scheduled job in Krish's account
+  // and is his call, not mine: three weekly Routines were disabled in September
+  // precisely because they failed silently. So it is named and reported missing
+  // rather than quietly added.
+  const EXPECTED_CLOCKS = {
+    observer: 'scripts/observe.mjs, nightly in harness-steward.yml',
+    'session-feed': 'a scheduled Routine collecting Claude Code session metadata, never created',
+  }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
-    N('state/heartbeats.json does not exist yet, so the observer has never run.')
+    F('heartbeat', 'all clocks', 'state/heartbeats.json does not exist, so no scheduled job has ever reported in.', 'Run the observer. Until a heartbeat exists, nothing can tell a healthy system from a dead one.')
   } else {
     const hb = JSON.parse(readFileSync(hbPath, 'utf8'))
+    for (const [who, where] of Object.entries(EXPECTED_CLOCKS)) {
+      if (!(who in hb)) {
+        F('heartbeat', who, `${who} is an expected clock with no entry in state/heartbeats.json, so it has never run once.`, `${where}. A writer that has never written is invisible to a watchdog that only reads the entries it finds, which is why the expected set is declared rather than discovered.`)
+      }
+    }
     for (const [who, beat] of Object.entries(hb)) {
       if (!beat || !beat.last_run) {
         F('heartbeat', who, `${who} has an entry in state/heartbeats.json with no last_run.`, 'Fix the writer, or remove the entry so it stops looking like a live clock.')
