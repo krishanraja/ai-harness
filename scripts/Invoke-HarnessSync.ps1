@@ -341,9 +341,24 @@ function Assert-NoUnknownSurfaceEntries {
     $extraDirectories = @(Get-ChildItem -LiteralPath $Surface.SkillsRoot -Directory -Force |
         Where-Object { $_.Name -notin $names -and $_.Name -notin $allowedProviderDirectories } |
         ForEach-Object Name)
+    # Loose FILES at a skills root are recorded, not refused. Ruled 2026-09-08.
+    #
+    # The installer replaces skill DIRECTORIES, so a stray .md or .skill archive
+    # sitting beside them can never be overwritten or lost by an install. Refusing
+    # on one protected nothing and stopped everything: LORIMER has 62 such files
+    # beside .claude\skills and 11 beside .cursor\skills, so the sync threw
+    # before it measured a single surface and the whole host stayed dark.
+    #
+    # An unknown DIRECTORY still refuses, and that is the half worth keeping: it
+    # may be a skill nobody registered, it sits exactly where an install writes,
+    # and it is the case where content can actually be destroyed.
     $rootFiles = @(Get-ChildItem -LiteralPath $Surface.SkillsRoot -File -Force | ForEach-Object Name)
-    if ($extraDirectories.Count -gt 0 -or $rootFiles.Count -gt 0) {
-        throw "Unclassified content on $($Surface.Id): directories=$($extraDirectories -join ',') files=$($rootFiles -join ',')"
+    if ($extraDirectories.Count -gt 0) {
+        throw "Unclassified directories on $($Surface.Id): $($extraDirectories -join ',')"
+    }
+    return [pscustomobject]@{
+        unmanaged_root_files = $rootFiles.Count
+        unmanaged_root_file_names = $rootFiles
     }
 }
 
@@ -354,7 +369,7 @@ function Get-SurfaceParity {
         [Parameter(Mandatory = $true)][string]$ArtifactsDirectory
     )
 
-    Assert-NoUnknownSurfaceEntries -Surface $Surface -Manifest $Manifest
+    $unmanaged = Assert-NoUnknownSurfaceEntries -Surface $Surface -Manifest $Manifest
     $installedRecords = New-Object System.Collections.Generic.List[string]
     $releaseRecords = New-Object System.Collections.Generic.List[string]
     $comparisons = New-Object System.Collections.Generic.List[object]
@@ -408,6 +423,11 @@ function Get-SurfaceParity {
         release_aggregate = $releaseAggregate
         aggregate_matches_release = $installedAggregate -eq $releaseAggregate
         hash_algorithm = $script:ArtifactHashAlgorithm
+        # Recorded so tolerating these files does not mean losing sight of them.
+        # A count that climbs every month is a surface quietly filling with things
+        # nothing governs, and this is the only place that would ever say so.
+        unmanaged_root_files = $unmanaged.unmanaged_root_files
+        unmanaged_root_file_names = $unmanaged.unmanaged_root_file_names
     }
 }
 

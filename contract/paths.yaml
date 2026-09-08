@@ -108,10 +108,21 @@ unmanaged_directories:
     observed: 2026-09-08
     loose_files: 62
     detail: 53 third-party marketing .md files and 9 .skill archives.
-    status: awaiting-ruling
+    # Ruled 2026-09-08. Loose FILES at a skills root are recorded, not refused.
+    # The installer replaces skill DIRECTORIES, so a file beside them cannot be
+    # overwritten or lost by an install, and refusing on one protected nothing
+    # while stopping the whole host: LORIMER's sync threw before measuring a
+    # single surface. An unknown DIRECTORY still refuses, because that is where
+    # an install writes and where content can actually be destroyed.
+    # scripts/Invoke-HarnessSync.ps1 counts them into every parity record, so a
+    # number that climbs is visible rather than merely tolerated.
+    status: recorded-not-refused
+    ruled: 2026-09-08
   - path: C:\Users\krish\.cursor\skills
     surface: windows-primary
     scope: loose files beside the managed skill directories, not the directories themselves
     observed: 2026-09-08
     loose_files: 11
-    status: awaiting-ruling
+    # Same ruling, 2026-09-08. See the note above.
+    status: recorded-not-refused
+    ruled: 2026-09-08
