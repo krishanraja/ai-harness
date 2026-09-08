@@ -19,8 +19,12 @@ roots:
     what: Scratch, QA, temporary files and screenshots. Never a deliverable.
   drive_root:
     what: Drive tree holding deliverables, cross-venture knowledge and personal records.
-  user_skills_root:
-    what: Where installed canonical user skills are exposed to the client.
+  claude_skills_root:
+    what: Where Claude Code reads installed user skills on this surface. Null where the client is absent.
+  codex_skills_root:
+    what: Where Codex reads installed user skills on this surface. Null where the client is absent.
+  cursor_skills_root:
+    what: Where Cursor reads installed user skills on this surface. Null where the client is absent.
   rules_file:
     what: The file-routing rules the operating contract defers to.
 
@@ -32,17 +36,21 @@ surfaces:
     ventures_root: C:\Users\krish\dev
     scratch_root: C:\Users\krish\.scratch
     drive_root: G:\My Drive
-    user_skills_root: C:\Users\krish\.agents\skills
+    claude_skills_root: C:\Users\krish\.claude\skills
+    codex_skills_root: C:\Users\krish\.codex\skills
+    cursor_skills_root: C:\Users\krish\.cursor\skills
     rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
 
   windows-codex:
-    what: The second Windows machine, Codex primary. Same layout, tracked separately because it deploys on its own clock.
+    what: SURFACE, the second Windows machine. Codex only; it has no Claude Code or Cursor skill surface at all, verified 2026-09-09.
     os: windows
     harness_root: C:\Users\krish\dev\mindmaker-os\ai-harness
     ventures_root: C:\Users\krish\dev
     scratch_root: C:\Users\krish\.scratch
     drive_root: G:\My Drive
-    user_skills_root: C:\Users\krish\.agents\skills
+    claude_skills_root: null
+    codex_skills_root: C:\Users\krish\.codex\skills
+    cursor_skills_root: null
     rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
 
   cloud-linux:
@@ -52,5 +60,32 @@ surfaces:
     ventures_root: /home/user
     scratch_root: /tmp/scratch
     drive_root: null
-    user_skills_root: /home/user/.agents/skills
+    claude_skills_root: null
+    codex_skills_root: null
+    cursor_skills_root: null
     rules_file: null
+
+# Not a skills root, recorded so nobody mistakes it for one.
+#
+# C:\Users\krish\.agents\skills on windows-primary held 61 skills on
+# 2026-09-09 and not one of them was canonical. At least nine are named by
+# contract/skill-routing-contract.md as retired and forbidden to run beside the
+# current set: strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit,
+# design-system-starter, N8N and fleet-ops.
+#
+# Until 2026-09-09 the Codex and Cursor adapters told agents that the canonical
+# skills were exposed there. They were not, and have never been. That claim was
+# inherited from the pre-rendered adapters and carried into the first version of
+# this file without being checked against a machine.
+#
+# It is NOT deleted here. Deletion is an irreversible external mutation and
+# needs Krish's explicit approval for that named target, and some of those 61
+# may be deliberate. It is recorded so the audit can name it.
+unmanaged_directories:
+  - path: C:\Users\krish\.agents\skills
+    surface: windows-primary
+    observed: 2026-09-09
+    skills: 61
+    canonical: 0
+    forbidden_present: [strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit, design-system-starter, N8N, fleet-ops]
+    status: awaiting-ruling
