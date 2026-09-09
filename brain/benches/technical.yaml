@@ -18,6 +18,26 @@
 # A judge that returns a number is measuring the judge. A judge that names the
 # clause that got worse is measuring the change.
 
+#
+# What this bench is allowed to do, and what it is not.
+#
+# The panel's first live run raised this against itself, blocking, and it was
+# right to: `verification.self-critique-is-supplemental` in the operating
+# contract says self-critique is supplemental and is not an independent
+# verifier. Making model judgement a deterministic gate would contradict a live
+# rule while both read as current, which is exactly the failure
+# contradiction-surfaced exists to catch.
+#
+# So the panel is not a gate. It posts a pull request review, the same standing
+# any reviewer has. A person merges. It never merges, never approves, and its
+# verdict is never the thing that makes a change correct. The deterministic
+# checks stay where they were: render, validate-surfaces, check-aggregate, the
+# provenance ledger and the canaries on real clients. Those verify. This
+# criticises, in writing, with a clause named, and a human decides.
+#
+# A blocking criterion therefore means "request changes and say why", not "stop
+# the merge". Read alongside `verification.use-deterministic-checks-first`.
+
 schema_version: 1
 bench: technical
 source: memory-doctrine

@@ -12,6 +12,26 @@
 # only improvements is discarded and re-run once. A bench that agrees with
 # everything is measuring nothing.
 
+#
+# What this bench is allowed to do, and what it is not.
+#
+# The panel's first live run raised this against itself, blocking, and it was
+# right to: `verification.self-critique-is-supplemental` in the operating
+# contract says self-critique is supplemental and is not an independent
+# verifier. Making model judgement a deterministic gate would contradict a live
+# rule while both read as current, which is exactly the failure
+# contradiction-surfaced exists to catch.
+#
+# So the panel is not a gate. It posts a pull request review, the same standing
+# any reviewer has. A person merges. It never merges, never approves, and its
+# verdict is never the thing that makes a change correct. The deterministic
+# checks stay where they were: render, validate-surfaces, check-aggregate, the
+# provenance ledger and the canaries on real clients. Those verify. This
+# criticises, in writing, with a clause named, and a human decides.
+#
+# A blocking criterion therefore means "request changes and say why", not "stop
+# the merge". Read alongside `verification.use-deterministic-checks-first`.
+
 schema_version: 1
 bench: personal
 source: personal-standard
@@ -42,6 +62,7 @@ criteria:
 
   - id: cited-or-silent
     blocking: false
+    restates: truth-and-freshness.record-source-and-retrieval
     quote: >
       No number, name or claim ships without a source.
     test: >
@@ -51,6 +72,11 @@ criteria:
 
   - id: approval-walls
     blocking: true
+    # Named, not silent. This deliberately mirrors a live canon rule, and the
+    # panel flagged the unnamed duplication as context pollution a five-gram
+    # check would never catch. The bench is the enforcement of that rule from
+    # the outside, not a second, drifting copy of it.
+    restates: authority.never-publish-post-send
     quote: >
       Approval walls. Drafts never send. Krish or the partner sends. No outbound
       tool has send authority.

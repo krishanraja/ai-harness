@@ -477,15 +477,22 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
 // counting it here would bury the real signal in noise.
 {
   const path = join(HARNESS, 'brain/proposals.jsonl')
-  const merged = []
+  const rows = []
   if (existsSync(path)) {
     for (const line of readFileSync(path, 'utf8').split('\n')) {
       if (!line.trim()) continue
-      try { const r = JSON.parse(line); if (r.event === 'merged') merged.push(r) } catch { /* a malformed line is not a reason to stop the audit */ }
+      try { rows.push(JSON.parse(line)) } catch { /* a malformed line is not a reason to stop the audit */ }
     }
   }
+  // The ledger is append-only, so a later row amends an earlier one rather than
+  // replacing it. What a merged proposal claimed to fix can therefore arrive in
+  // its own row or in an amendment, and both have to be read.
+  const merged = rows.filter((r) => r.event === 'merged')
+  const amendments = rows.filter((r) => r.amends)
   let checked = 0
-  for (const m of merged) {
+  for (const base of merged) {
+    const m = { ...base }
+    for (const a of amendments.filter((a) => a.amends === base.id)) Object.assign(m, { ...a, id: base.id, event: base.event })
     for (const a of m.addresses || []) {
       if (a.verdict === 'nothing-changes') continue
       checked++
