@@ -129,13 +129,20 @@ stores:
       exists. Section 9 of the Ikigai sheet already keeps one, with flip rules.
 
   - id: decision-ledger-store
-    where: nowhere
-    disposition: migrate
+    where: brain/decisions.jsonl, created 2026-09-09
+    disposition: canon
     action: >
-      The decision-ledger skill names Supabase as its canonical store and there
-      is no decisions table. The skill also says never to create an ad hoc
-      permanent file, so repointing it is a skill rewrite through the proposal
-      path, not a config change.
+      brain/decisions.jsonl now exists and holds its first ten entries: Krish's
+      rulings of 2026-09-09 on the agent rules that had been waiting unapproved
+      in corrections since 2026-08-24. Each row carries his wording verbatim in
+      krish_wording, the amended rule text wherever he changed the proposal, the
+      corrections row it answers, and the reason. Append only, latest row per id
+      wins, the same shape as proposals.jsonl.
+    outstanding: >
+      The decision-ledger skill still names a Supabase decisions table that does
+      not exist and returns STORE_UNAVAILABLE. Repointing it at this file is a
+      skill rewrite through the proposal path, not a config change, so it stays
+      open.
 
   # ----------------------------------------------------------------- retire
   - id: feedback_queue
