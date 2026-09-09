@@ -16,7 +16,7 @@
 
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
-  hasDissent, blockingRegressions, clauseUniverse, BENCHES,
+  hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED,
 } from './judge.mjs'
 
 let failures = 0
@@ -231,6 +231,38 @@ T('the prompt shows what a clause is not', () => {
   const s = systemPrompt(loadBench('personal'), clauseIds)
   assert(/NOT the criterion name/i.test(s), 'the prompt must say the clause is not the criterion name')
   assert(/wrong:/.test(s) && /right:/.test(s), 'and show an example of each')
+})
+
+
+// --------------------------------------------- output that was cut off
+/**
+ * Two live reviews came back cut mid-array. Both were discarded whole with
+ * "the bench returned unparseable JSON", which reads like a bench that found
+ * nothing rather than one whose findings were thrown away by a token limit.
+ */
+T('a review cut off mid-array keeps the findings that arrived whole', () => {
+  const bench = loadBench('technical')
+  const full = reply([
+    { criterion_id: 'provenance', verdict: 'regresses', clause: A_RULE, because: 'One.' },
+    { criterion_id: 'ghost-facts', verdict: 'regresses', clause: A_RULE, because: 'Two.' },
+    { criterion_id: 'write-gating', verdict: 'improves', clause: A_RULE, because: 'Three.' },
+  ])
+  const cut = TRUNCATED + full.slice(0, full.lastIndexOf('{"criterion_id":"write-gating"') + 40)
+  const { findings, problems } = parseFindings(cut, bench, clauseIds, DIFF_FILES)
+  assert(findings.length === 2, `expected the 2 whole findings to survive, got ${findings.length}`)
+  assert(problems.some((p) => /cut off after 2 finding/.test(p)), `it must say it was cut off, got ${problems.join(' | ')}`)
+})
+
+T('a cut with nothing whole in it says it was cut, not that it was silent', () => {
+  const bench = loadBench('technical')
+  const { findings, problems } = parseFindings(TRUNCATED + '{"findings":[{"criterion_id":"prov', bench, clauseIds, DIFF_FILES)
+  assert(findings.length === 0, 'nothing whole survived')
+  assert(problems.some((p) => /cut off/.test(p)), `a truncation must be named as one, got ${problems.join(' | ')}`)
+})
+
+T('salvage ignores fragments that are not findings', () => {
+  const objs = salvage('[{"criterion_id":"provenance","verdict":"improves"},{"not_a":"finding"},{"criterion_i')
+  assert(objs.length === 1, `expected 1 salvaged finding, got ${objs.length}`)
 })
 
 // -------------------------------------------------------------------- report

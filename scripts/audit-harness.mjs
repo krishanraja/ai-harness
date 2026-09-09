@@ -539,7 +539,11 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   let checked = 0
   for (const base of merged) {
     const m = { ...base }
-    for (const a of amendments.filter((a) => a.amends === base.id)) Object.assign(m, { ...a, id: base.id, event: base.event })
+    // amends is one id or several: a single amendment can carry a field that
+    // several rows were missing, and forcing one row per amended id would mean
+    // writing the same correction three times.
+    const amends = (a) => (Array.isArray(a.amends) ? a.amends : [a.amends])
+    for (const a of amendments.filter((a) => amends(a).includes(base.id))) Object.assign(m, { ...a, id: base.id, event: base.event })
     for (const a of m.addresses || []) {
       if (a.verdict === 'nothing-changes') continue
       checked++

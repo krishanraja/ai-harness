@@ -88,7 +88,8 @@ Waiting on Krish, in order of how much it blocks:
 10. **Two findings the judge panel will keep raising until you decide them**, both correct and neither fixable in code.
     - `ghost-facts`: 122 rules are live in `standards_registry` alongside 314 live entries in `brain/rules.yaml`, and nothing supersedes anything. Only the triage in item 8 closes this.
     - `building-unasked`: the brain is a new subsystem and its only named asker is your ruling of 2026-09-09. The panel is designed to always dissent, so a change like this one has no state in which it returns zero findings. That is working as intended, not a fault, and it is why the panel requests changes rather than gating a merge.
-11. **Seven freshness reviews and three routing decisions**, listed above.
+11. **Does the judge panel posting a review breach the approval wall?** The panel raised this against itself, blocking, twice. `authority.never-publish-post-send` says never publish or post without explicit approval, and the personal bench reads it as failing anything with publish authority however well gated. The panel posts a pull request review on every canon-touching change, autonomously. The counter-argument is that the steward already opens pull requests and issues on its own with your approval, so a review comment is the same class of action on the same private repository. I have not decided this for you and have not disabled the posting. If you want it off, the report still lands in the run summary and as an artifact; only the posting step would go.
+12. **Seven freshness reviews and three routing decisions**, listed above.
 
 Ruled and closed on 2026-09-08: `C:\Users\krish\.agents\skills` holds 63 entries, zero canonical, nine that the routing contract forbids, and **nothing reads it**. No client config points there and no instruction file names it. The forbidden skills are inert. It stays a third-party catalog.
 
