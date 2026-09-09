@@ -1,9 +1,9 @@
 {
   "harness-sync-surface": {
-    "last_run": "2026-09-08T17:31:24.8370043Z",
+    "last_run": "2026-09-09T07:31:58.371Z",
     "status": "ok",
     "release": "v2026.09.08.2",
-    "source": "scheduled-task-on-demand-test"
+    "source": "repository_dispatch"
   },
   "observer": {
     "last_run": "2026-09-08T22:57:39.141Z",
