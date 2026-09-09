@@ -98,6 +98,15 @@ machines:
     clients: [github-actions, claude-code-web]
     reports: rendered-per-run
     note: Ephemeral. Renders from the commit it checks out, so it is never behind by construction.
+  - id: openclaw-vps
+    clients: [openclaw-gateway]
+    reports: heartbeat-and-health
+    note: >
+      Declared 2026-09-09 after a read-only audit disproved the assumption that it
+      was idle. 31 root cron entries, 33 gateway jobs, 196 days uptime. It already
+      reads the brain and writes to it every 15 minutes and was in no manifest,
+      which is why five render logs could die at the 2026-08-29 rebrand and go
+      unnoticed for eleven days. Evidence: state/vps-liveness-audit-2026-09-09.md.
 
 # What each surface takes from the brain, and what it gives back.
 #
@@ -153,3 +162,22 @@ surface_contracts:
     reads: installed skills
     writes: nothing
     gap: Two live scheduled Routines with no path back into the ledger.
+
+  - id: openclaw-vps
+    reads: >
+      agents.brief_content, pulled from Supabase every 15 minutes by
+      render-identity.py into /root/.openclaw/skills/agent-*/SKILL.md. This is a
+      real, working brain-to-filesystem pump and the only one in the fleet.
+    writes: >
+      system_health, five rows every 15 minutes, currently the only thing
+      reporting DeepSeek balance as degraded. Also workflow_runs, and from
+      2026-09-09 an hourly heartbeat carrying the n8n execution counter.
+    role: >
+      The watchdog that sits outside the systems it watches. n8n-exec-governor.py
+      runs here rather than in n8n precisely so it cannot be starved by the thing
+      it measures, and that separation is the one structural property the rest of
+      the estate cannot give itself.
+    gap: >
+      Until 2026-09-09 it had no heartbeat and appeared in no manifest, so nothing
+      could tell a healthy host from a dead one. An external check that nobody
+      audits is a single point of failure wearing the costume of a safeguard.

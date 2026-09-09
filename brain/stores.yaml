@@ -160,6 +160,41 @@ stores:
       That text is superseded by the two fields above, not deleted, because the
       file's own rule is that nothing here is dropped.
 
+  - id: openclaw-vps-host-state
+    where: the OpenClaw VPS, /root/.openclaw, 4.5 GB
+    disposition: reference
+    owner: mindmake-os
+    holds: >
+      Runtime state for a host that was assumed dormant and is not. 31 root cron
+      entries, 33 gateway jobs on a scheduler the repository did not know
+      existed, 196 days uptime, and the n8n execution governor that runs here
+      rather than in n8n so it cannot be starved by the thing it measures.
+    reads_from_brain: >
+      agents.brief_content, pulled from Supabase every 15 minutes by
+      render-identity.py. The only working brain-to-filesystem pump in the fleet.
+    writes_to_brain: >
+      system_health every 15 minutes, workflow_runs, and from 2026-09-09 an
+      hourly heartbeat via scripts/vps-heartbeat.sh.
+    action: >
+      Reference, not migrate. The host is declared as a surface in
+      state/fleet.yaml rather than retired, because a watchdog outside the
+      systems it watches is a property the rest of the estate cannot give
+      itself. What migrates is definitions, not state: the 33 gateway jobs and
+      the agent runtime bindings, which exist in exactly one copy on one disk.
+    excluded_by_ruling: >
+      The four personal agents and their memory. Ruled 2026-09-09: leave them
+      entirely alone. No backup, no migration, no cataloguing. The risk of disk
+      loss is real and accepted, and recorded here so it is a decision rather
+      than an oversight.
+    unsettled: >
+      main.sqlite, ops.sqlite and cleo.sqlite, 77 MB across the three business
+      agents. Evidence points to session transcripts rather than curated memory,
+      since the documented model puts durable memory in MEMORY.md and Postgres
+      and no document mentions these files, but it is not proven. Reading the
+      table names settles it.
+    evidence: state/vps-liveness-audit-2026-09-09.md
+    declared: 2026-09-09
+
   # ----------------------------------------------------------------- retire
   - id: feedback_queue
     where: supabase

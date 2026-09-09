@@ -392,6 +392,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     'harness-sync-surface': 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE',
     observer: 'scripts/observe.mjs, nightly in harness-steward.yml',
     'session-feed': 'a scheduled Routine collecting Claude Code session metadata, never created',
+    'openclaw-vps': 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09',
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
