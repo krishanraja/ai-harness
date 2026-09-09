@@ -98,3 +98,58 @@ machines:
     clients: [github-actions, claude-code-web]
     reports: rendered-per-run
     note: Ephemeral. Renders from the commit it checks out, so it is never behind by construction.
+
+# What each surface takes from the brain, and what it gives back.
+#
+# The question was whether every place Krish works contributes to the central
+# memory as well as reading from it. Listed honestly, most do not. A surface
+# that only reads is a place where a ruling made in conversation is lost the
+# moment the session ends, and audit-harness.mjs opens a standing
+# surface-contract finding for every one of them until it has a write path.
+surface_contracts:
+  - id: claude-code-lorimer
+    reads: canon block, rendered adapter, 29 installed skills
+    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports
+    gap: Client-native auto-memory is ungoverned and nothing in the canon mentions it.
+
+  - id: cursor-lorimer
+    reads: krish-core.mdc, 29 installed skills
+    writes: rulings in commit bodies
+    gap: No canary path, because Cursor has no headless client that exposes skill invocation as observable output. Native rules are ungoverned.
+
+  - id: codex-lorimer
+    reads: AGENTS.md, 29 installed skills
+    writes: rulings in commit bodies, canary reports
+
+  - id: codex-surface
+    reads: AGENTS.md, 29 installed skills
+    writes: rulings in commit bodies, canary reports
+
+  - id: claude-code-cloud
+    reads: canon block
+    writes: pull requests, rulings, observations, proposals
+
+  - id: claude-ai-chat
+    reads: cloud skill catalogue, two releases behind
+    writes: nothing
+    gap: >
+      The biggest reader in the fleet and it has never written one thing back.
+      Every ruling made in conversation there is lost. The import-memory skill
+      already exists and is the cheapest write path available.
+
+  - id: perplexity-computer
+    reads: cloud skill catalogue, two releases behind
+    writes: nothing
+    gap: Same as claude.ai chat, with no import path of its own.
+
+  - id: n8n-agents
+    reads: agents.brief_content, which is not rendered from the canon
+    writes: nothing
+    gap: >
+      Fourteen agents reading a fourth copy of doctrine. They write corrections,
+      which nothing here reads yet, and learning_events, which is dead.
+
+  - id: routines
+    reads: installed skills
+    writes: nothing
+    gap: Two live scheduled Routines with no path back into the ledger.

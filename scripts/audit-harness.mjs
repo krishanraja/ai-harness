@@ -416,6 +416,53 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   }
 }
 
+// ------------------------------------------------------------------- stores
+// The brain is not the only memory, and pretending otherwise is how a second
+// live rule set goes unnoticed for four months.
+//
+// brain/stores.yaml classifies every store that holds something memory shaped.
+// This turns two of those classifications into standing findings: a store the
+// brain says it feeds on that has gone quiet, and a store carrying content that
+// belongs in the brain and has not been moved. Neither is fixed automatically.
+// Migrating a store is a reading job with judgement in it, which is exactly the
+// kind of thing this audit names and never performs.
+{
+  const p = join(HARNESS, 'brain/stores.yaml')
+  if (!existsSync(p)) {
+    F('stores', 'brain/stores.yaml', 'brain/stores.yaml does not exist, so nothing records which other memories exist or what is to become of them.', 'Restore it. The canon being well formed says nothing about whether it is the only memory.')
+  } else {
+    const doc = parseYaml(readFileSync(p, 'utf8'))
+    const stores = doc.stores || []
+    const days = (d) => Math.round((Date.now() - new Date(d)) / 86400000)
+    for (const st of stores) {
+      if (st.disposition === 'feed' && st.last_write && days(st.last_write) > 30) {
+        F('store-dead', st.id, `${st.id} is declared an input the brain feeds on and has not been written since ${st.last_write}, ${days(st.last_write)} days ago.`, 'Either the thing that writes it is broken, or it is not really an input. Both are worth knowing; a silent input is indistinguishable from a healthy one.')
+      }
+      if (st.disposition === 'migrate') {
+        const scale = st.active_rows ? `${st.active_rows} of ${st.rows} rows still marked active` : (st.rows ? `${st.rows} row(s)` : 'content')
+        F('store-unmigrated', st.id, `${st.id} holds ${scale} that brain/stores.yaml says belongs in the brain, and it has not been moved.`, String(st.action || 'Triage it against brain/rules.yaml.').replace(/\s+/g, ' ').trim())
+      }
+    }
+    N(`brain/stores.yaml classifies ${stores.length} stores: ${['canon', 'feed', 'migrate', 'retire', 'reference'].map((d) => `${stores.filter((x) => x.disposition === d).length} ${d}`).join(', ')}.`)
+  }
+}
+
+// ------------------------------------------------------- reads and writes
+// Every surface should both read from the brain and write back to it. A surface
+// that only reads is a place where a ruling made in conversation is lost, which
+// is the single largest hole in the loop: claude.ai chat is the biggest reader
+// in the fleet and has never written one thing back.
+{
+  const fleetDoc = parseYaml(read('state/fleet.yaml'))
+  const surfaces = fleetDoc.surface_contracts || []
+  for (const s of surfaces) {
+    if (!s.writes || s.writes === 'nothing') {
+      F('surface-contract', s.id, `${s.id} reads from the brain and writes nothing back.`, String(s.gap || 'Give it a write path, or record why it cannot have one. Until then, anything decided on this surface is lost when the session ends.').replace(/\s+/g, ' ').trim())
+    }
+  }
+  if (surfaces.length) N(`${surfaces.length} surfaces declare what they read and write.`)
+}
+
 // ------------------------------------------------------------- bench sources
 // The two judge benches are built from documents that do not live in this
 // repository: the memory doctrine is in a venture repo, the personal standard

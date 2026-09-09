@@ -1,0 +1,205 @@
+# Every place a memory lives, and what is to become of it.
+#
+# The question this file answers is the one the audit could never answer: not
+# "is the canon well formed" but "is this the only memory, and if not, what is
+# in the others". Counted live on 2026-09-09 against the operating system's
+# Supabase project and every checkout.
+#
+# disposition:
+#   canon      this repository. The governed, versioned, released memory.
+#   feed       an input the observer reads into state/observations/.
+#   migrate    content that belongs in the brain and is not here yet.
+#   retire     dead. Imported once as history, then marked, never dropped.
+#   reference  legitimate operational state. The brain points at it by id and
+#              never copies it, because copying it would create a second truth.
+#
+# Nothing here is deleted. Deletion is an irreversible external mutation and
+# needs Krish's approval for that named target, which is the same rule that
+# governs the unmanaged skills catalogue in contract/paths.yaml.
+
+schema_version: 1
+counted: 2026-09-09
+project: gojpffsrxybbpbdzzrvs
+
+stores:
+  # ------------------------------------------------------------------ canon
+  - id: harness-canon
+    where: this repository
+    disposition: canon
+    holds: two contracts, 29 skills, 314 provenance entries, observations, proposals, canaries
+    read_by: every client on every surface
+    written_by: pull request only
+
+  # --------------------------------------------------------- the big finding
+  #
+  # This is the most important row in the file.
+  #
+  # standards_registry has the schema the brain was about to build from
+  # scratch: rule_text, source, source_date, source_context, supersedes,
+  # active, deprecated_at, deprecation_reason, hit_count, last_hit_at,
+  # repeat_violations_30d, applied_at, last_efficacy_check. Provenance,
+  # supersession and efficacy, all of it, designed in April.
+  #
+  # It was then abandoned. The numbers are the argument:
+  #
+  #   169 rows, 122 still marked active, 47 deprecated
+  #   0 rows have ever used the supersedes column
+  #   6 of 169 have ever been hit
+  #   0 have ever had an efficacy check
+  #   no new row since 2026-05-31, last touched 2026-08-06
+  #
+  # That is the memory doctrine's "dead zones, never retrieved" failure in the
+  # flesh, in a store built to prevent exactly it. And 122 rules are nominally
+  # LIVE, which means Krish has two live rule sets: 314 entries here and 122
+  # there, with nothing reconciling them.
+  #
+  # They are not junk. A sample of the active rows includes "Zero em dashes",
+  # which this repository enforces independently and neither knows about the
+  # other; "No future tense promises"; "Confidence Tax", requiring every
+  # confidence claim to cite evidence; and a ban on mocked execution in
+  # scripts. At least three of those are good rules the canon does not have.
+  - id: standards_registry
+    where: supabase
+    disposition: migrate
+    rows: 169
+    active_rows: 122
+    deprecated_rows: 47
+    first_write: 2026-04-14
+    last_new_row: 2026-05-31
+    last_touched: 2026-08-06
+    supersedes_used: 0
+    ever_hit: 6
+    efficacy_checks: 0
+    read_by: nothing in this repository
+    written_by: unknown, nothing since May
+    action: >
+      Triage the 122 active rows against the 314 entries in brain/rules.yaml.
+      Each is one of three things: already said by the canon, worth adding to
+      the canon, or genuinely dead. This is a reading job for Krish and it is
+      the highest value item in this file, because until it is done two live
+      rule sets contradict each other in silence.
+
+  # ------------------------------------------------------------------- feed
+  - id: corrections
+    where: supabase
+    disposition: feed
+    rows: 23
+    last_write: 2026-09-06
+    read_by: nothing in this repository yet
+    # Not learning content. An alarm log, and the alarm is going off.
+    # 21 of 23 rows are unapplied and awaiting approval, every one carrying a
+    # written proposed_brief_edit: 11 silent_failure_pattern rows between
+    # 23 August and 6 September, and 10 pattern_recall rows from 24 August.
+    # Four named workflows have failed silently and continuously since
+    # 30 August, among them the Silent Success Detector and Feedback
+    # Aggregation. The detector meant to catch silent failure is one of the
+    # things failing silently.
+    action: Observer input, and an operational alarm that belongs to the OS, not to the harness.
+
+  - id: canaries
+    where: state/canaries/
+    disposition: feed
+    read_by: audit-harness.mjs and observe.mjs
+    written_by: machines, through a pull request
+
+  # ---------------------------------------------------------------- migrate
+  - id: canon_documents.krish-canon
+    where: supabase
+    disposition: migrate
+    rows: 1
+    bytes: 56000
+    last_write: 2026-09-03
+    read_by: the job-search routine
+    written_by: nothing. No code anywhere writes it and it has no git history.
+    action: A second canon covering identity, positioning and a decision log. It belongs in the brain with history.
+
+  - id: assumption-ledger
+    where: krish-principles section 5.3, as prose
+    disposition: migrate
+    action: >
+      The canon instructs agents to maintain an Assumption Ledger and no store
+      exists. Section 9 of the Ikigai sheet already keeps one, with flip rules.
+
+  - id: decision-ledger-store
+    where: nowhere
+    disposition: migrate
+    action: >
+      The decision-ledger skill names Supabase as its canonical store and there
+      is no decisions table. The skill also says never to create an ad hoc
+      permanent file, so repointing it is a skill rewrite through the proposal
+      path, not a config change.
+
+  # ----------------------------------------------------------------- retire
+  - id: feedback_queue
+    where: supabase
+    disposition: retire
+    rows: 389
+    last_write: 2026-07-02
+    action: >
+      Dead ten weeks. The likeliest cause is now known: the Vera Feedback
+      Aggregation workflow has been failing silently since 30 August, and
+      whatever stopped it in July was never noticed either.
+
+  - id: skill_proposals
+    where: supabase
+    disposition: retire
+    rows: 0
+    action: Built, never used once.
+
+  - id: learning_events
+    where: supabase
+    disposition: retire
+    rows: 12
+    last_write: 2026-05-04
+    action: All needs_review, zero efficacy checks, targets point at a filesystem that no longer exists.
+
+  - id: judge_verdicts
+    where: supabase
+    disposition: retire
+    rows: 2
+    action: >
+      A judge concept existed here before this one and ran twice. Read the two
+      rows before trusting the new panel, because whatever stopped that one is
+      the most likely thing to stop this one.
+
+  - id: panel_runs
+    where: supabase
+    disposition: retire
+    rows: 1
+    action: See judge_verdicts. One run, then nothing.
+
+  - id: memory
+    where: supabase
+    disposition: reference
+    rows: 5
+    last_write: 2026-04-15
+    action: Five LinkedIn post hooks. Misnamed. Content state, not memory.
+
+  # -------------------------------------------------------------- reference
+  - id: agents.brief_content
+    where: supabase
+    disposition: reference
+    rows: 14
+    action: >
+      The fourteen agent briefs, not rendered from the canon and carrying zero
+      learned_plays. Owned by mindmake-os. The harness renders a canon block
+      into that repository and its deploy path composes the briefs; the harness
+      never writes this table.
+
+  - id: operational-queues
+    where: supabase
+    disposition: reference
+    covers: [decisions_waiting, content_decisions, content_slate_rulings, workflow_proposals, system_improvements, audit_log, silent_failures]
+    action: >
+      Legitimate operational state owned by the OS. The brain references by id
+      and never copies. A decision here that should change the canon travels by
+      the existing Ruling (Krish, DATE) path.
+
+  - id: client-native-memory
+    where: each machine
+    disposition: reference
+    action: >
+      Claude Code auto-memory, Cursor rules and Codex notes. Zero mentions
+      anywhere in the canon or the adapters, so it is ungoverned. The rule is
+      that native memory is scratch and never authority, and anything durable
+      found there is proposed to the brain.
