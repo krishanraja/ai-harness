@@ -9,5 +9,13 @@
     "last_run": "2026-09-08T22:57:39.141Z",
     "observations_added": 3,
     "repos_read": 10
+  },
+  "openclaw-vps": {
+    "last_run": "2026-09-09T12:33:16.107Z",
+    "status": "ok",
+    "n8n_cycle_start": "2026-09-01T00:00:00+00:00",
+    "n8n_executions_this_cycle": 1690,
+    "gateway_jobs_defined": 45,
+    "source": "repository_dispatch"
   }
 }
