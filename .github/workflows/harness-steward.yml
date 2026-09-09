@@ -87,6 +87,12 @@ jobs:
       - name: The aggregate still matches the Windows construction
         run: node scripts/check-aggregate.mjs
 
+      # The provenance checker is the gate that stops a rule changing without a
+      # record of who changed it. A gate that cannot fail reads as health, so
+      # its own mutation suite runs first, before it is trusted on the canon.
+      - name: The provenance checker can still fail
+        run: node scripts/test-brain-rules.mjs
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail

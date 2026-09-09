@@ -1,0 +1,2760 @@
+# Provenance for every rule in the canon.
+#
+# Written by scripts/brain-rules.mjs, checked by scripts/validate-surfaces.mjs.
+# One entry per top-level rule in the two contracts, and one per chapter of
+# every skill. text_sha is the sha256 of the rule text (first 12 hex), so an
+# edit without a new source is arithmetic to detect rather than a judgement.
+#
+# source.kind:
+#   founding  the rule predates this ledger. We know when, not why.
+#   ruling    a Ruling (Krish, DATE) line in the commit that introduced it.
+#   proposal  a docs/proposals entry a human accepted.
+#   import    carried in from a source outside this repository.
+#
+# Ids are slugs of the rule's own opening words, never ordinals: inserting a
+# rule must not rename the ones below it, or provenance cannot survive the edit.
+
+schema_version: 1
+
+# 89 rules across the two contracts.
+contract_rules:
+  - id: working-style.apply-krish-principles-to
+    file: contract/krish-operating-contract.md
+    text_sha: "f338ba0fff33"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.use-concentrated-rigor-exhaustive
+    file: contract/krish-operating-contract.md
+    text_sha: "58dbd5afb6a0"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.when-strong-evidence-or
+    file: contract/krish-operating-contract.md
+    text_sha: "700ce023c79a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.preserve-finalized-consequential-decisions
+    file: contract/krish-operating-contract.md
+    text_sha: "c27914884d8b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.lead-with-the-conclusion
+    file: contract/krish-operating-contract.md
+    text_sha: "3174f22dfde8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.make-reasonable-reversible-assumptions
+    file: contract/krish-operating-contract.md
+    text_sha: "0fe3a43acc02"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.decide-reversible-technical-procedural
+    file: contract/krish-operating-contract.md
+    text_sha: "bda86ad868d8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.surface-contradictions-with-evidence
+    file: contract/krish-operating-contract.md
+    text_sha: "de1fabe81ad5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.distinguish-durable-objectives-and
+    file: contract/krish-operating-contract.md
+    text_sha: "7d22b5dd0ded"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.when-krish-closes-a
+    file: contract/krish-operating-contract.md
+    text_sha: "24465ed23e73"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: working-style.preserve-krish-s-voice
+    file: contract/krish-operating-contract.md
+    text_sha: "7aec44bcecd0"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.principles-apply-krish-principles
+    file: contract/krish-operating-contract.md
+    text_sha: "8e4d862113f3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.intent-briefing-when-triggered
+    file: contract/krish-operating-contract.md
+    text_sha: "30669d519b6a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.strategy-use-strategy-brief
+    file: contract/krish-operating-contract.md
+    text_sha: "9de56b1b2529"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.execution-use-the-narrowest
+    file: contract/krish-operating-contract.md
+    text_sha: "49e46e10ce57"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.verification-use-verification-loop
+    file: contract/krish-operating-contract.md
+    text_sha: "178e61e3daba"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: always-on-execution-chain.delivery-state-what-was
+    file: contract/krish-operating-contract.md
+    text_sha: "f61e0f57450f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.proactively-notice-when-a
+    file: contract/krish-operating-contract.md
+    text_sha: "d317688d4c2d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.ask-krish-one-specific
+    file: contract/krish-operating-contract.md
+    text_sha: "f5da45e89e1c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.when-krish-explicitly-hands
+    file: contract/krish-operating-contract.md
+    text_sha: "ca25819e31cb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.do-not-ask-for
+    file: contract/krish-operating-contract.md
+    text_sha: "afbecee90719"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.do-not-turn-a
+    file: contract/krish-operating-contract.md
+    text_sha: "a0a86bbc00d8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.do-not-make-sensitive
+    file: contract/krish-operating-contract.md
+    text_sha: "7d067c7b43b8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.treat-a-one-off
+    file: contract/krish-operating-contract.md
+    text_sha: "6476bafa0df9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.when-a-recurring-unmet
+    file: contract/krish-operating-contract.md
+    text_sha: "a957fea393c2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: personalization-discovery.keep-a-short-backlog
+    file: contract/krish-operating-contract.md
+    text_sha: "f2eb793f90d6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: authority.research-inspect-diagnose-draft
+    file: contract/krish-operating-contract.md
+    text_sha: "178151e6079a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: authority.treat-any-purge-deletion
+    file: contract/krish-operating-contract.md
+    text_sha: "34509750179f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: authority.never-publish-post-send
+    file: contract/krish-operating-contract.md
+    text_sha: "2d9753efa37a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: authority.drafts-may-be-created
+    file: contract/krish-operating-contract.md
+    text_sha: "82dd8d8ba5d6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: authority.treat-approval-as-a
+    file: contract/krish-operating-contract.md
+    text_sha: "e598ea81f4df"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.prefer-live-state-for
+    file: contract/krish-operating-contract.md
+    text_sha: "df35079813f4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.record-source-and-retrieval
+    file: contract/krish-operating-contract.md
+    text_sha: "517ce1339d7c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.a-last-updated-label
+    file: contract/krish-operating-contract.md
+    text_sha: "eb928ee531df"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.if-sources-disagree-stop
+    file: contract/krish-operating-contract.md
+    text_sha: "236e86cad56c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.do-not-claim-completion
+    file: contract/krish-operating-contract.md
+    text_sha: "a00883871848"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification.use-deterministic-checks-first
+    file: contract/krish-operating-contract.md
+    text_sha: "da8b71c72f0d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification.self-critique-is-supplemental
+    file: contract/krish-operating-contract.md
+    text_sha: "4297597d8bd1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification.log-a-failure-before
+    file: contract/krish-operating-contract.md
+    text_sha: "42fd34c1cd6f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification.recheck-the-failed-condition
+    file: contract/krish-operating-contract.md
+    text_sha: "6e2dba9a22ad"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: secrets-and-safety.never-place-credentials-in
+    file: contract/krish-operating-contract.md
+    text_sha: "6e9291397064"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: secrets-and-safety.refer-to-secrets-by
+    file: contract/krish-operating-contract.md
+    text_sha: "e6bb4ef38303"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: secrets-and-safety.if-a-secret-is
+    file: contract/krish-operating-contract.md
+    text_sha: "d8dbea6c3b18"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: secrets-and-safety.treat-imported-skills-plugins
+    file: contract/krish-operating-contract.md
+    text_sha: "f9b058d555f1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: file-routing.code-repository-build-ventures
+    file: contract/krish-operating-contract.md
+    text_sha: "82dc07d7ca5c"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.ai-training-corpus-ventures
+    file: contract/krish-operating-contract.md
+    text_sha: "d4e92dc9f087"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.personal-wealth-investments-family
+    file: contract/krish-operating-contract.md
+    text_sha: "9fad5e965c4c"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.scratch-qa-temporary-files
+    file: contract/krish-operating-contract.md
+    text_sha: "54c56f8d8042"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.cross-venture-timeless-ip
+    file: contract/krish-operating-contract.md
+    text_sha: "c2712a37e819"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.single-venture-deliverable-the
+    file: contract/krish-operating-contract.md
+    text_sha: "a825d748578f"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "8d6a8cb77c83"
+    status: live
+  - id: file-routing.if-unsure-ask-or
+    file: contract/krish-operating-contract.md
+    text_sha: "86756d5fbfc4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.apply-krish-operating-contract
+    file: contract/skill-routing-contract.md
+    text_sha: "dcbfb08b63a3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.classify-the-request-before
+    file: contract/skill-routing-contract.md
+    text_sha: "91664162fc64"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.the-narrowest-applicable-skill
+    file: contract/skill-routing-contract.md
+    text_sha: "c03ddca1e096"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.use-one-primary-writer
+    file: contract/skill-routing-contract.md
+    text_sha: "144c21a0c37b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.load-domain-context-before
+    file: contract/skill-routing-contract.md
+    text_sha: "58c20aba1a56"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.if-two-skills-still
+    file: contract/skill-routing-contract.md
+    text_sha: "57dd121ef537"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: routing-principles.record-the-route-for
+    file: contract/skill-routing-contract.md
+    text_sha: "dac7fdc37cc4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: global-chain.krish-principles-is-always
+    file: contract/skill-routing-contract.md
+    text_sha: "bd213a7db059"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: global-chain.take-the-brief-runs
+    file: contract/skill-routing-contract.md
+    text_sha: "a93786196ce1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: global-chain.strategy-brief-runs-before
+    file: contract/skill-routing-contract.md
+    text_sha: "6148331d2a48"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: global-chain.verification-loop-runs-after
+    file: contract/skill-routing-contract.md
+    text_sha: "e5da1a074714"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: global-chain.pure-social-conversation-does
+    file: contract/skill-routing-contract.md
+    text_sha: "eae985ca2610"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.ux-foundations-replaces-the
+    file: contract/skill-routing-contract.md
+    text_sha: "470b73374c7b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.data-pipeline-architect-is
+    file: contract/skill-routing-contract.md
+    text_sha: "93907c6c8a3f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.krish-voice-owns-final
+    file: contract/skill-routing-contract.md
+    text_sha: "e6b2f0a6aadb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.mindmake-os-owns-operating
+    file: contract/skill-routing-contract.md
+    text_sha: "ace98cebbf36"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.code-reviewer-ctrl-check
+    file: contract/skill-routing-contract.md
+    text_sha: "893e4462630c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.build-apps-with-krish
+    file: contract/skill-routing-contract.md
+    text_sha: "127bf0c93c56"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.design-intelligence-search-is
+    file: contract/skill-routing-contract.md
+    text_sha: "4c85a5ceec79"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.mindmake-os-owns-current
+    file: contract/skill-routing-contract.md
+    text_sha: "8763aeffae31"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.krish-content-marketer-owns
+    file: contract/skill-routing-contract.md
+    text_sha: "529c21b0521c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.decision-ledger-stores-finalized
+    file: contract/skill-routing-contract.md
+    text_sha: "3ed5f6246b35"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.take-the-brief-captures
+    file: contract/skill-routing-contract.md
+    text_sha: "a44378ff880b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.generic-marketplace-skills-never
+    file: contract/skill-routing-contract.md
+    text_sha: "4216a5d17b95"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.locked-revision-is-a
+    file: contract/skill-routing-contract.md
+    text_sha: "fc6beff32c9a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: collision-rules.video-engine-activates-only
+    file: contract/skill-routing-contract.md
+    text_sha: "485b01ccf69f"
+    first_seen: "2026-09-08"
+    source:
+      kind: founding
+      ref: "68d5dae3daf0"
+    status: live
+  - id: ctrl-standards-chain.ctrl-intake-stages-1
+    file: contract/skill-routing-contract.md
+    text_sha: "e06300b471d7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-standards-chain.ctrl-compile-stage-3
+    file: contract/skill-routing-contract.md
+    text_sha: "e50d7bb0bf87"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-standards-chain.ctrl-build-stage-4
+    file: contract/skill-routing-contract.md
+    text_sha: "b711658809a4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-standards-chain.ctrl-check-stages-5
+    file: contract/skill-routing-contract.md
+    text_sha: "ad34c811cdad"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-standards-chain.stage-8-deliver-is
+    file: contract/skill-routing-contract.md
+    text_sha: "f77d76b4c9bd"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-standards-chain.ctrl-capture-stage-9
+    file: contract/skill-routing-contract.md
+    text_sha: "e46e8e692025"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.selected-skills-and-why
+    file: contract/skill-routing-contract.md
+    text_sha: "23f6ddf13724"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.skills-deliberately-suppressed-because
+    file: contract/skill-routing-contract.md
+    text_sha: "4c7bbe232ef4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.source-revisions-and-retrieval
+    file: contract/skill-routing-contract.md
+    text_sha: "4a480e58a049"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.deterministic-checks-run-and
+    file: contract/skill-routing-contract.md
+    text_sha: "f2bf3ca2fefb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.inferred-findings-that-remain
+    file: contract/skill-routing-contract.md
+    text_sha: "2a94488f5c37"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: required-route-evidence.the-exact-action-still
+    file: contract/skill-routing-contract.md
+    text_sha: "e1e727aad258"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+
+# 225 chapters across the installed skills.
+skill_sections:
+  - id: apify.route-the-request
+    file: skills/apify/SKILL.md
+    heading: "Route the request"
+    text_sha: "5b14dc022032"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.define-the-job-contract
+    file: skills/apify/SKILL.md
+    heading: "Define the job contract"
+    text_sha: "7695dde1015a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.select-from-live-evidence
+    file: skills/apify/SKILL.md
+    heading: "Select from live evidence"
+    text_sha: "de7c2e45aad6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.validate-before-spend
+    file: skills/apify/SKILL.md
+    heading: "Validate before spend"
+    text_sha: "a5e8e8d82434"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.execute-once
+    file: skills/apify/SKILL.md
+    heading: "Execute once"
+    text_sha: "75d975998bef"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.recover-without-duplicate-spend
+    file: skills/apify/SKILL.md
+    heading: "Recover without duplicate spend"
+    text_sha: "1f0652d86472"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.protect-people-and-systems
+    file: skills/apify/SKILL.md
+    heading: "Protect people and systems"
+    text_sha: "39d473ff392a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: apify.verify-and-hand-off
+    file: skills/apify/SKILL.md
+    heading: "Verify and hand off"
+    text_sha: "aaa4a82b3488"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.role-and-chain
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Role and chain"
+    text_sha: "f7aba15cff24"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.inputs-and-preflight
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Inputs and preflight"
+    text_sha: "c63b55165128"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.operating-rules
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Operating rules"
+    text_sha: "1f54b289bc6e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.material-visual-approval-boundary
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Material visual approval boundary"
+    text_sha: "b726bba2ff8f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.phase-orchestration
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Phase orchestration"
+    text_sha: "6d23a6312f2f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.phase-exit-invariants
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Phase exit invariants"
+    text_sha: "4eaa1c111496"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.state-and-handoffs
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "State and handoffs"
+    text_sha: "fb0d228e38bb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.failure-handling
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Failure handling"
+    text_sha: "3a31ffa6e9b4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.authority-and-evidence-edge
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Authority and evidence edge cases"
+    text_sha: "1ff0dcdee651"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: build-apps-with-krish.completion
+    file: skills/build-apps-with-krish/SKILL.md
+    heading: "Completion"
+    text_sha: "734075295820"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.role-and-standard
+    file: skills/content-corpus/SKILL.md
+    heading: "Role and standard"
+    text_sha: "17034fb1abae"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.load-only-what-the
+    file: skills/content-corpus/SKILL.md
+    heading: "Load only what the task needs"
+    text_sha: "af49ea262ab2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.status-gate-before-production
+    file: skills/content-corpus/SKILL.md
+    heading: "Status gate before production"
+    text_sha: "6beeaa95c6c5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.five-standards
+    file: skills/content-corpus/SKILL.md
+    heading: "Five standards"
+    text_sha: "7c19cc499f41"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.workflow
+    file: skills/content-corpus/SKILL.md
+    heading: "Workflow"
+    text_sha: "7470ca5dad90"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.intent-router
+    file: skills/content-corpus/SKILL.md
+    heading: "Intent router"
+    text_sha: "925fda750225"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.cross-channel-rules
+    file: skills/content-corpus/SKILL.md
+    heading: "Cross-channel rules"
+    text_sha: "88029b1f2528"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.collision-and-handoff-rules
+    file: skills/content-corpus/SKILL.md
+    heading: "Collision and handoff rules"
+    text_sha: "5053812f3906"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.controlled-learning
+    file: skills/content-corpus/SKILL.md
+    heading: "Controlled learning"
+    text_sha: "b221f21b6507"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.external-actions-spend-and
+    file: skills/content-corpus/SKILL.md
+    heading: "External actions, spend, and retirement"
+    text_sha: "ab784ced08f4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: content-corpus.completion-contract
+    file: skills/content-corpus/SKILL.md
+    heading: "Completion contract"
+    text_sha: "de99114c1e45"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.read-both-references
+    file: skills/ctrl-build/SKILL.md
+    heading: "Read both references"
+    text_sha: "fe306d7736dc"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.source-hierarchy
+    file: skills/ctrl-build/SKILL.md
+    heading: "Source hierarchy"
+    text_sha: "fabac0fcb1a4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.admission-contract
+    file: skills/ctrl-build/SKILL.md
+    heading: "Admission contract"
+    text_sha: "1ab066b8b4e4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.separate-runtime-from-evaluation
+    file: skills/ctrl-build/SKILL.md
+    heading: "Separate runtime from evaluation"
+    text_sha: "11befa5aaad9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.workflow
+    file: skills/ctrl-build/SKILL.md
+    heading: "Workflow"
+    text_sha: "7108f3c96dde"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.provenance-rules
+    file: skills/ctrl-build/SKILL.md
+    heading: "Provenance rules"
+    text_sha: "51a8c109b0f3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.mandatory-acceptance-readbacks
+    file: skills/ctrl-build/SKILL.md
+    heading: "Mandatory acceptance readbacks"
+    text_sha: "f791f32f5ea6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.never-omit-result-envelope
+    file: skills/ctrl-build/SKILL.md
+    heading: "Never-omit result envelope"
+    text_sha: "e85b416d296c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-build.chain-boundaries
+    file: skills/ctrl-build/SKILL.md
+    heading: "Chain boundaries"
+    text_sha: "093eccb55454"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.read-the-applicable-reference
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Read the applicable reference"
+    text_sha: "1df53b3bba69"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.capture-contract
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Capture contract"
+    text_sha: "d1d6b7d68cc1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.evidence-is-not-truth
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Evidence is not truth"
+    text_sha: "1c7e04e9ba29"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.workflow
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Workflow"
+    text_sha: "f10872ff1af8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.proposal-schema
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Proposal schema"
+    text_sha: "a900ff97cd52"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.change-and-history-invariants
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Change and history invariants"
+    text_sha: "12aeb7040f08"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.never-omit-result-envelope
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Never-omit result envelope"
+    text_sha: "78ee434d38d9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.read-only-the-applicable
+    file: skills/ctrl-check/SKILL.md
+    heading: "Read only the applicable references"
+    text_sha: "0de6061248be"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.review-contract
+    file: skills/ctrl-check/SKILL.md
+    heading: "Review contract"
+    text_sha: "32892e1bcea7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.independence-protocol
+    file: skills/ctrl-check/SKILL.md
+    heading: "Independence protocol"
+    text_sha: "724426721051"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.workflow
+    file: skills/ctrl-check/SKILL.md
+    heading: "Workflow"
+    text_sha: "d0c8a4dc2cdc"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.judgment-rules
+    file: skills/ctrl-check/SKILL.md
+    heading: "Judgment rules"
+    text_sha: "e2d902b39909"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.result-envelope
+    file: skills/ctrl-check/SKILL.md
+    heading: "Result envelope"
+    text_sha: "a0ad74304b1d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-check.chain-and-domain-handoffs
+    file: skills/ctrl-check/SKILL.md
+    heading: "Chain and domain handoffs"
+    text_sha: "6a5763193a97"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.read-only-what-the
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Read only what the task needs"
+    text_sha: "dafba843cab2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.admission-contract
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Admission contract"
+    text_sha: "63b74d68ac07"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.freeze-the-compile-plan
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Freeze the compile plan"
+    text_sha: "b5270b4b3ca8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.never-omit-response-envelope
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Never-omit response envelope"
+    text_sha: "6cad836c1bd9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.workflow
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Workflow"
+    text_sha: "7d2c71fd49d7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.outputs
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Outputs"
+    text_sha: "4f17fc90af50"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.invariants
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Invariants"
+    text_sha: "ef0829c8a6be"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.diagnostic-not-quota
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Diagnostic, not quota"
+    text_sha: "bacea9141848"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-compile.chain-boundaries
+    file: skills/ctrl-compile/SKILL.md
+    heading: "Chain boundaries"
+    text_sha: "6438bce7274d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.intake-contract
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Intake contract"
+    text_sha: "3adc050d833e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.route-to-the-right
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Route to the right method"
+    text_sha: "ceb36f71bf57"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.evidence-invariants
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Evidence invariants"
+    text_sha: "74facf935e64"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.corpus-and-holdout-viability
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Corpus and holdout viability"
+    text_sha: "719f2e3579d5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.workflow
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Workflow"
+    text_sha: "ed0c26eeff0b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.privacy-and-edge-cases
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Privacy and edge cases"
+    text_sha: "403942ec8f0e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.outputs-and-handoff
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Outputs and handoff"
+    text_sha: "4dd7a5ec519c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-intake.chain-boundaries
+    file: skills/ctrl-intake/SKILL.md
+    heading: "Chain boundaries"
+    text_sha: "eaf719f1a56d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.role-and-chain
+    file: skills/decision-ledger/SKILL.md
+    heading: "Role and chain"
+    text_sha: "e885b00b069f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.read-the-schema
+    file: skills/decision-ledger/SKILL.md
+    heading: "Read the schema"
+    text_sha: "d06f75c6d2a5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.apply-the-capture-gate
+    file: skills/decision-ledger/SKILL.md
+    heading: "Apply the capture gate"
+    text_sha: "cc5f9178d543"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.capture-or-update-a
+    file: skills/decision-ledger/SKILL.md
+    heading: "Capture or update a decision"
+    text_sha: "f467f3f33253"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.recall-and-apply-a
+    file: skills/decision-ledger/SKILL.md
+    heading: "Recall and apply a decision"
+    text_sha: "7f9f77201af3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.reopen-supersede-or-reverse
+    file: skills/decision-ledger/SKILL.md
+    heading: "Reopen, supersede, or reverse"
+    text_sha: "04d8d75e47ab"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.authority-and-privacy
+    file: skills/decision-ledger/SKILL.md
+    heading: "Authority and privacy"
+    text_sha: "972ae5e8a089"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: decision-ledger.completion-contract
+    file: skills/decision-ledger/SKILL.md
+    heading: "Completion contract"
+    text_sha: "95aa1e8ed744"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.role-and-route
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Role and route"
+    text_sha: "fdc8314e38e8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.input-contract
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Input contract"
+    text_sha: "ad0fa7332951"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.query-workflow
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Query workflow"
+    text_sha: "6ee0310e5944"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.mobile-web-invariant
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Mobile-web invariant"
+    text_sha: "48392a64bb84"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.hard-boundaries
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Hard boundaries"
+    text_sha: "4e2cf641febb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: design-intelligence-search.output
+    file: skills/design-intelligence-search/SKILL.md
+    heading: "Output"
+    text_sha: "79590d371734"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.preconditions
+    file: skills/evidence-research/SKILL.md
+    heading: "Preconditions"
+    text_sha: "fdb6a69751c3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.source-hierarchy
+    file: skills/evidence-research/SKILL.md
+    heading: "Source hierarchy"
+    text_sha: "53c9b94020c0"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.research-workflow
+    file: skills/evidence-research/SKILL.md
+    heading: "Research workflow"
+    text_sha: "e5f6f1c79942"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.claim-evidence-matrix
+    file: skills/evidence-research/SKILL.md
+    heading: "Claim-evidence matrix"
+    text_sha: "a11be6a348c9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.edge-cases
+    file: skills/evidence-research/SKILL.md
+    heading: "Edge cases"
+    text_sha: "432a76ec95f6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.handoff-and-verification
+    file: skills/evidence-research/SKILL.md
+    heading: "Handoff and verification"
+    text_sha: "bd5c65bb4568"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: evidence-research.external-action-preparation
+    file: skills/evidence-research/SKILL.md
+    heading: "External action preparation"
+    text_sha: "b025ddfa8e17"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.role
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Role"
+    text_sha: "1d2ffb2fade3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.curated-only-policy
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Curated-only policy"
+    text_sha: "5beeafef3b02"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.maintenance-workflow
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Maintenance workflow"
+    text_sha: "64796066f867"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.scheduled-audit-invariant
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Scheduled-audit invariant"
+    text_sha: "b3ff03c52c79"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.missing-skill-test
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Missing-skill test"
+    text_sha: "1dd3d204664c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: harness-maintainer.output
+    file: skills/harness-maintainer/SKILL.md
+    heading: "Output"
+    text_sha: "93e21182d9a7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.role-and-chain
+    file: skills/instantly-operator/SKILL.md
+    heading: "Role and chain"
+    text_sha: "499b78059dc5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.operation-contract
+    file: skills/instantly-operator/SKILL.md
+    heading: "Operation contract"
+    text_sha: "2e8d03b32bad"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.workflow
+    file: skills/instantly-operator/SKILL.md
+    heading: "Workflow"
+    text_sha: "c6ee24b02901"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.safety-rules
+    file: skills/instantly-operator/SKILL.md
+    heading: "Safety rules"
+    text_sha: "cd9329bb5585"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.mandatory-edge-case-responses
+    file: skills/instantly-operator/SKILL.md
+    heading: "Mandatory edge-case responses"
+    text_sha: "058cea85fedf"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: instantly-operator.completion-record
+    file: skills/instantly-operator/SKILL.md
+    heading: "Completion record"
+    text_sha: "a11c2681c7eb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.build-task-contract
+    file: skills/krish-build/SKILL.md
+    heading: "Build task contract"
+    text_sha: "c84ea182a5d3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.1-build-doctrine
+    file: skills/krish-build/SKILL.md
+    heading: "1. Build doctrine"
+    text_sha: "78abcd686990"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.2-determinism-in-practice
+    file: skills/krish-build/SKILL.md
+    heading: "2. Determinism in practice"
+    text_sha: "8e991c4efb80"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.3-data-and-secrets
+    file: skills/krish-build/SKILL.md
+    heading: "3. Data and secrets"
+    text_sha: "8958dc72b645"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.4-gates-and-validation
+    file: skills/krish-build/SKILL.md
+    heading: "4. Gates and validation"
+    text_sha: "8634c51d1025"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.5-environment-truth
+    file: skills/krish-build/SKILL.md
+    heading: "5. Environment truth"
+    text_sha: "c408607c7e72"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.6-cross-references
+    file: skills/krish-build/SKILL.md
+    heading: "6. Cross-references"
+    text_sha: "f825078bf399"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-build.routing-destructive-actions-and
+    file: skills/krish-build/SKILL.md
+    heading: "Routing, destructive actions, and completion"
+    text_sha: "b9e787b015f5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.role-and-standard
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Role and standard"
+    text_sha: "143965364313"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.preconditions
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Preconditions"
+    text_sha: "c83aae717755"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.buyer-clarity-gate
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Buyer clarity gate"
+    text_sha: "004fc4133b1b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.workflow
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Workflow"
+    text_sha: "c133d3fc5d5f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.failure-patterns
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Failure patterns"
+    text_sha: "276a4417b923"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.routing-and-collisions
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Routing and collisions"
+    text_sha: "a46ffe1a7846"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.authority-boundaries
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Authority boundaries"
+    text_sha: "f60d98651f1b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.controlled-self-correction
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Controlled self-correction"
+    text_sha: "3c66ce485b1e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-content-marketer.output-and-completion
+    file: skills/krish-content-marketer/SKILL.md
+    heading: "Output and completion"
+    text_sha: "6c9a0fbbfcb8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.design-task-contract
+    file: skills/krish-design/SKILL.md
+    heading: "Design task contract"
+    text_sha: "7d51a103b177"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.1-interaction-as-sequencing
+    file: skills/krish-design/SKILL.md
+    heading: "1. Interaction as sequencing (the weapon)"
+    text_sha: "78e9b25ede95"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.2-house-design-systems
+    file: skills/krish-design/SKILL.md
+    heading: "2. House design systems"
+    text_sha: "7552a2d31a21"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.3-narrative-flow-document
+    file: skills/krish-design/SKILL.md
+    heading: "3. Narrative flow: document templates"
+    text_sha: "82a8e28bbd38"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.4-interaction-craft-reusable
+    file: skills/krish-design/SKILL.md
+    heading: "4. Interaction craft: reusable patterns"
+    text_sha: "22e143bdd465"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.5-consistency-is-the
+    file: skills/krish-design/SKILL.md
+    heading: "5. Consistency is the system, variation is the signal"
+    text_sha: "22f576f7e8c2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.6-anti-defaults-what
+    file: skills/krish-design/SKILL.md
+    heading: "6. Anti-defaults: what gets rejected on sight"
+    text_sha: "d712d1a85a88"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.design-truth-evidence-and
+    file: skills/krish-design/SKILL.md
+    heading: "Design truth, evidence, and authority"
+    text_sha: "c9912e54a4d7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.routing-and-handoffs
+    file: skills/krish-design/SKILL.md
+    heading: "Routing and handoffs"
+    text_sha: "d81df9279a56"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.7-visual-qa-the
+    file: skills/krish-design/SKILL.md
+    heading: "7. Visual QA: the end-of-build scan"
+    text_sha: "d80aaf5b591b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.8-the-canva-ceiling
+    file: skills/krish-design/SKILL.md
+    heading: "8. The Canva ceiling"
+    text_sha: "9025984be89b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-design.9-cross-references
+    file: skills/krish-design/SKILL.md
+    heading: "9. Cross-references"
+    text_sha: "afc2c87a8bb5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.application-contract
+    file: skills/krish-principles/SKILL.md
+    heading: "Application contract"
+    text_sha: "e49a2d41ae2e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.stability-tags
+    file: skills/krish-principles/SKILL.md
+    heading: "Stability tags"
+    text_sha: "d0a799680602"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.1-epistemics-how-to
+    file: skills/krish-principles/SKILL.md
+    heading: "1. Epistemics: how to decide what is true"
+    text_sha: "a21d7cdabdfb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.2-first-principles-how
+    file: skills/krish-principles/SKILL.md
+    heading: "2. First principles: how to reason"
+    text_sha: "5bc77963964f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.3-commercial-doctrine-how
+    file: skills/krish-principles/SKILL.md
+    heading: "3. Commercial doctrine: how to value things"
+    text_sha: "6228563bce0b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.4-cross-cutting-values
+    file: skills/krish-principles/SKILL.md
+    heading: "4. Cross-cutting values"
+    text_sha: "2e88b1ba0a5d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.5-decision-artifacts-the
+    file: skills/krish-principles/SKILL.md
+    heading: "5. Decision artifacts: the formats calls come out in"
+    text_sha: "4213e789b186"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.6-epistemics-in-practice
+    file: skills/krish-principles/SKILL.md
+    heading: "6. Epistemics in practice: the research method"
+    text_sha: "aeb6e9c53d0d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-principles.7-cross-references
+    file: skills/krish-principles/SKILL.md
+    heading: "7. Cross-references"
+    text_sha: "0e7edc5a6a7a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.place-in-the-harness
+    file: skills/krish-voice/SKILL.md
+    heading: "Place in the harness"
+    text_sha: "a7eefde4560c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.voice-task-contract
+    file: skills/krish-voice/SKILL.md
+    heading: "Voice task contract"
+    text_sha: "88feaba316ae"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.reference-routing
+    file: skills/krish-voice/SKILL.md
+    heading: "Reference routing"
+    text_sha: "c62a0b556df7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.source-and-privacy-contract
+    file: skills/krish-voice/SKILL.md
+    heading: "Source and privacy contract"
+    text_sha: "1eaf7b36f2da"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.mandatory-scenario-safeguards
+    file: skills/krish-voice/SKILL.md
+    heading: "Mandatory scenario safeguards"
+    text_sha: "c1e26fbd4e72"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.workflow
+    file: skills/krish-voice/SKILL.md
+    heading: "Workflow"
+    text_sha: "e5e1edf721d2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.kill-list
+    file: skills/krish-voice/SKILL.md
+    heading: "Kill list"
+    text_sha: "3f8e0476b869"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.voice-acceptance-record
+    file: skills/krish-voice/SKILL.md
+    heading: "Voice acceptance record"
+    text_sha: "9eff181ea961"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.handoffs-and-action-authority
+    file: skills/krish-voice/SKILL.md
+    heading: "Handoffs and action authority"
+    text_sha: "f7bc98720f72"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: krish-voice.output-shape
+    file: skills/krish-voice/SKILL.md
+    heading: "Output shape"
+    text_sha: "fb7c9144e136"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: locked-revision.required-workflow
+    file: skills/locked-revision/SKILL.md
+    heading: "Required workflow"
+    text_sha: "b71c38a96b4c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: locked-revision.fail-closed-rules
+    file: skills/locked-revision/SKILL.md
+    heading: "Fail-closed rules"
+    text_sha: "63939fc136be"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: locked-revision.supporting-resources
+    file: skills/locked-revision/SKILL.md
+    heading: "Supporting resources"
+    text_sha: "63d307e545be"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: locked-revision.handoff
+    file: skills/locked-revision/SKILL.md
+    heading: "Handoff"
+    text_sha: "7d54b560e55e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.role-and-standard
+    file: skills/mindmake/SKILL.md
+    heading: "Role and standard"
+    text_sha: "a043bf2a2a14"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.load-only-what-the
+    file: skills/mindmake/SKILL.md
+    heading: "Load only what the task needs"
+    text_sha: "4fe5387adff0"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.workflow
+    file: skills/mindmake/SKILL.md
+    heading: "Workflow"
+    text_sha: "76942a012c29"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.source-and-conflict-rules
+    file: skills/mindmake/SKILL.md
+    heading: "Source and conflict rules"
+    text_sha: "6355d4c2679b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.durable-commercial-lens
+    file: skills/mindmake/SKILL.md
+    heading: "Durable commercial lens"
+    text_sha: "2b838892c029"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.routing-and-collisions
+    file: skills/mindmake/SKILL.md
+    heading: "Routing and collisions"
+    text_sha: "9c44e0866bed"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.authority-boundaries
+    file: skills/mindmake/SKILL.md
+    heading: "Authority boundaries"
+    text_sha: "f895175b7fc9"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake.completion-contract
+    file: skills/mindmake/SKILL.md
+    heading: "Completion contract"
+    text_sha: "035704e953da"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake-os.two-authorities-and-which
+    file: skills/mindmake-os/SKILL.md
+    heading: "Two authorities, and which one wins"
+    text_sha: "408a4c3dd2af"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake-os.where-to-read-it
+    file: skills/mindmake-os/SKILL.md
+    heading: "Where to read it"
+    text_sha: "6d871f552c1b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake-os.section-map
+    file: skills/mindmake-os/SKILL.md
+    heading: "Section map"
+    text_sha: "0ccf0689e949"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake-os.changing-the-architecture-doc
+    file: skills/mindmake-os/SKILL.md
+    heading: "Changing the architecture doc"
+    text_sha: "211c49c23f43"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: mindmake-os.related-skills
+    file: skills/mindmake-os/SKILL.md
+    heading: "Related skills"
+    text_sha: "ecb3e02a7883"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.role-and-chain
+    file: skills/n8n-operator/SKILL.md
+    heading: "Role and chain"
+    text_sha: "958faf293c18"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.operation-contract
+    file: skills/n8n-operator/SKILL.md
+    heading: "Operation contract"
+    text_sha: "b4927881cdac"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.workflow
+    file: skills/n8n-operator/SKILL.md
+    heading: "Workflow"
+    text_sha: "698ef477d6d7"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.safety-rules
+    file: skills/n8n-operator/SKILL.md
+    heading: "Safety rules"
+    text_sha: "cade467b7c0d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.mandatory-edge-case-responses
+    file: skills/n8n-operator/SKILL.md
+    heading: "Mandatory edge-case responses"
+    text_sha: "861e486eecf1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: n8n-operator.completion-record
+    file: skills/n8n-operator/SKILL.md
+    heading: "Completion record"
+    text_sha: "f0a983f59329"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.scale-the-brief
+    file: skills/strategy-brief/SKILL.md
+    heading: "Scale the brief"
+    text_sha: "4a38d45d4785"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.build-the-route
+    file: skills/strategy-brief/SKILL.md
+    heading: "Build the route"
+    text_sha: "e04a9cda2bda"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.full-brief-format
+    file: skills/strategy-brief/SKILL.md
+    heading: "Full brief format"
+    text_sha: "fb783c4710cc"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.strategy-quality-rules
+    file: skills/strategy-brief/SKILL.md
+    heading: "Strategy quality rules"
+    text_sha: "5bbe1d398827"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.routing-rules-for-common
+    file: skills/strategy-brief/SKILL.md
+    heading: "Routing rules for common collisions"
+    text_sha: "930821f05717"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.access-and-policy-boundaries
+    file: skills/strategy-brief/SKILL.md
+    heading: "Access and policy boundaries"
+    text_sha: "c18d2a57b440"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.release-change-specificity
+    file: skills/strategy-brief/SKILL.md
+    heading: "Release/change specificity"
+    text_sha: "108a305dee6d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.verification-specificity
+    file: skills/strategy-brief/SKILL.md
+    heading: "Verification specificity"
+    text_sha: "a387e81c60a6"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: strategy-brief.handoff
+    file: skills/strategy-brief/SKILL.md
+    heading: "Handoff"
+    text_sha: "1af042465383"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.role-and-chain
+    file: skills/take-the-brief/SKILL.md
+    heading: "Role and chain"
+    text_sha: "99593485c8b1"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.decide-whether-to-interview
+    file: skills/take-the-brief/SKILL.md
+    heading: "Decide whether to interview"
+    text_sha: "9a8640b807db"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.run-the-interview
+    file: skills/take-the-brief/SKILL.md
+    heading: "Run the interview"
+    text_sha: "1bde9c93b064"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.produce-the-handoff
+    file: skills/take-the-brief/SKILL.md
+    heading: "Produce the handoff"
+    text_sha: "f0ee74b79e50"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.verification-inheritance
+    file: skills/take-the-brief/SKILL.md
+    heading: "Verification inheritance"
+    text_sha: "3cec08b6ac48"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.authority-and-privacy
+    file: skills/take-the-brief/SKILL.md
+    heading: "Authority and privacy"
+    text_sha: "d7a108366ceb"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: take-the-brief.completion-criteria
+    file: skills/take-the-brief/SKILL.md
+    heading: "Completion criteria"
+    text_sha: "9fe62680da65"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.non-negotiable-rules
+    file: skills/tools-access/SKILL.md
+    heading: "Non-negotiable rules"
+    text_sha: "505f75a49577"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.symbolic-credential-interface
+    file: skills/tools-access/SKILL.md
+    heading: "Symbolic credential interface"
+    text_sha: "352710b80326"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.access-task-record
+    file: skills/tools-access/SKILL.md
+    heading: "Access task record"
+    text_sha: "3f48489373db"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.access-preflight
+    file: skills/tools-access/SKILL.md
+    heading: "Access preflight"
+    text_sha: "5781459a72c2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.missing-expired-or-conflicting
+    file: skills/tools-access/SKILL.md
+    heading: "Missing, expired, or conflicting access"
+    text_sha: "c95c18b013e4"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.from-access-proof-to
+    file: skills/tools-access/SKILL.md
+    heading: "From access proof to action"
+    text_sha: "d2f58564f8f2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.browser-and-oauth-handoff
+    file: skills/tools-access/SKILL.md
+    heading: "Browser and OAuth handoff"
+    text_sha: "6fd3c1c63e13"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.suspected-exposure
+    file: skills/tools-access/SKILL.md
+    heading: "Suspected exposure"
+    text_sha: "110a04b52a4d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.stale-integrations
+    file: skills/tools-access/SKILL.md
+    heading: "Stale integrations"
+    text_sha: "0de53353ee6a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: tools-access.handoffs
+    file: skills/tools-access/SKILL.md
+    heading: "Handoffs"
+    text_sha: "230cb9a26e2d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.route-before-answering
+    file: skills/ux-foundations/SKILL.md
+    heading: "Route before answering"
+    text_sha: "9c9dfc0c295b"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.establish-the-lookup-contract
+    file: skills/ux-foundations/SKILL.md
+    heading: "Establish the lookup contract"
+    text_sha: "566203471123"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.classify-authority
+    file: skills/ux-foundations/SKILL.md
+    heading: "Classify authority"
+    text_sha: "7391cdc762f3"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.preserve-scope-units-and
+    file: skills/ux-foundations/SKILL.md
+    heading: "Preserve scope, units, and exceptions"
+    text_sha: "6adb1de641f8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.handle-artifacts-and-hostile
+    file: skills/ux-foundations/SKILL.md
+    heading: "Handle artifacts and hostile sources safely"
+    text_sha: "5f35b322173f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.return-the-lookup-envelope
+    file: skills/ux-foundations/SKILL.md
+    heading: "Return the lookup envelope"
+    text_sha: "6e3b4a91fb5e"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-foundations.verification-gate
+    file: skills/ux-foundations/SKILL.md
+    heading: "Verification gate"
+    text_sha: "8a38e46bbff5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.role-and-authority
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Role and authority"
+    text_sha: "659e05f3585a"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.qa-contract
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "QA contract"
+    text_sha: "9b3757af3349"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.phase-0-establish-current
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Phase 0: establish current truth"
+    text_sha: "900a6f2c180f"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.phase-1-derive-the
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Phase 1: derive the task-first plan"
+    text_sha: "2cff1e75cfd8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.phase-2-execute-from
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Phase 2: execute from the user's state"
+    text_sha: "b78080bc8995"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.mandatory-safety-and-failure
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Mandatory safety and failure scenarios"
+    text_sha: "511e8620a5c8"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.evidence-and-severity
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Evidence and severity"
+    text_sha: "515bb0e352e5"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.handoffs
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Handoffs"
+    text_sha: "251e0e63b606"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.fix-and-regression-loop
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Fix and regression loop"
+    text_sha: "c5f5c8500ac2"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: ux-testing-agent.report-and-completion
+    file: skills/ux-testing-agent/SKILL.md
+    heading: "Report and completion"
+    text_sha: "46f5d1c14312"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.inputs-from-strategy
+    file: skills/verification-loop/SKILL.md
+    heading: "Inputs from strategy"
+    text_sha: "836ac7859fde"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.evidence-hierarchy
+    file: skills/verification-loop/SKILL.md
+    heading: "Evidence hierarchy"
+    text_sha: "86e05eb53908"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.select-checks-by-artifact
+    file: skills/verification-loop/SKILL.md
+    heading: "Select checks by artifact"
+    text_sha: "3c3df845de45"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.correction-loop
+    file: skills/verification-loop/SKILL.md
+    heading: "Correction loop"
+    text_sha: "658650299098"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.specialist-handoffs
+    file: skills/verification-loop/SKILL.md
+    heading: "Specialist handoffs"
+    text_sha: "b33f1173ac18"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: verification-loop.completion-report
+    file: skills/verification-loop/SKILL.md
+    heading: "Completion report"
+    text_sha: "39ae3cb5e69c"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: video-engine.trigger-contract
+    file: skills/video-engine/SKILL.md
+    heading: "Trigger contract"
+    text_sha: "ef232c6294f0"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: video-engine.start-every-session
+    file: skills/video-engine/SKILL.md
+    heading: "Start every session"
+    text_sha: "27e22fb5d568"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live
+  - id: video-engine.authority-and-safety
+    file: skills/video-engine/SKILL.md
+    heading: "Authority and safety"
+    text_sha: "cb8306e9fb3d"
+    first_seen: "2026-09-07"
+    source:
+      kind: founding
+      ref: "a3d2f3706a87"
+    status: live

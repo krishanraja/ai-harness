@@ -23,6 +23,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
+import { check as checkRuleProvenance } from './brain-rules.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -98,11 +99,40 @@ for (const f of canonFiles) {
 O(`${canonFiles.length} canon files carry no machine-specific absolute path`)
 
 // ----------------------------------------------------------------- no em dash
-for (const f of [...canonFiles, ...fleet.adapters.map((a) => a.output), 'state/fleet.yaml']) {
-  const text = read(f)
-  text.split('\n').forEach((line, i) => { if (line.includes('—')) F(`${f}:${i + 1} contains an em dash`) })
+// Written as an escape rather than the character itself so this file obeys the
+// rule it enforces. brain/ is included because it is canon: everything the
+// judge panel and the provenance ledger read is built from these files.
+const EM_DASH = '\u2014'
+const brainFiles = []
+if (existsSync(join(HARNESS, 'brain'))) {
+  const walkBrain = (dir) => {
+    for (const e of readdirSync(join(HARNESS, dir))) {
+      const rel = `${dir}/${e}`
+      if (statSync(join(HARNESS, rel)).isDirectory()) walkBrain(rel)
+      else if (/\.(md|ya?ml|jsonl)$/.test(e)) brainFiles.push(rel)
+    }
+  }
+  walkBrain('brain')
 }
-O('no em dash in the canon, the templates or the rendered adapters')
+for (const f of [...canonFiles, ...brainFiles, ...fleet.adapters.map((a) => a.output), 'state/fleet.yaml']) {
+  const text = read(f)
+  text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)) F(`${f}:${i + 1} contains an em dash`) })
+}
+O(`no em dash in the canon, the templates, the rendered adapters or the ${brainFiles.length} brain files`)
+
+// --------------------------------------------------- provenance on every rule
+// Every rule in both contracts, and every chapter of every skill, must have an
+// entry in brain/rules.yaml carrying its hash and where it came from. Without
+// this, "who decided this and when" is unanswerable for almost the whole canon,
+// and an edit to a rule is indistinguishable from the rule having always said
+// that. The ledger is a sidecar so the contracts stay readable prose.
+if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
+  F('brain/rules.yaml does not exist, so no rule in the canon carries provenance')
+} else {
+  const { problems, counts } = checkRuleProvenance(read('brain/rules.yaml'))
+  for (const m of problems) F(m)
+  if (!problems.length) O(`${counts.contract_rules} contract rules and ${counts.skill_sections} skill chapters each carry a hash and a source`)
+}
 
 // ------------------------------------------------- fleet parity with the docs steward
 const fleetJsonPath = flag('--fleet-json')

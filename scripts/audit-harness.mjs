@@ -415,6 +415,40 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   }
 }
 
+// ------------------------------------------------------------------- em dash
+// "No em dashes anywhere, even in code" is a standing rule, and it is one of
+// the few voice rules a machine can check exactly. validate-surfaces.mjs makes
+// it a hard failure for the contracts, the rendered adapters and brain/, which
+// are the files the canon is built from. Everywhere else it is reported here
+// instead of refused, on the precedent Krish set for loose files at a skills
+// root on 2026-09-08: record what nothing has ever measured, and let a climbing
+// number be visible rather than merely tolerated.
+//
+// Vendored third-party trees are excluded. They are not ours to rewrite, and
+// the routing contract already suppresses the upstream they came from.
+{
+  const hits = []
+  const walkFor = (rel) => {
+    const abs = join(HARNESS, rel)
+    if (!existsSync(abs)) return
+    for (const e of readdirSync(abs)) {
+      const next = `${rel}/${e}`
+      if (statSync(join(HARNESS, next)).isDirectory()) { if (e !== 'vendor') walkFor(next); continue }
+      if (!/\.md$/.test(e)) continue
+      const text = readFileSync(join(HARNESS, next), 'utf8')
+      text.split('\n').forEach((line, i) => { if (line.includes('\u2014')) hits.push(`${next}:${i + 1}`) })
+    }
+  }
+  walkFor('skills')
+  walkFor('docs/proposals')
+  if (hits.length) {
+    const files = [...new Set(hits.map((h) => h.split(':')[0]))]
+    F('em-dash', `${hits.length} lines in ${files.length} files`,
+      `The canon carries ${hits.length} em dashes outside the files the validator refuses on: ${files.slice(0, 12).join(', ')}${files.length > 12 ? ', and more' : ''}.`,
+      'Replace each with the punctuation the sentence actually needs, one at a time, rather than a blanket substitution. This is content, so it belongs in its own change and not folded into an unrelated one.')
+  } else N('no em dash in skills/ or docs/proposals/.')
+}
+
 // --------------------------------------------------------------------- report
 const out = []
 const p = (s = '') => out.push(s)
