@@ -47,6 +47,7 @@ const flag = (f) => { const i = args.indexOf(f); return i === -1 ? null : args[i
 export const BENCHES = ['technical', 'personal']
 export const VERDICTS = new Set(['improves', 'regresses', 'unchanged', 'dissent'])
 const EM_DASH = '—'
+export const TRUNCATED = '\u0000truncated\u0000'
 
 // The canon. A change anywhere else is not this panel's business, and feeding
 // it the whole diff would bury the part that matters in build noise.
@@ -135,12 +136,26 @@ export function systemPrompt(bench, clauseIds) {
 export function parseFindings(raw, bench, clauseIds, diffFiles) {
   const problems = []
   let obj
-  const text = String(raw || '').trim()
+  let text = String(raw || '').trim()
+  let truncated = false
+  if (text.startsWith(TRUNCATED)) { truncated = true; text = text.slice(TRUNCATED.length).trim() }
   const start = text.indexOf('{')
   const end = text.lastIndexOf('}')
-  if (start === -1 || end <= start) return { findings: [], problems: ['the bench returned no JSON object at all'] }
+  if (start === -1 || end <= start) {
+    return { findings: [], problems: [truncated ? 'the bench was cut off before it produced any JSON. Raise JUDGE_MAX_TOKENS.' : 'the bench returned no JSON object at all'] }
+  }
   try { obj = JSON.parse(text.slice(start, end + 1)) }
-  catch (e) { return { findings: [], problems: [`the bench returned unparseable JSON: ${e.message}`] } }
+  catch (e) {
+    // A cut-off array is recoverable: keep the findings that did arrive whole
+    // rather than discarding a review because its last entry was clipped.
+    const salvaged = salvage(text)
+    if (salvaged.length) {
+      problems.push(`the bench was cut off after ${salvaged.length} finding(s); the rest were lost. Raise JUDGE_MAX_TOKENS.`)
+      obj = { findings: salvaged }
+    } else {
+      return { findings: [], problems: [`the bench returned unparseable JSON${truncated ? ' because it was cut off' : ''}: ${e.message}`] }
+    }
+  }
 
   const known = new Set(bench.criteria.map((c) => c.id))
   const blocking = new Set(bench.criteria.filter((c) => c.blocking).map((c) => c.id))
@@ -160,6 +175,29 @@ export function parseFindings(raw, bench, clauseIds, diffFiles) {
     kept.push({ bench: bench.bench, criterion_id: f.criterion_id, verdict: f.verdict, clause, because: String(f.because || '').trim(), blocking: blocking.has(f.criterion_id) })
   }
   return { findings: kept, problems }
+}
+
+/**
+ * Pull whole finding objects out of a JSON array that stopped mid-entry.
+ * Brace counting, not a parser: every complete object before the cut survives.
+ */
+export function salvage(text) {
+  const out = []
+  let depth = 0, start = -1, inStr = false, esc = false
+  for (let i = text.indexOf('['); i >= 0 && i < text.length; i++) {
+    const c = text[i]
+    if (inStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') inStr = false; continue }
+    if (c === '"') { inStr = true; continue }
+    if (c === '{') { if (depth === 0) start = i; depth++; continue }
+    if (c === '}') {
+      depth--
+      if (depth === 0 && start !== -1) {
+        try { out.push(JSON.parse(text.slice(start, i + 1))) } catch { /* not a finding */ }
+        start = -1
+      }
+    }
+  }
+  return out.filter((o) => o && o.criterion_id)
 }
 
 export const hasDissent = (findings) => findings.some((f) => f.verdict === 'regresses' || f.verdict === 'dissent')
@@ -265,7 +303,12 @@ async function anthropic({ system, user }) {
     headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: process.env.JUDGE_MODEL || 'claude-opus-5',
-      max_tokens: 4096,
+      // Twenty criteria at two sentences each, twice, does not fit in 4096.
+      // Two live reviews came back cut mid-array and were discarded whole with
+      // "the bench returned unparseable JSON", which reads as a bench that had
+      // nothing to say rather than one that was truncated. A silent cut is the
+      // worst kind: the findings existed and were thrown away.
+      max_tokens: Number(process.env.JUDGE_MAX_TOKENS || 16000),
       system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: user }],
     }),
@@ -273,7 +316,11 @@ async function anthropic({ system, user }) {
   if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`)
   // Never let a key reach stdout, a log, or a report.
   const body = await res.json()
-  return (body.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('')
+  const text = (body.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('')
+  // Truncation is a distinct failure and must not be mistaken for a bench that
+  // returned nothing usable. Marked, so the parser can say which it was.
+  if (body.stop_reason === 'max_tokens') return `${TRUNCATED}${text}`
+  return text
 }
 
 // ---------------------------------------------------------------------- main
