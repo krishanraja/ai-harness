@@ -7,9 +7,10 @@
  * only way this repository has evidence for: by comparison.
  *
  * Absolute scoring was tried and it failed twice in two days. Two controls over
- * identical cases moved recall by 0.250 and then 0.125 between models, the
- * stronger model scoring lower each time. Meanwhile canaries on real clients
- * found four real defects in an hour. So a judge here never returns a number.
+ * the same 120 cases moved recall by 0.250 and then 0.125 between models, the
+ * stronger model scoring lower each time; the table is in
+ * contract/canary-contract.md and both controls are kept under state/evals/.
+ * So a judge here never returns a number.
  * It is given a before and an after and must name the clause that improved or
  * regressed, by its id from brain/rules.yaml. A finding with no clause is
  * malformed and discarded, the same way canaries.mjs refuses a malformed report.
@@ -84,9 +85,16 @@ Rules you must follow exactly:
 
 1. You compare. You never score. Do not output a number, a rating, or a
    percentage anywhere.
-2. Every finding must cite a clause: a rule id from the list of valid ids you
-   are given, or the path of a file in the diff. A finding with no clause is
-   discarded, so a finding you cannot ground is a finding you should not make.
+2. Every finding must cite a clause, and the clause is NOT the criterion name.
+   It is either a rule id from the list of valid ids you are given, or the path
+   of a file that appears in the diff. Putting the criterion id in the clause
+   field is the most common way to get a finding thrown away.
+
+     wrong:  {"criterion_id":"approval-walls","clause":"approval-walls"}
+     right:  {"criterion_id":"approval-walls","clause":"authority.never-publish-post-send"}
+     right:  {"criterion_id":"approval-walls","clause":"scripts/judge.mjs"}
+
+   A finding you cannot ground is a finding you should not make.
 3. You must dissent. Return at least one finding whose verdict is "regresses"
    or "dissent". If you genuinely believe the change is clean, use "dissent" to
    name the strongest argument against it that you can construct. A panel that
@@ -167,6 +175,25 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
   const first = await ask({ system, user: diff, bench: name, attempt: 1 })
   let { findings, problems } = parseFindings(first, bench, clauseIds, diffFiles)
   let unanimous = false
+  let empty = false
+
+  // A bench that said something and had all of it discarded is not a bench that
+  // found nothing. On the first live run the technical bench returned no
+  // findings at all and the personal bench lost four, three of them on blocking
+  // criteria, every one because it put the criterion name in the clause field.
+  // The panel then reported "no blocking regression", which is the worst
+  // possible failure: a discard silently became a pass.
+  if (!findings.length && problems.length) {
+    const retry = await ask({
+      system, bench: name, attempt: 2,
+      user: `${diff}\n\nEvery finding in your previous review was discarded and the review was rejected. The reasons were:\n\n${problems.map((m) => `- ${m}`).join('\n')}\n\nThe clause field is not the criterion name. It must be a rule id from the valid list, or the path of a file in the diff. Return the review again, grounded.`,
+    })
+    const second = parseFindings(retry, bench, clauseIds, diffFiles)
+    problems = [...problems, ...second.problems]
+    findings = second.findings
+  }
+  if (!findings.length) empty = true
+
   if (findings.length && !hasDissent(findings)) {
     const retry = await ask({
       system, bench: name, attempt: 2,
@@ -177,7 +204,11 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
     if (hasDissent(second.findings)) findings = second.findings
     else { findings = second.findings.length ? second.findings : findings; unanimous = true }
   }
-  return { bench: name, findings, problems, unanimous }
+  // Which blocking criteria were raised and then thrown away. A reader must be
+  // able to see that a block was lost to a formatting mistake.
+  const blocking = new Set(bench.criteria.filter((c) => c.blocking).map((c) => c.id))
+  const lostBlocking = [...new Set(problems.flatMap((m) => [...blocking].filter((id) => m.includes(`a ${id} finding`))))]
+  return { bench: name, findings, problems, unanimous, empty, lostBlocking }
 }
 
 // ------------------------------------------------------------------ reporting
@@ -185,15 +216,24 @@ export function render(results, { base, head }) {
   const p = []
   const all = results.flatMap((r) => r.findings)
   const blocked = blockingRegressions(all)
+  const unmeasured = results.filter((r) => r.empty)
+  const lost = results.flatMap((r) => r.lostBlocking || [])
   p.push(`## Judge panel: \`${base}\` against \`${head}\``)
   p.push('')
-  p.push(blocked.length
-    ? `**${blocked.length} blocking regression${blocked.length === 1 ? '' : 's'}.** Each names the clause it regressed. Overrule with a commit body line \`Ruling (Krish, YYYY-MM-DD):\`, which the observer ledgers and which becomes that rule's new source.`
-    : 'No blocking regression. Advisory findings and the mandatory dissent are below.')
+  if (blocked.length) {
+    p.push(`**${blocked.length} blocking regression${blocked.length === 1 ? '' : 's'}.** Each names the clause it regressed. Overrule with a commit body line \`Ruling (Krish, YYYY-MM-DD):\`, which the observer ledgers and which becomes that rule's new source.`)
+  } else if (unmeasured.length || lost.length) {
+    // Never "clean" here. A bench that could not be read is unmeasured, not
+    // passing, which is the same rule canaries use for a void negative result.
+    p.push(`**Unmeasured, not clean.** ${unmeasured.length ? `${unmeasured.map((r) => r.bench).join(' and ')} returned nothing usable. ` : ''}${lost.length ? `Blocking criteria raised and then discarded: ${[...new Set(lost)].join(', ')}. ` : ''}No blocking regression was recorded, and that is not the same as there being none.`)
+  } else {
+    p.push('No blocking regression. Advisory findings and the mandatory dissent are below.')
+  }
   p.push('')
   for (const r of results) {
     p.push(`### ${r.bench} bench`)
     p.push('')
+    if (r.empty) p.push('> `bench-empty`. This bench returned nothing this panel could use, twice. Treat it as unmeasured rather than as agreement.')
     if (r.unanimous) p.push('> `bench-unanimous`. This bench returned no regression and no dissent twice. A bench that agrees with everything is measuring nothing, so read this one yourself rather than trusting it.')
     if (!r.findings.length) { p.push('_Nothing returned._'); p.push(''); continue }
     p.push('| Criterion | Verdict | Clause | Why |')
@@ -264,5 +304,6 @@ if (isMain) {
   if (report.includes(EM_DASH)) { console.error('FAIL  the report carries an em dash after filtering'); process.exit(2) }
 
   const blocked = blockingRegressions(results.flatMap((r) => r.findings))
-  process.exit(blocked.length ? 1 : 0)
+  const unusable = results.some((r) => r.empty || (r.lostBlocking || []).length)
+  process.exit(blocked.length || unusable ? 1 : 0)
 }

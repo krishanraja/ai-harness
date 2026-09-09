@@ -182,6 +182,57 @@ T('the report never carries an em dash', () => {
   assert(!render(r, { base: 'a', head: 'b' }).includes('—'), 'the rendered report leaked an em dash')
 })
 
+
+// --------------------------------------- what the first live run got wrong
+/**
+ * On the first real run the technical bench returned no findings at all and the
+ * personal bench lost four, three of them on blocking criteria, every one
+ * because it put the criterion name in the clause field. The panel then printed
+ * "No blocking regression". A discard had silently become a pass, which is the
+ * worst failure this thing can have.
+ */
+T('a bench whose findings were all discarded is re-asked, not treated as silence', async () => {
+  let attempts = 0
+  const ask = async ({ attempt }) => {
+    attempts = attempt
+    return attempt === 1
+      ? reply([{ criterion_id: 'approval-walls', verdict: 'regresses', clause: 'approval-walls', because: 'Grants send authority.' }])
+      : reply([{ criterion_id: 'approval-walls', verdict: 'regresses', clause: A_RULE, because: 'Grants send authority.' }])
+  }
+  const r = await runBench('personal', { diff: 'x', diffFiles: DIFF_FILES, clauseIds, ask })
+  assert(attempts === 2, 'a review that was entirely discarded must be asked again')
+  assert(r.findings.length === 1, 'the grounded retry counts')
+  assert(r.empty === false, 'it recovered, so it is not empty')
+})
+
+T('a bench that returns nothing usable twice is unmeasured, never clean', async () => {
+  const ask = async () => reply([{ criterion_id: 'approval-walls', verdict: 'regresses', clause: 'approval-walls', because: 'x' }])
+  const r = await runBench('personal', { diff: 'x', diffFiles: DIFF_FILES, clauseIds, ask })
+  assert(r.empty === true, 'twice unusable is empty')
+  assert(r.lostBlocking.includes('approval-walls'), `the lost blocking criterion must be named, got ${JSON.stringify(r.lostBlocking)}`)
+  const out = render([r], { base: 'a', head: 'b' })
+  assert(/Unmeasured, not clean/.test(out), 'the report must not read as a pass')
+  assert(!/No blocking regression\./.test(out), 'the report must never claim no blocking regression here')
+  assert(/bench-empty/.test(out), 'the bench must be marked empty')
+})
+
+T('a lost blocking criterion is named in the report', async () => {
+  const ask = async () => reply([
+    { criterion_id: 'refusals', verdict: 'regresses', clause: 'refusals', because: 'x' },
+    { criterion_id: 'mission-fit', verdict: 'dissent', clause: A_RULE, because: 'Grounded, so this one counts.' },
+  ])
+  const r = await runBench('personal', { diff: 'x', diffFiles: DIFF_FILES, clauseIds, ask })
+  assert(r.findings.length === 1, 'the grounded finding survives')
+  assert(r.lostBlocking.includes('refusals'), 'the discarded blocking criterion is recorded')
+  assert(/refusals/.test(render([r], { base: 'a', head: 'b' })), 'and named in the report')
+})
+
+T('the prompt shows what a clause is not', () => {
+  const s = systemPrompt(loadBench('personal'), clauseIds)
+  assert(/NOT the criterion name/i.test(s), 'the prompt must say the clause is not the criterion name')
+  assert(/wrong:/.test(s) && /right:/.test(s), 'and show an example of each')
+})
+
 // -------------------------------------------------------------------- report
 const run = async () => {
   for (const [n, f] of tests) await t(n, f)

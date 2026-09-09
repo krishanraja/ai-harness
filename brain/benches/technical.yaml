@@ -7,11 +7,16 @@
 # Read sources/MANIFEST.yaml first. That document is marked historical by its
 # own header, so these criteria are cited as an import rather than as authority.
 #
-# The bench compares. It never scores. Two controls over identical cases moved
-# recall by 0.250 and then 0.125 between models on 2026-09-07 and 2026-09-08,
-# the stronger model scoring lower each time, while canaries on real clients
-# found four real defects in an hour. A judge that returns a number is measuring
-# the judge. A judge that names the clause that got worse is measuring the change.
+# The bench compares. It never scores.
+#
+# Source for that, because this file polices sourcing and the first live run of
+# the panel caught this very header asserting numbers with nothing to check them
+# against: contract/canary-contract.md carries the table. Two controls over the
+# same 120 cases moved recall between models by 0.250 and then 0.125, the
+# stronger model scoring lower each time, and state/evals/ keeps both controls.
+#
+# A judge that returns a number is measuring the judge. A judge that names the
+# clause that got worse is measuring the change.
 
 schema_version: 1
 bench: technical
