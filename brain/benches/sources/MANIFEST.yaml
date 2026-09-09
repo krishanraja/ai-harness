@@ -1,0 +1,54 @@
+# Verbatim snapshots of the two documents the judge benches are built from.
+#
+# Neither lives in this repository. The technical source is in the mm-ctrl
+# venture repo; the personal source is a Google Sheet. A bench pointed at a
+# document it cannot version is a bench that silently changes underneath its own
+# verdicts, so each is captured here with its hash and the date it was taken.
+#
+# These files are never edited. They are third-party captures, held verbatim so
+# a criterion can quote them and a reader can check the quote. The em dash rule
+# does not apply to them for the same reason it does not apply to a vendored
+# tree: they are not ours to rewrite. They are stored as .txt so the validator
+# does not treat them as canon prose.
+#
+# When the live document moves past its snapshot, the audit opens
+# bench-source-stale and it stays open until a new snapshot lands here and the
+# bench cites it. Refreshing a snapshot is a read a person or a Routine does;
+# the Actions runner has no path to Drive and is not given one.
+
+schema_version: 1
+
+sources:
+  - id: memory-doctrine
+    file: ai-memory-systems-2026-09-07.txt
+    title: "AI Memory Systems for Multi-Agent Architectures: The Canonical Reference (2025 to 2026)"
+    origin: krishanraja/mm-ctrl, docs/history/
+    captured: 2026-09-07
+    snapshot_taken: 2026-09-09
+    bytes: 59359
+    sha256: 28e182238af0bfa534f91d8113fb635199560dce90465be4d952949a869d9976
+    # Read this before treating any criterion here as settled. The document's
+    # own header says so, and a bench that cites a retired source without
+    # saying it is retired is exactly the "stale served with confidence"
+    # failure the document itself names as the biggest production risk.
+    status: historical
+    status_note: >
+      The archived copy carries the header "Historical. Archived 2026-09-07 by
+      the docs steward. Not current guidance." Its production criteria are still
+      the best available doctrine, so the bench cites it as an import rather than
+      as authority, and the first whole-brain review is expected to decide
+      whether to replace it.
+
+  - id: personal-standard
+    file: master-ikigai-v4-2026-09-05.txt
+    title: "Krish Raja: Master Ikigai"
+    origin: Google Sheets, exported as text
+    version: "Version 4, 5 September 2026"
+    captured: 2026-09-05
+    snapshot_taken: 2026-09-09
+    bytes: 85954
+    sha256: ce1c3030a9a35e18870765e5cb4a44aa15c7f19d42bc2ee685c2d53e70d314f1
+    status: current
+    status_note: >
+      Built from 138 ranked answers across three sittings. The sheet states its
+      own version in its second row, which is what the staleness check reads.

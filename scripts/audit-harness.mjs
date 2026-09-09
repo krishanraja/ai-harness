@@ -26,6 +26,7 @@
  * exits 0, because a finding is work to schedule, not a broken build.
  */
 
+import { createHash } from 'node:crypto'
 import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -413,6 +414,90 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
       else N(`${who} heartbeat is ${age} hours old.`)
     }
   }
+}
+
+// ------------------------------------------------------------- bench sources
+// The two judge benches are built from documents that do not live in this
+// repository: the memory doctrine is in a venture repo, the personal standard
+// is a Google Sheet. A bench pointed at a document it cannot version silently
+// changes underneath its own verdicts, so each is snapshotted under
+// brain/benches/sources/ with its hash.
+//
+// This checks the snapshot against its own manifest. Comparing the snapshot
+// against the LIVE document is a machine-side check: the Actions runner has no
+// Drive access and no venture checkout, and it is not given either. So the
+// runner proves the snapshot has not been tampered with, and a person refreshes
+// it when the source moves.
+{
+  const manifestPath = join(HARNESS, 'brain/benches/sources/MANIFEST.yaml')
+  if (!existsSync(manifestPath)) {
+    if (existsSync(join(HARNESS, 'brain/benches'))) {
+      F('bench-source', 'MANIFEST.yaml', 'brain/benches/sources/MANIFEST.yaml is missing, so no bench criterion can be traced to a versioned source.', 'Restore it. A criterion with no quotable, hashed source is an opinion.')
+    }
+  } else {
+    const manifest = parseYaml(readFileSync(manifestPath, 'utf8'))
+    for (const src of manifest.sources || []) {
+      const file = join(HARNESS, 'brain/benches/sources', src.file)
+      if (!existsSync(file)) {
+        F('bench-source', src.id, `${src.file} is named in the manifest and does not exist.`, 'Restore the snapshot or remove the bench that cites it.')
+        continue
+      }
+      const raw = readFileSync(file)
+      const actual = createHash('sha256').update(raw).digest('hex')
+      if (actual !== src.sha256) {
+        F('bench-source-stale', src.id, `${src.file} hashes to ${actual.slice(0, 16)} but the manifest records ${String(src.sha256).slice(0, 16)}.`, 'A snapshot is a verbatim capture and is never edited. Either it was changed by hand, or a refresh landed without updating the manifest. Fix the manifest only if the new bytes are a genuine recapture.')
+        continue
+      }
+      // The sheet states its own version in its own text. If the manifest
+      // claims a version the file does not contain, one of them is lying.
+      if (src.version && !raw.toString('utf8').includes(src.version)) {
+        F('bench-source-stale', src.id, `The manifest records ${src.version}, and that string does not appear in ${src.file}.`, 'Recapture the source, or correct the manifest. A bench that cites a version its own snapshot does not carry cannot be checked by a reader.')
+        continue
+      }
+      N(`bench source ${src.id} matches its manifest hash${src.status === 'historical' ? ', and is marked historical by its own header' : ''}.`)
+    }
+  }
+}
+
+// ------------------------------------------------------ did the change work
+// The only check here that measures trajectory rather than hygiene.
+//
+// Every other class asks whether the canon is well formed today. This one asks
+// whether last month's accepted change actually did anything, which is the
+// question a system that claims to learn has to be able to answer about itself.
+//
+// A proposal that was merged and named a class of finding it would fix should
+// make that finding go away. When it does not, either the change was never
+// applied or it did not work, and both are worth saying out loud. Pull request
+// 8 is the founding case: it proposed three routing-contract rows, merged with
+// one file changed, and all three are still unrouted today.
+//
+// Blocks whose verdict was "nothing-changes" are excluded. Those deliberately
+// declined to act, so the finding recurring is the gate working as designed and
+// counting it here would bury the real signal in noise.
+{
+  const path = join(HARNESS, 'brain/proposals.jsonl')
+  const merged = []
+  if (existsSync(path)) {
+    for (const line of readFileSync(path, 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      try { const r = JSON.parse(line); if (r.event === 'merged') merged.push(r) } catch { /* a malformed line is not a reason to stop the audit */ }
+    }
+  }
+  let checked = 0
+  for (const m of merged) {
+    for (const a of m.addresses || []) {
+      if (a.verdict === 'nothing-changes') continue
+      checked++
+      const still = (a.subjects || []).filter((sub) => findings.some((f) => f.klass === a.class && f.subject === sub))
+      if (!still.length) { N(`proposal ${m.proposal} closed its ${a.class} findings.`); continue }
+      const days = Math.round((Date.now() - new Date(m.at)) / 86400000)
+      F('proposal-ineffective', `${m.proposal} (pull request ${m.pr})`,
+        `Merged ${days} day(s) ago naming ${a.subjects.length} ${a.class} finding(s) it would fix. ${still.length} of them are still open: ${still.join(', ')}.`,
+        `Read the proposal and decide which it is: the change was accepted but never applied, or it was applied and did not work. ${m.changed_files === 1 ? 'This one changed a single file, the proposal document itself, so nothing was ever applied.' : ''} Accepting a proposal and applying it are different events, and only the second one closes a finding.`)
+    }
+  }
+  if (merged.length) N(`${merged.length} merged proposal(s) in brain/proposals.jsonl, ${checked} acted-on cluster(s) checked for recurrence.`)
 }
 
 // ------------------------------------------------------------------- em dash
