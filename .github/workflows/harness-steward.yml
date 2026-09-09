@@ -27,7 +27,7 @@ name: Harness steward
 # A new push supersedes the run before it. Without this, a hung job on an older
 # commit keeps burning a runner while the commit that fixes it queues behind it.
 concurrency:
-  group: harness-steward-${{ github.workflow }}-${{ github.ref }}
+  group: harness-steward-${{ github.ref }}
   cancel-in-progress: true
 
 on:
