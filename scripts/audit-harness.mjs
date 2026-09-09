@@ -387,22 +387,40 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   // and is his call, not mine: three weekly Routines were disabled in September
   // precisely because they failed silently. So it is named and reported missing
   // rather than quietly added.
+  // Each clock carries the date it was declared. A clock that has never
+  // reported is reported as awaited rather than broken, and the finding gets
+  // louder as it ages, because the two are genuinely different failures and
+  // collapsing them is what taught everyone to scroll past this class.
+  //
+  // Under 14 days is a clock that has not been installed yet, which is normal.
+  // Over 14 days is a decision nobody made: either the clock is wanted and
+  // somebody must install it, or it is not wanted and must leave this set.
+  // Neither happens on its own, so the audit escalates rather than repeating
+  // itself at the same volume forever.
   const EXPECTED_CLOCKS = {
-    'harness-sync-lorimer': 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on LORIMER',
-    'harness-sync-surface': 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE',
-    observer: 'scripts/observe.mjs, nightly in harness-steward.yml',
-    'session-feed': 'a scheduled Routine collecting Claude Code session metadata, never created',
-    'openclaw-vps': 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09',
+    'harness-sync-lorimer': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on LORIMER', declared: '2026-09-08', fix: 'Run scripts/Invoke-HarnessSync.ps1 once on LORIMER, as was done on SURFACE. Only Krish can do this; it is a scheduled task on his machine.' },
+    'harness-sync-surface': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE', declared: '2026-09-08', fix: 'Re-run the installer on SURFACE.' },
+    observer: { where: 'scripts/observe.mjs, nightly in harness-steward.yml', declared: '2026-09-08', fix: 'Dispatch harness-steward.yml manually and read the job log.' },
+    'session-feed': { where: 'a scheduled Routine collecting Claude Code session metadata, never created', declared: '2026-09-08', fix: 'Create the Routine, or remove session-feed from EXPECTED_CLOCKS with a recorded reason. Krish disabled three weekly Routines in September for failing silently, so standing one up is his call and is deliberately not automated here.' },
+    'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09', declared: '2026-09-09', fix: 'Check the hourly cron entry on the VPS and that GITHUB_HEARTBEAT_TOKEN is still valid.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
     F('heartbeat', 'all clocks', 'state/heartbeats.json does not exist, so no scheduled job has ever reported in.', 'Run the observer. Until a heartbeat exists, nothing can tell a healthy system from a dead one.')
   } else {
     const hb = JSON.parse(readFileSync(hbPath, 'utf8'))
-    for (const [who, where] of Object.entries(EXPECTED_CLOCKS)) {
-      if (!(who in hb)) {
-        F('heartbeat', who, `${who} is an expected clock with no entry in state/heartbeats.json, so it has never run once.`, `${where}. A writer that has never written is invisible to a watchdog that only reads the entries it finds, which is why the expected set is declared rather than discovered.`)
-      }
+    for (const [who, spec] of Object.entries(EXPECTED_CLOCKS)) {
+      if (who in hb) continue
+      const waited = Math.round((Date.now() - new Date(spec.declared)) / 86400000)
+      const overdue = waited > 14
+      F(
+        'heartbeat',
+        who,
+        overdue
+          ? `${who} was declared an expected clock ${waited} days ago and has still never reported once. Past 14 days this is an unmade decision, not a pending install.`
+          : `${who} is an expected clock with no entry in state/heartbeats.json, so it has never run once. Declared ${waited} day(s) ago.`,
+        `${spec.where}. ${spec.fix} A writer that has never written is invisible to a watchdog that only reads the entries it finds, which is why the expected set is declared rather than discovered.${overdue ? ' This finding will keep getting louder until the clock reports or leaves the set, because a permanent finding at a fixed volume is one everybody learns to scroll past.' : ''}`
+      )
     }
     for (const [who, beat] of Object.entries(hb)) {
       if (!beat || !beat.last_run) {
