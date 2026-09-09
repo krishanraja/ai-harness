@@ -221,6 +221,50 @@ that exposes skill invocation as observable output, so the automatic job records
 that surface as `manual-required` instead of pretending a result. Installation
 and byte parity remain automatic.
 
+## The two cloud surfaces
+
+`claude-cloud` and `perplexity-cloud` have no API for the personal skill
+catalogue, and the architecture document is right that browser automation is
+too UI-dependent to be the unattended production updater. So it is not one.
+
+**Ruling (Krish, 2026-09-09): no phone, no hosted browser, no approval page.**
+He sits at LORIMER and exposes his own signed-in browser when an upload is due.
+His presence at the machine is the approval, which is the supervised session the
+architecture document already permits.
+
+Open your own Chrome, already signed in, with a debugging port and a profile
+that is not your daily one:
+
+```
+chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\Users\krish\.harness-browser
+```
+
+Then, from the harness checkout:
+
+```
+node scripts/cloud-upload.mjs --check --surface claude-cloud
+```
+
+It connects to that browser, borrows a tab, confirms the session is signed in,
+reads the catalogue, and writes `state/cloud-checks/claude-cloud.json`. It never
+launches a browser, never creates a profile, never sees a cookie or a token, and
+never takes a screenshot, because an image of a signed-in page carries the
+session.
+
+`--check` is the first thing to run after any change to those pages, and
+`--upload` refuses unless a check has passed for that surface within fourteen
+days. The selectors in `SURFACES` were written from the published shape of those
+pages and have never been run against them, so `verified` is null for both and
+the gate is closed until a real `--check` opens it.
+
+If a selector matches nothing, the run stops and records `unmeasurable` with the
+url and the selector name. It does not guess, and an empty catalogue and a
+changed page look identical from the outside, so it refuses rather than
+reporting zero.
+
+Removing a previous catalogue entry is a deletion. It needs its own named
+approval and this script never does it.
+
 ## Known gaps on the machines
 
 - **Codex truncates skill descriptions.** It reports "Skill descriptions were
