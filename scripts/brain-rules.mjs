@@ -220,6 +220,7 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
       L.push(`      ref: ${q(src?.ref || found?.sha || 'unknown')}`)
       L.push(`    status: ${(src && was.status) || 'live'}`)
       if (was?.supersedes?.length) L.push(`    supersedes: [${was.supersedes.join(', ')}]`)
+      if (was?.contested_by) L.push(`    contested_by: ${was.contested_by}`)
     }
     L.push('')
   }
@@ -257,7 +258,9 @@ export function check(ledgerText, root = HARNESS) {
     for (const id of recorded.keys()) {
       if (seen.has(id)) continue
       const e = recorded.get(id)
-      if (e.status === 'live') problems.push(`brain/rules.yaml carries ${id} as live, but no such rule exists in the canon. Retire it or restore the rule.`)
+      // `contested` is live doctrine with a recorded contradiction against it,
+      // not a removed rule, so an orphan check must not treat it as either.
+      if (e.status === 'live' || e.status === 'contested') problems.push(`brain/rules.yaml carries ${id} as live, but no such rule exists in the canon. Retire it or restore the rule.`)
     }
   }
   return { problems, counts: { contract_rules: live.contractRules.length, skill_sections: live.skillSections.length } }

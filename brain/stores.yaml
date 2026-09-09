@@ -53,11 +53,17 @@ stores:
   # LIVE, which means Krish has two live rule sets: 314 entries here and 122
   # there, with nothing reconciling them.
   #
-  # They are not junk. A sample of the active rows includes "Zero em dashes",
-  # which this repository enforces independently and neither knows about the
-  # other; "No future tense promises"; "Confidence Tax", requiring every
-  # confidence claim to cite evidence; and a ban on mocked execution in
-  # scripts. At least three of those are good rules the canon does not have.
+  # They may not be junk. A sample of six active rows read on 2026-09-09
+  # includes "Zero em dashes", which this repository enforces independently;
+  # "No future tense promises"; "Confidence Tax", requiring every confidence
+  # claim to cite evidence; and a ban on mocked execution in scripts. Three of
+  # those have no equivalent in the canon.
+  #
+  # Whether they are worth adding is NOT asserted here. Nobody has touched
+  # these rows since 31 May, none has ever had an efficacy check, and calling
+  # them good on that basis would be reasoning confidently from unverified
+  # material, which is the failure this whole layer exists to catch. The claim
+  # is deferred to the triage below, which is where it can be checked.
   - id: standards_registry
     where: supabase
     disposition: migrate
@@ -77,7 +83,9 @@ stores:
       Each is one of three things: already said by the canon, worth adding to
       the canon, or genuinely dead. This is a reading job for Krish and it is
       the highest value item in this file, because until it is done two live
-      rule sets contradict each other in silence.
+      rule sets contradict each other in silence. The em dash rule is a known
+      twin of the canon's own and is the first one to resolve, in one direction
+      or the other, rather than leaving it live on both sides.
 
   # ------------------------------------------------------------------- feed
   - id: corrections
@@ -135,6 +143,9 @@ stores:
     disposition: retire
     rows: 389
     last_write: 2026-07-02
+    retired_at: 2026-09-09
+    retirement_evidence: >
+      Verified 2026-09-09 by grep across every md, mjs, yaml, yml and ps1 file in this repository: zero references. The 389 rows are kept; only the disposition is retired.
     action: >
       Dead ten weeks. The likeliest cause is now known: the Vera Feedback
       Aggregation workflow has been failing silently since 30 August, and
@@ -144,6 +155,9 @@ stores:
     where: supabase
     disposition: retire
     rows: 0
+    retired_at: 2026-09-09
+    retirement_evidence: >
+      Verified 2026-09-09 by grep across every md, mjs, yaml, yml and ps1 file in this repository: zero references. Zero rows have ever existed either, so nothing can reference a row.
     action: Built, never used once.
 
   - id: learning_events
@@ -151,12 +165,18 @@ stores:
     disposition: retire
     rows: 12
     last_write: 2026-05-04
+    retired_at: 2026-09-09
+    retirement_evidence: >
+      Verified 2026-09-09 by grep across every md, mjs, yaml, yml and ps1 file in this repository. One reference exists, in state/fleet.yaml, and it is the surface_contracts row added in this same change that records the n8n agents writing to a dead table. No code path reads it. Its recommended_target paths point at a filesystem that no longer exists, so no live reference is even resolvable.
     action: All needs_review, zero efficacy checks, targets point at a filesystem that no longer exists.
 
   - id: judge_verdicts
     where: supabase
     disposition: retire
     rows: 2
+    retired_at: 2026-09-09
+    retirement_evidence: >
+      Verified 2026-09-09 by grep across every md, mjs, yaml, yml and ps1 file in this repository: zero references. Retired as a store, not as evidence: the two rows are kept and are worth reading before the new panel is trusted.
     action: >
       A judge concept existed here before this one and ran twice. Read the two
       rows before trusting the new panel, because whatever stopped that one is
@@ -166,6 +186,9 @@ stores:
     where: supabase
     disposition: retire
     rows: 1
+    retired_at: 2026-09-09
+    retirement_evidence: >
+      Verified 2026-09-09 by grep across every md, mjs, yaml, yml and ps1 file in this repository: zero references. The single row is kept.
     action: See judge_verdicts. One run, then nothing.
 
   - id: memory
