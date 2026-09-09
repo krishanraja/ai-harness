@@ -5,6 +5,17 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-09-09
+
+- reconciled at `f5b6d3d`: NOW.md rewritten against 27 non-steward commits since
+  `f98ef85`, the head it was last reconciled against. Covered: the judge gate
+  becoming blocking, three unrouted skills routed, the
+  OpenClaw VPS declared a permanent heartbeated surface, `brain/rules.yaml`
+  giving every canon rule a provenance record, `brain/decisions.jsonl`
+  replacing a Supabase store that never existed, and four credentials found
+  still live despite being reported rotated. No document moved and no
+  contradiction needed resolving; this was drift correction on one file.
+
 ## 2026-09-08
 
 - SURFACE installed `v2026.09.08.2` with 29 of 29 per-skill hashes and the
