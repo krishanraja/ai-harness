@@ -41,6 +41,9 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | Harness/configuration audit | `mindmake-os` when OS-related | No prose producer | Deterministic harness audit; model critique is supplemental |
 | Research, comparison, due diligence, or current external evidence | Relevant domain skill | `evidence-research` | Claim-evidence, contradiction, freshness, and citation-support checks |
 | Record, recall, review, supersede, or reverse a finalized consequential decision | Owning domain skill; `mindmake-os` for live OS state | `decision-ledger` | Authoritative readback, lifecycle-link, redaction, and trigger check |
+| Harness governance: auditing, adding, revising, deprecating, quarantining, packaging or diagnosing a skill, rule, adapter or client surface | `mindmake-os` when the question touches OS state | `harness-maintainer` | Active-skill quality standard, staged before activation, and the approval gate for any upload, enable, disable or delete |
+| A task needs an authenticated service: GitHub, Vercel, Supabase, n8n, Apify, Stripe or similar, or a login, scope, tenant or credential state fails | Relevant domain skill | `tools-access` supplies access, identity, scope and target verification; the per-tool skill supplies mechanics | Verified target and scope before the call, never a cached endpoint |
+| Apify Actor selection, run preparation, execution, recovery or dataset collection | Relevant domain skill; `n8n-operator` only for the workflow leg | `apify` | Live Actor identity, build and pricing, exact run and spend authority, and a verified collection handoff |
 
 ## Collision rules
 

@@ -440,3 +440,30 @@ jobs:
           path: judge.md
           retention-days: 90
           if-no-files-found: ignore
+
+      # The gate. Everything above this point posts and records; this is the
+      # only step that fails the job.
+      #
+      # It has to be last, and separate. The judge step exits 0 deliberately so
+      # the review can post afterwards: a step that dies takes the posting step
+      # with it, and a block nobody can read is worse than no block. So the
+      # verdict is carried in an output and acted on here, once the review is
+      # already on the pull request.
+      #
+      # Why this exists at all: until 2026-09-09 every judge run reported
+      # success, including the ones that requested changes. Pull requests 26, 27
+      # and 28 each merged within about a minute of the panel objecting, because
+      # nothing stopped them. A reviewer whose objection cannot fail a check is
+      # a reviewer nobody has to answer.
+      #
+      # Krish overrules a wrong block the same way he overrules anything else:
+      # a "Ruling (Krish, DATE):" line in the commit body, which observe.mjs
+      # already extracts into the ledger. The override is recorded rather than
+      # silent, and a criterion that keeps getting overruled is evidence the
+      # criterion is wrong.
+      - name: Fail on a blocking verdict
+        if: steps.scope.outputs.touched == 'true' && steps.run.outputs.verdict == '1'
+        run: |
+          echo "::error::The judge panel found a blocking regression. Read the review on this pull request."
+          echo "Overrule it with a 'Ruling (Krish, YYYY-MM-DD):' line in the commit body if the block is wrong."
+          exit 1
