@@ -129,20 +129,36 @@ stores:
       exists. Section 9 of the Ikigai sheet already keeps one, with flip rules.
 
   - id: decision-ledger-store
-    where: brain/decisions.jsonl, created 2026-09-09
-    disposition: canon
+    where: >
+      Nowhere authoritative yet. The decision-ledger skill names a Supabase
+      decisions table that does not exist. brain/decisions.jsonl was created
+      2026-09-09 and holds real content, but nothing routes the skill to it.
+    disposition: migrate
+    migration_state: destination-exists-skill-not-repointed
     action: >
-      brain/decisions.jsonl now exists and holds its first ten entries: Krish's
-      rulings of 2026-09-09 on the agent rules that had been waiting unapproved
-      in corrections since 2026-08-24. Each row carries his wording verbatim in
-      krish_wording, the amended rule text wherever he changed the proposal, the
-      corrections row it answers, and the reason. Append only, latest row per id
-      wins, the same shape as proposals.jsonl.
-    outstanding: >
-      The decision-ledger skill still names a Supabase decisions table that does
-      not exist and returns STORE_UNAVAILABLE. Repointing it at this file is a
-      skill rewrite through the proposal path, not a config change, so it stays
-      open.
+      The decision-ledger skill names Supabase as its canonical store and there
+      is no decisions table. The skill also says never to create an ad hoc
+      permanent file, so repointing it is a skill rewrite through the proposal
+      path, not a config change.
+    progress_2026_09_09: >
+      brain/decisions.jsonl now exists and holds fifteen entries: Krish's ten
+      rulings on the agent rules that had been waiting unapproved in corrections
+      since 2026-08-24, and five rulings on the operating system itself. Each row
+      carries his wording verbatim in krish_wording, the amended rule text
+      wherever he changed a proposal, the corrections row it answers, and the
+      reason. Append only, latest row per id wins, the same shape as
+      proposals.jsonl.
+    why_still_migrate: >
+      The judge panel caught this entry being flipped to canon in the same change
+      that created the file, which would have been the config edit this row
+      itself forbids, and would have declared a migration finished while the only
+      consumer still points somewhere else. A destination holding content is not
+      the same as a store being canonical. This stays migrate until the skill is
+      repointed through a proposal, and that proposal is what closes it.
+    superseded_wording: >
+      Until 2026-09-09 this row read "where: nowhere" with no progress fields.
+      That text is superseded by the two fields above, not deleted, because the
+      file's own rule is that nothing here is dropped.
 
   # ----------------------------------------------------------------- retire
   - id: feedback_queue
