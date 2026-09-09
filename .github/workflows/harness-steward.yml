@@ -396,10 +396,18 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
+          # `set +e` matters here. GitHub runs a `run:` block under `bash -e` by
+          # default, and `set -uo pipefail` above does not turn that off. So the
+          # judge exiting non-zero, which is exactly what it does when it finds a
+          # blocking regression or an unmeasurable bench, killed this step before
+          # rc was ever captured. The review then never posted, on the one run
+          # where it had something to say.
+          set +e
           node scripts/judge.mjs --base "${{ steps.scope.outputs.base }}" --head HEAD --out judge.md
           rc=$?
+          set -e
           echo "verdict=$rc" >> "$GITHUB_OUTPUT"
-          cat judge.md >> "$GITHUB_STEP_SUMMARY"
+          [ -f judge.md ] && cat judge.md >> "$GITHUB_STEP_SUMMARY"
           exit 0
 
       # A blocking regression requests changes. There is no auto-merge here to
