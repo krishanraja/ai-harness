@@ -88,6 +88,20 @@ export class Gh {
     })
   }
 
+  /**
+   * Pull requests, including merged and closed ones.
+   *
+   * findPull below asks for state=open only, which is right for "is there
+   * already a branch open for this", and useless for "what happened to the
+   * proposal we opened last week". A merged pull request is invisible to it.
+   */
+  async listPulls(repo, { state = 'all', head = null, base = null, per_page = 100 } = {}) {
+    const q = [`state=${state}`, `per_page=${per_page}`]
+    if (head) q.push(`head=${this.owner}:${head}`)
+    if (base) q.push(`base=${base}`)
+    return this.req('GET', `/repos/${this.owner}/${repo}/pulls?${q.join('&')}`)
+  }
+
   async findPull(repo, head, base) {
     const r = await this.req('GET', `/repos/${this.owner}/${repo}/pulls?state=open&head=${this.owner}:${head}&base=${base}`)
     return r[0] || null

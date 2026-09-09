@@ -1,0 +1,145 @@
+# The personal bench.
+#
+# Ten criteria, every one traced to a quotable line in
+# sources/master-ikigai-v4-2026-09-05.txt, which is version 4, built from 138
+# ranked answers across three sittings.
+#
+# This bench exists because a change to the canon can be technically immaculate
+# and still be the wrong thing to have spent the week on. The technical bench
+# cannot see that. This one can, and it is the harsher of the two.
+#
+# It compares, it does not score, and it must dissent. A review that returns
+# only improvements is discarded and re-run once. A bench that agrees with
+# everything is measuring nothing.
+
+#
+# What this bench is allowed to do, and what it is not.
+#
+# The panel's first live run raised this against itself, blocking, and it was
+# right to: `verification.self-critique-is-supplemental` in the operating
+# contract says self-critique is supplemental and is not an independent
+# verifier. Making model judgement a deterministic gate would contradict a live
+# rule while both read as current, which is exactly the failure
+# contradiction-surfaced exists to catch.
+#
+# So the panel is not a gate. It posts a pull request review, the same standing
+# any reviewer has. A person merges. It never merges, never approves, and its
+# verdict is never the thing that makes a change correct. The deterministic
+# checks stay where they were: render, validate-surfaces, check-aggregate, the
+# provenance ledger and the canaries on real clients. Those verify. This
+# criticises, in writing, with a clause named, and a human decides.
+#
+# A blocking criterion therefore means "request changes and say why", not "stop
+# the merge". Read alongside `verification.use-deterministic-checks-first`.
+
+schema_version: 1
+bench: personal
+source: personal-standard
+source_version: "Version 4, 5 September 2026"
+
+criteria:
+  - id: mission-fit
+    blocking: false
+    quote: >
+      Rule 7: If it does not put a leader's edge back, it is off mission.
+    test: >
+      Which of the five jobs does this change serve? Name it. A change that
+      cannot name one is off mission by the sheet's own test, however good it is.
+
+  - id: building-unasked
+    blocking: true
+    quote: >
+      Rule 6: If it is built in private, it is hiding. Every build is announced,
+      shown, or sold before it is finished. Hours building unasked has a target
+      of zero; it is the Rule 6 tripwire. G4: any new agent not in the five jobs
+      requires that a paying leader asked for it, in writing.
+    test: >
+      Does this add a skill, an agent, a store, or a subsystem? If so, who asked
+      for it, and is the ask recorded? No named asker fails. This is the
+      criterion most likely to fire on harness work itself, and it is supposed
+      to. Note the resolution the sheet already reached: the love of building is
+      real, the hiding is building alone and in private.
+
+  - id: cited-or-silent
+    blocking: false
+    restates: truth-and-freshness.record-source-and-retrieval
+    quote: >
+      No number, name or claim ships without a source.
+    test: >
+      Does any rule or document added here assert a fact with no source? An
+      unsourced number in the canon becomes an unsourced number in everything
+      the canon produces.
+
+  - id: approval-walls
+    blocking: true
+    # Named, not silent. This deliberately mirrors a live canon rule, and the
+    # panel flagged the unnamed duplication as context pollution a five-gram
+    # check would never catch. The bench is the enforcement of that rule from
+    # the outside, not a second, drifting copy of it.
+    restates: authority.never-publish-post-send
+    quote: >
+      Approval walls. Drafts never send. Krish or the partner sends. No outbound
+      tool has send authority.
+    test: >
+      Does anything here grant an agent authority to send, publish, delete,
+      upload, charge, or rotate a credential? It fails, whatever the
+      justification and however well gated. The wall is the point.
+
+  - id: stall-risk
+    blocking: false
+    quote: >
+      Rule 4: If he is alone in it, expect it to stall. A partner who owns or
+      polices selling is a precondition, not a nice to have.
+    test: >
+      Does this add a recurring manual step that only Krish can perform, with no
+      automation and no partner path? Flag it. Do not block it: some things
+      genuinely need him, and the honest move is to say how often.
+
+  - id: pays-inside-90-days
+    blocking: false
+    quote: >
+      Rule 3: If it does not pay inside 90 days, it cannot be the main thing.
+      Load-bearing.
+    test: >
+      Does this change reorder what the canon treats as the priority? If so,
+      show the revenue line. Rule 3 is marked load-bearing, not tolerated.
+
+  - id: protected
+    blocking: true
+    quote: >
+      Rule 8: Music and football are protected. They enter the work only after
+      it runs without him.
+    test: >
+      Does any rule schedule, instrument, gamify, or otherwise route work
+      through music or football? It fails. The protection is not a preference.
+
+  - id: refusals
+    blocking: true
+    quote: >
+      What do you refuse to become, whatever the money? The person who installs
+      AI for companies and manages people who resent it. A talker whose ideas
+      never became anything real.
+    test: >
+      Does anything here position him as an installer, an employee, or a talker
+      whose work never shipped? A rule that quietly makes the harness an
+      installation service fails.
+
+  - id: silent-success
+    blocking: false
+    quote: >
+      A green run with nothing sent is a failure.
+    test: >
+      Does this change's success condition end at a passing check? If nothing
+      reaches a person outside the repository as a result, say so. Green is not
+      an outcome.
+
+  - id: resolved-contradictions
+    blocking: false
+    quote: >
+      The sheet records four contradictions and their resolutions: portfolio
+      against one swing, private against public, income against ownership, and
+      fund against company.
+    test: >
+      Does this change reopen one of the four without citing a new ruling? The
+      resolutions were reached across twelve rounds. Reopening one by accident,
+      in a commit, is how a settled decision quietly becomes unsettled again.

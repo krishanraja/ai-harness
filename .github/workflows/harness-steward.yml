@@ -326,9 +326,111 @@ jobs:
           path: brief.md
           retention-days: 90
 
-  # Weekly: turn "trigger accuracy" from an assertion into a number.
+  # The one job that asks whether a change made the canon better.
   #
-  # Separate from the nightly chain because it costs money and because a
-  # measurement is not something to take every night. It fails loudly on a
-  # missing key rather than skipping, but only on the weekly and dispatch paths,
-  # so a missing key never breaks the nightly.
+  # Every other job here checks that the canon is well formed. Two benches of
+  # criteria, one from the memory-systems doctrine and one from Krish's own
+  # standards, compare the canon before this change against the canon after it
+  # and must name the rule id that improved or regressed. They never score:
+  # absolute scoring was tried and two controls over identical cases moved
+  # recall by 0.250 and then 0.125 between models, the stronger model scoring
+  # lower each time.
+  #
+  # It runs only on a pull request that actually touches the canon, and only
+  # when a key exists. A missing key skips the job with a note rather than
+  # failing it, because a panel that has never been armed should say so plainly
+  # instead of turning every unrelated pull request red.
+  judge:
+    name: judge
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # The protocol is testable without a model, and it is tested before it is
+      # trusted. What it accepts, what it refuses, whether the mandatory dissent
+      # actually bites, and whether a blocking regression really blocks.
+      - name: The panel can still refuse a bad review
+        run: node scripts/test-judge.mjs
+
+      - name: Does this change touch the canon
+        id: scope
+        run: |
+          set -euo pipefail
+          BASE="${{ github.event.pull_request.base.sha || 'HEAD~1' }}"
+          if git diff --quiet "$BASE"...HEAD -- contract/ skills/ brain/; then
+            echo "touched=false" >> "$GITHUB_OUTPUT"
+            echo "No change to contract/, skills/ or brain/. The panel has nothing to compare." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "touched=true" >> "$GITHUB_OUTPUT"
+            echo "base=$BASE" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run both benches
+        id: run
+        if: steps.scope.outputs.touched == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -uo pipefail
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "verdict=unarmed" >> "$GITHUB_OUTPUT"
+            {
+              echo "### Judge panel not armed"
+              echo
+              echo "The two benches, their sources and the whole protocol are in place and their"
+              echo "regression suite passed above. The model call is the one part that cannot be"
+              echo "faked, and it needs an \`ANTHROPIC_API_KEY\` repository secret that does not exist yet."
+              echo
+              echo "Until that secret is set this job reports the gap rather than pretending to a"
+              echo "review it did not perform."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          # `set +e` matters here. GitHub runs a `run:` block under `bash -e` by
+          # default, and `set -uo pipefail` above does not turn that off. So the
+          # judge exiting non-zero, which is exactly what it does when it finds a
+          # blocking regression or an unmeasurable bench, killed this step before
+          # rc was ever captured. The review then never posted, on the one run
+          # where it had something to say.
+          set +e
+          node scripts/judge.mjs --base "${{ steps.scope.outputs.base }}" --head HEAD --out judge.md
+          rc=$?
+          set -e
+          echo "verdict=$rc" >> "$GITHUB_OUTPUT"
+          [ -f judge.md ] && cat judge.md >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
+      # A blocking regression requests changes. There is no auto-merge here to
+      # stop, so the panel blocks the way any reviewer does. Krish overrules with
+      # a commit body line "Ruling (Krish, DATE):", which the observer already
+      # ledgers and which becomes that rule's new source.
+      - name: Post the review
+        if: steps.scope.outputs.touched == 'true' && github.event_name == 'pull_request' && steps.run.outputs.verdict != 'unarmed'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -f judge.md ] || exit 0
+          if [ "${{ steps.run.outputs.verdict }}" = "1" ]; then
+            gh pr review "${{ github.event.pull_request.number }}" --request-changes --body-file judge.md
+          else
+            gh pr comment "${{ github.event.pull_request.number }}" --body-file judge.md
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: judge-panel
+          path: judge.md
+          retention-days: 90
+          if-no-files-found: ignore

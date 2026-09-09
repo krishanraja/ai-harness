@@ -1,0 +1,150 @@
+# The technical bench.
+#
+# Ten criteria, every one traced to a quotable line in
+# sources/ai-memory-systems-2026-09-07.txt. A criterion with no quote is not a
+# standard, it is an opinion, and this bench is supposed to have neither.
+#
+# Read sources/MANIFEST.yaml first. That document is marked historical by its
+# own header, so these criteria are cited as an import rather than as authority.
+#
+# The bench compares. It never scores.
+#
+# Source for that, because this file polices sourcing and the first live run of
+# the panel caught this very header asserting numbers with nothing to check them
+# against: contract/canary-contract.md carries the table. Two controls over the
+# same 120 cases moved recall between models by 0.250 and then 0.125, the
+# stronger model scoring lower each time, and state/evals/ keeps both controls.
+#
+# A judge that returns a number is measuring the judge. A judge that names the
+# clause that got worse is measuring the change.
+
+#
+# What this bench is allowed to do, and what it is not.
+#
+# The panel's first live run raised this against itself, blocking, and it was
+# right to: `verification.self-critique-is-supplemental` in the operating
+# contract says self-critique is supplemental and is not an independent
+# verifier. Making model judgement a deterministic gate would contradict a live
+# rule while both read as current, which is exactly the failure
+# contradiction-surfaced exists to catch.
+#
+# So the panel is not a gate. It posts a pull request review, the same standing
+# any reviewer has. A person merges. It never merges, never approves, and its
+# verdict is never the thing that makes a change correct. The deterministic
+# checks stay where they were: render, validate-surfaces, check-aggregate, the
+# provenance ledger and the canaries on real clients. Those verify. This
+# criticises, in writing, with a clause named, and a human decides.
+#
+# A blocking criterion therefore means "request changes and say why", not "stop
+# the merge". Read alongside `verification.use-deterministic-checks-first`.
+
+schema_version: 1
+bench: technical
+source: memory-doctrine
+source_status: historical
+
+criteria:
+  - id: contradiction-surfaced
+    blocking: true
+    quote: >
+      What separates mature systems from toy implementations is not retrieval
+      recall but the ability to surface contradictions, decay stale facts, and
+      trace why decisions happened.
+    test: >
+      Does anything added here oppose a rule that is still live? If it does, is
+      the opposition named, and is one of the two superseded? Two rules that
+      contradict each other while both read as current is the failure. Silent
+      coexistence fails. Name both rule ids.
+
+  - id: ghost-facts
+    blocking: true
+    quote: >
+      When an agent learns a user's email changed, a vector store stores both
+      the old and new values, creating a ghost-fact problem.
+    test: >
+      Was any rule edited in place without a supersedes link? Is any entry
+      marked superseded while its text is still live in a contract? Either is a
+      ghost fact: the old value and the new one both present, with nothing
+      saying which is current.
+
+  - id: temporal-validity
+    blocking: false
+    quote: >
+      Graphiti's approach invalidates superseded facts by closing their
+      valid_until timestamp rather than deleting them, preserving history while
+      surfacing only currently valid facts.
+    test: >
+      Does every new entry carry first_seen? Does every superseded entry get a
+      closing row rather than a deletion? A change that removes history instead
+      of closing it fails, even when the removal is tidier.
+
+  - id: provenance
+    blocking: true
+    quote: >
+      Every memory carries its creating agent, creation time, and source,
+      enabling retrospective audit.
+    test: >
+      Does source.ref resolve to a real commit, ruling, proposal or import? A
+      new rule carrying source.kind founding fails: founding means the rule
+      predates the ledger, and a rule added today does not.
+
+  - id: deterministic-replay
+    blocking: false
+    quote: >
+      Event-sourced provenance, selective forgetting, and tiered memory
+      promotion. What separates mature systems from toy implementations is the
+      ability to trace why decisions happened.
+    test: >
+      From the ledger alone, without the conversation that produced this change,
+      could a reader reconstruct why the rule exists? If the reasoning lives only
+      in a chat transcript, it is not in the memory and it fails.
+
+  - id: stale-with-confidence
+    blocking: false
+    quote: >
+      The biggest production risk in memory systems is not hallucination, it is
+      stale memory served with high confidence.
+    test: >
+      Does this change build on a rule or a skill that is past its review date,
+      without re-verifying it? Reasoning confidently from something nobody has
+      checked is the named risk, not a lesser version of it.
+
+  - id: context-pollution
+    blocking: false
+    quote: >
+      Irrelevant, redundant, or conflicting information that distorts reasoning.
+    test: >
+      Does the addition say something an existing rule already says, in
+      different words? The overlap check compares five-grams and will not catch
+      a restatement. Name the twin rule id, or say there is none.
+
+  - id: write-gating
+    blocking: true
+    quote: >
+      Private memory store per agent using agent_id scoping, promoted to the
+      shared tier through explicit approval.
+    test: >
+      Did everything in this change reach the canon through the proposal and
+      pull request path? A rule that appeared by direct edit, or state written
+      straight into a store with no review, bypasses the only gate there is.
+
+  - id: dead-zones-and-regret
+    blocking: false
+    quote: >
+      Storage drift: redundant tight clusters, dead zones (never retrieved).
+      Archiving, compaction, deduplication.
+    test: >
+      If this change retires something, does it cite evidence the thing was
+      never load bearing: no canary, no ruling, no observation referencing it?
+      Pruning without that evidence is the regret case, and regret is not
+      recoverable once the history is gone.
+
+  - id: venture-isolation
+    blocking: false
+    quote: >
+      Three separate ventures with cross-venture shared memory, and one
+      venture's data guaranteed never to leak into another's decisions.
+    test: >
+      Does a rule specific to one venture land in the shared operating contract?
+      It belongs in that venture's skill. Shared doctrine that only one venture
+      needs is pollution for every other one.
