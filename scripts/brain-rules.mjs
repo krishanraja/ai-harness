@@ -220,6 +220,7 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
       L.push(`      ref: ${q(src?.ref || found?.sha || 'unknown')}`)
       L.push(`    status: ${(src && was.status) || 'live'}`)
       if (was?.supersedes?.length) L.push(`    supersedes: [${was.supersedes.join(', ')}]`)
+      if (was?.contested_by) L.push(`    contested_by: ${was.contested_by}`)
     }
     L.push('')
   }
@@ -238,6 +239,11 @@ export function check(ledgerText, root = HARNESS) {
   const ledger = parseYaml(ledgerText)
   const live = extract(root)
   const problems = []
+  const storesPath = join(root, 'brain/stores.yaml')
+  const storeIds = new Set(
+    existsSync(storesPath)
+      ? (parseYaml(readFileSync(storesPath, 'utf8')).stores || []).map((x) => String(x.id))
+      : [])
 
   for (const [key, rows] of [['contract_rules', live.contractRules], ['skill_sections', live.skillSections]]) {
     const recorded = new Map((ledger[key] || []).map((e) => [e.id, e]))
@@ -250,6 +256,14 @@ export function check(ledgerText, root = HARNESS) {
         problems.push(`${r.id} changed but brain/rules.yaml still records text_sha ${e.text_sha}; the live text hashes to ${r.text_sha}. Update the entry and give it a new source.`)
       }
       if (!e.source || !e.source.kind) problems.push(`${r.id} has no source.kind`)
+      // A contested rule points at the store row that contradicts it. A pointer
+      // that resolves to nothing is worse than no pointer: it reads as evidence
+      // and is not. The panel caught exactly that, in the field added to answer
+      // its previous finding.
+      if (e.contested_by && !storeIds.has(String(e.contested_by))) {
+        problems.push(`${r.id} is contested_by "${e.contested_by}", which is not a store id in brain/stores.yaml`)
+      }
+      if (e.status === 'contested' && !e.contested_by) problems.push(`${r.id} is contested with nothing named as contesting it`)
       if (e.source?.kind === 'founding' && String(e.first_seen) === 'unknown' && String(e.source?.ref) === 'unknown') {
         problems.push(`${r.id} is founding with no commit; it cannot be traced at all`)
       }
@@ -257,7 +271,9 @@ export function check(ledgerText, root = HARNESS) {
     for (const id of recorded.keys()) {
       if (seen.has(id)) continue
       const e = recorded.get(id)
-      if (e.status === 'live') problems.push(`brain/rules.yaml carries ${id} as live, but no such rule exists in the canon. Retire it or restore the rule.`)
+      // `contested` is live doctrine with a recorded contradiction against it,
+      // not a removed rule, so an orphan check must not treat it as either.
+      if (e.status === 'live' || e.status === 'contested') problems.push(`brain/rules.yaml carries ${id} as live, but no such rule exists in the canon. Retire it or restore the rule.`)
     }
   }
   return { problems, counts: { contract_rules: live.contractRules.length, skill_sections: live.skillSections.length } }

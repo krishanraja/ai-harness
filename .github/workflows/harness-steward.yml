@@ -93,6 +93,12 @@ jobs:
       - name: The provenance checker can still fail
         run: node scripts/test-brain-rules.mjs
 
+      # No browser on the runner, so the three cases that need one skip and say
+      # so. The gate that stops an upload running on an unverified selector map
+      # is pure logic and runs everywhere.
+      - name: The cloud upload still refuses what it should
+        run: node scripts/test-cloud-upload.mjs
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail
