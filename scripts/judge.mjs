@@ -213,8 +213,15 @@ export function render(results, { base, head }) {
 async function anthropic({ system, user }) {
   const key = process.env.ANTHROPIC_API_KEY
   if (!key) throw new Error('ANTHROPIC_API_KEY is not set, so no bench can run. This is the one part of the panel that cannot be faked.')
+  // A bounded call, always. The first run of this job on a real runner sat in
+  // "Run both benches" for eight minutes with no output and no way to tell a
+  // slow review from a dead socket. An unbounded fetch can hold a runner until
+  // the six hour job limit, and a panel that hangs is worse than one that is
+  // honestly absent: absent is visible.
+  const timeoutMs = Number(process.env.JUDGE_TIMEOUT_MS || 180000)
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
+    signal: AbortSignal.timeout(timeoutMs),
     headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: process.env.JUDGE_MODEL || 'claude-opus-5',
@@ -224,6 +231,7 @@ async function anthropic({ system, user }) {
     }),
   })
   if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  // Never let a key reach stdout, a log, or a report.
   const body = await res.json()
   return (body.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('')
 }

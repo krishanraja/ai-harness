@@ -24,6 +24,12 @@
 
 name: Harness steward
 
+# A new push supersedes the run before it. Without this, a hung job on an older
+# commit keeps burning a runner while the commit that fixes it queues behind it.
+concurrency:
+  group: harness-steward-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
   push:
@@ -344,6 +350,10 @@ jobs:
     name: judge
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    # A hung model call must never hold a runner. The first run of this job sat
+    # in "Run both benches" for eight minutes with nothing to show for it, which
+    # is how an unbounded network call fails: silently, and for six hours.
+    timeout-minutes: 12
     permissions:
       contents: read
       pull-requests: write
@@ -380,6 +390,7 @@ jobs:
         if: steps.scope.outputs.touched == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          JUDGE_TIMEOUT_MS: "180000"
         run: |
           set -uo pipefail
           if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
