@@ -1372,7 +1372,7 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: contested
-    contested_by: stores.decision-ledger-store
+    contested_by: decision-ledger-store
   - id: decision-ledger.apply-the-capture-gate
     file: skills/decision-ledger/SKILL.md
     heading: "Apply the capture gate"
@@ -1391,7 +1391,7 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: contested
-    contested_by: stores.decision-ledger-store
+    contested_by: decision-ledger-store
   - id: decision-ledger.recall-and-apply-a
     file: skills/decision-ledger/SKILL.md
     heading: "Recall and apply a decision"
@@ -1977,7 +1977,7 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: contested
-    contested_by: stores.assumption-ledger
+    contested_by: assumption-ledger
   - id: krish-principles.6-epistemics-in-practice
     file: skills/krish-principles/SKILL.md
     heading: "6. Epistemics in practice: the research method"
