@@ -23,7 +23,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
-import { check as checkRuleProvenance } from './brain-rules.mjs'
+import { check as checkRuleProvenance, extract as extractRules } from './brain-rules.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -132,6 +132,44 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
   const { problems, counts } = checkRuleProvenance(read('brain/rules.yaml'))
   for (const m of problems) F(m)
   if (!problems.length) O(`${counts.contract_rules} contract rules and ${counts.skill_sections} skill chapters each carry a hash and a source`)
+}
+
+// ------------------------------------------------ two live rules, one meaning
+// The memory doctrine puts conflict detection at write time first on its list
+// of underused techniques, and brain/stores.yaml already records the concrete
+// instance: the em dash rule is live in the canon AND live in the abandoned
+// standards_registry, "live on both sides", with nothing reconciling 314
+// entries against 122. That one is cross-store and is tracked by `contested_by`.
+// This check is the other half, inside the canon: two rules in the two
+// contracts that say the same thing in different words.
+//
+// A warning, never a failure. Overlap is evidence a person should read, not
+// arithmetic that proves duplication, and the panel is advisory for the same
+// reason. Deterministic: token overlap, no model, no embedding.
+{
+  const STOP = new Set('a an and are as at be but by for from in into is it its no not of on or that the their this to with without you your never always must may can when where which what how who whom whose do does did done'.split(' '))
+  const norm = (t) => [...new Set(String(t).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w)))]
+  const rules = extractRules().contractRules.map((r) => ({ id: r.id, file: r.file, toks: new Set(norm(r.text)) }))
+  const pairs = []
+  for (let i = 0; i < rules.length; i++) {
+    for (let j = i + 1; j < rules.length; j++) {
+      const a = rules[i], b = rules[j]
+      // Only across the two contracts. Two chapters of one contract restating
+      // each other is a drafting matter; the same rule live in both is the one
+      // that makes "which contract wins" unanswerable.
+      if (a.file === b.file) continue
+      const smaller = a.toks.size <= b.toks.size ? a.toks : b.toks
+      if (smaller.size < 4) continue
+      let shared = 0
+      for (const t of smaller) if ((smaller === a.toks ? b.toks : a.toks).has(t)) shared++
+      const overlap = shared / smaller.size
+      if (overlap >= 0.7) pairs.push({ a: a.id, b: b.id, overlap })
+    }
+  }
+  for (const x of pairs.sort((m, n) => n.overlap - m.overlap)) {
+    W(`${x.a} and ${x.b} live in different contracts and share ${Math.round(x.overlap * 100)} percent of their meaningful words. Decide which one owns the rule, or record why both exist.`)
+  }
+  if (!pairs.length) O(`no live rule in one contract restates a live rule in the other above the 70 percent overlap bar (${rules.length} rules compared)`)
 }
 
 // ------------------------------------------------- fleet parity with the docs steward

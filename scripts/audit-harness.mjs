@@ -31,12 +31,17 @@ import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync, statSy
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
+import { deadZones, readLedger } from './brain-usage.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
 const flag = (f) => { const i = args.indexOf(f); return i === -1 ? null : args[i + 1] }
 const strict = args.includes('--strict')
 const today = flag('--today') || new Date().toISOString().slice(0, 10)
+// A citation older than this counts as stale rather than current. Ninety days
+// is the widest freshness SLA any skill carries, so a rule untouched for longer
+// than that is untouched by this repository's own loosest standard.
+const DEAD_SINCE = new Date(Date.now() - 90 * 86400000).toISOString().slice(0, 10)
 
 const read = (rel) => readFileSync(join(HARNESS, rel), 'utf8')
 const registryText = read('state/skill-registry.yaml')
@@ -575,6 +580,55 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     }
   }
   if (merged.length) N(`${merged.length} merged proposal(s) in brain/proposals.jsonl, ${checked} acted-on cluster(s) checked for recurrence.`)
+}
+
+// ------------------------------------------------------- dead zones, Gate 8
+// Freshness answers "was this rule reviewed lately". It cannot answer "has this
+// rule ever been reached for by anything", and the two are different questions
+// with the same smell. brain/stores.yaml records what happens when only the
+// first is asked: standards_registry kept 122 rules nominally live with 6 of
+// 169 ever hit and no efficacy check, which is the memory doctrine's "dead
+// zones, never retrieved" failure written down in this repository's own words.
+//
+// The count is reported whole rather than as one finding per rule. 314 findings
+// on the first run would drown every other class and would say the same thing
+// 314 times. The honest number is the number.
+{
+  const rows = readLedger()
+  const { never, stale } = deadZones({ since: DEAD_SINCE })
+  const live = never.length + (rows.length ? new Set(rows.map((r) => r.rule_id)).size : 0)
+  if (!rows.length) {
+    F('dead-zone', 'brain/usage.jsonl',
+      `The citation ledger is empty, so none of the ${never.length} live rules has evidence that anything has ever reached for it.`,
+      'This is the expected state until the judge runs on a change and a canary report is recorded. It is a finding rather than a note because an empty ledger and a canon nothing uses look identical from here, and only running the producers tells them apart.')
+  } else {
+    if (never.length) {
+      F('dead-zone', `${never.length} live rules`,
+        `${never.length} of ${live} live rules have never been cited by the judge or by a passing canary: ${never.slice(0, 8).join(', ')}${never.length > 8 ? ', and more' : ''}.`,
+        'Read a sample before acting. A rule can be uncited because nothing exercises it, because no canary covers its skill, or because it is dead. Only the third is a reason to retire it, and retiring it is a proposal, not an edit.')
+    }
+    if (stale.length) {
+      F('dead-zone', `${stale.length} rules cited only before ${DEAD_SINCE}`,
+        `${stale.map((x) => `${x.id} (last ${x.last})`).slice(0, 8).join(', ')}${stale.length > 8 ? ', and more' : ''}.`,
+        'Stale is not dead. Check whether the producers have run at all in that window before reading anything into it.')
+    }
+    N(`${live - never.length} of ${live} live rules carry at least one recorded citation in brain/usage.jsonl.`)
+  }
+}
+
+// -------------------------------------------------- rules nobody has defended
+// Every entry in brain/rules.yaml is `founding`, which the ledger's own README
+// calls the honest record: we know when each rule entered, and for almost all of
+// them we do not know why. It is reported as a number rather than a finding
+// because it is not a defect to fix, it is a debt to watch, and it should fall
+// as rulings and proposals land.
+{
+  const ledger = parseYaml(read('brain/rules.yaml'))
+  const all = [...(ledger.contract_rules || []), ...(ledger.skill_sections || [])]
+  const byKind = {}
+  for (const e of all) { const k = e.source?.kind || 'unknown'; byKind[k] = (byKind[k] || 0) + 1 }
+  const founding = byKind.founding || 0
+  N(`provenance of ${all.length} rules: ${Object.entries(byKind).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${v} ${k}`).join(', ')}. ${founding} carry no recorded reason, only a first-seen commit.`)
 }
 
 // ------------------------------------------------------------------- em dash

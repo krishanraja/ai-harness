@@ -18,6 +18,62 @@ promotion step between them that leaves a record.
 |---|---|---|
 | `rules.yaml` | one entry per rule in both contracts, and one per chapter of every skill: its hash, when it first appeared, where it came from, what it supersedes | `scripts/brain-rules.mjs`, checked on every push |
 | `proposals.jsonl` | one row per event in a proposal's life: opened, merged or closed, and whether the finding it addressed actually went away | appended, never edited |
+| `usage.jsonl` | one row per observed citation of a rule: which rule, **when**, by which producer, against which pull request or canary report | appended by `scripts/judge.mjs` and `scripts/canaries.mjs`, never edited |
+
+## Why usage.jsonl exists
+
+`rules.yaml` answers where a rule came from. It cannot answer whether anything
+has ever reached for it, and those are different questions with the same smell.
+
+`stores.yaml` records what happens when only the first is asked. The abandoned
+`standards_registry` had `hit_count`, `last_hit_at` and `last_efficacy_check`
+designed in April, and died with 122 rules nominally live, 6 of 169 ever hit and
+no efficacy check ever run. That is the memory doctrine's "dead zones, never
+retrieved" failure. This directory then shipped 314 entries carrying every field
+that store had except the two the diagnosis named.
+
+Two producers of rule ids already existed and threw their output away. The judge
+refuses any finding that does not cite a clause id from `rules.yaml`. A canary
+that fires proves a skill was reachable on a live client, and every chapter of
+that skill is an entry here. Both now append instead of discarding, and
+`scripts/audit-harness.mjs` opens a `dead-zone` finding for live rules nothing
+has ever cited.
+
+Counts are **derived, never stored**. A mutable `hit_count` column in
+`rules.yaml` would break this directory's own first rule, and it would be the
+same shape as the store this ledger exists to avoid repeating. Read the count
+with `node scripts/brain-usage.mjs --report`; it is whatever the ledger says
+today and it is never written back.
+
+Every row carries `at`, the date the citation was observed, so the ledger
+answers when as well as whether. That matters because the failure the retired
+store actually had was not an empty column, it was `last_hit_at` going stale
+while the row still read active. `deadZones({ since })` separates never cited
+from cited but not lately, and the audit passes a ninety day window, the widest
+freshness SLA any skill carries. The two are reported apart because "never
+once" and "not since June" call for different work.
+
+That is still weaker than efficacy. A rule cited once and never re-verified
+reads as healthy here, and this ledger does not know whether citing it helped.
+`last_efficacy_check` is the column the retired store had and this one does not,
+and saying so is better than implying the instrument is complete.
+
+**This tier is machine written, and that is a deliberate exception.** The rule
+of this directory is that a thing arrives through a pull request a person
+merged. A citation is not a claim about what should be true, it is a record that
+something happened, and requiring a human to approve each one would mean either
+nobody records them or somebody rubber-stamps them. So the gate moved rather
+than disappeared: the ledger is append only and machine written, and nothing
+downstream of it may act alone. A `dead-zone` finding is a finding, which the
+quality standard already defines as a decision for a person; retiring a rule is
+still a proposal. No script reads this file and edits a rule.
+
+Two things the ledger deliberately refuses. A citation naming a rule that is not
+in the canon, because it would make the count answer for a canon that is not
+this one. And a citation from a void canary result, because a skill that could
+not fire proves nothing about the rules inside it. The regression suite writes
+its fixture citations under `--out-dir`, never here: a provenance ledger holding
+invented rows is worse than an empty one.
 
 ## Why rules.yaml exists
 
@@ -34,6 +90,9 @@ are the rules nobody has ever had to defend.
 
 ## The rules of this directory
 
+- **A count is derived, never stored.** The moment a tally becomes a column,
+  something has to write it, and the only way to write it is in place. Ask the
+  ledger and add up what it says.
 - **Nothing here is edited in place by a script.** The ledger files a script
   writes are JSONL, and a change of state is a new row for the same `id`. The
   current state of anything is the latest row that names it. A superseded entry

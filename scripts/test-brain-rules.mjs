@@ -228,6 +228,21 @@ Prose paragraph that gives an instruction and must not be recorded.
   assert(rules.length === 1, `expected exactly 1 rule, got ${rules.length}: ${rules.map((r) => r.id).join(', ')}`)
 })
 
+t('a superseded entry with no valid_until fails', () => {
+  const root = fixture()
+  // Close a rule the way a person would, by hand, and forget the date.
+  const ledger = ledgerFor(root).replace(/status: live/, 'status: superseded')
+  const { problems } = check(ledger, root)
+  matches(problems, /superseded with no valid_until/, 'a closed rule with no closing date must fail')
+})
+
+t('a superseded entry that carries valid_until passes', () => {
+  const root = fixture()
+  const ledger = ledgerFor(root).replace(/status: live/, 'status: superseded\n    valid_until: "2026-09-01"')
+  const { problems } = check(ledger, root)
+  assert(!problems.some((p) => /valid_until/.test(p)), `a dated closure must not fail: ${problems.join(' | ')}`)
+})
+
 // -------------------------------------------------------------------- report
 for (const d of cleanup) { try { rmSync(d, { recursive: true, force: true }) } catch {} }
 if (failures) { console.error(`\n${failures} failing case(s).`); process.exit(1) }

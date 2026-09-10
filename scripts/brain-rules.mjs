@@ -174,6 +174,7 @@ function firstCommit(file, needle) {
 }
 
 const q = (s) => `"${String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+const TODAY = new Date().toISOString().slice(0, 10)
 
 function toYaml({ contractRules, skillSections }, prior, noGit = false) {
   const priorById = new Map()
@@ -220,6 +221,15 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
       L.push(`      ref: ${q(src?.ref || found?.sha || 'unknown')}`)
       L.push(`    status: ${(src && was.status) || 'live'}`)
       if (was?.supersedes?.length) L.push(`    supersedes: [${was.supersedes.join(', ')}]`)
+      // A superseded rule is closed, never deleted, the same way Graphiti closes
+      // a fact's validity window instead of dropping the row. Without a closing
+      // date, "what did the canon say on a given day" cannot be answered from
+      // this file at all, and deterministic replay is the first thing an audit
+      // asks for. Carry an existing date forward; stamp one the first time an
+      // entry is regenerated as superseded.
+      if ((was && was.status === 'superseded') || was?.valid_until) {
+        L.push(`    valid_until: ${q(was?.valid_until || TODAY)}`)
+      }
       if (was?.contested_by) L.push(`    contested_by: ${was.contested_by}`)
     }
     L.push('')
@@ -266,6 +276,13 @@ export function check(ledgerText, root = HARNESS) {
       if (e.status === 'contested' && !e.contested_by) problems.push(`${r.id} is contested with nothing named as contesting it`)
       if (e.source?.kind === 'founding' && String(e.first_seen) === 'unknown' && String(e.source?.ref) === 'unknown') {
         problems.push(`${r.id} is founding with no commit; it cannot be traced at all`)
+      }
+    }
+    // A closed rule needs its closing date, or the ledger can say a rule is no
+    // longer live without ever saying when it stopped being so.
+    for (const e of recorded.values()) {
+      if (e.status === 'superseded' && !e.valid_until) {
+        problems.push(`${e.id} is superseded with no valid_until. Give it the date it stopped being live; a closed rule with no closing date cannot be replayed.`)
       }
     }
     for (const id of recorded.keys()) {
