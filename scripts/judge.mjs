@@ -361,6 +361,12 @@ if (isMain) {
   if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, report + '\n') }
   process.stdout.write(report + '\n')
 
+  // NOTE, found by running this in CI on pull request 34: the judge job has
+  // `permissions: contents: read` and never commits, so a citation written here
+  // on a runner is uploaded with the judge-panel artifact and otherwise thrown
+  // away. The ledger therefore does not yet populate from CI. Giving a pull
+  // request job write access to the canon is an escalation that needs its own
+  // approval, so it is named here rather than taken quietly.
   // Every grounded finding cited a rule id, and until now that citation was
   // computed, validated, and thrown away. It is the only evidence this
   // repository produces about which rules anything actually reaches for, so it
