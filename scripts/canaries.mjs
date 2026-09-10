@@ -42,6 +42,7 @@ import { createHash } from 'node:crypto'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
+import { appendUsage, ruleIds, ruleIdsForSkill } from './brain-usage.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -440,6 +441,26 @@ if (args.includes('--sheet-json')) {
       void_results: v.vacuous,
     }, null, 2) + '\n')
     console.log(`Recorded ${dest}${v.failing.length ? ' as a FAILURE' : ''}`)
+
+    // A skill whose positive canary fired was reachable on a live client, which
+    // is the only evidence this repository has that its chapters could actually
+    // apply to anything. Recorded per chapter, so brain/usage.jsonl can answer
+    // the question brain/rules.yaml cannot: which rules are load bearing.
+    //
+    // Only positives, and only the ones that passed. A negative result is void
+    // on a surface where no positive passed, and a void result recorded as a
+    // citation would be exactly the vacuous evidence this file exists to refuse.
+    const ref = `${v.report.release}-${v.report.surface}`
+    const rows = v.positivePassed.flatMap((skill) =>
+      ruleIdsForSkill(skill).map((rule_id) => ({ rule_id, producer: 'canary', ref, verdict: 'fired' })))
+    // The citation ledger follows --out-dir for the same reason the recorded
+    // report does. The regression suite drives this exact path with a fixture
+    // surface, and without this the fixture's citations land in the real
+    // brain/usage.jsonl, where they are indistinguishable from evidence. A
+    // provenance ledger holding invented rows is worse than an empty one.
+    const usageRoot = flag('--out-dir') ? join(flag('--out-dir'), 'brain-usage-root') : HARNESS
+    const wrote = appendUsage(rows, { root: usageRoot, validIds: ruleIds() })
+    if (wrote.length) console.log(`Recorded ${wrote.length} rule citation(s) in brain/usage.jsonl from ${v.positivePassed.length} passing positive(s).`)
   }
   if (v.failing.length) process.exit(1)
 } else {

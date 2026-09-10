@@ -86,6 +86,22 @@ stores:
       rule sets contradict each other in silence. The em dash rule is a known
       twin of the canon's own and is the first one to resolve, in one direction
       or the other, rather than leaving it live on both sides.
+    progress_2026_09_10: >
+      The half of this row's diagnosis that was about THIS repository is now
+      closed. brain/usage.jsonl records every citation of a canon rule by the
+      judge or by a passing canary, and scripts/audit-harness.mjs opens a
+      dead-zone finding for live rules nothing has ever cited, so the canon
+      cannot quietly accumulate the condition this row describes. The honest
+      first number is 0 of 314: the ledger begins empty and no producer has run
+      against it yet. scripts/validate-surfaces.mjs also warns when a live rule
+      in one contract restates a live rule in the other, which is the in-canon
+      half of the same contradiction this row records across stores. Its first
+      run found one pair, at 70 percent overlap:
+      always-on-execution-chain.intent-briefing-when-triggered and
+      global-chain.take-the-brief-runs.
+    why_still_migrate: >
+      None of that triages the 122 rows. The instrument now exists; the reading
+      job does not do itself.
 
   # ------------------------------------------------------------------- feed
   - id: corrections

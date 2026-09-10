@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -129,6 +129,8 @@ try {
   // --record is the mode Invoke-HarnessSync.ps1 actually calls, and it was
   // never exercised. Check the round trip writes the verdict, since a recorded
   // failure that reads as a pass is the worst outcome this file can produce.
+  const realLedger = join(HARNESS, 'brain/usage.jsonl')
+  const beforeLedger = existsSync(realLedger) ? readFileSync(realLedger, 'utf8') : null
   const recordDir = join(scratch, 'record-root')
   const recordRun = run(['--record', deadPositivePath, '--out-dir', recordDir])
   check(recordRun.status === 1, `--record of a failing report must exit 1, exited ${recordRun.status}`)
@@ -136,6 +138,34 @@ try {
   const recorded = JSON.parse(readFileSync(written, 'utf8'))
   check(recorded.verdict === 'failed', `recorded verdict was ${recorded.verdict}, expected failed`)
   check(Array.isArray(recorded.failures) && recorded.failures.length > 0, 'recorded file carried no failures')
+
+  // The citation ledger must follow --out-dir. If it does not, this very test
+  // writes fixture citations into the real brain/usage.jsonl, where a rule that
+  // nothing has ever exercised reads as load bearing. That happened once, on
+  // the run that added this check, and it put 46 invented rows in the ledger.
+  const usageLedger = join(recordDir, 'brain-usage-root', 'brain', 'usage.jsonl')
+  check(existsSync(usageLedger), 'the record path wrote no citation ledger under --out-dir')
+  const cited = readFileSync(usageLedger, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l))
+  check(cited.length > 0, 'a report with passing positives must record at least one citation')
+  check(cited.every((r) => r.producer === 'canary' && r.verdict === 'fired'), 'every canary citation must be recorded as a fired positive')
+  // A citation follows reachability, which is the same thing positivePassed
+  // means everywhere else in this file: a skill with a passing positive was
+  // reachable on that client, whatever else in the report failed. Killing ONE
+  // of a skill's positives does not make it unreachable, so it still counts.
+  //
+  // The vacuity rule is what must hold, and the unreachable fixture is the one
+  // that tests it: a skill whose positive could not fire records nothing, so a
+  // rule is never credited by a void negative.
+  const voidDir = join(scratch, 'unreachable-root')
+  run(['--record', unreachablePath, '--out-dir', voidDir])
+  const voidLedger = join(voidDir, 'brain-usage-root', 'brain', 'usage.jsonl')
+  const voidCited = existsSync(voidLedger)
+    ? readFileSync(voidLedger, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l))
+    : []
+  check(!voidCited.some((r) => r.rule_id.startsWith(`${positiveCase.skill}.`)),
+    `${positiveCase.skill} was unreachable on that surface and must record no citation; a void negative is not evidence`)
+  check((existsSync(realLedger) ? readFileSync(realLedger, 'utf8') : null) === beforeLedger,
+    'the regression suite must never write into the real citation ledger')
 
   const incomplete = structuredClone(passing)
   const removed = incomplete.results.pop()

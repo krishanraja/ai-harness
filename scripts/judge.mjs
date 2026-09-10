@@ -38,6 +38,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
+import { appendUsage, ruleIds } from './brain-usage.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -67,6 +68,18 @@ export function clauseUniverse() {
   const ids = new Set()
   for (const e of [...(ledger.contract_rules || []), ...(ledger.skill_sections || [])]) ids.add(e.id)
   return ids
+}
+
+/**
+ * The commit a citation is recorded against.
+ *
+ * A symbolic ref such as HEAD would make the same review record a new citation
+ * every time it ran, which is the difference between counting evidence and
+ * counting job runs.
+ */
+export function headSha(head) {
+  try { return execFileSync('git', ['-C', HARNESS, 'rev-parse', head], { encoding: 'utf8' }).trim().slice(0, 12) }
+  catch { return String(head) }
 }
 
 export function diffFor(base, head) {
@@ -347,6 +360,24 @@ if (isMain) {
   const out = flag('--out')
   if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, report + '\n') }
   process.stdout.write(report + '\n')
+
+  // Every grounded finding cited a rule id, and until now that citation was
+  // computed, validated, and thrown away. It is the only evidence this
+  // repository produces about which rules anything actually reaches for, so it
+  // is recorded. A clause that is a file path is not a rule and records nothing.
+  // See scripts/brain-usage.mjs for why the count is derived and never written
+  // back into brain/rules.yaml.
+  if (!has('--no-usage')) {
+    const pr = flag('--post')
+    // The pull request when there is one, the head commit otherwise. A ref that
+    // moves would make the same review look like two citations on a re-run.
+    const ref = pr ? `pr-${pr}` : headSha(head)
+    const valid = ruleIds()
+    const written = appendUsage(
+      results.flatMap((r) => r.findings).map((f) => ({ rule_id: f.clause, producer: 'judge', ref, verdict: f.verdict })),
+      { validIds: valid })
+    if (written.length) console.log(`\nRecorded ${written.length} rule citation(s) in brain/usage.jsonl against ${ref}.`)
+  }
 
   if (report.includes(EM_DASH)) { console.error('FAIL  the report carries an em dash after filtering'); process.exit(2) }
 
