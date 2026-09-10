@@ -93,6 +93,13 @@ jobs:
       - name: The provenance checker can still fail
         run: node scripts/test-brain-rules.mjs
 
+      # The citation ledger is the one place a fabricated row would read as
+      # evidence. Its suite asserts that a fixture never writes into the real
+      # brain/usage.jsonl and that a void canary result credits nothing, which
+      # is exactly the mistake the ledger's first wiring made.
+      - name: The citation ledger still refuses invented evidence
+        run: node scripts/test-brain-usage.mjs
+
       # No browser on the runner, so the three cases that need one skip and say
       # so. The gate that stops an upload running on an unverified selector map
       # is pure logic and runs everywhere.

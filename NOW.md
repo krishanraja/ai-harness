@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-08
+as_of: 2026-09-10
 head: f98ef85
 lifecycle: live
 production_url: none
