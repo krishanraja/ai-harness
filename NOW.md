@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-10
-head: 039b990
+as_of: 2026-09-11
+head: 4b5b085
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -32,7 +32,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured.
 
-## Where it is right now (as of 2026-09-10)
+## Where it is right now (as of 2026-09-11)
 
 - **Live** as the canon for 29 curated skills. SURFACE's `codex-surface-07a67cda9f99` installed and byte-verified `v2026.09.08.2` on 2026-09-08. The recorded LORIMER surfaces remain on `v2026.09.08.1` until the same machine job runs there.
 - **`v2026.09.08.2` is published and installed on SURFACE**, tag `harness-v2026.09.08.2` on `c5141ef`, 60 assets, 2026-09-08. Its 29 skills and 139 files match every per-skill manifest hash and the release tree aggregate `9D3F2E69...`. The verified manifest SHA-256 is `B6780D886B5B1A0688A1D7DDA29B25ED6F50B718156AEF2006632BA940F1952E`. It carries the `video-engine` launcher fix, and `v2026.09.08.1` remains the rollback target.
