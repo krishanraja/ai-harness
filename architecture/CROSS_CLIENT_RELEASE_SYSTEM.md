@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: `harness-v2026.08.29.1` is the latest immutable approved release and is proven on the additional Codex machine. The 2026-08-29 inbound reconciliation found newer source-backed Mindmake doctrine on this machine's Claude surface, preserved it as a candidate, and rejected unproven vendored UI drift whose bytes no longer matched its pinned provenance. GitHub remains the release authority only after reconciliation; no timestamp, client, or repository location wins automatically.
+Status: `harness-v2026.09.08.2` is the latest immutable approved release. It is hash-verified on all three local client surfaces on the primary Windows machine. The intermittently mounted additional machine and cloud account catalogues remain separately supervised surfaces. GitHub remains the release authority only after reconciliation; no timestamp, client, or repository location wins automatically.
 
 ## Decision
 

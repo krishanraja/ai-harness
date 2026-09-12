@@ -309,6 +309,13 @@ for (const f of readdirSync(join(HARNESS, 'evals')).filter((x) => /-trigger-case
 const provenOn = new Map()
 const lastSeen = new Map()
 const unreachableOn = new Map()
+const latestReachableOn = new Map()
+const evidenceStamp = (report) => {
+  const date = String(report.ran_at || '').slice(0, 10)
+  const match = String(report.release || '').match(/v(\d+)\.(\d+)\.(\d+)\.(\d+)/)
+  const release = match ? match.slice(1).map((part) => part.padStart(8, '0')).join('.') : String(report.release || '')
+  return `${date}\0${release}`
+}
 for (const r of canaryReports) {
   for (const res of r.results || []) {
     const meta = idToSkill.get(res.id)
@@ -317,11 +324,14 @@ for (const r of canaryReports) {
       const key = `${meta.skill}\0${r.surface}\0${r.release}`
       const existing = unreachableOn.get(key)
       if (existing) existing.canaries++
-      else unreachableOn.set(key, { skill: meta.skill, surface: r.surface, release: r.release, canaries: 1 })
+      else unreachableOn.set(key, { skill: meta.skill, surface: r.surface, release: r.release, stamp: evidenceStamp(r), canaries: 1 })
     }
     if (!meta.positive || res.outcome !== 'fired') continue
     if (!provenOn.has(meta.skill)) provenOn.set(meta.skill, new Set())
     provenOn.get(meta.skill).add(r.surface)
+    const surfaceKey = `${meta.skill}\0${r.surface}`
+    const stamp = evidenceStamp(r)
+    if (!latestReachableOn.has(surfaceKey) || latestReachableOn.get(surfaceKey) < stamp) latestReachableOn.set(surfaceKey, stamp)
     const d = String(r.ran_at || '').slice(0, 10)
     if (d && (!lastSeen.has(meta.skill) || lastSeen.get(meta.skill) < d)) lastSeen.set(meta.skill, d)
   }
@@ -350,6 +360,11 @@ for (const u of unreachableOn.values()) {
     N(`${u.skill} reported unreachable by ${u.canaries} implicit ${u.canaries === 1 ? 'canary' : 'canaries'} on ${u.surface}. That is its contract: it is manual-only and the client is correctly unable to route to it. Its explicit invocation is what proves it works.`)
     continue
   }
+  const laterReachable = latestReachableOn.get(`${u.skill}\0${u.surface}`)
+  if (laterReachable && laterReachable >= u.stamp) {
+    N(`${u.skill} was unreachable on ${u.surface} at ${u.release}, then a positive canary on the same surface proved it reachable at the same or a later evidence revision.`)
+    continue
+  }
   F('unreachable-on-surface', `${u.skill} on ${u.surface}`, `${u.canaries} ${u.canaries === 1 ? 'canary' : 'canaries'} reported ${u.skill} unreachable on ${u.surface} at ${u.release}: the client could not see the skill at all.`, 'This is not a trigger declining. Check the adapter\'s allow_implicit_invocation and the installed catalog. Byte parity does not imply reachability, and only a positive canary can tell them apart.')
 }
 
@@ -369,8 +384,8 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
 
 // -------------------------------------------------------- the other clock
 //
-// Two clocks, each watching the other. The observer writes a heartbeat; this
-// audit reads it and opens a finding when it has gone quiet. The three weekly
+// Independent clocks watch the paths that actually run. The observer writes a
+// heartbeat; this audit reads it and opens a finding when it has gone quiet. The three weekly
 // Documentation Refresh Routines died by simply stopping, and nothing noticed
 // for weeks, because nothing was watching them. A scheduled job with no
 // watchdog is a scheduled job you will eventually stop trusting.
@@ -384,14 +399,13 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   // worse outage than one that stopped, and it was the only kind that could not
   // be seen.
   //
-  // session-feed is the second half of "two clocks, each watching the other".
-  // It has never run. It would collect Claude Code session metadata, which is
-  // the one learning-loop input reachable for laptop sessions as well as cloud
-  // ones, and its heartbeat is what would let this audit fail loudly if the
-  // feed went quiet. Creating it is a standing scheduled job in Krish's account
-  // and is his call, not mine: three weekly Routines were disabled in September
-  // precisely because they failed silently. So it is named and reported missing
-  // rather than quietly added.
+  // session-feed was removed from this set on 2026-09-12. It never existed, and
+  // the hosted, authenticated observation endpoint now gives local and cloud
+  // clients the same bounded write path without a per-machine collector. The
+  // observer heartbeat below monitors ingestion. Restoring a session scraper
+  // would expand privacy scope and create another unattended local process, so
+  // it requires a new evidenced decision rather than remaining a permanent
+  // missing-clock finding.
   // Each clock carries the date it was declared. A clock that has never
   // reported is reported as awaited rather than broken, and the finding gets
   // louder as it ages, because the two are genuinely different failures and
@@ -406,7 +420,6 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     'harness-sync-lorimer': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on LORIMER', declared: '2026-09-08', fix: 'Run scripts/Invoke-HarnessSync.ps1 once on LORIMER, as was done on SURFACE. Only Krish can do this; it is a scheduled task on his machine.' },
     'harness-sync-surface': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE', declared: '2026-09-08', fix: 'Re-run the installer on SURFACE.' },
     observer: { where: 'scripts/observe.mjs, nightly in harness-steward.yml', declared: '2026-09-08', fix: 'Dispatch harness-steward.yml manually and read the job log.' },
-    'session-feed': { where: 'a scheduled Routine collecting Claude Code session metadata, never created', declared: '2026-09-08', fix: 'Create the Routine, or remove session-feed from EXPECTED_CLOCKS with a recorded reason. Krish disabled three weekly Routines in September for failing silently, so standing one up is his call and is deliberately not automated here.' },
     'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09', declared: '2026-09-09', fix: 'Check the hourly cron entry on the VPS and that GITHUB_HEARTBEAT_TOKEN is still valid.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')

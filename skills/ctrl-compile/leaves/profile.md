@@ -27,7 +27,7 @@ The review date is a scheduled check, not evidence that the profile is still tru
 
 1. **Decision rights and responsibilities.** What the subject owns, advises, or is merely involved in, each with source and date.
 2. **Recurring work and consequences.** Frequency, audience, reviewer, output shape, and what changes in execution. Encode material work even when it is not weekly.
-3. **Domain capability—evidenced and dated.** Use task-specific evidence and the practical consequence. Avoid global `expert`/`novice` identities when the evidence supports only a narrower claim.
+3. **Domain capability, evidenced and dated.** Use task-specific evidence and the practical consequence. Avoid global `expert`/`novice` identities when the evidence supports only a narrower claim.
 4. **Approved and rejected artifacts.** Stable ids, authorised excerpts or references, situation, and the subject's words about the difference.
 5. **Accepted constructs and criteria.** Reference rubric ids; do not restate or drift them. Untested constructs live under AWAITING.
 6. **Hard constraints.** Only demonstrated or explicitly owner-confirmed constraints, with surface, situation, quote/evidence, and date.

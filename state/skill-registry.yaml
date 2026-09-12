@@ -117,35 +117,38 @@ surface_deployments:
     status: installed-hash-verified-and-canaried-video-engine-reachable
     previous_release: v2026.09.08.1
   cursor-primary:
-    release_id: v2026.09.08.1
-    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
+    release_id: v2026.09.08.2
+    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-08
-    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
-    status: installed-hash-verified
+    deployed_at_utc: 2026-09-08T15:56:45.5447713Z
+    evidence: state/gap-closure-2026-09-12.md
+    status: installed-hash-verified-and-noop-reverified
   claude-code-user:
-    release_id: v2026.09.08.1
-    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
+    release_id: v2026.09.08.2
+    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-08
-    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
-    status: installed-hash-verified-and-fresh-task-canaried
+    deployed_at_utc: 2026-09-08T15:56:40.3809081Z
+    evidence: state/gap-closure-2026-09-12.md
+    status: installed-hash-verified-and-noop-reverified
   codex-current:
-    release_id: v2026.09.08.1
-    source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
+    release_id: v2026.09.08.2
+    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
+    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-08
-    evidence: state/release-v2026.09.08.1-deployment-lorimer-2026-09-08.md
-    status: installed-hash-verified-and-fresh-task-canaried
+    deployed_at_utc: 2026-09-08T15:56:50.3315533Z
+    evidence: state/gap-closure-2026-09-12.md
+    status: installed-hash-verified-and-noop-reverified
   claude-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
@@ -228,8 +231,8 @@ production:
   - {name: strategy-brief, role: always-on-pre-execution-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 30}
-  - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
+  - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -240,11 +243,11 @@ production:
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
-  - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-08-07, freshness_sla_days: 30}
-  - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 30}
-  - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
-  - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 30}
+  - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 90}
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -302,6 +305,14 @@ temporary_cloud_extraction:
   - {name: krish-outbound, reason: Personalized outbound strategy and voice extracted into the existing content and voice owners; retain only until candidate evaluation and approved retirement.}
 
 evaluation_evidence:
+  routing_description_comparison_2026_09_12:
+    record: state/routing-description-eval-2026-09-12.md
+    skills: [build-apps-with-krish, ctrl-intake, krish-design, krish-voice]
+    result: no-classification-regression-in-one-blind-baseline-candidate-comparison
+  provider_review_2026_09_12:
+    record: state/provider-review-2026-09-12.md
+    skills: [apify, n8n-operator, instantly-operator, design-intelligence-search]
+    result: current-primary-sources-checked-and-bounded-tests-passed
   n8n-operator:
     full_suite: {trigger: 12/13, behavior: 15/16, hard_failures: 0, note: Fresh-context stochastic run followed by explicit contract corrections.}
     closing_regression: {trigger: 1/1, behavior: 1/1, hard_failures: 0, result: pass}

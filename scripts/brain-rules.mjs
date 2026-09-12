@@ -219,6 +219,16 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
       L.push(`    source:`)
       L.push(`      kind: ${src?.kind || 'founding'}`)
       L.push(`      ref: ${q(src?.ref || found?.sha || 'unknown')}`)
+      if (was?.history?.length) {
+        L.push('    history:')
+        for (const h of was.history) {
+          L.push(`      - text_sha: ${q(h.text_sha)}`)
+          L.push(`        valid_until: ${q(h.valid_until)}`)
+          L.push(`        source:`)
+          L.push(`          kind: ${h.source?.kind || 'unknown'}`)
+          L.push(`          ref: ${q(h.source?.ref || 'unknown')}`)
+        }
+      }
       L.push(`    status: ${(src && was.status) || 'live'}`)
       if (was?.supersedes?.length) L.push(`    supersedes: [${was.supersedes.join(', ')}]`)
       // A superseded rule is closed, never deleted, the same way Graphiti closes
@@ -266,6 +276,24 @@ export function check(ledgerText, root = HARNESS) {
         problems.push(`${r.id} changed but brain/rules.yaml still records text_sha ${e.text_sha}; the live text hashes to ${r.text_sha}. Update the entry and give it a new source.`)
       }
       if (!e.source || !e.source.kind) problems.push(`${r.id} has no source.kind`)
+      const validSourceKinds = new Set(['founding', 'ruling', 'proposal', 'import'])
+      if (e.source?.kind && !validSourceKinds.has(String(e.source.kind))) {
+        problems.push(`${r.id} has unsupported source.kind ${e.source.kind}`)
+      }
+      if (e.source?.kind === 'ruling' && String(e.source?.ref || '').includes('/')) {
+        problems.push(`${r.id} labels repository artifact ${e.source.ref} as a ruling; use approval or proposal, or cite the ruling commit`)
+      }
+      if (e.source?.kind === 'proposal' && !existsSync(join(root, String(e.source?.ref || '').split('#')[0]))) {
+        problems.push(`${r.id} cites ${e.source.kind} ${e.source.ref}, but that repository artifact does not exist`)
+      }
+      for (const h of e.history || []) {
+        if (!h.text_sha || !h.valid_until || !h.source?.kind || !h.source?.ref) {
+          problems.push(`${r.id} has an incomplete history entry; text_sha, valid_until, source.kind, and source.ref are required`)
+        }
+        if (String(h.text_sha) === String(e.text_sha)) {
+          problems.push(`${r.id} repeats its current text_sha in history instead of preserving a superseded revision`)
+        }
+      }
       // A contested rule points at the store row that contradicts it. A pointer
       // that resolves to nothing is worse than no pointer: it reads as evidence
       // and is not. The panel caught exactly that, in the field added to answer

@@ -1,6 +1,6 @@
 # Scheduled freshness and regression pass
 
-Run on the owner-configured cadence. The purpose is to distinguish source change, evaluator change, deployment drift, changing work mix, and real standard drift—not to manufacture quarterly movement.
+Run on the owner-configured cadence. The purpose is to distinguish source change, evaluator change, deployment drift, changing work mix, and real standard drift, not to manufacture quarterly movement.
 
 ## Establish version and exposure
 

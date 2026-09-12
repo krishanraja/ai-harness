@@ -10,6 +10,9 @@
 #   ruling    a Ruling (Krish, DATE) line in the commit that introduced it.
 #   proposal  a docs/proposals entry a human accepted.
 #   import    carried in from a source outside this repository.
+# A revised entry keeps its superseded text hash and source under history with a
+# validity end date. The current id remains stable while its earlier bytes remain
+# replayable.
 #
 # Ids are slugs of the rule's own opening words, never ordinals: inserting a
 # rule must not rename the ones below it, or provenance cannot survive the edit.
@@ -1183,11 +1186,17 @@ skill_sections:
   - id: ctrl-check.independence-protocol
     file: skills/ctrl-check/SKILL.md
     heading: "Independence protocol"
-    text_sha: "724426721051"
+    text_sha: "1cb4be8112be"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "724426721051"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-check.workflow
     file: skills/ctrl-check/SKILL.md
@@ -1291,20 +1300,32 @@ skill_sections:
   - id: ctrl-compile.diagnostic-not-quota
     file: skills/ctrl-compile/SKILL.md
     heading: "Diagnostic, not quota"
-    text_sha: "bacea9141848"
+    text_sha: "ea7efa241ed7"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "bacea9141848"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-compile.chain-boundaries
     file: skills/ctrl-compile/SKILL.md
     heading: "Chain boundaries"
-    text_sha: "6438bce7274d"
+    text_sha: "1859dc6bb930"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "6438bce7274d"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-intake.intake-contract
     file: skills/ctrl-intake/SKILL.md
@@ -1409,11 +1430,17 @@ skill_sections:
   - id: decision-ledger.capture-or-update-a
     file: skills/decision-ledger/SKILL.md
     heading: "Capture or update a decision"
-    text_sha: "f467f3f33253"
+    text_sha: "61adee5c1d48"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "f467f3f33253"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: contested
     contested_by: decision-ledger-store
   - id: decision-ledger.recall-and-apply-a
@@ -1446,11 +1473,17 @@ skill_sections:
   - id: decision-ledger.completion-contract
     file: skills/decision-ledger/SKILL.md
     heading: "Completion contract"
-    text_sha: "95aa1e8ed744"
+    text_sha: "0864dfd1d27a"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "95aa1e8ed744"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: design-intelligence-search.role-and-route
     file: skills/design-intelligence-search/SKILL.md
@@ -1518,11 +1551,17 @@ skill_sections:
   - id: evidence-research.source-hierarchy
     file: skills/evidence-research/SKILL.md
     heading: "Source hierarchy"
-    text_sha: "53c9b94020c0"
+    text_sha: "19bbe789f976"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "53c9b94020c0"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: evidence-research.research-workflow
     file: skills/evidence-research/SKILL.md
@@ -1545,11 +1584,17 @@ skill_sections:
   - id: evidence-research.edge-cases
     file: skills/evidence-research/SKILL.md
     heading: "Edge cases"
-    text_sha: "432a76ec95f6"
+    text_sha: "fc1233d44adb"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+    history:
+      - text_sha: "432a76ec95f6"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: evidence-research.handoff-and-verification
     file: skills/evidence-research/SKILL.md

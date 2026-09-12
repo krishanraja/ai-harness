@@ -42,7 +42,7 @@ Before an A/B or controlled experiment launches, define:
 5. falsifiable hypothesis and expected causal mechanism;
 6. one declared primary metric, guardrails, metric direction, windows, and practical significance;
 7. baseline, minimum detectable effect, significance/error policy, power, sample-size assumptions, and expected duration;
-8. calendar effects, novelty/learning effects, ramp plan, and minimum runtime justified by the decision—not a universal one-week rule;
+8. calendar effects, novelty/learning effects, ramp plan, and minimum runtime justified by the decision, not a universal one-week rule;
 9. instrumentation and logging validation before exposure;
 10. assignment-integrity checks, especially sample-ratio mismatch (SRM), plus attrition, missingness, contamination, and cross-device identity risks;
 11. exclusions, variance-reduction or multiple-testing policy, analysis plan, and permitted segment analyses declared before reading results;

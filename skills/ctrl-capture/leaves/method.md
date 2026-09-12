@@ -1,6 +1,6 @@
 # Method corrections
 
-A method correction concerns how a class of work is produced—sequence, stance, omission, or authority boundary—rather than only one artifact passage.
+A method correction concerns how a class of work is produced, including sequence, stance, omission, or authority boundary, rather than only one artifact passage.
 
 ## Recognition test
 

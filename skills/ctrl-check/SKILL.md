@@ -39,7 +39,7 @@ If the standard is stale, unaccepted, hash-invalid, or depends on withdrawn evid
 
 Use a fresh isolated reviewer context that receives the frozen standard before the frozen submission and does not receive builder conclusions, prior verdicts, ledger history, holdout answers, or judge rubrics. If isolation is technically unavailable, state that independence is unavailable and do not self-certify.
 
-Do not ask the user to open a new chat when the runtime can create an isolated context. If the submission was already seen, the independent context—not a claimed memory reset—is the remedy.
+Do not ask the user to open a new chat when the runtime can create an isolated context. If the submission was already seen, the independent context, not a claimed memory reset, is the remedy.
 
 ## Workflow
 
