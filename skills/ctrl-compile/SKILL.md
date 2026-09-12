@@ -106,13 +106,13 @@ The compile manifest records input/output schemas and hashes, policy version, su
 
 Report `candidates in / keep / delete / untested` and every reason. If nothing dies, or if roughly seventy percent or more die under the declared defaults, investigate generic checks, confounds, sparse classes, or a miscalibrated policy. These are warnings, not permission to force a desired criterion count.
 
-Use a deliberate context budget—normally a small core plus a bounded surface set—because runtime packages must remain usable. If supported criteria exceed it, split surfaces/passes or leave lower-priority candidates advisory; do not delete evidence merely to hit a number.
+Use a deliberate context budget, normally a small core plus a bounded surface set, because runtime packages must remain usable. If supported criteria exceed it, split surfaces/passes or leave lower-priority candidates advisory; do not delete evidence merely to hit a number.
 
 ## Chain boundaries
 
 - Raw transcripts, examples, or ungraded candidates: `ctrl-intake`.
 - Accepted compile package needing client/platform variants: `ctrl-build`. The handoff says the human-readable rubric/profile remain authoritative; gives exact source version, schemas, hashes, status, and kept-criterion package; lists untested/AWAITING exclusions; and requires build validation before any installation.
-- New submission needing an independent verdict: `ctrl-check`. The handoff gives the untouched submission plus exact standard version/hash and requires an evidence-linked `holds`/`breaks`/`not-applicable` finding for every applicable criterion—not merely a holistic verdict.
+- New submission needing an independent verdict: `ctrl-check`. The handoff gives the untouched submission plus exact standard version/hash and requires an evidence-linked `holds`/`breaks`/`not-applicable` finding for every applicable criterion, not merely a holistic verdict.
 - Recurring ledger evidence suggesting a standard change: `ctrl-capture`; Compile never self-updates from review history.
 
 Completion means a subject-confirmed or honestly provisional package is versioned, provenance-complete, leakage-free, privacy-bounded, and ready for build validation. It does not mean active on any AI surface.

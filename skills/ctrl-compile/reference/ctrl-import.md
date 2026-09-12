@@ -89,4 +89,4 @@ Writing and validating this local derivative does not authorise upload or activa
 
 Every generation/validation response explicitly reads back the artifact status, exact authorised audience, retention boundary, omitted/pseudonymised data classes, and safe provenance ids retained. Applying those controls without reporting them is incomplete.
 
-Regenerate after an accepted, versioned source change—normally one proposed through `ctrl-capture`, recompiled under a frozen policy, rebuilt, and released through the normal gates.
+Regenerate after an accepted, versioned source change, normally one proposed through `ctrl-capture`, recompiled under a frozen policy, rebuilt, and released through the normal gates.

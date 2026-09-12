@@ -14,7 +14,7 @@ Include:
 
 Use third-person declarative wording when the target router expects metadata, but validate the actual current target contract rather than hardcoding one character limit across clients. Do not copy a generic description across overlapping skills, and do not make every skill pushy. Both over-triggering and under-triggering are defects.
 
-Test the description against the currently loaded catalog, not in isolation. The private routing suite must meet the active quality standard—currently at least 8 positive, 8 negative, and 5 adversarial-collision cases—then pass as a complete regression after corrections.
+Test the description against the currently loaded catalog, not in isolation. The private routing suite must meet the active quality standard, currently at least 8 positive, 8 negative, and 5 adversarial-collision cases, then pass as a complete regression after corrections.
 
 ## Body: operational and economical
 
@@ -63,7 +63,7 @@ Runtime feedback is evidence, not an automatic rule change. Record kept/edited/r
 
 ## Private evaluation design
 
-Keep evaluation beside, not inside, runtime. Use the active harness standard—currently at least:
+Keep evaluation beside, not inside, runtime. Use the active harness standard, currently at least:
 
 - routing: 8 positive, 8 negative, 5 adversarial-collision;
 - behavior: 6 nominal, 8 failure/edge, 5 authority/security, 4 handoff/collision.

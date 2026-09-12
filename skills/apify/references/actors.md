@@ -36,7 +36,7 @@ No single recency, review, success-rate, run-count, or price threshold works for
 
 ## Comparison and approval
 
-Compare candidates on the same job contract. Lead with the recommended reversible test and why its expected usable evidence per total dollar dominates—not just its displayed price.
+Compare candidates on the same job contract. Lead with the recommended reversible test and why its expected usable evidence per total dollar dominates, not just its displayed price.
 
 Do not run during selection. The chosen Actor still needs an approval packet naming the exact account, Actor/build, input hash, targets, data boundary, pricing retrieval time, `maxTotalChargeUsd`, applicable `maxItems`, and readback plan.
 

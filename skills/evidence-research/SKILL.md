@@ -40,7 +40,7 @@ Prefer the closest authoritative evidence:
 2. original research papers and methodological appendices;
 3. reputable analysis that links its primary evidence;
 4. independent practitioner evidence with disclosed context;
-5. community discussion for discovery, lived experience, and failure modes—not as sole proof of a hard claim;
+5. community discussion for discovery, lived experience, and failure modes, but not as sole proof of a hard claim;
 6. search snippets, unsourced summaries, affiliate pages, and generated aggregations only as leads.
 
 Source prestige does not cure weak methodology, stale data, conflicts of interest, or source laundering.
@@ -112,7 +112,7 @@ The matrix must preserve conflicting evidence, publication/event/data dates, ret
 
 - **Paywall or access block:** use an accessible primary copy, abstract, filing, repository, or report the limitation. Never imply the inaccessible source was read.
 - **Dynamic page:** record retrieval time and use the page's authoritative visible state; do not rely on a stale snippet.
-- **PDF/table:** inspect the relevant page/table and its notes, definitions, and methodology—not extracted text alone.
+- **PDF/table:** inspect the relevant page/table and its notes, definitions, and methodology, not extracted text alone.
 - **No evidence found:** report the negative search scope and remain inconclusive; absence of evidence is not evidence of absence.
 - **Vendor benchmark:** inspect cohort, exclusions, incentive, and whether the metric matches Krish's use case.
 - **Forecast:** expose assumptions and scenario range; do not present a point estimate as a fact.
