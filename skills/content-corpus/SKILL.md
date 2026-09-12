@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Exclusion gate first: never invoke for conversion strategy, a persuasive angle, a strategic overlay, generic marketing strategy, or final prose; route those to krish-content-marketer and/or krish-voice. This is the channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use only when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Never assert that a channel is currently active; verify status live before producing or publishing for a named surface."
+description: "Ownership gate first: conversion strategy, persuasive angles, strategic overlays, and generic marketing strategy are led by krish-content-marketer; final prose is led by krish-voice. This skill may support those owners only when they also need named-channel context. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Never assert current channel status; verify it live before producing or publishing."
 ---
 
 # Content corpus
