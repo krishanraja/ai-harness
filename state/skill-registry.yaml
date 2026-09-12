@@ -29,10 +29,10 @@ deployed_release:
 latest_approved_release:
   release_id: v2026.09.12.5
   tag: harness-v2026.09.12.5
-  source_commit: c64da30974e658c8c41ca61f48fadace6e0673c0
+  source_commit: 428efbcb6fc8f951b75786ccbcc1d46ace13d4b8
   published: false
   immutable: false
-  skills_tree_aggregate_sha256: 6E7A9350D781C5D110C9404512047E4322A632948EAD6484E814B284E4BD95D4
+  skills_tree_aggregate_sha256: A19C0DC9C776A0961C7DC9A2D8A5A6C12C2A4D102572E71F030AADF762D0F0B5
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
     - content-corpus
