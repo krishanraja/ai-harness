@@ -65,3 +65,10 @@ The additional Windows machine cannot receive a machine-scoped secret or produce
 runtime canary through a mounted drive. Its local configuration must be completed by
 one command executed on that machine when it is online. Claude and Cursor headless
 account sessions also require their owners' interactive login surfaces.
+
+The proposed `session-feed` Routine was retired before activation. It was never a
+working component, and the hosted authenticated observation endpoint now provides
+the cross-surface learning input without a session scraper or per-machine daemon.
+The existing observer heartbeat remains the liveness proof for that ingestion path.
+Reintroducing raw session collection would broaden privacy scope and requires a new
+evidenced decision.

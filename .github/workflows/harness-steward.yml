@@ -114,6 +114,9 @@ jobs:
       - name: The shared event importer is deterministic and fail-closed
         run: node scripts/test-import-harness-events.mjs
 
+      - name: The audit preserves history without reopening superseded failures
+        run: node scripts/test-audit.mjs
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail
