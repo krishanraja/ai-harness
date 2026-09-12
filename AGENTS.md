@@ -11,10 +11,10 @@ is never more than a day behind the tree. Chronology lives in `docs/history/LOG.
 This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
 canon below on anything specific to this repository.
 
-<!-- krish-canon:start release=v2026.09.08.2 sha=cb8e6994f9bd rendered=2026-09-08 -->
+<!-- krish-canon:start release=v2026.09.12.4 sha=f67a7bc8d925 rendered=2026-09-12 -->
 ## Krish canon
 
-Rendered from `krishanraja/ai-harness` at release v2026.09.08.2. Nothing inside these
+Rendered from `krishanraja/ai-harness` at release v2026.09.12.4. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
 never silently overwritten, and never lost. Everything outside the markers belongs to
 this repository and is never read or rewritten by the harness.
