@@ -1,0 +1,894 @@
+{
+  "schema_version": 1,
+  "run_id": "20260912T210300Z",
+  "asked_by": "Krish Raja: approved the v2026.09.12.4 harness rollout and live canary verification in the interactive session on 2026-09-12.",
+  "host": "LORIMER",
+  "host_evidence": "COMPUTERNAME is LORIMER and all three declared harness roots exist.",
+  "mode": "sync",
+  "canaries_requested": true,
+  "heartbeat_enabled": true,
+  "pull_request_enabled": true,
+  "started_at_utc": "2026-09-12T21:03:00.5700758Z",
+  "status": "blocked",
+  "surfaces": [
+    {
+      "surface": "claude-code-user",
+      "client": "claude",
+      "plan": {
+        "surface": "claude-code-user",
+        "exact": 26,
+        "replace_known_baseline": 3,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=claude-code-user release=v2026.09.12.4 exact=26 replace_known=3 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "claude-code-user",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "release_aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 62,
+        "unmanaged_root_file_names": [
+          "ab-test-plan.md",
+          "ad-creative-brief.md",
+          "agency-onboarding.md",
+          "brand-architecture.md",
+          "brand-voice-guide.md",
+          "client-intake-form.md",
+          "co-marketing-plan.md",
+          "consulting-framework.md",
+          "course-outline.md",
+          "crisis-comms.md",
+          "cross-sell-strategy.md",
+          "ctrl-build.skill",
+          "ctrl-capture.skill",
+          "ctrl-check.skill",
+          "ctrl-compile.skill",
+          "ctrl-intake.skill",
+          "data-engineer.md",
+          "drip-campaign.md",
+          "executive-resume.md",
+          "feature-announcement.md",
+          "ghostwriter-brief.md",
+          "guest-post-pitch.md",
+          "influencer-outreach.md",
+          "instagram-carousel.md",
+          "krish-build.skill",
+          "krish-design.skill",
+          "krish-principles.skill",
+          "landing-page-copy.md",
+          "linkedin-profile-optimizer.md",
+          "linkedin-strategy.md",
+          "media-kit.md",
+          "micro-course.md",
+          "mission-statement.md",
+          "networking-strategy.md",
+          "newsletter-strategy.md",
+          "personal-brand-strategy.md",
+          "podcast-guest-pitch.md",
+          "pr-pitch.md",
+          "press-release.md",
+          "pricing-page-copy.md",
+          "product-launch-email.md",
+          "professional-bio.md",
+          "renewal-campaign.md",
+          "sales-page.md",
+          "script-to-blog.md",
+          "short-form-video-plan.md",
+          "signature-talk.md",
+          "social-media-audit.md",
+          "social-media-calendar.md",
+          "social-media-strategy.md",
+          "speaking-one-sheet.md",
+          "sponsor-pitch.md",
+          "survey-builder.md",
+          "thought-leadership.md",
+          "thread-hook-writer.md",
+          "tiktok-script.md",
+          "tripwire-offer.md",
+          "twitter-thread.md",
+          "ux-foundations.skill",
+          "webinar-planner.md",
+          "youtube-ad-script.md",
+          "youtube-strategy.md"
+        ]
+      },
+      "rollback_directory": "C:\\Users\\krish\\.claude\\skills.harness-backups\\claude-code-user\\v2026.09.12.4-20260912T210347Z-6ffbebb4",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.4-claude-code-user.json",
+      "canaries": {
+        "surface": "claude-code-user",
+        "client": "claude",
+        "status": "failed",
+        "report": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\canaries\\v2026.09.12.4-claude-code-user.json",
+        "results": [
+          {
+            "id": "brief-trigger-006",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(take-the-brief)."
+          },
+          {
+            "id": "brief-trigger-007",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(take-the-brief)."
+          },
+          {
+            "id": "brief-trigger-017",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-principles."
+          },
+          {
+            "id": "brief-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-principles."
+          },
+          {
+            "id": "video-engine-trigger-001",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(video-engine)."
+          },
+          {
+            "id": "video-engine-trigger-002",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(video-engine)."
+          },
+          {
+            "id": "video-engine-trigger-011",
+            "outcome": "not-fired",
+            "note": "Claude Code completed without a Skill tool call."
+          },
+          {
+            "id": "video-engine-trigger-003",
+            "outcome": "not-fired",
+            "note": "Claude Code completed without a Skill tool call."
+          },
+          {
+            "id": "design-intelligence-search-explicit-001",
+            "outcome": "not-fired",
+            "note": "Claude Code completed without a Skill tool call."
+          },
+          {
+            "id": "design-intel-trigger-003",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+          },
+          {
+            "id": "design-intel-trigger-011",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-design."
+          },
+          {
+            "id": "design-intel-trigger-006",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: build-apps-with-krish, krish-principles."
+          },
+          {
+            "id": "os-trigger-001",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(mindmake-os)."
+          },
+          {
+            "id": "os-trigger-018",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(mindmake-os)."
+          },
+          {
+            "id": "os-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-principles, mindmake."
+          },
+          {
+            "id": "corpus-trigger-018",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(content-corpus)."
+          },
+          {
+            "id": "corpus-trigger-022",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(content-corpus)."
+          },
+          {
+            "id": "corpus-trigger-007",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(content-corpus)."
+          },
+          {
+            "id": "corpus-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-voice."
+          },
+          {
+            "id": "mindmake-trigger-003",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(mindmake)."
+          },
+          {
+            "id": "mindmake-trigger-005",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(mindmake)."
+          },
+          {
+            "id": "mindmake-trigger-017",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: mindmake-os."
+          },
+          {
+            "id": "mindmake-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: mindmake-os."
+          },
+          {
+            "id": "compile-trigger-005",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(ctrl-compile)."
+          },
+          {
+            "id": "compile-trigger-021",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(ctrl-compile)."
+          },
+          {
+            "id": "compile-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: ctrl-intake."
+          },
+          {
+            "id": "marketer-trigger-007",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+          },
+          {
+            "id": "marketer-trigger-017",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+          },
+          {
+            "id": "marketer-trigger-018",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-voice."
+          },
+          {
+            "id": "marketer-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-voice."
+          },
+          {
+            "id": "uxf-trigger-007",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(ux-foundations)."
+          },
+          {
+            "id": "uxf-trigger-008",
+            "outcome": "fired",
+            "note": "Claude stream-json recorded Skill(ux-foundations)."
+          },
+          {
+            "id": "uxf-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Claude stream-json recorded Skill calls: krish-design, krish-principles."
+          }
+        ]
+      }
+    },
+    {
+      "surface": "cursor-primary",
+      "client": "cursor",
+      "plan": {
+        "surface": "cursor-primary",
+        "exact": 26,
+        "replace_known_baseline": 3,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=cursor-primary release=v2026.09.12.4 exact=26 replace_known=3 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "cursor-primary",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "release_aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 11,
+        "unmanaged_root_file_names": [
+          "ctrl-build.skill",
+          "ctrl-capture.skill",
+          "ctrl-check.skill",
+          "ctrl-compile.skill",
+          "ctrl-intake.skill",
+          "data-engineer.md",
+          "krish-build.skill",
+          "krish-design.skill",
+          "krish-principles.skill",
+          "ml-engineer.md",
+          "ux-foundations.skill"
+        ]
+      },
+      "rollback_directory": "C:\\Users\\krish\\.cursor\\skills.harness-backups\\cursor-primary\\v2026.09.12.4-20260912T211440Z-b2a16180",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.4-cursor-primary.json",
+      "canaries": {
+        "surface": "cursor-primary",
+        "client": "cursor",
+        "status": "manual-required",
+        "reason": "Cursor has no supported headless client with observable skill invocation output."
+      }
+    },
+    {
+      "surface": "codex-current",
+      "client": "codex",
+      "plan": {
+        "surface": "codex-current",
+        "exact": 26,
+        "replace_known_baseline": 3,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=codex-current release=v2026.09.12.4 exact=26 replace_known=3 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "codex-current",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "release_aggregate": "9E3FCB5CB730EA829B60CA3063BBEDDF5CD689631DF3DDD184BCB22A2C239869",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 0,
+        "unmanaged_root_file_names": []
+      },
+      "rollback_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-current\\v2026.09.12.4-20260912T211444Z-62c3f129",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.4-codex-current.json",
+      "canaries": {
+        "surface": "codex-current",
+        "client": "codex",
+        "status": "failed",
+        "report": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\canaries\\v2026.09.12.4-codex-current.json",
+        "results": [
+          {
+            "id": "brief-trigger-006",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+          },
+          {
+            "id": "brief-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+          },
+          {
+            "id": "brief-trigger-017",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles."
+          },
+          {
+            "id": "brief-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles."
+          },
+          {
+            "id": "video-engine-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "video-engine-trigger-002",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "video-engine-trigger-011",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "video-engine-trigger-003",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "design-intelligence-search-explicit-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of design-intelligence-search/SKILL.md."
+          },
+          {
+            "id": "design-intel-trigger-003",
+            "outcome": "unreachable",
+            "note": "Codex target was absent from the catalog."
+          },
+          {
+            "id": "design-intel-trigger-011",
+            "outcome": "unreachable",
+            "note": "Codex target was absent from the catalog."
+          },
+          {
+            "id": "design-intel-trigger-006",
+            "outcome": "unreachable",
+            "note": "Codex target was absent from the catalog."
+          },
+          {
+            "id": "os-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+          },
+          {
+            "id": "os-trigger-018",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+          },
+          {
+            "id": "os-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake, strategy-brief."
+          },
+          {
+            "id": "corpus-trigger-018",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of content-corpus/SKILL.md."
+          },
+          {
+            "id": "corpus-trigger-022",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of content-corpus/SKILL.md."
+          },
+          {
+            "id": "corpus-trigger-007",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+          },
+          {
+            "id": "corpus-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, krish-voice."
+          },
+          {
+            "id": "mindmake-trigger-003",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake/SKILL.md."
+          },
+          {
+            "id": "mindmake-trigger-005",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake/SKILL.md."
+          },
+          {
+            "id": "mindmake-trigger-017",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake/SKILL.md."
+          },
+          {
+            "id": "mindmake-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake-os, n8n-operator, tools-access."
+          },
+          {
+            "id": "compile-trigger-005",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: ctrl-build, krish-principles."
+          },
+          {
+            "id": "compile-trigger-021",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: ctrl-intake, krish-principles."
+          },
+          {
+            "id": "compile-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: ctrl-intake, krish-principles."
+          },
+          {
+            "id": "marketer-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-content-marketer/SKILL.md."
+          },
+          {
+            "id": "marketer-trigger-017",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-content-marketer/SKILL.md."
+          },
+          {
+            "id": "marketer-trigger-018",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, krish-voice, locked-revision."
+          },
+          {
+            "id": "marketer-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, krish-voice, locked-revision."
+          },
+          {
+            "id": "uxf-trigger-007",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles."
+          },
+          {
+            "id": "uxf-trigger-008",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of ux-foundations/SKILL.md."
+          },
+          {
+            "id": "uxf-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-design, krish-principles, mindmake, strategy-brief."
+          }
+        ]
+      }
+    }
+  ],
+  "release": "v2026.09.12.4",
+  "assets": {
+    "asset_count": 60,
+    "checksum_count": 59,
+    "mismatches": 0
+  },
+  "manifest_sha256": "AB10D5CBE23122A978D510DE93C77F20BA588ADA05679AB8BDAA3E9E99CAE2C7",
+  "unmeasured_surfaces": [
+    "cursor-primary"
+  ],
+  "completed_at_utc": "2026-09-12T21:32:55.7751170Z"
+}
