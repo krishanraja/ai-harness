@@ -1,6 +1,6 @@
 ---
 name: design-intelligence-search
-description: "Manual-only design-data retrieval companion for Krish's app workflow. Use only when krish-design or build-apps-with-krish explicitly delegates a bounded search for product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or a mobile-web candidate packet. Never trigger directly from a user's generic design, build, implement, improve, review, accessibility, or QA request; those remain owned by krish-design, build-apps-with-krish, krish-build, ux-foundations, or ux-testing-agent. Returns advisory candidates with pinned provenance and uncertainty; it never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Last reviewed 2026-09-12."
+description: "Never use for a direct user's generic design, build, implementation, improvement, review, accessibility, or QA request; those stay with their normal owners. This is a subordinate design-data retrieval companion used only after krish-design or build-apps-with-krish explicitly delegates a bounded search. It retrieves advisory candidates for product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or mobile web with pinned provenance and uncertainty. It never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Last reviewed 2026-09-12."
 ---
 
 # Design Intelligence Search

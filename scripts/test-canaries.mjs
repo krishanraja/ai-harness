@@ -24,8 +24,11 @@ try {
   const sheetRun = run(['--sheet-json'])
   check(sheetRun.status === 0, `sheet JSON exited ${sheetRun.status}: ${sheetRun.stderr}`)
   const sheet = JSON.parse(sheetRun.stdout)
-  check(sheet.cases.length === 25, `expected 25 cases, got ${sheet.cases.length}`)
-  check(sheet.skills.length === 7, `expected 7 skills, got ${sheet.skills.length}`)
+  const declaredChanged = ['content-corpus', 'design-intelligence-search', 'mindmake-os', 'mindmake', 'video-engine']
+  for (const skill of declaredChanged) {
+    check(sheet.skills.includes(skill), `release sheet omitted declared changed skill ${skill}`)
+  }
+  check(sheet.skills.length >= 7, `expected at least 7 tier-one skills, got ${sheet.skills.length}`)
 
   const results = sheet.cases.map((canary) => {
     if (canary.should_trigger) return { id: canary.id, outcome: 'fired', note: `${canary.skill} loaded.` }

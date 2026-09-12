@@ -617,7 +617,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   } else {
     if (never.length) {
       F('dead-zone', `${never.length} live rules`,
-        `${never.length} of ${live} live rules have never been cited by the judge or by a passing canary: ${never.slice(0, 8).join(', ')}${never.length > 8 ? ', and more' : ''}.`,
+        `${never.length} of ${live} live rules have never been cited by an independent judge or retrieved in a passing synthetic canary: ${never.slice(0, 8).join(', ')}${never.length > 8 ? ', and more' : ''}.`,
         'Read a sample before acting. A rule can be uncited because nothing exercises it, because no canary covers its skill, or because it is dead. Only the third is a reason to retire it, and retiring it is a proposal, not an edit.')
     }
     if (stale.length) {
@@ -625,7 +625,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
         `${stale.map((x) => `${x.id} (last ${x.last})`).slice(0, 8).join(', ')}${stale.length > 8 ? ', and more' : ''}.`,
         'Stale is not dead. Check whether the producers have run at all in that window before reading anything into it.')
     }
-    N(`${live - never.length} of ${live} live rules carry at least one recorded citation in brain/usage.jsonl.`)
+    N(`${live - never.length} of ${live} live rules carry at least one recorded citation in brain/usage.jsonl; canary citations are synthetic evaluation evidence, not real-world usage.`)
   }
 }
 

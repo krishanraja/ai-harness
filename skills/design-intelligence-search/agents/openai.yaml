@@ -1,7 +1,7 @@
 interface:
   display_name: "Design Intelligence Search"
   short_description: "Bounded UI pattern and mobile-web candidate search"
-  default_prompt: "Use $design-intelligence-search to retrieve advisory UI candidates for a design task already owned by krish-design."
+  default_prompt: "Use $design-intelligence-search only after explicit delegation, with this packet: OWNER: the delegating skill, either krish-design or build-apps-with-krish; SEARCH NEED: retrieve advisory UI candidates for its already-owned design task."
 
 policy:
   allow_implicit_invocation: false

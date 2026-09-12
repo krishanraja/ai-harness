@@ -30,6 +30,29 @@ stores:
     read_by: every client on every surface
     written_by: pull request only
 
+  - id: citation-coverage-ledger
+    where: brain/usage.jsonl
+    disposition: canon
+    holds: append-only citations of canon rules by independent judges and synthetic canaries
+    first_write: 2026-09-12
+    read_by: brain-usage.mjs and audit-harness.mjs
+    written_by: pull request only
+    candidate_producers: judge.mjs and canaries.mjs
+    write_gate: >
+      PR-enabled machine sync stages citation candidates on its named evidence
+      branch with the canary and deployment records. Canary-only and no-PR runs
+      route both reports and citation candidates to scratch. Only merge admits
+      candidate rows into this canon-disposition store.
+    validity: >
+      Each event is historical evidence scoped to its immutable ref, not a claim
+      about the current release and not proof of real-world use or efficacy.
+      Canary rows carry evidence_class synthetic-evaluation and scope
+      skill-retrieval-only. A current-coverage claim must match the release being
+      evaluated; older rows remain append-only history and are never overwritten.
+    retirement: >
+      Stop future writes through a reviewed proposal. Keep prior rows with their
+      refs; event facts do not become false when a later selector or release changes.
+
   # --------------------------------------------------------- the big finding
   #
   # This is the most important row in the file.
@@ -99,6 +122,13 @@ stores:
       run found one pair, at 70 percent overlap:
       always-on-execution-chain.intent-briefing-when-triggered and
       global-chain.take-the-brief-runs.
+    progress_2026_09_12: >
+      The 2026-09-10 paragraph above remains verbatim historical text. Today the
+      ledger has 86 rows against 317 live rules. Every current row came from a
+      v2026.09.12.3 canary, is explicitly labelled synthetic-evaluation with
+      scope skill-retrieval-only, and is valid only for its immutable report ref.
+      This is retrieval coverage, not real-world use, efficacy, or current-release
+      proof. The new citation-coverage-ledger row above records its lifecycle.
     why_still_migrate: >
       None of that triages the 122 rows. The instrument now exists; the reading
       job does not do itself.

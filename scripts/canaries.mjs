@@ -91,8 +91,15 @@ function changedSkills() {
   const cur = registry?.latest_approved_release?.skills_tree_aggregate_sha256
   // Without both aggregates there is nothing to compare, and guessing which
   // skills moved would put skills on the sheet for no reason. Say so instead.
-  if (!prev || !cur || prev === cur) return { known: Boolean(prev && cur), skills: [] }
-  return { known: false, skills: [] }
+  if (!prev || !cur) return { known: false, skills: [] }
+  if (prev === cur) return { known: true, skills: [] }
+
+  const declared = registry?.latest_approved_release?.changed_skills
+  if (!Array.isArray(declared)) return { known: false, skills: [] }
+  const skills = [...new Set(declared.map((name) => String(name).trim()).filter(Boolean))]
+  const unknown = skills.filter((name) => !suites.includes(name))
+  if (unknown.length) throw new Error(`Approved changed_skills have no trigger suite: ${unknown.join(', ')}`)
+  return { known: true, skills }
 }
 
 /**

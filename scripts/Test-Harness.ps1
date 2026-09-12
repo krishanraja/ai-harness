@@ -30,6 +30,7 @@ $contract = Join-Path $Root 'contract\krish-operating-contract.md'
 $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
 $releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
+$syncScript = Join-Path $Root 'scripts\Invoke-HarnessSync.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
 else {
     $contractRaw = [IO.File]::ReadAllText($contract)
@@ -37,6 +38,21 @@ else {
     if ($contractRaw -notmatch 'record_harness_observation') { Add-Failure 'Observation capture does not name the hosted MCP tool.' }
     if ($contractRaw -notmatch '`ctrl-capture`\s+alone clusters and interprets evidence') { Add-Failure 'Observation capture does not preserve the ctrl-capture ownership boundary.' }
     if ($contractRaw -notmatch 'never simulate persistence or create\s+a local shadow ledger') { Add-Failure 'Observation capture does not fail honestly without a local collector.' }
+}
+if (-not (Test-Path -LiteralPath $syncScript -PathType Leaf)) {
+    Add-Failure 'Missing machine sync orchestrator.'
+}
+else {
+    $syncScriptRaw = [IO.File]::ReadAllText($syncScript)
+    if ($syncScriptRaw -notmatch 'unmeasured_surfaces\s*=\s*@\(\$unmeasured\s*\|\s*ForEach-Object\s*\{\s*\$_\.surface\s*\}\)') {
+        Add-Failure 'Machine sync does not record unmeasured surfaces by the surface field.'
+    }
+    if ($syncScriptRaw -notmatch '\$CanaryOnly\s+-or\s+\$NoPullRequest' -or $syncScriptRaw -notmatch '\$recordArguments\s*\+=\s*@\(''--out-dir''') {
+        Add-Failure 'Canary-only and no-PR sync runs do not route canary reports and citation candidates to scratch.'
+    }
+    if ($syncScriptRaw -notmatch "'brain/usage\.jsonl'") {
+        Add-Failure 'PR-enabled sync does not stage citation candidates with machine evidence.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
