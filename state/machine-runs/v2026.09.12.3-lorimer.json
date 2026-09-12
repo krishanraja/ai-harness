@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "run_id": "20260912T190910Z",
+  "host": "LORIMER",
+  "host_evidence": "COMPUTERNAME is LORIMER and all three declared harness roots exist.",
+  "mode": "sync",
+  "canaries_requested": false,
+  "heartbeat_enabled": true,
+  "pull_request_enabled": false,
+  "started_at_utc": "2026-09-12T19:09:10.0259112Z",
+  "status": "completed",
+  "surfaces": [
+    {
+      "surface": "claude-code-user",
+      "client": "claude",
+      "plan": {
+        "surface": "claude-code-user",
+        "exact": 29,
+        "replace_known_baseline": 0,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "exact"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "exact"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=claude-code-user release=v2026.09.12.3 exact=29 replace_known=0 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "claude-code-user",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "release_aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 62,
+        "unmanaged_root_file_names": [
+          "ab-test-plan.md",
+          "ad-creative-brief.md",
+          "agency-onboarding.md",
+          "brand-architecture.md",
+          "brand-voice-guide.md",
+          "client-intake-form.md",
+          "co-marketing-plan.md",
+          "consulting-framework.md",
+          "course-outline.md",
+          "crisis-comms.md",
+          "cross-sell-strategy.md",
+          "ctrl-build.skill",
+          "ctrl-capture.skill",
+          "ctrl-check.skill",
+          "ctrl-compile.skill",
+          "ctrl-intake.skill",
+          "data-engineer.md",
+          "drip-campaign.md",
+          "executive-resume.md",
+          "feature-announcement.md",
+          "ghostwriter-brief.md",
+          "guest-post-pitch.md",
+          "influencer-outreach.md",
+          "instagram-carousel.md",
+          "krish-build.skill",
+          "krish-design.skill",
+          "krish-principles.skill",
+          "landing-page-copy.md",
+          "linkedin-profile-optimizer.md",
+          "linkedin-strategy.md",
+          "media-kit.md",
+          "micro-course.md",
+          "mission-statement.md",
+          "networking-strategy.md",
+          "newsletter-strategy.md",
+          "personal-brand-strategy.md",
+          "podcast-guest-pitch.md",
+          "pr-pitch.md",
+          "press-release.md",
+          "pricing-page-copy.md",
+          "product-launch-email.md",
+          "professional-bio.md",
+          "renewal-campaign.md",
+          "sales-page.md",
+          "script-to-blog.md",
+          "short-form-video-plan.md",
+          "signature-talk.md",
+          "social-media-audit.md",
+          "social-media-calendar.md",
+          "social-media-strategy.md",
+          "speaking-one-sheet.md",
+          "sponsor-pitch.md",
+          "survey-builder.md",
+          "thought-leadership.md",
+          "thread-hook-writer.md",
+          "tiktok-script.md",
+          "tripwire-offer.md",
+          "twitter-thread.md",
+          "ux-foundations.skill",
+          "webinar-planner.md",
+          "youtube-ad-script.md",
+          "youtube-strategy.md"
+        ]
+      },
+      "rollback_directory": "C:\\Users\\krish\\.claude\\skills.harness-backups\\claude-code-user\\v2026.09.12.3-20260912T190958Z-e89798c1",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.3-claude-code-user.json"
+    },
+    {
+      "surface": "cursor-primary",
+      "client": "cursor",
+      "plan": {
+        "surface": "cursor-primary",
+        "exact": 29,
+        "replace_known_baseline": 0,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "exact"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "exact"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=cursor-primary release=v2026.09.12.3 exact=29 replace_known=0 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "cursor-primary",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "release_aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 11,
+        "unmanaged_root_file_names": [
+          "ctrl-build.skill",
+          "ctrl-capture.skill",
+          "ctrl-check.skill",
+          "ctrl-compile.skill",
+          "ctrl-intake.skill",
+          "data-engineer.md",
+          "krish-build.skill",
+          "krish-design.skill",
+          "krish-principles.skill",
+          "ml-engineer.md",
+          "ux-foundations.skill"
+        ]
+      },
+      "rollback_directory": "C:\\Users\\krish\\.cursor\\skills.harness-backups\\cursor-primary\\v2026.09.12.3-20260912T191002Z-54c22bc1",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.3-cursor-primary.json"
+    },
+    {
+      "surface": "codex-current",
+      "client": "codex",
+      "plan": {
+        "surface": "codex-current",
+        "exact": 29,
+        "replace_known_baseline": 0,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "exact"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "exact"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "exact"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "exact"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "exact"
+          },
+          {
+            "name": "video-engine",
+            "relation": "exact"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=codex-current release=v2026.09.12.3 exact=29 replace_known=0 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "codex-current",
+        "skill_count": 29,
+        "file_count": 139,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "release_aggregate": "78337968F3C981A4F95B08877486ADDCD7408988E5AFE6577F422BF601E164A1",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 0,
+        "unmanaged_root_file_names": []
+      },
+      "rollback_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-current\\v2026.09.12.3-20260912T191005Z-f19f81fa",
+      "deployment_record": "C:\\Users\\krish\\dev\\mindmaker-os\\ai-harness\\state\\deployments\\v2026.09.12.3-codex-current.json"
+    }
+  ],
+  "release": "v2026.09.12.3",
+  "assets": {
+    "asset_count": 60,
+    "checksum_count": 59,
+    "mismatches": 0
+  },
+  "manifest_sha256": "0032FE759639389090D516CF7503A580B7CB3FCD0504BE1C278983C7441F9A39",
+  "unmeasured_surfaces": [],
+  "completed_at_utc": "2026-09-12T19:10:07.0486560Z"
+}
