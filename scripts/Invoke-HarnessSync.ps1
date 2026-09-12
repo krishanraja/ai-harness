@@ -645,12 +645,37 @@ This directory is only for read-only trigger canaries.
     return $directory
 }
 
+function Resolve-CodexCli {
+    $native = Get-Command codex.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($native -and (Test-Path -LiteralPath $native.Source -PathType Leaf)) {
+        return [pscustomobject]@{ FilePath = $native.Source; Prefix = @() }
+    }
+
+    $legacyScript = Join-Path $env:APPDATA 'npm\node_modules\@openai\codex\bin\codex.js'
+    if (Test-Path -LiteralPath $legacyScript -PathType Leaf) {
+        $node = (Get-Command node.exe -ErrorAction Stop).Source
+        return [pscustomobject]@{ FilePath = $node; Prefix = @($legacyScript) }
+    }
+
+    throw 'Codex CLI entry point is missing. Checked the installed codex.exe command and the legacy npm package path.'
+}
+
+function Resolve-ClaudeCli {
+    $native = Get-Command claude.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($native -and (Test-Path -LiteralPath $native.Source -PathType Leaf)) {
+        return $native.Source
+    }
+
+    $legacy = Join-Path $env:APPDATA 'npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe'
+    if (Test-Path -LiteralPath $legacy -PathType Leaf) { return $legacy }
+    return $null
+}
+
 function Get-CodexCatalogText {
     param([Parameter(Mandatory = $true)][string]$WorkingDirectory)
-    $node = (Get-Command node.exe -ErrorAction Stop).Source
-    $codexScript = Join-Path $env:APPDATA 'npm\node_modules\@openai\codex\bin\codex.js'
-    if (-not (Test-Path -LiteralPath $codexScript -PathType Leaf)) { throw 'Codex CLI entry point is missing.' }
-    $result = Invoke-ProcessCapture -FilePath $node -Arguments @($codexScript, 'debug', 'prompt-input') -WorkingDirectory $WorkingDirectory -TimeoutSeconds 60
+    $codex = Resolve-CodexCli
+    $arguments = @($codex.Prefix) + @('debug', 'prompt-input')
+    $result = Invoke-ProcessCapture -FilePath $codex.FilePath -Arguments $arguments -WorkingDirectory $WorkingDirectory -TimeoutSeconds 60
     if ($result.ExitCode -ne 0 -or $result.TimedOut) { throw 'Codex catalog diagnostic failed.' }
     return $result.Stdout
 }
@@ -691,10 +716,8 @@ function Invoke-CodexCanary {
         [Parameter(Mandatory = $true)][string[]]$CanonicalNames
     )
 
-    $node = (Get-Command node.exe -ErrorAction Stop).Source
-    $codexScript = Join-Path $env:APPDATA 'npm\node_modules\@openai\codex\bin\codex.js'
-    $arguments = @(
-        $codexScript,
+    $codex = Resolve-CodexCli
+    $arguments = @($codex.Prefix) + @(
         '-c', 'windows.sandbox="unelevated"',
         '-s', 'read-only',
         '-a', 'never',
@@ -702,7 +725,7 @@ function Invoke-CodexCanary {
         'exec', '--json', '--ephemeral', '--skip-git-repo-check',
         [string]$Case.prompt
     )
-    $run = Invoke-ProcessCapture -FilePath $node -Arguments $arguments -WorkingDirectory $WorkingDirectory -TimeoutSeconds $CanaryTimeoutSeconds
+    $run = Invoke-ProcessCapture -FilePath $codex.FilePath -Arguments $arguments -WorkingDirectory $WorkingDirectory -TimeoutSeconds $CanaryTimeoutSeconds
     $reads = Get-LiveSkillReads -JsonLines $run.Stdout -SkillsRoot $Surface.SkillsRoot -CanonicalNames $CanonicalNames
     $target = [string]$Case.skill
     $targetInCatalog = $CatalogText -match ('(?m)-\s+' + [regex]::Escape($target) + ':')
@@ -730,8 +753,8 @@ function Invoke-ClaudeCanary {
         [Parameter(Mandatory = $true)][string]$WorkingDirectory
     )
 
-    $claude = Join-Path $env:APPDATA 'npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe'
-    if (-not (Test-Path -LiteralPath $claude -PathType Leaf)) {
+    $claude = Resolve-ClaudeCli
+    if (-not $claude) {
         return [pscustomobject]@{ id = $Case.id; outcome = 'unreachable'; note = 'Claude Code CLI entry point is missing.' }
     }
     $arguments = @(
