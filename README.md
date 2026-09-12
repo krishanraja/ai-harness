@@ -48,8 +48,8 @@ GitHub validation runs on pull requests and `main`. A tag matching `harness-vYYY
 
 A build does not install or publish anything. Local directory-link changes, Claude cloud uploads, enable/disable actions, credential changes, and external publication require their own explicit approval and verification.
 
-See `architecture/CROSS_CLIENT_RELEASE_SYSTEM.md` for the proposed automatic release and self-correction system. The design is documented but its GitHub workflows, local schedule, wider installations, cloud changes, and deletion stages are not active.
+See `architecture/CROSS_CLIENT_RELEASE_SYSTEM.md` for the governed automatic release and self-correction system. GitHub validation, immutable releases, local reconciliation, live canaries, heartbeat evidence, and controlled observation capture are active. Cloud catalogue uploads remain supervised because the personal catalogues expose no suitable unattended API.
 
 ## Current status
 
-The current reconciled candidate contains 29 curated skills and three thin client adapters. The previous immutable approved release is `harness-v2026.08.29.1`; a newer release is required for the source-backed Mindmake rename and doctrine merge. The set retains the always-on principles, conditional intent briefing, pre-execution strategy, and post-execution verification chain; adds the exact-baseline `locked-revision` controller and narrow `video-engine` launcher; and keeps provider mechanics, commercial context, content, design, voice, build, UX, and harness governance in distinct routes. No candidate becomes a deployable release until the complete validation, security, collision, behavior, and repeat-deterministic packaging gates pass.
+The current approved candidate is `v2026.09.12.4`, containing 29 curated skills and three thin client adapters. It corrects routing and recording failures found by authenticated `v2026.09.12.3` live canaries. No candidate becomes deployable until validation, security, collision, behavior, deterministic packaging, immutable publication, installation parity, and post-install canary gates are evidenced.
