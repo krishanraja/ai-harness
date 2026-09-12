@@ -13,3 +13,5 @@ Canonical user skills are exposed through `C:\Users\krish\.codex\skills`. Use `m
 For current mind/make OS facts, follow the source and freshness rules in `mindmake-os`; do not rely on remembered counts.
 
 When Krish overrules a decision, record it in the commit body as `Ruling (Krish, YYYY-MM-DD): the ruling, in one line`. The harness reads those lines across every repository.
+
+When `record_harness_observation` is available, follow the operating contract's Observation capture section. Tool absence or failure never authorizes a local shadow ledger.

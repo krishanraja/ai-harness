@@ -31,6 +31,13 @@ $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
 $releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
+else {
+    $contractRaw = [IO.File]::ReadAllText($contract)
+    if ($contractRaw -notmatch '(?m)^## Observation capture$') { Add-Failure 'Operating contract is missing the Observation capture boundary.' }
+    if ($contractRaw -notmatch 'record_harness_observation') { Add-Failure 'Observation capture does not name the hosted MCP tool.' }
+    if ($contractRaw -notmatch 'cannot change a\s+skill, rule, contract, registry, or canonical memory') { Add-Failure 'Observation capture does not preserve canon authority.' }
+    if ($contractRaw -notmatch 'never simulate persistence or create\s+a local shadow ledger') { Add-Failure 'Observation capture does not fail honestly without a local collector.' }
+}
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
 if (-not (Test-Path -LiteralPath $releaseBuilder -PathType Leaf)) {
@@ -65,6 +72,8 @@ foreach ($adapter in $adapterPaths) {
     if ($adapterRaw -notmatch 'krish-principles') { Add-Failure "Adapter does not make krish-principles always-on: $adapter" }
     if ($adapterRaw -notmatch 'strategy-brief') { Add-Failure "Adapter does not require pre-execution strategy: $adapter" }
     if ($adapterRaw -notmatch 'verification-loop') { Add-Failure "Adapter does not require post-execution verification: $adapter" }
+    if ($adapterRaw -notmatch 'record_harness_observation') { Add-Failure "Adapter does not route hosted observation capture: $adapter" }
+    if ($adapterRaw -notmatch 'local shadow ledger') { Add-Failure "Adapter does not forbid a local observation collector: $adapter" }
 }
 
 $skillsRoot = Join-Path $Root 'skills'

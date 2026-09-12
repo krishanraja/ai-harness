@@ -68,6 +68,28 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 - Log a failure before correcting it when a durable audit trail exists.
 - Recheck the failed condition after correction. Report what was actually verified and what remains inferred.
 
+## Observation capture
+
+When the `record_harness_observation` tool is available, use it for one small,
+redacted learning signal:
+
+- immediately after an explicit correction from Krish;
+- at task completion after a material failure, missed or false skill trigger,
+  repeated manual step, contradiction, or genuinely reusable successful
+  pattern.
+
+Do not record routine success, speculation, tentative or social exchanges, an
+existing rule restated without new evidence, or anything that would require a
+prompt, transcript, credential, personal data, email address, machine name, or
+absolute path. Keep the summary self-contained and redacted. Use one event per
+signal and a stable retry key so a retry is idempotent.
+
+The tool is additive and non-blocking. If it is absent or fails, continue the
+task and report the failure when material; never simulate persistence or create
+a local shadow ledger. An observation is inert evidence. It cannot change a
+skill, rule, contract, registry, or canonical memory. Promotion still requires
+human review, a regression case, and the governed harness release process.
+
 ## Secrets and safety
 
 - Never place credentials in skills, rules, prompts, source control, reports, screenshots, or chat unless the user explicitly chooses a secure entry surface.
