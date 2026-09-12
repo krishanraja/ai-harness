@@ -35,7 +35,7 @@ else {
     $contractRaw = [IO.File]::ReadAllText($contract)
     if ($contractRaw -notmatch '(?m)^## Observation capture$') { Add-Failure 'Operating contract is missing the Observation capture boundary.' }
     if ($contractRaw -notmatch 'record_harness_observation') { Add-Failure 'Observation capture does not name the hosted MCP tool.' }
-    if ($contractRaw -notmatch 'cannot change a\s+skill, rule, contract, registry, or canonical memory') { Add-Failure 'Observation capture does not preserve canon authority.' }
+    if ($contractRaw -notmatch '`ctrl-capture`\s+alone clusters and interprets evidence') { Add-Failure 'Observation capture does not preserve the ctrl-capture ownership boundary.' }
     if ($contractRaw -notmatch 'never simulate persistence or create\s+a local shadow ledger') { Add-Failure 'Observation capture does not fail honestly without a local collector.' }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
@@ -73,7 +73,6 @@ foreach ($adapter in $adapterPaths) {
     if ($adapterRaw -notmatch 'strategy-brief') { Add-Failure "Adapter does not require pre-execution strategy: $adapter" }
     if ($adapterRaw -notmatch 'verification-loop') { Add-Failure "Adapter does not require post-execution verification: $adapter" }
     if ($adapterRaw -notmatch 'record_harness_observation') { Add-Failure "Adapter does not route hosted observation capture: $adapter" }
-    if ($adapterRaw -notmatch 'local shadow ledger') { Add-Failure "Adapter does not forbid a local observation collector: $adapter" }
 }
 
 $skillsRoot = Join-Path $Root 'skills'

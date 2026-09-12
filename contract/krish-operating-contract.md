@@ -94,13 +94,14 @@ event provides cross-surface discovery.
 
 The tool is additive and non-blocking. If it is absent or fails, continue the
 task and report the failure when material; never simulate persistence or create
-a local shadow ledger. An observation is inert evidence. It cannot change a
-skill, rule, contract, registry, or canonical memory. The scheduled importer
-batches evidence automatically, and `ctrl-capture` escalates only repeated or
-severe verified patterns rather than creating a review task per event.
-Promotion still requires human review, a regression case, and the governed
-harness release process. Its mission is to reduce repeated failure and manual
-rework across future tasks so Krish spends less time correcting the harness.
+a local shadow ledger. All authority and promotion boundaries come from
+`ctrl-capture`'s Evidence is not truth and Capture contract sections; do not
+duplicate or weaken them here. The scheduled importer batches evidence
+automatically, and `ctrl-capture` escalates only repeated or severe verified
+patterns rather than creating a review task per event. Promotion still requires
+human review, a regression case, and the governed harness release process. Its
+mission is to reduce repeated failure and manual rework across future tasks so
+Krish spends less time correcting the harness.
 
 ## Secrets and safety
 
