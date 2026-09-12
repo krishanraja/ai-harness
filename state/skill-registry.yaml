@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-08-29
+last_reconciled: 2026-09-12
 status: governed-production-set
 
 candidate_reconciliation:
@@ -27,64 +27,55 @@ deployed_release:
   status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
 
 latest_approved_release:
-  release_id: v2026.09.08.2
-  tag: harness-v2026.09.08.2
-  source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
-  # The skills tree is byte-identical to a27170f, which is where it was approved.
-  # The tag sits on a later commit only because tooling, documentation and the
-  # canary instrument landed in between; no skill moved. Both hash to
-  # 9D3F2E69..., which is the field below and is what an installer compares.
-  #
-  # Published 2026-09-08T15:45:40Z, 60 assets, by release.yml on the
-  # workflow_dispatch path. That path exists because a tag push needs a
-  # credential a cloud session does not have, so this release was approved and
-  # unpublishable for about an hour. The workflow creates its own tag now.
-  published: true
-  published_at: 2026-09-08T15:45:40Z
-  assets: 60
-  # Reported by SURFACE on 2026-09-08 while verifying the download, which is the
-  # only way this value becomes evidence rather than an assertion copied off a
-  # release page. 60 assets downloaded, 59 checksums verified, zero mismatches.
-  manifest_sha256: B6780D886B5B1A0688A1D7DDA29B25ED6F50B718156AEF2006632BA940F1952E
-  manifest_sha256_source: codex-surface-07a67cda9f99 first install, 2026-09-08
-  immutable: true
-  skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+  release_id: v2026.09.12.4
+  tag: harness-v2026.09.12.4
+  source_commit: 235b0df979fb84253f00f22aa128fd4f7cde20bb
+  published: false
+  immutable: false
+  skills_tree_aggregate_sha256: CECE1A2A62168D3A88138A9EC24F46A3A83BC30DA950CB1DD2EC348BB4218C6A
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  approved_at: 2026-09-08
+  changed_skills:
+    - build-apps-with-krish
+    - content-corpus
+    - ctrl-intake
+    - design-intelligence-search
+    - krish-design
+    - krish-voice
+    - mindmake-os
+    - mindmake
+    - video-engine
+  approved_at: 2026-09-12
   approved_by: Krish Raja
   approval_basis: >-
-    Standing instruction of 2026-09-08 to complete the outstanding work, applied
-    to a change he had already ruled on. Recorded as the basis rather than left
-    implied, because an approval line that cannot say what it rests on is not a
-    record.
+    Krish explicitly approved closing all audited gaps on 2026-09-12 and then
+    confirmed continuation of the supervised credential and rollout work. The
+    approval covers this corrective release; publication and deployment remain
+    separately evidenced actions.
   approval_note: >-
-    One skill changes and it restores a behaviour the 2026-09-08 ruling always
-    intended. video-engine set allow_implicit_invocation: false, which does not
-    narrow which message starts the engine, it stops any message starting it,
-    and on Codex it also removes the skill from the discoverable catalog. SURFACE
-    proved it: the exact phrase started nothing, twice, while both negative
-    canaries passed for the wrong reason. Narrowness stays in the description,
-    which names the exact match and every excluded form. Everything else in this
-    release is tooling, documentation and recorded evidence.
+    Live v2026.09.12.3 canaries found two Claude routing failures, five Codex
+    routing or reachability failures, and a post-run recorder exception. This
+    candidate adds Claude's native manual-invocation control to the bounded design
+    search, sharpens observed collision routes, fixes the recorder field, adds a
+    regression assertion, and retains the failed reports as learning evidence.
   supersedes_reason: >-
-    v2026.09.08.1 is byte-verified on four surfaces and carries a launcher that
-    cannot launch on Codex. It stays the rollback target and must not be the
-    install target.
+    v2026.09.12.3 is byte-verified locally but its newly authenticated live
+    canaries exposed routing regressions and a run-recording defect. It remains
+    immutable and is the immediate rollback target, not the desired install.
 
 
 superseded_approved_release:
-  release_id: v2026.09.08.1
-  tag: harness-v2026.09.08.1
-  source_commit: cb738af10744d91f20d47c37fd84b0cd6bb837bf
+  release_id: v2026.09.12.3
+  tag: harness-v2026.09.12.3
+  source_commit: efcb84706276216458651f594fb928422d24cd26
   immutable: true
-  manifest_sha256: 66188213989BABF75CBC37AD106E8308BA7BED1C32545D9911F0C26BBCE6F200
-  checksum_sha256: 145717E97E67D4139C0DA284198F130FCC475482D7EA6129B838180C414425BA
-  skills_tree_aggregate_sha256: F7C08490BFC2F5A25C6669C614E0618180A1D37B6983450E7CCE5DC45A2B4441
-  approved_at: 2026-09-08
+  published_at: 2026-09-12T19:08:56Z
+  manifest_sha256: 0032FE759639389090D516CF7503A580B7CB3FCD0504BE1C278983C7441F9A39
+  skills_tree_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+  approved_at: 2026-09-12
   note: >-
-    Installed and byte-verified on all four client surfaces, then found to carry
-    a video-engine launcher that cannot launch on Codex. Retained as the rollback
-    target. Its aggregate is the attested vector in scripts/check-aggregate.mjs.
+    Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER.
+    Retained as the rollback target after authenticated canaries exposed the
+    routing and recorder failures addressed by v2026.09.12.4.
 
 
 surface_deployments:
