@@ -305,6 +305,14 @@ temporary_cloud_extraction:
   - {name: krish-outbound, reason: Personalized outbound strategy and voice extracted into the existing content and voice owners; retain only until candidate evaluation and approved retirement.}
 
 evaluation_evidence:
+  routing_description_comparison_2026_09_12:
+    record: state/routing-description-eval-2026-09-12.md
+    skills: [build-apps-with-krish, ctrl-intake, krish-design, krish-voice]
+    result: no-classification-regression-in-one-blind-baseline-candidate-comparison
+  provider_review_2026_09_12:
+    record: state/provider-review-2026-09-12.md
+    skills: [apify, n8n-operator, instantly-operator, design-intelligence-search]
+    result: current-primary-sources-checked-and-bounded-tests-passed
   n8n-operator:
     full_suite: {trigger: 12/13, behavior: 15/16, hard_failures: 0, note: Fresh-context stochastic run followed by explicit contract corrections.}
     closing_regression: {trigger: 1/1, behavior: 1/1, hard_failures: 0, result: pass}

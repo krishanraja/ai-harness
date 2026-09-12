@@ -82,7 +82,21 @@ surfaces:
 # needs Krish's explicit approval for that named target, and some of those 61
 # may be deliberate. It is recorded so the audit can name it.
 unmanaged_directories:
-  - path: C:\Users\krish\.agents\skills
+  - id: agents-skills-inert-20260908
+    path: C:\Users\krish\.agents\skills
+    surface: windows-primary
+    observed: 2026-09-08
+    entries: 63
+    detail: Initially inferred inert because no configured client path named it. Fresh Codex startup later disproved this inference.
+    canonical: 0
+    forbidden_present: [strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit, design-system-starter, N8N, fleet-ops]
+    status: superseded
+    source: a27170f03ec683b8c3e4abef0adf6f6cba7e37e0
+    valid_until: 2026-09-12
+    superseded_by: agents-skills-empty-20260912
+
+  - id: agents-skills-empty-20260912
+    path: C:\Users\krish\.agents\skills
     surface: windows-primary
     observed: 2026-09-08
     entries: 63
@@ -96,23 +110,33 @@ unmanaged_directories:
     # remains empty so no consumer mistakes absence for a missing mount.
     status: empty-auto-discovery-root
     ruled: 2026-09-12
+    source: state/gap-closure-2026-09-12.md
+    approval: state/approvals/2026-09-12-harness-gap-closure.md
+    supersedes: agents-skills-inert-20260908
 
-  - path: C:\Users\krish\.agents\catalog\skills-20260912
+  - id: agents-catalog-20260912
+    path: C:\Users\krish\.agents\catalog\skills-20260912
     surface: windows-primary
     observed: 2026-09-12
     entries: 60
     skill_manifests: 59
     detail: Preserved third-party library moved intact from the auto-discovered shared root.
-    status: inactive-catalog-pending-demand-review
+    status: archived-inactive-review-only-on-evidenced-need
+    owner: harness-maintainer
     ruled: 2026-09-12
+    source: state/gap-closure-2026-09-12.md
+    approval: state/approvals/2026-09-12-harness-gap-closure.md
 
-  - path: C:\Users\krish\.agents\quarantine\legacy-forbidden-20260912
+  - id: agents-quarantine-legacy-forbidden-20260912
+    path: C:\Users\krish\.agents\quarantine\legacy-forbidden-20260912
     surface: windows-primary
     observed: 2026-09-12
     entries: 2
     detail: Malformed legacy N8N and fleet-ops skills. The exposed value in the N8N copy was replaced by a symbolic reference before quarantine.
     status: quarantined-not-discoverable
     ruled: 2026-09-12
+    source: state/gap-closure-2026-09-12.md
+    approval: state/approvals/2026-09-12-harness-gap-closure.md
 
   # These two are different in kind: loose FILES sitting inside release-managed roots,
   # beside the skill directories. The installer walks directories, so it never sees

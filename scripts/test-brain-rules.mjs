@@ -162,6 +162,25 @@ t('an entry with no source fails', () => {
   matches(problems, /has no source\.kind/, 'an entry without provenance must fail')
 })
 
+t('an incomplete superseded-text history entry fails', () => {
+  const root = fixture()
+  const ledger = ledgerFor(root).replace(
+    '    status: live',
+    '    history:\n      - text_sha: "oldhash"\n    status: live')
+  const { problems } = check(ledger, root)
+  matches(problems, /incomplete history entry/, 'history must preserve its closing date and source')
+})
+
+t('a history entry cannot repeat the current text hash', () => {
+  const root = fixture()
+  const current = extract(root).contractRules[0].text_sha
+  const ledger = ledgerFor(root).replace(
+    '    status: live',
+    `    history:\n      - text_sha: "${current}"\n        valid_until: "2026-09-12"\n        source: {kind: founding, ref: "abc123abc123"}\n    status: live`)
+  const { problems } = check(ledger, root)
+  matches(problems, /repeats its current text_sha/, 'history must identify an earlier byte revision')
+})
+
 /**
  * The regression that made the first run of this checker report five false
  * failures. A 12 hex sha can be all digits; the YAML reader turns a bare

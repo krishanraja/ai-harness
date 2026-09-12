@@ -10,6 +10,9 @@
 #   ruling    a Ruling (Krish, DATE) line in the commit that introduced it.
 #   proposal  a docs/proposals entry a human accepted.
 #   import    carried in from a source outside this repository.
+# A revised entry keeps its superseded text hash and source under history with a
+# validity end date. The current id remains stable while its earlier bytes remain
+# replayable.
 #
 # Ids are slugs of the rule's own opening words, never ordinals: inserting a
 # rule must not rename the ones below it, or provenance cannot survive the edit.
@@ -1187,7 +1190,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "724426721051"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-check.workflow
     file: skills/ctrl-check/SKILL.md
@@ -1295,7 +1304,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "bacea9141848"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-compile.chain-boundaries
     file: skills/ctrl-compile/SKILL.md
@@ -1304,7 +1319,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "6438bce7274d"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-intake.intake-contract
     file: skills/ctrl-intake/SKILL.md
@@ -1413,7 +1434,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "f467f3f33253"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: contested
     contested_by: decision-ledger-store
   - id: decision-ledger.recall-and-apply-a
@@ -1450,7 +1477,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "95aa1e8ed744"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: design-intelligence-search.role-and-route
     file: skills/design-intelligence-search/SKILL.md
@@ -1522,7 +1555,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "53c9b94020c0"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: evidence-research.research-workflow
     file: skills/evidence-research/SKILL.md
@@ -1549,7 +1588,13 @@ skill_sections:
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "approval:2026-09-12:harness-gap-closure"
+      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+    history:
+      - text_sha: "432a76ec95f6"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: evidence-research.handoff-and-verification
     file: skills/evidence-research/SKILL.md
