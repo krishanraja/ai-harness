@@ -42,6 +42,11 @@ on:
         required: false
         type: boolean
         default: false
+      event_import_only:
+        description: "Import the shared event inbox and run no other steward mutation"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -122,7 +127,7 @@ jobs:
 
   # The canon is not exempt from the treatment it gives everyone else.
   audit:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.event_import_only
     needs: surfaces
     runs-on: ubuntu-latest
     steps:
@@ -144,7 +149,7 @@ jobs:
 
   # The only job here that writes anything, and only ever as a pull request.
   reconcile:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && !inputs.event_import_only
     needs: surfaces
     runs-on: ubuntu-latest
     steps:
@@ -156,6 +161,7 @@ jobs:
       # Fail loud rather than quietly doing nothing. A night the reconciler did
       # not run must never look like a night with no drift.
       - name: The fleet credential must exist
+        if: ${{ !inputs.event_import_only }}
         env:
           HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
         run: |
@@ -201,6 +207,7 @@ jobs:
           node-version: "22"
 
       - name: The fleet credential must exist
+        if: ${{ !inputs.event_import_only }}
         env:
           HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
         run: |
@@ -212,6 +219,7 @@ jobs:
       # The audit and the reconciler write findings the observer folds into the
       # same ledger, so the weekly proposer reads one stream and not four.
       - name: Collect this run's findings
+        if: ${{ !inputs.event_import_only }}
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
         run: |
@@ -234,6 +242,7 @@ jobs:
           node scripts/import-harness-events.mjs
 
       - name: Observe
+        if: ${{ !inputs.event_import_only }}
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
         run: node scripts/observe.mjs
@@ -259,7 +268,7 @@ jobs:
 
   # Sundays: what the evidence has earned, and nothing more.
   propose:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
+    if: (github.event_name == 'workflow_dispatch' && !inputs.event_import_only) || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
     needs: observe
     runs-on: ubuntu-latest
     permissions:
