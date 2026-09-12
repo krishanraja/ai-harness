@@ -1,4 +1,6 @@
-# Routing-description comparison, 2026-09-12
+# Rejected routing-description comparison, 2026-09-12
+
+Status: rejected before release. The shorter descriptions were not promoted.
 
 ## Method
 
@@ -20,9 +22,11 @@ live-client trigger canary and not evidence about behavior after routing.
 | krish-design | 17/21 | 17/21 | 0 |
 | krish-voice | 21/21 | 21/21 | 0 |
 
-The candidate did not reduce classification accuracy in this comparison. The three
-persistent build-apps and four persistent krish-design misses remain visible baseline
-limitations; this change does not claim to fix them.
+The candidate did not reduce classification accuracy in this comparison, but this
+was not a live-client canary. It therefore could not prove that removed explicit
+trigger phrases were non-load-bearing. The four descriptions were restored to their
+previously released text before merge. The three persistent build-apps and four
+persistent krish-design misses remain visible baseline limitations.
 
 ## Scratch evidence
 

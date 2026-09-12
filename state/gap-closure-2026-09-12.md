@@ -37,10 +37,13 @@ have appeared in session history and preserved backups.
 
 - Harness validation: passed, 29 skills, 3 adapters, no high-confidence secrets.
 - Fresh Codex startup: passed without malformed-skill or expired-OAuth errors.
-- Description audit: canonical total reduced from 21,615 to 19,634 characters; all
-  four high-risk description findings are closed. The client still reports global
-  truncation while useful provider plugins are enabled, so this remains a platform
-  budget residual rather than a reason to remove working capabilities.
+- Description audit: a proposed reduction from 21,615 to 19,634 characters was
+  rejected before release because its model-only comparison was not a live-client
+  canary and could not prove removed trigger phrases were non-load-bearing. The four
+  descriptions remain at their previously released text. Removing the accidental
+  third-party auto-discovery catalogue addressed the observed startup collisions;
+  global truncation while useful provider plugins are enabled remains an honest
+  platform-budget residual.
 - Hosted harness observer: connected in Claude Code and previously canaried in fresh
   Codex, Claude, and Cursor sessions.
 

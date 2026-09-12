@@ -1,6 +1,6 @@
 ---
 name: ctrl-intake
-description: "Elicit a named person's reusable taste or quality standard from their grading of real artifacts. Use for triadic or repertory-grid intake, approved-versus-rejected comparison, transcript-to-candidate extraction, voice-standard intake from their own corpus, or repairing unsupported inferred profiles. Refuse shortcuts that infer durable rules without grading, misuse private sources, contaminate holdouts, or supply desired constructs. Do not use for one-task briefing, compilation, packaging, review, or ledger updates. Last reviewed 2026-08-05."
+description: "Elicits a named person's reusable quality or taste standard from their grading of real work. Use for durable standards onboarding, triadic elicitation, repertory-grid sessions, self-serve sorts, approved/rejected artifact comparison, transcript-to-candidate extraction, building a voice or writing-style standard from a corpus of someone's own writing (including a client's), or repairing a personal profile that inferred rules the subject never established. Also trigger when someone asks to skip grading, infer personality or permanent rules from one source, reuse private material without scope, contaminate a holdout, or supply the desired construct; this skill enforces the refusal. Do not use for a one-task goals-and-constraints interview (`take-the-brief`), compiling an existing intake (`ctrl-compile`), packaging (`ctrl-build`), reviewing (`ctrl-check`), or ledger-based standard changes (`ctrl-capture`). Last reviewed 2026-08-05."
 ---
 
 # CTRL Intake

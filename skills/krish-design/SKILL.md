@@ -1,6 +1,6 @@
 ---
 name: krish-design
-description: "Krish's design doctrine for visual artifacts and interfaces. Use before creating or reshaping pages, decks, PDFs, forms, React UI, landing pages, layouts, interaction flows, reskins, or visual QA. Do not use for prose voice, build mechanics, or multi-phase app orchestration; use krish-voice, krish-build, or build-apps-with-krish. Apply krish-principles first. Last reviewed 2026-08-29."
+description: "Krish's design doctrine and house systems. MANDATORY before building or reshaping ANY visual artifact for Krish: HTML pages and artefacts, one-pagers, PDFs, decks, invites, SVG, React UI, forms, intake flows, reskins, landing pages, or visual QA passes. Trigger on: 'design', 'build a page', 'one-pager', 'dossier', 'brief I can use live', 'lay this out', 'make this look', 'reskin', 'the UX of', 'interaction', 'form', 'artifact', 'leave-behind', or any request that produces something a human will look at or touch. Covers interaction-as-sequencing doctrine, material product-surface approval, the Mindmake / CTRL / Signal & Noise / machine-first systems, document templates, anti-defaults, end-of-build visual QA, and the Canva handoff rule. Inherits krish-principles (read it first). Does NOT cover on-page copy voice (krish-voice), build mechanics (krish-build), or multi-phase app orchestration (build-apps-with-krish). Last reviewed 2026-08-29 against the recorded Mindmake North Star and design contract."
 ---
 
 # Krish Design: Taste, Systems, and the Interaction Weapon

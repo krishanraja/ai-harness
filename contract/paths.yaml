@@ -98,11 +98,11 @@ unmanaged_directories:
   - id: agents-skills-empty-20260912
     path: C:\Users\krish\.agents\skills
     surface: windows-primary
-    observed: 2026-09-08
-    entries: 63
-    detail: 62 directories plus a loose ml-engineer.md. Recorded as 61 until the machine counted it.
+    observed: 2026-09-12
+    entries: 0
+    detail: Empty after the preserved catalogue and malformed quarantine copies were moved out of auto-discovery.
     canonical: 0
-    forbidden_present: [strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit, design-system-starter, N8N, fleet-ops]
+    forbidden_present: []
     # Fresh Codex startup on 2026-09-12 disproved the 2026-09-08 inference that
     # this directory was inert. Codex discovers this conventional shared root
     # without a configured path, and two malformed skills raised startup errors.
@@ -132,7 +132,7 @@ unmanaged_directories:
     surface: windows-primary
     observed: 2026-09-12
     entries: 2
-    detail: Malformed legacy N8N and fleet-ops skills. The exposed value in the N8N copy was replaced by a symbolic reference before quarantine.
+    detail: Malformed legacy N8N and fleet-ops skills. A plaintext value was redacted from the inactive N8N copy before quarantine. This redaction is containment only, not credential rotation or incident closure; see state/credential-exposure-2026-09-12.md.
     status: quarantined-not-discoverable
     ruled: 2026-09-12
     source: state/gap-closure-2026-09-12.md
