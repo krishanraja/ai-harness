@@ -15,10 +15,11 @@
  *                                    Center's api/feedback.ts and the Vera
  *                                    clusterer. Two similar things happening is
  *                                    a coincidence.
- *   two, one a ruling or a revert    a direct correction is the stated reason
+ *   two, one a direct correction     a direct correction is the stated reason
  *                                    the quality standard's Gate 10 allows
  *                                    alongside repeated signals.
- *   one, if it is a ruling           Krish saying a thing once is not a weak
+ *   one ruling or explicit correction
+ *                                    Krish saying a thing once is not a weak
  *                                    signal that needs corroborating. Waiting
  *                                    for him to repeat himself is how the old
  *                                    corrections queue jammed.
@@ -81,13 +82,14 @@ for (const r of rows) {
 }
 
 // ------------------------------------------------------------- the thresholds
-const DIRECT = new Set(['ruling', 'revert'])
+const DIRECT = new Set(['ruling', 'revert', 'correction'])
 function eligibility(c) {
   const n = c.rows.length
   const direct = c.rows.filter((r) => DIRECT.has(r.class)).length
   if (n >= 3) return { eligible: true, reason: `${n} occurrences` }
   if (n === 2 && direct >= 1) return { eligible: true, reason: 'two occurrences, one of them a direct correction' }
   if (n === 1 && c.rows[0].class === 'ruling') return { eligible: true, reason: 'a direct ruling, which does not need repeating' }
+  if (n === 1 && c.rows[0].class === 'correction') return { eligible: true, reason: 'an explicit user correction, which does not need repeating' }
   return { eligible: false, reason: n === 1 ? 'a single observation, not yet a pattern' : `${n} occurrences, below the bar of three` }
 }
 

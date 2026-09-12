@@ -50,6 +50,8 @@ for (const repo of fleet.repos) {
   const state = inspect(block)
   if (!state.present) F(`canon block for ${repo.name} does not parse back`)
   else if (!state.intact) F(`canon block for ${repo.name} does not match its own stamp`)
+  const windowsState = inspect(block.replace(/\n/g, '\r\n'))
+  if (!windowsState.present) F(`canon block for ${repo.name} cannot classify CRLF transport as byte drift`)
 }
 O(`canon block renders and self-verifies for ${fleet.repos.length} repos, longest under ${MAX_BLOCK_LINES} lines`)
 

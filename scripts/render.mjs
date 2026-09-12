@@ -134,7 +134,7 @@ export function splice(existing, block) {
 
 /** Read the block out of a file and say whether its body still matches its own stamp. */
 export function inspect(text) {
-  const m = text.match(new RegExp(`<!--\\s*${START}\\s+release=(\\S+)\\s+sha=(\\S+)\\s+rendered=(\\S+)\\s*-->\\n([\\s\\S]*?)\\n${END.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  const m = text.match(new RegExp(`<!--\\s*${START}\\s+release=(\\S+)\\s+sha=(\\S+)\\s+rendered=(\\S+)\\s*-->\\r?\\n([\\s\\S]*?)\\r?\\n${END.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
   if (!m) return { present: false }
   const [, rel, sha, rendered, body] = m
   return { present: true, release: rel, sha, rendered, body, intact: sha256(body).slice(0, 12) === sha }

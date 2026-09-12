@@ -179,6 +179,32 @@ Do not flatten a healthy multi-file skill merely because one provider uses diffe
 
 Never learn from a single unconfirmed inference, copy live operational facts into durable doctrine, optimize only for positive triggers, or let a client write directly to production skill directories.
 
+### Shared event inbox
+
+Work surfaces do not run local collectors, scheduled scripts or n8n workflows.
+When a surface can make an authenticated HTTPS request, it submits one strict,
+redacted versioned envelope to Control Center's harness event endpoint. If a
+client cannot make that request, the capability remains visibly unavailable on
+that surface rather than being simulated through an unverified local process.
+
+Supabase owns this raw append-only inbox because it is operational event state.
+GitHub remains the only authority for harness doctrine. The nightly GitHub
+observer reads the inbox through a separate read-only bearer, appends unseen
+events to `state/observations/`, and advances a monotonic cursor. It never marks
+an event applied and never writes a skill, contract, registry or rule.
+
+The envelope contains only a stable event id, schema version, occurrence time,
+surface family, event kind, short redacted summary, opaque evidence reference,
+optional related skill or rule, outcome, severity and confidence. Unknown
+fields, raw transcripts, oversized text, control characters and likely secret
+shapes are rejected before persistence. Transport retries reuse the same event
+id and return the original receipt. The exact version 1 contract is in
+`architecture/HARNESS_EVENT_ENVELOPE.md`.
+
+`n8n` is not part of this path. It may submit an event when an n8n-backed task
+produces evidence, exactly like any other surface, but it does not ingest,
+classify, schedule, propose or promote harness learning.
+
 ## Freshness loop
 
 - Each canonical skill has an owner, last-reviewed date, and freshness SLA in `state/skill-registry.yaml`.
