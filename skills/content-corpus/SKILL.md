@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Channel and source-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use for a strategic overlay or channel-native adaptation, including a warm lead email grounded in language from a prior meeting, and when deciding where an asset belongs, who the surface serves, which native form fits, or how one source must differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job; those skills do not replace this one when channel or source context is required. Exclude generic voice editing, generic marketing strategy, and claims that a channel is active; verify status live before producing or publishing for a named surface."
+description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use to decide which prior source or meeting language belongs in a named channel's argument, including the strategic overlay for a warm lead email, before final wording. Also use to choose the right surface, audience, native form, or cross-channel adaptation. It owns channel context only: pair with krish-content-marketer for conversion strategy and krish-voice for prose. Exclude generic voice editing, generic marketing strategy, and claims that a channel is active; verify status live before producing or publishing for a named surface."
 ---
 
 # Content corpus

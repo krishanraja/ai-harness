@@ -112,6 +112,14 @@ t('a citation is written and read back', () => {
   assert(wrote.length === 1, `expected 1 row written, got ${wrote.length}`)
   assert(readLedger(root).length === 1, 'the row must read back')
   assert(readLedger(root)[0].rule_id === 'authority.never-publish-without', 'the rule id must survive the round trip')
+  assert(readLedger(root)[0].evidence_class === 'independent-review', 'a judge citation must be labelled independent review evidence')
+})
+
+t('a canary citation is explicitly synthetic', () => {
+  const root = fixture()
+  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-a', at: '2026-09-12', verdict: 'fired' }], { root })
+  assert(wrote.length === 1, `expected 1 row written, got ${wrote.length}`)
+  assert(wrote[0].evidence_class === 'synthetic-evaluation', 'a canary citation must not look like real-world usage')
 })
 
 t('the same evidence twice adds nothing', () => {

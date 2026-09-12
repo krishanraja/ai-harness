@@ -20,7 +20,7 @@
  *   judge     every finding must cite a clause id from brain/rules.yaml, and
  *             an ungrounded one is discarded. A kept finding is a rule the
  *             panel actually reached for.
- *   canary    a positive canary that fired on a live client is evidence the
+ *   canary    a positive synthetic canary that fired on a live client is evidence the
  *             skill was reachable, and every chapter of that skill is a rule
  *             the client could have applied.
  *
@@ -103,6 +103,7 @@ export function appendUsage(rows, { root = HARNESS, validIds = null } = {}) {
       rule_id,
       producer,
       ref,
+      evidence_class: producer === 'canary' ? 'synthetic-evaluation' : 'independent-review',
       ...(r.verdict ? { verdict: String(r.verdict) } : {}),
     })
   }
@@ -204,7 +205,7 @@ if (isMain) {
     process.exit(0)
   }
 
-  console.log(`${cited} of ${live} live rules have ever been cited by the judge or a passing canary.`)
+  console.log(`${cited} of ${live} live rules have ever been cited by an independent judge or retrieved in a passing synthetic canary.`)
   if (since) console.log(`${stale.length} were cited, but not since ${since}.`)
   if (args.includes('--dead')) {
     for (const id of never) console.log(`never   ${id}`)
