@@ -7,11 +7,11 @@ description: "Exact activation guard for Krishan Raja's Mindmake Video Engine. A
 
 Use this as a thin launcher. GitHub `krishanraja/mindmake-video-studio` `main` is the only authority for code, configuration, operational instructions, and durable learning.
 
-Semantic clients may retrieve this file while deciding whether a nearby phrase matches. That read is not a launch. Activation begins only when the exact-match check passes and the client accesses, fetches, or runs the authority repository or its engine surface. On a failed match, do not cross that boundary.
-
 ## Trigger contract
 
-Start a new Video Engine session only when both are true:
+This section governs activation, not semantic retrieval. A client may retrieve this guard while deciding whether a nearby phrase matches. That read is not a launch. Activation begins only when the check below passes and the client accesses, fetches, or runs the authority repository or its engine surface. On a failed match, do not cross that boundary.
+
+Activate a new Video Engine session only when both are true:
 
 1. The current message is the first user-authored message in a new chat.
 2. After removing leading and trailing whitespace only, its complete contents equal `Video engine`, case-insensitively.
