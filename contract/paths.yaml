@@ -87,10 +87,17 @@ unmanaged_directories:
     surface: windows-primary
     observed: 2026-09-08
     entries: 63
-    detail: Initially inferred inert because no configured client path named it. Fresh Codex startup later disproved this inference.
+    detail: 62 directories plus a loose ml-engineer.md. Recorded as 61 until the machine counted it.
     canonical: 0
     forbidden_present: [strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit, design-system-starter, N8N, fleet-ops]
+    # Ruled 2026-09-08, after LORIMER checked what actually reads it. Nothing does.
+    # No skills path points here in .claude/settings.json, .claude/settings.local.json,
+    # .claude.json, .codex/config.toml or .cursor/mcp.json, and no installed instruction
+    # file names it. A sweep of all three client trees hit only transcripts and caches.
+    # The nine forbidden skills are inert, not a live routing risk. It stays a
+    # third-party catalog. Nothing here is read from, installed to, or deleted.
     status: superseded
+    ruled: 2026-09-08
     source: a27170f03ec683b8c3e4abef0adf6f6cba7e37e0
     valid_until: 2026-09-12
     superseded_by: agents-skills-empty-20260912
