@@ -107,6 +107,7 @@ export function appendUsage(rows, { root = HARNESS, validIds = null } = {}) {
       evidence_class: producer === 'canary' ? 'synthetic-evaluation' : 'independent-review',
       scope: producer === 'canary' ? 'skill-retrieval-only' : 'review-citation',
       valid_for_ref: ref,
+      ...(r.asked_by ? { asked_by: String(r.asked_by) } : {}),
       ...(r.verdict ? { verdict: String(r.verdict) } : {}),
     })
   }

@@ -298,6 +298,7 @@ function verify(reportPath) {
 
   if (report.schema_version !== 1) problems.push(`schema_version must be 1, got ${report.schema_version}.`)
   if (!report.surface) problems.push('No surface id. A canary result with no surface cannot be evidence about anything.')
+  if (!String(report.asked_by || '').trim()) problems.push('No asked_by provenance. A harness evaluation without a named asker cannot enter the canon ledger.')
   if (!report.release) problems.push('No release id.')
   if (report.release && report.release !== RELEASE) notes.push(`Report is for ${report.release}; the approved release is ${RELEASE}.`)
 
@@ -312,6 +313,7 @@ function verify(reportPath) {
   const sawSkill = new Set()
   const seenIds = new Set()
   const outcomeFailures = []
+  const unmeasuredRoutes = []
   for (const r of results) {
     const c = byId.get(r.id)
     if (!c) { notes.push(`${r.id} is not on this release's sheet; recorded, not counted.`); continue }
@@ -330,7 +332,9 @@ function verify(reportPath) {
         .map((x) => x.trim())
         .filter(Boolean)
       const named = String(r.note || '').toLowerCase()
-      if (r.outcome !== 'wrong-skill' || !allowed.some((skill) => named.includes(skill.toLowerCase()))) {
+      if (r.outcome === 'unreachable' && manualOnly(c.skill)) {
+        unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The manual-only target was absent from the implicit catalog. Target containment is observed; the neighboring route is unmeasured.' })
+      } else if (r.outcome !== 'wrong-skill' || !allowed.some((skill) => named.includes(skill.toLowerCase()))) {
         outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${allowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
       }
     } else if (c.should_trigger !== true) {
@@ -394,7 +398,7 @@ function verify(reportPath) {
     notes.push(`${unreachable.length} canaries reported unreachable. That is a skill the client cannot see, not a trigger declining: check the adapter's allow_implicit_invocation and the installed catalog before reading anything else in this report.`)
   }
 
-  return { report, problems, failing, notes, vacuous, positivePassed: [...positivePassed], covered: [...sawSkill] }
+  return { report, problems, failing, notes, vacuous, unmeasuredRoutes, positivePassed: [...positivePassed], covered: [...sawSkill] }
 }
 
 // -------------------------------------------------------------------- run
@@ -427,6 +431,8 @@ if (args.includes('--sheet-json')) {
     console.error('')
     console.error('CANARY FAILURE on this surface:')
     for (const f of v.failing) console.error(`- ${f}`)
+  } else if (v.unmeasuredRoutes.length) {
+    console.log(`\nCanary report PARTIAL: ${v.unmeasuredRoutes.length} neighboring route(s) remain unmeasured after manual-only containment.`)
   } else {
     console.log(`\nCanary report accepted: ${v.covered.length} skills exercised on ${v.report.surface}, ${v.positivePassed.length} with a passing positive.`)
   }
@@ -443,9 +449,10 @@ if (args.includes('--sheet-json')) {
     // never mistake a recorded failure for recorded success.
     writeFileSync(dest, JSON.stringify({
       ...v.report,
-      verdict: v.failing.length ? 'failed' : 'passed',
+      verdict: v.failing.length ? 'failed' : (v.unmeasuredRoutes.length ? 'partial' : 'passed'),
       failures: v.failing,
       void_results: v.vacuous,
+      unmeasured_routes: v.unmeasuredRoutes,
     }, null, 2) + '\n')
     console.log(`Recorded ${dest}${v.failing.length ? ' as a FAILURE' : ''}`)
 
@@ -459,7 +466,7 @@ if (args.includes('--sheet-json')) {
     // citation would be exactly the vacuous evidence this file exists to refuse.
     const ref = `${v.report.release}-${v.report.surface}`
     const rows = v.positivePassed.flatMap((skill) =>
-      ruleIdsForSkill(skill).map((rule_id) => ({ rule_id, producer: 'canary', ref, verdict: 'fired' })))
+      ruleIdsForSkill(skill).map((rule_id) => ({ rule_id, producer: 'canary', ref, verdict: 'fired', asked_by: v.report.asked_by })))
     // The citation ledger follows --out-dir for the same reason the recorded
     // report does. The regression suite drives this exact path with a fixture
     // surface, and without this the fixture's citations land in the real

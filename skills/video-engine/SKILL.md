@@ -1,11 +1,13 @@
 ---
 name: video-engine
-description: "Launch Krishan Raja's Mindmake Video Engine only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not invoke this skill. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
+description: "Exact activation guard for Krishan Raja's Mindmake Video Engine. Activate only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not activate the engine. A client may retrieve this guard while resolving a nearby phrase; retrieval is not activation and must stop before accessing the authority repository. Never activate for ordinary video requests."
 ---
 
 # Video Engine launcher
 
 Use this as a thin launcher. GitHub `krishanraja/mindmake-video-studio` `main` is the only authority for code, configuration, operational instructions, and durable learning.
+
+Semantic clients may retrieve this file while deciding whether a nearby phrase matches. That read is not a launch. Activation begins only when the exact-match check passes and the client accesses, fetches, or runs the authority repository or its engine surface. On a failed match, do not cross that boundary.
 
 ## Trigger contract
 

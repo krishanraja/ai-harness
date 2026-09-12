@@ -671,6 +671,26 @@ function Resolve-ClaudeCli {
     return $null
 }
 
+function Get-ReleaseApprovalAsker {
+    param([Parameter(Mandatory = $true)][string]$ReleaseId)
+
+    $registryPath = Join-Path $RepositoryRoot 'state\skill-registry.yaml'
+    $inside = $false
+    $recordedRelease = $null
+    $approvedBy = $null
+    foreach ($line in [IO.File]::ReadAllLines($registryPath)) {
+        if ($line -match '^latest_approved_release:\s*$') { $inside = $true; continue }
+        if ($inside -and $line -match '^\S') { break }
+        if (-not $inside) { continue }
+        if ($line -match '^\s+release_id:\s*(\S+)\s*$') { $recordedRelease = $Matches[1] }
+        if ($line -match '^\s+approved_by:\s*(.+?)\s*$') { $approvedBy = $Matches[1].Trim() }
+    }
+    if ($recordedRelease -ne $ReleaseId -or -not $approvedBy) {
+        throw "Release $ReleaseId has no matching approved_by provenance in state/skill-registry.yaml."
+    }
+    return "${approvedBy}: approved rollout and live canary verification for $ReleaseId in state/skill-registry.yaml."
+}
+
 function Get-CodexCatalogText {
     param([Parameter(Mandatory = $true)][string]$WorkingDirectory)
     $codex = Resolve-CodexCli
@@ -730,7 +750,24 @@ function Invoke-CodexCanary {
     $target = [string]$Case.skill
     $targetInCatalog = $CatalogText -match ('(?m)-\s+' + [regex]::Escape($target) + ':')
 
+    # Video Engine has a guard-selection boundary and a later activation
+    # boundary. A semantic client may read the guard for a nearby phrase. That
+    # is not a launch unless it then crosses into the named authority repo.
+    $videoEngineActivated = $false
+    if ($target -eq 'video-engine') {
+        foreach ($line in @($run.Stdout -split "`r?`n")) {
+            if (-not $line.Trim().StartsWith('{')) { continue }
+            try { $event = $line | ConvertFrom-Json } catch { continue }
+            if ($event.type -in @('item.started', 'item.completed') -and $event.item.type -eq 'command_execution') {
+                if ([string]$event.item.command -match '(?i)mindmake-video-studio') { $videoEngineActivated = $true }
+            }
+        }
+    }
+
     if ($target -in $reads.Loaded) {
+        if ($target -eq 'video-engine' -and $Case.should_trigger -ne $true -and -not $videoEngineActivated) {
+            return [pscustomobject]@{ id = $Case.id; outcome = 'not-fired'; note = 'Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated.' }
+        }
         return [pscustomobject]@{ id = $Case.id; outcome = 'fired'; note = "Codex JSONL recorded a successful live read of $target/SKILL.md." }
     }
     if (-not $targetInCatalog) {
@@ -803,7 +840,8 @@ function Invoke-SurfaceCanaries {
         [Parameter(Mandatory = $true)]$Surface,
         [Parameter(Mandatory = $true)][string]$ReleaseId,
         [Parameter(Mandatory = $true)][string]$RunDirectory,
-        [Parameter(Mandatory = $true)]$Manifest
+        [Parameter(Mandatory = $true)]$Manifest,
+        [Parameter(Mandatory = $true)][string]$Asker
     )
 
     if ($Surface.Client -eq 'cursor') {
@@ -839,6 +877,7 @@ function Invoke-SurfaceCanaries {
         client = $Surface.Client
         ran_at = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
         ran_by = 'Invoke-HarnessSync.ps1'
+        asked_by = $Asker
         evidence = if ($Surface.Client -eq 'codex') { 'Codex CLI JSONL, successful reads from the live skills root, and a live catalog diagnostic.' } else { 'Claude Code stream-json Skill tool calls.' }
         results = $results.ToArray()
     }
@@ -858,10 +897,11 @@ function Invoke-SurfaceCanaries {
     $record = Invoke-NativeCapture -FilePath 'node' -Arguments $recordArguments
     if ($record.ExitCode -notin @(0, 1)) { throw "Canary report was refused for $($Surface.Id): $($record.Text)" }
     $recordedPath = Join-Path $recordedDirectory "$ReleaseId-$($Surface.Id).json"
+    $recordedReport = Get-Content -LiteralPath $recordedPath -Raw | ConvertFrom-Json
     return [pscustomobject]@{
         surface = $Surface.Id
         client = $Surface.Client
-        status = if ($record.ExitCode -eq 0) { 'passed' } else { 'failed' }
+        status = [string]$recordedReport.verdict
         report = $recordedPath
         results = $results.ToArray()
     }
@@ -950,7 +990,9 @@ $runRecord = [ordered]@{
 try {
     $latest = Get-LatestHarnessRelease
     $releaseId = ([string]$latest.tag_name).Substring('harness-'.Length)
+    $runAsker = Get-ReleaseApprovalAsker -ReleaseId $releaseId
     $runRecord.release = $releaseId
+    $runRecord.asked_by = $runAsker
     $previous = @{}
     $allCurrent = $true
     foreach ($surface in @($hostDefinition.Surfaces)) {
@@ -1088,7 +1130,7 @@ try {
             continue
         }
         if (-not $SkipCanaries) {
-            $canaryResult = Invoke-SurfaceCanaries -Surface $surface -ReleaseId $releaseId -RunDirectory $runDirectory -Manifest $manifest
+            $canaryResult = Invoke-SurfaceCanaries -Surface $surface -ReleaseId $releaseId -RunDirectory $runDirectory -Manifest $manifest -Asker $runAsker
             $surfaceRecord.canaries = $canaryResult
         }
         $surfaceResults.Add([pscustomobject]$surfaceRecord)
@@ -1112,7 +1154,7 @@ try {
     $unmeasured = @($surfaceResults | Where-Object {
         if (-not $_.PSObject.Properties['canaries']) { return $false }
         $canaryStatus = $_.canaries.PSObject.Properties['status']
-        return $canaryStatus -and $_.canaries.status -eq 'manual-required'
+        return $canaryStatus -and $_.canaries.status -in @('manual-required', 'partial')
     })
     if ($blocked.Count -gt 0 -or $failedCanaries.Count -gt 0) {
         $runRecord.status = 'blocked'

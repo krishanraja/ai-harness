@@ -117,12 +117,13 @@ t('a citation is written and read back', () => {
   assert(readLedger(root)[0].valid_for_ref === 'pr-26', 'a citation must scope validity to its immutable evidence ref')
 })
 
-t('a canary citation is explicitly synthetic', () => {
+t('a canary citation is explicitly synthetic and preserves its asker', () => {
   const root = fixture()
-  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-a', at: '2026-09-12', verdict: 'fired' }], { root })
+  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-a', at: '2026-09-12', verdict: 'fired', asked_by: 'Named release owner.' }], { root })
   assert(wrote.length === 1, `expected 1 row written, got ${wrote.length}`)
   assert(wrote[0].evidence_class === 'synthetic-evaluation', 'a canary citation must not look like real-world usage')
   assert(wrote[0].scope === 'skill-retrieval-only', 'a canary citation must not claim outcome or efficacy evidence')
+  assert(wrote[0].asked_by === 'Named release owner.', 'a canary citation must preserve its named asker')
 })
 
 t('the same evidence twice adds nothing', () => {
