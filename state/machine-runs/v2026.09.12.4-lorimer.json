@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "run_id": "20260912T210300Z",
+  "asked_by": "Krish Raja: approved the v2026.09.12.4 harness rollout and live canary verification in the interactive session on 2026-09-12.",
   "host": "LORIMER",
   "host_evidence": "COMPUTERNAME is LORIMER and all three declared harness roots exist.",
   "mode": "sync",

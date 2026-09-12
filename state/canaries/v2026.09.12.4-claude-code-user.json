@@ -5,6 +5,7 @@
   "client": "claude",
   "ran_at": "2026-09-12",
   "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved the v2026.09.12.4 harness rollout and live canary verification in the interactive session on 2026-09-12.",
   "evidence": "Claude Code stream-json Skill tool calls.",
   "results": [
     {
