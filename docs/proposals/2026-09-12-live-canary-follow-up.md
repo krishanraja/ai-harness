@@ -1,8 +1,8 @@
 # Live canary follow-up proposal, 2026-09-12
 
-Status: accepted for implementation under Krish's instruction to close the audited gaps and the approved live rollout.
+Status: proposed in public PR 45 and awaiting Krish's action-time approval before merge or publication.
 
-Asked by: Krish Raja, interactive session on 2026-09-12: "close the gaps", "i approve all of this", "yes", and approval to proceed with the rollout.
+Prompted by: Krish Raja's instruction to close the audited gaps and the failed approved rollout. That earlier broad instruction authorises this proposal and its verification, but is not treated as action-time approval to merge this later semantic change.
 
 ## Evidence
 
