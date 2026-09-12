@@ -91,6 +91,7 @@ export function appendUsage(rows, { root = HARNESS, validIds = null } = {}) {
     const ref = String(r.ref || '').trim()
     if (!rule_id || !ref) continue
     if (!PRODUCERS.has(producer)) continue
+    if (producer === 'canary' && !String(r.asked_by || '').trim()) continue
     // A citation of a rule that does not exist is not evidence about anything,
     // and would make the dead-zone count answer for a canon that is not this one.
     if (validIds && !validIds.has(rule_id)) continue

@@ -126,6 +126,13 @@ t('a canary citation is explicitly synthetic and preserves its asker', () => {
   assert(wrote[0].asked_by === 'Named release owner.', 'a canary citation must preserve its named asker')
 })
 
+t('a canary citation without a named asker is refused', () => {
+  const root = fixture()
+  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-unasked', at: '2026-09-12', verdict: 'fired' }], { root })
+  assert(wrote.length === 0, `an unasked canary row must be refused, wrote ${wrote.length}`)
+  assert(readLedger(root).length === 0, 'an unasked canary row must not reach the ledger')
+})
+
 t('the same evidence twice adds nothing', () => {
   const root = fixture()
   const row = { rule_id: 'authority.never-publish-without', producer: 'judge', ref: 'pr-26', at: '2026-09-10' }
@@ -178,7 +185,7 @@ t('a cited rule leaves the dead list, and an old citation is stale rather than d
   const root = fixture()
   appendUsage([
     { rule_id: 'authority.never-publish-without', producer: 'judge', ref: 'pr-26', at: '2026-09-10' },
-    { rule_id: 'verification.use-deterministic-checks', producer: 'canary', ref: 'v1-surface', at: '2026-01-05' },
+    { rule_id: 'verification.use-deterministic-checks', producer: 'canary', ref: 'v1-surface', at: '2026-01-05', asked_by: 'Named release owner.' },
   ], { root })
   const { never, stale } = deadZones({ root, since: '2026-06-01' })
   assert(never.length === 3, `expected 3 still never cited, got ${never.length}: ${never.join(', ')}`)

@@ -47,8 +47,9 @@ stores:
       Each event is historical evidence scoped to its immutable ref, not a claim
       about the current release and not proof of real-world use or efficacy.
       Canary rows carry evidence_class synthetic-evaluation and scope
-      skill-retrieval-only. A current-coverage claim must match the release being
-      evaluated; older rows remain append-only history and are never overwritten.
+      skill-retrieval-only, and each names the asker who authorised the sweep.
+      A current-coverage claim must match the release being evaluated; older
+      rows remain append-only history and are never overwritten.
     retirement: >
       Stop future writes through a reviewed proposal. Keep prior rows with their
       refs; event facts do not become false when a later selector or release changes.
