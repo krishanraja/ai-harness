@@ -1,6 +1,6 @@
 ---
 name: design-intelligence-search
-description: "Subordinate design-data retrieval that requires an explicit delegation packet containing `OWNER: krish-design` or `OWNER: build-apps-with-krish` plus a bounded `SEARCH NEED`. Without both fields this skill does not apply. Use the packet to search product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or mobile-web candidates. Generic design, build, implementation, improvement, review, accessibility, and QA requests stay with their normal owners. Returns advisory candidates with pinned provenance and uncertainty; it never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Routing reviewed 2026-09-12 against authenticated Claude and Codex canaries."
+description: "Never use for a direct user's generic design, build, implementation, improvement, review, accessibility, or QA request; those stay with their normal owners. This is a subordinate design-data retrieval companion used only after krish-design or build-apps-with-krish explicitly delegates a bounded search. It retrieves advisory candidates for product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or mobile web with pinned provenance and uncertainty. It never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Last reviewed 2026-09-12."
 ---
 
 # Design Intelligence Search

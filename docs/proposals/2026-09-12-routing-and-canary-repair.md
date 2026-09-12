@@ -30,7 +30,7 @@ The previous routing metadata remains recoverable at commit `abb0d4d` and releas
 | Artifact | Previous source | Successor reason |
 |---|---|---|
 | `skills/content-corpus/SKILL.md` description | `abb0d4d` | Narrowly name prior-source selection for a warm lead email while preserving `krish-content-marketer` as conversion owner and `krish-voice` as prose owner. |
-| `skills/design-intelligence-search/SKILL.md` description and OpenAI prompt | `abb0d4d` | Preserve agent delegation and require its existing `OWNER` plus `SEARCH NEED` packet at the routing boundary. Claude's user-only switch was rejected because it would also block the intended delegation. |
+| `skills/design-intelligence-search/SKILL.md` description and OpenAI prompt | `abb0d4d` | Preserve agent delegation while placing the direct-user exclusion first. The body retains its packet contract. Claude's user-only switch and a new literal frontmatter prerequisite were rejected because they would conflict with the intended delegation route. |
 | `skills/mindmake-os/SKILL.md` description | `abb0d4d` | Route live fleet and architecture reconciliation, while making inventory-first and exact deletion approval visible before the body loads. |
 | `skills/mindmake/SKILL.md` description | `abb0d4d` | Stop a brand-word collision from loading commercial context for internal runtime state. |
 | `skills/video-engine/SKILL.md` description | `abb0d4d` | No wording change is retained after review. The exact-match contract and in-skill rejection behavior remain as they were. |
@@ -49,7 +49,7 @@ The previous routing metadata remains recoverable at commit `abb0d4d` and releas
 
 ## Expected effect and risk
 
-Expected: changed skills cannot escape release canaries; the manual design search requires its existing delegation packet; content and OS collisions improve; Cursor remains explicitly manual for behavioral evidence; the run record completes with `partial` when Cursor is unmeasured. The Codex video-engine collisions remain recorded failures until a client-level control can preserve the positive route without contradiction.
+Expected: changed skills cannot escape release canaries; the manual design search rejects direct generic requests while preserving its existing delegated packet workflow; content and OS collisions improve; Cursor remains explicitly manual for behavioral evidence; the run record completes with `partial` when Cursor is unmeasured. The Codex video-engine collisions remain recorded failures until a client-level control can preserve the positive route without contradiction.
 
 If wrong: a legitimate design delegation may become inaccessible in Claude, commercial work may under-route to `mindmake`, or the content split may load too many skills. The first detector is the same frozen post-install canary sheet plus a manual Claude `/design-intelligence-search` check. Roll back all affected surfaces to immutable v2026.09.12.3 if a load-bearing positive regresses.
 

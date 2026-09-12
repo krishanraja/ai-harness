@@ -106,7 +106,7 @@ stores:
     progress_2026_09_10: >
       The half of this row's diagnosis that was about THIS repository is now
       closed. brain/usage.jsonl records every citation of a canon rule by the
-      judge or by a passing synthetic canary, and scripts/audit-harness.mjs opens a
+      judge or by a passing canary, and scripts/audit-harness.mjs opens a
       dead-zone finding for live rules nothing has ever cited, so the canon
       cannot quietly accumulate the condition this row describes. The honest
       first number is 0 of 314: the ledger begins empty and no producer has run
@@ -116,6 +116,13 @@ stores:
       run found one pair, at 70 percent overlap:
       always-on-execution-chain.intent-briefing-when-triggered and
       global-chain.take-the-brief-runs.
+    progress_2026_09_12: >
+      The 2026-09-10 paragraph above remains verbatim historical text. Today the
+      ledger has 86 rows against 317 live rules. Every current row came from a
+      v2026.09.12.3 canary, is explicitly labelled synthetic-evaluation with
+      scope skill-retrieval-only, and is valid only for its immutable report ref.
+      This is retrieval coverage, not real-world use, efficacy, or current-release
+      proof. The new citation-coverage-ledger row above records its lifecycle.
     why_still_migrate: >
       None of that triages the 122 rows. The instrument now exists; the reading
       job does not do itself.

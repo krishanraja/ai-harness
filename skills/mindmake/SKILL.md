@@ -1,6 +1,6 @@
 ---
 name: mindmake
-description: "Durable commercial context for Mindmake, Krish Raja's AI advisory, education, and product business. Use when work concerns Mindmake offers, ICPs, positioning, sales architecture, mindmake.co, Maven, the Mindmake editorial funnel, CTRL/mm-ctrl, or customer-facing claims. Use as context before a commercial producer. Never load it merely because a prompt says Mindmake when the requested facts concern mind/make OS fleets, Supabase queues, n8n workflows, Control Center runtime, or other internal operating state; route those to mindmake-os. Exclude generic conversion strategy and final prose voice. Retrieve live sources for volatile commercial facts."
+description: "Durable commercial context for Mindmake, Krish Raja's AI advisory, education, and product business. Exclude mind/make OS fleet and runtime operations; apply `collision-rules.mindmake-os-owns-current` when a prompt tries to force commercial context onto live internal state. Use for offers, ICPs, positioning, sales architecture, mindmake.co, Maven, the Mindmake editorial funnel, CTRL/mm-ctrl, or customer-facing claims, as context before a commercial producer. Exclude generic conversion strategy and final prose voice. Retrieve live sources for volatile commercial facts."
 ---
 
 # Mindmake commercial context
