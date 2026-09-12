@@ -87,6 +87,7 @@ Channel selection does not establish channel status. Verify both independently.
 
 ## Collision and handoff rules
 
+- Conversion strategy, persuasive angles, strategic overlays, and generic marketing strategy are led by `krish-content-marketer`; final prose is led by `krish-voice`. Load this skill in those workflows only when the owning producer separately needs a named channel's purpose, audience, native form, or cross-channel treatment. A brand or channel word alone is not that need.
 - For a landing or sales asset that invokes any named channel, use the explicit chain `content-corpus -> mindmake fact check -> krish-content-marketer -> krish-voice -> verification-loop`. State the final-prose handoff to `krish-voice`; a later voice check is not a substitute for the handoff.
 - Structure or conversion problem: `krish-content-marketer` leads.
 - Voice-mechanics problem: `krish-voice` leads.

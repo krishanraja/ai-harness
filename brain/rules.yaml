@@ -988,11 +988,17 @@ skill_sections:
   - id: content-corpus.collision-and-handoff-rules
     file: skills/content-corpus/SKILL.md
     heading: "Collision and handoff rules"
-    text_sha: "5053812f3906"
+    text_sha: "77f46d1ebead"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+    history:
+      - text_sha: "5053812f3906"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: content-corpus.controlled-learning
     file: skills/content-corpus/SKILL.md
