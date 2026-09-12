@@ -30,6 +30,23 @@ stores:
     read_by: every client on every surface
     written_by: pull request only
 
+  - id: citation-coverage-ledger
+    where: brain/usage.jsonl
+    disposition: canon
+    holds: append-only citations of canon rules by independent judges and synthetic canaries
+    first_write: 2026-09-12
+    read_by: brain-usage.mjs and audit-harness.mjs
+    written_by: judge.mjs and canaries.mjs, then admitted through pull request review
+    validity: >
+      Each event is historical evidence scoped to its immutable ref, not a claim
+      about the current release and not proof of real-world use or efficacy.
+      Canary rows carry evidence_class synthetic-evaluation and scope
+      skill-retrieval-only. A current-coverage claim must match the release being
+      evaluated; older rows remain append-only history and are never overwritten.
+    retirement: >
+      Stop future writes through a reviewed proposal. Keep prior rows with their
+      refs; event facts do not become false when a later selector or release changes.
+
   # --------------------------------------------------------- the big finding
   #
   # This is the most important row in the file.
@@ -89,7 +106,7 @@ stores:
     progress_2026_09_10: >
       The half of this row's diagnosis that was about THIS repository is now
       closed. brain/usage.jsonl records every citation of a canon rule by the
-      judge or by a passing canary, and scripts/audit-harness.mjs opens a
+      judge or by a passing synthetic canary, and scripts/audit-harness.mjs opens a
       dead-zone finding for live rules nothing has ever cited, so the canon
       cannot quietly accumulate the condition this row describes. The honest
       first number is 0 of 314: the ledger begins empty and no producer has run

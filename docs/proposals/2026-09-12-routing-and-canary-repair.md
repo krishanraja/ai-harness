@@ -8,9 +8,9 @@ Asked by: Krish Raja, interactive session on 2026-09-12: "close the gaps" and "i
 
 Apply a class 3 routing fix plus canary-instrument repair. The accepted change is limited to:
 
-- `content-corpus`, `design-intelligence-search`, `mindmake-os`, `mindmake`, and `video-engine` routing metadata;
+- `content-corpus`, `mindmake-os`, and `mindmake` routing metadata;
 - `scripts/Invoke-HarnessSync.ps1`, `scripts/canaries.mjs`, and their regression checks;
-- synthetic canary citation evidence produced by the authenticated v2026.09.12.3 run;
+- synthetic canary citation evidence produced by the authenticated v2026.09.12.3 run and its explicit store lifecycle in `brain/stores.yaml`;
 - release registry and explanatory documentation required to publish and verify v2026.09.12.4.
 
 The four long descriptions in `krish-design`, `build-apps-with-krish`, `ctrl-intake`, and `krish-voice` are explicitly excluded. A shorter rewrite was already rejected in `state/routing-description-eval-2026-09-12.md`, and PR 42's judge correctly found that a description-budget finding did not prove the removed phrases were non-load-bearing. Their prior wording and review dates remain live.
@@ -30,7 +30,7 @@ The previous routing metadata remains recoverable at commit `abb0d4d` and releas
 | Artifact | Previous source | Successor reason |
 |---|---|---|
 | `skills/content-corpus/SKILL.md` description | `abb0d4d` | Narrowly name prior-source selection for a warm lead email while preserving `krish-content-marketer` as conversion owner and `krish-voice` as prose owner. |
-| `skills/design-intelligence-search/SKILL.md` frontmatter | `abb0d4d` | Add Claude's native manual-only enforcement; the Codex adapter remains `allow_implicit_invocation: false`. |
+| `skills/design-intelligence-search/SKILL.md` frontmatter | `abb0d4d` | No frontmatter change is retained. Claude's user-only switch would also block the intended agent delegation, so the false positive remains open rather than being hidden by a contradictory control. |
 | `skills/mindmake-os/SKILL.md` description | `abb0d4d` | Route live fleet and architecture reconciliation, while making inventory-first and exact deletion approval visible before the body loads. |
 | `skills/mindmake/SKILL.md` description | `abb0d4d` | Stop a brand-word collision from loading commercial context for internal runtime state. |
 | `skills/video-engine/SKILL.md` description | `abb0d4d` | No wording change is retained after review. The exact-match contract and in-skill rejection behavior remain as they were. |
@@ -49,7 +49,7 @@ The previous routing metadata remains recoverable at commit `abb0d4d` and releas
 
 ## Expected effect and risk
 
-Expected: Claude cannot auto-select the manual design search; changed skills cannot escape release canaries; content and OS collisions improve; Cursor remains explicitly manual for behavioral evidence; the run record completes with `partial` when Cursor is unmeasured.
+Expected: changed skills cannot escape release canaries; content and OS collisions improve; Cursor remains explicitly manual for behavioral evidence; the run record completes with `partial` when Cursor is unmeasured. The Claude design-search false positive and Codex video-engine collisions remain recorded failures until a client-level control can preserve their positive routes without contradiction.
 
 If wrong: a legitimate design delegation may become inaccessible in Claude, commercial work may under-route to `mindmake`, or the content split may load too many skills. The first detector is the same frozen post-install canary sheet plus a manual Claude `/design-intelligence-search` check. Roll back all affected surfaces to immutable v2026.09.12.3 if a load-bearing positive regresses.
 

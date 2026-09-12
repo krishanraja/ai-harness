@@ -100,10 +100,13 @@ export function appendUsage(rows, { root = HARNESS, validIds = null } = {}) {
     clean.push({
       id,
       at: r.at || new Date().toISOString().slice(0, 10),
+      first_seen: r.at || new Date().toISOString().slice(0, 10),
       rule_id,
       producer,
       ref,
       evidence_class: producer === 'canary' ? 'synthetic-evaluation' : 'independent-review',
+      scope: producer === 'canary' ? 'skill-retrieval-only' : 'review-citation',
+      valid_for_ref: ref,
       ...(r.verdict ? { verdict: String(r.verdict) } : {}),
     })
   }

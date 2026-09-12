@@ -125,13 +125,9 @@ foreach ($manifest in $manifests) {
         ForEach-Object { if ($_ -match '^\s*([A-Za-z0-9_-]+)\s*:') { $Matches[1] } } |
         Where-Object { $_ } |
         Sort-Object -Unique)
-    $unexpectedFrontmatterKeys = @($frontmatterKeys | Where-Object { $_ -notin @('name', 'description', 'disable-model-invocation') })
+    $unexpectedFrontmatterKeys = @($frontmatterKeys | Where-Object { $_ -notin @('name', 'description') })
     if ($unexpectedFrontmatterKeys.Count -gt 0) {
         Add-Failure "$relative has unsupported frontmatter fields: $($unexpectedFrontmatterKeys -join ', ')."
-    }
-    $disableModelInvocation = Get-FrontmatterValue -Lines $lines -ClosingIndex $closing -Key 'disable-model-invocation'
-    if ($disableModelInvocation -and $disableModelInvocation -notin @('true', 'false')) {
-        Add-Failure "$relative has invalid disable-model-invocation value: $disableModelInvocation."
     }
     if ($name -notmatch '^[a-z0-9-]{1,64}$') { Add-Failure "$relative has an invalid or missing name." }
     if ($description.Length -eq 0 -or $description.Length -gt 1024) { Add-Failure "$relative description length is invalid ($($description.Length))." }
