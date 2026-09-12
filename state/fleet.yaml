@@ -88,12 +88,15 @@ adapters:
 
 machines:
   - id: windows-primary
-    clients: [claude-code-user, cursor-primary, claude-desktop]
+    clients: [claude-code-user, cursor-primary, codex-current, claude-desktop]
     reports: pull-and-report
   - id: windows-codex
     clients: [codex-surface-07a67cda9f99]
     reports: pull-and-report
-    note: Known gap. This surface installed v2026.08.29.1 while the fleet is on v2026.08.29.3.
+    note: >-
+      Latest skill heartbeat is healthy on v2026.09.08.2. Hosted observation
+      emission is still pending because a mounted drive does not provide safe
+      access to that machine's user credential store or prove its client is running.
   - id: cloud-linux
     clients: [github-actions, claude-code-web]
     reports: rendered-per-run
@@ -118,21 +121,22 @@ machines:
 surface_contracts:
   - id: claude-code-lorimer
     reads: canon block, rendered adapter, 29 installed skills
-    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports
-    gap: Client-native auto-memory is ungoverned and nothing in the canon mentions it.
+    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports, hosted redacted observations
+    gap: Claude Code account OAuth was expired during the fresh-agent canary; the MCP config itself connected and its isolated identity canary passed.
 
   - id: cursor-lorimer
     reads: krish-core.mdc, 29 installed skills
-    writes: rulings in commit bodies
-    gap: No canary path, because Cursor has no headless client that exposes skill invocation as observable output. Native rules are ungoverned.
+    writes: rulings in commit bodies, hosted redacted observations
+    gap: Cursor MCP discovery reached the one hosted tool, but the headless agent account was not logged in for an end-to-end model invocation.
 
   - id: codex-lorimer
     reads: AGENTS.md, 29 installed skills
-    writes: rulings in commit bodies, canary reports
+    writes: rulings in commit bodies, canary reports, hosted redacted observations
 
   - id: codex-surface
     reads: AGENTS.md, 29 installed skills
     writes: rulings in commit bodies, canary reports
+    gap: Hosted observation emitter not provisioned. The mapped drive is discovery evidence only and the architecture does not depend on it.
 
   - id: claude-code-cloud
     reads: canon block
