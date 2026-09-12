@@ -16,7 +16,7 @@
 
 schema_version: 1
 
-# 89 rules across the two contracts.
+# 92 rules across the two contracts.
 contract_rules:
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
@@ -250,6 +250,14 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: authority.record-harness-observation-is
+    file: contract/krish-operating-contract.md
+    text_sha: "a58310b760cf"
+    first_seen: "2026-09-12"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
+    status: live
   - id: authority.drafts-may-be-created
     file: contract/krish-operating-contract.md
     text_sha: "82dd8d8ba5d6"
@@ -337,6 +345,22 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: observation-capture.immediately-after-an-explicit
+    file: contract/krish-operating-contract.md
+    text_sha: "51a5966f06bf"
+    first_seen: "2026-09-12"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
+    status: live
+  - id: observation-capture.at-task-completion-after
+    file: contract/krish-operating-contract.md
+    text_sha: "f315473da580"
+    first_seen: "2026-09-12"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: secrets-and-safety.never-place-credentials-in
     file: contract/krish-operating-contract.md

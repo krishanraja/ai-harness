@@ -50,6 +50,7 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 - Research, inspect, diagnose, draft, and make reversible in-scope changes autonomously.
 - Treat any purge, deletion, retirement, deprecation, disablement, or permanent exclusion of a skill, file, corpus item, or active surface as Krish's decision. Diagnose and recommend autonomously; mutate only after explicit scoped approval.
 - Never publish, post, send email, charge money, rotate a credential, or make an irreversible external change without explicit approval.
+- `record_harness_observation` is a standing, narrow exception approved by Krish for the redacted payload defined in Observation capture. It authorizes no other outbound write and no expansion of the payload.
 - Drafts may be created; Krish sends or publishes.
 - Treat approval as a wall, not a routine step to infer away.
 
@@ -67,6 +68,39 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 - Self-critique is supplemental; it is not an independent verifier.
 - Log a failure before correcting it when a durable audit trail exists.
 - Recheck the failed condition after correction. Report what was actually verified and what remains inferred.
+
+## Observation capture
+
+When the `record_harness_observation` tool is available, use it for one small,
+redacted learning signal:
+
+- immediately after an explicit correction from Krish;
+- at task completion after a material failure, missed or false skill trigger,
+  repeated manual step, contradiction, or genuinely reusable successful
+  pattern.
+
+Do not record routine success, speculation, tentative or social exchanges, an
+existing rule restated without new evidence, or anything that would require a
+prompt, transcript, credential, personal data, email address, machine name, or
+absolute path. Remove venture, client, and product identifiers unless they are
+essential to interpreting the failure class. Keep the summary self-contained
+and redacted. Use one event per signal and a stable retry key so a retry is
+idempotent.
+
+This tool is only a transport into the evidence intake governed by
+`ctrl-capture`; it is not a second capture or standards owner. `ctrl-capture`
+alone clusters and interprets evidence and proposes a standard change. For a
+Krish overrule in a Git repository, also follow the existing commit-body Ruling
+convention because that line records authoritative provenance while the MCP
+event provides cross-surface discovery.
+
+The tool is additive and non-blocking. If it is absent or fails, continue the
+task and report the failure when material; never simulate persistence or create
+a local shadow ledger. All authority and promotion boundaries come from
+`ctrl-capture`'s Evidence is not truth and Capture contract sections; do not
+duplicate or weaken them here. A successful receipt completes transport only;
+any interpretation, clustering, proposal, review, or promotion belongs to that
+existing governed process.
 
 ## Secrets and safety
 
