@@ -38,6 +38,7 @@ stores:
     read_by: brain-usage.mjs and audit-harness.mjs
     written_by: pull request only
     candidate_producers: judge.mjs and canaries.mjs
+    asker_source: approved_by in state/skill-registry.yaml, resolved automatically by Invoke-HarnessSync.ps1
     write_gate: >
       PR-enabled machine sync stages citation candidates on its named evidence
       branch with the canary and deployment records. Canary-only and no-PR runs

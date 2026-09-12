@@ -655,11 +655,12 @@ contract_rules:
     status: live
   - id: collision-rules.video-engine-activates-only
     file: contract/skill-routing-contract.md
-    text_sha: "97aa7fe490f6"
+    text_sha: "2b4c55d93463"
     first_seen: "2026-09-08"
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
     history:
       - text_sha: "485b01ccf69f"
         valid_until: "2026-09-12"
@@ -994,11 +995,12 @@ skill_sections:
   - id: content-corpus.collision-and-handoff-rules
     file: skills/content-corpus/SKILL.md
     heading: "Collision and handoff rules"
-    text_sha: "77f46d1ebead"
+    text_sha: "c33707311b5d"
     first_seen: "2026-09-07"
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
     history:
       - text_sha: "5053812f3906"
         valid_until: "2026-09-12"
@@ -2823,6 +2825,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
     history:
       - text_sha: "ef232c6294f0"
         valid_until: "2026-09-12"
