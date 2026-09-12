@@ -2806,11 +2806,17 @@ skill_sections:
   - id: video-engine.trigger-contract
     file: skills/video-engine/SKILL.md
     heading: "Trigger contract"
-    text_sha: "ef232c6294f0"
+    text_sha: "a3df0b41de91"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+    history:
+      - text_sha: "ef232c6294f0"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: video-engine.start-every-session
     file: skills/video-engine/SKILL.md
