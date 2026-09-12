@@ -29,10 +29,10 @@ deployed_release:
 latest_approved_release:
   release_id: v2026.09.12.4
   tag: harness-v2026.09.12.4
-  source_commit: 0ac81107ee4b873cd327d9dd16eed6ab943e03d7
+  source_commit: 90c4695f91cc72d50f131e47621e4024c1ba5e4a
   published: false
   immutable: false
-  skills_tree_aggregate_sha256: E87DCF385B6E5E0150BEE48E31BAFD138722BCA4F0A0825E5DFC2C26DC4F726D
+  skills_tree_aggregate_sha256: C74692693ED3110CC570EA7550601E779BD7DDAEC5411D33108C4CABC17A4A8F
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
     - content-corpus
@@ -49,9 +49,9 @@ latest_approved_release:
   approval_note: >-
     Live v2026.09.12.3 canaries found two Claude case failures, seven Codex case
     failures plus one coverage summary, and a post-run recorder exception. This
-    candidate adds Claude's native manual-invocation control to the bounded design
-    search, sharpens observed collision routes, fixes the recorder field, adds a
-    regression assertion, and retains the failed reports as learning evidence.
+    candidate requires the design skill's existing delegation packet at its
+    routing boundary, sharpens observed collision routes, fixes the recorder
+    field, adds a regression assertion, and retains failed reports as evidence.
   supersedes_reason: >-
     v2026.09.12.3 is byte-verified locally but its newly authenticated live
     canaries exposed routing regressions and a run-recording defect. It remains
