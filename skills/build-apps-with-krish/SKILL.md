@@ -1,6 +1,6 @@
 ---
 name: build-apps-with-krish
-description: "Founder-in-the-loop orchestrator for taking a materially new app, product experience, or cross-surface redesign with Krish from product rules through approved rendered mocks, implementation, and evidence-backed release. Use when Krish asks to build a new app, rebuild or redesign an app, turn a product corpus into a working product, create several connected product surfaces, resume a multi-session app-delivery journey, or preserve his taste and judgment across strategy, design, code, and QA handoffs. Do not use for an isolated code fix, a single already-specified component, diagnosis-only UX audit, non-app visual artifact, or routine implementation inside a locked design system; route those directly to krish-build, krish-design, or ux-testing-agent. Load krish-principles and strategy-brief first. This skill orchestrates but never replaces krish-design, krish-build, verification-loop, ux-testing-agent, or Krish's material visual and go-live approvals. Last reviewed 2026-08-05."
+description: "Founder-in-the-loop orchestrator for materially new apps, cross-surface redesigns, and multi-session product delivery from product rules through mocks, implementation, QA, and release. Do not use for isolated fixes, specified components, diagnosis-only audits, non-app visuals, or routine work inside a locked design system. Apply krish-principles and strategy-brief, then route stages to krish-design, krish-build, ux-testing-agent, and verification-loop. Last reviewed 2026-08-05."
 ---
 
 # Build Apps with Krish

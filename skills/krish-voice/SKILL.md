@@ -1,6 +1,6 @@
 ---
 name: krish-voice
-description: "Final-prose voice owner for material drafted, edited, reviewed, or humanised under Krish's name. Use for emails, follow-ups, pitch notes, op-eds, LinkedIn posts, newsletters, podcast or talk scripts, deck and slide copy, workshop copy, voice review, de-AI work, or a requested rewrite that must sound like Krish. Also use after domain, channel, research, or conversion owners hand off approved facts and argument for final wording. Do not lead factual research, live channel status, content or conversion angle selection, visual design, implementation, sending, scheduling, or publication. For strategy-only work with no prose draft, route to the relevant domain owner, content-corpus, and krish-content-marketer. Preserve locked meaning and evidence, protect private source material, and never treat draft approval as action authority. Last reviewed 2026-08-29 against the recorded Mindmake North Star, publication canon, and voice rules."
+description: "Own final prose drafted, edited, reviewed, or humanised under Krish's name, including emails, pitches, posts, newsletters, scripts, decks, workshops, and voice review. Use after fact, channel, research, or conversion owners hand off approved substance. Do not own research, strategy or angle selection, design, implementation, sending, scheduling, or publication. Preserve locked meaning, evidence, and private sources; draft approval is not action authority. Last reviewed 2026-08-29."
 ---
 
 # Krish Voice
