@@ -65,3 +65,7 @@ If wrong: a legitimate design delegation may become inaccessible in Claude, comm
 ## Acceptance boundary
 
 Krish's instruction authorises this proposal and its governed release. It does not waive action-time approval for provider credential regeneration, destructive deletion, public publication, or spend. A green canary is behavioral evidence only; local parity, cloud upload readback, and old-key failure proof are separate completion gates.
+
+## Rule 6 disposition
+
+The citation-coverage ledger is an approved maintenance component of the existing harness, not a new agent or an OS product. It directly implements Krish's request that the repository learn from real work while distinguishing synthetic checks from real-world evidence. It serves the existing `keep him honest` job by exposing rules that are never retrieved or have gone stale. It is not being built privately: public PR 42 shows the implementation, evidence, review failures, and corrections before release. Krish's recorded instructions, "close the gaps", "i approve all of this", and "yes", are the named ask and acceptance for this bounded harness repair. This disposition does not authorise unrelated agents, stores, products, or feature work.
