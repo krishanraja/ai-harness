@@ -262,6 +262,28 @@ t('a superseded entry that carries valid_until passes', () => {
   assert(!problems.some((p) => /valid_until/.test(p)), `a dated closure must not fail: ${problems.join(' | ')}`)
 })
 
+t('an approval source must resolve to a repository artifact', () => {
+  const root = fixture()
+  const ledger = ledgerFor(root, {
+    mutate: (rows) => rows.map((r, i) => i === 0
+      ? { ...r, kind: 'approval' }
+      : r),
+  }).replace('ref: "abc123abc123"', 'ref: "state/approvals/missing.md"')
+  const { problems } = check(ledger, root)
+  matches(problems, /cites approval .* does not exist/, 'an approval path cannot be an invented pointer')
+})
+
+t('a repository artifact cannot be mislabeled as a ruling commit', () => {
+  const root = fixture()
+  const ledger = ledgerFor(root, {
+    mutate: (rows) => rows.map((r, i) => i === 0
+      ? { ...r, kind: 'ruling' }
+      : r),
+  }).replace('ref: "abc123abc123"', 'ref: "state/approvals/example.md"')
+  const { problems } = check(ledger, root)
+  matches(problems, /labels repository artifact .* as a ruling/, 'ruling provenance must cite the ruling commit')
+})
+
 // -------------------------------------------------------------------- report
 for (const d of cleanup) { try { rmSync(d, { recursive: true, force: true }) } catch {} }
 if (failures) { console.error(`\n${failures} failing case(s).`); process.exit(1) }

@@ -191,6 +191,7 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
   L.push('# source.kind:')
   L.push('#   founding  the rule predates this ledger. We know when, not why.')
   L.push('#   ruling    a Ruling (Krish, DATE) line in the commit that introduced it.')
+  L.push('#   approval  a repository approval artifact containing the user-owned gate.')
   L.push('#   proposal  a docs/proposals entry a human accepted.')
   L.push('#   import    carried in from a source outside this repository.')
   L.push('#')
@@ -276,8 +277,15 @@ export function check(ledgerText, root = HARNESS) {
         problems.push(`${r.id} changed but brain/rules.yaml still records text_sha ${e.text_sha}; the live text hashes to ${r.text_sha}. Update the entry and give it a new source.`)
       }
       if (!e.source || !e.source.kind) problems.push(`${r.id} has no source.kind`)
-      if (e.source?.kind === 'ruling' && String(e.source?.ref || '').includes('/') && !existsSync(join(root, String(e.source.ref)))) {
-        problems.push(`${r.id} cites ruling ${e.source.ref}, but that repository artifact does not exist`)
+      const validSourceKinds = new Set(['founding', 'ruling', 'approval', 'proposal', 'import'])
+      if (e.source?.kind && !validSourceKinds.has(String(e.source.kind))) {
+        problems.push(`${r.id} has unsupported source.kind ${e.source.kind}`)
+      }
+      if (e.source?.kind === 'ruling' && String(e.source?.ref || '').includes('/')) {
+        problems.push(`${r.id} labels repository artifact ${e.source.ref} as a ruling; use approval or proposal, or cite the ruling commit`)
+      }
+      if (['approval', 'proposal'].includes(String(e.source?.kind)) && !existsSync(join(root, String(e.source?.ref || '').split('#')[0]))) {
+        problems.push(`${r.id} cites ${e.source.kind} ${e.source.ref}, but that repository artifact does not exist`)
       }
       for (const h of e.history || []) {
         if (!h.text_sha || !h.valid_until || !h.source?.kind || !h.source?.ref) {
