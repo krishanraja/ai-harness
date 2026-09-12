@@ -47,6 +47,12 @@ else {
     if ($syncScriptRaw -notmatch 'unmeasured_surfaces\s*=\s*@\(\$unmeasured\s*\|\s*ForEach-Object\s*\{\s*\$_\.surface\s*\}\)') {
         Add-Failure 'Machine sync does not record unmeasured surfaces by the surface field.'
     }
+    if ($syncScriptRaw -notmatch '\$CanaryOnly\s+-or\s+\$NoPullRequest' -or $syncScriptRaw -notmatch '\$recordArguments\s*\+=\s*@\(''--out-dir''') {
+        Add-Failure 'Canary-only and no-PR sync runs do not route canary reports and citation candidates to scratch.'
+    }
+    if ($syncScriptRaw -notmatch "'brain/usage\.jsonl'") {
+        Add-Failure 'PR-enabled sync does not stage citation candidates with machine evidence.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }

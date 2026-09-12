@@ -36,7 +36,13 @@ stores:
     holds: append-only citations of canon rules by independent judges and synthetic canaries
     first_write: 2026-09-12
     read_by: brain-usage.mjs and audit-harness.mjs
-    written_by: judge.mjs and canaries.mjs, then admitted through pull request review
+    written_by: pull request only
+    candidate_producers: judge.mjs and canaries.mjs
+    write_gate: >
+      PR-enabled machine sync stages citation candidates on its named evidence
+      branch with the canary and deployment records. Canary-only and no-PR runs
+      route both reports and citation candidates to scratch. Only merge admits
+      candidate rows into this canon-disposition store.
     validity: >
       Each event is historical evidence scoped to its immutable ref, not a claim
       about the current release and not proof of real-world use or efficacy.

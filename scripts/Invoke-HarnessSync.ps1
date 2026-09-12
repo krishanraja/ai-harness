@@ -844,11 +844,20 @@ function Invoke-SurfaceCanaries {
     }
     $submittedPath = Join-Path $RunDirectory "canary-submission-$($Surface.Id).json"
     Write-JsonFile -Path $submittedPath -Value $report
-    $record = Invoke-NativeCapture -FilePath 'node' -Arguments @(
+    $recordArguments = @(
         (Join-Path $RepositoryRoot 'scripts\canaries.mjs'), '--record', $submittedPath, '--release', $ReleaseId
     )
+    $recordedDirectory = Join-Path $RepositoryRoot 'state\canaries'
+    # Canary-only and explicitly no-PR runs are diagnostics, not canon writers.
+    # Route both the report and its citation candidates to scratch so there is
+    # no path that mutates a canon-disposition store without the evidence PR.
+    if ($CanaryOnly -or $NoPullRequest) {
+        $recordedDirectory = Join-Path $RunDirectory 'canary-records'
+        $recordArguments += @('--out-dir', $recordedDirectory)
+    }
+    $record = Invoke-NativeCapture -FilePath 'node' -Arguments $recordArguments
     if ($record.ExitCode -notin @(0, 1)) { throw "Canary report was refused for $($Surface.Id): $($record.Text)" }
-    $recordedPath = Join-Path $RepositoryRoot "state\canaries\$ReleaseId-$($Surface.Id).json"
+    $recordedPath = Join-Path $recordedDirectory "$ReleaseId-$($Surface.Id).json"
     return [pscustomobject]@{
         surface = $Surface.Id
         client = $Surface.Client
@@ -886,7 +895,7 @@ function Open-EvidencePullRequest {
 
     $branch = "machine-sync/$($HostDefinition.HostSlug)/$ReleaseId-$RunId"
     Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', '-c', $branch)) -Label 'Create evidence branch'
-    Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('add', 'state/deployments', 'state/canaries', 'state/machine-runs')) -Label 'Stage machine evidence'
+    Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('add', 'state/deployments', 'state/canaries', 'state/machine-runs', 'brain/usage.jsonl')) -Label 'Stage machine evidence and citation candidates'
     $commit = Invoke-NativeCapture -FilePath 'git' -Arguments @(
         'commit', '-m', "chore(sync): record $ReleaseId on $($HostDefinition.HostName)"
     )
