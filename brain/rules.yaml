@@ -8,7 +8,6 @@
 # source.kind:
 #   founding  the rule predates this ledger. We know when, not why.
 #   ruling    a Ruling (Krish, DATE) line in the commit that introduced it.
-#   approval  a repository approval artifact containing the user-owned gate.
 #   proposal  a docs/proposals entry a human accepted.
 #   import    carried in from a source outside this repository.
 # A revised entry keeps its superseded text hash and source under history with a
@@ -1190,8 +1189,8 @@ skill_sections:
     text_sha: "1cb4be8112be"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "724426721051"
         valid_until: "2026-09-12"
@@ -1304,8 +1303,8 @@ skill_sections:
     text_sha: "ea7efa241ed7"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "bacea9141848"
         valid_until: "2026-09-12"
@@ -1319,8 +1318,8 @@ skill_sections:
     text_sha: "1859dc6bb930"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "6438bce7274d"
         valid_until: "2026-09-12"
@@ -1434,8 +1433,8 @@ skill_sections:
     text_sha: "61adee5c1d48"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "f467f3f33253"
         valid_until: "2026-09-12"
@@ -1477,8 +1476,8 @@ skill_sections:
     text_sha: "0864dfd1d27a"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "95aa1e8ed744"
         valid_until: "2026-09-12"
@@ -1555,8 +1554,8 @@ skill_sections:
     text_sha: "19bbe789f976"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "53c9b94020c0"
         valid_until: "2026-09-12"
@@ -1588,8 +1587,8 @@ skill_sections:
     text_sha: "fc1233d44adb"
     first_seen: "2026-09-07"
     source:
-      kind: approval
-      ref: "state/approvals/2026-09-12-harness-gap-closure.md"
+      kind: ruling
+      ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"

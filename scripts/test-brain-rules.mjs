@@ -262,15 +262,15 @@ t('a superseded entry that carries valid_until passes', () => {
   assert(!problems.some((p) => /valid_until/.test(p)), `a dated closure must not fail: ${problems.join(' | ')}`)
 })
 
-t('an approval source must resolve to a repository artifact', () => {
+t('an unsupported source kind fails closed', () => {
   const root = fixture()
   const ledger = ledgerFor(root, {
     mutate: (rows) => rows.map((r, i) => i === 0
       ? { ...r, kind: 'approval' }
       : r),
-  }).replace('ref: "abc123abc123"', 'ref: "state/approvals/missing.md"')
+  })
   const { problems } = check(ledger, root)
-  matches(problems, /cites approval .* does not exist/, 'an approval path cannot be an invented pointer')
+  matches(problems, /unsupported source.kind approval/, 'the provenance vocabulary cannot grow silently')
 })
 
 t('a repository artifact cannot be mislabeled as a ruling commit', () => {
