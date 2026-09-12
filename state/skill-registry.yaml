@@ -29,21 +29,16 @@ deployed_release:
 latest_approved_release:
   release_id: v2026.09.12.4
   tag: harness-v2026.09.12.4
-  source_commit: 235b0dfc0cc2563566d63bfb87ad7a19f31395bc
+  source_commit: 0ac81107ee4b873cd327d9dd16eed6ab943e03d7
   published: false
   immutable: false
-  skills_tree_aggregate_sha256: CECE1A2A62168D3A88138A9EC24F46A3A83BC30DA950CB1DD2EC348BB4218C6A
+  skills_tree_aggregate_sha256: E87DCF385B6E5E0150BEE48E31BAFD138722BCA4F0A0825E5DFC2C26DC4F726D
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - build-apps-with-krish
     - content-corpus
-    - ctrl-intake
     - design-intelligence-search
-    - krish-design
-    - krish-voice
     - mindmake-os
     - mindmake
-    - video-engine
   approved_at: 2026-09-12
   approved_by: Krish Raja
   approval_basis: >-
@@ -52,8 +47,8 @@ latest_approved_release:
     approval covers this corrective release; publication and deployment remain
     separately evidenced actions.
   approval_note: >-
-    Live v2026.09.12.3 canaries found two Claude routing failures, five Codex
-    routing or reachability failures, and a post-run recorder exception. This
+    Live v2026.09.12.3 canaries found two Claude case failures, seven Codex case
+    failures plus one coverage summary, and a post-run recorder exception. This
     candidate adds Claude's native manual-invocation control to the bounded design
     search, sharpens observed collision routes, fixes the recorder field, adds a
     regression assertion, and retains the failed reports as learning evidence.
