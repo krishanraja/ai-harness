@@ -82,8 +82,10 @@ redacted learning signal:
 Do not record routine success, speculation, tentative or social exchanges, an
 existing rule restated without new evidence, or anything that would require a
 prompt, transcript, credential, personal data, email address, machine name, or
-absolute path. Keep the summary self-contained and redacted. Use one event per
-signal and a stable retry key so a retry is idempotent.
+absolute path. Remove venture, client, and product identifiers unless they are
+essential to interpreting the failure class. Keep the summary self-contained
+and redacted. Use one event per signal and a stable retry key so a retry is
+idempotent.
 
 This tool is only a transport into the evidence intake governed by
 `ctrl-capture`; it is not a second capture or standards owner. `ctrl-capture`
@@ -96,12 +98,9 @@ The tool is additive and non-blocking. If it is absent or fails, continue the
 task and report the failure when material; never simulate persistence or create
 a local shadow ledger. All authority and promotion boundaries come from
 `ctrl-capture`'s Evidence is not truth and Capture contract sections; do not
-duplicate or weaken them here. The scheduled importer batches evidence
-automatically, and `ctrl-capture` escalates only repeated or severe verified
-patterns rather than creating a review task per event. Promotion still requires
-human review, a regression case, and the governed harness release process. Its
-mission is to reduce repeated failure and manual rework across future tasks so
-Krish spends less time correcting the harness.
+duplicate or weaken them here. A successful receipt completes transport only;
+any interpretation, clustering, proposal, review, or promotion belongs to that
+existing governed process.
 
 ## Secrets and safety
 

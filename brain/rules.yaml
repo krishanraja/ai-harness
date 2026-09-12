@@ -255,7 +255,7 @@ contract_rules:
     text_sha: "a58310b760cf"
     first_seen: "2026-09-12"
     source:
-      kind: ruling
+      kind: proposal
       ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: authority.drafts-may-be-created
@@ -351,7 +351,7 @@ contract_rules:
     text_sha: "51a5966f06bf"
     first_seen: "2026-09-12"
     source:
-      kind: ruling
+      kind: proposal
       ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: observation-capture.at-task-completion-after
@@ -359,7 +359,7 @@ contract_rules:
     text_sha: "f315473da580"
     first_seen: "2026-09-12"
     source:
-      kind: ruling
+      kind: proposal
       ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: secrets-and-safety.never-place-credentials-in
