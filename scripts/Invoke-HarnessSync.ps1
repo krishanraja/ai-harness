@@ -758,15 +758,14 @@ function Invoke-ClaudeCanary {
         return [pscustomobject]@{ id = $Case.id; outcome = 'unreachable'; note = 'Claude Code CLI entry point is missing.' }
     }
     $arguments = @(
-        '-p',
+        '-p', [string]$Case.prompt,
         '--output-format', 'stream-json',
         '--verbose',
         '--permission-mode', 'dontAsk',
         '--no-session-persistence',
         '--no-chrome',
         '--tools', 'Skill,Read,Glob,Grep',
-        '--disallowedTools', 'mcp__*',
-        [string]$Case.prompt
+        '--disallowedTools', 'mcp__*'
     )
     $run = Invoke-ProcessCapture -FilePath $claude -Arguments $arguments -WorkingDirectory $WorkingDirectory -TimeoutSeconds $CanaryTimeoutSeconds
     $loaded = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
@@ -789,7 +788,12 @@ function Invoke-ClaudeCanary {
         return [pscustomobject]@{ id = $Case.id; outcome = 'wrong-skill'; note = "Claude stream-json recorded Skill calls: $($other -join ', ')." }
     }
     if ($run.TimedOut -or $run.ExitCode -ne 0) {
-        return [pscustomobject]@{ id = $Case.id; outcome = 'unreachable'; note = if ($run.TimedOut) { 'Claude Code timed out.' } else { "Claude Code exited $($run.ExitCode)." } }
+        $authFailed = $run.Stdout -match 'authentication_failed|Failed to authenticate'
+        return [pscustomobject]@{
+            id = $Case.id
+            outcome = 'unreachable'
+            note = if ($run.TimedOut) { 'Claude Code timed out.' } elseif ($authFailed) { 'Claude Code authentication was unavailable.' } else { "Claude Code exited $($run.ExitCode)." }
+        }
     }
     return [pscustomobject]@{ id = $Case.id; outcome = 'not-fired'; note = 'Claude Code completed without a Skill tool call.' }
 }
