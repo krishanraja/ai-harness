@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. For a warm lead email, use it to select which prior meeting language belongs in the argument, then hand conversion strategy to krish-content-marketer and final prose to krish-voice. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
+description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
 ---
 
 # Content corpus

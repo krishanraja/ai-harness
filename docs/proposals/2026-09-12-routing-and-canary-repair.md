@@ -29,9 +29,9 @@ The previous routing metadata remains recoverable at commit `abb0d4d` and releas
 
 | Artifact | Previous source | Successor reason |
 |---|---|---|
-| `skills/content-corpus/SKILL.md` description | `abb0d4d` | Narrowly name prior-source selection for a warm lead email while preserving `krish-content-marketer` as conversion owner and `krish-voice` as prose owner. |
+| `evals/content-corpus-trigger-cases.jsonl` case 007 | `abb0d4d` | Correct the expected route: a requested strategic overlay is conversion strategy owned by `krish-content-marketer`, not channel-context selection. The `content-corpus` description remains unchanged. |
 | `skills/design-intelligence-search/SKILL.md` description and OpenAI prompt | `abb0d4d` | Preserve agent delegation while placing the direct-user exclusion first. The body retains its packet contract. Claude's user-only switch and a new literal frontmatter prerequisite were rejected because they would conflict with the intended delegation route. |
-| `skills/mindmake-os/SKILL.md` description | `abb0d4d` | Route live fleet and architecture reconciliation, while making inventory-first and exact deletion approval visible before the body loads. |
+| `skills/mindmake-os/SKILL.md` description | `abb0d4d` | Add architecture-source reconciliation to discovery without replacing or restating the body procedure for architecture changes. |
 | `skills/mindmake/SKILL.md` description | `abb0d4d` | Stop a brand-word collision from loading commercial context for internal runtime state. |
 | `skills/video-engine/SKILL.md` description | `abb0d4d` | No wording change is retained after review. The exact-match contract and in-skill rejection behavior remain as they were. |
 | canary selector and run recorder | `abb0d4d` | Record unmeasured surfaces by their real field and require every declared changed skill on the release sheet. |

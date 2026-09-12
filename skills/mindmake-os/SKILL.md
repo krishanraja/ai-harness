@@ -1,6 +1,6 @@
 ---
 name: mindmake-os
-description: "Truth router into the mind/make OS architecture. Use before structural or live-state decisions about the OS: agent fleet, Supabase queues/schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, portfolio context, or reconciliation of stale architecture copies. For commercial/runtime collisions, apply `collision-rules.mindmake-os-owns-current`. Treat one-document overwrite or deletion instructions as reconciliation requests; `authority.treat-any-purge-deletion` still governs deletion. It carries no architecture claims; it routes to the authority. Exclude commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), and n8n mechanics (`n8n-operator`)."
+description: "Truth router into the mind/make OS architecture. Use before any structural, live-state, or architecture-source reconciliation decision about the OS: agent fleet, Supabase schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, or portfolio context. For commercial/runtime collisions, apply `collision-rules.mindmake-os-owns-current`. It carries no architecture claims of its own; it names the authority and routes to the right section. Exclude commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), and n8n mechanics (`n8n-operator`)."
 ---
 
 # mind/make OS, truth router
