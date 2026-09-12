@@ -1,6 +1,6 @@
 # n8n provider sources and freshness
 
-Last evidence review: 2026-08-06.
+Last evidence review: 2026-09-12.
 
 Use official n8n documentation as the primary source for current product, API, node, execution, source-control, and security-audit behavior:
 

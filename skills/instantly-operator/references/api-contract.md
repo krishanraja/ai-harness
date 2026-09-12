@@ -1,6 +1,6 @@
 # Instantly API contract and freshness
 
-Last evidence review: 2026-08-06. Recheck the exact official endpoint page before any external mutation.
+Last evidence review: 2026-09-12. Recheck the exact official endpoint page before any external mutation.
 
 ## Primary sources
 

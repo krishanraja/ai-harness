@@ -89,14 +89,30 @@ unmanaged_directories:
     detail: 62 directories plus a loose ml-engineer.md. Recorded as 61 until the machine counted it.
     canonical: 0
     forbidden_present: [strategy, ux, ux-concepts, ux-principles, design, uiux-toolkit, design-system-starter, N8N, fleet-ops]
-    # Ruled 2026-09-08, after LORIMER checked what actually reads it. Nothing does.
-    # No skills path points here in .claude/settings.json, .claude/settings.local.json,
-    # .claude.json, .codex/config.toml or .cursor/mcp.json, and no installed instruction
-    # file names it. A sweep of all three client trees hit only transcripts and caches.
-    # The nine forbidden skills are inert, not a live routing risk. It stays a
-    # third-party catalog. Nothing here is read from, installed to, or deleted.
-    status: inert-third-party-catalog-nothing-reads-it
-    ruled: 2026-09-08
+    # Fresh Codex startup on 2026-09-12 disproved the 2026-09-08 inference that
+    # this directory was inert. Codex discovers this conventional shared root
+    # without a configured path, and two malformed skills raised startup errors.
+    # The library was moved intact out of auto-discovery. The source directory
+    # remains empty so no consumer mistakes absence for a missing mount.
+    status: empty-auto-discovery-root
+    ruled: 2026-09-12
+
+  - path: C:\Users\krish\.agents\catalog\skills-20260912
+    surface: windows-primary
+    observed: 2026-09-12
+    entries: 60
+    skill_manifests: 59
+    detail: Preserved third-party library moved intact from the auto-discovered shared root.
+    status: inactive-catalog-pending-demand-review
+    ruled: 2026-09-12
+
+  - path: C:\Users\krish\.agents\quarantine\legacy-forbidden-20260912
+    surface: windows-primary
+    observed: 2026-09-12
+    entries: 2
+    detail: Malformed legacy N8N and fleet-ops skills. The exposed value in the N8N copy was replaced by a symbolic reference before quarantine.
+    status: quarantined-not-discoverable
+    ruled: 2026-09-12
 
   # These two are different in kind: loose FILES sitting inside release-managed roots,
   # beside the skill directories. The installer walks directories, so it never sees

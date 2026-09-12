@@ -1,6 +1,6 @@
 # Live Actor selection record
 
-Last reviewed: 2026-08-05. This file intentionally contains no preferred Actor catalogue or price table. Store identity, ownership, availability, schemas, permissions, performance, and pricing are runtime facts.
+Last reviewed: 2026-09-12. This file intentionally contains no preferred Actor catalogue or price table. Store identity, ownership, availability, schemas, permissions, performance, and pricing are runtime facts.
 
 ## Official surfaces
 

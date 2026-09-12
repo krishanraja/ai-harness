@@ -1,6 +1,6 @@
 # Apify API contract
 
-Primary-source facts last verified: 2026-08-05. Recheck the linked current official documentation before consequential execution.
+Primary-source facts last verified: 2026-09-12. Recheck the linked current official documentation before consequential execution.
 
 ## Authentication and identity
 
