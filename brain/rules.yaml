@@ -655,11 +655,17 @@ contract_rules:
     status: live
   - id: collision-rules.video-engine-activates-only
     file: contract/skill-routing-contract.md
-    text_sha: "485b01ccf69f"
+    text_sha: "97aa7fe490f6"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "68d5dae3daf0"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+    history:
+      - text_sha: "485b01ccf69f"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "68d5dae3daf0"
     status: live
   - id: ctrl-standards-chain.ctrl-intake-stages-1
     file: contract/skill-routing-contract.md
