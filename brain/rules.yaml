@@ -16,7 +16,7 @@
 
 schema_version: 1
 
-# 91 rules across the two contracts.
+# 92 rules across the two contracts.
 contract_rules:
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
@@ -249,6 +249,14 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: authority.record-harness-observation-is
+    file: contract/krish-operating-contract.md
+    text_sha: "a58310b760cf"
+    first_seen: "2026-09-12"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: authority.drafts-may-be-created
     file: contract/krish-operating-contract.md

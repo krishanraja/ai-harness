@@ -50,6 +50,7 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 - Research, inspect, diagnose, draft, and make reversible in-scope changes autonomously.
 - Treat any purge, deletion, retirement, deprecation, disablement, or permanent exclusion of a skill, file, corpus item, or active surface as Krish's decision. Diagnose and recommend autonomously; mutate only after explicit scoped approval.
 - Never publish, post, send email, charge money, rotate a credential, or make an irreversible external change without explicit approval.
+- `record_harness_observation` is a standing, narrow exception approved by Krish for the redacted payload defined in Observation capture. It authorizes no other outbound write and no expansion of the payload.
 - Drafts may be created; Krish sends or publishes.
 - Treat approval as a wall, not a routine step to infer away.
 
@@ -84,11 +85,22 @@ prompt, transcript, credential, personal data, email address, machine name, or
 absolute path. Keep the summary self-contained and redacted. Use one event per
 signal and a stable retry key so a retry is idempotent.
 
+This tool is only a transport into the evidence intake governed by
+`ctrl-capture`; it is not a second capture or standards owner. `ctrl-capture`
+alone clusters and interprets evidence and proposes a standard change. For a
+Krish overrule in a Git repository, also follow the existing commit-body Ruling
+convention because that line records authoritative provenance while the MCP
+event provides cross-surface discovery.
+
 The tool is additive and non-blocking. If it is absent or fails, continue the
 task and report the failure when material; never simulate persistence or create
 a local shadow ledger. An observation is inert evidence. It cannot change a
-skill, rule, contract, registry, or canonical memory. Promotion still requires
-human review, a regression case, and the governed harness release process.
+skill, rule, contract, registry, or canonical memory. The scheduled importer
+batches evidence automatically, and `ctrl-capture` escalates only repeated or
+severe verified patterns rather than creating a review task per event.
+Promotion still requires human review, a regression case, and the governed
+harness release process. Its mission is to reduce repeated failure and manual
+rework across future tasks so Krish spends less time correcting the harness.
 
 ## Secrets and safety
 
