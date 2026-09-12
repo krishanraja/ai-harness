@@ -1,6 +1,6 @@
 ---
 name: video-engine
-description: "Launch Krishan Raja's Mindmake Video Engine only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not invoke this skill. Never invoke for ordinary requests that merely mention video, video editing, captions, rendering, Shorts, YouTube, or generating/editing a video."
+description: "Exact-message launcher, not a general video skill. Invoke only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Do not load this skill merely to inspect or reject any other mention. Terminal punctuation, extra words or lines, quoted mentions, later-turn uses, troubleshooting such as 'my video engine is broken', and $video-engine all fail. Ordinary video creation, editing, captions, rendering, Shorts, and YouTube requests use other capabilities."
 ---
 
 # Video Engine launcher

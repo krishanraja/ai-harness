@@ -1114,7 +1114,7 @@ try {
     else {
         $runRecord.status = 'completed'
     }
-    $runRecord.unmeasured_surfaces = @($unmeasured | ForEach-Object { $_.id })
+    $runRecord.unmeasured_surfaces = @($unmeasured | ForEach-Object { $_.surface })
     $runRecord.completed_at_utc = [DateTime]::UtcNow.ToString('o')
     Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
 

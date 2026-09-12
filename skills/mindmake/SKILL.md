@@ -1,6 +1,6 @@
 ---
 name: mindmake
-description: "Durable commercial context for Mindmake, Krish Raja's AI advisory, education, and product business. Use when work concerns Mindmake offers, ICPs, positioning, sales architecture, mindmake.co, Maven, the Mindmake editorial funnel, CTRL/mm-ctrl, or customer-facing claims. Use as context before a commercial producer. Exclude mind/make OS fleet/runtime operations, generic conversion strategy, and final prose voice. Never answer current price, date, seat, availability, route, product-version, or channel-status questions from this skill alone; retrieve the relevant live source."
+description: "Commercial-only context for Mindmake, Krish Raja's AI advisory, education, and product business. Use for offers, ICPs, positioning, sales architecture, mindmake.co, Maven, the editorial funnel, CTRL/mm-ctrl, or customer-facing claims, then hand off to the relevant producer. Never load it for mind/make OS agent fleets, Supabase queues, n8n workflows, Control Center runtime, or other internal operating state, even when the prompt contains the word Mindmake or asks you to use the commercial skill; route those to mindmake-os. Exclude generic conversion strategy and final prose voice. Retrieve live sources for volatile commercial facts."
 ---
 
 # Mindmake commercial context

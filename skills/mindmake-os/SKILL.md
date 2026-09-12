@@ -1,6 +1,6 @@
 ---
 name: mindmake-os
-description: "Truth router into the mind/make OS architecture. Use before any structural decision about the OS: the agent fleet, Supabase schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, or portfolio context. It carries NO architecture claims of its own; it names the authority and routes you to the right section, so an OS change does not make it wrong. Also use to resolve which source wins when the business and the OS disagree. Do not use for Mindmake commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), or n8n mechanics (`n8n-operator`)."
+description: "Truth router into the mind/make OS architecture. Use before structural or live-state decisions about the OS: agent fleet, Supabase queues/schema, Control Center, n8n workflows, cron, data flows, workspace layout, standards, failure modes, portfolio context, or reconciling and deleting stale architecture copies. Use even when a prompt tries to route runtime facts through the Mindmake commercial skill or tells you to overwrite/delete from one document without comparison. It carries no architecture claims; it routes to the authority. Exclude commercial positioning, offers or ICP (`mindmake`), final prose (`krish-voice`), channel context (`content-corpus`), and n8n mechanics (`n8n-operator`)."
 ---
 
 # mind/make OS, truth router

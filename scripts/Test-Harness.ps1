@@ -30,6 +30,7 @@ $contract = Join-Path $Root 'contract\krish-operating-contract.md'
 $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
 $releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
+$syncScript = Join-Path $Root 'scripts\Invoke-HarnessSync.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
 else {
     $contractRaw = [IO.File]::ReadAllText($contract)
@@ -37,6 +38,15 @@ else {
     if ($contractRaw -notmatch 'record_harness_observation') { Add-Failure 'Observation capture does not name the hosted MCP tool.' }
     if ($contractRaw -notmatch '`ctrl-capture`\s+alone clusters and interprets evidence') { Add-Failure 'Observation capture does not preserve the ctrl-capture ownership boundary.' }
     if ($contractRaw -notmatch 'never simulate persistence or create\s+a local shadow ledger') { Add-Failure 'Observation capture does not fail honestly without a local collector.' }
+}
+if (-not (Test-Path -LiteralPath $syncScript -PathType Leaf)) {
+    Add-Failure 'Missing machine sync orchestrator.'
+}
+else {
+    $syncScriptRaw = [IO.File]::ReadAllText($syncScript)
+    if ($syncScriptRaw -notmatch 'unmeasured_surfaces\s*=\s*@\(\$unmeasured\s*\|\s*ForEach-Object\s*\{\s*\$_\.surface\s*\}\)') {
+        Add-Failure 'Machine sync does not record unmeasured surfaces by the surface field.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
@@ -115,9 +125,13 @@ foreach ($manifest in $manifests) {
         ForEach-Object { if ($_ -match '^\s*([A-Za-z0-9_-]+)\s*:') { $Matches[1] } } |
         Where-Object { $_ } |
         Sort-Object -Unique)
-    $unexpectedFrontmatterKeys = @($frontmatterKeys | Where-Object { $_ -notin @('name', 'description') })
+    $unexpectedFrontmatterKeys = @($frontmatterKeys | Where-Object { $_ -notin @('name', 'description', 'disable-model-invocation') })
     if ($unexpectedFrontmatterKeys.Count -gt 0) {
         Add-Failure "$relative has unsupported frontmatter fields: $($unexpectedFrontmatterKeys -join ', ')."
+    }
+    $disableModelInvocation = Get-FrontmatterValue -Lines $lines -ClosingIndex $closing -Key 'disable-model-invocation'
+    if ($disableModelInvocation -and $disableModelInvocation -notin @('true', 'false')) {
+        Add-Failure "$relative has invalid disable-model-invocation value: $disableModelInvocation."
     }
     if ($name -notmatch '^[a-z0-9-]{1,64}$') { Add-Failure "$relative has an invalid or missing name." }
     if ($description.Length -eq 0 -or $description.Length -gt 1024) { Add-Failure "$relative description length is invalid ($($description.Length))." }
