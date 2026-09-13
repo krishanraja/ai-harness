@@ -27,38 +27,50 @@ deployed_release:
   status: local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked
 
 latest_approved_release:
-  release_id: v2026.09.13.6
-  tag: harness-v2026.09.13.6
-  source_commit: 285b37f272d4580be5be7cf198f12c7f794ad4b7
+  release_id: v2026.09.13.7
+  tag: harness-v2026.09.13.7
+  source_commit: 11b6c8ff091503fa45cfb4a5f580ca247d8f3933
   published: true
   immutable: true
-  published_at: 2026-09-13T16:56:20Z
-  manifest_sha256: 387F79E9883DF7BB3AA8EDAF1C5B8AA75A0BF2CC37FF27708F609E29630F6734
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.6
-  skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
+  published_at: 2026-09-13T17:43:29Z
+  manifest_sha256: 354B2E206DEB77007401920650A12E791BE753B9096D8D6FBE6BD30480D67F43
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.7
+  skills_tree_aggregate_sha256: F11DB08013F249B5D5CDE591887746D8DDF2007E085FAA353552AE62F1CA1E09
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  changed_skills: []
+  changed_skills:
+    - take-the-brief
   approved_at: 2026-09-13
   approved_by: Krish Raja
   approval_basis: >-
     Krish instructed execution of the audited correction plan on 2026-09-13.
-    PR 64 then passed the independent judge, surface validation, deterministic
+    PR 67 then passed the independent judge, surface validation, deterministic
     repeat-build, and installer proof before merge and immutable publication.
-    This authorises governed rollout with v2026.09.13.5 as rollback.
+    This authorises governed rollout with v2026.09.13.6 as rollback.
   approval_note: >-
-    The v2026.09.13.5 run proved the corrected ordinary positive and exclusion
-    routes, then exposed a measurement contradiction: target containment was
-    being failed when an optional downstream owner was not observed. This
-    release separates containment from downstream-route evidence and excludes
-    two contradictory phase prompts from deterministic release canaries.
+    The v2026.09.13.6 run proved every selected positive route on Claude Code
+    and Codex but exposed one intermittent Codex over-trigger: take-the-brief
+    loaded once in three attempts despite an explicit no-interview instruction
+    and supplied brief. This release front-loads that exclusion gate.
   supersedes_reason: >-
-    v2026.09.13.5 is byte-exact on all three LORIMER surfaces and remains the
-    immutable immediate rollback target. Its skill tree is identical to this
-    release; only governed canary selection and evidence semantics changed.
+    v2026.09.13.6 is byte-exact on all three LORIMER surfaces and remains the
+    immutable immediate rollback target, but its Codex behavioral report has
+    one repeated containment failure in take-the-brief.
   status: published-awaiting-progressive-rollout
 
 
 previous_published_release:
+  release_id: v2026.09.13.6
+  tag: harness-v2026.09.13.6
+  source_commit: 285b37f272d4580be5be7cf198f12c7f794ad4b7
+  immutable: true
+  published_at: 2026-09-13T16:56:20Z
+  manifest_sha256: 387F79E9883DF7BB3AA8EDAF1C5B8AA75A0BF2CC37FF27708F609E29630F6734
+  skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
+  installed_evidence: state/machine-runs/v2026.09.13.6-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-blocked-by-one-codex-containment-failure
+
+
+superseded_approved_release:
   release_id: v2026.09.13.5
   tag: harness-v2026.09.13.5
   source_commit: a718d21803eb597a5c859d6b1b815381abf06323
@@ -66,18 +78,6 @@ previous_published_release:
   published_at: 2026-09-13T15:59:17Z
   manifest_sha256: 7CC20FC33D8E5F88CF2F6DC77AF432DA6DBE7C64E5128AE5DB1609FDD04627B4
   skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
-  installed_evidence: state/machine-runs/v2026.09.13.5-lorimer.json
-  status: installed-exact-parity-behavioral-canaries-partial-with-three-codex-measurement-failures
-
-
-superseded_approved_release:
-  release_id: v2026.09.13.4
-  tag: harness-v2026.09.13.4
-  source_commit: 1a9ee0b301568fbe830b6c80865eee8a8936c016
-  immutable: true
-  published_at: 2026-09-13T14:39:57Z
-  manifest_sha256: 626D1B7C9974E7925A9941E7F46EF9116F28593993E0B3BD8DDCA2C4FEC707EC
-  skills_tree_aggregate_sha256: D2DA01124305C4D1FFB1FBA093B1316944D733D3707D7E28815A81522240601A
   note: >-
     Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER but
     blocked by authenticated canaries. Retained as the second rollback target.
