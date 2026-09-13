@@ -175,7 +175,7 @@ function pick(skill) {
   // Release sentinels measure owner discovery. Prefer owner-clear positives;
   // adversarial handoff cases remain in the broader held-out evaluation bank.
   const positives = (ordinaryPositives.length >= 2 ? ordinaryPositives : allPositives).sort(byPriorityThenShortest)
-  const collisions = preferPriority(all.filter((c) => c.category === 'adversarial_collision' && c.should_trigger !== true))
+  const collisions = preferPriority(all.filter((c) => c.category === 'adversarial_collision' && c.should_trigger !== true && c.release_canary !== false))
   const negatives = preferPriority(all.filter((c) => c.category === 'negative'))
 
   const chosen = []
@@ -368,17 +368,16 @@ function verify(reportPath) {
         .map((x) => x.trim())
         .filter(Boolean)
       const named = String(r.note || '').toLowerCase()
+      const namedSkillTokens = named.match(/[a-z0-9][a-z0-9-]*/g) || []
       const observableAllowed = allowed.filter((name) => suites.includes(name))
-      if (!observableAllowed.length) {
-        if (r.outcome === 'fired' || named.includes(c.skill.toLowerCase())) {
-          outcomeFailures.push(`${r.id}: ${c.skill} fired on a case routed to an external, non-skill owner.`)
-        } else {
-          unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured.' })
-        }
-      } else if (r.outcome === 'unreachable' && manualOnly(c.skill)) {
-        unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The manual-only target was absent from the implicit catalog. Target containment is observed; the neighboring route is unmeasured.' })
-      } else if (r.outcome !== 'wrong-skill' || !observableAllowed.some((skill) => named.includes(skill.toLowerCase()))) {
-        outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${observableAllowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
+      if (r.outcome === 'fired' || namedSkillTokens.includes(c.skill.toLowerCase())) {
+        outcomeFailures.push(`${r.id}: ${c.skill} fired on a case owned by ${allowed.join(' or ')}.`)
+      } else if (!observableAllowed.length) {
+        unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured.' })
+      } else if (r.outcome === 'wrong-skill' && observableAllowed.some((skill) => namedSkillTokens.includes(skill.toLowerCase()))) {
+        // Both target containment and the declared neighboring owner are observed.
+      } else {
+        unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: `Target containment is observed, but none of the declared neighboring owners (${observableAllowed.join(', ')}) was observed on this sample.` })
       }
     } else if (c.should_trigger !== true) {
       // A negative case asserts ONE thing: the target skill must not fire. It
@@ -397,9 +396,10 @@ function verify(reportPath) {
       // reason that says nothing about the trigger, and the vacuity rule below
       // already voids it.
       const named = String(r.note || '').toLowerCase()
+      const namedSkillTokens = named.match(/[a-z0-9][a-z0-9-]*/g) || []
       if (r.outcome === 'fired') {
         outcomeFailures.push(`${r.id}: ${c.skill} fired on a message that must not trigger it${r.note ? ` (${r.note})` : ''}.`)
-      } else if (r.outcome === 'wrong-skill' && named.includes(c.skill.toLowerCase())) {
+      } else if (r.outcome === 'wrong-skill' && namedSkillTokens.includes(c.skill.toLowerCase())) {
         outcomeFailures.push(`${r.id}: reported wrong-skill but the note names ${c.skill}, which is the skill this case forbids${r.note ? ` (${r.note})` : ''}.`)
       }
     }

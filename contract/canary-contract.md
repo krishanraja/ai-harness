@@ -81,6 +81,14 @@ model choice. On Codex, reading an exclusion guard and then loading the declared
 owner is recorded as the expected owner route with `target_guard_read: true`. A target
 read without the expected owner remains a failure.
 
+A negative canary asserts target containment. When it also names an expected
+downstream owner, observing that owner strengthens the evidence; failing to
+observe it makes that downstream route `unmeasured` and the report `partial`, not
+failed. The expected owner needs its own positive sentinel before release health
+can be claimed. Adversarial cases with contradictory phase or owner instructions
+may set `release_canary: false`; they remain in held-out evaluation and are not
+used as deterministic release sentinels.
+
 ## What counts as a canary result
 
 Four outcomes, and nothing else:

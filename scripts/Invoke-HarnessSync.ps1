@@ -806,13 +806,10 @@ function Test-CanaryOutcomePass {
     )
 
     if ($Case.should_trigger -eq $true) { return $Result.outcome -eq 'fired' }
-    if (-not $Case.expected_route) { return $Result.outcome -ne 'fired' }
-
-    $expected = @($Case.expected_route | ForEach-Object { [string]$_ -split '\s+or\s+|,' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
-    $observable = @($expected | Where-Object { $_ -in $CanonicalNames })
-    if ($observable.Count -eq 0) { return $Result.outcome -ne 'fired' }
-    $note = [string]$Result.note
-    return $Result.outcome -eq 'wrong-skill' -and @($observable | Where-Object { $note -match [regex]::Escape($_) }).Count -gt 0
+    # A negative canary proves containment of its target only. A declared
+    # downstream owner strengthens route evidence when observed, but its absence
+    # is partial evidence, not a reason to retry the target containment case.
+    return $Result.outcome -ne 'fired'
 }
 
 function Invoke-ClaudeCanary {
