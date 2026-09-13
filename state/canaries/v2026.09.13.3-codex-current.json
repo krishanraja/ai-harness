@@ -1,0 +1,1273 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.13.3",
+  "surface": "codex-current",
+  "client": "codex",
+  "ran_at": "2026-09-13",
+  "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.13.3 in state/skill-registry.yaml.",
+  "evidence": "Codex CLI JSONL, successful reads from the live skills root, and a live catalog diagnostic.",
+  "capabilities": {
+    "explicit_manual_invocation": false
+  },
+  "results": [
+    {
+      "id": "principles-trigger-002",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+    },
+    {
+      "id": "principles-trigger-026",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+    },
+    {
+      "id": "principles-trigger-032",
+      "outcome": "fired",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "principles-trigger-032",
+          "outcome": "fired",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "principles-trigger-032",
+              "outcome": "fired",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "principles-trigger-032",
+                  "outcome": "fired",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "principles-trigger-032",
+                      "outcome": "fired",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "principles-trigger-032",
+                          "outcome": "fired",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "principles-trigger-032",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                        },
+                        {
+                          "id": "principles-trigger-032",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "principles-trigger-032",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                    },
+                    {
+                      "id": "principles-trigger-032",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                    }
+                  ]
+                },
+                {
+                  "id": "principles-trigger-032",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                },
+                {
+                  "id": "principles-trigger-032",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                }
+              ]
+            },
+            {
+              "id": "principles-trigger-032",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+            },
+            {
+              "id": "principles-trigger-032",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+            }
+          ]
+        },
+        {
+          "id": "principles-trigger-032",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+        },
+        {
+          "id": "principles-trigger-032",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+        }
+      ]
+    },
+    {
+      "id": "principles-trigger-013",
+      "outcome": "fired",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "principles-trigger-013",
+          "outcome": "fired",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "principles-trigger-013",
+              "outcome": "fired",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "principles-trigger-013",
+                  "outcome": "fired",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "principles-trigger-013",
+                      "outcome": "fired",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "principles-trigger-013",
+                          "outcome": "fired",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "principles-trigger-013",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                        },
+                        {
+                          "id": "principles-trigger-013",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "principles-trigger-013",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                    },
+                    {
+                      "id": "principles-trigger-013",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                    }
+                  ]
+                },
+                {
+                  "id": "principles-trigger-013",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                },
+                {
+                  "id": "principles-trigger-013",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+                }
+              ]
+            },
+            {
+              "id": "principles-trigger-013",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+            },
+            {
+              "id": "principles-trigger-013",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+            }
+          ]
+        },
+        {
+          "id": "principles-trigger-013",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+        },
+        {
+          "id": "principles-trigger-013",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of krish-principles/SKILL.md."
+        }
+      ]
+    },
+    {
+      "id": "strategy-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "strategy-trigger-006",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "strategy-trigger-006",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "strategy-trigger-006",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "strategy-trigger-006",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "strategy-trigger-006",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "strategy-trigger-006",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                        },
+                        {
+                          "id": "strategy-trigger-006",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "strategy-trigger-006",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                    },
+                    {
+                      "id": "strategy-trigger-006",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles."
+                    }
+                  ]
+                },
+                {
+                  "id": "strategy-trigger-006",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                },
+                {
+                  "id": "strategy-trigger-006",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles."
+                }
+              ]
+            },
+            {
+              "id": "strategy-trigger-006",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+            },
+            {
+              "id": "strategy-trigger-006",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles."
+            }
+          ]
+        },
+        {
+          "id": "strategy-trigger-006",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+        },
+        {
+          "id": "strategy-trigger-006",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles."
+        }
+      ]
+    },
+    {
+      "id": "strategy-trigger-025",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "strategy-trigger-025",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "strategy-trigger-025",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "strategy-trigger-025",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "strategy-trigger-025",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "strategy-trigger-025",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, take-the-brief.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "strategy-trigger-025",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                        },
+                        {
+                          "id": "strategy-trigger-025",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "strategy-trigger-025",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                    },
+                    {
+                      "id": "strategy-trigger-025",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                    }
+                  ]
+                },
+                {
+                  "id": "strategy-trigger-025",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                },
+                {
+                  "id": "strategy-trigger-025",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+                }
+              ]
+            },
+            {
+              "id": "strategy-trigger-025",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+            },
+            {
+              "id": "strategy-trigger-025",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+            }
+          ]
+        },
+        {
+          "id": "strategy-trigger-025",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+        },
+        {
+          "id": "strategy-trigger-025",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+        }
+      ]
+    },
+    {
+      "id": "strategy-trigger-032",
+      "outcome": "fired",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "strategy-trigger-032",
+          "outcome": "fired",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "strategy-trigger-032",
+              "outcome": "fired",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "strategy-trigger-032",
+                  "outcome": "fired",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "strategy-trigger-032",
+                      "outcome": "fired",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "strategy-trigger-032",
+                          "outcome": "fired",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "strategy-trigger-032",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                        },
+                        {
+                          "id": "strategy-trigger-032",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "strategy-trigger-032",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                    },
+                    {
+                      "id": "strategy-trigger-032",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                    }
+                  ]
+                },
+                {
+                  "id": "strategy-trigger-032",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                },
+                {
+                  "id": "strategy-trigger-032",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+                }
+              ]
+            },
+            {
+              "id": "strategy-trigger-032",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+            },
+            {
+              "id": "strategy-trigger-032",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+            }
+          ]
+        },
+        {
+          "id": "strategy-trigger-032",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+        },
+        {
+          "id": "strategy-trigger-032",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+        }
+      ]
+    },
+    {
+      "id": "strategy-trigger-013",
+      "outcome": "not-fired",
+      "note": "Codex completed without a live canonical skill read."
+    },
+    {
+      "id": "verification-trigger-010",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "verification-trigger-010",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "verification-trigger-010",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "verification-trigger-010",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "verification-trigger-010",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "verification-trigger-010",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "verification-trigger-010",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                        },
+                        {
+                          "id": "verification-trigger-010",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "verification-trigger-010",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                    },
+                    {
+                      "id": "verification-trigger-010",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                    }
+                  ]
+                },
+                {
+                  "id": "verification-trigger-010",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                },
+                {
+                  "id": "verification-trigger-010",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+                }
+              ]
+            },
+            {
+              "id": "verification-trigger-010",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+            },
+            {
+              "id": "verification-trigger-010",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+            }
+          ]
+        },
+        {
+          "id": "verification-trigger-010",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+        },
+        {
+          "id": "verification-trigger-010",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, ux-testing-agent."
+        }
+      ]
+    },
+    {
+      "id": "verification-trigger-031",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "verification-trigger-031",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "verification-trigger-031",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "verification-trigger-031",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "verification-trigger-031",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "verification-trigger-031",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "verification-trigger-031",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles."
+                        },
+                        {
+                          "id": "verification-trigger-031",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "verification-trigger-031",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles."
+                    },
+                    {
+                      "id": "verification-trigger-031",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles."
+                    }
+                  ]
+                },
+                {
+                  "id": "verification-trigger-031",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles."
+                },
+                {
+                  "id": "verification-trigger-031",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles."
+                }
+              ]
+            },
+            {
+              "id": "verification-trigger-031",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles."
+            },
+            {
+              "id": "verification-trigger-031",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles."
+            }
+          ]
+        },
+        {
+          "id": "verification-trigger-031",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles."
+        },
+        {
+          "id": "verification-trigger-031",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles."
+        }
+      ]
+    },
+    {
+      "id": "verification-trigger-032",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "verification-trigger-013",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+    },
+    {
+      "id": "brief-trigger-006",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+    },
+    {
+      "id": "brief-trigger-007",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+    },
+    {
+      "id": "brief-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "brief-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+    },
+    {
+      "id": "video-engine-trigger-002",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+    },
+    {
+      "id": "video-engine-trigger-011",
+      "outcome": "not-fired",
+      "note": "Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated."
+    },
+    {
+      "id": "video-engine-trigger-003",
+      "outcome": "not-fired",
+      "note": "Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated."
+    },
+    {
+      "id": "design-intel-trigger-003",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of design-intelligence-search/SKILL.md."
+    },
+    {
+      "id": "design-intel-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of design-intelligence-search/SKILL.md."
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-design, krish-principles."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: build-apps-with-krish, krish-design, krish-principles, strategy-brief."
+    },
+    {
+      "id": "os-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+    },
+    {
+      "id": "os-trigger-018",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+    },
+    {
+      "id": "os-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake, strategy-brief."
+    },
+    {
+      "id": "decision-trigger-019",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+    },
+    {
+      "id": "decision-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+    },
+    {
+      "id": "decision-trigger-020",
+      "outcome": "wrong-skill",
+      "note": "Codex read the decision-ledger exclusion guard, then loaded the expected owner: mindmake-os.",
+      "target_guard_read": true
+    },
+    {
+      "id": "decision-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "design-trigger-020",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+    },
+    {
+      "id": "design-trigger-008",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+    },
+    {
+      "id": "design-trigger-021",
+      "outcome": "fired",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "design-trigger-021",
+          "outcome": "fired",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "design-trigger-021",
+              "outcome": "fired",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "design-trigger-021",
+                  "outcome": "fired",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "design-trigger-021",
+                      "outcome": "fired",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "design-trigger-021",
+                          "outcome": "fired",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "design-trigger-021",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                        },
+                        {
+                          "id": "design-trigger-021",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "design-trigger-021",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                    },
+                    {
+                      "id": "design-trigger-021",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+                    }
+                  ]
+                },
+                {
+                  "id": "design-trigger-021",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+                },
+                {
+                  "id": "design-trigger-021",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+                }
+              ]
+            },
+            {
+              "id": "design-trigger-021",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+            },
+            {
+              "id": "design-trigger-021",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+            }
+          ]
+        },
+        {
+          "id": "design-trigger-021",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, locked-revision."
+        },
+        {
+          "id": "design-trigger-021",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of krish-design/SKILL.md."
+        }
+      ]
+    },
+    {
+      "id": "design-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, krish-voice, locked-revision."
+    },
+    {
+      "id": "n8n-trigger-004",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of n8n-operator/SKILL.md."
+    },
+    {
+      "id": "n8n-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of n8n-operator/SKILL.md."
+    },
+    {
+      "id": "n8n-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake-os."
+    },
+    {
+      "id": "n8n-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, strategy-brief."
+    },
+    {
+      "id": "build-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of ctrl-build/SKILL.md."
+    },
+    {
+      "id": "build-trigger-003",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of ctrl-build/SKILL.md."
+    },
+    {
+      "id": "build-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: ctrl-compile, krish-principles."
+    },
+    {
+      "id": "instantly-trigger-004",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+      "attempt_count": 3,
+      "passing_attempt_count": 1,
+      "attempts": [
+        {
+          "id": "instantly-trigger-004",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+          "attempt_count": 3,
+          "passing_attempt_count": 1,
+          "attempts": [
+            {
+              "id": "instantly-trigger-004",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+              "attempt_count": 3,
+              "passing_attempt_count": 1,
+              "attempts": [
+                {
+                  "id": "instantly-trigger-004",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 1,
+                  "attempts": [
+                    {
+                      "id": "instantly-trigger-004",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 1,
+                      "attempts": [
+                        {
+                          "id": "instantly-trigger-004",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded live skill reads: krish-principles, n8n-operator.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 1,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "instantly-trigger-004",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                        },
+                        {
+                          "id": "instantly-trigger-004",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: krish-principles, n8n-operator."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "instantly-trigger-004",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                    },
+                    {
+                      "id": "instantly-trigger-004",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: krish-principles, n8n-operator."
+                    }
+                  ]
+                },
+                {
+                  "id": "instantly-trigger-004",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                },
+                {
+                  "id": "instantly-trigger-004",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: krish-principles, n8n-operator."
+                }
+              ]
+            },
+            {
+              "id": "instantly-trigger-004",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+            },
+            {
+              "id": "instantly-trigger-004",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: krish-principles, n8n-operator."
+            }
+          ]
+        },
+        {
+          "id": "instantly-trigger-004",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+        },
+        {
+          "id": "instantly-trigger-004",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: krish-principles, n8n-operator."
+        }
+      ]
+    },
+    {
+      "id": "instantly-trigger-011",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+    },
+    {
+      "id": "instantly-trigger-012",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+      "attempt_count": 3,
+      "passing_attempt_count": 2,
+      "attempts": [
+        {
+          "id": "instantly-trigger-012",
+          "outcome": "fired",
+          "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+        },
+        {
+          "id": "instantly-trigger-012",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+          "attempt_count": 3,
+          "passing_attempt_count": 2,
+          "attempts": [
+            {
+              "id": "instantly-trigger-012",
+              "outcome": "fired",
+              "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+            },
+            {
+              "id": "instantly-trigger-012",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+              "attempt_count": 3,
+              "passing_attempt_count": 2,
+              "attempts": [
+                {
+                  "id": "instantly-trigger-012",
+                  "outcome": "fired",
+                  "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                },
+                {
+                  "id": "instantly-trigger-012",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 2,
+                  "attempts": [
+                    {
+                      "id": "instantly-trigger-012",
+                      "outcome": "fired",
+                      "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                    },
+                    {
+                      "id": "instantly-trigger-012",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 2,
+                      "attempts": [
+                        {
+                          "id": "instantly-trigger-012",
+                          "outcome": "fired",
+                          "note": "Codex JSONL recorded a successful live read of instantly-operator/SKILL.md."
+                        },
+                        {
+                          "id": "instantly-trigger-012",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief, verification-loop.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 2,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "instantly-trigger-012",
+                          "outcome": "wrong-skill",
+                          "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "instantly-trigger-012",
+                      "outcome": "wrong-skill",
+                      "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+                    }
+                  ]
+                },
+                {
+                  "id": "instantly-trigger-012",
+                  "outcome": "wrong-skill",
+                  "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+                }
+              ]
+            },
+            {
+              "id": "instantly-trigger-012",
+              "outcome": "wrong-skill",
+              "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+            }
+          ]
+        },
+        {
+          "id": "instantly-trigger-012",
+          "outcome": "wrong-skill",
+          "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice, strategy-brief."
+        }
+      ]
+    },
+    {
+      "id": "instantly-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, krish-voice."
+    }
+  ],
+  "verdict": "failed",
+  "failures": [
+    "principles-trigger-032: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).",
+    "principles-trigger-013: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).",
+    "strategy-trigger-006: expected strategy-brief to fire, observed wrong-skill.",
+    "strategy-trigger-025: expected strategy-brief to fire, observed wrong-skill.",
+    "strategy-trigger-032: strategy-brief fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of strategy-brief/SKILL.md.).",
+    "verification-trigger-010: expected verification-loop to fire, observed wrong-skill.",
+    "verification-trigger-031: expected verification-loop to fire, observed wrong-skill.",
+    "design-trigger-021: expected wrong-skill naming one of krish-build, verification-loop, observed fired (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-design/SKILL.md.).",
+    "instantly-trigger-004: expected instantly-operator to fire, observed wrong-skill.",
+    "strategy-brief: no positive canary passed on codex-current (strategy-trigger-006 came back wrong-skill, strategy-trigger-025 came back wrong-skill). Every negative result for strategy-brief in this report is void, and strategy-brief is unmeasured on this surface, not passing.",
+    "verification-loop: no positive canary passed on codex-current (verification-trigger-010 came back wrong-skill, verification-trigger-031 came back wrong-skill). Every negative result for verification-loop in this report is void, and verification-loop is unmeasured on this surface, not passing."
+  ],
+  "void_results": [
+    {
+      "id": "strategy-trigger-032",
+      "skill": "strategy-brief",
+      "outcome": "fired"
+    },
+    {
+      "id": "strategy-trigger-013",
+      "skill": "strategy-brief",
+      "outcome": "not-fired"
+    },
+    {
+      "id": "verification-trigger-032",
+      "skill": "verification-loop",
+      "outcome": "wrong-skill"
+    },
+    {
+      "id": "verification-trigger-013",
+      "skill": "verification-loop",
+      "outcome": "wrong-skill"
+    }
+  ],
+  "unmeasured_routes": [
+    {
+      "id": "decision-trigger-009",
+      "skill": "decision-ledger",
+      "expected_route": [
+        "task system"
+      ],
+      "reason": "The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured."
+    }
+  ],
+  "unmeasured_capabilities": []
+}
