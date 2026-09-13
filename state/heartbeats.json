@@ -6,9 +6,9 @@
     "source": "repository_dispatch"
   },
   "harness-sync-surface": {
-    "last_run": "2026-09-12T07:30:52.154Z",
-    "status": "ok",
-    "release": "v2026.09.08.2",
+    "last_run": "2026-09-13T07:31:32.023Z",
+    "status": "blocked",
+    "release": "v2026.09.12.5",
     "source": "repository_dispatch"
   },
   "observer": {
