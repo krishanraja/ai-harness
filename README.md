@@ -2,6 +2,10 @@
 
 Canonical private source for Krish Raja's cross-client AI operating contract, personalized skills, routing rules, evaluations, and release artifacts.
 
+## Start here
+
+Read `CURRENT.md` first. It is generated from the registry, heartbeats, deployment records, and live canary evidence. `NOW.md` is the longer narrative maintained by the documentation steward; it is not the live operational authority.
+
 ## Design
 
 - `contract/`: durable operating, routing, and active-skill quality contracts.
@@ -50,6 +54,4 @@ A build does not install or publish anything. Local directory-link changes, Clau
 
 See `architecture/CROSS_CLIENT_RELEASE_SYSTEM.md` for the governed automatic release and self-correction system. GitHub validation, immutable releases, local reconciliation, live canaries, heartbeat evidence, and controlled observation capture are active. Cloud catalogue uploads remain supervised because the personal catalogues expose no suitable unattended API.
 
-## Current status
-
-The current approved candidate is `v2026.09.12.4`, containing 29 curated skills and three thin client adapters. It corrects routing and recording failures found by authenticated `v2026.09.12.3` live canaries. No candidate becomes deployable until validation, security, collision, behavior, deterministic packaging, immutable publication, installation parity, and post-install canary gates are evidenced.
+Current release and surface status deliberately do not appear here. Run `node scripts/render-current-state.mjs --check` and read `CURRENT.md`.

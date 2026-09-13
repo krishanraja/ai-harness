@@ -1,6 +1,6 @@
 # Cross-client release and learning system
 
-Status: `harness-v2026.09.08.2` is the latest immutable approved release. It is hash-verified on all three local client surfaces on the primary Windows machine. The intermittently mounted additional machine and cloud account catalogues remain separately supervised surfaces. GitHub remains the release authority only after reconciliation; no timestamp, client, or repository location wins automatically.
+This document defines the durable architecture. It does not state the current release or deployment status. Read `CURRENT.md` for generated operational state. GitHub remains the release authority only after reconciliation; no timestamp, client, or repository location wins automatically.
 
 ## Decision
 

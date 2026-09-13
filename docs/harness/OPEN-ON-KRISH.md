@@ -1,5 +1,7 @@
 # Open on Krish, 2026-09-09
 
+> Historical handoff, superseded as a current-state entrypoint. Some actions below were completed, replaced, or made unavailable by later account and release state. Read `CURRENT.md` and live provider readback before acting. This file is retained only as dated evidence of what the 2026-09-09 session observed.
+
 Things this session established, could not do from inside the container, and
 would otherwise be lost when the session ends. Each one carries the exact
 command or click, so none of them needs re-deriving.

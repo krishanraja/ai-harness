@@ -3,18 +3,19 @@
 Entry file for coding agents working in ai-harness. Codex reads this file natively;
 Claude Code and Cursor are routed here by their own rules.
 
-**Read `NOW.md` first.** It is the current state of this repository in one file: what
-it is, who it is for, what changed recently, what is waiting, and what not to trust.
-It is validated on every push to `main` and reconciled against the code nightly, so it
-is never more than a day behind the tree. Chronology lives in `docs/history/LOG.md`.
+**Read `CURRENT.md` first.** It is deterministically rendered from the repository's
+machine-owned release, deployment, heartbeat, and canary evidence. Then read `NOW.md`
+for the longer product narrative and recent chronology. `NOW.md` is validated on every
+push and reconciled nightly, so it may lag operational evidence by up to a day.
+Chronology lives in `docs/history/LOG.md`.
 
 This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
 canon below on anything specific to this repository.
 
-<!-- krish-canon:start release=v2026.09.08.2 sha=cb8e6994f9bd rendered=2026-09-08 -->
+<!-- krish-canon:start release=v2026.09.12.5 sha=6f33c99ee255 rendered=2026-09-13 -->
 ## Krish canon
 
-Rendered from `krishanraja/ai-harness` at release v2026.09.08.2. Nothing inside these
+Rendered from `krishanraja/ai-harness` at release v2026.09.12.5. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
 never silently overwritten, and never lost. Everything outside the markers belongs to
 this repository and is never read or rewritten by the harness.

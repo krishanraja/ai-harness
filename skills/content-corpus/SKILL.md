@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Ownership gate first: conversion strategy, persuasive angles, strategic overlays, and generic marketing strategy are led by krish-content-marketer; final prose and generic voice editing are led by krish-voice. This skill may support those owners only when they also need named-channel context. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Exclude assertions that a channel is currently active; verify status live before producing or publishing."
+description: "Exclusion gate first: never lead drafting, conversion strategy, persuasive angles, strategic overlays, or generic marketing strategy, including for a warm lead email; those belong to krish-content-marketer, with krish-voice owning final prose. Load this skill alongside those owners only when the task also asks what a named channel is for, whom it serves, which native form fits, or how one source should differ across channels. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces including The Money of AI, Built with AI, Signal & Noise, Maven, and lead email. Never infer that a channel is currently active; verify status live before producing or publishing."
 ---
 
 # Content corpus
