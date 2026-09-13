@@ -10,7 +10,6 @@ const OUTPUT = join(ROOT, 'CURRENT.md')
 const CHECK = process.argv.includes('--check')
 
 const registry = parseYaml(readFileSync(join(ROOT, 'state/skill-registry.yaml'), 'utf8'))
-const heartbeats = JSON.parse(readFileSync(join(ROOT, 'state/heartbeats.json'), 'utf8'))
 
 const esc = (value) => String(value ?? 'unknown').replaceAll('|', '\\|')
 const relative = (value) => String(value ?? '').replaceAll('\\', '/')
@@ -89,13 +88,9 @@ for (const row of localRows.filter((item) => item.status?.includes('manual-canar
 out()
 out('## Machine clocks')
 out()
-out('| Clock | Last report | Status | Release |')
-out('|---|---|---|---|')
-for (const [name, heartbeat] of Object.entries(heartbeats)) {
-  out(`| ${esc(name)} | ${esc(heartbeat.last_run)} | ${esc(heartbeat.status || 'reported')} | ${esc(heartbeat.release || 'n/a')} |`)
-}
+out('Read `state/heartbeats.json` directly for the latest timestamps, job status and reported release. Heartbeats change independently of documentation and are deliberately not copied into this file.')
 out()
-out('A silent or old secondary-machine heartbeat means unavailable or stale, not failed. Each machine updates itself from an immutable release when it is online; the mounted drive is not a deployment channel.')
+out('A heartbeat status proves the scheduled job ran; it does not override deployment or behavioral evidence. A silent or old secondary-machine heartbeat means unavailable or stale, not failed. Each machine updates itself from an immutable release when it is online; the mounted drive is not a deployment channel.')
 out()
 out('## Other open gates')
 out()

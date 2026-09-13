@@ -47,14 +47,9 @@ A local hash match proves installed bytes only. It does not prove client discove
 
 ## Machine clocks
 
-| Clock | Last report | Status | Release |
-|---|---|---|---|
-| harness-sync-lorimer | 2026-09-13T00:47:59.175Z | blocked | v2026.09.12.5 |
-| harness-sync-surface | 2026-09-12T07:30:52.154Z | ok | v2026.09.08.2 |
-| observer | 2026-09-12T22:31:45.279Z | reported | n/a |
-| openclaw-vps | 2026-09-13T00:05:09.953Z | ok | n/a |
+Read `state/heartbeats.json` directly for the latest timestamps, job status and reported release. Heartbeats change independently of documentation and are deliberately not copied into this file.
 
-A silent or old secondary-machine heartbeat means unavailable or stale, not failed. Each machine updates itself from an immutable release when it is online; the mounted drive is not a deployment channel.
+A heartbeat status proves the scheduled job ran; it does not override deployment or behavioral evidence. A silent or old secondary-machine heartbeat means unavailable or stale, not failed. Each machine updates itself from an immutable release when it is online; the mounted drive is not a deployment channel.
 
 ## Other open gates
 
