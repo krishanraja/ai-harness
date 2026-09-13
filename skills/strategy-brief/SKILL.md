@@ -1,6 +1,6 @@
 ---
 name: strategy-brief
-description: Pre-execution strategy harness for Krish. Use before producing, changing, deploying, sending, deciding, or materially recommending anything; before a multi-step research or build task; and whenever the route, trade-off, authority, or definition of done matters. Apply krish-principles first. For tiny reversible work, compress the brief to objective, route, and check. For material work, expose assumptions, alternatives, risks, approval boundaries, and the independent verification plan before execution.
+description: "Pre-execution routing gate for Krish. Invoke before producing, changing, deploying, sending, deciding, materially recommending, multi-step research/build work, or whenever route, trade-off, authority, or done matters. For tiny reversible work, compress to objective, route, and check. For material work, expose assumptions, alternatives, risks, approval walls, and verification before execution. Apply krish-principles first. NEVER invoke for pure social conversation, jokes, acknowledgements, definitions, translations, arithmetic, verbatim readback, or passive read-only listings. When an explicit interview is still open, take-the-brief owns that phase and hands off here afterward."
 ---
 
 # Strategy Brief

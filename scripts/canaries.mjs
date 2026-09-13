@@ -165,9 +165,11 @@ function manualOnly(skill) {
 function pick(skill) {
   const all = casesFor(skill)
   const shortest = (a, b) => String(a.prompt || '').length - String(b.prompt || '').length
-  const positives = all.filter((c) => c.should_trigger === true).sort(shortest)
-  const collisions = all.filter((c) => c.category === 'adversarial_collision' && c.should_trigger !== true)
-  const negatives = all.filter((c) => c.category === 'negative')
+  const byPriorityThenShortest = (a, b) => (Number(b.canary_priority || 0) - Number(a.canary_priority || 0)) || shortest(a, b)
+  const preferPriority = (items) => items.some((item) => item.canary_priority) ? [...items].sort(byPriorityThenShortest) : items
+  const positives = all.filter((c) => c.should_trigger === true).sort(byPriorityThenShortest)
+  const collisions = preferPriority(all.filter((c) => c.category === 'adversarial_collision' && c.should_trigger !== true))
+  const negatives = preferPriority(all.filter((c) => c.category === 'negative'))
 
   const chosen = []
   const manual = manualOnly(skill)
@@ -204,9 +206,11 @@ function pick(skill) {
     // The canonical form first: the shortest positive is almost always the plain
     // way a person would actually ask.
     if (positives[0]) chosen.push({ ...positives[0], role: 'positive', load_bearing: true })
-    // One more positive from the other end, to catch a trigger that only works
-    // for the exact canonical phrasing.
-    if (positives.length > 1) chosen.push({ ...positives[positives.length - 1], role: 'positive', load_bearing: true })
+    // Prefer explicitly reviewed live canaries. Without them, retain the old
+    // short/long diversity heuristic for suites that have not been curated.
+    const second = positives.find((candidate, index) => index > 0 && candidate.canary_priority)
+      || (positives.length > 1 ? [...positives].sort(shortest)[positives.length - 1] : null)
+    if (second) chosen.push({ ...second, role: 'positive', load_bearing: true })
   }
   // The sharpest negative is a collision: another skill could plausibly claim it.
   const c = collisions.find((x) => x.expected_route || x.neighbor) || collisions[0]
