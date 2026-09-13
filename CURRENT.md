@@ -7,11 +7,11 @@ Rendered from registry reconciliation date **2026-09-13**.
 
 ## Release authority
 
-- Latest approved release: **v2026.09.13.4** (harness-v2026.09.13.4)
-- Immutable and published: **yes**, 2026-09-13T14:39:57Z
-- Release source commit: `1a9ee0b301568fbe830b6c80865eee8a8936c016`
-- Manifest SHA-256: `626D1B7C9974E7925A9941E7F46EF9116F28593993E0B3BD8DDCA2C4FEC707EC`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.4
+- Latest approved release: **v2026.09.13.5** (harness-v2026.09.13.5)
+- Immutable and published: **yes**, 2026-09-13T15:59:17Z
+- Release source commit: `a718d21803eb597a5c859d6b1b815381abf06323`
+- Manifest SHA-256: `7CC20FC33D8E5F88CF2F6DC77AF432DA6DBE7C64E5128AE5DB1609FDD04627B4`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.5
 - Current deployment verdict: **local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
