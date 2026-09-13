@@ -68,17 +68,30 @@ const TIER1 = {
   'decision-ledger': 'A false positive silently turns tasks or unresolved operational state into durable memory, so its exclusion routes are load-bearing.',
 }
 
-const suites = readdirSync(join(HARNESS, 'evals'))
+// A trigger file may contain cases for several real skills. `core-trigger-cases`
+// does exactly that for krish-principles, strategy-brief, and verification-loop.
+// Index the declared skill in each record, never the storage filename. Treating
+// `core` as an invocable skill produced impossible canaries on 2026-09-13.
+const triggerRecords = readdirSync(join(HARNESS, 'evals'))
   .filter((f) => /-trigger-cases\.jsonl$/.test(f))
-  .map((f) => f.replace(/-trigger-cases\.jsonl$/, ''))
+  .flatMap((file) => readFileSync(join(HARNESS, 'evals', file), 'utf8')
+    .split('\n')
+    .map((line, index) => ({ line, index }))
+    .filter(({ line }) => line.trim())
+    .map(({ line, index }) => {
+      let record
+      try { record = JSON.parse(line) } catch (error) {
+        throw new Error(`${file}:${index + 1} is not valid JSON: ${error.message}`)
+      }
+      const inferredSkill = file.replace(/-trigger-cases\.jsonl$/, '')
+      if (record.skill != null && typeof record.skill !== 'string') {
+        throw new Error(`${file}:${index + 1} has an invalid declared skill`)
+      }
+      return { ...record, skill: record.skill || inferredSkill }
+    }))
 
-const casesFor = (skill) => {
-  const p = join(HARNESS, 'evals', `${skill}-trigger-cases.jsonl`)
-  if (!existsSync(p)) return []
-  return readFileSync(p, 'utf8').split('\n').filter((l) => l.trim()).map((l) => {
-    try { return JSON.parse(l) } catch { return null }
-  }).filter(Boolean)
-}
+const suites = [...new Set(triggerRecords.map((record) => record.skill))]
+const casesFor = (skill) => triggerRecords.filter((record) => record.skill === skill)
 
 /**
  * Which skills changed in this release.
