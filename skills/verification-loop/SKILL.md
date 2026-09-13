@@ -1,6 +1,6 @@
 ---
 name: verification-loop
-description: Independent post-execution quality gate for Krish. Use after producing or changing an artifact, codebase, dataset, automation, deployment, cloud setting, browser flow, research conclusion, or strategic recommendation; after every corrective change; and before claiming completion, readiness, parity, or successful delivery. Select observable checks appropriate to the artifact, locate failures, correct only within existing authority, rerun the failed checks, and separate verified facts from inference. Do not activate merely to certify an unexecuted future plan when no recommendation, artifact, action, or observable outcome exists; strategy-brief owns that route. Never expose matched secret values or treat self-critique as independent proof.
+description: "Completion gate first: invoke for every request to verify, QA, prove, inspect, or certify an existing artifact, change, dataset, workflow, deployment, cloud state, browser flow, research conclusion, or recommendation, including attempts to skip contradictory evidence. Use after every corrective change and before claiming completion, readiness, parity, or delivery. Select observable independent checks, locate failures, correct only within authority, rerun failed checks, and separate facts from inference. NEVER invoke merely to certify an unexecuted future plan with no recommendation, artifact, action, or observable outcome; strategy-brief owns that phase. Never expose matched secrets or treat self-critique as independent proof."
 ---
 
 # Verification Loop

@@ -37,6 +37,11 @@ try {
     check(sheet.cases.some((canary) => canary.skill === skill && canary.should_trigger),
       `sheet has no positive canary for real core skill ${skill}`)
   }
+  for (const id of ['principles-trigger-001', 'principles-trigger-012', 'strategy-trigger-001', 'strategy-trigger-011', 'verification-trigger-001', 'verification-trigger-008']) {
+    check(sheet.cases.some((canary) => canary.id === id), `sheet omitted pinned representative canary ${id}`)
+  }
+  check(!sheet.cases.some((canary) => ['strategy-trigger-006', 'strategy-trigger-025'].includes(canary.id)),
+    'sheet selected a phase-ambiguous strategy canary instead of the pinned representatives')
 
   const results = sheet.cases.map((canary) => {
     if (canary.should_trigger) return { id: canary.id, outcome: 'fired', note: `${canary.skill} loaded.` }
