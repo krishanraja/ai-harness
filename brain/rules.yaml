@@ -599,11 +599,17 @@ contract_rules:
     status: live
   - id: collision-rules.design-intelligence-search-is
     file: contract/skill-routing-contract.md
-    text_sha: "4c85a5ceec79"
-    first_seen: "2026-09-07"
+    text_sha: "0e26f5cfd171"
+    first_seen: "2026-09-13"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-13-handoff-and-canary-correction.md"
+    history:
+      - text_sha: "4c85a5ceec79"
+        valid_until: "2026-09-13"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: collision-rules.mindmake-os-owns-current
     file: contract/skill-routing-contract.md
