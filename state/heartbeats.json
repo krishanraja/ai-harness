@@ -1,14 +1,14 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-09-13T00:47:59.175Z",
-    "status": "blocked",
+    "last_run": "2026-09-13T07:30:57.874Z",
+    "status": "ok",
     "release": "v2026.09.12.5",
     "source": "repository_dispatch"
   },
   "harness-sync-surface": {
-    "last_run": "2026-09-12T07:30:52.154Z",
-    "status": "ok",
-    "release": "v2026.09.08.2",
+    "last_run": "2026-09-13T07:31:32.023Z",
+    "status": "blocked",
+    "release": "v2026.09.12.5",
     "source": "repository_dispatch"
   },
   "observer": {
@@ -17,10 +17,10 @@
     "repos_read": 10
   },
   "openclaw-vps": {
-    "last_run": "2026-09-13T00:05:09.953Z",
+    "last_run": "2026-09-13T11:05:10.053Z",
     "status": "ok",
     "n8n_cycle_start": "2026-09-01T00:00:00+00:00",
-    "n8n_executions_this_cycle": 2102,
+    "n8n_executions_this_cycle": 2159,
     "gateway_jobs_defined": 45,
     "source": "repository_dispatch"
   }
