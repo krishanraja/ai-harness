@@ -1,4 +1,4 @@
-{"id":"principles-trigger-001","skill":"krish-principles","category":"positive","prompt":"Which of these three Mindmake offers should I prioritise this quarter, and why?","should_trigger":true,"canary_priority":2}
+{"id":"principles-trigger-001","skill":"krish-principles","category":"positive","prompt":"Which of these three Mindmake offers should I prioritise this quarter, and why?","should_trigger":true}
 {"id":"principles-trigger-002","skill":"krish-principles","category":"positive","prompt":"Rename this local markdown heading and verify the diff.","should_trigger":true}
 {"id":"principles-trigger-003","skill":"krish-principles","category":"positive","prompt":"Build the smallest production feature that proves whether this workflow is useful.","should_trigger":true}
 {"id":"principles-trigger-004","skill":"krish-principles","category":"positive","prompt":"Draft a concise follow-up email under my name from these notes.","should_trigger":true}
@@ -9,7 +9,7 @@
 {"id":"principles-trigger-009","skill":"krish-principles","category":"positive","prompt":"Turn this research into a one-page decision brief I can use live.","should_trigger":true}
 {"id":"principles-trigger-010","skill":"krish-principles","category":"positive","prompt":"Pressure-test this partnership and tell me the downside lane.","should_trigger":true}
 {"id":"principles-trigger-011","skill":"krish-principles","category":"positive","prompt":"Summarise this file, but only include facts that change the next action.","should_trigger":true}
-{"id":"principles-trigger-012","skill":"krish-principles","category":"positive","prompt":"I have been away for two months. Re-anchor me: what should I kill, pause, or double down on?","should_trigger":true,"canary_priority":1}
+{"id":"principles-trigger-012","skill":"krish-principles","category":"positive","prompt":"I have been away for two months. Re-anchor me: what should I kill, pause, or double down on?","should_trigger":true}
 {"id":"principles-trigger-013","skill":"krish-principles","category":"negative","prompt":"Thanks.","should_trigger":false}
 {"id":"principles-trigger-014","skill":"krish-principles","category":"negative","prompt":"Good morning!","should_trigger":false}
 {"id":"principles-trigger-015","skill":"krish-principles","category":"negative","prompt":"👍","should_trigger":false}
@@ -66,10 +66,10 @@
 {"id":"verification-trigger-002","skill":"verification-loop","category":"positive","prompt":"The workflow says succeeded. Confirm that rows actually reached Supabase.","should_trigger":true}
 {"id":"verification-trigger-003","skill":"verification-loop","category":"positive","prompt":"I uploaded the skill. Prove Claude can discover and apply it.","should_trigger":true}
 {"id":"verification-trigger-004","skill":"verification-loop","category":"positive","prompt":"The research memo is drafted. Check every consequential claim and the recommendation.","should_trigger":true}
-{"id":"verification-trigger-005","skill":"verification-loop","category":"positive","prompt":"After fixing the failed test, rerun it and the adjacent checks.","should_trigger":true}
+{"id":"verification-trigger-005","skill":"verification-loop","category":"positive","prompt":"After fixing the failed test, rerun it and the adjacent checks.","should_trigger":true,"canary_priority":1}
 {"id":"verification-trigger-006","skill":"verification-loop","category":"positive","prompt":"Open the final PDF and make sure the rendered artifact is usable.","should_trigger":true}
 {"id":"verification-trigger-007","skill":"verification-loop","category":"positive","prompt":"We changed a cloud permission. Read back the authoritative state.","should_trigger":true}
-{"id":"verification-trigger-008","skill":"verification-loop","category":"positive","prompt":"Check whether the local skill bytes match the approved release manifest.","should_trigger":true,"canary_priority":1}
+{"id":"verification-trigger-008","skill":"verification-loop","category":"positive","prompt":"Check whether the local skill bytes match the approved release manifest.","should_trigger":true}
 {"id":"verification-trigger-009","skill":"verification-loop","category":"positive","prompt":"The launch recommendation is ready. Test it against the strongest alternative.","should_trigger":true}
 {"id":"verification-trigger-010","skill":"verification-loop","category":"positive","prompt":"QA the desktop and mobile flows after the redesign.","should_trigger":true}
 {"id":"verification-trigger-011","skill":"verification-loop","category":"positive","prompt":"The import completed with warnings. Determine what is actually complete and what is not.","should_trigger":true}

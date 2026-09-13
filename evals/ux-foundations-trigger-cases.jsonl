@@ -1,8 +1,8 @@
-{"id":"uxf-trigger-001","category":"positive","prompt":"What does current WCAG 2.2 AA require for minimum pointer target size on the web, including exceptions?","should_trigger":true}
+{"id":"uxf-trigger-001","category":"positive","prompt":"What does current WCAG 2.2 AA require for minimum pointer target size on the web, including exceptions?","should_trigger":true,"canary_priority":2}
 {"id":"uxf-trigger-002","category":"positive","prompt":"Check the official contrast thresholds for body text, large text, and essential UI component boundaries.","should_trigger":true}
 {"id":"uxf-trigger-003","category":"positive","prompt":"Does WCAG actually require exactly one h1, or is that a best-practice claim?","should_trigger":true}
 {"id":"uxf-trigger-004","category":"positive","prompt":"Which classic usability heuristic is violated when a save action gives no status or confirmation?","should_trigger":true}
-{"id":"uxf-trigger-005","category":"positive","prompt":"Compare web WCAG target sizing with current Apple iOS and Android guidance without mixing px, pt, and dp.","should_trigger":true}
+{"id":"uxf-trigger-005","category":"positive","prompt":"Compare web WCAG target sizing with current Apple iOS and Android guidance without mixing px, pt, and dp.","should_trigger":true,"canary_priority":1}
 {"id":"uxf-trigger-006","category":"positive","prompt":"Give me the generic keyboard and visible-focus fundamentals for this form pattern, with the relevant WCAG sources.","should_trigger":true}
 {"id":"uxf-trigger-007","category":"positive","prompt":"What is the minimum sound structure for an A/B test before it launches?","should_trigger":true}
 {"id":"uxf-trigger-008","category":"positive","prompt":"Tell me whether this accessibility statement is normative WCAG, an advisory technique, a platform guideline, or a heuristic.","should_trigger":true}

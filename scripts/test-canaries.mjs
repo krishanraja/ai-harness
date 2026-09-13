@@ -28,20 +28,31 @@ try {
   const registry = parseYaml(readFileSync(join(HARNESS, 'state/skill-registry.yaml'), 'utf8'))
   const declaredChanged = registry?.latest_approved_release?.changed_skills || []
   for (const skill of declaredChanged) {
+    if (skill === 'krish-principles') {
+      for (const adapter of ['adapters/claude/CLAUDE.md', 'adapters/codex/AGENTS.md', 'adapters/cursor/krish-core.mdc']) {
+        check(readFileSync(join(HARNESS, adapter), 'utf8').includes('skills\\krish-principles\\SKILL.md'),
+          `${adapter} lost its directly imported krish-principles invariant`)
+      }
+      continue
+    }
     check(sheet.skills.includes(skill), `release sheet omitted declared changed skill ${skill}`)
   }
   check(sheet.skills.length >= 7, `expected at least 7 tier-one skills, got ${sheet.skills.length}`)
   check(!sheet.skills.includes('core'), 'sheet invented a non-invocable skill from the core trigger filename')
-  for (const skill of ['krish-principles', 'strategy-brief', 'verification-loop']) {
+  check(!sheet.skills.includes('krish-principles'),
+    'directly imported krish-principles must be checked as an adapter invariant, not as an invocation canary')
+  for (const skill of ['strategy-brief', 'verification-loop']) {
     check(sheet.skills.includes(skill), `sheet omitted real core skill ${skill}`)
     check(sheet.cases.some((canary) => canary.skill === skill && canary.should_trigger),
       `sheet has no positive canary for real core skill ${skill}`)
   }
-  for (const id of ['principles-trigger-001', 'principles-trigger-012', 'strategy-trigger-001', 'strategy-trigger-011', 'verification-trigger-001', 'verification-trigger-008']) {
+  for (const id of ['strategy-trigger-001', 'strategy-trigger-011', 'verification-trigger-001', 'verification-trigger-005']) {
     check(sheet.cases.some((canary) => canary.id === id), `sheet omitted pinned representative canary ${id}`)
   }
   check(!sheet.cases.some((canary) => ['strategy-trigger-006', 'strategy-trigger-025'].includes(canary.id)),
     'sheet selected a phase-ambiguous strategy canary instead of the pinned representatives')
+  check(!sheet.cases.some((canary) => canary.role === 'positive' && /trigger-0(?:17|18|19|20|21)$/.test(canary.id)),
+    'sheet selected an adversarial collision as an ordinary positive sentinel')
 
   const results = sheet.cases.map((canary) => {
     if (canary.should_trigger) return { id: canary.id, outcome: 'fired', note: `${canary.skill} loaded.` }

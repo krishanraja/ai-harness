@@ -68,6 +68,11 @@ the canary can prove only that the forbidden skill stayed out unless that owner 
 observable canonical skill. Capability gaps and downstream route gaps are recorded as
 partial evidence and never promoted to passes.
 
+An adapter may directly import doctrine on every task. That import is an adapter
+invariant, not an implicit routing event. Verify it statically in every rendered
+adapter and do not create invocation canaries that require the imported file to
+be absent on social messages. `krish-principles` is currently such an import.
+
 Semantic routing is sampled, not deterministic. Run every case once, then repeat only
 an apparent mismatch twice in fresh tasks. The recorded outcome follows the two-of-three
 majority and retains all three attempts. A first-pass success is not repeated, which
