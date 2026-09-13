@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-09-13**.
 - Release source commit: `c7a429db4336b7f2e8cac563ee68d9d40714b4d4`
 - Manifest SHA-256: `415C473EFEE85EC846AC83B3237937AE4FF5CFE3805F01F2C61D57613C6040A5`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.8
-- Current deployment verdict: **local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked**
+- Current deployment verdict: **local-parity-deployed-claude-partial-cursor-manual-codex-one-intermittent-containment-failure-cloud-still-v2026.08.29.3**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -21,9 +21,9 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | installed-hash-verified-and-canaried-video-engine-reachable |
-| cursor-primary | v2026.09.12.5 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.12.5 | 29/29 exact | installed-hash-verified-behavioral-canary-failed |
-| codex-current | v2026.09.12.5 | 29/29 exact | installed-hash-verified-behavioral-canary-failed |
+| cursor-primary | v2026.09.13.8 | 29/29 exact | installed-hash-verified-manual-canary-required |
+| claude-code-user | v2026.09.13.8 | 29/29 exact | installed-hash-verified-behavioral-canaries-partial-external-task-route-unmeasured |
+| codex-current | v2026.09.13.8 | 29/29 exact | installed-hash-verified-one-intermittent-instantly-containment-failure |
 | claude-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 | perplexity-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 
@@ -31,18 +31,9 @@ A local hash match proves installed bytes only. It does not prove client discove
 
 ## Behavioral evidence
 
-- **claude-code-user: failed.** [Evidence](state/canaries/v2026.09.12.5-claude-code-user.json).
-  - design-intelligence-search-explicit-001: expected design-intelligence-search to fire, observed not-fired.
-  - design-intel-trigger-003: design-intelligence-search fired on a message that must not trigger it (Claude stream-json recorded Skill(design-intelligence-search).).
-  - decision-trigger-009: expected wrong-skill naming one of task system, observed wrong-skill (Claude stream-json recorded Skill calls: krish-principles.).
-  - design-intelligence-search: no positive canary passed on claude-code-user (design-intelligence-search-explicit-001 came back not-fired). Every negative result for design-intelligence-search in this report is void, and design-intelligence-search is unmeasured on this surface, not passing.
-- **codex-current: failed.** [Evidence](state/canaries/v2026.09.12.5-codex-current.json).
-  - design-intelligence-search-explicit-001: expected design-intelligence-search to fire, observed unreachable.
-  - os-trigger-018: expected mindmake-os to fire, observed wrong-skill.
-  - corpus-trigger-007: expected wrong-skill naming one of krish-content-marketer, observed fired (Codex JSONL recorded a successful live read of content-corpus/SKILL.md.).
-  - decision-trigger-020: expected wrong-skill naming one of mindmake-os, observed fired (Codex JSONL recorded a successful live read of decision-ledger/SKILL.md.).
-  - decision-trigger-009: expected wrong-skill naming one of task system, observed wrong-skill (Codex JSONL recorded live skill reads: krish-principles.).
-  - design-intelligence-search: no positive canary passed on codex-current (design-intelligence-search-explicit-001 came back unreachable). Every negative result for design-intelligence-search in this report is void, and design-intelligence-search is unmeasured on this surface, not passing.
+- **claude-code-user: partial.** [Evidence](state/canaries/v2026.09.13.8-claude-code-user.json).
+- **codex-current: failed.** [Evidence](state/canaries/v2026.09.13.8-codex-current.json).
+  - instantly-trigger-012: instantly-operator fired on a message that must not trigger it (Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded a successful live read of instantly-operator/SKILL.md.).
 - **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
 
 ## Machine clocks
