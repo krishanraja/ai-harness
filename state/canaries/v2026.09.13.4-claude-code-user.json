@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.13.4",
+  "surface": "claude-code-user",
+  "client": "claude",
+  "ran_at": "2026-09-13",
+  "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.13.4 in state/skill-registry.yaml.",
+  "evidence": "Claude Code stream-json Skill tool calls.",
+  "capabilities": {
+    "explicit_manual_invocation": false
+  },
+  "results": [
+    {
+      "id": "principles-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-principles)."
+    },
+    {
+      "id": "principles-trigger-012",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-principles)."
+    },
+    {
+      "id": "principles-trigger-032",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "principles-trigger-013",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "strategy-trigger-001",
+      "outcome": "fired",
+      "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+      "attempt_count": 3,
+      "passing_attempt_count": 2,
+      "attempts": [
+        {
+          "id": "strategy-trigger-001",
+          "outcome": "wrong-skill",
+          "note": "Claude stream-json recorded Skill calls: krish-build, krish-principles."
+        },
+        {
+          "id": "strategy-trigger-001",
+          "outcome": "fired",
+          "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+          "attempt_count": 3,
+          "passing_attempt_count": 2,
+          "attempts": [
+            {
+              "id": "strategy-trigger-001",
+              "outcome": "wrong-skill",
+              "note": "Claude stream-json recorded Skill calls: krish-build, krish-principles."
+            },
+            {
+              "id": "strategy-trigger-001",
+              "outcome": "fired",
+              "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+              "attempt_count": 3,
+              "passing_attempt_count": 2,
+              "attempts": [
+                {
+                  "id": "strategy-trigger-001",
+                  "outcome": "wrong-skill",
+                  "note": "Claude stream-json recorded Skill calls: krish-build, krish-principles."
+                },
+                {
+                  "id": "strategy-trigger-001",
+                  "outcome": "fired",
+                  "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 2,
+                  "attempts": [
+                    {
+                      "id": "strategy-trigger-001",
+                      "outcome": "wrong-skill",
+                      "note": "Claude stream-json recorded Skill calls: krish-build, krish-principles."
+                    },
+                    {
+                      "id": "strategy-trigger-001",
+                      "outcome": "fired",
+                      "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 2,
+                      "attempts": [
+                        {
+                          "id": "strategy-trigger-001",
+                          "outcome": "wrong-skill",
+                          "note": "Claude stream-json recorded Skill calls: krish-build, krish-principles."
+                        },
+                        {
+                          "id": "strategy-trigger-001",
+                          "outcome": "fired",
+                          "note": "Repeat-on-mismatch: 2/3 attempts met the declared route. Claude stream-json recorded Skill(strategy-brief).",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 2,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "strategy-trigger-001",
+                          "outcome": "fired",
+                          "note": "Claude stream-json recorded Skill(strategy-brief)."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "strategy-trigger-001",
+                      "outcome": "fired",
+                      "note": "Claude stream-json recorded Skill(strategy-brief)."
+                    }
+                  ]
+                },
+                {
+                  "id": "strategy-trigger-001",
+                  "outcome": "fired",
+                  "note": "Claude stream-json recorded Skill(strategy-brief)."
+                }
+              ]
+            },
+            {
+              "id": "strategy-trigger-001",
+              "outcome": "fired",
+              "note": "Claude stream-json recorded Skill(strategy-brief)."
+            }
+          ]
+        },
+        {
+          "id": "strategy-trigger-001",
+          "outcome": "fired",
+          "note": "Claude stream-json recorded Skill(strategy-brief)."
+        }
+      ]
+    },
+    {
+      "id": "strategy-trigger-011",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(strategy-brief)."
+    },
+    {
+      "id": "strategy-trigger-032",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "strategy-trigger-013",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "verification-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(verification-loop)."
+    },
+    {
+      "id": "verification-trigger-008",
+      "outcome": "wrong-skill",
+      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+      "attempt_count": 3,
+      "passing_attempt_count": 0,
+      "attempts": [
+        {
+          "id": "verification-trigger-008",
+          "outcome": "wrong-skill",
+          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+          "attempt_count": 3,
+          "passing_attempt_count": 0,
+          "attempts": [
+            {
+              "id": "verification-trigger-008",
+              "outcome": "wrong-skill",
+              "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+              "attempt_count": 3,
+              "passing_attempt_count": 0,
+              "attempts": [
+                {
+                  "id": "verification-trigger-008",
+                  "outcome": "wrong-skill",
+                  "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+                  "attempt_count": 3,
+                  "passing_attempt_count": 0,
+                  "attempts": [
+                    {
+                      "id": "verification-trigger-008",
+                      "outcome": "wrong-skill",
+                      "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+                      "attempt_count": 3,
+                      "passing_attempt_count": 0,
+                      "attempts": [
+                        {
+                          "id": "verification-trigger-008",
+                          "outcome": "wrong-skill",
+                          "note": "Repeat-on-mismatch: 0/3 attempts met the declared route. Claude stream-json recorded Skill calls: harness-maintainer, krish-principles.",
+                          "attempt_count": 3,
+                          "passing_attempt_count": 0,
+                          "attempts": "  "
+                        },
+                        {
+                          "id": "verification-trigger-008",
+                          "outcome": "wrong-skill",
+                          "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                        },
+                        {
+                          "id": "verification-trigger-008",
+                          "outcome": "wrong-skill",
+                          "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                        }
+                      ]
+                    },
+                    {
+                      "id": "verification-trigger-008",
+                      "outcome": "wrong-skill",
+                      "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                    },
+                    {
+                      "id": "verification-trigger-008",
+                      "outcome": "wrong-skill",
+                      "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                    }
+                  ]
+                },
+                {
+                  "id": "verification-trigger-008",
+                  "outcome": "wrong-skill",
+                  "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                },
+                {
+                  "id": "verification-trigger-008",
+                  "outcome": "wrong-skill",
+                  "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+                }
+              ]
+            },
+            {
+              "id": "verification-trigger-008",
+              "outcome": "wrong-skill",
+              "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+            },
+            {
+              "id": "verification-trigger-008",
+              "outcome": "wrong-skill",
+              "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+            }
+          ]
+        },
+        {
+          "id": "verification-trigger-008",
+          "outcome": "wrong-skill",
+          "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+        },
+        {
+          "id": "verification-trigger-008",
+          "outcome": "wrong-skill",
+          "note": "Claude stream-json recorded Skill calls: harness-maintainer, krish-principles."
+        }
+      ]
+    },
+    {
+      "id": "verification-trigger-032",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, strategy-brief."
+    },
+    {
+      "id": "verification-trigger-013",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: take-the-brief."
+    },
+    {
+      "id": "brief-trigger-006",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "brief-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-002",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-003",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "design-intel-trigger-003",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+    },
+    {
+      "id": "design-intel-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-design, krish-principles."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: build-apps-with-krish, krish-principles, strategy-brief."
+    },
+    {
+      "id": "os-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-018",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, mindmake."
+    },
+    {
+      "id": "decision-trigger-019",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-020",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: mindmake-os."
+    },
+    {
+      "id": "decision-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "instantly-trigger-004",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(instantly-operator)."
+    },
+    {
+      "id": "instantly-trigger-011",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(instantly-operator)."
+    },
+    {
+      "id": "instantly-trigger-012",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-content-marketer, krish-principles."
+    },
+    {
+      "id": "instantly-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-content-marketer, krish-principles, krish-voice."
+    },
+    {
+      "id": "design-trigger-020",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-design)."
+    },
+    {
+      "id": "design-trigger-008",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-design)."
+    },
+    {
+      "id": "design-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, krish-voice, locked-revision."
+    },
+    {
+      "id": "marketer-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+    },
+    {
+      "id": "marketer-trigger-017",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+    },
+    {
+      "id": "marketer-trigger-018",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-voice."
+    },
+    {
+      "id": "marketer-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-voice."
+    },
+    {
+      "id": "uxf-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ux-foundations)."
+    },
+    {
+      "id": "uxf-trigger-008",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ux-foundations)."
+    },
+    {
+      "id": "uxf-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-design, krish-principles."
+    },
+    {
+      "id": "check-trigger-021",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ctrl-check)."
+    },
+    {
+      "id": "check-trigger-006",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ctrl-check)."
+    },
+    {
+      "id": "check-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, strategy-brief."
+    }
+  ],
+  "verdict": "failed",
+  "failures": [
+    "verification-trigger-008: expected verification-loop to fire, observed wrong-skill."
+  ],
+  "void_results": [],
+  "unmeasured_routes": [
+    {
+      "id": "decision-trigger-009",
+      "skill": "decision-ledger",
+      "expected_route": [
+        "task system"
+      ],
+      "reason": "The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured."
+    }
+  ],
+  "unmeasured_capabilities": []
+}
