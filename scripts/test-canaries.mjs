@@ -51,6 +51,9 @@ try {
   }
   check(!sheet.cases.some((canary) => ['strategy-trigger-006', 'strategy-trigger-025'].includes(canary.id)),
     'sheet selected a phase-ambiguous strategy canary instead of the pinned representatives')
+  for (const id of ['strategy-trigger-032', 'verification-trigger-032']) {
+    check(!sheet.cases.some((canary) => canary.id === id), `sheet included held-out-only adversarial case ${id}`)
+  }
   check(!sheet.cases.some((canary) => canary.role === 'positive' && /trigger-0(?:17|18|19|20|21)$/.test(canary.id)),
     'sheet selected an adversarial collision as an ordinary positive sentinel')
 
@@ -119,6 +122,24 @@ try {
   const externalRecorded = JSON.parse(readFileSync(join(scratch, 'external-route-record', `${release}-${externalRoute.surface}.json`), 'utf8'))
   check(externalRecorded.verdict === 'partial', `external route verdict was ${externalRecorded.verdict}, expected partial`)
   check(externalRecorded.unmeasured_routes.some((gap) => gap.id === externalRouteCase.id), 'external route gap was not retained in the report')
+
+  // A negative case proves that its target stayed out. If the expected canonical
+  // neighbor is not observed, downstream routing is partial rather than failed.
+  const canonicalRouteCase = sheet.cases.find((canary) => !canary.should_trigger && canary.expected_route &&
+    (Array.isArray(canary.expected_route) ? canary.expected_route : [canary.expected_route])
+      .some((route) => sheet.skills.includes(String(route).split(/\s+or\s+/i)[0])))
+  check(Boolean(canonicalRouteCase), 'sheet has no canonical expected-route case for the containment regression')
+  const missingNeighbor = structuredClone(passing)
+  const mn = missingNeighbor.results.find((result) => result.id === canonicalRouteCase.id)
+  mn.outcome = 'wrong-skill'
+  mn.note = 'krish-principles loaded; the forbidden target stayed out but the declared neighbor was not observed.'
+  const missingNeighborPath = join(scratch, 'missing-neighbor.json')
+  writeFileSync(missingNeighborPath, JSON.stringify(missingNeighbor, null, 2) + '\n')
+  const missingNeighborRun = run(['--record', missingNeighborPath, '--out-dir', join(scratch, 'missing-neighbor-record')])
+  check(missingNeighborRun.status === 0, `missing canonical neighbor should be partial, not failed: ${missingNeighborRun.stderr}`)
+  const missingNeighborRecorded = JSON.parse(readFileSync(join(scratch, 'missing-neighbor-record', `${release}-${missingNeighbor.surface}.json`), 'utf8'))
+  check(missingNeighborRecorded.verdict === 'partial', `missing canonical neighbor verdict was ${missingNeighborRecorded.verdict}, expected partial`)
+  check(missingNeighborRecorded.unmeasured_routes.some((gap) => gap.id === canonicalRouteCase.id), 'missing canonical neighbor was not retained as a route gap')
 
   // The other half of the same rule: naming the forbidden skill itself is still
   // a failure, however the outcome is labelled. Without this, "wrong-skill" is
