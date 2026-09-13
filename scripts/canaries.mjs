@@ -58,7 +58,6 @@ const RELEASE = flag('--release') || registry?.latest_approved_release?.release_
 // looking broken. Every one of these is on the list because of something that
 // actually happened, not because it felt significant.
 const TIER1 = {
-  'krish-principles': 'A core skill. If it stops firing, everything downstream loses the standard it is judged against, and nothing errors.',
   'strategy-brief': 'A core skill, same reason.',
   'verification-loop': 'A core skill, and the one that makes every other claim checkable.',
   'take-the-brief': 'A core skill, and the entry point most work arrives through.',
@@ -67,6 +66,10 @@ const TIER1 = {
   'mindmake-os': 'It carries operating doctrine, and on 2026-09-08 it shipped instructing a self-executing deletion and a direct push to another repository main.',
   'decision-ledger': 'A false positive silently turns tasks or unresolved operational state into durable memory, so its exclusion routes are load-bearing.',
 }
+
+// These are loaded by the rendered adapter itself, before skill routing. Their
+// presence is a static adapter invariant; a live file read is not a routing event.
+const STATIC_ADAPTER_INVARIANTS = new Set(['krish-principles'])
 
 // A trigger file may contain cases for several real skills. `core-trigger-cases`
 // does exactly that for krish-principles, strategy-brief, and verification-loop.
@@ -113,7 +116,7 @@ function changedSkills() {
   const skills = [...new Set(declared.map((name) => String(name).trim()).filter(Boolean))]
   const unknown = skills.filter((name) => !suites.includes(name))
   if (unknown.length) throw new Error(`Approved changed_skills have no trigger suite: ${unknown.join(', ')}`)
-  return { known: true, skills }
+  return { known: true, skills: skills.filter((name) => !STATIC_ADAPTER_INVARIANTS.has(name)) }
 }
 
 /**
@@ -167,7 +170,11 @@ function pick(skill) {
   const shortest = (a, b) => String(a.prompt || '').length - String(b.prompt || '').length
   const byPriorityThenShortest = (a, b) => (Number(b.canary_priority || 0) - Number(a.canary_priority || 0)) || shortest(a, b)
   const preferPriority = (items) => items.some((item) => item.canary_priority) ? [...items].sort(byPriorityThenShortest) : items
-  const positives = all.filter((c) => c.should_trigger === true).sort(byPriorityThenShortest)
+  const allPositives = all.filter((c) => c.should_trigger === true)
+  const ordinaryPositives = allPositives.filter((c) => c.category !== 'adversarial_collision')
+  // Release sentinels measure owner discovery. Prefer owner-clear positives;
+  // adversarial handoff cases remain in the broader held-out evaluation bank.
+  const positives = (ordinaryPositives.length >= 2 ? ordinaryPositives : allPositives).sort(byPriorityThenShortest)
   const collisions = preferPriority(all.filter((c) => c.category === 'adversarial_collision' && c.should_trigger !== true))
   const negatives = preferPriority(all.filter((c) => c.category === 'negative'))
 
