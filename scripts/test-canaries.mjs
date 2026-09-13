@@ -141,6 +141,22 @@ try {
   check(missingNeighborRecorded.verdict === 'partial', `missing canonical neighbor verdict was ${missingNeighborRecorded.verdict}, expected partial`)
   check(missingNeighborRecorded.unmeasured_routes.some((gap) => gap.id === canonicalRouteCase.id), 'missing canonical neighbor was not retained as a route gap')
 
+  // Codex may need to read the target skill's exclusion gate to route correctly.
+  // A structured guard-only read plus the expected owner is not activation.
+  const guardOnly = structuredClone(passing)
+  const go = guardOnly.results.find((result) => result.id === canonicalRouteCase.id)
+  const canonicalOwner = (Array.isArray(canonicalRouteCase.expected_route) ? canonicalRouteCase.expected_route : [canonicalRouteCase.expected_route])
+    .flatMap((value) => String(value).split(/\s+or\s+|,/i))
+    .map((value) => value.trim())
+    .find((value) => sheet.skills.includes(value))
+  go.outcome = 'wrong-skill'
+  go.target_guard_read = true
+  go.note = `Read the ${canonicalRouteCase.skill} exclusion guard, then loaded the expected owner: ${canonicalOwner}.`
+  const guardOnlyPath = join(scratch, 'guard-only.json')
+  writeFileSync(guardOnlyPath, JSON.stringify(guardOnly, null, 2) + '\n')
+  const guardOnlyRun = run(['--verify', guardOnlyPath])
+  check(guardOnlyRun.status === 0, `a structured guard-only read with expected owner should pass: ${guardOnlyRun.stderr}`)
+
   // The other half of the same rule: naming the forbidden skill itself is still
   // a failure, however the outcome is labelled. Without this, "wrong-skill" is
   // an escape hatch that launders a containment breach into a pass.
