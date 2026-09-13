@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
+import { parseYaml } from './lib/yaml.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const instrument = join(HARNESS, 'scripts/canaries.mjs')
@@ -24,7 +25,8 @@ try {
   const sheetRun = run(['--sheet-json'])
   check(sheetRun.status === 0, `sheet JSON exited ${sheetRun.status}: ${sheetRun.stderr}`)
   const sheet = JSON.parse(sheetRun.stdout)
-  const declaredChanged = ['content-corpus', 'design-intelligence-search', 'mindmake-os', 'mindmake', 'video-engine']
+  const registry = parseYaml(readFileSync(join(HARNESS, 'state/skill-registry.yaml'), 'utf8'))
+  const declaredChanged = registry?.latest_approved_release?.changed_skills || []
   for (const skill of declaredChanged) {
     check(sheet.skills.includes(skill), `release sheet omitted declared changed skill ${skill}`)
   }
