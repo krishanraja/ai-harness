@@ -27,38 +27,51 @@ deployed_release:
   status: local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked
 
 latest_approved_release:
-  release_id: v2026.09.13.2
-  tag: harness-v2026.09.13.2
-  source_commit: c21c414835b9f96d5ea6d5ab4ac25ae70d8dd967
+  release_id: v2026.09.13.3
+  tag: harness-v2026.09.13.3
+  source_commit: 1429f16b6a747f710031b7c8d062115cab28b43e
   published: true
   immutable: true
-  published_at: 2026-09-13T12:43:16Z
-  manifest_sha256: BB6EDC27564161085B6480CCEA680ABE13D5A8AD563D013314DCE270F0350DC4
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.2
-  skills_tree_aggregate_sha256: 1723FF7F4F30FED19FF54C28520FC0B95426011B4B3BD8181E2D9927FA3B24EE
+  published_at: 2026-09-13T13:27:34Z
+  manifest_sha256: E7DEE1991B6EB3642A9CB8A3503D0ADAE116911AC164F999772B0C39338B991F
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.3
+  skills_tree_aggregate_sha256: FA728A9BEF083D8A7964633F3A76E3509127DAAD7FA5E64FA9F096BF157A2F17
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - decision-ledger
+    - krish-design
+    - n8n-operator
   approved_at: 2026-09-13
   approved_by: Krish Raja
   approval_basis: >-
     Krish instructed execution of the audited correction plan on 2026-09-13.
-    PR 52 then passed the independent judge, surface validation, deterministic
+    PR 55 then passed the independent judge, surface validation, deterministic
     repeat-build, and installer proof before merge and immutable publication.
-    This authorises governed rollout with v2026.09.13.1 as rollback.
+    This authorises governed rollout with v2026.09.13.2 as rollback.
   approval_note: >-
-    v2026.09.13.1 fixed the original design, OS and route-observability defects,
-    then exposed a wrong isolated-design eval, a real defensive decision trigger
-    miss, guard-read ambiguity, and single-sample semantic noise. This release
-    corrects those lowest owning layers and retains repeat evidence.
+    The v2026.09.13.2 rollout exposed a canary-selector defect that invented a
+    non-existent core skill from a shared trigger filename, plus majority Codex
+    misses at the archived n8n-liveness and adversarial visual-design boundaries.
+    This release corrects those lowest owning layers and retains failed evidence.
   supersedes_reason: >-
-    v2026.09.13.1 is byte-exact on all three LORIMER surfaces but its live
+    v2026.09.13.2 is byte-exact on all three LORIMER surfaces but its live
     behavioral run is blocked. It remains the immutable immediate rollback
-    target while v2026.09.13.2 is rolled out progressively.
+    target while v2026.09.13.3 is rolled out progressively.
   status: published-awaiting-progressive-rollout
 
 
 previous_published_release:
+  release_id: v2026.09.13.2
+  tag: harness-v2026.09.13.2
+  source_commit: c21c414835b9f96d5ea6d5ab4ac25ae70d8dd967
+  immutable: true
+  published_at: 2026-09-13T12:43:16Z
+  manifest_sha256: BB6EDC27564161085B6480CCEA680ABE13D5A8AD563D013314DCE270F0350DC4
+  skills_tree_aggregate_sha256: 1723FF7F4F30FED19FF54C28520FC0B95426011B4B3BD8181E2D9927FA3B24EE
+  installed_evidence: state/machine-runs/v2026.09.13.2-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-blocked
+
+
+superseded_approved_release:
   release_id: v2026.09.13.1
   tag: harness-v2026.09.13.1
   source_commit: f7a400206d25fdff6020565587d4a9a83552ccab
@@ -66,22 +79,9 @@ previous_published_release:
   published_at: 2026-09-13T11:50:52Z
   manifest_sha256: 43F339396D5CB767FB65505E0CE6606C160C209C7D1C7591178208780FBD90FE
   skills_tree_aggregate_sha256: BADAF477EB67A4E149023E0877661C1474895F6235E8803D999AD1D1668E536C
-  installed_evidence: state/machine-runs/v2026.09.13.1-lorimer.json
-  status: installed-exact-parity-behavioral-canaries-blocked
-
-
-superseded_approved_release:
-  release_id: v2026.09.12.5
-  tag: harness-v2026.09.12.5
-  source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
-  immutable: true
-  published_at: 2026-09-13T00:15:28Z
-  manifest_sha256: D0AF78E32767D5C627A8D64875CDECECB66FD4DBAF264DB13F45F7C1A6DCD1B0
-  skills_tree_aggregate_sha256: FEC86204347D784EB0DB1980CECE50E95265639B17F595AB66884E04342C673C
   note: >-
-    Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER.
-    Retained as the second rollback target after authenticated canaries exposed
-    the routing failures followed by v2026.09.13.1 and v2026.09.13.2.
+    Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER but
+    blocked by authenticated canaries. Retained as the second rollback target.
 
 
 surface_deployments:
