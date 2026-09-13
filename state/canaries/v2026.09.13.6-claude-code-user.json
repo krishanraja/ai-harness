@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.13.6",
+  "surface": "claude-code-user",
+  "client": "claude",
+  "ran_at": "2026-09-13",
+  "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.13.6 in state/skill-registry.yaml.",
+  "evidence": "Claude Code stream-json Skill tool calls.",
+  "capabilities": {
+    "explicit_manual_invocation": false
+  },
+  "results": [
+    {
+      "id": "strategy-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(strategy-brief)."
+    },
+    {
+      "id": "strategy-trigger-011",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(strategy-brief)."
+    },
+    {
+      "id": "strategy-trigger-013",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "verification-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(verification-loop)."
+    },
+    {
+      "id": "verification-trigger-005",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(verification-loop)."
+    },
+    {
+      "id": "verification-trigger-013",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: take-the-brief."
+    },
+    {
+      "id": "brief-trigger-006",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, strategy-brief."
+    },
+    {
+      "id": "brief-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-002",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-003",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "design-intel-trigger-003",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+    },
+    {
+      "id": "design-intel-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-design, krish-principles."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: build-apps-with-krish, krish-principles."
+    },
+    {
+      "id": "os-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, mindmake."
+    },
+    {
+      "id": "decision-trigger-008",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-020",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: mindmake-os."
+    },
+    {
+      "id": "decision-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "check-trigger-002",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ctrl-check)."
+    },
+    {
+      "id": "check-trigger-006",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(ctrl-check)."
+    },
+    {
+      "id": "check-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "marketer-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+    },
+    {
+      "id": "marketer-trigger-003",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-content-marketer)."
+    },
+    {
+      "id": "marketer-trigger-018",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-voice."
+    },
+    {
+      "id": "marketer-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-voice."
+    },
+    {
+      "id": "access-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(tools-access)."
+    },
+    {
+      "id": "access-trigger-005",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(tools-access)."
+    },
+    {
+      "id": "access-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    }
+  ],
+  "verdict": "partial",
+  "failures": [],
+  "void_results": [],
+  "unmeasured_routes": [
+    {
+      "id": "decision-trigger-009",
+      "skill": "decision-ledger",
+      "expected_route": [
+        "task system"
+      ],
+      "reason": "The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured."
+    },
+    {
+      "id": "access-trigger-009",
+      "skill": "tools-access",
+      "expected_route": [
+        "ordinary filesystem read"
+      ],
+      "reason": "The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured."
+    }
+  ],
+  "unmeasured_capabilities": []
+}
