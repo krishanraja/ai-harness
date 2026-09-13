@@ -59,6 +59,12 @@ else {
     if ($syncScriptRaw -notmatch 'mindmake-video-studio' -or $syncScriptRaw -notmatch 'videoEngineActivated') {
         Add-Failure 'Codex canaries do not distinguish Video Engine guard retrieval from authority-boundary activation.'
     }
+    if ($syncScriptRaw -notmatch 'Test-CanaryOutcomePass' -or $syncScriptRaw -notmatch 'passing_attempt_count') {
+        Add-Failure 'Machine canaries do not repeat an apparent semantic mismatch and retain the attempt evidence.'
+    }
+    if ($syncScriptRaw -notmatch 'target_guard_read') {
+        Add-Failure 'Codex canaries do not distinguish an exclusion-guard read followed by the expected owner.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
