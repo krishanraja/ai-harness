@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.12.5",
+  "surface": "codex-current",
+  "client": "codex",
+  "ran_at": "2026-09-13",
+  "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.12.5 in state/skill-registry.yaml.",
+  "evidence": "Codex CLI JSONL, successful reads from the live skills root, and a live catalog diagnostic.",
+  "results": [
+    {
+      "id": "brief-trigger-006",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+    },
+    {
+      "id": "brief-trigger-007",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+    },
+    {
+      "id": "brief-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, strategy-brief."
+    },
+    {
+      "id": "brief-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+    },
+    {
+      "id": "video-engine-trigger-002",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+    },
+    {
+      "id": "video-engine-trigger-011",
+      "outcome": "not-fired",
+      "note": "Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated."
+    },
+    {
+      "id": "video-engine-trigger-003",
+      "outcome": "not-fired",
+      "note": "Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated."
+    },
+    {
+      "id": "design-intelligence-search-explicit-001",
+      "outcome": "unreachable",
+      "note": "Codex target was absent from the catalog."
+    },
+    {
+      "id": "design-intel-trigger-003",
+      "outcome": "unreachable",
+      "note": "Codex target was absent from the catalog."
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "outcome": "unreachable",
+      "note": "Codex target was absent from the catalog."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "outcome": "unreachable",
+      "note": "Codex target was absent from the catalog."
+    },
+    {
+      "id": "os-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+    },
+    {
+      "id": "os-trigger-018",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: harness-maintainer, krish-principles."
+    },
+    {
+      "id": "os-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake, strategy-brief."
+    },
+    {
+      "id": "corpus-trigger-018",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of content-corpus/SKILL.md."
+    },
+    {
+      "id": "corpus-trigger-022",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of content-corpus/SKILL.md."
+    },
+    {
+      "id": "corpus-trigger-007",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of content-corpus/SKILL.md."
+    },
+    {
+      "id": "corpus-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, krish-voice."
+    },
+    {
+      "id": "mindmake-trigger-003",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of mindmake/SKILL.md."
+    },
+    {
+      "id": "mindmake-trigger-005",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of mindmake/SKILL.md."
+    },
+    {
+      "id": "mindmake-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake-os."
+    },
+    {
+      "id": "mindmake-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake-os."
+    },
+    {
+      "id": "decision-trigger-019",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+    },
+    {
+      "id": "decision-trigger-001",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+    },
+    {
+      "id": "decision-trigger-020",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+    },
+    {
+      "id": "decision-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: krish-principles."
+    },
+    {
+      "id": "voice-trigger-007",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-voice/SKILL.md."
+    },
+    {
+      "id": "voice-trigger-021",
+      "outcome": "fired",
+      "note": "Codex JSONL recorded a successful live read of krish-voice/SKILL.md."
+    },
+    {
+      "id": "voice-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, mindmake."
+    }
+  ],
+  "verdict": "failed",
+  "failures": [
+    "design-intelligence-search-explicit-001: expected design-intelligence-search to fire, observed unreachable.",
+    "os-trigger-018: expected mindmake-os to fire, observed wrong-skill.",
+    "corpus-trigger-007: expected wrong-skill naming one of krish-content-marketer, observed fired (Codex JSONL recorded a successful live read of content-corpus/SKILL.md.).",
+    "decision-trigger-020: expected wrong-skill naming one of mindmake-os, observed fired (Codex JSONL recorded a successful live read of decision-ledger/SKILL.md.).",
+    "decision-trigger-009: expected wrong-skill naming one of task system, observed wrong-skill (Codex JSONL recorded live skill reads: krish-principles.).",
+    "design-intelligence-search: no positive canary passed on codex-current (design-intelligence-search-explicit-001 came back unreachable). Every negative result for design-intelligence-search in this report is void, and design-intelligence-search is unmeasured on this surface, not passing."
+  ],
+  "void_results": [
+    {
+      "id": "design-intel-trigger-003",
+      "skill": "design-intelligence-search",
+      "outcome": "unreachable"
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "skill": "design-intelligence-search",
+      "outcome": "unreachable"
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "skill": "design-intelligence-search",
+      "outcome": "unreachable"
+    }
+  ],
+  "unmeasured_routes": [
+    {
+      "id": "design-intel-trigger-011",
+      "skill": "design-intelligence-search",
+      "expected_route": [
+        "krish-design"
+      ],
+      "reason": "The manual-only target was absent from the implicit catalog. Target containment is observed; the neighboring route is unmeasured."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "skill": "design-intelligence-search",
+      "expected_route": [
+        "krish-design",
+        "build-apps-with-krish"
+      ],
+      "reason": "The manual-only target was absent from the implicit catalog. Target containment is observed; the neighboring route is unmeasured."
+    }
+  ]
+}

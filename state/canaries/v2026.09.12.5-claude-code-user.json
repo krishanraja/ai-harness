@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.12.5",
+  "surface": "claude-code-user",
+  "client": "claude",
+  "ran_at": "2026-09-13",
+  "ran_by": "Invoke-HarnessSync.ps1",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.12.5 in state/skill-registry.yaml.",
+  "evidence": "Claude Code stream-json Skill tool calls.",
+  "results": [
+    {
+      "id": "brief-trigger-006",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(take-the-brief)."
+    },
+    {
+      "id": "brief-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "brief-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-002",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(video-engine)."
+    },
+    {
+      "id": "video-engine-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "video-engine-trigger-003",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "design-intelligence-search-explicit-001",
+      "outcome": "not-fired",
+      "note": "Claude Code completed without a Skill tool call."
+    },
+    {
+      "id": "design-intel-trigger-003",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(design-intelligence-search)."
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-design."
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: build-apps-with-krish, krish-principles."
+    },
+    {
+      "id": "os-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-018",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake-os)."
+    },
+    {
+      "id": "os-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, mindmake."
+    },
+    {
+      "id": "corpus-trigger-018",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(content-corpus)."
+    },
+    {
+      "id": "corpus-trigger-022",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(content-corpus)."
+    },
+    {
+      "id": "corpus-trigger-007",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-content-marketer."
+    },
+    {
+      "id": "corpus-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles, krish-voice."
+    },
+    {
+      "id": "mindmake-trigger-003",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake)."
+    },
+    {
+      "id": "mindmake-trigger-005",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(mindmake)."
+    },
+    {
+      "id": "mindmake-trigger-017",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: mindmake-os."
+    },
+    {
+      "id": "mindmake-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: mindmake-os."
+    },
+    {
+      "id": "decision-trigger-019",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-001",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(decision-ledger)."
+    },
+    {
+      "id": "decision-trigger-020",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: mindmake-os."
+    },
+    {
+      "id": "decision-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-principles."
+    },
+    {
+      "id": "voice-trigger-007",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-voice)."
+    },
+    {
+      "id": "voice-trigger-021",
+      "outcome": "fired",
+      "note": "Claude stream-json recorded Skill(krish-voice)."
+    },
+    {
+      "id": "voice-trigger-009",
+      "outcome": "wrong-skill",
+      "note": "Claude stream-json recorded Skill calls: krish-content-marketer."
+    }
+  ],
+  "verdict": "failed",
+  "failures": [
+    "design-intelligence-search-explicit-001: expected design-intelligence-search to fire, observed not-fired.",
+    "design-intel-trigger-003: design-intelligence-search fired on a message that must not trigger it (Claude stream-json recorded Skill(design-intelligence-search).).",
+    "decision-trigger-009: expected wrong-skill naming one of task system, observed wrong-skill (Claude stream-json recorded Skill calls: krish-principles.).",
+    "design-intelligence-search: no positive canary passed on claude-code-user (design-intelligence-search-explicit-001 came back not-fired). Every negative result for design-intelligence-search in this report is void, and design-intelligence-search is unmeasured on this surface, not passing."
+  ],
+  "void_results": [
+    {
+      "id": "design-intel-trigger-003",
+      "skill": "design-intelligence-search",
+      "outcome": "fired"
+    },
+    {
+      "id": "design-intel-trigger-011",
+      "skill": "design-intelligence-search",
+      "outcome": "wrong-skill"
+    },
+    {
+      "id": "design-intel-trigger-006",
+      "skill": "design-intelligence-search",
+      "outcome": "wrong-skill"
+    }
+  ],
+  "unmeasured_routes": []
+}
