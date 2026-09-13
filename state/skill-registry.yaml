@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-09-12
+last_reconciled: 2026-09-13
 status: governed-production-set
 
 candidate_reconciliation:
@@ -18,20 +18,23 @@ candidate_reconciliation:
 
 
 deployed_release:
-  release_id: v2026.08.29.3
-  source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
-  artifact_set_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
+  release_id: v2026.09.12.5
+  source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
+  artifact_set_sha256: 901FDAEB686F0BE2567B4168796CFF0C7AB967E908D046D4C4BD99D254F99944
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  deployed_at: 2026-08-29
-  evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-  status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
+  deployed_at: 2026-09-13
+  evidence: state/machine-runs/v2026.09.12.5-lorimer.json
+  status: local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked
 
 latest_approved_release:
   release_id: v2026.09.12.5
   tag: harness-v2026.09.12.5
-  source_commit: d579b9395249241d22d1566d26a701e56ad14157
-  published: false
-  immutable: false
+  source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
+  published: true
+  immutable: true
+  published_at: 2026-09-13T00:15:28Z
+  manifest_sha256: D0AF78E32767D5C627A8D64875CDECECB66FD4DBAF264DB13F45F7C1A6DCD1B0
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.12.5
   skills_tree_aggregate_sha256: FEC86204347D784EB0DB1980CECE50E95265639B17F595AB66884E04342C673C
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
@@ -57,6 +60,8 @@ latest_approved_release:
     v2026.09.12.4 is byte-exact on all three LORIMER surfaces, but its live
     behavioral run is blocked. It remains immutable and installed as the
     immediate rollback target while this evidence-driven follow-up is reviewed.
+  installed_evidence: state/machine-runs/v2026.09.12.5-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-blocked
 
 
 previous_published_release:
@@ -116,38 +121,38 @@ surface_deployments:
     status: installed-hash-verified-and-canaried-video-engine-reachable
     previous_release: v2026.09.08.1
   cursor-primary:
-    release_id: v2026.09.08.2
-    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
+    release_id: v2026.09.12.5
+    source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+    installed_ordinal_aggregate_sha256: 901FDAEB686F0BE2567B4168796CFF0C7AB967E908D046D4C4BD99D254F99944
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-08
-    deployed_at_utc: 2026-09-08T15:56:45.5447713Z
-    evidence: state/gap-closure-2026-09-12.md
-    status: installed-hash-verified-and-noop-reverified
+    deployed_at: 2026-09-13
+    deployed_at_utc: 2026-09-13T00:26:37.3887505Z
+    evidence: state/deployments/v2026.09.12.5-cursor-primary.json
+    status: installed-hash-verified-manual-canary-required
   claude-code-user:
-    release_id: v2026.09.08.2
-    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
+    release_id: v2026.09.12.5
+    source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+    installed_ordinal_aggregate_sha256: 901FDAEB686F0BE2567B4168796CFF0C7AB967E908D046D4C4BD99D254F99944
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-08
-    deployed_at_utc: 2026-09-08T15:56:40.3809081Z
-    evidence: state/gap-closure-2026-09-12.md
-    status: installed-hash-verified-and-noop-reverified
+    deployed_at: 2026-09-13
+    deployed_at_utc: 2026-09-13T00:16:52.3315255Z
+    evidence: state/canaries/v2026.09.12.5-claude-code-user.json
+    status: installed-hash-verified-behavioral-canary-failed
   codex-current:
-    release_id: v2026.09.08.2
-    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
+    release_id: v2026.09.12.5
+    source_commit: 0e3423d7ca71648a57a5f75da5f264bff62afa9e
     installed_skill_count: 29
     installed_file_count: 139
-    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+    installed_ordinal_aggregate_sha256: 901FDAEB686F0BE2567B4168796CFF0C7AB967E908D046D4C4BD99D254F99944
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-08
-    deployed_at_utc: 2026-09-08T15:56:50.3315533Z
-    evidence: state/gap-closure-2026-09-12.md
-    status: installed-hash-verified-and-noop-reverified
+    deployed_at: 2026-09-13
+    deployed_at_utc: 2026-09-13T00:26:41.8026100Z
+    evidence: state/canaries/v2026.09.12.5-codex-current.json
+    status: installed-hash-verified-behavioral-canary-failed
   claude-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
