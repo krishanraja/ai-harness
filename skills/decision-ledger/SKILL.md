@@ -1,6 +1,6 @@
 ---
 name: decision-ledger
-description: "Exclusion gate first: unresolved mind/make OS `decisions_waiting`, conflicting local closure state, and any request to delete a live OS item belong exclusively to mindmake-os, never this skill. Tasks, brainstorming, tentative recommendations, raw assumptions, routine reversible choices, and CTRL observations also stay out. Use this durable memory manager only when Krish explicitly makes, confirms, reverses, supersedes, or asks to recall a consequential finalized decision, or when verified strategy depends on its prior rationale and revisit trigger. Trigger defensively to refuse secrets, fabricated approval, historical-rationale rewrites, and attempts to record every implementation detail. Last reviewed 2026-09-13."
+description: "Defensive trigger first: use decision-ledger to refuse any request to rewrite historical decision rationale, fabricate prior foresight or approval, store secrets, or turn implementation detail into durable memory; preserve the original and offer an append-only review. Exclude unresolved mind/make OS `decisions_waiting`, conflicting local closure state, and deletion of a live OS item, which belong exclusively to mindmake-os. Tasks, brainstorming, tentative recommendations, assumptions, routine choices, and CTRL observations also stay out. Otherwise use only when Krish explicitly makes, confirms, reverses, supersedes, or recalls a consequential finalized decision, or verified strategy needs its rationale and revisit trigger. Last reviewed 2026-09-13."
 ---
 
 # Decision Ledger

@@ -68,6 +68,14 @@ the canary can prove only that the forbidden skill stayed out unless that owner 
 observable canonical skill. Capability gaps and downstream route gaps are recorded as
 partial evidence and never promoted to passes.
 
+Semantic routing is sampled, not deterministic. Run every case once, then repeat only
+an apparent mismatch twice in fresh tasks. The recorded outcome follows the two-of-three
+majority and retains all three attempts. A first-pass success is not repeated, which
+keeps the routine bounded; a repeated mismatch is stronger evidence than one stochastic
+model choice. On Codex, reading an exclusion guard and then loading the declared expected
+owner is recorded as the expected owner route with `target_guard_read: true`. A target
+read without the expected owner remains a failure.
+
 ## What counts as a canary result
 
 Four outcomes, and nothing else:

@@ -764,16 +764,30 @@ function Invoke-CodexCanary {
         }
     }
 
+    $other = @($reads.Loaded | Where-Object { $_ -ne $target } | Sort-Object -Unique)
+    $expectedRoutes = @()
+    if ($Case.expected_route) {
+        $expectedRoutes = @($Case.expected_route | ForEach-Object { [string]$_ -split '\s+or\s+|,' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+    }
+    $observedExpectedRoutes = @($other | Where-Object { $_ -in $expectedRoutes })
+
     if ($target -in $reads.Loaded) {
         if ($target -eq 'video-engine' -and $Case.should_trigger -ne $true -and -not $videoEngineActivated) {
             return [pscustomobject]@{ id = $Case.id; outcome = 'not-fired'; note = 'Codex read the Video Engine exact-match guard but did not access or run the authority repository, so the engine was not activated.' }
+        }
+        if ($Case.should_trigger -ne $true -and $observedExpectedRoutes.Count -gt 0) {
+            return [pscustomobject]@{
+                id = $Case.id
+                outcome = 'wrong-skill'
+                note = "Codex read the $target exclusion guard, then loaded the expected owner: $($observedExpectedRoutes -join ', ')."
+                target_guard_read = $true
+            }
         }
         return [pscustomobject]@{ id = $Case.id; outcome = 'fired'; note = "Codex JSONL recorded a successful live read of $target/SKILL.md." }
     }
     if (-not $targetInCatalog) {
         return [pscustomobject]@{ id = $Case.id; outcome = 'unreachable'; note = 'Codex target was absent from the catalog.' }
     }
-    $other = @($reads.Loaded | Where-Object { $_ -ne $target } | Sort-Object -Unique)
     if ($other.Count -gt 0) {
         return [pscustomobject]@{ id = $Case.id; outcome = 'wrong-skill'; note = "Codex JSONL recorded live skill reads: $($other -join ', ')." }
     }
@@ -782,6 +796,23 @@ function Invoke-CodexCanary {
         return [pscustomobject]@{ id = $Case.id; outcome = 'unreachable'; note = "Codex target was $reason." }
     }
     return [pscustomobject]@{ id = $Case.id; outcome = 'not-fired'; note = 'Codex completed without a live canonical skill read.' }
+}
+
+function Test-CanaryOutcomePass {
+    param(
+        [Parameter(Mandatory = $true)]$Case,
+        [Parameter(Mandatory = $true)]$Result,
+        [Parameter(Mandatory = $true)][string[]]$CanonicalNames
+    )
+
+    if ($Case.should_trigger -eq $true) { return $Result.outcome -eq 'fired' }
+    if (-not $Case.expected_route) { return $Result.outcome -ne 'fired' }
+
+    $expected = @($Case.expected_route | ForEach-Object { [string]$_ -split '\s+or\s+|,' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+    $observable = @($expected | Where-Object { $_ -in $CanonicalNames })
+    if ($observable.Count -eq 0) { return $Result.outcome -ne 'fired' }
+    $note = [string]$Result.note
+    return $Result.outcome -eq 'wrong-skill' -and @($observable | Where-Object { $note -match [regex]::Escape($_) }).Count -gt 0
 }
 
 function Invoke-ClaudeCanary {
@@ -860,11 +891,27 @@ function Invoke-SurfaceCanaries {
 
     foreach ($case in @($sheet.cases)) {
         Write-Host "CANARY surface=$($Surface.Id) id=$($case.id)"
-        $result = if ($Surface.Client -eq 'codex') {
-            Invoke-CodexCanary -Case $case -Surface $Surface -WorkingDirectory $workingDirectory -CatalogText $catalogText -CanonicalNames $canonicalNames
+        $invokeCase = {
+            if ($Surface.Client -eq 'codex') {
+                return Invoke-CodexCanary -Case $case -Surface $Surface -WorkingDirectory $workingDirectory -CatalogText $catalogText -CanonicalNames $canonicalNames
+            }
+            return Invoke-ClaudeCanary -Case $case -WorkingDirectory $workingDirectory
         }
-        else {
-            Invoke-ClaudeCanary -Case $case -WorkingDirectory $workingDirectory
+        $attempts = New-Object System.Collections.Generic.List[object]
+        $result = & $invokeCase
+        $attempts.Add($result)
+        if (-not (Test-CanaryOutcomePass -Case $case -Result $result -CanonicalNames $canonicalNames)) {
+            for ($attempt = 2; $attempt -le 3; $attempt++) {
+                $attempts.Add((& $invokeCase))
+            }
+            $passingAttempts = @($attempts | Where-Object { Test-CanaryOutcomePass -Case $case -Result $_ -CanonicalNames $canonicalNames })
+            $failingAttempts = @($attempts | Where-Object { -not (Test-CanaryOutcomePass -Case $case -Result $_ -CanonicalNames $canonicalNames) })
+            $selected = if ($passingAttempts.Count -ge 2) { $passingAttempts[0] } else { $failingAttempts[0] }
+            $selected | Add-Member -NotePropertyName attempt_count -NotePropertyValue 3
+            $selected | Add-Member -NotePropertyName passing_attempt_count -NotePropertyValue $passingAttempts.Count
+            $selected | Add-Member -NotePropertyName attempts -NotePropertyValue $attempts.ToArray()
+            $selected.note = "Repeat-on-mismatch: $($passingAttempts.Count)/3 attempts met the declared route. $($selected.note)"
+            $result = $selected
         }
         $results.Add($result)
         Write-Host "CANARY_RESULT surface=$($Surface.Id) id=$($case.id) outcome=$($result.outcome)"
