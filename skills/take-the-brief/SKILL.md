@@ -1,11 +1,19 @@
 ---
 name: take-the-brief
-description: "Intent-briefing gateway for delegated work. Use when Krish explicitly asks to be interviewed before execution, transfers end-to-end ownership, asks for an AI employee, or delegates new high-stakes/ambiguous work whose plausible interpretations materially differ. Ask up to five high-signal questions one at a time, then produce an amnesia-proof intent summary and short plan. An explicit interview request takes precedence. An explicit 'do not interview me' plus a supplied brief overrides generic 'take this off my plate' wording: route onward without this skill. Otherwise do not use for clear single-step, urgent, routine, already-briefed work, customer interviews, or durable taste-standard elicitation; use ctrl-intake for the last."
+description: "Exclusion gate first: do not invoke when Krish says not to interview him and supplies or identifies an existing brief, even if he also says 'take this off my plate', 'own it', or 'use your judgment'; route onward to strategy/execution. Otherwise use this intent-briefing gateway when Krish explicitly asks to be interviewed before execution, asks for an AI employee, or transfers new high-stakes/ambiguous work whose plausible interpretations materially differ. Ask up to five high-signal questions one at a time, then produce an amnesia-proof intent summary and short plan. An explicit interview request takes precedence. Do not use for clear single-step, urgent, routine, already-briefed work, customer interviews, or durable taste-standard elicitation; use ctrl-intake for the last."
 ---
 
 # Take the Brief
 
 Learn the intent behind a transferred outcome before owning its execution. This is a task-context gateway, not a general questionnaire, durable personal profile, or substitute for strategy and verification.
+
+## Exclusion gate
+
+Before treating ownership language as a trigger, look for an explicit instruction
+not to interview and evidence that a brief already exists. When both are present,
+do not invoke or continue this skill. Phrases such as "take this off my plate",
+"own it", and "use your judgment" do not override that exclusion. Route directly
+to `strategy-brief` and the appropriate producer using the supplied brief.
 
 ## Role and chain
 

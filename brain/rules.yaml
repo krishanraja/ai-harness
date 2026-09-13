@@ -2463,6 +2463,15 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: take-the-brief.exclusion-gate
+    file: skills/take-the-brief/SKILL.md
+    heading: "Exclusion gate"
+    text_sha: "517f25997539"
+    first_seen: "2026-09-13"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-13-take-the-brief-exclusion-gate.md"
+    status: live
   - id: take-the-brief.role-and-chain
     file: skills/take-the-brief/SKILL.md
     heading: "Role and chain"
