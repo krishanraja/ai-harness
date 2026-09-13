@@ -31,6 +31,12 @@ try {
     check(sheet.skills.includes(skill), `release sheet omitted declared changed skill ${skill}`)
   }
   check(sheet.skills.length >= 7, `expected at least 7 tier-one skills, got ${sheet.skills.length}`)
+  check(!sheet.skills.includes('core'), 'sheet invented a non-invocable skill from the core trigger filename')
+  for (const skill of ['krish-principles', 'strategy-brief', 'verification-loop']) {
+    check(sheet.skills.includes(skill), `sheet omitted real core skill ${skill}`)
+    check(sheet.cases.some((canary) => canary.skill === skill && canary.should_trigger),
+      `sheet has no positive canary for real core skill ${skill}`)
+  }
 
   const results = sheet.cases.map((canary) => {
     if (canary.should_trigger) return { id: canary.id, outcome: 'fired', note: `${canary.skill} loaded.` }
@@ -74,8 +80,9 @@ try {
   // behaving as designed, and the checker called that a containment failure.
   const otherSkillFired = structuredClone(passing)
   const on = otherSkillFired.results.find((result) => result.id === ordinaryNegative.id)
+  const otherSkill = sheet.skills.find((skill) => skill !== ordinaryNegative.skill)
   on.outcome = 'wrong-skill'
-  on.note = 'krish-principles loaded, which is the always-on doctrine set doing its job.'
+  on.note = `${otherSkill} loaded, which is a different skill doing its job.`
   const otherPath = join(scratch, 'other-skill-fired.json')
   writeFileSync(otherPath, JSON.stringify(otherSkillFired, null, 2) + '\n')
   const otherRun = run(['--verify', otherPath])
