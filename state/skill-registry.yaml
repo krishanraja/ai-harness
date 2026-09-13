@@ -27,56 +27,56 @@ deployed_release:
   status: local-parity-deployed-cloud-still-v2026.08.29.3-behavioral-canaries-blocked
 
 latest_approved_release:
-  release_id: v2026.09.13.7
-  tag: harness-v2026.09.13.7
-  source_commit: 11b6c8ff091503fa45cfb4a5f580ca247d8f3933
+  release_id: v2026.09.13.8
+  tag: harness-v2026.09.13.8
+  source_commit: c7a429db4336b7f2e8cac563ee68d9d40714b4d4
   published: true
   immutable: true
-  published_at: 2026-09-13T17:43:29Z
-  manifest_sha256: 354B2E206DEB77007401920650A12E791BE753B9096D8D6FBE6BD30480D67F43
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.7
-  skills_tree_aggregate_sha256: F11DB08013F249B5D5CDE591887746D8DDF2007E085FAA353552AE62F1CA1E09
+  published_at: 2026-09-13T18:26:40Z
+  manifest_sha256: 415C473EFEE85EC846AC83B3237937AE4FF5CFE3805F01F2C61D57613C6040A5
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.8
+  skills_tree_aggregate_sha256: 83C3766A6C6778F50CDCDFF1316334C3D989DB49642FA94E0BDC9D5613C15E66
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - take-the-brief
+    - ctrl-compile
   approved_at: 2026-09-13
   approved_by: Krish Raja
   approval_basis: >-
     Krish instructed execution of the audited correction plan on 2026-09-13.
-    PR 67 then passed the independent judge, surface validation, deterministic
+    PR 70 then passed the independent judge, surface validation, deterministic
     repeat-build, and installer proof before merge and immutable publication.
-    This authorises governed rollout with v2026.09.13.6 as rollback.
+    This authorises governed rollout with v2026.09.13.7 as rollback.
   approval_note: >-
-    The v2026.09.13.6 run proved every selected positive route on Claude Code
-    and Codex but exposed one intermittent Codex over-trigger: take-the-brief
-    loaded once in three attempts despite an explicit no-interview instruction
-    and supplied brief. This release front-loads that exclusion gate.
+    The v2026.09.13.7 run proved the take-the-brief correction but exposed a
+    repeated Codex owner miss between CTRL Compile and Build, plus a verifier
+    defect that misread structured guard-only evidence. This release corrects
+    both while retaining the strict activation failure rule.
   supersedes_reason: >-
-    v2026.09.13.6 is byte-exact on all three LORIMER surfaces and remains the
+    v2026.09.13.7 is byte-exact on all three LORIMER surfaces and remains the
     immutable immediate rollback target, but its Codex behavioral report has
-    one repeated containment failure in take-the-brief.
+    one repeated CTRL Compile positive-owner miss.
   status: published-awaiting-progressive-rollout
 
 
 previous_published_release:
+  release_id: v2026.09.13.7
+  tag: harness-v2026.09.13.7
+  source_commit: 11b6c8ff091503fa45cfb4a5f580ca247d8f3933
+  immutable: true
+  published_at: 2026-09-13T17:43:29Z
+  manifest_sha256: 354B2E206DEB77007401920650A12E791BE753B9096D8D6FBE6BD30480D67F43
+  skills_tree_aggregate_sha256: F11DB08013F249B5D5CDE591887746D8DDF2007E085FAA353552AE62F1CA1E09
+  installed_evidence: state/machine-runs/v2026.09.13.7-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-blocked-by-one-codex-positive-owner-miss
+
+
+superseded_approved_release:
   release_id: v2026.09.13.6
   tag: harness-v2026.09.13.6
   source_commit: 285b37f272d4580be5be7cf198f12c7f794ad4b7
   immutable: true
   published_at: 2026-09-13T16:56:20Z
   manifest_sha256: 387F79E9883DF7BB3AA8EDAF1C5B8AA75A0BF2CC37FF27708F609E29630F6734
-  skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
-  installed_evidence: state/machine-runs/v2026.09.13.6-lorimer.json
-  status: installed-exact-parity-behavioral-canaries-blocked-by-one-codex-containment-failure
-
-
-superseded_approved_release:
-  release_id: v2026.09.13.5
-  tag: harness-v2026.09.13.5
-  source_commit: a718d21803eb597a5c859d6b1b815381abf06323
-  immutable: true
-  published_at: 2026-09-13T15:59:17Z
-  manifest_sha256: 7CC20FC33D8E5F88CF2F6DC77AF432DA6DBE7C64E5128AE5DB1609FDD04627B4
   skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
   note: >-
     Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER but
