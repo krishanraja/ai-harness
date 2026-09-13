@@ -879,6 +879,9 @@ function Invoke-SurfaceCanaries {
         ran_by = 'Invoke-HarnessSync.ps1'
         asked_by = $Asker
         evidence = if ($Surface.Client -eq 'codex') { 'Codex CLI JSONL, successful reads from the live skills root, and a live catalog diagnostic.' } else { 'Claude Code stream-json Skill tool calls.' }
+        capabilities = [ordered]@{
+            explicit_manual_invocation = $false
+        }
         results = $results.ToArray()
     }
     $submittedPath = Join-Path $RunDirectory "canary-submission-$($Surface.Id).json"

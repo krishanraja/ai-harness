@@ -57,9 +57,9 @@ latest_approved_release:
     retrieval from authority-boundary activation, preserves manual-only route
     gaps as partial evidence, and requires asker provenance on generated rows.
   supersedes_reason: >-
-    v2026.09.12.4 is byte-exact on all three LORIMER surfaces, but its live
-    behavioral run is blocked. It remains immutable and installed as the
-    immediate rollback target while this evidence-driven follow-up is reviewed.
+    v2026.09.12.4 was byte-exact on all three LORIMER surfaces, but its live
+    behavioral run was blocked. v2026.09.12.5 replaced it on those surfaces;
+    v2026.09.12.4 remains the immutable immediate rollback target.
   installed_evidence: state/machine-runs/v2026.09.12.5-lorimer.json
   status: installed-exact-parity-behavioral-canaries-blocked
 
@@ -228,7 +228,7 @@ production_active:
   - video-engine
 
 production:
-  - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
+  - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
   - {name: mindmake, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: take-the-brief, role: conditional-intent-briefing-gateway, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
@@ -236,18 +236,18 @@ production:
   - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 30}
   - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
-  - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
   - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 60}
   - {name: locked-revision, role: immutable-baseline-surgical-revision-controller, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 90}
-  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 45}
+  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
-  - {name: design-intelligence-search, role: manual-only-design-data-tool, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: design-intelligence-search, role: delegation-gated-design-data-tool, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
   - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}

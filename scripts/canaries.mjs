@@ -63,8 +63,9 @@ const TIER1 = {
   'verification-loop': 'A core skill, and the one that makes every other claim checkable.',
   'take-the-brief': 'A core skill, and the entry point most work arrives through.',
   'video-engine': 'The narrowest trigger in the set, and the one that shipped unable to launch on 2026-09-08 with byte-perfect parity.',
-  'design-intelligence-search': 'Manual-only by contract. A skill that is supposed to never self-trigger is exactly the kind whose containment nothing notices breaking.',
+  'design-intelligence-search': 'Delegation-gated by contract. It must accept a named bounded owner delegation while rejecting direct generic design requests.',
   'mindmake-os': 'It carries operating doctrine, and on 2026-09-08 it shipped instructing a self-executing deletion and a direct push to another repository main.',
+  'decision-ledger': 'A false positive silently turns tasks or unresolved operational state into durable memory, so its exclusion routes are load-bearing.',
 }
 
 const suites = readdirSync(join(HARNESS, 'evals'))
@@ -314,6 +315,8 @@ function verify(reportPath) {
   const seenIds = new Set()
   const outcomeFailures = []
   const unmeasuredRoutes = []
+  const unmeasuredCapabilities = []
+  const explicitManualObservable = report?.capabilities?.explicit_manual_invocation !== false
   for (const r of results) {
     const c = byId.get(r.id)
     if (!c) { notes.push(`${r.id} is not on this release's sheet; recorded, not counted.`); continue }
@@ -324,7 +327,16 @@ function verify(reportPath) {
     if (c.load_bearing && c.should_trigger === true && r.outcome === 'fired') positivePassed.add(c.skill)
 
     if (c.should_trigger === true && r.outcome !== 'fired') {
-      outcomeFailures.push(`${r.id}: expected ${c.skill} to fire, observed ${r.outcome}.`)
+      if (c.role === 'positive-explicit' && !explicitManualObservable) {
+        unmeasuredCapabilities.push({
+          id: r.id,
+          skill: c.skill,
+          capability: 'explicit_manual_invocation',
+          reason: `${report.client || 'client'} headless evidence cannot exercise the client UI's explicit invocation path.`,
+        })
+      } else {
+        outcomeFailures.push(`${r.id}: expected ${c.skill} to fire, observed ${r.outcome}.`)
+      }
     } else if (c.should_trigger !== true && c.expected_route) {
       const routeValues = Array.isArray(c.expected_route) ? c.expected_route : [c.expected_route]
       const allowed = routeValues
@@ -332,10 +344,17 @@ function verify(reportPath) {
         .map((x) => x.trim())
         .filter(Boolean)
       const named = String(r.note || '').toLowerCase()
-      if (r.outcome === 'unreachable' && manualOnly(c.skill)) {
+      const observableAllowed = allowed.filter((name) => suites.includes(name))
+      if (!observableAllowed.length) {
+        if (r.outcome === 'fired' || named.includes(c.skill.toLowerCase())) {
+          outcomeFailures.push(`${r.id}: ${c.skill} fired on a case routed to an external, non-skill owner.`)
+        } else {
+          unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The expected owner is not an observable canonical skill route. Target containment is observed; downstream routing is unmeasured.' })
+        }
+      } else if (r.outcome === 'unreachable' && manualOnly(c.skill)) {
         unmeasuredRoutes.push({ id: r.id, skill: c.skill, expected_route: allowed, reason: 'The manual-only target was absent from the implicit catalog. Target containment is observed; the neighboring route is unmeasured.' })
-      } else if (r.outcome !== 'wrong-skill' || !allowed.some((skill) => named.includes(skill.toLowerCase()))) {
-        outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${allowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
+      } else if (r.outcome !== 'wrong-skill' || !observableAllowed.some((skill) => named.includes(skill.toLowerCase()))) {
+        outcomeFailures.push(`${r.id}: expected wrong-skill naming one of ${observableAllowed.join(', ')}, observed ${r.outcome}${r.note ? ` (${r.note})` : ''}.`)
       }
     } else if (c.should_trigger !== true) {
       // A negative case asserts ONE thing: the target skill must not fire. It
@@ -388,6 +407,11 @@ function verify(reportPath) {
   for (const skill of sawSkill) {
     if (!positivePassed.has(skill)) {
       const pos = results.filter((r) => byId.get(r.id)?.skill === skill && byId.get(r.id)?.should_trigger === true)
+      const onlyUnsupportedExplicit = pos.length > 0 && pos.every((r) => {
+        const c = byId.get(r.id)
+        return c?.role === 'positive-explicit' && !explicitManualObservable
+      })
+      if (onlyUnsupportedExplicit) continue
       const how = pos.length ? pos.map((r) => `${r.id} came back ${r.outcome}`).join(', ') : 'no positive was run at all'
       failing.push(`${skill}: no positive canary passed on ${report.surface} (${how}). Every negative result for ${skill} in this report is void, and ${skill} is unmeasured on this surface, not passing.`)
     }
@@ -398,7 +422,7 @@ function verify(reportPath) {
     notes.push(`${unreachable.length} canaries reported unreachable. That is a skill the client cannot see, not a trigger declining: check the adapter's allow_implicit_invocation and the installed catalog before reading anything else in this report.`)
   }
 
-  return { report, problems, failing, notes, vacuous, unmeasuredRoutes, positivePassed: [...positivePassed], covered: [...sawSkill] }
+  return { report, problems, failing, notes, vacuous, unmeasuredRoutes, unmeasuredCapabilities, positivePassed: [...positivePassed], covered: [...sawSkill] }
 }
 
 // -------------------------------------------------------------------- run
@@ -431,8 +455,8 @@ if (args.includes('--sheet-json')) {
     console.error('')
     console.error('CANARY FAILURE on this surface:')
     for (const f of v.failing) console.error(`- ${f}`)
-  } else if (v.unmeasuredRoutes.length) {
-    console.log(`\nCanary report PARTIAL: ${v.unmeasuredRoutes.length} neighboring route(s) remain unmeasured after manual-only containment.`)
+  } else if (v.unmeasuredRoutes.length || v.unmeasuredCapabilities.length) {
+    console.log(`\nCanary report PARTIAL: ${v.unmeasuredRoutes.length} neighboring route(s) and ${v.unmeasuredCapabilities.length} client capability path(s) remain unmeasured.`)
   } else {
     console.log(`\nCanary report accepted: ${v.covered.length} skills exercised on ${v.report.surface}, ${v.positivePassed.length} with a passing positive.`)
   }
@@ -449,10 +473,11 @@ if (args.includes('--sheet-json')) {
     // never mistake a recorded failure for recorded success.
     writeFileSync(dest, JSON.stringify({
       ...v.report,
-      verdict: v.failing.length ? 'failed' : (v.unmeasuredRoutes.length ? 'partial' : 'passed'),
+      verdict: v.failing.length ? 'failed' : ((v.unmeasuredRoutes.length || v.unmeasuredCapabilities.length) ? 'partial' : 'passed'),
       failures: v.failing,
       void_results: v.vacuous,
       unmeasured_routes: v.unmeasuredRoutes,
+      unmeasured_capabilities: v.unmeasuredCapabilities,
     }, null, 2) + '\n')
     console.log(`Recorded ${dest}${v.failing.length ? ' as a FAILURE' : ''}`)
 

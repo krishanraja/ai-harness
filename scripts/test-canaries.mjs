@@ -79,22 +79,21 @@ try {
   const otherRun = run(['--verify', otherPath])
   check(otherRun.status === 0, `a negative case where a DIFFERENT skill fired should pass, exited ${otherRun.status}: ${otherRun.stderr}`)
 
-  // A manual-only target absent from the implicit catalog proves that the
-  // target did not over-trigger, but it cannot prove which neighboring owner
-  // handled the prompt. Preserve that distinction as partial evidence.
-  const manualRouteGap = structuredClone(passing)
-  const manualRouteCase = sheet.cases.find((canary) => canary.skill === 'design-intelligence-search' && !canary.should_trigger && canary.expected_route)
-  check(Boolean(manualRouteCase), 'sheet has no manual-only expected-route case for the route-gap regression')
-  const mrg = manualRouteGap.results.find((result) => result.id === manualRouteCase.id)
-  mrg.outcome = 'unreachable'
-  mrg.note = 'Target absent from the implicit catalog.'
-  const manualRoutePath = join(scratch, 'manual-route-gap.json')
-  writeFileSync(manualRoutePath, JSON.stringify(manualRouteGap, null, 2) + '\n')
-  const manualRouteRun = run(['--record', manualRoutePath, '--out-dir', join(scratch, 'manual-route-record')])
-  check(manualRouteRun.status === 0, `a contained manual-only target with an unmeasured neighbor should be partial, not failed: ${manualRouteRun.stderr}`)
-  const manualRecorded = JSON.parse(readFileSync(join(scratch, 'manual-route-record', `${release}-${manualRouteGap.surface}.json`), 'utf8'))
-  check(manualRecorded.verdict === 'partial', `manual route-gap verdict was ${manualRecorded.verdict}, expected partial`)
-  check(manualRecorded.unmeasured_routes.some((gap) => gap.id === manualRouteCase.id), 'manual route gap was not retained in the report')
+  // An expected route outside the canonical skill catalog cannot be observed
+  // by this instrument. It proves target containment only and remains partial.
+  const externalRouteCase = sheet.cases.find((canary) => canary.expected_route && String(canary.expected_route).includes('task system'))
+  check(Boolean(externalRouteCase), 'sheet has no external-route case for the observability regression')
+  const externalRoute = structuredClone(passing)
+  const er = externalRoute.results.find((result) => result.id === externalRouteCase.id)
+  er.outcome = 'wrong-skill'
+  er.note = 'krish-principles loaded; the external task system is not observable.'
+  const externalRoutePath = join(scratch, 'external-route.json')
+  writeFileSync(externalRoutePath, JSON.stringify(externalRoute, null, 2) + '\n')
+  const externalRouteRun = run(['--record', externalRoutePath, '--out-dir', join(scratch, 'external-route-record')])
+  check(externalRouteRun.status === 0, `an external expected route should be partial, not failed: ${externalRouteRun.stderr}`)
+  const externalRecorded = JSON.parse(readFileSync(join(scratch, 'external-route-record', `${release}-${externalRoute.surface}.json`), 'utf8'))
+  check(externalRecorded.verdict === 'partial', `external route verdict was ${externalRecorded.verdict}, expected partial`)
+  check(externalRecorded.unmeasured_routes.some((gap) => gap.id === externalRouteCase.id), 'external route gap was not retained in the report')
 
   // The other half of the same rule: naming the forbidden skill itself is still
   // a failure, however the outcome is labelled. Without this, "wrong-skill" is

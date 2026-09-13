@@ -499,8 +499,8 @@ $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if (-not (Test-Path -LiteralPath $designIntelligenceMetadata -PathType Leaf)) {
     Add-Failure 'Missing design-intelligence-search OpenAI metadata.'
 }
-elseif ([IO.File]::ReadAllText($designIntelligenceMetadata) -notmatch '(?m)^\s*allow_implicit_invocation:\s*false\s*$') {
-    Add-Failure 'design-intelligence-search is not explicitly manual-only in agents/openai.yaml.'
+elseif ([IO.File]::ReadAllText($designIntelligenceMetadata) -notmatch '(?m)^\s*allow_implicit_invocation:\s*true\s*$') {
+    Add-Failure 'design-intelligence-search is not discoverable for its structured delegation route.'
 }
 
 if ($null -eq $pythonCommand) {
@@ -587,6 +587,16 @@ $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
 Test-EvalCategoryMinimums -Records $globalChains -Minimums @{} -Label 'global chain suite'
 Test-EvalCategoryMinimums -Records $skillRoutes -Minimums @{} -Label 'skill routing suite'
+
+$currentStateCheck = @(& node (Join-Path $Root 'scripts\render-current-state.mjs') --check 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Generated current-state handoff is stale or inconsistent: $($currentStateCheck -join ' | ')"
+}
+
+$canaryRegressionCheck = @(& node (Join-Path $Root 'scripts\test-canaries.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Canary instrument regression suite failed: $($canaryRegressionCheck -join ' | ')"
+}
 
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
     $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)

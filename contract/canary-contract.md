@@ -61,6 +61,13 @@ So:
    with no positive pass beside them.
 3. A skill whose only evidence is negative is `unmeasured`, not `passing`.
 
+A headless runner must also declare capabilities it cannot exercise. An explicit
+UI-only invocation that the runner cannot send is `manual-required`, not a failed
+trigger. Likewise, a negative case may name an external owner such as a task system;
+the canary can prove only that the forbidden skill stayed out unless that owner is an
+observable canonical skill. Capability gaps and downstream route gaps are recorded as
+partial evidence and never promoted to passes.
+
 ## What counts as a canary result
 
 Four outcomes, and nothing else:

@@ -6,13 +6,16 @@ head: e43c275
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
+operational_state: CURRENT.md
 history_log: docs/history/LOG.md
 truth_files: [state/skill-registry.yaml, state/fleet.yaml, contract/paths.yaml]
-authority_order: [state/skill-registry.yaml, contract/krish-operating-contract.md, contract/skill-routing-contract.md, contract/active-skill-quality-standard.md, README.md]
+authority_order: [CURRENT.md, state/skill-registry.yaml, contract/krish-operating-contract.md, contract/skill-routing-contract.md, contract/active-skill-quality-standard.md, README.md]
 steward: https://github.com/krishanraja/control-center/blob/main/docs/steward/RUNBOOK.md
 never_publish: [any machine name or surface id, any absolute path from a personal machine, the contents of any eval case, any credential name]
 ---
 # The harness: where it is right now
+
+> Narrative snapshot maintained by the documentation steward, currently stamped at the commit and date above. For exact operational state, release versions, deployments, heartbeats and live canary verdicts, read `CURRENT.md`. When the two differ, `CURRENT.md` and its linked machine evidence win.
 
 ## What it is
 
@@ -32,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured.
 
-## Where it is right now (as of 2026-09-12)
+## Where the narrative snapshot stood (as of 2026-09-12)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.12.4` (tag `harness-v2026.09.12.4`, commit `0ec7d3a`, manifest SHA-256 `AB10D5CB...CAE2C7`, published 2026-09-12T21:00:41Z), immutable. It supersedes `v2026.09.12.3`, which stays the rollback target.
 - **Installed and hash-verified on LORIMER's three local surfaces the same day.** `claude-code-user`, `cursor-primary` and `codex-current` each show 29 of 29 per-skill hashes exact and the release aggregate matching in their `state/deployments/v2026.09.12.4-*.json` records. The machine run's own status is `blocked`, not succeeded, because the live canary that followed the install failed.
