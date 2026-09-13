@@ -655,11 +655,18 @@ contract_rules:
     status: live
   - id: collision-rules.video-engine-activates-only
     file: contract/skill-routing-contract.md
-    text_sha: "485b01ccf69f"
+    text_sha: "2b4c55d93463"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "68d5dae3daf0"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+    history:
+      - text_sha: "485b01ccf69f"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "68d5dae3daf0"
     status: live
   - id: ctrl-standards-chain.ctrl-intake-stages-1
     file: contract/skill-routing-contract.md
@@ -988,11 +995,18 @@ skill_sections:
   - id: content-corpus.collision-and-handoff-rules
     file: skills/content-corpus/SKILL.md
     heading: "Collision and handoff rules"
-    text_sha: "5053812f3906"
+    text_sha: "c33707311b5d"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+    history:
+      - text_sha: "5053812f3906"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: content-corpus.controlled-learning
     file: skills/content-corpus/SKILL.md
@@ -2806,11 +2820,18 @@ skill_sections:
   - id: video-engine.trigger-contract
     file: skills/video-engine/SKILL.md
     heading: "Trigger contract"
-    text_sha: "ef232c6294f0"
+    text_sha: "a3df0b41de91"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+    history:
+      - text_sha: "ef232c6294f0"
+        valid_until: "2026-09-12"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: video-engine.start-every-session
     file: skills/video-engine/SKILL.md

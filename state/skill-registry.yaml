@@ -27,38 +27,48 @@ deployed_release:
   status: parity-deployed-to-all-reachable-local-and-cloud-surfaces
 
 latest_approved_release:
-  release_id: v2026.09.12.4
-  tag: harness-v2026.09.12.4
-  source_commit: 0ec7d3ae1c6068136a9d1bc757729dcb53f8ab02
-  published: true
-  immutable: true
-  published_at: 2026-09-12T21:00:41Z
-  manifest_sha256: AB10D5CBE23122A978D510DE93C77F20BA588ADA05679AB8BDAA3E9E99CAE2C7
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.12.4
-  skills_tree_aggregate_sha256: D5A9E654BF401680149489882F74B48C2404EEFEA0E32302783C9D2097EDD52B
+  release_id: v2026.09.12.5
+  tag: harness-v2026.09.12.5
+  source_commit: d579b9395249241d22d1566d26a701e56ad14157
+  published: false
+  immutable: false
+  skills_tree_aggregate_sha256: FEC86204347D784EB0DB1980CECE50E95265639B17F595AB66884E04342C673C
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
     - content-corpus
     - design-intelligence-search
-    - mindmake-os
     - mindmake
-  approved_at: 2026-09-12
+    - video-engine
+  approved_at: 2026-09-13
   approved_by: Krish Raja
   approval_basis: >-
-    Krish explicitly approved closing all audited gaps on 2026-09-12 and then
-    confirmed continuation of the supervised credential and rollout work. The
-    approval covers this corrective release; publication and deployment remain
-    separately evidenced actions.
+    After PR 45, harness-v2026.09.12.5, the exact change scope, green independent
+    judge, repeat-build proof, installer proof, and v2026.09.12.4 rollback target
+    were shown, Krish explicitly instructed on 2026-09-13: "yes, merge all to
+    main and close this out". This authorises merge, immutable publication, and
+    governed rollout. Credential rotation remains outside this approval.
   approval_note: >-
-    Live v2026.09.12.3 canaries found two Claude case failures, seven Codex case
-    failures plus one coverage summary, and a post-run recorder exception. This
-    candidate requires the design skill's existing delegation packet at its
-    routing boundary, sharpens observed collision routes, fixes the recorder
-    field, adds a regression assertion, and retains failed reports as evidence.
+    Live v2026.09.12.4 canaries installed with exact parity but recorded four
+    Claude and nine Codex failures. This candidate leads three routing
+    descriptions with their exclusion gates, distinguishes Video Engine guard
+    retrieval from authority-boundary activation, preserves manual-only route
+    gaps as partial evidence, and requires asker provenance on generated rows.
   supersedes_reason: >-
-    v2026.09.12.3 is byte-verified locally but its newly authenticated live
-    canaries exposed routing regressions and a run-recording defect. It remains
-    immutable and is the immediate rollback target, not the desired install.
+    v2026.09.12.4 is byte-exact on all three LORIMER surfaces, but its live
+    behavioral run is blocked. It remains immutable and installed as the
+    immediate rollback target while this evidence-driven follow-up is reviewed.
+
+
+previous_published_release:
+  release_id: v2026.09.12.4
+  tag: harness-v2026.09.12.4
+  source_commit: 0ec7d3ae1c6068136a9d1bc757729dcb53f8ab02
+  immutable: true
+  published_at: 2026-09-12T21:00:41Z
+  manifest_sha256: AB10D5CBE23122A978D510DE93C77F20BA588ADA05679AB8BDAA3E9E99CAE2C7
+  skills_tree_aggregate_sha256: D5A9E654BF401680149489882F74B48C2404EEFEA0E32302783C9D2097EDD52B
+  installed_evidence: state/machine-runs/v2026.09.12.4-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-blocked
 
 
 superseded_approved_release:

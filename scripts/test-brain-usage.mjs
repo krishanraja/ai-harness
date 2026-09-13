@@ -117,12 +117,20 @@ t('a citation is written and read back', () => {
   assert(readLedger(root)[0].valid_for_ref === 'pr-26', 'a citation must scope validity to its immutable evidence ref')
 })
 
-t('a canary citation is explicitly synthetic', () => {
+t('a canary citation is explicitly synthetic and preserves its asker', () => {
   const root = fixture()
-  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-a', at: '2026-09-12', verdict: 'fired' }], { root })
+  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-a', at: '2026-09-12', verdict: 'fired', asked_by: 'Named release owner.' }], { root })
   assert(wrote.length === 1, `expected 1 row written, got ${wrote.length}`)
   assert(wrote[0].evidence_class === 'synthetic-evaluation', 'a canary citation must not look like real-world usage')
   assert(wrote[0].scope === 'skill-retrieval-only', 'a canary citation must not claim outcome or efficacy evidence')
+  assert(wrote[0].asked_by === 'Named release owner.', 'a canary citation must preserve its named asker')
+})
+
+t('a canary citation without a named asker is refused', () => {
+  const root = fixture()
+  const wrote = appendUsage([{ rule_id: 'apify.route-the-request', producer: 'canary', ref: 'release-unasked', at: '2026-09-12', verdict: 'fired' }], { root })
+  assert(wrote.length === 0, `an unasked canary row must be refused, wrote ${wrote.length}`)
+  assert(readLedger(root).length === 0, 'an unasked canary row must not reach the ledger')
 })
 
 t('the same evidence twice adds nothing', () => {
@@ -177,7 +185,7 @@ t('a cited rule leaves the dead list, and an old citation is stale rather than d
   const root = fixture()
   appendUsage([
     { rule_id: 'authority.never-publish-without', producer: 'judge', ref: 'pr-26', at: '2026-09-10' },
-    { rule_id: 'verification.use-deterministic-checks', producer: 'canary', ref: 'v1-surface', at: '2026-01-05' },
+    { rule_id: 'verification.use-deterministic-checks', producer: 'canary', ref: 'v1-surface', at: '2026-01-05', asked_by: 'Named release owner.' },
   ], { root })
   const { never, stale } = deadZones({ root, since: '2026-06-01' })
   assert(never.length === 3, `expected 3 still never cited, got ${never.length}: ${never.join(', ')}`)

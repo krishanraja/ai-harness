@@ -1,6 +1,6 @@
 ---
 name: design-intelligence-search
-description: "Never use for a direct user's generic design, build, implementation, improvement, review, accessibility, or QA request; those stay with their normal owners. This is a subordinate design-data retrieval companion used only after krish-design or build-apps-with-krish explicitly delegates a bounded search. It retrieves advisory candidates for product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or mobile web with pinned provenance and uncertainty. It never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Last reviewed 2026-09-12."
+description: "Delegation gate first: invoke only when the request explicitly identifies krish-design or build-apps-with-krish as the delegator and names one bounded search need for one concept arm. Never infer delegation from design vocabulary. Never use for a direct user's generic design, build, implementation, improvement, review, accessibility, or QA request; those stay with their normal owners. This subordinate read-only companion retrieves advisory candidates for product patterns, style territories, palettes, typography, landing structures, icons, charts, motion, or mobile web with pinned provenance and uncertainty. It never chooses taste, states standards, writes project files, implements code, tests a rendered UI, or mutates an external surface. Last reviewed 2026-09-12."
 ---
 
 # Design Intelligence Search

@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Channel-context router for Krish Raja's named editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Pair with krish-voice for final prose and krish-content-marketer when conversion is the job. Exclude generic voice editing, generic marketing strategy, and assertions that a channel is currently active; verify status live before producing or publishing for a named surface."
+description: "Ownership gate first: conversion strategy, persuasive angles, strategic overlays, and generic marketing strategy are led by krish-content-marketer; final prose and generic voice editing are led by krish-voice. This skill may support those owners only when they also need named-channel context. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces. Use when deciding whether an asset belongs in The Money of AI, Built with AI, Signal & Noise, Maven, lead email, or another Mindmake publication/visibility surface; what that surface is for; who it serves; which native form fits; or how one source should differ by channel. Exclude assertions that a channel is currently active; verify status live before producing or publishing."
 ---
 
 # Content corpus
@@ -87,9 +87,8 @@ Channel selection does not establish channel status. Verify both independently.
 
 ## Collision and handoff rules
 
+- Conversion strategy, persuasive angles, strategic overlays, and generic marketing strategy are led by `krish-content-marketer`; final prose is led by `krish-voice`. Load this skill in those workflows only when the owning producer separately needs a named channel's purpose, audience, native form, or cross-channel treatment. A brand or channel word alone is not that need.
 - For a landing or sales asset that invokes any named channel, use the explicit chain `content-corpus -> mindmake fact check -> krish-content-marketer -> krish-voice -> verification-loop`. State the final-prose handoff to `krish-voice`; a later voice check is not a substitute for the handoff.
-- Structure or conversion problem: `krish-content-marketer` leads.
-- Voice-mechanics problem: `krish-voice` leads.
 - Current Mindmake offer or buyer fact: `mindmake` supplies context.
 - Current external claim or channel status: `evidence-research` or first-party retrieval supplies evidence.
 - Platform/API execution: the relevant tool skill acts only after the plan and authority gate.

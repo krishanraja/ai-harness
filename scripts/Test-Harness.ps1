@@ -53,6 +53,12 @@ else {
     if ($syncScriptRaw -notmatch "'brain/usage\.jsonl'") {
         Add-Failure 'PR-enabled sync does not stage citation candidates with machine evidence.'
     }
+    if ($syncScriptRaw -notmatch 'asked_by\s*=\s*\$Asker' -or $syncScriptRaw -notmatch 'Get-ReleaseApprovalAsker') {
+        Add-Failure 'Machine sync does not attach registry-backed asker provenance to canary reports.'
+    }
+    if ($syncScriptRaw -notmatch 'mindmake-video-studio' -or $syncScriptRaw -notmatch 'videoEngineActivated') {
+        Add-Failure 'Codex canaries do not distinguish Video Engine guard retrieval from authority-boundary activation.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }

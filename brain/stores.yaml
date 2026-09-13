@@ -38,6 +38,7 @@ stores:
     read_by: brain-usage.mjs and audit-harness.mjs
     written_by: pull request only
     candidate_producers: judge.mjs and canaries.mjs
+    asker_source: approved_by in state/skill-registry.yaml, resolved automatically by Invoke-HarnessSync.ps1
     write_gate: >
       PR-enabled machine sync stages citation candidates on its named evidence
       branch with the canary and deployment records. Canary-only and no-PR runs
@@ -47,8 +48,11 @@ stores:
       Each event is historical evidence scoped to its immutable ref, not a claim
       about the current release and not proof of real-world use or efficacy.
       Canary rows carry evidence_class synthetic-evaluation and scope
-      skill-retrieval-only. A current-coverage claim must match the release being
-      evaluated; older rows remain append-only history and are never overwritten.
+      skill-retrieval-only. Rows admitted from v2026.09.12.4 onward name the
+      asker who authorised the sweep; earlier rows are retained as legacy
+      history and make no asker-provenance claim. A current-coverage claim must
+      match the release being evaluated; older rows remain append-only history
+      and are never overwritten.
     retirement: >
       Stop future writes through a reviewed proposal. Keep prior rows with their
       refs; event facts do not become false when a later selector or release changes.
