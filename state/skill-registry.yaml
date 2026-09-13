@@ -39,13 +39,14 @@ latest_approved_release:
     - design-intelligence-search
     - mindmake
     - video-engine
-  approved_at: 2026-09-12
+  approved_at: 2026-09-13
   approved_by: Krish Raja
   approval_basis: >-
-    Krish explicitly approved closing all audited gaps on 2026-09-12 and then
-    confirmed continuation of the supervised credential and rollout work. The
-    approval covers this corrective release; publication and deployment remain
-    separately evidenced actions.
+    After PR 45, harness-v2026.09.12.5, the exact change scope, green independent
+    judge, repeat-build proof, installer proof, and v2026.09.12.4 rollback target
+    were shown, Krish explicitly instructed on 2026-09-13: "yes, merge all to
+    main and close this out". This authorises merge, immutable publication, and
+    governed rollout. Credential rotation remains outside this approval.
   approval_note: >-
     Live v2026.09.12.4 canaries installed with exact parity but recorded four
     Claude and nine Codex failures. This candidate leads three routing

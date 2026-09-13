@@ -660,7 +660,7 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
     history:
       - text_sha: "485b01ccf69f"
         valid_until: "2026-09-12"
@@ -1000,7 +1000,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
     history:
       - text_sha: "5053812f3906"
         valid_until: "2026-09-12"
@@ -2825,7 +2825,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "3930CC4D7F54D4E62332C142DAA9FD80B72CA9976DF9AF141D7311BDB5E0FD2F"
+      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
     history:
       - text_sha: "ef232c6294f0"
         valid_until: "2026-09-12"

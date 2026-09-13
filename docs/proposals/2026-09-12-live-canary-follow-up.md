@@ -1,8 +1,10 @@
 # Live canary follow-up proposal, 2026-09-12
 
-Status: proposed in public PR 45 and awaiting Krish's action-time approval before merge or publication.
+Status: approved by Krish Raja on 2026-09-13 for merge of public PR 45, publication of `harness-v2026.09.12.5`, and governed rollout. Credential rotation remains outside this approval.
 
 Prompted by: Krish Raja's instruction to close the audited gaps and the failed approved rollout. That earlier broad instruction authorises this proposal and its verification, but is not treated as action-time approval to merge this later semantic change.
+
+Action-time approval: "yes, merge all to main and close this out" in the interactive session on 2026-09-13, given after the exact PR, release identifier, change scope, green judge result, repeat-build proof, installer proof, and rollback target were shown.
 
 ## Evidence
 
