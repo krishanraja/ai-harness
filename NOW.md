@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-13
-head: dc48295
+as_of: 2026-09-14
+head: 88daf58
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -35,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
 
-## Where it is right now (as of 2026-09-13)
+## Where it is right now (as of 2026-09-14)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.13.8` (tag `harness-v2026.09.13.8`, source commit `c7a429d`, manifest SHA-256 `415C473E...C6040A5`, published 2026-09-13T18:26:40Z), immutable. It supersedes `v2026.09.13.7`, which stays the rollback target.
 - **Eight releases published in one day, each a correction to the last one's live evidence, not a rewrite of it.** Starting from `v2026.09.12.5`, the chain closed a canary index bug that invented a fictional "core" skill, two real Codex routing misses, an unsound rule for picking release-sentinel prompts, a CTRL compile-versus-build boundary Codex kept crossing, a `take-the-brief` exclusion buried too late in its own description, and a scoring rule that let one unobserved downstream route erase a valid containment pass. Every step is a separate proposal under `docs/proposals/2026-09-13-*.md`, and no historical canary report was rewritten to match a later expectation.
