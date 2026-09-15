@@ -3,15 +3,15 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-09-13**.
+Rendered from registry reconciliation date **2026-09-15**.
 
 ## Release authority
 
-- Latest approved release: **v2026.09.13.8** (harness-v2026.09.13.8)
-- Immutable and published: **yes**, 2026-09-13T18:26:40Z
-- Release source commit: `c7a429db4336b7f2e8cac563ee68d9d40714b4d4`
-- Manifest SHA-256: `415C473EFEE85EC846AC83B3237937AE4FF5CFE3805F01F2C61D57613C6040A5`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.8
+- Latest approved release: **v2026.09.15.1** (harness-v2026.09.15.1)
+- Immutable and published: **yes**, 2026-09-15T18:58:32Z
+- Release source commit: `813a5859c1c7017c45213af6d9b5b4a16ebb0416`
+- Manifest SHA-256: `55840B30AAED69122C19C78959B98268ED35F6677BCF7D4B3DC17051A7F660DC`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.1
 - Current deployment verdict: **local-parity-deployed-claude-partial-cursor-manual-codex-one-intermittent-containment-failure-cloud-still-v2026.08.29.3**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
