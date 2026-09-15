@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-09-13
+last_reconciled: 2026-09-15
 status: governed-production-set
 
 candidate_reconciliation:
@@ -27,38 +27,56 @@ deployed_release:
   status: local-parity-deployed-claude-partial-cursor-manual-codex-one-intermittent-containment-failure-cloud-still-v2026.08.29.3
 
 latest_approved_release:
-  release_id: v2026.09.13.8
-  tag: harness-v2026.09.13.8
-  source_commit: c7a429db4336b7f2e8cac563ee68d9d40714b4d4
+  release_id: v2026.09.15.1
+  tag: harness-v2026.09.15.1
+  source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
   published: true
   immutable: true
-  published_at: 2026-09-13T18:26:40Z
-  manifest_sha256: 415C473EFEE85EC846AC83B3237937AE4FF5CFE3805F01F2C61D57613C6040A5
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.13.8
-  skills_tree_aggregate_sha256: 83C3766A6C6778F50CDCDFF1316334C3D989DB49642FA94E0BDC9D5613C15E66
+  published_at: 2026-09-15T18:58:32Z
+  manifest_sha256: 55840B30AAED69122C19C78959B98268ED35F6677BCF7D4B3DC17051A7F660DC
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.1
+  skills_tree_aggregate_sha256: BECB0A29D54EAFB144D04F8564F4029365EBB332A93B353241E0FA40000276B6
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - ctrl-compile
-  approved_at: 2026-09-13
+    - build-apps-with-krish
+    - krish-build
+    - verification-loop
+    - video-engine
+  approved_at: 2026-09-15
   approved_by: Krish Raja
   approval_basis: >-
-    Krish instructed execution of the audited correction plan on 2026-09-13.
-    PR 70 then passed the independent judge, surface validation, deterministic
-    repeat-build, and installer proof before merge and immutable publication.
-    This authorises governed rollout with v2026.09.13.7 as rollback.
+    Krish instructed implementation, propagation, and merge of the aggregate
+    stage-conveyor correction on 2026-09-15. PR 75 passed the independent
+    package review, GitHub judge with the recorded owner ruling, surface
+    validation, deterministic repeat-build, and installer proof before merge
+    and immutable publication. This authorises governed rollout with
+    v2026.09.13.8 as the exact rollback baseline.
   approval_note: >-
-    The v2026.09.13.7 run proved the take-the-brief correction but exposed a
-    repeated Codex owner miss between CTRL Compile and Build, plus a verifier
-    defect that misread structured guard-only evidence. This release corrects
-    both while retaining the strict activation failure rule.
+    This release makes qualifying multi-stage repositories executable conveyors
+    of specialised stages, shared guards, declared handoffs, durable recovery,
+    and final consumed-output verification. It also records the Video Engine's
+    current content-engine identity and repairs the previously documented but
+    unenforced Krish-ruling override in the judge gate.
   supersedes_reason: >-
-    v2026.09.13.7 is byte-exact on all three LORIMER surfaces and remains the
-    immutable immediate rollback target, but its Codex behavioral report has
-    one repeated CTRL Compile positive-owner miss.
+    v2026.09.13.8 remains the immutable immediate rollback target. Its local
+    bytes have parity evidence, but its overall behavioral run is partial and
+    cloud surfaces remain on v2026.08.29.3.
   status: published-awaiting-progressive-rollout
 
 
 previous_published_release:
+  release_id: v2026.09.13.8
+  tag: harness-v2026.09.13.8
+  source_commit: c7a429db4336b7f2e8cac563ee68d9d40714b4d4
+  immutable: true
+  published_at: 2026-09-13T18:26:40Z
+  manifest_sha256: 415C473EFEE85EC846AC83B3237937AE4FF5CFE3805F01F2C61D57613C6040A5
+  skills_tree_aggregate_sha256: 83C3766A6C6778F50CDCDFF1316334C3D989DB49642FA94E0BDC9D5613C15E66
+  installed_evidence: state/machine-runs/v2026.09.13.8-lorimer.json
+  status: installed-exact-parity-behavioral-canaries-partial
+
+
+superseded_approved_release:
   release_id: v2026.09.13.7
   tag: harness-v2026.09.13.7
   source_commit: 11b6c8ff091503fa45cfb4a5f580ca247d8f3933
@@ -66,21 +84,10 @@ previous_published_release:
   published_at: 2026-09-13T17:43:29Z
   manifest_sha256: 354B2E206DEB77007401920650A12E791BE753B9096D8D6FBE6BD30480D67F43
   skills_tree_aggregate_sha256: F11DB08013F249B5D5CDE591887746D8DDF2007E085FAA353552AE62F1CA1E09
-  installed_evidence: state/machine-runs/v2026.09.13.7-lorimer.json
-  status: installed-exact-parity-behavioral-canaries-blocked-by-one-codex-positive-owner-miss
-
-
-superseded_approved_release:
-  release_id: v2026.09.13.6
-  tag: harness-v2026.09.13.6
-  source_commit: 285b37f272d4580be5be7cf198f12c7f794ad4b7
-  immutable: true
-  published_at: 2026-09-13T16:56:20Z
-  manifest_sha256: 387F79E9883DF7BB3AA8EDAF1C5B8AA75A0BF2CC37FF27708F609E29630F6734
-  skills_tree_aggregate_sha256: 4A5F0AF805E10DE3C61CC9CECA36B54662205E8881FF3072CE8C4AFBA13686FB
   note: >-
     Installed with exact parity on Claude Code, Cursor, and Codex on LORIMER but
-    blocked by authenticated canaries. Retained as the second rollback target.
+    blocked by one repeated Codex positive-owner miss. Retained as the second
+    rollback target.
 
 
 surface_deployments:

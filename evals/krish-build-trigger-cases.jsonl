@@ -6,7 +6,7 @@
 {"id":"build-trigger-006","category":"positive","prompt":"Wire this authenticated edge function using managed secrets and verify its downstream effect.","should_trigger":true}
 {"id":"build-trigger-007","category":"positive","prompt":"Commit the reviewed multi-file implementation atomically while preserving my unrelated local changes.","should_trigger":true}
 {"id":"build-trigger-008","category":"positive","prompt":"A key was pasted into a build log. Contain the exposure without printing it and propose the exact remediation gate.","should_trigger":true}
-{"id":"build-trigger-009","category":"negative","prompt":"Design a materially new onboarding interaction and render one option for my reaction before code.","should_trigger":false,"expected_route":["krish-design"]}
+{"id":"build-trigger-025","category":"negative","prompt":"Design a materially new onboarding interaction and render one option for my reaction before code.","should_trigger":false,"expected_route":["krish-design"]}
 {"id":"build-trigger-010","category":"negative","prompt":"Take this new app through product rules, several connected surfaces, build, and verified release.","should_trigger":false,"expected_route":["build-apps-with-krish"]}
 {"id":"build-trigger-011","category":"negative","prompt":"Audit the deployed app on desktop and mobile and return UX findings without changing code.","should_trigger":false,"expected_route":["ux-testing-agent"]}
 {"id":"build-trigger-012","category":"negative","prompt":"Rewrite this approved page in Krish's voice without changing its behavior.","should_trigger":false,"expected_route":["krish-voice"]}
