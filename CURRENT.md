@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-09-15**.
 - Release source commit: `5e7155341007d688a8b38ab70dee774df8e59a1b`
 - Manifest SHA-256: `1D7F83049E41F63343DB4ACB89D25812CB47CA8AD62D3EC05DF22B7FA5343E62`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.2
-- Current deployment verdict: **local-exact-parity-claude-one-positive-owner-failure-cursor-manual-codex-partial-cloud-still-v2026.08.29.3-surface-awaiting-own-sync**
+- Current deployment verdict: **local-exact-parity-canary-routing-failures-cursor-manual-cloud-still-v2026.08.29.3-surface-awaiting-own-sync**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -21,9 +21,9 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | installed-hash-verified-and-canaried-video-engine-reachable |
-| cursor-primary | v2026.09.15.1 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.15.1 | 29/29 exact | installed-hash-verified-canary-failed-one-strategy-positive-owner-miss |
-| codex-current | v2026.09.15.1 | 29/29 exact | installed-hash-verified-selected-positives-pass-one-external-task-route-unmeasured |
+| cursor-primary | v2026.09.15.2 | 29/29 exact | installed-hash-verified-manual-canary-required |
+| claude-code-user | v2026.09.15.2 | 29/29 exact | installed-hash-verified-canary-failed-routing-boundaries |
+| codex-current | v2026.09.15.2 | 29/29 exact | installed-hash-verified-canary-failed-routing-boundaries |
 | claude-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 | perplexity-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 
