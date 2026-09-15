@@ -53,6 +53,7 @@ Completion semantics are owned by `verification-loop`. The stage contract must n
 3. Preserve absence as absence. A missing, truncated, unparseable, stale, or unconsumed artifact cannot become a rejection, approval, empty success, or cached verdict.
 4. Verify the last artifact or state the user or downstream system actually consumes. Do not infer it from a correct intermediate file.
 5. When the same defect appears in several branches, inspect their nearest shared producer, contract, or guard before patching every branch.
+6. Treat dependency integrity and dependency availability as separate claims. A checksum proves the bytes received; it does not make an expiring nightly tag, temporary signed URL, mutable alias, or retention-limited host a reproducible build input. Mirror build-critical binaries into a retained, access-controlled release owned by the repository or use a provider with an explicit compatible retention contract. Keep the expected digest in version control and exercise authenticated download plus digest verification on every supported build platform.
 
 ## Ownership and layout
 
@@ -122,6 +123,7 @@ Adopt fixtures for the failure classes the repository can actually experience:
 - a restart resets the retry or spend budget;
 - a parent exits while child work continues unowned;
 - revision history duplicates stable executors instead of versioning evidence.
+- a hash-pinned build dependency disappears from its upstream host or requires authentication that CI does not provide.
 
 ## Completion packet
 
