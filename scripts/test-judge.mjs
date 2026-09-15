@@ -16,7 +16,7 @@
 
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
-  hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED,
+  hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED, recordedRulings,
 } from './judge.mjs'
 
 let failures = 0
@@ -151,6 +151,14 @@ T('a regression on an advisory criterion does not block', () => {
     bench, clauseIds, DIFF_FILES)
   assert(findings.length === 1, 'the finding is kept')
   assert(blockingRegressions(findings).length === 0, 'stall-risk is advisory: flag it, do not block it')
+})
+
+T('only a complete recorded Krish ruling matches the override contract', () => {
+  const valid = 'Subject\n\nRuling (Krish, 2026-09-15): Ship the bounded correction.\n'
+  assert(recordedRulings(valid).length === 1, 'a complete ruling line must be found')
+  assert(recordedRulings('Ruling (Krish, DATE): vague').length === 0, 'a placeholder date must not match')
+  assert(recordedRulings('Ruling (Someone, 2026-09-15): no').length === 0, 'another identity must not match')
+  assert(recordedRulings('Ruling (Krish, 2026-09-15):').length === 0, 'an empty ruling must not match')
 })
 
 // ----------------------------------------------------------------- the benches

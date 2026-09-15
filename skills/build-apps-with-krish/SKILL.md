@@ -27,6 +27,8 @@ Suppress generic app-building or marketplace skills unless they provide a bounde
 
 For a new app, material redesign, or workflow spanning multiple connected surfaces, read `references/delivery-protocol.md` before planning the phases. For an isolated task inside an already locked direction, leave this skill and route directly to the narrow owner.
 
+When the product is implemented as a repeatable, resumable, metered, or multi-artifact lifecycle, hand its technical architecture to `krish-build`'s stage-conveyor protocol. Keep this skill as the product-journey orchestrator; do not copy the stage contracts or repository machinery into this file.
+
 ## Inputs and preflight
 
 Establish these before committing implementation effort:

@@ -591,11 +591,18 @@ contract_rules:
     status: live
   - id: collision-rules.build-apps-with-krish
     file: contract/skill-routing-contract.md
-    text_sha: "127bf0c93c56"
+    text_sha: "c7cc99da7773"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+    history:
+      - text_sha: "127bf0c93c56"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: collision-rules.design-intelligence-search-is
     file: contract/skill-routing-contract.md
@@ -661,13 +668,19 @@ contract_rules:
     status: live
   - id: collision-rules.video-engine-activates-only
     file: contract/skill-routing-contract.md
-    text_sha: "2b4c55d93463"
+    text_sha: "4938185bee40"
     first_seen: "2026-09-08"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
     history:
+      - text_sha: "2b4c55d93463"
+        valid_until: "2026-09-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+          sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
       - text_sha: "485b01ccf69f"
         valid_until: "2026-09-12"
         source:
@@ -848,11 +861,18 @@ skill_sections:
   - id: build-apps-with-krish.role-and-chain
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Role and chain"
-    text_sha: "f7aba15cff24"
+    text_sha: "b5afeb808a99"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+    history:
+      - text_sha: "f7aba15cff24"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: build-apps-with-krish.inputs-and-preflight
     file: skills/build-apps-with-krish/SKILL.md
@@ -1754,11 +1774,18 @@ skill_sections:
   - id: krish-build.1-build-doctrine
     file: skills/krish-build/SKILL.md
     heading: "1. Build doctrine"
-    text_sha: "78abcd686990"
+    text_sha: "87fa07821840"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+    history:
+      - text_sha: "78abcd686990"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-build.2-determinism-in-practice
     file: skills/krish-build/SKILL.md
@@ -1781,11 +1808,18 @@ skill_sections:
   - id: krish-build.4-gates-and-validation
     file: skills/krish-build/SKILL.md
     heading: "4. Gates and validation"
-    text_sha: "8634c51d1025"
+    text_sha: "4c4abe331554"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+    history:
+      - text_sha: "8634c51d1025"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-build.5-environment-truth
     file: skills/krish-build/SKILL.md
@@ -2799,11 +2833,18 @@ skill_sections:
   - id: verification-loop.select-checks-by-artifact
     file: skills/verification-loop/SKILL.md
     heading: "Select checks by artifact"
-    text_sha: "3c3df845de45"
+    text_sha: "62775eb85fcb"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+    history:
+      - text_sha: "3c3df845de45"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: verification-loop.correction-loop
     file: skills/verification-loop/SKILL.md
@@ -2835,13 +2876,19 @@ skill_sections:
   - id: video-engine.trigger-contract
     file: skills/video-engine/SKILL.md
     heading: "Trigger contract"
-    text_sha: "a3df0b41de91"
+    text_sha: "69653dfb7630"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
     history:
+      - text_sha: "a3df0b41de91"
+        valid_until: "2026-09-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+          sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
       - text_sha: "ef232c6294f0"
         valid_until: "2026-09-12"
         source:

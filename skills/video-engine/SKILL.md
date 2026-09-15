@@ -5,7 +5,7 @@ description: "Exact activation guard for Krishan Raja's Mindmake Video Engine. A
 
 # Video Engine launcher
 
-Use this as a thin launcher. GitHub `krishanraja/mindmake-video-studio` `main` is the only authority for code, configuration, operational instructions, and durable learning.
+Use this as a thin launcher. GitHub `krishanraja/content-engine` `main` is the only authority for code, configuration, operational instructions, and durable learning.
 
 ## Trigger contract
 
@@ -18,7 +18,7 @@ Activate a new Video Engine session only when both are true:
 
 `Video engine`, `VIDEO ENGINE` and ` Video engine ` pass. Everything else fails, including `Video engine!`, `Video engine please`, a message carrying another line, a quoted mention, `$video-engine`, and the exact words on a later turn.
 
-This matches `krishanraja/mindmake-video-studio` `main` exactly, which this file names as the only authority. Narrowed here on 2026-09-08: the canon had been declaring a wider trigger than the repository it defers to, which the SURFACE reconciliation caught as a standing collision.
+This matches `krishanraja/content-engine` `main` exactly, which this file names as the only authority. The trigger was narrowed on 2026-09-08 while the same repository still used its former `krishanraja/mindmake-video-studio` identity, after the SURFACE reconciliation caught the standing collision. The 2026-09-15 rename changes the authority address, not what that older evidence proved.
 
 - Do not activate from phrases such as `video edit`, `edit this video`, `generate a video`, `my video engine`, `how does the video engine work?`, or any unrelated mention of video production.
 - If this skill was selected but the trigger contract is not satisfied, stop applying it immediately. Do not fetch the repository, run the CLI, inspect Video Engine state, or redirect the request. Handle the request normally with the relevant general capability.

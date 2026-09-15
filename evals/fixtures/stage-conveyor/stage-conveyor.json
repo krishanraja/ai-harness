@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "pipeline_id": "held-out-conveyor",
+  "inventory": {
+    "roots": ["pipeline"],
+    "extensions": [".mjs"],
+    "exclude": []
+  },
+  "external_inputs": ["source_request"],
+  "terminal_outputs": ["verified_delivery"],
+  "stages": [
+    {
+      "id": "capture",
+      "owner": "source capture",
+      "owned_paths": ["pipeline/capture.mjs"],
+      "inputs": ["source_request"],
+      "outputs": ["captured_source"],
+      "consumed_guards": ["scope"],
+      "side_effects": ["none"],
+      "retry": {"mode": "manual", "total_attempt_cap": 1, "checkpoint": "captured_source", "recovery_entrypoint": "resume-capture"},
+      "completion": {"source": "authoritative_output", "evidence": "captured source schema and hash"}
+    },
+    {
+      "id": "build",
+      "owner": "artifact build",
+      "owned_paths": ["pipeline/build.mjs"],
+      "inputs": ["captured_source"],
+      "outputs": ["built_artifact"],
+      "consumed_guards": ["scope"],
+      "side_effects": ["repository artifact write"],
+      "retry": {"mode": "idempotent", "total_attempt_cap": 3, "checkpoint": "built_artifact", "recovery_entrypoint": "resume-build"},
+      "completion": {"source": "rendered_artifact", "evidence": "new artifact hash and rendered output"}
+    },
+    {
+      "id": "verify",
+      "owner": "independent verification",
+      "owned_paths": ["pipeline/verify.mjs"],
+      "inputs": ["built_artifact"],
+      "outputs": ["verified_delivery"],
+      "consumed_guards": ["scope"],
+      "side_effects": ["none"],
+      "retry": {"mode": "manual", "total_attempt_cap": 1, "checkpoint": "verified_delivery", "recovery_entrypoint": "resume-verify"},
+      "completion": {"source": "independent_rederivation", "evidence": "consumer-facing artifact re-derived from source"}
+    }
+  ],
+  "edges": [
+    {"from": "capture", "to": "build", "artifact": "captured_source"},
+    {"from": "build", "to": "verify", "artifact": "built_artifact"}
+  ],
+  "guards": [
+    {"id": "scope", "owner": "shared scope guard", "owned_paths": ["pipeline/scope-guard.mjs"], "required_for": ["capture", "build", "verify"], "enforced_by": ["tests/stage-conveyor.test.mjs"]}
+  ],
+  "entrypoints": [
+    {"id": "start", "stage": "capture", "path": "pipeline/capture.mjs", "kind": "primary"},
+    {"id": "resume-capture", "stage": "capture", "path": "pipeline/capture.mjs", "kind": "recovery"},
+    {"id": "resume-build", "stage": "build", "path": "pipeline/build.mjs", "kind": "recovery"},
+    {"id": "resume-verify", "stage": "verify", "path": "pipeline/verify.mjs", "kind": "recovery"}
+  ],
+  "learnings": [
+    {"id": "absence-is-not-rejection", "owner_stage": "verify", "enforced_by": ["tests/stage-conveyor.test.mjs"]}
+  ]
+}
