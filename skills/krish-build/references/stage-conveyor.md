@@ -122,6 +122,7 @@ Adopt fixtures for the failure classes the repository can actually experience:
 - a restart resets the retry or spend budget;
 - a parent exits while child work continues unowned;
 - revision history duplicates stable executors instead of versioning evidence.
+- a hash-pinned build dependency cannot be retrieved by one or more supported CI platforms.
 
 ## Completion packet
 
