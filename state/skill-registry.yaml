@@ -18,13 +18,13 @@ candidate_reconciliation:
 
 
 deployed_release:
-  release_id: v2026.09.15.1
-  source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
-  artifact_set_sha256: B3343654A23A90D3012CBC390575A46D51D3924C20C9F9566EEB7976415CA012
+  release_id: v2026.09.15.2
+  source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
+  artifact_set_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   deployed_at: 2026-09-15
-  evidence: state/machine-runs/v2026.09.15.1-lorimer.json
-  status: local-exact-parity-claude-one-positive-owner-failure-cursor-manual-codex-partial-cloud-still-v2026.08.29.3-surface-awaiting-own-sync
+  evidence: state/machine-runs/v2026.09.15.2-lorimer.json
+  status: local-exact-parity-canary-routing-failures-cursor-manual-cloud-still-v2026.08.29.3-surface-awaiting-own-sync
 
 latest_approved_release:
   release_id: v2026.09.15.2
@@ -56,7 +56,7 @@ latest_approved_release:
     v2026.09.15.1 remains the immutable immediate rollback target and is locally
     deployed with exact byte parity. This successor contains only the governed
     krish-build learning from the content-engine PR 70 supply-boundary failure.
-  status: published-awaiting-progressive-rollout
+  status: published-deployed-locally-canary-blocked-awaiting-cloud-and-surface-rollout
 
 
 previous_published_release:
@@ -114,45 +114,45 @@ surface_deployments:
     status: installed-hash-verified-and-canaried-video-engine-reachable
     previous_release: v2026.09.08.1
   cursor-primary:
-    release_id: v2026.09.15.1
-    source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
+    release_id: v2026.09.15.2
+    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: B3343654A23A90D3012CBC390575A46D51D3924C20C9F9566EEB7976415CA012
+    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T19:19:09Z
-    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.09.15.1-20260915T191908Z-938f355f
-    evidence: state/deployments/v2026.09.15.1-cursor-primary.json
+    deployed_at_utc: 2026-09-15T21:02:06Z
+    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.09.15.2-20260915T210205Z-b476ed06
+    evidence: state/deployments/v2026.09.15.2-cursor-primary.json
     status: installed-hash-verified-manual-canary-required
   claude-code-user:
-    release_id: v2026.09.15.1
-    source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
+    release_id: v2026.09.15.2
+    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: B3343654A23A90D3012CBC390575A46D51D3924C20C9F9566EEB7976415CA012
+    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T19:03:42Z
-    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.09.15.1-20260915T190341Z-593f739c
+    deployed_at_utc: 2026-09-15T20:49:58Z
+    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.09.15.2-20260915T204957Z-88863ecc
     evidence:
-      - state/deployments/v2026.09.15.1-claude-code-user.json
-      - state/canaries/v2026.09.15.1-claude-code-user.json
-    status: installed-hash-verified-canary-failed-one-strategy-positive-owner-miss
+      - state/deployments/v2026.09.15.2-claude-code-user.json
+      - state/canaries/v2026.09.15.2-claude-code-user.json
+    status: installed-hash-verified-canary-failed-routing-boundaries
   codex-current:
-    release_id: v2026.09.15.1
-    source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
+    release_id: v2026.09.15.2
+    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: B3343654A23A90D3012CBC390575A46D51D3924C20C9F9566EEB7976415CA012
+    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
     per_skill_hashes_exact: 29
     deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T19:19:15Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.15.1-20260915T191913Z-43d81fb8
+    deployed_at_utc: 2026-09-15T21:02:09Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.15.2-20260915T210208Z-1f4564cc
     evidence:
-      - state/deployments/v2026.09.15.1-codex-current.json
-      - state/canaries/v2026.09.15.1-codex-current.json
-    status: installed-hash-verified-selected-positives-pass-one-external-task-route-unmeasured
+      - state/deployments/v2026.09.15.2-codex-current.json
+      - state/canaries/v2026.09.15.2-codex-current.json
+    status: installed-hash-verified-canary-failed-routing-boundaries
   claude-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
