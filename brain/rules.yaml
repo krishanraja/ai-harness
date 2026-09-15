@@ -1790,11 +1790,18 @@ skill_sections:
   - id: krish-build.2-determinism-in-practice
     file: skills/krish-build/SKILL.md
     heading: "2. Determinism in practice"
-    text_sha: "8e991c4efb80"
+    text_sha: "808d2a713e81"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-15-build-input-retrievability.md"
+      sha256: "B893EFFF25B08840F04CD777BDA26F4D6857A3B2F06787DF3283E869F9321279"
+    history:
+      - text_sha: "8e991c4efb80"
+        valid_until: "2026-09-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-build.3-data-and-secrets
     file: skills/krish-build/SKILL.md

@@ -67,6 +67,9 @@ For repeatable work with several derived artifacts, resumable or metered executi
 **Never re-run a non-idempotent assembler without proof.** [LOAD-BEARING]
 Inspect what the assembly step does and which artifact is canonical. If a rerun can double-apply edits, do not rerun it; edit the canonical assembled source surgically and verify no duplicate application. Identify and state the source of truth at the start of any session touching an existing build.
 
+**Verify retrievability, not only integrity.** [LOAD-BEARING]
+A recorded digest proves the bytes received, not that the build can still fetch them. Exercise retrieval and digest verification for build-critical external artifacts on every supported build platform. If retrieval fails, stop at that supply boundary and propose a durable source through the repository's normal authority gate.
+
 **Presenting is a separate step from creating.** [LOAD-BEARING]
 create_file writes to disk; present_files puts it in front of Krish. They are two explicit steps, always. The proven failure: a file written but not presented, and Krish reacting to the previous version. Never end a build turn without presenting the current file.
 
