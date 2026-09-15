@@ -1,6 +1,6 @@
 ---
 name: krish-build
-description: "Krish's build-and-ship doctrine, the layer above individual tool skills. Use before writing code, running a build pipeline, deploying, committing, handling secrets or keys, wiring data, or shipping a technical artifact for Krish. Trigger on: 'build this', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'run the pipeline', 'set this up', 'wire this', 'secrets', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery of .docx/.pptx/.html builds, or multi-step technical execution. Covers determinism, idempotency, build gates, runtime-only secrets, programmatic validation, targeted repair, and environment truth. Load krish-principles first. Use tools-access for secure authentication and a reviewed per-tool skill for API mechanics. Last reviewed 2026-08-05."
+description: "Krish's build-and-ship doctrine, the layer above individual tool skills. Use before writing code, designing or repairing a repeatable multi-stage repository pipeline, deploying, committing, handling secrets or keys, wiring data, or shipping a technical artifact for Krish. Trigger on: 'build this', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'run the pipeline', 'stage conveyor', 'set this up', 'wire this', 'secrets', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery of .docx/.pptx/.html builds, or multi-step technical execution. Covers stage ownership, determinism, idempotency, build gates, runtime-only secrets, programmatic validation, targeted repair, and environment truth. Load krish-principles first. Use tools-access for secure authentication and a reviewed per-tool skill for API mechanics. Fully reviewed 2026-09-15."
 ---
 
 # Krish Build: How It Gets Built and Shipped
@@ -57,6 +57,9 @@ Reject anything that adds a paradigm without earning it. A system already runnin
 **Learn from wins, not just losses.** [IN-PLAY]
 Correction loops that fire only on failure are half a loop. When something works, capture why (a pattern, a skill candidate, a reusable engine) through the same proposal-and-approval lane as fixes.
 
+**Use a stage conveyor when the work earns one.** [IN-PLAY]
+For repeatable work with several derived artifacts, resumable or metered execution, independent gates, or several specialised responsibilities, make the repository an executable conveyor of bounded stages. Each stage owns its contract, implementation, checks, and learned failure classes. Keep one thin orchestrator and shared guards; do not accumulate the workflow in one Markdown file, duplicate the whole implementation for every revision, or patch identical downstream symptoms before checking their common upstream producer. For a simple app or one-step build, keep the direct path. Read `references/stage-conveyor.md` before designing or materially changing a qualifying pipeline, and run `scripts/check-stage-conveyor.mjs` when the repository adopts its manifest.
+
 ---
 
 ## 2. Determinism in practice
@@ -107,6 +110,9 @@ A file marked done has no placeholders, no internal notes, no stale claims, and 
 
 **Use the app-runtime proof patterns when the boundary is fragile.** [LOAD-BEARING]
 Read `references/app-runtime-verification.md` when work involves a remote database mutation, a component fixture-render harness, an authenticated user path, an edge or serverless function, SPA shell caching, or a build-time environment flag. It supplies bounded procedures and evidence requirements; it never grants production authority or replaces a current provider-specific tool reference.
+
+**Use the long-running safety patterns when work can outlive one command.** [IN-PLAY]
+Read `references/long-running-run-safety.md` when work uses workers, leases, scheduled runs, retries, checkpoints, expensive batches, or external processes. Progress and completion must be separate signals, retry budgets must survive restarts, and recovery must be exercised from the same operational surface that will use it.
 
 After every located failure, correct the smallest root cause within authority, rerun the failed and adjacent checks, and update resumable state. A false HTTP success must be rerun after repair. An incomplete persistence bug also requires the historical affected-record range to be assessed before old data is called valid.
 

@@ -222,10 +222,16 @@ foreach ($markdownFile in $skillMarkdownFiles) {
     }
 }
 
-$scanExtensions = @('.md', '.mdc', '.yaml', '.yml', '.json', '.jsonl', '.ps1', '.sql')
+$packagedNodeModules = @(Get-ChildItem -LiteralPath $skillsRoot -Recurse -Directory -Force | Where-Object Name -eq 'node_modules')
+foreach ($directory in $packagedNodeModules) {
+    $relative = $directory.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
+    Add-Failure "$relative is a packaged dependency directory. Skills must ship auditable source files, not node_modules trees."
+}
+
+$scanExtensions = @('.md', '.mdc', '.yaml', '.yml', '.json', '.jsonl', '.ps1', '.sql', '.js', '.cjs', '.mjs', '.ts', '.tsx', '.py', '.sh')
 $scanFiles = @(Get-ChildItem -LiteralPath $Root -Recurse -File | Where-Object {
     $_.Extension.ToLowerInvariant() -in $scanExtensions -and
-    $_.FullName -notmatch '[\\/](?:\.git|dist)[\\/]'
+    $_.FullName -notmatch '[\\/](?:\.git|dist|node_modules)[\\/]'
 })
 foreach ($file in $scanFiles) {
     $relative = $file.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
@@ -602,6 +608,11 @@ if ($LASTEXITCODE -ne 0) {
 $canaryRegressionCheck = @(& node (Join-Path $Root 'scripts\test-canaries.mjs') 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Canary instrument regression suite failed: $($canaryRegressionCheck -join ' | ')"
+}
+
+$stageConveyorRegressionCheck = @(& node (Join-Path $Root 'scripts\test-stage-conveyor.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Stage-conveyor regression suite failed: $($stageConveyorRegressionCheck -join ' | ')"
 }
 
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {

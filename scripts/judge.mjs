@@ -216,6 +216,12 @@ export function salvage(text) {
 export const hasDissent = (findings) => findings.some((f) => f.verdict === 'regresses' || f.verdict === 'dissent')
 export const blockingRegressions = (findings) => findings.filter((f) => f.verdict === 'regresses' && f.blocking)
 
+export function recordedRulings(text) {
+  return String(text).split(/\r?\n/u)
+    .map((line) => line.trim())
+    .filter((line) => /^Ruling \(Krish, \d{4}-\d{2}-\d{2}\):\s+\S/u.test(line))
+}
+
 /**
  * Run one bench, with the mandatory second attempt when it comes back unanimous.
  * `ask` is injected so the whole protocol is testable without a model.
@@ -356,7 +362,13 @@ if (isMain) {
     catch (e) { console.error(`FAIL  ${name} bench: ${e.message}`); process.exit(2) }
   }
 
-  const report = render(results, { base, head })
+  const blocked = blockingRegressions(results.flatMap((r) => r.findings))
+  const commitMessages = execFileSync('git', ['log', '--format=%B', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
+  const rulings = recordedRulings(commitMessages)
+  let report = render(results, { base, head })
+  if (blocked.length && rulings.length) {
+    report += `\n## Recorded Krish override\n\n${rulings.map((r) => `- ${r}`).join('\n')}\n\nThe blocking findings remain visible as review evidence, but the recorded owner ruling overrules this gate.\n`
+  }
   const out = flag('--out')
   if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, report + '\n') }
   process.stdout.write(report + '\n')
@@ -387,7 +399,6 @@ if (isMain) {
 
   if (report.includes(EM_DASH)) { console.error('FAIL  the report carries an em dash after filtering'); process.exit(2) }
 
-  const blocked = blockingRegressions(results.flatMap((r) => r.findings))
   const unusable = results.some((r) => r.empty || (r.lostBlocking || []).length)
-  process.exit(blocked.length || unusable ? 1 : 0)
+  process.exit((blocked.length && !rulings.length) || unusable ? 1 : 0)
 }

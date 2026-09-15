@@ -61,8 +61,9 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 ### Data, databases, and pipelines
 
 - Validate schema, row counts, null/uniqueness/range invariants, and representative records.
-- Read back the authoritative destination after writes.
+- Read back the authoritative destination after writes. For a staged pipeline, verify every changed handoff from the producing artifact through the declared consumer, then inspect the final artifact or state actually consumed. A progress marker, startup log, nearby file, cached verdict, or successful orchestrator exit cannot prove semantic completion.
 - Test idempotency or deduplication before rerunning.
+- Treat missing, truncated, unparseable, or unconsumed output as `inconclusive` or `failed` according to the contract. Never coerce absence into rejection, approval, an empty success, or a durable negative result.
 - Never use production writes merely to verify access.
 
 ### Automations and agents
