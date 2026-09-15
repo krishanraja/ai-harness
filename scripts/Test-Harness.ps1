@@ -615,6 +615,11 @@ if ($LASTEXITCODE -ne 0) {
     Add-Failure "Stage-conveyor regression suite failed: $($stageConveyorRegressionCheck -join ' | ')"
 }
 
+$syncEvidenceRegressionCheck = @(& pwsh -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'scripts\Invoke-HarnessSync.ps1') -SelfTest 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Harness-sync evidence regression suite failed: $($syncEvidenceRegressionCheck -join ' | ')"
+}
+
 if (Test-Path -LiteralPath $decisionConfig -PathType Leaf) {
     $decisionConfigRaw = [IO.File]::ReadAllText($decisionConfig)
     if ($decisionConfigRaw -notmatch '(?m)^\s*type:\s*supabase-postgres\s*$') {

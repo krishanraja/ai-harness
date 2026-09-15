@@ -7,7 +7,8 @@ param(
     [switch]$CanaryOnly,
     [switch]$SkipCanaries,
     [switch]$NoHeartbeat,
-    [switch]$NoPullRequest
+    [switch]$NoPullRequest,
+    [switch]$SelfTest
 )
 
 Set-StrictMode -Version Latest
@@ -812,6 +813,33 @@ function Test-CanaryOutcomePass {
     return $Result.outcome -ne 'fired'
 }
 
+function Resolve-RepeatedCanaryResult {
+    param(
+        [Parameter(Mandatory = $true)]$Case,
+        [Parameter(Mandatory = $true)][object[]]$Attempts,
+        [Parameter(Mandatory = $true)][string[]]$CanonicalNames
+    )
+
+    $passingAttempts = @($Attempts | Where-Object { Test-CanaryOutcomePass -Case $Case -Result $_ -CanonicalNames $CanonicalNames })
+    $failingAttempts = @($Attempts | Where-Object { -not (Test-CanaryOutcomePass -Case $Case -Result $_ -CanonicalNames $CanonicalNames) })
+    $selected = if ($passingAttempts.Count -ge 2) { $passingAttempts[0] } else { $failingAttempts[0] }
+    $attemptSnapshots = @($Attempts | ForEach-Object {
+        [pscustomobject][ordered]@{
+            id = [string]$_.id
+            outcome = [string]$_.outcome
+            note = [string]$_.note
+        }
+    })
+    return [pscustomobject][ordered]@{
+        id = [string]$selected.id
+        outcome = [string]$selected.outcome
+        note = "Repeat-on-mismatch: $($passingAttempts.Count)/$($Attempts.Count) attempts met the declared route. $($selected.note)"
+        attempt_count = $Attempts.Count
+        passing_attempt_count = $passingAttempts.Count
+        attempts = $attemptSnapshots
+    }
+}
+
 function Invoke-ClaudeCanary {
     param(
         [Parameter(Mandatory = $true)]$Case,
@@ -901,14 +929,7 @@ function Invoke-SurfaceCanaries {
             for ($attempt = 2; $attempt -le 3; $attempt++) {
                 $attempts.Add((& $invokeCase))
             }
-            $passingAttempts = @($attempts | Where-Object { Test-CanaryOutcomePass -Case $case -Result $_ -CanonicalNames $canonicalNames })
-            $failingAttempts = @($attempts | Where-Object { -not (Test-CanaryOutcomePass -Case $case -Result $_ -CanonicalNames $canonicalNames) })
-            $selected = if ($passingAttempts.Count -ge 2) { $passingAttempts[0] } else { $failingAttempts[0] }
-            $selected | Add-Member -NotePropertyName attempt_count -NotePropertyValue 3
-            $selected | Add-Member -NotePropertyName passing_attempt_count -NotePropertyValue $passingAttempts.Count
-            $selected | Add-Member -NotePropertyName attempts -NotePropertyValue $attempts.ToArray()
-            $selected.note = "Repeat-on-mismatch: $($passingAttempts.Count)/3 attempts met the declared route. $($selected.note)"
-            $result = $selected
+            $result = Resolve-RepeatedCanaryResult -Case $case -Attempts $attempts.ToArray() -CanonicalNames $canonicalNames
         }
         $results.Add($result)
         Write-Host "CANARY_RESULT surface=$($Surface.Id) id=$($case.id) outcome=$($result.outcome)"
@@ -1013,6 +1034,26 @@ The installer applied only clean plans. Unknown drift, canary failures, and manu
 if ($RegisterScheduledTask) {
     Register-HarnessScheduledTask | ConvertTo-Json -Depth 4
     return
+}
+
+if ($SelfTest) {
+    $fixtureCase = [pscustomobject]@{ id = 'fixture'; should_trigger = $true }
+    $fixtureAttempts = @(
+        [pscustomobject]@{ id = 'fixture'; outcome = 'wrong-skill'; note = 'first' },
+        [pscustomobject]@{ id = 'fixture'; outcome = 'fired'; note = 'second' },
+        [pscustomobject]@{ id = 'fixture'; outcome = 'wrong-skill'; note = 'third' }
+    )
+    $fixtureResult = Resolve-RepeatedCanaryResult -Case $fixtureCase -Attempts $fixtureAttempts -CanonicalNames @('fixture')
+    $fixtureJson = $fixtureResult | ConvertTo-Json -Depth 12 -WarningAction Stop
+    $fixtureReadback = $fixtureJson | ConvertFrom-Json
+    if ($fixtureReadback.attempt_count -ne 3 -or $fixtureReadback.passing_attempt_count -ne 1 -or @($fixtureReadback.attempts).Count -ne 3) {
+        throw 'Repeated-canary evidence self-test lost attempt counts.'
+    }
+    if (@($fixtureReadback.attempts | Where-Object { $_.PSObject.Properties['attempts'] }).Count -ne 0) {
+        throw 'Repeated-canary evidence self-test found recursive attempts.'
+    }
+    Write-Output 'HARNESS SYNC EVIDENCE SELF-TEST PASSED: repeated attempts are flat snapshots with no self-reference.'
+    exit 0
 }
 
 $hostDefinition = Get-HostDefinition
