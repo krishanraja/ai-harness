@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-09-15**.
 - Release source commit: `813a5859c1c7017c45213af6d9b5b4a16ebb0416`
 - Manifest SHA-256: `55840B30AAED69122C19C78959B98268ED35F6677BCF7D4B3DC17051A7F660DC`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.1
-- Current deployment verdict: **local-parity-deployed-claude-partial-cursor-manual-codex-one-intermittent-containment-failure-cloud-still-v2026.08.29.3**
+- Current deployment verdict: **local-exact-parity-claude-one-positive-owner-failure-cursor-manual-codex-partial-cloud-still-v2026.08.29.3-surface-awaiting-own-sync**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -21,9 +21,9 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | installed-hash-verified-and-canaried-video-engine-reachable |
-| cursor-primary | v2026.09.13.8 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.13.8 | 29/29 exact | installed-hash-verified-behavioral-canaries-partial-external-task-route-unmeasured |
-| codex-current | v2026.09.13.8 | 29/29 exact | installed-hash-verified-one-intermittent-instantly-containment-failure |
+| cursor-primary | v2026.09.15.1 | 29/29 exact | installed-hash-verified-manual-canary-required |
+| claude-code-user | v2026.09.15.1 | 29/29 exact | installed-hash-verified-canary-failed-one-strategy-positive-owner-miss |
+| codex-current | v2026.09.15.1 | 29/29 exact | installed-hash-verified-selected-positives-pass-one-external-task-route-unmeasured |
 | claude-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 | perplexity-cloud | v2026.08.29.3 | cloud inventory only | exact-names-enabled-and-patched-content-observed |
 
@@ -31,9 +31,7 @@ A local hash match proves installed bytes only. It does not prove client discove
 
 ## Behavioral evidence
 
-- **claude-code-user: partial.** [Evidence](state/canaries/v2026.09.13.8-claude-code-user.json).
-- **codex-current: failed.** [Evidence](state/canaries/v2026.09.13.8-codex-current.json).
-  - instantly-trigger-012: instantly-operator fired on a message that must not trigger it (Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded a successful live read of instantly-operator/SKILL.md.).
+- No committed live canary reports are linked by the deployment registry.
 - **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
 
 ## Machine clocks
