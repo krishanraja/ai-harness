@@ -53,7 +53,7 @@ Completion semantics are owned by `verification-loop`. The stage contract must n
 3. Preserve absence as absence. A missing, truncated, unparseable, stale, or unconsumed artifact cannot become a rejection, approval, empty success, or cached verdict.
 4. Verify the last artifact or state the user or downstream system actually consumes. Do not infer it from a correct intermediate file.
 5. When the same defect appears in several branches, inspect their nearest shared producer, contract, or guard before patching every branch.
-6. Treat dependency integrity and retrievability as separate claims. A checksum proves the bytes received; it does not prove that the build can still fetch them. Exercise retrieval and digest verification for build-critical external artifacts on every supported build platform. If retrieval fails, stop and select an authorised durable source. Mirroring, uploading, publishing, credential use, or changing a dependency remains a separately gated repository action; this rule grants none of that authority.
+6. Treat dependency integrity and retrievability as separate claims. A checksum proves the bytes received; it does not prove that the build can still fetch them. Exercise retrieval and digest verification for build-critical external artifacts on every supported build platform. If retrieval fails, stop and propose an authorised durable source. Mirroring, uploading, publishing, credential use, selecting the new source, or changing a dependency remains a separately gated repository action; this rule grants none of that authority.
 
 ## Ownership and layout
 
