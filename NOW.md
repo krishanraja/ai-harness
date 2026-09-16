@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-15
-head: eeee7b5
+as_of: 2026-09-16
+head: 0653bcc
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -35,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
 
-## Where it is right now (as of 2026-09-15)
+## Where it is right now (as of 2026-09-16)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.15.2` (tag `harness-v2026.09.15.2`, source commit `5e71553`, manifest SHA-256 `1D7F8304...5343E62`, published 2026-09-15T20:45:21Z), immutable. It supersedes `v2026.09.15.1`, which stays the rollback target.
 - **Two more releases published 2026-09-15, each a single governed correction rather than a rewrite.** `v2026.09.15.1` added an executable stage-conveyor doctrine to `krish-build` (a portable manifest contract, topology checker, valid fixture and fifteen negative regression cases) after Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file (`docs/proposals/2026-09-15-stage-conveyor-v1.md`). `v2026.09.15.2` added a determinism rule requiring build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, after Ubuntu and Windows verification jobs for `content-engine` PR 70 both returned HTTP 404 fetching a pinned FFmpeg archive despite a stored SHA-256 (`docs/proposals/2026-09-15-build-input-retrievability.md`). A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself.
