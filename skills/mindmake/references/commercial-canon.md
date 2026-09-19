@@ -50,7 +50,7 @@ They are not two products. Either can be the way in, and either can lead to the 
 
 Alongside the advisory:
 
-- **Content, the publication.** Exactly two channels, **The Money of AI** and **Built with AI**. There is no third. It carries paid tiers, so never describe it as free. Retrieve the live publication before making tier, price, access or cadence claims.
+- **Content, the publication.** It is called **makeyourmindup** and it runs three subchannels: `split_the_bill` (Wednesdays), `mind_the_gap` (Fridays) and `lift_the_lid` (standing, no fixed day). **The mandate for each is `venture_formats.mandate` in Mindmaker OS, read live, never a file.** The Money of AI and Built with AI are retired, as of the 2026-09-17 relaunch. It carries paid tiers, so never describe it as free. Retrieve the live publication before making tier, price, access or cadence claims.
 - **CTRL.** A self-serve Mindmake product at `ctrl.mindmake.co`, kept alive deliberately cheaply. It is **never a third thing to buy from the advisory**, never linked or priced on mindmake.co, where it appears only as evidence that Mindmake does this itself. Read `references/ctrl-product.md` before making product claims.
 - **Maven Lightning Lessons.** Free education only. Never a paid cohort, workshop ladder or alumni programme.
 
@@ -63,7 +63,7 @@ Do not turn any surface into a linear ladder. A person may enter through the pub
 - `mindmake.co` is the primary customer-facing decision surface. `themindmaker.ai` redirects to it and is infrastructure, never a name. `krish@themindmaker.ai` is the only published contact address.
 - **No cold email.** The only two sales motions are warm intros and published thinking. Cold contact is legitimate for exactly one purpose: booking podcast guests, which is an ask and not a sale.
 - Maven is the discovery and delivery surface for free Lightning Lessons. Verify the live lesson and destination before customer-facing work.
-- The publication builds trust and literacy through The Money of AI and Built with AI; it feeds the business without becoming disguised sales copy.
+- The publication builds trust and literacy through its three subchannels; it feeds the business without becoming disguised sales copy.
 - Outbound and relationship channels move a specific opportunity forward using actual recipient context.
 - Enterprise work may use direct inquiry, proposal, invoice, or another approved transaction route. Verify the current mechanism.
 - CTRL is a parallel product-led route, not merely a bonus attached to services.
@@ -88,8 +88,8 @@ Use current canonical names exactly when current first-party evidence confirms t
 
 - Mindmake (the business; never Mindmaker, never Mindmaker Live)
 - mind/make OS (the operating system)
-- The Money of AI (publication channel)
-- Built with AI (publication channel)
+- makeyourmindup (the publication; the content brand and it owns the name)
+- split.the.bill, mind.the.gap, lift.the.lid (its three subchannels)
 - The Artifact (the investigative format; never call it Teardown)
 - Lightning Lessons
 - CTRL
@@ -98,9 +98,9 @@ Use current canonical names exactly when current first-party evidence confirms t
 - Full Time, Pulse, Circle (build experiments, never products for sale; Fractionl is not a brand)
 - Mindmaker LLC (legal entity only, appears only where the law wants the registrant named)
 
-**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, Paid, Built, Techonomic, Builder Economy, MYMU as a content brand, Plinth, Legibility, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
+**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, The Money of AI, Built with AI, Paid, Built, Techonomic, Builder Economy, inspect.the.build, follow.the.money, Newsflash, Plinth, Legibility, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
 Daily Briefing.
 
-Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmake workshops," "AI Decision Cohort," "Mindmake Sprints," "Mindmake Bootcamp," or "Mindmake for Leaders." Techonomic and The Builder Economy are also retired as brands; their useful editorial registers now live inside The Money of AI and Built with AI. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
+Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmake workshops," "AI Decision Cohort," "Mindmake Sprints," "Mindmake Bootcamp," or "Mindmake for Leaders." Techonomic and The Builder Economy are also retired as brands, as are The Money of AI and Built with AI since the 2026-09-17 relaunch; their useful editorial registers now live inside the three subchannels. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
 
 Do not relitigate an established canonical name during an ordinary copy task. Apply naming criteria only when Krish explicitly asks to name, rename, or reposition something.

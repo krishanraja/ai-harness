@@ -42,7 +42,11 @@ Choose the gear deliberately. If the audience or purpose makes the choice conseq
 - Zero flattery and zero deference. State the observation, consequence, and ask.
 - Risk and implementation reality matter more than novelty.
 
-### Gear B: Built with AI
+### Gear B: the publication's scrappy surfaces
+
+Named after a retired channel until 2026-09-19. The register did not change; only the
+name it was filed under. It is the YouTube and TikTok register for the publication, and it
+does not leak into the written channel.
 
 - Scrappy, fast, and momentum-driven.
 - Dry British humour, self-awareness, and occasional irreverence.

@@ -20,7 +20,9 @@ happened once (found at ~338 KB on 2026-08-29 and reverted to this router).
 
 | Question | Authority |
 |---|---|
-| **What the business is**: positioning, the offer, pricing posture, the naming law, voice, the publication's channels, what is retired | **`github.com/krishanraja/mindmake`**, `project-documentation/00_NORTH_STAR.md`, then `01_CANON.md`, then `02_PUBLICATION.md` |
+| **What the business is**: positioning, the offer, pricing posture, the naming law, voice, what is retired | **`github.com/krishanraja/mindmake`**, `project-documentation/00_NORTH_STAR.md`, then `01_CANON.md` |
+| **What a publication subchannel IS**: its mandate, its reader, its gates | **`venture_formats.mandate` in Mindmaker OS**, read live. Never a file: a restated mandate drifts while the table does not |
+| **The publication's canon**: the panel, the rubric, the kill list, the step plan | **`github.com/krishanraja/makeyourmindup`**, `NOW.md` first, then `project-documentation/01_MEDIA_KIT.md` |
 | **How the OS is built**: fleet, schema, workflows, cron, data flows, standards | **`github.com/krishanraja/control-center`**, `docs/MINDMAKE_OS_ARCHITECTURE.md` on `main` |
 
 **Canon wins on the business. The architecture doc wins on the machine.** If the
@@ -99,7 +101,7 @@ section it belongs to.
 ## Related skills
 
 `mindmake` for commercial positioning, offers and ICP. `content-corpus` for the
-publication's two channels. `krish-voice` for final prose. `n8n-operator` for workflow
+publication's three subchannels, whose mandates are read from `venture_formats`. `krish-voice` for final prose. `n8n-operator` for workflow
 mechanics. `tools-access` for authenticated access. `decision-ledger` for recording a
 finalised decision.
 
