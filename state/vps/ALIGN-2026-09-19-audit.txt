@@ -1,0 +1,183 @@
+===== 1. HOST =====
+openclaw-vps
+ 15:07:47 up 206 days, 18:26,  1 user,  load average: 0.47, 0.21, 0.13
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+/dev/sda1        75G   38G   35G  52% /
+
+===== 2. DOES THE OPENCLAW TREE EXIST =====
+4.7G	/root/.openclaw
+total 412
+drwx------ 35 root root  4096 Sep 19 12:25 .
+drwx------ 29 root root  4096 Sep 19 15:07 ..
+drwx------ 11 root root  4096 May 11 19:05 agents
+drwx------  3 root root  4096 Apr 14 20:17 browser
+drwxr-xr-x  2 root root  4096 Feb 13  2026 canvas
+-rw-r--r--  1 root root  6575 May 29 23:52 CLAUDE.md
+drwxr-xr-x  2 root root  4096 Feb 15  2026 completions
+drwx------  3 root root  4096 Jun 19 05:47 credentials
+drwx------  3 root root  4096 Sep 19 14:20 cron
+drwx------  3 root root  4096 Sep 15 20:30 delivery-queue
+drwxr-xr-x  2 root root  4096 Sep 19 14:00 devices
+drwxr-xr-x  2 root root  4096 May 14 09:37 discord
+-rw-------  1 root root   180 Mar  2  2026 .env
+-rw-------  1 root root  1613 Sep 19 12:25 exec-approvals.json
+drwx------  2 root root  4096 May 14 09:24 flows
+-rw-------  1 root root   180 Jun  2 15:05 gateway.systemd.env
+drwxr-xr-x  2 root root  4096 Feb 13  2026 identity
+drwxr-xr-x  4 root root  4096 Apr 14 20:06 integrations
+drwxr-xr-x  3 root root  4096 May 14 09:23 locks
+
+===== 3. THE SPEND CAP. Is the n8n governor alive? =====
+-rwxr-xr-x 1 root root 11626 Sep  9 12:21 /root/.openclaw/workspace/scripts/n8n-exec-governor.py
+{
+ "cycle_start": "2026-09-01T00:00:00+00:00",
+ "count": 2950,
+ "last_seen": "2026-09-19T14:34:56.043Z",
+ "warned": false,
+ "tripped": false,
+ "rate_alerted": {}
+}--- is it in cron? ---
+0 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/n8n-exec-governor.py >> /var/log/n8n-governor.log 2>&1
+
+===== 4. FULL CRON INVENTORY, against the checked-in snapshot =====
+0 3 * * * /root/.openclaw/workspace/scripts/arlo-daily-contradiction-audit.sh
+0 3 * * 1 /root/.openclaw/workspace/scripts/vera-contradiction-audit.sh >> /tmp/vera-audit.log 2>&1
+30 2 * * * python3 /root/.openclaw/workspace/scripts/regenerate-standards-digest.py >> /tmp/standards-digest.log 2>&1
+0 8 * * * /usr/local/bin/node /root/.openclaw/workspace/scripts/vera-n8n-audit.js >> /var/log/vera-audit.log 2>&1
+0 3 * * * /root/.openclaw/cron/workspace_maintenance.sh
+0 */6 * * * cd /root/.openclaw/integrations/google && bash refresh_token.sh >> /var/log/openclaw-drive-sync.log 2>&1 && cd /root/.openclaw/workspace && python3 scripts/sync-to-drive.py >> /var/log/openclaw-drive-sync.log 2>&1
+*/2 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/fire-pending-flags.py >> /var/log/openclaw-flags.log 2>&1
+*/5 * * * * /root/.openclaw/workspace-ops/scripts/cc-sync-engine.sh >> /tmp/cc-sync.log 2>&1
+*/15 * * * * /root/.openclaw/workspace-ops/scripts/cc-doc-creator.sh >> /tmp/cc-doc-creator.log 2>&1
+*/5 * * * * /usr/bin/python3 /root/.openclaw/workspace-ops/scripts/poll_sync_queue.py >> /tmp/poll_sync.log 2>&1
+*/15 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/render-identity.py >> /tmp/render-identity.log 2>&1
+30 2 * * * /root/.openclaw/workspace-ops/scripts/vera-nightly-quality-loop.sh >> /root/.openclaw/workspace-ops/logs/vera-nightly-cron.log 2>&1
+0 6 * * * ACCESS_TOKEN=$(jq -r .access_token /root/.openclaw/integrations/google/tokens.json) && curl -sL -H "Authorization: Bearer $ACCESS_TOKEN" "https://docs.google.com/document/export?format=txt&id=1vLSOMm2uXELk4c-G4sTEyA7efN9yYLO9BFY60pX5Tzg" > /root/.openclaw/workspace-cleo/DRAFTS.md
+0 8 * * * /root/.openclaw/cron/inbox-decay.sh >> /var/log/inbox-decay.log 2>&1
+0 9 * * 1,4 /root/.openclaw/workspace-ops/scripts/fireflies-biweekly-pull.sh >> /tmp/fireflies-pull.log 2>&1
+0 14 * * * /root/.openclaw/workspace-ops/scripts/token-spend-alert.sh >/dev/null 2>&1
+*/30 * * * * cd /root/.openclaw/workspace && /usr/bin/python3 scripts/os-autonomous-diagnostics.py --mode quick >> /var/log/os-autonomous-diagnostics.log 2>&1 || true
+30 11 * * 5 /root/.openclaw/workspace-ops/scripts/vera-gap-cycle.sh >> /var/log/vera-gap-cycle.log 2>&1
+0 14 * * * /root/.openclaw/workspace-ops/scripts/api-credit-monitor.sh
+0 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/n8n-exec-governor.py >> /var/log/n8n-governor.log 2>&1
+*/5 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/critical-infra-monitor.py >> /var/log/critical-infra-monitor.log 2>&1
+0 3 * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/api-balance-poller.py >> /var/log/api-usage.log 2>&1
+20 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/api-usage-alerter.py >> /var/log/api-usage.log 2>&1
+*/15 * * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/write-system-health.py >> /var/log/system-health.log 2>&1
+15 * * * * /usr/bin/python3 /root/.openclaw/workspace-loz/scripts/fix_orphaned_briefings.py >> /var/log/loz-orphan-sweep.log 2>&1
+15 6 * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/ingest-events-gmail.py >> /var/log/events-ingest.log 2>&1
+45 6 * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/discover-events.py >> /var/log/events-discover.log 2>&1
+0 7 * * * /usr/bin/python3 /root/.openclaw/workspace/scripts/score-events.py >> /var/log/events-score.log 2>&1
+30 14,19,23 * * * /usr/bin/python3 /root/.openclaw/workspace-loz/scripts/loz_freshness_diagnostic.py >> /var/log/loz-freshness-diagnostic.log 2>&1
+*/30 * * * * /usr/bin/python3 /root/.openclaw/workspace-loz/scripts/loz_signal_radar.py --mode quick --paid never >> /var/log/loz-signal-radar.log 2>&1
+7,37 * * * * /usr/bin/python3 /root/.openclaw/workspace-loz/scripts/verify_doc.py --auto-repair --quiet >> /var/log/loz-doc-integrity.log 2>&1
+5 * * * * . /root/.openclaw/workspace/scripts/.vps-heartbeat.env && /root/.openclaw/workspace/scripts/vps-heartbeat.sh >> /var/log/vps-heartbeat.log 2>&1
+0 13,18,22 * * * /usr/bin/python3 /root/.openclaw/workspace-loz/scripts/briefing_and_send.py >> /var/log/loz-briefing.log 2>&1
+--- entry count ---
+33
+
+===== 5. FORMAT VOCABULARY. Retired names still on this host =====
+Live slugs are split_the_bill, mind_the_gap, lift_the_lid.
+Anything below is a name retired on 2026-09-17 and still in use here.
+/root/.openclaw/media/inbound/content_corpus---5ae467c2-4b96-4b8a-bdf4-20599c8a2d65.txt
+/root/.openclaw/cron/runs/a170511a-a5e1-45a3-af2d-ca377d12d361.jsonl
+/root/.openclaw/cron/runs/aa051cd0-322d-4f57-92d3-3e42c9473706.jsonl
+/root/.openclaw/cron/runs/24071e7c-b29b-470c-9363-8e7c3e6a5f55.jsonl
+/root/.openclaw/agents/cleo/sessions/05917bf2-36dc-4b4c-8d85-5264043fa1d8.trajectory.jsonl
+/root/.openclaw/agents/cleo/sessions/6e0373a2-8c97-4b4a-9c25-0a6fd0fdfd4a.jsonl.reset.2026-04-16T00-37-47.297Z
+/root/.openclaw/agents/cleo/sessions/ec062036-effa-4dfa-9619-908acf30ca4f.jsonl.reset.2026-04-22T12-12-27.277Z
+/root/.openclaw/agents/cleo/sessions/51d71c6e-a2e5-4b5b-92b8-023d45294f6c.jsonl.reset.2026-05-21T15-20-38.646Z
+/root/.openclaw/agents/cleo/sessions/05917bf2-36dc-4b4c-8d85-5264043fa1d8.jsonl
+/root/.openclaw/agents/cleo/sessions/306c51fe-823f-4805-8e17-8dda75997b19.jsonl.reset.2026-04-23T03-41-25.194Z
+/root/.openclaw/agents/ops/sessions/fe322a18-acbe-47b7-b201-4041caab2983.jsonl
+/root/.openclaw/agents/ops/sessions/ec59134c-646f-4ff0-870c-6df3836534f8.jsonl
+/root/.openclaw/agents/ops/sessions/9d39c6d4-c0d2-4fbd-b918-a218a9e70583.jsonl
+/root/.openclaw/agents/ops/sessions/2c8d915b-4280-403b-93e9-227bfc49b612.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/eb698f6c-1e4b-4c26-90ec-66bce16b9dd9.jsonl
+/root/.openclaw/agents/ops/sessions/6be5ebbf-1d1f-413f-9c91-2d948f652b02.jsonl
+/root/.openclaw/agents/ops/sessions/f7a24d74-7071-4ab6-b903-8a9d6568bf8a.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/e67cf17c-c2a8-4560-9b08-c4419d7aca31.jsonl
+/root/.openclaw/agents/ops/sessions/5956972c-e8e5-4482-987e-d6b526404f69.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/a65cda5d-2e45-421a-9e15-34bdbc444f25.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/11138582-8932-403a-b57d-1791b9c94bf5.jsonl
+/root/.openclaw/agents/ops/sessions/b559a6e0-5b45-41fa-91b4-b7d7876a0c89.jsonl
+/root/.openclaw/agents/ops/sessions/0b54f627-fdd2-4b37-8494-f5410ab52aa3.jsonl
+/root/.openclaw/agents/ops/sessions/da3c79a0-2f55-4463-93dc-40938811ab8e.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/bb5215bf-3313-46e7-9f9c-2c4b7f6ddf50.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/9dbc666e-f847-4058-973a-410a938f5ab3.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/1b7464d9-ab70-4282-9296-e5656f9f441a.jsonl
+/root/.openclaw/agents/ops/sessions/d7873136-8359-48ab-8e3c-9d7ec3d26ea8.jsonl
+/root/.openclaw/agents/ops/sessions/806f7bfc-3a9c-4701-a8d4-5e41d1a832d9.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/11ae891c-0179-4301-a27c-083903042fee.jsonl
+/root/.openclaw/agents/ops/sessions/c299cf9c-8e38-4926-86f9-d612ce51d453.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/5539172b-1575-4061-8771-7ea5d810bafd.jsonl
+/root/.openclaw/agents/ops/sessions/1a4a3a4b-3c70-4d22-a57a-1e81f3c6a8fb.jsonl
+/root/.openclaw/agents/ops/sessions/8762a301-e524-49e4-b4b2-8c21fe499c52.jsonl
+/root/.openclaw/agents/ops/sessions/1838e4c3-0896-434a-bca4-7ccf9b9d4fb1.jsonl
+/root/.openclaw/agents/ops/sessions/4e6b730e-d460-4ec6-aace-39960d6cfc4a.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/3c875ca2-1d7a-4929-89ac-0497b1a770f5.jsonl
+/root/.openclaw/agents/ops/sessions/5d991ff2-8c28-403e-85c0-f515cfc96a06.trajectory.jsonl
+/root/.openclaw/agents/ops/sessions/fbac9564-a63d-43b0-8104-d21f16127271.jsonl
+/root/.openclaw/agents/ops/sessions/fb2d1c41-13ee-45a1-b293-887c27391383.trajectory.jsonl
+--- and whether the live slugs appear at all ---
+
+===== 6. CREDENTIALS IN PLAINTEXT =====
+The 2026-09-09 audit found a service_role JWT in two scripts here.
+Filenames only. Do NOT paste any matched line back.
+/root/.openclaw/media/inbound/standardize_audits---df29b885-fc56-4009-a9c6-dafa43075e0d
+/root/.openclaw/media/inbound/PHASE3_COMPLETION---dea23324-636b-49a6-84b1-a2e0e95f6096.md
+/root/.openclaw/media/inbound/04_WORKSPACE_CLEANSING_RUBRIC---9d7e6ca8-721d-4c77-a9fa-55bcce596a4e.md
+/root/.openclaw/media/inbound/agatha_master_system_APIs---b68bf1fe-8585-48e8-a98c-5fe2652f865b.txt
+/root/.openclaw/media/inbound/03_OPENCLAW_AGATHA_INSTRUCTIONS---77e6f8d1-26db-4666-a5d6-1bb875f07ffc.md
+/root/.openclaw/media/inbound/agatha_master_system_APIs---03b0337e-5ac6-40c7-bf31-b5838e59ab35.txt
+/root/.openclaw/media/inbound/04_WORKSPACE_CLEANSING_RUBRIC---ba70ac68-c22b-4c65-a933-3e531936a0ea.md
+/root/.openclaw/media/inbound/APIs_for_Gutted---9d49447a-bb87-43af-9f67-f78fdc10d652.txt
+/root/.openclaw/media/inbound/04_WORKSPACE_CLEANSING_RUBRIC---df7cd50c-6d8e-40ec-ae56-ace3246ca28a.md
+/root/.openclaw/media/inbound/API_Set_-_MM_OS_-_20-05-26---33fc2179-8880-450c-b3f6-e0d401dfdfa0.txt
+/root/.openclaw/media/inbound/04_WORKSPACE_CLEANSING_RUBRIC---099cf2ee-52f3-4526-983d-67c434ef8266.md
+/root/.openclaw/cron/runs/monthly-all-hands-001.jsonl
+/root/.openclaw/cron/runs/dad2c288-3447-491d-8d39-863b87614ade.jsonl
+/root/.openclaw/cron/runs/enterprise-gigs-daily-001.jsonl
+/root/.openclaw/cron/runs/vera-daily-001.jsonl
+/root/.openclaw/cron/runs/9e273d5c-6ab5-4c31-8a47-6c19aab37b1c.jsonl
+/root/.openclaw/cron/runs/vera-weekly-001.jsonl
+/root/.openclaw/cron/runs/24071e7c-b29b-470c-9363-8e7c3e6a5f55.jsonl
+/root/.openclaw/cron/runs/53081ff0-00a7-423c-b1f7-a83b85bca895.jsonl
+/root/.openclaw/cron/inbox-decay.sh
+
+===== 7. WHAT THIS HOST WRITES TO =====
+  11464 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/tasks
+    813 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/workflow_runs
+    706 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/approvals
+    355 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/audit_log
+    322 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/agents
+    311 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/system_config
+    295 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/home_intelligence
+    184 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/feedback_queue
+    176 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/workflow_proposals
+    146 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/agent_plans
+    129 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/zara_signals
+    122 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/standards_registry
+    116 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/vera_audit
+    114 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/haro_queries
+    110 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/content_ideas
+     95 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/fleet_drift_report
+     93 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/system_health
+     89 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/decisions_waiting
+     86 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/rpc
+     73 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/hunter_seen_roles
+     65 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/product_health
+     62 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/apify_actor_registry
+     58 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/credential_health
+     43 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/silent_failures
+     41 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/hunter_search_urls
+
+===== 8. HEARTBEAT: is this host reporting into the harness? =====
+[2026-09-19T15:05:01Z] heartbeat FAILED http=401 {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+
+===== END. Paste everything above back. =====
