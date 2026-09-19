@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-18
-head: 92d1cc2
+as_of: 2026-09-19
+head: b654fb0
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -35,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
 
-## Where it is right now (as of 2026-09-18)
+## Where it is right now (as of 2026-09-19)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.15.2` (tag `harness-v2026.09.15.2`, source commit `5e71553`, manifest SHA-256 `1D7F8304...5343E62`, published 2026-09-15T20:45:21Z), immutable. It supersedes `v2026.09.15.1`, which stays the rollback target.
 - **Two more releases published 2026-09-15, each a single governed correction rather than a rewrite.** `v2026.09.15.1` added an executable stage-conveyor doctrine to `krish-build` (a portable manifest contract, topology checker, valid fixture and fifteen negative regression cases) after Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file (`docs/proposals/2026-09-15-stage-conveyor-v1.md`). `v2026.09.15.2` added a determinism rule requiring build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, after Ubuntu and Windows verification jobs for `content-engine` PR 70 both returned HTTP 404 fetching a pinned FFmpeg archive despite a stored SHA-256 (`docs/proposals/2026-09-15-build-input-retrievability.md`). A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself.
@@ -49,6 +49,12 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 - **The judge can block, halfway**, unchanged since 2026-09-11: `harness-steward.yml` exits non-zero on a blocking verdict. Branch protection on `main`, the other half, is still Krish's to apply.
 
 ## What changed recently
+
+- 2026-09-19 **The canon said there were exactly two editorial channels and no third, and it was wrong in both directions.** `skills/content-corpus/references/editorial-channels.md` stated "exactly two channels, there is no third, do not invent one", and `mindmake/references/commercial-canon.md`, `mindmake-os/SKILL.md` and `krish-voice/references/voice-doctrine.md` rendered from it. Krish ruled on 2026-09-19 that the publication runs three subchannels, split.the.bill, mind.the.gap and lift.the.lid. The rule is replaced, and the authority moves off the file entirely: `venture_formats.mandate` in Mindmaker OS holds each mandate in full prose and a copy in a skill drifts while the table does not. The same pass corrected a line claiming Make Your Mind Up is not a content brand, which was wrong in both directions, and renamed Gear B off the retired channel it had been named after since before 2026-09-19: Gear B is the short-form video register, a surface and not a format. `748a1ce`.
+
+- 2026-09-19 **The OpenClaw VPS was audited from the host for the first time since 2026-09-09, and two documents stopped describing a machine that no longer existed.** A read-only script (`docs/harness/VPS-ALIGN-2026-09-19.sh`) ran as root and its output and report are in `state/vps/`, pushed from the host itself. Findings: zero active writes carry a retired format name and no VPS script writes any of the six columns that became foreign keys that day; the governor is live and warn-only exactly as the 2026-09-09 ruling left it, so no automated n8n execution cap exists anywhere; the checked-in crontab snapshot in control-center held 12 entries against 33 live and was regenerated from the audit. Ten active scripts moved from a plaintext service-role JWT to `SUPABASE_SERVICE_KEY` read from the managed environment file with no hardcoded fallback, proved afterwards by the 2, 5 and 15 minute job tiers running normally. The heartbeat has returned HTTP 401 since 09:05 UTC because its token is invalid, which is why `state/heartbeats.json` stops at that time. `987ac5f`.
+
+- 2026-09-19 **Two independent verifiers refuted several claims in the first draft of the operator handoff, and the corrections are the useful part.** `docs/harness/OPENCLAW-TAKEAWAY-2026-09-19.md` had said the database, both apps and the n8n factory were aligned to the three subchannels. The database is and the factory routes them, but the factory prompt still names a retired brand, the Control Center app carries retired labels in four lists, and `public.suggestions` existed with zero rows and no writer outside a spec. Each correction now cites the file that settles it, and the audit script's own header assertion of alignment is marked as an assertion rather than evidence. `b654fb0`.
 
 - 2026-09-15 **A stored SHA-256 could not prove a build could actually fetch its artifact, so the determinism rule now requires observed retrieval too.** Both the Ubuntu and Windows verification jobs for `krishanraja/content-engine` PR 70 returned HTTP 404 fetching a build-critical FFmpeg archive even though its digest was recorded; replacing the source with a repository-controlled release while keeping digest verification passed on both platforms (GitHub Actions runs `35019599447` and `35019602888`). `krish-build`'s determinism clause now requires build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, with one held-out failure evaluation and one stage-conveyor regression class added (`docs/proposals/2026-09-15-build-input-retrievability.md`, released as `v2026.09.15.2`).
 
@@ -115,6 +121,9 @@ Next without Krish: keep recording canary failures as failures, let the audit ag
 12. `docs/harness/VPS-AUDIT.md`: the read-only command set and decision table for `openclaw-vps`, to run before any future retirement question.
 
 ## Do not trust
+
+- Any prose saying the OpenClaw VPS execution governor trips or caps n8n spend. It warns and never acts, by ruling of 2026-09-09, re-confirmed by the 2026-09-19 host audit. `state/vps-surface-declaration-2026-09-09.md` is the ruling.
+- `state/heartbeats.json` for `openclaw-vps` as a liveness signal after 2026-09-19T09:05Z. The host is running; its heartbeat token is invalid and returns HTTP 401, so the absence of newer entries is a credential fact and not a dead machine.
 
 - A `reviewed` date in `state/skill-registry.yaml` as proof of live behaviour rather than of a documentation check. No skill's freshness SLA had expired as of 2026-09-15, and the release published that day, `v2026.09.15.2`, still failed its own canary sheet on both Claude Code and Codex.
 - The absence of an `evaluation_evidence` row read as "not measured". For 19 skills it means measured on 5 August and never filed. `node scripts/audit-harness.mjs` names which is which.

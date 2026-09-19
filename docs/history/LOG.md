@@ -5,6 +5,19 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-09-19
+
+- reconciled at `b654fb0`: the canon's two-channel rule was replaced by the three
+  subchannels and the authority for a mandate moved to `venture_formats.mandate` in
+  Mindmaker OS. The OpenClaw VPS was audited from the host, its report and the raw
+  audit output committed to `state/vps/` and merged, and the operator handoff
+  corrected against two independent verifiers. `NOW.md` re-headed with three new
+  "What changed recently" bullets and two "Do not trust" lines.
+- note: the `openclaw-vps` heartbeat stops at 2026-09-19T09:05Z because its GitHub
+  token is invalid, not because the host stopped. `audit-harness.mjs` will open a
+  finding at 48 hours; that finding will be true about the credential and false
+  about the machine.
+
 ## 2026-09-08
 
 - SURFACE installed `v2026.09.08.2` with 29 of 29 per-skill hashes and the
