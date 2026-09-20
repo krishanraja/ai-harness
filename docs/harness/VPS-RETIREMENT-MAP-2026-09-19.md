@@ -14,6 +14,61 @@ Nothing here is an instruction to switch anything off. Every host action needs i
 
 ---
 
+## 0. Corrections, 2026-09-20
+
+The read-only pass this map asked for ran on the host. `state/vps/UNKNOWNS-SETTLED-2026-09-20.md`
+is its output and it wins over this map wherever the two disagree, because it
+opened files this map reasoned about from names.
+
+**The gateway has 45 jobs, not 29.** Line 7 below called the gateway layer the
+weakest evidence here and it was worse than that: sixteen jobs were missing from
+the inventory entirely. The heartbeat's count of 45 was right the whole time and
+both this map and `ARCH:1771` were wrong. Anything in section 3 or section 7
+that counts gateway rows is understated by sixteen.
+
+**Nine of the eleven unknowns retire and two port.** The nine write only local
+JSON and Markdown under `/root/.openclaw`, read by nothing outside the machine.
+The two with a real consumer are `vera-daily-audit`, whose `vera-queue.json`
+host agents read, and `newsletter-draft`. Section 5 is settled and closed.
+
+**These jobs have a price, and this map had them at nothing.** `gmail-monitor`
+costs about USD 0.002 a run, three times a weekday. One Fireflies sweep run
+charged USD 0.65. They are scheduled LLM sessions, and the case for retiring a
+job that writes nothing anyone reads is stronger once the run has a number on it.
+
+**Telegram, settled 2026-09-20 (section 4.7).** The pull-only breach this map
+reported was not one. All 73 Telegram-capable nodes across the n8n mirrors are
+disabled, and the live Stripe workflow reads the same. The four `agatha-state-of-union`
+delivery claims are false: the 2026-09-15 `audit_log` row says "dispatched to
+Krish via Telegram" in the same sentence that reports "Telegram creds broken".
+`ARCH:212-214` already rules against exactly that. What does still send is on
+the gateway, and it splits in two:
+
+- **To Krish**, and so his to switch off: `loz-api-monitor` (Fridays 17:00) and
+  `Arlo Autonomous OS Diagnostics Sentinel` (every six hours, urgent only, and
+  the same diagnostics already run from root cron at no model cost).
+- **To Lauren**, and NOT his alone to switch off: `loz-news-briefing-9am`,
+  `-2pm`, `-6pm` and `loz-breaking-news-monitor` (every 90 minutes). These are
+  the one deliberate pull-only exception at `ARCH:191-193`. Switching them off
+  stops something another person receives, without her knowing, so it is named
+  here and not acted on. The two `maa` jobs are already disabled.
+
+**A live Telegram bot token is in plaintext in at least one LIVE n8n node**, and
+the count is not known. Correcting a claim made earlier the same day and wrong:
+all 63 Telegram nodes in the checked-in mirrors use the `{{TELEGRAM_BOT_TOKEN_OPS}}`
+placeholder, so git is clean and "around sixty nodes carry the token" was false.
+What is true is narrower and still bad: the LIVE `Stripe | Mindmaker OS | Payment
+Alert` workflow, read from n8n on 2026-09-20, has the bot token written into the
+node's URL, where git shows a placeholder. That is the exact divergence
+`scripts/n8n/scan-live-secrets.mjs` found on 2026-09-14 across seven nodes and
+sixteen credentials, and it means the mirror cannot answer this question: only a
+live scan can. Disabling a node does not remove a credential from it, and n8n
+keeps version history, so the token is exposed whether or not the node ever
+fires again. Reported here by location and never by value. Run the live scan to
+get the real count; rotation was declined on 2026-09-20.
+
+---
+
 ## 1. The answer in eight lines
 
 1. Four jobs carry something no other surface produces, and they are the reason the host cannot go this week: `n8n-exec-governor.py` (the only cumulative per-billing-cycle execution counter and the only per-workflow spike alarm anywhere, DECL:203, ARCH:520), `write-system-health.py` (the only writer of the five `system_health` rows the Systems panel, the sidebar badge and the `audit_critical_infra` freshness guard read), the 02:30 `render-plan.py` stamp (the only thing keeping `/api/health` agent-freshness out of `failed`), and `cc-doc-creator.sh` (the only writer of `tasks.link_primary`, which `decisions_waiting` and DecisionDetail render).
@@ -224,17 +279,89 @@ Both sides are stated. Nothing here is picked.
 - **The count is not reconciled**: 33 audited (LIVE:127), 45 reported by the heartbeat (HB:19), about 38 in ARCH:1771 (DECL:207).
 - **The settling command is one listing**, section 5.12, and it settles ten rows at once.
 
+### 4.5 The 28 Identity and Action Google Docs  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): he does not open them.** That was the one thing no
+code could settle, and it closes this item and the half of 2.7 that depended on
+it. `render-identity.py` retires with `sync-to-drive.py`'s identity leg; no
+Vercel cron is built to replace the mirror. The docs mirror Supabase, which is
+already the source of truth, so nothing is lost that is not still in a table.
+The 28 documents themselves are left in Drive and not deleted: the ruling is
+that nobody reads them, which is a reason to stop writing them and not a reason
+to destroy them. Both sides of the old question are kept below as the record.
+
 ### 4.5 The 28 Identity and Action Google Docs
 
 - **One side**: no code reads them. `api/agents/[name].ts` is the only reader of `google_drive_sync` and has no caller; none of the 28 doc ids appears in any repo; the 14 `agent_plans.doc_link` values point at folders or at a document id absent from `google_drive_sync`, so the ten n8n workflows that put "Plan doc: <url>" in a prompt are not reading these docs. The docs mirror Supabase, which is already the source of truth (ARCH:992).
 - **The other side**: whether Krish opens them by hand is unknown and cannot be settled from code. If he does, the render is one Vercel cron on `api/_google.ts` using `google_drive_sync.folder_id` (2.7, option B).
 - **What would settle it**: Krish saying so, or a Drive `files.get` on the 28 doc ids with `fields=viewedByMeTime,modifiedTime`.
 
+### 4.6 The attend lane (`events`)  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): "nope but I like that feature so have it fixed and
+more antifragile."** The lane ships. It does not, however, stay as it was: 355
+rows with a null `decision` and a null `outcome` on every one is a lane that has
+never learned anything from a single event, and it went quiet on 2026-09-09 with
+nobody noticing for eleven days.
+
+Done the same day, in control-center migration `20260920100000`: the lane joins
+the one intake as the `events_attend` source rather than staying a private table
+with its own credential and no watcher, and the fault that hid its death is
+fixed for every source rather than for this one. Each source now declares how
+often it should produce, `intake_source_health` computes the verdict at read
+time, and an overdue source becomes a named `source_went_quiet` hand-off row.
+Four other live sources turned out to be silently quiet the moment it was
+switched on, one of them for 31 days.
+
+Still owed, and it is step 7 of the order: the discovery itself runs on the host
+and 401s. Porting it off is what makes the source produce again. Both sides of
+the old question are kept below as the record.
+
 ### 4.6 The attend lane (`events`), where the two lenses disagreed
 
 - **One side (something already does this)**: nothing on any surface writes `events`, the read path already exists in the database, and `visibility_targets` is a press and podcast register, not a substitute. Port the discovery rather than lose the only event sourcing (keep_until_ported).
 - **The other side (load-bearing)**: no application reader exists, the two views over `events` have three ad-hoc calls in five months, `decision` and `outcome` are null on all 355 rows, and the lane has been 401-ing daily since 2026-09-09. Retire all three jobs and the four schema objects.
 - **Krish decides whether the attend lane ships.** If it does, section 2.11 applies; if not, rows 3.17, 3.18 and this one retire together.
+
+### 4.7 Pull-only pushes still firing (R1)  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): "kill all but Lauren briefing."** Both readings in
+the record turned out to be half right, so both are answered.
+
+The reading that said this was an unconfirmed delivery claim is correct about
+n8n. Every Telegram node there is disabled and the four `agatha-state-of-union`
+claims are false: the 2026-09-15 `audit_log` row says "dispatched to Krish via
+Telegram" in the same sentence that reports "Telegram creds broken". Nothing
+needs switching off there; what needs fixing is an agent that writes a delivery
+it did not make, which `ARCH:212-214` already rules against.
+
+The reading that said this was a live breach is correct about the gateway, which
+nobody had read when the map was written. Three jobs push to Krish and come off:
+`loz-api-monitor`, the `Arlo Autonomous OS Diagnostics Sentinel` (a duplicate of
+root-cron diagnostics that also pushes), and `agatha-state-of-union`'s send, with
+its `audit_log` write left in place because that row is a pull.
+
+**Applied 2026-09-20, with one override.** The Arlo sentinel is disabled and
+`agatha-state-of-union` keeps its `audit_log` write with Telegram sending
+forbidden in its prompt, which is the shape this section asked for: the row is a
+pull and Control Center reads it. **Ruling (Krish, 2026-09-20): `loz-api-monitor`
+stays on.** He was offered its removal and ordered it back on, so the Friday
+usage report to Krish is a second deliberate exception to R1 alongside Lauren's
+briefings, and it is recorded here rather than left to look like a job that was
+missed. Evidence, including the backup and the readback: `state/vps/TELEGRAM-OFF-2026-09-20.md`.
+Job count unchanged at 45, nothing deleted, no schedule touched.
+
+Five stay: `loz-news-briefing-9am`, `-2pm`, `-6pm` and `loz-breaking-news-monitor`,
+all to Lauren and the recorded exception at `ARCH:191-193`, plus `loz-api-monitor`
+to Krish by the override above. The breaking-news
+monitor is kept rather than guessed at: "all but Lauren briefing" does not
+plainly cover a 90-minute monitor, and of the two possible mistakes only one
+cannot be undone by switching it back on, because she will have missed the days
+in between.
+
+The change is a host mutation and runs from LORIMER with its own gates:
+`docs/harness/VPS-TELEGRAM-OFF-PROMPT.md`. Both sides of the old question are
+kept below as the record.
 
 ### 4.7 Pull-only pushes still firing (R1)
 

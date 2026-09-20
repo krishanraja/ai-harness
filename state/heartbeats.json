@@ -22,6 +22,8 @@
     "n8n_cycle_start": "2026-09-01T00:00:00+00:00",
     "n8n_executions_this_cycle": 2917,
     "gateway_jobs_defined": 45,
-    "source": "repository_dispatch"
+    "source": "repository_dispatch",
+    "retiring": "2026-09-20",
+    "why": "Ruling (Krish, 2026-09-20), delegated: this clock stops being a liveness beat. R4 retires the VPS as orchestrator and R7 declared openclaw-vps a permanent surface, and the two never agreed. A host that is on purpose winding down cannot also be a thing that must beat hourly, and a clock that can never beat again turns the dashboard red forever, which is how a person learns to ignore a red dashboard. Its token has been rejected since 2026-09-19T09:05Z and rotating it was declined on 2026-09-20, so it will not beat again. The surface stays declared, and what is watched inverts: not \"did it beat\" but \"is it still writing anything a surface reads\". The retirement map is the ledger of that, and this marker is removed only when the host is off."
   }
 }

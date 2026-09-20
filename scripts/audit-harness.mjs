@@ -420,7 +420,10 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     'harness-sync-lorimer': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on LORIMER', declared: '2026-09-08', fix: 'Run scripts/Invoke-HarnessSync.ps1 once on LORIMER, as was done on SURFACE. Only Krish can do this; it is a scheduled task on his machine.' },
     'harness-sync-surface': { where: 'the Windows Scheduled Task installed by scripts/Invoke-HarnessSync.ps1 on SURFACE', declared: '2026-09-08', fix: 'Re-run the installer on SURFACE.' },
     observer: { where: 'scripts/observe.mjs, nightly in harness-steward.yml', declared: '2026-09-08', fix: 'Dispatch harness-steward.yml manually and read the job log.' },
-    'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09', declared: '2026-09-09', fix: 'Check the hourly cron entry on the VPS and that GITHUB_HEARTBEAT_TOKEN is still valid.' },
+    // Declared 2026-09-09, retiring 2026-09-20. It stays in this set so the
+    // surface stays declared per R7, and the retiring marker on its heartbeat
+    // entry is what stops it being read as a failure. See state/heartbeats.json.
+    'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09 and retiring since 2026-09-20', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
@@ -446,6 +449,21 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
         continue
       }
       const age = Math.round((Date.now() - new Date(beat.last_run)) / 3600000)
+      // A clock declared retiring is not a clock that failed. It is one that is
+      // supposed to be going quiet, so silence is the expected reading and the
+      // finding inverts: report it if it starts beating again, because that
+      // means something is still running on a surface being wound down. Keeping
+      // it in the stale branch would raise the same finding every hour forever,
+      // and a permanent finding at a fixed volume is one everybody scrolls past.
+      if (beat.retiring) {
+        if (age <= 48) {
+          F('heartbeat', who, `${who} is declared retiring since ${beat.retiring} and beat ${age} hours ago, so something is still running on it.`,
+            'Read the retirement map and find out what is still writing. A surface being wound down that reports in is either work nobody moved yet or a job nobody knew about.')
+        } else {
+          N(`${who} is retiring since ${beat.retiring} and has been quiet ${age} hours, which is the expected reading.`)
+        }
+        continue
+      }
       if (beat.status === 'blocked') F('heartbeat', who, `${who} last reported a blocked machine run at ${beat.last_run}.`, 'Read the machine evidence pull request. A current clock proves the task ran; it does not turn a refused install or failed canary into health.')
       if (age > 48) F('heartbeat', who, `${who} last ran ${beat.last_run}, ${age} hours ago, past the 48 hour limit.`, 'Check the workflow. A silent clock is the failure mode this watchdog exists for, so treat a stale heartbeat as an outage rather than as noise.')
       else N(`${who} heartbeat is ${age} hours old.`)
