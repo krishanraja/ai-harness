@@ -14,6 +14,54 @@ Nothing here is an instruction to switch anything off. Every host action needs i
 
 ---
 
+## 0. Corrections, 2026-09-20
+
+The read-only pass this map asked for ran on the host. `state/vps/UNKNOWNS-SETTLED-2026-09-20.md`
+is its output and it wins over this map wherever the two disagree, because it
+opened files this map reasoned about from names.
+
+**The gateway has 45 jobs, not 29.** Line 7 below called the gateway layer the
+weakest evidence here and it was worse than that: sixteen jobs were missing from
+the inventory entirely. The heartbeat's count of 45 was right the whole time and
+both this map and `ARCH:1771` were wrong. Anything in section 3 or section 7
+that counts gateway rows is understated by sixteen.
+
+**Nine of the eleven unknowns retire and two port.** The nine write only local
+JSON and Markdown under `/root/.openclaw`, read by nothing outside the machine.
+The two with a real consumer are `vera-daily-audit`, whose `vera-queue.json`
+host agents read, and `newsletter-draft`. Section 5 is settled and closed.
+
+**These jobs have a price, and this map had them at nothing.** `gmail-monitor`
+costs about USD 0.002 a run, three times a weekday. One Fireflies sweep run
+charged USD 0.65. They are scheduled LLM sessions, and the case for retiring a
+job that writes nothing anyone reads is stronger once the run has a number on it.
+
+**Telegram, settled 2026-09-20 (section 4.7).** The pull-only breach this map
+reported was not one. All 73 Telegram-capable nodes across the n8n mirrors are
+disabled, and the live Stripe workflow reads the same. The four `agatha-state-of-union`
+delivery claims are false: the 2026-09-15 `audit_log` row says "dispatched to
+Krish via Telegram" in the same sentence that reports "Telegram creds broken".
+`ARCH:212-214` already rules against exactly that. What does still send is on
+the gateway, and it splits in two:
+
+- **To Krish**, and so his to switch off: `loz-api-monitor` (Fridays 17:00) and
+  `Arlo Autonomous OS Diagnostics Sentinel` (every six hours, urgent only, and
+  the same diagnostics already run from root cron at no model cost).
+- **To Lauren**, and NOT his alone to switch off: `loz-news-briefing-9am`,
+  `-2pm`, `-6pm` and `loz-breaking-news-monitor` (every 90 minutes). These are
+  the one deliberate pull-only exception at `ARCH:191-193`. Switching them off
+  stops something another person receives, without her knowing, so it is named
+  here and not acted on. The two `maa` jobs are already disabled.
+
+**A live Telegram bot token sits in plaintext** in the URL of around sixty n8n
+`httpRequest` nodes, disabled ones included, and therefore in n8n's version
+history. Disabling a node does not remove a credential from it. The token is
+reported here by location and count only. Rotation was declined on 2026-09-20;
+until it happens the nodes are dead code carrying a live key, and after it they
+are merely dead code, which is the cheap order to do it in.
+
+---
+
 ## 1. The answer in eight lines
 
 1. Four jobs carry something no other surface produces, and they are the reason the host cannot go this week: `n8n-exec-governor.py` (the only cumulative per-billing-cycle execution counter and the only per-workflow spike alarm anywhere, DECL:203, ARCH:520), `write-system-health.py` (the only writer of the five `system_health` rows the Systems panel, the sidebar badge and the `audit_critical_infra` freshness guard read), the 02:30 `render-plan.py` stamp (the only thing keeping `/api/health` agent-freshness out of `failed`), and `cc-doc-creator.sh` (the only writer of `tasks.link_primary`, which `decisions_waiting` and DecisionDetail render).
