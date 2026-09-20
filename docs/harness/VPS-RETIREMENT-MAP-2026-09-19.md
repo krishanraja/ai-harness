@@ -53,12 +53,19 @@ the gateway, and it splits in two:
   stops something another person receives, without her knowing, so it is named
   here and not acted on. The two `maa` jobs are already disabled.
 
-**A live Telegram bot token sits in plaintext** in the URL of around sixty n8n
-`httpRequest` nodes, disabled ones included, and therefore in n8n's version
-history. Disabling a node does not remove a credential from it. The token is
-reported here by location and count only. Rotation was declined on 2026-09-20;
-until it happens the nodes are dead code carrying a live key, and after it they
-are merely dead code, which is the cheap order to do it in.
+**A live Telegram bot token is in plaintext in at least one LIVE n8n node**, and
+the count is not known. Correcting a claim made earlier the same day and wrong:
+all 63 Telegram nodes in the checked-in mirrors use the `{{TELEGRAM_BOT_TOKEN_OPS}}`
+placeholder, so git is clean and "around sixty nodes carry the token" was false.
+What is true is narrower and still bad: the LIVE `Stripe | Mindmaker OS | Payment
+Alert` workflow, read from n8n on 2026-09-20, has the bot token written into the
+node's URL, where git shows a placeholder. That is the exact divergence
+`scripts/n8n/scan-live-secrets.mjs` found on 2026-09-14 across seven nodes and
+sixteen credentials, and it means the mirror cannot answer this question: only a
+live scan can. Disabling a node does not remove a credential from it, and n8n
+keeps version history, so the token is exposed whether or not the node ever
+fires again. Reported here by location and never by value. Run the live scan to
+get the real count; rotation was declined on 2026-09-20.
 
 ---
 
