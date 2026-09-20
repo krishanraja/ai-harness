@@ -20,7 +20,7 @@ Reason: it could push urgent diagnostics to Krish through Telegram, while the sa
 
 ### `agatha-state-of-union`
 
-The job remains enabled. Its prompt now writes the brief through the existing `audit_log` path only and explicitly forbids Telegram sending.
+The job is disabled. Its schedule remains intact, and its retained prompt writes the brief through the existing `audit_log` path only and explicitly forbids Telegram sending if the job is re-enabled later.
 
 The audit content remains:
 
@@ -48,7 +48,7 @@ The literal Telegram scan found seven jobs. The three scheduled Lauren briefing 
 
 | Job | Enabled | Sends to |
 |---|---:|---|
-| `agatha-state-of-union` | true | Nobody. Audit log only. |
+| `agatha-state-of-union` | false | Nobody. Audit log only when enabled. |
 | `loz-api-monitor` | true | Krish, retained by explicit override. |
 | `api-credit-monitor` | false | Krish when enabled. |
 | `Maa morning check-in` | false | Maa when enabled. |
@@ -59,9 +59,10 @@ The literal Telegram scan found seven jobs. The three scheduled Lauren briefing 
 | `loz-news-briefing-6pm` | true | Lauren. |
 | `loz-breaking-news-monitor` | true | Lauren. |
 
-Structural comparison against the backup found exactly two net differences:
+Structural comparison against the backup found exactly three net differences:
 
 - `Arlo Autonomous OS Diagnostics Sentinel.enabled`
+- `agatha-state-of-union.enabled`
 - `agatha-state-of-union.payload.message`
 
 ## Reversal commands
@@ -70,6 +71,12 @@ Reverse the diagnostics sentinel disablement:
 
 ```bash
 sudo python3 -c 'import json,os,pathlib; p="/root/.openclaw/cron/jobs.json"; d=json.load(open(p)); next(j for j in d["jobs"] if j["name"]=="Arlo Autonomous OS Diagnostics Sentinel")["enabled"]=True; q=p+".reverse.tmp"; pathlib.Path(q).write_text(json.dumps(d,indent=2)+"\n"); os.chmod(q,os.stat(p).st_mode); os.replace(q,p)'
+```
+
+Reverse the Agatha disablement:
+
+```bash
+sudo python3 -c 'import json,os,pathlib; p="/root/.openclaw/cron/jobs.json"; d=json.load(open(p)); next(j for j in d["jobs"] if j["name"]=="agatha-state-of-union")["enabled"]=True; q=p+".reverse.tmp"; pathlib.Path(q).write_text(json.dumps(d,indent=2)+"\n"); os.chmod(q,os.stat(p).st_mode); os.replace(q,p)'
 ```
 
 Reverse the Agatha prompt change by restoring only that prompt from the backup:
