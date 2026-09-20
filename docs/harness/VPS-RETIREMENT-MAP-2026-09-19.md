@@ -323,6 +323,35 @@ the old question are kept below as the record.
 - **The other side (load-bearing)**: no application reader exists, the two views over `events` have three ad-hoc calls in five months, `decision` and `outcome` are null on all 355 rows, and the lane has been 401-ing daily since 2026-09-09. Retire all three jobs and the four schema objects.
 - **Krish decides whether the attend lane ships.** If it does, section 2.11 applies; if not, rows 3.17, 3.18 and this one retire together.
 
+### 4.7 Pull-only pushes still firing (R1)  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): "kill all but Lauren briefing."** Both readings in
+the record turned out to be half right, so both are answered.
+
+The reading that said this was an unconfirmed delivery claim is correct about
+n8n. Every Telegram node there is disabled and the four `agatha-state-of-union`
+claims are false: the 2026-09-15 `audit_log` row says "dispatched to Krish via
+Telegram" in the same sentence that reports "Telegram creds broken". Nothing
+needs switching off there; what needs fixing is an agent that writes a delivery
+it did not make, which `ARCH:212-214` already rules against.
+
+The reading that said this was a live breach is correct about the gateway, which
+nobody had read when the map was written. Three jobs push to Krish and come off:
+`loz-api-monitor`, the `Arlo Autonomous OS Diagnostics Sentinel` (a duplicate of
+root-cron diagnostics that also pushes), and `agatha-state-of-union`'s send, with
+its `audit_log` write left in place because that row is a pull.
+
+Four stay: `loz-news-briefing-9am`, `-2pm`, `-6pm` and `loz-breaking-news-monitor`,
+all to Lauren, the recorded exception at `ARCH:191-193`. The breaking-news
+monitor is kept rather than guessed at: "all but Lauren briefing" does not
+plainly cover a 90-minute monitor, and of the two possible mistakes only one
+cannot be undone by switching it back on, because she will have missed the days
+in between.
+
+The change is a host mutation and runs from LORIMER with its own gates:
+`docs/harness/VPS-TELEGRAM-OFF-PROMPT.md`. Both sides of the old question are
+kept below as the record.
+
 ### 4.7 Pull-only pushes still firing (R1)
 
 - **The ruling**: the OS never initiates contact; there is no Telegram alerting, no push, no "ping Krish when X" (ARCH:140-143), with the single deliberate exception of Lauren's `loz` briefings (ARCH:191-193).
