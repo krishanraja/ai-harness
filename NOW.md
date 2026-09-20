@@ -2,7 +2,7 @@
 repo: krishanraja/ai-harness
 product: The harness
 as_of: 2026-09-20
-head: d62858f
+head: 9bec0078
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -49,6 +49,8 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 - **The judge can block, halfway**, unchanged since 2026-09-11: `harness-steward.yml` exits non-zero on a blocking verdict. Branch protection on `main`, the other half, is still Krish's to apply.
 
 ## What changed recently
+
+- 2026-09-20 **Three of the retirement map's eight open rulings are closed, and the Telegram change is applied.** The 28 Identity and Action Docs go, because Krish does not open them, which was the one thing no code could settle and which retires `render-identity.py` with the Drive identity leg. The attend lane stays and is rebuilt into the one intake rather than left as a private table with its own credential and no watcher. Telegram: two pushes to Krish off, `agatha-state-of-union` keeping its `audit_log` write and sending to nobody, Lauren's four untouched, and `loz-api-monitor` kept on by his override and recorded as a second deliberate exception so a kept job does not read as a missed one. Backup verified, 45 jobs, nothing deleted. `e9e3e37`, `239ebe0`, `26a8ca5`, `9bec007`.
 
 - 2026-09-20 **The gateway has 45 jobs, and nobody had ever opened the file that says so.** `/root/.openclaw/cron/jobs.json` was read on the host for the first time. The retirement map inventoried 29 gateway rows and called that its weakest evidence; it was short by sixteen. The heartbeat's count of 45 was right all along. Nine of the eleven unknown jobs retire, writing only local JSON and Markdown that nothing outside the machine reads; `vera-daily-audit` and `newsletter-draft` port. These jobs also have a price the map had at nothing: `gmail-monitor` is about USD 0.002 a run three times a weekday, and one Fireflies sweep charged USD 0.65. `state/vps/UNKNOWNS-SETTLED-2026-09-20.md`, and it wins over the map wherever they disagree. `a9d3036`, `71dc30c`.
 
