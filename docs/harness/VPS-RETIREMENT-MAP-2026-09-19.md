@@ -341,8 +341,19 @@ nobody had read when the map was written. Three jobs push to Krish and come off:
 root-cron diagnostics that also pushes), and `agatha-state-of-union`'s send, with
 its `audit_log` write left in place because that row is a pull.
 
-Four stay: `loz-news-briefing-9am`, `-2pm`, `-6pm` and `loz-breaking-news-monitor`,
-all to Lauren, the recorded exception at `ARCH:191-193`. The breaking-news
+**Applied 2026-09-20, with one override.** The Arlo sentinel is disabled and
+`agatha-state-of-union` keeps its `audit_log` write with Telegram sending
+forbidden in its prompt, which is the shape this section asked for: the row is a
+pull and Control Center reads it. **Ruling (Krish, 2026-09-20): `loz-api-monitor`
+stays on.** He was offered its removal and ordered it back on, so the Friday
+usage report to Krish is a second deliberate exception to R1 alongside Lauren's
+briefings, and it is recorded here rather than left to look like a job that was
+missed. Evidence, including the backup and the readback: `state/vps/TELEGRAM-OFF-2026-09-20.md`.
+Job count unchanged at 45, nothing deleted, no schedule touched.
+
+Five stay: `loz-news-briefing-9am`, `-2pm`, `-6pm` and `loz-breaking-news-monitor`,
+all to Lauren and the recorded exception at `ARCH:191-193`, plus `loz-api-monitor`
+to Krish by the override above. The breaking-news
 monitor is kept rather than guessed at: "all but Lauren briefing" does not
 plainly cover a 90-minute monitor, and of the two possible mistakes only one
 cannot be undone by switching it back on, because she will have missed the days
