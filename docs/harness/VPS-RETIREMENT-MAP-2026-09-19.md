@@ -279,11 +279,43 @@ Both sides are stated. Nothing here is picked.
 - **The count is not reconciled**: 33 audited (LIVE:127), 45 reported by the heartbeat (HB:19), about 38 in ARCH:1771 (DECL:207).
 - **The settling command is one listing**, section 5.12, and it settles ten rows at once.
 
+### 4.5 The 28 Identity and Action Google Docs  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): he does not open them.** That was the one thing no
+code could settle, and it closes this item and the half of 2.7 that depended on
+it. `render-identity.py` retires with `sync-to-drive.py`'s identity leg; no
+Vercel cron is built to replace the mirror. The docs mirror Supabase, which is
+already the source of truth, so nothing is lost that is not still in a table.
+The 28 documents themselves are left in Drive and not deleted: the ruling is
+that nobody reads them, which is a reason to stop writing them and not a reason
+to destroy them. Both sides of the old question are kept below as the record.
+
 ### 4.5 The 28 Identity and Action Google Docs
 
 - **One side**: no code reads them. `api/agents/[name].ts` is the only reader of `google_drive_sync` and has no caller; none of the 28 doc ids appears in any repo; the 14 `agent_plans.doc_link` values point at folders or at a document id absent from `google_drive_sync`, so the ten n8n workflows that put "Plan doc: <url>" in a prompt are not reading these docs. The docs mirror Supabase, which is already the source of truth (ARCH:992).
 - **The other side**: whether Krish opens them by hand is unknown and cannot be settled from code. If he does, the render is one Vercel cron on `api/_google.ts` using `google_drive_sync.folder_id` (2.7, option B).
 - **What would settle it**: Krish saying so, or a Drive `files.get` on the 28 doc ids with `fields=viewedByMeTime,modifiedTime`.
+
+### 4.6 The attend lane (`events`)  SETTLED 2026-09-20
+
+**Ruling (Krish, 2026-09-20): "nope but I like that feature so have it fixed and
+more antifragile."** The lane ships. It does not, however, stay as it was: 355
+rows with a null `decision` and a null `outcome` on every one is a lane that has
+never learned anything from a single event, and it went quiet on 2026-09-09 with
+nobody noticing for eleven days.
+
+Done the same day, in control-center migration `20260920100000`: the lane joins
+the one intake as the `events_attend` source rather than staying a private table
+with its own credential and no watcher, and the fault that hid its death is
+fixed for every source rather than for this one. Each source now declares how
+often it should produce, `intake_source_health` computes the verdict at read
+time, and an overdue source becomes a named `source_went_quiet` hand-off row.
+Four other live sources turned out to be silently quiet the moment it was
+switched on, one of them for 31 days.
+
+Still owed, and it is step 7 of the order: the discovery itself runs on the host
+and 401s. Porting it off is what makes the source produce again. Both sides of
+the old question are kept below as the record.
 
 ### 4.6 The attend lane (`events`), where the two lenses disagreed
 
