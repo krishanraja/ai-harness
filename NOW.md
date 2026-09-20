@@ -2,7 +2,7 @@
 repo: krishanraja/ai-harness
 product: The harness
 as_of: 2026-09-20
-head: 0390a0d
+head: d62858f
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -49,6 +49,12 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 - **The judge can block, halfway**, unchanged since 2026-09-11: `harness-steward.yml` exits non-zero on a blocking verdict. Branch protection on `main`, the other half, is still Krish's to apply.
 
 ## What changed recently
+
+- 2026-09-20 **The gateway has 45 jobs, and nobody had ever opened the file that says so.** `/root/.openclaw/cron/jobs.json` was read on the host for the first time. The retirement map inventoried 29 gateway rows and called that its weakest evidence; it was short by sixteen. The heartbeat's count of 45 was right all along. Nine of the eleven unknown jobs retire, writing only local JSON and Markdown that nothing outside the machine reads; `vera-daily-audit` and `newsletter-draft` port. These jobs also have a price the map had at nothing: `gmail-monitor` is about USD 0.002 a run three times a weekday, and one Fireflies sweep charged USD 0.65. `state/vps/UNKNOWNS-SETTLED-2026-09-20.md`, and it wins over the map wherever they disagree. `a9d3036`, `71dc30c`.
+
+- 2026-09-20 **Telegram was not the pull-only breach the map reported, and the token claim that replaced it was also wrong.** Every one of the 73 Telegram nodes across the n8n mirrors is disabled and the live Stripe workflow reads the same. The four `agatha-state-of-union` delivery claims are false: the 2026-09-15 `audit_log` row says "dispatched to Krish via Telegram" in the same sentence that reports "Telegram creds broken", which `ARCH:212-214` already rules against. What still sends is on the gateway and splits in two: two jobs reaching Krish, and four reaching Lauren, which are the recorded exception at `ARCH:191-193` and are named rather than touched, because switching them off stops something another person receives without her knowing. A same-day claim that a live bot token sat across around sixty nodes was corrected: git is clean, all 63 use a placeholder, and what is true is that the live Stripe node carries a literal where git shows a placeholder, with the live count unknown until a scan runs. `d62858f`.
+
+- 2026-09-20 **A retirement prompt that does one job instead of thirteen.** The 2026-09-19 prompt told a session to run an audit that had already run and then walked it into a section of changes that had already landed, so anyone picking it up redid finished work. `docs/harness/VPS-SETTLE-THE-UNKNOWNS-PROMPT.md` is step 1 of the retirement order and nothing else, read-only throughout, with the redaction filter written into the commands rather than left as an instruction, and an explicit refusal to continue into step 2. It was run and it produced the file above. `c7401d0`.
 
 - 2026-09-20 **The operator handoff was asking for a run that had already happened.** `docs/harness/OPENCLAW-TAKEAWAY-2026-09-19.md` told Krish to go and run the read-only audit. It had been run on the host, as root, between 15:07 and 15:09 UTC that day, and its verbatim 183-line output and report were committed to this repository twenty minutes before the handoff was written. So the document was asking for finished work and citing a facts file compiled without ever seeing the machine. It now cites the audit output and report alongside that file and says plainly that where the two disagree the audit wins; where the audit did not cover something it says so and names what would. `0390a0d`.
 

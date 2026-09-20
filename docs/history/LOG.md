@@ -7,6 +7,7 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-09-20
 
+- reconciled at `d62858f`: the settle-the-unknowns prompt was written, run on the host, and its 206-line report merged. The gateway job count is settled at 45 against three disagreeing numbers, nine of eleven unknown jobs retire, and the retirement map gained a corrections section that wins over its own body. Two claims of mine were corrected in the same pass: Telegram is not a pull-only breach (every node is disabled and the delivery claims are false), and the bot-token exposure is one live node with an unknown live count, not sixty. `NOW.md` re-headed with three bullets.
 - reconciled at `0390a0d`: two non-steward commits since `b654fb0`. The VPS retirement map
   (62 rows, two refutation lenses each, every row labelled with the model that checked it)
   and a correction to the OpenClaw operator handoff, which had been written as a list of
