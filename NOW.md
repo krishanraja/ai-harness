@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-19
-head: b654fb0
+as_of: 2026-09-20
+head: 0390a0d
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -35,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
 
-## Where it is right now (as of 2026-09-19)
+## Where it is right now (as of 2026-09-20)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.15.2` (tag `harness-v2026.09.15.2`, source commit `5e71553`, manifest SHA-256 `1D7F8304...5343E62`, published 2026-09-15T20:45:21Z), immutable. It supersedes `v2026.09.15.1`, which stays the rollback target.
 - **Two more releases published 2026-09-15, each a single governed correction rather than a rewrite.** `v2026.09.15.1` added an executable stage-conveyor doctrine to `krish-build` (a portable manifest contract, topology checker, valid fixture and fifteen negative regression cases) after Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file (`docs/proposals/2026-09-15-stage-conveyor-v1.md`). `v2026.09.15.2` added a determinism rule requiring build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, after Ubuntu and Windows verification jobs for `content-engine` PR 70 both returned HTTP 404 fetching a pinned FFmpeg archive despite a stored SHA-256 (`docs/proposals/2026-09-15-build-input-retrievability.md`). A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself.
@@ -49,6 +49,10 @@ Objection it answers: "AI agents drift, and nobody notices until something expen
 - **The judge can block, halfway**, unchanged since 2026-09-11: `harness-steward.yml` exits non-zero on a blocking verdict. Branch protection on `main`, the other half, is still Krish's to apply.
 
 ## What changed recently
+
+- 2026-09-20 **The operator handoff was asking for a run that had already happened.** `docs/harness/OPENCLAW-TAKEAWAY-2026-09-19.md` told Krish to go and run the read-only audit. It had been run on the host, as root, between 15:07 and 15:09 UTC that day, and its verbatim 183-line output and report were committed to this repository twenty minutes before the handoff was written. So the document was asking for finished work and citing a facts file compiled without ever seeing the machine. It now cites the audit output and report alongside that file and says plainly that where the two disagree the audit wins; where the audit did not cover something it says so and names what would. `0390a0d`.
+
+- 2026-09-19 **The VPS retirement map: what is unique, what is duplicated, and in what order.** Krish asked whether anything about the VPS jobs is objectively useful or unique enough that the rest can be retired. 62 rows, each put through two refutation lenses and each labelled with the model that checked it, so a row nobody independently checked is visible as such rather than reading like the rest. `f7c4d90`.
 
 - 2026-09-19 **The canon said there were exactly two editorial channels and no third, and it was wrong in both directions.** `skills/content-corpus/references/editorial-channels.md` stated "exactly two channels, there is no third, do not invent one", and `mindmake/references/commercial-canon.md`, `mindmake-os/SKILL.md` and `krish-voice/references/voice-doctrine.md` rendered from it. Krish ruled on 2026-09-19 that the publication runs three subchannels, split.the.bill, mind.the.gap and lift.the.lid. The rule is replaced, and the authority moves off the file entirely: `venture_formats.mandate` in Mindmaker OS holds each mandate in full prose and a copy in a skill drifts while the table does not. The same pass corrected a line claiming Make Your Mind Up is not a content brand, which was wrong in both directions, and renamed Gear B off the retired channel it had been named after since before 2026-09-19: Gear B is the short-form video register, a surface and not a format. `748a1ce`.
 

@@ -5,6 +5,14 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-09-20
+
+- reconciled at `0390a0d`: two non-steward commits since `b654fb0`. The VPS retirement map
+  (62 rows, two refutation lenses each, every row labelled with the model that checked it)
+  and a correction to the OpenClaw operator handoff, which had been written as a list of
+  things to go and find out twenty minutes after the audit that found them out was committed
+  to this repository. `NOW.md` re-headed with two bullets.
+
 ## 2026-09-19
 
 - reconciled at `b654fb0`: the canon's two-channel rule was replaced by the three
