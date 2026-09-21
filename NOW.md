@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-20
-head: 9bec0078
+as_of: 2026-09-21
+head: 3324038
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -35,7 +35,7 @@ Angles a writer can use without asking Krish:
 
 Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
 
-## Where it is right now (as of 2026-09-20)
+## Where it is right now (as of 2026-09-21)
 
 - **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.15.2` (tag `harness-v2026.09.15.2`, source commit `5e71553`, manifest SHA-256 `1D7F8304...5343E62`, published 2026-09-15T20:45:21Z), immutable. It supersedes `v2026.09.15.1`, which stays the rollback target.
 - **Two more releases published 2026-09-15, each a single governed correction rather than a rewrite.** `v2026.09.15.1` added an executable stage-conveyor doctrine to `krish-build` (a portable manifest contract, topology checker, valid fixture and fifteen negative regression cases) after Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file (`docs/proposals/2026-09-15-stage-conveyor-v1.md`). `v2026.09.15.2` added a determinism rule requiring build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, after Ubuntu and Windows verification jobs for `content-engine` PR 70 both returned HTTP 404 fetching a pinned FFmpeg archive despite a stored SHA-256 (`docs/proposals/2026-09-15-build-input-retrievability.md`). A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself.
@@ -104,6 +104,7 @@ Waiting on Krish, in order of how much it blocks:
 10. **`ghost-facts` and the general `building-unasked` finding will keep recurring until item 8 is decided.** The 2026-09-12 Rule 6 disposition closed the specific `building-unasked` objection raised against the citation ledger on PR 42; it does not close the same objection against `brain/` as a whole, which the judge panel is designed to keep raising.
 11. **Does the judge panel posting a review breach the approval wall?** The panel raised this against itself, blocking, twice. It posts a pull request review on every canon-touching change, autonomously. I have not decided this for you and have not disabled the posting; the report still lands in the run summary and as an artifact if you want the posting step off.
 12. **Provision the second workstation's hosted-observation identity** and run tool discovery plus one write canary there before marking it active. No file on that machine was changed during the 2026-09-12 read-only inspection.
+13. **Review `harness-maintainer`, past its freshness SLA.** Reviewed 2026-08-20 with a 30 day SLA, it was due 2026-09-19 and is still open as of 2026-09-21 per `node scripts/audit-harness.mjs`. Per ruling, an expired review date is reviewed and reported, never silently moved.
 
 Ruled and closed on 2026-09-08: `C:\Users\krish\.agents\skills` holds 63 entries, zero canonical, nine that the routing contract forbids, and loose files at a skills root are recorded as `unmanaged_root_files`, not refused.
 
@@ -137,7 +138,7 @@ Next without Krish: keep recording canary failures as failures, let the audit ag
 - Any prose saying the OpenClaw VPS execution governor trips or caps n8n spend. It warns and never acts, by ruling of 2026-09-09, re-confirmed by the 2026-09-19 host audit. `state/vps-surface-declaration-2026-09-09.md` is the ruling.
 - `state/heartbeats.json` for `openclaw-vps` as a liveness signal after 2026-09-19T09:05Z. The host is running; its heartbeat token is invalid and returns HTTP 401, so the absence of newer entries is a credential fact and not a dead machine.
 
-- A `reviewed` date in `state/skill-registry.yaml` as proof of live behaviour rather than of a documentation check. No skill's freshness SLA had expired as of 2026-09-15, and the release published that day, `v2026.09.15.2`, still failed its own canary sheet on both Claude Code and Codex.
+- A `reviewed` date in `state/skill-registry.yaml` as proof of live behaviour rather than of a documentation check. No skill's freshness SLA had expired as of 2026-09-15, and the release published that day, `v2026.09.15.2`, still failed its own canary sheet on both Claude Code and Codex. `harness-maintainer` (reviewed 2026-08-20, 30 day SLA) has since gone past due, on 2026-09-19; `node scripts/audit-harness.mjs` still lists it open as of 2026-09-21, and the date is reported, not moved, until it is actually reviewed.
 - The absence of an `evaluation_evidence` row read as "not measured". For 19 skills it means measured on 5 August and never filed. `node scripts/audit-harness.mjs` names which is which.
 - `mm-ctrl/skills/README.md`: its claim to be "the canonical, versioned home" of the CTRL skills is contested by this repository and unresolved.
 - Any individual PowerShell script as the whole maintenance procedure. `docs/harness/MACHINE-JOB.md` is the authority, and the scheduled machine path begins at `scripts/Invoke-HarnessSync.ps1`.

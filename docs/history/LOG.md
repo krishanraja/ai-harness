@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-09-21
+
+- reconciled at `3324038`: two `chore(heartbeat)` commits since `9bec0078`, both timestamp-only updates to `state/heartbeats.json`, no documentation consequence. `NOW.md`'s head and as_of stamped forward. `harness-maintainer`'s freshness SLA (reviewed 2026-08-20, 30 day SLA, due 2026-09-19) is past due per `node scripts/audit-harness.mjs`; noted in the waiting-on-Krish list and the Do not trust section rather than moved.
+
 ## 2026-09-20
 
 - reconciled at `9bec0078`: sections 4.5, 4.6 and 4.7 of the retirement map settled with Krish's rulings, and the Telegram change applied on the host with its evidence merged. His override on `loz-api-monitor` is written in as an exception rather than left implicit, because a job running against a documented instruction to stop it looks like an oversight to the next reader.
