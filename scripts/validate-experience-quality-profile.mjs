@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { readFile } from 'node:fs/promises'
+import { readFile, stat } from 'node:fs/promises'
+import { isAbsolute, relative, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
 export const REQUIRED_COVERAGE = [
@@ -185,6 +186,7 @@ export function validateExperienceQualityProfile(profile) {
   if (!isObject(commands)) failures.push('commands is required')
   else for (const name of ['definitions', 'reviewReadiness', 'presentation', 'continuity', 'blindPanel', 'status']) {
     if (typeof commands[name] !== 'string' || !commands[name].trim()) failures.push(`commands.${name} is required`)
+    else if (!parseNpmScript(commands[name].trim())) failures.push(`commands.${name} must be a direct npm run command`)
   }
 
   return failures
@@ -195,10 +197,73 @@ export async function readAndValidateProfile(path) {
   return { profile, failures: validateExperienceQualityProfile(profile) }
 }
 
+const PROJECT_PATHS = [
+  ['stateRoute'],
+  ['feedbackReconciliation', 'ledger'],
+]
+
+function readNested(object, path) {
+  return path.reduce((value, key) => value?.[key], object)
+}
+
+function within(root, path) {
+  const rel = relative(root, path)
+  return rel === '' || (!rel.startsWith('..') && !isAbsolute(rel))
+}
+
+function parseNpmScript(command) {
+  const match = command.match(/^npm\s+run\s+([A-Za-z0-9:_-]+)(?:\s+--(?:\s+.*)?)?$/)
+  return match?.[1] ?? null
+}
+
+export async function validateExperienceProjectWiring(profile, projectRoot) {
+  const failures = []
+  const root = resolve(projectRoot)
+  let packageJson
+  try {
+    packageJson = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'))
+  } catch (error) {
+    return [`project package.json is missing or invalid: ${error.message}`]
+  }
+
+  for (const path of PROJECT_PATHS) {
+    const declared = readNested(profile, path)
+    if (typeof declared !== 'string' || !declared.trim()) continue
+    const target = resolve(root, declared)
+    if (!within(root, target)) {
+      failures.push(`${path.join('.')} escapes the project root`)
+      continue
+    }
+    try {
+      if (!(await stat(target)).isFile()) failures.push(`${path.join('.')} is not a file: ${declared}`)
+    } catch {
+      failures.push(`${path.join('.')} does not exist: ${declared}`)
+    }
+  }
+
+  for (const [name, command] of Object.entries(profile.commands ?? {})) {
+    const script = typeof command === 'string' ? parseNpmScript(command.trim()) : null
+    if (!script) {
+      failures.push(`commands.${name} must be a direct npm run command, not an opaque shell command`)
+      continue
+    }
+    if (typeof packageJson.scripts?.[script] !== 'string' || !packageJson.scripts[script].trim()) {
+      failures.push(`commands.${name} references missing package.json script ${script}`)
+    }
+  }
+  return failures
+}
+
 async function main() {
   const profilePath = process.argv[2]
-  if (!profilePath) throw new Error('Usage: node scripts/validate-experience-quality-profile.mjs <profile.json>')
+  if (!profilePath) throw new Error('Usage: node scripts/validate-experience-quality-profile.mjs <profile.json> [--project-root <path>]')
   const { profile, failures } = await readAndValidateProfile(profilePath)
+  const rootIndex = process.argv.indexOf('--project-root')
+  if (rootIndex >= 0) {
+    const projectRoot = process.argv[rootIndex + 1]
+    if (!projectRoot) throw new Error('--project-root requires a path')
+    failures.push(...await validateExperienceProjectWiring(profile, projectRoot))
+  }
   console.log(JSON.stringify({ projectId: profile.projectId ?? null, contractVersion: profile.contractVersion ?? null, failures }, null, 2))
   if (failures.length) process.exitCode = 1
 }

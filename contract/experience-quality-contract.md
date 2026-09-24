@@ -22,6 +22,10 @@ It must also define a **brief-fidelity hard gate**. Before concept judging or re
 
 Repository-specific rules may exceed this contract. They may not weaken it silently.
 
+The profile itself is not evidence that its controls exist. Before material review, validate it against the project root: every declared state or ledger path must resolve to a real repository file, and every declared command must resolve to a real project script. A string that looks like a command but has no executable project route is a failed gate. The project's CI must execute the adversarial gate tests; harness schema validation alone is never sufficient.
+
+Every synthesis must also carry one machine-readable delivery-state receipt. It binds the candidate digest to every accepted decision, its exact source, its required observable outcome and current evidence. `implemented` is not closure: a candidate cannot enter review-ready, release-ready or live-verified state until each accepted decision is independently `verified` or explicitly `accepted`, blocking feedback is zero, the presentation receipt matches the current candidate digest and exactly one next action is recorded. Validate this with `scripts/validate-project-delivery-state.mjs` or a project-local equivalent. Synthesis from conversational memory without this receipt is blocked.
+
 ## Two independent quality layers
 
 ### Continuity guardians

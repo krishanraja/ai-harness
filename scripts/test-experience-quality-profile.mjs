@@ -37,6 +37,7 @@ const cases = [
   ['receipt may be stale', (p) => { p.presentationFirewall.candidateBoundReceiptRequired = false }, 'presentationFirewall.candidateBoundReceiptRequired must be true'],
   ['missing mismatch blocker', (p) => { p.presentationFirewall.blockingStatuses = p.presentationFirewall.blockingStatuses.filter((x) => x !== 'mismatch') }, 'presentationFirewall.blockingStatuses is missing mismatch'],
   ['presentation command missing', (p) => { delete p.commands.presentation }, 'commands.presentation is required'],
+  ['presentation command is opaque prose', (p) => { p.commands.presentation = 'echo trust-me' }, 'commands.presentation must be a direct npm run command'],
   ['history contaminates panel', (p) => { p.blindPanel.ownerHistoryVisible = true }, 'blindPanel.ownerHistoryVisible must be false'],
   ['too few jurors', (p) => { p.blindPanel.minimumIndependentJurors = 5 }, 'minimumIndependentJurors must be at least 6'],
   ['role coverage gap', (p) => { p.blindPanel.roles.forEach((r) => { r.coverage = r.coverage.filter((x) => x !== 'conversion_trust') }) }, 'blindPanel role coverage is missing conversion_trust'],

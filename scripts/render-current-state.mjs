@@ -15,6 +15,7 @@ const esc = (value) => String(value ?? 'unknown').replaceAll('|', '\\|')
 const relative = (value) => String(value ?? '').replaceAll('\\', '/')
 const release = registry.latest_approved_release
 const deployments = registry.surface_deployments || {}
+const provisionalOverlays = registry.provisional_overlays || []
 
 function readCanary(evidence) {
   if (!evidence || !String(evidence).startsWith('state/canaries/')) return null
@@ -64,9 +65,24 @@ out(`- Release source commit: \`${release.source_commit}\``)
 out(`- Manifest SHA-256: \`${release.manifest_sha256}\``)
 out(`- Release: ${release.release_url}`)
 out(`- Current deployment verdict: **${registry.deployed_release.status}**`)
+if (provisionalOverlays.length) {
+  out(`- Provisional single-surface overlays: **${provisionalOverlays.length}**. These are not durable releases.`)
+}
 out()
 out('Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.')
 out()
+if (provisionalOverlays.length) {
+  out('## Provisional overlays')
+  out()
+  out('| Surface | Overlay | Skills | Status | Next gate |')
+  out('|---|---|---|---|---|')
+  for (const overlay of provisionalOverlays) {
+    out(`| ${esc(overlay.surface)} | ${esc(overlay.release_id)} | ${esc((overlay.skills || []).join(', '))} | ${esc(overlay.status)} | ${esc(overlay.next_gate)} |`)
+  }
+  out()
+  out('An overlay proves only the named surface and evidence. It must not be called a harness upgrade until it is merged, published as an immutable approved release, installed on each in-scope surface, and canaried there.')
+  out()
+}
 out('## Surface state')
 out()
 out('| Surface | Release | Integrity evidence | Status |')

@@ -133,12 +133,12 @@
     "commands": {
       "type": "object", "additionalProperties": false, "required": ["definitions", "reviewReadiness", "presentation", "continuity", "blindPanel", "status"],
       "properties": {
-        "definitions": { "type": "string", "minLength": 1 },
-        "reviewReadiness": { "type": "string", "minLength": 1 },
-        "presentation": { "type": "string", "minLength": 1 },
-        "continuity": { "type": "string", "minLength": 1 },
-        "blindPanel": { "type": "string", "minLength": 1 },
-        "status": { "type": "string", "minLength": 1 }
+        "definitions": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" },
+        "reviewReadiness": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" },
+        "presentation": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" },
+        "continuity": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" },
+        "blindPanel": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" },
+        "status": { "type": "string", "pattern": "^npm\\s+run\\s+[A-Za-z0-9:_-]+(?:\\s+--(?:\\s+.*)?)?$" }
       }
     }
   }

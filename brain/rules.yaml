@@ -783,8 +783,24 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: required-route-evidence.for-a-material-app
+    file: contract/skill-routing-contract.md
+    text_sha: "fe6cb9df183e"
+    first_seen: "2026-09-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    status: live
+  - id: required-route-evidence.for-an-approved-pinned
+    file: contract/skill-routing-contract.md
+    text_sha: "8b9e05317fe3"
+    first_seen: "2026-09-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    status: live
 
-# 225 chapters across the installed skills.
+# 226 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -861,18 +877,23 @@ skill_sections:
   - id: build-apps-with-krish.role-and-chain
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Role and chain"
-    text_sha: "b5afeb808a99"
+    text_sha: "968832a04127"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
-      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     history:
       - text_sha: "f7aba15cff24"
         valid_until: "2026-09-15"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "b5afeb808a99"
+        valid_until: "2026-09-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+          sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
     status: live
   - id: build-apps-with-krish.inputs-and-preflight
     file: skills/build-apps-with-krish/SKILL.md
@@ -886,20 +907,32 @@ skill_sections:
   - id: build-apps-with-krish.operating-rules
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Operating rules"
-    text_sha: "1f54b289bc6e"
+    text_sha: "8df9a811d43d"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    history:
+      - text_sha: "1f54b289bc6e"
+        valid_until: "2026-09-24"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: build-apps-with-krish.material-visual-approval-boundary
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Material visual approval boundary"
-    text_sha: "b726bba2ff8f"
+    text_sha: "4e005fa9de4c"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    history:
+      - text_sha: "b726bba2ff8f"
+        valid_until: "2026-09-24"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: build-apps-with-krish.phase-orchestration
     file: skills/build-apps-with-krish/SKILL.md
@@ -2327,11 +2360,17 @@ skill_sections:
   - id: mindmake-os.two-authorities-and-which
     file: skills/mindmake-os/SKILL.md
     heading: "Two authorities, and which one wins"
-    text_sha: "408a4c3dd2af"
+    text_sha: "05300a94d4b9"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "748a1ce45969"
+    history:
+      - text_sha: "408a4c3dd2af"
+        valid_until: "2026-09-19"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake-os.where-to-read-it
     file: skills/mindmake-os/SKILL.md
@@ -2363,11 +2402,17 @@ skill_sections:
   - id: mindmake-os.related-skills
     file: skills/mindmake-os/SKILL.md
     heading: "Related skills"
-    text_sha: "ecb3e02a7883"
+    text_sha: "c87747ea592f"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "748a1ce45969"
+    history:
+      - text_sha: "ecb3e02a7883"
+        valid_until: "2026-09-19"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: n8n-operator.role-and-chain
     file: skills/n8n-operator/SKILL.md
@@ -2741,11 +2786,17 @@ skill_sections:
   - id: ux-testing-agent.qa-contract
     file: skills/ux-testing-agent/SKILL.md
     heading: "QA contract"
-    text_sha: "9b3757af3349"
+    text_sha: "3965000b5647"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    history:
+      - text_sha: "9b3757af3349"
+        valid_until: "2026-09-24"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ux-testing-agent.phase-0-establish-current
     file: skills/ux-testing-agent/SKILL.md
@@ -2759,11 +2810,17 @@ skill_sections:
   - id: ux-testing-agent.phase-1-derive-the
     file: skills/ux-testing-agent/SKILL.md
     heading: "Phase 1: derive the task-first plan"
-    text_sha: "2cff1e75cfd8"
+    text_sha: "897cf9786d67"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    history:
+      - text_sha: "2cff1e75cfd8"
+        valid_until: "2026-09-24"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ux-testing-agent.phase-2-execute-from
     file: skills/ux-testing-agent/SKILL.md
@@ -2813,11 +2870,17 @@ skill_sections:
   - id: ux-testing-agent.report-and-completion
     file: skills/ux-testing-agent/SKILL.md
     heading: "Report and completion"
-    text_sha: "46f5d1c14312"
+    text_sha: "e75c2a136552"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+    history:
+      - text_sha: "46f5d1c14312"
+        valid_until: "2026-09-24"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: verification-loop.inputs-from-strategy
     file: skills/verification-loop/SKILL.md

@@ -4,7 +4,7 @@ status: governed-production-set
 
 candidate_quality_system:
   id: experience-quality-v1
-  status: installed-and-behavior-canaried-on-codex-current
+  status: installed-provisional-and-behavior-canaried-on-codex-current
   accepted_by: Krish Raja
   accepted_at: 2026-09-23
   owner: build-apps-with-krish
@@ -32,7 +32,7 @@ candidate_quality_system:
 
 candidate_scroll_build_acceptance:
   id: scroll-build-causality-2026-09-24
-  status: installed-and-behavior-canaried-on-codex-current
+  status: installed-provisional-and-behavior-canaried-on-codex-current
   owner: build-apps-with-krish
   accepted_by: Krish Raja
   authority: harden-underlying-system-after-explicit-scroll-build-correction
@@ -48,6 +48,24 @@ candidate_scroll_build_acceptance:
     - state/deployments/v2026.09.24.2-codex-current.json
     - state/canaries/v2026.09.24.2-codex-current-scroll-build.json
   next_gate: other-client-rollout-requires-own-governed-release-and-canary
+
+provisional_overlays:
+  - release_id: v2026.09.24.1
+    surface: codex-current
+    status: provisional-not-durable
+    skills: [build-apps-with-krish, ux-testing-agent]
+    evidence:
+      - state/deployments/v2026.09.24.1-codex-current.json
+      - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
+    next_gate: merge-publish-install-canary
+  - release_id: v2026.09.24.2
+    surface: codex-current
+    status: provisional-not-durable
+    skills: [build-apps-with-krish, ux-testing-agent]
+    evidence:
+      - state/deployments/v2026.09.24.2-codex-current.json
+      - state/canaries/v2026.09.24.2-codex-current-scroll-build.json
+    next_gate: merge-publish-install-canary
 
 candidate_reconciliation:
   expected_skill_count: 29
@@ -158,7 +176,7 @@ surface_deployments:
     # selected skills got a passing positive. The seventh, design-intelligence-search,
     # is manual-only and correctly absent from the implicit catalog; the sheet was
     # asking it the wrong question and now sends its explicit invocation instead.
-    status: installed-hash-verified-and-canaried-video-engine-reachable
+    status: stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable
     previous_release: v2026.09.08.1
   cursor-primary:
     release_id: v2026.09.15.2
@@ -216,14 +234,14 @@ surface_deployments:
     installed_skill_count: 29
     deployed_at: 2026-08-29
     evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: exact-names-enabled-and-patched-content-observed
+    status: stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed
   perplexity-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
     installed_skill_count: 29
     deployed_at: 2026-08-29
     evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: exact-names-enabled-and-patched-content-observed
+    status: stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed
 
 canonical:
   repository: krishanraja/ai-harness

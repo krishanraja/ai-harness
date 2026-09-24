@@ -31,6 +31,9 @@ $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
 $experienceQualityContract = Join-Path $Root 'contract\experience-quality-contract.md'
 $experienceQualitySchema = Join-Path $Root 'contract\experience-quality-profile.schema.json'
+$releaseCoherenceValidator = Join-Path $Root 'scripts\validate-release-coherence.mjs'
+$fleetFreshnessReporter = Join-Path $Root 'scripts\report-fleet-freshness.mjs'
+$projectDeliveryValidator = Join-Path $Root 'scripts\validate-project-delivery-state.mjs'
 $releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
 $syncScript = Join-Path $Root 'scripts\Invoke-HarnessSync.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
@@ -82,6 +85,9 @@ else {
     try { $null = ConvertFrom-Json -InputObject ([IO.File]::ReadAllText($experienceQualitySchema)) }
     catch { Add-Failure "Experience quality profile schema is not valid JSON: $($_.Exception.Message)" }
 }
+if (-not (Test-Path -LiteralPath $releaseCoherenceValidator -PathType Leaf)) { Add-Failure 'Missing release coherence validator.' }
+if (-not (Test-Path -LiteralPath $fleetFreshnessReporter -PathType Leaf)) { Add-Failure 'Missing fleet freshness reporter.' }
+if (-not (Test-Path -LiteralPath $projectDeliveryValidator -PathType Leaf)) { Add-Failure 'Missing project delivery-state validator.' }
 if (-not (Test-Path -LiteralPath $releaseBuilder -PathType Leaf)) {
     Add-Failure 'Missing deterministic release builder.'
 }
@@ -632,6 +638,16 @@ if ($LASTEXITCODE -ne 0) {
 $experienceQualityRegressionCheck = @(& node (Join-Path $Root 'scripts\test-experience-quality-profile.mjs') 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Experience quality profile regression suite failed: $($experienceQualityRegressionCheck -join ' | ')"
+}
+
+$controlPlaneRegressionCheck = @(& node (Join-Path $Root 'scripts\test-control-plane.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Harness control-plane regression suite failed: $($controlPlaneRegressionCheck -join ' | ')"
+}
+
+$releaseCoherenceCheck = @(& node $releaseCoherenceValidator 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Release registry is incoherent: $($releaseCoherenceCheck -join ' | ')"
 }
 
 $scrollBuildRegressionCheck = @(& node (Join-Path $Root 'scripts\test-scroll-build-evidence.mjs') 2>&1)

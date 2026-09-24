@@ -4,9 +4,11 @@ Use this reference for every material website/app rebuild, every rendered materi
 
 ## Project profile
 
-Require one repository-owned machine-readable experience-quality profile before the first material review. It must name the state route, owners, surfaces, coverage disciplines, readiness checks, continuity fields, independent blind roles, release devices, and executable commands. Validate it with `scripts/validate-experience-quality-profile.mjs` when the harness repository is available, then add an equivalent project-local validator to the project's normal QA entry point.
+Require one repository-owned machine-readable experience-quality profile before the first material review. It must name the state route, owners, surfaces, coverage disciplines, readiness checks, continuity fields, independent blind roles, release devices, and executable commands. Validate structure and project wiring with `node scripts/validate-experience-quality-profile.mjs <profile> --project-root <project>` when the harness repository is available, then add an equivalent project-local validator to the project's normal QA entry point. A command name passes only when it is a direct `npm run` route backed by a real `package.json` script, and the state and feedback-ledger paths must exist inside the project root. Plausible strings are not executable controls.
 
 Project rules may add gates. They may not silently remove a required discipline, turn `not_run` into pass, delegate material approval, or infer physical-device evidence.
+
+Before synthesis, compile the accepted decisions and commentary into a candidate-bound delivery-state receipt. Each item must retain its source, scope, required observable outcome, evidence and closure state. The receipt is invalid when it was reconstructed from conversational memory, omits an accepted choice or note, calls `implemented` verified, contains blocking feedback, names more than one next action, or binds presentation evidence from another candidate. Use `scripts/validate-project-delivery-state.mjs` when available and keep an equivalent project-local gate.
 
 ## Brief-fidelity firewall
 

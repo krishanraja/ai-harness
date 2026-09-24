@@ -85,6 +85,17 @@ jobs:
       - name: Surfaces valid
         run: node scripts/validate-surfaces.mjs --fleet-json .steward/fleet.json
 
+      - name: Release and overlay claims are coherent
+        run: node scripts/validate-release-coherence.mjs
+
+      - name: Control-plane regressions still fail closed
+        run: node scripts/test-control-plane.mjs
+
+      - name: Publish fleet freshness in the run summary
+        run: |
+          node scripts/report-fleet-freshness.mjs > fleet-freshness.json
+          cat fleet-freshness.json >> "$GITHUB_STEP_SUMMARY"
+
       # The Node reimplementation of the release hash must keep agreeing with
       # the PowerShell that runs on the machines. It stopped agreeing once,
       # silently, and the disagreement read as drift on two hosts rather than as
