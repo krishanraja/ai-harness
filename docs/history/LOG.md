@@ -5,6 +5,22 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-09-25
+
+- Release `v2026.09.24.3` became the durable cross-client quality-system release.
+  Its 29 canonical skills were hash-verified on Claude Code, Cursor and Codex on
+  LORIMER, then replaced through the authenticated Claude and Perplexity cloud
+  catalogue flows without deleting user-owned skills. Cloud catalogues expose
+  inventory and content readback, not byte-level installed-package parity.
+- The two Codex-only quality overlays were retired as provisional state because
+  their accepted changes are now contained in the immutable release. The live
+  Claude canary retained its stochastic `strategy-brief` failure, Codex retained
+  its partial/unmeasured verdict, and Cursor retained its manual-canary status;
+  none was relabelled green.
+- `NOW.md` was collapsed to a fresh, non-duplicative narrative entry point.
+  Volatile state belongs only in generated `CURRENT.md` and the registry; this
+  file remains the append-only chronology.
+
 ## 2026-09-20
 
 - reconciled at `9bec0078`: sections 4.5, 4.6 and 4.7 of the retirement map settled with Krish's rulings, and the Telegram change applied on the host with its evidence merged. His override on `loz-api-monitor` is written in as an exception rather than left implicit, because a job running against a documented instruction to stop it looks like an oversight to the next reader.

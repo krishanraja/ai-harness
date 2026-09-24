@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "surface": "claude-cloud",
+  "status": "ok",
+  "checked_at": "2026-09-24T23:12:20.4733822Z",
+  "release": "v2026.09.24.3",
+  "source_commit": "3278b02aa981ee5e02507bbb502e41ddda8da9fd",
+  "url": "https://claude.ai/settings/capabilities",
+  "catalogue_count": 31,
+  "canonical_skill_count": 29,
+  "canonical_names_exact": true,
+  "upload_method": "supervised authenticated browser upload and replace",
+  "artifact_suffix": ".skill",
+  "manifest_sha256": "62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85",
+  "skills_tree_aggregate_sha256": "DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB",
+  "evidence": "All 29 immutable release packages were accepted by Claude. Existing skills were replaced through Claude's replacement flow; earlier versions remain in Claude version history. The refreshed catalogue exposed current release descriptions. Two unrelated user-owned skills were retained.",
+  "limitations": [
+    "Claude exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
+    "No behavioral routing canary was run in this supervised catalogue-update pass."
+  ]
+}

@@ -1,143 +1,61 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-20
-head: 9bec0078
+as_of: 2026-09-25
 lifecycle: live
-production_url: none
-state_doc: state/skill-registry.yaml
 operational_state: CURRENT.md
+state_doc: state/skill-registry.yaml
 history_log: docs/history/LOG.md
-truth_files: [state/skill-registry.yaml, state/fleet.yaml, contract/paths.yaml]
-authority_order: [CURRENT.md, state/skill-registry.yaml, contract/krish-operating-contract.md, contract/skill-routing-contract.md, contract/active-skill-quality-standard.md, README.md]
-steward: https://github.com/krishanraja/control-center/blob/main/docs/steward/RUNBOOK.md
-never_publish: [any machine name or surface id, any absolute path from a personal machine, the contents of any eval case, any credential name]
+authority_order: [CURRENT.md, state/skill-registry.yaml, contract/krish-operating-contract.md, contract/skill-routing-contract.md, contract/active-skill-quality-standard.md]
 ---
-# The harness: where it is right now
+# The harness now
 
-> Narrative snapshot maintained by the documentation steward, currently stamped at the commit and date above. For exact operational state, release versions, deployments, heartbeats and live canary verdicts, read `CURRENT.md`. When the two differ, `CURRENT.md` and its linked machine evidence win.
+The harness is Krish's governed, cross-client operating layer: one operating
+contract, one routing contract, 29 curated skills, deterministic release
+packages, per-surface deployment evidence, behavioral canaries and a controlled
+learning path. It exists to stop client, machine and session drift.
 
-## What it is
+`CURRENT.md` is the sole human-readable source for live release, deployment,
+surface and canary state. This file deliberately does not repeat those volatile
+facts. `docs/history/LOG.md` is the append-only historical ledger.
 
-The harness is the single canon every AI agent Krish uses reads from, whichever machine, client or cloud it runs in. It holds one operating contract (authority, verification, truth and freshness, secrets), one routing contract that decides which of the 29 curated skills runs and which apparent matches to ignore, one quality standard that is the admission bar for the curated set, and the skills themselves. Everything else is rendered from it: the Claude, Codex and Cursor adapters, the canon block that now sits inside every fleet repository's `AGENTS.md`, and a governed learning ledger that records which rules are ever actually cited. It is not a prompt library. It is the governed layer that stops nine repositories and four clients each inventing their own idea of what Krish wants.
+## What changed in the current release
 
-## Who it is for and why it matters for Mindmake
+- The experience-quality system is durable rather than session-local. App work
+  now has explicit coverage for narrative, journeys, conversion, visual-system
+  integrity, device-specific interaction, accessibility, overlap and contrast.
+- `build-apps-with-krish` now compiles accepted decisions before synthesis,
+  binds every acceptance claim to the candidate actually reviewed, and refuses
+  to treat implementation as review closure.
+- Scroll-build interactions require causal evidence that progress follows user
+  scroll and that the locked region releases only after its sequence completes.
+- Project delivery is fail-closed when a repository has no real test, build or
+  QA command. Placeholder scripts cannot manufacture readiness.
+- Provisional Codex-only overlays were consolidated into immutable release
+  `v2026.09.24.3` and the canonical release was installed on the in-scope local
+  and cloud surfaces. Exact current status and exceptions are in `CURRENT.md`.
 
-The harness is not sold and never will be. It is the reason the rest can be. The room_face buyer (`control-center/docs/ICP.md`: a senior leader at a PE or VC backed media, adtech, publishing or data business, quietly behind on what is coming and unable to say so inside their organisation) is being asked to believe that one person can run a portfolio on AI agents without losing control of them. Control Center is the dashboard that proves the agents are quiet. This repository is the answer to the harder question underneath: what stops them drifting.
+## Operating rule
 
-Angles a writer can use without asking Krish:
-
-- **The instructions are versioned like code, not typed into a chat.** Every skill has an owner, a reviewed date, a freshness SLA, a named route and a status. Nothing is always-on because it claims to be; it is always-on because the router says so.
-- **The canon reached the work only on 2026-09-08.** For months the governance was excellent and had never left the repository: no renderer existed, and the eight product repositories referenced the canon zero times. The gap between "we have standards" and "the standards are in the room where the work happens" is the whole story, and it is the same gap in most organisations.
-- **Absolute paths were the tell.** 26 files carried one Windows machine's paths, including shipped canon, which meant the contract was only literally correct on one laptop. Named roots fixed it. A rule that only works in one place is not a rule, it is a habit.
-- **Cloud governance does not depend on a machine being awake.** Rendering, validation, audit and reconciliation stay on Linux in GitHub Actions. A small Windows task now owns only machine deployment and live-client canaries, and its cloud heartbeat makes a stopped machine clock visible.
-- **One day, eight releases, and the system never hid the failure it ended on.** On 2026-09-13 a single approved correction plan ran eight immutable releases back to back, each one built to fix exactly what the previous release's live canary evidence found: a fictional "core" skill in the canary index itself, a CTRL stage boundary Codex kept crossing, an exclusion sentence buried too late in a skill's own description, a scoring rule that let one unobserved downstream route erase a valid containment pass. The last release, `v2026.09.13.8`, still shows Codex over-triggering `instantly-operator` on a message it must not touch. That is the point: eight rounds of self-correction did not end in a manufactured clean sheet.
-
-Objection it answers: "AI agents drift, and nobody notices until something expensive happens." Here is the drift being measured, and here is what it looks like when the measurement itself turns out to be wrong first.
-
-## Where it is right now (as of 2026-09-20)
-
-- **Live** as the canon for 29 curated skills. The approved and published release is `v2026.09.15.2` (tag `harness-v2026.09.15.2`, source commit `5e71553`, manifest SHA-256 `1D7F8304...5343E62`, published 2026-09-15T20:45:21Z), immutable. It supersedes `v2026.09.15.1`, which stays the rollback target.
-- **Two more releases published 2026-09-15, each a single governed correction rather than a rewrite.** `v2026.09.15.1` added an executable stage-conveyor doctrine to `krish-build` (a portable manifest contract, topology checker, valid fixture and fifteen negative regression cases) after Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file (`docs/proposals/2026-09-15-stage-conveyor-v1.md`). `v2026.09.15.2` added a determinism rule requiring build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, after Ubuntu and Windows verification jobs for `content-engine` PR 70 both returned HTTP 404 fetching a pinned FFmpeg archive despite a stored SHA-256 (`docs/proposals/2026-09-15-build-input-retrievability.md`). A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself.
-- **The Video Engine's routing entry now names its current repository.** The stage-conveyor work reconciled `contract/skill-routing-contract.md`'s authority pointer from the redirected former name `mindmake-video-studio` to `krishanraja/content-engine`; the 2026-09-08 narrowing evidence still stands; only the authority address changed.
-- **Installed and hash-verified on LORIMER's three local surfaces the same day.** `claude-code-user`, `cursor-primary` and `codex-current` each show 29 of 29 (60 assets, 59 checksums, 0 mismatches) exact against `v2026.09.15.2` in `state/skill-registry.yaml`.
-- **`v2026.09.15.2`'s own live canary sheet is still not clean, and the two failures are new, not the one carried over from `v2026.09.13.8`.** Claude Code met the declared `strategy-brief` route in only 1 of 3 repeat attempts on `strategy-trigger-001`, the other two attempts loading `krish-build` and `krish-principles` instead. Codex met the declared `ctrl-capture` route in only 1 of 3 attempts on `capture-trigger-007`, the other two loading `harness-maintainer` and `krish-principles`. The `instantly-operator` over-trigger recorded against `v2026.09.13.8` does not reappear in this sheet. Cursor stays `manual-required`, this client having no supported headless invocation evidence.
-- **`codex-surface-07a67cda9f99` (SURFACE) remains on `v2026.09.08.2`**, unmoved since 2026-09-08.
-- **`CURRENT.md` now exists as the one generated, machine-rendered statement of live state.** It replaced a real disagreement: `AGENTS.md` routed a fresh session to a `NOW.md` naming `v2026.09.12.4` while the registry and the immutable GitHub release already named `v2026.09.12.5`, and README and the architecture document each carried a third and fourth number. `README.md`, `AGENTS.md` and `architecture/CROSS_CLIENT_RELEASE_SYSTEM.md` no longer state a release number themselves; they point here instead.
-- **A live n8n credential found in plaintext on 2026-09-12 is contained, not closed.** Redaction and symbolic references are not provider-side revocation; the closure proof in `state/credential-exposure-2026-09-12.md` is still outstanding.
-- **Two cloud surfaces are still two-plus releases behind**: `claude-cloud` and `perplexity-cloud`, both on `v2026.08.29.3`. The upload gate stays closed until a real `--check` passes against the live pages.
-- **The judge can block, halfway**, unchanged since 2026-09-11: `harness-steward.yml` exits non-zero on a blocking verdict. Branch protection on `main`, the other half, is still Krish's to apply.
-
-## What changed recently
-
-- 2026-09-20 **Three of the retirement map's eight open rulings are closed, and the Telegram change is applied.** The 28 Identity and Action Docs go, because Krish does not open them, which was the one thing no code could settle and which retires `render-identity.py` with the Drive identity leg. The attend lane stays and is rebuilt into the one intake rather than left as a private table with its own credential and no watcher. Telegram: two pushes to Krish off, `agatha-state-of-union` keeping its `audit_log` write and sending to nobody, Lauren's four untouched, and `loz-api-monitor` kept on by his override and recorded as a second deliberate exception so a kept job does not read as a missed one. Backup verified, 45 jobs, nothing deleted. `e9e3e37`, `239ebe0`, `26a8ca5`, `9bec007`.
-
-- 2026-09-20 **The gateway has 45 jobs, and nobody had ever opened the file that says so.** `/root/.openclaw/cron/jobs.json` was read on the host for the first time. The retirement map inventoried 29 gateway rows and called that its weakest evidence; it was short by sixteen. The heartbeat's count of 45 was right all along. Nine of the eleven unknown jobs retire, writing only local JSON and Markdown that nothing outside the machine reads; `vera-daily-audit` and `newsletter-draft` port. These jobs also have a price the map had at nothing: `gmail-monitor` is about USD 0.002 a run three times a weekday, and one Fireflies sweep charged USD 0.65. `state/vps/UNKNOWNS-SETTLED-2026-09-20.md`, and it wins over the map wherever they disagree. `a9d3036`, `71dc30c`.
-
-- 2026-09-20 **Telegram was not the pull-only breach the map reported, and the token claim that replaced it was also wrong.** Every one of the 73 Telegram nodes across the n8n mirrors is disabled and the live Stripe workflow reads the same. The four `agatha-state-of-union` delivery claims are false: the 2026-09-15 `audit_log` row says "dispatched to Krish via Telegram" in the same sentence that reports "Telegram creds broken", which `ARCH:212-214` already rules against. What still sends is on the gateway and splits in two: two jobs reaching Krish, and four reaching Lauren, which are the recorded exception at `ARCH:191-193` and are named rather than touched, because switching them off stops something another person receives without her knowing. A same-day claim that a live bot token sat across around sixty nodes was corrected: git is clean, all 63 use a placeholder, and what is true is that the live Stripe node carries a literal where git shows a placeholder, with the live count unknown until a scan runs. `d62858f`.
-
-- 2026-09-20 **A retirement prompt that does one job instead of thirteen.** The 2026-09-19 prompt told a session to run an audit that had already run and then walked it into a section of changes that had already landed, so anyone picking it up redid finished work. `docs/harness/VPS-SETTLE-THE-UNKNOWNS-PROMPT.md` is step 1 of the retirement order and nothing else, read-only throughout, with the redaction filter written into the commands rather than left as an instruction, and an explicit refusal to continue into step 2. It was run and it produced the file above. `c7401d0`.
-
-- 2026-09-20 **The operator handoff was asking for a run that had already happened.** `docs/harness/OPENCLAW-TAKEAWAY-2026-09-19.md` told Krish to go and run the read-only audit. It had been run on the host, as root, between 15:07 and 15:09 UTC that day, and its verbatim 183-line output and report were committed to this repository twenty minutes before the handoff was written. So the document was asking for finished work and citing a facts file compiled without ever seeing the machine. It now cites the audit output and report alongside that file and says plainly that where the two disagree the audit wins; where the audit did not cover something it says so and names what would. `0390a0d`.
-
-- 2026-09-19 **The VPS retirement map: what is unique, what is duplicated, and in what order.** Krish asked whether anything about the VPS jobs is objectively useful or unique enough that the rest can be retired. 62 rows, each put through two refutation lenses and each labelled with the model that checked it, so a row nobody independently checked is visible as such rather than reading like the rest. `f7c4d90`.
-
-- 2026-09-19 **The canon said there were exactly two editorial channels and no third, and it was wrong in both directions.** `skills/content-corpus/references/editorial-channels.md` stated "exactly two channels, there is no third, do not invent one", and `mindmake/references/commercial-canon.md`, `mindmake-os/SKILL.md` and `krish-voice/references/voice-doctrine.md` rendered from it. Krish ruled on 2026-09-19 that the publication runs three subchannels, split.the.bill, mind.the.gap and lift.the.lid. The rule is replaced, and the authority moves off the file entirely: `venture_formats.mandate` in Mindmaker OS holds each mandate in full prose and a copy in a skill drifts while the table does not. The same pass corrected a line claiming Make Your Mind Up is not a content brand, which was wrong in both directions, and renamed Gear B off the retired channel it had been named after since before 2026-09-19: Gear B is the short-form video register, a surface and not a format. `748a1ce`.
-
-- 2026-09-19 **The OpenClaw VPS was audited from the host for the first time since 2026-09-09, and two documents stopped describing a machine that no longer existed.** A read-only script (`docs/harness/VPS-ALIGN-2026-09-19.sh`) ran as root and its output and report are in `state/vps/`, pushed from the host itself. Findings: zero active writes carry a retired format name and no VPS script writes any of the six columns that became foreign keys that day; the governor is live and warn-only exactly as the 2026-09-09 ruling left it, so no automated n8n execution cap exists anywhere; the checked-in crontab snapshot in control-center held 12 entries against 33 live and was regenerated from the audit. Ten active scripts moved from a plaintext service-role JWT to `SUPABASE_SERVICE_KEY` read from the managed environment file with no hardcoded fallback, proved afterwards by the 2, 5 and 15 minute job tiers running normally. The heartbeat has returned HTTP 401 since 09:05 UTC because its token is invalid, which is why `state/heartbeats.json` stops at that time. `987ac5f`.
-
-- 2026-09-19 **Two independent verifiers refuted several claims in the first draft of the operator handoff, and the corrections are the useful part.** `docs/harness/OPENCLAW-TAKEAWAY-2026-09-19.md` had said the database, both apps and the n8n factory were aligned to the three subchannels. The database is and the factory routes them, but the factory prompt still names a retired brand, the Control Center app carries retired labels in four lists, and `public.suggestions` existed with zero rows and no writer outside a spec. Each correction now cites the file that settles it, and the audit script's own header assertion of alignment is marked as an assertion rather than evidence. `b654fb0`.
-
-- 2026-09-15 **A stored SHA-256 could not prove a build could actually fetch its artifact, so the determinism rule now requires observed retrieval too.** Both the Ubuntu and Windows verification jobs for `krishanraja/content-engine` PR 70 returned HTTP 404 fetching a build-critical FFmpeg archive even though its digest was recorded; replacing the source with a repository-controlled release while keeping digest verification passed on both platforms (GitHub Actions runs `35019599447` and `35019602888`). `krish-build`'s determinism clause now requires build-critical external artifacts to prove both retrieval and digest verification on every supported CI platform, with one held-out failure evaluation and one stage-conveyor regression class added (`docs/proposals/2026-09-15-build-input-retrievability.md`, released as `v2026.09.15.2`).
-
-- 2026-09-15 **Four repository reviews and one production ruling found the same shape of defect recurring: missing joins, duplicated contract owners, stale parallel state, absence coerced into a passing verdict, and recovery paths with no operational reachability.** Krish ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file or duplicated revision tree. `krish-build` gained a conditional stage-conveyor clause, a portable manifest contract, a topology checker, a valid fixture and fifteen negative regression cases; `build-apps-with-krish` gained an orchestration handoff; `verification-loop` gained two derived-output verification checks; and the Video Engine's routing entry now names its current repository, `krishanraja/content-engine`, in place of its redirected former name (`docs/proposals/2026-09-15-stage-conveyor-v1.md`, released as `v2026.09.15.1`).
-
-- 2026-09-15 **`v2026.09.15.2` released and installed the same day, and its own canary sheet swapped one carried-over failure for two new ones.** The `instantly-operator` over-trigger recorded against `v2026.09.13.8` does not reappear; instead Claude Code met the `strategy-brief` route in only 1 of 3 repeat attempts on `strategy-trigger-001`, and Codex met the `ctrl-capture` route in only 1 of 3 attempts on `capture-trigger-007`. A separate fix (PR 78) stopped a selected canary retry result from embedding an attempts array that contained itself, so historical `v2026.09.15.1` evidence stays untouched while later retries record cleanly.
-
-- 2026-09-13 **Eight immutable releases in one day, each fixing exactly what the last one's live canary evidence found, ended with one recorded failure rather than a clean sheet.** `v2026.09.13.2`'s canary sheet asked both live clients to trigger a skill named "core", which does not exist, because the selector had inferred the filename of a shared case file as the skill instead of reading each record's declared owner; the same run found two real Codex routing misses. The fix in turn exposed a second-order problem, `v2026.09.13.3`'s policy of picking the shortest and longest positive prompt surfaced phase-ambiguous cases that made poor release sentinels rather than real defects. `v2026.09.13.5` then found a scoring rule that let one unobserved downstream route in a negative case erase a valid containment pass, so a negative canary now fails only when the forbidden target is actually observed; an unobserved expected neighbor is recorded `unmeasured`, not `passed` or `failed`. `v2026.09.13.7` found Codex sending CTRL's machine-readable import generation to `ctrl-build` instead of `ctrl-compile`, plus a verifier that ignored its own structured guard-read evidence. The chain closes, for now, at `v2026.09.13.8`, which still shows Codex firing `instantly-operator` on a message it must not touch in 2 of 3 fresh attempts. Krish's authority for the whole run: "ok go", given after the plan, scope, judge result and rollback target were shown (`docs/proposals/2026-09-13-canary-index-and-routing-repair.md` through `docs/proposals/2026-09-13-ctrl-compile-import-routing.md`).
-
-- 2026-09-13 **Four documents disagreed about which release was current, so a fifth, generated one replaced their claims instead of joining them.** `AGENTS.md` sent a fresh session to a `NOW.md` naming `v2026.09.12.4`; the registry and the immutable GitHub release already named `v2026.09.12.5`; README named `.4` and the architecture document named `.2`. A pull request proposing a `.4` canon render, opened after `.5` had already superseded it, was closed as stale rather than merged. `CURRENT.md` is now generated from registry, heartbeat, deployment and canary evidence by `scripts/render-current-state.mjs`, and `AGENTS.md` routes new sessions there first; README and architecture keep their own subject matter and stop restating a release number that only the generated file and the registry are allowed to own (`docs/proposals/2026-09-13-handoff-and-canary-correction.md`).
-
-- 2026-09-12 **The second live release published in one day failed its own canary sheet.** `v2026.09.12.4` replaced `v2026.09.12.3` after PR 42 repaired four routing descriptions and the canary run recorder, then installed with exact 29 of 29 hash parity on LORIMER's three local surfaces the same afternoon. The live canary that followed found `design-intelligence-search`'s explicit path still not firing on Claude, a warm lead-email request still loading `content-corpus` instead of `krish-content-marketer`, `video-engine` firing on two prompts it must not on Codex, and `ctrl-compile` never firing cleanly there. Both reports are preserved as recorded failures rather than corrected to expectation.
-
-- 2026-09-12 **A legacy skill copy was holding a live n8n credential in plaintext.** Exact-value scans also found it in authorised session-history and backup copies. 31 files across the Codex, Claude, Cursor, inactive-catalogue and historical Downloads roots were scrubbed and a rescan returned zero residual copies the same day. Active client configuration now reads the n8n and Skyvern values from user-scoped environment variables rather than storing them inline. Redaction is containment, not closure: provider-side rotation and proof that the superseded keys now fail are still open (`state/credential-exposure-2026-09-12.md`).
-
-- 2026-09-12 **The third-party skill catalog ruled inert on 2026-09-08 turned out to be visible to a live client.** A fresh Codex session reported malformed-skill errors from it and it competed for the client's finite description budget. Its 59 valid manifests and 324 files moved intact to an inactive catalog outside auto-discovery, and the two already-forbidden malformed skills moved to a separate quarantine, and a plaintext n8n credential inside one of them was replaced with a symbolic reference before the move.
-
-- 2026-09-12 **The learning intake moved off machine-local scripts onto one hosted, stateless endpoint.** `record_harness_observation` now calls a Streamable HTTP MCP server at `controlcenter.krishraja.com/api/harness/mcp`, authorised by Krish's ruling that this personally commissioned infrastructure is not subject to the paying-leader product-demand test and that the narrow redacted write is standing-approved without per-event confirmation. Three separately revocable identities were proven live on LORIMER by an isolated write each; the proposed `session-feed` Routine, which had never once run, was retired rather than activated because the hosted endpoint now covers the same cross-surface signal without a per-machine daemon.
-
-- 2026-09-12 **The citation ledger got an asker on every row after CI proved it could not keep its own writes.** Following the 2026-09-10 finding that the judge's citations died with the runner, every `brain/usage.jsonl` row now records who asked for the sweep that produced it, and writes to the ledger are gated through pull requests instead of a direct CI commit. The judge panel's own `building-unasked` objection to adding this ledger was answered with a recorded ruling rather than left to recur (Rule 6 disposition, `docs/proposals/2026-09-12-routing-and-canary-repair.md`), though the same finding against the wider `brain/` subsystem is not resolved by it.
-
-## What is next and what is waiting on Krish
-
-Waiting on Krish, in order of how much it blocks:
-
-1. **Apply branch protection on `main`**, the other half of the judge gate. `harness-steward.yml` already exits non-zero on a blocking verdict, but nothing yet stops a merge past it: the agent proxy cannot write the branch-protection API, so the exact `curl` and the browser path are recorded in `docs/harness/OPEN-ON-KRISH.md`. `enforce_admins` stays false on purpose, Krish's override, recorded as a `Ruling (Krish, DATE):` line whenever used.
-2. **Close the credential exposure, not just contain it.** Redaction and symbolic references are containment only. Closure needs, without recording any secret value: replacement n8n and Skyvern access proven live against the intended tenant, the superseded keys proven to fail, and confirmation the GitHub PAT, Supabase management token, Vercel token, n8n API key, VPS ed25519 host key, the `mm-ctrl` git-history credential, and the VPS `service_role` JWT are the ones actually rotated, not merely reported so. Exact commands are in `docs/harness/OPEN-ON-KRISH.md` and `state/credential-exposure-2026-09-12.md`.
-3. **Fix or rule on the two failures `v2026.09.15.2` carries.** Claude Code met the declared `strategy-brief` route in only 1 of 3 repeat attempts on `strategy-trigger-001`; Codex met the declared `ctrl-capture` route in only 1 of 3 attempts on `capture-trigger-007`. The installed bytes are correct; a further governed correction release is the fix path, not a rewrite of the sheet.
-4. **Accept or reject `docs/proposals/2026-09-09.md`**: repoint `decision-ledger` at `brain/decisions.jsonl`, which the judge panel twice refused to let become canon by config edit alone, since the store was stood up before the proposal that authorises it.
-5. **A ruling on `mm-ctrl/skills/`**, whose README still claims to be the canonical home of the five CTRL skills.
-6. **Three design rulings the judge panel raised and I will not decide for you.** Each names its clause: `venture-isolation` (whether the personal bench should bind every canon change to one venture's revenue line), `context-pollution` (two bench criteria now name the live rules they mirror rather than removing the duplication), and `stale-with-confidence`/`ghost-facts` (ten criteria built on a document whose own header says it is historical).
-7. **Where the personal source snapshot may live.** `brain/benches/sources/master-ikigai-v4-2026-09-05.txt` is a verbatim capture of the Ikigai sheet, committed so a bench criterion can quote something versioned. It carries personal material and no ruling covers this.
-8. **A second live rule set, 122 rules, that nothing reads.** `standards_registry` in the operating-system Supabase has the schema this brain was built to create, 169 rows, 122 still active, 6 ever hit, zero efficacy checks, nothing landed since 31 May. Triaging those 122 against the 314 entries in `brain/rules.yaml` is the single highest value thing on this list, because until it is done two live rule sets contradict each other in silence.
-9. **What is left of the operating-system corrections.** `workflow_runs` still grants `ALL` to anon through two unlabelled n8n credentials; every anon **read** grant is untouched, including `contacts`, `customers`, `leads`, `agents.brief_content` and `system_config`; the n8n fleet repair order Krish set (Google Drive reauthorisation, Stripe reauthorisation, the missing `nova_target_conferences` table, malformed Anthropic node parameters, one `getCredentials` code-node bug); and the Stripe reconciliation gap he explicitly deferred (sixteen failures, last 2026-09-06, accepted for now on low transaction volume).
-10. **`ghost-facts` and the general `building-unasked` finding will keep recurring until item 8 is decided.** The 2026-09-12 Rule 6 disposition closed the specific `building-unasked` objection raised against the citation ledger on PR 42; it does not close the same objection against `brain/` as a whole, which the judge panel is designed to keep raising.
-11. **Does the judge panel posting a review breach the approval wall?** The panel raised this against itself, blocking, twice. It posts a pull request review on every canon-touching change, autonomously. I have not decided this for you and have not disabled the posting; the report still lands in the run summary and as an artifact if you want the posting step off.
-12. **Provision the second workstation's hosted-observation identity** and run tool discovery plus one write canary there before marking it active. No file on that machine was changed during the 2026-09-12 read-only inspection.
-
-Ruled and closed on 2026-09-08: `C:\Users\krish\.agents\skills` holds 63 entries, zero canonical, nine that the routing contract forbids, and loose files at a skills root are recorded as `unmanaged_root_files`, not refused.
-
-Ruled and closed on 2026-09-09: `harness-maintainer`, `tools-access` and `apify` get named routes. `openclaw-vps` stays a permanently declared surface. The silent-failure-pattern alarm is closed and disabled outright. Anon write access is closed on twenty of twenty-four tables that carried it.
-
-Ruled and closed on 2026-09-12: the full harness gap-closure batch, auto-discovery correction, credential containment, freshness reviews and the `v2026.09.12.4` release, approved in the working session (`state/approvals/2026-09-12-harness-gap-closure.md`). The hosted observation endpoint is approved as a standing, narrow, redacted write. The proposed `session-feed` Routine is retired rather than activated. The citation-coverage ledger's specific `building-unasked` objection on PR 42 is answered by ruling, not by silence.
-
-Ruled and closed on 2026-09-13: "ok go" authorised the full eight-release canary and routing correction chain and the generation of `CURRENT.md` as the single current-state file, closing the four-document disagreement over which release was live.
-
-Ruled and closed on 2026-09-15: Krish approved the stage-conveyor-v1 and build-input-retrievability proposals for implementation, governed release and merge to `main`, and ruled that a repeatable multi-stage repository should be an executable conveyor of specialised machinery, not one accumulating Markdown file or duplicated revision tree.
-
-Next without Krish: keep recording canary failures as failures, let the audit age the machine clocks, and do not revive the retired trigger evaluator as authority.
+Do not infer completion from a package, upload, passing build, or an agent saying
+it is done. Read the evidence attached to the current surface, preserve measured
+failures as failures, and correct the lowest owning layer through a new governed
+release. Never rewrite an immutable release or its historical evidence.
 
 ## Read next
 
-1. `CURRENT.md`: the generated, machine-rendered statement of release, deployment, surface and canary state. Read it before anything else.
-2. `contract/krish-operating-contract.md`: authority, verification, truth and freshness, secrets, file routing. When anything here disagrees with it on cross-cutting doctrine, it wins.
-3. `contract/skill-routing-contract.md`: which skill runs, in what order, and which apparent matches to ignore.
-4. `contract/active-skill-quality-standard.md`: the ten gates a skill passes before it is production.
-5. `contract/canary-contract.md`: what a canary is, why the trigger-eval harness it replaced was retired, and what counts as a result.
-6. `state/skill-registry.yaml`: the live register of skills, releases and surfaces. Machine-owned; read it, do not write it.
-7. `state/fleet.yaml` and `contract/paths.yaml`: every surface the canon reaches, and the only place a machine path lives.
-8. `AGENTS.md`: the entry file, carrying the canon block that every other repository also carries.
-9. `README.md`: what the repository is, how a release is built and installed.
-10. `node scripts/audit-harness.mjs`: what is wrong with the harness today, measured rather than asserted.
-11. `docs/harness/OPEN-ON-KRISH.md`: historical handoff, dated 2026-09-09, retained as evidence of what that session observed and could not do from inside the container.
-12. `docs/harness/VPS-AUDIT.md`: the read-only command set and decision table for `openclaw-vps`, to run before any future retirement question.
+1. `CURRENT.md` — generated current release and surface truth.
+2. `state/skill-registry.yaml` — machine-owned release and deployment register.
+3. `contract/krish-operating-contract.md` — authority, verification, truth,
+   freshness, secrets and observation capture.
+4. `contract/skill-routing-contract.md` — which skill owns which request.
+5. `contract/active-skill-quality-standard.md` — admission standard.
+6. `contract/experience-quality-contract.md` — durable product-experience gates.
+7. `docs/history/LOG.md` — append-only chronology.
 
-## Do not trust
+## Historical material
 
-- Any prose saying the OpenClaw VPS execution governor trips or caps n8n spend. It warns and never acts, by ruling of 2026-09-09, re-confirmed by the 2026-09-19 host audit. `state/vps-surface-declaration-2026-09-09.md` is the ruling.
-- `state/heartbeats.json` for `openclaw-vps` as a liveness signal after 2026-09-19T09:05Z. The host is running; its heartbeat token is invalid and returns HTTP 401, so the absence of newer entries is a credential fact and not a dead machine.
-
-- A `reviewed` date in `state/skill-registry.yaml` as proof of live behaviour rather than of a documentation check. No skill's freshness SLA had expired as of 2026-09-15, and the release published that day, `v2026.09.15.2`, still failed its own canary sheet on both Claude Code and Codex.
-- The absence of an `evaluation_evidence` row read as "not measured". For 19 skills it means measured on 5 August and never filed. `node scripts/audit-harness.mjs` names which is which.
-- `mm-ctrl/skills/README.md`: its claim to be "the canonical, versioned home" of the CTRL skills is contested by this repository and unresolved.
-- Any individual PowerShell script as the whole maintenance procedure. `docs/harness/MACHINE-JOB.md` is the authority, and the scheduled machine path begins at `scripts/Invoke-HarnessSync.ps1`.
+Dated proposals, deployment reports, canary records and observations are
+evidence of what happened, not instructions for the current system. They remain
+available for audit and rollback. Any historical document that conflicts with
+`CURRENT.md`, the registry or a live target readback loses.
