@@ -19,7 +19,24 @@ moved. Nothing here is ever rewritten.
   none was relabelled green.
 - `NOW.md` was collapsed to a fresh, non-duplicative narrative entry point.
   Volatile state belongs only in generated `CURRENT.md` and the registry; this
-  file remains the append-only chronology.
+  file remains the append-only chronology. This collapse dropped four required
+  frontmatter keys and all seven required sections from `docs/steward/SCHEMA.md`
+  without updating the schema itself, and the commit that made it (`f11caf9`)
+  carried no `docs(steward):` prefix, so it fell outside the docs steward's own
+  territory. Corrected below.
+
+## 2026-09-24
+
+- reconciled at `e1dae13`: `NOW.md`'s schema drift (see the 2026-09-25 entry above)
+  was corrected: the strict validator had started failing on eleven counts. Restored
+  the missing frontmatter (`head`, `production_url`, `truth_files`, `steward`) and
+  rebuilt the seven required sections from `CURRENT.md`, `state/skill-registry.yaml`,
+  the digest and recent commit rulings, and removed six em dashes. The intent behind
+  the shorter form, that `CURRENT.md` is the sole volatile-state authority and
+  `NOW.md` stays narrative rather than a duplicate ledger, is preserved inside the
+  compliant structure rather than discarded. Also found and reported rather than
+  silently fixed: `harness-maintainer`'s skill review is 35 days old against its
+  own 30-day freshness SLA.
 
 ## 2026-09-20
 
