@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "surface_id": "codex-current",
+  "target": "C:\\Users\\krish\\.codex\\skills",
+  "release_id": "v2026.09.24.2",
+  "source_commit": "852c8f6c93c5810c6dfc12d388bb20683da993e2",
+  "artifact_hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+  "deployed_at_utc": "2026-09-24T11:42:20.2429527Z",
+  "backup_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-current\\v2026.09.24.2-20260924T114218Z-4386d092",
+  "result": "installed-and-hash-verified",
+  "repeat_build": { "standard_archives": 29, "root_layout_archives": 29, "mismatches": 0 },
+  "skills": [
+    {
+      "name": "build-apps-with-krish",
+      "action": "replace-known-baseline",
+      "installed_sha256": "25CBF2879BD5CF61E24F5EA27267006F6B184137EC835F32105801BBCA06A059",
+      "package_sha256": "058F8CC413A5972B50D1C5440793FA3DE98EE80B1EE6EFACAEF1E21379F3D981"
+    }
+  ]
+}

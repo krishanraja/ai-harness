@@ -69,6 +69,12 @@ repos:
     rules_files: [AGENTS.md, docs/PACKET.md, docs/STATE.md]
     note: The docs steward fleet spells it AEO-Engine; the repository itself is aeo-engine. Parity is compared case-insensitively rather than one manifest quietly renaming the other.
 
+  - name: makeyourmindup
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, project-documentation/02_REPO_BRIEF.md, engine/ENGINE_SPEC.md]
+    note: The publication and strategy machine. Added when the docs steward admitted it to the fleet so the two control planes cannot silently disagree.
+
 adapters:
   - id: claude
     template: contract/templates/adapter-claude.md

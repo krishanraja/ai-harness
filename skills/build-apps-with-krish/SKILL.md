@@ -25,7 +25,7 @@ Suppress generic app-building or marketplace skills unless they provide a bounde
 
 `design-intelligence-search` is the admitted exception for pinned read-only design retrieval. Invoke it only through `krish-design` or an explicit orchestration delegation, for one named evidence need and one concept arm. It may supply candidates and a mobile-web evidence envelope; it may not choose taste, set current standards, persist a competing design system, implement, test, or approve a surface.
 
-For a new app, material redesign, or workflow spanning multiple connected surfaces, read `references/delivery-protocol.md` before planning the phases. For an isolated task inside an already locked direction, leave this skill and route directly to the narrow owner.
+For a new app, material redesign, or workflow spanning multiple connected surfaces, read `references/delivery-protocol.md` before planning the phases. For every material rendered review, release-readiness claim, or world-class target, also read `references/experience-quality-protocol.md` and require its project profile plus presentation firewall. For an isolated task inside an already locked direction, leave this skill and route directly to the narrow owner.
 
 When the product is implemented as a repeatable, resumable, metered, or multi-artifact lifecycle, hand its technical architecture to `krish-build`'s stage-conveyor protocol. Keep this skill as the product-journey orchestrator; do not copy the stage contracts or repository machinery into this file.
 
@@ -70,6 +70,9 @@ FIRST_SURFACE: [one material surface]
 10. **Drive through locked execution.** Do not pause at routine milestones or ask what to do next. Pause only for a genuine founder decision, approval wall, missing authority, or evidence-backed blocker.
 11. **Keep completion language literal.** Built, merged, deployed, live, and verified are different states. Claim each only from its own evidence.
 12. **Close every phase into state.** Update the one canonical state artifact with confirmed versus inferred findings, evidence, paused surfaces, approvals, and exactly one next action before another owner or session continues.
+13. **Do not make Krish the first QA pass.** Before presenting any rendered material surface, run the project's candidate-bound human-review readiness command and then its fail-closed presentation command. Any applicable failure, inconclusive result, unrun check, stale receipt, candidate mismatch, embedded-frame assembly, missing journey evidence, or unresolved blocking feedback stops presentation until corrected and rerun. Never hand Krish a direct prototype URL as a substitute for the gated review URL.
+14. **Bind qualitative judging to coverage and evidence.** A panel exists only when distinct independent specialist roles cover the complete experience-quality matrix, continuity observations are complete, and every verdict is bound to the exact candidate and frozen evidence. Generic judges, duplicate executors, uncited opinions, or aggregate scores cannot certify a surface.
+15. **Compile accepted decisions before synthesis.** Do not rebuild from chat memory or a visual impression of the latest mock. Produce a machine-readable delivery-state receipt that enumerates every accepted decision and comment, its source, required outcome, evidence and closure state, then bind it to the candidate digest. `Implemented` means awaiting proof. Review-ready requires every decision to be `verified` or explicitly `accepted`, zero blocking feedback, a matching presentation receipt and one next action. A missing or stale receipt blocks synthesis and presentation.
 
 ## Material visual approval boundary
 
@@ -82,6 +85,8 @@ Treat a surface as material when the work introduces or changes any of these:
 - a new surface whose shape will constrain later surfaces.
 
 Hard gate: present one rendered artifact and wait for Krish's explicit approval before implementation or the next material surface. Present it neutrally enough to preserve his first reaction. After approval, lock the artifact and continue.
+
+Presentation prerequisite: the artifact must first pass the project profile's human-review readiness gate and its executable presentation firewall must issue a receipt bound to the exact current bytes. This is not material approval; it is the minimum professional floor that prevents basic fit, alignment, overlap, contrast, control, copy, motion, journey, and device defects from reaching Krish. If the project has no presentation command, the material artifact is blocked rather than shareable by direct URL.
 
 Revision gate: show every revised material mock cold as well. Withhold the design rationale and change log until after Krish gives his first reaction, then reveal a concise map of prior feedback to change to evidence. Never withhold a safety, authority, factual, or data constraint that Krish needs in order to judge responsibly.
 

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.24.2",
+  "surface": "codex-current",
+  "client": "codex",
+  "ran_at_utc": "2026-09-24T11:43:27Z",
+  "run_mode": "fresh-ephemeral-read-only-session",
+  "source_commit": "852c8f6c93c5810c6dfc12d388bb20683da993e2",
+  "installed_sha256": "25CBF2879BD5CF61E24F5EA27267006F6B184137EC835F32105801BBCA06A059",
+  "scenario": "Approved four-scene pinned section has matching attributes and opening screenshot, endpoint scroll screenshots and passing assertions; only entrance fade and clickable scene buttons are described, with no intermediate visible states or stage geometry.",
+  "outcome": "pass",
+  "observed": [
+    "Read the installed build-apps-with-krish entrypoint and installed experience-quality reference, including the new scroll-build clause.",
+    "Blocked release readiness while preserving the approved design.",
+    "Distinguished matching appearance and reachability from pinning, ordered state progression, completion, reverse behavior and scroll causality.",
+    "Required real scroll input with document position, stage geometry and independently observed visible content at every intermediate state and both exits.",
+    "Required controls to agree with the sequence and named short-height, zoom and reduced-motion coverage.",
+    "Marked unavailable runtime evidence not_run rather than inferring a pass."
+  ],
+  "session_id": "01a0d339-81cc-7413-9812-0b4fb93bba7b",
+  "limits": "One fresh-session behavior canary proves this tested gap on the current Codex surface only. No site runtime, other client, physical device or future-regression impossibility is certified. Unrelated MCP startup warnings did not affect read-only skill inspection."
+}

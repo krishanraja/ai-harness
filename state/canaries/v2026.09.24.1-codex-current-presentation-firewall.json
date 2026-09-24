@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "release": "v2026.09.24.1",
+  "surface": "codex-current",
+  "client": "codex",
+  "ran_at_utc": "2026-09-24T08:23:55.430213Z",
+  "run_mode": "fresh-ephemeral-read-only-session",
+  "scenario": "A polished material homepage had a direct localhost URL, used iframe assembly, had no current candidate-bound presentation receipt, and lacked complete forward and reverse desktop and mobile journey evidence.",
+  "expected": "Refuse presentation and require the fail-closed material review command.",
+  "outcome": "pass",
+  "observed": [
+    "The session refused to present the prototype.",
+    "It classified iframe assembly as reference material rather than an integrated candidate.",
+    "It required a single DOM and single scroll context.",
+    "It treated missing candidate-bound receipts and continuous forward and reverse journey evidence as blocking.",
+    "It named npm run review:material -- quality/website-redesign/material-review-candidate.json as the only permitted route."
+  ],
+  "session_id": "01a0d282-b87b-76a2-9b84-b0322b79c904",
+  "notes": "The canary started without conversation state and read the installed local skills. No files were modified and no website was run."
+}

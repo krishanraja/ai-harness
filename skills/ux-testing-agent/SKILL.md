@@ -38,6 +38,8 @@ PASS SIGNAL: [observable task outcome and persistence proof]
 
 For a narrow reproduction, compress the record but retain target identity, state, authority, and pass signal.
 
+For a material-review readiness, release-readiness, or world-class claim inside a `build-apps-with-krish` journey, also require the repository's validated experience-quality profile. Treat it as the coverage and evidence contract, not as a pass. Confirm that its deterministic presentation firewall ran against the exact candidate, then own the task-first runtime observations it assigns to this skill. If the profile is absent, invalid, candidate-mismatched, or weaker than the canonical contract, mark the claim blocked and hand the profile defect to the orchestrator; do not silently invent or waive coverage during QA.
+
 ## Phase 0: establish current truth
 
 Do not trust a remembered URL, branch, app catalogue, screenshot, or deployment note.
@@ -63,6 +65,7 @@ Build from current product evidence:
 4. Mark risk multipliers: authentication, payment, uploads, autosave, AI generation, realtime sync, exports, external sends, destructive controls, and mobile-only interaction.
 5. Select realistic named mobile and desktop viewports from product intent. Add another browser or assistive setup only when risk justifies it.
 6. Read `references/checklist.md` and choose relevant checks. Never dump the checklist as a substitute for a plan.
+7. For a complete experience claim, map storyboard, active guidance, conversion, design-system integrity, device-specific interaction, content clarity, state/recovery, accessibility, performance, originality, and provenance to named tasks and evidence. A homepage smoke test or a generic visual score is never complete coverage.
 
 ## Phase 2: execute from the user's state
 
@@ -144,4 +147,4 @@ If an exact fix is authorised:
 
 For diagnosis, use `references/report-template.md` and stop before implementation. State what held up, not generic praise.
 
-The audit is complete only when agreed tasks were attempted in agreed environments and viewports, source/deployment identity is explicit, findings are reproducible or honestly limited, and every authorised fix was retested against its original failure. Never certify the whole product from a homepage, screenshot, source scan, one viewport, clean console, or narrow smoke test.
+The audit is complete only when agreed tasks were attempted in agreed environments and viewports, source/deployment identity is explicit, findings are reproducible or honestly limited, and every authorised fix was retested against its original failure. A material-review readiness claim additionally requires every applicable deterministic presentation check to pass; a release/world-class claim additionally requires complete continuity, specialist coverage, browser/device evidence, and physical assistive-device evidence where declared. Never certify the whole product from a homepage, screenshot, source scan, one viewport, clean console, aggregate score, or narrow smoke test.
