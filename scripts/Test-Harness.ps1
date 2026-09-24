@@ -29,6 +29,8 @@ function Get-FrontmatterValue {
 $contract = Join-Path $Root 'contract\krish-operating-contract.md'
 $router = Join-Path $Root 'contract\skill-routing-contract.md'
 $qualityStandard = Join-Path $Root 'contract\active-skill-quality-standard.md'
+$experienceQualityContract = Join-Path $Root 'contract\experience-quality-contract.md'
+$experienceQualitySchema = Join-Path $Root 'contract\experience-quality-profile.schema.json'
 $releaseBuilder = Join-Path $Root 'scripts\Build-HarnessRelease.ps1'
 $syncScript = Join-Path $Root 'scripts\Invoke-HarnessSync.ps1'
 if (-not (Test-Path -LiteralPath $contract -PathType Leaf)) { Add-Failure 'Missing canonical operating contract.' }
@@ -68,6 +70,18 @@ else {
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
+if (-not (Test-Path -LiteralPath $experienceQualityContract -PathType Leaf)) { Add-Failure 'Missing cross-project experience quality contract.' }
+else {
+    $experienceQualityRaw = [IO.File]::ReadAllText($experienceQualityContract)
+    foreach ($requiredPhrase in @('Human-review readiness gate', 'Continuity guardians', 'Blind specialist panel', 'iPhone Safari with VoiceOver', 'Android Chrome with TalkBack', 'Scores and consensus cannot override it')) {
+        if ($experienceQualityRaw -notmatch [regex]::Escape($requiredPhrase)) { Add-Failure "Experience quality contract is missing: $requiredPhrase" }
+    }
+}
+if (-not (Test-Path -LiteralPath $experienceQualitySchema -PathType Leaf)) { Add-Failure 'Missing experience quality profile schema.' }
+else {
+    try { $null = ConvertFrom-Json -InputObject ([IO.File]::ReadAllText($experienceQualitySchema)) }
+    catch { Add-Failure "Experience quality profile schema is not valid JSON: $($_.Exception.Message)" }
+}
 if (-not (Test-Path -LiteralPath $releaseBuilder -PathType Leaf)) {
     Add-Failure 'Missing deterministic release builder.'
 }
@@ -613,6 +627,11 @@ if ($LASTEXITCODE -ne 0) {
 $stageConveyorRegressionCheck = @(& node (Join-Path $Root 'scripts\test-stage-conveyor.mjs') 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Stage-conveyor regression suite failed: $($stageConveyorRegressionCheck -join ' | ')"
+}
+
+$experienceQualityRegressionCheck = @(& node (Join-Path $Root 'scripts\test-experience-quality-profile.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Experience quality profile regression suite failed: $($experienceQualityRegressionCheck -join ' | ')"
 }
 
 $syncEvidenceRegressionCheck = @(& pwsh -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'scripts\Invoke-HarnessSync.ps1') -SelfTest 2>&1)

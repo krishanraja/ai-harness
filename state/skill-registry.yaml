@@ -1,6 +1,29 @@
 schema_version: 1
-last_reconciled: 2026-09-15
+last_reconciled: 2026-09-24
 status: governed-production-set
+
+candidate_quality_system:
+  id: experience-quality-v1
+  status: approved-for-local-canary
+  accepted_by: Krish Raja
+  accepted_at: 2026-09-23
+  owner: build-apps-with-krish
+  affected_skills: [build-apps-with-krish, ux-testing-agent]
+  contract: contract/experience-quality-contract.md
+  profile_schema: contract/experience-quality-profile.schema.json
+  validator: scripts/validate-experience-quality-profile.mjs
+  source_state: working-tree-uncommitted
+  activation: local-codex-canary-authorized-by-krish-2026-09-24
+  release: pending-clean-build
+  purpose: >-
+    Make fail-closed, evidence-bound review readiness, narrative and journey coverage,
+    conversion, design-system integrity, device-specific interaction,
+    accessibility, provenance, continuity and independent specialist judging a
+    durable cross-project requirement rather than a session-specific panel.
+  next_gate: >-
+    Commit the validated candidate, build the immutable release twice, verify
+    deterministic hashes, then replace only the known Codex baseline and run a
+    fresh-session routing and behavior canary before any other surface mutation.
 
 candidate_reconciliation:
   expected_skill_count: 29

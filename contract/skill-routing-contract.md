@@ -33,7 +33,7 @@ This file decides which skill runs, in what order, and which apparent matches mu
 | Content strategy or angle generation | Relevant domain skill, then `content-corpus` | `krish-content-marketer` | `krish-voice` only when drafting the final artifact |
 | Software implementation | Relevant domain skill | `krish-build` | Tests/build, then `code-reviewer` for material changes |
 | Product or interface design | Relevant domain skill; `design-intelligence-search` only when the design owner explicitly requests one bounded corpus query | `krish-design` | `ux-foundations`, then observable browser/UX QA |
-| New app or material cross-surface product redesign | Relevant domain skill | `build-apps-with-krish` orchestrates; `krish-design` and `krish-build` own their stages | Stage gates, `verification-loop`, then `ux-testing-agent` for release tasks |
+| New app or material cross-surface product redesign | Relevant domain skill | `build-apps-with-krish` orchestrates the repository's experience-quality profile; `krish-design` and `krish-build` own their stages | Candidate-bound human-review readiness before presentation; continuity plus blind specialist coverage; `verification-loop`, then `ux-testing-agent` for release tasks |
 | App or repository UX testing | Relevant domain skill | `ux-testing-agent` | Evidence bundle and reproducible findings |
 | Skill creation or revision | Relevant domain skill | `skill-creator` | Frontmatter, trigger, behavior, security, and packaging evals |
 | Surgical change to an approved, final, or locked artifact | Relevant domain context and the artifact-format producer | `locked-revision` controls the immutable baseline, declarative delta, and rebuild scope | Exact allowed-diff proof plus format-specific checks and recoverable prior release |
@@ -93,3 +93,4 @@ For material outputs, record:
 - deterministic checks run and their results;
 - inferred findings that remain unverified;
 - the exact action still behind an approval gate.
+- for a material app/site journey, the validated experience-quality profile, candidate-bound presentation-readiness result, continuity coverage, blind specialist coverage, and any explicitly unrun physical-device evidence.
