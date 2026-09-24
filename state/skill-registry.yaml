@@ -92,48 +92,47 @@ deployed_release:
   status: local-exact-parity-canary-routing-failures-cursor-manual-cloud-still-v2026.08.29.3-surface-awaiting-own-sync
 
 latest_approved_release:
-  release_id: v2026.09.15.2
-  tag: harness-v2026.09.15.2
-  source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
+  release_id: v2026.09.24.3
+  tag: harness-v2026.09.24.3
+  source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
   published: true
   immutable: true
-  published_at: 2026-09-15T20:45:21Z
-  manifest_sha256: 1D7F83049E41F63343DB4ACB89D25812CB47CA8AD62D3EC05DF22B7FA5343E62
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.2
-  skills_tree_aggregate_sha256: 30EF57AE4EDD53D032F5E74D622054931DB4B3ADA4DF78F9DF1F2C96597C2169
+  published_at: 2026-09-24T21:38:30Z
+  manifest_sha256: 62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.24.3
+  skills_tree_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - krish-build
-  approved_at: 2026-09-15
+    - build-apps-with-krish
+    - ux-testing-agent
+  approved_at: 2026-09-24
   approved_by: Krish Raja
   approval_basis: >-
-    Krish instructed the aggregate recent-build learning upgrade, direct Video
-    Engine application, propagation, and merge to main on 2026-09-15. PR 80
-    passed the provenance check, GitHub judge with the recorded owner ruling,
-    surface validation, deterministic repeat-build, and installer proof before
-    immutable publication. v2026.09.15.1 is the exact rollback baseline.
+    Krish instructed the quality-system repair, build-apps hardening and autonomous
+    cross-client rollout on 2026-09-24. PR 84 passed provenance, surface validation,
+    deterministic repeat-build, control-plane negative fixtures, the GitHub judge
+    and installer proof before immutable publication.
   approval_note: >-
-    This release adds the Video Engine incident learning that a recorded digest
-    proves byte integrity but not current retrievability. Build-critical external
-    artifacts must pass retrieval and digest verification on every supported
-    platform, while source changes remain behind repository authority gates.
+    This release makes accepted decisions candidate-bound, requires real project
+    QA command wiring, preserves causal scroll evidence, distinguishes provisional
+    overlays from durable releases and reports stale surfaces explicitly.
   supersedes_reason: >-
-    v2026.09.15.1 remains the immutable immediate rollback target and is locally
-    deployed with exact byte parity. This successor contains only the governed
-    krish-build learning from the content-engine PR 70 supply-boundary failure.
-  status: published-deployed-locally-canary-blocked-awaiting-cloud-and-surface-rollout
+    v2026.09.15.2 remains the immutable immediate rollback target. The two Codex-only
+    v2026.09.24.1 and v2026.09.24.2 overlays were provisional and are consolidated
+    here into one canonical release.
+  status: published-awaiting-governed-surface-install-and-canary
 
 
 previous_published_release:
-  release_id: v2026.09.15.1
-  tag: harness-v2026.09.15.1
-  source_commit: 813a5859c1c7017c45213af6d9b5b4a16ebb0416
+  release_id: v2026.09.15.2
+  tag: harness-v2026.09.15.2
+  source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
   immutable: true
-  published_at: 2026-09-15T18:58:32Z
-  manifest_sha256: 55840B30AAED69122C19C78959B98268ED35F6677BCF7D4B3DC17051A7F660DC
-  skills_tree_aggregate_sha256: BECB0A29D54EAFB144D04F8564F4029365EBB332A93B353241E0FA40000276B6
-  installed_evidence: state/machine-runs/v2026.09.15.1-lorimer.json
-  status: local-exact-parity-claude-one-positive-owner-failure-cursor-manual-codex-partial
+  published_at: 2026-09-15T20:45:21Z
+  manifest_sha256: 1D7F83049E41F63343DB4ACB89D25812CB47CA8AD62D3EC05DF22B7FA5343E62
+  skills_tree_aggregate_sha256: 30EF57AE4EDD53D032F5E74D622054931DB4B3ADA4DF78F9DF1F2C96597C2169
+  installed_evidence: state/machine-runs/v2026.09.15.2-lorimer.json
+  status: immediate-immutable-rollback-baseline
 
 
 superseded_approved_release:
@@ -203,7 +202,7 @@ surface_deployments:
     evidence:
       - state/deployments/v2026.09.15.2-claude-code-user.json
       - state/canaries/v2026.09.15.2-claude-code-user.json
-    status: installed-hash-verified-canary-failed-routing-boundaries
+    status: stale-installed-hash-verified-canary-failed-routing-boundaries
   codex-current:
     release_id: v2026.09.15.2
     source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
@@ -217,7 +216,7 @@ surface_deployments:
     evidence:
       - state/deployments/v2026.09.15.2-codex-current.json
       - state/canaries/v2026.09.15.2-codex-current.json
-    status: installed-hash-verified-canary-failed-routing-boundaries
+    status: stale-base-release-with-provisional-overlays-canary-failed-routing-boundaries
     quality_system_overlay:
       release_id: v2026.09.24.1
       source_commit: 42468003e1ffad1abac468a0d01c8551a2ba01a2

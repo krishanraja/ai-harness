@@ -7,11 +7,11 @@ Rendered from registry reconciliation date **2026-09-24**.
 
 ## Release authority
 
-- Latest approved release: **v2026.09.15.2** (harness-v2026.09.15.2)
-- Immutable and published: **yes**, 2026-09-15T20:45:21Z
-- Release source commit: `5e7155341007d688a8b38ab70dee774df8e59a1b`
-- Manifest SHA-256: `1D7F83049E41F63343DB4ACB89D25812CB47CA8AD62D3EC05DF22B7FA5343E62`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.15.2
+- Latest approved release: **v2026.09.24.3** (harness-v2026.09.24.3)
+- Immutable and published: **yes**, 2026-09-24T21:38:30Z
+- Release source commit: `3278b02aa981ee5e02507bbb502e41ddda8da9fd`
+- Manifest SHA-256: `62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.24.3
 - Current deployment verdict: **local-exact-parity-canary-routing-failures-cursor-manual-cloud-still-v2026.08.29.3-surface-awaiting-own-sync**
 - Provisional single-surface overlays: **2**. These are not durable releases.
 
@@ -32,8 +32,8 @@ An overlay proves only the named surface and evidence. It must not be called a h
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable |
 | cursor-primary | v2026.09.15.2 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.15.2 | 29/29 exact | installed-hash-verified-canary-failed-routing-boundaries |
-| codex-current | v2026.09.15.2 | 29/29 exact | installed-hash-verified-canary-failed-routing-boundaries |
+| claude-code-user | v2026.09.15.2 | 29/29 exact | stale-installed-hash-verified-canary-failed-routing-boundaries |
+| codex-current | v2026.09.15.2 | 29/29 exact | stale-base-release-with-provisional-overlays-canary-failed-routing-boundaries |
 | claude-cloud | v2026.08.29.3 | cloud inventory only | stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed |
 | perplexity-cloud | v2026.08.29.3 | cloud inventory only | stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed |
 
