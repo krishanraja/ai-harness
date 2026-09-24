@@ -32,16 +32,22 @@ candidate_quality_system:
 
 candidate_scroll_build_acceptance:
   id: scroll-build-causality-2026-09-24
-  status: candidate-not-installed
+  status: installed-and-behavior-canaried-on-codex-current
   owner: build-apps-with-krish
   accepted_by: Krish Raja
   authority: harden-underlying-system-after-explicit-scroll-build-correction
   base_commit: 79d31a7
+  source_commit: 852c8f6c93c5810c6dfc12d388bb20683da993e2
+  release: v2026.09.24.2
+  manifest_sha256: AD06309ABE96404EBDEB5E94887DAE847B59504906B499EAAE6AD4FF10ECDA13
   contract: contract/experience-quality-contract.md
   validator: scripts/validate-scroll-build-evidence.mjs
   regression: scripts/test-scroll-build-evidence.mjs
   evidence: docs/proposals/2026-09-24-scroll-build-causality.md
-  next_gate: independent-review-clean-commit-package-and-surface-canary
+  deployment_evidence:
+    - state/deployments/v2026.09.24.2-codex-current.json
+    - state/canaries/v2026.09.24.2-codex-current-scroll-build.json
+  next_gate: other-client-rollout-requires-own-governed-release-and-canary
 
 candidate_reconciliation:
   expected_skill_count: 29
