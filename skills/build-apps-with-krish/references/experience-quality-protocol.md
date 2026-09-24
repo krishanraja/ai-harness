@@ -40,6 +40,8 @@ The profile's presentation command is the only valid handoff route. It must reco
 
 The project must keep adversarial regression fixtures for a stale receipt, a forged receipt, candidate digest mismatch, iframe assembly, missing motion or reverse-scroll evidence, unresolved blocking feedback and judge evidence from another candidate. Its normal CI path must run them. A missing or weakened self-test blocks review readiness.
 
+When an accepted section builds while pinned, declare its ordered visible states and device-specific pin/release boundaries before capture. Require actual scroll input with document position, stage viewport geometry and independently read visible content at every forward and reverse state, plus an exit beyond both sequence boundaries. Entry reveals, matching attributes, timers, clicks or still frames cannot stand in for scroll causality. Controls must stay usable and agree with the sequence. Short-height, zoom and reduced-motion fallbacks must preserve all content and escape, and must be declared rather than mislabeled as pinned. The canonical scroll-build evidence validator may support a project-local collector; its numeric trace check is not a substitute for rendered evidence or independent review.
+
 ## Coverage matrix
 
 The project profile and evidence must cover all of:

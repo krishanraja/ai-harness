@@ -30,6 +30,19 @@ candidate_quality_system:
     Keep the quality-system overlay active on Codex. Publish or roll it to other
     surfaces only through their own governed release and canary process.
 
+candidate_scroll_build_acceptance:
+  id: scroll-build-causality-2026-09-24
+  status: candidate-not-installed
+  owner: build-apps-with-krish
+  accepted_by: Krish Raja
+  authority: harden-underlying-system-after-explicit-scroll-build-correction
+  base_commit: 79d31a7
+  contract: contract/experience-quality-contract.md
+  validator: scripts/validate-scroll-build-evidence.mjs
+  regression: scripts/test-scroll-build-evidence.mjs
+  evidence: docs/proposals/2026-09-24-scroll-build-causality.md
+  next_gate: independent-review-clean-commit-package-and-surface-canary
+
 candidate_reconciliation:
   expected_skill_count: 29
   base_release: v2026.08.29.1
