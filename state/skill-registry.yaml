@@ -4,7 +4,7 @@ status: governed-production-set
 
 candidate_quality_system:
   id: experience-quality-v1
-  status: installed-provisional-and-behavior-canaried-on-codex-current
+  status: durable-in-v2026.09.24.3-and-deployed-across-in-scope-surfaces
   accepted_by: Krish Raja
   accepted_at: 2026-09-23
   owner: build-apps-with-krish
@@ -26,13 +26,11 @@ candidate_quality_system:
     - state/deployments/v2026.09.24.1-codex-current.json
     - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
   rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.24.1-20260924T082038Z-c6f3e0a6
-  next_gate: >-
-    Keep the quality-system overlay active on Codex. Publish or roll it to other
-    surfaces only through their own governed release and canary process.
+  next_gate: maintain-through-normal-governed-release-cycle
 
 candidate_scroll_build_acceptance:
   id: scroll-build-causality-2026-09-24
-  status: installed-provisional-and-behavior-canaried-on-codex-current
+  status: durable-in-v2026.09.24.3-and-deployed-across-in-scope-surfaces
   owner: build-apps-with-krish
   accepted_by: Krish Raja
   authority: harden-underlying-system-after-explicit-scroll-build-correction
@@ -47,25 +45,9 @@ candidate_scroll_build_acceptance:
   deployment_evidence:
     - state/deployments/v2026.09.24.2-codex-current.json
     - state/canaries/v2026.09.24.2-codex-current-scroll-build.json
-  next_gate: other-client-rollout-requires-own-governed-release-and-canary
+  next_gate: maintain-through-normal-governed-release-cycle
 
-provisional_overlays:
-  - release_id: v2026.09.24.1
-    surface: codex-current
-    status: provisional-not-durable
-    skills: [build-apps-with-krish, ux-testing-agent]
-    evidence:
-      - state/deployments/v2026.09.24.1-codex-current.json
-      - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
-    next_gate: merge-publish-install-canary
-  - release_id: v2026.09.24.2
-    surface: codex-current
-    status: provisional-not-durable
-    skills: [build-apps-with-krish, ux-testing-agent]
-    evidence:
-      - state/deployments/v2026.09.24.2-codex-current.json
-      - state/canaries/v2026.09.24.2-codex-current-scroll-build.json
-    next_gate: merge-publish-install-canary
+provisional_overlays: []
 
 candidate_reconciliation:
   expected_skill_count: 29
@@ -83,13 +65,13 @@ candidate_reconciliation:
 
 
 deployed_release:
-  release_id: v2026.09.15.2
-  source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
-  artifact_set_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
+  release_id: v2026.09.24.3
+  source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+  artifact_set_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  deployed_at: 2026-09-15
-  evidence: state/machine-runs/v2026.09.15.2-lorimer.json
-  status: local-exact-parity-canary-routing-failures-cursor-manual-cloud-still-v2026.08.29.3-surface-awaiting-own-sync
+  deployed_at: 2026-09-24
+  evidence: state/machine-runs/v2026.09.24.3-lorimer.json
+  status: current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual
 
 latest_approved_release:
   release_id: v2026.09.24.3
@@ -178,69 +160,59 @@ surface_deployments:
     status: stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable
     previous_release: v2026.09.08.1
   cursor-primary:
-    release_id: v2026.09.15.2
-    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
+    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T21:02:06Z
-    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.09.15.2-20260915T210205Z-b476ed06
-    evidence: state/deployments/v2026.09.15.2-cursor-primary.json
+    deployed_at: 2026-09-24
+    deployed_at_utc: 2026-09-24T22:01:38.3187754Z
+    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.09.24.3-20260924T220136Z-4883301a
+    evidence: state/deployments/v2026.09.24.3-cursor-primary.json
     status: installed-hash-verified-manual-canary-required
   claude-code-user:
-    release_id: v2026.09.15.2
-    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
+    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T20:49:58Z
-    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.09.15.2-20260915T204957Z-88863ecc
+    deployed_at: 2026-09-24
+    deployed_at_utc: 2026-09-24T21:48:44.1393322Z
+    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.09.24.3-20260924T214842Z-c4219e9b
     evidence:
-      - state/deployments/v2026.09.15.2-claude-code-user.json
-      - state/canaries/v2026.09.15.2-claude-code-user.json
-    status: stale-installed-hash-verified-canary-failed-routing-boundaries
+      - state/canaries/v2026.09.24.3-claude-code-user.json
+      - state/deployments/v2026.09.24.3-claude-code-user.json
+    status: current-installed-hash-verified-canary-failed-one-stochastic-strategy-route
   codex-current:
-    release_id: v2026.09.15.2
-    source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
     installed_file_count: 143
-    installed_ordinal_aggregate_sha256: 09590C4ADEAC9258FE4CE9C778287EBA6645D54AAAA876DE15B87E85083E971D
+    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-15
-    deployed_at_utc: 2026-09-15T21:02:09Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.15.2-20260915T210208Z-1f4564cc
+    deployed_at: 2026-09-24
+    deployed_at_utc: 2026-09-24T22:25:34.8135781Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.24.3-20260924T222532Z-f302ba44
     evidence:
-      - state/deployments/v2026.09.15.2-codex-current.json
-      - state/canaries/v2026.09.15.2-codex-current.json
-    status: stale-base-release-with-provisional-overlays-canary-failed-routing-boundaries
-    quality_system_overlay:
-      release_id: v2026.09.24.1
-      source_commit: 42468003e1ffad1abac468a0d01c8551a2ba01a2
-      skills: [build-apps-with-krish, ux-testing-agent]
-      per_skill_hashes_exact: 2
-      deployed_at_utc: 2026-09-24T08:20:39.0692786Z
-      evidence:
-        - state/deployments/v2026.09.24.1-codex-current.json
-        - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
-      status: installed-hash-verified-and-fresh-session-canary-passed
+      - state/canaries/v2026.09.24.3-codex-current.json
+      - state/deployments/v2026.09.24.3-codex-current.json
+    status: current-installed-hash-verified-canary-partial-no-blocking-failures
   claude-cloud:
-    release_id: v2026.08.29.3
-    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
-    deployed_at: 2026-08-29
-    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed
+    deployed_at: 2026-09-24
+    evidence: state/cloud-checks/claude-cloud.json
+    status: current-supervised-upload-exact-canonical-inventory-content-visible-byte-parity-unavailable
   perplexity-cloud:
-    release_id: v2026.08.29.3
-    source_commit: d631f868be5f9896e283d662a0b49c46aa58f522
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
-    deployed_at: 2026-08-29
-    evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
-    status: stale-supervised-cloud-inventory-exact-names-enabled-and-patched-content-observed
+    deployed_at: 2026-09-24
+    evidence: state/cloud-checks/perplexity-cloud.json
+    status: current-supervised-replacement-exact-canonical-inventory-content-visible-byte-parity-unavailable
 
 canonical:
   repository: krishanraja/ai-harness
