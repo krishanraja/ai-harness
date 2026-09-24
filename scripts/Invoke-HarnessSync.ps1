@@ -444,6 +444,7 @@ function Get-SurfaceParity {
 function Get-PlanResult {
     param(
         [Parameter(Mandatory = $true)]$Surface,
+        [Parameter(Mandatory = $true)]$Manifest,
         [Parameter(Mandatory = $true)][string]$ManifestPath,
         [Parameter(Mandatory = $true)][string]$ArtifactsDirectory,
         [Parameter(Mandatory = $true)][IO.FileInfo]$ExpectedRecord
@@ -458,6 +459,10 @@ function Get-PlanResult {
         '-ArtifactsDirectory', $ArtifactsDirectory,
         '-ExpectedDeploymentRecordPath', $ExpectedRecord.FullName
     )
+    $reconciliationPath = Join-Path $RepositoryRoot "state\reconciliations\$($Manifest.release_id)-$($Surface.Id).json"
+    if (Test-Path -LiteralPath $reconciliationPath -PathType Leaf) {
+        $arguments += @('-ReconciliationRecordPath', $reconciliationPath)
+    }
     $result = Invoke-NativeCapture -FilePath 'pwsh' -Arguments $arguments
     Assert-NativeSuccess -Result $result -Label "Plan for $($Surface.Id)"
 
@@ -487,6 +492,7 @@ function Get-PlanResult {
 function Apply-SurfacePlan {
     param(
         [Parameter(Mandatory = $true)]$Surface,
+        [Parameter(Mandatory = $true)]$Manifest,
         [Parameter(Mandatory = $true)][string]$ManifestPath,
         [Parameter(Mandatory = $true)][string]$ArtifactsDirectory,
         [Parameter(Mandatory = $true)][IO.FileInfo]$ExpectedRecord
@@ -502,6 +508,10 @@ function Apply-SurfacePlan {
         '-ExpectedDeploymentRecordPath', $ExpectedRecord.FullName,
         '-Apply'
     )
+    $reconciliationPath = Join-Path $RepositoryRoot "state\reconciliations\$($Manifest.release_id)-$($Surface.Id).json"
+    if (Test-Path -LiteralPath $reconciliationPath -PathType Leaf) {
+        $arguments += @('-ReconciliationRecordPath', $reconciliationPath)
+    }
     $result = Invoke-NativeCapture -FilePath 'pwsh' -Arguments $arguments
     Assert-NativeSuccess -Result $result -Label "Install for $($Surface.Id)"
     $recordLine = @($result.Lines | Where-Object { $_ -like 'RECORD *' } | Select-Object -Last 1)
@@ -1203,14 +1213,14 @@ try {
         $installedRelease = [string](Read-DeploymentRecord -Record $recordFile).release_id
         if (-not $CanaryOnly -and $installedRelease -ne $releaseId) {
             Assert-NoUnknownSurfaceEntries -Surface $surface -Manifest $manifest
-            $plan = Get-PlanResult -Surface $surface -ManifestPath $manifestPath -ArtifactsDirectory $artifactsDirectory -ExpectedRecord $recordFile
+            $plan = Get-PlanResult -Surface $surface -Manifest $manifest -ManifestPath $manifestPath -ArtifactsDirectory $artifactsDirectory -ExpectedRecord $recordFile
             $surfaceRecord.plan = $plan
             if ($plan.unreconciled -gt 0) {
                 $surfaceRecord.install = 'halted-unknown-drift'
                 $surfaceResults.Add([pscustomobject]$surfaceRecord)
                 continue
             }
-            $recordFile = Apply-SurfacePlan -Surface $surface -ManifestPath $manifestPath -ArtifactsDirectory $artifactsDirectory -ExpectedRecord $recordFile
+            $recordFile = Apply-SurfacePlan -Surface $surface -Manifest $manifest -ManifestPath $manifestPath -ArtifactsDirectory $artifactsDirectory -ExpectedRecord $recordFile
             $surfaceRecord.install = 'applied'
         }
         else {
