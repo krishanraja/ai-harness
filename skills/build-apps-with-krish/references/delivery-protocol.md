@@ -67,15 +67,16 @@ For each material surface:
 1. Lock its governing product and data rule.
 2. If the concept is load-bearing and genuinely novel, generate at least three independent concept spines with deliberately different governing interaction metaphors, test their conceptual distance with fresh-context adversarial judges, and synthesize the strongest while preserving real code and data constraints. For post-rejection divergence, use the asymmetric context protocol below. Do not expose a fantasy that cannot survive the shipped system.
 3. Produce one rendered, self-contained mock of the synthesis at the intended viewport and state. Show multiple variants only when comparing them is the decision Krish must make.
-4. Verify that the artifact actually rendered and is the version being shown.
-5. Present it cold, without a persuasive walkthrough, rationale, or change log before Krish's first reaction. Apply the same rule to every revised material mock. Do not hide safety, authority, factual, or data constraints required for a responsible judgment.
-6. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect. After that first reaction, reveal a concise map of prior feedback to change to evidence.
-7. If rejected, record the conceptual spine and same-spine revision count, revise that surface only, and repeat.
-8. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Give generators only a sanitized divergence brief; give the fresh-context judge the complete rejected history. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
-9. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
-10. Carry the lock through its planned implementation and verification gate. Keep later material surfaces paused until that gate is recorded; only then begin the next material surface.
+4. Validate the repository's experience-quality profile, run its candidate-bound human-review readiness gate from a fresh self-owned runtime, then use its fail-closed presentation command. Correct and rerun every applicable deterministic failure, inconclusive result, unrun check, stale receipt, candidate mismatch or evidence gap before presentation. Never substitute a direct prototype URL for the gated review URL.
+5. Verify that the artifact actually rendered, is the version being shown, and has complete route/viewport/state/timestamp/hash evidence.
+6. Present it cold, without a persuasive walkthrough, rationale, or change log before Krish's first reaction. Apply the same rule to every revised material mock. Do not hide safety, authority, factual, or data constraints required for a responsible judgment.
+7. Capture Krish's exact reaction and classify it as product rule, interaction, structure, visual taste, copy, data honesty, or implementation defect. After that first reaction, reveal a concise map of prior feedback to change to evidence.
+8. If rejected, record the conceptual spine and same-spine revision count, revise that surface only, and repeat.
+9. If two consecutive revised mocks within the same conceptual spine are rejected, stop local refinement and rerun fresh concept divergence, adversarial judging, and synthesis for that surface. Give generators only a sanitized divergence brief; give the fresh-context judge the complete rejected history. Reset the count when a new spine is selected. Continue the rejected spine only when Krish explicitly asks for that scoped override.
+10. If approved, record the explicit lock, rationale, artifact hash or revision, and carry-forward conditions.
+11. Carry the lock through its planned implementation and verification gate. Keep later material surfaces paused until that gate is recorded; only then begin the next material surface.
 
-Gate: explicit approval of the rendered revision. Silence, approval of the idea, or approval of a prior version does not pass.
+Gate: candidate-bound human-review readiness passes first, then Krish explicitly approves the rendered revision. Silence, approval of the idea, a panel score, or approval of a prior version does not pass.
 
 ### Phase 6: systemize and bulletproof
 
@@ -108,7 +109,7 @@ Gate: build and deterministic checks pass, the requested behavior works, authori
 
 ### Phase 9: release and verify
 
-Use `verification-loop` for artifact-appropriate proof and `ux-testing-agent` for primary user tasks. Distinguish local, preview, merged, deployed, enabled, live, and prod-verified. Obtain exact production approval at action time unless already granted for the named release.
+Use `references/experience-quality-protocol.md`, `verification-loop` for artifact-appropriate proof, and `ux-testing-agent` for primary user tasks. Run continuity guardians with full accepted history and the blind specialist panel with owner history withheld. Distinguish local, preview, merged, deployed, enabled, live, world-class, and prod-verified. Obtain exact production approval at action time unless already granted for the named release.
 
 Gate: verify the actual deployed user outcome with current revision, DOM or behavior evidence, persisted state, and high-resolution pixels where visual. A green CI run alone cannot prove live experience.
 

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "1.3.0",
+  "projectId": "held-out-experience-quality-fixture",
+  "stateRoute": "project/state.md",
+  "owners": {
+    "orchestration": "build-apps-with-krish",
+    "taste": "krish-design",
+    "implementation": "krish-build",
+    "taskValidation": "ux-testing-agent",
+    "completion": "verification-loop",
+    "materialApproval": "Krish",
+    "exceptions": "Krish",
+    "release": "explicit-action-time-approval"
+  },
+  "surfaces": ["desktop", "mobile"],
+  "requiredCoverage": [
+    "product_truth", "storyboard_narrative", "information_architecture_guidance", "conversion_trust", "visual_craft",
+    "design_system_integrity", "device_specific_interaction", "motion_scroll_causality", "accessibility_assistive_technology",
+    "content_clarity_voice", "functional_state_recovery", "responsive_layout", "performance_technical", "originality_brand", "evidence_provenance"
+  ],
+  "briefFidelity": {
+    "required": true,
+    "ownerDirectionIsHardGate": true,
+    "candidateTraceRequired": true,
+    "scoresCannotOverride": true,
+    "blockOnUnresolved": true,
+    "requiredFields": ["accepted_outcomes", "accepted_experience", "authoritative_evidence", "rejected_patterns", "candidate_mapping", "omissions", "contradictions"],
+    "authoritativeSources": ["project/state.md"]
+  },
+  "feedbackReconciliation": {
+    "required": true,
+    "ledger": "project/feedback-ledger.json",
+    "verbatimRequired": true,
+    "decisionNotesRequired": true,
+    "overallNoteRequired": true,
+    "submissionIsApproval": false,
+    "blockOnUnresolved": true,
+    "judgesReceiveRequirements": true,
+    "blockingStatuses": ["open", "implemented-awaiting-review"],
+    "requiredFields": ["id", "exactFeedback", "source", "surface", "section", "device", "element", "classification", "requiredOutcome", "acceptanceTest", "status", "resolution", "evidence"]
+  },
+  "reviewReadiness": {
+    "blockingStatuses": ["fail", "inconclusive", "not_run"],
+    "requiredChecks": [
+      "artifact_identity", "runtime_identity", "fresh_self_owned_capture", "broken_links_controls_assets", "overflow_overlap_clipping",
+      "layout_alignment", "text_wrap_orphans_content_range", "contrast", "keyboard_focus_semantics", "touch_targets",
+      "viewport_safe_areas_fixed_chrome", "reduced_motion", "section_fit_scroll_contract", "duplicate_components_claims",
+      "placeholder_debug_backup_singer_copy", "console_network_user_impact"
+      , "single_dom_scroll_context", "continuous_forward_reverse_journey", "section_seam_collision", "judge_evidence_identity"
+    ],
+    "selfOwnedRuntime": true,
+    "candidateBoundEvidence": true
+  },
+  "presentationFirewall": {
+    "required": true,
+    "failClosed": true,
+    "candidateManifestRequired": true,
+    "singleDomScrollContextRequired": true,
+    "embeddedFrameIntegrationAllowed": false,
+    "candidateBoundReceiptRequired": true,
+    "directReviewCommandRequired": true,
+    "adversarialSelfTestRequired": true,
+    "blockingStatuses": ["fail", "inconclusive", "not_run", "stale", "mismatch", "missing"]
+  },
+  "continuity": {
+    "required": true,
+    "requiredFields": ["route", "viewport", "action", "expected", "observed", "evidence"],
+    "blockOnAnyUnresolved": true
+  },
+  "blindPanel": {
+    "required": true,
+    "ownerHistoryVisible": false,
+    "minimumIndependentJurors": 6,
+    "scoresCannotOverrideHardGates": true,
+    "roles": [
+      { "id": "truth", "surface": "desktop", "coverage": ["product_truth", "evidence_provenance"] },
+      { "id": "story", "surface": "desktop", "coverage": ["storyboard_narrative", "information_architecture_guidance", "content_clarity_voice"] },
+      { "id": "conversion", "surface": "desktop", "coverage": ["conversion_trust", "functional_state_recovery"] },
+      { "id": "craft", "surface": "desktop", "coverage": ["visual_craft", "design_system_integrity", "originality_brand"] },
+      { "id": "interaction", "surface": "mobile", "coverage": ["device_specific_interaction", "motion_scroll_causality", "responsive_layout"] },
+      { "id": "access", "surface": "mobile", "coverage": ["accessibility_assistive_technology", "performance_technical"] }
+    ]
+  },
+  "releaseEvidence": {
+    "automatedBrowsers": ["Chromium", "WebKit", "Firefox"],
+    "physicalDevices": ["iPhone Safari + VoiceOver", "Android Chrome + TalkBack"],
+    "physicalCannotBeInferred": true
+  },
+  "commands": {
+    "definitions": "npm run qa:definitions",
+    "reviewReadiness": "npm run qa:review-readiness",
+    "presentation": "npm run review:material",
+    "continuity": "npm run qa:continuity",
+    "blindPanel": "npm run qa:blind-panel",
+    "status": "npm run qa:status"
+  }
+}

@@ -10,6 +10,16 @@ Select checks based on the product's primary tasks and risks. This is a menu, no
 - Does the interface distinguish saved, saving, failed, empty, unavailable, and complete states?
 - Are destructive or consequential actions named by their consequence?
 
+## Storyboard, guidance, and conversion
+
+- Does each major section perform one distinct story job and change what the visitor understands next?
+- Is the sequence causal, with claims followed by proof and a clear handoff to the next belief or action?
+- Can the intended visitor recognise themselves, understand the offer and know the primary action without backup-singer instructions?
+- Does proof appear where doubt is created rather than only in navigation, a footer, or a separate proof page?
+- Are calls to action timed to earned intent, explicit about consequence, and recoverable?
+- Do repeated claims, instruments, imagery, and interactions perform demonstrably different visitor jobs?
+- On mobile, is the story independently sequenced for one-handed use, interruption, scroll economy, and resume?
+
 ## Primary task
 
 - Can the task be discovered without insider knowledge?
@@ -26,6 +36,9 @@ Select checks based on the product's primary tasks and risks. This is a menu, no
 - At target viewports, is important content visible without overlap, clipping, accidental horizontal scroll, or hover-only access?
 - Are controls reachable and touch targets practical on mobile?
 - Do menus, dialogs, drawers, and overlays manage focus and close predictably?
+- Do short desktop heights, browser chrome, safe areas, OS taskbars/home indicators, zoom, text enlargement, and orientation preserve the primary action?
+- Where a section promises one-screen fit, does it fit without hiding meaningful content or controls?
+- Do logos, containers, grids, component baselines, and repeated alignments use the same governed geometry?
 
 ## Accessibility
 
@@ -58,3 +71,6 @@ Select checks based on the product's primary tasks and risks. This is a menu, no
 - Do analytics and event names fire once at the intended transition without capturing sensitive content?
 - Are placeholders, mock data, debug copy, stale dates, and internal terminology absent from production surfaces?
 - Does the design use the relevant Krish design/voice standards without suppressing standard usability requirements?
+- Are there duplicated components, repeated claims, placeholder/debug labels, or explanatory copy compensating for unclear visual cues or information architecture?
+- Is the qualitative panel actually independent, specialist, candidate-bound, and complete, or is one executor giving several versions of the same opinion?
+- Can every pass be traced to the exact candidate, runtime, route, viewport, action, observed result, and frozen evidence?

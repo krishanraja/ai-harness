@@ -3,7 +3,7 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-09-15**.
+Rendered from registry reconciliation date **2026-09-24**.
 
 ## Release authority
 
