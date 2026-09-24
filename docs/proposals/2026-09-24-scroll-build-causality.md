@@ -21,7 +21,9 @@ The trace validator is deliberately not a claim that a fabricated JSON report is
 - Baseline `Test-Harness.ps1`: pass, 29 skills, 3 adapters, no high-confidence secrets.
 - `node scripts/test-scroll-build-evidence.mjs`: pass, 24 cases.
 - Post-change `Test-Harness.ps1`: pass, 29 skills, 3 adapters, no high-confidence secrets. Parent release agent independently reviewed the acceptance-clause intent and approved the scoped commit/package/install continuation. Fresh-client behavioral evidence belongs to the subsequent immutable deployment/canary records.
-- Candidate staged locally; not installed, enabled, published or claimed canaried. Wider client rollout remains the existing governed release process.
+- The source was committed as `852c8f6c93c5810c6dfc12d388bb20683da993e2`. Two clean builds of `v2026.09.24.2` produced identical hashes across 29 standard archives and 29 root-layout archives.
+- The governed installer verified the current Codex skill matched its recorded prior baseline, preserved that baseline for rollback, replaced only `build-apps-with-krish`, and verified the complete installed hash. A fresh ephemeral read-only Codex session rejected the static-parity substitute and required the intended causal input/geometry/state/exit proof. Immutable evidence is in `state/deployments/v2026.09.24.2-codex-current.json` and `state/canaries/v2026.09.24.2-codex-current-scroll-build.json`.
+- Installed and behavior-canaried on current Codex only. Wider client rollout remains the existing governed release process; this is not a public harness release or evidence that any site passed its own release checks.
 
 ## Release and rollback
 
