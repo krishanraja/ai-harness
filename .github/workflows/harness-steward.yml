@@ -59,7 +59,7 @@ jobs:
   surfaces:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
 
       # The docs steward's fleet manifest, so the two stewards cannot name
       # different repositories without a failing check. Sparse and shallow:
@@ -75,9 +75,10 @@ jobs:
           rm -rf .steward-src
           echo "fleet manifest: $(wc -c < .steward/fleet.json) bytes"
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
 
       - name: Render is byte-stable
         run: node scripts/render.mjs --check
@@ -145,16 +146,17 @@ jobs:
     needs: surfaces
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
       - name: Audit the harness against its own quality standard
         run: node scripts/audit-harness.mjs --out audit.md
       - name: Put the findings in the run summary
         if: always()
         run: cat audit.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0 # v7.0.1, Node 24
         if: always()
         with:
           name: harness-audit
@@ -167,10 +169,11 @@ jobs:
     needs: surfaces
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
 
       # Fail loud rather than quietly doing nothing. A night the reconciler did
       # not run must never look like a night with no drift.
@@ -200,7 +203,7 @@ jobs:
         if: always()
         run: cat reconcile.md >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0 # v7.0.1, Node 24
         if: always()
         with:
           name: canon-reconciliation
@@ -215,10 +218,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
 
       - name: The fleet credential must exist
         if: ${{ !inputs.event_import_only }}
@@ -290,12 +294,13 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
         with:
           ref: main
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
 
       # Deterministic in. The brief says what crossed a threshold and quotes the
       # evidence; it never says what the answer is.
@@ -373,7 +378,7 @@ jobs:
             --title "Capture proposals, $(date -u +%Y-%m-%d)" \
             --body-file /tmp/pr-body.md
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0 # v7.0.1, Node 24
         if: always()
         with:
           name: weekly-brief
@@ -402,13 +407,14 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
+          package-manager-cache: false
 
       # The protocol is testable without a model, and it is tested before it is
       # trusted. What it accepts, what it refuses, whether the mandatory dissent
@@ -481,7 +487,7 @@ jobs:
             gh pr comment "${{ github.event.pull_request.number }}" --body-file judge.md
           fi
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0 # v7.0.1, Node 24
         if: always()
         with:
           name: judge-panel
