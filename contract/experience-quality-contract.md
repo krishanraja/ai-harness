@@ -84,6 +84,16 @@ This makes bypass fail closed inside the governed build, review and agent workfl
 
 ## Narrative and journey gate
 
+### Authored scroll-build acceptance
+
+Apply this clause only when the accepted experience declares a pinned or scroll-built sequence. An entrance reveal, selected tab, `data-*` parity, elapsed timer, or matching screenshot is not evidence of that sequence.
+
+Before capture, declare each section's ordered visible states, applicable device modes, pin boundary below fixed chrome, and release boundary. Bind that declaration to the accepted decision rather than deriving expected states from the implementation being tested. For each applicable mode, capture real page-scroll input and independent rendered observations: document scroll position, stage viewport position, visible state text, and reachable controls. While document scroll increases, the stage must stay at its declared pin boundary and reach every state in order. Reverse input must restore each prior state. After the terminal state, normal document movement must resume; before the first state, reverse movement must exit without a trap. Controls must remain usable and agree with the scroll state. Never substitute direct state-setting or a button click for scroll-input proof.
+
+Reduced motion, short viewports, enlarged text and mobile chrome must retain all meaningful content and a reachable next section. If a device needs a non-pinned fallback, declare and justify that fallback before testing it; do not silently report the fallback as pinned. Inspect intermediate frames for overlap and clipping, not only the first and final frame.
+
+The project gate must reject incomplete sequences, missing reverse or release evidence, a static/entrance-only substitute, a timer-driven substitute without scroll causality, unbound samples and evidence from another candidate. `scripts/validate-scroll-build-evidence.mjs` supplies a reusable numeric/state trace check; it does not prove the honesty of a collector or replace browser captures, independent review, candidate hashing, or assistive-technology evidence. Projects may use an equivalent checker, but their normal QA command must run the negative fixtures as well as the real interaction capture.
+
 The experience must be evaluated as a storyboard, not a collection of attractive frames. For each route and device class, record:
 
 1. what the visitor notices first;

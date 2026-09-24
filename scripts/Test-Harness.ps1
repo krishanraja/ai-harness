@@ -634,6 +634,11 @@ if ($LASTEXITCODE -ne 0) {
     Add-Failure "Experience quality profile regression suite failed: $($experienceQualityRegressionCheck -join ' | ')"
 }
 
+$scrollBuildRegressionCheck = @(& node (Join-Path $Root 'scripts\test-scroll-build-evidence.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Scroll-build evidence regression suite failed: $($scrollBuildRegressionCheck -join ' | ')"
+}
+
 $syncEvidenceRegressionCheck = @(& pwsh -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'scripts\Invoke-HarnessSync.ps1') -SelfTest 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Harness-sync evidence regression suite failed: $($syncEvidenceRegressionCheck -join ' | ')"

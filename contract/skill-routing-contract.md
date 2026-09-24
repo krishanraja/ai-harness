@@ -94,3 +94,4 @@ For material outputs, record:
 - inferred findings that remain unverified;
 - the exact action still behind an approval gate.
 - for a material app/site journey, the validated experience-quality profile, candidate-bound presentation-readiness result, continuity coverage, blind specialist coverage, and any explicitly unrun physical-device evidence.
+- for an approved pinned scroll-build, the owning project's predeclared ordered-state contract and rendered forward/reverse pin-and-release evidence under `contract/experience-quality-contract.md`; route verification to the existing task validator, not a new motion skill.
