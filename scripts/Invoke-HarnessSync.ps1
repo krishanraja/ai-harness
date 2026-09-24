@@ -338,7 +338,16 @@ function Assert-NoUnknownSurfaceEntries {
     )
 
     $names = @($Manifest.skills | ForEach-Object { [string]$_.name })
-    $allowedProviderDirectories = if ($Surface.Client -eq 'codex') { @('.system') } else { @() }
+    # These roots are client-owned catalog/cache namespaces, not harness skill
+    # directories. Claude Desktop/Code now maintains a versioned cloud-sync
+    # snapshot under `skills/synced`; treating it as unknown drift blocks every
+    # governed release while protecting nothing, because the installer never
+    # writes below that path. Keep the allowlist client-specific and exact.
+    $allowedProviderDirectories = switch ($Surface.Client) {
+        'codex' { @('.system') }
+        'claude' { @('synced') }
+        default { @() }
+    }
     $extraDirectories = @(Get-ChildItem -LiteralPath $Surface.SkillsRoot -Directory -Force |
         Where-Object { $_.Name -notin $names -and $_.Name -notin $allowedProviderDirectories } |
         ForEach-Object Name)
