@@ -4,7 +4,7 @@ status: governed-production-set
 
 candidate_quality_system:
   id: experience-quality-v1
-  status: approved-for-local-canary
+  status: installed-and-behavior-canaried-on-codex-current
   accepted_by: Krish Raja
   accepted_at: 2026-09-23
   owner: build-apps-with-krish
@@ -12,18 +12,23 @@ candidate_quality_system:
   contract: contract/experience-quality-contract.md
   profile_schema: contract/experience-quality-profile.schema.json
   validator: scripts/validate-experience-quality-profile.mjs
-  source_state: working-tree-uncommitted
-  activation: local-codex-canary-authorized-by-krish-2026-09-24
-  release: pending-clean-build
+  source_state: committed-clean-source
+  source_commit: 42468003e1ffad1abac468a0d01c8551a2ba01a2
+  activation: active-on-codex-current-authorized-by-krish-2026-09-24
+  release: v2026.09.24.1
+  manifest_sha256: 314ECFA7F0EB12327A6881B660F028FF8F51ADA4DE6F49539CAE41B75BF7FEDC
   purpose: >-
     Make fail-closed, evidence-bound review readiness, narrative and journey coverage,
     conversion, design-system integrity, device-specific interaction,
     accessibility, provenance, continuity and independent specialist judging a
     durable cross-project requirement rather than a session-specific panel.
+  deployment_evidence:
+    - state/deployments/v2026.09.24.1-codex-current.json
+    - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
+  rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.24.1-20260924T082038Z-c6f3e0a6
   next_gate: >-
-    Commit the validated candidate, build the immutable release twice, verify
-    deterministic hashes, then replace only the known Codex baseline and run a
-    fresh-session routing and behavior canary before any other surface mutation.
+    Keep the quality-system overlay active on Codex. Publish or roll it to other
+    surfaces only through their own governed release and canary process.
 
 candidate_reconciliation:
   expected_skill_count: 29
@@ -176,6 +181,16 @@ surface_deployments:
       - state/deployments/v2026.09.15.2-codex-current.json
       - state/canaries/v2026.09.15.2-codex-current.json
     status: installed-hash-verified-canary-failed-routing-boundaries
+    quality_system_overlay:
+      release_id: v2026.09.24.1
+      source_commit: 42468003e1ffad1abac468a0d01c8551a2ba01a2
+      skills: [build-apps-with-krish, ux-testing-agent]
+      per_skill_hashes_exact: 2
+      deployed_at_utc: 2026-09-24T08:20:39.0692786Z
+      evidence:
+        - state/deployments/v2026.09.24.1-codex-current.json
+        - state/canaries/v2026.09.24.1-codex-current-presentation-firewall.json
+      status: installed-hash-verified-and-fresh-session-canary-passed
   claude-cloud:
     release_id: v2026.08.29.3
     source_commit: d631f868be5f9896e283d662a0b49c46aa58f522

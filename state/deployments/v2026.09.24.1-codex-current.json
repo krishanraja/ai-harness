@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "surface_id": "codex-current",
+  "target": "C:\\Users\\krish\\.codex\\skills",
+  "release_id": "v2026.09.24.1",
+  "source_commit": "42468003e1ffad1abac468a0d01c8551a2ba01a2",
+  "artifact_hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+  "deployed_at_utc": "2026-09-24T08:20:39.0692786Z",
+  "backup_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-current\\v2026.09.24.1-20260924T082038Z-c6f3e0a6",
+  "result": "installed-and-hash-verified",
+  "skills": [
+    {
+      "name": "build-apps-with-krish",
+      "action": "replace-known-baseline",
+      "installed_sha256": "23FEEAD63CB6A0F9D3A8D744629DC568B3D2430F1692E51289BFC69BD6446615",
+      "package_sha256": "C63B07541BB5FBE37F0C2A3E8709387535A9AA8968B5B59579A5E6EBDBCABF1E"
+    },
+    {
+      "name": "ux-testing-agent",
+      "action": "replace-known-baseline",
+      "installed_sha256": "C3AA282A219E4FC027ADF734208C3DF8ED78519C7BADF378FBB6F10D32348973",
+      "package_sha256": "2C05E38A9483A7B7463C947BC61E5B4766FDDB3DE57FE26317083A657F241E06"
+    }
+  ]
+}
