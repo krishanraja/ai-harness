@@ -70,6 +70,9 @@ else {
     if ($syncScriptRaw -notmatch 'target_guard_read') {
         Add-Failure 'Codex canaries do not distinguish an exclusion-guard read followed by the expected owner.'
     }
+    if ($syncScriptRaw -notmatch "'claude'\s*\{\s*@\('synced'\)\s*\}") {
+        Add-Failure 'Machine sync does not classify Claude skills/synced as a provider-managed cache namespace.'
+    }
 }
 if (-not (Test-Path -LiteralPath $router -PathType Leaf)) { Add-Failure 'Missing deterministic skill routing contract.' }
 if (-not (Test-Path -LiteralPath $qualityStandard -PathType Leaf)) { Add-Failure 'Missing active skill quality standard.' }
