@@ -226,9 +226,33 @@ function pick(skill) {
   return chosen
 }
 
+/**
+ * Skills with no positive canary that fired on any surface, ever.
+ *
+ * Rotation alone left apify and ctrl-build uncanaried through 34 reports, so a
+ * skill with no proof at all is always on the sheet until it has some. Read
+ * from the same recorded reports the audit reads, keyed by declared skill.
+ */
+function neverProven() {
+  const dir = join(HARNESS, 'state/canaries')
+  if (!existsSync(dir)) return suites.filter((s) => !STATIC_ADAPTER_INVARIANTS.has(s))
+  const byId = new Map(triggerRecords.map((record) => [record.id, record]))
+  const proven = new Set()
+  for (const file of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
+    let report
+    try { report = JSON.parse(readFileSync(join(dir, file), 'utf8')) } catch { continue }
+    for (const result of report.results || []) {
+      const record = byId.get(result.id)
+      if (record && record.should_trigger === true && result.outcome === 'fired') proven.add(record.skill)
+    }
+  }
+  return suites.filter((s) => !proven.has(s) && !STATIC_ADAPTER_INVARIANTS.has(s))
+}
+
 const changed = changedSkills()
-const tier3 = rotation(suites.filter((s) => !(s in TIER1)), 3)
-const selected = [...new Set([...Object.keys(TIER1).filter((s) => suites.includes(s)), ...changed.skills, ...tier3])]
+const unproven = neverProven()
+const tier3 = rotation(suites.filter((s) => !(s in TIER1) && !unproven.includes(s)), 3)
+const selected = [...new Set([...Object.keys(TIER1).filter((s) => suites.includes(s)), ...changed.skills, ...unproven, ...tier3])]
 
 // ------------------------------------------------------------------ the sheet
 function sheetObject() {
@@ -271,7 +295,7 @@ function sheet() {
   for (const skill of selected) {
     const chosen = pick(skill)
     if (!chosen.length) continue
-    const why = TIER1[skill] || (changed.skills.includes(skill) ? 'Its bytes changed in this release.' : 'On rotation this release, so coverage does not go permanently stale.')
+    const why = TIER1[skill] || (changed.skills.includes(skill) ? 'Its bytes changed in this release.' : unproven.includes(skill) ? 'No positive canary has ever fired for it on any surface, so it stays on every sheet until one does.' : 'On rotation this release, so coverage does not go permanently stale.')
     p(`## ${skill}`)
     p()
     p(`> ${why}`)

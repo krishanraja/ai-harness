@@ -293,15 +293,23 @@ const canaryReports = existsSync(canaryDir)
     }).filter(Boolean)
   : []
 
-// A canary id carries its skill as the suite prefix, and the suite files are
-// the authority for which is which. Built from the tree rather than parsed out
-// of the id, so a renamed suite cannot silently orphan its evidence.
+// The suite files are the authority for which canary id belongs to which
+// skill. Built from the tree rather than parsed out of the id, so a renamed
+// suite cannot silently orphan its evidence. A record's declared `skill` wins
+// over its filename: core-trigger-cases.jsonl holds cases for krish-principles,
+// strategy-brief and verification-loop, and reading the filename credited all
+// of them to a skill called "core" that does not exist. canaries.mjs made the
+// same correction on 2026-09-13; this reader had kept the old rule.
 const idToSkill = new Map()
 for (const f of readdirSync(join(HARNESS, 'evals')).filter((x) => /-trigger-cases\.jsonl$/.test(x))) {
-  const skill = f.replace(/-trigger-cases\.jsonl$/, '')
+  const inferredSkill = f.replace(/-trigger-cases\.jsonl$/, '')
   for (const line of readFileSync(join(HARNESS, 'evals', f), 'utf8').split('\n')) {
     if (!line.trim()) continue
-    try { const c = JSON.parse(line); if (c.id) idToSkill.set(c.id, { skill, positive: c.should_trigger === true }) } catch { /* a malformed line is not evidence */ }
+    try {
+      const c = JSON.parse(line)
+      const skill = typeof c.skill === 'string' && c.skill ? c.skill : inferredSkill
+      if (c.id) idToSkill.set(c.id, { skill, positive: c.should_trigger === true })
+    } catch { /* a malformed line is not evidence */ }
   }
 }
 
@@ -338,9 +346,10 @@ for (const r of canaryReports) {
 }
 
 // For a manual-only skill, `unreachable` on an IMPLICIT route is the contract
-// holding, not a defect. design-intelligence-search sets
-// allow_implicit_invocation: false and says "Manual-only ... Never trigger
-// directly", so a client that cannot route to it is doing what it was told.
+// holding, not a defect. A skill is manual-only here when its openai.yaml sets
+// allow_implicit_invocation: false. No skill does today: design-intelligence-search
+// was switched to true so a structured delegation packet can reach it, and its
+// narrowness now lives in its description's delegation gate instead.
 //
 // The canary sheet now sends such a skill its EXPLICIT invocation as the
 // load-bearing positive and inverts the implicit case into a containment test,

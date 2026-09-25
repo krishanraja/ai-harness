@@ -141,6 +141,7 @@ For the current personal-account setup, use this controlled bridge:
 5. Test the uploaded skill in a fresh Claude chat before enabling or replacing broader routes.
 6. Record the cloud upload, state, and behavioral proof. The record is the parity evidence because the personal catalog does not expose a local filesystem hash.
 7. Preserve the previous ZIP and do not delete the old entry until the replacement passes its observation window and deletion is explicitly approved.
+8. Paste `adapters/cloud/account-instructions.md` into `Settings > Profile > Instructions for Claude` whenever it changes. The account has no filesystem, so this text is its only router: it forces krish-principles, strategy-brief and verification-loop, and it names every production skill. That matters because the account catalog can list a skill without its description, as observed on 2026-09-25 for the last seven skills alphabetically.
 
 The Claude Skills API can automate API/workspace-managed skills, but those API skills are not the same catalog as claude.ai. Browser automation can assist a supervised personal-account release, but it is too UI-dependent to be the unattended production updater.
 
@@ -156,6 +157,7 @@ Use a controlled bridge:
 4. Upload no more than Perplexity's current UI batch limit, wait for each batch to finish, and verify the exact enabled name set after the final batch.
 5. Run a fresh Computer task that proves discovery, reference loading, routing, behavior, and stopping conditions before claiming the surface active.
 6. Record source commit, transport hashes, visible enabled state, canary evidence, retrieval time, and the residual absence of a downloadable cloud hash.
+7. Paste `adapters/cloud/account-instructions.md` into the account's persistent instructions whenever it changes, for the same reason as the Claude account.
 
 Perplexity's account-level upload is not a second release authority and is not a byte-parity claim. Its observable content may still be an inbound change candidate and must be preserved for review rather than overwritten by assumption. Do not create a fake local skills folder for the desktop app. Updates remain supervised until Perplexity exposes a stable authenticated API with equivalent inventory, upload, enabled-state, and rollback evidence.
 
