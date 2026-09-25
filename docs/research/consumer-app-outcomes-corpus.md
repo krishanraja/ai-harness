@@ -19,3 +19,9 @@ The corpus supports diagnosis and measurable intervention briefs. It does not re
 ## Rights boundary
 
 Store URLs and original synthesis. Do not redistribute source prose, imagery, paid materials, or proprietary examples. Recheck source availability and permissions before any external publication of the corpus.
+
+## Provenance correction, 2026-09-25
+
+A live readback of every cited URL found that all 15 onboarding, retention and trust-building records cited pages that do not exist. Their slugs and problem names had no source page behind them. The real problem pages for those stacks were read and the 15 records rebuilt from them as original synthesis. All 73 pages now return HTTP 200 and are recorded in `candidates/consumer-app-outcomes/references/source-ledger.json`, with the page title and check date and no source prose. The validator now fails any record whose source is missing from that ledger, and any ledger page that no record cites.
+
+The rebuilt `retention.gone-after-day-one` record deliberately departs from its source. The page relies on loss aversion. The record keeps the visible-progress mechanism, excludes loss-threat framing, and makes guilt or loss messaging a guardrail, in line with `references/evidence-and-ethics.md`.
