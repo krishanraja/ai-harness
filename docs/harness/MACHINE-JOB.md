@@ -18,7 +18,10 @@ and reports what it found. The cloud never touches it.
 | `cursor-primary` | `C:\Users\krish\.cursor\skills` |
 | `codex-current` | `C:\Users\krish\.codex\skills` |
 
-SURFACE carries one, `codex-surface-07a67cda9f99`, at `C:\Users\krish\.codex\skills`.
+SURFACE carries one managed surface, `codex-surface-07a67cda9f99`, at
+`C:\Users\krish\.codex\skills`. Claude or Cursor directories may also exist on that
+machine, but their presence neither changes host identity nor expands this job's
+authority: the SURFACE runner still manages Codex only.
 
 `C:\Users\krish\.cursor\skills-cursor` is Cursor's own product surface. It is not
 ours and is never a target.

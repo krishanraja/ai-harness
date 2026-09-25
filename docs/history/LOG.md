@@ -7,6 +7,13 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-09-25
 
+- The SURFACE maintainer exposed a pre-record failure after unrelated Claude or
+  Cursor skill directories appeared on a Codex-only managed host. Host identity
+  had been coupled to the absence of unowned client roots, so the runner exited
+  before it could write fresh evidence. The resolver now binds SURFACE to its
+  machine name and managed Codex root, records other roots without managing
+  them, and carries a regression fixture proving they cannot make the host
+  ambiguous or expand the runner's authority.
 - Release `v2026.09.24.3` became the durable cross-client quality-system release.
   Its 29 canonical skills were hash-verified on Claude Code, Cursor and Codex on
   LORIMER, then replaced through the authenticated Claude and Perplexity cloud
