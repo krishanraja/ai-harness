@@ -1,6 +1,6 @@
 ---
 name: consumer-app-outcomes
-description: Diagnose consumer-app lifecycle problems and translate them into measurable, ethical product interventions. Use for onboarding, activation, retention, monetisation, engagement, habit formation, growth and sharing, conversion, trust, experience refinement, intent shaping, or premium positioning. Do not use for visual taste, generic accessibility lookup, implementation ownership, or UX testing; route those to their named owners.
+description: Diagnose consumer-app lifecycle problems and translate them into measurable, ethical product interventions. Use for onboarding, activation, retention, monetisation, engagement, habit formation, growth and sharing, conversion, trust, experience refinement, intent shaping, or premium positioning. Do not use for visual taste, paywall or landing copy and angles, generic accessibility lookup, implementation ownership, or UX testing; route those to their named owners.
 ---
 
 # Consumer App Outcomes
@@ -9,7 +9,7 @@ description: Diagnose consumer-app lifecycle problems and translate them into me
 
 Use this skill as lifecycle context and decision support. It diagnoses a product leak, selects outcome hypotheses from the bundled catalog, and produces a bounded intervention and measurement brief.
 
-It does not own visual design, source code, standards lookup, user research, or observed QA. Hand those stages to `krish-design`, `krish-build` or `build-apps-with-krish`, `ux-foundations`, `evidence-research`, and `ux-testing-agent` respectively.
+It does not own visual design, persuasive copy, source code, standards lookup, user research, or observed QA. Hand those stages to `krish-design`, `krish-content-marketer` then `krish-voice`, `krish-build` or `build-apps-with-krish`, `ux-foundations`, `evidence-research`, and `ux-testing-agent` respectively.
 
 Treat the Consumer App Studio pages as a public taxonomy and practitioner source, not proof that a tactic causes an outcome. Never reproduce its paid cards, prompts, screenshots, or commercial examples.
 
@@ -31,22 +31,25 @@ Do not invent baselines, conversion rates, significance, sample sizes, or user m
 
 Read `references/stack-router.md`. Select one primary stack from observable evidence. Add a secondary stack only when the leak genuinely crosses a boundary.
 
-Read `references/stack-contracts.md` for the target outcome, useful evidence, primary metrics, and guardrails. Retrieve candidate records from `references/outcome-catalog.json` using `scripts/retrieve.py` when command execution is available; otherwise inspect only the chosen stack's records.
+Read `references/stack-contracts.md` for the target outcome, useful evidence, primary metrics, and guardrails. Retrieve candidate records from `references/outcome-catalog.json` with `python scripts/retrieve.py --stack <stack> --query "<observed leak>" --brief` when command execution is available; otherwise inspect only the chosen stack's records and any rows for them in `references/evidence-log.jsonl`.
 
-For provenance or freshness questions, inspect `references/source-ledger.json`. For evidence strength and prohibited patterns, read `references/evidence-and-ethics.md`. For downstream work, read `references/handoff-contract.md`.
+Each retrieved record carries a status computed from the evidence log: `candidate` (untested practitioner hypothesis), `tested`, `supported`, `contested`, or `retired`. Report the status with the record ID. Never describe a candidate as proven, and never omit a contrary or harmful result that retrieval prints.
+
+For provenance or freshness questions, inspect `references/source-ledger.json`. For how results are recorded and how status is computed, read `references/evidence-loop.md`. For evidence strength and prohibited patterns, read `references/evidence-and-ethics.md`. For downstream work, read `references/handoff-contract.md`.
 
 ## Workflow
 
 1. State the diagnosed leak as an observable gap, not a tactic request.
 2. Separate known evidence, inference, and unknowns.
 3. Choose the primary stack and target outcome.
-4. Retrieve three to five candidate records by stack and problem terms.
+4. Retrieve three to five candidate records by stack and problem terms. Where match is equal, prefer tested or supported records, and read their contrary results first.
 5. Reject candidates whose prerequisites are absent or whose guardrails cannot be measured.
 6. Offer at most three interventions with mechanism, trade-off, primary metric, guardrails, and rollback trigger.
 7. Select one intervention only when the evidence supports a choice; otherwise frame a research or instrumentation step first.
 8. Define the smallest coherent implementation boundary and send it to the correct producer.
 9. Require exposure logging, event validation, accessibility checks, and observed verification before claiming success.
 10. Report what production evidence would confirm or falsify the hypothesis.
+11. Close the loop. When the decision window ends, give the exact `scripts/record_result.py` command that records the result against the record ID. Null, contrary, and harmful results are recorded too. A record's status changes only through that log.
 
 ## Outcome rules
 
@@ -103,13 +106,15 @@ Recommended next move
 - Verification:
 - Rollback trigger:
 - What remains unproven:
+- Result to record: (record ID, metric, decision date)
 ```
 
 ## Completion gate
 
 Do not call the work complete unless:
 
-- the recommendation traces to one or more catalog records;
+- the recommendation traces to one or more catalog records, each named with its computed status;
+- every contrary or harmful result on a cited record is stated;
 - source observation, practitioner hypothesis, and causal evidence remain distinct;
 - the target outcome and guardrails are measurable;
 - deceptive, coercive, privacy-invasive, or accessibility-hostile variants are rejected;

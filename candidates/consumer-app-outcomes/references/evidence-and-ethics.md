@@ -8,7 +8,7 @@
 4. Documented external case study with disclosed method and outcome.
 5. Public practitioner pattern or observed implementation.
 
-The bundled outcome records begin at level 5. They are hypotheses until stronger evidence is attached.
+The bundled outcome records begin at level 5. They are hypotheses until stronger evidence is attached, and stronger evidence is attached only as rows in `evidence-log.jsonl` (see `evidence-loop.md`). The catalog itself never changes level.
 
 ## Claim discipline
 

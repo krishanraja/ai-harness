@@ -20,7 +20,8 @@ Use `verification-loop` for artifact checks and `ux-testing-agent` for observabl
 ## Required implementation packet
 
 - Diagnosis and target outcome.
-- Selected catalog record IDs.
+- Intended user feeling at this moment, and why this outcome matters to the business. Downstream owners make dozens of small calls this brief cannot list; this line is what lets them make those calls the way the brief would.
+- Selected catalog record IDs with computed status.
 - Evidence level and unresolved assumptions.
 - Journey entry and exit conditions.
 - Required UI and system states.
@@ -28,3 +29,4 @@ Use `verification-loop` for artifact checks and `ux-testing-agent` for observabl
 - Primary metric, guardrails, decision window, and segments.
 - Accessibility, privacy, consent, and commercial constraints.
 - Feature flag, rollback trigger, and owner.
+- Decision date and the `scripts/record_result.py` command to run when it arrives.
