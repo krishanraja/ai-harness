@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "run_id": "20260925T042353Z",
+  "host": "SURFACE",
+  "host_evidence": "COMPUTERNAME is SURFACE and the managed Codex skills root exists. Unmanaged roots observed: claude:True,cursor:False.",
+  "mode": "sync",
+  "canaries_requested": true,
+  "heartbeat_enabled": true,
+  "pull_request_enabled": true,
+  "started_at_utc": "2026-09-25T04:23:53.9732811Z",
+  "status": "blocked",
+  "surfaces": [
+    {
+      "surface": "codex-surface-07a67cda9f99",
+      "client": "codex",
+      "plan": {
+        "surface": "codex-surface-07a67cda9f99",
+        "exact": 3,
+        "replace_known_baseline": 24,
+        "replace_reconciled": 0,
+        "unreconciled": 2,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "krish-build",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "unreconciled-drift"
+          },
+          {
+            "name": "mindmake",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "tools-access",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "video-engine",
+            "relation": "unreconciled-drift"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=codex-surface-07a67cda9f99 release=v2026.09.24.3 exact=3 replace_known=24 replace_reconciled=0 unreconciled=2 add=0"
+      },
+      "install": "halted-unknown-drift"
+    }
+  ],
+  "release": "v2026.09.24.3",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.09.24.3 in state/skill-registry.yaml.",
+  "assets": {
+    "asset_count": 60,
+    "checksum_count": 59,
+    "mismatches": 0
+  },
+  "manifest_sha256": "62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85",
+  "unmeasured_surfaces": [],
+  "completed_at_utc": "2026-09-25T04:24:38.7777793Z"
+}
