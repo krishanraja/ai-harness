@@ -107,6 +107,50 @@ function Write-JsonFile {
     [IO.File]::WriteAllText($Path, $json + "`n", [Text.UTF8Encoding]::new($false))
 }
 
+function Resolve-HostDefinition {
+    param(
+        [Parameter(Mandatory = $true)][string]$Computer,
+        [Parameter(Mandatory = $true)][bool]$HasClaude,
+        [Parameter(Mandatory = $true)][bool]$HasCursor,
+        [Parameter(Mandatory = $true)][bool]$HasCodex,
+        [Parameter(Mandatory = $true)][string]$ClaudeRoot,
+        [Parameter(Mandatory = $true)][string]$CursorRoot,
+        [Parameter(Mandatory = $true)][string]$CodexRoot
+    )
+
+    # Host identity and managed-surface membership are different questions.
+    # SURFACE owns only the Codex catalogue. A provider or user may create
+    # Claude/Cursor directories there later; their existence must not make the
+    # already-named machine ambiguous or silently expand this job's authority.
+    if ($Computer -ieq 'SURFACE' -and $HasCodex) {
+        return [pscustomobject]@{
+            HostName = 'SURFACE'
+            HostSlug = 'surface'
+            Heartbeat = 'harness-sync-surface'
+            Evidence = "COMPUTERNAME is SURFACE and the managed Codex skills root exists. Unmanaged roots observed: claude:$HasClaude,cursor:$HasCursor."
+            Surfaces = @(
+                [pscustomobject]@{ Id = 'codex-surface-07a67cda9f99'; Client = 'codex'; SkillsRoot = $CodexRoot }
+            )
+        }
+    }
+
+    if ($Computer -ieq 'LORIMER' -and $HasCodex -and $HasClaude -and $HasCursor) {
+        return [pscustomobject]@{
+            HostName = 'LORIMER'
+            HostSlug = 'lorimer'
+            Heartbeat = 'harness-sync-lorimer'
+            Evidence = 'COMPUTERNAME is LORIMER and all three declared harness roots exist.'
+            Surfaces = @(
+                [pscustomobject]@{ Id = 'claude-code-user'; Client = 'claude'; SkillsRoot = $ClaudeRoot },
+                [pscustomobject]@{ Id = 'cursor-primary'; Client = 'cursor'; SkillsRoot = $CursorRoot },
+                [pscustomobject]@{ Id = 'codex-current'; Client = 'codex'; SkillsRoot = $CodexRoot }
+            )
+        }
+    }
+
+    throw "Host identity is ambiguous. COMPUTERNAME=$Computer allowed_roots=claude:$HasClaude,cursor:$HasCursor,codex:$HasCodex"
+}
+
 function Get-HostDefinition {
     $profileRoot = [Environment]::GetFolderPath([Environment+SpecialFolder]::UserProfile)
     if (-not $profileRoot) { throw 'The Windows profile root could not be resolved.' }
@@ -117,35 +161,15 @@ function Get-HostDefinition {
     $hasClaude = Test-Path -LiteralPath $claudeRoot -PathType Container
     $hasCursor = Test-Path -LiteralPath $cursorRoot -PathType Container
     $hasCodex = Test-Path -LiteralPath $codexRoot -PathType Container
-    $computer = [string]$env:COMPUTERNAME
 
-    if ($computer -ieq 'SURFACE' -and $hasCodex -and -not $hasClaude -and -not $hasCursor) {
-        return [pscustomobject]@{
-            HostName = 'SURFACE'
-            HostSlug = 'surface'
-            Heartbeat = 'harness-sync-surface'
-            Evidence = 'COMPUTERNAME is SURFACE, the Codex skills root exists, and the Claude Code and Cursor harness roots do not exist.'
-            Surfaces = @(
-                [pscustomobject]@{ Id = 'codex-surface-07a67cda9f99'; Client = 'codex'; SkillsRoot = $codexRoot }
-            )
-        }
-    }
-
-    if ($computer -ieq 'LORIMER' -and $hasCodex -and $hasClaude -and $hasCursor) {
-        return [pscustomobject]@{
-            HostName = 'LORIMER'
-            HostSlug = 'lorimer'
-            Heartbeat = 'harness-sync-lorimer'
-            Evidence = 'COMPUTERNAME is LORIMER and all three declared harness roots exist.'
-            Surfaces = @(
-                [pscustomobject]@{ Id = 'claude-code-user'; Client = 'claude'; SkillsRoot = $claudeRoot },
-                [pscustomobject]@{ Id = 'cursor-primary'; Client = 'cursor'; SkillsRoot = $cursorRoot },
-                [pscustomobject]@{ Id = 'codex-current'; Client = 'codex'; SkillsRoot = $codexRoot }
-            )
-        }
-    }
-
-    throw "Host identity is ambiguous. COMPUTERNAME=$computer allowed_roots=claude:$hasClaude,cursor:$hasCursor,codex:$hasCodex"
+    return Resolve-HostDefinition `
+        -Computer ([string]$env:COMPUTERNAME) `
+        -HasClaude $hasClaude `
+        -HasCursor $hasCursor `
+        -HasCodex $hasCodex `
+        -ClaudeRoot $claudeRoot `
+        -CursorRoot $cursorRoot `
+        -CodexRoot $codexRoot
 }
 
 function Get-LatestHarnessRelease {
@@ -1056,6 +1080,18 @@ if ($RegisterScheduledTask) {
 }
 
 if ($SelfTest) {
+    $surfaceFixture = Resolve-HostDefinition `
+        -Computer 'SURFACE' `
+        -HasClaude $true `
+        -HasCursor $true `
+        -HasCodex $true `
+        -ClaudeRoot 'fixture-claude' `
+        -CursorRoot 'fixture-cursor' `
+        -CodexRoot 'fixture-codex'
+    if ($surfaceFixture.HostName -ne 'SURFACE' -or @($surfaceFixture.Surfaces).Count -ne 1 -or $surfaceFixture.Surfaces[0].Client -ne 'codex') {
+        throw 'Host-resolution self-test expanded or rejected the SURFACE managed surface when unrelated client roots appeared.'
+    }
+
     $fixtureCase = [pscustomobject]@{ id = 'fixture'; should_trigger = $true }
     $fixtureAttempts = @(
         [pscustomobject]@{ id = 'fixture'; outcome = 'wrong-skill'; note = 'first' },
