@@ -133,6 +133,15 @@ $skillsRoot = Join-Path $Root 'skills'
 $rootItem = Get-Item -LiteralPath $Root
 $manifests = @(Get-ChildItem -LiteralPath $skillsRoot -Recurse -File -Filter 'SKILL.md')
 if ($manifests.Count -eq 0) { Add-Failure 'No skill manifests found.' }
+# Candidates get the same package checks as admitted skills but live outside
+# skills/, because Build-HarnessRelease.ps1 packages everything under skills/.
+$candidatesRoot = Join-Path $Root 'candidates'
+$candidateManifests = @(if (Test-Path -LiteralPath $candidatesRoot -PathType Container) {
+    Get-ChildItem -LiteralPath $candidatesRoot -Directory | ForEach-Object {
+        $candidateManifest = Join-Path $_.FullName 'SKILL.md'
+        if (Test-Path -LiteralPath $candidateManifest -PathType Leaf) { Get-Item -LiteralPath $candidateManifest }
+    }
+})
 
 $secretPatterns = [ordered]@{
     GitHubToken = '(?i)\bgh(?:p|o|u|s|r)_[A-Za-z0-9]{20,}\b'
@@ -143,7 +152,7 @@ $secretPatterns = [ordered]@{
 }
 
 $hashes = @{}
-foreach ($manifest in $manifests) {
+foreach ($manifest in @($manifests + $candidateManifests)) {
     $relative = $manifest.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
     $raw = [IO.File]::ReadAllText($manifest.FullName)
     $lines = $raw -split "`r?`n"
@@ -178,7 +187,7 @@ foreach ($manifest in $manifests) {
     if ($manifest.Directory.Name -cne $name) { Add-Failure "$relative folder name does not match skill name '$name'." }
     if ($description -notmatch '(?i)\b(use|trigger|invoke|when|asks?|request|for)\b') { $warnings.Add("$relative description may lack trigger language.") }
 
-    $referenceMatches = [regex]::Matches($raw, '(?i)`((?:references?|leaves)/[^`#\s]+\.md)(?:#[^`]*)?`')
+    $referenceMatches = [regex]::Matches($raw, '(?i)`((?:references?|leaves)/[^`#\s]+\.(?:md|json|jsonl))(?:#[^`]*)?`')
     foreach ($match in $referenceMatches) {
         $target = Join-Path $manifest.Directory.FullName ($match.Groups[1].Value -replace '/', '\')
         if (-not (Test-Path -LiteralPath $target -PathType Leaf)) {
@@ -621,6 +630,50 @@ else {
     }
 }
 
+foreach ($candidateManifest in $candidateManifests) {
+    $candidateDirectory = $candidateManifest.Directory
+    $candidateName = $candidateDirectory.Name
+    $candidateRecord = Join-Path (Join-Path (Join-Path $Root 'state') 'candidates') "$candidateName.yaml"
+    if (-not (Test-Path -LiteralPath $candidateRecord -PathType Leaf)) {
+        Add-Failure "candidates/$candidateName has no state/candidates/$candidateName.yaml manifest."
+    }
+    elseif ([IO.File]::ReadAllText($candidateRecord) -notmatch '(?m)^release_eligible:\s*false\s*$') {
+        Add-Failure "candidates/$candidateName is still under candidates/ but its manifest does not say release_eligible: false."
+    }
+    if (Test-Path -LiteralPath (Join-Path $skillsRoot $candidateName)) {
+        Add-Failure "$candidateName exists under both candidates/ and skills/; admission moves it, never copies it."
+    }
+
+    $candidateEvals = Join-Path (Join-Path $Root 'evals') 'candidates'
+    Test-EvalCategoryMinimums -Records @(Read-JsonLines -Path (Join-Path $candidateEvals "$candidateName-trigger-cases.jsonl")) -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label "$candidateName candidate trigger suite"
+    Test-EvalCategoryMinimums -Records @(Read-JsonLines -Path (Join-Path $candidateEvals "$candidateName-behavior-cases.jsonl")) -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label "$candidateName candidate behavior suite"
+
+    $candidateTests = Join-Path (Join-Path $candidateDirectory.FullName 'scripts') 'tests'
+    $candidateValidator = Join-Path (Join-Path $candidateDirectory.FullName 'scripts') 'validate.py'
+    if (-not (Test-Path -LiteralPath $candidateTests -PathType Container) -or -not (Test-Path -LiteralPath $candidateValidator -PathType Leaf)) { continue }
+    if ($null -eq $pythonCommand) {
+        Add-Failure "Python is unavailable for the $candidateName candidate suite."
+        continue
+    }
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $candidateTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $candidateTests -p 'test_*.py' 2>&1)
+        $candidateTestExitCode = $LASTEXITCODE
+        $candidateValidationOutput = @(& $pythonCommand.Source -B $candidateValidator --base auto 2>&1)
+        $candidateValidationExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($candidateTestExitCode -ne 0) {
+        Add-Failure "$candidateName candidate tests failed: $($candidateTestOutput -join ' | ')"
+    }
+    if ($candidateValidationExitCode -ne 0) {
+        Add-Failure "$candidateName candidate data validation failed: $($candidateValidationOutput -join ' | ')"
+    }
+}
+
 $globalChains = @(Read-JsonLines -Path $globalChainCases)
 $skillRoutes = @(Read-JsonLines -Path $skillRoutingCases)
 Test-EvalCategoryMinimums -Records $globalChains -Minimums @{} -Label 'global chain suite'
@@ -734,4 +787,4 @@ if ($failures.Count -gt 0) {
     exit 1
 }
 
-Write-Output "HARNESS VALIDATION PASSED: $($manifests.Count) skills, $($adapterPaths.Count) adapters, no high-confidence secrets."
+Write-Output "HARNESS VALIDATION PASSED: $($manifests.Count) skills, $($candidateManifests.Count) unreleased candidates, $($adapterPaths.Count) adapters, no high-confidence secrets."

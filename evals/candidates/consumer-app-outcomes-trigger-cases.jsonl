@@ -1,0 +1,21 @@
+{"id": "cao-trigger-001", "category": "positive", "prompt": "Our onboarding completion is 80% but day-one return is 18%. Where is the leak and what should we test first?", "should_trigger": true}
+{"id": "cao-trigger-002", "category": "positive", "prompt": "Free-to-paid conversion on the Pro tier stalled at 1.1%. Diagnose it and give me a measurable, ethical intervention.", "should_trigger": true}
+{"id": "cao-trigger-003", "category": "positive", "prompt": "Users create a project and then never come back after the first week. What lifecycle stage is this and what would you try?", "should_trigger": true}
+{"id": "cao-trigger-004", "category": "positive", "prompt": "Half our users deny notification permission on first launch. Frame an experiment to fix it without being pushy.", "should_trigger": true}
+{"id": "cao-trigger-005", "category": "positive", "prompt": "Referral invites get sent but almost nobody who receives one signs up. What's broken and how do we measure a fix?", "should_trigger": true}
+{"id": "cao-trigger-006", "category": "positive", "prompt": "People start the checkout flow for a booking and bail at the final step. Give me the diagnosis, metrics and guardrails.", "should_trigger": true}
+{"id": "cao-trigger-007", "category": "positive", "prompt": "We want a streak feature to lift habit formation in the CTRL app. Pressure-test it and give me a brief the build team can run.", "should_trigger": true}
+{"id": "cao-trigger-008", "category": "positive", "prompt": "Map our app's activation problem: signups browse but never make anything. I need an intervention brief with a rollback trigger.", "should_trigger": true}
+{"id": "cao-trigger-009", "category": "negative", "prompt": "Make the onboarding screens look more premium; the gradients feel cheap.", "should_trigger": false}
+{"id": "cao-trigger-010", "category": "negative", "prompt": "Write the headline and body copy for our new paywall.", "should_trigger": false}
+{"id": "cao-trigger-011", "category": "negative", "prompt": "What does WCAG 2.2 require for touch target size?", "should_trigger": false}
+{"id": "cao-trigger-012", "category": "negative", "prompt": "Implement the feature flag and analytics events for the onboarding experiment in our Next.js repo.", "should_trigger": false}
+{"id": "cao-trigger-013", "category": "negative", "prompt": "Run a browser QA pass on the signup flow and give me a findings bundle.", "should_trigger": false}
+{"id": "cao-trigger-014", "category": "negative", "prompt": "What is our data retention policy for deleted user accounts under GDPR?", "should_trigger": false}
+{"id": "cao-trigger-015", "category": "negative", "prompt": "Draft a LinkedIn post about why most apps lose users in week one.", "should_trigger": false}
+{"id": "cao-trigger-016", "category": "negative", "prompt": "Find published benchmarks for day-30 retention in fitness apps with sources.", "should_trigger": false}
+{"id": "cao-trigger-017", "category": "adversarial_collision", "prompt": "Our paywall converts badly. Rewrite the paywall copy so it converts better.", "should_trigger": false}
+{"id": "cao-trigger-018", "category": "adversarial_collision", "prompt": "Redesign the retention dashboard in the Control Center so it's easier to read.", "should_trigger": false}
+{"id": "cao-trigger-019", "category": "adversarial_collision", "prompt": "Add a countdown timer and 'only 3 spots left' to the upgrade screen to lift conversion.", "should_trigger": true}
+{"id": "cao-trigger-020", "category": "adversarial_collision", "prompt": "Build me a new habit-tracking app from scratch with Krish's design system.", "should_trigger": false}
+{"id": "cao-trigger-021", "category": "adversarial_collision", "prompt": "Is onboarding friction or weak core value the reason users churn after day one? I want the diagnosis before anyone designs anything.", "should_trigger": true}

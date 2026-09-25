@@ -7,6 +7,17 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-09-25
 
+- The `consumer-app-outcomes` candidate was repaired and moved to
+  `candidates/`. As committed under `skills/`, the release builder would have
+  shipped it as a 30th skill, and its own validator could not run because
+  `source-ledger.json` was never committed. A live readback found all 15
+  onboarding, retention and trust-building records citing pages that do not
+  exist. Those were rebuilt from the real pages, and all 73 sources are now in
+  a checked ledger. The catalog gained an append-only evidence log with
+  computed status, so records can gain or lose strength from real product
+  results. Validation now runs candidate packages without packaging them.
+  Routing and registry changes are staged in the proposal, not applied.
+
 - The SURFACE maintainer exposed a pre-record failure after unrelated Claude or
   Cursor skill directories appeared on a Codex-only managed host. Host identity
   had been coupled to the absence of unowned client roots, so the runner exited
