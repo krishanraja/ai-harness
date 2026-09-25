@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consumer App Outcomes"
+  short_description: "Diagnose and improve consumer-app lifecycle outcomes"
+  default_prompt: "Use $consumer-app-outcomes to diagnose this lifecycle leak and produce an ethical, measurable intervention brief."

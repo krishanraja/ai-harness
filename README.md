@@ -10,7 +10,8 @@ Read `CURRENT.md` first. It is generated from the registry, heartbeats, deployme
 
 - `contract/`: durable operating, routing, and active-skill quality contracts.
 - `adapters/`: thin client-specific entry points for Claude, Cursor, and Codex.
-- `skills/`: curated candidate and admitted skills only. Research corpora and bulk downloaded libraries do not belong here.
+- `skills/`: admitted skills only. Every directory here with a `SKILL.md` is packaged by the release builder, so nothing unadmitted may live here. Research corpora and bulk downloaded libraries do not belong here.
+- `candidates/`: candidate skill packages under evaluation. They are validated but never packaged; each has a manifest in `state/candidates/` and moves into `skills/` only on named admission.
 - `evals/`: trigger, routing, and behavior fixtures.
 - `scripts/`: validation and deterministic release tooling.
 - `state/`: lifecycle registry and cross-surface release evidence.

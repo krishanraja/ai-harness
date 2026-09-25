@@ -1,0 +1,29 @@
+schema_version: 1
+id: consumer-app-outcomes
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-09-25
+source_branch: feat/consumer-app-outcomes
+skill_path: candidates/consumer-app-outcomes
+admission_path: skills/consumer-app-outcomes
+proposal: docs/proposals/2026-09-25-consumer-app-outcomes.md
+research_record: docs/research/consumer-app-outcomes-corpus.md
+source_scope:
+  root: https://www.consumerapp.studio/stacks/
+  public_pages: 73
+  stack_pages: 12
+  problem_pages: 60
+  retrieved_at: 2026-09-25
+  rights_boundary: linked-public-pages-and-original-synthesis-only
+evaluation:
+  trigger_cases: evals/candidates/consumer-app-outcomes-trigger-cases.jsonl
+  behavior_cases: evals/candidates/consumer-app-outcomes-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - named-human-admission
+  - governed-release-and-install-approval
