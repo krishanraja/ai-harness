@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "surface_id": "codex-surface-07a67cda9f99",
+  "target": "C:\\Users\\krish\\.codex\\skills",
+  "candidate_release_id": "v2026.09.24.3",
+  "candidate_source_commit": "3278b02aa981ee5e02507bbb502e41ddda8da9fd",
+  "approved_by": "Krish Raja",
+  "rationale": "Krish explicitly authorized direct completion of the Surface harness update on 2026-09-25. Replace only locked-revision and video-engine with the immutable v2026.09.24.3 artifacts; the installer must retain their current Surface versions in its rollback backup.",
+  "approved_at_utc": "2026-09-25T04:33:05Z",
+  "artifact_hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+  "skills": [
+    {
+      "name": "locked-revision",
+      "current_sha256": "3E64AFF2BFEA97C490B12A45A9314D2358F5CF4C158451CBB06F72E80F305C7E",
+      "candidate_sha256": "05CC9DBB8AF839A789091857640880A1183F73E8A7187F35FA5EB65242A4E9B9",
+      "decision": "replace-approved"
+    },
+    {
+      "name": "video-engine",
+      "current_sha256": "20899D66750CA9D5484F4F40EA9F9B17DA7EA3B58EC574676D05D19261CC2AE4",
+      "candidate_sha256": "AC9824EFA354195990430E2119AFDC55C7D6F6EE832537DE69DB6287CE0606EC",
+      "decision": "replace-approved"
+    }
+  ]
+}
