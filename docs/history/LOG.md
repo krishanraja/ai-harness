@@ -42,6 +42,15 @@ moved. Nothing here is ever rewritten.
   without updating the schema itself, and the commit that made it (`f11caf9`)
   carried no `docs(steward):` prefix, so it fell outside the docs steward's own
   territory. Corrected below.
+- reconciled at `1137278`: added four "What changed recently" bullets for the
+  day's non-documentation work that the digest surfaced and this file already
+  carried but `NOW.md` did not yet: the `consumer-app-outcomes` candidate build
+  and repair, the cloud account routing floor for claude.ai and Perplexity, the
+  canary-audit attribution fix (2 of 29 skills genuinely uncanaried, not 5), and
+  the SURFACE identity resolver fix. Bumped `harness-maintainer`'s expired
+  freshness count from 35 to 36 days and dropped the "What is next" bullet about
+  the `f11caf9` schema drift, since that correction is already recorded above
+  and under 2026-09-24 and is no longer an open action.
 
 ## 2026-09-24
 
