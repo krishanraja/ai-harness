@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-25
-head: 1137278
+as_of: 2026-09-26
+head: 1d11c25
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,7 +21,7 @@ The harness is Krish's canonical, private cross-client AI operating layer: one o
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-09-25)
+## Where it is right now (as of 2026-09-26)
 
 Latest approved release is **v2026.09.24.3** (source commit `3278b02`), immutable and published 2026-09-24T21:38:30Z. It is installed and hash-verified (29/29 exact) on every tracked surface; behavioral canary evidence is mixed rather than uniformly green, and `CURRENT.md` is the only place that mixed state should be read, never copied here. As of this reconciliation the known open items are: `claude-code-user`'s canary failed one stochastic route (`strategy-trigger-001`, expected `strategy-brief` to fire, observed the wrong skill); `codex-current` is partial with no blocking failures; `cursor-primary` has no supported headless canary and needs a manual run; the credential-exposure lifecycle opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`); and the `harness-maintainer` skill's review is 36 days old against its own 30-day freshness SLA (reviewed 2026-08-20, `state/skill-registry.yaml`). A 30th skill is under evaluation rather than admitted: `consumer-app-outcomes` lives in `candidates/`, is validated on every harness run, and is excluded from release packaging until admission (`state/candidates/consumer-app-outcomes.yaml`). Full detail, exact surface table and machine clocks: `CURRENT.md`.
 
