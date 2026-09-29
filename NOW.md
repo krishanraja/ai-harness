@@ -2,7 +2,7 @@
 repo: krishanraja/ai-harness
 product: The harness
 as_of: 2026-09-29
-head: 830b89f
+head: d3a2dc5
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
