@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-09-29
-head: d3a2dc5
+as_of: 2026-10-01
+head: ff1d710
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,9 +21,9 @@ The harness is Krish's canonical, private cross-client AI operating layer: one o
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-09-29)
+## Where it is right now (as of 2026-10-01)
 
-Latest approved release is **v2026.09.24.3** (source commit `3278b02`), immutable and published 2026-09-24T21:38:30Z. It is installed and hash-verified (29/29 exact) on every tracked surface; behavioral canary evidence is mixed rather than uniformly green, and `CURRENT.md` is the only place that mixed state should be read, never copied here. As of this reconciliation the known open items are: `claude-code-user`'s canary failed one stochastic route (`strategy-trigger-001`, expected `strategy-brief` to fire, observed the wrong skill); `codex-current` is partial with no blocking failures; `cursor-primary` has no supported headless canary and needs a manual run; the credential-exposure lifecycle opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`); and the `harness-maintainer` skill's review is 40 days old against its own 30-day freshness SLA (reviewed 2026-08-20, `state/skill-registry.yaml`). A 30th skill is under evaluation rather than admitted: `consumer-app-outcomes` lives in `candidates/`, is validated on every harness run, and is excluded from release packaging until admission (`state/candidates/consumer-app-outcomes.yaml`). Full detail, exact surface table and machine clocks: `CURRENT.md`.
+Latest approved release is **v2026.09.24.3** (source commit `3278b02`), immutable and published 2026-09-24T21:38:30Z. It is installed and hash-verified (29/29 exact) on every tracked surface; behavioral canary evidence is mixed rather than uniformly green, and `CURRENT.md` is the only place that mixed state should be read, never copied here. As of this reconciliation the known open items are: `claude-code-user`'s canary failed one stochastic route (`strategy-trigger-001`, expected `strategy-brief` to fire, observed the wrong skill); `codex-current` is partial with no blocking failures; `cursor-primary` has no supported headless canary and needs a manual run; the credential-exposure lifecycle opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`); and the `harness-maintainer` skill's review is 42 days old against its own 30-day freshness SLA (reviewed 2026-08-20), and the `video-engine` review is 33 days old against the same 30-day SLA (reviewed 2026-08-29), both in `state/skill-registry.yaml`. A 30th skill is under evaluation rather than admitted: `consumer-app-outcomes` lives in `candidates/`, is validated on every harness run, and is excluded from release packaging until admission (`state/candidates/consumer-app-outcomes.yaml`). Full detail, exact surface table and machine clocks: `CURRENT.md`.
 
 ## What changed recently
 
@@ -39,7 +39,7 @@ Latest approved release is **v2026.09.24.3** (source commit `3278b02`), immutabl
 
 ## What is next and what is waiting on Krish
 
-- `harness-maintainer`'s review-date SLA has expired (40 days against a 30-day freshness SLA). Per this repo's own rule, an expired review date opens a finding and is never silently bumped; it needs Krish's review, not a stamp update.
+- `harness-maintainer`'s review-date SLA has expired (42 days against a 30-day freshness SLA) and so has `video-engine`'s (33 days against 30, expired 2026-09-28). Per this repo's own rule, an expired review date opens a finding and is never silently bumped; each needs Krish's review, not a stamp update.
 - `claude-code-user`'s stochastic canary failure on `strategy-trigger-001` (expected `strategy-brief`, observed a different skill) is unresolved; `codex-current` remains partial and `cursor-primary` still has no supported headless canary, so its status is manual-required by construction, not by neglect.
 - The credential-exposure lifecycle opened 2026-09-12 remains open with approved remediation in progress; containment is not the same as provider-side revocation, and closure is Krish's call.
 - `consumer-app-outcomes` is a validated candidate, not an admitted skill. It needs independent execution of its held-out trigger and behaviour suites, review against `krish-design`, `build-apps-with-krish`, `ux-foundations`, `evidence-research` and `ux-testing-agent` for overlap, and Krish's admit/revise/reject decision before the staged routing change in `docs/proposals/2026-09-25-consumer-app-outcomes.md` can be applied.
