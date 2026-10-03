@@ -8,6 +8,11 @@ notice and hand the reboot back to Krish.
 This prompt CHANGES the host. Every change is gated, backed up and reversible.
 The decision behind it is `docs/harness/VPS-ROLE-2026-10-03.md`.
 
+**Run on 2026-10-03** (`state/vps/HARDEN-AND-CLOCK-2026-10-03.md`). Phase 1 is
+done. Phase 2 stopped at the token, and the clock has since gained a second
+entry, so finish with `docs/harness/VPS-CLOCK-ON-PROMPT.md`, not with phase 2
+below. Its hashes are for the files as first installed.
+
 ---
 
 You are working on the OpenClaw VPS (hostname `openclaw-vps`, Ubuntu 22.04,

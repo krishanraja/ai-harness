@@ -44,8 +44,18 @@ class FakeApi:
         return self.proof_value
 
 
-def entries():
+def shipped():
     return clock.load_config(CONFIG)
+
+
+def entries():
+    """The Lozatron entry alone, so the timing tests are not crossed by the
+    other entries' own windows."""
+    return [e for e in shipped() if e.name == "lozatron-briefing"]
+
+
+def compound():
+    return [e for e in shipped() if e.name == "compound-daily-brief"]
 
 
 def run_ticks(api, start, minutes, state=None, step=5):
@@ -130,6 +140,27 @@ class OncePerSlot(unittest.TestCase):
         self.assertEqual(len(api.dispatches), 2)
 
 
+class NoProof(unittest.TestCase):
+    """COMPOUND's brief writes to a private database, so the clock has no file
+    to read. A successful dispatch settles it; a refused one is retried once."""
+
+    def test_a_successful_dispatch_settles_the_slot(self):
+        api = FakeApi()
+        state = {}
+        for minute in range(0, 61, 5):
+            clock.tick(compound(), state, at(2026, 10, 5, 10, 30) + dt.timedelta(minutes=minute), api)
+        self.assertEqual(api.dispatches, ["compound-daily-brief"])
+        self.assertEqual(api.proof_checks, 0)
+        self.assertEqual(state["slots"]["compound-daily-brief"]["2026-10-05T06:30"]["outcome"], "dispatched")
+
+    def test_a_refused_dispatch_is_retried_once(self):
+        api = FakeApi(dispatch_ok=False)
+        state = {}
+        for minute in range(0, 241, 5):
+            clock.tick(compound(), state, at(2026, 10, 5, 10, 30) + dt.timedelta(minutes=minute), api)
+        self.assertEqual(len(api.dispatches), 2)
+
+
 class ClockOutages(unittest.TestCase):
     def test_coming_back_inside_the_window_dispatches_late(self):
         api = FakeApi(proof=True)
@@ -169,9 +200,14 @@ class Config(unittest.TestCase):
         return {"version": 1, "entries": [entry]}
 
     def test_the_shipped_config_loads_and_targets_the_clock_trigger(self):
+        self.assertEqual([e.name for e in shipped()], ["lozatron-briefing", "compound-daily-brief"])
         entry = entries()[0]
         self.assertEqual(entry.inputs, {"dry_run": "false", "trigger": "clock"})
         self.assertEqual(entry.proof.expected(entry.slot_for(dt.date(2026, 10, 4))), "2026-10-04T09")
+        brief = compound()[0]
+        self.assertEqual(brief.inputs, {"mode": "daily", "trigger": "clock"})
+        self.assertIsNone(brief.proof)
+        self.assertEqual(brief.slot_for(dt.date(2026, 10, 5)).astimezone(UTC), at(2026, 10, 5, 10, 30))
 
     def test_bad_values_are_refused_by_name(self):
         for changes, words in (
