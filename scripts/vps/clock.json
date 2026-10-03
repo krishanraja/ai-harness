@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "name": "lozatron-briefing",
+      "repo": "krishanraja/lozatron",
+      "workflow": "briefings.yml",
+      "ref": "main",
+      "at": "09:00",
+      "tz": "America/New_York",
+      "days": ["daily"],
+      "inputs": { "dry_run": "false", "trigger": "clock" },
+      "proof": {
+        "kind": "json_key_present",
+        "path": "state/delivered.json",
+        "field": "slots",
+        "key": "{date}T{hour}"
+      },
+      "proof_after_minutes": 30,
+      "give_up_after_minutes": 240,
+      "max_dispatches": 2
+    }
+  ]
+}
