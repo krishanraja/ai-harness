@@ -148,3 +148,52 @@ The OpenClaw node process (the gateway on 18789/18791) runs as root. Moving it m
 ## Not done, on purpose
 
 No credential was rotated or printed. No PR was opened. Nothing else on the host changed: the n8n governor, every OpenClaw gateway job, the loz, steph, finno and maa agents and their cron lines, and the loz sandbox were left as found.
+
+## Clock switched on, 2026-10-04
+
+Run from LORIMER with `docs/harness/VPS-CLOCK-ON-PROMPT.md`. Krish said yes to step 1 and to step 4; steps 2 and 3 needed no change from this session.
+
+### 1. Files updated
+
+- Backups: `/opt/vps-clock/clock.json.bak-2026-10-04`, `/opt/vps-clock/test_clock.py.bak-2026-10-04` (both verified).
+- Downloaded `clock.json` and `test_clock.py` from `ai-harness` `main`, `scripts/vps/`. `clock.py` unchanged.
+- SHA-256, all `OK`:
+  - `0bc4ddfca77d67f0f36c54ece93ca68b58cba82846802bed5b1371082af299bd  clock.py`
+  - `87155666195d03d17bae9f027bd991f018be0e81dd32fe4ed4e6a9f31670c097  clock.json`
+  - `253e3482f64db18ed0ff64d8a93d1c097df9cc2853e89122c50a7bc10beee4f1  test_clock.py`
+- Tests: `Ran 26 tests ... OK`.
+- Dry run at `--now 2026-10-05T10:31:00Z`: `compound-daily-brief slot=2026-10-05T06:30 would-dispatch krishanraja/compound compound-daily.yml@main attempt 1 (on time)`, then `dry run: 2 entries, nothing dispatched, state untouched`.
+- Side effect: running the tests as root left a `__pycache__` folder in `/opt/vps-clock`. Harmless.
+- Undo: `sudo cp -p /opt/vps-clock/clock.json.bak-2026-10-04 /opt/vps-clock/clock.json && sudo cp -p /opt/vps-clock/test_clock.py.bak-2026-10-04 /opt/vps-clock/test_clock.py`
+
+### 2. Token
+
+Krish created and installed it from his own terminal; it never passed through a chat. `/etc/vps-clock/env` is `600 root`, its folder `700 root`, and it holds one `CLOCK_GITHUB_TOKEN` line. The value was not read or printed.
+
+### 3. Token proof (read-only, statuses only)
+
+- `lozatron 200 active`
+- `compound 200 active`
+
+### 4. Turned on
+
+- Backup: `/root/crontab.bak-2026-10-04` (42 lines; identical to the live crontab minus the new line).
+- Added to the root crontab:
+  ```
+  */5 * * * * /usr/bin/python3 /opt/vps-clock/clock.py --config /opt/vps-clock/clock.json >> /var/log/vps-clock.log 2>&1
+  ```
+- Added `/etc/logrotate.d/vps-clock`: `weekly`, `rotate 8`, `compress`, `missingok`, `notifempty`. A dry run of the full `/etc/logrotate.conf` (which sets `su root adm`) picks it up cleanly. Testing the file on its own reports an "insecure permissions" error only because the global `su` line is not loaded then; that is not a fault.
+- Readback: active cron count 30 to 31. First tick at `2026-10-04T00:05:01Z` wrote `/var/lib/vps-clock/state.json` with keys `first_tick`, `last_tick`, `slots`. `/var/log/vps-clock.log` exists and is empty, as expected outside both windows.
+- Undo: `sudo crontab /root/crontab.bak-2026-10-04 && sudo rm /etc/logrotate.d/vps-clock`
+
+### 5. The proof is in the morning (open)
+
+- 06:30 New York (10:30 UTC until 1 November, 11:30 after): `compound-daily-brief ... dispatched ... HTTP 204`, then `settled` on the next tick.
+- 09:00 New York (13:00 UTC, 14:00 after 1 November): `lozatron-briefing ... dispatched ... HTTP 204`, then `proved` about 30 minutes later.
+- A `dispatch-refused ... HTTP 422` would be a regression (both repos declared the `trigger` input on 2026-10-03); report it.
+
+### Earlier open checks, updated
+
+- **Governor line: closed.** Cron started the governor at 00:00:01 UTC and it logged `[2026-10-04T00:00:02Z] done`. The line sits in `/var/log/n8n-governor.log.1.gz` because the weekly logrotate ran at the same minute and left a fresh empty log. All reboot after-checks now pass except the loz sandbox.
+- **Token, 2.3, 2.4: closed** by the steps above.
+- **loz sandbox:** still open. Check `sudo docker ps -a` names and status after Lauren's 13:00 UTC run; if still exited, ask Krish before `docker start`.
