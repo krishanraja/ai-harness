@@ -19,8 +19,40 @@
 
 schema_version: 1
 
-# 92 rules across the two contracts.
+# 98 rules across the two contracts.
 contract_rules:
+  - id: who-krish-is.before-proposing-material-work
+    file: contract/krish-operating-contract.md
+    text_sha: "8f6aa4aef201"
+    first_seen: "2026-10-05"
+    source:
+      kind: ruling
+      ref: "60106bef02bd"
+    status: live
+  - id: who-krish-is.mindmake-the-mission-and
+    file: contract/krish-operating-contract.md
+    text_sha: "8df6b922b4eb"
+    first_seen: "2026-10-05"
+    source:
+      kind: ruling
+      ref: "60106bef02bd"
+    status: live
+  - id: who-krish-is.the-ikigai-s-twelve
+    file: contract/krish-operating-contract.md
+    text_sha: "709db44eaf7e"
+    first_seen: "2026-10-05"
+    source:
+      kind: ruling
+      ref: "60106bef02bd"
+    status: live
+  - id: who-krish-is.read-the-venture-list
+    file: contract/krish-operating-contract.md
+    text_sha: "753e74bacc3e"
+    first_seen: "2026-10-05"
+    source:
+      kind: ruling
+      ref: "60106bef02bd"
+    status: live
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
     text_sha: "f338ba0fff33"
@@ -800,7 +832,7 @@ contract_rules:
       ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
 
-# 226 chapters across the installed skills.
+# 227 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -2086,6 +2118,15 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: krish-principles.who-krish-is
+    file: skills/krish-principles/SKILL.md
+    heading: "Who Krish is"
+    text_sha: "d06d8a102719"
+    first_seen: "2026-10-05"
+    source:
+      kind: ruling
+      ref: "60106bef02bd"
+    status: live
   - id: krish-principles.stability-tags
     file: skills/krish-principles/SKILL.md
     heading: "Stability tags"
@@ -2288,11 +2329,17 @@ skill_sections:
   - id: mindmake.role-and-standard
     file: skills/mindmake/SKILL.md
     heading: "Role and standard"
-    text_sha: "a043bf2a2a14"
+    text_sha: "d2042c811938"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "60106bef02bd"
+    history:
+      - text_sha: "a043bf2a2a14"
+        valid_until: "2026-10-05"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake.load-only-what-the
     file: skills/mindmake/SKILL.md
@@ -2315,11 +2362,17 @@ skill_sections:
   - id: mindmake.source-and-conflict-rules
     file: skills/mindmake/SKILL.md
     heading: "Source and conflict rules"
-    text_sha: "6355d4c2679b"
+    text_sha: "07d9f1b061b1"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "60106bef02bd"
+    history:
+      - text_sha: "6355d4c2679b"
+        valid_until: "2026-10-05"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake.durable-commercial-lens
     file: skills/mindmake/SKILL.md
@@ -2360,12 +2413,17 @@ skill_sections:
   - id: mindmake-os.two-authorities-and-which
     file: skills/mindmake-os/SKILL.md
     heading: "Two authorities, and which one wins"
-    text_sha: "05300a94d4b9"
+    text_sha: "08731ae7e06d"
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "748a1ce45969"
+      ref: "60106bef02bd"
     history:
+      - text_sha: "05300a94d4b9"
+        valid_until: "2026-10-05"
+        source:
+          kind: ruling
+          ref: "748a1ce45969"
       - text_sha: "408a4c3dd2af"
         valid_until: "2026-09-19"
         source:
