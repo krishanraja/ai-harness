@@ -7,11 +7,11 @@ Rendered from registry reconciliation date **2026-09-24**.
 
 ## Release authority
 
-- Latest approved release: **v2026.09.24.3** (harness-v2026.09.24.3)
-- Immutable and published: **yes**, 2026-09-24T21:38:30Z
-- Release source commit: `3278b02aa981ee5e02507bbb502e41ddda8da9fd`
-- Manifest SHA-256: `62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.09.24.3
+- Latest approved release: **v2026.10.05.1** (harness-v2026.10.05.1)
+- Immutable and published: **yes**, 2026-10-05T22:23:46Z
+- Release source commit: `58910a0a82794355ce88ee1ffeb84995b04075dc`
+- Manifest SHA-256: `D703C292548EDE3B683ADDE98ACAFB5BCF9316C3B4FFF8C9C8ABA916BC914A30`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.05.1
 - Current deployment verdict: **current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
@@ -22,10 +22,10 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable |
 | cursor-primary | v2026.09.24.3 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.24.3 | 29/29 exact | current-installed-hash-verified-canary-failed-one-stochastic-strategy-route |
-| codex-current | v2026.09.24.3 | 29/29 exact | current-installed-hash-verified-canary-partial-no-blocking-failures |
-| claude-cloud | v2026.09.24.3 | cloud inventory only | current-supervised-upload-exact-canonical-inventory-content-visible-byte-parity-unavailable |
-| perplexity-cloud | v2026.09.24.3 | cloud inventory only | current-supervised-replacement-exact-canonical-inventory-content-visible-byte-parity-unavailable |
+| claude-code-user | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.05.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route |
+| codex-current | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.05.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures |
+| claude-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.05.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
+| perplexity-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.05.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
