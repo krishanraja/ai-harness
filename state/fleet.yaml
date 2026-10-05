@@ -32,6 +32,12 @@ repos:
     canon_target: AGENTS.md
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, project-documentation/06_CURRENT_STATE.md]
+    who_krish: false
+    note: >-
+      Carries the canon block without the who-Krish paragraph. Ruling (Krish,
+      2026-10-05): his ikigai, venture objectives, pricing and revenue are published in
+      control-center and ai-harness, and the mindmake repository is excluded because it is
+      one product focused on one thing.
 
   - name: fractionl-circle
     canon_target: AGENTS.md

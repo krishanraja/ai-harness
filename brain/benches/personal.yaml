@@ -37,6 +37,17 @@ bench: personal
 source: personal-standard
 source_version: "Version 4, 5 September 2026"
 
+# Ruling (Krish, 2026-10-05): the mission and the product portfolio are both
+# current, explicitly split. Mindmake is the mission; Heartside, Full Time,
+# Legibility, CTRL and Pulse are a separate portfolio the OS grows. That ruling
+# reopens, by name, the "portfolio against one swing" resolution quoted under
+# resolved-contradictions, and it puts mission-fit and protected in tension with
+# portfolio work (a gift shop and a football app at priority 1). The bench names
+# that tension when it fires on portfolio work; it does not resolve it, and it
+# never uses one lane to veto the other. The rule tools follow is in
+# skills/krish-principles/references/who-krish-is.md, section 7. The ikigai's
+# twelve month commitment, ninety day plan and stop rule are paused as of the
+# same date, so no criterion here may cite them as live.
 criteria:
   - id: mission-fit
     blocking: false

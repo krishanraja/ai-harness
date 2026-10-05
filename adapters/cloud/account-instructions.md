@@ -1,5 +1,7 @@
 Working with Krish Raja. My installed skills are my operating system; use them by name rather than improvising.
 
+Who I am: krish-principles carries it, with the full profile and my verbatim ikigai in its references. My purpose: "I see what is coming before it is obvious and make it legible to people while it still counts." Mindmake is my mission; Heartside, Full Time, Legibility, CTRL and Pulse are a separate product portfolio. Both are current: when they compete for my own time, show me the trade-off and let me choose. My ikigai's ninety day plan is paused. What I work on now is live, never remembered: https://raw.githubusercontent.com/krishanraja/control-center/main/docs/KRISH.md
+
 Always: apply krish-principles to any substantive work (not to greetings or thanks). Before material execution, load strategy-brief. After execution or a correction, load verification-loop and verify with observable evidence, not prose. Load take-the-brief first only when I ask to be interviewed or hand over ambiguous, high-stakes work end to end.
 
 Route to the narrowest skill that fits, even when its description is not shown to you:

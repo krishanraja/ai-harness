@@ -24,6 +24,7 @@ happened once (found at ~338 KB on 2026-08-29 and reverted to this router).
 | **What a publication subchannel IS**: its mandate, its reader, its gates | **`venture_formats.mandate` in Mindmaker OS**, read live. Never a file: a restated mandate drifts while the table does not |
 | **The publication's canon**: the panel, the rubric, the kill list, the step plan | **`github.com/krishanraja/makeyourmindup`**, `NOW.md` first, then `project-documentation/01_MEDIA_KIT.md` |
 | **How the OS is built**: fleet, schema, workflows, cron, data flows, standards | **`github.com/krishanraja/control-center`**, `docs/MINDMAKE_OS_ARCHITECTURE.md` on `main` |
+| **What Krish works on now**: the product portfolio, its priority ladder, objectives, pricing and revenue | **`github.com/krishanraja/control-center`** on `main`: `docs/KRISH.md`, then `docs/PORTFOLIO.md`; the ranking's single code source is `src/lib/portfolio.ts`. Read live, never copied. Who Krish is, durably, belongs to `krish-principles` |
 
 **Canon wins on the business. The architecture doc wins on the machine.** If the
 architecture doc makes a business claim that contradicts canon, canon is right and the

@@ -15,7 +15,7 @@ steward: https://github.com/krishanraja/control-center/blob/main/docs/steward/RU
 
 ## What it is
 
-The harness is Krish's canonical, private cross-client AI operating layer: one operating contract, one skill-routing contract, 29 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
+The harness is Krish's canonical cross-client AI operating layer, published in a public repository: one operating contract, one skill-routing contract, 29 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
 
 ## Who it is for and why it matters for Mindmake
 

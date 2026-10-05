@@ -1,6 +1,6 @@
 ---
 name: krish-principles
-description: "Execution doctrine for work done for Krish: how he reasons, decides, values, and formats calls. NEVER invoke for pure social conversation, greetings, thanks, acknowledgements, emoji, or no-action remarks; the root adapter already carries the always-on baseline. Invoke before substantive work, recommending, evaluating, researching, designing, building, reviewing, changing, or executing; compress tiny routine application rather than omitting it. Especially relevant to 'should I', 'pressure-test this', 'rank these', 'kill or double down', prioritisation, venture/product/partnership assessment, and returning after a gap. It does not replace voice, channel context, strategy routing, producers, verification, or tool APIs. Last reviewed 2026-09-13."
+description: "Execution doctrine for work done for Krish: who he is (locked purpose, decision rules, mission versus portfolio split), how he reasons, decides, values, and formats calls. NEVER invoke for pure social conversation, greetings, thanks, acknowledgements, emoji, or no-action remarks; the root adapter already carries the always-on baseline. Invoke before substantive work, recommending, evaluating, researching, designing, building, reviewing, changing, or executing; compress tiny routine application rather than omitting it. Especially relevant to 'should I', 'pressure-test this', 'rank these', 'kill or double down', prioritisation, venture/product/partnership assessment, and returning after a gap. It does not replace voice, channel context, strategy routing, producers, verification, or tool APIs. Last reviewed 2026-09-13."
 ---
 
 # Krish Principles: Base Doctrine
@@ -34,6 +34,20 @@ Route ownership precisely:
 Pass facts, assumptions, evidence, authority, constraints, material alternatives, unresolved questions, and the observable success signal in each handoff. `strategy-brief` selects the minimal chain and its approval gates; principles frames the call but does not duplicate the plan. Naming a generic "research", "writing", or "verification" step is not a handoff when a named owner exists.
 
 Completion has three distinct destinations: observable proof goes to `verification-loop`; verified finalized rationale plus its revisit trigger goes to `decision-ledger` when consequential; tentative or unresolved beliefs stay in the Assumption Ledger. Never collapse all three into a generic memory update.
+
+## Who Krish is
+
+The person this doctrine serves, from his Master Ikigai (version 4) and his rulings of 2026-10-05. Quote the locked lines exactly; never paraphrase them into copy or plans.
+
+- **Purpose (locked):** "I see what is coming before it is obvious and make it legible to people while it still counts."
+- **The face (locked):** "A senior leader who will not admit to anyone that they are not ready for what is happening."
+- **The word (locked):** "Edge." **The enemy (locked):** "Fear and noise that stop capable people acting on what is already happening."
+- **Mission (working, not locked):** "Build the company that gives leaders their edge back before what is coming takes it, and sell it at scale with my name on it."
+- **Mission and portfolio are both current, explicitly split.** Mindmake is the mission and the one swing. Heartside, Full Time, Legibility, CTRL and Pulse are a separate product portfolio the OS grows; Circle is dormant. Rules 7 and 8 of his ikigai pull against a football app and a gift shop at portfolio priority 1. Do not resolve that tension for him: never use one lane to veto the other, and when a proposal would spend his own hours in one lane at the other's expense, surface the trade-off and let him choose.
+- **Paused:** the ikigai's twelve month commitment, ninety day plan and stop rule were paused on 2026-10-05 and are being reset by Krish. Never act on them as live.
+- **What he works on is dynamic.** Read the venture list, priorities, pricing and revenue live from Control Center; never from memory or from this skill.
+
+Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full mission and portfolio rule, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it.
 
 ## Stability tags
 

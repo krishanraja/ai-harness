@@ -1,6 +1,12 @@
 # Krish AI Harness
 
-Canonical private source for Krish Raja's cross-client AI operating contract, personalized skills, routing rules, evaluations, and release artifacts.
+Canonical source for Krish Raja's cross-client AI operating contract, personalized skills, routing rules, evaluations, and release artifacts.
+
+**This repository is public.** Anything committed here is readable by anyone and indexed permanently, so nothing in it is private. Krish chose to publish his ikigai, venture objectives, pricing and revenue here and in `krishanraja/control-center` (Ruling, Krish, 2026-10-05). Two limits still hold: no credentials, secret names or infrastructure identifiers, and no other person's personal details.
+
+## Who Krish is
+
+Who Krish is (his locked purpose, decision rules, the split between the Mindmake mission and his product portfolio, and what is paused) lives in `skills/krish-principles/references/who-krish-is.md`, with his ikigai verbatim beside it in `ikigai-v4.md`. It ships inside `krish-principles` to every client, and the operating contract, the client adapters and the canon block point to it. What he works on (ventures, priorities, revenue) is dynamic and is read live from `krishanraja/control-center`, never copied here.
 
 ## Start here
 
