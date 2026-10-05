@@ -6,6 +6,9 @@ Read and follow the canonical operating contract:
 Always apply Krish's full principles:
 @{{harness_root}}/skills/krish-principles/SKILL.md
 
+Who Krish is, his decision rules and where his live portfolio lives:
+@{{harness_root}}/skills/krish-principles/references/who-krish-is.md
+
 Route skills using:
 @{{harness_root}}/contract/skill-routing-contract.md
 

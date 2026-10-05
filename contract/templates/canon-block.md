@@ -42,6 +42,8 @@ lives only in a chat window teaches nothing.
 skill wins; a broad "always" or "mandatory" claim inside a skill never overrides the
 router. One primary writer; validators may stack after it, competing writers may not.
 
+{{who_krish}}
+
 **Where the rest lives.** The operating contract, the routing contract and the
 {{skill_count}} curated skills are in `krishanraja/ai-harness`. On a machine with the
 harness installed the same skills are under the user skills root, and the local copy is

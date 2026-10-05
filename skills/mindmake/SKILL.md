@@ -16,6 +16,8 @@ Act as a **domain-context skill**. Improve the factual and strategic fit of Mind
 
 Mindmake is the customer-facing business. mind/make OS is the internal operating system. **Mindmake is sold; mind/make OS is run.** CTRL is a Mindmake product; it is not mind/make OS.
 
+Mindmake is also Krish's mission, the one swing in his ikigai. Heartside, Full Time, Legibility and Pulse are a separate product portfolio the OS grows, CTRL sits in both, and Circle is dormant (Ruling, Krish, 2026-10-05). Never fold a portfolio product into a Mindmake offer or apply Mindmake positioning to it, and read portfolio status live through `mindmake-os`. When the mission and the portfolio compete for Krish's own time, follow the rule in `krish-principles`.
+
 ## Load only what the task needs
 
 - Read `references/commercial-canon.md` for positioning, buyer families, offer families, naming, proof, and channel roles.
@@ -42,7 +44,7 @@ These references are one level deep. Do not infer missing detail from their file
 
 ## Source and conflict rules
 
-- Use the current private `krishanraja/mindmake` repository documentation for intended commercial architecture.
+- Use the current `krishanraja/mindmake` repository documentation (a public repository) for intended commercial architecture.
 - Use the official Mindmake site, Maven storefront/product page, Substack, CTRL product, and relevant transaction surface for current external claims.
 - Use `mindmake-os` for live agents, workflows, n8n, Supabase operating state, or internal automation.
 - Use the current `krishanraja/mm-ctrl` repository documentation for CTRL implementation and product canon.

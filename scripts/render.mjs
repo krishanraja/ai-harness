@@ -81,10 +81,25 @@ function resolvePaths(text, surfaceId) {
   })
 }
 
+/**
+ * The who-Krish paragraph, or nothing for a repository that opts out.
+ *
+ * Krish ruled on 2026-10-05 that his profile is published in ai-harness and
+ * control-center and that the mindmake repository is excluded. A repository
+ * marked `who_krish: false` in state/fleet.yaml therefore renders the block
+ * exactly as it did before the paragraph existed: the placeholder line and the
+ * blank line after it are removed, so its stamp does not move and no pull
+ * request is opened against it.
+ */
+function whoKrish(text, repo) {
+  if (repo.who_krish === false) return text.replace(/\{\{who_krish\}\}\r?\n\r?\n/g, '')
+  return text.replace(/\{\{who_krish\}\}/g, read('contract/templates/canon-who-krish.md').trimEnd())
+}
+
 /** The canon block body for one repository, before the markers go on. */
 export function renderBody(repo) {
   const rules = (repo.rules_files || []).map((f) => `\`${f}\``).join(', ') || 'none recorded'
-  return read('contract/templates/canon-block.md')
+  return whoKrish(read('contract/templates/canon-block.md'), repo)
     .replace(/\{\{release\}\}/g, release)
     .replace(/\{\{skill_count\}\}/g, String(skillCount))
     .replace(/\{\{rules_files\}\}/g, rules)

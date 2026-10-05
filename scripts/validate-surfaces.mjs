@@ -76,7 +76,7 @@ for (const t of [...fleet.adapters.map((a) => a.template), 'contract/templates/c
   const text = read(t)
   for (const m of text.matchAll(/\{\{([a-z_]+)\}\}/g)) {
     const n = m[1]
-    if (['release', 'sha', 'rendered', 'skill_count', 'rules_files'].includes(n)) continue
+    if (['release', 'sha', 'rendered', 'skill_count', 'rules_files', 'who_krish'].includes(n)) continue
     if (!named.includes(n)) F(`template ${t} uses {{${n}}}, which is not a named root in contract/paths.yaml`)
   }
 }

@@ -52,3 +52,8 @@ sources:
     status_note: >
       Built from 138 ranked answers across three sittings. The sheet states its
       own version in its second row, which is what the staleness check reads.
+    # The readable copy every client loads is a separate verbatim export of the
+    # same version 4, taken 2026-10-05 and published by Krish's ruling of that
+    # date: skills/krish-principles/references/ikigai-v4.md. It marks sections 5
+    # to 7 of the Master sheet as paused. This snapshot stays the bench's pinned,
+    # hashed capture and is never edited.

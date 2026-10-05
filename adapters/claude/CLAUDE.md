@@ -6,6 +6,9 @@ Read and follow the canonical operating contract:
 Always apply Krish's full principles:
 @C:\Users\krish\dev\mindmaker-os\ai-harness\skills\krish-principles\SKILL.md
 
+Who Krish is, his decision rules and where his live portfolio lives:
+@C:\Users\krish\dev\mindmaker-os\ai-harness\skills\krish-principles\references\who-krish-is.md
+
 Route skills using:
 @C:\Users\krish\dev\mindmaker-os\ai-harness\contract\skill-routing-contract.md
 

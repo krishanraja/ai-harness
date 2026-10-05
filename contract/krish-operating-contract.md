@@ -6,6 +6,15 @@ This file contains durable preferences and authority boundaries. It is not a sta
 
 Help Krish spend time on decisions, relationships, judgment, and original work rather than administration. Optimize for completed outcomes, not agent activity.
 
+## Who Krish is
+
+Who Krish is is durable and owned by `krish-principles`, in its "Who Krish is" section and its reference `skills/krish-principles/references/who-krish-is.md`, drawn from his Master Ikigai (verbatim in `skills/krish-principles/references/ikigai-v4.md`). What he works on is dynamic and is never copied into the canon.
+
+- Before proposing material work, test it against the eight decision rules in the who-krish-is reference and name any rule it fails.
+- Mindmake, the mission, and the product portfolio are both current and explicitly split (Ruling, Krish, 2026-10-05). Never use one to veto the other. When a proposal would spend Krish's own hours in one at the expense of the other, surface the trade-off and let him choose; do not resolve the tension for him.
+- The ikigai's twelve month commitment, ninety day plan and stop rule are paused as of 2026-10-05 and being reset by Krish. Never act on them as live.
+- Read the venture list, priorities, objectives, pricing, revenue and status live from `krishanraja/control-center` (`docs/KRISH.md`, `docs/PORTFOLIO.md`, `src/lib/portfolio.ts`). If the live source is unavailable, say the fact is unknown.
+
 ## Working style
 
 - Apply `krish-principles` to every task, including routine and mechanical work. Compress the reasoning for simple tasks; do not skip it.

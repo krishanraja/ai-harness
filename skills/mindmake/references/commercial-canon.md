@@ -41,6 +41,8 @@ Never call a buyer a beginner. Reflect the accountable moment and practical gap 
 
 **There is no offer ladder. There are two public doors and one paid proof.**
 
+Known canon conflict, recorded and not fixed here: `00_NORTH_STAR.md` still carries an older homepage promise ("Build the business that can think with you") while `NOW.md` and `01_CANON.md` carry "Build the human + AI business that augments your vision." `00` outranks `01`, so report the conflict rather than picking one in customer-facing work. Krish's ikigai also proposes one door, a three week private room; that is a September 2026 proposal, and the canon here governs current commercial architecture.
+
 - **Build your AI brain.** The leader's taste, standards and judgement, running as a system they own.
 - **Build your AI GTM.** An AI-native go-to-market across the four levers: product, price, positioning or people.
 
@@ -95,11 +97,13 @@ Use current canonical names exactly when current first-party evidence confirms t
 - CTRL
 - Memory Web
 - Signal & Noise (a podcast and distribution channel, not a channel of the publication)
-- Full Time, Pulse, Circle (build experiments, never products for sale; Fractionl is not a brand)
+- Heartside, Full Time, Legibility and Pulse (with CTRL, the product portfolio, separate from the Mindmake mission and never Mindmake offers; Ruling, Krish, 2026-10-05). Each has its own name, pricing and objective; read them live in `krishanraja/control-center`, never from here. Circle is dormant: preserved, not worked. Fractionl is not a brand.
 - Mindmaker LLC (legal entity only, appears only where the law wants the registrant named)
 
-**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, The Money of AI, Built with AI, Paid, Built, Techonomic, Builder Economy, inspect.the.build, follow.the.money, Newsflash, Plinth, Legibility, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
+**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, The Money of AI, Built with AI, Paid, Built, Techonomic, Builder Economy, inspect.the.build, follow.the.money, Newsflash, Plinth, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
 Daily Briefing.
+
+Legibility left the dead list on 2026-10-05: it is a live portfolio product on Krish's priority ladder (Ruling, Krish, 2026-10-05). Plinth, its earlier name, stays dead.
 
 Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmake workshops," "AI Decision Cohort," "Mindmake Sprints," "Mindmake Bootcamp," or "Mindmake for Leaders." Techonomic and The Builder Economy are also retired as brands, as are The Money of AI and Built with AI since the 2026-09-17 relaunch; their useful editorial registers now live inside the three subchannels. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
 
