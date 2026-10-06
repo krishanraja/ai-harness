@@ -1,6 +1,6 @@
 ---
 name: krish-build
-description: "Precondition: NEVER use this technical producer as the first skill for a non-trivial implementation; invoke strategy-brief first, including for an API endpoint that must be proved. After that handoff, use this build-and-ship doctrine before writing code, designing or repairing a multi-stage repository pipeline, deploying, committing, handling secrets, wiring data, or shipping a technical artifact. Trigger on: 'build this', 'implement', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'API endpoint', 'run the pipeline', 'stage conveyor', 'set this up', 'wire this', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery builds, or multi-step technical execution. Covers stage ownership, determinism, idempotency, gates, runtime-only secrets, validation, repair, and environment truth. Use tools-access for authentication and a reviewed tool skill for API mechanics. Fully reviewed 2026-10-06."
+description: "Technical producer for implementation and repair. MUST load for code changes, including a single pure function, and for designing or repairing a multi-stage repository pipeline. For non-trivial implementation, strategy-brief routes first and then hands to krish-build; observing strategy-brief never replaces this producer. Tiny reversible edits may use krish-build directly with a compressed strategy check. Trigger on: 'build this', 'implement', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'API endpoint', 'run the pipeline', 'stage conveyor', 'set this up', 'wire this', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery builds, or multi-step technical execution. Covers stage ownership, determinism, idempotency, gates, runtime-only secrets, validation, repair, and environment truth. Use tools-access for authentication and a reviewed tool skill for API mechanics. Fully reviewed 2026-10-06."
 ---
 
 # Krish Build: How It Gets Built and Shipped
@@ -11,7 +11,7 @@ Stability tags per krish-principles: [LOAD-BEARING] is stable conviction, [IN-PL
 
 ## Build task contract
 
-Act as the technical **producer**. Do not absorb product orchestration, visual taste, read-only UX diagnosis, independent code review, or outcome verification. For any implementation beyond a tiny reversible edit, load and complete `strategy-brief` before applying this producer. If routed here first, hand back to `strategy-brief`; a producer-level plan is not a substitute for the cross-skill route, authority boundary, and predeclared verification signal.
+Act as the technical **producer**. Do not absorb product orchestration, visual taste, read-only UX diagnosis, independent code review, or outcome verification. Load this producer for every authorised code change and for stage-conveyor design or repair. For any implementation beyond a tiny reversible edit, load and complete `strategy-brief` first, then return here for production; `strategy-brief` does not replace the producer. A tiny reversible edit may enter here directly after a compressed check of target, authority, pass signal, and rollback. If a non-trivial request routes here first, hand back to `strategy-brief` and resume `krish-build` after that route is fixed.
 
 Before any material write, deployment, paid run, or external mutation, record:
 
