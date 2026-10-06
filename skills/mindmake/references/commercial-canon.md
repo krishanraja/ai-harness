@@ -52,8 +52,8 @@ They are not two products. Either can be the way in, and either can lead to the 
 
 Alongside the advisory:
 
-- **Content, the publication.** It is called **makeyourmindup** and it runs three subchannels: `split_the_bill` (Wednesdays), `mind_the_gap` (Fridays) and `lift_the_lid` (standing, no fixed day). **The mandate for each is `venture_formats.mandate` in Mindmaker OS, read live, never a file.** The Money of AI and Built with AI are retired, as of the 2026-09-17 relaunch. It carries paid tiers, so never describe it as free. Retrieve the live publication before making tier, price, access or cadence claims.
-- **CTRL.** A self-serve Mindmake product at `ctrl.mindmake.co`, kept alive deliberately cheaply. It is **never a third thing to buy from the advisory**, never linked or priced on mindmake.co, where it appears only as evidence that Mindmake does this itself. Read `references/ctrl-product.md` before making product claims.
+- **Content, the publication.** It is called **makeyourmindup**, lives at `home.makeyourmindup.ai`, and runs three channels (Ruling, Krish, 2026-10-06, matching the database): **follow.the.money** (Mondays), **under.the.hood** (Wednesdays) and **mind.the.gap** (Fridays). **The mandate for each is `venture_formats.mandate` in Mindmaker OS, read live, never a file.** The Money of AI and Built with AI are retired, as of the 2026-09-17 relaunch, and so are the interim names `split_the_bill` and `lift_the_lid`. If the canon in `krishanraja/mindmake` still says two channels, that repository is stale on this point; report the conflict rather than editing it from here. It carries paid tiers, so never describe it as free. Retrieve the live publication before making tier, price, access or cadence claims.
+- **CTRL.** A self-serve Mindmake product at `ctrl.mindmake.co`, kept alive deliberately cheaply. It is **never a third thing to buy from the advisory**, never linked or priced on mindmake.co, where it appears only as evidence that Mindmake does this itself. CTRL carrying its own price on its own surface is fine (Ruling, Krish, 2026-10-06); read the current price live. Where the `krishanraja/mindmake` canon says CTRL is never priced, that canon conflicts with the ruling: record the conflict, do not edit that repository from here. Read `references/ctrl-product.md` before making product claims.
 - **Maven Lightning Lessons.** Free education only. Never a paid cohort, workshop ladder or alumni programme.
 
 **RETIRED, and they stay retired.** The Teardown, The Handover, the 21-day Sprint, the AI Decision Cohort, **The Signal Session**, **The Revenue Architecture**, **The AI Immersion**, and the paid Maven cohort, workshop and alumni ladder. Older documents, pages or transaction artifacts describing any of them are historical evidence, not current intent. Report the discrepancy; never revive the offer and never silently mutate a live surface.
@@ -91,20 +91,22 @@ Use current canonical names exactly when current first-party evidence confirms t
 - Mindmake (the business; never Mindmaker, never Mindmaker Live)
 - mind/make OS (the operating system)
 - makeyourmindup (the publication; the content brand and it owns the name)
-- split.the.bill, mind.the.gap, lift.the.lid (its three subchannels)
+- follow.the.money, under.the.hood, mind.the.gap (its three channels; Ruling, Krish, 2026-10-06)
 - The Artifact (the investigative format; never call it Teardown)
 - Lightning Lessons
 - CTRL
 - Memory Web
 - Signal & Noise (a podcast and distribution channel, not a channel of the publication)
-- Heartside, Full Time, Legibility and Pulse (with CTRL, the product portfolio, separate from the Mindmake mission and never Mindmake offers; Ruling, Krish, 2026-10-05). Each has its own name, pricing and objective; read them live in `krishanraja/control-center`, never from here. Circle is dormant: preserved, not worked. Fractionl is not a brand.
+- Heartside, Full Time, Legibility and Pulse (with CTRL, the product portfolio, which rolls into the Mindmake mission but never becomes a Mindmake offer; Ruling, Krish, 2026-10-06). Each has its own name, pricing and objective; read them live in `krishanraja/control-center`, never from here. Full Time is a B2C monetisation experiment app, never a job search or career asset (Ruling, Krish, 2026-10-06). Circle is dormant: preserved, not worked. Fractionl is not a brand.
 - Mindmaker LLC (legal entity only, appears only where the law wants the registrant named)
 
-**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, The Money of AI, Built with AI, Paid, Built, Techonomic, Builder Economy, inspect.the.build, follow.the.money, Newsflash, Plinth, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
+**Dead names. Never use one as a live offer or venture:** Mindmaker, Mindmaker Live, The Money of AI, Built with AI, Paid, Built, Techonomic, Builder Economy, inspect.the.build, Newsflash, Plinth, The Teardown, The Handover, The Signal Session, The Revenue Architecture, The AI Immersion, AI Decision Cohort, AdFixus, Meliora, Amperity, OnAlert, gutted, Merciless. Their history and contacts stay queryable; only the offer is gone. A verbatim quote is never edited, so a quote may still say Mindmaker.
 Daily Briefing.
 
 Legibility left the dead list on 2026-10-05: it is a live portfolio product on Krish's priority ladder (Ruling, Krish, 2026-10-05). Plinth, its earlier name, stays dead.
 
-Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmake workshops," "AI Decision Cohort," "Mindmake Sprints," "Mindmake Bootcamp," or "Mindmake for Leaders." Techonomic and The Builder Economy are also retired as brands, as are The Money of AI and Built with AI since the 2026-09-17 relaunch; their useful editorial registers now live inside the three subchannels. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
+follow.the.money left the dead list on 2026-10-06: it is a live channel of the publication, on Mondays (Ruling, Krish, 2026-10-06).
+
+Do not casually revive retired or historical names such as "The AI-Fluent Executive," "Mindmake workshops," "AI Decision Cohort," "Mindmake Sprints," "Mindmake Bootcamp," or "Mindmake for Leaders." Techonomic and The Builder Economy are also retired as brands, as are The Money of AI and Built with AI since the 2026-09-17 relaunch; their useful editorial registers now live inside the three channels: follow.the.money, under.the.hood and mind.the.gap. If a live official surface still uses a retired name, report the discrepancy rather than rewriting one source from another.
 
 Do not relitigate an established canonical name during an ordinary copy task. Apply naming criteria only when Krish explicitly asks to name, rename, or reposition something.

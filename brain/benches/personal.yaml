@@ -37,17 +37,20 @@ bench: personal
 source: personal-standard
 source_version: "Version 4, 5 September 2026"
 
-# Ruling (Krish, 2026-10-05): the mission and the product portfolio are both
-# current, explicitly split. Mindmake is the mission; Heartside, Full Time,
-# Legibility, CTRL and Pulse are a separate portfolio the OS grows. That ruling
-# reopens, by name, the "portfolio against one swing" resolution quoted under
-# resolved-contradictions, and it puts mission-fit and protected in tension with
-# portfolio work (a gift shop and a football app at priority 1). The bench names
-# that tension when it fires on portfolio work; it does not resolve it, and it
-# never uses one lane to veto the other. The rule tools follow is in
+# Ruling (Krish, 2026-10-06): the portfolio rolls into the mission. It
+# supersedes the 2026-10-05 "both, explicitly split" ruling. Mindmake is the one
+# company; Heartside, Full Time, Legibility, CTRL and Pulse are parts of it, and
+# there is one queue with the mission leading and products ordered beneath it
+# by the live ladder. That restores the sheet's "portfolio against one swing"
+# resolution quoted under resolved-contradictions, by a dated ruling. Krish
+# resolved the tension between mission-fit and protected and the products at
+# ladder position 1 (a gift shop and a football app) by placing them inside the
+# mission, so no criterion here may cite Rule 7 or Rule 8 to block ladder work;
+# protected still applies to Krish's own hours. The rule tools follow is in
 # skills/krish-principles/references/who-krish-is.md, section 7. The ikigai's
-# twelve month commitment, ninety day plan and stop rule are paused as of the
-# same date, so no criterion here may cite them as live.
+# twelve month commitment is ongoing (Ruling, Krish, 2026-10-06) with no new
+# stop date, so no criterion here may cite the ninety day plan's dated steps or
+# the stop rule as live.
 criteria:
   - id: mission-fit
     blocking: false

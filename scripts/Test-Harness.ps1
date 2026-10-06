@@ -733,6 +733,11 @@ if ($LASTEXITCODE -ne 0) {
     Add-Failure "Harness control-plane regression suite failed: $($controlPlaneRegressionCheck -join ' | ')"
 }
 
+$canonSyncRegressionCheck = @(& node (Join-Path $Root 'scripts	est-canon-sync.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Canon sync exclusion regression suite failed: $($canonSyncRegressionCheck -join ' | ')"
+}
+
 $releaseCoherenceCheck = @(& node $releaseCoherenceValidator 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Release registry is incoherent: $($releaseCoherenceCheck -join ' | ')"

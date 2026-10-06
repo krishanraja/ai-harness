@@ -33,8 +33,16 @@ repos:
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, project-documentation/06_CURRENT_STATE.md]
     who_krish: false
+    canon_sync: false
+    canon_sync_reason: >-
+      Ruling (Krish, 2026-10-06): keep the mindmake repository out of the canon rollout;
+      he closed its canon pull request and it must not be reopened nightly. The
+      reconciler and the seeder skip it entirely, so no stamp-only pull request is
+      opened when a release moves the stamp.
     note: >-
-      Carries the canon block without the who-Krish paragraph. Ruling (Krish,
+      Stays in this list for parity with the docs steward's fleet.json and so the
+      observer still reads its rulings. who_krish false is kept so that, if the sync is
+      ever turned back on, the who-Krish paragraph stays out. Ruling (Krish,
       2026-10-05): his ikigai, venture objectives, pricing and revenue are published in
       control-center and ai-harness, and the mindmake repository is excluded because it is
       one product focused on one thing.

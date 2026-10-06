@@ -13,14 +13,16 @@ How to read it:
   and this file is re-exported, never edited by hand.
 - Lines that begin with `> Harness annotation` were added by the harness. They are not
   part of the sheet and they never change a cell.
-- **Paused, 2026-10-05.** Section 5 (the twelve month commitment), section 6 (the ninety
-  day plan) and section 7 (the scorecard and its stop rule) of the Master Ikigai sheet are
-  PAUSED. The stop rule fell due on 5 October 2026 and was not met. Krish is resetting
-  them; the new stop date and terms are pending. Do not act on the ninety day plan, the
-  scorecard targets or the stop rule as if they were live.
+- **Ongoing, 2026-10-06.** Section 5 (the twelve month commitment) of the Master Ikigai
+  sheet is ONGOING by Krish's ruling of 2026-10-06 ("its ongoing."), which replaces the
+  2026-10-05 pause. The stop rule in section 7 fell due on 5 October 2026 and was not met;
+  Krish chose to continue, and no new stop date has been set. The dated steps of section 6
+  (the ninety day plan) are history from the original plan, and its day 90 review date of
+  5 December 2026 is unconfirmed. Do not act on the plan's steps, the scorecard targets or
+  the stop rule as if they were live, and do not invent a new stop date.
 - The rest of the sheet (the locked purpose, the face, the word, the enemy, the decision
   rules in section 4, and the kill, park and double down list) stands, read together with
-  the 2026-10-05 rulings in `references/who-krish-is.md`.
+  the 2026-10-05 and 2026-10-06 rulings in `references/who-krish-is.md`.
 - Appendix D is the version 3 reading and its seven rules. Section 4 of the Master
   Ikigai sheet ("Decision rules v2") supersedes them; Appendix D is history.
 
@@ -70,7 +72,7 @@ How to read it:
 | Rule 7 | If it does not put a leader's edge back, it is off mission. | Generic AI implementation, tooling for its own sake. | R12.4, R12.5, R6.4 |
 | Rule 8 | Music and football are protected. They enter the work only after it runs without him. | Portfolio plays across passions now. | R11.5, F6, R4.2 |
 
-> Harness annotation, 2026-10-05: PAUSED. The twelve month commitment is paused by Krish and being reset; new stop date and terms pending. The rows below are verbatim and are not live instructions.
+> Harness annotation, 2026-10-06: ONGOING. The twelve month commitment continues by Krish's ruling of 2026-10-06; the stop rule was not met and no new stop date has been set. The rows below are verbatim; their dates and stop condition are not live instructions.
 
 | 5. The twelve month commitment |
 | Commitment | Terms | Revisit trigger | Flip condition |
@@ -78,7 +80,7 @@ How to read it:
 | Say it before you sell it | Purpose and mission said out loud, unhedged, to one person he respects. R12.6 rank 1 is the only test that counts. | Weekend of 6 Sep 2026. | If he hedges, the mission wording is wrong and one more round is owed before anything is sent. |
 | Find the binding | One of the 25 conversations is also the partner search. A commercial partner who sells, or a peer who reviews the sent-count weekly. | By 31 Oct 2026. | No partner by 31 Oct: hire the accountability (a weekly paid coach or a fractional seller on commission) rather than continue solo. |
 
-> Harness annotation, 2026-10-05: PAUSED. The ninety day plan is paused by Krish and being reset; new stop date and terms pending. The rows below are verbatim and are not live instructions.
+> Harness annotation, 2026-10-06: HISTORY. The dated steps below are from the original ninety day plan; the commitment is ongoing (Ruling, Krish, 2026-10-06) and the day 90 review date of 5 Dec 2026 is unconfirmed. The rows below are verbatim and are not live instructions.
 
 | 6. Ninety day plan. Room first, company second, raise third |
 | Window | Do | Done when | Owner |
@@ -88,7 +90,7 @@ How to read it:
 | Days 43 to 90 (18 Oct to 5 Dec) | Convert the first room to an embedded rebuild with growth shares. Define the product that keeps the leader's edge after the room (see CTRL tab). Close the partner conversation. | One embedded engagement signed. Partner named. Product definition written from what the paid leader actually asked for. | Krish and partner |
 | Day 90 review (5 Dec 2026) | Score the ledger. Decide: raise on the company, or run two more rooms first. | Decision recorded with rationale and the next revisit date. | Krish |
 
-> Harness annotation, 2026-10-05: PAUSED. The scorecard and its stop rule is paused by Krish and being reset; new stop date and terms pending. The rows below are verbatim and are not live instructions.
+> Harness annotation, 2026-10-06: NOT LIVE. The stop rule fell due on 5 Oct 2026 and was not met; Krish chose to continue (Ruling, Krish, 2026-10-06) and no new stop date has been set. The rows below are verbatim and are not live tests.
 
 | 7. Twelve week scorecard. Fill the yellow cells weekly. Totals and gaps are formulas. |
 | Week ending | Approaches sent | Calls taken | Paid rooms | Cash invoiced (GBP) | Pieces published | Hours building unasked |
@@ -120,7 +122,7 @@ How to read it:
 | Double down | Keynotes and the podcast as the demand engine | Closest thing to the purpose lived (R5.4, R8.5, R10.5). Repetition to a hungry room is the job. | None, but they exist to fill the room, not to replace it. |
 | Double down, redefined | CTRL as what the leader keeps after the room | R12.3 rank 1 names the product: something people use to keep their own judgement and edge. See CTRL tab. | None. |
 
-> Harness annotation, 2026-10-05 (inference, confirm with Krish): the dates of 5 Oct 2026 below come from the same stop rule that is being reset. Read them as part of the reset, not as live tests.
+> Harness annotation, 2026-10-06 (inference, confirm with Krish): the dates of 5 Oct 2026 below come from the same stop rule, which fell due unmet while the commitment continues (Ruling, Krish, 2026-10-06). Read them as history, not as live tests.
 
 | 9. Assumption ledger. Beliefs the plan rests on, with flip rules |
 | Belief | Confidence | Evidence that set it | Flip rule |
@@ -176,7 +178,7 @@ How to read it:
 | Founder visible, company owned | Krish is named as founder and the person in the room. The company is mind/make and outlives him. | R12.1 rank 1, C5 (well known inside the niche), the room is sold by a name. | Requires editing the site's hard rule and the film briefs. |
 | Recommendation | Founder visible, company owned. The mission chosen in round 12 has his name on it; the site rule predates that choice and should yield to it. |  | Decision owed by Krish, not made here. |
 
-> Harness annotation, 2026-10-05 (inference, confirm with Krish): the dates of 5 Oct 2026 below come from the same stop rule that is being reset. Read them as part of the reset, not as live tests.
+> Harness annotation, 2026-10-06 (inference, confirm with Krish): the dates of 5 Oct 2026 below come from the same stop rule, which fell due unmet while the commitment continues (Ruling, Krish, 2026-10-06). Read them as history, not as live tests.
 
 | 5. Tests, ninety days |
 | Test | Measure | Pass | Fail |

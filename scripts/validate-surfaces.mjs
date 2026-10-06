@@ -24,6 +24,7 @@ import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
 import { check as checkRuleProvenance, extract as extractRules } from './brain-rules.mjs'
+import { canonSyncProblems, canonExcludedRepos, isCanonSynced } from './lib/fleet.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -54,6 +55,20 @@ for (const repo of fleet.repos) {
   if (!windowsState.present) F(`canon block for ${repo.name} cannot classify CRLF transport as byte drift`)
 }
 O(`canon block renders and self-verifies for ${fleet.repos.length} repos, longest under ${MAX_BLOCK_LINES} lines`)
+
+// ------------------------------------------------------- canon sync exclusions
+// A repository can stay in the fleet (for steward parity and the observer)
+// while being out of the canon rollout. The flag must be a real boolean and an
+// exclusion must say why, or a typo could quietly drop a repository from the
+// sync, or the sync could keep writing to one its owner ruled out.
+{
+  const problems = canonSyncProblems(fleet)
+  for (const m of problems) F(`state/fleet.yaml ${m}`)
+  if (!problems.length) {
+    const ex = canonExcludedRepos(fleet).map((r) => r.name)
+    O(`canon sync flags well formed; excluded from the rollout: ${ex.length ? ex.join(', ') : 'none'}`)
+  }
+}
 
 // ------------------------------------------------------------------ adapters
 const REQUIRED = ['krish-operating-contract.md', 'skill-routing-contract.md', 'krish-principles', 'strategy-brief', 'verification-loop']
@@ -194,6 +209,7 @@ if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
 const reposRoot = flag('--repos-root') || join(HARNESS, '..')
 let checked = 0
 for (const repo of fleet.repos) {
+  if (!isCanonSynced(repo)) continue
   const target = join(reposRoot, repo.checkout || repo.name, repo.canon_target)
   if (!existsSync(target)) continue
   const text = readFileSync(target, 'utf8')

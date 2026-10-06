@@ -19,6 +19,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { blockFor, splice } from './render.mjs'
+import { isCanonSynced } from './lib/fleet.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -64,6 +65,7 @@ function header(repo, meta) {
 
 let seeded = 0, spliced = 0
 for (const repo of fleet.repos) {
+  if (!isCanonSynced(repo)) { console.log(`skip  ${repo.name} (canon_sync false in state/fleet.yaml)`); continue }
   const dir = join(root, repo.checkout || repo.name)
   if (!existsSync(dir)) { console.log(`skip  ${repo.name} (no checkout at ${dir})`); continue }
   const target = join(dir, repo.canon_target)

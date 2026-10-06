@@ -10,7 +10,7 @@
 
 ## Maven sales surface
 
-**Refocused 2026-08-11 and confirmed by Krish on 2026-08-20: the paid ladder that used to live here is retired.** There are no workshops, no cohort, and no alumni pass. Maven now hosts **free Lightning Lessons only**, and their job is to feed CTRL at makeyourmindup.ai and subscriptions to Mindmake's publication. Any older copy quoting a workshop or cohort price is historical evidence, not current copy, and must not be reproduced as a live offer.
+**Refocused 2026-08-11 and confirmed by Krish on 2026-08-20: the paid ladder that used to live here is retired.** There are no workshops, no cohort, and no alumni pass. Maven now hosts **free Lightning Lessons only**, and their job is to feed CTRL and subscriptions to Mindmake's publication. Read both destination addresses live before writing a link. Any older copy quoting a workshop or cohort price is historical evidence, not current copy, and must not be reproduced as a live offer.
 
 Maven is a direct-response surface. Its job is to help a browsing leader recognise their situation, understand the concrete outcome, trust the proof, and make the next buying decision. Unlike the editorial channels, selling is explicit.
 

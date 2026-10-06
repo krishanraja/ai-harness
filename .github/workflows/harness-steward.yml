@@ -92,6 +92,12 @@ jobs:
       - name: Control-plane regressions still fail closed
         run: node scripts/test-control-plane.mjs
 
+      # mindmake is ruled out of the canon rollout (Krish, 2026-10-06). This runs
+      # the real reconciler with the network stubbed out and fails if it would
+      # make any request for an excluded repository.
+      - name: Excluded repositories are never touched by the canon sync
+        run: node scripts/test-canon-sync.mjs
+
       - name: Publish fleet freshness in the run summary
         run: |
           node scripts/report-fleet-freshness.mjs > fleet-freshness.json

@@ -1,6 +1,6 @@
 ---
 name: krish-principles
-description: "Execution doctrine for work done for Krish: who he is (locked purpose, decision rules, mission versus portfolio split), how he reasons, decides, values, and formats calls. NEVER invoke for pure social conversation, greetings, thanks, acknowledgements, emoji, or no-action remarks; the root adapter already carries the always-on baseline. Invoke before substantive work, recommending, evaluating, researching, designing, building, reviewing, changing, or executing; compress tiny routine application rather than omitting it. Especially relevant to 'should I', 'pressure-test this', 'rank these', 'kill or double down', prioritisation, venture/product/partnership assessment, and returning after a gap. It does not replace voice, channel context, strategy routing, producers, verification, or tool APIs. Last reviewed 2026-09-13."
+description: "Execution doctrine for work done for Krish: who he is (locked purpose, decision rules, one queue with the mission leading the product ladder), how he reasons, decides, values, and formats calls. NEVER invoke for pure social conversation, greetings, thanks, acknowledgements, emoji, or no-action remarks; the root adapter already carries the always-on baseline. Invoke before substantive work, recommending, evaluating, researching, designing, building, reviewing, changing, or executing; compress tiny routine application rather than omitting it. Especially relevant to 'should I', 'pressure-test this', 'rank these', 'kill or double down', prioritisation, venture/product/partnership assessment, and returning after a gap. It does not replace voice, channel context, strategy routing, producers, verification, or tool APIs. Last reviewed 2026-09-13."
 ---
 
 # Krish Principles: Base Doctrine
@@ -37,17 +37,18 @@ Completion has three distinct destinations: observable proof goes to `verificati
 
 ## Who Krish is
 
-The person this doctrine serves, from his Master Ikigai (version 4) and his rulings of 2026-10-05. Quote the locked lines exactly; never paraphrase them into copy or plans.
+The person this doctrine serves, from his Master Ikigai (version 4) and his rulings of 2026-10-05 and 2026-10-06. Quote the locked lines exactly; never paraphrase them into copy or plans.
 
 - **Purpose (locked):** "I see what is coming before it is obvious and make it legible to people while it still counts."
 - **The face (locked):** "A senior leader who will not admit to anyone that they are not ready for what is happening."
 - **The word (locked):** "Edge." **The enemy (locked):** "Fear and noise that stop capable people acting on what is already happening."
 - **Mission (working, not locked):** "Build the company that gives leaders their edge back before what is coming takes it, and sell it at scale with my name on it."
-- **Mission and portfolio are both current, explicitly split.** Mindmake is the mission and the one swing. Heartside, Full Time, Legibility, CTRL and Pulse are a separate product portfolio the OS grows; Circle is dormant. Rules 7 and 8 of his ikigai pull against a football app and a gift shop at portfolio priority 1. Do not resolve that tension for him: never use one lane to veto the other, and when a proposal would spend his own hours in one lane at the other's expense, surface the trade-off and let him choose.
-- **Paused:** the ikigai's twelve month commitment, ninety day plan and stop rule were paused on 2026-10-05 and are being reset by Krish. Never act on them as live.
+- **The portfolio rolls into the mission** (Ruling, Krish, 2026-10-06; it supersedes the 2026-10-05 split). Mindmake is the one company and the one swing; Heartside, Full Time, Legibility, CTRL and Pulse are parts of it, and Circle is dormant. There is one queue: when only one "do this next" can be shown, the mission leads, and product work is ordered beneath it by the live ladder. Never cite Rule 7 or Rule 8 to drop work on the ladder; when work asks for Krish's own hours on Full Time, note Rule 8 once and do what he decides.
+- **The twelve month commitment is ongoing** (Ruling, Krish, 2026-10-06). No new stop date has been set; never invent one. The ninety day plan's dated steps are history, and its 5 December 2026 review date is unconfirmed.
+- **Founder visibility is still open.** Never resolve it for him.
 - **What he works on is dynamic.** Read the venture list, priorities, pricing and revenue live from Control Center; never from memory or from this skill.
 
-Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full mission and portfolio rule, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it.
+Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full one-queue rule, his other standing rulings, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it.
 
 ## Stability tags
 

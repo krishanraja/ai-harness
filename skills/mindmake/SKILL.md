@@ -16,7 +16,7 @@ Act as a **domain-context skill**. Improve the factual and strategic fit of Mind
 
 Mindmake is the customer-facing business. mind/make OS is the internal operating system. **Mindmake is sold; mind/make OS is run.** CTRL is a Mindmake product; it is not mind/make OS.
 
-Mindmake is also Krish's mission, the one swing in his ikigai. Heartside, Full Time, Legibility and Pulse are a separate product portfolio the OS grows, CTRL sits in both, and Circle is dormant (Ruling, Krish, 2026-10-05). Never fold a portfolio product into a Mindmake offer or apply Mindmake positioning to it, and read portfolio status live through `mindmake-os`. When the mission and the portfolio compete for Krish's own time, follow the rule in `krish-principles`.
+Mindmake is also Krish's mission, the one swing in his ikigai and his one company. Heartside, Full Time, Legibility, CTRL and Pulse roll into it, and Circle is dormant (Ruling, Krish, 2026-10-06, superseding the 2026-10-05 split). Inside one company is not inside one offer: each product keeps its own name, buyer and pricing, so never fold a product into the advisory's offer or apply the advisory's positioning to it. Read product status and the priority ladder live through `mindmake-os`; for how the mission and the ladder share one queue, follow `krish-principles`.
 
 ## Load only what the task needs
 
