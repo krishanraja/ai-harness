@@ -3,7 +3,7 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-09-24**.
+Rendered from registry reconciliation date **2026-10-06**.
 
 ## Release authority
 
@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-09-24**.
 - Release source commit: `88a059daac42a9f3753e960a82e8054cafebd075`
 - Manifest SHA-256: `CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
-- Current deployment verdict: **current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual**
+- Current deployment verdict: **partial-current-on-lorimer-and-cloud-skill-catalogues-surface-machine-stale-perplexity-account-instructions-and-local-canary-failures-open**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -20,20 +20,23 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable |
-| cursor-primary | v2026.09.24.3 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route |
-| codex-current | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures |
-| claude-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.06.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
-| perplexity-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.06.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
+| codex-surface-07a67cda9f99 | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.06.1-machine-unreachable-was-v2026.09.24.3-installed-hash-verified-canary-partial |
+| cursor-primary | v2026.10.06.1 | 29/29 exact | installed-hash-verified-manual-canary-required |
+| claude-code-user | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-one-strategy-route |
+| codex-current | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-two-krish-principles-negative-routes |
+| claude-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-exact-byte-parity-unavailable |
+| perplexity-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-blocked-1500-character-limit-byte-parity-unavailable |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
 ## Behavioral evidence
 
-- **claude-code-user: failed.** [Evidence](state/canaries/v2026.09.24.3-claude-code-user.json).
+- **codex-surface-07a67cda9f99: partial.** [Evidence](state/canaries/v2026.09.24.3-codex-surface-07a67cda9f99.json).
+- **claude-code-user: failed.** [Evidence](state/canaries/v2026.10.06.1-claude-code-user.json).
   - strategy-trigger-001: expected strategy-brief to fire, observed wrong-skill.
-- **codex-current: partial.** [Evidence](state/canaries/v2026.09.24.3-codex-current.json).
+- **codex-current: failed.** [Evidence](state/canaries/v2026.10.06.1-codex-current.json).
+  - principles-trigger-032: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).
+  - principles-trigger-013: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).
 - **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
 
 ## Machine clocks

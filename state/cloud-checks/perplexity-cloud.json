@@ -2,20 +2,34 @@
   "schema_version": 1,
   "surface": "perplexity-cloud",
   "status": "ok",
-  "checked_at": "2026-09-24T23:12:20.4733822Z",
-  "release": "v2026.09.24.3",
-  "source_commit": "3278b02aa981ee5e02507bbb502e41ddda8da9fd",
+  "checked_at": "2026-10-06T14:47:47.8520675Z",
+  "release": "v2026.10.06.1",
+  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
   "url": "https://www.perplexity.ai/computer/skills?tab=installed",
   "catalogue_count": 29,
   "canonical_skill_count": 29,
   "canonical_names_exact": true,
   "upload_method": "supervised authenticated browser upload and per-skill replace",
   "artifact_suffix": "-perplexity.zip",
-  "manifest_sha256": "62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85",
-  "skills_tree_aggregate_sha256": "DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB",
-  "evidence": "All 29 immutable release packages were accepted through Perplexity's duplicate-safe Replace flow in batches of at most five. The installed catalogue exposes the exact canonical skill names and refreshed content descriptions. No skill was deleted.",
+  "manifest_sha256": "CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657",
+  "skills_tree_aggregate_sha256": "406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768",
+  "changed_skills_replaced": [
+    "content-corpus",
+    "krish-principles",
+    "mindmake",
+    "mindmake-os"
+  ],
+  "account_instructions": {
+    "status": "blocked-platform-limit-original-state-restored",
+    "source": "adapters/cloud/account-instructions.md",
+    "source_character_count": 2497,
+    "platform_character_limit": 1500,
+    "original_character_count": 0
+  },
+  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Perplexity's duplicate-safe Replace flow and each refreshed description was read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills. No skill was deleted. The canonical account-instructions adapter could not be saved because Perplexity enforces a 1,500-character limit; no approved compressed adapter exists, so the original empty field was restored instead of inventing production policy.",
   "limitations": [
     "Perplexity exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
-    "No behavioral routing canary was run in this supervised catalogue-update pass."
+    "No behavioral routing canary was run in this supervised catalogue-update pass.",
+    "Account-instructions parity is blocked until an approved Perplexity-specific adapter of at most 1,500 characters exists."
   ]
 }

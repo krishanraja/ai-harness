@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-09-24
+last_reconciled: 2026-10-06
 status: governed-production-set
 
 candidate_quality_system:
@@ -65,13 +65,13 @@ candidate_reconciliation:
 
 
 deployed_release:
-  release_id: v2026.09.24.3
-  source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
-  artifact_set_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
+  release_id: v2026.10.06.1
+  source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+  artifact_set_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
-  deployed_at: 2026-09-24
-  evidence: state/machine-runs/v2026.09.24.3-lorimer.json
-  status: current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual
+  deployed_at: 2026-10-06
+  evidence: state/machine-runs/v2026.10.06.1-lorimer.json
+  status: partial-current-on-lorimer-and-cloud-skill-catalogues-surface-machine-stale-perplexity-account-instructions-and-local-canary-failures-open
 
 latest_approved_release:
   release_id: v2026.10.06.1
@@ -148,81 +148,80 @@ surface_deployments:
     # evidence beat the register, which is the right way round, and the register was
     # simply not updated by anything. It is now written from the committed records
     # under state/deployments/ and state/machine-runs/ rather than from a report.
-    release_id: v2026.09.08.2
-    source_commit: c5141efa028abdc0683ae5ac116f05d43c1f62b4
+    release_id: v2026.09.24.3
+    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
-    installed_file_count: 139
-    installed_ordinal_aggregate_sha256: 9D3F2E690A450CC3E23E9B3C86A4A9DC2D563EE111678AA811F8837C098B4B05
+    installed_file_count: 144
+    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-08
-    deployed_at_utc: 2026-09-08T15:59:43Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.09.08.2-20260908T155937Z-60f0fe0d
+    deployed_at: 2026-09-25
+    deployed_at_utc: 2026-09-25T07:31:23.6342697Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.09.24.3-20260925T073121Z-e472f516
     evidence:
-      - state/deployments/v2026.09.08.2-codex-surface-07a67cda9f99.json
-      - state/machine-runs/v2026.09.08.2-surface.json
-      - state/canaries/v2026.09.08.2-codex-surface-07a67cda9f99.json
-      - state/release-v2026.09.08.1-deployment-surface-2026-09-08.md
+      - state/canaries/v2026.09.24.3-codex-surface-07a67cda9f99.json
+      - state/deployments/v2026.09.24.3-codex-surface-07a67cda9f99.json
+      - state/machine-runs/v2026.09.24.3-surface.json
     # The video-engine launcher fires again here: both positive canaries passed on
     # Codex, which is the defect .1 shipped and the reason .2 exists. Six of seven
     # selected skills got a passing positive. The seventh, design-intelligence-search,
     # is manual-only and correctly absent from the implicit catalog; the sheet was
     # asking it the wrong question and now sends its explicit invocation instead.
-    status: stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable
-    previous_release: v2026.09.08.1
+    status: stale-behind-v2026.10.06.1-machine-unreachable-was-v2026.09.24.3-installed-hash-verified-canary-partial
+    previous_release: v2026.09.08.2
   cursor-primary:
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    installed_file_count: 143
-    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
+    installed_file_count: 146
+    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-24
-    deployed_at_utc: 2026-09-24T22:01:38.3187754Z
-    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.09.24.3-20260924T220136Z-4883301a
-    evidence: state/deployments/v2026.09.24.3-cursor-primary.json
+    deployed_at: 2026-10-06
+    deployed_at_utc: 2026-10-06T11:27:52.5480571Z
+    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.1-20261006T112751Z-6cce4873
+    evidence: state/deployments/v2026.10.06.1-cursor-primary.json
     status: installed-hash-verified-manual-canary-required
   claude-code-user:
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    installed_file_count: 143
-    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
+    installed_file_count: 146
+    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-24
-    deployed_at_utc: 2026-09-24T21:48:44.1393322Z
-    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.09.24.3-20260924T214842Z-c4219e9b
+    deployed_at: 2026-10-06
+    deployed_at_utc: 2026-10-06T11:12:26.0244249Z
+    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.1-20261006T111224Z-43caa2a2
     evidence:
-      - state/canaries/v2026.09.24.3-claude-code-user.json
-      - state/deployments/v2026.09.24.3-claude-code-user.json
-    status: stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route
+      - state/canaries/v2026.10.06.1-claude-code-user.json
+      - state/deployments/v2026.10.06.1-claude-code-user.json
+    status: installed-hash-verified-canary-failed-one-strategy-route
   codex-current:
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    installed_file_count: 143
-    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
+    installed_file_count: 146
+    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-24
-    deployed_at_utc: 2026-09-24T22:25:34.8135781Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.09.24.3-20260924T222532Z-f302ba44
+    deployed_at: 2026-10-06
+    deployed_at_utc: 2026-10-06T11:27:58.6257306Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.1-20261006T112757Z-9a491d0a
     evidence:
-      - state/canaries/v2026.09.24.3-codex-current.json
-      - state/deployments/v2026.09.24.3-codex-current.json
-    status: stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures
+      - state/canaries/v2026.10.06.1-codex-current.json
+      - state/deployments/v2026.10.06.1-codex-current.json
+    status: installed-hash-verified-canary-failed-two-krish-principles-negative-routes
   claude-cloud:
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    deployed_at: 2026-09-24
+    deployed_at: 2026-10-06
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-behind-v2026.10.06.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
+    status: changed-skills-replaced-catalogue-verified-account-instructions-exact-byte-parity-unavailable
   perplexity-cloud:
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    deployed_at: 2026-09-24
+    deployed_at: 2026-10-06
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-behind-v2026.10.06.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
+    status: changed-skills-replaced-catalogue-verified-account-instructions-blocked-1500-character-limit-byte-parity-unavailable
 
 canonical:
   repository: krishanraja/ai-harness
