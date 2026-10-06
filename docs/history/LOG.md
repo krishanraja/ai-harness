@@ -7,6 +7,8 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-10-06
 
+- The `v2026.10.06.1` Codex canary failed `principles-trigger-013` and `principles-trigger-032` because the tier-three rotation, seeded on that release id, drew `krish-principles` back onto the sheet. The 2026-09-13 observability boundary had removed it from the Tier 1, changed-skill and never-proven lists but not from the rotation. Codex reads that file on every turn because its root adapter says to, so those cases failed exactly as they had on `v2026.09.13.3` and `.4`; they were never run on `v2026.09.24.3` or `v2026.10.05.1`. The rotation now drops adapter invariants after the draw, so every other release's sheet is unchanged, and a regression test sweeps 41 release seeds. No skill bytes changed.
+
 - reconciled at `5b22a53`: added the v2026.10.05.1 who-Krish canon, release and LORIMER install bullets to `NOW.md`, recorded that `CURRENT.md` and the LORIMER machine-run record disagree on whether `claude-code-user` and `codex-current` are installed, and refreshed review ages for `harness-maintainer` (47 days) and `video-engine` (38 days) against their 30-day SLA, both still waiting on Krish.
 
 ## 2026-10-04
