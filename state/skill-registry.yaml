@@ -71,7 +71,7 @@ deployed_release:
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   deployed_at: 2026-10-06
   evidence: state/machine-runs/v2026.10.06.1-lorimer.json
-  status: current-on-lorimer-and-supported-cloud-surfaces-surface-machine-stale-local-canary-gaps-open
+  status: current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open
 
 latest_approved_release:
   release_id: v2026.10.06.1
@@ -142,32 +142,24 @@ superseded_approved_release:
 
 surface_deployments:
   codex-surface-07a67cda9f99:
-    # Moved to v2026.09.08.2 on 2026-09-08 at 15:59:43Z. This row said v2026.09.08.1
-    # for seven hours after the install, and SURFACE flagged it: its live deployment
-    # records and direct parity proved .2 while the register said .1. Machine
-    # evidence beat the register, which is the right way round, and the register was
-    # simply not updated by anything. It is now written from the committed records
-    # under state/deployments/ and state/machine-runs/ rather than from a report.
-    release_id: v2026.09.24.3
-    source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
+    # Installed through the immutable release bundle after the live checkout path
+    # diverged from the canonical local convention. The corrected current runner
+    # measured only Codex; byte parity passed and the behavioral canary failed.
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
-    installed_file_count: 144
-    installed_ordinal_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
+    installed_file_count: 146
+    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
     per_skill_hashes_exact: 29
-    deployed_at: 2026-09-25
-    deployed_at_utc: 2026-09-25T07:31:23.6342697Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.09.24.3-20260925T073121Z-e472f516
+    deployed_at: 2026-10-06
+    deployed_at_utc: 2026-10-06T19:15:28.2985717Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.10.06.1-20261006T191526Z-6e0feab2
     evidence:
-      - state/canaries/v2026.09.24.3-codex-surface-07a67cda9f99.json
-      - state/deployments/v2026.09.24.3-codex-surface-07a67cda9f99.json
-      - state/machine-runs/v2026.09.24.3-surface.json
-    # The video-engine launcher fires again here: both positive canaries passed on
-    # Codex, which is the defect .1 shipped and the reason .2 exists. Six of seven
-    # selected skills got a passing positive. The seventh, design-intelligence-search,
-    # is manual-only and correctly absent from the implicit catalog; the sheet was
-    # asking it the wrong question and now sends its explicit invocation instead.
-    status: stale-behind-v2026.10.06.1-machine-unreachable-was-v2026.09.24.3-installed-hash-verified-canary-partial
-    previous_release: v2026.09.08.2
+      - state/canaries/v2026.10.06.1-codex-surface-07a67cda9f99.json
+      - state/deployments/v2026.10.06.1-codex-surface-07a67cda9f99.json
+      - state/machine-runs/v2026.10.06.1-surface.json
+    status: installed-hash-verified-canary-failed-take-the-brief-exclusion-and-video-engine-positive-routes
+    previous_release: v2026.09.24.3
   cursor-primary:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
