@@ -2,7 +2,7 @@
   "schema_version": 1,
   "surface": "perplexity-cloud",
   "status": "ok",
-  "checked_at": "2026-10-06T14:47:47.8520675Z",
+  "checked_at": "2026-10-06T16:23:35.0525289Z",
   "release": "v2026.10.06.1",
   "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
   "url": "https://www.perplexity.ai/computer/skills?tab=installed",
@@ -20,16 +20,19 @@
     "mindmake-os"
   ],
   "account_instructions": {
-    "status": "blocked-platform-limit-original-state-restored",
-    "source": "adapters/cloud/account-instructions.md",
-    "source_character_count": 2497,
+    "status": "updated-and-read-back",
+    "source": "adapters/cloud/perplexity-account-instructions.md",
+    "source_character_count": 1494,
+    "source_sha256": "B2538D48FDE113B53A7734559D4EF3D60E47724EA536B3286396A410D90C2D98",
+    "live_character_count": 1493,
+    "live_sha256": "B1DA911822F466BD3289DDC099B353A5DBDA10A6CE8A70B52BA0689BF5128711",
     "platform_character_limit": 1500,
-    "original_character_count": 0
+    "terminal_newline_omitted_from_live_field": true,
+    "readback_exact": true
   },
-  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Perplexity's duplicate-safe Replace flow and each refreshed description was read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills. No skill was deleted. The canonical account-instructions adapter could not be saved because Perplexity enforces a 1,500-character limit; no approved compressed adapter exists, so the original empty field was restored instead of inventing production policy.",
+  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Perplexity's duplicate-safe Replace flow and each refreshed description was read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills. No skill was deleted. A governed Perplexity-specific adapter names all 29 active skills and preserves the core execution and approval gates within the platform's 1,500-character limit. Perplexity reported Information updated; after navigating away and reopening Personalization, the 1,493-character live value matched the source payload exactly. The source file's conventional terminal newline is not entered into the account field.",
   "limitations": [
     "Perplexity exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
-    "No behavioral routing canary was run in this supervised catalogue-update pass.",
-    "Account-instructions parity is blocked until an approved Perplexity-specific adapter of at most 1,500 characters exists."
+    "No behavioral routing canary was run in this supervised catalogue-update pass."
   ]
 }

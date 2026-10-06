@@ -71,7 +71,7 @@ deployed_release:
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   deployed_at: 2026-10-06
   evidence: state/machine-runs/v2026.10.06.1-lorimer.json
-  status: partial-current-on-lorimer-and-cloud-skill-catalogues-surface-machine-stale-perplexity-account-instructions-and-local-canary-failures-open
+  status: current-on-lorimer-and-supported-cloud-surfaces-surface-machine-stale-local-canary-gaps-open
 
 latest_approved_release:
   release_id: v2026.10.06.1
@@ -221,7 +221,14 @@ surface_deployments:
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: changed-skills-replaced-catalogue-verified-account-instructions-blocked-1500-character-limit-byte-parity-unavailable
+    status: changed-skills-replaced-catalogue-verified-account-instructions-read-back-byte-parity-unavailable
+  codex-cloud:
+    release_id: v2026.10.06.1
+    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    installed_skill_count: 29
+    deployed_at: 2026-10-06
+    evidence: state/cloud-checks/codex-cloud.json
+    status: published-environment-pinned-commit-startup-validated-account-instructions-read-back
 
 canonical:
   repository: krishanraja/ai-harness
@@ -235,6 +242,7 @@ canonical:
   cloud_surfaces:
     - claude.ai/customize/skills
     - perplexity.ai/computer/skills
+    - chatgpt.com/settings/codex-cloud
 
 release_policy:
   source: clean canonical commit

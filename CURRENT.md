@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-10-06**.
 - Release source commit: `88a059daac42a9f3753e960a82e8054cafebd075`
 - Manifest SHA-256: `CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
-- Current deployment verdict: **partial-current-on-lorimer-and-cloud-skill-catalogues-surface-machine-stale-perplexity-account-instructions-and-local-canary-failures-open**
+- Current deployment verdict: **current-on-lorimer-and-supported-cloud-surfaces-surface-machine-stale-local-canary-gaps-open**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -25,7 +25,8 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | claude-code-user | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-one-strategy-route |
 | codex-current | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-two-krish-principles-negative-routes |
 | claude-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-exact-byte-parity-unavailable |
-| perplexity-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-blocked-1500-character-limit-byte-parity-unavailable |
+| perplexity-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-read-back-byte-parity-unavailable |
+| codex-cloud | v2026.10.06.1 | cloud inventory only | published-environment-pinned-commit-startup-validated-account-instructions-read-back |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
