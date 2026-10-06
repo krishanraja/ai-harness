@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 98 rules across the two contracts.
+# 99 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -31,19 +31,39 @@ contract_rules:
     status: live
   - id: who-krish-is.mindmake-the-mission-and
     file: contract/krish-operating-contract.md
-    text_sha: "8df6b922b4eb"
+    text_sha: "fb8d39c337b4"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "8df6b922b4eb"
+        valid_until: "2026-10-06"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
     status: live
   - id: who-krish-is.the-ikigai-s-twelve
     file: contract/krish-operating-contract.md
-    text_sha: "709db44eaf7e"
+    text_sha: "936b966d044b"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "709db44eaf7e"
+        valid_until: "2026-10-06"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
+    status: live
+  - id: who-krish-is.founder-visibility-is-an
+    file: contract/krish-operating-contract.md
+    text_sha: "4559a6fb2461"
+    first_seen: "2026-10-06"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
@@ -1023,20 +1043,32 @@ skill_sections:
   - id: content-corpus.role-and-standard
     file: skills/content-corpus/SKILL.md
     heading: "Role and standard"
-    text_sha: "17034fb1abae"
+    text_sha: "8b83284a3b55"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "17034fb1abae"
+        valid_until: "2026-10-06"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: content-corpus.load-only-what-the
     file: skills/content-corpus/SKILL.md
     heading: "Load only what the task needs"
-    text_sha: "af49ea262ab2"
+    text_sha: "a827a55dacb3"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "af49ea262ab2"
+        valid_until: "2026-10-06"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: content-corpus.status-gate-before-production
     file: skills/content-corpus/SKILL.md
@@ -1068,11 +1100,17 @@ skill_sections:
   - id: content-corpus.intent-router
     file: skills/content-corpus/SKILL.md
     heading: "Intent router"
-    text_sha: "925fda750225"
+    text_sha: "cf0d9d421e20"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "925fda750225"
+        valid_until: "2026-10-06"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: content-corpus.cross-channel-rules
     file: skills/content-corpus/SKILL.md
@@ -2121,11 +2159,17 @@ skill_sections:
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
     heading: "Who Krish is"
-    text_sha: "d06d8a102719"
+    text_sha: "a18eecc47938"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "db5cd4c3bd10"
+    history:
+      - text_sha: "d06d8a102719"
+        valid_until: "2026-10-06"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
     status: live
   - id: krish-principles.stability-tags
     file: skills/krish-principles/SKILL.md
@@ -2329,17 +2373,22 @@ skill_sections:
   - id: mindmake.role-and-standard
     file: skills/mindmake/SKILL.md
     heading: "Role and standard"
-    text_sha: "d2042c811938"
+    text_sha: "fe1343c4d238"
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "db5cd4c3bd10"
     history:
       - text_sha: "a043bf2a2a14"
         valid_until: "2026-10-05"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "d2042c811938"
+        valid_until: "2026-10-06"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
     status: live
   - id: mindmake.load-only-what-the
     file: skills/mindmake/SKILL.md
@@ -2442,35 +2491,52 @@ skill_sections:
   - id: mindmake-os.section-map
     file: skills/mindmake-os/SKILL.md
     heading: "Section map"
-    text_sha: "0ccf0689e949"
+    text_sha: "19e2dca0e007"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
+    history:
+      - text_sha: "0ccf0689e949"
+        valid_until: "2026-10-06"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake-os.changing-the-architecture-doc
     file: skills/mindmake-os/SKILL.md
     heading: "Changing the architecture doc"
-    text_sha: "211c49c23f43"
+    text_sha: "c8b981782b37"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
+    history:
+      - text_sha: "211c49c23f43"
+        valid_until: "2026-10-06"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake-os.related-skills
     file: skills/mindmake-os/SKILL.md
     heading: "Related skills"
-    text_sha: "c87747ea592f"
+    text_sha: "a8ad89ed2913"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "748a1ce45969"
+      kind: proposal
+      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
     history:
       - text_sha: "ecb3e02a7883"
         valid_until: "2026-09-19"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "c87747ea592f"
+        valid_until: "2026-10-06"
+        source:
+          kind: ruling
+          ref: "748a1ce45969"
     status: live
   - id: n8n-operator.role-and-chain
     file: skills/n8n-operator/SKILL.md
