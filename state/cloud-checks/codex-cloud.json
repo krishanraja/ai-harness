@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "surface": "codex-cloud",
+  "status": "ok",
+  "checked_at": "2026-10-06T18:56:55.5078242Z",
+  "release": "v2026.10.06.1",
+  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+  "url": "https://chatgpt.com/settings/codex-cloud",
+  "environment": {
+    "name": "ai-harness",
+    "visibility": "private",
+    "published": true,
+    "repository": "github.com/krishanraja/ai-harness",
+    "mount_path": "ai-harness",
+    "commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+    "install_script_configured": true,
+    "start_skill_configured": true,
+    "power_shell_version": "7.6.6",
+    "power_shell_archive_sha256": "DDBC4A2D113BBD46D283CFEDCBCD117A70CAEFD7673F41F2B4E0000BADF103BC",
+    "pwsh_path": "/home/agent/.local/bin/pwsh",
+    "python_path": "/home/agent/.local/bin/python",
+    "environment_variables": {
+      "XDG_CACHE_HOME": "/workspace/.cache",
+      "XDG_DATA_HOME": "/workspace/.local/share",
+      "XDG_CONFIG_HOME": "/workspace/.config"
+    },
+    "network_policy": "package-managers-no-additional-domains-no-secrets"
+  },
+  "account_instructions": {
+    "status": "updated-and-read-back",
+    "scope": "Instructions for Codex synced across desktop and web",
+    "source": "adapters/cloud/account-instructions.md",
+    "character_count": 2497,
+    "sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83"
+  },
+  "acceptance": {
+    "task_id": "01a1128c-55a6-7157-b5d9-e72d13d6306e",
+    "verdict": "pass",
+    "repository_path": "/workspace/ai-harness",
+    "repository_clean": true,
+    "origin": "https://github.com/krishanraja/ai-harness.git",
+    "head": "88a059daac42a9f3753e960a82e8054cafebd075",
+    "pwsh_version": "PowerShell 7.6.6",
+    "python_version": "Python 3.12.14",
+    "node_version": "v24.19.0",
+    "skill_count": 29,
+    "validator": "HARNESS VALIDATION PASSED: 29 skills, 1 unreleased candidates, 3 adapters, no high-confidence secrets.",
+    "repository_clean_after_validator": true
+  },
+  "evidence": "The private ai-harness Codex Cloud environment was published from the immutable release commit with a checksum-pinned PowerShell bootstrap, persistent pwsh and Python shims on the normal fresh-task PATH, all three XDG variables, and a governed Start skill. A new cloud task resolved both shims, observed the exact repository commit and a clean tree, and passed the full harness validator without leaving changes. The Codex custom-instructions field was separately populated from the canonical cloud adapter and read back exactly.",
+  "limitations": [
+    "Codex Cloud's default command sandbox suppresses stdout from nested Node subprocesses in this validator; the accepted run used explicitly authorized full command permissions.",
+    "The published Start skill records that boundary and requires immediate user approval before the full-permission readiness check."
+  ]
+}

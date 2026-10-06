@@ -1,6 +1,6 @@
 ---
 name: krish-build
-description: "Krish's build-and-ship doctrine, the layer above individual tool skills. Use before writing code, designing or repairing a repeatable multi-stage repository pipeline, deploying, committing, handling secrets or keys, wiring data, or shipping a technical artifact for Krish. Trigger on: 'build this', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'run the pipeline', 'stage conveyor', 'set this up', 'wire this', 'secrets', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery of .docx/.pptx/.html builds, or multi-step technical execution. Covers stage ownership, determinism, idempotency, build gates, runtime-only secrets, programmatic validation, targeted repair, and environment truth. Load krish-principles first. Use tools-access for secure authentication and a reviewed per-tool skill for API mechanics. Fully reviewed 2026-09-15."
+description: "Precondition: NEVER use this technical producer as the first skill for a non-trivial implementation; invoke strategy-brief first, including for an API endpoint that must be proved. After that handoff, use this build-and-ship doctrine before writing code, designing or repairing a multi-stage repository pipeline, deploying, committing, handling secrets, wiring data, or shipping a technical artifact. Trigger on: 'build this', 'implement', 'deploy', 'ship it', 'commit', 'edge function', 'migration', 'API endpoint', 'run the pipeline', 'stage conveyor', 'set this up', 'wire this', 'API key', 'why did this fail', 'it ran but nothing happened', file delivery builds, or multi-step technical execution. Covers stage ownership, determinism, idempotency, gates, runtime-only secrets, validation, repair, and environment truth. Use tools-access for authentication and a reviewed tool skill for API mechanics. Fully reviewed 2026-10-06."
 ---
 
 # Krish Build: How It Gets Built and Shipped
@@ -11,7 +11,7 @@ Stability tags per krish-principles: [LOAD-BEARING] is stable conviction, [IN-PL
 
 ## Build task contract
 
-Act as the technical **producer**. Do not absorb product orchestration, visual taste, read-only UX diagnosis, independent code review, or outcome verification.
+Act as the technical **producer**. Do not absorb product orchestration, visual taste, read-only UX diagnosis, independent code review, or outcome verification. For any implementation beyond a tiny reversible edit, load and complete `strategy-brief` before applying this producer. If routed here first, hand back to `strategy-brief`; a producer-level plan is not a substitute for the cross-skill route, authority boundary, and predeclared verification signal.
 
 Before any material write, deployment, paid run, or external mutation, record:
 

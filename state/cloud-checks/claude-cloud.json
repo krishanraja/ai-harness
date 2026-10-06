@@ -2,18 +2,30 @@
   "schema_version": 1,
   "surface": "claude-cloud",
   "status": "ok",
-  "checked_at": "2026-09-24T23:12:20.4733822Z",
-  "release": "v2026.09.24.3",
-  "source_commit": "3278b02aa981ee5e02507bbb502e41ddda8da9fd",
-  "url": "https://claude.ai/settings/capabilities",
+  "checked_at": "2026-10-06T14:47:47.8520675Z",
+  "release": "v2026.10.06.1",
+  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+  "url": "https://claude.ai/customize/skills",
   "catalogue_count": 31,
   "canonical_skill_count": 29,
   "canonical_names_exact": true,
   "upload_method": "supervised authenticated browser upload and replace",
   "artifact_suffix": ".skill",
-  "manifest_sha256": "62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85",
-  "skills_tree_aggregate_sha256": "DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB",
-  "evidence": "All 29 immutable release packages were accepted by Claude. Existing skills were replaced through Claude's replacement flow; earlier versions remain in Claude version history. The refreshed catalogue exposed current release descriptions. Two unrelated user-owned skills were retained.",
+  "manifest_sha256": "CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657",
+  "skills_tree_aggregate_sha256": "406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768",
+  "changed_skills_replaced": [
+    "content-corpus",
+    "krish-principles",
+    "mindmake",
+    "mindmake-os"
+  ],
+  "account_instructions": {
+    "status": "updated-and-read-back",
+    "source": "adapters/cloud/account-instructions.md",
+    "character_count": 2497,
+    "sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83"
+  },
+  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Claude's Replace flow and their refreshed descriptions were read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills plus two unrelated user-owned skills. Earlier skill versions remain in Claude version history. Claude account instructions were replaced with the canonical cloud adapter and read back exactly; the pre-update text was saved in the governed scratch rollout directory.",
   "limitations": [
     "Claude exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
     "No behavioral routing canary was run in this supervised catalogue-update pass."
