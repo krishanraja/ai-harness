@@ -74,38 +74,39 @@ deployed_release:
   status: current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open
 
 latest_approved_release:
-  release_id: v2026.10.06.2
-  tag: harness-v2026.10.06.2
-  source_commit: ded500e031d35a447358b7da69414df7a5ae3c3c
+  release_id: v2026.10.06.3
+  tag: harness-v2026.10.06.3
+  source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
   published: true
   immutable: true
-  published_at: 2026-10-06T20:09:26Z
-  manifest_sha256: A50693BCDFECFE1DD56B33F11716307825389CE6244262A9F34342F41673379B
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.2
-  skills_tree_aggregate_sha256: C7505E71DB54A3997209E4985C463F6B51BD298BAD809D19E0EEBC71850653A4
+  published_at: 2026-10-06T21:04:18Z
+  manifest_sha256: F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.3
+  skills_tree_aggregate_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
+    - apify
     - krish-build
-    - strategy-brief
-    - video-engine
+    - ux-testing-agent
+    - verification-loop
   approved_at: 2026-10-06
   approved_by: Krish Raja
   approval_basis: >-
-    After the v2026.10.06.1 rollout exposed unresolved canary failures, Krish instructed
+    After the v2026.10.06.2 live canaries preserved adjacent routing failures, Krish instructed
     the coordinator to "just continue til 100% complete" across the already named local,
-    SURFACE and cloud targets. PR 112 carried the bounded corrections and passed
+    SURFACE and cloud targets. PR 115 carried the bounded corrections and passed
     validate-and-repeat-build, surfaces and the GitHub judge before immutable
     publication.
   approval_note: >-
-    Keep adapter invariants out of invocation-canary rotation, require strategy before
-    non-trivial technical production, move Video Engine conversation-history validation
-    behind exact-prompt discovery, and make the no-interview collision's strategy route
-    observable. The prior release and its failing evidence remain immutable.
+    Preserve strategy-first routing for material implementation while requiring a producer
+    handback, assign generic post-fix regression closure to verification-loop rather than UX
+    testing, and make the custom-Actor exclusion route to krish-build observable. The prior
+    release and its failing evidence remain immutable.
   supersedes_reason: >-
-    v2026.10.06.1 remains the immutable immediate rollback target and the currently
-    installed baseline on every declared surface.
+    v2026.10.06.2 remains the immutable immediate rollback target and the currently
+    installed baseline on LORIMER pending this governed successor rollout.
   hash_provenance: >-
-    manifest_sha256 is the SHA-256 of release-v2026.10.06.2.json downloaded from the
+    manifest_sha256 is the SHA-256 of release-v2026.10.06.3.json downloaded from the
     release. skills_tree_aggregate_sha256 was recomputed from the committed git objects
     at source_commit with the same record format as Invoke-HarnessSync.ps1, the method
     that reproduced prior recorded aggregates exactly, and
@@ -115,6 +116,17 @@ latest_approved_release:
 
 
 previous_published_release:
+  release_id: v2026.10.06.2
+  tag: harness-v2026.10.06.2
+  source_commit: ded500e031d35a447358b7da69414df7a5ae3c3c
+  immutable: true
+  published_at: 2026-10-06T20:09:26Z
+  manifest_sha256: A50693BCDFECFE1DD56B33F11716307825389CE6244262A9F34342F41673379B
+  skills_tree_aggregate_sha256: C7505E71DB54A3997209E4985C463F6B51BD298BAD809D19E0EEBC71850653A4
+  status: immediate-immutable-rollback-baseline
+
+
+superseded_approved_release:
   release_id: v2026.10.06.1
   tag: harness-v2026.10.06.1
   source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
@@ -122,19 +134,8 @@ previous_published_release:
   published_at: 2026-10-06T11:08:52Z
   manifest_sha256: CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657
   skills_tree_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
-  status: immediate-immutable-rollback-baseline
-
-
-superseded_approved_release:
-  release_id: v2026.10.05.1
-  tag: harness-v2026.10.05.1
-  source_commit: 58910a0a82794355ce88ee1ffeb84995b04075dc
-  immutable: true
-  published_at: 2026-10-05T22:23:46Z
-  manifest_sha256: D703C292548EDE3B683ADDE98ACAFB5BCF9316C3B4FFF8C9C8ABA916BC914A30
-  skills_tree_aggregate_sha256: 1BBE77303148E86374DB46D6FB6DB311BDE1BFDC073A23063C6DD0D892DE3AA9
   note: >-
-    Retained as the second immutable rollback target after v2026.10.06.1.
+    Retained as the second immutable rollback target after v2026.10.06.2.
 
 
 surface_deployments:
