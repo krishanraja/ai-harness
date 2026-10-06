@@ -12,7 +12,7 @@ Rendered from registry reconciliation date **2026-10-06**.
 - Release source commit: `22a77d11cb77225ad3efd917dea6c3b553e4c342`
 - Manifest SHA-256: `F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8`
 - Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.3
-- Current deployment verdict: **current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open**
+- Current deployment verdict: **current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -20,28 +20,21 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2 |
-| cursor-primary | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-manual-canary-required-awaiting-v2026.10.06.2 |
-| claude-code-user | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2 |
-| codex-current | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-measurement-defect-corrected-awaiting-v2026.10.06.2 |
-| claude-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-exact-byte-parity-unavailable |
-| perplexity-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-byte-parity-unavailable |
-| codex-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.2 |
+| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes |
+| cursor-primary | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-manual-canary-required-cli-authentication-unavailable |
+| claude-code-user | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-two-declared-unmeasured-routes |
+| codex-current | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes |
+| claude-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-exact-byte-parity-unavailable |
+| perplexity-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-byte-parity-unavailable |
+| codex-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.3 |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
 ## Behavioral evidence
 
-- **codex-surface-07a67cda9f99: failed.** [Evidence](state/canaries/v2026.10.06.1-codex-surface-07a67cda9f99.json).
-  - brief-trigger-017: take-the-brief fired on a message that must not trigger it (Repeat-on-mismatch: 1/3 attempts met the declared route. Codex JSONL recorded a successful live read of take-the-brief/SKILL.md.).
-  - video-engine-trigger-001: expected video-engine to fire, observed not-fired.
-  - video-engine-trigger-002: expected video-engine to fire, observed not-fired.
-  - video-engine: no positive canary passed on codex-surface-07a67cda9f99 (video-engine-trigger-001 came back not-fired, video-engine-trigger-002 came back not-fired). Every negative result for video-engine in this report is void, and video-engine is unmeasured on this surface, not passing.
-- **claude-code-user: failed.** [Evidence](state/canaries/v2026.10.06.1-claude-code-user.json).
-  - strategy-trigger-001: expected strategy-brief to fire, observed wrong-skill.
-- **codex-current: failed.** [Evidence](state/canaries/v2026.10.06.1-codex-current.json).
-  - principles-trigger-032: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).
-  - principles-trigger-013: krish-principles fired on a message that must not trigger it (Repeat-on-mismatch: 0/3 attempts met the declared route. Codex JSONL recorded a successful live read of krish-principles/SKILL.md.).
+- **codex-surface-07a67cda9f99: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json).
+- **claude-code-user: partial.** [Evidence](state/canaries/v2026.10.06.3-claude-code-user.json).
+- **codex-current: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-current.json).
 - **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
 
 ## Machine clocks

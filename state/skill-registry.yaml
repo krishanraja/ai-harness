@@ -65,13 +65,13 @@ candidate_reconciliation:
 
 
 deployed_release:
-  release_id: v2026.10.06.1
-  source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
-  artifact_set_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+  release_id: v2026.10.06.3
+  source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
+  artifact_set_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   deployed_at: 2026-10-06
-  evidence: state/machine-runs/v2026.10.06.1-lorimer.json
-  status: current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open
+  evidence: state/machine-runs/v2026.10.06.3-lorimer.json
+  status: current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes
 
 latest_approved_release:
   release_id: v2026.10.06.3
@@ -142,83 +142,83 @@ surface_deployments:
   codex-surface-07a67cda9f99:
     # Installed through the immutable release bundle after the live checkout path
     # diverged from the canonical local convention. The corrected current runner
-    # measured only Codex; byte parity passed and the behavioral canary failed.
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    # measured only Codex; byte parity passed and the canary has zero failures.
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     installed_file_count: 146
-    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+    installed_ordinal_aggregate_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
     per_skill_hashes_exact: 29
     deployed_at: 2026-10-06
-    deployed_at_utc: 2026-10-06T19:15:28.2985717Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.10.06.1-20261006T191526Z-6e0feab2
+    deployed_at_utc: 2026-10-06T21:46:16.0000000Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-surface-07a67cda9f99\v2026.10.06.3-20261006T214615Z-517a47c4
     evidence:
-      - state/canaries/v2026.10.06.1-codex-surface-07a67cda9f99.json
-      - state/deployments/v2026.10.06.1-codex-surface-07a67cda9f99.json
-      - state/machine-runs/v2026.10.06.1-surface.json
-    status: stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2
-    previous_release: v2026.09.24.3
+      - state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json
+      - state/deployments/v2026.10.06.3-codex-surface-07a67cda9f99.json
+      - state/machine-runs/v2026.10.06.3-surface.json
+    status: current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes
+    previous_release: v2026.10.06.2
   cursor-primary:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     installed_file_count: 146
-    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+    installed_ordinal_aggregate_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
     per_skill_hashes_exact: 29
     deployed_at: 2026-10-06
-    deployed_at_utc: 2026-10-06T11:27:52.5480571Z
-    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.1-20261006T112751Z-6cce4873
-    evidence: state/deployments/v2026.10.06.1-cursor-primary.json
-    status: stale-v2026.10.06.1-installed-hash-verified-manual-canary-required-awaiting-v2026.10.06.2
+    deployed_at_utc: 2026-10-06T21:20:43.0000000Z
+    rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.3-20261006T212041Z-b93d1a7c
+    evidence: state/deployments/v2026.10.06.3-cursor-primary.json
+    status: current-installed-hash-verified-manual-canary-required-cli-authentication-unavailable
   claude-code-user:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     installed_file_count: 146
-    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+    installed_ordinal_aggregate_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
     per_skill_hashes_exact: 29
     deployed_at: 2026-10-06
-    deployed_at_utc: 2026-10-06T11:12:26.0244249Z
-    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.1-20261006T111224Z-43caa2a2
+    deployed_at_utc: 2026-10-06T21:08:27.0000000Z
+    rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.3-20261006T210825Z-82f20902
     evidence:
-      - state/canaries/v2026.10.06.1-claude-code-user.json
-      - state/deployments/v2026.10.06.1-claude-code-user.json
-    status: stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2
+      - state/canaries/v2026.10.06.3-claude-code-user.json
+      - state/deployments/v2026.10.06.3-claude-code-user.json
+    status: current-installed-hash-verified-canary-zero-failures-two-declared-unmeasured-routes
   codex-current:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     installed_file_count: 146
-    installed_ordinal_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+    installed_ordinal_aggregate_sha256: F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D
     per_skill_hashes_exact: 29
     deployed_at: 2026-10-06
-    deployed_at_utc: 2026-10-06T11:27:58.6257306Z
-    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.1-20261006T112757Z-9a491d0a
+    deployed_at_utc: 2026-10-06T21:20:48.9255897Z
+    rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.3-20261006T212047Z-3bb3bf3b
     evidence:
-      - state/canaries/v2026.10.06.1-codex-current.json
-      - state/deployments/v2026.10.06.1-codex-current.json
-    status: stale-v2026.10.06.1-installed-hash-verified-measurement-defect-corrected-awaiting-v2026.10.06.2
+      - state/canaries/v2026.10.06.3-codex-current.json
+      - state/deployments/v2026.10.06.3-codex-current.json
+    status: current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes
   claude-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-exact-byte-parity-unavailable
+    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-exact-byte-parity-unavailable
   perplexity-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-byte-parity-unavailable
+    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-byte-parity-unavailable
   codex-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/codex-cloud.json
-    status: stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.2
+    status: stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.3
 
 canonical:
   repository: krishanraja/ai-harness
