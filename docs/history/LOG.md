@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-06
+
+- reconciled at `5b22a53`: added the v2026.10.05.1 who-Krish canon, release and LORIMER install bullets to `NOW.md`, recorded that `CURRENT.md` and the LORIMER machine-run record disagree on whether `claude-code-user` and `codex-current` are installed, and refreshed review ages for `harness-maintainer` (47 days) and `video-engine` (38 days) against their 30-day SLA, both still waiting on Krish.
+
 ## 2026-10-04
 
 - reconciled at `a5ce22b`: added the VPS clock and host-prompt bullets to `NOW.md`, refreshed review ages for `harness-maintainer` (45 days) and `video-engine` (36 days) against their 30-day SLA, both still waiting on Krish.
