@@ -4,7 +4,7 @@
 
 CTRL is a customer-facing Mindmake software product. It is not mind/make OS and not a separate internal venture. mind/make OS may operate or dogfood parts of the business, but its internal fleet, automations, and state are not CTRL features.
 
-CTRL sits in two places at once, and both are current (Ruling, Krish, 2026-10-05). In his ikigai it is what a leader keeps after working with Mindmake. In his product portfolio it is a product in its own right, ranked on a live priority ladder in `krishanraja/control-center`. Do not resolve that for him; label which reading a claim relies on, and read its ranking, price and paying customers live.
+CTRL is part of the mission and a product on the ladder at once, and there is no tension to resolve (Ruling, Krish, 2026-10-06: the portfolio rolls into the mission). In his ikigai it is what a leader keeps after working with Mindmake. On his live priority ladder in `krishanraja/control-center` it is a product in its own right. CTRL being priced is fine (Ruling, Krish, 2026-10-06); read its ranking, price and paying customers live, never from here.
 
 Use this reference for product positioning and routing. Use the current `krishanraja/mm-ctrl` repository (public), its `project-documentation/`, the live product, and the relevant transaction surface for implementation facts and current claims.
 

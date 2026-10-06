@@ -1,6 +1,6 @@
 ---
 name: content-corpus
-description: "Exclusion gate first: never lead drafting, conversion strategy, persuasive angles, strategic overlays, or generic marketing strategy, including for a warm lead email; those belong to krish-content-marketer, with krish-voice owning final prose. Load this skill alongside those owners only when the task also asks what a named channel is for, whom it serves, which native form fits, or how one source should differ across channels. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces including The Money of AI, Built with AI, Signal & Noise, Maven, and lead email. Never infer that a channel is currently active; verify status live before producing or publishing."
+description: "Exclusion gate first: never lead drafting, conversion strategy, persuasive angles, strategic overlays, or generic marketing strategy, including for a warm lead email; those belong to krish-content-marketer, with krish-voice owning final prose. Load this skill alongside those owners only when the task also asks what a named channel is for, whom it serves, which native form fits, or how one source should differ across channels. It routes Krish Raja's editorial, audio, education, outbound, and visibility surfaces including the publication's three channels (follow.the.money, under.the.hood, mind.the.gap), Signal & Noise, Maven, and lead email. Never infer that a channel is currently active; verify status live before producing or publishing."
 ---
 
 # Content corpus
@@ -10,13 +10,14 @@ description: "Exclusion gate first: never lead drafting, conversion strategy, pe
 Act as a **domain-context skill** for channels. `krish-voice` owns how Krish writes. This skill owns what each named channel is for, who it serves, which format fits, and what quality bar it must clear.
 
 - Owner: Krish Raja.
-- Reviewed: 2026-08-29 against the Mindmake canon at github.com/krishanraja/mindmake, project-documentation/02_PUBLICATION.md, which is the authority for this skill.
+- Reviewed: 2026-08-29 against the Mindmake canon at github.com/krishanraja/mindmake, project-documentation/02_PUBLICATION.md.
+- Channel list corrected 2026-10-06 by Krish's ruling of that day: the publication has three channels, matching the database. What each channel is for is `venture_formats.mandate` in Mindmaker OS, read live; where `02_PUBLICATION.md` still says two channels, it is stale on that point.
 - Freshness SLA: 45 days, or immediately after a channel, audience, format, or distribution decision changes.
 - Unique outcome: prevent generic content from being relabelled across channels and prevent dormant, pre-launch, or inaccessible surfaces from being treated as active.
 
 ## Load only what the task needs
 
-- Read `references/editorial-channels.md` for Mindmake's publication and its two channels, The Money of AI and Built with AI, or for the Signal & Noise channel.
+- Read `references/editorial-channels.md` for Mindmake's publication and its three channels, follow.the.money (Mondays), under.the.hood (Wednesdays) and mind.the.gap (Fridays), or for the Signal & Noise channel.
 - Read `references/maven-and-outbound.md` for Maven lesson copy, lead/customer emails, speaking, podcast, press, or visibility outreach.
 - Load `mindmake` before making Mindmake offer, ICP, pricing, availability, or product claims.
 - Load `krish-voice` before drafting final prose. Load `krish-content-marketer` when the asset's job is to change buyer behaviour.
@@ -66,9 +67,10 @@ Failure on any one standard blocks publication. If the piece lacks an owned arti
 
 | Intent | Instrument | Characteristic move |
 |---|---|---|
-| Follow the money through a digital-economy shift | **The Money of AI** | ask who pays and trace the mechanism |
-| Understand the human reason someone built | **Built with AI** | reach the why beneath the why |
-| Air a finished The Money of AI or Built with AI piece as a live argument | Signal & Noise (distribution/discussion, not a publication channel) | no-BS call, devil's advocate, what-if |
+| A shift that would change a reader's price, budget or contract | **follow.the.money** | ask who pays and trace the mechanism |
+| A shift that would change what a reader builds or buys | **under.the.hood** | trace what changes in what they build or buy |
+| A shift that would change how a reader thinks or what they expect | **mind.the.gap** | show where the expectation and the reality separated |
+| Air a finished piece from one of the three channels as a live argument | Signal & Noise (distribution/discussion, not a publication channel) | no-BS call, devil's advocate, what-if |
 | Orient a busy executive to what changed and why it matters | choose the fitting publication channel after applying its mandate | prioritised signal plus operator so-what |
 | Get a leader to a free lesson that leads into CTRL | Maven (free lessons only) | legibility, concrete outcome, proof, verified offer facts |
 | Move a lead, customer, guest, talk, or press relationship | Outbound/visibility | listening specificity and one low-friction next step |

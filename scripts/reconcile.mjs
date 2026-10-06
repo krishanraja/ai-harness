@@ -26,6 +26,10 @@
  * repositories it reconciles. No machine, no browser, no local path.
  *
  *   node scripts/reconcile.mjs [--dry-run] [--repo <name>] [--out <path>]
+ *   node scripts/reconcile.mjs --list-targets   print synced and excluded repos, no network
+ *
+ * A repository marked `canon_sync: false` in state/fleet.yaml is never read or
+ * written here: it is reported as `excluded` and skipped before any request.
  *
  * FLEET_TOKEN (fine-grained, contents and pull-requests write on the fleet) is
  * required to write. Without it the run reports what it would do and exits 0,
@@ -39,6 +43,7 @@ import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { Gh } from './lib/github.mjs'
 import { blockFor, inspect, splice, renderBlock } from './render.mjs'
+import { canonSyncRepos, canonExcludedRepos } from './lib/fleet.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -51,6 +56,16 @@ const token = process.env.FLEET_TOKEN || process.env.GITHUB_TOKEN
 const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
 const today = new Date().toISOString().slice(0, 10)
 const BRANCH = 'harness/canon-sync'
+
+// The plan, with no credential and no network: which repositories this run
+// would touch and which it skips. The canon-sync test reads this, so the proof
+// that an excluded repository is skipped exercises this script, not a copy of
+// its logic.
+if (has('--list-targets')) {
+  for (const r of canonSyncRepos(fleet)) console.log(`sync     ${r.name}`)
+  for (const r of canonExcludedRepos(fleet)) console.log(`excluded ${r.name}`)
+  process.exit(0)
+}
 
 if (!token) {
   console.error('::error::FLEET_TOKEN is not set. The reconciler reads and writes ten repositories from one job and cannot do either without it. Add a fine-grained PAT with contents and pull-requests write on the fleet as the repository secret FLEET_TOKEN.')
@@ -105,7 +120,15 @@ function diffLines(a, b, context = 2) {
   return out
 }
 
-for (const repo of fleet.repos) {
+// Excluded repositories are reported and never contacted, so a release that
+// moves the stamp cannot turn into a pull request against a repository whose
+// owner has ruled it out of the rollout.
+for (const repo of canonExcludedRepos(fleet)) {
+  if (only && repo.name !== only) continue
+  rows.push({ name: repo.name, state: 'excluded', note: 'canon_sync false in state/fleet.yaml; not read, not written' })
+}
+
+for (const repo of canonSyncRepos(fleet)) {
   if (only && repo.name !== only) continue
   const name = repo.name
   const target = repo.canon_target

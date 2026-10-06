@@ -59,29 +59,36 @@ have already been retired and when.
 
 | You need | Section |
 |---|---|
-| The whole thing in five sentences | `## 0.` Mental model |
-| **Rulings that override everything below them** | `## 0a.` CANON, then `## 0b.` and `## 0c.` |
+| Who Krish is, what exists and what it earns, the rules every agent follows, where to look next | `## 0.` Start here |
+| **Rulings that override everything below them** | `## 0a.` CANON: the rules in force |
+| Known contradictions agents must not paper over | `## 0b.` Open issues |
+| What is retired, and when | `## 0c.` Retired: the only list of retired things |
 | What the OS is for, the objectives | `## 1.` Outcomes |
-| Components and stack | `## 2.` What's in the box |
+| Components and stack | `## 2.` What is in the box |
 | The agents, who does what | `## 3.` The agent fleet |
 | Tables, views, schema | `## 4.` Supabase |
 | The dashboard and its tabs | `## 5.` Control Center |
-| Claude Code workspace layout | `## 6.` Workspace architecture |
+| The VPS workspace layout | `## 6.` Workspace architecture |
 | How agents are supposed to behave | `## 7.` Agent operating contract |
 | How data actually moves | `## 8.` Data flows |
 | Schedules, and what each tick costs | `## 9.` Cron and scheduling |
 | Drive folders | `## 10.` Google Drive |
-| Ventures, domains, slugs, what is retired | `## 11.` Portfolio context |
+| Ventures, domains, slugs | `## 11.` Portfolio context |
 | The rulebook | `## 12.` Standards |
 | What breaks and how it self-heals | `## 13.` Failure modes |
 | Where to find a thing | `## 14.` Operational lookup |
 | Why something is the way it is | `## 15.` Architectural decisions |
+| What a normal week runs | `## 16.` A working week |
+| Where it is heading | `## 17.` Where this is going |
+| Terms | `## 18.` Glossary |
 | Paths and IDs | `## 19.` Quick reference |
 | **What changed recently and why** | `## 20.` Rolling changelog |
 | How to change the doc itself | `## 21.` Update protocol |
 
-**Read the `## 0` rulings and the top of `## 20.` whenever the answer looks like it might
-have moved.** Those carry the dated rulings that override older prose elsewhere in the file.
+**Read `## 0.`, `## 0a.`, `## 0b.` and the top of `## 20.` whenever the answer looks like it
+might have moved.** `## 0a.` carries the dated rulings that override older prose elsewhere
+in the file; `## 0b.` names the contradictions still open, so do not resolve one by
+reading the other side.
 
 ---
 
@@ -96,8 +103,8 @@ each week's builds as one dated entry at the top of `## 20.` and stamps
 `**Last engine refresh:**` in the header; the Monday scorecard note reads that stamp back
 and says when it is stale. For which job does it and on what schedule, read `## 21.` of the
 architecture doc rather than trusting a time written here. A ruling, a new agent, a retired
-component or a new table is still a human edit, under `## 0a`, `## 0b`, `## 0c` or the
-section it belongs to.
+component or a new table is still a human edit: a ruling under `## 0a`, an open issue
+under `## 0b`, a retirement under `## 0c`, anything else in the section it belongs to.
 
 ## Related skills
 
@@ -106,7 +113,8 @@ publication's three subchannels, whose mandates are read from `venture_formats`.
 mechanics. `tools-access` for authenticated access. `decision-ledger` for recording a
 finalised decision.
 
-*Router rewritten 2026-09-07 for the one-surface ruling, corrected 2026-09-08. It carries
+*Router rewritten 2026-09-07 for the one-surface ruling, corrected 2026-09-08, section map
+re-checked against the live doc on 2026-10-06. It carries
 no architecture facts, so it does not need to change when the OS does. It does carry
 section numbers and repository names, which can move: if a section map entry does not
 match the doc, the doc is right and this router is stale.*

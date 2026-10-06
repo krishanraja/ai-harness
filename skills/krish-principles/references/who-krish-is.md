@@ -5,9 +5,9 @@ is, how he decides and what is off limits. It deliberately does not say what he 
 on this week: that is dynamic and lives in its live sources, listed at the end.
 
 Sources: his Master Ikigai, version 4 of 5 September 2026, built from 138 ranked answers
-and reproduced verbatim in `references/ikigai-v4.md`; and his rulings of 2026-10-05. Where
-this file and the ikigai differ, a dated ruling wins over the sheet, and the sheet wins
-over anything older. Section numbers below ("section 4", "R12.5") point into the ikigai.
+and reproduced verbatim in `references/ikigai-v4.md`; and his rulings of 2026-10-05 and
+2026-10-06. Where this file and the ikigai differ, a dated ruling wins over the sheet, a
+later ruling wins over an earlier one, and the sheet wins over anything older. Section numbers below ("section 4", "R12.5") point into the ikigai.
 
 Publication: this repository is public. Krish chose to publish his ikigai, venture
 objectives, pricing and revenue in `krishanraja/ai-harness` and `krishanraja/control-center`
@@ -22,8 +22,8 @@ infrastructure identifiers, and no other person's personal details. Company name
 3. The eight decision rules
 4. Acquisition doctrine
 5. Protected, killed, parked, doubled down
-6. Paused: the twelve month commitment and the ninety day plan
-7. The mission and the product portfolio
+6. The twelve month commitment: ongoing
+7. The mission and the product portfolio: one queue
 8. Other standing rulings
 9. What he works on: live sources only
 
@@ -83,7 +83,7 @@ because the request did not mention it. These supersede the version 3 rules in A
 | 4 | If he is alone in it, expect it to stall. A partner who owns or polices selling is a precondition, not a nice to have. | Who besides Krish carries it? |
 | 5 | If it only produces income and never ownership, it is a job with extra steps. | Does it build something he owns? |
 | 6 | If it is built in private, it is hiding. Every build is announced, shown, or sold before it is finished. | Who asked for it, and when will it be shown? |
-| 7 | If it does not put a leader's edge back, it is off mission. | Does it give a leader their edge back? (See section 7 before applying this to portfolio work.) |
+| 7 | If it does not put a leader's edge back, it is off mission. | Does it give a leader their edge back? (See section 7 before applying this to work on the product ladder.) |
 | 8 | Music and football are protected. They enter the work only after it runs without him. | Does it route his own time through music or football? (See section 7.) |
 
 ## 4. Acquisition doctrine
@@ -98,14 +98,20 @@ because the request did not mention it. These supersede the version 3 rules in A
 
 ## 5. Protected, killed, parked, doubled down
 
-From section 8 of the sheet, unchanged by the 2026-10-05 rulings except where marked.
+From section 8 of the sheet, unchanged by the 2026-10-05 and 2026-10-06 rulings except
+where marked.
 
-- **Protected:** music and football (Rule 8). See section 7 for the named tension.
+- **Protected:** music and football (Rule 8). See section 7 for how this reads against
+  the product ladder.
 - **Killed:** Track 2, the displaced worker media property. The fund or capital vehicle as
   a route.
-- **Parked:** the job search (its reopen condition is the stop rule, which is paused, so do
-  not treat it as triggered); the OS as a product (reopens only if a paying leader asks to
-  buy it).
+- **Parked:** the job search (its reopen condition is the stop rule, which has not been
+  restated, so do not treat it as triggered); the OS as a product (reopens only if a
+  paying leader asks to buy it).
+- **Hunter is active** (Ruling, Krish, 2026-10-06: "Hunter is active yes."). Hunter, the
+  job sourcing agent, keeps running. The parked job search above does not switch it off:
+  never cite the park to pause, retire or deprioritise Hunter, and never cite Hunter to
+  call the job search reopened.
 - **Doubled down:** the room (a confidential diagnostic for a leader at a fork); keynotes
   and the podcast as the demand engine; CTRL as what the leader keeps after the room.
 
@@ -113,65 +119,76 @@ The sheet's positioning tab proposes one door, a three week room. That is a Sept
 proposal. The current commercial architecture is the canon in `krishanraja/mindmake`
 (two doors into one privately scoped thirty day paid proof); the `mindmake` skill owns it.
 
-## 6. Paused: the twelve month commitment and the ninety day plan
+## 6. The twelve month commitment: ongoing
 
-**PAUSED on 2026-10-05, being reset by Krish; new stop date and terms pending.**
+**Ongoing** (Ruling, Krish, 2026-10-06: "its ongoing."). This replaces the 2026-10-05
+status, which paused the commitment and said it was being reset.
 
-The commitment's stop rule read: fewer than 2 of 25 leaders take a call, or no paid room by
-5 October 2026, means stop. It fell due on 5 October 2026 and was not met; the scorecard
-holds only its week one example values. Krish has chosen to reset it rather than read it.
+The commitment runs from 7 September 2026 to 6 September 2027, with the mission as the one
+swing. Its stop rule read: fewer than 2 of 25 leaders take a call, or no paid room by
+5 October 2026, means stop. It fell due on 5 October 2026 and was not met, and Krish chose
+to continue. Reading "its ongoing" as "the twelve month commitment continues, with no new
+stop date" is the coordinator's reading of his words, and is recorded as that.
 
 For every tool:
 
-- Do not act on the ninety day plan, the scorecard targets or the stop rule as if they were
-  live. Do not schedule its steps, chase its numbers or declare it failed or passed.
-- Do not cite the paused plan as a reason to start, stop or reprioritise work.
-- When the reset lands, it will arrive as a new ruling. Until then, say "paused, being
-  reset" if asked.
+- **No new stop date has been set.** Do not invent one, and do not invent new targets or
+  plan dates. If asked, say the commitment is ongoing and no new stop date exists.
+- **The ninety day plan's dated steps (5 September to 5 December 2026) are history** from
+  the original plan. Do not schedule them, chase them or score them as live.
+- **The day 90 review date of 5 December 2026 is unconfirmed.** Krish has not restated it.
+  Do not treat it as live; ask him if a task depends on it.
+- **The scorecard targets and the stop rule are not live tests.** The stop rule fell due
+  and Krish continued; do not declare the commitment failed or passed by it.
 
-## 7. The mission and the product portfolio
+## 7. The mission and the product portfolio: one queue
 
-**Both are current, explicitly split** (Ruling, Krish, 2026-10-05).
+**The portfolio rolls into the mission** (Ruling, Krish, 2026-10-06: "portfolio rolls in
+to mission."). This supersedes the 2026-10-05 ruling that the two were "both current,
+explicitly split", and it retires the rule for tools that went with it.
 
-- **The mission** is Mindmake: the one swing in the ikigai, tested by the eight rules.
-- **The product portfolio** is separate, and the OS grows it: Heartside, Full Time,
-  Legibility, CTRL and Pulse. Circle is dormant: preserved, never purged, not worked. Its
-  order is a live priority ladder (section 9).
+- **Mindmake is the one company and the one swing.** Heartside, Full Time, Legibility,
+  CTRL and Pulse are parts of it, not a separate lane competing for Krish's time. Circle
+  is dormant: preserved, never purged, not worked.
+- **There is one queue, and the mission is its parent.** When a surface can show only one
+  "do this next", the mission leads. Product work is ordered beneath it by the live
+  priority ladder (section 9).
+- **The ladder stands.** Heartside and Full Time 1, Legibility 2, CTRL and Pulse 3,
+  Circle dormant. Read it live; its code source is `src/lib/portfolio.ts` in Control
+  Center.
+- **Full Time is a B2C monetisation experiment app** (Ruling, Krish, 2026-10-06:
+  "fulltime is not a job search thing, its a b2c monetization experiment app."). It is not
+  a job search or career asset. Never frame it as a route to a role or say employers are
+  its buyers.
+- **CTRL being priced is fine** (Ruling, Krish, 2026-10-06: "CTRL is fine priced."). It is
+  part of the mission (in the ikigai, what a leader keeps after working with Mindmake) and
+  a priced product on the ladder. Read its current price live. A source that says CTRL is
+  never priced is stale.
+- **Each product keeps its own name, buyer and pricing.** Inside one company is not the
+  same as inside one offer: never fold a product into the advisory's offer or apply the
+  advisory's positioning to it. The `mindmake` skill owns that boundary.
 
-**The tension, named rather than hidden.** The ikigai and the portfolio do not agree:
+**Rules 7 and 8, read against this ruling.** Rule 7 says work that does not put a
+leader's edge back is off mission, and Rule 8 says football is protected, yet Heartside,
+a gift shop, and Full Time, a football app, sit at ladder position 1. Krish resolved that
+tension by placing the portfolio inside the mission on 2026-10-06. The rules themselves
+are unchanged and stay verbatim in the ikigai. So:
 
-- Rule 7 says work that does not put a leader's edge back is off mission. Heartside is a
-  retail gift shop and Full Time is a football app, and both sit at portfolio priority 1.
-- Rule 8 says football is protected and stays out of the work until it runs without him.
-  Full Time is a football app at priority 1.
-- The sheet's own reading (section 3, "Portfolio of ventures") says every task on the
-  calendar must sit under the one company. The portfolio is a second lane.
-- CTRL sits in both: the sheet makes it what the leader keeps after the room, and the
-  portfolio ranks it as a product in its own right.
+1. **Do not cite Rule 7 or Rule 8 to refuse, kill or quietly deprioritise product work on
+   the ladder.** The ruling placed it inside the mission.
+2. **Do not cite the ladder to displace mission work.** The mission is the parent of the
+   queue.
+3. **Rule 8 still guards Krish's own time.** When work asks him personally to spend hours
+   on Full Time, note Rule 8 once, then do what he decides.
+4. **Work the OS can do without Krish needs no trade-off.** Agents growing products within
+   their existing authority proceed on the ladder.
 
-Krish has not resolved this, and no tool may resolve it for him.
-
-**The rule for tools when the two compete for Krish's own time:**
-
-1. **Never use one lane to veto the other.** Do not cite Rule 7 or Rule 8 to refuse, kill
-   or quietly deprioritise portfolio work Krish asked for, and do not cite the portfolio
-   ladder to displace mission work. Both are current.
-2. **Order inside each lane by that lane's own rules.** Mission work is tested against the
-   eight rules. Portfolio work follows the live priority ladder.
-3. **Work the OS can do without Krish is not in conflict.** Agents growing the portfolio
-   within their existing authority do not compete for his time; proceed.
-4. **When a proposal would spend Krish's own hours in one lane at the expense of the other,
-   surface the trade-off and let him choose.** Name the lane, the hours, the rule or ladder
-   position involved and what it displaces. Do not silently schedule it, and do not ask
-   about trivial or already-decided work.
-5. **Flag, do not block, the named tension.** When work asks Krish personally to spend
-   time on Full Time, note Rule 8 once. When it asks him to spend time on a portfolio
-   product that does not give a leader their edge back, note Rule 7 once. Then do what he
-   decides.
+This matches the sheet's own reading (section 3, "Portfolio of ventures"): every task on
+the calendar sits under the one company.
 
 ## 8. Other standing rulings
 
-All dated 2026-10-05, by Krish.
+All by Krish, dated 2026-10-05 unless marked otherwise.
 
 - **Agents report to Control Center, never into his Drive.** Agent briefs, identity,
   action and synthesis documents never go to Google Drive. Krish pressing "Send to Google
@@ -181,6 +198,15 @@ All dated 2026-10-05, by Krish.
   customers). Never MRR or paying subscribers.
 - **Revenue and pricing are read live, never remembered.** Read Stripe, Shopify or Control
   Center at the time of the claim. A remembered figure has already been wrong once.
+- **The publication has three channels** (Ruling, Krish, 2026-10-06), which matches the
+  database: follow.the.money on Mondays, under.the.hood on Wednesdays and mind.the.gap on
+  Fridays, at home.makeyourmindup.ai. Any text that says the publication has exactly two
+  channels, or names The Money of AI or Built with AI as live channels, is stale. The
+  `content-corpus` skill routes them.
+- **Founder visibility is still open** (2026-10-06: not ruled). The ikigai's mission says
+  "with my name on it"; the acquisition rule warns against plans that lean on his personal
+  brand. Do not resolve it for him. When a proposal depends on it, name the open decision
+  and let him choose.
 
 ## 9. What he works on: live sources only
 
@@ -199,6 +225,7 @@ never copied into this file or into any skill. Read them live, in this order:
 If a live source is missing or unreachable, say so and treat the fact as unknown. Never
 fill the gap from memory or from this file.
 
-**Dated snapshot, 2026-10-05. Defer to the live ladder above whenever it differs.**
+**Dated snapshot, 2026-10-05, restated by the 2026-10-06 ruling. Defer to the live ladder
+above whenever it differs.**
 Priority 1: Heartside and Full Time. Priority 2: Legibility. Priority 3: CTRL and Pulse.
 Circle: dormant.

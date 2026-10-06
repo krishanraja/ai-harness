@@ -6,7 +6,7 @@ Canonical source for Krish Raja's cross-client AI operating contract, personaliz
 
 ## Who Krish is
 
-Who Krish is (his locked purpose, decision rules, the split between the Mindmake mission and his product portfolio, and what is paused) lives in `skills/krish-principles/references/who-krish-is.md`, with his ikigai verbatim beside it in `ikigai-v4.md`. It ships inside `krish-principles` to every client, and the operating contract, the client adapters and the canon block point to it. What he works on (ventures, priorities, revenue) is dynamic and is read live from `krishanraja/control-center`, never copied here.
+Who Krish is (his locked purpose, decision rules, the one queue in which his product portfolio rolls into the Mindmake mission, and his other standing rulings) lives in `skills/krish-principles/references/who-krish-is.md`, with his ikigai verbatim beside it in `ikigai-v4.md`. It ships inside `krish-principles` to every client, and the operating contract, the client adapters and the canon block point to it. What he works on (ventures, priorities, revenue) is dynamic and is read live from `krishanraja/control-center`, never copied here.
 
 ## Start here
 

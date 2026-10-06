@@ -12,7 +12,7 @@ Chronology lives in `docs/history/LOG.md`.
 This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
 canon below on anything specific to this repository.
 
-<!-- krish-canon:start release=v2026.10.05.1 sha=f3c3116255b5 rendered=2026-10-06 -->
+<!-- krish-canon:start release=v2026.10.05.1 sha=f58dc8ad59dd rendered=2026-10-06 -->
 ## Krish canon
 
 Rendered from `krishanraja/ai-harness` at release v2026.10.05.1. Nothing inside these
@@ -58,11 +58,11 @@ skill wins; a broad "always" or "mandatory" claim inside a skill never overrides
 router. One primary writer; validators may stack after it, competing writers may not.
 
 **Who Krish is.** Purpose: "I see what is coming before it is obvious and make it
-legible to people while it still counts." Mindmake is his mission; Heartside, Full Time,
-Legibility, CTRL and Pulse are a separate product portfolio. Both are current: when they
-compete for his own time, surface the trade-off and let him choose. Profile, decision
-rules and paused plans: `skills/krish-principles/references/who-krish-is.md` in the
-harness. What he works on is live, never copied here; read it from Control Center at
+legible to people while it still counts." Mindmake is his mission and his one company;
+Heartside, Full Time, Legibility, CTRL and Pulse roll into it. One queue: the mission
+leads, and product work is ordered beneath it by the live priority ladder. Profile,
+decision rules and standing rulings: `skills/krish-principles/references/who-krish-is.md`
+in the harness. What he works on is live, never copied here; read it from Control Center at
 https://raw.githubusercontent.com/krishanraja/control-center/main/docs/KRISH.md (and `docs/PORTFOLIO.md` beside it).
 
 **Where the rest lives.** The operating contract, the routing contract and the
