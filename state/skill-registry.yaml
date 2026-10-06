@@ -74,48 +74,60 @@ deployed_release:
   status: current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual
 
 latest_approved_release:
-  release_id: v2026.10.05.1
-  tag: harness-v2026.10.05.1
-  source_commit: 58910a0a82794355ce88ee1ffeb84995b04075dc
+  release_id: v2026.10.06.1
+  tag: harness-v2026.10.06.1
+  source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
   published: true
   immutable: true
-  published_at: 2026-10-05T22:23:46Z
-  manifest_sha256: D703C292548EDE3B683ADDE98ACAFB5BCF9316C3B4FFF8C9C8ABA916BC914A30
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.05.1
-  skills_tree_aggregate_sha256: 1BBE77303148E86374DB46D6FB6DB311BDE1BFDC073A23063C6DD0D892DE3AA9
+  published_at: 2026-10-06T11:08:52Z
+  manifest_sha256: CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
+  skills_tree_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
+    - content-corpus
     - krish-principles
     - mindmake
     - mindmake-os
-  approved_at: 2026-10-05
+  approved_at: 2026-10-06
   approved_by: Krish Raja
   approval_basis: >-
-    On 2026-10-05 Krish approved merging PR 104, cutting a new release and installing
-    it on Claude Code, Codex and Cursor, and approved propagating the who-Krish canon
-    paragraph to all eight fleet product repos (mindmake excluded). PR 104 passed
-    validate-and-repeat-build (29 skills, 3 adapters, no high-confidence secrets),
-    surfaces and the GitHub judge before immutable publication.
+    On 2026-10-06 Krish issued rulings that superseded parts of v2026.10.05.1 and
+    said "yes merge" to PR 108, which carries them; the coordinator had stated that a
+    release and install on Claude Code, Codex and Cursor would follow the merge. PR 108
+    passed validate-and-repeat-build (including Test-Harness.ps1), surfaces and the
+    GitHub judge before immutable publication.
   approval_note: >-
-    This release makes who Krish is a first-class part of the canon: the
-    krish-principles reference who-krish-is.md (purpose, the face, the word, the
-    enemy, the eight decision rules as tests, the acquisition doctrine, and the
-    mission versus portfolio rule) plus the full ikigai v4, verbatim. Dynamic venture
-    facts are not copied; they are pointed to in control-center. The mindmake skill
-    drops false privacy claims and the stale "never products for sale" line.
+    One queue: the portfolio rolls into the mission and the mission leads. The ikigai
+    commitment is ongoing, not paused. Full Time is a B2C monetisation experiment app,
+    CTRL being priced is fine, the publication has three channels, Hunter is active and
+    founder visibility stays open. The mindmake repository is now skipped by the canon
+    sync entirely (canon_sync: false), proven by test-canon-sync.mjs.
   supersedes_reason: >-
-    v2026.09.24.3 becomes the immutable immediate rollback target; it is the release
+    v2026.10.05.1 becomes the immutable immediate rollback target; it is the release
     currently installed on the local surfaces.
   hash_provenance: >-
-    manifest_sha256 matches SHA256SUMS.txt in the release. skills_tree_aggregate_sha256
-    was recomputed from the committed git objects at source_commit with the same
-    record format as Invoke-HarnessSync.ps1 (skill/relative NUL SHA256, ordinal sort,
-    joined by newline). The same method reproduces v2026.09.24.3's recorded aggregate
-    exactly, so it is the canonical value: 146 files across 29 skills.
+    manifest_sha256 is the SHA-256 of release-v2026.10.06.1.json downloaded from the
+    release. skills_tree_aggregate_sha256 was recomputed from the committed git objects
+    at source_commit with the same record format as Invoke-HarnessSync.ps1, the method
+    that reproduced v2026.09.24.3's and v2026.10.05.1's recorded aggregates exactly, and
+    scripts/check-aggregate.mjs independently computes the same value over the tree:
+    146 files across 29 skills.
   status: published-awaiting-governed-surface-install-and-canary
 
 
 previous_published_release:
+  release_id: v2026.10.05.1
+  tag: harness-v2026.10.05.1
+  source_commit: 58910a0a82794355ce88ee1ffeb84995b04075dc
+  immutable: true
+  published_at: 2026-10-05T22:23:46Z
+  manifest_sha256: D703C292548EDE3B683ADDE98ACAFB5BCF9316C3B4FFF8C9C8ABA916BC914A30
+  skills_tree_aggregate_sha256: 1BBE77303148E86374DB46D6FB6DB311BDE1BFDC073A23063C6DD0D892DE3AA9
+  status: immediate-immutable-rollback-baseline
+
+
+superseded_approved_release:
   release_id: v2026.09.24.3
   tag: harness-v2026.09.24.3
   source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
@@ -123,20 +135,8 @@ previous_published_release:
   published_at: 2026-09-24T21:38:30Z
   manifest_sha256: 62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85
   skills_tree_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
-  installed_evidence: state/machine-runs/v2026.09.24.3-lorimer.json
-  status: immediate-immutable-rollback-baseline
-
-
-superseded_approved_release:
-  release_id: v2026.09.15.2
-  tag: harness-v2026.09.15.2
-  source_commit: 5e7155341007d688a8b38ab70dee774df8e59a1b
-  immutable: true
-  published_at: 2026-09-15T20:45:21Z
-  manifest_sha256: 1D7F83049E41F63343DB4ACB89D25812CB47CA8AD62D3EC05DF22B7FA5343E62
-  skills_tree_aggregate_sha256: 30EF57AE4EDD53D032F5E74D622054931DB4B3ADA4DF78F9DF1F2C96597C2169
   note: >-
-    Installed with exact parity on LORIMER (state/machine-runs/v2026.09.15.2-lorimer.json)
+    Installed with exact parity on LORIMER (state/machine-runs/v2026.09.24.3-lorimer.json)
     and retained as the second immutable rollback target.
 
 
@@ -194,7 +194,7 @@ surface_deployments:
     evidence:
       - state/canaries/v2026.09.24.3-claude-code-user.json
       - state/deployments/v2026.09.24.3-claude-code-user.json
-    status: stale-behind-v2026.10.05.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route
+    status: stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route
   codex-current:
     release_id: v2026.09.24.3
     source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
@@ -208,21 +208,21 @@ surface_deployments:
     evidence:
       - state/canaries/v2026.09.24.3-codex-current.json
       - state/deployments/v2026.09.24.3-codex-current.json
-    status: stale-behind-v2026.10.05.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures
+    status: stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures
   claude-cloud:
     release_id: v2026.09.24.3
     source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
     deployed_at: 2026-09-24
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-behind-v2026.10.05.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
+    status: stale-behind-v2026.10.06.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
   perplexity-cloud:
     release_id: v2026.09.24.3
     source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
     installed_skill_count: 29
     deployed_at: 2026-09-24
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-behind-v2026.10.05.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
+    status: stale-behind-v2026.10.06.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable
 
 canonical:
   repository: krishanraja/ai-harness
