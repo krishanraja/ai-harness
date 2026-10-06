@@ -7,6 +7,14 @@ moved. Nothing here is ever rewritten.
 
 ## 2026-10-06
 
+- The v2026.10.06.2 live canaries preserved four adjacent routing collisions:
+  strategy could replace rather than hand back to the build producer, generic
+  post-fix regression closure could be mistaken for UX testing, and an Apify
+  exclusion-guard read lacked a declared `krish-build` neighboring route. The
+  producer handback, verification precedence, UX exclusion, Apify discovery
+  gate, and canary route declaration were narrowed together for the next
+  immutable patch release without rewriting the v2 evidence.
+
 - The v2026.10.06.1 rollout surfaced three different boundaries rather than one
   generic canary failure: an adapter-invariant measurement leak, a skipped
   strategy-to-producer handoff, and catalogue discovery trying to enforce Video

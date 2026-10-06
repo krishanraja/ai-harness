@@ -6,7 +6,7 @@
 {"id":"apify-trigger-006","category":"positive","prompt":"Fetch every item from this Apify dataset safely even when clean=true produces short pages.","should_trigger":true}
 {"id":"apify-trigger-007","category":"positive","prompt":"Compare two current Apify Store Actors by maintainer, pricing model, permissions, recent activity, input schema, and a small validation result.","should_trigger":true}
 {"id":"apify-trigger-008","category":"positive","prompt":"Design the Apify leg of an approved scrape-to-n8n-to-Supabase pipeline, including a verification handoff.","should_trigger":true}
-{"id":"apify-trigger-009","category":"negative","prompt":"Build and publish a brand-new custom web crawler Actor from source code.","should_trigger":false}
+{"id":"apify-trigger-009","category":"negative","prompt":"Build and publish a brand-new custom web crawler Actor from source code.","should_trigger":false,"expected_route":"krish-build"}
 {"id":"apify-trigger-010","category":"negative","prompt":"Research the current market using primary sources in the browser; no scraping service is needed.","should_trigger":false}
 {"id":"apify-trigger-011","category":"negative","prompt":"Write the already-approved dataset rows into our application database and deploy the importer.","should_trigger":false}
 {"id":"apify-trigger-012","category":"negative","prompt":"Write a personalised outbound email sequence from this existing prospect list.","should_trigger":false}

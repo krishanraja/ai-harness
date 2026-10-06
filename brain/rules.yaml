@@ -1868,13 +1868,19 @@ skill_sections:
   - id: krish-build.build-task-contract
     file: skills/krish-build/SKILL.md
     heading: "Build task contract"
-    text_sha: "9627b0817bfb"
+    text_sha: "ea03a569776e"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-06-canary-routing-repair.md"
-      sha256: "6F3216D4A53F2266BD6312C27100E5E538BA55B7EB6DBF2BC9E130D068391C6B"
+      ref: "docs/proposals/2026-10-06-v2-adjacent-canary-repair.md"
+      sha256: "E7010FAE600A1064CF9BCD2C40746613A8EFE7DC705574E62C8C673FDB267634"
     history:
+      - text_sha: "9627b0817bfb"
+        valid_until: "2026-10-06"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-06-canary-routing-repair.md"
+          sha256: "6F3216D4A53F2266BD6312C27100E5E538BA55B7EB6DBF2BC9E130D068391C6B"
       - text_sha: "c84ea182a5d3"
         valid_until: "2026-10-06"
         source:
