@@ -1,6 +1,6 @@
 ---
 name: strategy-brief
-description: "Pre-execution routing gate for Krish. Invoke before producing, changing, deploying, sending, deciding, materially recommending, multi-step research/build work, or whenever route, trade-off, authority, or done matters. For tiny reversible work, compress to objective, route, and check. For material work, expose assumptions, alternatives, risks, approval walls, and verification before execution. Apply krish-principles first. NEVER invoke for pure social conversation, jokes, acknowledgements, definitions, translations, arithmetic, verbatim readback, or passive read-only listings. When an explicit interview is still open, take-the-brief owns that phase and hands off here afterward."
+description: "First routing gate for every non-trivial implementation or build request. Invoke before krish-build when asked to implement an API endpoint and prove it, and before producing, changing, deploying, sending, deciding, materially recommending, or doing multi-step research/build work. For tiny reversible work, compress to objective, route, and check. For material work, expose assumptions, alternatives, risks, approval walls, and verification before execution. Apply krish-principles first. NEVER invoke for pure social conversation, jokes, acknowledgements, definitions, translations, arithmetic, verbatim readback, or passive read-only listings. When an explicit interview is still open, take-the-brief owns that phase and hands off here afterward."
 ---
 
 # Strategy Brief

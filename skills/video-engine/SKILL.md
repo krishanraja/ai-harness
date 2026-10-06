@@ -1,6 +1,6 @@
 ---
 name: video-engine
-description: "Exact activation guard for Krishan Raja's Mindmake Video Engine. Activate only when the complete first user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not activate the engine. A client may retrieve this guard while resolving a nearby phrase; retrieval is not activation and must stop before accessing the authority repository. Never activate for ordinary video requests."
+description: "Use this skill whenever the current user message, after trimming leading and trailing whitespace, equals 'Video engine' case-insensitively, so the skill can validate the launch guard. Discovery is not activation: after loading, activate only if that exact message is also the first user-authored message in a new chat. Terminal punctuation, additional words or lines, quoted mentions, later-turn uses, and $video-engine must not activate the engine. On a failed guard, stop before accessing the authority repository. Never activate for ordinary video requests."
 ---
 
 # Video Engine launcher
@@ -9,7 +9,7 @@ Use this as a thin launcher. GitHub `krishanraja/content-engine` `main` is the o
 
 ## Trigger contract
 
-This section governs activation, not semantic retrieval. A client may retrieve this guard while deciding whether a nearby phrase matches. That read is not a launch. Activation begins only when the check below passes and the client accesses, fetches, or runs the authority repository or its engine surface. On a failed match, do not cross that boundary.
+This section governs activation, not discovery or semantic retrieval. The catalog must select this skill whenever the current prompt itself is the exact phrase so this file can perform the history check; catalog routing must not try to infer whether a conversation is new. A client may also retrieve this guard while deciding whether a nearby phrase matches. Either read is not a launch. Activation begins only when the check below passes and the client accesses, fetches, or runs the authority repository or its engine surface. On a failed match, do not cross that boundary.
 
 Activate a new Video Engine session only when both are true:
 
