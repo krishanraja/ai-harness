@@ -7,11 +7,11 @@ Rendered from registry reconciliation date **2026-10-06**.
 
 ## Release authority
 
-- Latest approved release: **v2026.10.06.1** (harness-v2026.10.06.1)
-- Immutable and published: **yes**, 2026-10-06T11:08:52Z
-- Release source commit: `88a059daac42a9f3753e960a82e8054cafebd075`
-- Manifest SHA-256: `CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
+- Latest approved release: **v2026.10.06.2** (harness-v2026.10.06.2)
+- Immutable and published: **yes**, 2026-10-06T20:09:26Z
+- Release source commit: `ded500e031d35a447358b7da69414df7a5ae3c3c`
+- Manifest SHA-256: `A50693BCDFECFE1DD56B33F11716307825389CE6244262A9F34342F41673379B`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.2
 - Current deployment verdict: **current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
@@ -20,13 +20,13 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-take-the-brief-exclusion-and-video-engine-positive-routes |
-| cursor-primary | v2026.10.06.1 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-one-strategy-route |
-| codex-current | v2026.10.06.1 | 29/29 exact | installed-hash-verified-canary-failed-two-krish-principles-negative-routes |
-| claude-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-exact-byte-parity-unavailable |
-| perplexity-cloud | v2026.10.06.1 | cloud inventory only | changed-skills-replaced-catalogue-verified-account-instructions-read-back-byte-parity-unavailable |
-| codex-cloud | v2026.10.06.1 | cloud inventory only | published-environment-pinned-commit-startup-validated-account-instructions-read-back |
+| codex-surface-07a67cda9f99 | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2 |
+| cursor-primary | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-manual-canary-required-awaiting-v2026.10.06.2 |
+| claude-code-user | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2 |
+| codex-current | v2026.10.06.1 | 29/29 exact | stale-v2026.10.06.1-installed-hash-verified-measurement-defect-corrected-awaiting-v2026.10.06.2 |
+| claude-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-exact-byte-parity-unavailable |
+| perplexity-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-byte-parity-unavailable |
+| codex-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.2 |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 

@@ -74,49 +74,58 @@ deployed_release:
   status: current-on-all-declared-local-and-supported-cloud-surfaces-local-canary-failures-open
 
 latest_approved_release:
-  release_id: v2026.10.06.1
-  tag: harness-v2026.10.06.1
-  source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+  release_id: v2026.10.06.2
+  tag: harness-v2026.10.06.2
+  source_commit: ded500e031d35a447358b7da69414df7a5ae3c3c
   published: true
   immutable: true
-  published_at: 2026-10-06T11:08:52Z
-  manifest_sha256: CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
-  skills_tree_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+  published_at: 2026-10-06T20:09:26Z
+  manifest_sha256: A50693BCDFECFE1DD56B33F11716307825389CE6244262A9F34342F41673379B
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.2
+  skills_tree_aggregate_sha256: C7505E71DB54A3997209E4985C463F6B51BD298BAD809D19E0EEBC71850653A4
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - content-corpus
-    - krish-principles
-    - mindmake
-    - mindmake-os
+    - krish-build
+    - strategy-brief
+    - video-engine
   approved_at: 2026-10-06
   approved_by: Krish Raja
   approval_basis: >-
-    On 2026-10-06 Krish issued rulings that superseded parts of v2026.10.05.1 and
-    said "yes merge" to PR 108, which carries them; the coordinator had stated that a
-    release and install on Claude Code, Codex and Cursor would follow the merge. PR 108
-    passed validate-and-repeat-build (including Test-Harness.ps1), surfaces and the
-    GitHub judge before immutable publication.
+    After the v2026.10.06.1 rollout exposed unresolved canary failures, Krish instructed
+    the coordinator to "just continue til 100% complete" across the already named local,
+    SURFACE and cloud targets. PR 112 carried the bounded corrections and passed
+    validate-and-repeat-build, surfaces and the GitHub judge before immutable
+    publication.
   approval_note: >-
-    One queue: the portfolio rolls into the mission and the mission leads. The ikigai
-    commitment is ongoing, not paused. Full Time is a B2C monetisation experiment app,
-    CTRL being priced is fine, the publication has three channels, Hunter is active and
-    founder visibility stays open. The mindmake repository is now skipped by the canon
-    sync entirely (canon_sync: false), proven by test-canon-sync.mjs.
+    Keep adapter invariants out of invocation-canary rotation, require strategy before
+    non-trivial technical production, move Video Engine conversation-history validation
+    behind exact-prompt discovery, and make the no-interview collision's strategy route
+    observable. The prior release and its failing evidence remain immutable.
   supersedes_reason: >-
-    v2026.10.05.1 becomes the immutable immediate rollback target; it is the release
-    currently installed on the local surfaces.
+    v2026.10.06.1 remains the immutable immediate rollback target and the currently
+    installed baseline on every declared surface.
   hash_provenance: >-
-    manifest_sha256 is the SHA-256 of release-v2026.10.06.1.json downloaded from the
+    manifest_sha256 is the SHA-256 of release-v2026.10.06.2.json downloaded from the
     release. skills_tree_aggregate_sha256 was recomputed from the committed git objects
     at source_commit with the same record format as Invoke-HarnessSync.ps1, the method
-    that reproduced v2026.09.24.3's and v2026.10.05.1's recorded aggregates exactly, and
+    that reproduced prior recorded aggregates exactly, and
     scripts/check-aggregate.mjs independently computes the same value over the tree:
     146 files across 29 skills.
   status: published-awaiting-governed-surface-install-and-canary
 
 
 previous_published_release:
+  release_id: v2026.10.06.1
+  tag: harness-v2026.10.06.1
+  source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+  immutable: true
+  published_at: 2026-10-06T11:08:52Z
+  manifest_sha256: CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657
+  skills_tree_aggregate_sha256: 406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768
+  status: immediate-immutable-rollback-baseline
+
+
+superseded_approved_release:
   release_id: v2026.10.05.1
   tag: harness-v2026.10.05.1
   source_commit: 58910a0a82794355ce88ee1ffeb84995b04075dc
@@ -124,20 +133,8 @@ previous_published_release:
   published_at: 2026-10-05T22:23:46Z
   manifest_sha256: D703C292548EDE3B683ADDE98ACAFB5BCF9316C3B4FFF8C9C8ABA916BC914A30
   skills_tree_aggregate_sha256: 1BBE77303148E86374DB46D6FB6DB311BDE1BFDC073A23063C6DD0D892DE3AA9
-  status: immediate-immutable-rollback-baseline
-
-
-superseded_approved_release:
-  release_id: v2026.09.24.3
-  tag: harness-v2026.09.24.3
-  source_commit: 3278b02aa981ee5e02507bbb502e41ddda8da9fd
-  immutable: true
-  published_at: 2026-09-24T21:38:30Z
-  manifest_sha256: 62D968CE4E16DD7FC1455015A894B8A9316CB3E83A563D7EB0366AC4082FAF85
-  skills_tree_aggregate_sha256: DEF0EE0E3000185D4FC811FECC9B84DEB822DD621A8655A5AC065A94D55AE8FB
   note: >-
-    Installed with exact parity on LORIMER (state/machine-runs/v2026.09.24.3-lorimer.json)
-    and retained as the second immutable rollback target.
+    Retained as the second immutable rollback target after v2026.10.06.1.
 
 
 surface_deployments:
@@ -158,7 +155,7 @@ surface_deployments:
       - state/canaries/v2026.10.06.1-codex-surface-07a67cda9f99.json
       - state/deployments/v2026.10.06.1-codex-surface-07a67cda9f99.json
       - state/machine-runs/v2026.10.06.1-surface.json
-    status: installed-hash-verified-canary-failed-take-the-brief-exclusion-and-video-engine-positive-routes
+    status: stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2
     previous_release: v2026.09.24.3
   cursor-primary:
     release_id: v2026.10.06.1
@@ -171,7 +168,7 @@ surface_deployments:
     deployed_at_utc: 2026-10-06T11:27:52.5480571Z
     rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.1-20261006T112751Z-6cce4873
     evidence: state/deployments/v2026.10.06.1-cursor-primary.json
-    status: installed-hash-verified-manual-canary-required
+    status: stale-v2026.10.06.1-installed-hash-verified-manual-canary-required-awaiting-v2026.10.06.2
   claude-code-user:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
@@ -185,7 +182,7 @@ surface_deployments:
     evidence:
       - state/canaries/v2026.10.06.1-claude-code-user.json
       - state/deployments/v2026.10.06.1-claude-code-user.json
-    status: installed-hash-verified-canary-failed-one-strategy-route
+    status: stale-v2026.10.06.1-installed-hash-verified-canary-failed-awaiting-v2026.10.06.2
   codex-current:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
@@ -199,28 +196,28 @@ surface_deployments:
     evidence:
       - state/canaries/v2026.10.06.1-codex-current.json
       - state/deployments/v2026.10.06.1-codex-current.json
-    status: installed-hash-verified-canary-failed-two-krish-principles-negative-routes
+    status: stale-v2026.10.06.1-installed-hash-verified-measurement-defect-corrected-awaiting-v2026.10.06.2
   claude-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/claude-cloud.json
-    status: changed-skills-replaced-catalogue-verified-account-instructions-exact-byte-parity-unavailable
+    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-exact-byte-parity-unavailable
   perplexity-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: changed-skills-replaced-catalogue-verified-account-instructions-read-back-byte-parity-unavailable
+    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.2-byte-parity-unavailable
   codex-cloud:
     release_id: v2026.10.06.1
     source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
     installed_skill_count: 29
     deployed_at: 2026-10-06
     evidence: state/cloud-checks/codex-cloud.json
-    status: published-environment-pinned-commit-startup-validated-account-instructions-read-back
+    status: stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.2
 
 canonical:
   repository: krishanraja/ai-harness
