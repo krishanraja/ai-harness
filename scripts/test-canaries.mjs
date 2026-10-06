@@ -41,6 +41,17 @@ try {
   check(!sheet.skills.includes('core'), 'sheet invented a non-invocable skill from the core trigger filename')
   check(!sheet.skills.includes('krish-principles'),
     'directly imported krish-principles must be checked as an adapter invariant, not as an invocation canary')
+  // The rotation is seeded on the release id, so one pinned id cannot prove the
+  // boundary. v2026.10.06.1 is the id whose seed leaked krish-principles onto a
+  // live sheet; the rest sweep the rotation so no other seed can do it again.
+  const rotationIds = ['v2026.10.06.1', ...Array.from({ length: 40 }, (_, i) => `v2026.11.${String(i + 1).padStart(2, '0')}.1`)]
+  for (const id of rotationIds) {
+    const swept = spawnSync(process.execPath, [instrument, '--sheet-json', '--release', id], { cwd: HARNESS, encoding: 'utf8' })
+    check(swept.status === 0, `sheet JSON for ${id} exited ${swept.status}: ${swept.stderr}`)
+    const sweptSheet = JSON.parse(swept.stdout)
+    check(!sweptSheet.skills.includes('krish-principles') && !sweptSheet.cases.some((canary) => canary.skill === 'krish-principles'),
+      `release ${id} rotated the directly imported krish-principles onto the invocation sheet`)
+  }
   for (const skill of ['strategy-brief', 'verification-loop']) {
     check(sheet.skills.includes(skill), `sheet omitted real core skill ${skill}`)
     check(sheet.cases.some((canary) => canary.skill === skill && canary.should_trigger),

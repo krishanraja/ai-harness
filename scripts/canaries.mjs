@@ -251,7 +251,14 @@ function neverProven() {
 
 const changed = changedSkills()
 const unproven = neverProven()
+// The rotation must honour the adapter-invariant boundary too. Without this
+// filter the seed for v2026.10.06.1 rotated krish-principles back onto the
+// sheet, and Codex then failed its social exclusions exactly as it had on
+// 2026-09-13, because its root adapter tells it to read that file every turn.
+// Filtering after the draw, not before it, leaves every other release's
+// rotation, and every recorded report against it, unchanged.
 const tier3 = rotation(suites.filter((s) => !(s in TIER1) && !unproven.includes(s)), 3)
+  .filter((s) => !STATIC_ADAPTER_INVARIANTS.has(s))
 const selected = [...new Set([...Object.keys(TIER1).filter((s) => suites.includes(s)), ...changed.skills, ...unproven, ...tier3])]
 
 // ------------------------------------------------------------------ the sheet
