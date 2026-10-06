@@ -1,8 +1,8 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-10-05T23:24:00.260Z",
+    "last_run": "2026-10-06T20:54:21.063Z",
     "status": "blocked",
-    "release": "v2026.10.05.1",
+    "release": "v2026.10.06.2",
     "source": "repository_dispatch"
   },
   "harness-sync-surface": {
