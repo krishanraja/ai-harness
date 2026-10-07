@@ -1,5 +1,5 @@
 schema_version: 1
-last_reconciled: 2026-10-06
+last_reconciled: 2026-10-07
 status: governed-production-set
 
 candidate_quality_system:
@@ -199,26 +199,26 @@ surface_deployments:
       - state/deployments/v2026.10.06.3-codex-current.json
     status: current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes
   claude-cloud:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
-    deployed_at: 2026-10-06
+    deployed_at: 2026-10-07
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-exact-byte-parity-unavailable
+    status: current-catalogue-and-instructions-verified-exact-byte-parity-unavailable
   perplexity-cloud:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
-    deployed_at: 2026-10-06
+    deployed_at: 2026-10-07
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-byte-parity-unavailable
+    status: current-catalogue-and-instructions-verified-exact-byte-parity-unavailable
   codex-cloud:
-    release_id: v2026.10.06.1
-    source_commit: 88a059daac42a9f3753e960a82e8054cafebd075
+    release_id: v2026.10.06.3
+    source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
-    deployed_at: 2026-10-06
+    deployed_at: 2026-10-07
     evidence: state/cloud-checks/codex-cloud.json
-    status: stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.3
+    status: current-published-environment-fresh-task-validated
 
 canonical:
   repository: krishanraja/ai-harness
