@@ -3,7 +3,7 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-10-06**.
+Rendered from registry reconciliation date **2026-10-07**.
 
 ## Release authority
 
@@ -24,9 +24,9 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | cursor-primary | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-manual-canary-required-cli-authentication-unavailable |
 | claude-code-user | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-two-declared-unmeasured-routes |
 | codex-current | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes |
-| claude-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-exact-byte-parity-unavailable |
-| perplexity-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-byte-parity-unavailable |
-| codex-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.3 |
+| claude-cloud | v2026.10.06.3 | cloud inventory only | current-catalogue-and-instructions-verified-exact-byte-parity-unavailable |
+| perplexity-cloud | v2026.10.06.3 | cloud inventory only | current-catalogue-and-instructions-verified-exact-byte-parity-unavailable |
+| codex-cloud | v2026.10.06.3 | cloud inventory only | current-published-environment-fresh-task-validated |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
