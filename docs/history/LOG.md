@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-08
+
+- reconciled at `467448f`: `NOW.md` now records the three cloud surfaces at v2026.10.06.3 (they were stale at v2026.10.06.1), notes that the registry's top-level deployment verdict still says `cloud-surfaces-stale` and waits on the next registry reconcile, and refreshes review ages for `harness-maintainer` (49 days) and `video-engine` (40 days) against their 30-day SLA, both still waiting on Krish. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
+
 ## 2026-10-07
 
 - reconciled at `8042cab`: `NOW.md` moved from v2026.10.05.1 to v2026.10.06.3 (all four local surfaces 29/29 exact, three cloud surfaces stale at v2026.10.06.1), closed the `CURRENT.md` versus LORIMER record disagreement flagged at `5b22a53`, added the 2026-10-06 rulings and canary-repair bullets, and refreshed review ages for `harness-maintainer` (48 days) and `video-engine` (39 days) against their 30-day SLA, both still waiting on Krish. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
