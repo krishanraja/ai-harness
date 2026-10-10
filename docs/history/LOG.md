@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-10
+
+- reconciled at `259f0a8`: the only commit since `467448f` was the observer ledger (`state/` files, no documentation consequence). `NOW.md` head and `as_of` advanced and the review ages restated (`harness-maintainer` 51 days, `video-engine` 42 days); the registry dates are unchanged and still wait on Krish.
+
 ## 2026-10-08
 
 - reconciled at `467448f`: `NOW.md` now records the three cloud surfaces at v2026.10.06.3 (they were stale at v2026.10.06.1), notes that the registry's top-level deployment verdict still says `cloud-surfaces-stale` and waits on the next registry reconcile, and refreshes review ages for `harness-maintainer` (49 days) and `video-engine` (40 days) against their 30-day SLA, both still waiting on Krish. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
