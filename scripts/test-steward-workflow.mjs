@@ -47,6 +47,7 @@ test('the judge records a harness/judge status', /context="harness\/judge"/.test
 test('a judge status reads measured only on exit 0', /0\) state=success; desc="measured/.test(judge) && !/\*\) state=success/.test(judge))
 test('the observer suite runs on every push', /node scripts\/test-observe\.mjs/.test(surfaces))
 test('this suite runs on every push', /node scripts\/test-steward-workflow\.mjs/.test(surfaces))
+test('every pull request reports its always-on context change', /node scripts\/context-budget\.mjs --base/.test(surfaces))
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)

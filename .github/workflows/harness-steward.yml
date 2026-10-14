@@ -146,6 +146,20 @@ jobs:
       - name: The steward workflow keeps its own guarantees
         run: node scripts/test-steward-workflow.mjs
 
+      - name: The context budget measures what it claims to
+        run: node scripts/test-context-budget.mjs
+
+      # Smarter must not mean heavier. Every pull request shows what it does to
+      # the context every session loads (contract/context-budget.yaml). Report
+      # only here; the steward's own change requests are held to it hard.
+      - name: Report the always-on context change
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
+          git fetch --no-tags --depth=50 origin "${{ github.event.pull_request.head.sha }}"
+          node scripts/context-budget.mjs --base "${{ github.event.pull_request.base.sha }}" --head "${{ github.event.pull_request.head.sha }}" | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail

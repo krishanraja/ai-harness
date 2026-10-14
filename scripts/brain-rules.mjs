@@ -20,6 +20,11 @@
  *   node scripts/brain-rules.mjs --extract          print what the contracts contain
  *   node scripts/brain-rules.mjs --backfill --out brain/rules.yaml
  *   node scripts/brain-rules.mjs --check            compare the contracts to the ledger
+ *   node scripts/brain-rules.mjs --revise --kind proposal --ref docs/proposals/<file>.md
+ *                                                   record a reviewed change in place
+ *
+ * --backfill is lossy for a changed entry (it rewrites the source as founding);
+ * use --revise for any change made after the ledger exists.
  *
  * Dependency-free, and --check never writes.
  */
@@ -324,6 +329,171 @@ export function check(ledgerText, root = HARNESS) {
   return { problems, counts: { contract_rules: live.contractRules.length, skill_sections: live.skillSections.length } }
 }
 
+// ------------------------------------------------------------------- revise
+/**
+ * Record a reviewed change to the canon in brain/rules.yaml, in place.
+ *
+ * --backfill regenerates the whole file and is lossy for a changed entry: it
+ * writes `founding` plus the first commit and drops the old source instead of
+ * keeping it. A change request needs the opposite, so this edits only the
+ * entries whose text moved, and leaves every other byte alone:
+ *
+ *   changed   the old text_sha and source move to `history` with valid_until,
+ *             and the entry takes the new hash and the given source;
+ *   added     a new entry, inserted after the rule that precedes it;
+ *   removed   a live entry whose rule no longer exists becomes `superseded`
+ *             with valid_until. It is closed, never deleted;
+ *   merged    `supersedes: [old]` on the surviving entry, from --supersedes.
+ *
+ * Idempotent: a second run over the same tree changes nothing.
+ */
+const SOURCE_KINDS = new Set(['founding', 'ruling', 'proposal', 'import'])
+
+function emitEntry(e) {
+  const L = []
+  L.push(`  - id: ${e.id}`)
+  L.push(`    file: ${e.file}`)
+  if (e.heading) L.push(`    heading: ${q(e.heading)}`)
+  L.push(`    text_sha: ${q(e.text_sha)}`)
+  L.push(`    first_seen: ${q(e.first_seen || 'unknown')}`)
+  L.push('    source:')
+  L.push(`      kind: ${e.source?.kind || 'founding'}`)
+  L.push(`      ref: ${q(e.source?.ref || 'unknown')}`)
+  if (e.history?.length) {
+    L.push('    history:')
+    for (const h of e.history) {
+      L.push(`      - text_sha: ${q(h.text_sha)}`)
+      L.push(`        valid_until: ${q(h.valid_until)}`)
+      L.push('        source:')
+      L.push(`          kind: ${h.source?.kind || 'unknown'}`)
+      L.push(`          ref: ${q(h.source?.ref || 'unknown')}`)
+    }
+  }
+  L.push(`    status: ${e.status || 'live'}`)
+  if (e.supersedes?.length) L.push(`    supersedes: [${e.supersedes.join(', ')}]`)
+  if (e.valid_until) L.push(`    valid_until: ${q(e.valid_until)}`)
+  if (e.contested_by) L.push(`    contested_by: ${e.contested_by}`)
+  return L
+}
+
+/** Entry blocks by id: section key, first line, and the line after the last. */
+function locate(lines) {
+  const out = new Map()
+  const sections = {}
+  let key = null
+  let open = null
+  const close = (i) => { if (open) { open.end = i; out.set(open.id, open); open = null } }
+  for (let i = 0; i < lines.length; i++) {
+    const k = lines[i].match(/^(contract_rules|skill_sections):\s*$/)
+    if (k) { close(i); key = k[1]; sections[key] = i; continue }
+    const m = lines[i].match(/^  - id: (.+?)\s*$/)
+    if (m) { close(i); open = { id: m[1], key, start: i }; continue }
+    if (open && !lines[i].startsWith('    ')) close(i)
+  }
+  close(lines.length)
+  return { blocks: out, sections }
+}
+
+export function revise(ledgerText, root = HARNESS, { kind, ref, today = TODAY, supersedes = {} } = {}) {
+  if (!SOURCE_KINDS.has(String(kind))) throw new Error(`revise: unsupported source kind ${kind}`)
+  if (!ref) throw new Error('revise: a source ref is required')
+  const ledger = parseYaml(ledgerText)
+  const byId = new Map()
+  for (const key of ['contract_rules', 'skill_sections']) for (const e of ledger[key] || []) byId.set(e.id, { ...e, key })
+  const live = extract(root)
+  const liveRows = [
+    ...live.contractRules.map((r) => ({ ...r, key: 'contract_rules' })),
+    ...live.skillSections.map((r) => ({ ...r, key: 'skill_sections' })),
+  ]
+  const liveIds = new Set(liveRows.map((r) => r.id))
+  const mergedInto = {}
+  for (const [oldId, newId] of Object.entries(supersedes)) (mergedInto[newId] = mergedInto[newId] || []).push(oldId)
+
+  const replace = new Map()   // id -> new entry object
+  const inserts = []          // { after: id | null, key, entry }
+  const changed = []
+  const added = []
+  const superseded = []
+
+  let prevByKey = { contract_rules: null, skill_sections: null }
+  for (const r of liveRows) {
+    const was = byId.get(r.id)
+    const extra = mergedInto[r.id] || []
+    if (!was) {
+      inserts.push({ after: prevByKey[r.key], key: r.key, entry: {
+        id: r.id, file: r.file, heading: r.heading, text_sha: r.text_sha, first_seen: today,
+        source: { kind, ref }, status: 'live', supersedes: extra.length ? extra : undefined,
+      } })
+      added.push(r.id)
+    } else {
+      const moved = String(was.text_sha) !== String(r.text_sha)
+      const revived = was.status === 'superseded'
+      const needsMerge = extra.some((id) => !(was.supersedes || []).includes(id))
+      if (moved || revived || needsMerge) {
+        const next = { ...was }
+        if (moved) {
+          next.history = [...(was.history || []), { text_sha: was.text_sha, valid_until: today, source: was.source }]
+          next.text_sha = r.text_sha
+          next.source = { kind, ref }
+          changed.push(r.id)
+        }
+        if (revived) { next.status = 'live'; delete next.valid_until }
+        if (needsMerge) next.supersedes = [...new Set([...(was.supersedes || []), ...extra])]
+        replace.set(r.id, next)
+      }
+    }
+    prevByKey[r.key] = r.id
+  }
+  for (const [id, e] of byId) {
+    if (liveIds.has(id)) continue
+    if (e.status === 'live' || e.status === 'contested') {
+      replace.set(id, { ...e, status: 'superseded', valid_until: e.valid_until || today })
+      superseded.push(id)
+    }
+  }
+
+  if (!replace.size && !inserts.length) return { text: ledgerText, changed, added, superseded }
+
+  const lines = ledgerText.split('\n')
+  const { blocks, sections } = locate(lines)
+  // Build the output by walking the original lines once.
+  const insertAfter = new Map()
+  const insertTop = { contract_rules: [], skill_sections: [] }
+  for (const ins of inserts) {
+    if (ins.after && blocks.has(ins.after)) (insertAfter.get(ins.after) || insertAfter.set(ins.after, []).get(ins.after)).push(ins.entry)
+    else if (ins.after) {
+      // The preceding rule is itself new: chain behind it.
+      const chain = inserts.find((x) => x.entry.id === ins.after)
+      ;(chain.followers = chain.followers || []).push(ins.entry)
+    } else insertTop[ins.key].push(ins.entry)
+  }
+  const expand = (entry) => {
+    const ins = inserts.find((x) => x.entry === entry)
+    return [entry, ...((ins?.followers || []).flatMap(expand))]
+  }
+  const startOf = new Map([...blocks.values()].map((b) => [b.start, b]))
+  const out = []
+  for (let i = 0; i < lines.length; i++) {
+    const b = startOf.get(i)
+    if (b) {
+      const next = replace.get(b.id)
+      if (next) out.push(...emitEntry(next))
+      else out.push(...lines.slice(b.start, b.end))
+      for (const e of insertAfter.get(b.id) || []) for (const x of expand(e)) out.push(...emitEntry(x))
+      i = b.end - 1
+      continue
+    }
+    out.push(lines[i])
+    for (const key of ['contract_rules', 'skill_sections']) {
+      if (sections[key] === i) for (const e of insertTop[key]) for (const x of expand(e)) out.push(...emitEntry(x))
+    }
+  }
+  let text = out.join('\n')
+  text = text.replace(/^# \d+ rules across the two contracts\.$/m, `# ${live.contractRules.length} rules across the two contracts.`)
+  text = text.replace(/^# \d+ chapters across the installed skills\.$/m, `# ${live.skillSections.length} chapters across the installed skills.`)
+  return { text, changed, added, superseded }
+}
+
 // ---------------------------------------------------------------------- main
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 if (isMain) {
@@ -347,8 +517,15 @@ if (isMain) {
     for (const p of problems) console.error(`FAIL  ${p}`)
     if (problems.length) { console.error(`\n${problems.length} provenance failure(s).`); process.exit(1) }
     console.log(`ok    ${counts.contract_rules} contract rules and ${counts.skill_sections} skill chapters all carry provenance`)
+  } else if (has('--revise')) {
+    const abs = join(HARNESS, 'brain/rules.yaml')
+    const supersedes = Object.fromEntries((flag('--supersedes') || '').split(',').filter(Boolean).map((p) => p.split('=')))
+    const r = revise(readFileSync(abs, 'utf8'), HARNESS, { kind: flag('--kind'), ref: flag('--ref'), supersedes })
+    if (!has('--dry-run')) writeFileSync(abs, r.text)
+    console.log(`revised brain/rules.yaml${has('--dry-run') ? ' (dry run)' : ''}: ${r.changed.length} changed, ${r.added.length} added, ${r.superseded.length} superseded`)
+    for (const id of [...r.changed, ...r.added, ...r.superseded]) console.log(`  ${id}`)
   } else {
-    console.error('usage: brain-rules.mjs [--extract | --backfill [--out <path>] | --check]')
+    console.error('usage: brain-rules.mjs [--extract | --backfill [--out <path>] | --check | --revise --kind <kind> --ref <ref> [--supersedes old=new,...] [--dry-run]]')
     process.exit(2)
   }
 }
