@@ -16,8 +16,13 @@ const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const DEFAULT_LEDGER_DIR = join(HARNESS, 'state/observations')
 const DEFAULT_CURSOR = join(DEFAULT_LEDGER_DIR, 'inbox-cursor.json')
 const MAX_PAGES = 20
-const SURFACES = new Set(['codex', 'claude-code', 'cursor', 'claude-cloud', 'perplexity', 'github-actions', 'n8n', 'other'])
-const KINDS = new Set(['explicit_correction', 'failure', 'missed_trigger', 'false_trigger', 'repeated_manual_step', 'successful_pattern', 'contradiction'])
+// claude-ai covers claude.ai and Claude Desktop, which share one account's connectors.
+// claude-code-web is a Claude Code cloud session. perplexity and claude-cloud stay
+// accepted for rows already recorded under them.
+const SURFACES = new Set(['codex', 'claude-code', 'claude-code-web', 'claude-ai', 'chatgpt', 'cursor', 'claude-cloud', 'perplexity', 'github-actions', 'n8n', 'other'])
+const KINDS = new Set(['explicit_correction', 'failure', 'missed_trigger', 'false_trigger', 'repeated_manual_step', 'successful_pattern', 'contradiction', 'preference', 'friction'])
+// An event id's prefix names what produced it, so no new envelope field is needed.
+const PRODUCERS = [['session-miner:', 'session-miner']]
 const OUTCOMES = new Set(['corrected', 'failed', 'succeeded', 'unknown'])
 const SEVERITIES = new Set(['low', 'medium', 'high', 'blocking'])
 const CONFIDENCES = new Set(['low', 'medium', 'high'])
@@ -58,6 +63,7 @@ export function toObservation(event, seenAt) {
     severity: event.severity,
     confidence: event.confidence,
     payload_sha256: event.payload_sha256,
+    producer: (PRODUCERS.find(([prefix]) => String(event.event_id).startsWith(prefix)) || [null, 'agent'])[1],
   }
 }
 

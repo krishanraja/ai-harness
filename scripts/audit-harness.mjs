@@ -433,6 +433,9 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     // surface stays declared per R7, and the retiring marker on its heartbeat
     // entry is what stops it being read as a failure. See state/heartbeats.json.
     'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09 and retiring since 2026-09-20', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
+    // The session miner restored by Krish's ruling of 2026-10-14, the "new evidenced
+    // decision" the note above asked for. It is opt-in and weekly.
+    'session-miner-lorimer': { where: 'the weekly Windows Scheduled Task installed by scripts/Invoke-SessionMiner.ps1 -RegisterScheduledTask on LORIMER', declared: '2026-10-14', fix: 'Run scripts/Invoke-SessionMiner.ps1 -SelfTest, then -DryRun, then -RegisterScheduledTask on LORIMER. Only Krish can do this. If he decides against it, remove this clock.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
@@ -520,11 +523,33 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
   const fleetDoc = parseYaml(read('state/fleet.yaml'))
   const surfaces = fleetDoc.surface_contracts || []
   for (const s of surfaces) {
+    // A surface Krish ruled out of capture is not a gap (Perplexity, 2026-10-14).
+    if (s.capture === 'out-of-scope') continue
     if (!s.writes || s.writes === 'nothing') {
       F('surface-contract', s.id, `${s.id} reads from the brain and writes nothing back.`, String(s.gap || 'Give it a write path, or record why it cannot have one. Until then, anything decided on this surface is lost when the session ends.').replace(/\s+/g, ' ').trim())
     }
   }
   if (surfaces.length) N(`${surfaces.length} surfaces declare what they read and write.`)
+
+  // A surface that claims to send hosted observations must have sent one. A
+  // claim nobody checks is how claude-code-cloud said it wrote observations
+  // while the inbox held none from it.
+  const ledgerDir = join(HARNESS, 'state/observations')
+  const inbox = []
+  for (const f of existsSync(ledgerDir) ? readdirSync(ledgerDir) : []) {
+    if (!f.endsWith('.jsonl')) continue
+    for (const line of readFileSync(join(ledgerDir, f), 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      try { const r = JSON.parse(line); if (r.source === 'harness-inbox') inbox.push(r) } catch { /* skip */ }
+    }
+  }
+  for (const s of surfaces) {
+    if (!s.event_surface || !/hosted/i.test(String(s.writes || ''))) continue
+    const last = inbox.filter((r) => String(r.quote).startsWith(`[${s.event_surface}]`)).map((r) => r.dated || r.seen_at).sort().at(-1)
+    if (!last || days(last, today) > 30) {
+      F('surface-claim', s.id, `${s.id} claims to send hosted observations, but the ledger has ${last ? `none since ${last}, ${days(last, today)} days ago` : 'none at all'} labelled ${s.event_surface}.`, 'Either the client stopped calling the tool, or the claim is wrong. Fix the client or correct its writes entry in state/fleet.yaml.')
+    }
+  }
 }
 
 // ------------------------------------------------------------- bench sources

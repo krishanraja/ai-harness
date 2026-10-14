@@ -17,7 +17,7 @@ promotion step between them that leaves a record.
 | File | Holds | Written by |
 |---|---|---|
 | `rules.yaml` | one entry per rule in both contracts, and one per chapter of every skill: its hash, when it first appeared, where it came from, what it supersedes | `scripts/brain-rules.mjs`, checked on every push |
-| `proposals.jsonl` | one row per event in a proposal's life: opened, merged or closed, and whether the finding it addressed actually went away | appended, never edited |
+| `proposals.jsonl` | one row per event in a steward pull request's life: opened, merged, closed or expired, with hours to decision | appended by `scripts/observe.mjs`, never edited; the same deliberate machine-written exception as `usage.jsonl` |
 | `usage.jsonl` | one row per observed citation of a rule: which rule, **when**, by which producer, against which pull request or canary report | appended by `scripts/judge.mjs` and `scripts/canaries.mjs`, never edited |
 
 ## Why usage.jsonl exists
@@ -66,7 +66,9 @@ nobody records them or somebody rubber-stamps them. So the gate moved rather
 than disappeared: the ledger is append only and machine written, and nothing
 downstream of it may act alone. A `dead-zone` finding is a finding, which the
 quality standard already defines as a decision for a person; retiring a rule is
-still a proposal. No script reads this file and edits a rule.
+still a proposal. No script reads this file and edits a rule in place; a
+retirement it suggests reaches the canon only as a change-request pull request
+a person merges.
 
 Two things the ledger deliberately refuses. A citation naming a rule that is not
 in the canon, because it would make the count answer for a canon that is not

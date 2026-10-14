@@ -223,6 +223,39 @@ export function recordedRulings(text) {
 }
 
 /**
+ * Rulings from a `git log --format=%B%x1e` stream, one record per commit.
+ *
+ * A commit the steward wrote carries a `Harness-Steward:` trailer, and its
+ * rulings never count: a change request must not be able to overrule the panel
+ * reviewing it by quoting a ruling into its own commit body.
+ */
+export function rulingsFromLog(log) {
+  return String(log).split('\u001e')
+    .filter((body) => !/^Harness-Steward:/imu.test(body))
+    .flatMap((body) => recordedRulings(body))
+}
+
+/**
+ * The report for a run that could not measure. Exit 2 used to write nothing, so
+ * a rejected key looked exactly like a quiet pass: green check, no comment.
+ */
+export function failureReport({ base, head, bench, error }) {
+  const raw = String(error?.message || error || 'unknown error')
+  const masked = raw.replace(/sk-[A-Za-z0-9_-]{8,}/gu, '[masked]').replace(/Bearer\s+\S+/giu, 'Bearer [masked]')
+  const message = masked.split(EM_DASH).join(',').slice(0, 200)
+  const auth = /\b(401|403)\b/u.test(raw)
+  return [
+    '## Judge panel: unmeasured',
+    '',
+    `The ${bench} bench could not run on ${base}..${head}, so this canon change is unreviewed. Unmeasured is not a pass.`,
+    '',
+    `- Error: ${message}`,
+    ...(auth ? ['- The model call was refused. Replace the `ANTHROPIC_API_KEY` repository secret, then re-run this check.'] : []),
+    '',
+  ].join('\n')
+}
+
+/**
  * Run one bench, with the mandatory second attempt when it comes back unanimous.
  * `ask` is injected so the whole protocol is testable without a model.
  */
@@ -359,12 +392,17 @@ if (isMain) {
   const results = []
   for (const name of BENCHES) {
     try { results.push(await runBench(name, { diff, diffFiles, clauseIds, ask: anthropic })) }
-    catch (e) { console.error(`FAIL  ${name} bench: ${e.message}`); process.exit(2) }
+    catch (e) {
+      console.error(`FAIL  ${name} bench: ${String(e.message).replace(/sk-[A-Za-z0-9_-]{8,}/gu, '[masked]')}`)
+      const out = flag('--out')
+      if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, failureReport({ base, head, bench: name, error: e }) + '\n') }
+      process.exit(2)
+    }
   }
 
   const blocked = blockingRegressions(results.flatMap((r) => r.findings))
-  const commitMessages = execFileSync('git', ['log', '--format=%B', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
-  const rulings = recordedRulings(commitMessages)
+  const commitMessages = execFileSync('git', ['log', '--format=%B%x1e', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
+  const rulings = rulingsFromLog(commitMessages)
   let report = render(results, { base, head })
   if (blocked.length && rulings.length) {
     report += `\n## Recorded Krish override\n\n${rulings.map((r) => `- ${r}`).join('\n')}\n\nThe blocking findings remain visible as review evidence, but the recorded owner ruling overrules this gate.\n`

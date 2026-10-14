@@ -39,6 +39,14 @@ let rejectedPrivate = false
 try { toObservation({ ...event, evidence_ref: 'C:\\Users\\person\\session.json' }, '2026-09-12') } catch (error) { rejectedPrivate = error.message === 'private_shape_rejected' }
 test('rejects a private machine path in exported evidence', rejectedPrivate)
 
+const claudeAi = toObservation({ ...event, event_id: 'claude-ai:chat:01J1', surface: 'claude-ai', kind: 'preference' }, '2026-10-14')
+test('accepts claude.ai and the preference kind', claudeAi.class === 'preference' && claudeAi.quote.startsWith('[claude-ai]') && claudeAi.producer === 'agent')
+const mined = toObservation({ ...event, event_id: 'session-miner:claude-code:abc123', surface: 'claude-code', kind: 'friction' }, '2026-10-14')
+test('a session-miner event is labelled by its producer', mined.producer === 'session-miner' && mined.class === 'friction')
+let rejectedSurface = false
+try { toObservation({ ...event, surface: 'myspace' }, '2026-10-14') } catch (error) { rejectedSurface = error.message === 'invalid_surface' }
+test('still rejects an unknown surface', rejectedSurface)
+
 const root = mkdtempSync(join(tmpdir(), 'harness-inbox-test-'))
 const cursorPath = join(root, 'inbox-cursor.json')
 let calls = 0

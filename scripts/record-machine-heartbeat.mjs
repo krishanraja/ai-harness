@@ -15,7 +15,8 @@ const clock = flag('--clock')
 const status = flag('--status')
 const release = flag('--release')
 const output = resolve(flag('--out') || resolve(HARNESS, 'state/heartbeats.json'))
-const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', 'openclaw-vps'])
+// session-miner-lorimer: the opt-in weekly session miner (Ruling, Krish, 2026-10-14).
+const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', 'openclaw-vps', 'session-miner-lorimer'])
 
 // Clocks that ship a harness release, and so must name the release they are
 // reporting for. The OpenClaw VPS is not a harness install: it reports that a

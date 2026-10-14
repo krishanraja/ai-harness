@@ -1,0 +1,97 @@
+# The learning loop's tunables, in one place.
+#
+# Every threshold the weekly brief, the change requests, the digest and the
+# miner use lives here, so the loop can be tuned without touching code. The
+# weekly process review (scripts/process-review.mjs) may propose a change to
+# this file and to nothing else (Ruling, Krish, 2026-10-14). A change here is a
+# pull request like any other: judged, and merged by a person.
+#
+# Read by scripts/propose.mjs, scripts/scoreboard.mjs, scripts/digest.mjs,
+# scripts/steward-housekeeping.mjs, scripts/process-review.mjs and
+# scripts/mine-sessions.mjs.
+
+schema_version: 1
+
+# How far back one weekly brief reads.
+window_weeks: 1
+
+# Decisions asked of Krish per week, open change requests included.
+decision_budget: 3
+
+# Candidates the brief shows in full; everything else is a count.
+brief_top: 6
+
+# An unmerged change request closes itself as superseded after this many days.
+change_expiry_days: 14
+
+# Word-overlap needed to read two observations as one cluster.
+cluster_jaccard: 0.35
+
+# Candidate types the process review has retired. The brief never shows them.
+disabled_types: []
+
+thresholds:
+  # Three similar observations are a pattern; two are a coincidence.
+  ordinary: 3
+  # Two, when one of them is a direct correction.
+  with_direct: 2
+  direct_classes: [ruling, revert, correction, inbound-edit]
+  # One is enough: Krish saying a thing once is not a weak signal.
+  single_direct: [ruling, correction, inbound-edit]
+  # One high-severity observation qualifies on its own.
+  severity_override: [high]
+
+standing:
+  # An open standing finding is raised again once every this many days, never nightly.
+  stale_days: 28
+
+scope:
+  # A ruling counts for the canon when it comes from this repository, spans
+  # this many repositories, names a skill or rule id, or uses one of these words.
+  # Anything else stays local to the repository that made it.
+  harness_repo: ai-harness
+  cross_repo_min: 2
+  # A ruling shorter than this many content words is almost always a product
+  # fact or a task approval ("build it and merge"), not a rule for the canon.
+  min_words: 6
+  # A ruling this close to one already made in an ai-harness commit is carried.
+  carried_jaccard: 0.5
+  lexicon:
+    - harness
+    - canon
+    - skill
+    - skills
+    - agent
+    - agents
+    - approval
+    - every repo
+    - every session
+    - every project
+    - all repos
+    - fleet
+
+consolidation:
+  # Slots kept for consolidation every cycle, when any consolidation candidate exists.
+  always_slot: true
+  slots: 1
+  # Near-duplicate sentences between an always-on file and any skill.
+  duplicate_jaccard: 0.6
+  duplicate_min_chars: 80
+  # A skill chapter no canary has cited for this long, outside the always-on set.
+  uncited_days: 60
+
+retirement:
+  # A candidate type, stage or surface with no accepted change in this many
+  # weeks is proposed for retirement by the process review.
+  idle_weeks: 6
+
+revisit:
+  # When to propose letting description- and routing-only changes auto-merge.
+  auto_merge_after_weeks: 4
+  auto_merge_min_acceptance: 0.8
+
+miner:
+  enabled: true
+  excerpts_per_week: 40
+  excerpt_chars: 1200
+  posts_per_run: 50

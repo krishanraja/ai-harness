@@ -25,6 +25,8 @@ Use the declared minimum unique evidence/window and severity override:
 - **Routing change:** under/over-trigger evidence tied to exact description/catalog/client version.
 - **Freshness/retirement question:** needs meaningful exposure and owner decision; no automatic delta.
 - **Incident:** immediate containment owner plus a separately governed permanent-change proposal.
+- **Revealed preference:** what the owner merged, closed, let expire, overrode, reverted, or kept doing by hand. It outranks a stated preference it contradicts.
+- **Consolidation:** every cycle reserves one slot to merge duplicates, compress over-budget text, or close a superseded or unexposed rule. A closed rule keeps its history and `valid_until`; it is never deleted. A contract rule is never retired on citation counts alone, because nothing measures its citations yet.
 
 One ordinary event stays a visible observation under the policy. Do not discard it or promote it. An owner can request an immediate review outside the recurrence threshold.
 
@@ -44,12 +46,12 @@ Context discipline is a design problem, not a one-in/one-out ritual. Prefer repl
 
 Return proposals in the result. Do not append to a proposal log unless the Capture contract explicitly authorises the exact target and fields. If authorised, create a new immutable proposal version or append-only decision event and read back its id/hash; never overwrite history.
 
-Decision states are `awaiting-owner`, `accepted`, `rejected`, `needs-evidence`, `superseded`, `released`, `effective`, `ineffective`, or `uncertain`. Preserve who decided, when, exact version/hash, and accepted scope.
+Decision states are `awaiting-owner`, `accepted`, `rejected`, `needs-evidence`, `superseded`, `released`, `effective`, `ineffective`, or `uncertain`. Preserve who decided, when, exact version/hash, and accepted scope. For a change request, merged is `accepted`, closed is `rejected`, and closed unmerged at expiry is `superseded`.
 
 Do not re-propose a rejection on cadence alone. State the materially new evidence that would reopen it and continue monitoring under policy.
 
-## 7. Accepted handoff, not application
+## 7. Change request, not application
 
-Create a versioned change request against exact source bytes. Route content/criteria through Compile as needed, deterministic packaging and route tests through Build, fresh independent review through Check, and controlled release/parity/rollback through Harness Maintainer.
+Open a versioned change request against exact source bytes: a pull request with the exact bytes, evidence ids, regression case, context delta, and rollback, built through Compile and Build and reviewed fresh through Check. The owner's merge is the acceptance; controlled release, parity, and rollback stay with Harness Maintainer.
 
-Capture performs no direct standard, skill, adapter, cloud, or local-surface edit.
+Capture never merges, releases, or edits an adapter, cloud, or local surface.
