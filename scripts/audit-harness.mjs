@@ -433,6 +433,9 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     // surface stays declared per R7, and the retiring marker on its heartbeat
     // entry is what stops it being read as a failure. See state/heartbeats.json.
     'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09 and retiring since 2026-09-20', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
+    // The session miner restored by Krish's ruling of 2026-10-14, the "new evidenced
+    // decision" the note above asked for. It is opt-in and weekly.
+    'session-miner-lorimer': { where: 'the weekly Windows Scheduled Task installed by scripts/Invoke-SessionMiner.ps1 -RegisterScheduledTask on LORIMER', declared: '2026-10-14', fix: 'Run scripts/Invoke-SessionMiner.ps1 -SelfTest, then -DryRun, then -RegisterScheduledTask on LORIMER. Only Krish can do this. If he decides against it, remove this clock.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
