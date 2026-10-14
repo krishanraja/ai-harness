@@ -1,0 +1,206 @@
+{
+  "freshness:harness-maintainer": {
+    "klass": "freshness",
+    "subject": "harness-maintainer",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:video-engine": {
+    "klass": "freshness",
+    "subject": "video-engine",
+    "first_seen": "2026-09-29",
+    "open": true
+  },
+  "freshness:krish-design": {
+    "klass": "freshness",
+    "subject": "krish-design",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:krish-content-marketer": {
+    "klass": "freshness",
+    "subject": "krish-content-marketer",
+    "first_seen": "2026-10-05",
+    "open": true
+  },
+  "freshness:evidence-research": {
+    "klass": "freshness",
+    "subject": "evidence-research",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:tools-access": {
+    "klass": "freshness",
+    "subject": "tools-access",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:apify": {
+    "klass": "freshness",
+    "subject": "apify",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:n8n-operator": {
+    "klass": "freshness",
+    "subject": "n8n-operator",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:instantly-operator": {
+    "klass": "freshness",
+    "subject": "instantly-operator",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:mindmake-os": {
+    "klass": "freshness",
+    "subject": "mindmake-os",
+    "first_seen": "2026-10-14",
+    "open": true
+  },
+  "freshness:mindmake": {
+    "klass": "freshness",
+    "subject": "mindmake",
+    "first_seen": "2026-10-14",
+    "open": true
+  },
+  "freshness:decision-ledger": {
+    "klass": "freshness",
+    "subject": "decision-ledger",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "freshness:design-intelligence-search": {
+    "klass": "freshness",
+    "subject": "design-intelligence-search",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "description-budget:verification-loop": {
+    "klass": "description-budget",
+    "subject": "verification-loop",
+    "first_seen": "2026-10-07",
+    "open": true
+  },
+  "description-budget:build-apps-with-krish": {
+    "klass": "description-budget",
+    "subject": "build-apps-with-krish",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "description-budget:ux-testing-agent": {
+    "klass": "description-budget",
+    "subject": "ux-testing-agent",
+    "first_seen": "2026-10-07",
+    "open": true
+  },
+  "description-budget:ctrl-intake": {
+    "klass": "description-budget",
+    "subject": "ctrl-intake",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "description-budget:krish-build": {
+    "klass": "description-budget",
+    "subject": "krish-build",
+    "first_seen": "2026-10-07",
+    "open": true
+  },
+  "description-budget:krish-voice": {
+    "klass": "description-budget",
+    "subject": "krish-voice",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "uncanaried:coverage": {
+    "klass": "uncanaried",
+    "subject": "coverage",
+    "first_seen": "2026-09-08",
+    "open": true
+  },
+  "heartbeat:session-miner-lorimer": {
+    "klass": "heartbeat",
+    "subject": "session-miner-lorimer",
+    "first_seen": "2026-10-14",
+    "open": true
+  },
+  "heartbeat:harness-sync-lorimer": {
+    "klass": "heartbeat",
+    "subject": "harness-sync-lorimer",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "heartbeat:harness-sync-surface": {
+    "klass": "heartbeat",
+    "subject": "harness-sync-surface",
+    "first_seen": "2026-09-13",
+    "open": true
+  },
+  "store-unmigrated:standards_registry": {
+    "klass": "store-unmigrated",
+    "subject": "standards_registry",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "store-unmigrated:canon_documents.krish-canon": {
+    "klass": "store-unmigrated",
+    "subject": "canon_documents.krish-canon",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "store-unmigrated:assumption-ledger": {
+    "klass": "store-unmigrated",
+    "subject": "assumption-ledger",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "store-unmigrated:decision-ledger-store": {
+    "klass": "store-unmigrated",
+    "subject": "decision-ledger-store",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "store-dead:corrections": {
+    "klass": "store-dead",
+    "subject": "corrections",
+    "first_seen": "2026-10-07",
+    "open": true
+  },
+  "surface-contract:claude-ai-chat": {
+    "klass": "surface-contract",
+    "subject": "claude-ai-chat",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "surface-contract:chatgpt-chat": {
+    "klass": "surface-contract",
+    "subject": "chatgpt-chat",
+    "first_seen": "2026-10-14",
+    "open": true
+  },
+  "surface-contract:n8n-agents": {
+    "klass": "surface-contract",
+    "subject": "n8n-agents",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "surface-contract:routines": {
+    "klass": "surface-contract",
+    "subject": "routines",
+    "first_seen": "2026-09-09",
+    "open": true
+  },
+  "surface-claim:cursor-lorimer": {
+    "klass": "surface-claim",
+    "subject": "cursor-lorimer",
+    "first_seen": "2026-10-14",
+    "open": true
+  },
+  "dead-zone:# live rules": {
+    "klass": "dead-zone",
+    "subject": "# live rules",
+    "first_seen": "2026-09-12",
+    "open": true
+  }
+}
