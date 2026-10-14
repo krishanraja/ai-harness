@@ -61,5 +61,6 @@ raw conversation, credential, customer data, machine name, absolute local path
 or full model output. `evidence_ref` is an opaque locator for a human who has
 access to the originating surface, not copied evidence.
 
-An event can open a proposal. It cannot approve one. No endpoint, importer or
-workflow may update a skill, contract, registry, rule or active client surface.
+An event can contribute to a proposal. It cannot approve one. No endpoint or
+importer may change a skill, contract, registry, rule or active client surface,
+and no workflow may do so except by opening a pull request a named human merges.

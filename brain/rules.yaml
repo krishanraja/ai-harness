@@ -781,11 +781,17 @@ contract_rules:
     status: live
   - id: ctrl-standards-chain.ctrl-capture-stage-9
     file: contract/skill-routing-contract.md
-    text_sha: "e46e8e692025"
+    text_sha: "00747cc7b581"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "e46e8e692025"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: required-route-evidence.selected-skills-and-why
     file: contract/skill-routing-contract.md
@@ -1266,20 +1272,32 @@ skill_sections:
   - id: ctrl-capture.evidence-is-not-truth
     file: skills/ctrl-capture/SKILL.md
     heading: "Evidence is not truth"
-    text_sha: "1c7e04e9ba29"
+    text_sha: "07a6702221b1"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "1c7e04e9ba29"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-capture.workflow
     file: skills/ctrl-capture/SKILL.md
     heading: "Workflow"
-    text_sha: "f10872ff1af8"
+    text_sha: "fedc2a6d60a8"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "f10872ff1af8"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-capture.proposal-schema
     file: skills/ctrl-capture/SKILL.md
@@ -1293,11 +1311,17 @@ skill_sections:
   - id: ctrl-capture.change-and-history-invariants
     file: skills/ctrl-capture/SKILL.md
     heading: "Change and history invariants"
-    text_sha: "12aeb7040f08"
+    text_sha: "361c91710387"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "12aeb7040f08"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-capture.never-omit-result-envelope
     file: skills/ctrl-capture/SKILL.md
