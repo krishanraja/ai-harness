@@ -75,7 +75,9 @@ export const rulingKey = (quote, dated) => sha(`${dated || ''}\u0000${normalise(
 
 /** Old rows joined consecutive rulings; split them so both halves count as seen. */
 export function splitLegacyQuote(quote) {
-  return String(quote)
+  // A joined quote was cut at 600 characters, sometimes inside the second
+  // ruling's own marker: drop a trailing fragment that never got its date.
+  return String(quote).replace(/\s*(?:\*\*)?Ruling[ \t]*\((?![^)]*\d{4}-\d{2}-\d{2}\))[^)]*$/i, '')
     .split(/\s(?=(?:\*\*)?Ruling[ \t]*\((?:Krish,?[ \t]*)?\d{4}-\d{2}-\d{2}\))/i)
     .map((part) => {
       const m = part.match(/^(?:\*\*)?Ruling[ \t]*\((?:Krish,?[ \t]*)?(\d{4}-\d{2}-\d{2})\)(?:\*\*)?[ \t]*:[ \t]*(.+)$/i)

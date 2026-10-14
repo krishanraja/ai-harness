@@ -149,6 +149,12 @@ jobs:
       - name: The context budget measures what it claims to
         run: node scripts/test-context-budget.mjs
 
+      # The weekly brief used to list 87 blocks, 85 of them "nothing changes".
+      # This holds it to a short list: rulings counted once, product rulings kept
+      # local, standing findings raised once, one consolidation slot.
+      - name: The weekly brief stays short and the scoreboard counts honestly
+        run: node scripts/test-propose.mjs
+
       # Smarter must not mean heavier. Every pull request shows what it does to
       # the context every session loads (contract/context-budget.yaml). Report
       # only here; the steward's own change requests are held to it hard.
@@ -296,6 +302,12 @@ jobs:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
         run: node scripts/observe.mjs
 
+      # One row a week, on the Sunday run that closes the week, so the weekly
+      # proposer an hour later reads a scoreboard that includes it.
+      - name: Score the week
+        if: ${{ !inputs.event_import_only }}
+        run: node scripts/scoreboard.mjs --append
+
       # Committed, so the ledger is diffable and cannot be quietly rewritten.
       # Append-only by construction: every line carries a stable id and the
       # script never rewrites an existing one.
@@ -307,13 +319,14 @@ jobs:
         run: |
           set -euo pipefail
           rm -f audit.md reconcile.md
-          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json brain/proposals.jsonl)" ]; then
+          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json state/scoreboard.jsonl brain/proposals.jsonl)" ]; then
             echo "Nothing new observed. Committing nothing is the correct outcome."
             exit 0
           fi
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
           git add state/observations state/heartbeats.json brain/proposals.jsonl
+          [ -f state/scoreboard.jsonl ] && git add state/scoreboard.jsonl
           git commit \
             -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
             -m "Appended by scripts/observe.mjs. Evidence only; nothing here is a decision."
@@ -339,11 +352,21 @@ jobs:
 
       # Deterministic in. The brief says what crossed a threshold and quotes the
       # evidence; it never says what the answer is.
-      - name: Build the brief
-        run: node scripts/propose.mjs --out brief.md
+      # What Krish works on now decides which candidate matters most. Read live,
+      # never copied into the repository: only its hash goes into the brief.
+      - name: Fetch live intent
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/intent"
+          for f in KRISH.md PORTFOLIO.md; do
+            curl -fsSL "https://raw.githubusercontent.com/krishanraja/control-center/main/docs/$f" -o "$RUNNER_TEMP/intent/$f" \
+              || echo "::warning::could not read live intent $f; the brief says so rather than guessing"
+          done
 
-      - name: Put the brief in the run summary
-        run: cat brief.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Build the brief
+        run: |
+          set -euo pipefail
+          node scripts/propose.mjs --out brief.md --json candidates.json --intent-dir "$RUNNER_TEMP/intent" | tail -1 >> "$GITHUB_STEP_SUMMARY"
 
       # A week with nothing earned opens nothing, which is what makes an open
       # proposal mean something when there is one.
