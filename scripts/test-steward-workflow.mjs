@@ -49,6 +49,17 @@ test('the observer suite runs on every push', /node scripts\/test-observe\.mjs/.
 test('this suite runs on every push', /node scripts\/test-steward-workflow\.mjs/.test(surfaces))
 test('every pull request reports its always-on context change', /node scripts\/context-budget\.mjs --base/.test(surfaces))
 
+const propose = job(yml, 'propose')
+const housekeeping = job(yml, 'housekeeping')
+const draftStep = propose.slice(propose.indexOf('- name: Draft change packages'), propose.indexOf('- name: Guard and open change requests'))
+test('the propose job token is read-only', /permissions:\n      contents: read\n      pull-requests: read\n/.test(propose) && !/contents: write/.test(propose))
+test('the propose checkout keeps no credentials', /persist-credentials: false/.test(propose))
+test('the model may only read and write under changes/', /--allowedTools "Read,Glob,Grep,Write\(changes\/\*\*\),Edit\(changes\/\*\*\)"/.test(draftStep) && /--disallowedTools "Bash/.test(draftStep))
+test('the model step never sees the fleet token', draftStep.length > 0 && !/FLEET_TOKEN/.test(draftStep))
+test('only the guarded opening step holds the fleet token', propose.split('\n').filter((l) => /FLEET_TOKEN/.test(l)).length === 1 && /open-changes\.mjs/.test(propose))
+test('housekeeping runs nightly and decides the digest', /node scripts\/steward-housekeeping\.mjs/.test(housekeeping) && /state\/digest/.test(housekeeping))
+for (const t of ['test-change-guard', 'test-digest', 'test-process-review']) test(`${t} runs on every push`, new RegExp(`node scripts/${t}\\.mjs`).test(surfaces))
+
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)
 console.log('STEWARD WORKFLOW OK')

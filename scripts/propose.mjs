@@ -308,13 +308,16 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   candidates.push(...standingCandidates(standing, { cutoff: all ? '0000' : cutoff, today, policy, rows }))
   const consolidation = consolidationCandidates(root, policy, { standing, today })
 
+  const disabled = new Set(policy.disabled_types || [])
+  for (let i = candidates.length - 1; i >= 0; i--) if (disabled.has(candidates[i].type)) candidates.splice(i, 1)
+  if (disabled.has('consolidation')) consolidation.length = 0
   for (const c of [...candidates, ...consolidation]) {
     c.id = `${c.type}:${sha(c.evidence.map((e) => `${e.id}:${sha(e.quote)}`).sort().join(',')).slice(0, 10)}`
     c.priority = PRIORITY[c.type] || 9
   }
   candidates.sort((a, b) => a.priority - b.priority || b.evidence.length - a.evidence.length)
   const top = num(policy.brief_top, 6)
-  const keepConsolidation = policy.consolidation?.always_slot !== false && consolidation.length ? 1 : 0
+  const keepConsolidation = policy.consolidation?.always_slot !== false ? Math.min(consolidation.length, num(policy.consolidation?.slots, 1)) : 0
   const chosen = [...candidates.slice(0, top - keepConsolidation), ...consolidation.slice(0, keepConsolidation)]
   const rest = [...candidates.slice(top - keepConsolidation), ...consolidation.slice(keepConsolidation)]
   const restCounts = {}

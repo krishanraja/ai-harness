@@ -27,6 +27,9 @@ change_expiry_days: 14
 # Word-overlap needed to read two observations as one cluster.
 cluster_jaccard: 0.35
 
+# Candidate types the process review has retired. The brief never shows them.
+disabled_types: []
+
 thresholds:
   # Three similar observations are a pattern; two are a coincidence.
   ordinary: 3
@@ -68,8 +71,9 @@ scope:
     - fleet
 
 consolidation:
-  # One slot every cycle, when any consolidation candidate exists.
+  # Slots kept for consolidation every cycle, when any consolidation candidate exists.
   always_slot: true
+  slots: 1
   # Near-duplicate sentences between an always-on file and any skill.
   duplicate_jaccard: 0.6
   duplicate_min_chars: 80
@@ -87,6 +91,7 @@ revisit:
   auto_merge_min_acceptance: 0.8
 
 miner:
+  enabled: true
   excerpts_per_week: 40
   excerpt_chars: 1200
   posts_per_run: 50
