@@ -135,6 +135,17 @@ jobs:
       - name: The audit preserves history without reopening superseded failures
         run: node scripts/test-audit.mjs
 
+      # The observer joined consecutive rulings, counted one ruling once per
+      # commit, re-recorded every standing audit finding nightly and never parsed
+      # the reconcile report. Each of those is a case here.
+      - name: The observer records one row per piece of evidence
+        run: node scripts/test-observe.mjs
+
+      # Workflow invariants a YAML edit could silently undo: what the observer
+      # commits, and that an unmeasured judge run can never read as a pass.
+      - name: The steward workflow keeps its own guarantees
+        run: node scripts/test-steward-workflow.mjs
+
       - name: Render twice and prove the second run changes nothing
         run: |
           set -euo pipefail
@@ -274,17 +285,21 @@ jobs:
       # Committed, so the ledger is diffable and cannot be quietly rewritten.
       # Append-only by construction: every line carries a stable id and the
       # script never rewrites an existing one.
+      # brain/proposals.jsonl is the lifecycle of every steward pull request. It
+      # was appended on the runner and never staged, so it stopped on 09-15.
+      # `git status --porcelain` rather than `git diff`: a new file is untracked
+      # and invisible to diff.
       - name: Commit the ledger
         run: |
           set -euo pipefail
           rm -f audit.md reconcile.md
-          if git diff --quiet -- state/; then
+          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json brain/proposals.jsonl)" ]; then
             echo "Nothing new observed. Committing nothing is the correct outcome."
             exit 0
           fi
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
-          git add state/observations state/heartbeats.json
+          git add state/observations state/heartbeats.json brain/proposals.jsonl
           git commit \
             -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
             -m "Appended by scripts/observe.mjs. Evidence only; nothing here is a decision."
@@ -412,6 +427,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      statuses: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
         with:
@@ -460,6 +476,7 @@ jobs:
               echo "Until that secret is set this job reports the gap rather than pretending to a"
               echo "review it did not perform."
             } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::The judge panel is not armed, so this canon change is unreviewed."
             exit 0
           fi
           # `set +e` matters here. GitHub runs a `run:` block under `bash -e` by
@@ -493,6 +510,24 @@ jobs:
             gh pr comment "${{ github.event.pull_request.number }}" --body-file judge.md
           fi
 
+      # The one signal a change request may be marked ready on. "measured" only
+      # when the panel actually compared the canon and found no unruled block.
+      - name: Record whether the panel measured this change
+        if: steps.scope.outputs.touched == 'true' && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERDICT: ${{ steps.run.outputs.verdict }}
+        run: |
+          set -euo pipefail
+          case "$VERDICT" in
+            0) state=success; desc="measured: no unruled blocking regression" ;;
+            1) state=failure; desc="measured: blocking regression" ;;
+            unarmed) state=error; desc="unmeasured: panel not armed" ;;
+            *) state=error; desc="unmeasured: the panel could not run" ;;
+          esac
+          gh api "repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }}" \
+            -f state="$state" -f context="harness/judge" -f description="$desc" > /dev/null
+
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1, Node 24
         if: always()
         with:
@@ -523,9 +558,17 @@ jobs:
       # already extracts into the ledger. The override is recorded rather than
       # silent, and a criterion that keeps getting overruled is evidence the
       # criterion is wrong.
-      - name: Fail on a blocking verdict
-        if: steps.scope.outputs.touched == 'true' && steps.run.outputs.verdict == '1'
+      #
+      # Exit 2 is a run that could not measure: a refused key, an exception. It
+      # used to pass, which is how a rejected key kept every canon change green
+      # and unreviewed from at least 2026-10-06.
+      - name: Fail on a blocking or unmeasured verdict
+        if: steps.scope.outputs.touched == 'true' && (steps.run.outputs.verdict == '1' || steps.run.outputs.verdict == '2')
         run: |
+          if [ "${{ steps.run.outputs.verdict }}" = "2" ]; then
+            echo "::error::Unmeasured: the judge panel could not run, so this canon change is unreviewed. Read the comment on this pull request."
+            exit 1
+          fi
           echo "::error::The judge panel found a blocking regression. Read the review on this pull request."
           echo "Overrule it with a 'Ruling (Krish, YYYY-MM-DD):' line in the commit body if the block is wrong."
           exit 1
