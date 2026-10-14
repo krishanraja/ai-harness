@@ -14,7 +14,13 @@ Content-Type: application/json
 ```
 
 Clients call the HTTPS endpoint directly through their native network or tool
-capability. There is no installed helper, background process or local schedule.
+capability. There is one declared exception to "no installed helper": the
+opt-in weekly session miner (`scripts/Invoke-SessionMiner.ps1` on a named
+machine, and a cloud scheduled task for Claude Code cloud sessions). It reads
+session logs where they already are, redacts locally before any model sees an
+excerpt, and submits only envelope events through this same endpoint (Ruling,
+Krish, 2026-10-14). Nothing raw leaves the machine and nothing raw enters the
+repository.
 Capture must not block the primary task. A client that cannot make the call
 reports capture as unavailable instead of creating a local shadow ledger.
 
@@ -36,11 +42,18 @@ reports capture as unavailable instead of creating a local shadow ledger.
 }
 ```
 
-Allowed surfaces: `codex`, `claude-code`, `cursor`, `claude-cloud`,
-`perplexity`, `github-actions`, `n8n`, `other`.
+Allowed surfaces: `codex`, `claude-code`, `claude-code-web` (a Claude Code
+cloud session), `claude-ai` (claude.ai and Claude Desktop), `chatgpt`, `cursor`,
+`github-actions`, `n8n`, `other`. `claude-cloud` and `perplexity` remain
+accepted for rows already recorded under them.
 
 Allowed kinds: `explicit_correction`, `failure`, `missed_trigger`,
-`false_trigger`, `repeated_manual_step`, `successful_pattern`, `contradiction`.
+`false_trigger`, `repeated_manual_step`, `successful_pattern`, `contradiction`,
+`preference` (how Krish wants something done, stated or shown), `friction` (a
+step that cost him time or attention and need not have).
+
+An `event_id` beginning `session-miner:` marks an event the session miner
+produced; the importer records it as `producer: session-miner`.
 
 Allowed outcomes: `corrected`, `failed`, `succeeded`, `unknown`.
 

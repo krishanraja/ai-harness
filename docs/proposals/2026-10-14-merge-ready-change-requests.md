@@ -19,7 +19,7 @@ across his AI tools. This file is the provenance for the doctrine change and the
 - The independent judge could not review anything: on pull request 115 its log
   reads `anthropic 401: API key is invalid`, and the job reported success with
   no comment, so a canon change merged unreviewed.
-- The canon only grew. The always-on surface measures 74,318 characters; 326
+- The canon only grew. The always-on surface measures 116,314 characters; 326
   rules are live and 13 of 29 skills are past their review SLA.
 
 The cause is structural: capture could only write a document, so every change
