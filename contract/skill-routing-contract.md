@@ -73,9 +73,9 @@ The CTRL chain is for creating or changing a reusable standard. It is not the de
 3. `ctrl-build`: stage 4, GENERATE.
 4. `ctrl-check`: stages 5-7, SCRUB, CRITIQUE, and PROVENANCE + MEASURE.
 5. Stage 8, DELIVER, is the explicit human-approved installation or publication step. No skill silently performs it.
-6. `ctrl-capture`: stage 9, LEARN. It proposes evidence-backed changes and may open each as a change-request pull request; a named human accepts one by merging it or rejects it by closing it.
+6. `ctrl-capture`: stage 9, LEARN. It opens evidence-backed change requests; a named human merges or closes each one.
 
-Never skip from intake to build, let capture change a live standard without a human merge, or treat self-critique as an independent verifier.
+Never skip from intake to build, let capture merge its own change, or treat self-critique as an independent verifier.
 
 ## Approval gates
 

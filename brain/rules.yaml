@@ -781,7 +781,7 @@ contract_rules:
     status: live
   - id: ctrl-standards-chain.ctrl-capture-stage-9
     file: contract/skill-routing-contract.md
-    text_sha: "00747cc7b581"
+    text_sha: "d8b95d47214e"
     first_seen: "2026-09-07"
     source:
       kind: proposal
