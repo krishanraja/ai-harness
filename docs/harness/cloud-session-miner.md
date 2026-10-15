@@ -27,8 +27,9 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    read the lessons it proposes. If any lesson names a person, a client, a
 >    path or a secret, stop and report which kind instead of sending anything.
 > 4. Otherwise run `node scripts/mine-sessions.mjs --source cloud-events
->    --submit dispatch`. It sends the lessons as a GitHub repository_dispatch;
->    the repository's intake workflow records them.
+>    --submit dispatch --from-dry-run`. It sends exactly the lessons the dry
+>    run proposed, as a GitHub repository_dispatch; the repository's intake
+>    workflow records them.
 > 5. Reply with counts only: sessions read, excerpts, lessons sent, lessons
 >    rejected. If any step fails, say which step and the error in one line.
 
@@ -42,7 +43,9 @@ the `list_events` results back from the session's own Claude Code transcript
 and subagent turns, and keeps a per-session cursor outside the repository so a
 re-fetched page is never mined twice. If the extractor's reply is malformed,
 the miner keeps every lesson that still parses and asks once more when none
-does, so one bad reply cannot sink the run. Event ids are deterministic, so a resend
+does, so one bad reply cannot sink the run. The dry run keeps the lessons it
+proposed in the state folder, and `--from-dry-run` sends that set rather than
+asking the model again, so what goes out is what was checked. Event ids are deterministic, so a resend
 after a lost cursor is absorbed by the intake.
 
 The selection, redaction, validation and sending are the same code the PC's

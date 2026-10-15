@@ -6,7 +6,7 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, parseLessons, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, parseLessons, planKey, readPlan, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
@@ -71,6 +71,13 @@ test('lessons: one malformed element costs only itself', parseLessons(`[${good},
 let threw = false
 try { parseLessons('[{"excerpt": 0, "confidence":medium}]') } catch { threw = true }
 test('lessons: a reply with nothing readable throws, so the extractor asks again', threw && parseLessons('no lessons').length === 0)
+const planDir = mkdtempSync(join(tmpdir(), 'miner-plan-'))
+const planFile = join(planDir, 'plan.json')
+const cur = { sA: '2026-10-14T10:00:00Z' }
+test('plan: a send with no dry run refuses', Boolean(readPlan(planFile, cur).error))
+writeFileSync(planFile, JSON.stringify({ key: planKey(cur), envelopes: [{ event_id: 'e1' }] }))
+test('plan: the send gets exactly what the dry run proposed', readPlan(planFile, { ...cur }).envelopes?.[0]?.event_id === 'e1')
+test('plan: a session that moved since the dry run refuses the plan', Boolean(readPlan(planFile, { ...cur, sB: '2026-10-15T00:00:00Z' }).error))
 
 test('a correction scores, a thank-you does not', scoreTurn('No, that is wrong, never do that again.').score >= 3 && scoreTurn('thanks').score === 0)
 const ex = selectExcerpts(turns, { max: 40, chars: 1200 })

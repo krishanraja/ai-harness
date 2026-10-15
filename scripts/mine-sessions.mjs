@@ -24,7 +24,10 @@
  *
  *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json|cloud-events
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
- *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--self-test]
+ *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--from-dry-run] [--self-test]
+ *
+ * --from-dry-run sends exactly the lessons the last --dry-run proposed (kept,
+ * redacted, in the state folder) instead of asking the extractor again.
  *
  * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
  * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
@@ -33,7 +36,7 @@
 
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -293,6 +296,21 @@ export function mine(turns, { surface, extract, names = [], known = knownIds(), 
   return { excerpts, prompt, envelopes: envelopes.slice(0, num(policy.miner?.posts_per_run, 50)), rejected }
 }
 
+/**
+ * What a dry run proposed, kept outside the repository so the send can be
+ * exactly the set that was checked: the extractor is a model and a second
+ * call would not return the same lessons. The plan is keyed to the cursor
+ * the run would save, so a session that moved since the dry run refuses it.
+ */
+export const planKey = (nextCursor) => sha(JSON.stringify(Object.entries(nextCursor).sort()))
+export function readPlan(path, nextCursor) {
+  if (!existsSync(path)) return { error: 'there is no dry-run plan; run with --dry-run first' }
+  let plan
+  try { plan = JSON.parse(readFileSync(path, 'utf8')) } catch { return { error: 'the dry-run plan is unreadable; run with --dry-run again' } }
+  if (plan?.key !== planKey(nextCursor) || !Array.isArray(plan.envelopes)) return { error: 'sessions changed since the dry run; run with --dry-run again' }
+  return { envelopes: plan.envelopes }
+}
+
 export async function post(envelopes, { url, token, fetchImpl = fetch }) {
   let sent = 0
   const failures = []
@@ -448,12 +466,26 @@ if (isMain) {
       nextCursor[f] = lines.length
     }
   }
-  const r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
-  console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  const planPath = join(stateDir, `plan-${source}.json`)
+  const fromDryRun = args.includes('--from-dry-run') && !args.includes('--dry-run')
+  let r
+  if (fromDryRun) {
+    const plan = readPlan(planPath, nextCursor)
+    if (plan.error) { console.error(`::error::${plan.error}; nothing was sent and the cursor did not move.`); process.exit(1) }
+    r = { excerpts: [], envelopes: plan.envelopes, rejected: [] }
+    console.log(`session miner (${source}): sending the ${r.envelopes.length} lesson(s) the dry run proposed.`)
+  } else {
+    r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
+    console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  }
   // An extractor that could not run used to save the cursor with zero lessons,
   // which skipped those sessions for good and reported a healthy run.
   if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }
-  if (args.includes('--dry-run')) { for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`); process.exit(0) }
+  if (args.includes('--dry-run')) {
+    writeFileSync(planPath, JSON.stringify({ key: planKey(nextCursor), envelopes: r.envelopes }) + '\n')
+    for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`)
+    process.exit(0)
+  }
   const url = process.env.HARNESS_EVENT_INGEST_URL
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
   if (route !== 'post' && route !== 'dispatch') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
@@ -461,5 +493,6 @@ if (isMain) {
   const p = !r.envelopes.length ? { sent: 0, failures: [] } : route === 'post' ? await post(r.envelopes, { url, token }) : dispatch(r.envelopes)
   if (p.failures.length) { console.error(`::error::${p.failures.length} submission(s) failed (${p.failures.join(', ')}); the cursor did not move.`); process.exit(1) }
   writeFileSync(cursorPath, JSON.stringify(nextCursor, null, 2) + '\n')
+  if (existsSync(planPath)) rmSync(planPath)
   console.log(`submitted ${p.sent} by ${route}; cursor saved outside the repository.`)
 }
