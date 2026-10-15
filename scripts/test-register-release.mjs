@@ -73,8 +73,11 @@ const hbOnly = parseYaml(rec.text).surface_deployments['cursor-primary']
 test('without a committed record, an ok heartbeat for the release counts, and says it is weaker evidence', hbOnly.release_id === 'v2099.01.01.1' && hbOnly.status === 'current-reported-by-machine-heartbeat-install-record-not-committed')
 test('a blocked heartbeat moves nothing', parseYaml(rec.text).surface_deployments['codex-surface-07a67cda9f99'].status.startsWith('awaiting'))
 const reconciled = parseYaml(rec.text)
+// The surface's own release before the reconcile, not the latest approved one:
+// a surface can lag more than one release behind.
+const ccuBefore = parseYaml(out).surface_deployments['claude-code-user'].release_id
 const ccu = reconciled.surface_deployments['claude-code-user']
-test('a verified install moves its surface onto the release; a refused one stays awaiting', rec.updated.includes('claude-code-user') && !rec.updated.includes('codex-current') && ccu.release_id === 'v2099.01.01.1' && ccu.status === 'current-installed-hash-verified-automatic-install' && ccu.previous_release === oldLatest && reconciled.surface_deployments['codex-current'].status.startsWith('awaiting'))
+test('a verified install moves its surface onto the release; a refused one stays awaiting', rec.updated.includes('claude-code-user') && !rec.updated.includes('codex-current') && ccu.release_id === 'v2099.01.01.1' && ccu.status === 'current-installed-hash-verified-automatic-install' && ccu.previous_release === ccuBefore && reconciled.surface_deployments['codex-current'].status.startsWith('awaiting'))
 test('the reconciled registry is still coherent', validateReleaseCoherence(reconciled).length === 0)
 
 // The same algorithm over the checked-out files, independently: records are
