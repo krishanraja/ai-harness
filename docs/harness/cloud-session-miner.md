@@ -4,8 +4,8 @@ Claude Code cloud sessions (like the one that built this) leave no transcript on
 any machine Krish owns, so the PC's miner cannot read them. This is the prompt
 of the weekly Claude Code scheduled task that mines them the same way, under the
 same rules (Rulings, Krish, 2026-10-14 and 2026-10-15). It starts a fresh
-session on this repository every Sunday at 17:47 UTC, before the steward's
-weekly proposal run.
+session on this repository every Sunday at 11:46 New York time (Krish's noon,
+moved off the hour), before the steward's weekly proposal run at 21:40 UTC.
 
 ## Prompt
 
