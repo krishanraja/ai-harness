@@ -182,7 +182,7 @@ export function selectExcerpts(turns, { max = 40, chars = 1200, names = [] } = {
 export function buildPrompt(excerpts) {
   return [
     'You read short, redacted excerpts from AI work sessions with Krish. For each, decide whether it teaches the AI something durable about how Krish works or wants work done.',
-    'Return ONLY a JSON array. Each element: {"excerpt": <index>, "kind": one of explicit_correction|failure|missed_trigger|false_trigger|repeated_manual_step|successful_pattern|contradiction|preference|friction, "summary": the lesson in at most 280 characters, in your own words, with no names, paths, quotes or product details, "related_skill_or_rule": a harness skill name or null, "severity": low|medium|high, "confidence": low|medium|high}.',
+    'Return ONLY a valid JSON array, with every string value in double quotes. Each element: {"excerpt": <index>, "kind": one of explicit_correction|failure|missed_trigger|false_trigger|repeated_manual_step|successful_pattern|contradiction|preference|friction, "summary": the lesson in at most 280 characters, in your own words, with no names, paths, quotes or product details, "related_skill_or_rule": a harness skill name or null, "severity": low|medium|high, "confidence": low|medium|high}.',
     'Skip routine back-and-forth, one-off task details and anything you are unsure of. An empty array is a good answer.',
     '',
     ...excerpts.map((e, i) => `--- excerpt ${i}\n${e.excerpt}`),
@@ -204,11 +204,29 @@ export function claudeExtractor({ cwd }) {
   const { file, shell } = claudeCommand()
   return (prompt) => {
     mkdirSync(cwd, { recursive: true })
-    const out = execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
-    const start = out.indexOf('[')
-    const end = out.lastIndexOf(']')
-    return start === -1 || end === -1 ? [] : JSON.parse(out.slice(start, end + 1))
+    const run = () => execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
+    // One malformed reply used to sink the whole run; ask once more before giving up.
+    try { return parseLessons(run()) } catch { return parseLessons(run()) }
   }
+}
+
+/**
+ * The extractor's reply as an array. A reply that is not valid JSON as a whole
+ * keeps every element that is, so one broken lesson does not cost the other
+ * thirty-nine; validateObservation still checks each one. A reply with
+ * objects but none readable throws, which the caller retries.
+ */
+export function parseLessons(out) {
+  const start = out.indexOf('[')
+  const end = out.lastIndexOf(']')
+  if (start !== -1 && end > start) {
+    try { const v = JSON.parse(out.slice(start, end + 1)); if (Array.isArray(v)) return v } catch {}
+  }
+  const objects = out.match(/\{[^{}]*\}/g) || []
+  const kept = []
+  for (const o of objects) { try { kept.push(JSON.parse(o)) } catch {} }
+  if (objects.length && !kept.length) throw new Error(`the reply was not valid JSON (${out.slice(0, 80).replace(/\s+/g, ' ')})`)
+  return kept
 }
 
 /** Every 40-character window of the excerpt; a summary may not contain one. */

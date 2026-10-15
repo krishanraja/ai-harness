@@ -21,8 +21,8 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    and any session whose title starts with "Session miner".
 > 2. For each, call `list_events` with kinds user and assistant and limit 100,
 >    paging back with `before_id` until a page reaches past 8 days or
->    `has_more` is false. Only call the tool: do not copy, save, summarise or
->    print what it returns.
+>    `has_more` is false or missing (the last page leaves it out). Only call
+>    the tool: do not copy, save, summarise or print what it returns.
 > 3. Run `node scripts/mine-sessions.mjs --source cloud-events --dry-run` and
 >    read the lessons it proposes. If any lesson names a person, a client, a
 >    path or a secret, stop and report which kind instead of sending anything.
@@ -40,7 +40,9 @@ The agent never writes transcript text anywhere: `--source cloud-events` reads
 the `list_events` results back from the session's own Claude Code transcript
 (and from tool-results, where Claude Code saves a large one), skips synthetic
 and subagent turns, and keeps a per-session cursor outside the repository so a
-re-fetched page is never mined twice. Event ids are deterministic, so a resend
+re-fetched page is never mined twice. If the extractor's reply is malformed,
+the miner keeps every lesson that still parses and asks once more when none
+does, so one bad reply cannot sink the run. Event ids are deterministic, so a resend
 after a lost cursor is absorbed by the intake.
 
 The selection, redaction, validation and sending are the same code the PC's

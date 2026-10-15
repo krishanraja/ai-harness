@@ -6,7 +6,7 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, parseLessons, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
@@ -65,6 +65,12 @@ const cloudTurns = parseCloudEvents(cloud, { readSaved: (p) => { asked.push(p); 
 test('cloud events: Krish and assistant text only, no synthetic, subagent, thinking or tool turns', cloudTurns.length === 3 && !cloudTurns.some((t) => /prompt|tool output|subagent|hidden|not an events/.test(t.text)))
 test('cloud events: each event once, in order, tagged with the session it was fetched for', cloudTurns.map((t) => `${t.session}:${t.text.slice(0, 4)}`).join(',') === 'sA:Publ,sA:No, ,sB:Stop')
 test('cloud events: a result saved to tool-results is read back from that path', asked.length === 1 && asked[0] === savedPath)
+const good = '{"excerpt": 0, "kind": "preference", "summary": "a", "severity": "low", "confidence": "low"}'
+test('lessons: a clean reply parses whole', parseLessons(`Here you go:\n[${good}, ${good}]`).length === 2)
+test('lessons: one malformed element costs only itself', parseLessons(`[${good}, {"excerpt": 1, "confidence":medium_pla}]`).length === 1)
+let threw = false
+try { parseLessons('[{"excerpt": 0, "confidence":medium}]') } catch { threw = true }
+test('lessons: a reply with nothing readable throws, so the extractor asks again', threw && parseLessons('no lessons').length === 0)
 
 test('a correction scores, a thank-you does not', scoreTurn('No, that is wrong, never do that again.').score >= 3 && scoreTurn('thanks').score === 0)
 const ex = selectExcerpts(turns, { max: 40, chars: 1200 })
