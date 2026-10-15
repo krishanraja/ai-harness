@@ -779,6 +779,7 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"
     status: live
+    supersedes: [ctrl-standards-chain.stage-8-deliver-is]
   - id: ctrl-standards-chain.stage-8-deliver-is
     file: contract/skill-routing-contract.md
     text_sha: "f77d76b4c9bd"

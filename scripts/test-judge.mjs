@@ -17,7 +17,7 @@
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
   hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED, recordedRulings,
-  rulingsFromLog, failureReport,
+  rulingsFromLog, failureReport, groundedFiles,
 } from './judge.mjs'
 
 let failures = 0
@@ -37,6 +37,24 @@ const tests = []
 const T = (n, f) => tests.push([n, f])
 
 // ------------------------------------------------------------ what it accepts
+T('a proposal the diff cites as provenance is a citable file; one it merely mentions in prose elsewhere is not', () => {
+  const diff = [
+    '+++ b/brain/rules.yaml',
+    '+      ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"',
+    ' unchanged context naming docs/proposals/2026-01-01-old.md',
+    '+++ b/contract/skill-routing-contract.md',
+  ].join('\n')
+  const files = groundedFiles(diff)
+  assert(files.includes('brain/rules.yaml') && files.includes('contract/skill-routing-contract.md'), 'changed files missing')
+  assert(files.includes('docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md'), 'the cited proposal is not citable')
+  assert(!files.includes('docs/proposals/2026-01-01-old.md'), 'an unchanged context line widened the citable set')
+  const bench = loadBench('technical')
+  const { findings, problems } = parseFindings(
+    reply([{ criterion_id: 'provenance', verdict: 'regresses', clause: 'docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md', because: 'The proposal names no asker.' }]),
+    bench, clauseIds, files)
+  assert(findings.length === 1 && problems.length === 0, 'a finding about the cited proposal was discarded')
+})
+
 T('a grounded finding is kept', () => {
   const bench = loadBench('technical')
   const { findings, problems } = parseFindings(
