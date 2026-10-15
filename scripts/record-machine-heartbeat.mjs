@@ -45,7 +45,11 @@ if (!new Set(['ok', 'blocked', 'degraded']).has(status)) {
   console.error('heartbeat: status must be ok, blocked or degraded.')
   process.exit(2)
 }
-if (releaseClocks.has(clock) && !/^v\d{4}\.\d{2}\.\d{2}\.\d+$/.test(release || '')) {
+// A run that failed before it could read the release still has to be heard.
+// Rejecting `unknown` here is how a sync that died early never reached
+// heartbeats.json at all, so its failure looked exactly like silence.
+const unknownButFailing = release === 'unknown' && status !== 'ok'
+if (releaseClocks.has(clock) && !unknownButFailing && !/^v\d{4}\.\d{2}\.\d{2}\.\d+$/.test(release || '')) {
   console.error('heartbeat: release must be a vYYYY.MM.DD.N identifier.')
   process.exit(2)
 }

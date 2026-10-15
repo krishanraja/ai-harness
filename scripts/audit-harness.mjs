@@ -435,7 +435,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09 and retiring since 2026-09-20', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
     // The session miner restored by Krish's ruling of 2026-10-14, the "new evidenced
     // decision" the note above asked for. It is opt-in and weekly.
-    'session-miner-lorimer': { where: 'the weekly Windows Scheduled Task installed by scripts/Invoke-SessionMiner.ps1 -RegisterScheduledTask on LORIMER', declared: '2026-10-14', fix: 'Run scripts/Invoke-SessionMiner.ps1 -SelfTest, then -DryRun, then -RegisterScheduledTask on LORIMER. Only Krish can do this. If he decides against it, remove this clock.' },
+    'session-miner-lorimer': { where: 'the weekly session miner, run by the nightly harness sync on LORIMER (scripts/Invoke-SessionMiner.ps1)', declared: '2026-10-15', stale_hours: 8 * 24, fix: 'It reports once the PC sync runs again. If the sync itself is silent, the one-line repair is scripts/Repair-HarnessPc.ps1. A degraded beat means no submission route is chosen in contract/learning-policy.yaml miner.submit.' },
   }
   const hbPath = join(HARNESS, 'state/heartbeats.json')
   if (!existsSync(hbPath)) {
@@ -477,7 +477,9 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
         continue
       }
       if (beat.status === 'blocked') F('heartbeat', who, `${who} last reported a blocked machine run at ${beat.last_run}.`, 'Read the machine evidence pull request. A current clock proves the task ran; it does not turn a refused install or failed canary into health.')
-      if (age > 48) F('heartbeat', who, `${who} last ran ${beat.last_run}, ${age} hours ago, past the 48 hour limit.`, 'Check the workflow. A silent clock is the failure mode this watchdog exists for, so treat a stale heartbeat as an outage rather than as noise.')
+      // A weekly clock is not stale on day three; each clock may declare its own limit.
+      const limit = EXPECTED_CLOCKS[who]?.stale_hours || 48
+      if (age > limit) F('heartbeat', who, `${who} last ran ${beat.last_run}, ${age} hours ago, past the ${limit} hour limit.`, 'Check the workflow. A silent clock is the failure mode this watchdog exists for, so treat a stale heartbeat as an outage rather than as noise.')
       else N(`${who} heartbeat is ${age} hours old.`)
     }
   }

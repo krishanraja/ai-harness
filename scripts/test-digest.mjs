@@ -6,7 +6,7 @@
  */
 
 import { buildDigest, boardItem, sendBoard } from './digest.mjs'
-import { decide } from './steward-housekeeping.mjs'
+import { decide, silentClocks, silentBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
 import { loadPolicy } from './propose.mjs'
 
 let passed = 0
@@ -57,6 +57,14 @@ test('a draft with a running check waits', decide(change(), { ...green, runs: [{
 test('a draft with a failed check is never marked ready', decide(change(), { ...green, runs: [{ name: 'validate', status: 'completed', conclusion: 'failure' }] }, { today, expiryDays: 14 }).action === 'none')
 test('a change request past expiry closes', decide(change({ created_at: '2026-10-01T00:00:00Z' }), green, { today, expiryDays: 14 }).action === 'close')
 test('a pull request that is not the steward\'s is left alone', decide({ head: { ref: 'feature/x' }, created_at: '2026-10-01T00:00:00Z' }, null, { today, expiryDays: 14 }).action === 'none')
+
+const hb = { 'harness-sync-lorimer': { last_run: '2026-10-06T21:44:07Z', status: 'ok' }, 'harness-sync-surface': { last_run: '2026-10-06T21:55:19Z' }, 'openclaw-vps': { last_run: '2026-09-19T09:05:09Z', retiring: '2026-09-20' } }
+const silent = silentClocks(hb, { now: new Date('2026-10-15T08:00:00Z'), limits: { 'harness-sync-lorimer': 3, 'openclaw-vps': 3 } })
+test('a PC sync silent nine days is caught; a retiring clock and an unwatched one are not', silent.length === 1 && silent[0].clock === 'harness-sync-lorimer' && silent[0].since === '2026-10-06' && silent[0].days === 8)
+test('a clock that beat yesterday is not silent', silentClocks(hb, { now: new Date('2026-10-07T09:00:00Z'), limits: { 'harness-sync-lorimer': 3 } }).length === 0)
+const sb = silentBlocker(silent)
+test('the silent-PC blocker names the clock, the date and the one-line fix', sb.title === 'Your PC stopped checking in' && sb.detail.includes('2026-10-06') && sb.detail.includes(PC_REPAIR) && silentBlocker([]) === null)
+test('the silent-PC blocker reaches the digest', buildDigest({ blockers: [sb], today: '2026-10-15', policy }).decisions[0].title === 'Your PC stopped checking in')
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)

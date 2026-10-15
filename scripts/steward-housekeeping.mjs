@@ -13,6 +13,10 @@
  *     passed and the judge actually measured it (status harness/judge success).
  *   - A change request the judge could not measure for more than a day is a
  *     blocker only Krish can clear (the panel's key), and says so once.
+ *   - A machine clock silent longer than learning-policy guardian.silent_days
+ *     (the PC's nightly sync above all) is a blocker too, with its one-line fix,
+ *     so a job that dies on his PC reaches his list instead of waiting to be
+ *     noticed. LORIMER's sync was silent from 2026-10-06 for nine days unseen.
  *
  * Then scripts/digest.mjs decides whether this week has anything to say.
  *
@@ -48,6 +52,31 @@ export function decide(pr, checks, { today, expiryDays }) {
   if (pr.draft && runsGreen && judge === 'success') return { action: 'mark-ready' }
   if (!pr.draft && runsGreen && judge === 'success') return { action: 'ready' }
   return { action: 'none' }
+}
+
+export const PC_REPAIR = "irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex"
+
+/** Clocks silent longer than their limit, from state/heartbeats.json. Pure. */
+export function silentClocks(heartbeats, { now = new Date(), limits = {} } = {}) {
+  const out = []
+  for (const [clock, days] of Object.entries(limits)) {
+    const beat = heartbeats?.[clock]
+    if (!beat?.last_run || beat.retiring) continue
+    const silent = (now - new Date(beat.last_run)) / 86400000
+    if (silent > Number(days)) out.push({ clock, since: String(beat.last_run).slice(0, 10), days: Math.floor(silent) })
+  }
+  return out
+}
+
+/** The digest blocker for silent clocks: what stopped, since when, and the one fix. */
+export function silentBlocker(silent) {
+  if (!silent.length) return null
+  const names = silent.map((s) => `${s.clock} (silent since ${s.since})`).join(', ')
+  return {
+    kind: 'machine', only_you: 'permission',
+    title: 'Your PC stopped checking in',
+    detail: `${names}. Improvements cannot reach your local tools until it runs again. Open PowerShell on your PC, paste this line and press Enter: ${PC_REPAIR}`,
+  }
 }
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
@@ -88,6 +117,10 @@ if (isMain) {
     title: 'Replace the judge panel key',
     detail: `${judgeBlocked} change request(s) cannot be reviewed because the judge panel's model call is refused. Replace the ANTHROPIC_API_KEY repository secret in krishanraja/ai-harness, then re-run the failed judge checks. Until then nothing is marked ready.`,
   }] : []
+  const hbPath = join(HARNESS, 'state/heartbeats.json')
+  const silent = silentClocks(existsSync(hbPath) ? JSON.parse(readFileSync(hbPath, 'utf8')) : {}, { limits: policy.guardian?.silent_days || {} })
+  const machine = silentBlocker(silent)
+  if (machine) { blockers.unshift(machine); log.push(`silent: ${silent.map((x) => x.clock).join(', ')}`) }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
   const digest = buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })

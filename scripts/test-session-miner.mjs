@@ -6,7 +6,7 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
 import { loadPolicy } from './propose.mjs'
 
@@ -59,6 +59,10 @@ test('a summary that quotes the excerpt verbatim is rejected', !validateObservat
 test('an invented related id becomes null', validateObservation({ kind: 'preference', summary: 'Prefers a short confirmation before anything goes out.', related_skill_or_rule: 'made-up-skill', severity: 'low', confidence: 'low' }, excerpt, { known: new Set(['krish-build']) }).value.related_skill_or_rule === null)
 test('an unknown kind is rejected', !validateObservation({ kind: 'gossip', summary: 'x'.repeat(40), severity: 'low', confidence: 'low' }, excerpt).ok)
 test('the same lesson twice has one event id', toEnvelope({ kind: 'preference', summary: 's', severity: 'low', confidence: 'low' }, { surface: 'codex', session: 'a', index: 1 }).event_id === toEnvelope({ kind: 'preference', summary: 's', severity: 'low', confidence: 'low' }, { surface: 'codex', session: 'a', index: 1 }).event_id)
+
+const broken = mine(turns, { surface: 'claude-code', extract: () => { throw new Error('spawn claude ENOENT') }, policy, known: new Set() })
+test('an extractor that cannot run is reported, not counted as an empty week', broken.extractorError === 'spawn claude ENOENT' && broken.envelopes.length === 0)
+test('Windows starts an npm claude shim through a shell, never an .exe', claudeCommand({ cli: 'claude', platform: 'win32' }).shell === true && claudeCommand({ cli: 'C:\\tools\\claude.exe', platform: 'win32' }).shell === false && claudeCommand({ cli: 'claude', platform: 'linux' }).shell === false)
 
 let calls = 0
 const fake = async () => { calls++; return new Response('{}', { status: calls === 2 ? 409 : calls === 3 ? 500 : 200 }) }

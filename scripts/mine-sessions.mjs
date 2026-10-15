@@ -4,8 +4,9 @@
  *
  * Krish ruled on 2026-10-14 that his Claude Code and Codex session logs may be
  * mined privately so the brain learns how he works, not only what he writes
- * down. This is that miner. It runs on his machine (scripts/Invoke-SessionMiner.ps1)
- * or in a cloud scheduled task over exported cloud sessions, and:
+ * down. This is that miner. On his PC the nightly harness sync runs it once a
+ * week (scripts/Invoke-SessionMiner.ps1); it can also run in a cloud scheduled
+ * task over exported cloud sessions. It:
  *
  *   1. reads only lines it has not read before (a cursor kept outside the repo);
  *   2. picks a few excerpts deterministically: Krish correcting, preferring,
@@ -21,9 +22,11 @@
  *
  *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
- *        [--exclude-cwd <dir>] [--self-test]
+ *        [--exclude-cwd <dir>] [--submit none|post] [--self-test]
  *
- * Submitting needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN.
+ * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
+ * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
+ * moves only after every lesson was accepted.
  */
 
 import { createHash } from 'node:crypto'
@@ -134,11 +137,22 @@ export function buildPrompt(excerpts) {
   ].join('\n')
 }
 
+/**
+ * How to start claude. Windows cannot start an npm shim (claude.cmd) without a
+ * shell, so anything that is not an .exe goes through one there; the arguments
+ * are fixed words, never input. HARNESS_CLAUDE_CLI names the executable when
+ * it is not on PATH.
+ */
+export function claudeCommand({ cli = process.env.HARNESS_CLAUDE_CLI || 'claude', platform = process.platform } = {}) {
+  return { file: cli, shell: platform === 'win32' && !/\.exe$/i.test(cli) }
+}
+
 /** Runs `claude -p` with no tools, from a working directory the miner never mines. */
 export function claudeExtractor({ cwd }) {
+  const { file, shell } = claudeCommand()
   return (prompt) => {
     mkdirSync(cwd, { recursive: true })
-    const out = execFileSync('claude', ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000 })
+    const out = execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
     const start = out.indexOf('[')
     const end = out.lastIndexOf(']')
     return start === -1 || end === -1 ? [] : JSON.parse(out.slice(start, end + 1))
@@ -196,7 +210,7 @@ export function mine(turns, { surface, extract, names = [], known = knownIds(), 
   if (!excerpts.length) return { excerpts, prompt: null, envelopes: [], rejected: [] }
   const prompt = buildPrompt(excerpts)
   let raw = []
-  try { raw = extract(prompt) } catch (e) { return { excerpts, prompt, envelopes: [], rejected: [`extractor failed: ${String(e.message).slice(0, 120)}`] } }
+  try { raw = extract(prompt) } catch (e) { return { excerpts, prompt, envelopes: [], rejected: [], extractorError: String(e.message).split('\n')[0].slice(0, 160) } }
   const envelopes = []
   const rejected = []
   for (const o of Array.isArray(raw) ? raw : []) {
@@ -263,6 +277,11 @@ if (isMain) {
     process.exit(leaked.length ? 1 : 0)
   }
 
+  // Where lessons go is a decision, not a default: contract/learning-policy.yaml
+  // miner.submit. Until one is chosen a real run reads nothing (exit 3, which
+  // the PC wrapper reports as degraded); a dry run still shows what it would learn.
+  const route = flag('--submit') || policy.miner?.submit || 'none'
+  if (route === 'none' && !args.includes('--dry-run')) { console.log('session miner: no submission route is chosen (contract/learning-policy.yaml miner.submit is none); nothing read.'); process.exit(3) }
   const source = flag('--source')
   const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web' }[source]
   if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json [--path <dir|file>] [--dry-run]'); process.exit(2) }
@@ -288,9 +307,13 @@ if (isMain) {
   }
   const r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
   console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  // An extractor that could not run used to save the cursor with zero lessons,
+  // which skipped those sessions for good and reported a healthy run.
+  if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }
   if (args.includes('--dry-run')) { for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`); process.exit(0) }
   const url = process.env.HARNESS_EVENT_INGEST_URL
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
+  if (route !== 'post') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
   if (r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
   const p = r.envelopes.length ? await post(r.envelopes, { url, token }) : { sent: 0, failures: [] }
   if (p.failures.length) { console.error(`::error::${p.failures.length} submission(s) failed (${p.failures.join(', ')}); the cursor did not move.`); process.exit(1) }

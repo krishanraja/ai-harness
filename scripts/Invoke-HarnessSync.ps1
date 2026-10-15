@@ -8,7 +8,9 @@ param(
     [switch]$SkipCanaries,
     [switch]$NoHeartbeat,
     [switch]$NoPullRequest,
-    [switch]$SelfTest
+    [switch]$SelfTest,
+    # Set only by the sync itself when it restarts on a newer copy of this script.
+    [switch]$SelfUpdated
 )
 
 Set-StrictMode -Version Latest
@@ -92,6 +94,58 @@ function Assert-RunningSyncScriptOnGitRef {
     }
 
     return [pscustomobject]@{ git_ref = $GitRef; running_blob = $runningBlob; ref_blob = $refBlob }
+}
+
+# The checkout follows main every day, not only on install days. Two failures
+# made this necessary. A release published before its registration commit had
+# been pulled blocked every run, because the approval gate reads the local
+# registry and the no-op path never pulled. And any change to this script on
+# main deadlocked the install path, which refuses to switch to a revision it is
+# not itself running, so the PC needed a person at the keyboard to move on.
+# A dirty or diverged checkout is left exactly as it is.
+function Update-HarnessCheckout {
+    $status = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=no')
+    Assert-NativeSuccess -Result $status -Label 'Repository status'
+    if ($status.Text.Trim()) { return 'dirty-not-updated' }
+    Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
+    $before = (Invoke-NativeCapture -FilePath 'git' -Arguments @('hash-object', '--', 'scripts/Invoke-HarnessSync.ps1')).Text.Trim()
+    $branch = (Invoke-NativeCapture -FilePath 'git' -Arguments @('rev-parse', '--abbrev-ref', 'HEAD')).Text.Trim()
+    if ($branch -ne 'main') {
+        $switch = Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')
+        if ($switch.ExitCode -ne 0) { return 'not-on-main' }
+    }
+    $merge = Invoke-NativeCapture -FilePath 'git' -Arguments @('merge', '--ff-only', 'origin/main')
+    if ($merge.ExitCode -ne 0) { return 'not-fast-forward' }
+    $after = (Invoke-NativeCapture -FilePath 'git' -Arguments @('hash-object', '--', 'scripts/Invoke-HarnessSync.ps1')).Text.Trim()
+    if ($before -cne $after) { return 'updated-sync-script' }
+    return 'current'
+}
+
+# Once a week the private session miner (Ruling, Krish, 2026-10-14) runs from
+# here, so Krish installs nothing separately for it. It is isolated: whatever it
+# does, this run's install and heartbeat carry on, and it reports through its
+# own clock. The stamp is written before it runs, so a failing miner is retried
+# next week rather than every night.
+function Invoke-WeeklySessionMiner {
+    try {
+        $miner = Join-Path $RepositoryRoot 'scripts\Invoke-SessionMiner.ps1'
+        if (-not (Test-Path -LiteralPath $miner -PathType Leaf)) { return 'not-present' }
+        $stampDir = Join-Path $env:LOCALAPPDATA 'krish-harness\session-miner'
+        $stamp = Join-Path $stampDir 'last-run.txt'
+        if (Test-Path -LiteralPath $stamp -PathType Leaf) {
+            $last = [DateTime]::Parse((Get-Content -LiteralPath $stamp -Raw).Trim(), [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind)
+            if (([DateTime]::UtcNow - $last.ToUniversalTime()).TotalDays -lt 6.5) { return 'not-due' }
+        }
+        New-Item -ItemType Directory -Force -Path $stampDir | Out-Null
+        Set-Content -LiteralPath $stamp -Value ([DateTime]::UtcNow.ToString('o')) -Encoding utf8
+        $result = Invoke-ProcessCapture -FilePath (Get-Process -Id $PID).Path -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $miner) -WorkingDirectory $RepositoryRoot -TimeoutSeconds 3600
+        if ($result.TimedOut) { return 'timed-out' }
+        if ($result.ExitCode -eq 0) { return 'ok' }
+        return "blocked-exit-$($result.ExitCode)"
+    }
+    catch {
+        return "error: $($_.Exception.Message)"
+    }
 }
 
 function Write-JsonFile {
@@ -1131,6 +1185,25 @@ $runRecord = [ordered]@{
 }
 
 try {
+    if (-not $CanaryOnly) {
+        $runRecord.checkout = Update-HarnessCheckout
+        if ($runRecord.checkout -eq 'updated-sync-script' -and -not $SelfUpdated) {
+            # Restart on the copy main now holds, with the same switches, and
+            # report whatever that run reports.
+            $forward = @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath, '-SelfUpdated')
+            foreach ($name in @('SkipCanaries', 'NoHeartbeat', 'NoPullRequest')) {
+                if ($PSBoundParameters.ContainsKey($name)) { $forward += "-$name" }
+            }
+            foreach ($name in @('Repository', 'RepositoryRoot', 'CanaryTimeoutSeconds')) {
+                if ($PSBoundParameters.ContainsKey($name)) { $forward += @("-$name", [string]$PSBoundParameters[$name]) }
+            }
+            $runRecord.status = 'restarted-on-updated-sync-script'
+            Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
+            & (Get-Process -Id $PID).Path @forward
+            exit $LASTEXITCODE
+        }
+        if ($hostDefinition.HostSlug -eq 'lorimer') { $runRecord.session_miner = Invoke-WeeklySessionMiner }
+    }
     $latest = Get-LatestHarnessRelease
     $releaseId = ([string]$latest.tag_name).Substring('harness-'.Length)
     $runAsker = Get-ReleaseApprovalAsker -ReleaseId $releaseId

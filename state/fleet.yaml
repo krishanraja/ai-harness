@@ -138,7 +138,7 @@ machines:
 surface_contracts:
   - id: claude-code-lorimer
     reads: canon block, rendered adapter, 29 installed skills
-    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports, hosted redacted observations, and once installed the private weekly session miner (scripts/Invoke-SessionMiner.ps1)
+    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports, hosted redacted observations, and the private session miner the nightly sync runs weekly (scripts/Invoke-SessionMiner.ps1) once a submission route is chosen
     event_surface: claude-code
     gap: Claude Code account OAuth was expired during the fresh-agent canary; the MCP config itself connected and its isolated identity canary passed.
 

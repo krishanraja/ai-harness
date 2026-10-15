@@ -92,6 +92,16 @@ revisit:
 
 miner:
   enabled: true
+  # Where lessons go: none (nothing is read or sent) or post (the hosted inbox).
+  # Krish chooses; until he does the weekly PC run reports itself degraded.
+  submit: none
   excerpts_per_week: 40
   excerpt_chars: 1200
   posts_per_run: 50
+
+# The guardian. A machine clock silent longer than this many days becomes a
+# blocker in the weekly digest, with its one-line fix, so a job that dies on
+# Krish's PC reaches his list instead of waiting nine days to be noticed.
+guardian:
+  silent_days:
+    harness-sync-lorimer: 3

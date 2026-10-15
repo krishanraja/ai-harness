@@ -8,7 +8,7 @@ tool that reads the brain and writes nothing back.
 
 | Tool | How it feeds the brain | State |
 |---|---|---|
-| Claude Code and Codex on LORIMER | The hosted `record_harness_observation` tool, Ruling lines in commits, and the private weekly session miner | Tool and Ruling lines live; the miner needs installing (below) |
+| Claude Code and Codex on LORIMER | The hosted `record_harness_observation` tool, Ruling lines in commits, and the private weekly session miner | Tool and Ruling lines live; the miner runs from the nightly sync and waits for a submission route (below) |
 | Claude Code cloud sessions | Ruling lines in merged commits today; the claude.ai connector and the cloud session miner once added | Ruling lines live |
 | claude.ai and Claude Desktop | One custom connector plus one line in the account instructions | Needs a connector-compatible endpoint, then Krish adds the connector |
 | ChatGPT | The same hosted endpoint as a custom connector | Best effort only: write tools are in beta, may be plan-limited, and ask for confirmation on every call |
@@ -36,12 +36,26 @@ tool that reads the brain and writes nothing back.
 5. **ChatGPT, if wanted.** Enable developer mode, add the same endpoint as a
    custom connector for the `chatgpt` identity, and accept that every write asks
    for confirmation.
-6. **Install the session miner on LORIMER** (opt-in, removable):
-   `scripts/Invoke-SessionMiner.ps1 -SelfTest`, then `-DryRun`, then
-   `-RegisterScheduledTask`. `-Unregister` removes it.
+6. **Nothing to install for the session miner.** The nightly PC sync runs it
+   once a week. Where its lessons go is Krish's call, recorded in
+   `contract/learning-policy.yaml` (`miner.submit`); until he chooses, it reads
+   nothing and its clock reports degraded.
 7. **Create the cloud session miner** as a weekly Claude Code scheduled task
    from the prompt in `docs/harness/cloud-session-miner.md`, with the claude.ai
    connector attached.
+
+## If the PC stops checking in
+
+The weekly digest says so on Krish's list, with the one line that fixes it. In
+any PowerShell window:
+
+```
+irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex
+```
+
+It finds the checkout, brings it up to date, points the nightly task at it,
+runs it once and says in one line how that went. From then on the sync keeps
+its own checkout current every day.
 
 ## What Control Center must change first
 
