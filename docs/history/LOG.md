@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-15
+
+- reconciled at `908ad07`: `NOW.md` moved to release v2026.10.15.2 (published, registered by the release workflow, recorded on no surface yet), added five 2026-10-15 bullets (automatic release and install, the PC sync that died with exit code 64 for nine days, mined lessons sent through GitHub, the docs steward moving here, the red test fixed in place) and restated review ages (`harness-maintainer` 56 days, `video-engine` 47 days), both still waiting on Krish. The registry and `CURRENT.md` were not edited.
+
 ## 2026-10-14
 
 - reconciled at `181341f`: `NOW.md` gained four 2026-10-14 bullets for the learning-loop merge (PR 124: merge-ready change requests, the observer and judge repair, surface labels, the private session miner), the credential asks that wait on Krish, and review ages restated (`harness-maintainer` 55 days, `video-engine` 46 days). `CURRENT.md` and the registry were not touched by those commits. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
