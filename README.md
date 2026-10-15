@@ -2,7 +2,7 @@
 
 Canonical source for Krish Raja's cross-client AI operating contract, personalized skills, routing rules, evaluations, and release artifacts.
 
-**This repository is public.** Anything committed here is readable by anyone and indexed permanently, so nothing in it is private. Krish chose to publish his ikigai, venture objectives, pricing and revenue here and in `krishanraja/control-center` (Ruling, Krish, 2026-10-05). Two limits still hold: no credentials, secret names or infrastructure identifiers, and no other person's personal details.
+**This repository is public.** Anything committed here is readable by anyone and indexed permanently, so nothing in it is private. Krish chose to publish his ikigai, venture objectives, pricing and revenue here and in `krishanraja/control-center` (Ruling, Krish, 2026-10-05). control-center has been private since 2026-10-15; what it still publishes is `KRISH.md` and `PORTFOLIO.md`, at https://controlcenter.krishraja.com/api/canon/KRISH.md and beside it. Two limits still hold: no credentials, secret names or infrastructure identifiers, and no other person's personal details.
 
 ## Who Krish is
 

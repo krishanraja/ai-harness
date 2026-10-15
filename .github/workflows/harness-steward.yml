@@ -68,19 +68,10 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
 
-      # The docs steward's fleet manifest, so the two stewards cannot name
-      # different repositories without a failing check. Sparse and shallow:
-      # one file, no history.
-      - name: Fetch the docs steward fleet manifest
-        run: |
-          set -euo pipefail
-          git clone --depth 1 --filter=blob:none --sparse \
-            https://github.com/krishanraja/control-center.git .steward-src
-          git -C .steward-src sparse-checkout set docs/steward
-          mkdir -p .steward
-          cp .steward-src/docs/steward/fleet.json .steward/fleet.json
-          rm -rf .steward-src
-          echo "fleet manifest: $(wc -c < .steward/fleet.json) bytes"
+      # The docs steward's fleet manifest is docs/steward/fleet.json in this
+      # repository (moved from control-center on 2026-10-15, when it went
+      # private), so the two stewards cannot name different repositories
+      # without a failing check, and nothing is fetched to compare them.
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
@@ -91,7 +82,7 @@ jobs:
         run: node scripts/render.mjs --check
 
       - name: Surfaces valid
-        run: node scripts/validate-surfaces.mjs --fleet-json .steward/fleet.json
+        run: node scripts/validate-surfaces.mjs --fleet-json docs/steward/fleet.json
 
       - name: Release and overlay claims are coherent
         run: node scripts/validate-release-coherence.mjs
@@ -407,7 +398,7 @@ jobs:
           set -euo pipefail
           mkdir -p .intent
           for f in KRISH.md PORTFOLIO.md; do
-            curl -fsSL "https://raw.githubusercontent.com/krishanraja/control-center/main/docs/$f" -o ".intent/$f" \
+            curl -fsSL "https://controlcenter.krishraja.com/api/canon/$f" -o ".intent/$f" \
               || echo "::warning::could not read live intent $f; the brief says so rather than guessing"
           done
 

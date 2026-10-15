@@ -4,4 +4,4 @@ Heartside, Full Time, Legibility, CTRL and Pulse roll into it. One queue: the mi
 leads, and product work is ordered beneath it by the live priority ladder. Profile,
 decision rules and standing rulings: `skills/krish-principles/references/who-krish-is.md`
 in the harness. What he works on is live, never copied here; read it from Control Center at
-https://raw.githubusercontent.com/krishanraja/control-center/main/docs/KRISH.md (and `docs/PORTFOLIO.md` beside it).
+https://controlcenter.krishraja.com/api/canon/KRISH.md (and `PORTFOLIO.md` beside it).

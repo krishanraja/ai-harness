@@ -14,7 +14,7 @@
  *
  * Dependency-free, and it never writes.
  *
- *   node scripts/validate-surfaces.mjs [--fleet-json <path to control-center fleet.json>]
+ *   node scripts/validate-surfaces.mjs [--fleet-json <path to docs/steward/fleet.json>]
  *                                      [--repos-root <dir holding the checkouts>]
  */
 
@@ -191,9 +191,9 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
 
 // ------------------------------------------------- fleet parity with the docs steward
 const fleetJsonPath = flag('--fleet-json')
-  || [join(HARNESS, '../control-center/docs/steward/fleet.json'), join(HARNESS, '.steward/fleet.json')].find((p) => existsSync(p))
+  || [join(HARNESS, 'docs/steward/fleet.json')].find((p) => existsSync(p))
 if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
-  W('control-center docs/steward/fleet.json not reachable, so repo parity was not checked')
+  W('docs/steward/fleet.json not reachable, so repo parity was not checked')
 } else {
   const docs = JSON.parse(readFileSync(fleetJsonPath, 'utf8'))
   const lc = (n) => n.toLowerCase()
