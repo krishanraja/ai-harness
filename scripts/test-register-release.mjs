@@ -7,9 +7,11 @@
  * copy of the live registry, so a drift in its layout fails here first.
  */
 
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { changedSkills, getBlock, reconcileDeployments, registerRelease, scalar, skillsAggregate } from './register-release.mjs'
 import { parseYaml } from './lib/yaml.mjs'
@@ -75,8 +77,20 @@ const ccu = reconciled.surface_deployments['claude-code-user']
 test('a verified install moves its surface onto the release; a refused one stays awaiting', rec.updated.includes('claude-code-user') && !rec.updated.includes('codex-current') && ccu.release_id === 'v2099.01.01.1' && ccu.status === 'current-installed-hash-verified-automatic-install' && ccu.previous_release === oldLatest && reconciled.surface_deployments['codex-current'].status.startsWith('awaiting'))
 test('the reconciled registry is still coherent', validateReleaseCoherence(reconciled).length === 0)
 
-const { aggregate, files } = skillsAggregate(manifest.source_commit)
-test('the aggregate recomputed from git objects equals the recorded one for that commit', aggregate === scalar(getBlock(live, 'latest_approved_release'), 'skills_tree_aggregate_sha256') && files > 0)
+// The same algorithm over the checked-out files, independently: records are
+// "path NUL UPPERCASE-HEX", ordinal-sorted, newline-joined, hashed once.
+const walk = (dir, base = dir) => readdirSync(dir).flatMap((n) => { const p = join(dir, n); return statSync(p).isDirectory() ? walk(p, base) : [relative(base, p).split(sep).join('/')] })
+const lines = walk(join(HARNESS, 'skills')).map((p) => `${p}${String.fromCharCode(0)}${createHash('sha256').update(readFileSync(join(HARNESS, 'skills', p))).digest('hex').toUpperCase()}`).sort()
+const fromFiles = createHash('sha256').update(Buffer.from(lines.join('\n'), 'utf8')).digest('hex').toUpperCase()
+const head = skillsAggregate('HEAD')
+test('the aggregate from git objects at HEAD equals the one computed from the files on disk', head.aggregate === fromFiles && head.files === lines.length)
+let haveRecorded = true
+try { execFileSync('git', ['cat-file', '-e', `${manifest.source_commit}^{commit}`], { cwd: HARNESS, stdio: 'ignore' }) } catch { haveRecorded = false }
+if (haveRecorded) {
+  test('it reproduces the aggregate recorded for the latest release exactly', skillsAggregate(manifest.source_commit).aggregate === scalar(getBlock(live, 'latest_approved_release'), 'skills_tree_aggregate_sha256'))
+} else {
+  console.log('skip  the latest release commit is not in this shallow checkout; the recorded-aggregate check runs where it is')
+}
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)
