@@ -513,10 +513,33 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
         with:
           ref: main
+          fetch-depth: 0
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
           package-manager-cache: false
+
+      # Releases install themselves now (Ruling, Krish, 2026-10-15), so the
+      # registry is moved onto a release from the evidence the PC sends: a
+      # committed install record, or an ok heartbeat for that release, which
+      # the status names as the weaker of the two.
+      - name: Record what the machines installed
+        run: |
+          set -euo pipefail
+          node scripts/register-release.mjs --reconcile-deployments
+          if [ -z "$(git status --porcelain -- state/skill-registry.yaml)" ]; then exit 0; fi
+          node scripts/render-current-state.mjs
+          node scripts/validate-release-coherence.mjs > /dev/null
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add state/skill-registry.yaml CURRENT.md
+          git commit -m "chore(registry): record installs reported by the machines" -m "Written by scripts/register-release.mjs --reconcile-deployments."
+          for attempt in 1 2 3; do
+            if git pull --rebase --quiet origin main && git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 7))
+          done
+          echo "::error::The registry could not be pushed after three attempts."
+          exit 1
 
       - name: Tidy steward pull requests and decide the digest
         env:

@@ -35,9 +35,19 @@ is the provenance for the `guardian` and `miner.submit` entries in
    This is a standing approval for that one automated send, a scoped exception
    to `authority.never-publish-post-send`: redacted lessons, into this ledger,
    nothing else.
-5. Releases built from main after his merge count as approved by him. The
-   registrar (`scripts/register-release.mjs`) exists; running it unattended is
-   not yet wired.
+5. Releases built from main after his merge count as approved by him, and
+   install on his PC without a further step. After "Validate harness" passes on
+   main, `.github/workflows/harness-auto-release.yml` releases main if a skill
+   changed; the release workflow then registers it
+   (`scripts/register-release.mjs`), and nightly housekeeping records each
+   install the PC reports. This is why stage 8 of
+   `contract/skill-routing-contract.md` now names his merge as the approval,
+   and why `ctrl-capture` says the release follows a merge through the
+   pipeline, never through capture. Claude.ai's own skill catalogue stays a
+   supervised upload: it has no API.
+6. Every Claude transcript folder on the PC is mined, so a second account and
+   Claude Desktop's local agent sessions are learned from as well as the first
+   account ("mine both claude accounts", "get the local sessions too").
 
 ## If wrong
 

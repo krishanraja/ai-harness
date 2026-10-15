@@ -1,0 +1,60 @@
+name: Harness automatic release
+
+# Krish ruled on 2026-10-15 that every release built from main after he merges
+# a change counts as approved by him and installs on his PC automatically.
+#
+# After "Validate harness" passes on a push to main, this releases main if any
+# packaged bytes (skills/) changed since the latest release. It dispatches the
+# existing release workflow, which still builds twice, compares the builds,
+# self-tests the installer, refuses an existing tag, and then registers the
+# release (scripts/register-release.mjs). The PC's nightly sync installs it.
+# Commits that change nothing under skills/ (ledgers, heartbeats, the
+# registration commit itself) release nothing, so this cannot loop.
+
+on:
+  workflow_run:
+    workflows: ["Validate harness"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: harness-auto-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Release main if a skill changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet --tags --force origin
+          if ! git merge-base --is-ancestor "$HEAD_SHA" origin/main; then
+            echo "$HEAD_SHA is not on main; nothing to release."
+            exit 0
+          fi
+          latest=$(git tag --list 'harness-v*' --sort=-v:refname | head -n 1)
+          if [ -n "$latest" ] && git diff --quiet "$latest" "$HEAD_SHA" -- skills/; then
+            echo "No skill changed since $latest; nothing to release." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          day=$(date -u +%Y.%m.%d)
+          n=$(git tag --list "harness-v$day.*" | sed 's/.*\.//' | sort -n | tail -n 1)
+          id="v$day.$(( ${n:-0} + 1 ))"
+          gh workflow run release.yml --ref main -f release_id="$id" -f ref="$HEAD_SHA"
+          echo "Dispatched release $id from $HEAD_SHA (skills changed since ${latest:-the first release})." | tee -a "$GITHUB_STEP_SUMMARY"

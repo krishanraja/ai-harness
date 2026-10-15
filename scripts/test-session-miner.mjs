@@ -6,10 +6,10 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
-import { mkdtempSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { loadPolicy } from './propose.mjs'
@@ -72,6 +72,19 @@ let calls = 0
 const fake = async () => { calls++; return new Response('{}', { status: calls === 2 ? 409 : calls === 3 ? 500 : 200 }) }
 const p = await post([{}, {}, {}], { url: 'https://example.invalid/api/harness/events', token: 't', fetchImpl: fake })
 test('posting counts sent, skips a conflict, and reports a failure', p.sent === 1 && p.failures.length === 1)
+
+// Both accounts and the Desktop app's local sessions, never its caches.
+const home = mkdtempSync(join(tmpdir(), 'miner-home-'))
+const appdata = join(home, 'AppData', 'Roaming')
+const place = (...p) => { mkdirSync(join(...p.slice(0, -1)), { recursive: true }); writeFileSync(join(...p), '{}\n') }
+place(home, '.claude', 'projects', 'repo-a', 'one.jsonl')
+place(home, '.claude-work', 'projects', 'repo-b', 'two.jsonl')
+place(home, 'alt-config', 'projects', 'repo-c', 'three.jsonl')
+place(appdata, 'Claude', 'local-agent-mode-sessions', 'abc', 'four.jsonl')
+place(appdata, 'Claude', 'Cache', 'not-a-session.jsonl')
+place(home, '.claude', 'projects', 'repo-a', 'notes.txt')
+const found = claudeTranscripts({ home, env: { APPDATA: appdata, CLAUDE_CONFIG_DIR: join(home, 'alt-config') } }).map((f) => f.slice(home.length))
+test('transcripts are found for every Claude account folder and Desktop local sessions, never caches or other files', found.length === 4 && ['one', 'two', 'three', 'four'].every((n) => found.some((f) => f.endsWith(`${n}.jsonl`))) && !found.some((f) => /Cache|notes/.test(f)))
 
 const sentBodies = []
 const fakeGh = (cmd, args, opts) => { if (cmd !== 'gh' || args[3] !== 'repos/krishanraja/ai-harness/dispatches') throw new Error('wrong call'); sentBodies.push(JSON.parse(opts.input)); return '' }
