@@ -67,11 +67,17 @@ contract_rules:
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
-    text_sha: "753e74bacc3e"
+    text_sha: "1520cfd4a9cb"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "6c1c96d26649"
+    history:
+      - text_sha: "753e74bacc3e"
+        valid_until: "2026-10-15"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
     status: live
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
@@ -2534,11 +2540,17 @@ skill_sections:
   - id: mindmake-os.where-to-read-it
     file: skills/mindmake-os/SKILL.md
     heading: "Where to read it"
-    text_sha: "6d871f552c1b"
+    text_sha: "e76c8aaed17b"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "6c1c96d26649"
+    history:
+      - text_sha: "6d871f552c1b"
+        valid_until: "2026-10-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake-os.section-map
     file: skills/mindmake-os/SKILL.md
