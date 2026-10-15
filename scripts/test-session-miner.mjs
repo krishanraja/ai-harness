@@ -6,7 +6,7 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT, claudeTranscripts } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
@@ -43,6 +43,28 @@ const codex = [
 const ct = parseCodex(codex)
 test('Codex: both line formats, injected context skipped, cwd carried', ct.length === 2 && ct[0].cwd === '/repo' && ct[1].role === 'user')
 test('cloud export: normalised turns pass through', parseEvents([{ role: 'user', text: 'x' }, { role: 'tool', text: 'y' }]).length === 1)
+
+const ev = (role, uuid, at, content, extra = {}) => ({ created_at: at, [role]: { uuid, internal_anthropic_catchall: { message: { role, content }, ...extra } } })
+const page = (data) => `<other-session nonce="n" untrusted="true">\nheader\n    ${JSON.stringify({ ccr: { data, has_more: false } })}\n</other-session nonce="n">`
+const savedPath = '/root/.claude/projects/p/s/tool-results/mcp-list_events-1.txt'
+const cloud = [
+  { type: 'assistant', message: { content: [{ type: 'tool_use', id: 't1', name: 'mcp__claude-code-remote__list_events', input: { session_id: 'sA' } }, { type: 'tool_use', id: 't2', name: 'mcp__claude-code-remote__list_events', input: { session_id: 'sB' } }, { type: 'tool_use', id: 't3', name: 'mcp__claude-code-remote__list_sessions', input: {} }] } },
+  { type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 't1', content: [{ type: 'text', text: page([
+    ev('user', 'u1', '2026-10-14T10:00:00Z', 'No, never publish without asking me first.'),
+    ev('user', 'u2', '2026-10-14T10:01:00Z', 'Weekly run prompt', { isSynthetic: true }),
+    ev('user', 'u3', '2026-10-14T10:02:00Z', [{ type: 'tool_result', content: 'tool output' }]),
+    ev('assistant', 'a1', '2026-10-14T09:59:00Z', [{ type: 'thinking', thinking: 'hidden' }, { type: 'text', text: 'Published it.' }]),
+    ev('assistant', 'a2', '2026-10-14T10:03:00Z', [{ type: 'text', text: 'subagent words' }], { parent_tool_use_id: 'x' }),
+  ]) }] }] } },
+  { type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 't1', content: page([ev('user', 'u1', '2026-10-14T10:00:00Z', 'No, never publish without asking me first.')]) }] } },
+  { type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 't2', content: `Output too large. Output has been saved to ${savedPath}. Read it in chunks.` }] } },
+  { type: 'user', message: { content: [{ type: 'tool_result', tool_use_id: 't3', content: page([ev('user', 'z1', '2026-10-14T10:00:00Z', 'not an events page')]) }] } },
+].map((o) => JSON.stringify(o))
+const asked = []
+const cloudTurns = parseCloudEvents(cloud, { readSaved: (p) => { asked.push(p); return p === savedPath ? page([ev('user', 'b1', '2026-10-14T11:00:00Z', 'Stop doing that by hand.')]) : null } })
+test('cloud events: Krish and assistant text only, no synthetic, subagent, thinking or tool turns', cloudTurns.length === 3 && !cloudTurns.some((t) => /prompt|tool output|subagent|hidden|not an events/.test(t.text)))
+test('cloud events: each event once, in order, tagged with the session it was fetched for', cloudTurns.map((t) => `${t.session}:${t.text.slice(0, 4)}`).join(',') === 'sA:Publ,sA:No, ,sB:Stop')
+test('cloud events: a result saved to tool-results is read back from that path', asked.length === 1 && asked[0] === savedPath)
 
 test('a correction scores, a thank-you does not', scoreTurn('No, that is wrong, never do that again.').score >= 3 && scoreTurn('thanks').score === 0)
 const ex = selectExcerpts(turns, { max: 40, chars: 1200 })

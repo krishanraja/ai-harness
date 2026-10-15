@@ -22,7 +22,7 @@
  * Raw text never leaves the machine except as a redacted excerpt sent to the
  * extractor, and nothing raw is ever written into the repository.
  *
- *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json
+ *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json|cloud-events
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
  *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--self-test]
  *
@@ -86,6 +86,56 @@ export function parseCodex(lines) {
     turns.push({ role: p.role, text, at: o.timestamp || null, session, cwd })
   }
   return turns
+}
+
+/**
+ * Cloud sessions as the claude-code-remote list_events tool returned them,
+ * read back from this session's own transcript: the weekly cloud task calls
+ * the tool and nothing else, so no raw text is ever written out by hand. A
+ * result too large to inline was saved by Claude Code under tool-results;
+ * readSaved fetches it. Synthetic turns (scheduled prompts) and subagent turns
+ * are not Krish and are skipped; each event counts once however often it was
+ * fetched.
+ */
+export function parseCloudEvents(lines, { readSaved = () => null } = {}) {
+  const calls = new Map()
+  const seen = new Set()
+  const turns = []
+  for (const line of lines) {
+    let o
+    try { o = JSON.parse(line) } catch { continue }
+    const content = o?.message?.content
+    if (!Array.isArray(content)) continue
+    for (const b of content) {
+      if (b?.type === 'tool_use' && /list_events$/.test(b.name || '') && b.input?.session_id) calls.set(b.id, b.input.session_id)
+      if (b?.type !== 'tool_result' || !calls.has(b.tool_use_id)) continue
+      let text = typeof b.content === 'string' ? b.content : textOf(b.content)
+      if (!text.includes('{"ccr"')) {
+        const saved = text.match(/\/\S+\/tool-results\/[^\s"'<>]+/)
+        text = (saved && readSaved(saved[0].replace(/[.,;:)]+$/, ''))) || ''
+      }
+      const start = text.indexOf('{"ccr"')
+      const close = text.indexOf('</other-session', start)
+      const end = text.lastIndexOf('}', close === -1 ? text.length : close)
+      if (start === -1 || end < start) continue
+      let page
+      try { page = JSON.parse(text.slice(start, end + 1)).ccr } catch { continue }
+      for (const e of page?.data || []) {
+        for (const role of ['user', 'assistant']) {
+          const ev = e?.[role]
+          const c = ev?.internal_anthropic_catchall
+          if (!ev || !c || c.isSynthetic || c.parent_tool_use_id) continue
+          const key = ev.uuid || `${e.created_at}:${role}`
+          if (seen.has(key)) continue
+          seen.add(key)
+          const t = textOf(c.message?.content).trim()
+          if (!t || t.startsWith('<')) continue
+          turns.push({ role, text: t, at: e.created_at || null, session: calls.get(b.tool_use_id), cwd: null })
+        }
+      }
+    }
+  }
+  return turns.sort((a, b) => (a.session === b.session ? String(a.at).localeCompare(String(b.at)) : String(a.session).localeCompare(String(b.session))))
 }
 
 /** Exported cloud sessions, already normalised by the cloud task to [{role, text, at, session}]. */
@@ -347,8 +397,8 @@ if (isMain) {
   const route = flag('--submit') || policy.miner?.submit || 'none'
   if (route === 'none' && !args.includes('--dry-run')) { console.log('session miner: no submission route is chosen (contract/learning-policy.yaml miner.submit is none); nothing read.'); process.exit(3) }
   const source = flag('--source')
-  const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web' }[source]
-  if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json [--path <dir|file>] [--dry-run]'); process.exit(2) }
+  const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web', 'cloud-events': 'claude-code-web' }[source]
+  if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json|cloud-events [--path <dir|file>] [--dry-run]'); process.exit(2) }
   const stateDir = resolve(flag('--state') || defaultStateDir())
   mkdirSync(stateDir, { recursive: true })
   const cursorPath = join(stateDir, `cursor-${source}.json`)
@@ -358,6 +408,15 @@ if (isMain) {
   const nextCursor = { ...cursor }
   if (source === 'events-json') {
     turns = parseEvents(JSON.parse(readFileSync(resolve(flag('--path')), 'utf8')))
+  } else if (source === 'cloud-events') {
+    // The cursor keeps the newest event already mined per session, so a
+    // standing session that re-fetches last week's pages sends nothing twice.
+    const home = resolve(homedir(), '.claude')
+    const readSaved = (p) => { const f = resolve(p); return f.startsWith(home) && existsSync(f) ? readFileSync(f, 'utf8') : null }
+    const transcripts = flag('--path') ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl')) : claudeTranscripts()
+    const lines = transcripts.flatMap((f) => readFileSync(f, 'utf8').split('\n').filter(Boolean))
+    turns = parseCloudEvents(lines, { readSaved }).filter((t) => !cursor[t.session] || String(t.at) > cursor[t.session])
+    for (const t of turns) if (!nextCursor[t.session] || String(t.at) > nextCursor[t.session]) nextCursor[t.session] = t.at
   } else {
     const transcripts = flag('--path')
       ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl'))
