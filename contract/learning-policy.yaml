@@ -92,9 +92,10 @@ revisit:
 
 miner:
   enabled: true
-  # Where lessons go: none (nothing is read or sent) or post (the hosted inbox).
-  # Krish chooses; until he does the weekly PC run reports itself degraded.
-  submit: none
+  # Where lessons go: dispatch (a GitHub repository_dispatch to this repository,
+  # recorded by scripts/intake-observations.mjs), post (the hosted inbox) or
+  # none. Krish chose the public ledger on 2026-10-15.
+  submit: dispatch
   excerpts_per_week: 40
   excerpt_chars: 1200
   posts_per_run: 50

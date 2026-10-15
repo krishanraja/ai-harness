@@ -15,14 +15,16 @@
  *   4. asks a model with no tools to name the smallest lesson in each, or none;
  *   5. re-checks every lesson: redacted again, enums valid, short, no verbatim
  *      span of the excerpt, a related id only if it really exists;
- *   6. submits each as one envelope event to the hosted inbox, idempotently.
+ *   6. submits the envelopes idempotently: by default as a GitHub
+ *      repository_dispatch through the gh login already on the machine, which
+ *      scripts/intake-observations.mjs records; or to the hosted inbox.
  *
  * Raw text never leaves the machine except as a redacted excerpt sent to the
  * extractor, and nothing raw is ever written into the repository.
  *
  *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
- *        [--exclude-cwd <dir>] [--submit none|post] [--self-test]
+ *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--self-test]
  *
  * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
  * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
@@ -235,6 +237,33 @@ export async function post(envelopes, { url, token, fetchImpl = fetch }) {
   return { sent, failures }
 }
 
+export const DISPATCH_REPO = 'krishanraja/ai-harness'
+export const DISPATCH_EVENT = 'harness-observations'
+const DISPATCH_CHUNK = 20
+
+/**
+ * Send envelopes as repository_dispatch events through the gh CLI, 20 per
+ * event, to scripts/intake-observations.mjs. gh resolves without a shell on
+ * every platform and reuses the machine's existing GitHub login, so this route
+ * needs no key of its own (Ruling, Krish, 2026-10-15: redacted lessons may be
+ * stored in the public ledger).
+ */
+export function dispatch(envelopes, { repo = DISPATCH_REPO, run = execFileSync } = {}) {
+  let sent = 0
+  const failures = []
+  for (let i = 0; i < envelopes.length; i += DISPATCH_CHUNK) {
+    const events = envelopes.slice(i, i + DISPATCH_CHUNK)
+    const body = JSON.stringify({ event_type: DISPATCH_EVENT, client_payload: { producer: 'session-miner', events } })
+    try {
+      run('gh', ['api', '--method', 'POST', `repos/${repo}/dispatches`, '--input', '-'], { input: body, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 60000 })
+      sent += events.length
+    } catch (e) {
+      failures.push(String(e.stderr || e.message).split('\n')[0].slice(0, 160))
+    }
+  }
+  return { sent, failures }
+}
+
 // ---------------------------------------------------------------- reading
 function files(dir, test) {
   if (!existsSync(dir)) return []
@@ -313,10 +342,10 @@ if (isMain) {
   if (args.includes('--dry-run')) { for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`); process.exit(0) }
   const url = process.env.HARNESS_EVENT_INGEST_URL
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
-  if (route !== 'post') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
-  if (r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
-  const p = r.envelopes.length ? await post(r.envelopes, { url, token }) : { sent: 0, failures: [] }
+  if (route !== 'post' && route !== 'dispatch') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
+  if (route === 'post' && r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
+  const p = !r.envelopes.length ? { sent: 0, failures: [] } : route === 'post' ? await post(r.envelopes, { url, token }) : dispatch(r.envelopes)
   if (p.failures.length) { console.error(`::error::${p.failures.length} submission(s) failed (${p.failures.join(', ')}); the cursor did not move.`); process.exit(1) }
   writeFileSync(cursorPath, JSON.stringify(nextCursor, null, 2) + '\n')
-  console.log(`submitted ${p.sent}; cursor saved outside the repository.`)
+  console.log(`submitted ${p.sent} by ${route}; cursor saved outside the repository.`)
 }
