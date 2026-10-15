@@ -215,15 +215,17 @@ never copied into this file or into any skill. Read them live, in this order:
 
 | What | Live source |
 |---|---|
-| Who Krish is and what he is working on now | https://raw.githubusercontent.com/krishanraja/control-center/main/docs/KRISH.md |
-| The product portfolio, its objectives and the live priority ladder | https://raw.githubusercontent.com/krishanraja/control-center/main/docs/PORTFOLIO.md |
-| The single code source of the priority ranking | https://raw.githubusercontent.com/krishanraja/control-center/main/src/lib/portfolio.ts |
-| The ikigai, as published in Control Center | https://raw.githubusercontent.com/krishanraja/control-center/main/docs/krish/IKIGAI_v4.md |
-| How the OS is built | https://raw.githubusercontent.com/krishanraja/control-center/main/docs/MINDMAKE_OS_ARCHITECTURE.md |
+| Who Krish is and what he is working on now | https://controlcenter.krishraja.com/api/canon/KRISH.md |
+| The product portfolio, its objectives and the live priority ladder | https://controlcenter.krishraja.com/api/canon/PORTFOLIO.md |
+| The single code source of the priority ranking | `src/lib/portfolio.ts` in `krishanraja/control-center`, through the GitHub connector or a checkout |
+| The ikigai | `references/ikigai-v4.md` in this skill, the same sheet exported verbatim |
+| How the OS is built | `docs/MINDMAKE_OS_ARCHITECTURE.md` in `krishanraja/control-center`, routed by the `mindmake-os` skill |
 | What the business is | `krishanraja/mindmake`, `project-documentation/00_NORTH_STAR.md` then `01_CANON.md`, through the `mindmake` skill |
 
-If a live source is missing or unreachable, say so and treat the fact as unknown. Never
-fill the gap from memory or from this file.
+`krishanraja/control-center` has been private since 2026-10-15: only the two Control Center
+links above are public, and an anonymous raw.githubusercontent.com read of anything in it
+returns 404. If a live source is missing or unreachable, say so and treat the fact as
+unknown. Never fill the gap from memory or from this file.
 
 **Dated snapshot, 2026-10-05, restated by the 2026-10-06 ruling. Defer to the live ladder
 above whenever it differs.**

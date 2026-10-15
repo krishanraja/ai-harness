@@ -1,0 +1,276 @@
+{
+  "$comment": "Fleet manifest for the docs steward. One entry per repo the steward maintains. rules_files are the repo's OWN documentation rules and outrank RUNBOOK.md on structure, naming, voice and archive location. write_allowlist is everything the steward may touch; the validator rejects anything else. docs_check is the repo's own gate and must run without an install step. bootstrap_head is the last non-steward commit the first reconciliation was done against; after that NOW.md carries the head.",
+  "schema_version": 1,
+  "defaults": {
+    "default_branch": "main",
+    "history_log": "docs/history/LOG.md",
+    "write_allowlist": [
+      "**/*.md"
+    ],
+    "nightly_utc": "20:15"
+  },
+  "repos": [
+    {
+      "name": "control-center",
+      "product": "Control Center (mind/make OS dashboard)",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/plans/one-swing/STATE.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/icp.json"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "docs/README.md",
+        "docs/CONTRIBUTING.md",
+        "docs/DECISIONS/README.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "docs/icp.json",
+        "docs/steward/LEDGER.md"
+      ],
+      "bootstrap_head": "e99b776"
+    },
+    {
+      "name": "mm-ctrl",
+      "product": "CTRL by Mindmake",
+      "docs_roots": [
+        "docs",
+        "project-documentation"
+      ],
+      "state_doc": "docs/current/release-state.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "public/.well-known/product.json"
+      ],
+      "docs_check": "node scripts/check-docs.mjs",
+      "rules_files": [
+        "CLAUDE.md",
+        "docs/current/README.md",
+        "docs/current/documentation-standards.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "public/.well-known/product.json"
+      ],
+      "bootstrap_head": "edd9045"
+    },
+    {
+      "name": "mindmake",
+      "product": "Mindmake (mindmake.co)",
+      "docs_roots": [
+        "project-documentation"
+      ],
+      "state_doc": "project-documentation/06_CURRENT_STATE.md",
+      "history_dir": "project-documentation/history",
+      "history_log": "project-documentation/history/LOG.md",
+      "truth_files": [],
+      "docs_check": null,
+      "rules_files": [
+        "CLAUDE.md",
+        "project-documentation/README.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "20ef51f"
+    },
+    {
+      "name": "fractionl-circle",
+      "product": "Circle by Fractionl",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/DELIVERY_STATE.md",
+      "history_dir": "docs/_archive",
+      "truth_files": [
+        "public/agent.json",
+        "public/llms.txt"
+      ],
+      "docs_check": "node scripts/check-docs.mjs",
+      "rules_files": [
+        "DOCS.md",
+        "CONTRIBUTING.md",
+        "AGENT_BRIEFING.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "public/agent.json",
+        "public/llms.txt"
+      ],
+      "bootstrap_head": "5ac840e"
+    },
+    {
+      "name": "fractionl-pulse",
+      "product": "Pulse by Fractionl (Fractional Working Index)",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/DOCUMENTATION_GOVERNANCE.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "public/product-truth.json",
+        "public/llms.txt",
+        "public/.well-known/ai-plugin.json"
+      ],
+      "docs_check": "node scripts/docs-audit.mjs",
+      "rules_files": [
+        "docs/DOCUMENTATION_GOVERNANCE.md",
+        "docs/AGENT_BRIEFING.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "public/product-truth.json",
+        "public/llms.txt",
+        "public/.well-known/ai-plugin.json"
+      ],
+      "bootstrap_head": "7df98a5"
+    },
+    {
+      "name": "full-time",
+      "product": "Full Time (fulltime.fm)",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/19-release-state.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/product-state.json"
+      ],
+      "docs_check": "node scripts/check-documentation.mjs",
+      "rules_files": [
+        "docs/README.md",
+        "docs/02-developer.md",
+        "docs/13-agent-handoff.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "docs/product-state.json",
+        "scripts/check-documentation.mjs"
+      ],
+      "bootstrap_head": "adddf64"
+    },
+    {
+      "name": "content-engine",
+      "product": "Mindmake content engine",
+      "docs_roots": [
+        "docs",
+        ".agents/skills"
+      ],
+      "state_doc": "docs/STATE.md",
+      "history_dir": "docs/history",
+      "truth_files": [],
+      "docs_check": "python3 scripts/validate-skills.py",
+      "rules_files": [
+        "CLAUDE.md",
+        "AGENTS.md",
+        "docs/NORTH_STAR.md",
+        "docs/ENGINE_SESSION.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "efb3f80"
+    },
+    {
+      "name": "contentarchives",
+      "product": "contentarchives (personal media consolidation)",
+      "docs_roots": [
+        "docs",
+        "state"
+      ],
+      "state_doc": "RESUME.md",
+      "history_dir": "docs/history",
+      "truth_files": [],
+      "docs_check": null,
+      "rules_files": [
+        "README.md",
+        "docs/ARCHITECTURE.md",
+        "docs/HANDOVER.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "08def7e"
+    },
+    {
+      "name": "ai-harness",
+      "product": "The harness",
+      "state_doc": "state/skill-registry.yaml",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "state/skill-registry.yaml",
+        "state/fleet.yaml",
+        "contract/paths.yaml"
+      ],
+      "docs_check": "node scripts/render.mjs --check && node scripts/validate-surfaces.mjs",
+      "rules_files": [
+        "AGENTS.md",
+        "contract/krish-operating-contract.md",
+        "contract/skill-routing-contract.md",
+        "contract/active-skill-quality-standard.md"
+      ],
+      "write_allowlist": [
+        "NOW.md",
+        "docs/history/**/*.md",
+        "**/*.md"
+      ],
+      "bootstrap_head": "a3d2f37"
+    },
+    {
+      "name": "AEO-Engine",
+      "product": "AEO research machine (weekly answer-engine research for the ventures, the buyers and the benchmarks)",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/STATE.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/packet.schema.json"
+      ],
+      "docs_check": "npm run check:config",
+      "rules_files": [
+        "README.md",
+        "docs/NEVER-PUBLISH.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "nightly_utc": "20:45",
+      "bootstrap_head": "0d5a6f3"
+    },
+    {
+      "name": "makeyourmindup",
+      "product": "makeyourmindup (the publication and the strategy machine behind it)",
+      "docs_roots": [
+        "project-documentation",
+        "docs",
+        "engine",
+        "panel",
+        "quality"
+      ],
+      "state_doc": "project-documentation/03_STEP_PLAN.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "project-documentation/01_MEDIA_KIT.md",
+        "panel/judges.json",
+        "quality/panel/rubric.v1.json",
+        "quality/panel/kill-list.v1.json"
+      ],
+      "docs_check": "npm test && npm run gate:canon",
+      "rules_files": [
+        "AGENTS.md",
+        "project-documentation/02_REPO_BRIEF.md",
+        "engine/ENGINE_SPEC.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "f3c8bfd"
+    }
+  ]
+}

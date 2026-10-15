@@ -41,8 +41,10 @@ not the whole file.
    under the `ventures_root` for the surface you are on (`contract/paths.yaml` resolves
    the name; do not carry another machine's path in your head). Run `git pull --ff-only`
    first. A checkout is not a copy: it follows `main`.
-2. No checkout: fetch the raw file.
-   `https://raw.githubusercontent.com/krishanraja/control-center/main/docs/MINDMAKE_OS_ARCHITECTURE.md`
+2. No checkout: read it through the GitHub connector (repository
+   `krishanraja/control-center`, path `docs/MINDMAKE_OS_ARCHITECTURE.md`, ref `main`).
+   The repository is private since 2026-10-15, so an anonymous raw fetch returns 404;
+   if no authenticated read is available, say the architecture is unknown here.
 
 Read a section with a targeted `grep -n "^## "` then `sed -n 'START,ENDp'` (or fetch and
 search the same way). Do not load the whole file into context.

@@ -9,7 +9,7 @@ state_doc: state/skill-registry.yaml
 history_log: docs/history/LOG.md
 truth_files: [state/skill-registry.yaml, state/fleet.yaml, contract/paths.yaml]
 authority_order: [live target readback for volatile external state, state/skill-registry.yaml, state/heartbeats.json, contract/krish-operating-contract.md, contract/skill-routing-contract.md, contract/active-skill-quality-standard.md, CURRENT.md, README.md]
-steward: https://github.com/krishanraja/control-center/blob/main/docs/steward/RUNBOOK.md
+steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOOK.md
 ---
 # The harness: where it is right now
 

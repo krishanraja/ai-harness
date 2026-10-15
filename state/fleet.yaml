@@ -4,9 +4,10 @@
 # carries the canon block, a client adapter rendered from the templates, or a
 # machine that installs a release and reports back.
 #
-# The repos list is asserted against krishanraja/control-center
-# docs/steward/fleet.json by scripts/validate-surfaces.mjs, so the docs steward
-# and the harness steward cannot drift apart without a failing check.
+# The repos list is asserted against docs/steward/fleet.json (the docs
+# steward's manifest, in this repository since 2026-10-15) by
+# scripts/validate-surfaces.mjs, so the docs steward and the harness steward
+# cannot drift apart without a failing check.
 
 schema_version: 1
 owner: krishanraja
@@ -21,7 +22,7 @@ repos:
   - name: control-center
     canon_target: AGENTS.md
     entry: AGENTS.md
-    rules_files: [AGENTS.md, docs/steward/RUNBOOK.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
+    rules_files: [AGENTS.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
 
   - name: mm-ctrl
     canon_target: AGENTS.md
