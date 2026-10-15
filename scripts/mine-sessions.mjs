@@ -22,9 +22,12 @@
  * Raw text never leaves the machine except as a redacted excerpt sent to the
  * extractor, and nothing raw is ever written into the repository.
  *
- *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json
+ *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json|cloud-events
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
- *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--self-test]
+ *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--from-dry-run] [--self-test]
+ *
+ * --from-dry-run sends exactly the lessons the last --dry-run proposed (kept,
+ * redacted, in the state folder) instead of asking the extractor again.
  *
  * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
  * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
@@ -33,7 +36,7 @@
 
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -88,6 +91,56 @@ export function parseCodex(lines) {
   return turns
 }
 
+/**
+ * Cloud sessions as the claude-code-remote list_events tool returned them,
+ * read back from this session's own transcript: the weekly cloud task calls
+ * the tool and nothing else, so no raw text is ever written out by hand. A
+ * result too large to inline was saved by Claude Code under tool-results;
+ * readSaved fetches it. Synthetic turns (scheduled prompts) and subagent turns
+ * are not Krish and are skipped; each event counts once however often it was
+ * fetched.
+ */
+export function parseCloudEvents(lines, { readSaved = () => null } = {}) {
+  const calls = new Map()
+  const seen = new Set()
+  const turns = []
+  for (const line of lines) {
+    let o
+    try { o = JSON.parse(line) } catch { continue }
+    const content = o?.message?.content
+    if (!Array.isArray(content)) continue
+    for (const b of content) {
+      if (b?.type === 'tool_use' && /list_events$/.test(b.name || '') && b.input?.session_id) calls.set(b.id, b.input.session_id)
+      if (b?.type !== 'tool_result' || !calls.has(b.tool_use_id)) continue
+      let text = typeof b.content === 'string' ? b.content : textOf(b.content)
+      if (!text.includes('{"ccr"')) {
+        const saved = text.match(/\/\S+\/tool-results\/[^\s"'<>]+/)
+        text = (saved && readSaved(saved[0].replace(/[.,;:)]+$/, ''))) || ''
+      }
+      const start = text.indexOf('{"ccr"')
+      const close = text.indexOf('</other-session', start)
+      const end = text.lastIndexOf('}', close === -1 ? text.length : close)
+      if (start === -1 || end < start) continue
+      let page
+      try { page = JSON.parse(text.slice(start, end + 1)).ccr } catch { continue }
+      for (const e of page?.data || []) {
+        for (const role of ['user', 'assistant']) {
+          const ev = e?.[role]
+          const c = ev?.internal_anthropic_catchall
+          if (!ev || !c || c.isSynthetic || c.parent_tool_use_id) continue
+          const key = ev.uuid || `${e.created_at}:${role}`
+          if (seen.has(key)) continue
+          seen.add(key)
+          const t = textOf(c.message?.content).trim()
+          if (!t || t.startsWith('<')) continue
+          turns.push({ role, text: t, at: e.created_at || null, session: calls.get(b.tool_use_id), cwd: null })
+        }
+      }
+    }
+  }
+  return turns.sort((a, b) => (a.session === b.session ? String(a.at).localeCompare(String(b.at)) : String(a.session).localeCompare(String(b.session))))
+}
+
 /** Exported cloud sessions, already normalised by the cloud task to [{role, text, at, session}]. */
 export function parseEvents(json) {
   const arr = Array.isArray(json) ? json : json?.turns || []
@@ -132,7 +185,7 @@ export function selectExcerpts(turns, { max = 40, chars = 1200, names = [] } = {
 export function buildPrompt(excerpts) {
   return [
     'You read short, redacted excerpts from AI work sessions with Krish. For each, decide whether it teaches the AI something durable about how Krish works or wants work done.',
-    'Return ONLY a JSON array. Each element: {"excerpt": <index>, "kind": one of explicit_correction|failure|missed_trigger|false_trigger|repeated_manual_step|successful_pattern|contradiction|preference|friction, "summary": the lesson in at most 280 characters, in your own words, with no names, paths, quotes or product details, "related_skill_or_rule": a harness skill name or null, "severity": low|medium|high, "confidence": low|medium|high}.',
+    'Return ONLY a valid JSON array, with every string value in double quotes. Each element: {"excerpt": <index>, "kind": one of explicit_correction|failure|missed_trigger|false_trigger|repeated_manual_step|successful_pattern|contradiction|preference|friction, "summary": the lesson in at most 280 characters, in your own words, with no names, paths, quotes or product details, "related_skill_or_rule": a harness skill name or null, "severity": low|medium|high, "confidence": low|medium|high}.',
     'Skip routine back-and-forth, one-off task details and anything you are unsure of. An empty array is a good answer.',
     '',
     ...excerpts.map((e, i) => `--- excerpt ${i}\n${e.excerpt}`),
@@ -154,11 +207,29 @@ export function claudeExtractor({ cwd }) {
   const { file, shell } = claudeCommand()
   return (prompt) => {
     mkdirSync(cwd, { recursive: true })
-    const out = execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
-    const start = out.indexOf('[')
-    const end = out.lastIndexOf(']')
-    return start === -1 || end === -1 ? [] : JSON.parse(out.slice(start, end + 1))
+    const run = () => execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
+    // One malformed reply used to sink the whole run; ask once more before giving up.
+    try { return parseLessons(run()) } catch { return parseLessons(run()) }
   }
+}
+
+/**
+ * The extractor's reply as an array. A reply that is not valid JSON as a whole
+ * keeps every element that is, so one broken lesson does not cost the other
+ * thirty-nine; validateObservation still checks each one. A reply with
+ * objects but none readable throws, which the caller retries.
+ */
+export function parseLessons(out) {
+  const start = out.indexOf('[')
+  const end = out.lastIndexOf(']')
+  if (start !== -1 && end > start) {
+    try { const v = JSON.parse(out.slice(start, end + 1)); if (Array.isArray(v)) return v } catch {}
+  }
+  const objects = out.match(/\{[^{}]*\}/g) || []
+  const kept = []
+  for (const o of objects) { try { kept.push(JSON.parse(o)) } catch {} }
+  if (objects.length && !kept.length) throw new Error(`the reply was not valid JSON (${out.slice(0, 80).replace(/\s+/g, ' ')})`)
+  return kept
 }
 
 /** Every 40-character window of the excerpt; a summary may not contain one. */
@@ -223,6 +294,21 @@ export function mine(turns, { surface, extract, names = [], known = knownIds(), 
     envelopes.push(toEnvelope(r.value, { surface, session: ex.session, index: ex.index, at: ex.at }))
   }
   return { excerpts, prompt, envelopes: envelopes.slice(0, num(policy.miner?.posts_per_run, 50)), rejected }
+}
+
+/**
+ * What a dry run proposed, kept outside the repository so the send can be
+ * exactly the set that was checked: the extractor is a model and a second
+ * call would not return the same lessons. The plan is keyed to the cursor
+ * the run would save, so a session that moved since the dry run refuses it.
+ */
+export const planKey = (nextCursor) => sha(JSON.stringify(Object.entries(nextCursor).sort()))
+export function readPlan(path, nextCursor) {
+  if (!existsSync(path)) return { error: 'there is no dry-run plan; run with --dry-run first' }
+  let plan
+  try { plan = JSON.parse(readFileSync(path, 'utf8')) } catch { return { error: 'the dry-run plan is unreadable; run with --dry-run again' } }
+  if (plan?.key !== planKey(nextCursor) || !Array.isArray(plan.envelopes)) return { error: 'sessions changed since the dry run; run with --dry-run again' }
+  return { envelopes: plan.envelopes }
 }
 
 export async function post(envelopes, { url, token, fetchImpl = fetch }) {
@@ -347,8 +433,8 @@ if (isMain) {
   const route = flag('--submit') || policy.miner?.submit || 'none'
   if (route === 'none' && !args.includes('--dry-run')) { console.log('session miner: no submission route is chosen (contract/learning-policy.yaml miner.submit is none); nothing read.'); process.exit(3) }
   const source = flag('--source')
-  const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web' }[source]
-  if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json [--path <dir|file>] [--dry-run]'); process.exit(2) }
+  const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web', 'cloud-events': 'claude-code-web' }[source]
+  if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json|cloud-events [--path <dir|file>] [--dry-run]'); process.exit(2) }
   const stateDir = resolve(flag('--state') || defaultStateDir())
   mkdirSync(stateDir, { recursive: true })
   const cursorPath = join(stateDir, `cursor-${source}.json`)
@@ -358,6 +444,15 @@ if (isMain) {
   const nextCursor = { ...cursor }
   if (source === 'events-json') {
     turns = parseEvents(JSON.parse(readFileSync(resolve(flag('--path')), 'utf8')))
+  } else if (source === 'cloud-events') {
+    // The cursor keeps the newest event already mined per session, so a
+    // standing session that re-fetches last week's pages sends nothing twice.
+    const home = resolve(homedir(), '.claude')
+    const readSaved = (p) => { const f = resolve(p); return f.startsWith(home) && existsSync(f) ? readFileSync(f, 'utf8') : null }
+    const transcripts = flag('--path') ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl')) : claudeTranscripts()
+    const lines = transcripts.flatMap((f) => readFileSync(f, 'utf8').split('\n').filter(Boolean))
+    turns = parseCloudEvents(lines, { readSaved }).filter((t) => !cursor[t.session] || String(t.at) > cursor[t.session])
+    for (const t of turns) if (!nextCursor[t.session] || String(t.at) > nextCursor[t.session]) nextCursor[t.session] = t.at
   } else {
     const transcripts = flag('--path')
       ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl'))
@@ -371,12 +466,26 @@ if (isMain) {
       nextCursor[f] = lines.length
     }
   }
-  const r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
-  console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  const planPath = join(stateDir, `plan-${source}.json`)
+  const fromDryRun = args.includes('--from-dry-run') && !args.includes('--dry-run')
+  let r
+  if (fromDryRun) {
+    const plan = readPlan(planPath, nextCursor)
+    if (plan.error) { console.error(`::error::${plan.error}; nothing was sent and the cursor did not move.`); process.exit(1) }
+    r = { excerpts: [], envelopes: plan.envelopes, rejected: [] }
+    console.log(`session miner (${source}): sending the ${r.envelopes.length} lesson(s) the dry run proposed.`)
+  } else {
+    r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
+    console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  }
   // An extractor that could not run used to save the cursor with zero lessons,
   // which skipped those sessions for good and reported a healthy run.
   if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }
-  if (args.includes('--dry-run')) { for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`); process.exit(0) }
+  if (args.includes('--dry-run')) {
+    writeFileSync(planPath, JSON.stringify({ key: planKey(nextCursor), envelopes: r.envelopes }) + '\n')
+    for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`)
+    process.exit(0)
+  }
   const url = process.env.HARNESS_EVENT_INGEST_URL
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
   if (route !== 'post' && route !== 'dispatch') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
@@ -384,5 +493,6 @@ if (isMain) {
   const p = !r.envelopes.length ? { sent: 0, failures: [] } : route === 'post' ? await post(r.envelopes, { url, token }) : dispatch(r.envelopes)
   if (p.failures.length) { console.error(`::error::${p.failures.length} submission(s) failed (${p.failures.join(', ')}); the cursor did not move.`); process.exit(1) }
   writeFileSync(cursorPath, JSON.stringify(nextCursor, null, 2) + '\n')
+  if (existsSync(planPath)) rmSync(planPath)
   console.log(`submitted ${p.sent} by ${route}; cursor saved outside the repository.`)
 }
