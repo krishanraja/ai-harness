@@ -94,15 +94,17 @@ miner:
   enabled: true
   # Where lessons go: dispatch (a GitHub repository_dispatch to this repository,
   # recorded by scripts/intake-observations.mjs), post (the hosted inbox) or
-  # none. Krish chose the public ledger on 2026-10-15.
+  # none, which stops every miner sending. A scoped standing approval, first
+  # seen 2026-10-15: docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md.
   submit: dispatch
   excerpts_per_week: 40
   excerpt_chars: 1200
   posts_per_run: 50
 
-# The guardian. A machine clock silent longer than this many days becomes a
-# blocker in the weekly digest, with its one-line fix, so a job that dies on
-# Krish's PC reaches his list instead of waiting nine days to be noticed.
+# The guardian, first seen 2026-10-15. A machine clock silent longer than this
+# many days becomes one blocker in the weekly digest, with its one-line fix.
+# Why three days, and the nine silent days it answers:
+# docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md.
 guardian:
   silent_days:
     harness-sync-lorimer: 3
