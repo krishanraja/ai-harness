@@ -265,16 +265,51 @@ export function dispatch(envelopes, { repo = DISPATCH_REPO, run = execFileSync }
 }
 
 // ---------------------------------------------------------------- reading
-function files(dir, test) {
+function files(dir, test, descend = () => true) {
   if (!existsSync(dir)) return []
   const out = []
   for (const name of readdirSync(dir)) {
     const p = join(dir, name)
-    const st = statSync(p)
-    if (st.isDirectory()) out.push(...files(p, test))
+    let st
+    try { st = statSync(p) } catch { continue }
+    if (st.isDirectory()) { if (descend(name)) out.push(...files(p, test, descend)) }
     else if (test(name)) out.push(p)
   }
   return out
+}
+
+/**
+ * Every place this machine keeps Claude transcripts, so a second account is
+ * mined as well as the first (Krish, 2026-10-15: "mine both claude accounts",
+ * "get the local sessions too"):
+ *
+ *   ~/.claude/projects            Claude Code, and the Code tab in Claude Desktop
+ *   ~/.claude-<name>/projects     a second account kept in its own config folder
+ *   $CLAUDE_CONFIG_DIR/projects   the same, set by environment variable
+ *   %APPDATA%\Claude\...session...  Claude Desktop's local agent sessions
+ *
+ * Inside the Claude Desktop folder only directories whose names mention a
+ * session or an agent are entered, never its caches. A file that is not a
+ * Claude transcript yields no turns: parseClaudeCode keeps only user and
+ * assistant text messages.
+ */
+export function claudeTranscripts({ home = homedir(), env = process.env } = {}) {
+  const roots = new Set([join(home, '.claude', 'projects')])
+  if (existsSync(home)) for (const name of readdirSync(home)) if (/^\.claude[-_.]/.test(name)) roots.add(join(home, name, 'projects'))
+  if (env.CLAUDE_CONFIG_DIR) roots.add(join(env.CLAUDE_CONFIG_DIR, 'projects'))
+  const out = new Set()
+  for (const root of roots) for (const f of files(root, (n) => n.endsWith('.jsonl'))) out.add(f)
+  const desktop = env.APPDATA ? join(env.APPDATA, 'Claude') : join(home, 'Library', 'Application Support', 'Claude')
+  const sessionish = (n) => /session|agent/i.test(n)
+  if (existsSync(desktop)) {
+    for (const name of readdirSync(desktop)) {
+      const p = join(desktop, name)
+      let st
+      try { st = statSync(p) } catch { continue }
+      if (st.isDirectory() && sessionish(name)) for (const f of files(p, (n) => n.endsWith('.jsonl'))) out.add(f)
+    }
+  }
+  return [...out].sort()
 }
 
 export function defaultStateDir() {
@@ -324,8 +359,10 @@ if (isMain) {
   if (source === 'events-json') {
     turns = parseEvents(JSON.parse(readFileSync(resolve(flag('--path')), 'utf8')))
   } else {
-    const root = resolve(flag('--path') || (source === 'codex' ? join(homedir(), '.codex', 'sessions') : join(homedir(), '.claude', 'projects')))
-    for (const f of files(root, (n) => n.endsWith('.jsonl'))) {
+    const transcripts = flag('--path')
+      ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl'))
+      : source === 'codex' ? files(join(homedir(), '.codex', 'sessions'), (n) => n.endsWith('.jsonl')) : claudeTranscripts()
+    for (const f of transcripts) {
       const lines = readFileSync(f, 'utf8').split('\n').filter(Boolean)
       const from = cursor[f] || 0
       if (lines.length <= from) continue

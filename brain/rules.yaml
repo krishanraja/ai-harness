@@ -771,6 +771,15 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: ctrl-standards-chain.stage-8-deliver-installs
+    file: contract/skill-routing-contract.md
+    text_sha: "0a2b49ed2a71"
+    first_seen: "2026-10-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"
+    status: live
+    supersedes: [ctrl-standards-chain.stage-8-deliver-is]
   - id: ctrl-standards-chain.stage-8-deliver-is
     file: contract/skill-routing-contract.md
     text_sha: "f77d76b4c9bd"
@@ -778,7 +787,8 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
-    status: live
+    status: superseded
+    valid_until: "2026-10-15"
   - id: ctrl-standards-chain.ctrl-capture-stage-9
     file: contract/skill-routing-contract.md
     text_sha: "d8b95d47214e"
@@ -1287,17 +1297,22 @@ skill_sections:
   - id: ctrl-capture.workflow
     file: skills/ctrl-capture/SKILL.md
     heading: "Workflow"
-    text_sha: "fedc2a6d60a8"
+    text_sha: "db21f7c7cde8"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+      ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"
     history:
       - text_sha: "f10872ff1af8"
         valid_until: "2026-10-14"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "fedc2a6d60a8"
+        valid_until: "2026-10-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
     status: live
   - id: ctrl-capture.proposal-schema
     file: skills/ctrl-capture/SKILL.md

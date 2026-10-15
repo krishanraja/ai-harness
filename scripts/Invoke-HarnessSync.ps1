@@ -125,19 +125,25 @@ function Update-HarnessCheckout {
 # here, so Krish installs nothing separately for it. It is isolated: whatever it
 # does, this run's install and heartbeat carry on, and it reports through its
 # own clock. The stamp is written before it runs, so a failing miner is retried
-# next week rather than every night.
+# next week rather than every night. A changed miner runs the next night
+# instead of waiting out the week, so a new source (a second account, Claude
+# Desktop's local sessions) is learned from at once; its cursor keeps anything
+# already read from being sent twice.
 function Invoke-WeeklySessionMiner {
     try {
         $miner = Join-Path $RepositoryRoot 'scripts\Invoke-SessionMiner.ps1'
         if (-not (Test-Path -LiteralPath $miner -PathType Leaf)) { return 'not-present' }
+        $version = (Get-FileHash -LiteralPath (Join-Path $RepositoryRoot 'scripts\mine-sessions.mjs') -Algorithm SHA256).Hash
         $stampDir = Join-Path $env:LOCALAPPDATA 'krish-harness\session-miner'
         $stamp = Join-Path $stampDir 'last-run.txt'
         if (Test-Path -LiteralPath $stamp -PathType Leaf) {
-            $last = [DateTime]::Parse((Get-Content -LiteralPath $stamp -Raw).Trim(), [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind)
-            if (([DateTime]::UtcNow - $last.ToUniversalTime()).TotalDays -lt 6.5) { return 'not-due' }
+            $parts = (Get-Content -LiteralPath $stamp -Raw).Trim() -split '\s+'
+            $last = [DateTime]::Parse($parts[0], [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind)
+            $sameMiner = $parts.Count -gt 1 -and $parts[1] -eq $version
+            if ($sameMiner -and ([DateTime]::UtcNow - $last.ToUniversalTime()).TotalDays -lt 6.5) { return 'not-due' }
         }
         New-Item -ItemType Directory -Force -Path $stampDir | Out-Null
-        Set-Content -LiteralPath $stamp -Value ([DateTime]::UtcNow.ToString('o')) -Encoding utf8
+        Set-Content -LiteralPath $stamp -Value "$([DateTime]::UtcNow.ToString('o')) $version" -Encoding utf8
         $result = Invoke-ProcessCapture -FilePath (Get-Process -Id $PID).Path -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $miner) -WorkingDirectory $RepositoryRoot -TimeoutSeconds 3600
         if ($result.TimedOut) { return 'timed-out' }
         if ($result.ExitCode -eq 0) { return 'ok' }

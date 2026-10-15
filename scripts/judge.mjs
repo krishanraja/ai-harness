@@ -256,6 +256,19 @@ export function failureReport({ base, head, bench, error }) {
 }
 
 /**
+ * The files a finding may cite as its clause: every file the diff changes, and
+ * every proposal document the diff itself cites as provenance (a brain/rules.yaml
+ * source.ref). A finding about that document is grounded in the change, not
+ * invented; discarding it marked a lost blocking finding and so made pull
+ * requests 125 and 126 unmeasured, although each carried an owner ruling.
+ */
+export function groundedFiles(diff) {
+  const changed = [...diff.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((m) => m[1])
+  const cited = [...diff.matchAll(/^\+.*?\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/gm)].map((m) => m[1])
+  return [...new Set([...changed, ...cited])]
+}
+
+/**
  * Run one bench, with the mandatory second attempt when it comes back unanimous.
  * `ask` is injected so the whole protocol is testable without a model.
  */
@@ -387,7 +400,7 @@ if (isMain) {
     process.exit(0)
   }
 
-  const diffFiles = [...new Set([...diff.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((m) => m[1]))]
+  const diffFiles = groundedFiles(diff)
   const clauseIds = clauseUniverse()
   const results = []
   for (const name of BENCHES) {
