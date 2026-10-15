@@ -4,8 +4,9 @@
  *
  * Krish ruled on 2026-10-14 that his Claude Code and Codex session logs may be
  * mined privately so the brain learns how he works, not only what he writes
- * down. This is that miner. It runs on his machine (scripts/Invoke-SessionMiner.ps1)
- * or in a cloud scheduled task over exported cloud sessions, and:
+ * down. This is that miner. On his PC the nightly harness sync runs it once a
+ * week (scripts/Invoke-SessionMiner.ps1); it can also run in a cloud scheduled
+ * task over exported cloud sessions. It:
  *
  *   1. reads only lines it has not read before (a cursor kept outside the repo);
  *   2. picks a few excerpts deterministically: Krish correcting, preferring,
@@ -14,16 +15,20 @@
  *   4. asks a model with no tools to name the smallest lesson in each, or none;
  *   5. re-checks every lesson: redacted again, enums valid, short, no verbatim
  *      span of the excerpt, a related id only if it really exists;
- *   6. submits each as one envelope event to the hosted inbox, idempotently.
+ *   6. submits the envelopes idempotently: by default as a GitHub
+ *      repository_dispatch through the gh login already on the machine, which
+ *      scripts/intake-observations.mjs records; or to the hosted inbox.
  *
  * Raw text never leaves the machine except as a redacted excerpt sent to the
  * extractor, and nothing raw is ever written into the repository.
  *
  *   node scripts/mine-sessions.mjs --source claude-code|codex|events-json
  *        [--path <dir|file>] [--state <dir>] [--names <file>] [--dry-run]
- *        [--exclude-cwd <dir>] [--self-test]
+ *        [--exclude-cwd <dir>] [--submit none|dispatch|post] [--self-test]
  *
- * Submitting needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN.
+ * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
+ * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
+ * moves only after every lesson was accepted.
  */
 
 import { createHash } from 'node:crypto'
@@ -134,11 +139,22 @@ export function buildPrompt(excerpts) {
   ].join('\n')
 }
 
+/**
+ * How to start claude. Windows cannot start an npm shim (claude.cmd) without a
+ * shell, so anything that is not an .exe goes through one there; the arguments
+ * are fixed words, never input. HARNESS_CLAUDE_CLI names the executable when
+ * it is not on PATH.
+ */
+export function claudeCommand({ cli = process.env.HARNESS_CLAUDE_CLI || 'claude', platform = process.platform } = {}) {
+  return { file: cli, shell: platform === 'win32' && !/\.exe$/i.test(cli) }
+}
+
 /** Runs `claude -p` with no tools, from a working directory the miner never mines. */
 export function claudeExtractor({ cwd }) {
+  const { file, shell } = claudeCommand()
   return (prompt) => {
     mkdirSync(cwd, { recursive: true })
-    const out = execFileSync('claude', ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000 })
+    const out = execFileSync(file, ['-p', '--output-format', 'text', '--disallowedTools', 'Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Task'], { cwd, input: prompt, encoding: 'utf8', maxBuffer: 1 << 24, timeout: 600000, shell })
     const start = out.indexOf('[')
     const end = out.lastIndexOf(']')
     return start === -1 || end === -1 ? [] : JSON.parse(out.slice(start, end + 1))
@@ -196,7 +212,7 @@ export function mine(turns, { surface, extract, names = [], known = knownIds(), 
   if (!excerpts.length) return { excerpts, prompt: null, envelopes: [], rejected: [] }
   const prompt = buildPrompt(excerpts)
   let raw = []
-  try { raw = extract(prompt) } catch (e) { return { excerpts, prompt, envelopes: [], rejected: [`extractor failed: ${String(e.message).slice(0, 120)}`] } }
+  try { raw = extract(prompt) } catch (e) { return { excerpts, prompt, envelopes: [], rejected: [], extractorError: String(e.message).split('\n')[0].slice(0, 160) } }
   const envelopes = []
   const rejected = []
   for (const o of Array.isArray(raw) ? raw : []) {
@@ -217,6 +233,33 @@ export async function post(envelopes, { url, token, fetchImpl = fetch }) {
     if (res.status >= 200 && res.status < 300) sent++
     else if (res.status === 409) continue
     else failures.push(`${res.status}`)
+  }
+  return { sent, failures }
+}
+
+export const DISPATCH_REPO = 'krishanraja/ai-harness'
+export const DISPATCH_EVENT = 'harness-observations'
+const DISPATCH_CHUNK = 20
+
+/**
+ * Send envelopes as repository_dispatch events through the gh CLI, 20 per
+ * event, to scripts/intake-observations.mjs. gh resolves without a shell on
+ * every platform and reuses the machine's existing GitHub login, so this route
+ * needs no key of its own (Ruling, Krish, 2026-10-15: redacted lessons may be
+ * stored in the public ledger).
+ */
+export function dispatch(envelopes, { repo = DISPATCH_REPO, run = execFileSync } = {}) {
+  let sent = 0
+  const failures = []
+  for (let i = 0; i < envelopes.length; i += DISPATCH_CHUNK) {
+    const events = envelopes.slice(i, i + DISPATCH_CHUNK)
+    const body = JSON.stringify({ event_type: DISPATCH_EVENT, client_payload: { producer: 'session-miner', events } })
+    try {
+      run('gh', ['api', '--method', 'POST', `repos/${repo}/dispatches`, '--input', '-'], { input: body, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 60000 })
+      sent += events.length
+    } catch (e) {
+      failures.push(String(e.stderr || e.message).split('\n')[0].slice(0, 160))
+    }
   }
   return { sent, failures }
 }
@@ -263,6 +306,11 @@ if (isMain) {
     process.exit(leaked.length ? 1 : 0)
   }
 
+  // Where lessons go is a decision, not a default: contract/learning-policy.yaml
+  // miner.submit. Until one is chosen a real run reads nothing (exit 3, which
+  // the PC wrapper reports as degraded); a dry run still shows what it would learn.
+  const route = flag('--submit') || policy.miner?.submit || 'none'
+  if (route === 'none' && !args.includes('--dry-run')) { console.log('session miner: no submission route is chosen (contract/learning-policy.yaml miner.submit is none); nothing read.'); process.exit(3) }
   const source = flag('--source')
   const surface = { 'claude-code': process.env.CLAUDE_CODE_REMOTE === 'true' ? 'claude-code-web' : 'claude-code', codex: 'codex', 'events-json': 'claude-code-web' }[source]
   if (!surface) { console.error('usage: mine-sessions.mjs --source claude-code|codex|events-json [--path <dir|file>] [--dry-run]'); process.exit(2) }
@@ -288,12 +336,16 @@ if (isMain) {
   }
   const r = mine(turns, { surface, names, extract: claudeExtractor({ cwd: excludeCwd }) })
   console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
+  // An extractor that could not run used to save the cursor with zero lessons,
+  // which skipped those sessions for good and reported a healthy run.
+  if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }
   if (args.includes('--dry-run')) { for (const e of r.envelopes) console.log(`  ${e.kind}: ${e.summary}`); process.exit(0) }
   const url = process.env.HARNESS_EVENT_INGEST_URL
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
-  if (r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
-  const p = r.envelopes.length ? await post(r.envelopes, { url, token }) : { sent: 0, failures: [] }
+  if (route !== 'post' && route !== 'dispatch') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
+  if (route === 'post' && r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
+  const p = !r.envelopes.length ? { sent: 0, failures: [] } : route === 'post' ? await post(r.envelopes, { url, token }) : dispatch(r.envelopes)
   if (p.failures.length) { console.error(`::error::${p.failures.length} submission(s) failed (${p.failures.join(', ')}); the cursor did not move.`); process.exit(1) }
   writeFileSync(cursorPath, JSON.stringify(nextCursor, null, 2) + '\n')
-  console.log(`submitted ${p.sent}; cursor saved outside the repository.`)
+  console.log(`submitted ${p.sent} by ${route}; cursor saved outside the repository.`)
 }

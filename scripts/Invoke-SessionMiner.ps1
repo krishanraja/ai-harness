@@ -9,24 +9,21 @@ mined privately, so the harness learns how he works and not only what he writes
 down. This wrapper runs scripts/mine-sessions.mjs over both, then reports a
 heartbeat (clock session-miner-lorimer).
 
-It is opt-in and separately removable: it never runs until -RegisterScheduledTask,
-and -Unregister removes it. The miner redacts every excerpt before any model sees
-it and submits only small envelope events; its cursor lives in
-%LOCALAPPDATA%\krish-harness\session-miner, never in the repository. A names.txt
-in that folder (one name per line, never committed) adds names to redact.
-
-Submitting needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN as user
-environment variables; the heartbeat needs an authenticated gh.
+There is nothing to install. The nightly harness sync (scripts/Invoke-HarnessSync.ps1)
+runs this once a week on LORIMER. Where the lessons go is chosen in
+contract/learning-policy.yaml (miner.submit); until a route is chosen a run reads
+nothing and reports itself degraded. The miner redacts every excerpt before any
+model sees it, and its cursor lives in %LOCALAPPDATA%\krish-harness\session-miner,
+never in the repository. A names.txt in that folder (one name per line, never
+committed) adds names to redact.
 
 .EXAMPLE
 pwsh scripts/Invoke-SessionMiner.ps1 -SelfTest
 pwsh scripts/Invoke-SessionMiner.ps1 -DryRun
-pwsh scripts/Invoke-SessionMiner.ps1 -RegisterScheduledTask
 pwsh scripts/Invoke-SessionMiner.ps1 -Unregister
 #>
 param(
     [string]$RepositoryRoot = (Split-Path -Parent $PSScriptRoot),
-    [switch]$RegisterScheduledTask,
     [switch]$Unregister,
     [switch]$DryRun,
     [switch]$SelfTest,
@@ -36,9 +33,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$TaskName = 'Krish Harness Session Miner'
-$TaskDay = 'Sunday'
-$TaskTime = '18:00'
+# The separate task an earlier version asked Krish to install by hand.
+$LegacyTaskName = 'Krish Harness Session Miner'
 $Repository = 'krishanraja/ai-harness'
 $Clock = 'session-miner-lorimer'
 $Node = (Get-Command node -ErrorAction Stop).Source
@@ -50,8 +46,13 @@ $NamesFile = Join-Path $StateDir 'names.txt'
 if (-not (Test-Path -LiteralPath $Miner -PathType Leaf)) { throw "Miner not found: $Miner" }
 
 if ($Unregister) {
-    Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
-    Write-Output "Removed the scheduled task '$TaskName'. The cursor in $StateDir is kept; delete that folder for a clean slate."
+    if (Get-ScheduledTask -TaskName $LegacyTaskName -ErrorAction SilentlyContinue) {
+        Unregister-ScheduledTask -TaskName $LegacyTaskName -Confirm:$false
+        Write-Output "Removed the separate task '$LegacyTaskName'; the nightly harness sync runs the miner weekly."
+    }
+    else {
+        Write-Output "There is no separate task to remove; the nightly harness sync runs the miner weekly."
+    }
     return
 }
 
@@ -60,35 +61,13 @@ if ($SelfTest) {
     exit $LASTEXITCODE
 }
 
-if ($RegisterScheduledTask) {
-    $pwsh = (Get-Command pwsh.exe -ErrorAction Stop).Source
-    $scriptPath = Join-Path $RepositoryRoot 'scripts\Invoke-SessionMiner.ps1'
-    $action = New-ScheduledTaskAction `
-        -Execute $pwsh `
-        -Argument "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$scriptPath`"" `
-        -WorkingDirectory $RepositoryRoot
-    $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $TaskDay -At $TaskTime
-    $settings = New-ScheduledTaskSettingsSet `
-        -StartWhenAvailable `
-        -RunOnlyIfNetworkAvailable `
-        -AllowStartIfOnBatteries `
-        -DontStopIfGoingOnBatteries `
-        -MultipleInstances IgnoreNew `
-        -ExecutionTimeLimit (New-TimeSpan -Hours 2)
-    $principal = New-ScheduledTaskPrincipal `
-        -UserId "$env:USERDOMAIN\$env:USERNAME" `
-        -LogonType Interactive `
-        -RunLevel Limited
-    Register-ScheduledTask `
-        -TaskName $TaskName `
-        -Action $action `
-        -Trigger $trigger `
-        -Settings $settings `
-        -Principal $principal `
-        -Description 'Weekly private session miner for the Krish harness: redacted lessons from Claude Code and Codex sessions, nothing raw leaves the machine.' `
-        -Force | Out-Null
-    Write-Output "Registered '$TaskName': weekly on $TaskDay at $TaskTime. Remove it with -Unregister."
-    return
+# claude.exe from the native installer, else the npm package's binary; the miner
+# itself falls back to a shell for an npm shim (claude.cmd) when neither exists.
+if (-not $env:HARNESS_CLAUDE_CLI) {
+    $native = Get-Command claude.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+    $legacy = Join-Path $env:APPDATA 'npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe'
+    if ($native) { $env:HARNESS_CLAUDE_CLI = $native.Source }
+    elseif (Test-Path -LiteralPath $legacy -PathType Leaf) { $env:HARNESS_CLAUDE_CLI = $legacy }
 }
 
 New-Item -ItemType Directory -Force -Path $StateDir, $WorkDir | Out-Null
@@ -99,6 +78,7 @@ if ($DryRun) { $common += '--dry-run' }
 $status = 'ok'
 foreach ($source in @('claude-code', 'codex')) {
     & $Node $Miner --source $source @common
+    if ($LASTEXITCODE -eq 3) { $status = 'degraded'; break }
     if ($LASTEXITCODE -ne 0) { $status = 'blocked' }
 }
 
@@ -110,4 +90,4 @@ if (-not $DryRun -and -not $NoHeartbeat) {
     if ($LASTEXITCODE -ne 0) { Write-Warning 'The heartbeat dispatch failed; the audit will report the clock as silent.' }
 }
 
-if ($status -ne 'ok') { exit 1 }
+if ($status -eq 'blocked') { exit 1 }

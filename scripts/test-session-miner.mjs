@@ -6,8 +6,12 @@
  * Its envelopes pass the importer's own gate.
  */
 
-import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post } from './mine-sessions.mjs'
+import { parseClaudeCode, parseCodex, parseEvents, selectExcerpts, scoreTurn, mine, validateObservation, toEnvelope, post, claudeCommand, dispatch, DISPATCH_EVENT } from './mine-sessions.mjs'
 import { toObservation } from './import-harness-events.mjs'
+import { intake } from './intake-observations.mjs'
+import { mkdtempSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { loadPolicy } from './propose.mjs'
 
 let passed = 0
@@ -60,10 +64,25 @@ test('an invented related id becomes null', validateObservation({ kind: 'prefere
 test('an unknown kind is rejected', !validateObservation({ kind: 'gossip', summary: 'x'.repeat(40), severity: 'low', confidence: 'low' }, excerpt).ok)
 test('the same lesson twice has one event id', toEnvelope({ kind: 'preference', summary: 's', severity: 'low', confidence: 'low' }, { surface: 'codex', session: 'a', index: 1 }).event_id === toEnvelope({ kind: 'preference', summary: 's', severity: 'low', confidence: 'low' }, { surface: 'codex', session: 'a', index: 1 }).event_id)
 
+const broken = mine(turns, { surface: 'claude-code', extract: () => { throw new Error('spawn claude ENOENT') }, policy, known: new Set() })
+test('an extractor that cannot run is reported, not counted as an empty week', broken.extractorError === 'spawn claude ENOENT' && broken.envelopes.length === 0)
+test('Windows starts an npm claude shim through a shell, never an .exe', claudeCommand({ cli: 'claude', platform: 'win32' }).shell === true && claudeCommand({ cli: 'C:\\tools\\claude.exe', platform: 'win32' }).shell === false && claudeCommand({ cli: 'claude', platform: 'linux' }).shell === false)
+
 let calls = 0
 const fake = async () => { calls++; return new Response('{}', { status: calls === 2 ? 409 : calls === 3 ? 500 : 200 }) }
 const p = await post([{}, {}, {}], { url: 'https://example.invalid/api/harness/events', token: 't', fetchImpl: fake })
 test('posting counts sent, skips a conflict, and reports a failure', p.sent === 1 && p.failures.length === 1)
+
+const sentBodies = []
+const fakeGh = (cmd, args, opts) => { if (cmd !== 'gh' || args[3] !== 'repos/krishanraja/ai-harness/dispatches') throw new Error('wrong call'); sentBodies.push(JSON.parse(opts.input)); return '' }
+const many = Array.from({ length: 45 }, (_, i) => toEnvelope({ kind: 'preference', summary: `Prefers the decision first in every reply, case ${i}.`, severity: 'low', confidence: 'medium' }, { surface: 'codex', session: 's', index: i, at: '2026-10-15T00:00:00Z' }))
+const d = dispatch(many, { run: fakeGh })
+test('dispatch sends every envelope in chunks of 20 through gh, nothing else', d.sent === 45 && d.failures.length === 0 && sentBodies.length === 3 && sentBodies.every((b) => b.event_type === DISPATCH_EVENT && b.client_payload.events.length <= 20))
+const failing = dispatch(many.slice(0, 5), { run: () => { const e = new Error('x'); e.stderr = 'HTTP 404: Not Found'; throw e } })
+test('a refused dispatch is a failure, so the cursor stays put', failing.sent === 0 && failing.failures[0] === 'HTTP 404: Not Found')
+const ledger = mkdtempSync(join(tmpdir(), 'intake-'))
+const got = intake(sentBodies[0].client_payload, { ledgerDir: ledger, now: new Date('2026-10-15T00:00:00Z') })
+test('what the miner dispatches, the intake accepts and labels as the miner', got.fresh.length === 20 && Object.keys(got.rejected).length === 0 && got.fresh.every((row) => row.producer === 'session-miner' && row.quote.startsWith('[codex] ')))
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)

@@ -32,11 +32,22 @@ export function observationId(eventId) {
   return createHash('sha256').update(`harness-inbox\0${eventId}`, 'utf8').digest('hex').slice(0, 16)
 }
 
-export function toObservation(event, seenAt) {
+/** The hash Control Center records for an envelope; computed here for envelopes that skip it. */
+export function envelopeSha(event) {
+  const keys = ['event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence']
+  return createHash('sha256').update(JSON.stringify(keys.map((k) => event[k] ?? null)), 'utf8').digest('hex')
+}
+
+/**
+ * One envelope to one ledger row. Envelopes from Control Center carry an inbox
+ * id; envelopes sent straight to this repository (scripts/intake-observations.mjs)
+ * do not, so `requireInbox: false` skips that one field.
+ */
+export function toObservation(event, seenAt, { requireInbox = true } = {}) {
   if (!event || typeof event !== 'object') throw new Error('invalid_event')
-  const required = ['inbox_id', 'event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'outcome', 'severity', 'confidence', 'payload_sha256']
+  const required = [...(requireInbox ? ['inbox_id'] : []), 'event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'outcome', 'severity', 'confidence', 'payload_sha256']
   for (const key of required) if (event[key] === undefined || event[key] === null || event[key] === '') throw new Error(`event_missing_${key}`)
-  if (!Number.isSafeInteger(event.inbox_id) || event.inbox_id < 1) throw new Error('invalid_inbox_id')
+  if (requireInbox && (!Number.isSafeInteger(event.inbox_id) || event.inbox_id < 1)) throw new Error('invalid_inbox_id')
   if (!SURFACES.has(event.surface)) throw new Error('invalid_surface')
   if (!KINDS.has(event.kind)) throw new Error('invalid_kind')
   if (!OUTCOMES.has(event.outcome)) throw new Error('invalid_outcome')
@@ -67,7 +78,7 @@ export function toObservation(event, seenAt) {
   }
 }
 
-function readSeenIds(ledgerDir) {
+export function readSeenIds(ledgerDir) {
   const seen = new Set()
   if (!existsSync(ledgerDir)) return seen
   for (const file of readdirSync(ledgerDir)) {

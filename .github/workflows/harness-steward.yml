@@ -184,6 +184,8 @@ jobs:
       - name: The session miner never lets raw text out
         run: |
           node scripts/test-session-miner.mjs
+          node scripts/test-intake-observations.mjs
+          node scripts/test-register-release.mjs
           node scripts/mine-sessions.mjs --self-test
 
       # Smarter must not mean heavier. Every pull request shows what it does to
@@ -361,7 +363,14 @@ jobs:
           git commit \
             -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
             -m "Appended by scripts/observe.mjs. Evidence only; nothing here is a decision."
-          git push origin HEAD:main
+          # The intake and heartbeat workflows also push to main; ledger files
+          # merge as a union (.gitattributes), so a rebase never conflicts.
+          for attempt in 1 2 3 4; do
+            if git pull --rebase --quiet origin main && git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 7))
+          done
+          echo "::error::The ledger could not be pushed after four attempts."
+          exit 1
 
   # Sundays: what the evidence has earned, as merge-ready change requests.
   #
