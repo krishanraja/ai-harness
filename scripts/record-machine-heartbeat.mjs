@@ -81,16 +81,18 @@ const entry = {
 }
 if (releaseClocks.has(clock)) entry.release = release
 
-// A clock that is not ok says why and since when, so one bad night (a dropped
-// connection) can be told apart from an install that will never finish on its
-// own. Both fields go the moment it reports ok again.
+// A clock that is not ok says why, since when, and for how many runs in a row,
+// so one bad night (a dropped connection) can be told apart from an install
+// that will never finish on its own. Counted in runs, not hours: a PC that is
+// simply off the next night has not failed twice. All three go the moment it
+// reports ok again.
 if (status !== 'ok') {
   const reason = flag('--reason')
   if (reason && reason !== 'null') entry.reason = REASONS.has(reason) ? reason : 'unrecognised'
   const previous = state[clock]
-  entry.failing_since = previous && previous.status && previous.status !== 'ok'
-    ? previous.failing_since || previous.last_run
-    : entry.last_run
+  const failing = previous && previous.status && previous.status !== 'ok'
+  entry.failing_since = failing ? previous.failing_since || previous.last_run : entry.last_run
+  entry.failing_runs = failing ? (Number(previous.failing_runs) || 1) + 1 : 1
 }
 
 // Recorded so the spend trend is visible in the brain without anyone reaching

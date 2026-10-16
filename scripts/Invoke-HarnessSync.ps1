@@ -303,7 +303,7 @@ function Get-FailureReason {
     param([AllowEmptyString()][string]$Message)
 
     switch -Regex ($Message) {
-        '^Repository working tree is dirty' { return 'checkout-dirty' }
+        '^Tracked files have uncommitted edits' { return 'checkout-dirty' }
         '^(Git fetch|Switch to main|Fast-forward main|Repository status) failed' { return 'checkout-update' }
         '^The running sync script is not' { return 'sync-script-not-on-main' }
         'no matching approved_by provenance' { return 'release-not-registered' }
@@ -1196,7 +1196,7 @@ if ($SelfTest) {
         throw 'Repeated-canary evidence self-test found recursive attempts.'
     }
     $reasonFixtures = [ordered]@{
-        'Repository working tree is dirty. Nothing was installed.' = 'checkout-dirty'
+        'Tracked files have uncommitted edits. Nothing was installed.' = 'checkout-dirty'
         'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
         'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
         'Install for codex-current failed with exit code 1: denied' = 'install-failed'
@@ -1359,17 +1359,18 @@ try {
 
     if (-not $CanaryOnly) {
         # Edits to tracked files block, because the switch and pull below could
-        # lose them. Untracked files do not: nothing here deletes them, and a
-        # pull that would overwrite one refuses on its own. Counting them stopped
-        # every install on a checkout carrying one stray file, which is how
-        # LORIMER is suspected to have blocked on v2026.10.15.2, while the daily
-        # checkout update, which ignores them, carried on regardless.
-        # They are still counted, so the evidence the old gate gave is kept.
+        # lose them. Untracked files do not, on the mechanism alone: nothing here
+        # deletes them, and a pull that would overwrite one refuses on its own.
+        # Until 2026-10-16 any untracked file blocked every install, while the
+        # daily checkout update, which ignores them, carried on regardless.
+        # Whether that is what blocked LORIMER on v2026.10.15.2 is for its next
+        # heartbeat to say; the reason now travels with it. Untracked files are
+        # still counted into run.json, so the old gate's evidence is kept.
         $untracked = Invoke-NativeCapture -FilePath 'git' -Arguments @('ls-files', '--others', '--exclude-standard')
         if ($untracked.ExitCode -eq 0) { $runRecord.untracked_files = @($untracked.Lines | Where-Object { $_ }).Count }
         $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=no')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
-        if ($repoStatus.Text.Trim()) { throw 'Repository working tree is dirty. Nothing was installed.' }
+        if ($repoStatus.Text.Trim()) { throw 'Tracked files have uncommitted edits. Nothing was installed.' }
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
         Assert-RunningSyncScriptOnGitRef -GitRef 'origin/main' | Out-Null
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')) -Label 'Switch to main'

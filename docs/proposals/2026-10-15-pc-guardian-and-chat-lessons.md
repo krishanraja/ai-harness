@@ -29,9 +29,9 @@ is the provenance for the `guardian` and `miner.submit` entries in
    the PC off stays quiet, short enough that a broken task surfaces within the
    week it broke. This complements `harness-maintainer.scheduled-audit-invariant`
    (the audit names the stale clock; the guardian puts it in front of Krish).
-   Added 2026-10-16: a clock that keeps reporting `blocked` past
-   `guardian.blocked_days` is the same blocker, with the reason it sent in
-   plain words. One day means two nightly runs in a row. LORIMER ran that
+   Added 2026-10-16: a clock that reports `blocked` on
+   `guardian.blocked_runs` runs in a row (two) is the same blocker, with the
+   reason it sent in plain words. LORIMER ran that
    morning and reported `blocked` on v2026.10.15.2 with no reason anyone off
    the PC could read, so the sync now sends one word from a fixed list (never
    the error text: the ledger is public), and the recorder keeps it with the

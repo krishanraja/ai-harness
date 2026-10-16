@@ -17,7 +17,7 @@
  *     (the PC's nightly sync above all) is a blocker too, with its one-line fix,
  *     so a job that dies on his PC reaches his list instead of waiting to be
  *     noticed. LORIMER's sync was silent from 2026-10-06 for nine days unseen.
- *   - So is a clock that keeps reporting blocked past guardian.blocked_days,
+ *   - So is a clock that keeps reporting blocked for guardian.blocked_runs,
  *     with the reason it sent in plain words: a PC that runs every night but
  *     cannot install is as stuck as one that never runs.
  *
@@ -106,18 +106,19 @@ export const BLOCKED_WORDS = {
 }
 
 /**
- * Clocks reporting `blocked` for longer than their limit, from
- * state/heartbeats.json. A limit of one day means two nightly runs in a row,
- * so one dropped connection never reaches Krish. Pure.
+ * Clocks that reported `blocked` on at least their limit of runs in a row
+ * (failing_runs, counted by scripts/record-machine-heartbeat.mjs), from
+ * state/heartbeats.json. Runs, not hours, so a PC switched off after one bad
+ * night never reaches Krish. Pure.
  */
-export function blockedClocks(heartbeats, { now = new Date(), limits = {} } = {}) {
+export function blockedClocks(heartbeats, { limits = {} } = {}) {
   const out = []
-  for (const [clock, days] of Object.entries(limits)) {
+  for (const [clock, runs] of Object.entries(limits)) {
     const beat = heartbeats?.[clock]
     if (beat?.status !== 'blocked' || beat.retiring) continue
+    if ((Number(beat.failing_runs) || 1) < Number(runs)) continue
     const since = beat.failing_since || beat.last_run
-    if (!since) continue
-    if ((now - new Date(since)) / 86400000 > Number(days)) out.push({ clock, since: String(since).slice(0, 10), reason: beat.reason || null, release: beat.release || null })
+    out.push({ clock, since: String(since || '').slice(0, 10), runs: Number(beat.failing_runs) || 1, reason: beat.reason || null, release: beat.release || null })
   }
   return out
 }
@@ -125,7 +126,7 @@ export function blockedClocks(heartbeats, { now = new Date(), limits = {} } = {}
 /** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
 export function blockedBlocker(blocked) {
   if (!blocked.length) return null
-  const lines = blocked.map((b) => `${b.clock} has been blocked since ${b.since}${b.release && b.release !== 'unknown' ? ` on ${b.release}` : ''}: ${BLOCKED_WORDS[b.reason] || 'it stopped for a reason it could not name'}`).join('; ')
+  const lines = blocked.map((b) => `${b.clock} has been blocked ${b.runs || 2} runs in a row since ${b.since}${b.release && b.release !== 'unknown' ? ` on ${b.release}` : ''}: ${BLOCKED_WORDS[b.reason] || 'it stopped for a reason it could not name'}`).join('; ')
   return {
     kind: 'machine', only_you: 'permission',
     title: 'Your PC cannot install the latest release',
@@ -177,7 +178,7 @@ if (isMain) {
   const machine = silentBlocker(silent)
   if (machine) { blockers.unshift(machine); log.push(`silent: ${silent.map((x) => x.clock).join(', ')}`) }
   // A silent clock already has its blocker; its last report is old news.
-  const stuck = blockedClocks(heartbeats, { limits: policy.guardian?.blocked_days || {} }).filter((b) => !silent.some((s) => s.clock === b.clock))
+  const stuck = blockedClocks(heartbeats, { limits: policy.guardian?.blocked_runs || {} }).filter((b) => !silent.some((s) => s.clock === b.clock))
   const install = blockedBlocker(stuck)
   if (install) { blockers.unshift(install); log.push(`blocked: ${stuck.map((x) => `${x.clock} (${x.reason || 'no reason'})`).join(', ')}`) }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')

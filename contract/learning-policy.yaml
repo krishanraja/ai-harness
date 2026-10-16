@@ -115,15 +115,18 @@ guardian:
   # First seen 2026-10-16, when LORIMER ran but reported blocked on
   # v2026.10.15.2 with no reason anyone could read; part of the guardian Krish
   # asked for on 2026-10-15 (docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md,
-  # decision 3). The task is registered -Daily (Register-HarnessScheduledTask
-  # in scripts/Invoke-HarnessSync.ps1), so one day means two runs blocked in a
-  # row and a dropped connection stays quiet.
+  # decision 3). Counted in runs in a row (failing_runs, written by
+  # scripts/record-machine-heartbeat.mjs), never hours, so a dropped connection
+  # or a PC switched off after one bad night stays quiet. The task is registered
+  # -Daily (Register-HarnessScheduledTask in scripts/Invoke-HarnessSync.ps1), so
+  # two runs is normally two nights. Tested in scripts/test-digest.mjs and
+  # scripts/test-machine-heartbeat.mjs.
   # Which fires: a clock silent past silent_days raises only the silent
-  # blocker, because its last blocked report is old news; blocked_days applies
+  # blocker, because its last blocked report is old news; blocked_runs applies
   # only to a clock still reporting (scripts/steward-housekeeping.mjs).
   # Who clears it: the one-line PC repair in the blocker, which reports what it
   # found in one line; the next nightly run then reports again on its own.
-  # How often: at most once per digest week, and only after two blocked
-  # nights in a row; a single blocked night never reaches Krish.
-  blocked_days:
-    harness-sync-lorimer: 1
+  # How often: at most once per digest week, and only after two blocked runs
+  # in a row; a single blocked run never reaches Krish.
+  blocked_runs:
+    harness-sync-lorimer: 2

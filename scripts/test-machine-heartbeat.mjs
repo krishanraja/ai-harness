@@ -35,10 +35,10 @@ const ok = beat('ok', '')
 test('an ok beat carries no reason and no failing_since', ok.status === 'ok' && !('reason' in ok) && !('failing_since' in ok))
 
 const first = beat('blocked', 'checkout-dirty')
-test('a blocked beat stores its reason and starts failing_since', first.reason === 'checkout-dirty' && first.failing_since === first.last_run)
+test('a blocked beat stores its reason and starts failing_since and failing_runs', first.reason === 'checkout-dirty' && first.failing_since === first.last_run && first.failing_runs === 1)
 
 const second = beat('blocked', 'install-failed')
-test('a second blocked beat keeps the first failing_since and the new reason', second.failing_since === first.failing_since && second.reason === 'install-failed')
+test('a second blocked beat keeps the first failing_since, counts two runs and takes the new reason', second.failing_since === first.failing_since && second.failing_runs === 2 && second.reason === 'install-failed')
 
 const leak = beat('blocked', 'C:\\Users\\someone\\client-folder')
 test('free text is never stored: it becomes unrecognised', leak.reason === 'unrecognised' && !JSON.stringify(leak).includes('someone'))
@@ -47,12 +47,12 @@ const silentReason = beat('blocked', '')
 test('an empty reason stores none', !('reason' in silentReason))
 
 const healed = beat('ok', 'checkout-dirty')
-test('the next ok beat clears the reason and failing_since', !('reason' in healed) && !('failing_since' in healed))
+test('the next ok beat clears the reason, failing_since and failing_runs', !('reason' in healed) && !('failing_since' in healed) && !('failing_runs' in healed))
 
 // Today's shape: a blocked entry written before failing_since existed.
 writeFileSync(out, JSON.stringify({ 'harness-sync-lorimer': { last_run: '2026-10-16T07:45:36.839Z', status: 'blocked', release: 'v2026.10.15.2', source: 'repository_dispatch' } }))
 const carried = beat('blocked', 'other')
-test('a blocked entry without failing_since starts it from its own last run', carried.failing_since === '2026-10-16T07:45:36.839Z')
+test('a blocked entry from before failing_runs counts as the first run', carried.failing_since === '2026-10-16T07:45:36.839Z' && carried.failing_runs === 2)
 
 // The two lists that must agree.
 const recorder = readFileSync(join(HARNESS, 'scripts/record-machine-heartbeat.mjs'), 'utf8')
