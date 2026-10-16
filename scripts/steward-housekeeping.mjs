@@ -96,10 +96,11 @@ export function blockedClocks(heartbeats, { limits = {} } = {}) {
     if (beat?.status !== 'blocked' || beat.retiring) continue
     if ((Number(beat.failing_runs) || 1) < Number(runs)) continue
     const since = beat.failing_since || beat.last_run
-    // The latest word the span carried, and how many different words it has
-    // carried, so a reason that changed part way is never told as the only one.
+    // The latest run's own word, kept apart from the last word an earlier run
+    // gave, and how many different words the span carried, so neither an old
+    // reason nor a changed one is told as the latest or the only one.
     const words = Array.isArray(beat.reasons) ? beat.reasons.map((r) => r?.reason).filter(Boolean) : []
-    out.push({ clock, since: String(since || '').slice(0, 10), runs: Number(beat.failing_runs) || 1, reason: beat.reason || words.at(-1) || null, distinct: new Set(words).size, release: beat.release || null })
+    out.push({ clock, since: String(since || '').slice(0, 10), runs: Number(beat.failing_runs) || 1, reason: beat.reason || null, earlier: beat.reason ? null : words.at(-1) || null, distinct: new Set(words).size, release: beat.release || null })
   }
   return out
 }
@@ -107,13 +108,17 @@ export function blockedClocks(heartbeats, { limits = {} } = {}) {
 /** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
 const RELEASE_ID = /^v\d{4}\.\d{2}\.\d{2}\.\d+$/
 const DATE = /^\d{4}-\d{2}-\d{2}$/
+const known = (w) => (Object.hasOwn(REASONS, w || '') ? REASONS[w] : null)
+const said = (b) => known(b.reason) ? `its latest run said ${known(b.reason)}`
+  : known(b.earlier) ? `its latest run gave no reason; an earlier run in this span said ${known(b.earlier)}`
+    : `its latest run said ${REASONS.other}`
 
 export function blockedBlocker(blocked) {
   if (!blocked.length) return null
   // Every value from state/heartbeats.json is checked before it reaches this
   // text: the reason must be a fixed word, the release a release id, the date a
   // date and the count a whole number; anything else is left out, not shown.
-  const lines = blocked.map((b) => `${b.clock} has been blocked${Number.isInteger(b.runs) && b.runs > 0 ? ` ${b.runs} runs in a row` : ''}${DATE.test(b.since || '') ? ` since ${b.since}` : ''}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}; the latest reason it gave: ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}${Number.isInteger(b.distinct) && b.distinct > 1 ? ` (it has given ${b.distinct} different reasons in that time)` : ''}`).join('; ')
+  const lines = blocked.map((b) => `${b.clock} has been blocked${Number.isInteger(b.runs) && b.runs > 0 ? ` ${b.runs} runs in a row` : ''}${DATE.test(b.since || '') ? ` since ${b.since}` : ''}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}; ${said(b)}${Number.isInteger(b.distinct) && b.distinct > 1 ? ` (it has given ${b.distinct} different reasons in that time)` : ''}`).join('; ')
   return {
     kind: 'machine', only_you: 'permission',
     title: 'Your PC cannot install the latest release',
