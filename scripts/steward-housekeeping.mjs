@@ -83,10 +83,13 @@ export function silentBlocker(silent) {
 }
 
 // The reason a blocked sync reports (scripts/record-machine-heartbeat.mjs), in
-// plain words. The fix line is the same for all of them: the repair says what it
-// found in one line, and the next run reports again either way.
+// plain words. scripts/test-machine-heartbeat.mjs fails if a reason the
+// recorder keeps has no words here, so the three lists move together. A cause
+// fixable in code is fixed there, and the PC takes it on its next run; the
+// repair line covers what only the PC can do, says what it found in one line,
+// and the next run reports again either way.
 export const BLOCKED_WORDS = {
-  'checkout-dirty': 'the harness folder on your PC has edits nobody committed, so it will not install over them',
+  'checkout-dirty': 'files the harness tracks were edited on your PC and never committed, so it will not install over them (new files it does not track do not block it)',
   'checkout-update': 'it could not update its copy of the harness from GitHub',
   'sync-script-not-on-main': 'it is running a copy of the sync that main does not hold',
   'release-not-registered': 'its copy of the registry does not yet approve the release',

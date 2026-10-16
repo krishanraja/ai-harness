@@ -1200,6 +1200,13 @@ if ($SelfTest) {
         'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
         'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
         'Install for codex-current failed with exit code 1: denied' = 'install-failed'
+        'Git fetch failed with exit code 128: could not resolve host' = 'checkout-update'
+        'The running sync script is not byte-exact on origin/main. Refusing to switch branches.' = 'sync-script-not-on-main'
+        'Release v2026.10.15.2 has no matching approved_by provenance in state/skill-registry.yaml.' = 'release-not-registered'
+        'Release checksum mismatches: krish-build.zip' = 'release-assets'
+        'No previous deployment record exists for cursor-primary.' = 'deployment-record-missing'
+        'Plan for claude-code-user failed with exit code 1: refused' = 'install-plan-failed'
+        'Canary report was refused for codex-current: invalid' = 'canary-error'
         'something nobody planned for at C:\Users\someone' = 'other'
     }
     foreach ($message in $reasonFixtures.Keys) {
@@ -1357,6 +1364,9 @@ try {
         # every install on a checkout carrying one stray file, which is how
         # LORIMER is suspected to have blocked on v2026.10.15.2, while the daily
         # checkout update, which ignores them, carried on regardless.
+        # They are still counted, so the evidence the old gate gave is kept.
+        $untracked = Invoke-NativeCapture -FilePath 'git' -Arguments @('ls-files', '--others', '--exclude-standard')
+        if ($untracked.ExitCode -eq 0) { $runRecord.untracked_files = @($untracked.Lines | Where-Object { $_ }).Count }
         $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=no')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
         if ($repoStatus.Text.Trim()) { throw 'Repository working tree is dirty. Nothing was installed.' }
