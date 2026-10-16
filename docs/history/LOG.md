@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-16
+
+- reconciled at `1b2fc25`: `NOW.md` gained the 2026-10-16 bullet for the PC sync's fixed reason word and the guardian's blocked-run count (PR 129), noted LORIMER's last sync heartbeat as `blocked`, and corrected the expired-review count from 2 to 13 of 29 skills, recomputed from `state/skill-registry.yaml`. No bullet was old enough to roll. Registry verdict and expired review dates are unchanged and wait on Krish.
+
 ## 2026-10-15
 
 - reconciled at `908ad07`: `NOW.md` moved to release v2026.10.15.2 (published, registered by the release workflow, recorded on no surface yet), added five 2026-10-15 bullets (automatic release and install, the PC sync that died with exit code 64 for nine days, mined lessons sent through GitHub, the docs steward moving here, the red test fixed in place) and restated review ages (`harness-maintainer` 56 days, `video-engine` 47 days), both still waiting on Krish. The registry and `CURRENT.md` were not edited.
