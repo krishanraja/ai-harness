@@ -75,27 +75,53 @@ if (releaseClocks.has(clock)) entry.release = release
 // bad night (a dropped connection) can be told apart from an install that will
 // never finish on its own. Counted in runs, not hours: a PC that is simply off
 // the next night has not failed twice. An entry from before failing_runs
-// existed counts as one run, the least it can have been. `reason` is the latest
-// run's word and `reason_since` when that word was first sent in this span, so
-// a reason that changed part way is never read as holding for the whole of it.
-// When the clock reports ok again the span is closed into last_outage, with
-// the last word it carried as last_reason, rather than dropped. Earlier
-// outages are not lost: every heartbeat is its own commit to this file, so its
-// git history holds each one.
+// existed counts as one run, because it was one.
+//
+// Nothing is edited in place. `reasons` lists every word the span has carried,
+// in order, each with when it was first sent; a new word is appended, never
+// written over the last. `reason` is only the latest run's own word. When the
+// clock reports ok again the span is appended to `outages` with its close.
+// Both lists are bounded (MAX_KEPT) so the public file cannot grow without
+// limit; anything older stays in this file's git history, one commit per beat.
+//
+// Everything read back from the previous entry is checked first (a date is a
+// date, a count a whole number, a word a known word); a value that fails is
+// dropped and the span starts afresh, so a damaged entry cannot inflate a count
+// that reaches Krish.
+const MAX_KEPT = 10
+const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
+const iso = (v) => (typeof v === 'string' && ISO.test(v) ? v : null)
+const runs = (v) => (Number.isInteger(v) && v > 0 ? v : null)
+const word = (v) => (typeof v === 'string' && Object.hasOwn(REASONS, v) ? v : null)
+const spans = (list) => (Array.isArray(list) ? list : [])
+  .filter((x) => x && word(x.reason) && iso(x.since))
+  .map((x) => ({ reason: x.reason, since: x.since }))
+const closed = (list) => (Array.isArray(list) ? list : [])
+  .filter((x) => x && iso(x.since) && iso(x.until) && runs(x.runs))
+  .map((x) => ({ since: x.since, until: x.until, runs: x.runs, reasons: spans(x.reasons) }))
+
 const previous = state[clock]
 const failing = Boolean(previous && previous.status && previous.status !== 'ok')
+// The words the open span has carried so far. An entry from before `reasons`
+// existed contributes its one word, dated from its own run.
+const carried = !failing ? [] : spans(previous.reasons).length ? spans(previous.reasons)
+  : word(previous.reason) && iso(previous.last_run) ? [{ reason: previous.reason, since: previous.last_run }] : []
+const openedAt = failing ? iso(previous.failing_since) || iso(previous.last_run) : null
 if (status !== 'ok') {
-  const reason = flag('--reason')
-  if (reason && reason !== 'null') {
-    entry.reason = Object.hasOwn(REASONS, reason) ? reason : 'unrecognised'
-    entry.reason_since = failing && previous.reason === entry.reason && previous.reason_since ? previous.reason_since : entry.last_run
-  }
-  entry.failing_since = failing ? previous.failing_since || previous.last_run : entry.last_run
-  entry.failing_runs = failing ? (Number(previous.failing_runs) || 1) + 1 : 1
-} else if (failing) {
-  entry.last_outage = { since: previous.failing_since || previous.last_run, until: entry.last_run, runs: Number(previous.failing_runs) || 1, last_reason: previous.reason || null }
-} else if (previous?.last_outage) {
-  entry.last_outage = previous.last_outage
+  const sent = flag('--reason')
+  if (sent && sent !== 'null') entry.reason = Object.hasOwn(REASONS, sent) ? sent : 'unrecognised'
+  entry.failing_since = openedAt || entry.last_run
+  entry.failing_runs = openedAt ? (runs(previous.failing_runs) || 1) + 1 : 1
+  const reasons = openedAt ? carried : []
+  entry.reasons = entry.reason && reasons.at(-1)?.reason !== entry.reason
+    ? [...reasons, { reason: entry.reason, since: entry.last_run }].slice(-MAX_KEPT)
+    : reasons
+  const kept = closed(previous?.outages)
+  if (kept.length) entry.outages = kept
+} else {
+  const kept = closed(previous?.outages)
+  if (openedAt) kept.push({ since: openedAt, until: entry.last_run, runs: runs(previous.failing_runs) || 1, reasons: carried })
+  if (kept.length) entry.outages = kept.slice(-MAX_KEPT)
 }
 
 // Recorded so the spend trend is visible in the brain without anyone reaching
