@@ -1365,7 +1365,8 @@ try {
         # 2026-10-16 is that the message says which kind, so the heartbeat can
         # carry it off the PC: LORIMER blocked on v2026.10.15.2 that morning and
         # nothing off the machine could say whether this gate was why, or which
-        # half of it. Counts only; file names stay on the PC. The capture merges
+        # half of it. No other file read the old one-line message (searched the
+        # repository that day). Counts only; file names stay on the PC. The capture merges
         # stderr, so a git warning on a clean tree is named for what it is.
         $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=all')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
