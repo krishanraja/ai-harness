@@ -27,7 +27,7 @@ export const REASONS = Object.freeze({
   'unclassified-skill-directory': 'a folder the harness does not recognise sits in one of your skills folders, so it will not install beside it',
   'install-plan-failed': 'the installer could not plan the update',
   'install-failed': 'the installer stopped part way',
-  'install-halted': 'a skill on your PC was changed by hand, so it stopped rather than overwrite it',
+  'install-halted': 'a skill on your PC no longer matched what the harness last installed, so it stopped rather than overwrite it',
   'parity-drift': 'an installed skill no longer matches its release',
   'canary-failed': 'a skill did not load as expected in the check after installing',
   'canary-error': 'the check after installing could not run',

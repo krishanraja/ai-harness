@@ -108,7 +108,7 @@ export function blockedBlocker(blocked) {
   if (!blocked.length) return null
   // Only the fixed words and a release id that passes the recorder's own format
   // check reach this text; nothing the machine sent is shown as it came.
-  const lines = blocked.map((b) => `${b.clock} has been blocked ${b.runs || 2} runs in a row since ${b.since}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}: ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}`).join('; ')
+  const lines = blocked.map((b) => `${b.clock} has been blocked${b.runs ? ` ${b.runs} runs in a row` : ''} since ${b.since}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}: ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}`).join('; ')
   return {
     kind: 'machine', only_you: 'permission',
     title: 'Your PC cannot install the latest release',
