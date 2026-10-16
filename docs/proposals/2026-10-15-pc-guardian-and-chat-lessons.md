@@ -35,13 +35,12 @@ is the provenance for the `guardian` and `miner.submit` entries in
    morning and reported `blocked` on v2026.10.15.2 with no reason anyone off
    the PC could read, so the sync now sends one word from a fixed list (never
    the error text: the ledger is public), and the recorder keeps it with the
-   date the clock started failing. In the same change the install step stops
-   counting untracked files as a dirty checkout, as decision 1's daily update
-   already did: they cannot be lost by the switch and fast-forward it guards,
-   and one stray file had stopped every install while the update carried on.
-   The count is still written to the run record on the PC. If wrong: an
-   install ever overwrites an untracked file (git refuses that on its own), in
-   which case restore the old check.
+   date the clock started failing and the count of runs. The install step's
+   dirty-checkout gate is unchanged: it now says whether tracked files were
+   edited, untracked files are present, or git printed a warning, so the next
+   heartbeat shows which (if any) stopped LORIMER before anyone changes the
+   gate on a guess. If wrong: the guardian fires on a run the PC recovers from
+   unaided; raise `blocked_runs`.
 4. Chat lessons: `miner.submit: dispatch`. Redacted lessons from his private
    Claude Code and Codex chats are sent to this repository's public ledger by
    repository_dispatch and checked again by `scripts/intake-observations.mjs`.

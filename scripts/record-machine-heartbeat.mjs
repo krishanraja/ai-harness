@@ -3,6 +3,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { REASONS } from './heartbeat-reasons.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -25,18 +26,6 @@ const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', '
 // openclaw-vps was declared in EXPECTED_CLOCKS on 2026-09-09 and then bounced
 // by this script on its first real run.
 const releaseClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer'])
-
-// Why a sync did not finish, as one word from this list and nothing else. The
-// ledger is public, and a raw error can carry a path, a folder name or a
-// remote's output, so scripts/Invoke-HarnessSync.ps1 maps its errors onto these
-// words and anything else is stored as `unrecognised`. Before this, LORIMER
-// reported `blocked` on 2026-10-16 and nothing off the PC could say why.
-const REASONS = new Set([
-  'checkout-dirty', 'checkout-update', 'sync-script-not-on-main', 'release-not-registered',
-  'release-assets', 'deployment-record-missing', 'unclassified-skill-directory',
-  'install-plan-failed', 'install-failed', 'install-halted', 'parity-drift',
-  'canary-failed', 'canary-error', 'evidence-pull-request', 'other',
-])
 
 // A number that is absent and a number that is zero mean opposite things: no
 // counter versus an idle counter. Anything unparseable stays absent.
@@ -81,18 +70,24 @@ const entry = {
 }
 if (releaseClocks.has(clock)) entry.release = release
 
-// A clock that is not ok says why, since when, and for how many runs in a row,
-// so one bad night (a dropped connection) can be told apart from an install
-// that will never finish on its own. Counted in runs, not hours: a PC that is
-// simply off the next night has not failed twice. All three go the moment it
-// reports ok again.
+// A clock that is not ok says why (one word from scripts/heartbeat-reasons.mjs,
+// never free text), since when, and for how many reported runs in a row, so one
+// bad night (a dropped connection) can be told apart from an install that will
+// never finish on its own. Counted in runs, not hours: a PC that is simply off
+// the next night has not failed twice. An entry from before failing_runs
+// existed counts as one run, the least it can have been. When the clock reports
+// ok again the span is closed into last_outage rather than dropped.
+const previous = state[clock]
+const failing = Boolean(previous && previous.status && previous.status !== 'ok')
 if (status !== 'ok') {
   const reason = flag('--reason')
-  if (reason && reason !== 'null') entry.reason = REASONS.has(reason) ? reason : 'unrecognised'
-  const previous = state[clock]
-  const failing = previous && previous.status && previous.status !== 'ok'
+  if (reason && reason !== 'null') entry.reason = Object.hasOwn(REASONS, reason) ? reason : 'unrecognised'
   entry.failing_since = failing ? previous.failing_since || previous.last_run : entry.last_run
   entry.failing_runs = failing ? (Number(previous.failing_runs) || 1) + 1 : 1
+} else if (failing) {
+  entry.last_outage = { since: previous.failing_since || previous.last_run, until: entry.last_run, runs: Number(previous.failing_runs) || 1, reason: previous.reason || null }
+} else if (previous?.last_outage) {
+  entry.last_outage = previous.last_outage
 }
 
 // Recorded so the spend trend is visible in the brain without anyone reaching

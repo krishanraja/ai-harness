@@ -35,6 +35,7 @@ import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
 import { loadPolicy } from './propose.mjs'
 import { buildDigest, boardItem, sendBoard, writeDigest, lastSent } from './digest.mjs'
+import { REASONS } from './heartbeat-reasons.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -82,29 +83,6 @@ export function silentBlocker(silent) {
   }
 }
 
-// The reason a blocked sync reports (scripts/record-machine-heartbeat.mjs), in
-// plain words. scripts/test-machine-heartbeat.mjs fails if a reason the
-// recorder keeps has no words here, so the three lists move together. A cause
-// fixable in code is fixed there, and the PC takes it on its next run; the
-// repair line covers what only the PC can do, says what it found in one line,
-// and the next run reports again either way.
-export const BLOCKED_WORDS = {
-  'checkout-dirty': 'files the harness tracks were edited on your PC and never committed, so it will not install over them (new files it does not track do not block it)',
-  'checkout-update': 'it could not update its copy of the harness from GitHub',
-  'sync-script-not-on-main': 'it is running a copy of the sync that main does not hold',
-  'release-not-registered': 'its copy of the registry does not yet approve the release',
-  'release-assets': 'the release files would not download or did not match their checksums',
-  'deployment-record-missing': 'it has no record of an earlier install on one of your tools',
-  'unclassified-skill-directory': 'a folder the harness does not recognise sits in one of your skills folders, so it will not install beside it',
-  'install-plan-failed': 'the installer could not plan the update',
-  'install-failed': 'the installer stopped part way',
-  'install-halted': 'a skill on your PC was changed by hand, so it stopped rather than overwrite it',
-  'parity-drift': 'an installed skill no longer matches its release',
-  'canary-failed': 'a skill did not load as expected in the check after installing',
-  'canary-error': 'the check after installing could not run',
-  'evidence-pull-request': 'it installed but could not send its evidence to GitHub',
-}
-
 /**
  * Clocks that reported `blocked` on at least their limit of runs in a row
  * (failing_runs, counted by scripts/record-machine-heartbeat.mjs), from
@@ -124,9 +102,13 @@ export function blockedClocks(heartbeats, { limits = {} } = {}) {
 }
 
 /** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
+const RELEASE_ID = /^v\d{4}\.\d{2}\.\d{2}\.\d+$/
+
 export function blockedBlocker(blocked) {
   if (!blocked.length) return null
-  const lines = blocked.map((b) => `${b.clock} has been blocked ${b.runs || 2} runs in a row since ${b.since}${b.release && b.release !== 'unknown' ? ` on ${b.release}` : ''}: ${BLOCKED_WORDS[b.reason] || 'it stopped for a reason it could not name'}`).join('; ')
+  // Only the fixed words and a release id that passes the recorder's own format
+  // check reach this text; nothing the machine sent is shown as it came.
+  const lines = blocked.map((b) => `${b.clock} has been blocked ${b.runs || 2} runs in a row since ${b.since}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}: ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}`).join('; ')
   return {
     kind: 'machine', only_you: 'permission',
     title: 'Your PC cannot install the latest release',

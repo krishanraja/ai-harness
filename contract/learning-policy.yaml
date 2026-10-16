@@ -119,14 +119,15 @@ guardian:
   # scripts/record-machine-heartbeat.mjs), never hours, so a dropped connection
   # or a PC switched off after one bad night stays quiet. The task is registered
   # -Daily (Register-HarnessScheduledTask in scripts/Invoke-HarnessSync.ps1), so
-  # two runs is normally two nights. Tested in scripts/test-digest.mjs and
-  # scripts/test-machine-heartbeat.mjs.
+  # two runs is normally two nights. The reason is one word from
+  # scripts/heartbeat-reasons.mjs, which the recorder and the digest both read.
+  # Tested in scripts/test-digest.mjs and scripts/test-machine-heartbeat.mjs.
   # Which fires: a clock silent past silent_days raises only the silent
   # blocker, because its last blocked report is old news; blocked_runs applies
   # only to a clock still reporting (scripts/steward-housekeeping.mjs).
   # Who clears it: the one-line PC repair in the blocker, which reports what it
   # found in one line; the next nightly run then reports again on its own.
-  # How often: at most once per digest week, and only after two blocked runs
-  # in a row; a single blocked run never reaches Krish.
+  # How often: only after two blocked runs in a row; a single blocked run
+  # never reaches Krish.
   blocked_runs:
     harness-sync-lorimer: 2

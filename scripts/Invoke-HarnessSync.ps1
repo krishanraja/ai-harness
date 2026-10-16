@@ -296,14 +296,17 @@ function Read-DeploymentRecord {
 # Why a run stopped, as one word the public heartbeat can carry. The message
 # itself stays in run.json on this PC: it can hold a path, a folder name or a
 # remote's output. On 2026-10-16 this PC reported `blocked` and nothing off the
-# machine could say why. Keep the words in step with REASONS in
-# scripts/record-machine-heartbeat.mjs; scripts/test-machine-heartbeat.mjs
-# checks both lists.
+# machine could say why. Every word returned here must be a key of REASONS in
+# scripts/heartbeat-reasons.mjs; scripts/test-machine-heartbeat.mjs checks it.
 function Get-FailureReason {
     param([AllowEmptyString()][string]$Message)
 
     switch -Regex ($Message) {
-        '^Tracked files have uncommitted edits' { return 'checkout-dirty' }
+        '^Repository working tree is dirty: \d+ tracked' { return 'checkout-edited' }
+        '^Repository working tree is dirty: \d+ untracked' { return 'checkout-untracked' }
+        '^Repository working tree is dirty: git status printed' { return 'checkout-git-output' }
+        # The wording before 2026-10-16, still in older run.json files.
+        '^Repository working tree is dirty' { return 'checkout-dirty' }
         '^(Git fetch|Switch to main|Fast-forward main|Repository status) failed' { return 'checkout-update' }
         '^The running sync script is not' { return 'sync-script-not-on-main' }
         'no matching approved_by provenance' { return 'release-not-registered' }
@@ -1196,7 +1199,10 @@ if ($SelfTest) {
         throw 'Repeated-canary evidence self-test found recursive attempts.'
     }
     $reasonFixtures = [ordered]@{
-        'Tracked files have uncommitted edits. Nothing was installed.' = 'checkout-dirty'
+        'Repository working tree is dirty: 2 tracked file(s) edited. Nothing was installed.' = 'checkout-edited'
+        'Repository working tree is dirty: 3 untracked file(s). Nothing was installed.' = 'checkout-untracked'
+        'Repository working tree is dirty: git status printed 1 line(s) that are not file changes. Nothing was installed.' = 'checkout-git-output'
+        'Repository working tree is dirty. Nothing was installed.' = 'checkout-dirty'
         'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
         'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
         'Install for codex-current failed with exit code 1: denied' = 'install-failed'
@@ -1358,19 +1364,22 @@ try {
     }
 
     if (-not $CanaryOnly) {
-        # Edits to tracked files block, because the switch and pull below could
-        # lose them. Untracked files do not, on the mechanism alone: nothing here
-        # deletes them, and a pull that would overwrite one refuses on its own.
-        # Until 2026-10-16 any untracked file blocked every install, while the
-        # daily checkout update, which ignores them, carried on regardless.
-        # Whether that is what blocked LORIMER on v2026.10.15.2 is for its next
-        # heartbeat to say; the reason now travels with it. Untracked files are
-        # still counted into run.json, so the old gate's evidence is kept.
-        $untracked = Invoke-NativeCapture -FilePath 'git' -Arguments @('ls-files', '--others', '--exclude-standard')
-        if ($untracked.ExitCode -eq 0) { $runRecord.untracked_files = @($untracked.Lines | Where-Object { $_ }).Count }
-        $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=no')
+        # Anything in the checkout still stops the install. What changed on
+        # 2026-10-16 is that the message says which kind, so the heartbeat can
+        # carry it off the PC: LORIMER blocked on v2026.10.15.2 that morning and
+        # nothing off the machine could say whether this gate was why, or which
+        # half of it. Counts only; file names stay on the PC. The capture merges
+        # stderr, so a git warning on a clean tree is named for what it is.
+        $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=all')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
-        if ($repoStatus.Text.Trim()) { throw 'Tracked files have uncommitted edits. Nothing was installed.' }
+        $statusLines = @($repoStatus.Lines | Where-Object { $_ })
+        if ($statusLines.Count -gt 0) {
+            $untrackedCount = @($statusLines | Where-Object { $_ -match '^\?\? ' }).Count
+            $editedCount = @($statusLines | Where-Object { $_ -match '^[ MADRCUT]{2} ' }).Count
+            if ($editedCount -gt 0) { throw "Repository working tree is dirty: $editedCount tracked file(s) edited. Nothing was installed." }
+            if ($untrackedCount -gt 0) { throw "Repository working tree is dirty: $untrackedCount untracked file(s). Nothing was installed." }
+            throw "Repository working tree is dirty: git status printed $($statusLines.Count) line(s) that are not file changes. Nothing was installed."
+        }
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
         Assert-RunningSyncScriptOnGitRef -GitRef 'origin/main' | Out-Null
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')) -Label 'Switch to main'
