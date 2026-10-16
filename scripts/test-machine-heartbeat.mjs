@@ -64,7 +64,7 @@ const sync = readFileSync(join(HARNESS, 'scripts/Invoke-HarnessSync.ps1'), 'utf8
 const fn = sync.slice(sync.indexOf('function Get-FailureReason'), sync.indexOf('function Send-Heartbeat'))
 const sent = new Set([...fn.matchAll(/return '([a-z-]+)'/g)].map((m) => m[1]))
 for (const line of sync.split('\n').filter((l) => /-Reason |\$reason = /.test(l))) for (const m of line.matchAll(/'([a-z]+(?:-[a-z]+)+)'/g)) sent.add(m[1])
-test('the sync sends at least the words it promises', ['checkout-edited', 'checkout-untracked', 'checkout-git-output', 'checkout-dirty', 'unclassified-skill-directory', 'parity-drift', 'install-halted', 'canary-failed', 'other'].every((r) => sent.has(r)))
+test('the sync sends at least the words it promises', ['checkout-edited', 'checkout-untracked', 'checkout-git-output', 'unclassified-skill-directory', 'parity-drift', 'install-halted', 'canary-failed', 'other'].every((r) => sent.has(r)))
 const unknown = [...sent].filter((r) => !reasons.has(r))
 test(`every word the sync sends is one the recorder keeps${unknown.length ? ` (missing: ${unknown.join(', ')})` : ''}`, unknown.length === 0)
 const unworded = [...reasons].filter((r) => typeof REASONS[r] !== 'string' || REASONS[r].length < 20)

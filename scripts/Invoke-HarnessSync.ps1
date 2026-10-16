@@ -305,8 +305,6 @@ function Get-FailureReason {
         '^Repository working tree is dirty: \d+ tracked' { return 'checkout-edited' }
         '^Repository working tree is dirty: \d+ untracked' { return 'checkout-untracked' }
         '^Repository working tree is dirty: git status printed' { return 'checkout-git-output' }
-        # The wording before 2026-10-16, still in older run.json files.
-        '^Repository working tree is dirty' { return 'checkout-dirty' }
         '^(Git fetch|Switch to main|Fast-forward main|Repository status) failed' { return 'checkout-update' }
         '^The running sync script is not' { return 'sync-script-not-on-main' }
         'no matching approved_by provenance' { return 'release-not-registered' }
@@ -1202,7 +1200,6 @@ if ($SelfTest) {
         'Repository working tree is dirty: 2 tracked file(s) edited. Nothing was installed.' = 'checkout-edited'
         'Repository working tree is dirty: 3 untracked file(s). Nothing was installed.' = 'checkout-untracked'
         'Repository working tree is dirty: git status printed 1 line(s) that are not file changes. Nothing was installed.' = 'checkout-git-output'
-        'Repository working tree is dirty. Nothing was installed.' = 'checkout-dirty'
         'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
         'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
         'Install for codex-current failed with exit code 1: denied' = 'install-failed'
