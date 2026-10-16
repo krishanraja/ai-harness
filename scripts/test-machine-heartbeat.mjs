@@ -38,7 +38,10 @@ const first = beat('blocked', 'checkout-untracked')
 test('a blocked beat stores its reason and starts failing_since and failing_runs', first.reason === 'checkout-untracked' && first.failing_since === first.last_run && first.failing_runs === 1)
 
 const second = beat('blocked', 'install-failed')
-test('a second blocked beat keeps the first failing_since, counts two runs and takes the new reason', second.failing_since === first.failing_since && second.failing_runs === 2 && second.reason === 'install-failed')
+test('a second blocked beat keeps the first failing_since, counts two runs, and dates the new reason from itself', second.failing_since === first.failing_since && second.failing_runs === 2 && second.reason === 'install-failed' && second.reason_since === second.last_run && first.reason_since === first.last_run)
+
+const same = beat('blocked', 'install-failed')
+test('the same reason again keeps the date it was first sent', same.reason_since === second.reason_since && same.failing_runs === 3)
 
 const leak = beat('blocked', 'C:\\Users\\someone\\client-folder')
 test('free text is never stored: it becomes unrecognised', leak.reason === 'unrecognised' && !JSON.stringify(leak).includes('someone'))
@@ -48,7 +51,7 @@ test('an empty reason stores none', !('reason' in silentReason))
 
 const healed = beat('ok', 'checkout-untracked')
 test('the next ok beat clears the reason, failing_since and failing_runs', !('reason' in healed) && !('failing_since' in healed) && !('failing_runs' in healed))
-test('and closes the outage into last_outage instead of dropping it', healed.last_outage?.since === first.failing_since && healed.last_outage?.until === healed.last_run && healed.last_outage?.runs === 4 && healed.last_outage?.reason === null)
+test('and closes the outage into last_outage instead of dropping it', healed.last_outage?.since === first.failing_since && healed.last_outage?.until === healed.last_run && healed.last_outage?.runs === 5 && healed.last_outage?.last_reason === null && !('reason_since' in healed))
 const later = beat('ok', '')
 test('a later ok beat keeps the last outage', later.last_outage?.since === first.failing_since && later.last_outage?.until === healed.last_run)
 

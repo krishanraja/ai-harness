@@ -75,19 +75,25 @@ if (releaseClocks.has(clock)) entry.release = release
 // bad night (a dropped connection) can be told apart from an install that will
 // never finish on its own. Counted in runs, not hours: a PC that is simply off
 // the next night has not failed twice. An entry from before failing_runs
-// existed counts as one run, the least it can have been. When the clock reports
-// ok again the span is closed into last_outage rather than dropped. Earlier
+// existed counts as one run, the least it can have been. `reason` is the latest
+// run's word and `reason_since` when that word was first sent in this span, so
+// a reason that changed part way is never read as holding for the whole of it.
+// When the clock reports ok again the span is closed into last_outage, with
+// the last word it carried as last_reason, rather than dropped. Earlier
 // outages are not lost: every heartbeat is its own commit to this file, so its
 // git history holds each one.
 const previous = state[clock]
 const failing = Boolean(previous && previous.status && previous.status !== 'ok')
 if (status !== 'ok') {
   const reason = flag('--reason')
-  if (reason && reason !== 'null') entry.reason = Object.hasOwn(REASONS, reason) ? reason : 'unrecognised'
+  if (reason && reason !== 'null') {
+    entry.reason = Object.hasOwn(REASONS, reason) ? reason : 'unrecognised'
+    entry.reason_since = failing && previous.reason === entry.reason && previous.reason_since ? previous.reason_since : entry.last_run
+  }
   entry.failing_since = failing ? previous.failing_since || previous.last_run : entry.last_run
   entry.failing_runs = failing ? (Number(previous.failing_runs) || 1) + 1 : 1
 } else if (failing) {
-  entry.last_outage = { since: previous.failing_since || previous.last_run, until: entry.last_run, runs: Number(previous.failing_runs) || 1, reason: previous.reason || null }
+  entry.last_outage = { since: previous.failing_since || previous.last_run, until: entry.last_run, runs: Number(previous.failing_runs) || 1, last_reason: previous.reason || null }
 } else if (previous?.last_outage) {
   entry.last_outage = previous.last_outage
 }
