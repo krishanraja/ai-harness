@@ -162,6 +162,11 @@ jobs:
       - name: The digest stays silent unless only Krish can act
         run: node scripts/test-digest.mjs
 
+      # A blocked PC says why in one listed word, never free text, because the
+      # ledger is public; the sync and the recorder must agree on the words.
+      - name: A machine heartbeat says why it is blocked without leaking
+        run: node scripts/test-machine-heartbeat.mjs
+
       - name: The process review only ever tunes the learning policy
         run: node scripts/test-process-review.mjs
 

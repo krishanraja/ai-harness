@@ -293,15 +293,42 @@ function Read-DeploymentRecord {
     return Get-Content -LiteralPath $Record.FullName -Raw | ConvertFrom-Json
 }
 
+# Why a run stopped, as one word the public heartbeat can carry. The message
+# itself stays in run.json on this PC: it can hold a path, a folder name or a
+# remote's output. On 2026-10-16 this PC reported `blocked` and nothing off the
+# machine could say why. Every word returned here must be a key of REASONS in
+# scripts/heartbeat-reasons.mjs; scripts/test-machine-heartbeat.mjs checks it.
+function Get-FailureReason {
+    param([AllowEmptyString()][string]$Message)
+
+    switch -Regex ($Message) {
+        '^Repository working tree is dirty: \d+ tracked' { return 'checkout-edited' }
+        '^Repository working tree is dirty: \d+ untracked' { return 'checkout-untracked' }
+        '^Repository working tree is dirty: git status printed' { return 'checkout-git-output' }
+        '^(Git fetch|Switch to main|Fast-forward main|Repository status) failed' { return 'checkout-update' }
+        '^The running sync script is not' { return 'sync-script-not-on-main' }
+        'no matching approved_by provenance' { return 'release-not-registered' }
+        '^(Release asset count|SHA256SUMS|Malformed checksum|Checksum entry|Release checksum|Unsafe or incomplete release asset|Could not start GitHub asset|GitHub asset download|Release manifest)' { return 'release-assets' }
+        '^No previous deployment record' { return 'deployment-record-missing' }
+        '^Unclassified directories' { return 'unclassified-skill-directory' }
+        '^(Plan for|Plan summary)' { return 'install-plan-failed' }
+        '^(Install for|Installer did not|Deployment record not found)' { return 'install-failed' }
+        '^(Canary report was refused|Codex catalog diagnostic|Codex CLI entry point)' { return 'canary-error' }
+        '^(Create evidence branch|Stage machine evidence|Commit machine evidence|Push evidence branch|Open evidence pull request|Git status before evidence)' { return 'evidence-pull-request' }
+    }
+    return 'other'
+}
+
 function Send-Heartbeat {
     param(
         [Parameter(Mandatory = $true)]$HostDefinition,
         [Parameter(Mandatory = $true)][string]$ReleaseId,
-        [Parameter(Mandatory = $true)][ValidateSet('ok', 'blocked')][string]$Status
+        [Parameter(Mandatory = $true)][ValidateSet('ok', 'blocked')][string]$Status,
+        [ValidatePattern('^([a-z][a-z-]{1,40})?$')][string]$Reason = ''
     )
 
     if ($NoHeartbeat) { return }
-    $beat = Invoke-NativeCapture -FilePath 'gh' -Arguments @(
+    $arguments = @(
         'api', '--method', 'POST',
         '-H', 'Accept: application/vnd.github+json',
         "repos/$Repository/dispatches",
@@ -310,6 +337,8 @@ function Send-Heartbeat {
         '-f', "client_payload[status]=$Status",
         '-f', "client_payload[release]=$ReleaseId"
     )
+    if ($Reason) { $arguments += @('-f', "client_payload[reason]=$Reason") }
+    $beat = Invoke-NativeCapture -FilePath 'gh' -Arguments $arguments
     Assert-NativeSuccess -Result $beat -Label 'Machine heartbeat dispatch'
 }
 
@@ -1167,6 +1196,27 @@ if ($SelfTest) {
     if (@($fixtureReadback.attempts | Where-Object { $_.PSObject.Properties['attempts'] }).Count -ne 0) {
         throw 'Repeated-canary evidence self-test found recursive attempts.'
     }
+    $reasonFixtures = [ordered]@{
+        'Repository working tree is dirty: 2 tracked file(s) edited. Nothing was installed.' = 'checkout-edited'
+        'Repository working tree is dirty: 3 untracked file(s). Nothing was installed.' = 'checkout-untracked'
+        'Repository working tree is dirty: git status printed 1 line(s) that are not file changes. Nothing was installed.' = 'checkout-git-output'
+        'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
+        'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
+        'Install for codex-current failed with exit code 1: denied' = 'install-failed'
+        'Git fetch failed with exit code 128: could not resolve host' = 'checkout-update'
+        'The running sync script is not byte-exact on origin/main. Refusing to switch branches.' = 'sync-script-not-on-main'
+        'Release v2026.10.15.2 has no matching approved_by provenance in state/skill-registry.yaml.' = 'release-not-registered'
+        'Release checksum mismatches: krish-build.zip' = 'release-assets'
+        'No previous deployment record exists for cursor-primary.' = 'deployment-record-missing'
+        'Plan for claude-code-user failed with exit code 1: refused' = 'install-plan-failed'
+        'Canary report was refused for codex-current: invalid' = 'canary-error'
+        'something nobody planned for at C:\Users\someone' = 'other'
+    }
+    foreach ($message in $reasonFixtures.Keys) {
+        if ((Get-FailureReason -Message $message) -ne $reasonFixtures[$message]) {
+            throw "Failure-reason self-test mapped '$message' to $(Get-FailureReason -Message $message)."
+        }
+    }
     Write-Output 'HARNESS SYNC EVIDENCE SELF-TEST PASSED: repeated attempts are flat snapshots with no self-reference.'
     exit 0
 }
@@ -1297,7 +1347,7 @@ try {
         $runRecord.status = $noopStatus
         $runRecord.completed_at_utc = [DateTime]::UtcNow.ToString('o')
         Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
-        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $noopHeartbeat
+        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $noopHeartbeat -Reason $(if ($noopDrift) { 'parity-drift' } else { '' })
         if ($noopDrift) {
             # Write-Error is terminating here because ErrorActionPreference is
             # Stop, so this threw into the outer catch, the catch rewrote run.json
@@ -1311,9 +1361,23 @@ try {
     }
 
     if (-not $CanaryOnly) {
+        # Anything in the checkout still stops the install. What changed on
+        # 2026-10-16 is that the message says which kind, so the heartbeat can
+        # carry it off the PC: LORIMER blocked on v2026.10.15.2 that morning and
+        # nothing off the machine could say whether this gate was why, or which
+        # half of it. No other file read the old one-line message (searched the
+        # repository that day). Counts only; file names stay on the PC. The capture merges
+        # stderr, so a git warning on a clean tree is named for what it is.
         $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=all')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
-        if ($repoStatus.Text.Trim()) { throw 'Repository working tree is dirty. Nothing was installed.' }
+        $statusLines = @($repoStatus.Lines | Where-Object { $_ })
+        if ($statusLines.Count -gt 0) {
+            $untrackedCount = @($statusLines | Where-Object { $_ -match '^\?\? ' }).Count
+            $editedCount = @($statusLines | Where-Object { $_ -match '^[ MADRCUT]{2} ' }).Count
+            if ($editedCount -gt 0) { throw "Repository working tree is dirty: $editedCount tracked file(s) edited. Nothing was installed." }
+            if ($untrackedCount -gt 0) { throw "Repository working tree is dirty: $untrackedCount untracked file(s). Nothing was installed." }
+            throw "Repository working tree is dirty: git status printed $($statusLines.Count) line(s) that are not file changes. Nothing was installed."
+        }
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
         Assert-RunningSyncScriptOnGitRef -GitRef 'origin/main' | Out-Null
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')) -Label 'Switch to main'
@@ -1400,17 +1464,19 @@ try {
         if ($prUrl) { Write-Output "PULL_REQUEST $prUrl" }
     }
     $healthy = @('completed', 'partial') -contains $runRecord.status
-    Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $(if ($healthy) { 'ok' } else { 'blocked' })
+    $reason = if ($healthy) { '' } elseif ($blocked.Count -gt 0) { 'install-halted' } else { 'canary-failed' }
+    Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $(if ($healthy) { 'ok' } else { 'blocked' }) -Reason $reason
     if (-not $healthy) { exit 1 }
 }
 catch {
     $runRecord.status = 'blocked'
     $runRecord.error = $_.Exception.Message
+    $runRecord.reason = Get-FailureReason -Message $_.Exception.Message
     $runRecord.completed_at_utc = [DateTime]::UtcNow.ToString('o')
     Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
     try {
         $knownRelease = if ($runRecord.release) { [string]$runRecord.release } else { 'unknown' }
-        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $knownRelease -Status blocked
+        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $knownRelease -Status blocked -Reason $runRecord.reason
     }
     catch { }
     throw

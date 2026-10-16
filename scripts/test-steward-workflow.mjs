@@ -58,7 +58,7 @@ test('the model may only read and write under changes/', /--allowedTools "Read,G
 test('the model step never sees the fleet token', draftStep.length > 0 && !/FLEET_TOKEN/.test(draftStep))
 test('only the guarded opening step holds the fleet token', propose.split('\n').filter((l) => /FLEET_TOKEN/.test(l)).length === 1 && /open-changes\.mjs/.test(propose))
 test('housekeeping runs nightly and decides the digest', /node scripts\/steward-housekeeping\.mjs/.test(housekeeping) && /state\/digest/.test(housekeeping))
-for (const t of ['test-change-guard', 'test-digest', 'test-process-review', 'test-redact', 'test-session-miner', 'test-intake-observations', 'test-register-release']) test(`${t} runs on every push`, new RegExp(`node scripts/${t}\\.mjs`).test(surfaces))
+for (const t of ['test-change-guard', 'test-digest', 'test-process-review', 'test-redact', 'test-session-miner', 'test-intake-observations', 'test-register-release', 'test-machine-heartbeat']) test(`${t} runs on every push`, new RegExp(`node scripts/${t}\\.mjs`).test(surfaces))
 test('the observer retries its push instead of failing on a concurrent ledger write', /git pull --rebase --quiet origin main && git push origin HEAD:main/.test(observe))
 
 console.log(`\n${passed} passed, ${failed} failed`)

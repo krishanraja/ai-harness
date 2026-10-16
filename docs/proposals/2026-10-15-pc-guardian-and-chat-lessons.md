@@ -29,6 +29,22 @@ is the provenance for the `guardian` and `miner.submit` entries in
    the PC off stays quiet, short enough that a broken task surfaces within the
    week it broke. This complements `harness-maintainer.scheduled-audit-invariant`
    (the audit names the stale clock; the guardian puts it in front of Krish).
+   Added 2026-10-16: a clock that reports `blocked` on
+   `guardian.blocked_runs` runs in a row (two) is the same blocker, with the
+   reason it sent in plain words. LORIMER ran that
+   morning and reported `blocked` on v2026.10.15.2 with no reason anyone off
+   the PC could read, so the sync now sends one word from a fixed list (never
+   the error text: the ledger is public), and the recorder keeps it with the
+   date the clock started failing and the count of runs. Krish approved that
+   word as a standing automatic send on 2026-10-16, a scoped exception to
+   `authority.never-publish-post-send` like decision 4's: one word from
+   `scripts/heartbeat-reasons.mjs` in the PC's own heartbeat, never error
+   text, names or paths, and nothing else. The install step's
+   dirty-checkout gate is unchanged: it now says whether tracked files were
+   edited, untracked files are present, or git printed a warning, so the next
+   heartbeat shows which (if any) stopped LORIMER before anyone changes the
+   gate on a guess. If wrong: the guardian fires on a run the PC recovers from
+   unaided; raise `blocked_runs`.
 4. Chat lessons: `miner.submit: dispatch`. Redacted lessons from his private
    Claude Code and Codex chats are sent to this repository's public ledger by
    repository_dispatch and checked again by `scripts/intake-observations.mjs`.

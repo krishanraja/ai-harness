@@ -29,12 +29,14 @@ jobs:
           CLOCK: ${{ github.event.client_payload.clock }}
           STATUS: ${{ github.event.client_payload.status }}
           RELEASE: ${{ github.event.client_payload.release }}
+          REASON: ${{ github.event.client_payload.reason }}
           N8N_CYCLE_START: ${{ github.event.client_payload.n8n_cycle_start }}
           N8N_EXECUTIONS: ${{ github.event.client_payload.n8n_executions_this_cycle }}
           GATEWAY_JOBS: ${{ github.event.client_payload.gateway_jobs_defined }}
         run: >
           node scripts/record-machine-heartbeat.mjs
           --clock "$CLOCK" --status "$STATUS" --release "$RELEASE"
+          --reason "$REASON"
           --n8n-cycle-start "$N8N_CYCLE_START"
           --n8n-executions "$N8N_EXECUTIONS"
           --gateway-jobs "$GATEWAY_JOBS"

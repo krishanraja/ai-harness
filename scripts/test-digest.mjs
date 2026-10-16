@@ -6,7 +6,7 @@
  */
 
 import { buildDigest, boardItem, sendBoard } from './digest.mjs'
-import { decide, silentClocks, silentBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
+import { decide, silentClocks, silentBlocker, blockedClocks, blockedBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
 import { loadPolicy } from './propose.mjs'
 
 let passed = 0
@@ -65,6 +65,23 @@ test('a clock that beat yesterday is not silent', silentClocks(hb, { now: new Da
 const sb = silentBlocker(silent)
 test('the silent-PC blocker names the clock, the date and the one-line fix', sb.title === 'Your PC stopped checking in' && sb.detail.includes('2026-10-06') && sb.detail.includes(PC_REPAIR) && silentBlocker([]) === null)
 test('the silent-PC blocker reaches the digest', buildDigest({ blockers: [sb], today: '2026-10-15', policy }).decisions[0].title === 'Your PC stopped checking in')
+
+// A PC that runs every night but cannot install (LORIMER, 2026-10-16).
+const once = { 'harness-sync-lorimer': { last_run: '2026-10-16T07:45:36Z', status: 'blocked', release: 'v2026.10.15.2' } }
+test('one blocked run stays quiet, however long ago it was (the PC may simply be off)', blockedClocks(once, { limits: { 'harness-sync-lorimer': 2 } }).length === 0)
+const twice = { 'harness-sync-lorimer': { last_run: '2026-10-16T22:31:00Z', status: 'blocked', release: 'v2026.10.15.2', reason: 'checkout-untracked', failing_since: '2026-10-16T07:45:36Z', failing_runs: 2 } }
+const stuck = blockedClocks(twice, { limits: { 'harness-sync-lorimer': 2 } })
+test('two blocked runs in a row are caught with their reason', stuck.length === 1 && stuck[0].since === '2026-10-16' && stuck[0].runs === 2 && stuck[0].reason === 'checkout-untracked')
+test('an ok clock is never blocked', blockedClocks({ 'harness-sync-lorimer': { last_run: '2026-10-17T22:31:00Z', status: 'ok', failing_runs: 5 } }, { limits: { 'harness-sync-lorimer': 2 } }).length === 0)
+const bb = blockedBlocker(stuck)
+test('the blocked-PC blocker says why in plain words, with the release and the one-line fix', bb.title === 'Your PC cannot install the latest release' && bb.detail.includes('files git does not track') && bb.detail.includes('v2026.10.15.2') && bb.detail.includes('2 runs in a row') && bb.detail.includes(PC_REPAIR) && !bb.detail.includes('checkout-untracked') && blockedBlocker([]) === null)
+test('a span that changed reason says so instead of telling the latest as the only one', (() => { const s = blockedClocks({ 'harness-sync-lorimer': { status: 'blocked', reason: 'install-failed', failing_runs: 3, failing_since: '2026-10-16T07:45:36Z', reasons: [{ reason: 'checkout-untracked', since: '2026-10-16T07:45:36Z' }, { reason: 'install-failed', since: '2026-10-17T22:31:00Z' }] } }, { limits: { 'harness-sync-lorimer': 2 } }); const d = blockedBlocker(s).detail; return s[0].reason === 'install-failed' && d.includes('its latest run said the installer stopped part way') && d.includes('2 different reasons') })())
+test('a latest run with no reason is not given an earlier run\'s word as its own', (() => { const s = blockedClocks({ 'harness-sync-lorimer': { status: 'blocked', failing_runs: 2, failing_since: '2026-10-16T07:45:36Z', reasons: [{ reason: 'checkout-untracked', since: '2026-10-16T07:45:36Z' }] } }, { limits: { 'harness-sync-lorimer': 2 } }); const d = blockedBlocker(s).detail; return s[0].reason === null && s[0].earlier === 'checkout-untracked' && d.includes('its latest run gave no reason; an earlier run in this span said the harness folder') })())
+test('a reason nobody worded still reads as a sentence, and a missing run count is not invented', (() => { const d = blockedBlocker([{ clock: 'harness-sync-lorimer', since: '2026-10-16', reason: 'not-a-reason', release: 'unknown' }]).detail; return d.includes('could not name') && !/runs in a row/.test(d) })())
+test('a date or run count that is not one never reaches the text', (() => { const d = blockedBlocker([{ clock: 'harness-sync-lorimer', since: '<b>x', runs: '2; rm', reason: 'other', release: 'v2026.10.15.2' }]).detail; return !d.includes('<b>') && !d.includes('2; rm') && d.includes('harness-sync-lorimer has been blocked on v2026.10.15.2') })())
+test('a release that is not a release id never reaches the text', !blockedBlocker([{ clock: 'harness-sync-lorimer', since: '2026-10-16', runs: 2, reason: 'other', release: 'C:\\Users\\someone' }]).detail.includes('someone'))
+test('the blocked-PC blocker reaches the digest', buildDigest({ blockers: [bb], today: '2026-10-17', policy }).decisions[0].title === 'Your PC cannot install the latest release')
+test('the policy watches the PC for both silence and blocking', policy.guardian?.silent_days?.['harness-sync-lorimer'] > 0 && policy.guardian?.blocked_runs?.['harness-sync-lorimer'] >= 2)
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)

@@ -17,7 +17,7 @@
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
   hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED, recordedRulings,
-  rulingsFromLog, failureReport, groundedFiles,
+  rulingsFromLog, failureReport, groundedFiles, citedScripts,
 } from './judge.mjs'
 
 let failures = 0
@@ -53,6 +53,20 @@ T('a proposal the diff cites as provenance is a citable file; one it merely ment
     reply([{ criterion_id: 'provenance', verdict: 'regresses', clause: 'docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md', because: 'The proposal names no asker.' }]),
     bench, clauseIds, files)
   assert(findings.length === 1 && problems.length === 0, 'a finding about the cited proposal was discarded')
+})
+
+T('a script the canon cites on an added line is shown to the panel; one in unchanged context is not', () => {
+  const diff = [
+    '+++ b/contract/learning-policy.yaml',
+    '+  # only to a clock still reporting (scripts/steward-housekeeping.mjs).',
+    '+  # The task is registered -Daily in scripts/Invoke-HarnessSync.ps1 and scripts/Invoke-HarnessSync.ps1 again',
+    '+  # Tested in scripts/test-digest.mjs and scripts/test-machine-heartbeat.mjs.',
+    ' # unchanged context naming scripts/observe.mjs',
+  ].join('\n')
+  const cited = citedScripts(diff)
+  assert(cited.length === 4 && cited.includes('scripts/steward-housekeeping.mjs') && cited.includes('scripts/Invoke-HarnessSync.ps1') && cited.includes('scripts/test-machine-heartbeat.mjs'), `cited: ${cited.join(', ')}`)
+  assert(!cited.includes('scripts/observe.mjs'), 'an unchanged context line widened what the panel is shown')
+  assert(groundedFiles(diff + '\n+++ b/scripts/steward-housekeeping.mjs\n').includes('scripts/steward-housekeeping.mjs'), 'a shown script is not citable')
 })
 
 T('a grounded finding is kept', () => {

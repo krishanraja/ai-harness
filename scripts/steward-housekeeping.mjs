@@ -17,6 +17,9 @@
  *     (the PC's nightly sync above all) is a blocker too, with its one-line fix,
  *     so a job that dies on his PC reaches his list instead of waiting to be
  *     noticed. LORIMER's sync was silent from 2026-10-06 for nine days unseen.
+ *   - So is a clock that keeps reporting blocked for guardian.blocked_runs,
+ *     with the reason it sent in plain words: a PC that runs every night but
+ *     cannot install is as stuck as one that never runs.
  *
  * Then scripts/digest.mjs decides whether this week has anything to say.
  *
@@ -32,6 +35,7 @@ import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
 import { loadPolicy } from './propose.mjs'
 import { buildDigest, boardItem, sendBoard, writeDigest, lastSent } from './digest.mjs'
+import { REASONS } from './heartbeat-reasons.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -79,6 +83,49 @@ export function silentBlocker(silent) {
   }
 }
 
+/**
+ * Clocks that reported `blocked` on at least their limit of runs in a row
+ * (failing_runs, counted by scripts/record-machine-heartbeat.mjs), from
+ * state/heartbeats.json. Runs, not hours, so a PC switched off after one bad
+ * night never reaches Krish. Pure.
+ */
+export function blockedClocks(heartbeats, { limits = {} } = {}) {
+  const out = []
+  for (const [clock, runs] of Object.entries(limits)) {
+    const beat = heartbeats?.[clock]
+    if (beat?.status !== 'blocked' || beat.retiring) continue
+    if ((Number(beat.failing_runs) || 1) < Number(runs)) continue
+    const since = beat.failing_since || beat.last_run
+    // The latest run's own word, kept apart from the last word an earlier run
+    // gave, and how many different words the span carried, so neither an old
+    // reason nor a changed one is told as the latest or the only one.
+    const words = Array.isArray(beat.reasons) ? beat.reasons.map((r) => r?.reason).filter(Boolean) : []
+    out.push({ clock, since: String(since || '').slice(0, 10), runs: Number(beat.failing_runs) || 1, reason: beat.reason || null, earlier: beat.reason ? null : words.at(-1) || null, distinct: new Set(words).size, release: beat.release || null })
+  }
+  return out
+}
+
+/** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
+const RELEASE_ID = /^v\d{4}\.\d{2}\.\d{2}\.\d+$/
+const DATE = /^\d{4}-\d{2}-\d{2}$/
+const known = (w) => (Object.hasOwn(REASONS, w || '') ? REASONS[w] : null)
+const said = (b) => known(b.reason) ? `its latest run said ${known(b.reason)}`
+  : known(b.earlier) ? `its latest run gave no reason; an earlier run in this span said ${known(b.earlier)}`
+    : `its latest run said ${REASONS.other}`
+
+export function blockedBlocker(blocked) {
+  if (!blocked.length) return null
+  // Every value from state/heartbeats.json is checked before it reaches this
+  // text: the reason must be a fixed word, the release a release id, the date a
+  // date and the count a whole number; anything else is left out, not shown.
+  const lines = blocked.map((b) => `${b.clock} has been blocked${Number.isInteger(b.runs) && b.runs > 0 ? ` ${b.runs} runs in a row` : ''}${DATE.test(b.since || '') ? ` since ${b.since}` : ''}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}; ${said(b)}${Number.isInteger(b.distinct) && b.distinct > 1 ? ` (it has given ${b.distinct} different reasons in that time)` : ''}`).join('; ')
+  return {
+    kind: 'machine', only_you: 'permission',
+    title: 'Your PC cannot install the latest release',
+    detail: `${lines}. Open PowerShell on your PC, paste this line and press Enter: ${PC_REPAIR}`,
+  }
+}
+
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 if (isMain) {
   const dryRun = process.argv.includes('--dry-run')
@@ -118,9 +165,14 @@ if (isMain) {
     detail: `${judgeBlocked} change request(s) cannot be reviewed because the judge panel's model call is refused. Replace the ANTHROPIC_API_KEY repository secret in krishanraja/ai-harness, then re-run the failed judge checks. Until then nothing is marked ready.`,
   }] : []
   const hbPath = join(HARNESS, 'state/heartbeats.json')
-  const silent = silentClocks(existsSync(hbPath) ? JSON.parse(readFileSync(hbPath, 'utf8')) : {}, { limits: policy.guardian?.silent_days || {} })
+  const heartbeats = existsSync(hbPath) ? JSON.parse(readFileSync(hbPath, 'utf8')) : {}
+  const silent = silentClocks(heartbeats, { limits: policy.guardian?.silent_days || {} })
   const machine = silentBlocker(silent)
   if (machine) { blockers.unshift(machine); log.push(`silent: ${silent.map((x) => x.clock).join(', ')}`) }
+  // A silent clock already has its blocker; its last report is old news.
+  const stuck = blockedClocks(heartbeats, { limits: policy.guardian?.blocked_runs || {} }).filter((b) => !silent.some((s) => s.clock === b.clock))
+  const install = blockedBlocker(stuck)
+  if (install) { blockers.unshift(install); log.push(`blocked: ${stuck.map((x) => `${x.clock} (${x.reason || 'no reason'})`).join(', ')}`) }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
   const digest = buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })
