@@ -90,7 +90,8 @@ export function headSha(head) {
  * shown the policy and not the code it named.
  */
 export function citedScripts(diff) {
-  return [...new Set([...diff.matchAll(/^\+.*?\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/gm)].map((m) => m[1]))]
+  const added = diff.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++'))
+  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
 }
 
 export function diffFor(base, head) {
