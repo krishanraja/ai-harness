@@ -17,6 +17,9 @@
  *     (the PC's nightly sync above all) is a blocker too, with its one-line fix,
  *     so a job that dies on his PC reaches his list instead of waiting to be
  *     noticed. LORIMER's sync was silent from 2026-10-06 for nine days unseen.
+ *   - So is a clock that keeps reporting blocked past guardian.blocked_days,
+ *     with the reason it sent in plain words: a PC that runs every night but
+ *     cannot install is as stuck as one that never runs.
  *
  * Then scripts/digest.mjs decides whether this week has anything to say.
  *
@@ -79,6 +82,54 @@ export function silentBlocker(silent) {
   }
 }
 
+// The reason a blocked sync reports (scripts/record-machine-heartbeat.mjs), in
+// plain words. The fix line is the same for all of them: the repair says what it
+// found in one line, and the next run reports again either way.
+export const BLOCKED_WORDS = {
+  'checkout-dirty': 'the harness folder on your PC has edits nobody committed, so it will not install over them',
+  'checkout-update': 'it could not update its copy of the harness from GitHub',
+  'sync-script-not-on-main': 'it is running a copy of the sync that main does not hold',
+  'release-not-registered': 'its copy of the registry does not yet approve the release',
+  'release-assets': 'the release files would not download or did not match their checksums',
+  'deployment-record-missing': 'it has no record of an earlier install on one of your tools',
+  'unclassified-skill-directory': 'a folder the harness does not recognise sits in one of your skills folders, so it will not install beside it',
+  'install-plan-failed': 'the installer could not plan the update',
+  'install-failed': 'the installer stopped part way',
+  'install-halted': 'a skill on your PC was changed by hand, so it stopped rather than overwrite it',
+  'parity-drift': 'an installed skill no longer matches its release',
+  'canary-failed': 'a skill did not load as expected in the check after installing',
+  'canary-error': 'the check after installing could not run',
+  'evidence-pull-request': 'it installed but could not send its evidence to GitHub',
+}
+
+/**
+ * Clocks reporting `blocked` for longer than their limit, from
+ * state/heartbeats.json. A limit of one day means two nightly runs in a row,
+ * so one dropped connection never reaches Krish. Pure.
+ */
+export function blockedClocks(heartbeats, { now = new Date(), limits = {} } = {}) {
+  const out = []
+  for (const [clock, days] of Object.entries(limits)) {
+    const beat = heartbeats?.[clock]
+    if (beat?.status !== 'blocked' || beat.retiring) continue
+    const since = beat.failing_since || beat.last_run
+    if (!since) continue
+    if ((now - new Date(since)) / 86400000 > Number(days)) out.push({ clock, since: String(since).slice(0, 10), reason: beat.reason || null, release: beat.release || null })
+  }
+  return out
+}
+
+/** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
+export function blockedBlocker(blocked) {
+  if (!blocked.length) return null
+  const lines = blocked.map((b) => `${b.clock} has been blocked since ${b.since}${b.release && b.release !== 'unknown' ? ` on ${b.release}` : ''}: ${BLOCKED_WORDS[b.reason] || 'it stopped for a reason it could not name'}`).join('; ')
+  return {
+    kind: 'machine', only_you: 'permission',
+    title: 'Your PC cannot install the latest release',
+    detail: `${lines}. Open PowerShell on your PC, paste this line and press Enter: ${PC_REPAIR}`,
+  }
+}
+
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 if (isMain) {
   const dryRun = process.argv.includes('--dry-run')
@@ -118,9 +169,14 @@ if (isMain) {
     detail: `${judgeBlocked} change request(s) cannot be reviewed because the judge panel's model call is refused. Replace the ANTHROPIC_API_KEY repository secret in krishanraja/ai-harness, then re-run the failed judge checks. Until then nothing is marked ready.`,
   }] : []
   const hbPath = join(HARNESS, 'state/heartbeats.json')
-  const silent = silentClocks(existsSync(hbPath) ? JSON.parse(readFileSync(hbPath, 'utf8')) : {}, { limits: policy.guardian?.silent_days || {} })
+  const heartbeats = existsSync(hbPath) ? JSON.parse(readFileSync(hbPath, 'utf8')) : {}
+  const silent = silentClocks(heartbeats, { limits: policy.guardian?.silent_days || {} })
   const machine = silentBlocker(silent)
   if (machine) { blockers.unshift(machine); log.push(`silent: ${silent.map((x) => x.clock).join(', ')}`) }
+  // A silent clock already has its blocker; its last report is old news.
+  const stuck = blockedClocks(heartbeats, { limits: policy.guardian?.blocked_days || {} }).filter((b) => !silent.some((s) => s.clock === b.clock))
+  const install = blockedBlocker(stuck)
+  if (install) { blockers.unshift(install); log.push(`blocked: ${stuck.map((x) => `${x.clock} (${x.reason || 'no reason'})`).join(', ')}`) }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
   const digest = buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })

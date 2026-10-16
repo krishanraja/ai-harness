@@ -26,6 +26,18 @@ const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', '
 // by this script on its first real run.
 const releaseClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer'])
 
+// Why a sync did not finish, as one word from this list and nothing else. The
+// ledger is public, and a raw error can carry a path, a folder name or a
+// remote's output, so scripts/Invoke-HarnessSync.ps1 maps its errors onto these
+// words and anything else is stored as `unrecognised`. Before this, LORIMER
+// reported `blocked` on 2026-10-16 and nothing off the PC could say why.
+const REASONS = new Set([
+  'checkout-dirty', 'checkout-update', 'sync-script-not-on-main', 'release-not-registered',
+  'release-assets', 'deployment-record-missing', 'unclassified-skill-directory',
+  'install-plan-failed', 'install-failed', 'install-halted', 'parity-drift',
+  'canary-failed', 'canary-error', 'evidence-pull-request', 'other',
+])
+
 // A number that is absent and a number that is zero mean opposite things: no
 // counter versus an idle counter. Anything unparseable stays absent.
 const num = (value) => {
@@ -68,6 +80,18 @@ const entry = {
   status,
 }
 if (releaseClocks.has(clock)) entry.release = release
+
+// A clock that is not ok says why and since when, so one bad night (a dropped
+// connection) can be told apart from an install that will never finish on its
+// own. Both fields go the moment it reports ok again.
+if (status !== 'ok') {
+  const reason = flag('--reason')
+  if (reason && reason !== 'null') entry.reason = REASONS.has(reason) ? reason : 'unrecognised'
+  const previous = state[clock]
+  entry.failing_since = previous && previous.status && previous.status !== 'ok'
+    ? previous.failing_since || previous.last_run
+    : entry.last_run
+}
 
 // Recorded so the spend trend is visible in the brain without anyone reaching
 // into the host. A count that falls without a commit explaining it, or a job

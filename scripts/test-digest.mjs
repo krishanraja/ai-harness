@@ -6,7 +6,7 @@
  */
 
 import { buildDigest, boardItem, sendBoard } from './digest.mjs'
-import { decide, silentClocks, silentBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
+import { decide, silentClocks, silentBlocker, blockedClocks, blockedBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
 import { loadPolicy } from './propose.mjs'
 
 let passed = 0
@@ -65,6 +65,19 @@ test('a clock that beat yesterday is not silent', silentClocks(hb, { now: new Da
 const sb = silentBlocker(silent)
 test('the silent-PC blocker names the clock, the date and the one-line fix', sb.title === 'Your PC stopped checking in' && sb.detail.includes('2026-10-06') && sb.detail.includes(PC_REPAIR) && silentBlocker([]) === null)
 test('the silent-PC blocker reaches the digest', buildDigest({ blockers: [sb], today: '2026-10-15', policy }).decisions[0].title === 'Your PC stopped checking in')
+
+// A PC that runs every night but cannot install (LORIMER, 2026-10-16).
+const once = { 'harness-sync-lorimer': { last_run: '2026-10-16T07:45:36Z', status: 'blocked', release: 'v2026.10.15.2' } }
+test('one blocked night stays quiet', blockedClocks(once, { now: new Date('2026-10-16T20:40:00Z'), limits: { 'harness-sync-lorimer': 1 } }).length === 0)
+const twice = { 'harness-sync-lorimer': { last_run: '2026-10-16T22:31:00Z', status: 'blocked', release: 'v2026.10.15.2', reason: 'checkout-dirty', failing_since: '2026-10-16T07:45:36Z' } }
+const stuck = blockedClocks(twice, { now: new Date('2026-10-17T20:40:00Z'), limits: { 'harness-sync-lorimer': 1 } })
+test('two blocked nights in a row are caught with their reason', stuck.length === 1 && stuck[0].since === '2026-10-16' && stuck[0].reason === 'checkout-dirty')
+test('an ok clock is never blocked', blockedClocks({ 'harness-sync-lorimer': { last_run: '2026-10-17T22:31:00Z', status: 'ok' } }, { now: new Date('2026-10-20T00:00:00Z'), limits: { 'harness-sync-lorimer': 1 } }).length === 0)
+const bb = blockedBlocker(stuck)
+test('the blocked-PC blocker says why in plain words, with the release and the one-line fix', bb.title === 'Your PC cannot install the latest release' && bb.detail.includes('edits nobody committed') && bb.detail.includes('v2026.10.15.2') && bb.detail.includes(PC_REPAIR) && !bb.detail.includes('checkout-dirty') && blockedBlocker([]) === null)
+test('a reason nobody worded still reads as a sentence', blockedBlocker([{ clock: 'harness-sync-lorimer', since: '2026-10-16', reason: 'unrecognised', release: 'unknown' }]).detail.includes('could not name'))
+test('the blocked-PC blocker reaches the digest', buildDigest({ blockers: [bb], today: '2026-10-17', policy }).decisions[0].title === 'Your PC cannot install the latest release')
+test('the policy watches the PC for both silence and blocking', policy.guardian?.silent_days?.['harness-sync-lorimer'] > 0 && policy.guardian?.blocked_days?.['harness-sync-lorimer'] > 0)
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)

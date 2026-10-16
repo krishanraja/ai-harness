@@ -112,3 +112,8 @@ miner:
 guardian:
   silent_days:
     harness-sync-lorimer: 3
+  # First seen 2026-10-16, when LORIMER ran but reported blocked on
+  # v2026.10.15.2 with no reason anyone could read. One day means two nightly
+  # runs blocked in a row, so a dropped connection stays quiet.
+  blocked_days:
+    harness-sync-lorimer: 1
