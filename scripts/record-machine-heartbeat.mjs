@@ -76,7 +76,9 @@ if (releaseClocks.has(clock)) entry.release = release
 // never finish on its own. Counted in runs, not hours: a PC that is simply off
 // the next night has not failed twice. An entry from before failing_runs
 // existed counts as one run, the least it can have been. When the clock reports
-// ok again the span is closed into last_outage rather than dropped.
+// ok again the span is closed into last_outage rather than dropped. Earlier
+// outages are not lost: every heartbeat is its own commit to this file, so its
+// git history holds each one.
 const previous = state[clock]
 const failing = Boolean(previous && previous.status && previous.status !== 'ok')
 if (status !== 'ok') {

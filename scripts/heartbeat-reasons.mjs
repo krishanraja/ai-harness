@@ -13,6 +13,9 @@ export const REASONS = Object.freeze({
   'checkout-edited': 'files the harness tracks were edited on your PC and never committed, so it will not install over them',
   'checkout-untracked': 'the harness folder on your PC holds files git does not track, so it will not install beside them',
   'checkout-git-output': 'git printed a warning about the harness folder on your PC, so it would not install',
+  // Superseded on 2026-10-16 by the three words above, which say which kind of
+  // change it was. Kept only because run.json files written before then carry
+  // the old message, which still maps here; the sync no longer sends it.
   'checkout-dirty': 'the harness folder on your PC has changes nobody committed, so it will not install over them',
   'checkout-update': 'it could not update its copy of the harness from GitHub',
   'sync-script-not-on-main': 'it is running a copy of the sync that main does not hold',
