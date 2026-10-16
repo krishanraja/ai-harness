@@ -82,10 +82,23 @@ export function headSha(head) {
   catch { return String(head) }
 }
 
+/**
+ * Scripts the canon's added lines cite by path. Their change is shown to the
+ * panel beside the canon's, so a policy line saying what a script does can be
+ * checked against that script: pull request 129 was marked a contradiction for
+ * a precedence its own housekeeping change implemented, because the panel was
+ * shown the policy and not the code it named.
+ */
+export function citedScripts(diff) {
+  return [...new Set([...diff.matchAll(/^\+.*?\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/gm)].map((m) => m[1]))]
+}
+
 export function diffFor(base, head) {
-  const out = execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...WATCHED],
+  const git = (paths) => execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...paths],
     { encoding: 'utf8', maxBuffer: 1 << 26 })
-  return out
+  const canon = git(WATCHED)
+  const cited = citedScripts(canon)
+  return cited.length ? canon + git(cited) : canon
 }
 
 // --------------------------------------------------------------- the protocol

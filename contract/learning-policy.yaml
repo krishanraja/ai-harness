@@ -123,5 +123,7 @@ guardian:
   # only to a clock still reporting (scripts/steward-housekeeping.mjs).
   # Who clears it: the one-line PC repair in the blocker, which reports what it
   # found in one line; the next nightly run then reports again on its own.
+  # How often: at most once per digest week, and only after two blocked
+  # nights in a row; a single blocked night never reaches Krish.
   blocked_days:
     harness-sync-lorimer: 1
