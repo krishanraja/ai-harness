@@ -103,12 +103,14 @@ export function blockedClocks(heartbeats, { limits = {} } = {}) {
 
 /** The digest blocker for a sync that keeps failing: what it could not do, why, and the one fix. */
 const RELEASE_ID = /^v\d{4}\.\d{2}\.\d{2}\.\d+$/
+const DATE = /^\d{4}-\d{2}-\d{2}$/
 
 export function blockedBlocker(blocked) {
   if (!blocked.length) return null
-  // Only the fixed words and a release id that passes the recorder's own format
-  // check reach this text; nothing the machine sent is shown as it came.
-  const lines = blocked.map((b) => `${b.clock} has been blocked${b.runs ? ` ${b.runs} runs in a row` : ''} since ${b.since}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}; its latest run said ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}`).join('; ')
+  // Every value from state/heartbeats.json is checked before it reaches this
+  // text: the reason must be a fixed word, the release a release id, the date a
+  // date and the count a whole number; anything else is left out, not shown.
+  const lines = blocked.map((b) => `${b.clock} has been blocked${Number.isInteger(b.runs) && b.runs > 0 ? ` ${b.runs} runs in a row` : ''}${DATE.test(b.since || '') ? ` since ${b.since}` : ''}${RELEASE_ID.test(b.release || '') ? ` on ${b.release}` : ''}; its latest run said ${Object.hasOwn(REASONS, b.reason || '') ? REASONS[b.reason] : REASONS.other}`).join('; ')
   return {
     kind: 'machine', only_you: 'permission',
     title: 'Your PC cannot install the latest release',
