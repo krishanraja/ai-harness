@@ -113,7 +113,15 @@ guardian:
   silent_days:
     harness-sync-lorimer: 3
   # First seen 2026-10-16, when LORIMER ran but reported blocked on
-  # v2026.10.15.2 with no reason anyone could read. One day means two nightly
-  # runs blocked in a row, so a dropped connection stays quiet.
+  # v2026.10.15.2 with no reason anyone could read; part of the guardian Krish
+  # asked for on 2026-10-15 (docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md,
+  # decision 3). The task is registered -Daily (Register-HarnessScheduledTask
+  # in scripts/Invoke-HarnessSync.ps1), so one day means two runs blocked in a
+  # row and a dropped connection stays quiet.
+  # Which fires: a clock silent past silent_days raises only the silent
+  # blocker, because its last blocked report is old news; blocked_days applies
+  # only to a clock still reporting (scripts/steward-housekeeping.mjs).
+  # Who clears it: the one-line PC repair in the blocker, which reports what it
+  # found in one line; the next nightly run then reports again on its own.
   blocked_days:
     harness-sync-lorimer: 1
