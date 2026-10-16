@@ -8,6 +8,8 @@
  * other word as `unrecognised`, and scripts/test-machine-heartbeat.mjs fails if
  * the sync can send a word that is not here. Added 2026-10-16, when LORIMER
  * reported `blocked` on v2026.10.15.2 and nothing off the PC could say why.
+ * Krish approved this one word as a standing automatic send that day
+ * (docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md, decision 3).
  */
 export const REASONS = Object.freeze({
   'checkout-edited': 'files the harness tracks were edited on your PC and never committed, so it will not install over them',

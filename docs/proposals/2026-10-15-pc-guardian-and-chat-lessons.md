@@ -35,7 +35,11 @@ is the provenance for the `guardian` and `miner.submit` entries in
    morning and reported `blocked` on v2026.10.15.2 with no reason anyone off
    the PC could read, so the sync now sends one word from a fixed list (never
    the error text: the ledger is public), and the recorder keeps it with the
-   date the clock started failing and the count of runs. The install step's
+   date the clock started failing and the count of runs. Krish approved that
+   word as a standing automatic send on 2026-10-16, a scoped exception to
+   `authority.never-publish-post-send` like decision 4's: one word from
+   `scripts/heartbeat-reasons.mjs` in the PC's own heartbeat, never error
+   text, names or paths, and nothing else. The install step's
    dirty-checkout gate is unchanged: it now says whether tracked files were
    edited, untracked files are present, or git printed a warning, so the next
    heartbeat shows which (if any) stopped LORIMER before anyone changes the
