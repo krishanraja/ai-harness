@@ -106,7 +106,7 @@ are authorized by a generated guide.
 after relevant accepted-source changes, nightly, and on manual dispatch. It
 checks trusted main for mutations, consolidates evidence, verifies owner
 acceptances and reconciles instruction PRs. Weekly proposal interpretation
-uses the existing Claude Code OAuth connection with no writer credential and
+uses the existing Anthropic API access with no writer credential and
 restricted output paths. Deterministic scripts alone hold `FLEET_TOKEN`.
 
 No database, exporter service, local PC or new package is required. Existing

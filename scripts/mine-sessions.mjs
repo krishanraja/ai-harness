@@ -104,6 +104,22 @@ export function parseCodex(lines) {
  */
 export function parseCloudEvents(lines, { readSaved = () => null } = {}) {
   const calls = new Map()
+  const repositories = new Map(), sessionCalls = new Set()
+  // Provider-returned session metadata earns attribution; titles and assistant guesses do not.
+  for(const line of lines){let o;try{o=JSON.parse(line)}catch{continue}
+    const content=o?.message?.content;if(!Array.isArray(content))continue
+    for(const b of content){
+      if(b?.type==='tool_use'&&/list_sessions$/.test(b.name||''))sessionCalls.add(b.id)
+      if(b?.type!=='tool_result'||!sessionCalls.has(b.tool_use_id))continue
+      let text=typeof b.content==='string'?b.content:textOf(b.content)
+      if(!text.includes('{"ccr"')){const saved=text.match(/\/\S+\/tool-results\/[^\s"'<>]+/);text=(saved&&readSaved(saved[0].replace(/[.,;:)]+$/,'')))||''}
+      const start=text.indexOf('{"ccr"'),close=text.indexOf('</other-session',start),end=text.lastIndexOf('}',close===-1?text.length:close)
+      if(start<0||end<start)continue
+      let sessions;try{sessions=JSON.parse(text.slice(start,end+1)).ccr?.data}catch{continue}
+      if(!Array.isArray(sessions))continue
+      for(const session of sessions){const repo=repositoryIdentity(session.repository?.full_name||session.repository);const id=session.id||session.session_id;if(repo&&id)repositories.set(id,repo)}
+    }
+  }
   const seen = new Set()
   const turns = []
   for (const line of lines) {
@@ -136,7 +152,7 @@ export function parseCloudEvents(lines, { readSaved = () => null } = {}) {
           seen.add(scopedKey)
           const t = textOf(c.message?.content).trim()
           if (!t || t.startsWith('<')) continue
-          turns.push({ role, text: t, at: e.created_at || null, session: calls.get(b.tool_use_id), cwd: null, source_event_id: key, repository: repositoryIdentity(e.repository?.full_name || e.repository || page.repository?.full_name), task: e.task_id || null })
+          turns.push({ role, text: t, at: e.created_at || null, session: calls.get(b.tool_use_id), cwd: null, source_event_id: key, repository: repositoryIdentity(e.repository?.full_name || e.repository || page.repository?.full_name) || repositories.get(calls.get(b.tool_use_id)) || null, task: e.task_id || null })
         }
       }
     }

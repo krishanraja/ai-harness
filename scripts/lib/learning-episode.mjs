@@ -13,7 +13,14 @@ export const digest = (s) => createHash('sha256').update(String(s), 'utf8').dige
 
 export function repositoryIdentity(value) {
   if (!value) return null
-  const last = String(value).replace(/[\\/]$/, '').split(/[\\/]/).at(-1).replace(/\.git$/, '').toLowerCase()
+  let raw=String(value).replace(/[\\/]$/, '')
+  if (/^https?:\/\//.test(raw)) {
+    let url;try{url=new URL(raw)}catch{return null}
+    if(url.hostname!=='github.com')return null
+    raw=url.pathname.slice(1)
+  }
+  if(!/^(?:\/|[A-Za-z]:[\\/]|\.{1,2}[\\/]|~[\\/])/.test(raw)&&raw.includes('/')&&raw.split('/')[0]!==fleet.owner)return null
+  const last = raw.split(/[\\/]/).at(-1).replace(/\.git$/, '').toLowerCase()
   const repo = fleet.repos.find((r) => [r.name, r.checkout].filter(Boolean).some((n) => n.toLowerCase() === last))
   return repo?.name || null
 }
