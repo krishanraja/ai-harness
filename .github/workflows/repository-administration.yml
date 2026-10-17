@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths: ["brain/knowledge.jsonl", "brain/reviews.jsonl", "brain/repositories/**", "state/observations/*.jsonl", "contract/repository-administration.json", "scripts/repository-*.mjs", "scripts/reconcile-repository-admin.mjs", ".github/workflows/repository-administration.yml"]
   workflow_run:
+    # Intake and observation pushes cover learning. Derived reports must not restart publication.
     workflows: ["Harness observation intake"]
     types: [completed]
     branches: [main]
@@ -87,6 +88,7 @@ jobs:
           set -euo pipefail
           node scripts/repository-health.mjs --out state/repository-administration/health.json
           node scripts/validate-repository-brain.mjs
+          node scripts/validate-knowledge-history.mjs --base "$(git rev-parse HEAD)"
           cat state/repository-administration/health.json >> "$GITHUB_STEP_SUMMARY"
           git config user.name "Krish Raja"
           git config user.email "hello@krishraja.com"
@@ -95,7 +97,10 @@ jobs:
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "chore(brain): consolidate evidence and verify repository views" -m "Approved plan: brain-repository-administration-v1. Observations remain unaccepted; owner decisions carry exact merge proofs."
           for attempt in 1 2 3; do
-            if git pull --rebase --quiet origin main && git push --quiet origin HEAD:main; then exit 0; fi
+            if git pull --rebase --quiet origin main; then
+              node scripts/validate-knowledge-history.mjs --base "$(git rev-parse origin/main)"
+              if git push --quiet origin HEAD:main; then exit 0; fi
+            fi
             sleep $((attempt * 5))
           done
           exit 1

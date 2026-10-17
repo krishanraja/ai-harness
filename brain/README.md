@@ -136,8 +136,15 @@ but resets changed entries to founding provenance, so it is an initial inventory
 operation. Both commands own `rules.yaml` only.
 
 The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
-appends records. `scripts/validate-knowledge-history.mjs` checks that exact file
-against the PR base. Canon-index regeneration and learning-history validation
-operate on these two distinct files under their respective rules.
+appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
+against the PR base and before automated commits and rebased pushes in
+`.github/workflows/repository-administration.yml`. Canon-index regeneration owns
+the other file, `rules.yaml`.
 
-Historical non-accepted source evidence keeps its exact bytes. The two pre-existing punctuation records in `state/repository-administration/legacy-evidence-format.json` have hash-bound formatting allowances. Changed records and accepted instructions cannot use those allowances. `scripts/validate-knowledge-history.mjs` enforces byte-for-byte append-only history in `.github/workflows/repository-administration.yml`, against GitHub's exact PR base. This maintenance follows the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
+`scripts/validate-surfaces.mjs` reads the two historical punctuation allowances in
+`state/repository-administration/legacy-evidence-format.json`. Its helper,
+`scripts/lib/legacy-evidence-format.mjs`, permits those exact non-accepted lines
+to pass the text style check without changing them. This is no exception to the
+history guard. `scripts/test-knowledge-history.mjs` verifies both controls,
+including rejection of altered or accepted records. This maintenance follows
+the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
