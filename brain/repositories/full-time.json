@@ -37,19 +37,27 @@
       "path": "docs/history/LOG.md",
       "role": "orientation",
       "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/13-agent-handoff.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
     }
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "editorial",
+      "label": "Checked match facts, pundit production and spend discipline",
       "read": [
         "README.md",
-        "NOW.md",
-        "docs/19-release-state.md"
+        "docs/13-agent-handoff.md",
+        "docs/19-release-state.md",
+        "NOW.md"
       ],
       "checks": [
-        "npm run docs:check"
+        "npm run docs:check",
+        "npm run typecheck",
+        "npm test"
       ]
     }
   ]

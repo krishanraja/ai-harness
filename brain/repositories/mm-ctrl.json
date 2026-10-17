@@ -37,18 +37,26 @@
       "path": "docs/history/LOG.md",
       "role": "orientation",
       "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/current/README.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
     }
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "product",
+      "label": "Briefing, decisions, evidence and contained delivery",
       "read": [
-        "README.md",
+        "docs/current/README.md",
+        "project-documentation/AGENT_BRIEFING.md",
         "NOW.md"
       ],
       "checks": [
-        "npm run docs:check"
+        "npm run docs:check",
+        "npm run typecheck",
+        "npm run standards:check"
       ]
     }
   ]

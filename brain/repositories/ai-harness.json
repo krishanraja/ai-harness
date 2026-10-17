@@ -47,18 +47,68 @@
       "path": "docs/history/LOG.md",
       "role": "orientation",
       "label": "Required bootstrap source"
+    },
+    {
+      "path": "skills/harness-maintainer/SKILL.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "docs/harness/repository-administration.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "skills/ctrl-capture/SKILL.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "contract/repository-administration.json",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
     }
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "canon",
+      "label": "Contracts, routing and governed skills",
       "read": [
-        "README.md",
-        "NOW.md",
-        "CURRENT.md"
+        "CURRENT.md",
+        "contract/krish-operating-contract.md",
+        "contract/skill-routing-contract.md",
+        "skills/harness-maintainer/SKILL.md"
       ],
-      "checks": []
+      "checks": [
+        "pwsh -NoProfile -File scripts/Test-Harness.ps1",
+        "node scripts/render.mjs --check",
+        "node scripts/validate-surfaces.mjs"
+      ]
+    },
+    {
+      "id": "learning",
+      "label": "Evidence, candidate review and accepted repository delivery",
+      "read": [
+        "docs/harness/repository-administration.md",
+        "skills/ctrl-capture/SKILL.md",
+        "contract/repository-administration.json"
+      ],
+      "checks": [
+        "node scripts/test-repository-learning.mjs",
+        "node scripts/validate-repository-brain.mjs"
+      ]
+    },
+    {
+      "id": "release",
+      "label": "Immutable packaging, deployment and canary evidence",
+      "read": [
+        "CURRENT.md",
+        "skills/harness-maintainer/SKILL.md"
+      ],
+      "checks": [
+        "pwsh -NoProfile -File scripts/Test-Harness.ps1",
+        "node scripts/validate-release-coherence.mjs"
+      ]
     }
   ],
   "bootstrap_notes": [

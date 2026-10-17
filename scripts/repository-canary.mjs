@@ -32,7 +32,7 @@ export function verifyCanary({out='.canary',execution}){
  const answer=JSON.parse(output.replace(/^\s*```(?:json)?\s*|\s*```\s*$/g,''))
  const diagnostic=redact(JSON.stringify(Object.fromEntries(['repository','kind','retained_decision_ids','superseded_decision_ids','requested_delta','conditions','global_prohibition','revised_offline_test_allowed','cause_known'].filter(k=>k in answer).map(k=>[k,answer[k]])))).slice(0,1200)
  if(answer.repository!==expected.repository||answer.kind!==expected.kind)throw new Error('wrong_canary_scope')
- for(const p of ['CLAUDE.md','AGENTS.md','docs/HARNESS_CONTEXT.md'])if(![...reads].some(s=>s.endsWith('/.canary/'+p)||s==='.canary/'+p))throw new Error('canary_entry_or_context_not_observed:'+p)
+ for(const p of ['CLAUDE.md','AGENTS.md','docs/HARNESS_CONTEXT.md'])if(![...reads].some(s=>s.endsWith('/.canary/'+p)||s==='.canary/'+p))throw new Error('canary_entry_or_context_not_observed:'+p+';'+diagnostic)
  if([...reads].some(s=>s.endsWith('/expected.json')))throw new Error('canary_read_hidden_expectations')
  if(expected.kind==='orientation'){
   if(answer.workflow!==expected.workflow||!Array.isArray(answer.sources)||!expected.read.every(p=>answer.sources.includes(p)))throw new Error('canary_system_route_lost')

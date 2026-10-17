@@ -46,15 +46,18 @@
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "relationships",
+      "label": "People ingestion, joining, memory and retrieval",
       "read": [
         "README.md",
-        "NOW.md",
-        "docs/DELIVERY_STATE.md"
+        "AGENT_BRIEFING.md",
+        "docs/DELIVERY_STATE.md",
+        "NOW.md"
       ],
       "checks": [
-        "npm run docs:check"
+        "npm run docs:check",
+        "npm run test:run",
+        "npm run build"
       ]
     }
   ]

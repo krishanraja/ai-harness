@@ -51,12 +51,24 @@
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "consolidation",
+      "label": "Safe media consolidation through the owning stage",
       "read": [
-        "README.md",
-        "NOW.md",
-        "RESUME.md"
+        "RESUME.md",
+        "docs/LEARNINGS.md",
+        "README.md"
+      ],
+      "checks": [
+        "python3 -m unittest discover -s tests -p test_stage_contracts.py"
+      ]
+    },
+    {
+      "id": "application",
+      "label": "Application boundary and stage-owned implementation",
+      "read": [
+        "stages/13_app/STAGE.md",
+        "web/README.md",
+        "NOW.md"
       ],
       "checks": []
     }

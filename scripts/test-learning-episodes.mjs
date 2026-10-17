@@ -3,7 +3,8 @@ import assert from 'node:assert/strict'
 import { mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { selectExcerpts, mine, toEnvelope, parseCodex } from './mine-sessions.mjs'
+import { selectExcerpts, mine, toEnvelope, parseCodex, parseCloudEvents } from './mine-sessions.mjs'
+import { repositoryIdentity } from './lib/learning-episode.mjs'
 import { toObservation, envelopeSha } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
 
@@ -58,4 +59,14 @@ for (const over of [
 }
 const legacy = toObservation({ ...event, schema_version: 1, repository: undefined, episode: undefined, episode_id: undefined, knowledge_type: undefined, payload_sha256: 'a'.repeat(64) }, '2026-10-17', { requireInbox: false })
 assert.equal(legacy.repo, null, 'discarded legacy repository scope stays unknown')
+assert.equal(repositoryIdentity('another-owner/content-engine'), null)
+assert.equal(repositoryIdentity('https://github.com/krishanraja/content-engine'), 'content-engine')
+const line = (content) => JSON.stringify({ message: { content } })
+const cloud = parseCloudEvents([
+ line([{ type: 'tool_use', id: 'sessions', name: 'list_sessions', input: { mine: true } }]),
+ line([{ type: 'tool_result', tool_use_id: 'sessions', content: JSON.stringify({ ccr: { data: [{ id: 'cloud-one', repository: { full_name: 'krishanraja/content-engine' }, title: 'Untrusted title ignored' }] } }) }]),
+ line([{ type: 'tool_use', id: 'events', name: 'list_events', input: { session_id: 'cloud-one' } }]),
+ line([{ type: 'tool_result', tool_use_id: 'events', content: JSON.stringify({ ccr: { data: [{ created_at: '2026-10-17', user: { uuid: 'one', internal_anthropic_catchall: { message: { content: 'No, retain previously accepted decisions.' } } } }] } }) }]),
+])
+assert.equal(cloud[0].repository, 'content-engine', 'provider-returned session metadata earns scope')
 console.log('LEARNING EPISODES OK: context, isolation, outcomes, stable identity, scoped intake, privacy and conflicts')

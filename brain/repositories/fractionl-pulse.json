@@ -42,17 +42,28 @@
       "path": "docs/history/LOG.md",
       "role": "orientation",
       "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/TECHNICAL_SPEC.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
     }
   ],
   "workflows": [
     {
-      "id": "administration",
-      "label": "Orient, diagnose and verify the system",
+      "id": "market-instrument",
+      "label": "Collectors, evidence quality, index and publication boundaries",
       "read": [
         "README.md",
+        "docs/AGENT_BRIEFING.md",
+        "docs/TECHNICAL_SPEC.md",
+        "docs/DOCUMENTATION_GOVERNANCE.md",
         "NOW.md"
       ],
-      "checks": []
+      "checks": [
+        "npm run lint",
+        "npm run build"
+      ]
     }
   ]
 }
