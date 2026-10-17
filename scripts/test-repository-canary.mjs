@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { digest } from './lib/learning-episode.mjs'
 import { seal } from './repository-brain.mjs'
-import { privateTitleReplay, titleReplayTask, verifyTitleReplay } from './repository-title-replay.mjs'
+import { privateTitleReplay, titleReplayTask, verifyTitleReplay, titleReplayToolAnswer, TITLE_REPLAY_TOOL } from './repository-title-replay.mjs'
 
 // These invented examples test mechanics; actual native examples are fetched
 // only by the private in-memory evaluation on the runner.
@@ -52,6 +52,22 @@ assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.compariso
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.map(x => ({ ...x, rationale: '' })) }, expected), /qualitative_comparison_missing/)
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.map(x => ({ ...x, tradeoffs: ['brevity'] })) }, expected), /balance_missing/)
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: [answer.comparisons[0], answer.comparisons[0], ...answer.comparisons.slice(2)] }, expected), /native_verdict_changed/)
+assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.map(x => ({ ...x, rationale: 'word '.repeat(81) })) }, expected), /qualitative_comparison_missing/)
+assert.throws(() => verifyTitleReplay({ ...answer, remaining_tension: 'word '.repeat(61) }, expected), /balance_missing/)
+
+const toolBlock = { type: 'tool_use', id: 'test-evaluation', name: TITLE_REPLAY_TOOL.name, input: answer }
+const toolResponse = { model: 'claude-test-1', stop_reason: 'tool_use', content: [toolBlock] }
+assert.equal(titleReplayToolAnswer(toolResponse), answer)
+assert.equal(titleReplayToolAnswer({ ...toolResponse, content: [{ type: 'text', text: secretMarker }, toolBlock] }), answer, 'Private preamble, if present, is ignored and never printed')
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, stop_reason: 'max_tokens' }), { message: 'title_replay_model_incomplete' }, 'A partial tool result never counts as a completed evaluation')
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, stop_reason: 'pause_turn' }), { message: 'title_replay_model_incomplete' })
+assert.throws(() => titleReplayToolAnswer({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer) }] }), { message: 'title_replay_model_tool_response_missing' }, 'Free text cannot substitute for the structured result')
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: [toolBlock, toolBlock] }), { message: 'title_replay_model_tool_response_invalid' })
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: [toolBlock, { ...toolBlock, name: 'unexpected_product_action' }] }), { message: 'title_replay_model_tool_response_invalid' })
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: [{ ...toolBlock, name: 'unexpected_product_action' }] }), { message: 'title_replay_model_tool_response_invalid' })
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: [{ ...toolBlock, input: null }] }), { message: 'title_replay_model_tool_response_invalid' })
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: [{ ...toolBlock, input: [] }] }), { message: 'title_replay_model_tool_response_invalid' })
+assert.throws(() => titleReplayToolAnswer({ ...toolResponse, content: secretMarker }), { message: 'title_replay_model_response_invalid' })
 
 const out = mkdtempSync(join(tmpdir(), 'repository-title-replay-'))
 try {
@@ -72,11 +88,19 @@ try {
   await assert.rejects(privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, fetchImpl: fakeFetch, spec }), { message: 'title_replay_model_http_failed' })
   assert.equal(calls.length, 1)
   assert.ok(calls[0].options.body.includes(secretMarker), 'Private source reaches only the in-memory model request')
-  assert.equal(JSON.parse(calls[0].options.body).max_tokens, 3000)
-  const response = await privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, spec, fetchImpl: async () => ({ ok: true, json: async () => ({ model: 'claude-test-1', stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(answer) }] }) }) })
+  const request = JSON.parse(calls[0].options.body)
+  assert.equal(request.max_tokens, 3000)
+  assert.deepEqual(request.tool_choice, { type: 'tool', name: 'submit_title_replay', disable_parallel_tool_use: true })
+  assert.equal(request.tools.length, 1)
+  assert.deepEqual(request.tools[0], TITLE_REPLAY_TOOL)
+  assert.ok(!JSON.stringify(request.tools).includes(expected.obsolete_lesson_id), 'Tool schema must not contain the hidden correct supersession')
+  assert.ok(!JSON.stringify(request.tools).includes(expected.shorter_picked_ids[0]), 'Tool schema must not contain the hidden correct example selection')
+  const response = await privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, spec, fetchImpl: async () => ({ ok: true, json: async () => toolResponse }) })
   assert.equal(response.model_calls, 1)
   assert.ok(!JSON.stringify(response).includes(secretMarker), 'Provider response prose never enters the receipt')
   await assert.rejects(privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, spec, fetchImpl: async () => ({ ok: true, json: async () => { throw new Error(secretMarker) } }) }), { message: 'title_replay_model_response_invalid' })
+  await assert.rejects(privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, spec, fetchImpl: async () => ({ ok: true, json: async () => ({ ...toolResponse, stop_reason: 'max_tokens' }) }) }), { message: 'title_replay_model_incomplete' }, 'Safe incomplete diagnosis must survive the transport parser')
+  await assert.rejects(privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, spec, fetchImpl: async () => ({ ok: true, json: async () => ({ ...toolResponse, content: [{ ...toolBlock, input: secretMarker }] }) }) }), { message: 'title_replay_model_tool_response_invalid' })
   writeFileSync(join(out, 'AGENTS.md'), 'Changed delivered bytes.\n')
   await assert.rejects(privateTitleReplay({ gh: { getFile: async () => ({ text: raw }) }, key: 'test', out, fetchImpl: fakeFetch, spec }), { message: 'title_replay_delivered_context_moved' })
   assert.equal(calls.length, 1, 'Drift must fail before another model call')
