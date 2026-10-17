@@ -1,21 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T08:14:15.022Z",
+  "generated_at": "2026-10-17T08:15:31.736Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+      "base": "ec01de3a217075011082eec205b65ede244b6d8c",
       "brain_revision": "f0c91f3b1502",
-      "before": 232887,
+      "before": 213721,
       "after": 213721,
-      "files": [
-        "CLAUDE.md",
-        "AGENTS.md",
-        "docs/HARNESS_CONTEXT.md",
-        ".github/workflows/harness-repository-context.yml"
-      ],
-      "source_seal": "e4258a4b899ecfdfe83da7617f2515138f76cfbaa7e3ebc7cefe413f45891bf3",
+      "files": [],
+      "source_seal": "2ce37a9e3ffec7e8512dcdc4ffb3e409fca5baaba45c23987db47554f413c511",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,39 +18,16 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "verified",
-      "pr": 90,
-      "head": "a8bee39d8af7ba33b5ab40ff18161be56be816ba",
-      "merge": "ec01de3a217075011082eec205b65ede244b6d8c",
-      "rollback": {
-        "base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
-        "managed_before": {
-          "CLAUDE.md": "2cb60c4b35fe77cd7d92570848442d6e590e8634042a3b5c151d7a5606a40b46",
-          "AGENTS.md": "d6c3a0a84dffa2420502f808c2c9a730522d77a4200afbb2085588a451814be5",
-          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        "files": [
-          "CLAUDE.md",
-          "AGENTS.md",
-          "docs/HARNESS_CONTEXT.md",
-          ".github/workflows/harness-repository-context.yml"
-        ]
-      }
+      "status": "current"
     },
     {
       "repository": "AEO-Engine",
-      "base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+      "base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
       "brain_revision": "5ca09cc3df52",
-      "before": 17233,
+      "before": 11549,
       "after": 11549,
-      "files": [
-        "AGENTS.md",
-        "CLAUDE.md",
-        "docs/HARNESS_CONTEXT.md",
-        ".github/workflows/harness-repository-context.yml"
-      ],
-      "source_seal": "c1a2d0f2cddc5f47c283cbb758d441c684cb61b0441a38c16c2848d989d8bffc",
+      "files": [],
+      "source_seal": "a2d318ee7abcb96192e3428220a8a367045cf6a3ec29fa1e44ef5b8cfee66880",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -63,49 +35,12 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "verified",
-      "pr": 13,
-      "head": "58fa6dad9fca9dba0af7c266bbe8b141cb1032b2",
-      "merge": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
-      "rollback": {
-        "base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
-        "managed_before": {
-          "AGENTS.md": "0d12c8c2715ed5c0d1cf45efe5e7aae1c3327ad4db2d9edfc214345e02c07c3a",
-          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        "files": [
-          "AGENTS.md",
-          "CLAUDE.md",
-          "docs/HARNESS_CONTEXT.md",
-          ".github/workflows/harness-repository-context.yml"
-        ]
-      }
+      "status": "current"
     },
     {
       "repository": "ai-harness",
-      "base": "e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28",
-      "brain_revision": "155b79828fb7",
-      "before": 54570,
-      "after": 39955,
-      "files": [
-        "AGENTS.md",
-        "CLAUDE.md",
-        "docs/HARNESS_CONTEXT.md",
-        ".github/workflows/harness-repository-context.yml"
-      ],
-      "source_seal": "5bf36905d2fdeeb261e9e1f14ccc986e38caa7a07d305eab7c59354f4d9d92bf",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "awaiting-checks",
-      "pr": 131,
-      "head": "a9b80709d3fd601ad8f2b6e52c224a4c0569af8f"
+      "status": "blocked",
+      "reason": "administration_merge_base_moved"
     },
     {
       "repository": "control-center",
@@ -175,9 +110,25 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 163,
-      "head": "b1d1acb3906c037ead71cdcea97c0fba1e233d23"
+      "head": "b1d1acb3906c037ead71cdcea97c0fba1e233d23",
+      "merge": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+      "rollback": {
+        "base": "866a1307a835ae58d6150b7bd71b31736d9ffbd2",
+        "managed_before": {
+          "AGENTS.md": "5db2e1e27f525ea1c615863f4d8b7d41e654d9cbf4b6e1a1162fc36faaee71ba",
+          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml"
+        ]
+      }
     },
     {
       "repository": "fractionl-pulse",
@@ -199,9 +150,25 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 49,
-      "head": "b978886ebc1bca3a03875550127b4001f0242613"
+      "head": "b978886ebc1bca3a03875550127b4001f0242613",
+      "merge": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+      "rollback": {
+        "base": "42a3210aa8abefcab6f09f076ffd2ce56f44f533",
+        "managed_before": {
+          "AGENTS.md": "520f97b91481a66c201cd6f0ce78451ef895621fa029d94e6f0fce820622c3bf",
+          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml"
+        ]
+      }
     },
     {
       "repository": "full-time",
@@ -223,9 +190,25 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 81,
-      "head": "25ff73720e14f2511d682093361722a671db010c"
+      "head": "25ff73720e14f2511d682093361722a671db010c",
+      "merge": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+      "rollback": {
+        "base": "702c84d242071b0e0c347a6b87668e210ed2d897",
+        "managed_before": {
+          "AGENTS.md": "522b2411a95f0d2861e21bb22f4d9a87ec6d9e4a7db9fd28dbc4b605c3bd12e1",
+          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml"
+        ]
+      }
     },
     {
       "repository": "contentarchives",
@@ -247,9 +230,25 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 14,
-      "head": "dbb7633c3b467ec130471555b773b37b7f07b950"
+      "head": "dbb7633c3b467ec130471555b773b37b7f07b950",
+      "merge": "c9f795c92c66bc13157b5b2159be083443860648",
+      "rollback": {
+        "base": "35ba0dcf783d9311e11b774b41197bb0dfc884ea",
+        "managed_before": {
+          "AGENTS.md": "22a6772be7973beb07b6c3dcd04df062343e0c1ae909567b65f2452392e3bd0c",
+          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml"
+        ]
+      }
     },
     {
       "repository": "makeyourmindup",
@@ -271,9 +270,25 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 18,
-      "head": "7132574926a1ae3bc675ae04c4d46cce4567fce2"
+      "head": "7132574926a1ae3bc675ae04c4d46cce4567fce2",
+      "merge": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
+      "rollback": {
+        "base": "e19ea80944d7abec90b88c31e7a550d1dc33e901",
+        "managed_before": {
+          "AGENTS.md": "017c9c81b68eafc14523b725f0733299fca440681fdc55cf21476274479bb6b6",
+          "CLAUDE.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "CLAUDE.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml"
+        ]
+      }
     }
   ]
 }
