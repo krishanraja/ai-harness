@@ -1,16 +1,8 @@
 # AGENTS.md
 
-Entry file for coding agents working in ai-harness. Codex reads this file natively;
-Claude Code and Cursor are routed here by their own rules.
+Read `CURRENT.md` first, then read `NOW.md`.
 
-**Read `CURRENT.md` first.** It is deterministically rendered from the repository's
-machine-owned release, deployment, heartbeat, and canary evidence. Then read `NOW.md`
-for the longer product narrative and recent chronology. `NOW.md` is validated on every
-push and reconciled nightly, so it may lag operational evidence by up to a day.
-Chronology lives in `docs/history/LOG.md`.
-
-This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
-canon below on anything specific to this repository.
+Contracts: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`.
 
 <!-- krish-canon:start release=v2026.10.15.1 sha=48e09ddec167 rendered=2026-10-15 -->
 ## Krish canon
@@ -72,3 +64,11 @@ authoritative for reading; the repository is authoritative for what is correct.
 
 **This repository's own rules:** `AGENTS.md`, `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`
 <!-- krish-canon:end -->
+
+<!-- krish-repo-admin:start brain=155b79828fb7 sha=80cd8764df8a -->
+## Administer this repository
+
+Use `docs/HARNESS_CONTEXT.md` for the owning workflow, source of truth and checks. Preserve the goal and accepted decisions when a revision changes one part; explain material trade-offs. Verify the downstream result. Record corrections and observed outcomes through the existing capture path. Experimental results retain their conditions; inferred requirements remain proposals.
+
+Record each Krish ruling once per session in the acting commit. For `record_harness_observation` use `claude-code-web` when `CLAUDE_CODE_REMOTE` is true; otherwise `claude-code`.
+<!-- krish-repo-admin:end -->
