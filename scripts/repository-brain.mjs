@@ -10,9 +10,15 @@ import { loadLedger } from './propose.mjs'
 export const ROOT = resolve(fileURLToPath(import.meta.url), '../..')
 export const KNOWLEDGE = 'brain/knowledge.jsonl'
 // Source observations and proposed interpretations are inert data, not authored canon.
-export function isInertKnowledgeLine(file,line) {
-  if(file!==KNOWLEDGE)return false
-  try {return ['observed','candidate'].includes(JSON.parse(line).status)}catch{return false}
+export function sourceEvidenceSeals(observations,policy) {
+  return new Set(observations.map(o=>observationKnowledge(o,policy)).filter(Boolean).map(seal))
+}
+export function isInertKnowledgeLine(file,line,sourceSeals) {
+  if(file!==KNOWLEDGE||!(sourceSeals instanceof Set))return false
+  try {
+    const record=JSON.parse(line)
+    return ['observed','candidate'].includes(record.status)&&sourceSeals.has(seal(record))
+  }catch{return false}
 }
 export const POLICY = 'contract/repository-administration.json'
 const STATUSES = new Set(['observed', 'candidate', 'accepted', 'rejected', 'superseded'])

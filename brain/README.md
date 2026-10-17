@@ -119,8 +119,9 @@ are the rules nobody has ever had to defend.
   no edit can fix it. This is not hypothetical: it happened on the first run.
 - **No em dash in authored canon (2026-10-17).** This supersedes the earlier
   directory-wide formatting statement because the directory now also holds
-  inert source data. `scripts/repository-brain.mjs` identifies observed and
-  candidate records; `scripts/validate-surfaces.mjs` keeps accepted knowledge,
+  inert source data. `scripts/repository-brain.mjs` independently reconstructs
+  source records from the observation ledger; matching the entire content hash
+  is required. A self-declared status is insufficient. `scripts/validate-surfaces.mjs` keeps accepted knowledge,
   contracts and rendered adapters subject to the authored-text check.
   `scripts/test-knowledge-history.mjs` verifies both the distinction and the
   unchanged byte-level history guard. Source punctuation grants no authority.
