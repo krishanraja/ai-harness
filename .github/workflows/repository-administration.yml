@@ -42,6 +42,9 @@ jobs:
           node scripts/test-repository-admin.mjs
           node scripts/test-repository-reconcile.mjs
           node scripts/test-repository-learning.mjs
+          node scripts/test-repository-learning-loop.mjs
+          node scripts/test-repository-measurements.mjs
+          node scripts/test-repository-canary.mjs
           node scripts/test-repository-reviews.mjs
           node scripts/test-repository-workflow.mjs
           node scripts/test-knowledge-history.mjs
@@ -84,10 +87,11 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ secrets.FLEET_TOKEN }}
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
           HARNESS_EVENT_EXPORT_URL: ${{ vars.HARNESS_EVENT_EXPORT_URL }}
         run: |
           set -euo pipefail
-          node scripts/repository-health.mjs --out state/repository-administration/health.json
+          node scripts/repository-health.mjs --verify --out state/repository-administration/health.json
           node scripts/validate-repository-brain.mjs
           node scripts/validate-knowledge-history.mjs --base "$(git rev-parse HEAD)"
           cat state/repository-administration/health.json >> "$GITHUB_STEP_SUMMARY"
@@ -95,7 +99,7 @@ jobs:
           git config user.email "hello@krishraja.com"
           git config credential.helper '!gh auth git-credential'
           # Only declared runtime outputs are staged; policy and validator code remain reviewed source.
-          git add brain/knowledge.jsonl brain/acceptances.jsonl state/repository-administration/latest.json state/repository-administration/health.json state/repository-administration/deployments.jsonl
+          git add brain/knowledge.jsonl brain/acceptances.jsonl state/repository-administration/latest.json state/repository-administration/health.json state/repository-administration/deployments.jsonl state/repository-administration/measurement-verification.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "chore(brain): consolidate evidence and verify repository views" -m "Approved plan: brain-repository-administration-v1. Observations remain unaccepted; owner decisions carry exact merge proofs."
           for attempt in 1 2 3; do
@@ -148,6 +152,14 @@ jobs:
         run: |
           node scripts/repository-canary.mjs --verify --execution "$EXECUTION_FILE"
           cat .canary/receipt.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Replay native title corrections without exposing private examples
+        if: matrix.repository == 'content-engine' && matrix.kind == 'iteration'
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/repository-canary.mjs --private-title-replay
+          cat .canary/native-title-replay-receipt.json >> "$GITHUB_STEP_SUMMARY"
   proposals:
     if: github.event.schedule == '10 23 * * 0' || (github.event_name == 'workflow_dispatch' && inputs.proposals)
     needs: administer

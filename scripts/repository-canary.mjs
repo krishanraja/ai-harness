@@ -7,6 +7,7 @@ import {Gh} from './lib/github.mjs'
 import {redact} from './lib/redact.mjs'
 import {profiles,policyAt,knowledgeHistory,ROOT,seal} from './repository-brain.mjs'
 import {planAdministration,TARGET_CHECK} from './repository-admin.mjs'
+import {privateTitleReplay} from './repository-title-replay.mjs'
 export async function prepareCanary({repository,kind,gh,root=ROOT,out='.canary'}) {
  const policy=policyAt(root),profile=profiles(root).find(p=>p.repository===repository)
  if(!policy.pilots.includes(repository)||!['orientation','iteration'].includes(kind))throw new Error('canary_outside_pilots')
@@ -43,4 +44,13 @@ export function verifyCanary({out='.canary',execution}){
  const receipt={...expected,status:'passed',observed_read_paths:[...reads].filter(s=>s.includes('.canary/')).map(s=>s.slice(s.indexOf('.canary/'))),evidence_kind:'fresh-Claude-fixture',limits:'Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured.'}
  writeFileSync(join(out,'receipt.json'),JSON.stringify(receipt,null,2)+'\n');return receipt
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const args=process.argv.slice(2),flag=f=>args[args.indexOf(f)+1];if(args.includes('--prepare'))await prepareCanary({repository:flag('--repo'),kind:flag('--kind'),gh:new Gh(process.env.FLEET_TOKEN)});else if(args.includes('--verify'))console.log(JSON.stringify(verifyCanary({execution:flag('--execution')})))}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+ const args=process.argv.slice(2),flag=f=>args[args.indexOf(f)+1]
+ if(args.includes('--prepare'))await prepareCanary({repository:flag('--repo'),kind:flag('--kind'),gh:new Gh(process.env.FLEET_TOKEN)})
+ else if(args.includes('--verify'))console.log(JSON.stringify(verifyCanary({execution:flag('--execution')})))
+ else if(args.includes('--private-title-replay')){
+  const receipt=await privateTitleReplay({gh:new Gh(process.env.FLEET_TOKEN),key:process.env.ANTHROPIC_API_KEY})
+  writeFileSync('.canary/native-title-replay-receipt.json',JSON.stringify(receipt,null,2)+'\n')
+  console.log(JSON.stringify(receipt))
+ }
+}

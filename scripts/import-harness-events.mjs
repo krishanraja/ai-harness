@@ -36,7 +36,7 @@ export function observationId(eventId) {
 /** The hash Control Center records for an envelope; computed here for envelopes that skip it. */
 export function envelopeSha(event) {
   const keys = ['event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence']
-  if (event.schema_version === 2) { keys.shift(); keys.push('schema_version', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision') }
+  if (event.schema_version === 2) { keys.shift(); keys.push('schema_version', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision');if(event.measurement)keys.push('measurement') }
   const canonical = (v) => Array.isArray(v) ? v.map(canonical) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])])) : v
   return createHash('sha256').update(JSON.stringify(keys.map((k) => canonical(event[k] ?? null))), 'utf8').digest('hex')
 }
@@ -69,7 +69,7 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
     source: 'harness-inbox',
     repo: event.schema_version === 2 ? event.repository : null,
     evidence: `inbox:${event.event_id}`,
-    class: event.kind === 'explicit_correction' ? 'correction' : event.kind,
+    class: event.measurement ? 'measurement' : event.kind === 'explicit_correction' ? 'correction' : event.kind,
     dated,
     quote: `[${event.surface}] ${event.summary}${related}`.slice(0, 1000),
     author: null,
@@ -80,7 +80,7 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
     confidence: event.confidence,
     payload_sha256: event.payload_sha256,
     producer: (PRODUCERS.find(([prefix]) => String(event.event_id).startsWith(prefix)) || [null, 'agent'])[1],
-    ...(event.schema_version === 2 ? { schema_version: 2, episode_id: event.episode_id, knowledge_type: event.knowledge_type, episode: event.episode, source_revision: event.source_revision || null } : {}),
+    ...(event.schema_version === 2 ? { schema_version: 2, episode_id: event.episode_id, knowledge_type: event.knowledge_type, episode: event.episode, source_revision: event.source_revision || null,...(event.measurement?{measurement:event.measurement,occurred_at:event.occurred_at}:{}) } : {}),
   }
 }
 

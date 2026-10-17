@@ -126,6 +126,10 @@ replays the same bytes until identity and payload match the durable ledger on
 GitHub main. Dispatch HTTP success alone never advances a cursor. Capped or
 failed extraction leaves unprocessed source episodes replayable. Cloud
 timestamps include event identities so equal timestamps cannot drop events.
+Receipt-bound opaque cloud checkpoints also live in GitHub. A fresh worker
+recovers only progress whose referenced observation payloads match the same
+pinned main revision. Malformed or partial model output cannot become an
+empty interpretation.
 
 ## Local checks and read-only previews
 
@@ -145,6 +149,11 @@ base, brain revision, startup measure and target PR. Successful deployments
 retain their prior base and changed paths for rollback in Git history and
 the deployment ledger. `health.json` derives received episode counts and
 coverage, keeping missing opportunities and effectiveness unknown.
+It also consumes the bounded [measurement handoff](repository-measurements.md)
+through the same intake. The scheduled verifier checks source hashes, exact
+job attestations or owner merges, delivered bytes and brain revisions before
+counting observed loading, application checks or comparable opportunities.
+Source failures, unverified reports and synthetic evaluations remain distinct.
 
 ## Validation and effectiveness
 
@@ -160,6 +169,13 @@ source and brain revisions and requiring observed Read tool calls for the
 entry route and context. They certify those fixture behaviours only. They do
 not establish production loading, Codex parity, subjective title quality or
 long-term effectiveness.
+
+The additional native-title replay reads pinned accepted/rejected examples
+and the actual correction sequence privately in memory. It preserves the
+accumulated brief, resolves the explicit supersession, compares competing
+qualities and retains surface-specific approval boundaries. Only opaque
+hashes, IDs and bounded evaluation results enter public logs. This supplements
+the fresh-context fixture; model comparison does not certify personal taste.
 
 Measure repeated avoidable corrections only against relevant opportunities
 under comparable conditions. Diagnose missing evidence, interpretation,

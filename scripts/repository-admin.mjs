@@ -81,6 +81,15 @@ export function renderAdministration(profile, history, policy = policyAt()) {
   const views = [view, ...(profile.workflows || []).map((w) => effectiveKnowledge(history, { repository: profile.repository, workflow: w.id, families: profile.families || [] }, policy))]
   if (views.some(v=>v.conflicts.length)) throw new Error('unresolved_accepted_knowledge_conflict')
   const applicable = [...new Map(views.flatMap((v) => v.accepted).map((r) => [r.id, r])).values()]
+  // A default may remain valid elsewhere after a workflow supersedes it. Keep
+  // that default, but carry the effective-view exception into its delivered text.
+  const defaults = new Set(view.accepted.map((r) => r.id))
+  const workflowViews = (profile.workflows || []).map((workflow, index) => ({ workflow: workflow.id, accepted: new Set(views[index + 1].accepted.map((r) => r.id)) }))
+  const applicability = (record) => {
+    if (record.scope.kind === 'workflow') return `In workflow \`${record.scope.workflow}\` only: `
+    const excluded = defaults.has(record.id) ? workflowViews.filter((v) => !v.accepted.has(record.id)).map((v) => `\`${v.workflow}\``) : []
+    return excluded.length ? `Except when superseded by applicable workflow knowledge in ${excluded.join(', ')}: ` : ''
+  }
   const semantic = { repository: profile.repository, families: profile.families, sources: profile.sources, workflows: profile.workflows, bootstrap_notes: profile.bootstrap_notes || [], accepted: applicable }
   const revision = seal(semantic).slice(0, 12)
   const body = [
@@ -97,7 +106,7 @@ export function renderAdministration(profile, history, policy = policyAt()) {
     '## Workflows', '',
     ...(profile.workflows || []).flatMap((w) => [`### ${w.id}: ${w.label}`, '', `Read: ${w.read.map((p) => `\`${p}\``).join(', ')}.`, `Checks: ${w.checks.length ? w.checks.map((c) => `\`${c}\``).join('; ') : 'use the owning repository source; no command is inferred'}.`, 'Run only within existing authority. Check inputs, the owning stage, and the downstream artifact actually consumed.', '']),
     '## Accepted operating knowledge', '',
-    ...applicable.filter((r) => r.type !== 'experiment').map((r) => `- ${r.statement}${r.conditions.length ? ' Applies when: ' + r.conditions.join('; ') + '.' : ''}${r.uncertainties.length ? ' Uncertainty: ' + r.uncertainties.join('; ') + '.' : ''} [${r.id}@${r.version}; ${r.scope.kind}${r.scope.workflow ? ':' + r.scope.workflow : ''}]`), '',
+    ...applicable.filter((r) => r.type !== 'experiment').map((r) => `- ${applicability(r)}${r.statement}${r.conditions.length ? ' Applies when: ' + r.conditions.join('; ') + '.' : ''}${r.uncertainties.length ? ' Uncertainty: ' + r.uncertainties.join('; ') + '.' : ''} [${r.id}@${r.version}; ${r.scope.kind}${r.scope.workflow ? ':' + r.scope.workflow : ''}]`), '',
     '## Learning and decisions', '',
     'Keep an accumulated working brief: goal, accepted decisions, requested delta, conditions, unresolved questions and observed outcome. A narrow revision preserves other decisions. Distinguish an explicit owner instruction from an interpretation, and a failed experiment from an operational defect. Read native feedback/experiment records for the specific task; a result for another audience or stage is not a prohibition here.', '',
     'The brain retains evidence and proposals separately. Newly observed evidence never approves itself. When a failure repeats, diagnose missing knowledge, interpretation, retrieval, stale instructions, ignored guidance or the owning code before adding another rule.', '',
