@@ -120,11 +120,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
             You are testing a fresh repository work session using an isolated fixture under .canary/. Read .canary/CLAUDE.md, follow its shared entry route under .canary/, and read the repository operating context that route names. Read .canary/task.json and handle its request. Source links describe repository-owned authority; this is a read-only simulation. Never run product commands or fetch remote sources. Do not read expected.json.
-            Write .canary/answer.json with repository and kind matching task.json. For orientation, include workflow (primary workflow id), sources (all files named by that workflow), execute_product_actions (boolean). For content iteration, include retained_decision_ids, superseded_decision_ids, requested_delta (one word). For growth iteration, include conditions (array), global_prohibition, revised_offline_test_allowed, cause_known (booleans). Explain your choice in a short rationale field. Nobody is watching; ask no questions.
+            Return ONLY one JSON object as your final response, with repository and kind matching task.json. For orientation, include workflow (primary workflow id), sources (all files named by that workflow), execute_product_actions (boolean). For content iteration, include retained_decision_ids, superseded_decision_ids, requested_delta (one word). For growth iteration, include conditions (array), global_prohibition, revised_offline_test_allowed, cause_known (booleans). Explain your choice in a short rationale field. Nobody is watching; ask no questions. Write no files.
           claude_args: |
             --max-turns 10
-            --allowedTools "Read(.canary/CLAUDE.md),Read(.canary/AGENTS.md),Read(.canary/docs/HARNESS_CONTEXT.md),Read(.canary/task.json),Write(.canary/answer.json)"
-            --disallowedTools "Bash,WebFetch,WebSearch"
+            --allowedTools "Read(./.canary/CLAUDE.md),Read(./.canary/AGENTS.md),Read(./.canary/docs/HARNESS_CONTEXT.md),Read(./.canary/task.json)"
+            --disallowedTools "Bash,WebFetch,WebSearch,Write,Edit"
       - name: Check behaviour and observed context reads
         env:
           EXECUTION_FILE: ${{ steps.model.outputs.execution_file }}

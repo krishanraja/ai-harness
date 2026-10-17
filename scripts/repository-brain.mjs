@@ -101,7 +101,7 @@ export function effectiveKnowledge(rows, { repository, workflow = null, task = n
 export function observationKnowledge(observation, policy) {
   if (!observation.id || !observation.quote) return null
   if (!new Set(['ruling', 'correction', 'failure', 'successful_pattern', 'preference', 'friction', 'revert', 'contradiction', 'repeated_manual_step', 'missed_trigger', 'false_trigger']).has(observation.class)) return null
-  const repository = policy.targets.includes(observation.repo) ? observation.repo : null
+  const repository = observation.source === 'harness-inbox' && observation.schema_version !== 2 ? null : policy.targets.includes(observation.repo) ? observation.repo : null
   const type = observation.knowledge_type || ({ ruling: 'requirement', correction: 'requirement', preference: 'preference', successful_pattern: 'procedure' }[observation.class] || 'hypothesis')
   const statement = redact(observation.quote).replace(/\s+/g, ' ').trim().slice(0, 800)
   if (statement.length < 12) return null

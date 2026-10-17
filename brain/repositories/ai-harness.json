@@ -60,5 +60,8 @@
       ],
       "checks": []
     }
+  ],
+  "bootstrap_notes": [
+    "Record each Krish ruling once per session in the acting commit. For `record_harness_observation` use `claude-code-web` when `CLAUDE_CODE_REMOTE` is true; otherwise `claude-code`."
   ]
 }

@@ -20,6 +20,7 @@ const observed = observationKnowledge({ id: 'one', repo: 'content-engine', class
 assert.equal(observed.status, 'candidate')
 assert.equal(observed.acceptance_ref, undefined)
 assert.equal(observationKnowledge({ id: 'two', repo: null, class: 'failure', quote: 'The observed result did not meet the intended outcome.' }, policy).scope.kind, 'unknown')
+assert.equal(observationKnowledge({ id: 'legacy', source: 'harness-inbox', repo: 'ai-harness', class: 'failure', quote: 'An older importer assigned all repositories to the harness.' }, policy).scope.kind, 'unknown')
 const brief = { goal: 'Explain the real finding.', decisions: [{ id: 'name-subject', status: 'accepted', text: 'Name the subject.' }] }
 const revision = accumulateBrief(brief, { request: 'Make the title shorter.', changes: [] })
 assert.equal(revision.decisions[0].status, 'accepted')
