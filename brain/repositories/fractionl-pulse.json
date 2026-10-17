@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "repository": "fractionl-pulse",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "42a3210aa8abefcab6f09f076ffd2ce56f44f533",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 46439,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/AGENT_BRIEFING.md",
+      "role": "orientation",
+      "label": "AGENT BRIEFING"
+    },
+    {
+      "path": "docs/DOCUMENTATION_GOVERNANCE.md",
+      "role": "orientation",
+      "label": "DOCUMENTATION GOVERNANCE"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "administration",
+      "label": "Orient, diagnose and verify the system",
+      "read": [
+        "README.md",
+        "NOW.md"
+      ],
+      "checks": []
+    }
+  ]
+}

@@ -23,6 +23,10 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    paging back with `before_id` until a page reaches past 8 days or
 >    `has_more` is false or missing (the last page leaves it out). Only call
 >    the tool: do not copy, save, summarise or print what it returns.
+>    Retain repository identity only from verified provider metadata. If that
+>    metadata is unavailable, leave scope unknown; never infer it from a title.
+>    Report incomplete accounts, pagination or unavailable tools as coverage
+>    gaps. Do not report full history coverage from the sessions you can see.
 > 3. Run `node scripts/mine-sessions.mjs --source cloud-events --dry-run` and
 >    read the lessons it proposes. If any lesson names a person, a client, a
 >    path or a secret, stop and report which kind instead of sending anything.
@@ -30,6 +34,9 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    --submit dispatch --from-dry-run`. It sends exactly the lessons the dry
 >    run proposed, as a GitHub repository_dispatch; the repository's intake
 >    workflow records them.
+>    If durable acknowledgement is pending (exit 3), rerun that command once
+>    after the intake completes. The miner replays its saved interpretation,
+>    verifies the main-branch ledger, and advances only acknowledged cursors.
 > 5. Reply with counts only: sessions read, excerpts, lessons sent, lessons
 >    rejected. If any step fails, say which step and the error in one line.
 
@@ -47,6 +54,12 @@ does, so one bad reply cannot sink the run. The dry run keeps the lessons it
 proposed in the state folder, and `--from-dry-run` sends that set rather than
 asking the model again, so what goes out is what was checked. Event ids are deterministic, so a resend
 after a lost cursor is absorbed by the intake.
+
+Version 2 episodes preserve the goal, retained decisions, requested delta,
+attempt, outcome, conditions and uncertainty. They enter the existing brain
+as scoped evidence or candidates, not accepted requirements. The standing
+task's saved prompt must be read back before claiming this documentation has
+updated the provider-side schedule; this repository cannot infer that parity.
 
 The selection, redaction, validation and sending are the same code the PC's
 miner runs (`scripts/mine-sessions.mjs`), so the two cannot drift, and

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "repository": "makeyourmindup",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "e19ea80944d7abec90b88c31e7a550d1dc33e901",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 9036,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "project-documentation/02_REPO_BRIEF.md",
+      "role": "orientation",
+      "label": "02 REPO BRIEF"
+    },
+    {
+      "path": "engine/ENGINE_SPEC.md",
+      "role": "orientation",
+      "label": "ENGINE SPEC"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "administration",
+      "label": "Orient, diagnose and verify the system",
+      "read": [
+        "README.md",
+        "NOW.md"
+      ],
+      "checks": [
+        "npm test"
+      ]
+    }
+  ]
+}

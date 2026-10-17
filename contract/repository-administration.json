@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "owner": "krishanraja",
+  "approval": "brain-repository-administration-v1",
+  "targets": [
+    "ai-harness",
+    "control-center",
+    "mm-ctrl",
+    "fractionl-circle",
+    "fractionl-pulse",
+    "full-time",
+    "content-engine",
+    "contentarchives",
+    "AEO-Engine",
+    "makeyourmindup"
+  ],
+  "pilots": [
+    "content-engine",
+    "AEO-Engine"
+  ],
+  "excluded": [
+    "mindmake"
+  ],
+  "families": [
+    "repository-administration",
+    "content",
+    "growth"
+  ],
+  "managed_words": 400,
+  "context_words": 1200,
+  "max_files": 4,
+  "max_attempts": 3,
+  "acceptances": {
+    "plan:brain-repository-administration-v1": {
+      "actor": "Krish",
+      "date": "2026-10-17",
+      "repositories": [
+        "ai-harness",
+        "control-center",
+        "mm-ctrl",
+        "fractionl-circle",
+        "fractionl-pulse",
+        "full-time",
+        "content-engine",
+        "contentarchives",
+        "AEO-Engine",
+        "makeyourmindup"
+      ],
+      "source": "docs/proposals/2026-10-17-brain-repository-administration.md",
+      "records": {
+        "administration.preserve-intent": "1e94f6bdd9ad4b8555df485d89fc7d56c05fae46ed6e59125d5745037da7cc8e",
+        "administration.verify-owning-system": "c4356540ca71195944259fe8a665701cfc76b9838eef732a265ac915c4405043",
+        "administration.experimental-learning": "379312935291f5942881d1ba4ff508165359765abbb0005e7fc6d778e10c1b0f",
+        "administration.evidence-and-acceptance": "f83d055047c201657ed2e938d94a4c48cf63bc51a43201e427b76d21a6fd31ea"
+      }
+    }
+  }
+}

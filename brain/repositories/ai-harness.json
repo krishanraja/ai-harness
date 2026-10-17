@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "repository": "ai-harness",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "2abb99cbd9468b8bc2863dafbc8cdeb680706fbd",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 54570,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "contract/krish-operating-contract.md",
+      "role": "orientation",
+      "label": "krish operating contract"
+    },
+    {
+      "path": "contract/skill-routing-contract.md",
+      "role": "workflow",
+      "label": "skill routing contract"
+    },
+    {
+      "path": "CURRENT.md",
+      "role": "state",
+      "label": "CURRENT"
+    },
+    {
+      "path": "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md",
+      "role": "orientation",
+      "label": "2026 10 15 pc guardian and chat lessons"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "administration",
+      "label": "Orient, diagnose and verify the system",
+      "read": [
+        "README.md",
+        "NOW.md",
+        "CURRENT.md"
+      ],
+      "checks": []
+    }
+  ]
+}

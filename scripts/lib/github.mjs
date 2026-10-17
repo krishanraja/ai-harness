@@ -88,6 +88,23 @@ export class Gh {
     })
   }
 
+  /** One multi-file commit, with a non-forced ref update. A moved head fails instead of losing work. */
+  async commitFiles(repo, branch, parent, files, message) {
+    if (this.dryRun) return { sha: parent, dryRun: true }
+    if (await this.headSha(repo, branch) !== parent) throw new Error('write_head_moved')
+    const commit = await this.req('GET', `/repos/${this.owner}/${repo}/git/commits/${parent}`)
+    const tree = []
+    for (const [path, text] of Object.entries(files)) {
+      if (text === null) { tree.push({ path, mode: '100644', type: 'blob', sha: null }); continue }
+      const blob = await this.req('POST', `/repos/${this.owner}/${repo}/git/blobs`, { content: text, encoding: 'utf-8' })
+      tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha })
+    }
+    const nextTree = await this.req('POST', `/repos/${this.owner}/${repo}/git/trees`, { base_tree: commit.tree.sha, tree })
+    const next = await this.req('POST', `/repos/${this.owner}/${repo}/git/commits`, { message, tree: nextTree.sha, parents: [parent] })
+    await this.req('PATCH', `/repos/${this.owner}/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { sha: next.sha, force: false })
+    return next
+  }
+
   /**
    * Pull requests, including merged and closed ones.
    *

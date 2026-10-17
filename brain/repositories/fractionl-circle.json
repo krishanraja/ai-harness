@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "repository": "fractionl-circle",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "866a1307a835ae58d6150b7bd71b31736d9ffbd2",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 24627,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "AGENT_BRIEFING.md",
+      "role": "orientation",
+      "label": "AGENT BRIEFING"
+    },
+    {
+      "path": "docs/DELIVERY_STATE.md",
+      "role": "state",
+      "label": "DELIVERY STATE"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "administration",
+      "label": "Orient, diagnose and verify the system",
+      "read": [
+        "README.md",
+        "NOW.md",
+        "docs/DELIVERY_STATE.md"
+      ],
+      "checks": [
+        "npm run docs:check"
+      ]
+    }
+  ]
+}

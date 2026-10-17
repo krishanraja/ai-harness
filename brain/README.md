@@ -4,8 +4,9 @@ The curated tier of the harness memory.
 
 `state/observations/` is the raw tier: an append-only ledger of everything the
 observer saw, written by machines, never edited. Anything can land there. This
-directory is the other half, and the difference between them is approval. A
-thing arrives here only through a pull request a person merged.
+directory keeps interpretation and accepted authority distinct. Accepted meaning
+arrives through an owner-approved plan or a verified owner merge. Machine-written
+observations and candidates are typed explicitly and cannot act as requirements.
 
 That split is not new architecture for its own sake. It is the one property
 that separates a memory system from a pile of files: a private tier that is
@@ -19,6 +20,13 @@ promotion step between them that leaves a record.
 | `rules.yaml` | one entry per rule in both contracts, and one per chapter of every skill: its hash, when it first appeared, where it came from, what it supersedes | `scripts/brain-rules.mjs`, checked on every push |
 | `proposals.jsonl` | one row per event in a steward pull request's life: opened, merged, closed or expired, with hours to decision | appended by `scripts/observe.mjs`, never edited; the same deliberate machine-written exception as `usage.jsonl` |
 | `usage.jsonl` | one row per observed citation of a rule: which rule, **when**, by which producer, against which pull request or canary report | appended by `scripts/judge.mjs` and `scripts/canaries.mjs`, never edited |
+| `knowledge.jsonl` | versioned scoped facts, requirements, preferences, procedures, experiments, hypotheses and working decisions; each explicitly observed, candidate, accepted, rejected or superseded | append-only consolidator; acceptance bound to exact approved content |
+| `reviews.jsonl`, `acceptances.jsonl` | proposed meaning and independently verified owner-merge proofs | guarded review PRs, then the deterministic promotion worker |
+| `repositories/` | curated system-source and workflow profiles, budgets and fixed entrypoints | approved initial inventory; changes remain reviewable |
+
+Read `docs/harness/repository-administration.md` for the repository learning loop,
+source coverage, deployment ownership and rollback. Runtime agents receive compact
+accepted views, not these raw evidence ledgers.
 
 ## Why usage.jsonl exists
 
