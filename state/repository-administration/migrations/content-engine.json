@@ -3,7 +3,7 @@
   "files": {
     "CLAUDE.md": {
       "before_sha256": "2cb60c4b35fe77cd7d92570848442d6e590e8634042a3b5c151d7a5606a40b46",
-      "after": "@AGENTS.md\n"
+      "after": "@AGENTS.md\n\nStudio entry: follow the shared `docs/ENGINE_SESSION.md` protocol and `studio.session.open` capability gate.\n"
     }
   },
   "retained_clauses": [

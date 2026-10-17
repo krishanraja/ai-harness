@@ -41,7 +41,7 @@ export function inventoryProfile(repo, read, source_revision, policy = policyAt(
 export function initialMigration(repo, read, policy = policyAt()) {
   const migration = { acceptance: policy.approval, files: {}, retained_clauses: [] }
   if (repo.name === 'content-engine') {
-    migration.files['CLAUDE.md'] = { before_sha256: digest(read('CLAUDE.md') || ''), after: '@AGENTS.md\n' }
+    migration.files['CLAUDE.md'] = { before_sha256: digest(read('CLAUDE.md') || ''), after: '@AGENTS.md\n\nStudio entry: follow the shared `docs/ENGINE_SESSION.md` protocol and `studio.session.open` capability gate.\n' }
     migration.retained_clauses = ['System boundaries and authority remain in AGENTS.md and docs/SYSTEM_MAP.md.', 'Failure checks, both-account comments/publication, tracked Studio, observer attribution, transcript exclusion and exact launcher move into the managed bootstrap note.', 'Weekly board and account/editor mechanics remain in the board workflow sources, including plan-week.', 'Session orientation and handoff remain in AGENTS.md and WORKBENCH.md.']
   } else if ((read('AGENTS.md') || '').startsWith('# AGENTS.md\n\nEntry file for coding agents')) {
     const source = read('AGENTS.md'), at = source.indexOf('<!-- krish-canon:start')
