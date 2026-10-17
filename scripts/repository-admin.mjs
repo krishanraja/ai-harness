@@ -91,7 +91,7 @@ export function renderAdministration(profile, history, policy = policyAt()) {
   if (words(body) > policy.managed_words) throw new Error('administration_context_over_budget')
   const out = [
     `# ${profile.repository}: operating context`, '',
-    'Generated from the central ai-harness brain. Read the section for the work at hand; repository-owned sources establish current facts. This file grants no product action or spending authority.', '',
+    'Generated from the central ai-harness brain. This is a route inventory, not a certification of current architecture. Read the section for the work at hand; repository-owned sources establish current facts. The nightly publisher rechecks source paths and named commands. This file grants no product action or spending authority.', '',
     '## Sources and system boundaries', '',
     ...profile.sources.map((s) => `- ${s.label} (${s.role}): \`${s.path}\`.`), '',
     '## Workflows', '',
@@ -113,6 +113,13 @@ export function planAdministration(profile, files, history, { policy = policyAt(
   const read = (p) => files[p] ?? null
   const before = bootstrapMeasure(read)
   for (const source of profile.sources) if (read(source.path) == null) throw new Error(`source_missing:${source.path}`)
+  if (read('package.json')) {
+    const pkg=JSON.parse(read('package.json'))
+    for(const workflow of profile.workflows||[])for(const command of workflow.checks){
+      const match=command.match(/^npm (?:run ([a-zA-Z0-9:_-]+)|(?:test)(?=\s|$))/)
+      if(match&&!pkg.scripts?.[match[1]||'test'])throw new Error(`profile_command_missing:${match[1]||'test'}`)
+    }
+  }
   const rendered = renderAdministration(profile, history, policy)
   const changes = {}
   let agents = read('AGENTS.md')

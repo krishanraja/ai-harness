@@ -45,7 +45,7 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   for (const path of paths) files[path] = (await gh.getFile(repo, path, base))?.text ?? null
   const initial = !inspectRegion(files['AGENTS.md'] || '').present
   const plan = planAdministration(profile, files, history, { policy, migration: initial ? migration : null })
-  const proof = { repository: repo, base, brain_revision: plan.revision, before: plan.before.chars, after: plan.after.chars, files: Object.keys(plan.changes), source_seal: plan.input_seal, accepted_ids: plan.accepted_ids }
+  const proof = { repository: repo, base, brain_revision: plan.revision, before: plan.before.chars, after: plan.after.chars, files: Object.keys(plan.changes), source_seal: plan.input_seal, source_check: 'current-source-paths-hashes-and-named-commands', accepted_ids: plan.accepted_ids }
   if (!Object.keys(plan.changes).length) return { ...proof, status: 'current' }
   if (!write) return { ...proof, status: 'planned' }
   if (await gh.headSha(repo, branch) !== base) throw new Error('source_base_moved')

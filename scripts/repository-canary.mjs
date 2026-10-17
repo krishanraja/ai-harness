@@ -4,6 +4,7 @@ import {mkdirSync,writeFileSync,readFileSync,existsSync} from 'node:fs'
 import {join,resolve,dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {Gh} from './lib/github.mjs'
+import {redact} from './lib/redact.mjs'
 import {profiles,policyAt,knowledgeHistory,ROOT,seal} from './repository-brain.mjs'
 import {planAdministration,TARGET_CHECK} from './repository-admin.mjs'
 export async function prepareCanary({repository,kind,gh,root=ROOT,out='.canary'}) {
@@ -25,11 +26,13 @@ export function verifyCanary({out='.canary',execution}){
  const reads=new Set(),walk=(v)=>{if(!v||typeof v!=='object')return;if(v.type==='tool_use'&&v.name==='Read'&&typeof v.input?.file_path==='string')reads.add(v.input.file_path.replaceAll('\\','/'));for(const x of Object.values(v))if(typeof x==='object')walk(x)}
  if(!execution||!existsSync(execution))throw new Error('canary_execution_evidence_missing')
  const raw=readFileSync(execution,'utf8');let parsed;try{parsed=JSON.parse(raw)}catch{parsed=raw.split('\n').filter(Boolean).map(s=>JSON.parse(s))}walk(parsed)
- const results=[],findResults=v=>{if(!v||typeof v!=='object')return;if(v.type==='result'&&typeof v.result==='string')results.push(v.result);for(const x of Object.values(v))if(typeof x==='object')findResults(x)};findResults(parsed)
- const output=results.at(-1)||''
+ const results=[],findResults=v=>{if(!v||typeof v!=='object')return;if(v.type==='result')results.push(v);for(const x of Object.values(v))if(typeof x==='object')findResults(x)};findResults(parsed)
+ const final=results.at(-1),output=final?.result||''
+ if(final?.is_error)throw new Error('canary_model_error:'+redact(output).replace(/\s+/g,' ').slice(0,400))
  const answer=JSON.parse(output.replace(/^\s*```(?:json)?\s*|\s*```\s*$/g,''))
  if(answer.repository!==expected.repository||answer.kind!==expected.kind)throw new Error('wrong_canary_scope')
  for(const p of ['CLAUDE.md','AGENTS.md','docs/HARNESS_CONTEXT.md'])if(![...reads].some(s=>s.endsWith('/.canary/'+p)||s==='.canary/'+p))throw new Error('canary_entry_or_context_not_observed:'+p)
+ if([...reads].some(s=>s.endsWith('/expected.json')))throw new Error('canary_read_hidden_expectations')
  if(expected.kind==='orientation'){
   if(answer.workflow!==expected.workflow||!Array.isArray(answer.sources)||!expected.read.every(p=>answer.sources.includes(p)))throw new Error('canary_system_route_lost')
   if(answer.execute_product_actions!==false)throw new Error('canary_authority_expanded')

@@ -126,6 +126,7 @@ jobs:
             --allowedTools "Read(./.canary/CLAUDE.md),Read(./.canary/AGENTS.md),Read(./.canary/docs/HARNESS_CONTEXT.md),Read(./.canary/task.json)"
             --disallowedTools "Bash,WebFetch,WebSearch,Write,Edit"
       - name: Check behaviour and observed context reads
+        if: always() && steps.model.outputs.execution_file != ''
         env:
           EXECUTION_FILE: ${{ steps.model.outputs.execution_file }}
         run: |
