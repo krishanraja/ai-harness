@@ -44,6 +44,10 @@ try {
  const review=validateReview(proposal,[candidate],policyAt());assert.equal(review.evidence_ids[0],r.id)
  assert.throws(()=>validateReview({...proposal,repository:'AEO-Engine'},[candidate],policyAt()),/scope_not_earned/)
  assert.throws(()=>validateReview({...proposal,accepted:true},[candidate],policyAt()),/unknown_field/)
+ const scopedCandidate={...candidate,allowed_workflows:['content']}
+ assert.equal(validateReview({...proposal,workflow:'content'},[scopedCandidate],policyAt()).workflow,'content')
+ assert.throws(()=>validateReview({...proposal,workflow:'unrelated'},[scopedCandidate],policyAt()),/workflow_outside/)
+ assert.throws(()=>validateReview({...proposal,type:'working_decision'},[scopedCandidate],policyAt()),/native_task_briefs/)
  const accepted={...knowledge,status:'accepted',acceptance_ref:'plan:brain-repository-administration-v1'}
  assert.throws(()=>validateKnowledge(accepted,policyAt()),/content_mismatch/)
  console.log('REPOSITORY LEARNING OK: episode to scoped candidate, no implicit acceptance, durable receipts, timestamp ties and review isolation')

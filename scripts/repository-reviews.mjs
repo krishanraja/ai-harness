@@ -4,7 +4,7 @@ import { existsSync, readFileSync, appendFileSync, mkdirSync, readdirSync, write
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
-import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge, serializeKnowledge } from './repository-brain.mjs'
+import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge, serializeKnowledge, profiles, effectiveKnowledge } from './repository-brain.mjs'
 import { buildCandidates, loadLedger, loadPolicy } from './propose.mjs'
 import { leaks } from './lib/redact.mjs'
 
@@ -17,19 +17,25 @@ export function repositoryCandidates(root = ROOT) {
   const today = new Date().toISOString().slice(0, 10), cutoff = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10)
   const result = buildCandidates({ root, rows: loadLedger(root), policy: loadPolicy(root), today, cutoff })
   const done = new Set(lines(read(root, REVIEWS)).map((r) => r.candidate_id))
-  return result.repositoryCandidates.filter((r) => policyAt(root).targets.includes(r.repository) && !done.has(r.id)).slice(0, 6)
+  const policy=policyAt(root),history=knowledgeHistory(root),inventories=profiles(root)
+  return result.repositoryCandidates.filter((r) => policy.targets.includes(r.repository) && !done.has(r.id)).slice(0, 6).map(c=>{
+    const p=inventories.find(p=>p.repository===c.repository),views=[null,...(p?.workflows||[]).map(w=>w.id)].map(workflow=>effectiveKnowledge(history,{repository:c.repository,workflow,families:p?.families||[]},policy))
+    return {...c,allowed_workflows:(p?.workflows||[]).map(w=>w.id),accepted_context:[...new Map(views.flatMap(v=>v.accepted).map(r=>[r.id,r])).values()]}
+  })
 }
 
 export function validateReview(proposal, candidates, policy) {
   if(JSON.stringify(proposal).includes('\u2014'))throw new Error('review_emdash')
   const c = candidates.find((x) => x.id === proposal.candidate_id)
   if (!c || proposal.repository !== c.repository || !policy.targets.includes(proposal.repository)) throw new Error('review_scope_not_earned')
-  const allowed = new Set(['candidate_id', 'repository', 'type', 'statement', 'conditions', 'uncertainties', 'why', 'alternative_explanations', 'if_wrong', 'validation', 'rollback', 'supersedes', 'refines', 'contradicts'])
+  const allowed = new Set(['candidate_id', 'repository', 'workflow', 'type', 'statement', 'conditions', 'uncertainties', 'why', 'alternative_explanations', 'if_wrong', 'validation', 'rollback', 'supersedes', 'refines', 'contradicts'])
   if (Object.keys(proposal).some((k) => !allowed.has(k))) throw new Error('review_unknown_field')
   for (const key of ['statement', 'why', 'alternative_explanations', 'if_wrong', 'validation', 'rollback']) if (typeof proposal[key] !== 'string' || proposal[key].length < 12 || proposal[key].length > 800 || leaks(proposal[key]) || /<!--|https?:\/\/|[\u0000-\u001f]/u.test(proposal[key])) throw new Error('invalid_review_text')
   if (!['requirement', 'preference', 'procedure', 'hypothesis', 'experiment', 'fact', 'working_decision'].includes(proposal.type)) throw new Error('invalid_review_type')
+  if(proposal.type==='working_decision')throw new Error('temporary_decisions_stay_in_native_task_briefs')
+  if(proposal.workflow&&!(c.allowed_workflows||[]).includes(proposal.workflow))throw new Error('review_workflow_outside_repository')
   const record = { ...proposal, id: `review.${seal(proposal).slice(0, 20)}`, evidence_ids: [...new Set(c.evidence.map((e) => e.id))], conditions: proposal.conditions || [], uncertainties: proposal.uncertainties || [], supersedes: proposal.supersedes || [], refines: proposal.refines || [], contradicts: proposal.contradicts || [] }
-  validateKnowledge({ ...record, version: 1, status: 'candidate', scope: { kind: 'repository', repository: c.repository } }, policy)
+  validateKnowledge({ ...record, version: 1, status: 'candidate', scope: { kind: proposal.workflow?'workflow':'repository', repository: c.repository, ...(proposal.workflow?{workflow:proposal.workflow}:{}) } }, policy)
   return record
 }
 
@@ -70,7 +76,7 @@ export async function promoteOwnerReviews({ gh, root = ROOT, write = false }) {
       if (done.has(r.id)) continue
       const proof = { ref: `pull-request:${p.number}`, actor: 'Krish', github_login: pr.merged_by.login, merge_sha: pr.merge_commit_sha, repository: r.repository, review_id: r.id, record_hash: seal(r) }
       if (!policy.targets.includes(r.repository)) throw new Error('owner_review_outside_admission')
-      const accepted = { id: `accepted.${r.id}`, version: 1, type: r.type, status: 'accepted', scope: { kind: 'repository', repository: r.repository }, statement: r.statement, conditions: r.conditions, uncertainties: r.uncertainties, evidence_ids: r.evidence_ids, acceptance_ref: proof.ref, supersedes: r.supersedes, refines: r.refines, contradicts: r.contradicts }
+      const accepted = { id: `accepted.${r.id}`, version: 1, type: r.type, status: 'accepted', scope: { kind: r.workflow?'workflow':'repository', repository: r.repository, ...(r.workflow?{workflow:r.workflow}:{}) }, statement: r.statement, conditions: r.conditions, uncertainties: r.uncertainties, evidence_ids: r.evidence_ids, acceptance_ref: proof.ref, supersedes: r.supersedes, refines: r.refines, contradicts: r.contradicts }
       proof.knowledge_id = accepted.id; proof.knowledge_hash = seal(accepted)
       const approvedPolicy = { ...policy, acceptances: { ...policy.acceptances, [proof.ref]: { actor: 'Krish', repositories: [r.repository], records: { [accepted.id]: proof.knowledge_hash } } } }
       validateKnowledge(accepted, approvedPolicy)
