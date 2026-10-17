@@ -124,7 +124,7 @@ are the rules nobody has ever had to defend.
   is required. A self-declared status is insufficient. `scripts/validate-surfaces.mjs` keeps accepted knowledge,
   contracts and rendered adapters subject to the authored-text check.
   `scripts/test-knowledge-history.mjs` verifies both the distinction and the
-  unchanged byte-level history guard. Source punctuation grants no authority.
+  unchanged byte-level history guard.
 
 ## Changing a rule
 

@@ -10,7 +10,7 @@
  *   - the adapters are what the templates render, not hand edits
  *   - the fleet list here and the docs steward's fleet.json name the same repos
  *   - no machine-specific absolute path has crept back into the canon
- *   - no em dash, the one voice rule that is machine-checkable
+ *   - authored surfaces obey the machine-checkable em dash voice rule
  *
  * Dependency-free, and it never writes.
  *
@@ -119,8 +119,9 @@ O(`${canonFiles.length} canon files carry no machine-specific absolute path`)
 
 // ----------------------------------------------------------------- no em dash
 // Written as an escape rather than the character itself so this file obeys the
-// rule it enforces. brain/ is included because it is canon: everything the
-// judge panel and the provenance ledger read is built from these files.
+// rule it enforces. brain/ holds authored instructions and inert source evidence.
+// Only exact observation-ledger reconstructions qualify as source data; accepted
+// knowledge and the other authored surfaces retain the text-style check.
 const EM_DASH = '\u2014'
 // Derive provenance independently from the observation ledger, not a row's self-reported status.
 const sourceSeals=sourceEvidenceSeals(loadLedger(HARNESS),policyAt(HARNESS))
