@@ -3,9 +3,9 @@ on:
   pull_request:
   push:
     branches: [main]
-    paths: ["brain/knowledge.jsonl", "brain/reviews.jsonl", "brain/repositories/**", "contract/repository-administration.json", "scripts/repository-*.mjs", "scripts/reconcile-repository-admin.mjs", ".github/workflows/repository-administration.yml"]
+    paths: ["brain/knowledge.jsonl", "brain/reviews.jsonl", "brain/repositories/**", "state/observations/*.jsonl", "contract/repository-administration.json", "scripts/repository-*.mjs", "scripts/reconcile-repository-admin.mjs", ".github/workflows/repository-administration.yml"]
   workflow_run:
-    workflows: ["Harness observation intake", "Harness steward"]
+    workflows: ["Harness observation intake"]
     types: [completed]
     branches: [main]
   schedule:
@@ -39,6 +39,7 @@ jobs:
           node scripts/test-repository-reconcile.mjs
           node scripts/test-repository-learning.mjs
           node scripts/test-repository-reviews.mjs
+          node scripts/test-repository-workflow.mjs
           node scripts/validate-repository-brain.mjs
   administer:
     if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')

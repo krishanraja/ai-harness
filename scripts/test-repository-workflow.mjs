@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+import assert from 'node:assert/strict'
+import {readFileSync} from 'node:fs'
+const yml=readFileSync('.github/workflows/repository-administration.yml','utf8')
+const events=yml.slice(yml.indexOf('on:'),yml.indexOf('permissions:'))
+assert.match(events,/workflows: \["Harness observation intake"\]/)
+assert.doesNotMatch(events,/Harness steward/,'A reporting commit starts the steward; listening for its completion would create an infinite loop')
+const paths=events.match(/paths: \[([^\n]+)\]/)[1]
+assert.match(paths,/state\/observations\/\*\.jsonl/,'New real observations must still trigger consolidation')
+assert.doesNotMatch(paths,/repository-administration\/(?:latest|health|deployments)|"state\/\*\*/,'Derived reporting must not retrigger the publisher')
+assert.match(yml,/ref: main/)
+assert.match(yml,/persist-credentials: false/)
+console.log('REPOSITORY WORKFLOW OK: intake and source events retained; reporting cannot cycle through the steward')
