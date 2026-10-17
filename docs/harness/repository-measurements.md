@@ -54,7 +54,7 @@ native outcome or source-run receipt. The successful default-branch source
 job must emit the exact machine attestation produced by:
 
 ```sh
-node scripts/repository-health.mjs --attest measurement.json --evidence evidence.json --repo content-engine
+node scripts/repository-health.mjs --attest measurement.json --evidence evidence.json
 ```
 
 The producer calls this after collecting the evidence. It prints only the

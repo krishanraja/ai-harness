@@ -1,5 +1,10 @@
 # Repository administration rollout: 2026-10-17
 
+The subsequent [approved-plan completion audit](repository-administration-completion-2026-10-17.md)
+closes the remaining digestion, measurement and native-replay gaps and records
+new readbacks after source-owned changes. The measurements below describe the
+initial rollout at its recorded revisions.
+
 All ten approved repositories have merged operating guides. A fresh read of each
 GitHub main branch matches the deterministic brain view with zero generated
 changes. The verification snapshot records the exact observed heads, source

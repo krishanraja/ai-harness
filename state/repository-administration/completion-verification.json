@@ -1,0 +1,613 @@
+{
+  "schema_version": 1,
+  "plan_id": "brain-repository-administration-v1",
+  "engineering_status": "complete",
+  "verified_at": "2026-10-17T10:09:04.563Z",
+  "implementation": {
+    "pr": 134,
+    "head": "ded35030100c1b35d44f390b457c7ce584d1dfbd",
+    "merge": "93253e62a8483b270823d07cc9542537c660e775",
+    "ci": [
+      {
+        "id": 39023588410,
+        "name": "Repository operating context",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39023588372,
+        "name": "Harness steward",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39023588339,
+        "name": "Validate harness",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 39023588380,
+        "name": "Brain repository administration",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "fresh_context_and_native_replay": [
+      {
+        "evidence_class": "synthetic-evaluation",
+        "run": 39023588380,
+        "job": 117370104387,
+        "repository": "content-engine",
+        "kind": "iteration",
+        "source_base": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+        "brain_revision": "f0c91f3b1502",
+        "delivered_sha": "bf515de8fa007296db9466a267cb159728be3f64cf828ea386cdbb4fd4fa2cc5",
+        "workflow": "content",
+        "read": [
+          "docs/NORTH_STAR.md",
+          "docs/CONTENT_ENGINE.md",
+          ".agents/skills/make-piece/SKILL.md",
+          "config/title-verdicts.json",
+          "config/failures.json",
+          "WORKBENCH.md"
+        ],
+        "status": "passed",
+        "observed_read_paths": [
+          ".canary/CLAUDE.md",
+          ".canary/AGENTS.md",
+          ".canary/docs/HARNESS_CONTEXT.md",
+          ".canary/task.json"
+        ],
+        "evidence_kind": "fresh-Claude-fixture",
+        "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+      },
+      {
+        "evidence_class": "synthetic-evaluation",
+        "run": 39023588380,
+        "job": 117370104387,
+        "schema_version": 1,
+        "repository": "content-engine",
+        "kind": "native-title-replay",
+        "source_base": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+        "brain_revision": "f0c91f3b1502",
+        "delivered_sha": "bf515de8fa007296db9466a267cb159728be3f64cf828ea386cdbb4fd4fa2cc5",
+        "native_source_path": "config/title-verdicts.json",
+        "native_source_revision": "ec01de3a217075011082eec205b65ede244b6d8c",
+        "native_source_sha256": "1ac8a5ffa2f64c144f2cb88b280ec34cf219e36f82e15b5bb5294ccbde3ffef0",
+        "task_sha256": "ac94af33a42f2f9224d0ea22b4b538b89b35b82f762c2933a93b25100b67cd08",
+        "status": "passed",
+        "evidence_kind": "private-native-history-model-replay",
+        "retained_decision_ids": [
+          "native-subject",
+          "native-claim",
+          "native-feedback"
+        ],
+        "requested_delta": "length",
+        "comparison_only": true,
+        "native_approval_transfer": false,
+        "selected_example_id": "example-8b85c9cbb146c83c",
+        "selected_reference_category": "known-baseline",
+        "superseded_lesson_ids": [
+          "lesson-241bb75ff982b852"
+        ],
+        "superseding_lesson_id": "lesson-8339e6d78adcd5cc",
+        "compared_example_ids": [
+          "example-8b85c9cbb146c83c",
+          "example-da727fdcb01dc06f",
+          "example-edca7842808d4fd0",
+          "example-f5f37a0e4921fd4a"
+        ],
+        "comparison_count": 4,
+        "tradeoff_axes": [
+          "brevity",
+          "clarity",
+          "curiosity",
+          "factual-fidelity",
+          "specificity",
+          "surface-fit"
+        ],
+        "private_response_sha256": "21d2926d790ead877d93d1277feb7a62b38ebf68ab0900ae552975c5f3669614",
+        "limits": "Native source verdicts, picked comparison reference, explicit supersession and accumulated intent checked deterministically. The length request remains a proposed revision delta; selecting a reference does not prove a shortened title was produced. Qualitative trade-off reasoning is supplemental model evidence; subjective taste, production application and long-term effectiveness remain unmeasured. The shortening request is a synthetic replay delta, not a claim about the historical transcript.",
+        "model": "claude-opus-5",
+        "model_calls": 1,
+        "max_output_tokens": 3000,
+        "private_input_sha256": "935ec1b9cd50b42cc7b9b341545ef88f9f274d53f559b67c918f290efac5b3af"
+      },
+      {
+        "evidence_class": "synthetic-evaluation",
+        "run": 39023588380,
+        "job": 117370104424,
+        "repository": "AEO-Engine",
+        "kind": "iteration",
+        "source_base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+        "brain_revision": "5ca09cc3df52",
+        "delivered_sha": "280d97c2c51b31a1d06e8b6f77721515b15b16bea1c9dd6e0b556c9e6584f571",
+        "workflow": "research",
+        "read": [
+          "README.md",
+          "docs/PACKET.md",
+          "docs/STATE.md",
+          "src/pipeline/run.ts",
+          "docs/NEVER-PUBLISH.md"
+        ],
+        "status": "passed",
+        "observed_read_paths": [
+          ".canary/CLAUDE.md",
+          ".canary/AGENTS.md",
+          ".canary/docs/HARNESS_CONTEXT.md",
+          ".canary/task.json"
+        ],
+        "evidence_kind": "fresh-Claude-fixture",
+        "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+      },
+      {
+        "evidence_class": "synthetic-evaluation",
+        "run": 39023588380,
+        "job": 117370104431,
+        "repository": "content-engine",
+        "kind": "orientation",
+        "source_base": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+        "brain_revision": "f0c91f3b1502",
+        "delivered_sha": "bf515de8fa007296db9466a267cb159728be3f64cf828ea386cdbb4fd4fa2cc5",
+        "workflow": "content",
+        "read": [
+          "docs/NORTH_STAR.md",
+          "docs/CONTENT_ENGINE.md",
+          ".agents/skills/make-piece/SKILL.md",
+          "config/title-verdicts.json",
+          "config/failures.json",
+          "WORKBENCH.md"
+        ],
+        "status": "passed",
+        "observed_read_paths": [
+          ".canary/CLAUDE.md",
+          ".canary/AGENTS.md",
+          ".canary/docs/HARNESS_CONTEXT.md",
+          ".canary/task.json"
+        ],
+        "evidence_kind": "fresh-Claude-fixture",
+        "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+      },
+      {
+        "evidence_class": "synthetic-evaluation",
+        "run": 39023588380,
+        "job": 117370104456,
+        "repository": "AEO-Engine",
+        "kind": "orientation",
+        "source_base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+        "brain_revision": "5ca09cc3df52",
+        "delivered_sha": "280d97c2c51b31a1d06e8b6f77721515b15b16bea1c9dd6e0b556c9e6584f571",
+        "workflow": "research",
+        "read": [
+          "README.md",
+          "docs/PACKET.md",
+          "docs/STATE.md",
+          "src/pipeline/run.ts",
+          "docs/NEVER-PUBLISH.md"
+        ],
+        "status": "passed",
+        "observed_read_paths": [
+          ".canary/CLAUDE.md",
+          ".canary/AGENTS.md",
+          ".canary/docs/HARNESS_CONTEXT.md",
+          ".canary/task.json"
+        ],
+        "evidence_kind": "fresh-Claude-fixture",
+        "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+      }
+    ]
+  },
+  "fleet": {
+    "schema_version": 1,
+    "evidence_class": "deployment-verification",
+    "verified_at": "2026-10-17T10:08:36.535Z",
+    "brain_commit": "956b5421ec7a09522bccb65c6c228d9f070ebe99",
+    "claims": "Current Git heads, generated bytes, route, integrity, budgets, source existence and named commands; production behaviour and subjective output quality remain unmeasured.",
+    "repositories": [
+      {
+        "repository": "AEO-Engine",
+        "observed_head": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+        "brain_revision": "5ca09cc3df52",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 432,
+        "bootstrap_chars": 11549,
+        "source_seal": "a2d318ee7abcb96192e3428220a8a367045cf6a3ec29fa1e44ef5b8cfee66880",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "882e977bdbd1c99d4bea142526c7e1a8a715a7cf1b6a2ec9c4e288b035163234",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "5d09a958ec318742929dfa96e5d9ff0de3d310cc3e05ea504bb00d5a521e70d6",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 13,
+        "deployment_merge": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+        "rollback": {
+          "evidence_class": "read-only-planner-evaluation",
+          "base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+          "intervening_human_note_preserved": true,
+          "changed_new_file_refused": true,
+          "product_mutations": 0
+        }
+      },
+      {
+        "repository": "ai-harness",
+        "observed_head": "956b5421ec7a09522bccb65c6c228d9f070ebe99",
+        "brain_revision": "155b79828fb7",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 74,
+        "reference_words": 483,
+        "bootstrap_chars": 39955,
+        "source_seal": "e6ebbbe2d1803baeb3513a99b6c839b1725011d228a19a551bb287f743a64d0b",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "457695d134c3f20547a15dfd742ba1ea177b1c36c33911e6e5bbcb1fda578d0c",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "d192dbb5bbd6f1306d31ce336224ee968c070ea641b1623f99e816cfecd780aa",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 131,
+        "deployment_merge": "7ef3bb660589922348b4c41242b32b9aa6d114b0",
+        "rollback": null
+      },
+      {
+        "repository": "content-engine",
+        "observed_head": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+        "brain_revision": "f0c91f3b1502",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 118,
+        "reference_words": 497,
+        "bootstrap_chars": 251254,
+        "source_seal": "e764874a39c5535177ba06a1b8c5ae1ca39059d74d8f2b27519f250ed0aa3a72",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "0a6a59edaeeb1816c0ef160bda0120ea54d0539ace927f540326f26b2b0f83dc",
+          "CLAUDE.md": "f650a769bd4418f7721a45357fbb188a6b303c0af9c6c8fa943793e95455cc89",
+          "docs/HARNESS_CONTEXT.md": "d06e170085a1a38986ad06e6e94b39de5c7a2154ec33a946eb926799fd02e917",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 90,
+        "deployment_merge": "ec01de3a217075011082eec205b65ede244b6d8c",
+        "rollback": {
+          "evidence_class": "read-only-planner-evaluation",
+          "base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+          "intervening_human_note_preserved": true,
+          "changed_new_file_refused": true,
+          "product_mutations": 0
+        }
+      },
+      {
+        "repository": "contentarchives",
+        "observed_head": "c9f795c92c66bc13157b5b2159be083443860648",
+        "brain_revision": "430ad4208f8a",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 417,
+        "bootstrap_chars": 76175,
+        "source_seal": "7664a7a1fde23522189764efc634d9822581b02c63f46cd038c56eceee66c2a0",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "3cb76f6dee733a471a76a8a3d4f1bf514b25f83ff54c3392b51a89ad5bbedbbe",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "8b6c6264d0b0730e24893c4fb30675f02d3aa03490dda73da814febe3e0d63cb",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 14,
+        "deployment_merge": "c9f795c92c66bc13157b5b2159be083443860648",
+        "rollback": null
+      },
+      {
+        "repository": "control-center",
+        "observed_head": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
+        "brain_revision": "ba41f521a760",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 418,
+        "bootstrap_chars": 48670,
+        "source_seal": "1094a06ff158ab4a7a4751b25db16e14f3147756e8ddecc37dde91a0e3901227",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "2bbf2252bb2de15a9f341702ca834528fe15c985a53d959ba3ce4129a326d9b4",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "68e1165151387ce5f7045aa934cfb2d72c73d9f01fb9c2193c6e54b39174f53e",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 471,
+        "deployment_merge": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
+        "rollback": null
+      },
+      {
+        "repository": "fractionl-circle",
+        "observed_head": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+        "brain_revision": "dddd1abc777c",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 380,
+        "bootstrap_chars": 15715,
+        "source_seal": "54f92549b3ac3ee695463ec9fbb8d91cfcc7ac5a9bcc9817a66473acd80f2bd3",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "b17a82d73772d86603725d942f6e92fba376a7356104ba6e9fad4fb20ca18d8b",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "b0e31d6a64d922fe11a17682cd50561dda985bce583e4edffef075065e8fe85d",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 163,
+        "deployment_merge": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+        "rollback": null
+      },
+      {
+        "repository": "fractionl-pulse",
+        "observed_head": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+        "brain_revision": "c3389b60c708",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 385,
+        "bootstrap_chars": 33956,
+        "source_seal": "b5d9aef19fcd14ec993e7a1a9888171f6dc917c28f30a230617605e6f7b2eafc",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "9df7acf4a1a8164c5dc6dc3ef814a0e48fdbc19aa11ef7f9f27ce3a623d7d844",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "45121a9f097046adc16093d20c8a297bf3a5c2dc57895d589c77ee2346ee904a",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 49,
+        "deployment_merge": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+        "rollback": null
+      },
+      {
+        "repository": "full-time",
+        "observed_head": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+        "brain_revision": "cd43facd0779",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 383,
+        "bootstrap_chars": 44509,
+        "source_seal": "f6a3f0c16b573873e9b7119f04f07689551752e53137c5a8f4c8e373f348a51a",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "556f511b5f2da50275832a712913171d4a14b6e75b51cf6ef2850a7aea243b3a",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "b3d827b20623e774c2a8e212b658387660b5106424288860517a84eeda41f774",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 81,
+        "deployment_merge": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+        "rollback": null
+      },
+      {
+        "repository": "makeyourmindup",
+        "observed_head": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
+        "brain_revision": "13bd661431b5",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 378,
+        "bootstrap_chars": 9003,
+        "source_seal": "cf756e17ba1f41d448fe3212aa0f57fda27e6ab1046e50af539ca6f02d2f3a2a",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "b06266acb4a21d75d9e2e41f17fffa2c7e6ca3cf51c4f74519a3fbffcc63049a",
+          "CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+          "docs/HARNESS_CONTEXT.md": "18890d7b06ec64bdda905fcbf6276dd4aeb48bfcecb8c10f84f2239413ec6124",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 18,
+        "deployment_merge": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
+        "rollback": null
+      },
+      {
+        "repository": "mm-ctrl",
+        "observed_head": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
+        "brain_revision": "4757d4458aee",
+        "status": "current-byte-readback-verified",
+        "generated_changes": 0,
+        "managed_words": 53,
+        "reference_words": 380,
+        "bootstrap_chars": 22137,
+        "source_seal": "319bb02070730d4b97d97b79bcc1cc2c6b4b119d4249f102bab2f8a0853e2d8f",
+        "native_claude_route": "@AGENTS.md",
+        "files": {
+          "AGENTS.md": "8e8cb96fa6c3e91d78081e72048ee676abad3e4169adf67db0f32ffc0b5ea644",
+          "CLAUDE.md": "80c4d1d98311f2924d8bd92db6fb0d45b2402f3dec8ae3696748b13de8ffd22d",
+          "docs/HARNESS_CONTEXT.md": "ac1e16b7e6aa56b60fe725fea4f7e1c0abb7e1ee8dfa7e6a7a2af4a552ad3499",
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+        },
+        "deployment_pr": 399,
+        "deployment_merge": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
+        "rollback": null
+      }
+    ]
+  },
+  "live_operation": {
+    "run": 39023704741,
+    "job": 117370448463,
+    "conclusion": "success",
+    "report_commit": "956b5421ec7a09522bccb65c6c228d9f070ebe99",
+    "health_sha256": "23a885f423cedaa477f994dbc93428c70859ba429695d417dd286e335831e279",
+    "health_generated_at": "2026-10-17T10:08:17.075Z",
+    "schema_version": 2,
+    "targets_current": 10,
+    "verified_production_measurements": 0,
+    "coverage_status": "coverage-unverified"
+  },
+  "immutable_history": {
+    "knowledge_records": 591,
+    "knowledge_sha256": "d1bc1929de4e751c8985ee21f3d8985851d91e6b81b2e3695ef64b9e6d76a481",
+    "deployment_receipts": 10,
+    "deployment_ledger_sha256": "f3af8d0e2731acd977542aefd4c1ee106fb1dabd6be251952a745d1e3b8fcd3b"
+  },
+  "local_validation": {
+    "baseline_suites": [
+      {
+        "test": "test-control-plane",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-canon-sync",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-brain-rules",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-brain-usage",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-cloud-upload",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-audit",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-observe",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-steward-workflow",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-context-budget",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-propose",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-change-guard",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-digest",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-machine-heartbeat",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-process-review",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-redact",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-register-release",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "test-judge",
+        "status": "fulfilled",
+        "exit_code": 0
+      }
+    ],
+    "affected_suites": [
+      {
+        "test": "node scripts/test-learning-episodes.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-brain.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-admin.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-reconcile.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-learning.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-learning-loop.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-reviews.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-measurements.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-repository-canary.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-knowledge-history.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-import-harness-events.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/test-intake-observations.mjs",
+        "status": "fulfilled",
+        "exit_code": 0
+      },
+      {
+        "test": "node scripts/mine-sessions.mjs --self-test",
+        "status": "fulfilled",
+        "exit_code": 0
+      }
+    ]
+  },
+  "limits": [
+    "Provider-side account enumeration, complete history pagination and saved standing-task readback remain unverified. No complete Claude or Codex history coverage is claimed.",
+    "Fresh-context and native-title replay receipts are evaluations, not production loading or effectiveness observations. The native shortening delta is synthetic; no final shortened title or personal-taste certification is claimed.",
+    "Later source-owned content-engine startup reads total 251254 characters at 644a8e1cc832fde5c28aeb8bcf724642c34b70f7. Generated guides remain unchanged and managed growth is refused while above the recorded baseline.",
+    "The linked content-engine application defect #91 is outside the approved four-file guide rollout.",
+    "No production opportunities are verified yet; effectiveness stays unknown until real comparable work is observed."
+  ]
+}
