@@ -103,11 +103,16 @@ are the rules nobody has ever had to defend.
 - **A count is derived, never stored.** The moment a tally becomes a column,
   something has to write it, and the only way to write it is in place. Ask the
   ledger and add up what it says.
-- **Nothing here is edited in place by a script.** The ledger files a script
+- **Historical records are immutable.** The ledger files a script
   writes are JSONL, and a change of state is a new row for the same `id`. The
   current state of anything is the latest row that names it. A superseded entry
   gets a closing row; it never gets deleted, and neither does the thing it
   superseded.
+- JSON transport may use equivalent Unicode escapes. `scripts/validate-knowledge-history.mjs`
+  independently requires every prior decoded record to remain identical and in
+  the same order. An encoding-only repair changes no field, status, evidence,
+  scope or accepted-content hash. The verified repair of two legacy punctuation
+  characters is recorded in `state/repository-administration/serialization-migration.json`.
 - **Ids are slugs, never ordinals.** `authority.never-publish-post-send`, not
   `authority.3`. An ordinal renames every rule below an insertion, and a
   provenance record that survives an edit by name while pointing at different

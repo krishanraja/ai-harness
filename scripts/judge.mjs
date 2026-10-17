@@ -97,12 +97,15 @@ export function citedScripts(diff) {
 export function citedProposals(diff) {
   return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/g)].map(m=>m[1])))]
 }
+export function citedEvidenceArtifacts(diff) {
+ return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(state\/repository-administration\/[A-Za-z0-9._-]+\.json)\b/g)].map(m=>m[1])))]
+}
 
 export function diffFor(base, head) {
   const git = (paths) => execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...paths],
     { encoding: 'utf8', maxBuffer: 1 << 26 })
   const canon = git(WATCHED)
-  const cited = [...citedScripts(canon), ...citedProposals(canon)]
+  const cited = [...citedScripts(canon), ...citedProposals(canon), ...citedEvidenceArtifacts(canon)]
   return cited.length ? canon + git(cited) : canon
 }
 
