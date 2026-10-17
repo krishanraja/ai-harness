@@ -12,13 +12,13 @@ Chronology lives in `docs/history/LOG.md`.
 This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
 canon below on anything specific to this repository.
 
-<!-- krish-canon:start release=v2026.10.15.2 sha=2a2ea084e8ff rendered=2026-10-15 -->
+<!-- krish-canon:start release=v2026.10.17.1 sha=2ed1b873a356 rendered=2026-10-17 -->
 ## Krish canon
 
-Rendered from `krishanraja/ai-harness` at release v2026.10.15.2. Nothing inside these
+Rendered from `krishanraja/ai-harness` at release v2026.10.17.1. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
-never silently overwritten, and never lost. Everything outside the markers belongs to
-this repository and is never read or rewritten by the harness.
+never silently overwritten, and never lost. This sync preserves all other text.
+Separately approved repository administration owns only its declared regions and context file.
 
 **Precedence.** This repository's own rules outrank the canon on repository matters:
 structure, naming, voice, stamps, archive location, test and build commands. The canon
