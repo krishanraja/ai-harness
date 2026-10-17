@@ -41,13 +41,13 @@ export function buildDigest({ ready = [], blockers = [], scoreboard = null, toda
   const budget = num(policy?.decision_budget, 3)
   const decisions = [
     ...blockers.map((b) => ({ kind: b.kind, title: b.title, detail: b.detail, only_you: b.only_you || 'permission' })),
-    ...[...ready].sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))).map((p) => ({ kind: 'merge', title: p.title.replace(/^Change request:\s*/, ''), pr: p.number, url: p.html_url, only_you: 'permission' })),
+    ...[...ready].sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))).map((p) => ({ kind: 'merge', title: p.title.replace(/^Change request:\s*/, ''), pr: p.number, url: p.html_url, delivery: p.head?.ref?.startsWith('harness/repository-learning-') ? 'repository' : 'canon', only_you: 'permission' })),
   ].slice(0, budget)
 
   const lines = [`# Harness digest, ${week}`, '']
   lines.push(decisions.length === 1 ? 'One thing needs you this week.' : `${decisions.length} things need you this week.`, '')
   for (const [i, d] of decisions.entries()) {
-    if (d.kind === 'merge') lines.push(`${i + 1}. **Merge or close** [#${d.pr}](${d.url}): ${d.title}. Merging accepts it; it does not release anything.`)
+    if (d.kind === 'merge') lines.push(`${i + 1}. **Merge or close** [#${d.pr}](${d.url}): ${d.title}. ${d.delivery==='repository'?'Merging accepts this scoped knowledge and schedules checked repository delivery.':'Merging accepts the change and starts the normal release process.'}`)
     else lines.push(`${i + 1}. **${d.title}.** ${d.detail}`)
   }
   lines.push('')
@@ -59,6 +59,7 @@ export function buildDigest({ ready = [], blockers = [], scoreboard = null, toda
     lines.push(`- Change requests accepted: ${acc === null || acc === undefined ? 'none decided yet' : acc}`)
     lines.push(`- Always-on context: ${Number(s.always_on_chars).toLocaleString('en-US')} characters${s.always_on_delta ? ` (${s.always_on_delta > 0 ? '+' : ''}${s.always_on_delta} this week)` : ''}`)
     lines.push(`- Real work signals captured this week: ${s.work_signals_week}`)
+    if(s.repository_administration){const repos=s.repository_administration.repositories||[];lines.push(`- Repository views verified or current: ${repos.filter(r=>['verified','current'].includes(r.delivery)).length}/${repos.length}. History coverage and effectiveness remain unmeasured where evidence is missing.`)}
     lines.push('')
   }
   const merges = decisions.filter((d) => d.kind === 'merge').length

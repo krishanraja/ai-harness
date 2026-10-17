@@ -57,6 +57,9 @@ test('a draft with a running check waits', decide(change(), { ...green, runs: [{
 test('a draft with a failed check is never marked ready', decide(change(), { ...green, runs: [{ name: 'validate', status: 'completed', conclusion: 'failure' }] }, { today, expiryDays: 14 }).action === 'none')
 test('a change request past expiry closes', decide(change({ created_at: '2026-10-01T00:00:00Z' }), green, { today, expiryDays: 14 }).action === 'close')
 test('a pull request that is not the steward\'s is left alone', decide({ head: { ref: 'feature/x' }, created_at: '2026-10-01T00:00:00Z' }, null, { today, expiryDays: 14 }).action === 'none')
+const scoped=change({head:{ref:'harness/repository-learning-example',sha:'abc'}})
+test('a measured repository learning proposal reaches the same review queue',decide(scoped,green,{today,expiryDays:14}).action==='mark-ready')
+test('repository learning digest explains the accepted-view delivery that follows a merge',buildDigest({ready:[{...pr(7),head:scoped.head}],today,policy}).md.includes('schedules checked repository delivery'))
 
 const hb = { 'harness-sync-lorimer': { last_run: '2026-10-06T21:44:07Z', status: 'ok' }, 'harness-sync-surface': { last_run: '2026-10-06T21:55:19Z' }, 'openclaw-vps': { last_run: '2026-09-19T09:05:09Z', retiring: '2026-09-20' } }
 const silent = silentClocks(hb, { now: new Date('2026-10-15T08:00:00Z'), limits: { 'harness-sync-lorimer': 3, 'openclaw-vps': 3 } })
