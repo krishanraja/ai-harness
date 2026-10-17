@@ -46,7 +46,7 @@ const OK_CONCLUSIONS = new Set(['success', 'skipped', 'neutral'])
 export function decide(pr, checks, { today, expiryDays }) {
   const head = pr.head?.ref || ''
   if (head.startsWith('harness/proposals-')) return { action: 'close', reason: 'proposals-superseded' }
-  if (!head.startsWith('harness/change-')) return { action: 'none' }
+  if (!/^harness\/(?:change-|repository-learning-)/.test(head)) return { action: 'none' }
   const ageDays = (Date.parse(`${today}T00:00:00Z`) - Date.parse(pr.created_at)) / 86400000
   if (ageDays > expiryDays) return { action: 'close', reason: 'expired' }
   const judge = checks?.statuses?.['harness/judge']
@@ -142,7 +142,7 @@ if (isMain) {
   for (const pr of await gh.openPulls('ai-harness')) {
     const head = pr.head?.ref || ''
     if (!head.startsWith('harness/')) continue
-    const checks = head.startsWith('harness/change-') ? await gh.checksFor('ai-harness', pr.head.sha) : null
+    const checks = /^harness\/(?:change-|repository-learning-)/.test(head) ? await gh.checksFor('ai-harness', pr.head.sha) : null
     const d = decide(pr, checks, { today, expiryDays })
     if (d.action === 'close') {
       const body = d.reason === 'expired'

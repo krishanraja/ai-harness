@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "repository": "AEO-Engine",
+  "enabled": true,
+  "families": [
+    "repository-administration",
+    "growth"
+  ],
+  "source_revision": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 17233,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/PACKET.md",
+      "role": "orientation",
+      "label": "PACKET"
+    },
+    {
+      "path": "docs/STATE.md",
+      "role": "state",
+      "label": "STATE"
+    },
+    {
+      "path": "docs/NEVER-PUBLISH.md",
+      "role": "privacy",
+      "label": "NEVER PUBLISH"
+    },
+    {
+      "path": "src/index.ts",
+      "role": "orientation",
+      "label": "index"
+    },
+    {
+      "path": "src/pipeline/run.ts",
+      "role": "orientation",
+      "label": "run"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "research",
+      "label": "Question selection, probes, evidence and packet handoffs",
+      "read": [
+        "README.md",
+        "docs/PACKET.md",
+        "docs/STATE.md",
+        "src/pipeline/run.ts",
+        "docs/NEVER-PUBLISH.md"
+      ],
+      "checks": [
+        "npm test",
+        "npm run typecheck",
+        "npm run check:config"
+      ]
+    },
+    {
+      "id": "experiment",
+      "label": "Compare conditional findings and choose the next bounded test",
+      "read": [
+        "README.md",
+        "docs/PACKET.md",
+        "docs/STATE.md"
+      ],
+      "checks": [
+        "npm run run -- --offline --dry --subject ctrl"
+      ]
+    }
+  ]
+}

@@ -30,6 +30,7 @@ import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { loadLedger, loadPolicy, normaliseRulings, cluster } from './propose.mjs'
 import { loadBudget, measure, reader } from './context-budget.mjs'
+import { repositoryHealth } from './repository-health.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -123,6 +124,7 @@ export function computeScoreboard({ root = HARNESS, today = new Date().toISOStri
     standing_open: standing.filter((e) => e.open).length,
     standing_closed_28d: standing.filter((e) => !e.open && (e.closed_at || '') >= daysBefore(today, 28)).length,
     reverts_28d: reverts,
+    ...(existsSync(join(root,'contract/repository-administration.json')) ? {repository_administration:repositoryHealth(root)} : {}),
   }
   const weeks = num(policy.revisit?.auto_merge_after_weeks, 4)
   const minAcc = num(policy.revisit?.auto_merge_min_acceptance, 0.8)

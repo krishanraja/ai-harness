@@ -201,17 +201,18 @@ procedure moved here.
   date is reported as waiting on Krish, never bumped, because
   "review-date expiry opens a finding; it does not silently rewrite a skill".
 
-## The two stewards
+## Writer ownership
 
-Two automated writers now touch the same repositories, so their territories are
-fixed and disjoint:
+The docs steward, canon sync and repository-administration publisher have disjoint territories:
 
 | | Docs steward | Harness steward |
 |---|---|---|
 | Lives in | `ai-harness/docs/steward/` and `ai-harness/scripts/steward/` | `ai-harness/scripts/` |
 | Owns | `NOW.md`, `docs/history/LOG.md`, banners on superseded docs | the text between the `krish-canon` markers in `AGENTS.md`, and the harness canon itself |
 | Writes by | committing to `main` | opening a pull request |
-| Never touches | anything between the `krish-canon` markers | `NOW.md`, `docs/history/`, or anything outside the markers |
+| Never touches | `krish-canon`, `krish-repo-admin`, `krish-repo-context` regions; `docs/HARNESS_CONTEXT.md`; `.github/workflows/harness-repository-context.yml` | `NOW.md`, `docs/history/`, or anything outside its own markers |
+
+The separate repository-administration publisher owns `krish-repo-admin` in `AGENTS.md`, the complete generated `docs/HARNESS_CONTEXT.md`, and its hash/budget check workflow. An approved, hash-bound initial migration may thin `CLAUDE.md` to `@AGENTS.md` and compress duplicated bootstrap explanation while preserving specific rules. Subsequent runs preserve every unmanaged byte. New meaning comes from accepted central brain records; the docs steward may report a finding but must never rewrite or archive these surfaces, even with a regenerated hash.
 
 The canon block is inside `AGENTS.md`, which is on the docs steward's markdown
 allowlist. The steward must leave it alone: it is rendered from

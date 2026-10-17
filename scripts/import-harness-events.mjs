@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto'
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { validateEpisode, eventIdentity } from './lib/learning-episode.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const DEFAULT_LEDGER_DIR = join(HARNESS, 'state/observations')
@@ -29,13 +30,15 @@ const CONFIDENCES = new Set(['low', 'medium', 'high'])
 const PRIVATE_SHAPE = /\b[A-Z]:\\(?:Users|Documents and Settings)\\|\/(?:Users|home)\/[^\s/]+\/|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
 
 export function observationId(eventId) {
-  return createHash('sha256').update(`harness-inbox\0${eventId}`, 'utf8').digest('hex').slice(0, 16)
+  return createHash('sha256').update(typeof eventId === 'object' ? eventIdentity(eventId) : `harness-inbox\0${eventId}`, 'utf8').digest('hex').slice(0, 16)
 }
 
 /** The hash Control Center records for an envelope; computed here for envelopes that skip it. */
 export function envelopeSha(event) {
   const keys = ['event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence']
-  return createHash('sha256').update(JSON.stringify(keys.map((k) => event[k] ?? null)), 'utf8').digest('hex')
+  if (event.schema_version === 2) { keys.shift(); keys.push('schema_version', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision') }
+  const canonical = (v) => Array.isArray(v) ? v.map(canonical) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])])) : v
+  return createHash('sha256').update(JSON.stringify(keys.map((k) => canonical(event[k] ?? null))), 'utf8').digest('hex')
 }
 
 /**
@@ -45,6 +48,8 @@ export function envelopeSha(event) {
  */
 export function toObservation(event, seenAt, { requireInbox = true } = {}) {
   if (!event || typeof event !== 'object') throw new Error('invalid_event')
+  if (![undefined, 1, 2].includes(event.schema_version)) throw new Error('invalid_schema_version')
+  validateEpisode(event)
   const required = [...(requireInbox ? ['inbox_id'] : []), 'event_id', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'outcome', 'severity', 'confidence', 'payload_sha256']
   for (const key of required) if (event[key] === undefined || event[key] === null || event[key] === '') throw new Error(`event_missing_${key}`)
   if (requireInbox && (!Number.isSafeInteger(event.inbox_id) || event.inbox_id < 1)) throw new Error('invalid_inbox_id')
@@ -59,10 +64,10 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dated)) throw new Error('invalid_occurred_at')
   const related = event.related_skill_or_rule ? ` Related: ${event.related_skill_or_rule}.` : ''
   return {
-    id: observationId(event.event_id),
+    id: observationId(event),
     seen_at: seenAt,
     source: 'harness-inbox',
-    repo: 'ai-harness',
+    repo: event.schema_version === 2 ? event.repository : null,
     evidence: `inbox:${event.event_id}`,
     class: event.kind === 'explicit_correction' ? 'correction' : event.kind,
     dated,
@@ -75,6 +80,7 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
     confidence: event.confidence,
     payload_sha256: event.payload_sha256,
     producer: (PRODUCERS.find(([prefix]) => String(event.event_id).startsWith(prefix)) || [null, 'agent'])[1],
+    ...(event.schema_version === 2 ? { schema_version: 2, episode_id: event.episode_id, knowledge_type: event.knowledge_type, episode: event.episode, source_revision: event.source_revision || null } : {}),
   }
 }
 
@@ -89,6 +95,18 @@ export function readSeenIds(ledgerDir) {
     }
   }
   return seen
+}
+
+export function readSeenPayloads(ledgerDir) {
+  const out = new Map()
+  if (!existsSync(ledgerDir)) return out
+  for (const file of readdirSync(ledgerDir).filter((f) => f.endsWith('.jsonl'))) {
+    for (const line of readFileSync(join(ledgerDir, file), 'utf8').split('\n').filter(Boolean)) {
+      const row = JSON.parse(line)
+      if (row.id) out.set(row.id, row.payload_sha256 || null)
+    }
+  }
+  return out
 }
 
 export async function importHarnessEvents({
@@ -106,6 +124,7 @@ export async function importHarnessEvents({
   const month = seenAt.slice(0, 7)
   const ledger = join(ledgerDir, `${month}.jsonl`)
   const seen = readSeenIds(ledgerDir)
+  const payloads = readSeenPayloads(ledgerDir)
   const saved = existsSync(cursorPath) ? JSON.parse(readFileSync(cursorPath, 'utf8')) : { cursor: 0 }
   let cursor = Number(saved.cursor || 0)
   if (!Number.isSafeInteger(cursor) || cursor < 0) throw new Error('invalid saved inbox cursor')
@@ -133,8 +152,10 @@ export async function importHarnessEvents({
     if (page.has_more && page.next_cursor === cursor) throw new Error('event export did not advance its cursor')
     for (const event of page.events) {
       const row = toObservation(event, seenAt)
+      if (seen.has(row.id) && row.schema_version === 2 && payloads.get(row.id) !== row.payload_sha256) throw new Error('event_conflict')
       if (!seen.has(row.id)) {
         seen.add(row.id)
+        payloads.set(row.id, row.payload_sha256)
         fresh.push(row)
       }
     }

@@ -239,6 +239,14 @@ if (since) {
     if (code.startsWith('D')) fail(`diff: ${a} was deleted. The steward moves files to history, it never deletes.`)
     if (code.startsWith('R') && !/\/history\/|\/_archive\//.test(b)) fail(`diff: ${a} renamed to ${b}, but renames are only allowed into the history or archive directory`)
     if (!allow.some((re) => re.test(path))) fail(`diff: ${path} is outside the write allowlist`)
+    if (['docs/HARNESS_CONTEXT.md', '.github/workflows/harness-repository-context.yml'].includes(path)) fail(`diff: ${path} belongs to the repository-administration publisher`)
+    if (path.endsWith('.md') && !code.startsWith('D') && exists(path)) {
+      let old = ''; try { old = git('show', `${since}:${path}`) } catch { /* new file */ }
+      for (const kind of ['krish-repo-admin', 'krish-repo-context']) {
+        const re = new RegExp('<!-- '+kind+':start[^>]*-->[\\s\\S]*?<!-- '+kind+':end -->', 'g')
+        if (JSON.stringify([...old.matchAll(re)].map(m=>m[0])) !== JSON.stringify([...read(path).matchAll(re)].map(m=>m[0]))) fail(`diff: ${path} changes a protected ${kind} region`)
+      }
+    }
     if (code.startsWith('M') && path.endsWith('.md')) {
       const before = git('show', `${since}:${path}`).split('\n').length
       const now = read(path).split('\n').length

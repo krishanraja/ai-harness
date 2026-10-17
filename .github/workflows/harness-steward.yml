@@ -314,14 +314,15 @@ jobs:
       # One cloud intake replaces per-machine session collectors. The exporter
       # returns redacted envelopes only. This job appends them to evidence and
       # has no path to edit a contract, skill, registry or rule.
-      - name: Import cross-surface observations
+      - name: Import optional cross-surface observations
+        continue-on-error: true
         env:
           HARNESS_EVENT_EXPORT_URL: ${{ vars.HARNESS_EVENT_EXPORT_URL }}
           HARNESS_EVENT_EXPORT_TOKEN: ${{ secrets.HARNESS_EVENT_EXPORT_TOKEN }}
         run: |
           if [ -z "$HARNESS_EVENT_EXPORT_URL" ] || [ -z "$HARNESS_EVENT_EXPORT_TOKEN" ]; then
-            echo "::error::The harness event inbox is not armed. Set HARNESS_EVENT_EXPORT_URL and HARNESS_EVENT_EXPORT_TOKEN before enabling this change."
-            exit 1
+            echo "Optional hosted exporter is unconfigured. GitHub dispatch intake and repository administration remain independent." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
           fi
           node scripts/import-harness-events.mjs
 
@@ -378,6 +379,9 @@ jobs:
   # each package. Every change request opens as a draft; merging it is Krish's
   # acceptance (Ruling, Krish, 2026-10-14).
   propose:
+    concurrency:
+      group: harness-learning-proposals
+      cancel-in-progress: false
     if: (github.event_name == 'workflow_dispatch' && !inputs.event_import_only) || (github.event_name == 'schedule' && github.event.schedule == '40 21 * * 0')
     needs: observe
     runs-on: ubuntu-latest
@@ -435,7 +439,7 @@ jobs:
         run: |
           set -euo pipefail
           budget=$(node -e "import('./scripts/propose.mjs').then((m) => console.log(Number(m.loadPolicy().decision_budget || 3)))")
-          open=$(gh api "repos/${{ github.repository }}/pulls?state=open&per_page=100" --jq '[.[] | select(.head.ref | startswith("harness/change-"))] | length')
+          open=$(gh api "repos/${{ github.repository }}/pulls?state=open&per_page=100" --jq '[.[] | select(.head.ref | test("^harness/(change-|repository-learning-)"))] | length')
           free=$(( budget - open )); if [ "$free" -lt 0 ]; then free=0; fi
           echo "free=$free" >> "$GITHUB_OUTPUT"
           echo "Decision budget $budget, open change requests $open, free $free." >> "$GITHUB_STEP_SUMMARY"

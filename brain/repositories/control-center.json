@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "repository": "control-center",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "379d193052027fe290bafca4f37f9ef902a0b112",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 48856,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/MINDMAKE_OS_ARCHITECTURE.md",
+      "role": "orientation",
+      "label": "MINDMAKE OS ARCHITECTURE"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    },
+    {
+      "path": "docs/app/README.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "docs/design/DESIGN_SYSTEM.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "experience",
+      "label": "Dashboard primitives, one list and one close",
+      "read": [
+        "README.md",
+        "NOW.md",
+        "docs/app/README.md",
+        "docs/design/DESIGN_SYSTEM.md"
+      ],
+      "checks": [
+        "npm run lint",
+        "npm run check:one-list",
+        "npm run check:one-close"
+      ]
+    },
+    {
+      "id": "orchestration",
+      "label": "Agent orchestration, handoffs and state ownership",
+      "read": [
+        "docs/MINDMAKE_OS_ARCHITECTURE.md",
+        "README.md",
+        "NOW.md"
+      ],
+      "checks": [
+        "npm run typecheck:api",
+        "npm run check:model-routing"
+      ]
+    }
+  ]
+}

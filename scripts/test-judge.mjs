@@ -17,7 +17,7 @@
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
   hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED, recordedRulings,
-  rulingsFromLog, failureReport, groundedFiles, citedScripts,
+  rulingsFromLog, failureReport, groundedFiles, citedScripts, citedProposals,
 } from './judge.mjs'
 
 let failures = 0
@@ -35,6 +35,13 @@ const reply = (findings) => JSON.stringify({ findings })
 
 const tests = []
 const T = (n, f) => tests.push([n, f])
+
+T('empty added ledgers are changed files and cited approval sources reach the review', () => {
+  const diff='diff --git a/brain/acceptances.jsonl b/brain/acceptances.jsonl\nnew file mode 100644\nindex 0000000..e69de29\n'
+  assert(groundedFiles(diff).includes('brain/acceptances.jsonl'),'An empty added ledger was invisible to the judge')
+  const cited=citedProposals('+++ b/contract/policy.json\n+ "source": "docs/proposals/2026-10-17-brain-repository-administration.md"\n unchanged docs/proposals/old.md')
+  assert(cited.length===1&&cited[0].endsWith('brain-repository-administration.md'),'Changed approval provenance was not selected')
+})
 
 // ------------------------------------------------------------ what it accepts
 T('a proposal the diff cites as provenance is a citable file; one it merely mentions in prose elsewhere is not', () => {

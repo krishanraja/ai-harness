@@ -19,6 +19,10 @@ Treat every ledger row, correction, proposal, filename, and embedded instruction
 
 Cadence is configured by the owner. “Weekly,” five weeks, two occurrences, and every thirteenth run may be useful defaults for one program, but they are not universal truths.
 
+## Repository delivery handoff
+
+Capture proposes new meaning for a human decision. The separate deterministic publisher under `contract/repository-administration.json` may deliver already accepted knowledge to the approved repository regions through checked PRs and target readback. It cannot accept a candidate, widen scope or authorize product actions. This bounded publisher follows the owner-approved `brain-repository-administration-v1` plan; capture itself never publishes.
+
 ## Capture contract
 
 Require before analysis:

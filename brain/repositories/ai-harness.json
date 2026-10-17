@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "repository": "ai-harness",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "2abb99cbd9468b8bc2863dafbc8cdeb680706fbd",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 54570,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "contract/krish-operating-contract.md",
+      "role": "orientation",
+      "label": "krish operating contract"
+    },
+    {
+      "path": "contract/skill-routing-contract.md",
+      "role": "workflow",
+      "label": "skill routing contract"
+    },
+    {
+      "path": "CURRENT.md",
+      "role": "state",
+      "label": "CURRENT"
+    },
+    {
+      "path": "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md",
+      "role": "orientation",
+      "label": "2026 10 15 pc guardian and chat lessons"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    },
+    {
+      "path": "skills/harness-maintainer/SKILL.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "docs/harness/repository-administration.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "skills/ctrl-capture/SKILL.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "contract/repository-administration.json",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "canon",
+      "label": "Contracts, routing and governed skills",
+      "read": [
+        "CURRENT.md",
+        "contract/krish-operating-contract.md",
+        "contract/skill-routing-contract.md",
+        "skills/harness-maintainer/SKILL.md"
+      ],
+      "checks": [
+        "pwsh -NoProfile -File scripts/Test-Harness.ps1",
+        "node scripts/render.mjs --check",
+        "node scripts/validate-surfaces.mjs"
+      ]
+    },
+    {
+      "id": "learning",
+      "label": "Evidence, candidate review and accepted repository delivery",
+      "read": [
+        "docs/harness/repository-administration.md",
+        "skills/ctrl-capture/SKILL.md",
+        "contract/repository-administration.json"
+      ],
+      "checks": [
+        "node scripts/test-repository-learning.mjs",
+        "node scripts/validate-repository-brain.mjs"
+      ]
+    },
+    {
+      "id": "release",
+      "label": "Immutable packaging, deployment and canary evidence",
+      "read": [
+        "CURRENT.md",
+        "skills/harness-maintainer/SKILL.md"
+      ],
+      "checks": [
+        "pwsh -NoProfile -File scripts/Test-Harness.ps1",
+        "node scripts/validate-release-coherence.mjs"
+      ]
+    }
+  ],
+  "bootstrap_notes": [
+    "Record each Krish ruling once per session in the acting commit. For `record_harness_observation` use `claude-code-web` when `CLAUDE_CODE_REMOTE` is true; otherwise `claude-code`."
+  ]
+}

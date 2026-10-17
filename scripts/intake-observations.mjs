@@ -25,7 +25,7 @@
 import { appendFileSync, mkdirSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { envelopeSha, readSeenIds, toObservation } from './import-harness-events.mjs'
+import { envelopeSha, readSeenIds, readSeenPayloads, toObservation } from './import-harness-events.mjs'
 import { leaks } from './lib/redact.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
@@ -39,6 +39,7 @@ export function intake(payload, { ledgerDir = join(HARNESS, 'state/observations'
   if (events.length > MAX_EVENTS) throw new Error(`client_payload.events holds ${events.length} events; the cap is ${MAX_EVENTS}`)
   const seenAt = now.toISOString().slice(0, 10)
   const seen = readSeenIds(ledgerDir)
+  const payloads = readSeenPayloads(ledgerDir)
   const fresh = []
   const rejected = {}
   let duplicates = 0
@@ -50,8 +51,12 @@ export function intake(payload, { ledgerDir = join(HARNESS, 'state/observations'
       if (typeof event.evidence_ref !== 'string' || event.evidence_ref.length > 300) throw new Error('invalid_evidence_ref')
       if (leaks(event.summary)) throw new Error('redaction_failed')
       const row = toObservation({ ...event, payload_sha256: envelopeSha(event) }, seenAt, { requireInbox: false })
-      if (seen.has(row.id)) { duplicates++; continue }
+      if (seen.has(row.id)) {
+        if (row.schema_version === 2 && payloads.get(row.id) !== row.payload_sha256) throw new Error('event_conflict')
+        duplicates++; continue
+      }
       seen.add(row.id)
+      payloads.set(row.id, row.payload_sha256)
       fresh.push(row)
     } catch (error) {
       rejected[error.message] = (rejected[error.message] || 0) + 1

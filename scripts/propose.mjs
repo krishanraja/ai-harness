@@ -286,6 +286,7 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   const clusters = cluster([...rulings, ...others], num(policy.cluster_jaccard, 0.35), (r) => TYPE_OF[r.class])
 
   const local = {}
+  const repositoryCandidates = []
   const below = {}
   let carried = 0
   const candidates = []
@@ -296,7 +297,15 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
     if (type === 'ruling-cluster') {
       const scope = classifyScope(c, policy, ctx)
       if (scope === 'carried') { carried++; continue }
-      if (scope === 'local') { for (const r of c.rows) local[r.repo] = (local[r.repo] || 0) + 1; continue }
+      if (scope === 'local') {
+        for (const r of c.rows) local[r.repo] = (local[r.repo] || 0) + 1
+        repositoryCandidates.push({ type, scope: 'repository', repository: c.rows[0].repo, reason: e.reason, evidence: c.rows, id: `repository:${sha(c.rows.map((r) => r.id).sort().join(',')).slice(0, 16)}` })
+        continue
+      }
+    }
+    if (c.rows.every((r) => r.schema_version === 2 && r.repo) && new Set(c.rows.map((r) => r.repo)).size === 1) {
+      repositoryCandidates.push({ type, scope: 'repository', repository: c.rows[0].repo, reason: e.reason, evidence: c.rows, id: `repository:${sha(c.rows.map((r) => r.id).sort().join(',')).slice(0, 16)}` })
+      continue
     }
     candidates.push({
       type, title: c.rows[0].quote.slice(0, 120), reason: e.reason,
@@ -322,7 +331,7 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   const rest = [...candidates.slice(top - keepConsolidation), ...consolidation.slice(keepConsolidation)]
   const restCounts = {}
   for (const c of rest) restCounts[c.type] = (restCounts[c.type] || 0) + 1
-  return { windowRows, chosen, restCounts, local, below, carried, standing }
+  return { windowRows, chosen, restCounts, local, below, carried, standing, repositoryCandidates }
 }
 
 // ------------------------------------------------------------------ brief
@@ -395,7 +404,7 @@ if (isMain) {
   const jsonPath = flag('--json')
   if (jsonPath) {
     mkdirSync(dirname(resolve(jsonPath)), { recursive: true })
-    writeFileSync(jsonPath, JSON.stringify({ generated: today, window: { from: all ? null : cutoff, to: today }, intent, candidates: result.chosen, counted: result.restCounts, local: result.local, below: result.below, carried: result.carried }, null, 2) + '\n')
+    writeFileSync(jsonPath, JSON.stringify({ generated: today, window: { from: all ? null : cutoff, to: today }, intent, candidates: result.chosen, repository_candidates: result.repositoryCandidates, counted: result.restCounts, local: result.local, below: result.below, carried: result.carried }, null, 2) + '\n')
   }
   process.stdout.write(text)
   console.log(`\nSummary: ${result.windowRows.length} observations, ${result.chosen.length} shown, ${Object.values(result.restCounts).reduce((a, b) => a + b, 0)} more eligible, ${Object.values(result.local).reduce((a, b) => a + b, 0)} local rulings.`)
