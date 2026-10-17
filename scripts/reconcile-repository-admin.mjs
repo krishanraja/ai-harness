@@ -49,7 +49,10 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   if (!Object.keys(plan.changes).length) return { ...proof, status: 'current' }
   if (!write) return { ...proof, status: 'planned' }
   if (await gh.headSha(repo, branch) !== base) throw new Error('source_base_moved')
-  let pr = await gh.findPull(repo, BRANCH, branch)
+  // A new rendered view gets a fresh branch; squash merges need not retain ancestry with an old branch.
+  const publicationBranch = `${BRANCH}-${seal({ block: plan.block, context: plan.context }).slice(0, 12)}`
+  let pr = await gh.findPull(repo, publicationBranch, branch)
+  if(!pr)pr=await gh.findPull(repo,BRANCH,branch) // adopt the already checked initial rollout PRs
   if (pr) {
     const prFiles = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/files?per_page=100`)
     if (prFiles.length !== Object.keys(plan.changes).length || prFiles.some((f) => !(f.filename in plan.changes))) throw new Error('administration_pr_has_unowned_changes')
@@ -57,22 +60,22 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
     for (const [path, expected] of Object.entries(plan.changes)) if ((await gh.getFile(repo, path, pr.head.sha))?.text !== expected) throw new Error('administration_pr_or_source_moved')
   } else {
     let head
-    if (await gh.branchExists(repo, BRANCH)) {
-      head = await gh.headSha(repo, BRANCH)
+    if (await gh.branchExists(repo, publicationBranch)) {
+      head = await gh.headSha(repo, publicationBranch)
       // A prior merge may leave the branch. Use a fresh commit from current main, never force-reset it.
       const compare = await gh.req('GET', `/repos/${gh.owner}/${repo}/compare/${head}...${base}`)
       if (!['ahead', 'identical'].includes(compare.status)) throw new Error('administration_branch_has_unknown_drift')
-      if (head !== base) await gh.req('PATCH', `/repos/${gh.owner}/${repo}/git/refs/heads/${encodeURIComponent(BRANCH)}`, { sha: base, force: false })
-    } else await gh.createBranch(repo, BRANCH, base)
-    const candidate = await gh.commitFiles(repo, BRANCH, base, plan.changes, `docs(harness): maintain repository administration\n\nApproved plan: ${policy.approval}.\nBrain-View: ${plan.revision}\nSource-Base: ${base}\nInput-Seal: ${plan.input_seal}\nOnly declared administration regions and approved initial migrations changed.`)
-    pr = await gh.openPull(repo, { title: 'Maintain the repository operating guide from the brain', head: BRANCH, base: branch, body: `Generated from accepted knowledge under approved plan \`${policy.approval}\`.\n\nWhole-system sources, workflows and checks stay repository-specific. Evidence and inferred preferences cannot promote themselves.\n\n- Brain view: \`${plan.revision}\`\n- Source base: \`${base}\`\n- Bootstrap: ${plan.before.chars} -> ${plan.after.chars} characters\n- Changed files: ${Object.keys(plan.changes).map((p) => `\`${p}\``).join(', ')}\n- Input seal: \`${plan.input_seal}\`\n\nRollback restores only the managed content against this base; evidence remains append-only.` })
+      if (head !== base) await gh.req('PATCH', `/repos/${gh.owner}/${repo}/git/refs/heads/${encodeURIComponent(publicationBranch)}`, { sha: base, force: false })
+    } else await gh.createBranch(repo, publicationBranch, base)
+    const candidate = await gh.commitFiles(repo, publicationBranch, base, plan.changes, `docs(harness): maintain repository administration\n\nApproved plan: ${policy.approval}.\nBrain-View: ${plan.revision}\nSource-Base: ${base}\nInput-Seal: ${plan.input_seal}\nOnly declared administration regions and approved initial migrations changed.`)
+    pr = await gh.openPull(repo, { title: 'Maintain the repository operating guide from the brain', head: publicationBranch, base: branch, body: `Generated from accepted knowledge under approved plan \`${policy.approval}\`.\n\nWhole-system sources, workflows and checks stay repository-specific. Evidence and inferred preferences cannot promote themselves.\n\n- Brain view: \`${plan.revision}\`\n- Source base: \`${base}\`\n- Bootstrap: ${plan.before.chars} -> ${plan.after.chars} characters\n- Changed files: ${Object.keys(plan.changes).map((p) => `\`${p}\``).join(', ')}\n- Input seal: \`${plan.input_seal}\`\n\nRollback restores only the managed content against this base; evidence remains append-only.` })
     pr = { ...pr, head: { sha: candidate.sha } }
   }
   const result = { ...proof, status: 'pull-request', pr: pr.number, head: pr.head.sha }
   if (!merge) return result
   if (!checksPassed(await gh.checksFor(repo, pr.head.sha))) return { ...result, status: 'awaiting-checks' }
   const latest = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls/${pr.number}`)
-  if (latest.head.sha !== pr.head.sha || latest.base.sha !== base || await gh.headSha(repo, branch) !== base) throw new Error('administration_merge_base_moved')
+  if (latest.head.sha !== pr.head.sha || latest.base.ref !== branch || await gh.headSha(repo, branch) !== base) throw new Error('administration_merge_base_moved')
   const merged = await gh.req('PUT', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/merge`, { sha: pr.head.sha, merge_method: 'squash', commit_title: `docs(harness): maintain repository administration (#${pr.number})` })
   if (merged.merged !== true) throw new Error('administration_merge_not_confirmed')
   for (const [path, expected] of Object.entries(plan.changes)) if ((await gh.getFile(repo, path, merged.sha))?.text !== expected) throw new Error('administration_target_readback_failed')

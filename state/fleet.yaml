@@ -25,6 +25,8 @@ repos:
     rules_files: [AGENTS.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
 
   - name: mm-ctrl
+    # Same GitHub repository, id 1090040458; the former name redirects here.
+    aliases: [mindmake-ctrl]
     canon_target: AGENTS.md
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, project-documentation/AGENT_BRIEFING.md]

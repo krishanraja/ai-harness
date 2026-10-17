@@ -4,7 +4,7 @@ import { existsSync, readFileSync, appendFileSync, mkdirSync, readdirSync, write
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
-import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge } from './repository-brain.mjs'
+import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge, serializeKnowledge } from './repository-brain.mjs'
 import { buildCandidates, loadLedger, loadPolicy } from './propose.mjs'
 import { leaks } from './lib/redact.mjs'
 
@@ -21,6 +21,7 @@ export function repositoryCandidates(root = ROOT) {
 }
 
 export function validateReview(proposal, candidates, policy) {
+  if(JSON.stringify(proposal).includes('\u2014'))throw new Error('review_emdash')
   const c = candidates.find((x) => x.id === proposal.candidate_id)
   if (!c || proposal.repository !== c.repository || !policy.targets.includes(proposal.repository)) throw new Error('review_scope_not_earned')
   const allowed = new Set(['candidate_id', 'repository', 'type', 'statement', 'conditions', 'uncertainties', 'why', 'alternative_explanations', 'if_wrong', 'validation', 'rollback', 'supersedes', 'refines', 'contradicts'])
@@ -77,7 +78,7 @@ export async function promoteOwnerReviews({ gh, root = ROOT, write = false }) {
       if (write) {
         for (const path of [ACCEPTANCES, KNOWLEDGE]) mkdirSync(dirname(join(root, path)), { recursive: true })
         appendFileSync(join(root, ACCEPTANCES), JSON.stringify(proof) + '\n')
-        appendFileSync(join(root, KNOWLEDGE), JSON.stringify(accepted) + '\n')
+        appendFileSync(join(root, KNOWLEDGE), serializeKnowledge(accepted) + '\n')
       }
       done.add(r.id); results.push({ id: accepted.id, repository: r.repository, approval: proof.ref })
     }

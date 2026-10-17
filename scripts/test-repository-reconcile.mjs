@@ -25,6 +25,17 @@ const writtenResult = await reconcileRepository({ profile, gh, history: [], writ
 assert.equal(writtenResult.status, 'pull-request')
 assert.equal(Object.keys(written).length, 4)
 assert.equal(mutations, 3)
+const candidate=structuredClone(written)
+const merging={...gh,
+ findPull:async()=>({number:12,head:{sha:'c'.repeat(40)}}),
+ checksFor:async()=>({runs:[{status:'completed',conclusion:'success'}],statuses:{}}),
+ getFile:async(repo,path,ref)=>({text:['c'.repeat(40),'merged'].includes(ref)?candidate[path]??source[path]:source[path]}),
+ req:async(method,path)=>path.endsWith('/files?per_page=100')?Object.keys(candidate).map(filename=>({filename})):method==='PUT'?{merged:true,sha:'merged'}:{head:{sha:'c'.repeat(40)},base:{ref:'main',sha:'older-main-before-unrelated-report'}}
+}
+const merged=await reconcileRepository({profile,gh:merging,history:[],write:true,merge:true})
+assert.equal(merged.status,'verified','A stale PR base label must not block a freshly regenerated, unchanged view against current main')
+assert.equal(merged.rollback.base,'a'.repeat(40))
+await assert.rejects(()=>reconcileRepository({profile,gh:{...merging,getFile:async(repo,path,ref)=>({text:ref==='c'.repeat(40)&&path==='AGENTS.md'?'A human changed this branch.':(['c'.repeat(40),'merged'].includes(ref)?candidate[path]??source[path]:source[path])})},history:[],write:true,merge:true}),/source_moved/)
 assert.equal(checksPassed({ runs: [], statuses: {} }), false)
 assert.equal(checksPassed({ runs: [{ status: 'completed', conclusion: 'success' }], statuses: {} }), true)
 assert.equal(checksPassed({ runs: [{ status: 'completed', conclusion: 'success' }], statuses: { 'harness/judge': 'failure' } }), false)

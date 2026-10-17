@@ -37,6 +37,8 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    If durable acknowledgement is pending (exit 3), rerun that command once
 >    after the intake completes. The miner replays its saved interpretation,
 >    verifies the main-branch ledger, and advances only acknowledged cursors.
+>    A later dry run first acknowledges an already stored pending batch, then
+>    prepares fresh proposals. It sends nothing during that dry run.
 > 5. Reply with counts only: sessions read, excerpts, lessons sent, lessons
 >    rejected. If any step fails, say which step and the error in one line.
 
