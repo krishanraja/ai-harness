@@ -192,14 +192,15 @@ export function selectExcerpts(turns, { max = 40, chars = 4000, names = [] } = {
     if (t.role !== 'user' || t.fresh === false) continue
     const { score, hits } = scoreTurn(t.text)
     if (score < 3) continue
-    const related = t.session ? turns.slice(0, i).filter((x) => x.session === t.session && (x.task || null) === (t.task || null)) : []
+    const repository = repositoryIdentity(t.repository || t.cwd)
+    const related = t.session ? turns.slice(0, i).filter((x) => x.session === t.session && (x.task || null) === (t.task || null) && (!repository || !repositoryIdentity(x.repository || x.cwd) || repositoryIdentity(x.repository || x.cwd) === repository)) : []
     const earlier = related.filter((x) => x.role === 'user')
     const prev = [...related].reverse().find((x) => x.role === 'assistant')
     const before = prev ? prev.text.slice(-400) : ''
     const history = [...new Set([earlier[0], ...earlier.slice(-5)].filter(Boolean))].map((x) => `EARLIER USER: ${x.text.slice(0, 400)}`).join('\n')
     const raw = `${history ? history + '\n' : ''}${before ? `ASSISTANT CLAIM: ${before}\n` : ''}KRISH: ${t.text.slice(0, 800)}`
     const excerpt = redact(raw, { names }).slice(0, chars)
-    picks.push({ index: t.source_index ?? i, turn_index: i, source_file: t.source_file, source_event_id: t.source_event_id, score, hits, excerpt, at: t.at, session: t.session, task: t.task || null, repository: repositoryIdentity(t.repository || t.cwd || earlier.find((x) => x.repository)?.repository) })
+    picks.push({ index: t.source_index ?? i, turn_index: i, source_file: t.source_file, source_event_id: t.source_event_id, score, hits, excerpt, at: t.at, session: t.session, task: t.task || null, repository })
   }
   // Preserve source order: a cap must leave a replayable suffix, not silently skip low-ranked episodes.
   return picks.slice(0, max)

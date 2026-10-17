@@ -21,6 +21,12 @@ const isolated = selectExcerpts([
   { role: 'user', session: 'b', text: 'No, this is still wrong, stop repeating it.' },
 ])[0]
 assert.doesNotMatch(isolated.excerpt, /UNRELATED/)
+const changedRepository = selectExcerpts([
+ { role:'assistant', session:'shared', repository:'AEO-Engine', text:'UNRELATED REPOSITORY CLAIM' },
+ { role:'user', session:'shared', repository:'content-engine', text:'No, preserve the earlier accepted title decisions.' },
+])[0]
+assert.doesNotMatch(changedRepository.excerpt,/UNRELATED REPOSITORY/)
+assert.equal(selectExcerpts([{role:'user',session:'shared',repository:'content-engine',text:'Earlier context.'},{role:'user',session:'shared',text:'No, keep accepted decisions through the next revision.'}])[0].repository,null,'Missing attribution cannot be borrowed from an earlier turn')
 assert.equal(selectExcerpts([{ role: 'user', session: 's', text: 'The experiment returned eighteen qualified enquiries from two hundred visits.' }]).length, 1)
 assert.equal(selectExcerpts([{ role: 'user', session: 's', fresh: false, text: 'No, never repeat this mistake again.' }]).length, 0)
 
