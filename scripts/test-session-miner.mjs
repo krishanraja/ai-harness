@@ -10,6 +10,7 @@ import { parseClaudeCode, parseCodex, parseEvents, parseCloudEvents, parseLesson
 import { toObservation } from './import-harness-events.mjs'
 import { intake } from './intake-observations.mjs'
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
+import './test-miner-checkpoints.mjs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { loadPolicy } from './propose.mjs'
@@ -67,10 +68,14 @@ test('cloud events: each event once, in order, tagged with the session it was fe
 test('cloud events: a result saved to tool-results is read back from that path', asked.length === 1 && asked[0] === savedPath)
 const good = '{"excerpt": 0, "kind": "preference", "summary": "a", "severity": "low", "confidence": "low"}'
 test('lessons: a clean reply parses whole', parseLessons(`Here you go:\n[${good}, ${good}]`).length === 2)
-test('lessons: one malformed element costs only itself', parseLessons(`[${good}, {"excerpt": 1, "confidence":medium_pla}]`).length === 1)
+let partialThrew = false
+try { parseLessons(`[${good}, {"excerpt": 1, "confidence":medium_pla}]`) } catch { partialThrew = true }
+test('lessons: a partial array is retried whole so malformed excerpts remain replayable', partialThrew)
 let threw = false
 try { parseLessons('[{"excerpt": 0, "confidence":medium}]') } catch { threw = true }
-test('lessons: a reply with nothing readable throws, so the extractor asks again', threw && parseLessons('no lessons').length === 0)
+let refusalThrew = false
+try { parseLessons('no lessons') } catch { refusalThrew = true }
+test('lessons: malformed replies and refusals retry; only an explicit empty array declines', threw && refusalThrew && parseLessons('[]').length === 0)
 const planDir = mkdtempSync(join(tmpdir(), 'miner-plan-'))
 const planFile = join(planDir, 'plan.json')
 const cur = { sA: '2026-10-14T10:00:00Z' }

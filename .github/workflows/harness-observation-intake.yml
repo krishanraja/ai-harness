@@ -44,12 +44,15 @@ jobs:
             git fetch --quiet origin main
             git reset --quiet --hard origin/main
             node scripts/intake-observations.mjs
-            if [ -z "$(git status --porcelain -- state/observations)" ]; then
+            if [ -z "$(git status --porcelain -- state/observations state/session-miner/checkpoints.jsonl)" ]; then
               echo "Nothing new to record."
               exit 0
             fi
             git add state/observations
-            git commit --quiet -m "chore(intake): redacted observations" -m "Recorded by scripts/intake-observations.mjs from a harness-observations dispatch. Evidence only; nothing here is a decision."
+            if [ -f state/session-miner/checkpoints.jsonl ]; then
+              git add state/session-miner/checkpoints.jsonl
+            fi
+            git commit --quiet -m "chore(intake): redacted observations and acknowledged progress" -m "Recorded by scripts/intake-observations.mjs from a harness-observations dispatch. Evidence and opaque progress only; nothing here is a decision."
             if git push --quiet origin HEAD:main; then
               exit 0
             fi

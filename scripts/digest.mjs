@@ -59,7 +59,14 @@ export function buildDigest({ ready = [], blockers = [], scoreboard = null, toda
     lines.push(`- Change requests accepted: ${acc === null || acc === undefined ? 'none decided yet' : acc}`)
     lines.push(`- Always-on context: ${Number(s.always_on_chars).toLocaleString('en-US')} characters${s.always_on_delta ? ` (${s.always_on_delta > 0 ? '+' : ''}${s.always_on_delta} this week)` : ''}`)
     lines.push(`- Real work signals captured this week: ${s.work_signals_week}`)
-    if(s.repository_administration){const repos=s.repository_administration.repositories||[];lines.push(`- Repository views verified or current: ${repos.filter(r=>['verified','current'].includes(r.delivery)).length}/${repos.length}. History coverage and effectiveness remain unmeasured where evidence is missing.`)}
+    if(s.repository_administration){
+      const repos=s.repository_administration.repositories||[]
+      lines.push(`- Repository views verified or current: ${repos.filter(r=>['verified','current'].includes(r.delivery)).length}/${repos.length}. History coverage remains unknown without source receipts.`)
+      for(const repo of repos){
+        const use=repo.observed_use||{},effect=repo.effectiveness||{}
+        lines.push(`- ${repo.repository}: ${use.loaded||0} observed loads; ${use.application_checks||0} application checks; comparable opportunities ${effect.opportunities??'unmeasured'}; repeated avoidable failures ${effect.repeated_failures??'unmeasured'}.`)
+      }
+    }
     lines.push('')
   }
   const merges = decisions.filter((d) => d.kind === 'merge').length

@@ -28,17 +28,26 @@ assert.equal(mutations, 3)
 const candidate=structuredClone(written)
 const merging={...gh,
  findPull:async()=>({number:12,head:{sha:'c'.repeat(40)}}),
- checksFor:async()=>({runs:[{status:'completed',conclusion:'success'}],statuses:{}}),
+ checksFor:async()=>({runs:[{name:'operating-context',status:'completed',conclusion:'success'}],statuses:{}}),
  getFile:async(repo,path,ref)=>({text:['c'.repeat(40),'merged'].includes(ref)?candidate[path]??source[path]:source[path]}),
  req:async(method,path)=>path.endsWith('/files?per_page=100')?Object.keys(candidate).map(filename=>({filename})):method==='PUT'?{merged:true,sha:'merged'}:{head:{sha:'c'.repeat(40)},base:{ref:'main',sha:'older-main-before-unrelated-report'}}
 }
 const merged=await reconcileRepository({profile,gh:merging,history:[],write:true,merge:true})
 assert.equal(merged.status,'verified','A stale PR base label must not block a freshly regenerated, unchanged view against current main')
 assert.equal(merged.rollback.base,'a'.repeat(40))
+let uncheckedMerges = 0
+const unrelatedOnly = await reconcileRepository({profile,gh:{...merging,checksFor:async()=>({runs:[{name:'lint',status:'completed',conclusion:'success'}],statuses:{}}),req:async(method,path,...args)=>{if(method==='PUT')uncheckedMerges++;return merging.req(method,path,...args)}},history:[],write:true,merge:true})
+assert.equal(unrelatedOnly.status,'awaiting-checks','Unrelated successful CI cannot replace the managed integrity check')
+assert.equal(uncheckedMerges,0,'Missing integrity proof must stop before the merge API')
 await assert.rejects(()=>reconcileRepository({profile,gh:{...merging,getFile:async(repo,path,ref)=>({text:ref==='c'.repeat(40)&&path==='AGENTS.md'?'A human changed this branch.':(['c'.repeat(40),'merged'].includes(ref)?candidate[path]??source[path]:source[path])})},history:[],write:true,merge:true}),/source_moved/)
 assert.equal(checksPassed({ runs: [], statuses: {} }), false)
-assert.equal(checksPassed({ runs: [{ status: 'completed', conclusion: 'success' }], statuses: {} }), true)
-assert.equal(checksPassed({ runs: [{ status: 'completed', conclusion: 'success' }], statuses: { 'harness/judge': 'failure' } }), false)
+const integrityCheck = { name: 'operating-context', status: 'completed', conclusion: 'success' }
+assert.equal(checksPassed({ runs: [integrityCheck], statuses: {} }), true)
+assert.equal(checksPassed({ runs: [{ name: 'lint', status: 'completed', conclusion: 'success' }], statuses: {} }), false)
+assert.equal(checksPassed({ runs: [{...integrityCheck,status:'in_progress',conclusion:null}], statuses: {} }), false)
+assert.equal(checksPassed({ runs: [{...integrityCheck,conclusion:'skipped'}], statuses: {} }), false)
+assert.equal(checksPassed({ runs: [integrityCheck,{name:'other',status:'completed',conclusion:'failure'}], statuses: {} }), false)
+assert.equal(checksPassed({ runs: [integrityCheck], statuses: { 'harness/judge': 'failure' } }), false)
 const original = 'Human text\n' + region('Old instructions', '0'.repeat(12)) + '\n'
 const delivered = 'Human text\n' + region('New instructions', '1'.repeat(12)) + '\n'
 const current = delivered.replace('Human text', 'New human text')

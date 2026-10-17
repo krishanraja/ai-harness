@@ -11,7 +11,7 @@ import { planAdministration, inspectRegion, rollbackFile, CONTEXT, TARGET_CHECK,
 export const BRANCH = 'harness/repository-administration'
 export function checksPassed(checks) {
   const runs = checks.runs || [], statuses = Object.values(checks.statuses || {})
-  return runs.some((r) => r.status === 'completed' && r.conclusion === 'success') && runs.every((r) => r.status === 'completed' && ['success', 'skipped', 'neutral'].includes(r.conclusion)) && statuses.every((s) => s === 'success')
+  return runs.some((r) => r.name === 'operating-context' && r.status === 'completed' && r.conclusion === 'success') && runs.every((r) => r.status === 'completed' && ['success', 'skipped', 'neutral'].includes(r.conclusion)) && statuses.every((s) => s === 'success')
 }
 
 export async function rollbackRepository({ receipt, gh, profile, write = false }) {

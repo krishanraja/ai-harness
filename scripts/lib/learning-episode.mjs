@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './yaml.mjs'
 import { leaks } from './redact.mjs'
+import {validateMeasurement} from './repository-measurements.mjs'
 
 const fleet = parseYaml(readFileSync(fileURLToPath(new URL('../../state/fleet.yaml', import.meta.url)), 'utf8'))
 export const KNOWLEDGE_TYPES = new Set(['fact', 'requirement', 'preference', 'procedure', 'hypothesis', 'experiment', 'working_decision'])
@@ -27,12 +28,13 @@ export function repositoryIdentity(value) {
 
 export function validateEpisode(event) {
   if (event.schema_version !== 2) return
-  const keys = new Set(['event_id', 'schema_version', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision', 'inbox_id', 'received_at', 'payload_sha256'])
+  const keys = new Set(['event_id', 'schema_version', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision', 'measurement', 'inbox_id', 'received_at', 'payload_sha256'])
   if (Object.keys(event).some((k) => !keys.has(k))) throw new Error('unknown_episode_field')
   if (event.repository !== null && (typeof event.repository !== 'string' || !fleet.repos.some((r) => r.name === event.repository))) throw new Error('invalid_repository')
   if (!/^episode:[a-f0-9]{16,64}$/.test(event.episode_id || '')) throw new Error('invalid_episode_id')
   if (!KNOWLEDGE_TYPES.has(event.knowledge_type)) throw new Error('invalid_knowledge_type')
   if (event.source_revision != null && !/^[a-f0-9]{40}$/.test(event.source_revision)) throw new Error('invalid_source_revision')
+  if(event.measurement)validateMeasurement(event.measurement,{repository:event.repository,targets:fleet.repos.filter(r=>r.canon_sync!==false).map(r=>r.name)})
   const context = event.episode
   if (!context || typeof context !== 'object' || Array.isArray(context)) throw new Error('invalid_episode')
   if (Object.keys(context).some((k) => !CONTEXT_KEYS.has(k))) throw new Error('unknown_episode_context_field')

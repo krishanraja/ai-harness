@@ -8,7 +8,7 @@
  * week (scripts/Invoke-SessionMiner.ps1); it can also run in a cloud scheduled
  * task over exported cloud sessions. It:
  *
- *   1. reads only lines it has not read before (a cursor kept outside the repo);
+ *   1. reads new lines using a private cursor; cloud progress also has opaque GitHub receipts;
  *   2. picks a few excerpts deterministically: Krish correcting, preferring,
  *      repeating himself, or naming a skill that should have fired;
  *   3. redacts each excerpt (scripts/lib/redact.mjs) BEFORE any model sees it;
@@ -31,7 +31,7 @@
  *
  * The route comes from contract/learning-policy.yaml miner.submit (or --submit).
  * `post` needs HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN. A cursor
- * moves only after every lesson was accepted.
+ * moves only after matching durable receipts; cloud progress must also be read back.
  */
 
 import { createHash } from 'node:crypto'
@@ -44,6 +44,7 @@ import { redact } from './lib/redact.mjs'
 import { loadPolicy } from './propose.mjs'
 import { repositoryIdentity, KNOWLEDGE_TYPES, validateEpisode } from './lib/learning-episode.mjs'
 import { observationId, envelopeSha } from './import-harness-events.mjs'
+import { CLOUD_CHECKPOINT_PATH, cloudCheckpointState, cloudEventHash, makeCloudCheckpoints, resumeCloudCursor, validateCloudCheckpoint } from './lib/miner-checkpoint.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -239,23 +240,14 @@ export function claudeExtractor({ cwd }) {
   }
 }
 
-/**
- * The extractor's reply as an array. A reply that is not valid JSON as a whole
- * keeps every element that is, so one broken lesson does not cost the other
- * thirty-nine; validateObservation still checks each one. A reply with
- * objects but none readable throws, which the caller retries.
- */
+/** Only a complete JSON array is an interpretation; an explicit [] is a valid decline. */
 export function parseLessons(out) {
-  const start = out.indexOf('[')
-  const end = out.lastIndexOf(']')
+  const start = out.indexOf('['), end = out.lastIndexOf(']')
   if (start !== -1 && end > start) {
-    try { const v = JSON.parse(out.slice(start, end + 1)); if (Array.isArray(v)) return v } catch {}
+    try { const value = JSON.parse(out.slice(start, end + 1)); if (Array.isArray(value)) return value } catch {}
   }
-  const objects = out.match(/\{[^{}]*\}/g) || []
-  const kept = []
-  for (const o of objects) { try { kept.push(JSON.parse(o)) } catch {} }
-  if (objects.length && !kept.length) throw new Error(`the reply was not valid JSON (${out.slice(0, 80).replace(/\s+/g, ' ')})`)
-  return kept
+  // Never turn a refusal, truncation or partially readable reply into an empty/smaller week.
+  throw new Error('extractor_reply_requires_complete_json_array')
 }
 
 /** Every 40-character window of the excerpt; a summary may not contain one. */
@@ -323,9 +315,10 @@ export function mine(turns, { surface, extract, names = [], known = knownIds(), 
   const prompt = buildPrompt(excerpts)
   let raw = []
   try { raw = extract(prompt) } catch (e) { return { excerpts, prompt, envelopes: [], rejected: [], extractorError: String(e.message).split('\n')[0].slice(0, 160) } }
+  if (!Array.isArray(raw)) return { excerpts, prompt, envelopes: [], rejected: [], extractorError: 'extractor_reply_requires_array' }
   const envelopes = []
   const rejected = []
-  for (const o of Array.isArray(raw) ? raw : []) {
+  for (const o of raw) {
     const ex = excerpts[Number(o?.excerpt)]
     if (!ex) { rejected.push('no such excerpt'); continue }
     const r = validateObservation(o, ex.excerpt, { names, known })
@@ -347,10 +340,12 @@ export function cloudCursor(turns, cursor) {
   const next = structuredClone(cursor)
   const marked = turns.map((t) => {
     const old = cursor[t.session], at = typeof old === 'string' ? old : old?.at
-    const fresh = !at || String(t.at) > at || (String(t.at) === at && typeof old === 'object' && !old.ids.includes(t.source_event_id))
+    const compare = (left, right) => Number.isFinite(Date.parse(left)) && Number.isFinite(Date.parse(right)) ? Date.parse(left) - Date.parse(right) : String(left).localeCompare(String(right))
+    const id = (value) => value?.opaque_ids ? cloudEventHash(t.source_event_id) : t.source_event_id
+    const fresh = !at || compare(t.at, at) > 0 || (compare(t.at, at) === 0 && typeof old === 'object' && !old.ids.includes(id(old)))
     const prior = next[t.session], last = typeof prior === 'string' ? prior : prior?.at
-    if (!last || String(t.at) > last) next[t.session] = { at: t.at, ids: [t.source_event_id] }
-    else if (String(t.at) === last && typeof prior === 'object' && !prior.ids.includes(t.source_event_id)) prior.ids.push(t.source_event_id)
+    if (!last || compare(t.at, last) > 0) next[t.session] = { at: t.at, ids: [t.source_event_id] }
+    else if (compare(t.at, last) === 0 && typeof prior === 'object' && !prior.ids.includes(id(prior))) prior.ids.push(id(prior))
     return { ...t, fresh }
   })
   return { turns: marked, next }
@@ -374,15 +369,20 @@ export function readPlan(path, nextCursor) {
   return { envelopes: plan.envelopes, next_cursor: plan.next_cursor }
 }
 
-/** Dispatch acknowledgement is not durable storage. Match identity AND payload in main's ledger. */
-export function verifyReceipts(envelopes, { repo = 'krishanraja/ai-harness', run = execFileSync } = {}) {
-  if (!envelopes.length) return true
+/** Dispatch acknowledgement is not durable storage. Match identity AND payload in a pinned ledger. */
+export function verifyPayloadReceipts(receipts, { repo = 'krishanraja/ai-harness', run = execFileSync, ref = 'main' } = {}) {
+  if (!receipts.length) return true
+  if (ref !== 'main' && !/^[a-f0-9]{40}$/.test(ref)) throw new Error('invalid_receipt_revision')
   const api = (path) => JSON.parse(run('gh', ['api', path], { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 30000 }))
-  const entries = api(`repos/${repo}/contents/state/observations?ref=main`)
-  const wanted = new Map(envelopes.map((e) => [observationId(e), envelopeSha(e)]))
-  for (const f of entries.filter((f) => /^\d{4}-\d{2}\.jsonl$/.test(f.name)).sort((a, b) => b.name.localeCompare(a.name))) {
-    const file = api(`repos/${repo}/contents/state/observations/${f.name}?ref=main`)
-    for (const line of Buffer.from(file.content, 'base64').toString('utf8').split('\n').filter(Boolean)) {
+  const entries = api(`repos/${repo}/contents/state/observations?ref=${ref}`)
+  const wanted = new Map()
+  for (const receipt of receipts) {
+    if (wanted.has(receipt.id) && wanted.get(receipt.id) !== receipt.payload_sha256) throw new Error('durable_receipt_payload_conflict')
+    wanted.set(receipt.id, receipt.payload_sha256)
+  }
+  for (const file of entries.filter((file) => /^\d{4}-\d{2}\.jsonl$/.test(file.name)).sort((a, b) => b.name.localeCompare(a.name))) {
+    const content = api(`repos/${repo}/contents/state/observations/${file.name}?ref=${ref}`)
+    for (const line of Buffer.from(content.content, 'base64').toString('utf8').split('\n').filter(Boolean)) {
       const row = JSON.parse(line)
       if (!wanted.has(row.id)) continue
       if (wanted.get(row.id) !== row.payload_sha256) throw new Error('durable_receipt_payload_conflict')
@@ -393,13 +393,47 @@ export function verifyReceipts(envelopes, { repo = 'krishanraja/ai-harness', run
   return false
 }
 
+export function verifyReceipts(envelopes, options) {
+  return verifyPayloadReceipts(envelopes.map((event) => ({ id: observationId(event), payload_sha256: envelopeSha(event) })), options)
+}
+
 /** Acknowledge an already submitted batch without sending or reinterpreting any source. */
-export function acknowledgePending(pending,{cursorPath,pendingPath,verify=verifyReceipts}) {
-  if(!Array.isArray(pending.envelopes)||!pending.envelopes.length||!pending.next_cursor)throw new Error('invalid_pending_batch')
-  if(!verify(pending.envelopes))return false
+export function acknowledgePending(pending,{cursorPath,pendingPath,verify=verifyReceipts,verifyCheckpoints=()=>true}) {
+  if(!Array.isArray(pending.envelopes)||!pending.next_cursor)throw new Error('invalid_pending_batch')
+  if(!verify(pending.envelopes)||!verifyCheckpoints(pending.checkpoints||[]))return false
   writeFileSync(cursorPath,JSON.stringify(pending.next_cursor,null,2)+'\n')
   rmSync(pendingPath)
   return true
+}
+
+/** Authenticated read pinned to one main revision. Missing state is an uninitialised adapter, not coverage. */
+export function readCloudCheckpointState({ repo = DISPATCH_REPO, run = execFileSync } = {}) {
+  const api = (path) => JSON.parse(run('gh', ['api', path], { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 30000 }))
+  const revision = api(`repos/${repo}/git/ref/heads/main`).object?.sha
+  if (!/^[a-f0-9]{40}$/.test(revision || '')) throw new Error('invalid_checkpoint_source_revision')
+  let file
+  try { file = api(`repos/${repo}/contents/${CLOUD_CHECKPOINT_PATH}?ref=${revision}`) }
+  catch (error) { if (/HTTP 404\b/.test(String(error.stderr || error.message))) return { ...cloudCheckpointState(''), revision }; throw error }
+  if (file.encoding !== 'base64' || typeof file.content !== 'string') throw new Error('invalid_checkpoint_readback')
+  const state = cloudCheckpointState(Buffer.from(file.content, 'base64').toString('utf8'))
+  const receipts = [...state.checkpoints.values()].flatMap((checkpoint) => checkpoint.receipts)
+  if (!verifyPayloadReceipts(receipts, { repo, run, ref: revision })) throw new Error('cloud_checkpoint_receipt_missing')
+  return { ...state, revision }
+}
+
+export function verifyCloudCheckpoints(checkpoints, options) {
+  if (!checkpoints.length) return true
+  const state = readCloudCheckpointState(options)
+  return checkpoints.every((checkpoint) => state.checkpoints.has(validateCloudCheckpoint(checkpoint).checkpoint_id))
+}
+
+export function dispatchCloudCheckpoints(checkpoints, { repo = DISPATCH_REPO, run = execFileSync } = {}) {
+  for (const checkpoint of checkpoints) {
+    validateCloudCheckpoint(checkpoint)
+    const body = JSON.stringify({ event_type: DISPATCH_EVENT, client_payload: { producer: 'session-miner', events: [], checkpoint } })
+    if (Buffer.byteLength(body, 'utf8') > 60000) throw new Error('checkpoint_exceeds_dispatch_byte_budget')
+    run('gh', ['api', '--method', 'POST', `repos/${repo}/dispatches`, '--input', '-'], { input: body, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 60000 })
+  }
 }
 
 export async function post(envelopes, { url, token, fetchImpl = fetch }) {
@@ -546,16 +580,24 @@ if (isMain) {
       if (result.failures.length) throw new Error('submission_failed')
       if (!receipts()) { console.log('Submitted; durable ledger acknowledgement pending. The saved interpretation will be retried and the cursor has not moved.'); return false }
     }
+    if (source === 'cloud-events' && !verifyCloudCheckpoints(pending.checkpoints || [])) {
+      dispatchCloudCheckpoints(pending.checkpoints)
+      if (!verifyCloudCheckpoints(pending.checkpoints)) { console.log('Lessons are durable; opaque GitHub progress acknowledgement pending. The local cursor has not moved.'); return false }
+    }
     writeFileSync(cursorPath, JSON.stringify(pending.next_cursor, null, 2) + '\n')
     rmSync(pendingPath)
-    console.log('All lessons verified in GitHub main; cursor saved outside the repository.')
+    console.log(source === 'cloud-events' ? 'Lessons and opaque progress verified in GitHub main; local cursor acknowledged.' : 'All lessons verified in GitHub main; cursor saved outside the repository.')
     return true
   }
   if (existsSync(pendingPath)) {
     try {
       const pending=JSON.parse(readFileSync(pendingPath,'utf8'))
+      if (source === 'cloud-events' && !pending.checkpoints) {
+        pending.checkpoints = makeCloudCheckpoints(pending.next_cursor, pending.envelopes)
+        writeFileSync(pendingPath, JSON.stringify(pending) + '\n')
+      }
       if(args.includes('--dry-run')) {
-        if(!acknowledgePending(pending,{cursorPath,pendingPath})){console.log('An earlier submission awaits durable acknowledgement; its interpretation is preserved.');process.exit(0)}
+        if(!acknowledgePending(pending,{cursorPath,pendingPath,verifyCheckpoints: source === 'cloud-events' ? verifyCloudCheckpoints : ()=>true})){console.log('An earlier submission awaits durable acknowledgement; its interpretation is preserved.');process.exit(0)}
         console.log('The previously submitted batch is durable; preparing fresh proposals without sending.')
       }else{
         const complete=await finishPending(pending)
@@ -577,7 +619,12 @@ if (isMain) {
     const readSaved = (p) => { const f = resolve(p); return f.startsWith(home) && existsSync(f) ? readFileSync(f, 'utf8') : null }
     const transcripts = flag('--path') ? files(resolve(flag('--path')), (n) => n.endsWith('.jsonl')) : claudeTranscripts()
     const lines = transcripts.flatMap((f) => readFileSync(f, 'utf8').split('\n').filter(Boolean))
-    const result = cloudCursor(parseCloudEvents(lines, { readSaved }), cursor)
+    let durable
+    try { durable = readCloudCheckpointState() } catch { console.error('::error::GitHub cloud progress readback unavailable or invalid; no source interpreted and no cursor advanced.'); process.exit(1) }
+    const parsed = parseCloudEvents(lines, { readSaved })
+    Object.assign(cursor, resumeCloudCursor(parsed, cursor, durable.cursors))
+    Object.assign(nextCursor, cursor)
+    const result = cloudCursor(parsed, cursor)
     turns = result.turns; Object.assign(nextCursor, result.next)
   } else {
     const transcripts = flag('--path')
@@ -621,8 +668,12 @@ if (isMain) {
   const token = process.env.HARNESS_EVENT_INGEST_TOKEN
   if (route !== 'post' && route !== 'dispatch') { console.error(`::error::unknown submission route ${route}; nothing was sent and the cursor did not move.`); process.exit(2) }
   if (route === 'post' && r.envelopes.length && (!url || !token)) { console.error('::error::HARNESS_EVENT_INGEST_URL and HARNESS_EVENT_INGEST_TOKEN are needed to submit; nothing was sent and the cursor did not move.'); process.exit(1) }
-  if (r.envelopes.length) {
+  if (r.envelopes.length || source === 'cloud-events') {
     const pending = { route, envelopes: r.envelopes, next_cursor: nextCursor }
+    if (source === 'cloud-events') {
+      try { pending.checkpoints = makeCloudCheckpoints(nextCursor, r.envelopes, { previous: cursor }) }
+      catch { console.error('::error::Cloud progress could not be represented safely; no submission or cursor advance.'); process.exit(1) }
+    }
     writeFileSync(pendingPath, JSON.stringify(pending) + '\n')
     try { if (!await finishPending(pending)) process.exit(3) }
     catch { console.error('::error::Submission or durable acknowledgement failed; interpretation preserved, cursor unchanged.'); process.exit(1) }

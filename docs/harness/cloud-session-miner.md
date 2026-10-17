@@ -34,9 +34,11 @@ repository, "Session miner (standing)", and sends it the prompt below.
 >    --submit dispatch --from-dry-run`. It sends exactly the lessons the dry
 >    run proposed, as a GitHub repository_dispatch; the repository's intake
 >    workflow records them.
->    If durable acknowledgement is pending (exit 3), rerun that command once
->    after the intake completes. The miner replays its saved interpretation,
->    verifies the main-branch ledger, and advances only acknowledged cursors.
+>    If durable acknowledgement is pending (exit 3), rerun that command
+>    after the corresponding intake run completes. Lessons and opaque cloud
+>    progress have separate acknowledgement stages, so a second rerun may
+>    be needed. The miner replays its saved interpretation, checks matching
+>    payload receipts and progress on GitHub main, and advances only then.
 >    A later dry run first acknowledges an already stored pending batch, then
 >    prepares fresh proposals. It sends nothing during that dry run.
 > 5. Reply with counts only: sessions read, excerpts, lessons sent, lessons
@@ -49,13 +51,27 @@ the task wakes a standing session that was opened once by hand and has them.
 The agent never writes transcript text anywhere: `--source cloud-events` reads
 the `list_events` results back from the session's own Claude Code transcript
 (and from tool-results, where Claude Code saves a large one), skips synthetic
-and subagent turns, and keeps a per-session cursor outside the repository so a
-re-fetched page is never mined twice. If the extractor's reply is malformed,
-the miner keeps every lesson that still parses and asks once more when none
-does, so one bad reply cannot sink the run. The dry run keeps the lessons it
-proposed in the state folder, and `--from-dry-run` sends that set rather than
-asking the model again, so what goes out is what was checked. Event ids are deterministic, so a resend
-after a lost cursor is absorbed by the intake.
+and subagent turns, and keeps a private per-session cursor outside the
+repository. After matching lesson receipts are durable, it submits an opaque progress checkpoint through
+the same intake. `state/session-miner/checkpoints.jsonl` contains only hashed
+session and event identities, timestamps and observation payload receipts. A
+fresh cloud worker reads a pinned GitHub revision, verifies the checkpoint's
+receipts against that revision's observation ledger, and matches hashes only
+to sessions already returned by the provider. Lost local state therefore
+resumes without copying provider identifiers into the repository. Concurrent
+older checkpoints cannot rewind progress; timestamp ties retain all event
+identities. These receipts show acknowledged processed batches, not complete
+provider account access or exhaustive history coverage.
+
+If the extractor's reply is malformed, including a partially readable array,
+the miner asks once more and then fails without advancing a cursor. Only a
+complete JSON array is accepted. An explicit empty array deliberately declines
+all selected excerpts; a valid nonempty array deliberately declines omitted
+excerpts. Refusal prose cannot become an empty week. The dry run keeps the
+lessons it proposed in the state folder, and `--from-dry-run` sends that set rather than
+asking the model again, so what goes out is what was checked. Event ids are
+deterministic, so a resend after a lost cursor is absorbed by the intake. Empty interpretations also
+receive opaque cloud checkpoints, so a fresh worker need not reinterpret them.
 
 Version 2 episodes preserve the goal, retained decisions, requested delta,
 attempt, outcome, conditions and uncertainty. They enter the existing brain

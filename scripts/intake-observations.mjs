@@ -27,13 +27,14 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { envelopeSha, readSeenIds, readSeenPayloads, toObservation } from './import-harness-events.mjs'
 import { leaks } from './lib/redact.mjs'
+import { CLOUD_CHECKPOINT_PATH, validateCloudCheckpoint, loadCloudCheckpointState } from './lib/miner-checkpoint.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 export const MAX_EVENTS = 100
 const EVENT_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{15,127}$/
 
 /** Validate and dedupe one dispatch payload. Pure apart from reading the ledger. */
-export function intake(payload, { ledgerDir = join(HARNESS, 'state/observations'), now = new Date() } = {}) {
+export function intake(payload, { ledgerDir = join(HARNESS, 'state/observations'), checkpointPath = join(HARNESS, CLOUD_CHECKPOINT_PATH), now = new Date() } = {}) {
   const events = payload?.events
   if (!Array.isArray(events)) throw new Error('client_payload.events must be an array')
   if (events.length > MAX_EVENTS) throw new Error(`client_payload.events holds ${events.length} events; the cap is ${MAX_EVENTS}`)
@@ -62,7 +63,17 @@ export function intake(payload, { ledgerDir = join(HARNESS, 'state/observations'
       rejected[error.message] = (rejected[error.message] || 0) + 1
     }
   }
-  return { fresh, rejected, duplicates, ledger: join(ledgerDir, `${seenAt.slice(0, 7)}.jsonl`) }
+  let checkpoint = null
+  if (payload.checkpoint !== undefined) {
+    if (payload.producer !== 'session-miner') throw new Error('invalid_checkpoint_producer')
+    const candidate = validateCloudCheckpoint(payload.checkpoint)
+    for (const receipt of candidate.receipts) {
+      if (!payloads.has(receipt.id)) throw new Error('checkpoint_receipt_missing')
+      if (payloads.get(receipt.id) !== receipt.payload_sha256) throw new Error('checkpoint_receipt_conflict')
+    }
+    if (!loadCloudCheckpointState(checkpointPath).checkpoints.has(candidate.checkpoint_id)) checkpoint = candidate
+  }
+  return { fresh, rejected, duplicates, checkpoint, checkpointPath, ledger: join(ledgerDir, `${seenAt.slice(0, 7)}.jsonl`) }
 }
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
@@ -79,12 +90,17 @@ if (isMain) {
     console.error(`::error::The dispatch payload was refused: ${error.message}`)
     process.exit(1)
   }
-  const { fresh, rejected, duplicates, ledger } = result
+  const { fresh, rejected, duplicates, ledger, checkpoint, checkpointPath } = result
   if (fresh.length && !args.includes('--dry-run')) {
     mkdirSync(resolve(ledger, '..'), { recursive: true })
     appendFileSync(ledger, fresh.map((row) => JSON.stringify(row)).join('\n') + '\n')
   }
+  if (checkpoint && !args.includes('--dry-run')) {
+    mkdirSync(resolve(checkpointPath, '..'), { recursive: true })
+    appendFileSync(checkpointPath, JSON.stringify(checkpoint) + '\n')
+  }
   const reasons = Object.entries(rejected).map(([k, v]) => `${k} x${v}`).join(', ')
   console.log(`Observation intake: ${fresh.length} new, ${duplicates} already recorded, ${Object.values(rejected).reduce((a, b) => a + b, 0)} refused${reasons ? ` (${reasons})` : ''}.`)
+  if (checkpoint) console.log('Cloud progress: one receipt-verified opaque checkpoint accepted.')
   if (Object.keys(rejected).length) console.log('::warning::Some envelopes were refused; the counts above say why. Nothing refused was written.')
 }
