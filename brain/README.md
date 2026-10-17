@@ -144,6 +144,12 @@ Revise existing entries with `--revise --kind proposal --ref <proposal>` to
 preserve prior provenance in history. Existing source records retain their
 recorded meaning; this repair does not relabel them.
 
+A read-only audit of 23 committed index revisions found zero existing-entry
+resets to founding provenance. `state/repository-administration/provenance-audit.json`
+pins the inspected head, source blob, every ledger commit, comparison method
+and limits. Unknown pre-ledger rationale remains unknown; the audit does not
+invent a reason for a founding record.
+
 The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
 appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
 against the PR or push base and before automated commits and rebased pushes in

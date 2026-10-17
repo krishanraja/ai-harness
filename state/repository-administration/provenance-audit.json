@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "evidence_class": "git-provenance-audit",
+  "audited_at": "2026-10-17T09:31:43.305Z",
+  "head": "5e45b288a95f511ff85cadc1a527a6d0f8ae2443",
+  "shallow": "false",
+  "ledger_revisions": 23,
+  "scope": "Detect existing-entry changes that became founding or reset a non-founding source in committed brain/rules.yaml history. Does not invent motives or certify unknown pre-ledger rationale.",
+  "resets": [],
+  "current_entries": 328,
+  "ledger_commits": [
+    "f82d9bfbeea6b28539a1a484f69742ebbffb40d4",
+    "9c75f8264f8048ee4a3144761ed2620448890591",
+    "840ad04b68450599861e330fa3f22596a9be969c",
+    "e8d699b75678a6acf2edcc5f5c0b7b7194307275",
+    "f640449d88fdd96dab19741262bceb41b0a3bdff",
+    "5c0e1acb87e5bedd0df1c91fc2640b45375b7de0",
+    "783ed52cab1fe99f2af11a4fa6093202886ad40d",
+    "0e3423d7ca71648a57a5f75da5f264bff62afa9e",
+    "f7a400206d25fdff6020565587d4a9a83552ccab",
+    "520e4d9e0dfe5062e80f994785362f499d32d950",
+    "bd529178b280701b124cb8812152ab5b127b6326",
+    "da7827c2131627a0986afb1878748643b4824ac5",
+    "06447cdc7af458ffd669124da66265b280d16942",
+    "58910a0a82794355ce88ee1ffeb84995b04075dc",
+    "88a059daac42a9f3753e960a82e8054cafebd075",
+    "be38f017dfa8b9e0a78cfea4937f6c48f16bcf0c",
+    "8080fbdbd5b8162f0704687ddc249740fd05c7ec",
+    "0d6d309b22817a7d50c12b582ad3882ef71e57d7",
+    "3f443a2c6f62369d835a1a9372806a86bd935c1e",
+    "8bdb57200905cce7d472648663807bd1793d3343",
+    "7b2e6b051aecc7dc410cb7dc489dd620a47d63fb",
+    "0cd1eaa13649fce98b01689024bc2f24bc4866e7",
+    "e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28"
+  ],
+  "source_blob": "e4770f6dd60e7ddb6e7fc654498db59b9484d6ff",
+  "method": {
+    "history_command": [
+      "git",
+      "log",
+      "--reverse",
+      "--format=%H",
+      "5e45b288a95f511ff85cadc1a527a6d0f8ae2443",
+      "--",
+      "brain/rules.yaml"
+    ],
+    "comparison": "For each existing id in successive committed index states, report a reset when the new source.kind is founding and either text_sha changed or the prior source.kind was non-founding.",
+    "limits": "Only reachable committed index history at the pinned head. No claim about unmerged branches, unknown pre-ledger rationale, or first attribution of a previously unindexed rule."
+  }
+}
