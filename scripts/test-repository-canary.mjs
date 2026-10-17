@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { digest } from './lib/learning-episode.mjs'
 import { seal } from './repository-brain.mjs'
-import { privateTitleReplay, titleReplayTask, verifyTitleReplay, titleReplayToolAnswer, TITLE_REPLAY_TOOL } from './repository-title-replay.mjs'
+import { privateTitleReplay, titleReplayTask, verifyTitleReplay, titleReplayToolAnswer, titleReferenceCategory, TITLE_REPLAY_TOOL } from './repository-title-replay.mjs'
 
 // These invented examples test mechanics; actual native examples are fetched
 // only by the private in-memory evaluation on the runner.
@@ -38,6 +38,12 @@ const answer = {
 const receipt = verifyTitleReplay(answer, expected)
 assert.equal(receipt.status, 'passed')
 assert.equal(receipt.comparison_count, 4)
+assert.equal(receipt.selected_reference_category, 'shorter-picked')
+const baselineReceipt = verifyTitleReplay({ ...answer, selected_example_id: expected.baseline_example_id }, expected)
+assert.equal(baselineReceipt.status, 'passed', 'Preserving the longer picked baseline as a reference must not be mistaken for choosing a rejected title')
+assert.equal(baselineReceipt.selected_reference_category, 'known-baseline')
+assert.equal(baselineReceipt.requested_delta, 'length', 'The requested revision remains active even when the approved baseline is the comparison reference')
+assert.equal(baselineReceipt.comparison_only, true, 'A reference selection must not claim a shortened title has been produced')
 assert.ok(!JSON.stringify(receipt).includes(secretMarker), 'Public receipt contains no native or model prose')
 assert.ok(!JSON.stringify(receipt).includes(native.verdicts[0].title), 'Public receipt contains no title text')
 assert.throws(() => titleReplayTask(raw + ' ', delivered, spec), /native_source_moved/)
@@ -47,7 +53,12 @@ assert.throws(() => verifyTitleReplay({ ...answer, execute_product_actions: true
 assert.throws(() => verifyTitleReplay({ ...answer, cross_surface_approval: true }, expected), /intent_or_authority_lost/)
 assert.throws(() => verifyTitleReplay({ ...answer, superseded_lesson_ids: [] }, expected), /supersession_lost/)
 assert.throws(() => verifyTitleReplay({ ...answer, superseded_lesson_ids: [expected.obsolete_lesson_id, expected.replacement_lesson_id] }, expected), /supersession_lost/)
-assert.throws(() => verifyTitleReplay({ ...answer, selected_example_id: task.examples[0].id }, expected), /shortest_rejection_won/)
+for (const row of task.examples.filter(x => x.verdict === 'rejected')) {
+  assert.throws(() => verifyTitleReplay({ ...answer, selected_example_id: row.id }, expected), { message: 'title_replay_unapproved_reference:rejected' }, 'Both native rejected references remain rejected regardless of brevity')
+}
+assert.equal(titleReferenceCategory(expected.baseline_example_id, expected), 'known-baseline')
+assert.equal(titleReferenceCategory(expected.shorter_picked_ids[0], expected), 'shorter-picked')
+assert.throws(() => verifyTitleReplay({ ...answer, selected_example_id: secretMarker }, expected), { message: 'title_replay_unapproved_reference:unknown-id' }, 'Unknown private text must never appear in the diagnostic')
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.slice(1) }, expected), /comparison_missing/)
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.map(x => ({ ...x, rationale: '' })) }, expected), /qualitative_comparison_missing/)
 assert.throws(() => verifyTitleReplay({ ...answer, comparisons: answer.comparisons.map(x => ({ ...x, tradeoffs: ['brevity'] })) }, expected), /balance_missing/)

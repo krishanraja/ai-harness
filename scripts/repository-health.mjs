@@ -9,6 +9,7 @@ import {Gh} from './lib/github.mjs'
 import {dispatch} from './mine-sessions.mjs'
 import {aggregateMeasurements,readMeasurementProofs,readMinerCheckpoints,verifyMeasurementRows,validateMeasurement,measurementHash,measurementSeal,measurementMarker} from './lib/repository-measurements.mjs'
 import {createHash} from 'node:crypto'
+import {envelopeSha,observationId} from './import-harness-events.mjs'
 export function repositoryHealth(root=ROOT) {
   const policy=policyAt(root), rows=loadLedger(root), history=knowledgeHistory(root)
   const deployments=existsSync(join(root,'state/repository-administration/latest.json'))?JSON.parse(readFileSync(join(root,'state/repository-administration/latest.json'),'utf8')).results:[]
@@ -35,7 +36,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   console.log(measurementMarker(m,sha))
  }else if(args.includes('--record')) {
   const measurement=JSON.parse(readFileSync(flag('--record'),'utf8')),repository=args.includes('--repo')?flag('--repo'):null,envelope=measurementEnvelope(measurement,repository)
-  if(args.includes('--submit')){const result=dispatch([envelope]);if(result.failures.length)throw new Error('measurement-dispatch-failed');console.log(JSON.stringify({submitted:result.sent,measurement_id:measurement.id,payload_sha256:measurementSeal(measurement),acknowledgement:'Read the durable observation ledger; dispatch alone is not persistence.'}))}
+  if(args.includes('--submit')){const result=dispatch([envelope]);if(result.failures.length)throw new Error('measurement-dispatch-failed');console.log(JSON.stringify({submitted:result.sent,measurement_id:measurement.id,observation_id:observationId(envelope),payload_sha256:envelopeSha(envelope),measurement_sha256:measurementSeal(measurement),acknowledgement:'Read the durable observation ledger; dispatch alone is not persistence.'}))}
   else console.log(JSON.stringify({event_type:'harness-observations',client_payload:{events:[envelope]}},null,2))
  }else {
   if(args.includes('--verify')){const gh=new Gh(process.env.FLEET_TOKEN||process.env.GH_TOKEN),proof=await verifyMeasurementRows(loadLedger(ROOT),{gh,policy:policyAt()});mkdirSync(join(ROOT,'state/repository-administration'),{recursive:true});writeFileSync(join(ROOT,'state/repository-administration/measurement-verification.json'),JSON.stringify(proof,null,2)+'\n')}

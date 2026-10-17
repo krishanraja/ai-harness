@@ -82,7 +82,7 @@ export function titleReplayTask(raw, delivered, spec = TITLE_HISTORY) {
     ],
     examples, ordered_native_corrections: lessons,
     latest_request: 'Make the title shorter.',
-    replay_boundary: 'The latest request is a synthetic delta applied to a real native history. Select an existing shorter picked example as a comparison reference for a rewrite, not as a newly approved final title. The native examples include companion surfaces for the same piece: an approval never transfers to another surface. Do not publish, invent an owner approval, or convert the examples into a universal title rule.',
+    replay_boundary: 'The latest request is a synthetic delta applied to a real native history. Select an existing picked example as a comparison reference for a proposed rewrite, not as a newly approved final title. The reference may remain the longer picked baseline when a shorter companion example would lose accepted qualities. Length remains the requested revision delta; choosing a reference does not mean the title has already been shortened. The native examples include companion surfaces for the same piece: an approval never transfers to another surface. Do not publish, invent an owner approval, or convert the examples into a universal title rule.',
     request: 'Recover the explicit lesson supersession from the native correction sequence. Compare every supplied picked and rejected example with your selected starting point. Explain concrete trade-offs with the native reasons and owner feedback, including why a still-shorter rejected option does not automatically win. Describe the remaining tension rather than certifying final title quality.',
   }
   const expected = {
@@ -99,11 +99,20 @@ export function titleReplayTask(raw, delivered, spec = TITLE_HISTORY) {
   return { task, expected }
 }
 
+export function titleReferenceCategory(id, expected) {
+  if (id === expected.baseline_example_id) return 'known-baseline'
+  if (expected.shorter_picked_ids.includes(id)) return 'shorter-picked'
+  if (expected.example_verdicts[id] === 'picked') return 'known-picked'
+  if (expected.example_verdicts[id] === 'rejected') return 'rejected'
+  return 'unknown-id'
+}
+
 export function verifyTitleReplay(answer, expected) {
   if (answer?.repository !== expected.repository || answer.kind !== expected.kind) fail('title_replay_wrong_scope')
   if (answer.requested_delta !== 'length' || !Array.isArray(answer.retained_decision_ids) || decisionIds.some(id => !answer.retained_decision_ids.includes(id)) || answer.global_rule_created !== false || answer.execute_product_actions !== false || answer.cross_surface_approval !== false || answer.owner_approval_required !== true) fail('title_replay_intent_or_authority_lost')
   if (!Array.isArray(answer.superseded_lesson_ids) || answer.superseded_lesson_ids.length !== 1 || answer.superseded_lesson_ids[0] !== expected.obsolete_lesson_id || answer.superseding_lesson_id !== expected.replacement_lesson_id) fail('title_replay_supersession_lost')
-  if (!expected.shorter_picked_ids.includes(answer.selected_example_id)) fail('title_replay_shortest_rejection_won')
+  const selectedCategory = titleReferenceCategory(answer.selected_example_id, expected)
+  if (expected.example_verdicts[answer.selected_example_id] !== 'picked') fail('title_replay_unapproved_reference:' + selectedCategory)
   if (!Array.isArray(answer.comparisons) || answer.comparisons.length !== Object.keys(expected.example_verdicts).length) fail('title_replay_comparison_missing')
   const seen = new Set(), axes = new Set()
   for (const row of answer.comparisons) {
@@ -124,11 +133,11 @@ export function verifyTitleReplay(answer, expected) {
     status: 'passed', evidence_kind: 'private-native-history-model-replay',
     retained_decision_ids: [...decisionIds], requested_delta: 'length',
     comparison_only: true, native_approval_transfer: false,
-    selected_example_id: answer.selected_example_id,
+    selected_example_id: answer.selected_example_id, selected_reference_category: selectedCategory,
     superseded_lesson_ids: [expected.obsolete_lesson_id], superseding_lesson_id: expected.replacement_lesson_id,
     compared_example_ids: [...seen].sort(), comparison_count: seen.size, tradeoff_axes: [...axes].sort(),
     private_response_sha256: seal(answer),
-    limits: 'Native source verdicts, shorter picked selection, explicit supersession and accumulated intent checked deterministically. Qualitative trade-off reasoning is supplemental model evidence; subjective taste, production application and long-term effectiveness remain unmeasured. The shortening request is a synthetic replay delta, not a claim about the historical transcript.',
+    limits: 'Native source verdicts, picked comparison reference, explicit supersession and accumulated intent checked deterministically. The length request remains a proposed revision delta; selecting a reference does not prove a shortened title was produced. Qualitative trade-off reasoning is supplemental model evidence; subjective taste, production application and long-term effectiveness remain unmeasured. The shortening request is a synthetic replay delta, not a claim about the historical transcript.',
   }
 }
 

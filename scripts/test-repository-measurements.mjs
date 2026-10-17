@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import {createHash} from 'node:crypto'
-import {mkdtempSync,writeFileSync,rmSync} from 'node:fs'
+import {mkdtempSync,writeFileSync,readFileSync,mkdirSync,rmSync} from 'node:fs'
+import {spawnSync} from 'node:child_process'
 import {tmpdir} from 'node:os'
 import {join} from 'node:path'
 import {aggregateMeasurements,validateMeasurement,measurementSeal,measurementHash,measurementMarker,verifyMeasurement,inspectMeasurementEvidence} from './lib/repository-measurements.mjs'
@@ -24,6 +25,17 @@ const dir=mkdtempSync(join(tmpdir(),'repository-measurements-'))
 try {
  const m=base(),e=event(m),first=intake({events:[e]},{ledgerDir:dir}).fresh
  assert.equal(first.length,1);assert.equal(first[0].class,'measurement');assert.deepEqual(first[0].measurement,m)
+ if(process.platform!=='win32'){
+  const bin=join(dir,'bin'),input=join(dir,'measurement.json'),submitted=join(dir,'dispatch.json')
+  mkdirSync(bin);writeFileSync(input,JSON.stringify(m))
+  writeFileSync(join(bin,'gh'),'#!/usr/bin/env node\nconst fs=require("node:fs");fs.writeFileSync(process.env.HARNESS_TEST_DISPATCH_PATH,fs.readFileSync(0,"utf8"));\n',{mode:0o755})
+  const cli=spawnSync(process.execPath,['scripts/repository-health.mjs','--record',input,'--repo','content-engine','--submit'],{cwd:process.cwd(),env:{...process.env,PATH:bin+':'+process.env.PATH,HARNESS_TEST_DISPATCH_PATH:submitted},encoding:'utf8'})
+  assert.equal(cli.status,0,cli.stderr)
+  const receipt=JSON.parse(cli.stdout),payload=JSON.parse(readFileSync(submitted,'utf8')).client_payload,received=intake(payload,{ledgerDir:join(dir,'submitted-ledger')}).fresh[0]
+  assert.equal(receipt.observation_id,received.id,'Submission receipt names the durable intake identity')
+  assert.equal(receipt.payload_sha256,received.payload_sha256,'Submission receipt uses the independently computed intake envelope hash')
+  assert.equal(receipt.measurement_sha256,measurementSeal(m),'Measurement content hash remains separately labelled')
+ }
  assert.equal(observationKnowledge(first[0],policy),null,'measurement claims cannot become learned requirements')
  writeFileSync(join(dir,'2026-10.jsonl'),JSON.stringify(first[0])+'\n')
  assert.equal(intake({events:[e]},{ledgerDir:dir}).duplicates,1)
