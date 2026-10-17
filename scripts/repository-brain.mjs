@@ -9,6 +9,11 @@ import { loadLedger } from './propose.mjs'
 
 export const ROOT = resolve(fileURLToPath(import.meta.url), '../..')
 export const KNOWLEDGE = 'brain/knowledge.jsonl'
+// Source observations and proposed interpretations are inert data, not authored canon.
+export function isInertKnowledgeLine(file,line) {
+  if(file!==KNOWLEDGE)return false
+  try {return ['observed','candidate'].includes(JSON.parse(line).status)}catch{return false}
+}
 export const POLICY = 'contract/repository-administration.json'
 const STATUSES = new Set(['observed', 'candidate', 'accepted', 'rejected', 'superseded'])
 export const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'))

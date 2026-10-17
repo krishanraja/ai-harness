@@ -68,11 +68,11 @@ T('a script the canon cites on an added line is shown to the panel; one in uncha
     '+  # only to a clock still reporting (scripts/steward-housekeeping.mjs).',
     '+  # The task is registered -Daily in scripts/Invoke-HarnessSync.ps1 and scripts/Invoke-HarnessSync.ps1 again',
     '+  # Tested in scripts/test-digest.mjs and scripts/test-machine-heartbeat.mjs.',
-    '+  # Historical evidence helper: scripts/lib/legacy-evidence-format.mjs.',
+    '+  # Episode validation helper: scripts/lib/learning-episode.mjs.',
     ' # unchanged context naming scripts/observe.mjs',
   ].join('\n')
   const cited = citedScripts(diff)
-  assert(cited.length === 5 && cited.includes('scripts/lib/legacy-evidence-format.mjs') && cited.includes('scripts/steward-housekeeping.mjs') && cited.includes('scripts/Invoke-HarnessSync.ps1') && cited.includes('scripts/test-machine-heartbeat.mjs'), `cited: ${cited.join(', ')}`)
+  assert(cited.length === 5 && cited.includes('scripts/lib/learning-episode.mjs') && cited.includes('scripts/steward-housekeeping.mjs') && cited.includes('scripts/Invoke-HarnessSync.ps1') && cited.includes('scripts/test-machine-heartbeat.mjs'), `cited: ${cited.join(', ')}`)
   assert(!cited.includes('scripts/observe.mjs'), 'an unchanged context line widened what the panel is shown')
   assert(groundedFiles(diff + '\n+++ b/scripts/steward-housekeeping.mjs\n').includes('scripts/steward-housekeeping.mjs'), 'a shown script is not citable')
 })

@@ -15,7 +15,6 @@ assert.match(yml,/HISTORY_BASE:.*github.event.before/,'Direct pushes must preser
 const persist=yml.slice(yml.indexOf('- name: Record coverage and persist append-only knowledge'),yml.indexOf('  fresh-context:'))
 const staged=persist.match(/^\s+git add (.+)$/m)?.[1].split(' ')
 assert.deepEqual(staged,['brain/knowledge.jsonl','brain/acceptances.jsonl','state/repository-administration/latest.json','state/repository-administration/health.json','state/repository-administration/deployments.jsonl'],'Only declared runtime outputs may be committed by the publisher')
-assert.match(persist,/git diff --exit-code -- state\/repository-administration\/legacy-evidence-format\.json/,'The publisher must refuse mutated validation inputs')
 const guard=persist.indexOf('validate-knowledge-history.mjs --base "$(git rev-parse HEAD)"')
 assert.ok(guard>=0&&guard<persist.indexOf('git commit -m'),'Automatic commits must preserve their checked-out history')
 assert.match(persist,/git pull --rebase[^\n]+\n\s+node scripts\/validate-knowledge-history\.mjs --base "\$\(git rev-parse origin\/main\)"\n\s+if git push/,'Every rebased push must preserve the fetched main history')

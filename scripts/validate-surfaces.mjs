@@ -25,7 +25,7 @@ import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
 import { check as checkRuleProvenance, extract as extractRules } from './brain-rules.mjs'
 import { canonSyncProblems, canonExcludedRepos, isCanonSynced } from './lib/fleet.mjs'
-import { isLegacyEvidenceLine } from './lib/legacy-evidence-format.mjs'
+import { isInertKnowledgeLine } from './repository-brain.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -121,8 +121,6 @@ O(`${canonFiles.length} canon files carry no machine-specific absolute path`)
 // rule it enforces. brain/ is included because it is canon: everything the
 // judge panel and the provenance ledger read is built from these files.
 const EM_DASH = '\u2014'
-const allowancePath=join(HARNESS,'state/repository-administration/legacy-evidence-format.json')
-const legacyFormatAllowance=existsSync(allowancePath)?JSON.parse(readFileSync(allowancePath,'utf8')):null
 const brainFiles = []
 if (existsSync(join(HARNESS, 'brain'))) {
   const walkBrain = (dir) => {
@@ -136,9 +134,9 @@ if (existsSync(join(HARNESS, 'brain'))) {
 }
 for (const f of [...canonFiles, ...brainFiles, ...fleet.adapters.map((a) => a.output), 'state/fleet.yaml']) {
   const text = read(f)
-  text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)&&!isLegacyEvidenceLine(f,line,legacyFormatAllowance)) F(`${f}:${i + 1} contains an em dash`) })
+  text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)&&!isInertKnowledgeLine(f,line)) F(`${f}:${i + 1} contains an em dash`) })
 }
-O(`em dash policy valid for canon, templates, adapters and ${brainFiles.length} brain files; only exact historical source evidence is exempt`)
+O(`em dash policy valid for authored canon, templates, adapters and accepted knowledge; inert source observations are data`)
 
 // --------------------------------------------------- provenance on every rule
 // Every rule in both contracts, and every chapter of every skill, must have an
