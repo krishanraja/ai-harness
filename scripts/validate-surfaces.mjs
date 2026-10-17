@@ -138,7 +138,7 @@ for (const f of [...canonFiles, ...brainFiles, ...fleet.adapters.map((a) => a.ou
   const text = read(f)
   text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)&&!isLegacyEvidenceLine(f,line,legacyFormatAllowance)) F(`${f}:${i + 1} contains an em dash`) })
 }
-O(`no em dash in the canon, the templates, the rendered adapters or the ${brainFiles.length} brain files`)
+O(`em dash policy valid for canon, templates, adapters and ${brainFiles.length} brain files; only exact historical source evidence is exempt`)
 
 // --------------------------------------------------- provenance on every rule
 // Every rule in both contracts, and every chapter of every skill, must have an

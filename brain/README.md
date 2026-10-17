@@ -129,9 +129,10 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Maintain the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
---revise --kind proposal --ref <proposal>`. The reviser records changed rule
-hashes and preserves prior provenance in history.
+Bootstrap an absent canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
+--backfill`. Maintain existing entries with `--revise --kind proposal --ref
+<proposal>`: the reviser records changed rule hashes and preserves prior
+provenance in history. Backfill is not a provenance-preserving revision command.
 
 The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
 appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
@@ -142,7 +143,8 @@ against the PR or push base and before automated commits and rebased pushes in
 `state/repository-administration/legacy-evidence-format.json`. Its helper,
 `scripts/lib/legacy-evidence-format.mjs`, permits those exact non-accepted lines
 to pass the text style check without changing them. This is no exception to the
-history guard. `scripts/test-knowledge-history.mjs` verifies both controls,
+history guard. The publisher refuses changes to this validation input and stages
+only its five declared runtime outputs. `scripts/test-knowledge-history.mjs` verifies both controls,
 including rejection of altered or accepted records. This maintenance follows
 the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
 `scripts/test-repository-workflow.mjs` protects intake-triggered learning while

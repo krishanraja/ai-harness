@@ -94,7 +94,9 @@ jobs:
           git config user.name "Krish Raja"
           git config user.email "hello@krishraja.com"
           git config credential.helper '!gh auth git-credential'
-          git add brain/knowledge.jsonl brain/acceptances.jsonl state/repository-administration/
+          # Validation inputs are reviewed source, never runtime publisher output.
+          git diff --exit-code -- state/repository-administration/legacy-evidence-format.json
+          git add brain/knowledge.jsonl brain/acceptances.jsonl state/repository-administration/latest.json state/repository-administration/health.json state/repository-administration/deployments.jsonl
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "chore(brain): consolidate evidence and verify repository views" -m "Approved plan: brain-repository-administration-v1. Observations remain unaccepted; owner decisions carry exact merge proofs."
           for attempt in 1 2 3; do
