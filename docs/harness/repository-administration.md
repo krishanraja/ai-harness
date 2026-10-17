@@ -148,6 +148,10 @@ coverage, keeping missing opportunities and effectiveness unknown.
 
 ## Validation and effectiveness
 
+The [2026-10-17 rollout report](repository-administration-rollout-2026-10-17.md)
+records the initial merged targets, exact readbacks, fresh Claude fixtures and
+rollback evidence. Its observations are pinned to the recorded revisions.
+
 Deterministic regressions cover retained intent, source isolation, scope,
 deduplication, receipt conflicts, experiment uncertainty, approval binding,
 human drift, budgets, exclusion, atomic commits and rollback. Fresh Claude
