@@ -94,11 +94,15 @@ export function citedScripts(diff) {
   return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
 }
 
+export function citedProposals(diff) {
+  return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/g)].map(m=>m[1])))]
+}
+
 export function diffFor(base, head) {
   const git = (paths) => execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...paths],
     { encoding: 'utf8', maxBuffer: 1 << 26 })
   const canon = git(WATCHED)
-  const cited = citedScripts(canon)
+  const cited = [...citedScripts(canon), ...citedProposals(canon)]
   return cited.length ? canon + git(cited) : canon
 }
 
@@ -277,7 +281,8 @@ export function failureReport({ base, head, bench, error }) {
  * requests 125 and 126 unmeasured, although each carried an owner ruling.
  */
 export function groundedFiles(diff) {
-  const changed = [...diff.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((m) => m[1])
+  // Empty added ledgers have a diff header but no +++ line or content hunk.
+  const changed = [...diff.matchAll(/^\+\+\+ b\/(.+)$/gm), ...diff.matchAll(/^diff --git a\/[^\n]+ b\/([^\n]+)$/gm)].map((m) => m[1])
   const cited = [...diff.matchAll(/^\+.*?\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/gm)].map((m) => m[1])
   return [...new Set([...changed, ...cited])]
 }
