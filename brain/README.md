@@ -129,8 +129,15 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Regenerate the whole ledger with `node scripts/brain-rules.mjs --backfill`. It
-keeps every existing entry whose text has not changed, so a regeneration never
-silently rewrites provenance you already recorded.
+Bootstrap the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs --backfill`.
+Maintain that index with `--revise --kind proposal --ref <proposal>`, which records
+changed rule hashes and their prior provenance. Backfill retains unchanged entries
+but resets changed entries to founding provenance, so it is an initial inventory
+operation. Both commands own `rules.yaml` only.
+
+The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
+appends records. `scripts/validate-knowledge-history.mjs` checks that exact file
+against the PR base. Canon-index regeneration and learning-history validation
+operate on these two distinct files under their respective rules.
 
 Historical non-accepted source evidence keeps its exact bytes. The two pre-existing punctuation records in `state/repository-administration/legacy-evidence-format.json` have hash-bound formatting allowances. Changed records and accepted instructions cannot use those allowances. `scripts/validate-knowledge-history.mjs` enforces byte-for-byte append-only history in `.github/workflows/repository-administration.yml`, against GitHub's exact PR base. This maintenance follows the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
