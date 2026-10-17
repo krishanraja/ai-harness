@@ -31,8 +31,6 @@ export const policyAt = (root = ROOT) => {
 }
 export const canonical = (v) => Array.isArray(v) ? v.map(canonical) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])])) : v
 export const seal = (v) => digest(JSON.stringify(canonical(v)))
-// Preserve source punctuation in decoded evidence while keeping the JSON transport ASCII at this character.
-export const serializeKnowledge = (record) => JSON.stringify(record).replace(/\u2014/g, '\\u2014')
 
 export function validateKnowledge(record, policy) {
   if (!record || !/^[a-z][a-z0-9._-]{2,119}$/.test(record.id || '') || !Number.isSafeInteger(record.version) || record.version < 1) throw new Error('invalid_knowledge_identity')
@@ -142,7 +140,7 @@ export function consolidateKnowledge({ root = ROOT, rows = loadLedger(root), wri
   }
   if (write && fresh.length) {
     mkdirSync(dirname(join(root, KNOWLEDGE)), { recursive: true })
-    appendFileSync(join(root, KNOWLEDGE), fresh.map(serializeKnowledge).join('\n') + '\n')
+    appendFileSync(join(root, KNOWLEDGE), fresh.map(r=>JSON.stringify(r)).join('\n') + '\n')
   }
   return { fresh, total: history.length + fresh.length, unknown_scope: [...history, ...fresh].filter((r) => r.scope.kind === 'unknown').length }
 }

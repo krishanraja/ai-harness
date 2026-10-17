@@ -117,10 +117,13 @@ are the rules nobody has ever had to defend.
   YAML reader turns a bare all-digit scalar into a number, which never compares
   equal to its own identical string. Unquoted, such an entry fails forever and
   no edit can fix it. This is not hypothetical: it happened on the first run.
-- **No em dash in authored canon.** `scripts/validate-surfaces.mjs` checks
-  accepted knowledge, contracts and rendered adapters. Observed and candidate
-  source records remain inert evidence, as defined above; their punctuation
-  cannot enter instructions through observation or interpretation alone.
+- **No em dash in authored canon (2026-10-17).** This supersedes the earlier
+  directory-wide formatting statement because the directory now also holds
+  inert source data. `scripts/repository-brain.mjs` identifies observed and
+  candidate records; `scripts/validate-surfaces.mjs` keeps accepted knowledge,
+  contracts and rendered adapters subject to the authored-text check.
+  `scripts/test-knowledge-history.mjs` verifies both the distinction and the
+  unchanged byte-level history guard. Source punctuation grants no authority.
 
 ## Changing a rule
 
@@ -145,10 +148,6 @@ appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefi
 against the PR or push base and before automated commits and rebased pushes in
 `.github/workflows/repository-administration.yml`.
 
-`scripts/repository-brain.mjs` classifies observed and candidate records as inert
-source data. `scripts/validate-surfaces.mjs` applies authored-text checks to
-accepted instructions. `scripts/test-knowledge-history.mjs` verifies that this
-classification grants no authority and never permits rewriting evidence bytes.
 The publisher stages only its five declared runtime outputs. This maintenance follows
 the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
 `scripts/test-repository-workflow.mjs` protects intake-triggered learning while

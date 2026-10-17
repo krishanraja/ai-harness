@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os'
 import {join} from 'node:path'
 import {mine,verifyReceipts,cloudCursor,acknowledgePending,dispatch,clipDeferredCursors} from './mine-sessions.mjs'
 import {intake} from './intake-observations.mjs'
-import {observationKnowledge,policyAt,seal,validateKnowledge,serializeKnowledge} from './repository-brain.mjs'
+import {observationKnowledge,policyAt,seal,validateKnowledge} from './repository-brain.mjs'
 import {validateReview} from './repository-reviews.mjs'
 import {envelopeSha,observationId} from './import-harness-events.mjs'
 const dir=mkdtempSync(join(tmpdir(),'repository-learning-'))
@@ -26,8 +26,6 @@ try {
  assert.deepEqual(JSON.parse(readFileSync(cursorPath,'utf8')),{source:1});assert.ok(existsSync(pendingPath))
  assert.equal(acknowledgePending(pending,{cursorPath,pendingPath,verify:()=>true}),true)
  assert.deepEqual(JSON.parse(readFileSync(cursorPath,'utf8')),{source:2});assert.equal(existsSync(pendingPath),false)
- const historical={statement:'A historical source retained its punctuation\u2014and its meaning.'}
- const encoded=serializeKnowledge(historical);assert.deepEqual(JSON.parse(encoded),historical);assert.equal(encoded.includes('\u2014'),false)
  const batches=[],large={...e,episode:{goal:'\u5b57'.repeat(500),requested_change:'\u5b57'.repeat(500),attempt:'\u5b57'.repeat(500),outcome:'\u5b57'.repeat(500),retained:['\u5b57'.repeat(450),'\u5b57'.repeat(450)],conditions:['\u5b57'.repeat(450)],uncertainties:['\u5b57'.repeat(450)]}}
  assert.equal(dispatch(Array.from({length:30},()=>large),{run:(cmd,args,options)=>{assert.ok(Buffer.byteLength(options.input,'utf8')<=60000);batches.push(JSON.parse(options.input).client_payload.events)}}).sent,30)
  assert.ok(batches.length>2,'Structured multilingual episodes must split by UTF-8 bytes as well as event count')

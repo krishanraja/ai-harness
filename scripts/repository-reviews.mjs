@@ -4,7 +4,7 @@ import { existsSync, readFileSync, appendFileSync, mkdirSync, readdirSync, write
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
-import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge, serializeKnowledge, profiles, effectiveKnowledge } from './repository-brain.mjs'
+import { ROOT, policyAt, seal, knowledgeHistory, KNOWLEDGE, validateKnowledge, profiles, effectiveKnowledge } from './repository-brain.mjs'
 import { buildCandidates, loadLedger, loadPolicy } from './propose.mjs'
 import { leaks } from './lib/redact.mjs'
 
@@ -84,7 +84,7 @@ export async function promoteOwnerReviews({ gh, root = ROOT, write = false }) {
       if (write) {
         for (const path of [ACCEPTANCES, KNOWLEDGE]) mkdirSync(dirname(join(root, path)), { recursive: true })
         appendFileSync(join(root, ACCEPTANCES), JSON.stringify(proof) + '\n')
-        appendFileSync(join(root, KNOWLEDGE), serializeKnowledge(accepted) + '\n')
+        appendFileSync(join(root, KNOWLEDGE), JSON.stringify(accepted) + '\n')
       }
       done.add(r.id); results.push({ id: accepted.id, repository: r.repository, approval: proof.ref })
     }
