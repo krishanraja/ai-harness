@@ -129,17 +129,14 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Bootstrap the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs --backfill`.
-Maintain that index with `--revise --kind proposal --ref <proposal>`, which records
-changed rule hashes and their prior provenance. Backfill retains unchanged entries
-but resets changed entries to founding provenance, so it is an initial inventory
-operation. Both commands own `rules.yaml` only.
+Maintain the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
+--revise --kind proposal --ref <proposal>`. The reviser records changed rule
+hashes and preserves prior provenance in history.
 
 The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
 appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
-against the PR base and before automated commits and rebased pushes in
-`.github/workflows/repository-administration.yml`. Canon-index regeneration owns
-the other file, `rules.yaml`.
+against the PR or push base and before automated commits and rebased pushes in
+`.github/workflows/repository-administration.yml`.
 
 `scripts/validate-surfaces.mjs` reads the two historical punctuation allowances in
 `state/repository-administration/legacy-evidence-format.json`. Its helper,
@@ -148,3 +145,5 @@ to pass the text style check without changing them. This is no exception to the
 history guard. `scripts/test-knowledge-history.mjs` verifies both controls,
 including rejection of altered or accepted records. This maintenance follows
 the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
+`scripts/test-repository-workflow.mjs` protects intake-triggered learning while
+preventing a derived report from restarting publication through the steward.

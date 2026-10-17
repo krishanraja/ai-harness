@@ -91,7 +91,7 @@ export function headSha(head) {
  */
 export function citedScripts(diff) {
   const added = diff.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++'))
-  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
+  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
 }
 
 export function citedProposals(diff) {
