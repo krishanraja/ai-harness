@@ -294,7 +294,8 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   const candidates = []
   for (const c of clusters) {
     if(c.rows.some(r=>r.schema_version===2&&!r.repo)){below['unknown-scope']=(below['unknown-scope']||0)+c.rows.length;continue}
-    const e = eligibility(c, policy)
+    const uniqueEpisodes=[...new Map(c.rows.map(r=>[r.episode_id||r.id,r])).values()]
+    const e = eligibility({...c,rows:uniqueEpisodes}, policy)
     const type = c.key
     if (!e.eligible) { below[type] = (below[type] || 0) + 1; continue }
     if (type === 'ruling-cluster') {

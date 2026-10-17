@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import {mkdtempSync,writeFileSync,readFileSync,existsSync,rmSync} from 'node:fs'
 import {tmpdir} from 'node:os'
 import {join} from 'node:path'
-import {mine,verifyReceipts,cloudCursor,acknowledgePending,dispatch} from './mine-sessions.mjs'
+import {mine,verifyReceipts,cloudCursor,acknowledgePending,dispatch,clipDeferredCursors} from './mine-sessions.mjs'
 import {intake} from './intake-observations.mjs'
 import {observationKnowledge,policyAt,seal,validateKnowledge,serializeKnowledge} from './repository-brain.mjs'
 import {validateReview} from './repository-reviews.mjs'
@@ -35,6 +35,10 @@ try {
  const first=cloudCursor([{session:'s',at:'same',source_event_id:'one'}],{})
  const second=cloudCursor([{session:'s',at:'same',source_event_id:'one'},{session:'s',at:'same',source_event_id:'two'}],first.next)
  assert.deepEqual(second.turns.map(t=>t.fresh),[false,true],'Equal timestamps cannot drop a later paginated event')
+ const cappedTurns=['one','two','three'].map(source_event_id=>({session:'capped',at:'same-time',source_event_id}))
+ const whole=cloudCursor(cappedTurns,{})
+ const clipped=clipDeferredCursors(cappedTurns,{},whole.next,[{session:'capped',at:'same-time',turn_index:2}])
+ assert.deepEqual(cloudCursor(cappedTurns,clipped).turns.map(t=>t.fresh),[false,false,true],'A capped cloud batch advances to its processed prefix rather than replaying it forever')
  const candidate={id:'candidate.one',repository:'content-engine',evidence:[r]}
  const proposal={candidate_id:candidate.id,repository:candidate.repository,type:'procedure',statement:'Preserve the accumulated decisions when changing one dimension.',why:'Repeated corrections show earlier decisions being lost.',alternative_explanations:'Retrieval or owning stage defects may explain the failure.',if_wrong:'An obsolete decision could block a useful revision.',validation:'Check a fresh revision against the retained decisions.',rollback:'Supersede the accepted record with an owner-reviewed correction.'}
  const review=validateReview(proposal,[candidate],policyAt());assert.equal(review.evidence_ids[0],r.id)

@@ -355,6 +355,17 @@ export function cloudCursor(turns, cursor) {
   })
   return { turns: marked, next }
 }
+export function clipDeferredCursors(turns,cursor,nextCursor,deferred){
+ const next=structuredClone(nextCursor),clipped=new Set()
+ for(const ex of deferred||[]){
+  if(ex.source_file)next[ex.source_file]=Math.min(next[ex.source_file],ex.index)
+  else if(ex.session&&ex.at&&!clipped.has(ex.session)){
+   next[ex.session]=cloudCursor(turns.slice(0,ex.turn_index).filter(t=>t.session===ex.session),cursor).next[ex.session]||cursor[ex.session]||''
+   clipped.add(ex.session)
+  }
+ }
+ return next
+}
 export function readPlan(path, nextCursor) {
   if (!existsSync(path)) return { error: 'there is no dry-run plan; run with --dry-run first' }
   let plan
@@ -596,10 +607,7 @@ if (isMain) {
     console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
   }
   // Leave an unprocessed suffix replayable. A bounded run must not advance past episodes it did not read.
-  for (const ex of r.deferred || []) {
-    if (ex.source_file) nextCursor[ex.source_file] = Math.min(nextCursor[ex.source_file], ex.index)
-    else if (ex.session && ex.at) nextCursor[ex.session] = cursor[ex.session] || ''
-  }
+  Object.assign(nextCursor,clipDeferredCursors(turns,cursor,nextCursor,r.deferred))
   // An extractor that could not run used to save the cursor with zero lessons,
   // which skipped those sessions for good and reported a healthy run.
   if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }
