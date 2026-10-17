@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-17T08:14:15.122Z",
+  "sources": {
+    "github": {
+      "status": "available",
+      "basis": "existing observation ledger"
+    },
+    "ai_history": {
+      "status": "coverage-unverified",
+      "basis": "Only delivered episodes are measurable; source accounts, history pagination and unavailable sessions are not inferred."
+    },
+    "hosted_exporter": {
+      "status": "configured-unverified"
+    }
+  },
+  "unknown_repository_observations": 0,
+  "repositories": [
+    {
+      "repository": "AEO-Engine",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 2,
+      "unknown_coverage": true,
+      "delivery": "verified",
+      "brain_revision": "5ca09cc3df52",
+      "source_base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+      "bootstrap_before": 17233,
+      "bootstrap_after": 11549,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "ai-harness",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 57,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "155b79828fb7",
+      "source_base": "e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28",
+      "bootstrap_before": 54570,
+      "bootstrap_after": 39955,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "content-engine",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 127,
+      "unknown_coverage": true,
+      "delivery": "verified",
+      "brain_revision": "f0c91f3b1502",
+      "source_base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+      "bootstrap_before": 232887,
+      "bootstrap_after": 213721,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "contentarchives",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 39,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "430ad4208f8a",
+      "source_base": "35ba0dcf783d9311e11b774b41197bb0dfc884ea",
+      "bootstrap_before": 139913,
+      "bootstrap_after": 76175,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "control-center",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 192,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "ba41f521a760",
+      "source_base": "379d193052027fe290bafca4f37f9ef902a0b112",
+      "bootstrap_before": 48856,
+      "bootstrap_after": 48670,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "fractionl-circle",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "dddd1abc777c",
+      "source_base": "866a1307a835ae58d6150b7bd71b31736d9ffbd2",
+      "bootstrap_before": 24627,
+      "bootstrap_after": 15715,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "fractionl-pulse",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "c3389b60c708",
+      "source_base": "42a3210aa8abefcab6f09f076ffd2ce56f44f533",
+      "bootstrap_before": 46439,
+      "bootstrap_after": 33956,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "full-time",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 20,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "cd43facd0779",
+      "source_base": "702c84d242071b0e0c347a6b87668e210ed2d897",
+      "bootstrap_before": 71870,
+      "bootstrap_after": 44509,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "makeyourmindup",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 37,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "13bd661431b5",
+      "source_base": "e19ea80944d7abec90b88c31e7a550d1dc33e901",
+      "bootstrap_before": 9036,
+      "bootstrap_after": 9003,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    },
+    {
+      "repository": "mm-ctrl",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "4757d4458aee",
+      "source_base": "d2483fdbe866dfcebc6f42643c97bdabd9da6b36",
+      "bootstrap_before": 47367,
+      "bootstrap_after": 22137,
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "status": "awaiting-observed-work"
+      }
+    }
+  ]
+}
