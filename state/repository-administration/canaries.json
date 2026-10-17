@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "implementation_pr": 130,
+  "implementation_head": "1d347424bae3e19f61a12b707ff5643b1010ab03",
+  "implementation_merge": "e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28",
+  "evidence_class": "synthetic-evaluation",
+  "receipts": [
+    {
+      "evidence_class": "synthetic-evaluation",
+      "job": 117348619574,
+      "run": 39016162045,
+      "repository": "content-engine",
+      "kind": "iteration",
+      "source_base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+      "brain_revision": "f0c91f3b1502",
+      "delivered_sha": "10ab0d37b2fe2670d02d7604d1175d398b568735bc349764a036132b2a87e927",
+      "workflow": "content",
+      "read": [
+        "docs/NORTH_STAR.md",
+        "docs/CONTENT_ENGINE.md",
+        ".agents/skills/make-piece/SKILL.md",
+        "config/title-verdicts.json",
+        "config/failures.json",
+        "WORKBENCH.md"
+      ],
+      "status": "passed",
+      "observed_read_paths": [
+        ".canary/CLAUDE.md",
+        ".canary/AGENTS.md",
+        ".canary/docs/HARNESS_CONTEXT.md",
+        ".canary/task.json"
+      ],
+      "evidence_kind": "fresh-Claude-fixture",
+      "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+    },
+    {
+      "evidence_class": "synthetic-evaluation",
+      "job": 117348619585,
+      "run": 39016162045,
+      "repository": "content-engine",
+      "kind": "orientation",
+      "source_base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+      "brain_revision": "f0c91f3b1502",
+      "delivered_sha": "10ab0d37b2fe2670d02d7604d1175d398b568735bc349764a036132b2a87e927",
+      "workflow": "content",
+      "read": [
+        "docs/NORTH_STAR.md",
+        "docs/CONTENT_ENGINE.md",
+        ".agents/skills/make-piece/SKILL.md",
+        "config/title-verdicts.json",
+        "config/failures.json",
+        "WORKBENCH.md"
+      ],
+      "status": "passed",
+      "observed_read_paths": [
+        ".canary/CLAUDE.md",
+        ".canary/AGENTS.md",
+        ".canary/docs/HARNESS_CONTEXT.md",
+        ".canary/task.json"
+      ],
+      "evidence_kind": "fresh-Claude-fixture",
+      "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+    },
+    {
+      "evidence_class": "synthetic-evaluation",
+      "job": 117348619587,
+      "run": 39016162045,
+      "repository": "AEO-Engine",
+      "kind": "orientation",
+      "source_base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+      "brain_revision": "5ca09cc3df52",
+      "delivered_sha": "280d97c2c51b31a1d06e8b6f77721515b15b16bea1c9dd6e0b556c9e6584f571",
+      "workflow": "research",
+      "read": [
+        "README.md",
+        "docs/PACKET.md",
+        "docs/STATE.md",
+        "src/pipeline/run.ts",
+        "docs/NEVER-PUBLISH.md"
+      ],
+      "status": "passed",
+      "observed_read_paths": [
+        ".canary/CLAUDE.md",
+        ".canary/AGENTS.md",
+        ".canary/docs/HARNESS_CONTEXT.md",
+        ".canary/task.json"
+      ],
+      "evidence_kind": "fresh-Claude-fixture",
+      "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+    },
+    {
+      "evidence_class": "synthetic-evaluation",
+      "job": 117348619601,
+      "run": 39016162045,
+      "repository": "AEO-Engine",
+      "kind": "iteration",
+      "source_base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
+      "brain_revision": "5ca09cc3df52",
+      "delivered_sha": "280d97c2c51b31a1d06e8b6f77721515b15b16bea1c9dd6e0b556c9e6584f571",
+      "workflow": "research",
+      "read": [
+        "README.md",
+        "docs/PACKET.md",
+        "docs/STATE.md",
+        "src/pipeline/run.ts",
+        "docs/NEVER-PUBLISH.md"
+      ],
+      "status": "passed",
+      "observed_read_paths": [
+        ".canary/CLAUDE.md",
+        ".canary/AGENTS.md",
+        ".canary/docs/HARNESS_CONTEXT.md",
+        ".canary/task.json"
+      ],
+      "evidence_kind": "fresh-Claude-fixture",
+      "limits": "Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured."
+    }
+  ]
+}
