@@ -129,10 +129,14 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Bootstrap an absent canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
---backfill`. Maintain existing entries with `--revise --kind proposal --ref
-<proposal>`: the reviser records changed rule hashes and preserves prior
-provenance in history. Backfill is not a provenance-preserving revision command.
+Bootstrap the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
+--backfill`. An existing valid index remains byte-for-byte unchanged; a changed
+index is refused. This replaces the earlier regeneration behaviour that could
+reset changed entries to founding provenance. `scripts/test-brain-rules.mjs`
+exercises the actual command and proves it cannot rewrite an existing index.
+Revise existing entries with `--revise --kind proposal --ref <proposal>` to
+preserve prior provenance in history. Existing source records retain their
+recorded meaning; this repair does not relabel them.
 
 The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
 appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix

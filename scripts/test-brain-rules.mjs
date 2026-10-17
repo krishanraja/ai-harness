@@ -13,9 +13,10 @@
  *   node scripts/test-brain-rules.mjs
  */
 
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, relative } from 'node:path'
 import { check, extract, idFor, textSha, slug, revise } from './brain-rules.mjs'
 
 let failures = 0
@@ -98,6 +99,22 @@ const cleanup = []
 const fixture = (...a) => { const r = tree(...a); cleanup.push(r); return r }
 
 // -------------------------------------------------------------------- cases
+t('backfill cannot relabel or rewrite an existing provenance index', () => {
+  const dir=mkdtempSync(join(tmpdir(),'backfill-history-')),path=join(dir,'rules.yaml')
+  try {
+    const original=readFileSync('brain/rules.yaml','utf8')
+    writeFileSync(path,original)
+    const run=()=>spawnSync(process.execPath,['scripts/brain-rules.mjs','--backfill','--out',relative(process.cwd(),path)],{encoding:'utf8'})
+    const valid=run();assert(valid.status===0,valid.stderr)
+    assert(readFileSync(path,'utf8')===original,'Validation must preserve every existing index byte')
+    const changed=original.replace(/text_sha: "[a-f0-9]{12}"/,'text_sha: "000000000000"')
+    assert(changed!==original,'Fixture must change an actual provenance hash')
+    writeFileSync(path,changed)
+    const invalid=run();assert(invalid.status!==0&&/backfill_requires_reviewed_revision/.test(invalid.stderr),'A changed index must require an explicit revision source')
+    assert(readFileSync(path,'utf8')===changed,'Refusal must not reset or rewrite the prior source')
+  } finally {rmSync(dir,{recursive:true,force:true})}
+})
+
 t('a canon that matches its ledger reports nothing', () => {
   const root = fixture()
   const { problems, counts } = check(ledgerFor(root), root)

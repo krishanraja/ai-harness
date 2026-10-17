@@ -333,9 +333,8 @@ export function check(ledgerText, root = HARNESS) {
 /**
  * Record a reviewed change to the canon in brain/rules.yaml, in place.
  *
- * --backfill regenerates the whole file and is lossy for a changed entry: it
- * writes `founding` plus the first commit and drops the old source instead of
- * keeping it. A change request needs the opposite, so this edits only the
+ * --backfill bootstraps an absent file and validates an existing one without
+ * rewriting it. A changed index must use this reviser, which edits only the
  * entries whose text moved, and leaves every other byte alone:
  *
  *   changed   the old text_sha and source move to `history` with valid_until,
@@ -505,11 +504,16 @@ if (isMain) {
   } else if (has('--backfill')) {
     const out = flag('--out') || 'brain/rules.yaml'
     const abs = join(HARNESS, out)
-    const prior = existsSync(abs) ? parseYaml(readFileSync(abs, 'utf8')) : null
-    const yaml = toYaml(extract(), prior)
-    mkdirSync(dirname(abs), { recursive: true })
-    writeFileSync(abs, yaml.endsWith('\n') ? yaml : yaml + '\n')
-    console.log(`wrote ${out}`)
+    if (existsSync(abs)) {
+      const { problems } = check(readFileSync(abs, 'utf8'))
+      if (problems.length) throw new Error(`backfill_requires_reviewed_revision: use --revise --kind <kind> --ref <ref>; ${problems[0]}`)
+      console.log(`${out} valid and unchanged`)
+    } else {
+      const yaml = toYaml(extract(), null)
+      mkdirSync(dirname(abs), { recursive: true })
+      writeFileSync(abs, yaml.endsWith('\n') ? yaml : yaml + '\n')
+      console.log(`wrote ${out}`)
+    }
   } else if (has('--check')) {
     const abs = join(HARNESS, 'brain/rules.yaml')
     if (!existsSync(abs)) { console.error('FAIL  brain/rules.yaml does not exist'); process.exit(1) }
