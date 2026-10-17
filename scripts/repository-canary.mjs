@@ -30,6 +30,7 @@ export function verifyCanary({out='.canary',execution}){
  const final=results.at(-1),output=final?.result||''
  if(final?.is_error)throw new Error('canary_model_error:'+redact(output).replace(/\s+/g,' ').slice(0,400))
  const answer=JSON.parse(output.replace(/^\s*```(?:json)?\s*|\s*```\s*$/g,''))
+ const diagnostic=redact(JSON.stringify(Object.fromEntries(['repository','kind','retained_decision_ids','superseded_decision_ids','requested_delta','conditions','global_prohibition','revised_offline_test_allowed','cause_known'].filter(k=>k in answer).map(k=>[k,answer[k]])))).slice(0,1200)
  if(answer.repository!==expected.repository||answer.kind!==expected.kind)throw new Error('wrong_canary_scope')
  for(const p of ['CLAUDE.md','AGENTS.md','docs/HARNESS_CONTEXT.md'])if(![...reads].some(s=>s.endsWith('/.canary/'+p)||s==='.canary/'+p))throw new Error('canary_entry_or_context_not_observed:'+p)
  if([...reads].some(s=>s.endsWith('/expected.json')))throw new Error('canary_read_hidden_expectations')
@@ -37,8 +38,8 @@ export function verifyCanary({out='.canary',execution}){
   if(answer.workflow!==expected.workflow||!Array.isArray(answer.sources)||!expected.read.every(p=>answer.sources.includes(p)))throw new Error('canary_system_route_lost')
   if(answer.execute_product_actions!==false)throw new Error('canary_authority_expanded')
  }else if(expected.repository==='content-engine'){
-  if(!['subject-719','finding-286','tone-541'].every(id=>answer.retained_decision_ids?.includes(id))||answer.superseded_decision_ids?.length||answer.requested_delta!=='length')throw new Error('canary_iteration_erased_intent')
- }else if(answer.global_prohibition!==false||answer.revised_offline_test_allowed!==true||answer.cause_known!==false||!answer.conditions?.includes('Synthetic pilot cohort Z, one trial'))throw new Error('canary_experiment_overlearned')
+  if(!['subject-719','finding-286','tone-541'].every(id=>answer.retained_decision_ids?.includes(id))||answer.superseded_decision_ids?.length||answer.requested_delta!=='length')throw new Error('canary_iteration_erased_intent:'+diagnostic)
+ }else if(answer.global_prohibition!==false||answer.revised_offline_test_allowed!==true||answer.cause_known!==false||!answer.conditions?.includes('Synthetic pilot cohort Z, one trial'))throw new Error('canary_experiment_overlearned:'+diagnostic)
  const receipt={...expected,status:'passed',observed_read_paths:[...reads].filter(s=>s.includes('.canary/')).map(s=>s.slice(s.indexOf('.canary/'))),evidence_kind:'fresh-Claude-fixture',limits:'Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured.'}
  writeFileSync(join(out,'receipt.json'),JSON.stringify(receipt,null,2)+'\n');return receipt
 }
