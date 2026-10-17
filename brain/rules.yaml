@@ -874,7 +874,7 @@ contract_rules:
       ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
 
-# 227 chapters across the installed skills.
+# 228 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -1275,6 +1275,15 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: ctrl-capture.repository-delivery-handoff
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Repository delivery handoff"
+    text_sha: "cb0359dd2a16"
+    first_seen: "2026-10-17"
+    source:
+      kind: ruling
+      ref: "docs/proposals/2026-10-17-brain-repository-administration.md"
     status: live
   - id: ctrl-capture.capture-contract
     file: skills/ctrl-capture/SKILL.md
