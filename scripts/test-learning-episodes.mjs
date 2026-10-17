@@ -67,6 +67,8 @@ const legacy = toObservation({ ...event, schema_version: 1, repository: undefine
 assert.equal(legacy.repo, null, 'discarded legacy repository scope stays unknown')
 assert.equal(repositoryIdentity('another-owner/content-engine'), null)
 assert.equal(repositoryIdentity('https://github.com/krishanraja/content-engine'), 'content-engine')
+assert.equal(repositoryIdentity('krishanraja/mindmake-ctrl'),'mm-ctrl','A verified repository rename remains the same admitted scope')
+assert.equal(repositoryIdentity('another-owner/mindmake-ctrl'),null)
 const line = (content) => JSON.stringify({ message: { content } })
 const cloud = parseCloudEvents([
  line([{ type: 'tool_use', id: 'sessions', name: 'list_sessions', input: { mine: true } }]),

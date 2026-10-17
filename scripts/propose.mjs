@@ -283,7 +283,9 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   const priorRows = all ? [] : rows.filter((r) => !inWindow(r))
   const rulings = normaliseRulings(windowRows, priorRows)
   const others = windowRows.filter((r) => TYPE_OF[r.class] && r.class !== 'ruling' && !(r.class === 'canary' && /is unmeasured on/.test(r.quote)))
-  const clusters = cluster([...rulings, ...others], num(policy.cluster_jaccard, 0.35), (r) => TYPE_OF[r.class])
+  const partitions=new Map()
+  for(const r of [...rulings,...others]){const key=r.schema_version===2?`episode:${r.repo||'unknown'}`:'legacy';if(!partitions.has(key))partitions.set(key,[]);partitions.get(key).push(r)}
+  const clusters = [...partitions.values()].flatMap(rows=>cluster(rows, num(policy.cluster_jaccard, 0.35), (r) => TYPE_OF[r.class]))
 
   const local = {}
   const repositoryCandidates = []
@@ -291,7 +293,9 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   let carried = 0
   const candidates = []
   for (const c of clusters) {
-    const e = eligibility(c, policy)
+    if(c.rows.some(r=>r.schema_version===2&&!r.repo)){below['unknown-scope']=(below['unknown-scope']||0)+c.rows.length;continue}
+    const uniqueEpisodes=[...new Map(c.rows.map(r=>[r.episode_id||r.id,r])).values()]
+    const e = eligibility({...c,rows:uniqueEpisodes}, policy)
     const type = c.key
     if (!e.eligible) { below[type] = (below[type] || 0) + 1; continue }
     if (type === 'ruling-cluster') {

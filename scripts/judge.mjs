@@ -91,19 +91,30 @@ export function headSha(head) {
  */
 export function citedScripts(diff) {
   const added = diff.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++'))
-  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
+  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
 }
 
 export function citedProposals(diff) {
   return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/g)].map(m=>m[1])))]
+}
+export function citedEvidenceArtifacts(diff) {
+ return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(state\/repository-administration\/[A-Za-z0-9._-]+\.json)\b/g)].map(m=>m[1])))]
+}
+export function citedWorkflows(diff) {
+ return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/(\.github\/workflows\/[A-Za-z0-9._-]+\.ya?ml)\b/g)].map(m=>m[1])))]
 }
 
 export function diffFor(base, head) {
   const git = (paths) => execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...paths],
     { encoding: 'utf8', maxBuffer: 1 << 26 })
   const canon = git(WATCHED)
-  const cited = [...citedScripts(canon), ...citedProposals(canon)]
-  return cited.length ? canon + git(cited) : canon
+  const proposals=citedProposals(canon)
+  const cited = [...citedScripts(canon), ...proposals, ...citedEvidenceArtifacts(canon), ...citedWorkflows(canon)]
+  let result=cited.length?canon+git(cited):canon
+  for(const path of proposals)if(!result.includes(`+++ b/${path}\n`)){
+    try{const source=execFileSync('git',['-C',HARNESS,'show',`${head}:${path}`],{encoding:'utf8',maxBuffer:1<<22});result+=`\nRead-only cited approval source at ${head}:${path}\n${source}\n`}catch{/* unavailable provenance remains explicitly absent */}
+  }
+  return result
 }
 
 // --------------------------------------------------------------- the protocol

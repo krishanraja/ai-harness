@@ -355,6 +355,17 @@ export function cloudCursor(turns, cursor) {
   })
   return { turns: marked, next }
 }
+export function clipDeferredCursors(turns,cursor,nextCursor,deferred){
+ const next=structuredClone(nextCursor),clipped=new Set()
+ for(const ex of deferred||[]){
+  if(ex.source_file)next[ex.source_file]=Math.min(next[ex.source_file],ex.index)
+  else if(ex.session&&ex.at&&!clipped.has(ex.session)){
+   next[ex.session]=cloudCursor(turns.slice(0,ex.turn_index).filter(t=>t.session===ex.session),cursor).next[ex.session]||cursor[ex.session]||''
+   clipped.add(ex.session)
+  }
+ }
+ return next
+}
 export function readPlan(path, nextCursor) {
   if (!existsSync(path)) return { error: 'there is no dry-run plan; run with --dry-run first' }
   let plan
@@ -380,6 +391,15 @@ export function verifyReceipts(envelopes, { repo = 'krishanraja/ai-harness', run
     if (!wanted.size) return true
   }
   return false
+}
+
+/** Acknowledge an already submitted batch without sending or reinterpreting any source. */
+export function acknowledgePending(pending,{cursorPath,pendingPath,verify=verifyReceipts}) {
+  if(!Array.isArray(pending.envelopes)||!pending.envelopes.length||!pending.next_cursor)throw new Error('invalid_pending_batch')
+  if(!verify(pending.envelopes))return false
+  writeFileSync(cursorPath,JSON.stringify(pending.next_cursor,null,2)+'\n')
+  rmSync(pendingPath)
+  return true
 }
 
 export async function post(envelopes, { url, token, fetchImpl = fetch }) {
@@ -408,9 +428,17 @@ const DISPATCH_CHUNK = 20
 export function dispatch(envelopes, { repo = DISPATCH_REPO, run = execFileSync } = {}) {
   let sent = 0
   const failures = []
-  for (let i = 0; i < envelopes.length; i += DISPATCH_CHUNK) {
-    const events = envelopes.slice(i, i + DISPATCH_CHUNK)
-    const body = JSON.stringify({ event_type: DISPATCH_EVENT, client_payload: { producer: 'session-miner', events } })
+  const bodyFor=events=>JSON.stringify({event_type:DISPATCH_EVENT,client_payload:{producer:'session-miner',events}})
+  for (let i = 0; i < envelopes.length;) {
+    const events=[]
+    while(i<envelopes.length&&events.length<DISPATCH_CHUNK){
+      if(Buffer.byteLength(bodyFor([...events,envelopes[i]]),'utf8')>60000){
+        if(!events.length)throw new Error('event_exceeds_dispatch_byte_budget')
+        break
+      }
+      events.push(envelopes[i++])
+    }
+    const body = bodyFor(events)
     try {
       run('gh', ['api', '--method', 'POST', `repos/${repo}/dispatches`, '--input', '-'], { input: body, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: 60000 })
       sent += events.length
@@ -524,9 +552,17 @@ if (isMain) {
     return true
   }
   if (existsSync(pendingPath)) {
-    if (args.includes('--dry-run')) { console.log('An earlier submission awaits durable acknowledgement; its interpretation is preserved.'); process.exit(0) }
-    try { const complete = await finishPending(JSON.parse(readFileSync(pendingPath, 'utf8'))); process.exit(complete ? 0 : 3) }
-    catch { console.error('::error::Durable acknowledgement unavailable or conflicting; pending lessons are preserved and no cursor advanced.'); process.exit(1) }
+    try {
+      const pending=JSON.parse(readFileSync(pendingPath,'utf8'))
+      if(args.includes('--dry-run')) {
+        if(!acknowledgePending(pending,{cursorPath,pendingPath})){console.log('An earlier submission awaits durable acknowledgement; its interpretation is preserved.');process.exit(0)}
+        console.log('The previously submitted batch is durable; preparing fresh proposals without sending.')
+      }else{
+        const complete=await finishPending(pending)
+        if(!complete)process.exit(3)
+        if(args.includes('--from-dry-run'))process.exit(0)
+      }
+    }catch { console.error('::error::Durable acknowledgement unavailable or conflicting; pending lessons are preserved and no cursor advanced.'); process.exit(1) }
   }
   const cursor = existsSync(cursorPath) ? JSON.parse(readFileSync(cursorPath, 'utf8')) : {}
   const excludeCwd = resolve(flag('--exclude-cwd') || join(tmpdir(), 'krish-session-miner'))
@@ -571,10 +607,7 @@ if (isMain) {
     console.log(`session miner (${source}): ${turns.length} new turns, ${r.excerpts.length} excerpt(s), ${r.envelopes.length} lesson(s), ${r.rejected.length} rejected.`)
   }
   // Leave an unprocessed suffix replayable. A bounded run must not advance past episodes it did not read.
-  for (const ex of r.deferred || []) {
-    if (ex.source_file) nextCursor[ex.source_file] = Math.min(nextCursor[ex.source_file], ex.index)
-    else if (ex.session && ex.at) nextCursor[ex.session] = cursor[ex.session] || ''
-  }
+  Object.assign(nextCursor,clipDeferredCursors(turns,cursor,nextCursor,r.deferred))
   // An extractor that could not run used to save the cursor with zero lessons,
   // which skipped those sessions for good and reported a healthy run.
   if (r.extractorError) { console.error(`::error::claude could not read the excerpts (${r.extractorError}); nothing was sent and the cursor did not move.`); process.exit(1) }

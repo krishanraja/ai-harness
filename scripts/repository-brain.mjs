@@ -9,6 +9,17 @@ import { loadLedger } from './propose.mjs'
 
 export const ROOT = resolve(fileURLToPath(import.meta.url), '../..')
 export const KNOWLEDGE = 'brain/knowledge.jsonl'
+// Source observations and proposed interpretations are inert data, not authored canon.
+export function sourceEvidenceSeals(observations,policy) {
+  return new Set(observations.map(o=>observationKnowledge(o,policy)).filter(Boolean).map(seal))
+}
+export function isInertKnowledgeLine(file,line,sourceSeals) {
+  if(file!==KNOWLEDGE||!(sourceSeals instanceof Set))return false
+  try {
+    const record=JSON.parse(line)
+    return ['observed','candidate'].includes(record.status)&&sourceSeals.has(seal(record))
+  }catch{return false}
+}
 export const POLICY = 'contract/repository-administration.json'
 const STATUSES = new Set(['observed', 'candidate', 'accepted', 'rejected', 'superseded'])
 export const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'))
@@ -135,7 +146,7 @@ export function consolidateKnowledge({ root = ROOT, rows = loadLedger(root), wri
   }
   if (write && fresh.length) {
     mkdirSync(dirname(join(root, KNOWLEDGE)), { recursive: true })
-    appendFileSync(join(root, KNOWLEDGE), fresh.map((r) => JSON.stringify(r)).join('\n') + '\n')
+    appendFileSync(join(root, KNOWLEDGE), fresh.map(r=>JSON.stringify(r)).join('\n') + '\n')
   }
   return { fresh, total: history.length + fresh.length, unknown_scope: [...history, ...fresh].filter((r) => r.scope.kind === 'unknown').length }
 }

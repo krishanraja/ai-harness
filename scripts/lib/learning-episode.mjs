@@ -19,9 +19,9 @@ export function repositoryIdentity(value) {
     if(url.hostname!=='github.com')return null
     raw=url.pathname.slice(1)
   }
-  if(!/^(?:\/|[A-Za-z]:[\\/]|\.{1,2}[\\/]|~[\\/])/.test(raw)&&raw.includes('/')&&raw.split('/')[0]!==fleet.owner)return null
+  if(!/^(?:\/|[A-Za-z]:[\\/]|\.{1,2}[\\/]|~[\\/])/.test(raw)&&raw.includes('/')&&raw.split('/')[0].toLowerCase()!==fleet.owner.toLowerCase())return null
   const last = raw.split(/[\\/]/).at(-1).replace(/\.git$/, '').toLowerCase()
-  const repo = fleet.repos.find((r) => [r.name, r.checkout].filter(Boolean).some((n) => n.toLowerCase() === last))
+  const repo = fleet.repos.find((r) => [r.name, r.checkout, ...(r.aliases||[])].filter(Boolean).some((n) => n.toLowerCase() === last))
   return repo?.name || null
 }
 

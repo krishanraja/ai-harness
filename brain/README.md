@@ -117,8 +117,14 @@ are the rules nobody has ever had to defend.
   YAML reader turns a bare all-digit scalar into a number, which never compares
   equal to its own identical string. Unquoted, such an entry fails forever and
   no edit can fix it. This is not hypothetical: it happened on the first run.
-- **No em dash.** `scripts/validate-surfaces.mjs` refuses this directory on it,
-  the same way it refuses the contracts and the rendered adapters.
+- **No em dash in authored canon (2026-10-17).** This supersedes the earlier
+  directory-wide formatting statement because the directory now also holds
+  inert source data. `scripts/repository-brain.mjs` independently reconstructs
+  source records from the observation ledger; matching the entire content hash
+  is required. A self-declared status is insufficient. `scripts/validate-surfaces.mjs` keeps accepted knowledge,
+  contracts and rendered adapters subject to the authored-text check.
+  `scripts/test-knowledge-history.mjs` verifies both the distinction and the
+  unchanged byte-level history guard.
 
 ## Changing a rule
 
@@ -129,6 +135,27 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Regenerate the whole ledger with `node scripts/brain-rules.mjs --backfill`. It
-keeps every existing entry whose text has not changed, so a regeneration never
-silently rewrites provenance you already recorded.
+Bootstrap the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
+--backfill`. An existing valid index remains byte-for-byte unchanged; a changed
+index is refused. This replaces the earlier regeneration behaviour that could
+reset changed entries to founding provenance. `scripts/test-brain-rules.mjs`
+exercises the actual command and proves it cannot rewrite an existing index.
+Revise existing entries with `--revise --kind proposal --ref <proposal>` to
+preserve prior provenance in history. Existing source records retain their
+recorded meaning; this repair does not relabel them.
+
+A read-only audit of 23 committed index revisions found zero existing-entry
+resets to founding provenance. `state/repository-administration/provenance-audit.json`
+pins the inspected head, source blob, every ledger commit, comparison method
+and limits. Unknown pre-ledger rationale remains unknown; the audit does not
+invent a reason for a founding record.
+
+The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
+appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
+against the PR or push base and before automated commits and rebased pushes in
+`.github/workflows/repository-administration.yml`.
+
+The publisher stages only its five declared runtime outputs. This maintenance follows
+the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
+`scripts/test-repository-workflow.mjs` protects intake-triggered learning while
+preventing a derived report from restarting publication through the steward.
