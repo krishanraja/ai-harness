@@ -103,16 +103,11 @@ are the rules nobody has ever had to defend.
 - **A count is derived, never stored.** The moment a tally becomes a column,
   something has to write it, and the only way to write it is in place. Ask the
   ledger and add up what it says.
-- **Historical records are immutable.** The ledger files a script
+- **Nothing here is edited in place by a script.** The ledger files a script
   writes are JSONL, and a change of state is a new row for the same `id`. The
   current state of anything is the latest row that names it. A superseded entry
   gets a closing row; it never gets deleted, and neither does the thing it
   superseded.
-- JSON transport may use equivalent Unicode escapes. `scripts/validate-knowledge-history.mjs`
-  independently requires every prior decoded record to remain identical and in
-  the same order. An encoding-only repair changes no field, status, evidence,
-  scope or accepted-content hash. The verified repair of two legacy punctuation
-  characters is recorded in `state/repository-administration/serialization-migration.json`.
 - **Ids are slugs, never ordinals.** `authority.never-publish-post-send`, not
   `authority.3`. An ordinal renames every rule below an insertion, and a
   provenance record that survives an edit by name while pointing at different
@@ -137,3 +132,5 @@ are the rules nobody has ever had to defend.
 Regenerate the whole ledger with `node scripts/brain-rules.mjs --backfill`. It
 keeps every existing entry whose text has not changed, so a regeneration never
 silently rewrites provenance you already recorded.
+
+Historical non-accepted source evidence keeps its exact bytes. The two pre-existing punctuation records in `state/repository-administration/legacy-evidence-format.json` have hash-bound formatting allowances. Changed records and accepted instructions cannot use those allowances. `scripts/validate-knowledge-history.mjs` enforces byte-for-byte append-only history in `.github/workflows/repository-administration.yml`, against GitHub's exact PR base. This maintenance follows the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.

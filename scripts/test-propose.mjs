@@ -57,6 +57,13 @@ writeFileSync(join(root, 'state/observations/standing.json'), JSON.stringify({
 }))
 
 const result = buildCandidates({ root, rows, policy, today: '2026-10-14', cutoff: '2026-10-07' })
+const scoped=buildCandidates({root,policy,today:'2026-10-14',cutoff:'2026-10-07',rows:[
+ row({id:'episode-one',schema_version:2,repo:'content-engine',class:'failure',severity:'high',quote:'An experimental change underperformed under one bounded test condition.',episode:{conditions:['Content workflow.']}}),
+ row({id:'episode-two',schema_version:2,repo:'AEO-Engine',class:'failure',severity:'high',quote:'An experimental change underperformed under one bounded test condition.',episode:{conditions:['Research workflow.']}}),
+ row({id:'episode-unknown',schema_version:2,repo:null,class:'failure',severity:'high',quote:'An experimental change underperformed under one bounded test condition.'})
+]})
+test('lexically similar scoped episodes remain separate repository candidates with conditions',scoped.repositoryCandidates.length===2&&scoped.repositoryCandidates.every(c=>c.evidence.length===1&&c.evidence[0].episode.conditions.length===1)&&!scoped.chosen.some(c=>c.evidence.some(e=>e.id.startsWith('episode-'))))
+test('an unattributed episode cannot become a global proposal',scoped.below['unknown-scope']===1)
 const ids = result.chosen.map((c) => c.type)
 const agent = result.chosen.filter((c) => c.type === 'ruling-cluster' && /reversible step/.test(c.evidence[0].quote))
 test('a cross-cutting agent ruling is a candidate, once', agent.length === 1)
