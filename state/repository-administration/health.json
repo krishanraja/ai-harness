@@ -1,6 +1,7 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-10-17T09:38:34.625Z",
+  "schema_version": 2,
+  "generated_at": "2026-10-17T10:08:17.075Z",
+  "measurement_verification_at": "2026-10-17T10:08:17.046Z",
   "sources": {
     "github": {
       "status": "available",
@@ -8,7 +9,13 @@
     },
     "ai_history": {
       "status": "coverage-unverified",
-      "basis": "Only delivered episodes are measurable; source accounts, history pagination and unavailable sessions are not inferred."
+      "basis": "Only delivered episodes and explicit source receipts are measurable; unknown accounts and unavailable sessions are not inferred.",
+      "accounts": [],
+      "acknowledged_checkpoint_records": 0,
+      "acknowledged_streams": 0,
+      "last_processed_event_at": null,
+      "last_acknowledged_checkpoint_at": null,
+      "checkpoint_limits": "Checkpoint cursors prove durable receipt of processed events, not run time, account enumeration, pagination or complete source coverage."
     },
     "hosted_exporter": {
       "status": "configured-unverified"
@@ -28,10 +35,25 @@
       "source_base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
       "bootstrap_before": 11549,
       "bootstrap_after": 11549,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -41,15 +63,30 @@
       "accepted": 4,
       "candidates": 57,
       "unknown_coverage": true,
-      "delivery": "verified",
+      "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "add0c611b502b58a9d1267ec15d2f7c0f1296772",
-      "bootstrap_before": 54570,
+      "source_base": "93253e62a8483b270823d07cc9542537c660e775",
+      "bootstrap_before": 39955,
       "bootstrap_after": 39955,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -61,13 +98,28 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "f0c91f3b1502",
-      "source_base": "ec01de3a217075011082eec205b65ede244b6d8c",
-      "bootstrap_before": 213721,
-      "bootstrap_after": 213721,
+      "source_base": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+      "bootstrap_before": 251254,
+      "bootstrap_after": 251254,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -82,10 +134,25 @@
       "source_base": "c9f795c92c66bc13157b5b2159be083443860648",
       "bootstrap_before": 76175,
       "bootstrap_after": 76175,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -100,10 +167,25 @@
       "source_base": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
       "bootstrap_before": 48670,
       "bootstrap_after": 48670,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -118,10 +200,25 @@
       "source_base": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
       "bootstrap_before": 15715,
       "bootstrap_after": 15715,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -136,10 +233,25 @@
       "source_base": "dd802b89f3de547b512b97519b4240fc9405fc4c",
       "bootstrap_before": 33956,
       "bootstrap_after": 33956,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -154,10 +266,25 @@
       "source_base": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
       "bootstrap_before": 44509,
       "bootstrap_after": 44509,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -172,10 +299,25 @@
       "source_base": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
       "bootstrap_before": 9003,
       "bootstrap_after": 9003,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     },
     {
@@ -190,10 +332,25 @@
       "source_base": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
       "bootstrap_before": 22137,
       "bootstrap_after": 22137,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
       "effectiveness": {
         "opportunities": null,
         "repeated_failures": null,
-        "status": "awaiting-observed-work"
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
       }
     }
   ]
