@@ -109,6 +109,9 @@ name the owners, proof requirements, prior-known-good bases and exact rollback
 procedure. Rollback preserves unambiguous later human edits, refuses drift and
 retains immutable history. Both pilot rollback planners were exercised; no
 application action or rollback was performed during this completion audit.
+The current-source replay uses the actual deployment bytes as its rollback
+base and preserves content-engine's 18 later nonblank human instruction lines,
+as well as a synthetic appended note. It refuses edits to a newly owned file.
 
 No further implementation or rollout step remains in the approved plan.
 Future source receipts and real work will update the measurements without

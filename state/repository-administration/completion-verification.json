@@ -227,7 +227,11 @@
         "rollback": {
           "evidence_class": "read-only-planner-evaluation",
           "base": "c9604510ec56339fbb52a0bd1be7a03ee0107c4f",
-          "intervening_human_note_preserved": true,
+          "delivered": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+          "current_source": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+          "outcome": "restored-managed-delta-and-preserved-human-additions",
+          "current_human_added_lines": 0,
+          "synthetic_appended_note": true,
           "changed_new_file_refused": true,
           "product_mutations": 0
         }
@@ -275,7 +279,11 @@
         "rollback": {
           "evidence_class": "read-only-planner-evaluation",
           "base": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
-          "intervening_human_note_preserved": true,
+          "delivered": "ec01de3a217075011082eec205b65ede244b6d8c",
+          "current_source": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+          "outcome": "restored-managed-delta-and-preserved-human-additions",
+          "current_human_added_lines": 18,
+          "synthetic_appended_note": true,
           "changed_new_file_refused": true,
           "product_mutations": 0
         }
