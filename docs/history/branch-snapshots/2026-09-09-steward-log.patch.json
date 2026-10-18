@@ -1,0 +1,5 @@
+{
+  "source": "steward/2026-09-09",
+  "path": "docs/history/LOG.md",
+  "patch": "diff --git a/docs/history/LOG.md b/docs/history/LOG.md\nindex 9c9045f..180d2ac 100644\n--- a/docs/history/LOG.md\n+++ b/docs/history/LOG.md\n@@ -5,6 +5,17 @@ rolls entries out of `NOW.md`'s \"What changed recently\" into this file when they\n pass 30 days, and adds a line whenever a document is superseded, banners or\n moved. Nothing here is ever rewritten.\n \n+## 2026-09-09\n+\n+- reconciled at `f5b6d3d`: NOW.md rewritten against 27 non-steward commits since\n+  `f98ef85`, the head it was last reconciled against. Covered: the judge gate\n+  becoming blocking, three unrouted skills routed, the\n+  OpenClaw VPS declared a permanent heartbeated surface, `brain/rules.yaml`\n+  giving every canon rule a provenance record, `brain/decisions.jsonl`\n+  replacing a Supabase store that never existed, and four credentials found\n+  still live despite being reported rotated. No document moved and no\n+  contradiction needed resolving; this was drift correction on one file.\n+\n ## 2026-09-08\n \n - SURFACE installed `v2026.09.08.2` with 29 of 29 per-skill hashes and the\n"
+}
