@@ -2861,11 +2861,17 @@ skill_sections:
   - id: tools-access.non-negotiable-rules
     file: skills/tools-access/SKILL.md
     heading: "Non-negotiable rules"
-    text_sha: "505f75a49577"
+    text_sha: "05c3648186c5"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "48683aa0b21b"
+    history:
+      - text_sha: "505f75a49577"
+        valid_until: "2026-10-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: tools-access.symbolic-credential-interface
     file: skills/tools-access/SKILL.md
