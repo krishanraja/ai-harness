@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T10:08:17.075Z",
-  "measurement_verification_at": "2026-10-17T10:08:17.046Z",
+  "generated_at": "2026-10-18T00:00:17.609Z",
+  "measurement_verification_at": "2026-10-18T00:00:17.578Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 0,
+  "unknown_repository_observations": 8,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -61,11 +61,11 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 57,
+      "candidates": 58,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "93253e62a8483b270823d07cc9542537c660e775",
+      "source_base": "229ef7e2b7e39fbdd51da675f14269d324b0d145",
       "bootstrap_before": 39955,
       "bootstrap_after": 39955,
       "observed_use": {
@@ -94,7 +94,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 127,
+      "candidates": 136,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "f0c91f3b1502",
