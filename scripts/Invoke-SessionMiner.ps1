@@ -27,7 +27,10 @@ param(
     [switch]$Unregister,
     [switch]$DryRun,
     [switch]$SelfTest,
-    [switch]$NoHeartbeat
+    [switch]$NoHeartbeat,
+    [ValidateSet('legacy', 'api')]
+    [string]$Extractor = 'legacy',
+    [string]$SourceAccountSha256
 )
 
 Set-StrictMode -Version Latest
@@ -61,9 +64,9 @@ if ($SelfTest) {
     exit $LASTEXITCODE
 }
 
-# claude.exe from the native installer, else the npm package's binary; the miner
-# itself falls back to a shell for an npm shim (claude.cmd) when neither exists.
-if (-not $env:HARNESS_CLAUDE_CLI) {
+# Only an explicitly selected legacy route discovers a Claude executable. The miner
+# uses a shell for a Windows npm shim. The API route never falls back to it.
+if ($Extractor -eq 'legacy' -and -not $env:HARNESS_CLAUDE_CLI) {
     $native = Get-Command claude.exe -ErrorAction SilentlyContinue | Select-Object -First 1
     $legacy = Join-Path $env:APPDATA 'npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe'
     if ($native) { $env:HARNESS_CLAUDE_CLI = $native.Source }
@@ -71,7 +74,8 @@ if (-not $env:HARNESS_CLAUDE_CLI) {
 }
 
 New-Item -ItemType Directory -Force -Path $StateDir, $WorkDir | Out-Null
-$common = @('--state', $StateDir, '--exclude-cwd', $WorkDir)
+$common = @('--state', $StateDir, '--exclude-cwd', $WorkDir, '--extractor', $Extractor)
+if ($SourceAccountSha256) { $common += @('--source-account-sha256', $SourceAccountSha256) }
 if (Test-Path -LiteralPath $NamesFile -PathType Leaf) { $common += @('--names', $NamesFile) }
 if ($DryRun) { $common += '--dry-run' }
 

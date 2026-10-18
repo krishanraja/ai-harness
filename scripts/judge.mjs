@@ -39,6 +39,9 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { appendUsage, ruleIds } from './brain-usage.mjs'
+import { boundedInference } from './lib/inference-mode.mjs'
+import { requestMessages } from './harness-api.mjs'
+import { randomUUID } from 'node:crypto'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -303,9 +306,11 @@ export function groundedFiles(diff) {
  * `ask` is injected so the whole protocol is testable without a model.
  */
 export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
+  let requestNumber = 0
+  const call = (input) => ask({ ...input, attempt: ++requestNumber })
   const bench = loadBench(name)
   const system = systemPrompt(bench, clauseIds)
-  const first = await ask({ system, user: diff, bench: name, attempt: 1 })
+  const first = await call({ system, user: diff, bench: name, attempt: 1 })
   let { findings, problems } = parseFindings(first, bench, clauseIds, diffFiles)
   let unanimous = false
   let empty = false
@@ -317,7 +322,7 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
   // The panel then reported "no blocking regression", which is the worst
   // possible failure: a discard silently became a pass.
   if (!findings.length && problems.length) {
-    const retry = await ask({
+    const retry = await call({
       system, bench: name, attempt: 2,
       user: `${diff}\n\nEvery finding in your previous review was discarded and the review was rejected. The reasons were:\n\n${problems.map((m) => `- ${m}`).join('\n')}\n\nThe clause field is not the criterion name. It must be a rule id from the valid list, or the path of a file in the diff. Return the review again, grounded.`,
     })
@@ -328,7 +333,7 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
   if (!findings.length) empty = true
 
   if (findings.length && !hasDissent(findings)) {
-    const retry = await ask({
+    const retry = await call({
       system, bench: name, attempt: 2,
       user: `${diff}\n\nYour previous review returned no regression and no dissent, and was rejected for that reason. Rule 3 is not optional. Return the review again, and this time include the strongest argument against this change that you can honestly construct, as a finding with verdict "dissent".`,
     })
@@ -383,32 +388,43 @@ export function render(results, { base, head }) {
 }
 
 // ---------------------------------------------------------------- the model
-async function anthropic({ system, user }) {
-  const key = process.env.ANTHROPIC_API_KEY
+export async function anthropic({ system, user, bench, attempt }, { env = process.env, request = requestMessages, fetchImpl = fetch } = {}) {
+  if (boundedInference(env)) {
+    const body = await request({
+      purpose: 'review', model: env.JUDGE_MODEL || env.HARNESS_API_MODEL,
+      max_tokens: Number(env.JUDGE_MAX_TOKENS || 16000), system,
+      messages: [{ role: 'user', content: user }],
+      requestId: `${env.HARNESS_REQUEST_ID || env.GITHUB_RUN_ID || randomUUID()}:${env.GITHUB_RUN_ATTEMPT || '1'}:judge:${bench}:${attempt}`,
+    })
+    if (!['end_turn', 'max_tokens'].includes(body.stop_reason)) throw new Error('judge_response_incomplete')
+    const text = (body.content || []).filter(c => c.type === 'text').map(c => c.text).join('')
+    return body.stop_reason === 'max_tokens' ? `${TRUNCATED}${text}` : text
+  }
+  const key = env.ANTHROPIC_API_KEY
   if (!key) throw new Error('ANTHROPIC_API_KEY is not set, so no bench can run. This is the one part of the panel that cannot be faked.')
   // A bounded call, always. The first run of this job on a real runner sat in
   // "Run both benches" for eight minutes with no output and no way to tell a
   // slow review from a dead socket. An unbounded fetch can hold a runner until
   // the six hour job limit, and a panel that hangs is worse than one that is
   // honestly absent: absent is visible.
-  const timeoutMs = Number(process.env.JUDGE_TIMEOUT_MS || 180000)
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const timeoutMs = Number(env.JUDGE_TIMEOUT_MS || 180000)
+  const res = await fetchImpl('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     signal: AbortSignal.timeout(timeoutMs),
     headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
-      model: process.env.JUDGE_MODEL || 'claude-opus-5',
+      model: env.JUDGE_MODEL || 'claude-opus-5',
       // Twenty criteria at two sentences each, twice, does not fit in 4096.
       // Two live reviews came back cut mid-array and were discarded whole with
       // "the bench returned unparseable JSON", which reads as a bench that had
       // nothing to say rather than one that was truncated. A silent cut is the
       // worst kind: the findings existed and were thrown away.
-      max_tokens: Number(process.env.JUDGE_MAX_TOKENS || 16000),
+      max_tokens: Number(env.JUDGE_MAX_TOKENS || 16000),
       system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: user }],
     }),
   })
-  if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  if (!res.ok) throw new Error(`anthropic_http_${res.status}`)
   // Never let a key reach stdout, a log, or a report.
   const body = await res.json()
   const text = (body.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('')

@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "repository": "krishanraja/ai-harness",
+  "default_branch": "main",
+  "timezone": "Europe/London",
+  "watchdog": {
+    "workflow": "harness-watchdog.yml",
+    "activation": "manual-only-pending-approval",
+    "proposed_cron": "17 * * * *",
+    "cadence_seconds": 3600,
+    "grace_seconds": 1800,
+    "artifact_name": "harness-watchdog-status",
+    "artifact_attempt_suffix": true,
+    "artifact_member": "status.json",
+    "allowed_side_effects": ["sanitized-actions-summary", "sanitized-status-artifact"],
+    "notification_delivery": "not-enabled",
+    "limits": "A GitHub-hosted observer cannot prove GitHub's own availability from outside GitHub. The existing Control Center observer is a separate owner."
+  },
+  "evidence": {
+    "health_path": "state/repository-administration/health.json",
+    "observation_directory": "state/observations",
+    "measurement_verification_path": "state/repository-administration/measurement-verification.json",
+    "checkpoints_path": "state/session-miner/checkpoints.jsonl",
+    "heartbeats_path": "state/heartbeats.json",
+    "max_ledger_files": 24,
+    "max_response_bytes": 4194304,
+    "max_run_pages": 2,
+    "runs_per_page": 30,
+    "max_job_runs": 16,
+    "max_job_pages": 2
+  },
+  "jobs": [
+    {
+      "id": "central-checks", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "surfaces", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["GITHUB_TOKEN"], "budget_class": "free", "allowed_side_effects": [],
+      "outputs": [], "completion_proof": "successful-named-job"
+    },
+    {
+      "id": "central-audit", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "audit", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["GITHUB_TOKEN"], "budget_class": "free", "allowed_side_effects": ["audit-artifact"],
+      "outputs": [], "completion_proof": "successful-named-job"
+    },
+    {
+      "id": "central-canon-reconciliation", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "reconcile", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["FLEET_TOKEN"], "budget_class": "free", "allowed_side_effects": ["guarded-repository-pull-request"],
+      "outputs": [], "completion_proof": "successful-named-job"
+    },
+    {
+      "id": "central-observation", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "observe", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["FLEET_TOKEN"], "budget_class": "free", "allowed_side_effects": ["append-redacted-observations", "heartbeat"],
+      "outputs": ["state/observations", "state/heartbeats.json"], "completion_proof": "successful-named-job-and-observer-heartbeat"
+    },
+    {
+      "id": "central-housekeeping", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "housekeeping", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["FLEET_TOKEN"], "budget_class": "free", "allowed_side_effects": ["existing-steward-housekeeping-route"],
+      "outputs": [], "completion_proof": "successful-named-job"
+    },
+    {
+      "id": "central-proposals", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "propose", "event": "schedule",
+      "cadence_seconds": 604800, "grace_seconds": 21600, "max_run_seconds": 3600,
+      "credentials": ["CLAUDE_CODE_OAUTH_TOKEN", "FLEET_TOKEN"],
+      "credential_inventory_after": ["ANTHROPIC_API_KEY", "HARNESS_BUDGET_TOKEN", "FLEET_TOKEN"], "budget_class": "proposals", "allowed_side_effects": ["guarded-draft-pull-request"],
+      "outputs": [], "completion_proof": "successful-named-job", "runtime_migration": "prepared-api-cutover-not-certified-by-watchdog"
+    },
+    {
+      "id": "central-repository-administration", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name": "administer", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 1800,
+      "credentials": ["FLEET_TOKEN"], "budget_class": "free", "allowed_side_effects": ["append-brain-evidence", "accepted-guide-publication"],
+      "outputs": ["state/repository-administration/latest.json", "state/repository-administration/health.json"],
+      "completion_proof": "successful-named-job-and-current-administration-report"
+    },
+    {
+      "id": "central-repository-proposals", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name": "proposals", "event": "schedule",
+      "cadence_seconds": 604800, "grace_seconds": 21600, "max_run_seconds": 1800,
+      "credentials": ["ANTHROPIC_API_KEY", "FLEET_TOKEN"], "budget_class": "proposals", "allowed_side_effects": ["guarded-draft-pull-request"],
+      "outputs": [], "completion_proof": "successful-named-job"
+    },
+    {
+      "id": "central-docs", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "docs-steward", "workflow_id": "docs-steward.yml", "job_name": "steward", "event": "schedule",
+      "cadence_seconds": 86400, "grace_seconds": 10800, "max_run_seconds": 3600,
+      "credentials": ["CLAUDE_CODE_OAUTH_TOKEN", "GITHUB_TOKEN"],
+      "credential_inventory_after": ["ANTHROPIC_API_KEY", "HARNESS_BUDGET_TOKEN", "FLEET_TOKEN"], "budget_class": "docs", "allowed_side_effects": ["existing-documentation-writer"],
+      "outputs": [], "completion_proof": "successful-named-job", "runtime_migration": "legacy-runtime-active-central-api-caller-rollout-not-approved"
+    },
+    {
+      "id": "central-docs-prepared", "kind": "workflow", "required": false, "enabled": false,
+      "owner": "docs-steward", "workflow_id": "docs-steward-central.yml", "job_name": "central", "event": "workflow_dispatch",
+      "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 3600,
+      "credentials": [], "credential_inventory_after": ["ANTHROPIC_API_KEY", "HARNESS_BUDGET_TOKEN", "FLEET_TOKEN"],
+      "budget_class": "docs", "allowed_side_effects": ["approved-allowlisted-documentation-pull-request"],
+      "outputs": [], "completion_proof": "successful-named-job", "runtime_migration": "prepared-only-rollout-disabled-no-schedule-no-callers-admitted"
+    },
+    {
+      "id": "central-intake", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "observation-intake", "workflow_id": "harness-observation-intake.yml", "job_name": "intake", "event": "repository_dispatch",
+      "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 900,
+      "credentials": ["GITHUB_TOKEN"], "budget_class": "free", "allowed_side_effects": ["append-validated-observations"],
+      "outputs": ["state/observations"], "completion_proof": "successful-named-job", "limits": "Event-driven receipt transport; silence alone does not prove no eligible events or source coverage."
+    },
+    {
+      "id": "central-judge", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "harness-steward", "workflow_id": "harness-steward.yml", "job_name": "judge", "event": "pull_request",
+      "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
+      "credentials": ["ANTHROPIC_API_KEY", "GITHUB_TOKEN"], "budget_class": "review", "allowed_side_effects": ["pull-request-check"],
+      "outputs": [], "completion_proof": "successful-named-job", "limits": "A skipped conditional review is not a measured review."
+    },
+    {
+      "id": "central-fresh-context", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "event": "pull_request",
+      "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
+      "credentials": ["ANTHROPIC_API_KEY", "GITHUB_TOKEN"], "budget_class": "context", "allowed_side_effects": ["synthetic-evaluation-receipt"],
+      "outputs": [], "expected_jobs": 4, "completion_proof": "successful-named-job", "limits": "Job execution is distinct from production application and effectiveness."
+    },
+    {
+      "id": "central-native-title-replay", "kind": "workflow", "required": true, "enabled": true,
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "event": "pull_request",
+      "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
+      "credentials": ["ANTHROPIC_API_KEY", "FLEET_TOKEN"], "budget_class": "replay", "allowed_side_effects": ["sanitized-replay-receipt"],
+      "outputs": [], "completion_proof": "containing-job-only-step-proof-unverified", "limits": "A containing matrix job does not independently prove that its conditional private replay step executed."
+    },
+    {
+      "id": "claude-cloud-account-1", "kind": "source", "required": true, "enabled": true,
+      "owner": "session-collector", "provider": "claude-code-web", "account_sha256": null,
+      "cadence_seconds": 604800, "grace_seconds": 86400, "max_run_seconds": 3600,
+      "credentials": ["SUPPORTED_SOURCE_ACCOUNT_ACCESS"], "budget_class": "extraction", "allowed_side_effects": ["authorized-distilled-event-intake"],
+      "outputs": ["state/observations", "state/session-miner/checkpoints.jsonl"], "completion_proof": "independently-verified-account-source-run-receipt",
+      "identity_status": "unverified-binding", "limits": "The first required account remains blocked until supported source access and its opaque account identity are independently verified."
+    },
+    {
+      "id": "claude-cloud-account-2", "kind": "source", "required": true, "enabled": true,
+      "owner": "session-collector", "provider": "claude-code-web", "account_sha256": null,
+      "cadence_seconds": 604800, "grace_seconds": 86400, "max_run_seconds": 3600,
+      "credentials": ["SUPPORTED_SOURCE_ACCOUNT_ACCESS"], "budget_class": "extraction", "allowed_side_effects": ["authorized-distilled-event-intake"],
+      "outputs": ["state/observations", "state/session-miner/checkpoints.jsonl"], "completion_proof": "independently-verified-account-source-run-receipt",
+      "identity_status": "unverified-binding", "limits": "A healthy first account cannot stand in for this second required account."
+    },
+    {
+      "id": "optional-local-sync", "kind": "heartbeat", "required": false, "enabled": true,
+      "owner": "local-adapter", "heartbeat_key": "harness-sync-lorimer",
+      "cadence_seconds": 86400, "grace_seconds": 259200, "max_run_seconds": 3600,
+      "credentials": ["LOCAL_GITHUB_LOGIN"], "budget_class": "free", "allowed_side_effects": ["existing-local-install-and-heartbeat"],
+      "outputs": ["state/heartbeats.json"], "completion_proof": "existing-machine-heartbeat", "limits": "Optional local surface health never gates central execution."
+    },
+    {
+      "id": "optional-local-miner", "kind": "heartbeat", "required": false, "enabled": true,
+      "owner": "local-adapter", "heartbeat_key": "session-miner-lorimer",
+      "cadence_seconds": 604800, "grace_seconds": 172800, "max_run_seconds": 3600,
+      "credentials": ["LOCAL_GITHUB_LOGIN"], "budget_class": "free", "allowed_side_effects": ["authorized-distilled-event-intake"],
+      "outputs": ["state/heartbeats.json"], "completion_proof": "existing-machine-heartbeat", "limits": "Local-only transcript collection remains optional and cannot replace either required cloud account."
+    }
+  ]
+}
