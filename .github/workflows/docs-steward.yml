@@ -60,20 +60,80 @@ on:
         default: false
 
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
+  contents: read
 
 concurrency:
   group: docs-steward-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
+  validate:
+    # Free paths have read-only credentials and cannot reach the legacy writer.
+    if: ${{ (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'docs(steward):')) && (github.event_name == 'push' || inputs.dry_run) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out this repository without a persisted credential
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Read the steward procedure and validators
+        uses: actions/checkout@v4
+        with:
+          repository: krishanraja/ai-harness
+          ref: main
+          path: .steward
+          persist-credentials: false
+          sparse-checkout: |
+            docs/steward
+            scripts/steward
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Prepare the private working digest
+        run: |
+          set -euo pipefail
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          if ! node .steward/scripts/steward/digest.mjs . --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" > .steward/digest.md 2> .steward/digest-diagnostics.log; then
+            echo "::error::The documentation digest could not be prepared. Source diagnostics remain in the runner workspace."
+            exit 1
+          fi
+          echo "Documentation digest prepared; source contents remain in the runner workspace." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Validate without model access
+        # Pushes enforce the schema; dry runs additionally report freshness.
+        # Preserve the existing informational dry-run result without exposing source diagnostics.
+        continue-on-error: ${{ github.event_name != 'push' }}
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          STRICT=()
+          if [ "$EVENT_NAME" != "push" ]; then STRICT=(--strict); fi
+          if node .steward/scripts/steward/validate.mjs . "${STRICT[@]}" --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" > .steward/validation-diagnostics.log 2>&1; then
+            echo "Documentation validation passed." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Documentation validation failed. Source diagnostics remain in the runner workspace."
+            echo "Documentation validation failed." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
   steward:
-    # Belt and braces for the self-trigger case; callers carry the same test.
-    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'docs(steward):') }}
+    # Temporary legacy paid path. API migration owns its eventual replacement.
+    if: ${{ !inputs.dry_run && github.event_name != 'push' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Require the subscription token
         # Fail loudly, never silently green. A missing secret is the most
@@ -90,6 +150,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # The existing writer uses this default token for git push.
+          persist-credentials: true
 
       - name: Check out the steward (runbook, schema, fleet, scripts)
         uses: actions/checkout@v4
@@ -97,6 +159,7 @@ jobs:
           repository: krishanraja/ai-harness
           ref: main
           path: .steward
+          persist-credentials: false
           sparse-checkout: |
             docs/steward
             scripts/steward
@@ -113,13 +176,16 @@ jobs:
       - name: Digest what changed since the last reconciliation
         id: digest
         # Dependency-free node. Reads head from NOW.md, else the fleet's
-        # bootstrap_head, else 30 days. Output goes to the file Claude reads
-        # and to the job summary so a person can read it too.
+        # bootstrap_head, else 30 days. Private source details stay off summaries.
         run: |
+          set -euo pipefail
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           echo "name=$REPO_NAME" >> "$GITHUB_OUTPUT"
-          node .steward/scripts/steward/digest.mjs . --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" > .steward/digest.md
-          cat .steward/digest.md >> "$GITHUB_STEP_SUMMARY"
+          if ! node .steward/scripts/steward/digest.mjs . --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" > .steward/digest.md 2> .steward/digest-diagnostics.log; then
+            echo "::error::The documentation digest could not be prepared. Source diagnostics remain in the runner workspace."
+            exit 1
+          fi
+          echo "Documentation digest prepared; source contents remain in the runner workspace." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Validate the current state before Claude touches anything
         # On a schedule or a dispatch this is informational and strict: a stale
@@ -136,10 +202,12 @@ jobs:
         # secret, and those all fail without --strict.
         continue-on-error: ${{ github.event_name != 'push' }}
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            node .steward/scripts/steward/validate.mjs . --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}"
+          set -euo pipefail
+          if node .steward/scripts/steward/validate.mjs . --strict --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}" > .steward/validation-before.log 2>&1; then
+            echo "Documentation validation passed." >> "$GITHUB_STEP_SUMMARY"
           else
-            node .steward/scripts/steward/validate.mjs . --strict --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}"
+            echo "::warning::Documentation needs reconciliation. Source diagnostics remain in the runner workspace."
+            exit 1
           fi
 
       # anthropics/claude-code-action@v1 installed Claude Code 2.1.265 and then
@@ -196,9 +264,15 @@ jobs:
         # what was pushed; the next run (or a person) does that.
         if: ${{ !inputs.dry_run && github.event_name != 'push' }}
         run: |
+          set -euo pipefail
           git fetch origin main
           git checkout -q origin/main
-          node .steward/scripts/steward/validate.mjs . --strict --since ${{ steps.before.outputs.sha }} --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}"
+          if node .steward/scripts/steward/validate.mjs . --strict --since ${{ steps.before.outputs.sha }} --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}" > .steward/validation-after.log 2>&1; then
+            echo "Published documentation validation passed." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Published documentation validation failed. Source diagnostics remain in the runner workspace."
+            exit 1
+          fi
 
       - name: Fail the job if Claude's run failed
         if: ${{ !inputs.dry_run && github.event_name != 'push' && steps.claude.outputs.conclusion == 'failure' }}
