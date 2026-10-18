@@ -21,6 +21,10 @@ try {
   assert.throws(() => validateCloudCheckpoint({ ...checkpoint, ignored: true }), /invalid_cloud_checkpoint/)
   assert.throws(() => validateCloudCheckpoint({ ...checkpoint, cursors: [{ ...checkpoint.cursors[0], at: 'later' }] }), /invalid_cloud_checkpoint_cursor/)
   assert.throws(() => validateCloudCheckpoint({ ...checkpoint, checkpoint_id: `checkpoint:${'f'.repeat(64)}` }), /content_mismatch/)
+  const micro = '2026-10-18T14:19:02.645108Z'
+  const [microCheckpoint] = makeCloudCheckpoints({ [session]: { at: micro, ids: [event] } }, [])
+  assert.equal(validateCloudCheckpoint(microCheckpoint).cursors[0].at, micro, 'Cloud provider timestamps with microseconds are valid progress')
+  assert.throws(() => validateCloudCheckpoint({ ...microCheckpoint, cursors: [{ ...microCheckpoint.cursors[0], at: '2026-10-18T14:19:02.6451089Z' }] }), /invalid_cloud_checkpoint_cursor/)
   const checkpointPath = join(dir, 'checkpoints.jsonl')
   assert.throws(() => intake({ producer: 'session-miner', events: [], checkpoint }, { ledgerDir: dir, checkpointPath }), /receipt_missing/, 'A dispatch acceptance cannot masquerade as storage acknowledgement')
   const row = intake({ events: [envelope] }, { ledgerDir: dir, checkpointPath }).fresh[0]
