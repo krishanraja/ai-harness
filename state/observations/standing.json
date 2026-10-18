@@ -123,8 +123,8 @@
     "klass": "heartbeat",
     "subject": "session-miner-lorimer",
     "first_seen": "2026-10-14",
-    "open": false,
-    "closed_at": "2026-10-15"
+    "open": true,
+    "reopened": "2026-10-18"
   },
   "heartbeat:harness-sync-lorimer": {
     "klass": "heartbeat",
@@ -245,6 +245,12 @@
     "klass": "surface-parity",
     "subject": "codex-cloud",
     "first_seen": "2026-10-15",
+    "open": true
+  },
+  "em-dash:# lines in 1 files": {
+    "klass": "em-dash",
+    "subject": "# lines in 1 files",
+    "first_seen": "2026-10-18",
     "open": true
   }
 }
