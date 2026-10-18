@@ -8,6 +8,30 @@ New York time (Krish's noon, moved off the hour), before the steward's weekly
 proposal run at 21:40 UTC, it wakes one standing cloud session on this
 repository, "Session miner (standing)", and sends it the prompt below.
 
+## How cloud sessions are covered
+
+Ruling (Krish, 2026-10-18): cloud sessions are covered in two layers, with no
+GitHub collector.
+
+1. **Live capture is the primary route.** Under Observation capture in the
+   operating contract, every session in either Claude account sends a redacted
+   lesson through the Control Center connector (`record_harness_observation`)
+   right after a correction. The GitHub import loop records it. This needs no
+   schedule.
+2. **This weekly miner is the backstop.** It reads finished sessions and
+   catches corrections live capture missed. A scheduled task can only read the
+   account it runs in, so each Claude account needs its own standing session
+   and its own copy of this task with the same prompt.
+
+No supported interface lets a GitHub runner list or read Claude Code cloud
+sessions. The Compliance API is Enterprise-only and excludes cloud sessions,
+a CLI OAuth token can only make model requests, and the session tools exist
+only inside a Claude session. The Control Center connector is write-only: its
+one tool records an observation and reads nothing. So the `claude-cloud-account-*`
+collector jobs in `config/harness-jobs.json` stay blocked until such an
+interface exists, and the watchdog keeps reporting them as inaccessible rather
+than letting this task stand in for them.
+
 ## Prompt
 
 > Weekly run. You are the cloud session miner for krishanraja/ai-harness. Work
