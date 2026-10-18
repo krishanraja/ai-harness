@@ -1,3 +1,7 @@
+> **Historical.** Banner added 2026-10-18 by the docs steward. Not current guidance.
+> Replaced by: `docs/proposals/2026-09-08.md`
+> Reason: a superseded variant of the 2026-09-08 proposal, kept as branch evidence (`docs/history/BRANCH_RECONCILIATION_2026-10-18.md`).
+
 # Capture proposals, 2026-09-08
 
 Source: `brief.md` (window 2026-09-01 to 2026-09-08, 54 observations, 41 clusters, 7 over the bar). Shape follows `skills/ctrl-capture/SKILL.md` stage 9, using the five fields `brief.md` itself specifies: EVIDENCE, ALTERNATIVE EXPLANATIONS, IF WRONG, VALIDATION, PRIOR KNOWN-GOOD + ROLLBACK. This file is the only change in this run; no skill, registry, contract, or eval case is edited here. A named human accepts or rejects each block below.

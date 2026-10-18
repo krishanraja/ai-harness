@@ -1,3 +1,7 @@
+> **Historical.** Banner added 2026-10-18 by the docs steward. Not current guidance.
+> Replaced by: `docs/harness/VPS-RETIREMENT-MAP-2026-09-19.md`
+> Reason: a dated branch note on the Telegram ruling, kept as evidence (`docs/history/BRANCH_RECONCILIATION_2026-10-18.md`); VPS state is read live.
+
 # Telegram push changes, 2026-09-20
 
 ## Ruling applied
