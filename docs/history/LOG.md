@@ -5,6 +5,11 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-18
+
+- reconciled at `a2102fa`: `NOW.md` moved to release v2026.10.17.1 (published, registered, recorded on no surface), added five bullets (North Star, subscription-independent checks, two-layer cloud coverage, preserved proposal histories, central-brain repository administration), restated LORIMER's sync as `blocked` with reason `checkout-untracked` and the session miner as `blocked`, replaced the stale `cloud-surfaces-stale` note with the reworded verdict, and re-counted expired reviews at 13 of 29. No document moved or archived; `AGENTS.md`, `docs/HARNESS_CONTEXT.md` and the registry were read and left alone.
+- bannered on arrival: `docs/history/branch-snapshots/2026-09-08-proposal-variant-a5dbd655.md` (replaced by `docs/proposals/2026-09-08.md`) and `docs/history/branch-snapshots/2026-09-20-telegram-note-ed1545ec.md` (replaced by `docs/harness/VPS-RETIREMENT-MAP-2026-09-19.md`); both came from the 2026-10-18 branch reconciliation without the Historical banner. Nothing deleted.
+
 ## 2026-10-16
 
 - reconciled at `1b2fc25`: `NOW.md` gained the 2026-10-16 bullet for the PC sync's fixed reason word and the guardian's blocked-run count (PR 129), noted LORIMER's last sync heartbeat as `blocked`, and corrected the expired-review count from 2 to 13 of 29 skills, recomputed from `state/skill-registry.yaml`. No bullet was old enough to roll. Registry verdict and expired review dates are unchanged and wait on Krish.
