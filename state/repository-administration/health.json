@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T10:24:53.368Z",
-  "measurement_verification_at": "2026-10-18T10:24:53.337Z",
+  "generated_at": "2026-10-18T16:07:49.679Z",
+  "measurement_verification_at": "2026-10-18T16:07:49.645Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 8,
+  "unknown_repository_observations": 12,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -32,9 +32,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
-      "bootstrap_before": 11549,
-      "bootstrap_after": 11549,
+      "source_base": "bcc5df069fb286d047acf5964d5089cc4c5f849a",
+      "bootstrap_before": 12049,
+      "bootstrap_after": 12049,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -65,9 +65,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "136f99c21aa50534f6256df355da1cfc211b4447",
-      "bootstrap_before": 39955,
-      "bootstrap_after": 39955,
+      "source_base": "f39f1a1f67b1d2190ac870480c25afbebf5dd933",
+      "bootstrap_before": 40455,
+      "bootstrap_after": 40455,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -98,9 +98,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "f0c91f3b1502",
-      "source_base": "3c5bf3117ba9415b713bca347da67d6d0ca86ef4",
-      "bootstrap_before": 252496,
-      "bootstrap_after": 252496,
+      "source_base": "187ee6ffd9a50a6748ab08ff8d2d6ce587aa0d15",
+      "bootstrap_before": 80489,
+      "bootstrap_after": 80489,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -131,9 +131,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "430ad4208f8a",
-      "source_base": "c9f795c92c66bc13157b5b2159be083443860648",
-      "bootstrap_before": 76175,
-      "bootstrap_after": 76175,
+      "source_base": "c5827946636198e80ceba23aa1194b011f0be18f",
+      "bootstrap_before": 76675,
+      "bootstrap_after": 76675,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -164,9 +164,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
-      "bootstrap_before": 48670,
-      "bootstrap_after": 48670,
+      "source_base": "0060da0f7f6dfcc636018764fcc740bd56f61c05",
+      "bootstrap_before": 49303,
+      "bootstrap_after": 49303,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -197,9 +197,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "dddd1abc777c",
-      "source_base": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
-      "bootstrap_before": 15715,
-      "bootstrap_after": 15715,
+      "source_base": "a86a0ade2448efef53e1373e867d29e6a2e8d7bc",
+      "bootstrap_before": 16215,
+      "bootstrap_after": 16215,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -230,9 +230,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "c3389b60c708",
-      "source_base": "dd802b89f3de547b512b97519b4240fc9405fc4c",
-      "bootstrap_before": 33956,
-      "bootstrap_after": 33956,
+      "source_base": "ce8c48388a4a08217b43a034a459f5d02a5af778",
+      "bootstrap_before": 34456,
+      "bootstrap_after": 34456,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -263,9 +263,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "cd43facd0779",
-      "source_base": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
-      "bootstrap_before": 44509,
-      "bootstrap_after": 44509,
+      "source_base": "97018c4e4fe3b72faa0dd3b8c93eb7dbe264d52e",
+      "bootstrap_before": 45009,
+      "bootstrap_after": 45009,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -296,9 +296,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "13bd661431b5",
-      "source_base": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
-      "bootstrap_before": 9003,
-      "bootstrap_after": 9003,
+      "source_base": "333322dda882146a920cd91b0ea5b8723f11c8c6",
+      "bootstrap_before": 9503,
+      "bootstrap_after": 9503,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -329,9 +329,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "4757d4458aee",
-      "source_base": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
-      "bootstrap_before": 22137,
-      "bootstrap_after": 22137,
+      "source_base": "596a088bed0d8d97e017fa503c8b1eb4c4820d3d",
+      "bootstrap_before": 22645,
+      "bootstrap_after": 22645,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
