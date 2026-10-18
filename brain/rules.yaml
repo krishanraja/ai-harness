@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 99 rules across the two contracts.
+# 104 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -78,6 +78,46 @@ contract_rules:
         source:
           kind: ruling
           ref: "60106bef02bd"
+    status: live
+  - id: north-star.read-it-before-any
+    file: contract/krish-operating-contract.md
+    text_sha: "c19f6b9521c5"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.before-starting-say-which
+    file: contract/krish-operating-contract.md
+    text_sha: "ece6bd66ded2"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.prefer-the-work-that
+    file: contract/krish-operating-contract.md
+    text_sha: "8f481a00f830"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.only-krish-changes-a
+    file: contract/krish-operating-contract.md
+    text_sha: "27578a750b20"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.a-repository-with-no
+    file: contract/krish-operating-contract.md
+    text_sha: "947f39bcda48"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
     status: live
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md

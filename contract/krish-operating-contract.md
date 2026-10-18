@@ -16,6 +16,16 @@ Who Krish is is durable and owned by `krish-principles`, in its "Who Krish is" s
 - Founder visibility is an open decision (not ruled as of 2026-10-06). Never resolve it for Krish; name it when a proposal depends on it.
 - Read the venture list, priorities, objectives, pricing, revenue and status live from Control Center (`https://controlcenter.krishraja.com/api/canon/KRISH.md` and `PORTFOLIO.md` beside it; `src/lib/portfolio.ts` in the private `krishanraja/control-center` through the GitHub connector or a checkout). If the live source is unavailable, say the fact is unknown.
 
+## North Star
+
+Every repository Krish owns names one North Star: an ambition he set that is not reached yet (Ruling, Krish, 2026-10-18). Its path is in the `<!-- north-star:start -->` block of the repository's `AGENTS.md`, or `CLAUDE.md` where there is no `AGENTS.md`.
+
+- Read it before any work in that repository, every session.
+- Before starting, say which part of it the task moves. If the task moves nothing toward it, say so first and let Krish decide.
+- Prefer the work that moves it furthest, and close by noting what moved.
+- Only Krish changes a North Star. Record his ruling in the commit body.
+- A repository with no North Star asks Krish for one before material work. When one is reached, say so and ask him for the next.
+
 ## Working style
 
 - Apply `krish-principles` to every task, including routine and mechanical work. Compress the reasoning for simple tasks; do not skip it.
