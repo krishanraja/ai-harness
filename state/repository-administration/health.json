@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-18T16:07:49.679Z",
-  "measurement_verification_at": "2026-10-18T16:07:49.645Z",
+  "generated_at": "2026-10-18T16:08:32.432Z",
+  "measurement_verification_at": "2026-10-18T16:08:32.400Z",
   "sources": {
     "github": {
       "status": "available",
@@ -11,9 +11,9 @@
       "status": "coverage-unverified",
       "basis": "Only delivered episodes and explicit source receipts are measurable; unknown accounts and unavailable sessions are not inferred.",
       "accounts": [],
-      "acknowledged_checkpoint_records": 0,
-      "acknowledged_streams": 0,
-      "last_processed_event_at": null,
+      "acknowledged_checkpoint_records": 1,
+      "acknowledged_streams": 8,
+      "last_processed_event_at": "2026-10-18T15:47:16.314886Z",
       "last_acknowledged_checkpoint_at": null,
       "checkpoint_limits": "Checkpoint cursors prove durable receipt of processed events, not run time, account enumeration, pagination or complete source coverage."
     },
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "f39f1a1f67b1d2190ac870480c25afbebf5dd933",
+      "source_base": "acb37321d2f513f0f19493225954cf17f6c4081a",
       "bootstrap_before": 40455,
       "bootstrap_after": 40455,
       "observed_use": {
