@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "run_id": "20261006T214532Z",
+  "host": "SURFACE",
+  "host_evidence": "COMPUTERNAME is SURFACE and the managed Codex skills root exists. Unmanaged roots observed: claude:True,cursor:False.",
+  "mode": "sync",
+  "canaries_requested": true,
+  "heartbeat_enabled": true,
+  "pull_request_enabled": true,
+  "started_at_utc": "2026-10-06T21:45:32.4295279Z",
+  "status": "partial",
+  "surfaces": [
+    {
+      "surface": "codex-surface-07a67cda9f99",
+      "client": "codex",
+      "plan": {
+        "surface": "codex-surface-07a67cda9f99",
+        "exact": 23,
+        "replace_known_baseline": 6,
+        "replace_reconciled": 0,
+        "unreconciled": 0,
+        "additions": 0,
+        "items": [
+          {
+            "name": "apify",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "build-apps-with-krish",
+            "relation": "exact"
+          },
+          {
+            "name": "content-corpus",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-build",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-capture",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-check",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-compile",
+            "relation": "exact"
+          },
+          {
+            "name": "ctrl-intake",
+            "relation": "exact"
+          },
+          {
+            "name": "decision-ledger",
+            "relation": "exact"
+          },
+          {
+            "name": "design-intelligence-search",
+            "relation": "exact"
+          },
+          {
+            "name": "evidence-research",
+            "relation": "exact"
+          },
+          {
+            "name": "harness-maintainer",
+            "relation": "exact"
+          },
+          {
+            "name": "instantly-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-build",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "krish-content-marketer",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-design",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-principles",
+            "relation": "exact"
+          },
+          {
+            "name": "krish-voice",
+            "relation": "exact"
+          },
+          {
+            "name": "locked-revision",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake",
+            "relation": "exact"
+          },
+          {
+            "name": "mindmake-os",
+            "relation": "exact"
+          },
+          {
+            "name": "n8n-operator",
+            "relation": "exact"
+          },
+          {
+            "name": "strategy-brief",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "take-the-brief",
+            "relation": "exact"
+          },
+          {
+            "name": "tools-access",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-foundations",
+            "relation": "exact"
+          },
+          {
+            "name": "ux-testing-agent",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "verification-loop",
+            "relation": "replace-known-baseline"
+          },
+          {
+            "name": "video-engine",
+            "relation": "replace-known-baseline"
+          }
+        ],
+        "raw_summary": "PLAN_ONLY surface=codex-surface-07a67cda9f99 release=v2026.10.06.3 exact=23 replace_known=6 replace_reconciled=0 unreconciled=0 add=0"
+      },
+      "install": "applied",
+      "parity": {
+        "surface": "codex-surface-07a67cda9f99",
+        "skill_count": 29,
+        "file_count": 146,
+        "per_skill_match_count": 29,
+        "per_skill_mismatches": [],
+        "aggregate": "F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D",
+        "release_aggregate": "F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D",
+        "aggregate_matches_release": true,
+        "hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+        "unmanaged_root_files": 0,
+        "unmanaged_root_file_names": []
+      },
+      "rollback_directory": "C:\\Users\\krish\\.codex\\skills.harness-backups\\codex-surface-07a67cda9f99\\v2026.10.06.3-20261006T214615Z-517a47c4",
+      "deployment_record": "C:\\Users\\krish\\.scratch\\ai-harness\\sync-v2026.10.06.3-surface\\state\\deployments\\v2026.10.06.3-codex-surface-07a67cda9f99.json",
+      "canaries": {
+        "surface": "codex-surface-07a67cda9f99",
+        "client": "codex",
+        "status": "partial",
+        "report": "C:\\Users\\krish\\.scratch\\ai-harness\\sync-v2026.10.06.3-surface\\state\\canaries\\v2026.10.06.3-codex-surface-07a67cda9f99.json",
+        "results": [
+          {
+            "id": "strategy-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+          },
+          {
+            "id": "strategy-trigger-011",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of strategy-brief/SKILL.md."
+          },
+          {
+            "id": "strategy-trigger-013",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "verification-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of verification-loop/SKILL.md."
+          },
+          {
+            "id": "verification-trigger-005",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of verification-loop/SKILL.md."
+          },
+          {
+            "id": "verification-trigger-013",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, take-the-brief."
+          },
+          {
+            "id": "brief-trigger-006",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+          },
+          {
+            "id": "brief-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of take-the-brief/SKILL.md."
+          },
+          {
+            "id": "brief-trigger-017",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "brief-trigger-009",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "video-engine-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "video-engine-trigger-002",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of video-engine/SKILL.md."
+          },
+          {
+            "id": "video-engine-trigger-011",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "video-engine-trigger-003",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "design-intel-trigger-003",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of design-intelligence-search/SKILL.md."
+          },
+          {
+            "id": "design-intel-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of design-intelligence-search/SKILL.md."
+          },
+          {
+            "id": "design-intel-trigger-011",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-design, krish-principles."
+          },
+          {
+            "id": "design-intel-trigger-006",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: build-apps-with-krish, krish-design, krish-principles, strategy-brief."
+          },
+          {
+            "id": "os-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+          },
+          {
+            "id": "os-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of mindmake-os/SKILL.md."
+          },
+          {
+            "id": "os-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-principles, mindmake, strategy-brief."
+          },
+          {
+            "id": "decision-trigger-008",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+          },
+          {
+            "id": "decision-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of decision-ledger/SKILL.md."
+          },
+          {
+            "id": "decision-trigger-020",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: mindmake-os."
+          },
+          {
+            "id": "decision-trigger-009",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "apify-trigger-005",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of apify/SKILL.md."
+          },
+          {
+            "id": "apify-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of apify/SKILL.md."
+          },
+          {
+            "id": "apify-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex read the apify exclusion guard, then loaded the expected owner: krish-build.",
+            "target_guard_read": true
+          },
+          {
+            "id": "build-trigger-024",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-build/SKILL.md."
+          },
+          {
+            "id": "build-trigger-022",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-build/SKILL.md."
+          },
+          {
+            "id": "build-trigger-025",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: build-apps-with-krish, krish-design, krish-principles, strategy-brief."
+          },
+          {
+            "id": "uxqa-trigger-005",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of ux-testing-agent/SKILL.md."
+          },
+          {
+            "id": "uxqa-trigger-008",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of ux-testing-agent/SKILL.md."
+          },
+          {
+            "id": "uxqa-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: krish-build, krish-principles."
+          },
+          {
+            "id": "build-trigger-001",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of ctrl-build/SKILL.md."
+          },
+          {
+            "id": "build-trigger-003",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of ctrl-build/SKILL.md."
+          },
+          {
+            "id": "build-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: ctrl-compile."
+          },
+          {
+            "id": "research-trigger-008",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of evidence-research/SKILL.md."
+          },
+          {
+            "id": "research-trigger-002",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of evidence-research/SKILL.md."
+          },
+          {
+            "id": "research-trigger-009",
+            "outcome": "not-fired",
+            "note": "Codex completed without a live canonical skill read."
+          },
+          {
+            "id": "voice-trigger-007",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-voice/SKILL.md."
+          },
+          {
+            "id": "voice-trigger-004",
+            "outcome": "fired",
+            "note": "Codex JSONL recorded a successful live read of krish-voice/SKILL.md."
+          },
+          {
+            "id": "voice-trigger-009",
+            "outcome": "wrong-skill",
+            "note": "Codex JSONL recorded live skill reads: content-corpus, krish-content-marketer, krish-principles, mindmake, strategy-brief."
+          }
+        ]
+      }
+    }
+  ],
+  "release": "v2026.10.06.3",
+  "asked_by": "Krish Raja: approved rollout and live canary verification for v2026.10.06.3 in state/skill-registry.yaml.",
+  "assets": {
+    "asset_count": 60,
+    "checksum_count": 59,
+    "mismatches": 0
+  },
+  "manifest_sha256": "F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8",
+  "unmeasured_surfaces": [
+    "codex-surface-07a67cda9f99"
+  ],
+  "completed_at_utc": "2026-10-06T21:55:05.5341357Z"
+}

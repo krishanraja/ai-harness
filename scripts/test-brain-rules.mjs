@@ -13,10 +13,11 @@
  *   node scripts/test-brain-rules.mjs
  */
 
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
-import { check, extract, idFor, textSha, slug } from './brain-rules.mjs'
+import { join, relative } from 'node:path'
+import { check, extract, idFor, textSha, slug, revise } from './brain-rules.mjs'
 
 let failures = 0
 const t = (name, fn) => {
@@ -98,6 +99,22 @@ const cleanup = []
 const fixture = (...a) => { const r = tree(...a); cleanup.push(r); return r }
 
 // -------------------------------------------------------------------- cases
+t('backfill cannot relabel or rewrite an existing provenance index', () => {
+  const dir=mkdtempSync(join(tmpdir(),'backfill-history-')),path=join(dir,'rules.yaml')
+  try {
+    const original=readFileSync('brain/rules.yaml','utf8')
+    writeFileSync(path,original)
+    const run=()=>spawnSync(process.execPath,['scripts/brain-rules.mjs','--backfill','--out',relative(process.cwd(),path)],{encoding:'utf8'})
+    const valid=run();assert(valid.status===0,valid.stderr)
+    assert(readFileSync(path,'utf8')===original,'Validation must preserve every existing index byte')
+    const changed=original.replace(/text_sha: "[a-f0-9]{12}"/,'text_sha: "000000000000"')
+    assert(changed!==original,'Fixture must change an actual provenance hash')
+    writeFileSync(path,changed)
+    const invalid=run();assert(invalid.status!==0&&/backfill_requires_reviewed_revision/.test(invalid.stderr),'A changed index must require an explicit revision source')
+    assert(readFileSync(path,'utf8')===changed,'Refusal must not reset or rewrite the prior source')
+  } finally {rmSync(dir,{recursive:true,force:true})}
+})
+
 t('a canon that matches its ledger reports nothing', () => {
   const root = fixture()
   const { problems, counts } = check(ledgerFor(root), root)
@@ -282,6 +299,69 @@ t('a repository artifact cannot be mislabeled as a ruling commit', () => {
   }).replace('ref: "abc123abc123"', 'ref: "state/approvals/example.md"')
   const { problems } = check(ledger, root)
   matches(problems, /labels repository artifact .* as a ruling/, 'ruling provenance must cite the ruling commit')
+})
+
+// ------------------------------------------------------------------ revise
+// A change request records its provenance with revise(), never with the lossy
+// backfill. Each case runs the reviser and then the gate it has to satisfy.
+const withProposal = (root) => {
+  mkdirSync(join(root, 'docs/proposals'), { recursive: true })
+  writeFileSync(join(root, 'docs/proposals/2026-10-19-change.md'), '# change\n')
+  return root
+}
+const HEADER = '# header line one\n# header line two\n\n'
+
+t('revise records an edited rule: new source, old one kept in history, gate passes', () => {
+  const root = withProposal(fixture())
+  const ledger = HEADER + ledgerFor(root)
+  writeFileSync(join(root, 'contract/krish-operating-contract.md'),
+    CONTRACT.replace('- Never publish without explicit approval.', '- Never publish, send or spend without explicit approval.'))
+  const r = revise(ledger, root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-19' })
+  assert(r.added.length === 1 && r.superseded.length === 1, `an edited opening line is a new id; expected 1 added and 1 superseded, got ${JSON.stringify(r)}`)
+  const { problems } = check(r.text, root)
+  assert(problems.length === 0, `the revised ledger must pass the gate, got: ${problems.join(' | ')}`)
+  assert(r.text.startsWith(HEADER), 'the header must stay byte-identical')
+  assert(/status: superseded\n    valid_until: "2026-10-19"/.test(r.text), 'the removed rule is closed with a date, never deleted')
+})
+
+t('revise moves a changed chapter body into history and passes the gate', () => {
+  const root = withProposal(fixture())
+  const ledger = ledgerFor(root)
+  writeFileSync(join(root, 'skills/fixture/SKILL.md'), SKILL.replace('Body of the limits chapter.', 'A tighter limits chapter.'))
+  const r = revise(ledger, root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-19' })
+  assert(r.changed.length === 1, `expected one changed chapter, got ${JSON.stringify(r)}`)
+  assert(/history:\n      - text_sha: "[0-9a-f]{12}"\n        valid_until: "2026-10-19"\n        source:\n          kind: founding/.test(r.text), 'the old hash and source move into history')
+  assert(/kind: proposal\n      ref: "docs\/proposals\/2026-10-19-change\.md"/.test(r.text), 'the new source is the proposal')
+  const { problems } = check(r.text, root)
+  assert(problems.length === 0, `gate must pass, got: ${problems.join(' | ')}`)
+})
+
+t('revise is idempotent', () => {
+  const root = withProposal(fixture())
+  writeFileSync(join(root, 'skills/fixture/SKILL.md'), SKILL.replace('Body of the limits chapter.', 'A tighter limits chapter.'))
+  const once = revise(ledgerFor(fixture()), root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-19' }).text
+  const twice = revise(once, root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-20' })
+  assert(twice.text === once, 'a second run over the same tree must change nothing')
+})
+
+t('revise inserts a new rule after its neighbour and records a merge', () => {
+  const root = withProposal(fixture())
+  const ledger = ledgerFor(root)
+  const merged = CONTRACT.replace('- Research, inspect and diagnose autonomously.\n', '')
+    .replace('- Never publish without explicit approval.', '- Never publish without explicit approval.\n- Research and diagnose freely; mutate only with approval.')
+  writeFileSync(join(root, 'contract/krish-operating-contract.md'), merged)
+  const oldId = extract(fixture()).contractRules[0].id
+  const newId = extract(root).contractRules.find((x) => /research-and-diagnose/.test(x.id)).id
+  const r = revise(ledger, root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-19', supersedes: { [oldId]: newId } })
+  assert(r.text.includes(`supersedes: [${oldId}]`), 'the surviving rule records what it superseded')
+  const { problems } = check(r.text, root)
+  assert(problems.length === 0, `gate must pass, got: ${problems.join(' | ')}`)
+})
+
+t('revise refuses an unknown source kind', () => {
+  let threw = false
+  try { revise('schema_version: 1\n', fixture(), { kind: 'vibes', ref: 'x' }) } catch { threw = true }
+  assert(threw, 'an unsupported source kind must throw')
 })
 
 // -------------------------------------------------------------------- report

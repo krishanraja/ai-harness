@@ -2,6 +2,8 @@
 
 Use this reference only for surface audits, provider/import review, admission, canaries, releases, retirement proposals, and rollback. It supplies evidence schemas; it never grants mutation authority.
 
+Repository entry guidance has a separate publisher under the owner-approved `brain-repository-administration-v1` plan. `contract/repository-administration.json` fixes its targets and budgets. It projects accepted brain records through checked PRs, verifies merged bytes, preserves unmanaged text and records exact rollback bases. New inferred meaning remains a human-reviewed proposal. This is not a skill installation or permission to mutate application state; local client parity and unavailable history sources remain separately unknown.
+
 ## Surface reconciliation record
 
 Inventory only user-managed surfaces and explicitly named shared dependencies. Provider-managed caches are dependencies, not personalized duplicates.

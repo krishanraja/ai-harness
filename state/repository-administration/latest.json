@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-18T10:24:53.256Z",
+  "approval": "brain-repository-administration-v1",
+  "results": [
+    {
+      "repository": "content-engine",
+      "base": "3c5bf3117ba9415b713bca347da67d6d0ca86ef4",
+      "brain_revision": "f0c91f3b1502",
+      "before": 252496,
+      "after": 252496,
+      "files": [],
+      "source_seal": "bcdbee459167000c77ac29816a461c2821d9f39175d25cb3cdb68a559598c013",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "AEO-Engine",
+      "base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+      "brain_revision": "5ca09cc3df52",
+      "before": 11549,
+      "after": 11549,
+      "files": [],
+      "source_seal": "a2d318ee7abcb96192e3428220a8a367045cf6a3ec29fa1e44ef5b8cfee66880",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "ai-harness",
+      "base": "136f99c21aa50534f6256df355da1cfc211b4447",
+      "brain_revision": "155b79828fb7",
+      "before": 39955,
+      "after": 39955,
+      "files": [],
+      "source_seal": "e6ebbbe2d1803baeb3513a99b6c839b1725011d228a19a551bb287f743a64d0b",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "control-center",
+      "base": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
+      "brain_revision": "ba41f521a760",
+      "before": 48670,
+      "after": 48670,
+      "files": [],
+      "source_seal": "1094a06ff158ab4a7a4751b25db16e14f3147756e8ddecc37dde91a0e3901227",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "mm-ctrl",
+      "base": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
+      "brain_revision": "4757d4458aee",
+      "before": 22137,
+      "after": 22137,
+      "files": [],
+      "source_seal": "319bb02070730d4b97d97b79bcc1cc2c6b4b119d4249f102bab2f8a0853e2d8f",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "fractionl-circle",
+      "base": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+      "brain_revision": "dddd1abc777c",
+      "before": 15715,
+      "after": 15715,
+      "files": [],
+      "source_seal": "54f92549b3ac3ee695463ec9fbb8d91cfcc7ac5a9bcc9817a66473acd80f2bd3",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "fractionl-pulse",
+      "base": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+      "brain_revision": "c3389b60c708",
+      "before": 33956,
+      "after": 33956,
+      "files": [],
+      "source_seal": "b5d9aef19fcd14ec993e7a1a9888171f6dc917c28f30a230617605e6f7b2eafc",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "full-time",
+      "base": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+      "brain_revision": "cd43facd0779",
+      "before": 44509,
+      "after": 44509,
+      "files": [],
+      "source_seal": "f6a3f0c16b573873e9b7119f04f07689551752e53137c5a8f4c8e373f348a51a",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "contentarchives",
+      "base": "c9f795c92c66bc13157b5b2159be083443860648",
+      "brain_revision": "430ad4208f8a",
+      "before": 76175,
+      "after": 76175,
+      "files": [],
+      "source_seal": "7664a7a1fde23522189764efc634d9822581b02c63f46cd038c56eceee66c2a0",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
+      "repository": "makeyourmindup",
+      "base": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
+      "brain_revision": "13bd661431b5",
+      "before": 9003,
+      "after": 9003,
+      "files": [],
+      "source_seal": "cf756e17ba1f41d448fe3212aa0f57fda27e6ab1046e50af539ca6f02d2f3a2a",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    }
+  ]
+}

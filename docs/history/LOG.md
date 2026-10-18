@@ -5,7 +5,48 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-16
+
+- reconciled at `1b2fc25`: `NOW.md` gained the 2026-10-16 bullet for the PC sync's fixed reason word and the guardian's blocked-run count (PR 129), noted LORIMER's last sync heartbeat as `blocked`, and corrected the expired-review count from 2 to 13 of 29 skills, recomputed from `state/skill-registry.yaml`. No bullet was old enough to roll. Registry verdict and expired review dates are unchanged and wait on Krish.
+
+## 2026-10-15
+
+- reconciled at `908ad07`: `NOW.md` moved to release v2026.10.15.2 (published, registered by the release workflow, recorded on no surface yet), added five 2026-10-15 bullets (automatic release and install, the PC sync that died with exit code 64 for nine days, mined lessons sent through GitHub, the docs steward moving here, the red test fixed in place) and restated review ages (`harness-maintainer` 56 days, `video-engine` 47 days), both still waiting on Krish. The registry and `CURRENT.md` were not edited.
+
+## 2026-10-14
+
+- reconciled at `181341f`: `NOW.md` gained four 2026-10-14 bullets for the learning-loop merge (PR 124: merge-ready change requests, the observer and judge repair, surface labels, the private session miner), the credential asks that wait on Krish, and review ages restated (`harness-maintainer` 55 days, `video-engine` 46 days). `CURRENT.md` and the registry were not touched by those commits. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
+
+## 2026-10-10
+
+- reconciled at `259f0a8`: the only commit since `467448f` was the observer ledger (`state/` files, no documentation consequence). `NOW.md` head and `as_of` advanced and the review ages restated (`harness-maintainer` 51 days, `video-engine` 42 days); the registry dates are unchanged and still wait on Krish.
+
+## 2026-10-08
+
+- reconciled at `467448f`: `NOW.md` now records the three cloud surfaces at v2026.10.06.3 (they were stale at v2026.10.06.1), notes that the registry's top-level deployment verdict still says `cloud-surfaces-stale` and waits on the next registry reconcile, and refreshes review ages for `harness-maintainer` (49 days) and `video-engine` (40 days) against their 30-day SLA, both still waiting on Krish. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
+
+## 2026-10-07
+
+- reconciled at `8042cab`: `NOW.md` moved from v2026.10.05.1 to v2026.10.06.3 (all four local surfaces 29/29 exact, three cloud surfaces stale at v2026.10.06.1), closed the `CURRENT.md` versus LORIMER record disagreement flagged at `5b22a53`, added the 2026-10-06 rulings and canary-repair bullets, and refreshed review ages for `harness-maintainer` (48 days) and `video-engine` (39 days) against their 30-day SLA, both still waiting on Krish. Nothing rolled out of `NOW.md`: the oldest bullet is 2026-09-19.
+
 ## 2026-10-06
+
+- The v2026.10.06.2 live canaries preserved four adjacent routing collisions:
+  strategy could replace rather than hand back to the build producer, generic
+  post-fix regression closure could be mistaken for UX testing, and an Apify
+  exclusion-guard read lacked a declared `krish-build` neighboring route. The
+  producer handback, verification precedence, UX exclusion, Apify discovery
+  gate, and canary route declaration were narrowed together for the next
+  immutable patch release without rewriting the v2 evidence.
+
+- The v2026.10.06.1 rollout surfaced three different boundaries rather than one
+  generic canary failure: an adapter-invariant measurement leak, a skipped
+  strategy-to-producer handoff, and catalogue discovery trying to enforce Video
+  Engine conversation history before loading its guard. The invocation sheet,
+  strategy/build metadata, Video Engine discovery boundary, and the
+  take-the-brief neighboring-route declaration were repaired together for the
+  next immutable patch release; isolated Codex canaries passed the previously
+  failing strategy route 3/3 and the exact launcher while containing punctuation.
 
 - The `v2026.10.06.1` Codex canary failed `principles-trigger-013` and `principles-trigger-032` because the tier-three rotation, seeded on that release id, drew `krish-principles` back onto the sheet. The 2026-09-13 observability boundary had removed it from the Tier 1, changed-skill and never-proven lists but not from the rotation. Codex reads that file on every turn because its root adapter says to, so those cases failed exactly as they had on `v2026.09.13.3` and `.4`; they were never run on `v2026.09.24.3` or `v2026.10.05.1`. The rotation now drops adapter invariants after the draw, so every other release's sheet is unchanged, and a regression test sweeps 41 release seeds. No skill bytes changed.
 

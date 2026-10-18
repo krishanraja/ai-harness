@@ -1,0 +1,357 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-10-18T10:24:53.368Z",
+  "measurement_verification_at": "2026-10-18T10:24:53.337Z",
+  "sources": {
+    "github": {
+      "status": "available",
+      "basis": "existing observation ledger"
+    },
+    "ai_history": {
+      "status": "coverage-unverified",
+      "basis": "Only delivered episodes and explicit source receipts are measurable; unknown accounts and unavailable sessions are not inferred.",
+      "accounts": [],
+      "acknowledged_checkpoint_records": 0,
+      "acknowledged_streams": 0,
+      "last_processed_event_at": null,
+      "last_acknowledged_checkpoint_at": null,
+      "checkpoint_limits": "Checkpoint cursors prove durable receipt of processed events, not run time, account enumeration, pagination or complete source coverage."
+    },
+    "hosted_exporter": {
+      "status": "configured-unverified"
+    }
+  },
+  "unknown_repository_observations": 8,
+  "repositories": [
+    {
+      "repository": "AEO-Engine",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 2,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "5ca09cc3df52",
+      "source_base": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+      "bootstrap_before": 11549,
+      "bootstrap_after": 11549,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "ai-harness",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 58,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "155b79828fb7",
+      "source_base": "136f99c21aa50534f6256df355da1cfc211b4447",
+      "bootstrap_before": 39955,
+      "bootstrap_after": 39955,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "content-engine",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 136,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "f0c91f3b1502",
+      "source_base": "3c5bf3117ba9415b713bca347da67d6d0ca86ef4",
+      "bootstrap_before": 252496,
+      "bootstrap_after": 252496,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "contentarchives",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 39,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "430ad4208f8a",
+      "source_base": "c9f795c92c66bc13157b5b2159be083443860648",
+      "bootstrap_before": 76175,
+      "bootstrap_after": 76175,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "control-center",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 192,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "ba41f521a760",
+      "source_base": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
+      "bootstrap_before": 48670,
+      "bootstrap_after": 48670,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "fractionl-circle",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "dddd1abc777c",
+      "source_base": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+      "bootstrap_before": 15715,
+      "bootstrap_after": 15715,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "fractionl-pulse",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "c3389b60c708",
+      "source_base": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+      "bootstrap_before": 33956,
+      "bootstrap_after": 33956,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "full-time",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 20,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "cd43facd0779",
+      "source_base": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+      "bootstrap_before": 44509,
+      "bootstrap_after": 44509,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "makeyourmindup",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 37,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "13bd661431b5",
+      "source_base": "b3b21c87d6e1d5c1328f627a8bfbfed5337bd83f",
+      "bootstrap_before": 9003,
+      "bootstrap_after": 9003,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "mm-ctrl",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "4757d4458aee",
+      "source_base": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
+      "bootstrap_before": 22137,
+      "bootstrap_after": 22137,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    }
+  ]
+}

@@ -88,6 +88,23 @@ export class Gh {
     })
   }
 
+  /** One multi-file commit, with a non-forced ref update. A moved head fails instead of losing work. */
+  async commitFiles(repo, branch, parent, files, message) {
+    if (this.dryRun) return { sha: parent, dryRun: true }
+    if (await this.headSha(repo, branch) !== parent) throw new Error('write_head_moved')
+    const commit = await this.req('GET', `/repos/${this.owner}/${repo}/git/commits/${parent}`)
+    const tree = []
+    for (const [path, text] of Object.entries(files)) {
+      if (text === null) { tree.push({ path, mode: '100644', type: 'blob', sha: null }); continue }
+      const blob = await this.req('POST', `/repos/${this.owner}/${repo}/git/blobs`, { content: text, encoding: 'utf-8' })
+      tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha })
+    }
+    const nextTree = await this.req('POST', `/repos/${this.owner}/${repo}/git/trees`, { base_tree: commit.tree.sha, tree })
+    const next = await this.req('POST', `/repos/${this.owner}/${repo}/git/commits`, { message, tree: nextTree.sha, parents: [parent] })
+    await this.req('PATCH', `/repos/${this.owner}/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { sha: next.sha, force: false })
+    return next
+  }
+
   /**
    * Pull requests, including merged and closed ones.
    *
@@ -123,8 +140,46 @@ export class Gh {
     return this.req('POST', `/repos/${this.owner}/${repo}/issues/${number}/comments`, { body })
   }
 
-  async openPull(repo, { title, head, base, body }) {
+  async openPull(repo, { title, head, base, body, draft = false }) {
     if (this.dryRun) return { dryRun: true, html_url: '(dry run)' }
-    return this.req('POST', `/repos/${this.owner}/${repo}/pulls`, { title, head, base, body })
+    return this.req('POST', `/repos/${this.owner}/${repo}/pulls`, { title, head, base, body, ...(draft ? { draft: true } : {}) })
+  }
+
+  /** Every open pull request, paged. */
+  async openPulls(repo) {
+    const out = []
+    for (let page = 1; page <= 10; page++) {
+      const r = await this.req('GET', `/repos/${this.owner}/${repo}/pulls?state=open&per_page=100&page=${page}`)
+      out.push(...r)
+      if (r.length < 100) break
+    }
+    return out
+  }
+
+  async closePull(repo, number) {
+    if (this.dryRun) return { dryRun: true }
+    return this.req('PATCH', `/repos/${this.owner}/${repo}/pulls/${number}`, { state: 'closed' })
+  }
+
+  async addLabels(repo, number, labels) {
+    if (this.dryRun) return { dryRun: true }
+    return this.req('POST', `/repos/${this.owner}/${repo}/issues/${number}/labels`, { labels })
+  }
+
+  /** Commit statuses (context -> state) and check runs for one sha. */
+  async checksFor(repo, sha) {
+    const status = await this.req('GET', `/repos/${this.owner}/${repo}/commits/${sha}/status`)
+    const runs = await this.req('GET', `/repos/${this.owner}/${repo}/commits/${sha}/check-runs?per_page=100`)
+    const statuses = Object.fromEntries((status.statuses || []).map((s) => [s.context, s.state]))
+    return { statuses, runs: (runs.check_runs || []).map((r) => ({ name: r.name, status: r.status, conclusion: r.conclusion })) }
+  }
+
+  /** A draft pull request becomes ready for review. REST has no endpoint for it. */
+  async markReady(nodeId) {
+    if (this.dryRun) return { dryRun: true }
+    return this.req('POST', 'https://api.github.com/graphql', {
+      query: 'mutation($id: ID!) { markPullRequestReadyForReview(input: { pullRequestId: $id }) { pullRequest { number isDraft } } }',
+      variables: { id: nodeId },
+    })
   }
 }

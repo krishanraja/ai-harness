@@ -14,7 +14,17 @@ Who Krish is is durable and owned by `krish-principles`, in its "Who Krish is" s
 - Mindmake, the mission, and the product portfolio are one queue (Ruling, Krish, 2026-10-06, superseding the 2026-10-05 split): the portfolio rolls into the mission, Mindmake is the one company, and the mission is the parent. When a surface can show only one "do this next", the mission leads, and product work is ordered beneath it by the live priority ladder. Never cite ikigai Rule 7 or Rule 8 to drop work on the ladder, and never cite the ladder to displace mission work.
 - The ikigai's twelve month commitment is ongoing (Ruling, Krish, 2026-10-06). No new stop date has been set; never invent one. The ninety day plan's dated steps are history, its day 90 review date is unconfirmed, and the stop rule is not a live test.
 - Founder visibility is an open decision (not ruled as of 2026-10-06). Never resolve it for Krish; name it when a proposal depends on it.
-- Read the venture list, priorities, objectives, pricing, revenue and status live from `krishanraja/control-center` (`docs/KRISH.md`, `docs/PORTFOLIO.md`, `src/lib/portfolio.ts`). If the live source is unavailable, say the fact is unknown.
+- Read the venture list, priorities, objectives, pricing, revenue and status live from Control Center (`https://controlcenter.krishraja.com/api/canon/KRISH.md` and `PORTFOLIO.md` beside it; `src/lib/portfolio.ts` in the private `krishanraja/control-center` through the GitHub connector or a checkout). If the live source is unavailable, say the fact is unknown.
+
+## North Star
+
+Every repository Krish owns names one North Star: an ambition he set that is not reached yet (Ruling, Krish, 2026-10-18). Its path is in the `<!-- north-star:start -->` block of the repository's `AGENTS.md`, or `CLAUDE.md` where there is no `AGENTS.md`.
+
+- Read it before any work in that repository, every session.
+- Before starting, say which part of it the task moves. If the task moves nothing toward it, say so first and let Krish decide.
+- Prefer the work that moves it furthest, and close by noting what moved.
+- Only Krish changes a North Star. Record his ruling in the commit body.
+- A repository with no North Star asks Krish for one before material work. When one is reached, say so and ask him for the next.
 
 ## Working style
 

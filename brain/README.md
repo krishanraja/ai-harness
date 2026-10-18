@@ -4,8 +4,9 @@ The curated tier of the harness memory.
 
 `state/observations/` is the raw tier: an append-only ledger of everything the
 observer saw, written by machines, never edited. Anything can land there. This
-directory is the other half, and the difference between them is approval. A
-thing arrives here only through a pull request a person merged.
+directory keeps interpretation and accepted authority distinct. Accepted meaning
+arrives through an owner-approved plan or a verified owner merge. Machine-written
+observations and candidates are typed explicitly and cannot act as requirements.
 
 That split is not new architecture for its own sake. It is the one property
 that separates a memory system from a pile of files: a private tier that is
@@ -17,8 +18,15 @@ promotion step between them that leaves a record.
 | File | Holds | Written by |
 |---|---|---|
 | `rules.yaml` | one entry per rule in both contracts, and one per chapter of every skill: its hash, when it first appeared, where it came from, what it supersedes | `scripts/brain-rules.mjs`, checked on every push |
-| `proposals.jsonl` | one row per event in a proposal's life: opened, merged or closed, and whether the finding it addressed actually went away | appended, never edited |
+| `proposals.jsonl` | one row per event in a steward pull request's life: opened, merged, closed or expired, with hours to decision | appended by `scripts/observe.mjs`, never edited; the same deliberate machine-written exception as `usage.jsonl` |
 | `usage.jsonl` | one row per observed citation of a rule: which rule, **when**, by which producer, against which pull request or canary report | appended by `scripts/judge.mjs` and `scripts/canaries.mjs`, never edited |
+| `knowledge.jsonl` | versioned scoped facts, requirements, preferences, procedures, experiments, hypotheses and working decisions; each explicitly observed, candidate, accepted, rejected or superseded | append-only consolidator; acceptance bound to exact approved content |
+| `reviews.jsonl`, `acceptances.jsonl` | proposed meaning and independently verified owner-merge proofs | guarded review PRs, then the deterministic promotion worker |
+| `repositories/` | curated system-source and workflow profiles, budgets and fixed entrypoints | approved initial inventory; changes remain reviewable |
+
+Read `docs/harness/repository-administration.md` for the repository learning loop,
+source coverage, deployment ownership and rollback. Runtime agents receive compact
+accepted views, not these raw evidence ledgers.
 
 ## Why usage.jsonl exists
 
@@ -66,7 +74,9 @@ nobody records them or somebody rubber-stamps them. So the gate moved rather
 than disappeared: the ledger is append only and machine written, and nothing
 downstream of it may act alone. A `dead-zone` finding is a finding, which the
 quality standard already defines as a decision for a person; retiring a rule is
-still a proposal. No script reads this file and edits a rule.
+still a proposal. No script reads this file and edits a rule in place; a
+retirement it suggests reaches the canon only as a change-request pull request
+a person merges.
 
 Two things the ledger deliberately refuses. A citation naming a rule that is not
 in the canon, because it would make the count answer for a canon that is not
@@ -107,8 +117,14 @@ are the rules nobody has ever had to defend.
   YAML reader turns a bare all-digit scalar into a number, which never compares
   equal to its own identical string. Unquoted, such an entry fails forever and
   no edit can fix it. This is not hypothetical: it happened on the first run.
-- **No em dash.** `scripts/validate-surfaces.mjs` refuses this directory on it,
-  the same way it refuses the contracts and the rendered adapters.
+- **No em dash in authored canon (2026-10-17).** This supersedes the earlier
+  directory-wide formatting statement because the directory now also holds
+  inert source data. `scripts/repository-brain.mjs` independently reconstructs
+  source records from the observation ledger; matching the entire content hash
+  is required. A self-declared status is insufficient. `scripts/validate-surfaces.mjs` keeps accepted knowledge,
+  contracts and rendered adapters subject to the authored-text check.
+  `scripts/test-knowledge-history.mjs` verifies both the distinction and the
+  unchanged byte-level history guard.
 
 ## Changing a rule
 
@@ -119,6 +135,27 @@ are the rules nobody has ever had to defend.
    entry's `status` to `superseded`.
 3. `node scripts/validate-surfaces.mjs` refuses the change until both are true.
 
-Regenerate the whole ledger with `node scripts/brain-rules.mjs --backfill`. It
-keeps every existing entry whose text has not changed, so a regeneration never
-silently rewrites provenance you already recorded.
+Bootstrap the canon index, `rules.yaml`, with `node scripts/brain-rules.mjs
+--backfill`. An existing valid index remains byte-for-byte unchanged; a changed
+index is refused. This replaces the earlier regeneration behaviour that could
+reset changed entries to founding provenance. `scripts/test-brain-rules.mjs`
+exercises the actual command and proves it cannot rewrite an existing index.
+Revise existing entries with `--revise --kind proposal --ref <proposal>` to
+preserve prior provenance in history. Existing source records retain their
+recorded meaning; this repair does not relabel them.
+
+A read-only audit of 23 committed index revisions found zero existing-entry
+resets to founding provenance. `state/repository-administration/provenance-audit.json`
+pins the inspected head, source blob, every ledger commit, comparison method
+and limits. Unknown pre-ledger rationale remains unknown; the audit does not
+invent a reason for a founding record.
+
+The separate learning ledger, `knowledge.jsonl`, preserves every prior byte and
+appends records. `scripts/validate-knowledge-history.mjs` checks the exact prefix
+against the PR or push base and before automated commits and rebased pushes in
+`.github/workflows/repository-administration.yml`.
+
+The publisher stages only its five declared runtime outputs. This maintenance follows
+the owner-approved `docs/proposals/2026-10-17-brain-repository-administration.md`.
+`scripts/test-repository-workflow.mjs` protects intake-triggered learning while
+preventing a derived report from restarting publication through the steward.

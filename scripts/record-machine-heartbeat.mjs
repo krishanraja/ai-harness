@@ -3,6 +3,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { REASONS } from './heartbeat-reasons.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -15,7 +16,8 @@ const clock = flag('--clock')
 const status = flag('--status')
 const release = flag('--release')
 const output = resolve(flag('--out') || resolve(HARNESS, 'state/heartbeats.json'))
-const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', 'openclaw-vps'])
+// session-miner-lorimer: the opt-in weekly session miner (Ruling, Krish, 2026-10-14).
+const allowedClocks = new Set(['harness-sync-surface', 'harness-sync-lorimer', 'openclaw-vps', 'session-miner-lorimer'])
 
 // Clocks that ship a harness release, and so must name the release they are
 // reporting for. The OpenClaw VPS is not a harness install: it reports that a
@@ -44,7 +46,11 @@ if (!new Set(['ok', 'blocked', 'degraded']).has(status)) {
   console.error('heartbeat: status must be ok, blocked or degraded.')
   process.exit(2)
 }
-if (releaseClocks.has(clock) && !/^v\d{4}\.\d{2}\.\d{2}\.\d+$/.test(release || '')) {
+// A run that failed before it could read the release still has to be heard.
+// Rejecting `unknown` here is how a sync that died early never reached
+// heartbeats.json at all, so its failure looked exactly like silence.
+const unknownButFailing = release === 'unknown' && status !== 'ok'
+if (releaseClocks.has(clock) && !unknownButFailing && !/^v\d{4}\.\d{2}\.\d{2}\.\d+$/.test(release || '')) {
   console.error('heartbeat: release must be a vYYYY.MM.DD.N identifier.')
   process.exit(2)
 }
@@ -63,6 +69,60 @@ const entry = {
   status,
 }
 if (releaseClocks.has(clock)) entry.release = release
+
+// A clock that is not ok says why (one word from scripts/heartbeat-reasons.mjs,
+// never free text), since when, and for how many reported runs in a row, so one
+// bad night (a dropped connection) can be told apart from an install that will
+// never finish on its own. Counted in runs, not hours: a PC that is simply off
+// the next night has not failed twice. An entry from before failing_runs
+// existed counts as one run, because it was one.
+//
+// Nothing is edited in place. `reasons` lists every word the span has carried,
+// in order, each with when it was first sent; a new word is appended, never
+// written over the last. `reason` is only the latest run's own word. When the
+// clock reports ok again the span is appended to `outages` with its close.
+// Both lists are bounded (MAX_KEPT) so the public file cannot grow without
+// limit; anything older stays in this file's git history, one commit per beat.
+//
+// Everything read back from the previous entry is checked first (a date is a
+// date, a count a whole number, a word a known word); a value that fails is
+// dropped and the span starts afresh, so a damaged entry cannot inflate a count
+// that reaches Krish.
+const MAX_KEPT = 10
+const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
+const iso = (v) => (typeof v === 'string' && ISO.test(v) ? v : null)
+const runs = (v) => (Number.isInteger(v) && v > 0 ? v : null)
+const word = (v) => (typeof v === 'string' && Object.hasOwn(REASONS, v) ? v : null)
+const spans = (list) => (Array.isArray(list) ? list : [])
+  .filter((x) => x && word(x.reason) && iso(x.since))
+  .map((x) => ({ reason: x.reason, since: x.since }))
+const closed = (list) => (Array.isArray(list) ? list : [])
+  .filter((x) => x && iso(x.since) && iso(x.until) && runs(x.runs))
+  .map((x) => ({ since: x.since, until: x.until, runs: x.runs, reasons: spans(x.reasons) }))
+
+const previous = state[clock]
+const failing = Boolean(previous && previous.status && previous.status !== 'ok')
+// The words the open span has carried so far. An entry from before `reasons`
+// existed contributes its one word, dated from its own run.
+const carried = !failing ? [] : spans(previous.reasons).length ? spans(previous.reasons)
+  : word(previous.reason) && iso(previous.last_run) ? [{ reason: previous.reason, since: previous.last_run }] : []
+const openedAt = failing ? iso(previous.failing_since) || iso(previous.last_run) : null
+if (status !== 'ok') {
+  const sent = flag('--reason')
+  if (sent && sent !== 'null') entry.reason = Object.hasOwn(REASONS, sent) ? sent : 'unrecognised'
+  entry.failing_since = openedAt || entry.last_run
+  entry.failing_runs = openedAt ? (runs(previous.failing_runs) || 1) + 1 : 1
+  const reasons = openedAt ? carried : []
+  entry.reasons = entry.reason && reasons.at(-1)?.reason !== entry.reason
+    ? [...reasons, { reason: entry.reason, since: entry.last_run }].slice(-MAX_KEPT)
+    : reasons
+  const kept = closed(previous?.outages)
+  if (kept.length) entry.outages = kept
+} else {
+  const kept = closed(previous?.outages)
+  if (openedAt) kept.push({ since: openedAt, until: entry.last_run, runs: runs(previous.failing_runs) || 1, reasons: carried })
+  if (kept.length) entry.outages = kept.slice(-MAX_KEPT)
+}
 
 // Recorded so the spend trend is visible in the brain without anyone reaching
 // into the host. A count that falls without a commit explaining it, or a job

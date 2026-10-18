@@ -1,21 +1,24 @@
 # AGENTS.md
 
-Entry file for coding agents working in ai-harness. Codex reads this file natively;
-Claude Code and Cursor are routed here by their own rules.
+<!-- north-star:start -->
+## North Star: read it first, every session
 
-**Read `CURRENT.md` first.** It is deterministically rendered from the repository's
-machine-owned release, deployment, heartbeat, and canary evidence. Then read `NOW.md`
-for the longer product narrative and recent chronology. `NOW.md` is validated on every
-push and reconciled nightly, so it may lag operational evidence by up to a day.
-Chronology lives in `docs/history/LOG.md`.
+This repository's North Star is [`docs/NORTH_STAR.md`](docs/NORTH_STAR.md): an ambition Krish set that is not reached yet.
 
-This repository's own rules and deeper state: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`. They outrank the
-canon below on anything specific to this repository.
+- Read it before any work, every session.
+- Before you start, say which part of it the task moves. If it moves nothing, say so first and let Krish decide.
+- Prefer the work that moves it furthest, and close by noting what moved.
+- Only Krish changes it.
+<!-- north-star:end -->
 
-<!-- krish-canon:start release=v2026.10.05.1 sha=f58dc8ad59dd rendered=2026-10-06 -->
+Read `CURRENT.md` first, then read `NOW.md`.
+
+Contracts: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`.
+
+<!-- krish-canon:start release=v2026.10.15.1 sha=48e09ddec167 rendered=2026-10-15 -->
 ## Krish canon
 
-Rendered from `krishanraja/ai-harness` at release v2026.10.05.1. Nothing inside these
+Rendered from `krishanraja/ai-harness` at release v2026.10.15.1. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
 never silently overwritten, and never lost. Everything outside the markers belongs to
 this repository and is never read or rewritten by the harness.
@@ -63,7 +66,7 @@ Heartside, Full Time, Legibility, CTRL and Pulse roll into it. One queue: the mi
 leads, and product work is ordered beneath it by the live priority ladder. Profile,
 decision rules and standing rulings: `skills/krish-principles/references/who-krish-is.md`
 in the harness. What he works on is live, never copied here; read it from Control Center at
-https://raw.githubusercontent.com/krishanraja/control-center/main/docs/KRISH.md (and `docs/PORTFOLIO.md` beside it).
+https://controlcenter.krishraja.com/api/canon/KRISH.md (and `PORTFOLIO.md` beside it).
 
 **Where the rest lives.** The operating contract, the routing contract and the
 29 curated skills are in `krishanraja/ai-harness`. On a machine with the
@@ -72,3 +75,11 @@ authoritative for reading; the repository is authoritative for what is correct.
 
 **This repository's own rules:** `AGENTS.md`, `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`
 <!-- krish-canon:end -->
+
+<!-- krish-repo-admin:start brain=155b79828fb7 sha=80cd8764df8a -->
+## Administer this repository
+
+Use `docs/HARNESS_CONTEXT.md` for the owning workflow, source of truth and checks. Preserve the goal and accepted decisions when a revision changes one part; explain material trade-offs. Verify the downstream result. Record corrections and observed outcomes through the existing capture path. Experimental results retain their conditions; inferred requirements remain proposals.
+
+Record each Krish ruling once per session in the acting commit. For `record_harness_observation` use `claude-code-web` when `CLAUDE_CODE_REMOTE` is true; otherwise `claude-code`.
+<!-- krish-repo-admin:end -->

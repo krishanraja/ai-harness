@@ -3,16 +3,16 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-09-24**.
+Rendered from registry reconciliation date **2026-10-07**.
 
 ## Release authority
 
-- Latest approved release: **v2026.10.06.1** (harness-v2026.10.06.1)
-- Immutable and published: **yes**, 2026-10-06T11:08:52Z
-- Release source commit: `88a059daac42a9f3753e960a82e8054cafebd075`
-- Manifest SHA-256: `CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.1
-- Current deployment verdict: **current-on-lorimer-and-cloud-surface-stale-claude-canary-failure-codex-partial-cursor-manual**
+- Latest approved release: **v2026.10.17.1** (harness-v2026.10.17.1)
+- Immutable and published: **yes**, 2026-10-17T08:14:51Z
+- Release source commit: `e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28`
+- Manifest SHA-256: `E03AB1F2EC9A230C4ADD586C8BF22874AFB37E587233E42C2AF578B52A8D1D03`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.17.1
+- Current deployment verdict: **current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
 
@@ -20,21 +20,21 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.09.08.2 | 29/29 exact | stale-superseded-release-installed-hash-verified-and-canaried-video-engine-reachable |
-| cursor-primary | v2026.09.24.3 | 29/29 exact | installed-hash-verified-manual-canary-required |
-| claude-code-user | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-failed-one-stochastic-strategy-route |
-| codex-current | v2026.09.24.3 | 29/29 exact | stale-behind-v2026.10.06.1-awaiting-governed-install-was-v2026.09.24.3-installed-hash-verified-canary-partial-no-blocking-failures |
-| claude-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.06.1-awaiting-krish-supervised-upload-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
-| perplexity-cloud | v2026.09.24.3 | cloud inventory only | stale-behind-v2026.10.06.1-awaiting-krish-supervised-replacement-was-v2026.09.24.3-exact-canonical-inventory-byte-parity-unavailable |
+| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| cursor-primary | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| claude-code-user | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| codex-current | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.17.1 |
+| perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.17.1 |
+| codex-cloud | v2026.10.06.3 | cloud inventory only | awaiting-environment-refresh-for-v2026.10.17.1 |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
 ## Behavioral evidence
 
-- **claude-code-user: failed.** [Evidence](state/canaries/v2026.09.24.3-claude-code-user.json).
-  - strategy-trigger-001: expected strategy-brief to fire, observed wrong-skill.
-- **codex-current: partial.** [Evidence](state/canaries/v2026.09.24.3-codex-current.json).
-- **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
+- **codex-surface-07a67cda9f99: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json).
+- **claude-code-user: partial.** [Evidence](state/canaries/v2026.10.06.3-claude-code-user.json).
+- **codex-current: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-current.json).
 
 ## Machine clocks
 

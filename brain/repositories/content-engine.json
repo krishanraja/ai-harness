@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "repository": "content-engine",
+  "enabled": true,
+  "families": [
+    "repository-administration",
+    "content"
+  ],
+  "source_revision": "8b016abce2e61660b7a723f8fb387a975ac1d9b8",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 232887,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/CAROUSEL_ENGINE_STATE.md",
+      "role": "state",
+      "label": "CAROUSEL ENGINE STATE"
+    },
+    {
+      "path": "WORKBENCH.md",
+      "role": "state",
+      "label": "WORKBENCH"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "NORTH STAR"
+    },
+    {
+      "path": "docs/plans/2026-10-14-handoff.md",
+      "role": "orientation",
+      "label": "2026 10 14 handoff"
+    },
+    {
+      "path": "docs/CONTENT_ENGINE.md",
+      "role": "orientation",
+      "label": "CONTENT ENGINE"
+    },
+    {
+      "path": "docs/STUDIO.md",
+      "role": "orientation",
+      "label": "STUDIO"
+    },
+    {
+      "path": "docs/ENGINE_SESSION.md",
+      "role": "workflow",
+      "label": "ENGINE SESSION"
+    },
+    {
+      "path": "docs/SYSTEM_MAP.md",
+      "role": "orientation",
+      "label": "SYSTEM MAP"
+    },
+    {
+      "path": ".agents/skills/make-piece/SKILL.md",
+      "role": "workflow",
+      "label": "SKILL"
+    },
+    {
+      "path": ".agents/skills/produce-video/SKILL.md",
+      "role": "workflow",
+      "label": "SKILL"
+    },
+    {
+      "path": ".agents/skills/plan-week/SKILL.md",
+      "role": "workflow",
+      "label": "SKILL"
+    },
+    {
+      "path": "config/title-verdicts.json",
+      "role": "learning",
+      "label": "title verdicts"
+    },
+    {
+      "path": "config/failures.json",
+      "role": "learning",
+      "label": "failures"
+    },
+    {
+      "path": "config/boards.json",
+      "role": "orientation",
+      "label": "boards"
+    },
+    {
+      "path": "scripts/check_failures.py",
+      "role": "learning",
+      "label": "check failures"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "content",
+      "label": "Ideation, drafting, iteration and publication preparation",
+      "read": [
+        "docs/NORTH_STAR.md",
+        "docs/CONTENT_ENGINE.md",
+        ".agents/skills/make-piece/SKILL.md",
+        "config/title-verdicts.json",
+        "config/failures.json",
+        "WORKBENCH.md"
+      ],
+      "checks": [
+        "python3 scripts/check_failures.py",
+        "npm run verify"
+      ]
+    },
+    {
+      "id": "production",
+      "label": "Tracked Studio and media production",
+      "read": [
+        "docs/STUDIO.md",
+        "docs/ENGINE_SESSION.md",
+        ".agents/skills/produce-video/SKILL.md"
+      ],
+      "checks": [
+        "npm run verify"
+      ]
+    },
+    {
+      "id": "board",
+      "label": "Weekly decisions, all account links and feedback continuity",
+      "read": [
+        ".agents/skills/plan-week/SKILL.md",
+        "config/boards.json",
+        "WORKBENCH.md"
+      ],
+      "checks": [
+        "python3 scripts/check_failures.py"
+      ]
+    }
+  ],
+  "bootstrap_notes": [
+    "Before any work run `python3 scripts/check_failures.py`. At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
+  ]
+}

@@ -158,6 +158,33 @@ else {
     }
 }
 
+# Perplexity imposes a stricter 1,500-character account-instructions limit.
+# Its dedicated transport must retain the complete active skill-name routing
+# floor and the core execution gates without referring to local files.
+$perplexityCloudAdapter = Join-Path (Join-Path (Join-Path $Root 'adapters') 'cloud') 'perplexity-account-instructions.md'
+if (-not (Test-Path -LiteralPath $perplexityCloudAdapter -PathType Leaf)) {
+    Add-Failure 'Missing Perplexity cloud account adapter: adapters/cloud/perplexity-account-instructions.md'
+}
+else {
+    $perplexityCloudRaw = [IO.File]::ReadAllText($perplexityCloudAdapter)
+    foreach ($required in @('krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief')) {
+        if ($perplexityCloudRaw -notmatch [regex]::Escape($required)) { Add-Failure "Perplexity cloud account adapter does not route $required." }
+    }
+    if ($perplexityCloudRaw -match '(?i)[A-Z]:\\|@C:|\.md`|contract/') { Add-Failure 'Perplexity cloud account adapter references a file path, which the account cannot load.' }
+    if ($perplexityCloudRaw.Length -gt 1500) { Add-Failure "Perplexity cloud account adapter is $($perplexityCloudRaw.Length) characters; keep it at or under 1500." }
+    $registryRaw = [IO.File]::ReadAllText((Join-Path (Join-Path $Root 'state') 'skill-registry.yaml'))
+    $activeBlock = [regex]::Match($registryRaw, '(?m)^production_active:\r?\n((?:  - .+\r?\n)+)')
+    if (-not $activeBlock.Success) { Add-Failure 'Cannot read production_active from state/skill-registry.yaml.' }
+    else {
+        foreach ($activeLine in ($activeBlock.Groups[1].Value -split '\r?\n' | Where-Object { $_.Trim() })) {
+            $activeName = $activeLine.Trim().Substring(2).Trim()
+            if ($perplexityCloudRaw -notmatch ('(?<![a-z-])' + [regex]::Escape($activeName) + '(?![a-z-])')) {
+                Add-Failure "Perplexity cloud account adapter does not name production skill $activeName."
+            }
+        }
+    }
+}
+
 $skillsRoot = Join-Path $Root 'skills'
 $rootItem = Get-Item -LiteralPath $Root
 $manifests = @(Get-ChildItem -LiteralPath $skillsRoot -Recurse -File -Filter 'SKILL.md')
