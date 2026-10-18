@@ -177,6 +177,10 @@ try {
   })
   await test('workflow is trusted-main dispatch-only with no model fleet credential or uploads', async () => {
     const source = readFileSync(join(ROOT, '.github/workflows/docs-steward-central.yml'), 'utf8')
+    // GitHub rejects runner context in jobs.<id>.env before allocating a runner.
+    const jobEnv = source.match(/^    env:\n((?:^      .*(?:\n|$))*)/m)?.[1] || ''
+    assert.doesNotMatch(jobEnv, /\$\{\{\s*runner\./)
+    assert.match(source, /DOCS_WORK_DIR=\$RUNNER_TEMP\/harness-docs-central.*GITHUB_ENV/)
     assert.match(source, /workflow_dispatch:/)
     assert.doesNotMatch(source, /\bschedule:|\bworkflow_call:|\bpush:|upload-artifact|claude-code-action/)
     assert.match(source, /default: true/)
