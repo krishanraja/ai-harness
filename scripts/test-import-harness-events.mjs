@@ -43,6 +43,12 @@ const claudeAi = toObservation({ ...event, event_id: 'claude-ai:chat:01J1', surf
 test('accepts claude.ai and the preference kind', claudeAi.class === 'preference' && claudeAi.quote.startsWith('[claude-ai]') && claudeAi.producer === 'agent')
 const mined = toObservation({ ...event, event_id: 'session-miner:claude-code:abc123', surface: 'claude-code', kind: 'friction' }, '2026-10-14')
 test('a session-miner event is labelled by its producer', mined.producer === 'session-miner' && mined.class === 'friction')
+const fromAccount = toObservation({ ...event, emitter_id: 'connector-claude-ai-20261015074610' }, '2026-10-18')
+test('records the source account a lesson came through', fromAccount.source_account === 'connector-claude-ai-20261015074610')
+test('leaves source_account off when the export does not carry one', !('source_account' in row))
+let rejectedEmitter = false
+try { toObservation({ ...event, emitter_id: 'Not An Id' }, '2026-10-18') } catch (error) { rejectedEmitter = error.message === 'invalid_emitter_id' }
+test('rejects a malformed source account', rejectedEmitter)
 let rejectedSurface = false
 try { toObservation({ ...event, surface: 'myspace' }, '2026-10-14') } catch (error) { rejectedSurface = error.message === 'invalid_surface' }
 test('still rejects an unknown surface', rejectedSurface)

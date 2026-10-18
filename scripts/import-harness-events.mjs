@@ -27,6 +27,9 @@ const PRODUCERS = [['session-miner:', 'session-miner']]
 const OUTCOMES = new Set(['corrected', 'failed', 'succeeded', 'unknown'])
 const SEVERITIES = new Set(['low', 'medium', 'high', 'blocking'])
 const CONFIDENCES = new Set(['low', 'medium', 'high'])
+// Control Center's connector or machine identity for the lesson (harness_emitter_clients.emitter_id).
+// A Claude or ChatGPT account connects through its own connector key, so this names the account.
+const EMITTER_ID = /^[a-z0-9][a-z0-9._:-]{2,63}$/
 const PRIVATE_SHAPE = /\b[A-Z]:\\(?:Users|Documents and Settings)\\|\/(?:Users|home)\/[^\s/]+\/|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
 
 export function observationId(eventId) {
@@ -59,6 +62,7 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
   if (!SEVERITIES.has(event.severity)) throw new Error('invalid_severity')
   if (!CONFIDENCES.has(event.confidence)) throw new Error('invalid_confidence')
   if (!/^[a-f0-9]{64}$/.test(event.payload_sha256)) throw new Error('invalid_payload_sha256')
+  if (event.emitter_id != null && !EMITTER_ID.test(String(event.emitter_id))) throw new Error('invalid_emitter_id')
   if (PRIVATE_SHAPE.test(`${event.summary}\n${event.evidence_ref}\n${event.related_skill_or_rule || ''}`)) throw new Error('private_shape_rejected')
   const dated = String(event.occurred_at).slice(0, 10)
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dated)) throw new Error('invalid_occurred_at')
@@ -80,6 +84,7 @@ export function toObservation(event, seenAt, { requireInbox = true } = {}) {
     confidence: event.confidence,
     payload_sha256: event.payload_sha256,
     producer: (PRODUCERS.find(([prefix]) => String(event.event_id).startsWith(prefix)) || [null, 'agent'])[1],
+    ...(event.emitter_id != null ? { source_account: event.emitter_id } : {}),
     ...(event.schema_version === 2 ? { schema_version: 2, episode_id: event.episode_id, knowledge_type: event.knowledge_type, episode: event.episode, source_revision: event.source_revision || null,...(event.measurement?{measurement:event.measurement,occurred_at:event.occurred_at}:{}) } : {}),
   }
 }
