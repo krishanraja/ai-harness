@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "approval_ref": null,
+  "target_allowlist": [
+    "krishanraja/ai-harness",
+    "krishanraja/control-center",
+    "krishanraja/mindmake-ctrl",
+    "krishanraja/fractionl-circle",
+    "krishanraja/fractionl-pulse",
+    "krishanraja/full-time",
+    "krishanraja/content-engine",
+    "krishanraja/contentarchives",
+    "krishanraja/AEO-Engine",
+    "krishanraja/makeyourmindup"
+  ],
+  "entries": []
+}

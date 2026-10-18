@@ -1,0 +1,47 @@
+name: Harness watchdog
+
+# Prepared observer only. The manifest proposes "17 * * * *" after explicit
+# activation. Every hour has the same minute in UTC and Europe/London, including
+# daylight-saving changes. A manual run is not evidence of scheduled delivery.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: harness-independent-watchdog
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: Verify deterministic observer regressions
+        run: node scripts/test-harness-watchdog.mjs
+      - name: Read independent worker and source evidence
+        id: observation
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/harness-watchdog.mjs --out .watchdog/status.json
+      - name: Retain only the sanitized status report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: harness-watchdog-status-${{ github.run_attempt }}
+          path: .watchdog/status.json
+          retention-days: 1
+          if-no-files-found: error
+      - name: Keep unavailable or degraded evidence visible
+        if: steps.observation.outcome != 'success'
+        run: exit 1

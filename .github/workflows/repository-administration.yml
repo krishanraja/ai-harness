@@ -21,6 +21,8 @@ on:
         description: Draft scoped learning proposals using existing AI access
 permissions:
   contents: read
+env:
+  HARNESS_INFERENCE_MODE: ${{ vars.HARNESS_INFERENCE_MODE }}
 concurrency:
   group: brain-administration-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
   cancel-in-progress: false
@@ -47,6 +49,7 @@ jobs:
           node scripts/test-repository-canary.mjs
           node scripts/test-repository-reviews.mjs
           node scripts/test-repository-workflow.mjs
+          node scripts/test-inference-integration.mjs
           node scripts/test-knowledge-history.mjs
           node scripts/validate-repository-brain.mjs
       - name: Historical knowledge bytes remain immutable
@@ -128,12 +131,15 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
+      - name: Validate the explicit inference route
+        run: node --input-type=module -e "import { boundedInference } from './scripts/lib/inference-mode.mjs'; boundedInference()"
       - name: Prepare pinned pilot fixture
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
         run: node scripts/repository-canary.mjs --prepare --repo '${{ matrix.repository }}' --kind '${{ matrix.kind }}'
       - name: Start a fresh fixture context
         id: model
+        if: vars.HARNESS_INFERENCE_MODE == '' || vars.HARNESS_INFERENCE_MODE == 'legacy'
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -145,6 +151,14 @@ jobs:
             --max-turns 10
             --allowedTools "Read(./.canary/CLAUDE.md),Read(./.canary/AGENTS.md),Read(./.canary/docs/HARNESS_CONTEXT.md),Read(./.canary/task.json)"
             --disallowedTools "Bash,WebFetch,WebSearch,Write,Edit"
+      - name: Exercise the bounded API fixture with observed reads
+        if: vars.HARNESS_INFERENCE_MODE == 'bounded-api'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
+        run: |
+          node scripts/repository-api-context.mjs
+          cat .canary/receipt.json >> "$GITHUB_STEP_SUMMARY"
       - name: Check behaviour and observed context reads
         if: always() && steps.model.outputs.execution_file != ''
         env:
@@ -157,6 +171,7 @@ jobs:
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
         run: |
           node scripts/repository-canary.mjs --private-title-replay
           cat .canary/native-title-replay-receipt.json >> "$GITHUB_STEP_SUMMARY"
@@ -180,13 +195,15 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
+      - name: Validate the explicit inference route
+        run: node --input-type=module -e "import { boundedInference } from './scripts/lib/inference-mode.mjs'; boundedInference()"
       - name: Build the scoped evidence brief
         id: brief
         run: |
           node scripts/repository-reviews.mjs --brief
           node -e "const f=require('./repository-candidates.json');require('node:fs').appendFileSync(process.env.GITHUB_OUTPUT,'any='+Boolean(f.length)+'\n')"
       - name: Interpret earned repository evidence
-        if: steps.brief.outputs.any == 'true'
+        if: steps.brief.outputs.any == 'true' && (vars.HARNESS_INFERENCE_MODE == '' || vars.HARNESS_INFERENCE_MODE == 'legacy')
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -201,6 +218,12 @@ jobs:
             --max-turns 12
             --allowedTools "Read,Glob,Grep,Write(repository-proposals/**),Edit(repository-proposals/**)"
             --disallowedTools "Bash,WebFetch,WebSearch"
+      - name: Interpret earned evidence through the shared API boundary
+        if: steps.brief.outputs.any == 'true' && vars.HARNESS_INFERENCE_MODE == 'bounded-api'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
+        run: node scripts/repository-api-drafts.mjs
       - name: Guard proposals and apply the shared decision budget
         if: steps.brief.outputs.any == 'true'
         env:

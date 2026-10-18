@@ -58,6 +58,10 @@ on:
 permissions:
   contents: read
 
+env:
+  # Explicit reviewed cutover; an unset value preserves the current route.
+  HARNESS_INFERENCE_MODE: ${{ vars.HARNESS_INFERENCE_MODE }}
+
 concurrency:
   group: harness-steward-${{ github.ref }}
   cancel-in-progress: false
@@ -143,6 +147,18 @@ jobs:
       # commits, and that an unmeasured judge run can never read as a pass.
       - name: The steward workflow keeps its own guarantees
         run: node scripts/test-steward-workflow.mjs
+
+      - name: Inference accounting, credential isolation and monitoring regressions
+        run: |
+          node --input-type=module -e "import { boundedInference } from './scripts/lib/inference-mode.mjs'; boundedInference()"
+          node scripts/test-harness-api.mjs
+          node scripts/test-docs-steward-workflow.mjs
+          node scripts/test-draft-harness-changes.mjs
+          node scripts/test-inference-integration.mjs
+          node scripts/steward/test-central-draft.mjs
+          node scripts/test-harness-watchdog.mjs
+          node scripts/test-harness-incidents.mjs
+          node scripts/steward/test-run-central.mjs
 
       - name: The context budget measures what it claims to
         run: node scripts/test-context-budget.mjs
@@ -462,8 +478,11 @@ jobs:
 
       # Model in the middle. It writes packages under changes/ or declines; it
       # cannot run a command, reach the network, or write anywhere else.
+      - name: Validate the explicit inference route
+        run: node --input-type=module -e "import { boundedInference } from './scripts/lib/inference-mode.mjs'; boundedInference()"
+
       - name: Draft change packages
-        if: steps.earned.outputs.any == 'true' && steps.process.outputs.model_slots != '0'
+        if: steps.earned.outputs.any == 'true' && steps.process.outputs.model_slots != '0' && (vars.HARNESS_INFERENCE_MODE == '' || vars.HARNESS_INFERENCE_MODE == 'legacy')
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -481,6 +500,13 @@ jobs:
             --max-turns 60
             --allowedTools "Read,Glob,Grep,Write(changes/**),Edit(changes/**)"
             --disallowedTools "Bash,WebFetch,WebSearch"
+
+      - name: Draft change packages through the shared API boundary
+        if: steps.earned.outputs.any == 'true' && steps.process.outputs.model_slots != '0' && vars.HARNESS_INFERENCE_MODE == 'bounded-api'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
+        run: node scripts/draft-harness-changes.mjs --max "${{ steps.process.outputs.model_slots }}"
 
       # Deterministic out, and the only step that can write. Each package is
       # guarded, given provenance, validated, committed with a Harness-Steward
@@ -544,9 +570,7 @@ jobs:
       - name: Tidy steward pull requests and decide the digest
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
-          CONTENT_ENGINE_KEY: ${{ secrets.CONTENT_ENGINE_KEY }}
-          CONTENT_ENGINE_URL: ${{ vars.CONTENT_ENGINE_URL }}
-        run: node scripts/steward-housekeeping.mjs
+        run: node scripts/steward-housekeeping.mjs --prepare-digest
 
       - name: Commit the digest
         run: |
@@ -559,6 +583,25 @@ jobs:
           git config user.email "noreply@anthropic.com"
           git add state/digest
           git commit -m "chore(digest): $(date -u +%G-W%V)" -m "Written by scripts/digest.mjs. One item on Krish's list, nothing else."
+          git pull --rebase --quiet origin main
+          git push origin HEAD:main
+
+      - name: Deliver the committed pending digest and verify readback
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONTENT_ENGINE_KEY: ${{ secrets.CONTENT_ENGINE_KEY }}
+          CONTENT_ENGINE_URL: ${{ vars.CONTENT_ENGINE_URL }}
+        run: node scripts/digest.mjs --deliver-pending
+
+      - name: Persist the delivery receipt even when delivery failed
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- state/digest)" ]; then exit 0; fi
+          git config user.name "Krish Raja"
+          git config user.email "hello@krishraja.com"
+          git add state/digest
+          git commit -m "chore(digest): persist verified delivery state"
           git pull --rebase --quiet origin main
           git push origin HEAD:main
 
@@ -613,11 +656,15 @@ jobs:
             echo "base=$BASE" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Validate the explicit inference route
+        run: node --input-type=module -e "import { boundedInference } from './scripts/lib/inference-mode.mjs'; boundedInference()"
+
       - name: Run both benches
         id: run
         if: steps.scope.outputs.touched == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
         run: |
           set -uo pipefail
           if [ -z "${ANTHROPIC_API_KEY:-}" ]; then

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "approval_ref": null,
+  "timezone": "Europe/London",
+  "monthly_limit_usd": null,
+  "review_reserve_usd": null,
+  "purposes": ["review", "proposals", "docs", "extraction", "replay", "context"],
+  "models": {},
+  "default_model": null,
+  "limits": {
+    "max_request_bytes": 80000,
+    "max_output_tokens": 16000,
+    "max_attempts": 2,
+    "timeout_ms": 180000,
+    "cas_attempts": 8
+  },
+  "ledger": {
+    "repository": "krishanraja/ai-harness",
+    "ref": "harness/inference-budget",
+    "path": "state/inference-budget.jsonl"
+  }
+}

@@ -5,7 +5,10 @@
  * when it was measured. No network: the board call is stubbed.
  */
 
-import { buildDigest, boardItem, sendBoard } from './digest.mjs'
+import { buildDigest, boardItem, sendBoard, writeDigest, pendingDigest, lastSent, deliverPending, verifyPublishedPending } from './digest.mjs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { join } from 'node:path'
+import { tmpdir } from 'node:os'
 import { decide, silentClocks, silentBlocker, blockedClocks, blockedBlocker, PC_REPAIR } from './steward-housekeeping.mjs'
 import { loadPolicy } from './propose.mjs'
 
@@ -36,7 +39,11 @@ const item = boardItem(one, { date: '2026-10-14' })
 test('the board item passes the Control Center gate shape', item.lane === 'on_you' && item.closes_on === 'his_word' && /^https:\/\//.test(item.link) && item.only_you === 'permission' && /^[a-z0-9][a-z0-9-]{1,79}$/.test(item.id))
 
 let sentBody = null
-const fakeFetch = async (url, init) => { sentBody = { url, init }; return new Response('{"ok":true}', { status: 200 }) }
+const fakeFetch = async (url, init) => {
+  if (init.method === 'GET') return new Response(JSON.stringify({ ok: true, items: [item] }))
+  sentBody = { url, init }
+  return new Response(JSON.stringify({ ok: true, written: [item.id] }))
+}
 const r = await sendBoard(item, { key: 'fixture-key', fetchImpl: fakeFetch })
 test('the board write is an upsert from claude_code with a bearer key', r.sent && JSON.parse(sentBody.init.body).action === 'upsert_items' && JSON.parse(sentBody.init.body).client === 'claude_code' && sentBody.init.headers.authorization === 'Bearer fixture-key' && sentBody.url.endsWith('/api/workbench'))
 test('with no key the board is skipped and says why', (await sendBoard(item, { key: '' })).sent === false)
@@ -45,6 +52,54 @@ test('an item Krish already closed is not an error', closed.sent === false && /c
 let threw = false
 try { await sendBoard(item, { key: 'k', fetchImpl: async () => new Response('nope', { status: 500 }) }) } catch { threw = true }
 test('a failed board write is loud', threw)
+
+for (const [label, response] of [
+  ['a success page instead of JSON', new Response('<html>secret fixture</html>')],
+  ['a success body without exact acknowledgement', new Response('{"ok":true}')],
+  ['a string pretending to be the written id list', new Response(JSON.stringify({ ok: true, written: item.id }))],
+]) {
+  let refused = false
+  try { await sendBoard(item, { key: 'fixture-key', fetchImpl: async () => response }) } catch { refused = true }
+  test(`${label} never proves delivery`, refused)
+}
+let mismatchRefused = false
+try { await sendBoard(item, { key: 'fixture-key', fetchImpl: async (_url, init) => new Response(JSON.stringify(init.method === 'POST' ? { ok: true, written: [item.id] } : { ok: true, items: [{ ...item, area: 'wrong' }] })) }) } catch { mismatchRefused = true }
+test('readback checks every item-owned field', mismatchRefused)
+const digestRoot = mkdtempSync(join(tmpdir(), 'harness-digest-'))
+try {
+  writeDigest(one, digestRoot)
+  const pending = pendingDigest(digestRoot)
+  test('preparation is pending and never a sent receipt', pending.delivery.status === 'pending' && lastSent(digestRoot) === null)
+  let boardCalls = 0
+  try { await deliverPending({ root: digestRoot, verifyDurable: async () => false, key: 'fixture-key', fetchImpl: async () => { boardCalls++; return new Response('{}') } }) } catch {}
+  test('an uncommitted pending item cannot be sent', boardCalls === 0 && pendingDigest(digestRoot).delivery.status === 'pending')
+  const publishedFetch = async () => new Response(JSON.stringify({ encoding: 'base64', content: Buffer.from(JSON.stringify(pending)).toString('base64') }))
+  test('durability requires authoritative main readback of the exact pending payload', await verifyPublishedPending(pending, { token: 'fixture-key', fetchImpl: publishedFetch }))
+  let durableMismatch = false
+  try { await verifyPublishedPending({ ...pending, date: 'wrong' }, { token: 'fixture-key', fetchImpl: publishedFetch }) } catch { durableMismatch = true }
+  test('a different main payload cannot authorize delivery', durableMismatch)
+  const payloads = []
+  const delayed = async (_url, init) => {
+    payloads.push(init.body)
+    return new Response('{"ok":false}', { status: 503 })
+  }
+  try { await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: delayed }) } catch {}
+  test('failed delivery keeps the exact durable pending item for retry', JSON.stringify(pendingDigest(digestRoot)) === JSON.stringify(pending) && lastSent(digestRoot) === null)
+  const good = async (_url, init) => {
+    if (init.method === 'POST') { payloads.push(init.body); return new Response(JSON.stringify({ ok: true, written: [pending.delivery.item.id] })) }
+    return new Response(JSON.stringify({ ok: true, items: [pending.delivery.item] }))
+  }
+  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: good })
+  test('retry preserves id and payload, then records verified delivery', payloads.length === 2 && payloads[0] === payloads[1] && pendingDigest(digestRoot) === null && lastSent(digestRoot).delivery.readback === true)
+  const repeat = await deliverPending({ root: digestRoot, verifyDurable: async () => { throw new Error('must not run') } })
+  test('delivered item is not sent twice', repeat.reason === 'no_pending_digest')
+  writeDigest(one, digestRoot)
+  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: async () => new Response('{"error":"krish_closed_it"}', { status: 409 }) })
+  test('an owner-closed item stays closed without repeated writes', lastSent(digestRoot).delivery.status === 'closed-by-owner' && pendingDigest(digestRoot) === null)
+  const workflow = readFileSync('.github/workflows/harness-steward.yml', 'utf8')
+  test('workflow commits pending state before the only delivery step', workflow.indexOf('name: Commit the digest') < workflow.indexOf('node scripts/digest.mjs --deliver-pending'))
+  test('housekeeping has no immediate delivery path', !readFileSync('scripts/steward-housekeeping.mjs', 'utf8').includes('deliverPending'))
+} finally { rmSync(digestRoot, { recursive: true, force: true }) }
 
 // --------------------------------------------------------------- housekeeping
 const today = '2026-10-20'

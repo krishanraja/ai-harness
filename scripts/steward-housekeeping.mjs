@@ -34,7 +34,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
 import { loadPolicy } from './propose.mjs'
-import { buildDigest, boardItem, sendBoard, writeDigest, lastSent } from './digest.mjs'
+import { buildDigest, writeDigest, lastSent, pendingDigest } from './digest.mjs'
 import { REASONS } from './heartbeat-reasons.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
@@ -175,19 +175,12 @@ if (isMain) {
   if (install) { blockers.unshift(install); log.push(`blocked: ${stuck.map((x) => `${x.clock} (${x.reason || 'no reason'})`).join(', ')}`) }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
-  const digest = buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })
+  const digest = pendingDigest() || buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })
   if (!digest) log.push('digest: nothing needs Krish this week, or it was already sent; silent.')
   else if (dryRun) log.push(`digest (dry run): ${digest.title}`)
   else {
-    writeDigest(digest)
-    try {
-      const r = await sendBoard(boardItem(digest, { date: today }), { key: process.env.CONTENT_ENGINE_KEY, url: process.env.CONTENT_ENGINE_URL || undefined })
-      log.push(r.sent ? `digest: ${digest.title}; board item written` : `digest: ${digest.title}; ${r.reason}`)
-      if (!r.sent && /not set/.test(r.reason)) console.log('::warning::The digest was written but not put on the Control Center list: CONTENT_ENGINE_KEY is not set.')
-    } catch (e) {
-      console.log(`::error::The digest was written but the board write failed: ${String(e.message).slice(0, 200)}`)
-      process.exitCode = 1
-    }
+    if (!pendingDigest()) writeDigest(digest)
+    log.push('digest: pending delivery prepared; commit before the separate delivery step')
   }
   console.log(log.join('\n') || 'Nothing to tidy.')
 }

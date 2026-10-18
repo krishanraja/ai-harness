@@ -5,6 +5,7 @@ import {join,resolve,dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {Gh} from './lib/github.mjs'
 import {redact} from './lib/redact.mjs'
+import {digest} from './lib/learning-episode.mjs'
 import {profiles,policyAt,knowledgeHistory,ROOT,seal} from './repository-brain.mjs'
 import {planAdministration,TARGET_CHECK} from './repository-admin.mjs'
 import {privateTitleReplay} from './repository-title-replay.mjs'
@@ -22,11 +23,19 @@ export async function prepareCanary({repository,kind,gh,root=ROOT,out='.canary'}
  writeFileSync(join(out,'task.json'),JSON.stringify({repository,kind,task},null,2)+'\n')
  writeFileSync(join(out,'expected.json'),JSON.stringify({repository,kind,source_base:base,brain_revision:plan.revision,delivered_sha:seal(Object.fromEntries(['AGENTS.md','CLAUDE.md',profile.context_path].map(p=>[p,plan.changes[p]??files[p]]))),workflow:profile.workflows[0].id,read:profile.workflows[0].read},null,2)+'\n')
 }
-export function verifyCanary({out='.canary',execution}){
+export function verifyCanary({out='.canary',execution,evidenceKind='fresh-Claude-fixture'}){
  const expected=JSON.parse(readFileSync(join(out,'expected.json'),'utf8'))
  const reads=new Set(),walk=(v)=>{if(!v||typeof v!=='object')return;if(v.type==='tool_use'&&v.name==='Read'&&typeof v.input?.file_path==='string')reads.add(v.input.file_path.replaceAll('\\','/'));for(const x of Object.values(v))if(typeof x==='object')walk(x)}
  if(!execution||!existsSync(execution))throw new Error('canary_execution_evidence_missing')
  const raw=readFileSync(execution,'utf8');let parsed;try{parsed=JSON.parse(raw)}catch{parsed=raw.split('\n').filter(Boolean).map(s=>JSON.parse(s))}walk(parsed)
+ if(evidenceKind==='fresh-API-fixture'){
+  if(!Array.isArray(parsed))throw new Error('canary_api_trace_invalid')
+  for(const p of ['CLAUDE.md','AGENTS.md','docs/HARNESS_CONTEXT.md','task.json']){
+   const content=readFileSync(join(out,p),'utf8')
+   if(!parsed.some(r=>r.type==='fixture_read'&&r.file_path==='.canary/'+p&&r.sha256===digest(content)&&r.bytes===Buffer.byteLength(content)))throw new Error('canary_api_read_result_missing')
+  }
+  if(seal(Object.fromEntries(['AGENTS.md','CLAUDE.md','docs/HARNESS_CONTEXT.md'].map(p=>[p,readFileSync(join(out,p),'utf8')])))!==expected.delivered_sha)throw new Error('canary_api_context_moved')
+ }
  const results=[],findResults=v=>{if(!v||typeof v!=='object')return;if(v.type==='result')results.push(v);for(const x of Object.values(v))if(typeof x==='object')findResults(x)};findResults(parsed)
  const final=results.at(-1),output=final?.result||''
  if(final?.is_error)throw new Error('canary_model_error:'+redact(output).replace(/\s+/g,' ').slice(0,400))
@@ -41,7 +50,8 @@ export function verifyCanary({out='.canary',execution}){
  }else if(expected.repository==='content-engine'){
   if(!['subject-719','finding-286','tone-541'].every(id=>answer.retained_decision_ids?.includes(id))||answer.superseded_decision_ids?.length||answer.requested_delta!=='length')throw new Error('canary_iteration_erased_intent:'+diagnostic)
  }else if(answer.global_prohibition!==false||answer.revised_offline_test_allowed!==true||answer.cause_known!==false||!answer.conditions?.includes('Synthetic pilot cohort Z, one trial'))throw new Error('canary_experiment_overlearned:'+diagnostic)
- const receipt={...expected,status:'passed',observed_read_paths:[...reads].filter(s=>s.includes('.canary/')).map(s=>s.slice(s.indexOf('.canary/'))),evidence_kind:'fresh-Claude-fixture',limits:'Fixture routing and behaviour only; production loading, Codex parity, subjective taste and long-term effectiveness unmeasured.'}
+ if(!['fresh-Claude-fixture','fresh-API-fixture'].includes(evidenceKind))throw new Error('canary_evidence_kind_invalid')
+ const receipt={...expected,status:'passed',observed_read_paths:[...reads].filter(s=>s.includes('.canary/')).map(s=>s.slice(s.indexOf('.canary/'))),evidence_kind:evidenceKind,limits:'Fixture routing and behaviour only; native installed-client discovery, production loading, Codex parity, subjective taste and long-term effectiveness unmeasured.'}
  writeFileSync(join(out,'receipt.json'),JSON.stringify(receipt,null,2)+'\n');return receipt
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){

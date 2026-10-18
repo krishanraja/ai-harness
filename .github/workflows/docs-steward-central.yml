@@ -1,0 +1,54 @@
+name: Docs steward central API
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: Explicitly enrolled target, activation remains disabled in reviewed configuration
+        type: choice
+        required: true
+        default: krishanraja/ai-harness
+        options: [krishanraja/ai-harness, krishanraja/control-center, krishanraja/mindmake-ctrl, krishanraja/fractionl-circle, krishanraja/fractionl-pulse, krishanraja/full-time, krishanraja/content-engine, krishanraja/contentarchives, krishanraja/AEO-Engine, krishanraja/makeyourmindup]
+      dry_run:
+        description: Prepare source and validate the request cap only; no model call or pull request
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: docs-steward-central-${{ inputs.repository }}
+  cancel-in-progress: false
+jobs:
+  central:
+    if: github.repository == 'krishanraja/ai-harness' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DOCS_WORK_DIR: ${{ runner.temp }}/harness-docs-central
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: Prepare explicitly configured source without inference
+        id: prepare
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+          DOCS_TARGET: ${{ inputs.repository }}
+        run: node scripts/steward/run-central.mjs prepare --repository "$DOCS_TARGET" --work-dir "$DOCS_WORK_DIR"
+      - name: Draft through the shared approved API budget without a fleet credential
+        if: steps.prepare.outputs.status == 'prepared' && !inputs.dry_run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HARNESS_BUDGET_TOKEN: ${{ secrets.HARNESS_BUDGET_TOKEN }}
+        run: node scripts/steward/central-draft.mjs --config "$DOCS_WORK_DIR/config.json" --output "$DOCS_WORK_DIR/bundle.json"
+      - name: Revalidate source and draft, then open a guarded review request
+        if: steps.prepare.outputs.status == 'prepared' && !inputs.dry_run
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: node scripts/steward/run-central.mjs publish --work-dir "$DOCS_WORK_DIR" --write
+      # No source packs, model prose, drafts or validator outputs are uploaded.
+      # The ephemeral runner is discarded by GitHub after the job.
