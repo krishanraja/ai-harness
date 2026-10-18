@@ -22,8 +22,6 @@ jobs:
     if: github.repository == 'krishanraja/ai-harness' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    env:
-      DOCS_WORK_DIR: ${{ runner.temp }}/harness-docs-central
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -33,6 +31,8 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
+      - name: Set the private handoff directory after runner allocation
+        run: echo "DOCS_WORK_DIR=$RUNNER_TEMP/harness-docs-central" >> "$GITHUB_ENV"
       - name: Prepare explicitly configured source without inference
         id: prepare
         env:
