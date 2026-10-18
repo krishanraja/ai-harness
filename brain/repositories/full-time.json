@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "repository": "full-time",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "702c84d242071b0e0c347a6b87668e210ed2d897",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 71870,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/19-release-state.md",
+      "role": "state",
+      "label": "19 release state"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/13-agent-handoff.md",
+      "role": "workflow",
+      "label": "Repository-owned workflow source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "editorial",
+      "label": "Checked match facts, pundit production and spend discipline",
+      "read": [
+        "README.md",
+        "docs/13-agent-handoff.md",
+        "docs/19-release-state.md",
+        "NOW.md"
+      ],
+      "checks": [
+        "npm run docs:check",
+        "npm run typecheck",
+        "npm test"
+      ]
+    }
+  ]
+}

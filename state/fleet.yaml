@@ -4,9 +4,10 @@
 # carries the canon block, a client adapter rendered from the templates, or a
 # machine that installs a release and reports back.
 #
-# The repos list is asserted against krishanraja/control-center
-# docs/steward/fleet.json by scripts/validate-surfaces.mjs, so the docs steward
-# and the harness steward cannot drift apart without a failing check.
+# The repos list is asserted against docs/steward/fleet.json (the docs
+# steward's manifest, in this repository since 2026-10-15) by
+# scripts/validate-surfaces.mjs, so the docs steward and the harness steward
+# cannot drift apart without a failing check.
 
 schema_version: 1
 owner: krishanraja
@@ -21,9 +22,11 @@ repos:
   - name: control-center
     canon_target: AGENTS.md
     entry: AGENTS.md
-    rules_files: [AGENTS.md, docs/steward/RUNBOOK.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
+    rules_files: [AGENTS.md, docs/MINDMAKE_OS_ARCHITECTURE.md]
 
   - name: mm-ctrl
+    # Same GitHub repository, id 1090040458; the former name redirects here.
+    aliases: [mindmake-ctrl]
     canon_target: AGENTS.md
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, project-documentation/AGENT_BRIEFING.md]
@@ -138,17 +141,20 @@ machines:
 surface_contracts:
   - id: claude-code-lorimer
     reads: canon block, rendered adapter, 29 installed skills
-    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports, hosted redacted observations
+    writes: Ruling (Krish, DATE) lines in commit bodies, canary reports, hosted redacted observations, and the private session miner the nightly sync runs weekly (scripts/Invoke-SessionMiner.ps1) once a submission route is chosen
+    event_surface: claude-code
     gap: Claude Code account OAuth was expired during the fresh-agent canary; the MCP config itself connected and its isolated identity canary passed.
 
   - id: cursor-lorimer
     reads: krish-core.mdc, 29 installed skills
     writes: rulings in commit bodies, hosted redacted observations
+    event_surface: cursor
     gap: Cursor MCP discovery reached the one hosted tool, but the headless agent account was not logged in for an end-to-end model invocation.
 
   - id: codex-lorimer
     reads: AGENTS.md, 29 installed skills
-    writes: rulings in commit bodies, canary reports, hosted redacted observations
+    writes: rulings in commit bodies, canary reports, hosted redacted observations, and once installed the private weekly session miner
+    event_surface: codex
 
   - id: codex-surface
     reads: AGENTS.md, 29 installed skills
@@ -157,20 +163,35 @@ surface_contracts:
 
   - id: claude-code-cloud
     reads: canon block
-    writes: pull requests, rulings, observations, proposals
+    writes: pull requests and Ruling lines in commit bodies
+    event_surface: claude-code-web
+    gap: A correction made in a cloud session reaches the brain only if it ends in a merged commit with a Ruling line, until the claude.ai connector and the cloud session miner exist (docs/harness/capture-connectors.md).
 
   - id: claude-ai-chat
-    reads: cloud skill catalogue, two releases behind
+    reads: cloud skill catalogue and the pasted account instructions
     writes: nothing
+    event_surface: claude-ai
     gap: >
-      The biggest reader in the fleet and it has never written one thing back.
-      Every ruling made in conversation there is lost. The import-memory skill
-      already exists and is the cheapest write path available.
+      The biggest reader in the fleet, covering claude.ai and Claude Desktop. Its
+      write path is one custom connector to the hosted observation endpoint plus
+      one account-instruction line (docs/harness/capture-connectors.md). It needs
+      a connector-compatible endpoint first, then Krish adds the connector.
+
+  - id: chatgpt-chat
+    reads: nothing from the harness yet
+    writes: nothing
+    event_surface: chatgpt
+    capture: best-effort
+    gap: >
+      Its custom connectors are in beta, may be limited by plan, and ask for
+      confirmation on every write, so capture there cannot be silent. Best effort
+      through the same hosted endpoint; codex work is mined separately.
 
   - id: perplexity-computer
-    reads: cloud skill catalogue, two releases behind
+    reads: cloud skill catalogue
     writes: nothing
-    gap: Same as claude.ai chat, with no import path of its own.
+    capture: out-of-scope
+    note: Krish uses it for deep research only, so it is out of capture scope (Ruling, Krish, 2026-10-14).
 
   - id: n8n-agents
     reads: agents.brief_content, which is not rendered from the canon

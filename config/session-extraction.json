@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "approval_ref": null,
+  "approval_sha256": null,
+  "execution_repository": "krishanraja/control-center",
+  "execution_repository_id": null,
+  "reviewed_harness_revision": null,
+  "audience_sha256": null,
+  "actions_policy_sha256": null,
+  "retention_sha256": null,
+  "provider_data_sha256": null,
+  "source_accounts": [],
+  "max_input_bytes": 60000,
+  "max_episodes": 20,
+  "max_output_tokens": 4000
+}

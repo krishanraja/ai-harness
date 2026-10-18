@@ -10,11 +10,11 @@
  *   - the adapters are what the templates render, not hand edits
  *   - the fleet list here and the docs steward's fleet.json name the same repos
  *   - no machine-specific absolute path has crept back into the canon
- *   - no em dash, the one voice rule that is machine-checkable
+ *   - authored surfaces obey the machine-checkable em dash voice rule
  *
  * Dependency-free, and it never writes.
  *
- *   node scripts/validate-surfaces.mjs [--fleet-json <path to control-center fleet.json>]
+ *   node scripts/validate-surfaces.mjs [--fleet-json <path to docs/steward/fleet.json>]
  *                                      [--repos-root <dir holding the checkouts>]
  */
 
@@ -25,6 +25,8 @@ import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
 import { check as checkRuleProvenance, extract as extractRules } from './brain-rules.mjs'
 import { canonSyncProblems, canonExcludedRepos, isCanonSynced } from './lib/fleet.mjs'
+import { isInertKnowledgeLine, sourceEvidenceSeals, policyAt } from './repository-brain.mjs'
+import { loadLedger } from './propose.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -117,9 +119,12 @@ O(`${canonFiles.length} canon files carry no machine-specific absolute path`)
 
 // ----------------------------------------------------------------- no em dash
 // Written as an escape rather than the character itself so this file obeys the
-// rule it enforces. brain/ is included because it is canon: everything the
-// judge panel and the provenance ledger read is built from these files.
+// rule it enforces. brain/ holds authored instructions and inert source evidence.
+// Only exact observation-ledger reconstructions qualify as source data; accepted
+// knowledge and the other authored surfaces retain the text-style check.
 const EM_DASH = '\u2014'
+// Derive provenance independently from the observation ledger, not a row's self-reported status.
+const sourceSeals=sourceEvidenceSeals(loadLedger(HARNESS),policyAt(HARNESS))
 const brainFiles = []
 if (existsSync(join(HARNESS, 'brain'))) {
   const walkBrain = (dir) => {
@@ -133,9 +138,9 @@ if (existsSync(join(HARNESS, 'brain'))) {
 }
 for (const f of [...canonFiles, ...brainFiles, ...fleet.adapters.map((a) => a.output), 'state/fleet.yaml']) {
   const text = read(f)
-  text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)) F(`${f}:${i + 1} contains an em dash`) })
+  text.split('\n').forEach((line, i) => { if (line.includes(EM_DASH)&&!isInertKnowledgeLine(f,line,sourceSeals)) F(`${f}:${i + 1} contains an em dash`) })
 }
-O(`no em dash in the canon, the templates, the rendered adapters or the ${brainFiles.length} brain files`)
+O(`em dash policy valid for authored canon, templates, adapters and accepted knowledge; inert source observations are data`)
 
 // --------------------------------------------------- provenance on every rule
 // Every rule in both contracts, and every chapter of every skill, must have an
@@ -191,9 +196,9 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
 
 // ------------------------------------------------- fleet parity with the docs steward
 const fleetJsonPath = flag('--fleet-json')
-  || [join(HARNESS, '../control-center/docs/steward/fleet.json'), join(HARNESS, '.steward/fleet.json')].find((p) => existsSync(p))
+  || [join(HARNESS, 'docs/steward/fleet.json')].find((p) => existsSync(p))
 if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
-  W('control-center docs/steward/fleet.json not reachable, so repo parity was not checked')
+  W('docs/steward/fleet.json not reachable, so repo parity was not checked')
 } else {
   const docs = JSON.parse(readFileSync(fleetJsonPath, 'utf8'))
   const lc = (n) => n.toLowerCase()

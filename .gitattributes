@@ -7,3 +7,7 @@
 *.jpeg -text
 *.gif -text
 *.pdf -text
+
+# Append-only ledgers written by several workflows at once: keep both sides'
+# lines on a merge or rebase instead of conflicting.
+state/observations/*.jsonl merge=union

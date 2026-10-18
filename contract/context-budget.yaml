@@ -1,0 +1,37 @@
+# What every session loads before it does anything, and the budget it lives under.
+#
+# The harness is meant to get smarter and leaner at the same time. Until
+# 2026-10-14 it only grew: verbatim imports, rules added and never retired. This
+# file names the always-on surface so growth is arithmetic, not an impression.
+# scripts/context-budget.mjs measures it on every pull request.
+#
+# Policy (Ruling, Krish, 2026-10-14: distil, do not accumulate):
+#   - net zero or negative on the always-on surface;
+#   - growth is allowed only with a `Growth justified:` line in a commit body
+#     saying why the addition earns its place;
+#   - a change request opened by the steward may never grow it by more than
+#     hard_cap_chars, justified or not.
+#
+# Baseline on 2026-10-14: 116,314 characters (93,596 in files, 22,718 in descriptions).
+# A first count of 74,318 left out the files the Claude adapter imports.
+
+schema_version: 1
+policy: net-zero
+hard_cap_chars: 400
+# The Claude adapter imports the two contracts and who-krish-is every session,
+# so they are always-on too, not just the files the adapters are rendered from.
+files:
+  - contract/krish-operating-contract.md
+  - contract/skill-routing-contract.md
+  - skills/krish-principles/references/who-krish-is.md
+  - adapters/claude/CLAUDE.md
+  - adapters/codex/AGENTS.md
+  - adapters/cursor/krish-core.mdc
+  - adapters/cloud/account-instructions.md
+  - contract/templates/canon-block.md
+  - contract/templates/canon-who-krish.md
+  - skills/krish-principles/SKILL.md
+  - skills/strategy-brief/SKILL.md
+  - skills/verification-loop/SKILL.md
+# Every skill's description is loaded into every session's catalogue.
+descriptions: skills/*/SKILL.md

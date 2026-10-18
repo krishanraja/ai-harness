@@ -2,30 +2,33 @@
   "schema_version": 1,
   "surface": "claude-cloud",
   "status": "ok",
-  "checked_at": "2026-10-06T14:47:47.8520675Z",
-  "release": "v2026.10.06.1",
-  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+  "checked_at": "2026-10-07T15:01:21.0882822Z",
+  "release": "v2026.10.06.3",
+  "source_commit": "22a77d11cb77225ad3efd917dea6c3b553e4c342",
   "url": "https://claude.ai/customize/skills",
   "catalogue_count": 31,
   "canonical_skill_count": 29,
   "canonical_names_exact": true,
-  "upload_method": "supervised authenticated browser upload and replace",
+  "upload_method": "supervised authenticated browser upload and versioned replace",
   "artifact_suffix": ".skill",
-  "manifest_sha256": "CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657",
-  "skills_tree_aggregate_sha256": "406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768",
+  "manifest_sha256": "F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8",
+  "skills_tree_aggregate_sha256": "F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D",
   "changed_skills_replaced": [
-    "content-corpus",
-    "krish-principles",
-    "mindmake",
-    "mindmake-os"
+    "apify",
+    "krish-build",
+    "ux-testing-agent",
+    "verification-loop"
   ],
   "account_instructions": {
-    "status": "updated-and-read-back",
+    "status": "verified-read-back",
     "source": "adapters/cloud/account-instructions.md",
-    "character_count": 2497,
-    "sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83"
+    "source_character_count": 2497,
+    "source_sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83",
+    "live_character_count": 2496,
+    "terminal_newline_omitted_from_live_field": true,
+    "readback_exact": true
   },
-  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Claude's Replace flow and their refreshed descriptions were read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills plus two unrelated user-owned skills. Earlier skill versions remain in Claude version history. Claude account instructions were replaced with the canonical cloud adapter and read back exactly; the pre-update text was saved in the governed scratch rollout directory.",
+  "evidence": "The four skills changed by v2026.10.06.3 were accepted through Claude's versioned Replace flow and appeared at the top of the catalogue with refreshed descriptions and a current timestamp. The other 25 canonical skills remained installed, leaving 29 canonical skills plus two unrelated user-owned skills. Claude stated that earlier skill versions remain available in version history. Account instructions were read back as the canonical cloud adapter with only the source file's terminal newline omitted by the live field.",
   "limitations": [
     "Claude exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
     "No behavioral routing canary was run in this supervised catalogue-update pass."

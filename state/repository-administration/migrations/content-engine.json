@@ -1,0 +1,15 @@
+{
+  "acceptance": "brain-repository-administration-v1",
+  "files": {
+    "CLAUDE.md": {
+      "before_sha256": "2cb60c4b35fe77cd7d92570848442d6e590e8634042a3b5c151d7a5606a40b46",
+      "after": "@AGENTS.md\n\nStudio entry: follow the shared `docs/ENGINE_SESSION.md` protocol and `studio.session.open` capability gate.\n"
+    }
+  },
+  "retained_clauses": [
+    "System boundaries and authority remain in AGENTS.md and docs/SYSTEM_MAP.md.",
+    "Failure checks, both-account comments/publication, tracked Studio, observer attribution, transcript exclusion and exact launcher move into the managed bootstrap note.",
+    "Weekly board and account/editor mechanics remain in the board workflow sources, including plan-week.",
+    "Session orientation and handoff remain in AGENTS.md and WORKBENCH.md."
+  ]
+}

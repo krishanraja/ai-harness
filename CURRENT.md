@@ -3,15 +3,15 @@
 
 This is the only committed human-readable statement of live harness state. It is rendered from the machine-owned evidence named below. `README.md`, architecture documents, dated reports and chat history are explanatory or historical, never current-state authorities.
 
-Rendered from registry reconciliation date **2026-10-06**.
+Rendered from registry reconciliation date **2026-10-07**.
 
 ## Release authority
 
-- Latest approved release: **v2026.10.06.3** (harness-v2026.10.06.3)
-- Immutable and published: **yes**, 2026-10-06T21:04:18Z
-- Release source commit: `22a77d11cb77225ad3efd917dea6c3b553e4c342`
-- Manifest SHA-256: `F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.06.3
+- Latest approved release: **v2026.10.17.1** (harness-v2026.10.17.1)
+- Immutable and published: **yes**, 2026-10-17T08:14:51Z
+- Release source commit: `e5ad24c99f59259f3b0e8ee5ea2c956ef57f2f28`
+- Manifest SHA-256: `E03AB1F2EC9A230C4ADD586C8BF22874AFB37E587233E42C2AF578B52A8D1D03`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.10.17.1
 - Current deployment verdict: **current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
@@ -20,13 +20,13 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes |
-| cursor-primary | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-manual-canary-required-cli-authentication-unavailable |
-| claude-code-user | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-two-declared-unmeasured-routes |
-| codex-current | v2026.10.06.3 | 29/29 exact | current-installed-hash-verified-canary-zero-failures-three-declared-unmeasured-routes |
-| claude-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-exact-byte-parity-unavailable |
-| perplexity-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-catalogue-verified-awaiting-v2026.10.06.3-byte-parity-unavailable |
-| codex-cloud | v2026.10.06.1 | cloud inventory only | stale-v2026.10.06.1-published-environment-awaiting-v2026.10.06.3 |
+| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| cursor-primary | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| claude-code-user | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| codex-current | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.17.1 |
+| claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.17.1 |
+| perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.17.1 |
+| codex-cloud | v2026.10.06.3 | cloud inventory only | awaiting-environment-refresh-for-v2026.10.17.1 |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
@@ -35,7 +35,6 @@ A local hash match proves installed bytes only. It does not prove client discove
 - **codex-surface-07a67cda9f99: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json).
 - **claude-code-user: partial.** [Evidence](state/canaries/v2026.10.06.3-claude-code-user.json).
 - **codex-current: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-current.json).
-- **cursor-primary: manual-required.** This client has no supported headless invocation evidence.
 
 ## Machine clocks
 

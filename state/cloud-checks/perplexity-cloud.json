@@ -2,25 +2,25 @@
   "schema_version": 1,
   "surface": "perplexity-cloud",
   "status": "ok",
-  "checked_at": "2026-10-06T16:23:35.0525289Z",
-  "release": "v2026.10.06.1",
-  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+  "checked_at": "2026-10-07T15:01:21.0882822Z",
+  "release": "v2026.10.06.3",
+  "source_commit": "22a77d11cb77225ad3efd917dea6c3b553e4c342",
   "url": "https://www.perplexity.ai/computer/skills?tab=installed",
   "catalogue_count": 29,
   "canonical_skill_count": 29,
   "canonical_names_exact": true,
   "upload_method": "supervised authenticated browser upload and per-skill replace",
   "artifact_suffix": "-perplexity.zip",
-  "manifest_sha256": "CD9E55957A15244326071D4C0DCD45538BC84D220CBCE551142D2F22A9347657",
-  "skills_tree_aggregate_sha256": "406AD5B5C7A6BDD7297010E63040A85770FAE636B040513828797291BE7A4768",
+  "manifest_sha256": "F20E1F1B2F329A9FD531B87B000F3473890C2F63BBE5DB5768E98EC0740509D8",
+  "skills_tree_aggregate_sha256": "F39644BF060724AB9067A45F1C3FA29AA4BD35863F8F703B36E03215A73CEC0D",
   "changed_skills_replaced": [
-    "content-corpus",
-    "krish-principles",
-    "mindmake",
-    "mindmake-os"
+    "apify",
+    "krish-build",
+    "ux-testing-agent",
+    "verification-loop"
   ],
   "account_instructions": {
-    "status": "updated-and-read-back",
+    "status": "verified-read-back",
     "source": "adapters/cloud/perplexity-account-instructions.md",
     "source_character_count": 1494,
     "source_sha256": "B2538D48FDE113B53A7734559D4EF3D60E47724EA536B3286396A410D90C2D98",
@@ -30,7 +30,7 @@
     "terminal_newline_omitted_from_live_field": true,
     "readback_exact": true
   },
-  "evidence": "The four skills changed by v2026.10.06.1 were accepted through Perplexity's duplicate-safe Replace flow and each refreshed description was read back. The other 25 canonical skills were unchanged from the previously exact catalogue, leaving 29 canonical skills. No skill was deleted. A governed Perplexity-specific adapter names all 29 active skills and preserves the core execution and approval gates within the platform's 1,500-character limit. Perplexity reported Information updated; after navigating away and reopening Personalization, the 1,493-character live value matched the source payload exactly. The source file's conventional terminal newline is not entered into the account field.",
+  "evidence": "The four skills changed by v2026.10.06.3 were accepted through Perplexity's duplicate-safe Replace flow. The live full catalogue readback showed the refreshed descriptions for apify, krish-build, ux-testing-agent, and verification-loop, while the other 25 canonical skills remained installed. No skill was deleted. The governed Perplexity-specific account adapter remained intact at 1,493 live characters, matching its 1,494-character source after omission of the conventional terminal newline.",
   "limitations": [
     "Perplexity exposes catalogue and content readback but not downloadable byte-level parity for installed cloud skills.",
     "No behavioral routing canary was run in this supervised catalogue-update pass."

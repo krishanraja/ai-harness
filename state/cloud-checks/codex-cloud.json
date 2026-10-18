@@ -2,9 +2,9 @@
   "schema_version": 1,
   "surface": "codex-cloud",
   "status": "ok",
-  "checked_at": "2026-10-06T18:56:55.5078242Z",
-  "release": "v2026.10.06.1",
-  "source_commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+  "checked_at": "2026-10-07T15:01:21.0882822Z",
+  "release": "v2026.10.06.3",
+  "source_commit": "22a77d11cb77225ad3efd917dea6c3b553e4c342",
   "url": "https://chatgpt.com/settings/codex-cloud",
   "environment": {
     "name": "ai-harness",
@@ -12,9 +12,11 @@
     "published": true,
     "repository": "github.com/krishanraja/ai-harness",
     "mount_path": "ai-harness",
-    "commit": "88a059daac42a9f3753e960a82e8054cafebd075",
+    "snapshot_commit": "48aa086e8af640efb7f2480aca9ffeb36b286833",
     "install_script_configured": true,
     "start_skill_configured": true,
+    "default_branch_refresh": "guarded-fast-forward-for-clean-default-or-pristine-snapshot-checkouts",
+    "branch_safety_checks_passed": 7,
     "power_shell_version": "7.6.6",
     "power_shell_archive_sha256": "DDBC4A2D113BBD46D283CFEDCBCD117A70CAEFD7673F41F2B4E0000BADF103BC",
     "pwsh_path": "/home/agent/.local/bin/pwsh",
@@ -24,30 +26,33 @@
       "XDG_DATA_HOME": "/workspace/.local/share",
       "XDG_CONFIG_HOME": "/workspace/.config"
     },
-    "network_policy": "package-managers-no-additional-domains-no-secrets"
+    "network_policy": "package-manager-preset-no-user-domains-no-secrets"
   },
   "account_instructions": {
-    "status": "updated-and-read-back",
+    "status": "verified-read-back",
     "scope": "Instructions for Codex synced across desktop and web",
     "source": "adapters/cloud/account-instructions.md",
-    "character_count": 2497,
-    "sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83"
+    "source_character_count": 2497,
+    "source_sha256": "073FC76887A78B8F8EC13EF1253A7EF83FAC4F75A26593C890CE7B2F57930A83",
+    "live_character_count": 2497,
+    "readback_exact": true
   },
   "acceptance": {
-    "task_id": "01a1128c-55a6-7157-b5d9-e72d13d6306e",
+    "task_id": "01a116e0-43ac-7383-b118-0da5489db067",
     "verdict": "pass",
     "repository_path": "/workspace/ai-harness",
     "repository_clean": true,
     "origin": "https://github.com/krishanraja/ai-harness.git",
-    "head": "88a059daac42a9f3753e960a82e8054cafebd075",
+    "head": "48aa086e8af640efb7f2480aca9ffeb36b286833",
     "pwsh_version": "PowerShell 7.6.6",
     "python_version": "Python 3.12.14",
     "node_version": "v24.19.0",
+    "current_release": "v2026.10.06.3",
     "skill_count": 29,
     "validator": "HARNESS VALIDATION PASSED: 29 skills, 1 unreleased candidates, 3 adapters, no high-confidence secrets.",
     "repository_clean_after_validator": true
   },
-  "evidence": "The private ai-harness Codex Cloud environment was published from the immutable release commit with a checksum-pinned PowerShell bootstrap, persistent pwsh and Python shims on the normal fresh-task PATH, all three XDG variables, and a governed Start skill. A new cloud task resolved both shims, observed the exact repository commit and a clean tree, and passed the full harness validator without leaving changes. The Codex custom-instructions field was separately populated from the canonical cloud adapter and read back exactly.",
+  "evidence": "The private ai-harness Codex Cloud environment was republished with the checksum-pinned PowerShell bootstrap, persistent pwsh and Python shims, the three governed XDG variables, and a Start skill that resolves the live remote default branch and fast-forwards only eligible clean default-branch or pristine snapshot checkouts. A first fresh task exposed the platform's stale stored snapshot at 88a059d; the guarded repair then passed seven branch-safety cases and the full validator before publication. Final fresh task 01a116e0-43ac-7383-b118-0da5489db067 started at 48aa086, identified v2026.10.06.3, resolved the required toolchain, passed the full harness validator, and left the repository clean. Codex instructions synced across desktop and web were separately read back exactly from the canonical cloud adapter.",
   "limitations": [
     "Codex Cloud's default command sandbox suppresses stdout from nested Node subprocesses in this validator; the accepted run used explicitly authorized full command permissions.",
     "The published Start skill records that boundary and requires immediate user approval before the full-permission readiness check."

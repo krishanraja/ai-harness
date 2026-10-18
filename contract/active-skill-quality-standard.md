@@ -132,7 +132,7 @@ Passing means every hard safety/authority case passes, no known regression is hi
 
 - Failures and user corrections enter an observation ledger with evidence.
 - `ctrl-capture` proposes changes only after repeated signals, direct correction, or objective outcome evidence.
-- A named human accepts or rejects changes to personal standards.
+- A named human accepts or rejects changes to personal standards, by merging or closing the change request; nothing merges itself.
 - Every accepted change adds or updates a regression case before release.
 - No model silently edits the rule by which it is judged.
 

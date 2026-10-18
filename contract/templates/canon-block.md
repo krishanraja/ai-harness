@@ -2,8 +2,8 @@
 
 Rendered from `krishanraja/ai-harness` at release {{release}}. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
-never silently overwritten, and never lost. Everything outside the markers belongs to
-this repository and is never read or rewritten by the harness.
+never silently overwritten, and never lost. This sync preserves all other text.
+Separately approved repository administration owns only its declared regions and context file.
 
 **Precedence.** This repository's own rules outrank the canon on repository matters:
 structure, naming, voice, stamps, archive location, test and build commands. The canon
@@ -40,7 +40,7 @@ lives only in a chat window teaches nothing.
 **Route.** principles, then context, then `strategy-brief`, then the producer, then
 `verification-loop`, then the approval gate, then delivery. The narrowest applicable
 skill wins; a broad "always" or "mandatory" claim inside a skill never overrides the
-router. One primary writer; validators may stack after it, competing writers may not.
+router. One primary writer; validators may stack after it, competing writers may not. **North Star:** before any work, read the North Star linked from the `north-star` block in `AGENTS.md` or `CLAUDE.md`, say which part of it the task moves, and say so first when it moves nothing; only Krish changes it, and a repository with none asks him for one.
 
 {{who_krish}}
 

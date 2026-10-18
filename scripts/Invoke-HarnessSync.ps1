@@ -8,7 +8,9 @@ param(
     [switch]$SkipCanaries,
     [switch]$NoHeartbeat,
     [switch]$NoPullRequest,
-    [switch]$SelfTest
+    [switch]$SelfTest,
+    # Set only by the sync itself when it restarts on a newer copy of this script.
+    [switch]$SelfUpdated
 )
 
 Set-StrictMode -Version Latest
@@ -92,6 +94,64 @@ function Assert-RunningSyncScriptOnGitRef {
     }
 
     return [pscustomobject]@{ git_ref = $GitRef; running_blob = $runningBlob; ref_blob = $refBlob }
+}
+
+# The checkout follows main every day, not only on install days. Two failures
+# made this necessary. A release published before its registration commit had
+# been pulled blocked every run, because the approval gate reads the local
+# registry and the no-op path never pulled. And any change to this script on
+# main deadlocked the install path, which refuses to switch to a revision it is
+# not itself running, so the PC needed a person at the keyboard to move on.
+# A dirty or diverged checkout is left exactly as it is.
+function Update-HarnessCheckout {
+    $status = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=no')
+    Assert-NativeSuccess -Result $status -Label 'Repository status'
+    if ($status.Text.Trim()) { return 'dirty-not-updated' }
+    Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
+    $before = (Invoke-NativeCapture -FilePath 'git' -Arguments @('hash-object', '--', 'scripts/Invoke-HarnessSync.ps1')).Text.Trim()
+    $branch = (Invoke-NativeCapture -FilePath 'git' -Arguments @('rev-parse', '--abbrev-ref', 'HEAD')).Text.Trim()
+    if ($branch -ne 'main') {
+        $switch = Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')
+        if ($switch.ExitCode -ne 0) { return 'not-on-main' }
+    }
+    $merge = Invoke-NativeCapture -FilePath 'git' -Arguments @('merge', '--ff-only', 'origin/main')
+    if ($merge.ExitCode -ne 0) { return 'not-fast-forward' }
+    $after = (Invoke-NativeCapture -FilePath 'git' -Arguments @('hash-object', '--', 'scripts/Invoke-HarnessSync.ps1')).Text.Trim()
+    if ($before -cne $after) { return 'updated-sync-script' }
+    return 'current'
+}
+
+# Once a week the private session miner (Ruling, Krish, 2026-10-14) runs from
+# here, so Krish installs nothing separately for it. It is isolated: whatever it
+# does, this run's install and heartbeat carry on, and it reports through its
+# own clock. The stamp is written before it runs, so a failing miner is retried
+# next week rather than every night. A changed miner runs the next night
+# instead of waiting out the week, so a new source (a second account, Claude
+# Desktop's local sessions) is learned from at once; its cursor keeps anything
+# already read from being sent twice.
+function Invoke-WeeklySessionMiner {
+    try {
+        $miner = Join-Path $RepositoryRoot 'scripts\Invoke-SessionMiner.ps1'
+        if (-not (Test-Path -LiteralPath $miner -PathType Leaf)) { return 'not-present' }
+        $version = (Get-FileHash -LiteralPath (Join-Path $RepositoryRoot 'scripts\mine-sessions.mjs') -Algorithm SHA256).Hash
+        $stampDir = Join-Path $env:LOCALAPPDATA 'krish-harness\session-miner'
+        $stamp = Join-Path $stampDir 'last-run.txt'
+        if (Test-Path -LiteralPath $stamp -PathType Leaf) {
+            $parts = (Get-Content -LiteralPath $stamp -Raw).Trim() -split '\s+'
+            $last = [DateTime]::Parse($parts[0], [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::RoundtripKind)
+            $sameMiner = $parts.Count -gt 1 -and $parts[1] -eq $version
+            if ($sameMiner -and ([DateTime]::UtcNow - $last.ToUniversalTime()).TotalDays -lt 6.5) { return 'not-due' }
+        }
+        New-Item -ItemType Directory -Force -Path $stampDir | Out-Null
+        Set-Content -LiteralPath $stamp -Value "$([DateTime]::UtcNow.ToString('o')) $version" -Encoding utf8
+        $result = Invoke-ProcessCapture -FilePath (Get-Process -Id $PID).Path -Arguments @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $miner) -WorkingDirectory $RepositoryRoot -TimeoutSeconds 3600
+        if ($result.TimedOut) { return 'timed-out' }
+        if ($result.ExitCode -eq 0) { return 'ok' }
+        return "blocked-exit-$($result.ExitCode)"
+    }
+    catch {
+        return "error: $($_.Exception.Message)"
+    }
 }
 
 function Write-JsonFile {
@@ -233,15 +293,42 @@ function Read-DeploymentRecord {
     return Get-Content -LiteralPath $Record.FullName -Raw | ConvertFrom-Json
 }
 
+# Why a run stopped, as one word the public heartbeat can carry. The message
+# itself stays in run.json on this PC: it can hold a path, a folder name or a
+# remote's output. On 2026-10-16 this PC reported `blocked` and nothing off the
+# machine could say why. Every word returned here must be a key of REASONS in
+# scripts/heartbeat-reasons.mjs; scripts/test-machine-heartbeat.mjs checks it.
+function Get-FailureReason {
+    param([AllowEmptyString()][string]$Message)
+
+    switch -Regex ($Message) {
+        '^Repository working tree is dirty: \d+ tracked' { return 'checkout-edited' }
+        '^Repository working tree is dirty: \d+ untracked' { return 'checkout-untracked' }
+        '^Repository working tree is dirty: git status printed' { return 'checkout-git-output' }
+        '^(Git fetch|Switch to main|Fast-forward main|Repository status) failed' { return 'checkout-update' }
+        '^The running sync script is not' { return 'sync-script-not-on-main' }
+        'no matching approved_by provenance' { return 'release-not-registered' }
+        '^(Release asset count|SHA256SUMS|Malformed checksum|Checksum entry|Release checksum|Unsafe or incomplete release asset|Could not start GitHub asset|GitHub asset download|Release manifest)' { return 'release-assets' }
+        '^No previous deployment record' { return 'deployment-record-missing' }
+        '^Unclassified directories' { return 'unclassified-skill-directory' }
+        '^(Plan for|Plan summary)' { return 'install-plan-failed' }
+        '^(Install for|Installer did not|Deployment record not found)' { return 'install-failed' }
+        '^(Canary report was refused|Codex catalog diagnostic|Codex CLI entry point)' { return 'canary-error' }
+        '^(Create evidence branch|Stage machine evidence|Commit machine evidence|Push evidence branch|Open evidence pull request|Git status before evidence)' { return 'evidence-pull-request' }
+    }
+    return 'other'
+}
+
 function Send-Heartbeat {
     param(
         [Parameter(Mandatory = $true)]$HostDefinition,
         [Parameter(Mandatory = $true)][string]$ReleaseId,
-        [Parameter(Mandatory = $true)][ValidateSet('ok', 'blocked')][string]$Status
+        [Parameter(Mandatory = $true)][ValidateSet('ok', 'blocked')][string]$Status,
+        [ValidatePattern('^([a-z][a-z-]{1,40})?$')][string]$Reason = ''
     )
 
     if ($NoHeartbeat) { return }
-    $beat = Invoke-NativeCapture -FilePath 'gh' -Arguments @(
+    $arguments = @(
         'api', '--method', 'POST',
         '-H', 'Accept: application/vnd.github+json',
         "repos/$Repository/dispatches",
@@ -250,6 +337,8 @@ function Send-Heartbeat {
         '-f', "client_payload[status]=$Status",
         '-f', "client_payload[release]=$ReleaseId"
     )
+    if ($Reason) { $arguments += @('-f', "client_payload[reason]=$Reason") }
+    $beat = Invoke-NativeCapture -FilePath 'gh' -Arguments $arguments
     Assert-NativeSuccess -Result $beat -Label 'Machine heartbeat dispatch'
 }
 
@@ -1107,6 +1196,27 @@ if ($SelfTest) {
     if (@($fixtureReadback.attempts | Where-Object { $_.PSObject.Properties['attempts'] }).Count -ne 0) {
         throw 'Repeated-canary evidence self-test found recursive attempts.'
     }
+    $reasonFixtures = [ordered]@{
+        'Repository working tree is dirty: 2 tracked file(s) edited. Nothing was installed.' = 'checkout-edited'
+        'Repository working tree is dirty: 3 untracked file(s). Nothing was installed.' = 'checkout-untracked'
+        'Repository working tree is dirty: git status printed 1 line(s) that are not file changes. Nothing was installed.' = 'checkout-git-output'
+        'Unclassified directories on claude-code-user: private-folder' = 'unclassified-skill-directory'
+        'Push evidence branch failed with exit code 128: fatal: C:\Users\someone\repo' = 'evidence-pull-request'
+        'Install for codex-current failed with exit code 1: denied' = 'install-failed'
+        'Git fetch failed with exit code 128: could not resolve host' = 'checkout-update'
+        'The running sync script is not byte-exact on origin/main. Refusing to switch branches.' = 'sync-script-not-on-main'
+        'Release v2026.10.15.2 has no matching approved_by provenance in state/skill-registry.yaml.' = 'release-not-registered'
+        'Release checksum mismatches: krish-build.zip' = 'release-assets'
+        'No previous deployment record exists for cursor-primary.' = 'deployment-record-missing'
+        'Plan for claude-code-user failed with exit code 1: refused' = 'install-plan-failed'
+        'Canary report was refused for codex-current: invalid' = 'canary-error'
+        'something nobody planned for at C:\Users\someone' = 'other'
+    }
+    foreach ($message in $reasonFixtures.Keys) {
+        if ((Get-FailureReason -Message $message) -ne $reasonFixtures[$message]) {
+            throw "Failure-reason self-test mapped '$message' to $(Get-FailureReason -Message $message)."
+        }
+    }
     Write-Output 'HARNESS SYNC EVIDENCE SELF-TEST PASSED: repeated attempts are flat snapshots with no self-reference.'
     exit 0
 }
@@ -1131,6 +1241,25 @@ $runRecord = [ordered]@{
 }
 
 try {
+    if (-not $CanaryOnly) {
+        $runRecord.checkout = Update-HarnessCheckout
+        if ($runRecord.checkout -eq 'updated-sync-script' -and -not $SelfUpdated) {
+            # Restart on the copy main now holds, with the same switches, and
+            # report whatever that run reports.
+            $forward = @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath, '-SelfUpdated')
+            foreach ($name in @('SkipCanaries', 'NoHeartbeat', 'NoPullRequest')) {
+                if ($PSBoundParameters.ContainsKey($name)) { $forward += "-$name" }
+            }
+            foreach ($name in @('Repository', 'RepositoryRoot', 'CanaryTimeoutSeconds')) {
+                if ($PSBoundParameters.ContainsKey($name)) { $forward += @("-$name", [string]$PSBoundParameters[$name]) }
+            }
+            $runRecord.status = 'restarted-on-updated-sync-script'
+            Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
+            & (Get-Process -Id $PID).Path @forward
+            exit $LASTEXITCODE
+        }
+        if ($hostDefinition.HostSlug -eq 'lorimer') { $runRecord.session_miner = Invoke-WeeklySessionMiner }
+    }
     $latest = Get-LatestHarnessRelease
     $releaseId = ([string]$latest.tag_name).Substring('harness-'.Length)
     $runAsker = Get-ReleaseApprovalAsker -ReleaseId $releaseId
@@ -1218,7 +1347,7 @@ try {
         $runRecord.status = $noopStatus
         $runRecord.completed_at_utc = [DateTime]::UtcNow.ToString('o')
         Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
-        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $noopHeartbeat
+        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $noopHeartbeat -Reason $(if ($noopDrift) { 'parity-drift' } else { '' })
         if ($noopDrift) {
             # Write-Error is terminating here because ErrorActionPreference is
             # Stop, so this threw into the outer catch, the catch rewrote run.json
@@ -1232,9 +1361,23 @@ try {
     }
 
     if (-not $CanaryOnly) {
+        # Anything in the checkout still stops the install. What changed on
+        # 2026-10-16 is that the message says which kind, so the heartbeat can
+        # carry it off the PC: LORIMER blocked on v2026.10.15.2 that morning and
+        # nothing off the machine could say whether this gate was why, or which
+        # half of it. No other file read the old one-line message (searched the
+        # repository that day). Counts only; file names stay on the PC. The capture merges
+        # stderr, so a git warning on a clean tree is named for what it is.
         $repoStatus = Invoke-NativeCapture -FilePath 'git' -Arguments @('status', '--porcelain', '--untracked-files=all')
         Assert-NativeSuccess -Result $repoStatus -Label 'Repository status'
-        if ($repoStatus.Text.Trim()) { throw 'Repository working tree is dirty. Nothing was installed.' }
+        $statusLines = @($repoStatus.Lines | Where-Object { $_ })
+        if ($statusLines.Count -gt 0) {
+            $untrackedCount = @($statusLines | Where-Object { $_ -match '^\?\? ' }).Count
+            $editedCount = @($statusLines | Where-Object { $_ -match '^[ MADRCUT]{2} ' }).Count
+            if ($editedCount -gt 0) { throw "Repository working tree is dirty: $editedCount tracked file(s) edited. Nothing was installed." }
+            if ($untrackedCount -gt 0) { throw "Repository working tree is dirty: $untrackedCount untracked file(s). Nothing was installed." }
+            throw "Repository working tree is dirty: git status printed $($statusLines.Count) line(s) that are not file changes. Nothing was installed."
+        }
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('fetch', 'origin', 'main', '--tags')) -Label 'Git fetch'
         Assert-RunningSyncScriptOnGitRef -GitRef 'origin/main' | Out-Null
         Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', 'main')) -Label 'Switch to main'
@@ -1321,17 +1464,19 @@ try {
         if ($prUrl) { Write-Output "PULL_REQUEST $prUrl" }
     }
     $healthy = @('completed', 'partial') -contains $runRecord.status
-    Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $(if ($healthy) { 'ok' } else { 'blocked' })
+    $reason = if ($healthy) { '' } elseif ($blocked.Count -gt 0) { 'install-halted' } else { 'canary-failed' }
+    Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $releaseId -Status $(if ($healthy) { 'ok' } else { 'blocked' }) -Reason $reason
     if (-not $healthy) { exit 1 }
 }
 catch {
     $runRecord.status = 'blocked'
     $runRecord.error = $_.Exception.Message
+    $runRecord.reason = Get-FailureReason -Message $_.Exception.Message
     $runRecord.completed_at_utc = [DateTime]::UtcNow.ToString('o')
     Write-JsonFile -Path (Join-Path $runDirectory 'run.json') -Value $runRecord
     try {
         $knownRelease = if ($runRecord.release) { [string]$runRecord.release } else { 'unknown' }
-        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $knownRelease -Status blocked
+        Send-Heartbeat -HostDefinition $hostDefinition -ReleaseId $knownRelease -Status blocked -Reason $runRecord.reason
     }
     catch { }
     throw

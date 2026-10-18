@@ -39,6 +39,9 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { appendUsage, ruleIds } from './brain-usage.mjs'
+import { boundedInference } from './lib/inference-mode.mjs'
+import { requestMessages } from './harness-api.mjs'
+import { randomUUID } from 'node:crypto'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const args = process.argv.slice(2)
@@ -82,10 +85,39 @@ export function headSha(head) {
   catch { return String(head) }
 }
 
+/**
+ * Scripts the canon's added lines cite by path. Their change is shown to the
+ * panel beside the canon's, so a policy line saying what a script does can be
+ * checked against that script: pull request 129 was marked a contradiction for
+ * a precedence its own housekeeping change implemented, because the panel was
+ * shown the policy and not the code it named.
+ */
+export function citedScripts(diff) {
+  const added = diff.split('\n').filter((l) => l.startsWith('+') && !l.startsWith('+++'))
+  return [...new Set(added.flatMap((l) => [...l.matchAll(/\b(scripts\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9._-]+\.(?:mjs|ps1))\b/g)].map((m) => m[1])))]
+}
+
+export function citedProposals(diff) {
+  return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/g)].map(m=>m[1])))]
+}
+export function citedEvidenceArtifacts(diff) {
+ return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/\b(state\/repository-administration\/[A-Za-z0-9._-]+\.json)\b/g)].map(m=>m[1])))]
+}
+export function citedWorkflows(diff) {
+ return [...new Set(diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).flatMap(l=>[...l.matchAll(/(\.github\/workflows\/[A-Za-z0-9._-]+\.ya?ml)\b/g)].map(m=>m[1])))]
+}
+
 export function diffFor(base, head) {
-  const out = execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...WATCHED],
+  const git = (paths) => execFileSync('git', ['-C', HARNESS, 'diff', '--unified=3', `${base}...${head}`, '--', ...paths],
     { encoding: 'utf8', maxBuffer: 1 << 26 })
-  return out
+  const canon = git(WATCHED)
+  const proposals=citedProposals(canon)
+  const cited = [...citedScripts(canon), ...proposals, ...citedEvidenceArtifacts(canon), ...citedWorkflows(canon)]
+  let result=cited.length?canon+git(cited):canon
+  for(const path of proposals)if(!result.includes(`+++ b/${path}\n`)){
+    try{const source=execFileSync('git',['-C',HARNESS,'show',`${head}:${path}`],{encoding:'utf8',maxBuffer:1<<22});result+=`\nRead-only cited approval source at ${head}:${path}\n${source}\n`}catch{/* unavailable provenance remains explicitly absent */}
+  }
+  return result
 }
 
 // --------------------------------------------------------------- the protocol
@@ -223,13 +255,62 @@ export function recordedRulings(text) {
 }
 
 /**
+ * Rulings from a `git log --format=%B%x1e` stream, one record per commit.
+ *
+ * A commit the steward wrote carries a `Harness-Steward:` trailer, and its
+ * rulings never count: a change request must not be able to overrule the panel
+ * reviewing it by quoting a ruling into its own commit body.
+ */
+export function rulingsFromLog(log) {
+  return String(log).split('\u001e')
+    .filter((body) => !/^Harness-Steward:/imu.test(body))
+    .flatMap((body) => recordedRulings(body))
+}
+
+/**
+ * The report for a run that could not measure. Exit 2 used to write nothing, so
+ * a rejected key looked exactly like a quiet pass: green check, no comment.
+ */
+export function failureReport({ base, head, bench, error }) {
+  const raw = String(error?.message || error || 'unknown error')
+  const masked = raw.replace(/sk-[A-Za-z0-9_-]{8,}/gu, '[masked]').replace(/Bearer\s+\S+/giu, 'Bearer [masked]')
+  const message = masked.split(EM_DASH).join(',').slice(0, 200)
+  const auth = /\b(401|403)\b/u.test(raw)
+  return [
+    '## Judge panel: unmeasured',
+    '',
+    `The ${bench} bench could not run on ${base}..${head}, so this canon change is unreviewed. Unmeasured is not a pass.`,
+    '',
+    `- Error: ${message}`,
+    ...(auth ? ['- The model call was refused. Replace the `ANTHROPIC_API_KEY` repository secret, then re-run this check.'] : []),
+    '',
+  ].join('\n')
+}
+
+/**
+ * The files a finding may cite as its clause: every file the diff changes, and
+ * every proposal document the diff itself cites as provenance (a brain/rules.yaml
+ * source.ref). A finding about that document is grounded in the change, not
+ * invented; discarding it marked a lost blocking finding and so made pull
+ * requests 125 and 126 unmeasured, although each carried an owner ruling.
+ */
+export function groundedFiles(diff) {
+  // Empty added ledgers have a diff header but no +++ line or content hunk.
+  const changed = [...diff.matchAll(/^\+\+\+ b\/(.+)$/gm), ...diff.matchAll(/^diff --git a\/[^\n]+ b\/([^\n]+)$/gm)].map((m) => m[1])
+  const cited = [...diff.matchAll(/^\+.*?\b(docs\/proposals\/[A-Za-z0-9._-]+\.md)\b/gm)].map((m) => m[1])
+  return [...new Set([...changed, ...cited])]
+}
+
+/**
  * Run one bench, with the mandatory second attempt when it comes back unanimous.
  * `ask` is injected so the whole protocol is testable without a model.
  */
 export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
+  let requestNumber = 0
+  const call = (input) => ask({ ...input, attempt: ++requestNumber })
   const bench = loadBench(name)
   const system = systemPrompt(bench, clauseIds)
-  const first = await ask({ system, user: diff, bench: name, attempt: 1 })
+  const first = await call({ system, user: diff, bench: name, attempt: 1 })
   let { findings, problems } = parseFindings(first, bench, clauseIds, diffFiles)
   let unanimous = false
   let empty = false
@@ -241,7 +322,7 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
   // The panel then reported "no blocking regression", which is the worst
   // possible failure: a discard silently became a pass.
   if (!findings.length && problems.length) {
-    const retry = await ask({
+    const retry = await call({
       system, bench: name, attempt: 2,
       user: `${diff}\n\nEvery finding in your previous review was discarded and the review was rejected. The reasons were:\n\n${problems.map((m) => `- ${m}`).join('\n')}\n\nThe clause field is not the criterion name. It must be a rule id from the valid list, or the path of a file in the diff. Return the review again, grounded.`,
     })
@@ -252,7 +333,7 @@ export async function runBench(name, { diff, diffFiles, clauseIds, ask }) {
   if (!findings.length) empty = true
 
   if (findings.length && !hasDissent(findings)) {
-    const retry = await ask({
+    const retry = await call({
       system, bench: name, attempt: 2,
       user: `${diff}\n\nYour previous review returned no regression and no dissent, and was rejected for that reason. Rule 3 is not optional. Return the review again, and this time include the strongest argument against this change that you can honestly construct, as a finding with verdict "dissent".`,
     })
@@ -307,32 +388,43 @@ export function render(results, { base, head }) {
 }
 
 // ---------------------------------------------------------------- the model
-async function anthropic({ system, user }) {
-  const key = process.env.ANTHROPIC_API_KEY
+export async function anthropic({ system, user, bench, attempt }, { env = process.env, request = requestMessages, fetchImpl = fetch } = {}) {
+  if (boundedInference(env)) {
+    const body = await request({
+      purpose: 'review', model: env.JUDGE_MODEL || env.HARNESS_API_MODEL,
+      max_tokens: Number(env.JUDGE_MAX_TOKENS || 16000), system,
+      messages: [{ role: 'user', content: user }],
+      requestId: `${env.HARNESS_REQUEST_ID || env.GITHUB_RUN_ID || randomUUID()}:${env.GITHUB_RUN_ATTEMPT || '1'}:judge:${bench}:${attempt}`,
+    })
+    if (!['end_turn', 'max_tokens'].includes(body.stop_reason)) throw new Error('judge_response_incomplete')
+    const text = (body.content || []).filter(c => c.type === 'text').map(c => c.text).join('')
+    return body.stop_reason === 'max_tokens' ? `${TRUNCATED}${text}` : text
+  }
+  const key = env.ANTHROPIC_API_KEY
   if (!key) throw new Error('ANTHROPIC_API_KEY is not set, so no bench can run. This is the one part of the panel that cannot be faked.')
   // A bounded call, always. The first run of this job on a real runner sat in
   // "Run both benches" for eight minutes with no output and no way to tell a
   // slow review from a dead socket. An unbounded fetch can hold a runner until
   // the six hour job limit, and a panel that hangs is worse than one that is
   // honestly absent: absent is visible.
-  const timeoutMs = Number(process.env.JUDGE_TIMEOUT_MS || 180000)
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const timeoutMs = Number(env.JUDGE_TIMEOUT_MS || 180000)
+  const res = await fetchImpl('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     signal: AbortSignal.timeout(timeoutMs),
     headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
-      model: process.env.JUDGE_MODEL || 'claude-opus-5',
+      model: env.JUDGE_MODEL || 'claude-opus-5',
       // Twenty criteria at two sentences each, twice, does not fit in 4096.
       // Two live reviews came back cut mid-array and were discarded whole with
       // "the bench returned unparseable JSON", which reads as a bench that had
       // nothing to say rather than one that was truncated. A silent cut is the
       // worst kind: the findings existed and were thrown away.
-      max_tokens: Number(process.env.JUDGE_MAX_TOKENS || 16000),
+      max_tokens: Number(env.JUDGE_MAX_TOKENS || 16000),
       system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: user }],
     }),
   })
-  if (!res.ok) throw new Error(`anthropic ${res.status}: ${(await res.text()).slice(0, 300)}`)
+  if (!res.ok) throw new Error(`anthropic_http_${res.status}`)
   // Never let a key reach stdout, a log, or a report.
   const body = await res.json()
   const text = (body.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('')
@@ -354,17 +446,22 @@ if (isMain) {
     process.exit(0)
   }
 
-  const diffFiles = [...new Set([...diff.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((m) => m[1]))]
+  const diffFiles = groundedFiles(diff)
   const clauseIds = clauseUniverse()
   const results = []
   for (const name of BENCHES) {
     try { results.push(await runBench(name, { diff, diffFiles, clauseIds, ask: anthropic })) }
-    catch (e) { console.error(`FAIL  ${name} bench: ${e.message}`); process.exit(2) }
+    catch (e) {
+      console.error(`FAIL  ${name} bench: ${String(e.message).replace(/sk-[A-Za-z0-9_-]{8,}/gu, '[masked]')}`)
+      const out = flag('--out')
+      if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, failureReport({ base, head, bench: name, error: e }) + '\n') }
+      process.exit(2)
+    }
   }
 
   const blocked = blockingRegressions(results.flatMap((r) => r.findings))
-  const commitMessages = execFileSync('git', ['log', '--format=%B', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
-  const rulings = recordedRulings(commitMessages)
+  const commitMessages = execFileSync('git', ['log', '--format=%B%x1e', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
+  const rulings = rulingsFromLog(commitMessages)
   let report = render(results, { base, head })
   if (blocked.length && rulings.length) {
     report += `\n## Recorded Krish override\n\n${rulings.map((r) => `- ${r}`).join('\n')}\n\nThe blocking findings remain visible as review evidence, but the recorded owner ruling overrules this gate.\n`

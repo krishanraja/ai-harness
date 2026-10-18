@@ -1,0 +1,30 @@
+{
+  "acceptance": "brain-repository-administration-v1",
+  "files": {
+    "AGENTS.md": {
+      "before_sha256": "017c9c81b68eafc14523b725f0733299fca440681fdc55cf21476274479bb6b6",
+      "edits": [
+        {
+          "start": 2081,
+          "end": 2232,
+          "replacement": ""
+        },
+        {
+          "start": 3138,
+          "end": 3209,
+          "replacement": ""
+        },
+        {
+          "start": 3893,
+          "end": 4224,
+          "replacement": ""
+        }
+      ]
+    }
+  },
+  "retained_clauses": [
+    "Preserve all repository-specific instructions outside the hash-bound edits.",
+    "Retain authority, secrets, deterministic verification and freshness in the unchanged shared canon.",
+    "Keep system ownership, design authority, ADR and source pointers; remove repeated explanation only."
+  ]
+}

@@ -1,0 +1,62 @@
+name: Harness observation intake
+
+# Redacted lessons sent straight to this repository by the private session
+# miners (scripts/mine-sessions.mjs on the PC, and the weekly cloud session
+# miner), as repository_dispatch events of type harness-observations. Only a
+# writer to this repository can send one. Krish chose the public ledger for
+# these lessons on 2026-10-15.
+#
+# The payload is read from the event file, never interpolated into a shell or
+# echoed: the repository and its Actions logs are public, so the script prints
+# counts only.
+
+on:
+  repository_dispatch:
+    types: [harness-observations]
+
+permissions:
+  contents: write
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
+        with:
+          node-version: "22"
+          package-manager-cache: false
+
+      # No concurrency group: GitHub keeps one pending run per group and
+      # cancels the rest, which would drop a lesson when the PC sends several
+      # batches at once. Instead each attempt starts from the latest main and
+      # recomputes, and dedupe by event id makes a replay harmless.
+      - name: Record unseen observations
+        run: |
+          set -euo pipefail
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          for attempt in 1 2 3 4 5 6; do
+            git fetch --quiet origin main
+            git reset --quiet --hard origin/main
+            node scripts/intake-observations.mjs
+            if [ -z "$(git status --porcelain -- state/observations state/session-miner/checkpoints.jsonl)" ]; then
+              echo "Nothing new to record."
+              exit 0
+            fi
+            git add state/observations
+            if [ -f state/session-miner/checkpoints.jsonl ]; then
+              git add state/session-miner/checkpoints.jsonl
+            fi
+            git commit --quiet -m "chore(intake): redacted observations and acknowledged progress" -m "Recorded by scripts/intake-observations.mjs from a harness-observations dispatch. Evidence and opaque progress only; nothing here is a decision."
+            if git push --quiet origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 7))
+          done
+          echo "::error::The observations could not be recorded after six attempts. Re-run this workflow; the payload is kept with the run."
+          exit 1

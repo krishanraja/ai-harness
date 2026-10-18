@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-18 10:17:45 UTC",
+  "scope": "Source definitions and limited scheduled run readback; not enabled-state certification or complete workflow history.",
+  "rows": [
+    {
+      "repository": "control-center",
+      "source_status": "read",
+      "blob_sha": "2647117662b7397b11c3057cce3fb5b15d003198",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39073433011,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "0a99d99b6113945a94c391d580dcf63cb1c8d9bd",
+        "created_at": "2026-10-17T22:02:34Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "mindmake-ctrl",
+      "source_status": "read",
+      "blob_sha": "74d3ee26018a4bcfad6a663f1ebf438220e3372b",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39073185957,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "80d1efee5bce6afba684cf7eb2a67cfd7fa6f9d9",
+        "created_at": "2026-10-17T21:59:08Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "mindmake",
+      "source_status": "read",
+      "blob_sha": "c14436d76fc9f5560356676fb6f89970ecdd8a4b",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": false,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39074283093,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "ded0f32bdbc7d1cf68609c7bd403400e78531ecf",
+        "created_at": "2026-10-17T22:15:02Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "fractionl-circle",
+      "source_status": "read",
+      "blob_sha": "91e625109479289113376060575df6ea3ed555be",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39074723070,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "eddcbde9d93cee3fdd6cd74069d3d5b9ced57948",
+        "created_at": "2026-10-17T22:21:19Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "fractionl-pulse",
+      "source_status": "read",
+      "blob_sha": "c79e99c627b935c320eaa888d05839cdfd0acc73",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39075063870,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "dd802b89f3de547b512b97519b4240fc9405fc4c",
+        "created_at": "2026-10-17T22:26:14Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "full-time",
+      "source_status": "read",
+      "blob_sha": "bd390ac1b96e4e6a78ef5179b96dfe57386d369b",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39075070066,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "210dc080fbdbf8d9a1bd888d2812dceda075bb44",
+        "created_at": "2026-10-17T22:26:19Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "content-engine",
+      "source_status": "read",
+      "blob_sha": "b07360141f774aa46672d02076af1ec06fc1a74a",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39075391525,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "644a8e1cc832fde5c28aeb8bcf724642c34b70f7",
+        "created_at": "2026-10-17T22:31:00Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "contentarchives",
+      "source_status": "read",
+      "blob_sha": "d83bb3ca4ba9c409db88b3c9d36e0c94544ef480",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39075785824,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "c9f795c92c66bc13157b5b2159be083443860648",
+        "created_at": "2026-10-17T22:36:50Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "ai-harness",
+      "source_status": "read",
+      "blob_sha": "f320838944ec313dcdbafed6a4e19eb310628872",
+      "has_scheduled_definition": true,
+      "has_reusable_call": false,
+      "secrets_inherit": false,
+      "has_model_action": true,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39076054483,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "229ef7e2b7e39fbdd51da675f14269d324b0d145",
+        "created_at": "2026-10-17T22:40:52Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "AEO-Engine",
+      "source_status": "read",
+      "blob_sha": "bd936f72591d64a55815b5724f00cc93ee31df20",
+      "has_scheduled_definition": true,
+      "has_reusable_call": true,
+      "secrets_inherit": true,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "File definition only; enabled workflow state and scheduled execution not proven.",
+      "scheduled_evidence": {
+        "id": 39076057169,
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "be3cf5b49725f079f187fd9de66f9e817fdb7733",
+        "created_at": "2026-10-17T22:40:54Z",
+        "event": "schedule"
+      }
+    },
+    {
+      "repository": "makeyourmindup",
+      "source_status": "directory-read-no-docs-workflow",
+      "blob_sha": null,
+      "has_scheduled_definition": false,
+      "has_reusable_call": false,
+      "secrets_inherit": false,
+      "has_model_action": false,
+      "suspended_hint": false,
+      "admitted_for_instruction_writes": true,
+      "limits": "Live .github/workflows directory contains only the repository-context workflow; do not enroll a docs writer from the fleet manifest."
+    }
+  ],
+  "first_merged_fix": {
+    "pull_request": 136,
+    "merge_sha": "9f4d7793fa929efcfd23a1d2e0260b495b285b1a",
+    "main_push_run": 39118339905,
+    "validation": "passed",
+    "model_job": "skipped",
+    "evidence_kind": "actual-main-push-not-scheduled-proof"
+  },
+  "limits": [
+    "Ten recent nightly docs runs reported failure; two sampled job traces failed at model execution, not the token-presence preflight. Cause is not inferred without private-safe diagnostics.",
+    "mindmake remains excluded from instruction writes; a discovered schedule does not enroll it in the rollout.",
+    "makeyourmindup has only a repository-context workflow in the inspected live directory; no docs writer is enrolled from the fleet entry."
+  ]
+}

@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 99 rules across the two contracts.
+# 104 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -67,11 +67,57 @@ contract_rules:
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
-    text_sha: "753e74bacc3e"
+    text_sha: "1520cfd4a9cb"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "60106bef02bd"
+      ref: "6c1c96d26649"
+    history:
+      - text_sha: "753e74bacc3e"
+        valid_until: "2026-10-15"
+        source:
+          kind: ruling
+          ref: "60106bef02bd"
+    status: live
+  - id: north-star.read-it-before-any
+    file: contract/krish-operating-contract.md
+    text_sha: "c19f6b9521c5"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.before-starting-say-which
+    file: contract/krish-operating-contract.md
+    text_sha: "ece6bd66ded2"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.prefer-the-work-that
+    file: contract/krish-operating-contract.md
+    text_sha: "8f481a00f830"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.only-krish-changes-a
+    file: contract/krish-operating-contract.md
+    text_sha: "27578a750b20"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.a-repository-with-no
+    file: contract/krish-operating-contract.md
+    text_sha: "947f39bcda48"
+    first_seen: "2026-10-18"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
     status: live
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
@@ -771,6 +817,15 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: ctrl-standards-chain.stage-8-deliver-installs
+    file: contract/skill-routing-contract.md
+    text_sha: "0a2b49ed2a71"
+    first_seen: "2026-10-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"
+    status: live
+    supersedes: [ctrl-standards-chain.stage-8-deliver-is]
   - id: ctrl-standards-chain.stage-8-deliver-is
     file: contract/skill-routing-contract.md
     text_sha: "f77d76b4c9bd"
@@ -778,14 +833,21 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
-    status: live
+    status: superseded
+    valid_until: "2026-10-15"
   - id: ctrl-standards-chain.ctrl-capture-stage-9
     file: contract/skill-routing-contract.md
-    text_sha: "e46e8e692025"
+    text_sha: "d8b95d47214e"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "e46e8e692025"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: required-route-evidence.selected-skills-and-why
     file: contract/skill-routing-contract.md
@@ -852,7 +914,7 @@ contract_rules:
       ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
 
-# 227 chapters across the installed skills.
+# 228 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -1254,6 +1316,15 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: ctrl-capture.repository-delivery-handoff
+    file: skills/ctrl-capture/SKILL.md
+    heading: "Repository delivery handoff"
+    text_sha: "cb0359dd2a16"
+    first_seen: "2026-10-17"
+    source:
+      kind: ruling
+      ref: "9760cd321f6a8180dc8fd38aef309ee3e9741931"
+    status: live
   - id: ctrl-capture.capture-contract
     file: skills/ctrl-capture/SKILL.md
     heading: "Capture contract"
@@ -1266,20 +1337,37 @@ skill_sections:
   - id: ctrl-capture.evidence-is-not-truth
     file: skills/ctrl-capture/SKILL.md
     heading: "Evidence is not truth"
-    text_sha: "1c7e04e9ba29"
+    text_sha: "07a6702221b1"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "1c7e04e9ba29"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-capture.workflow
     file: skills/ctrl-capture/SKILL.md
     heading: "Workflow"
-    text_sha: "f10872ff1af8"
+    text_sha: "db21f7c7cde8"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-15-pc-guardian-and-chat-lessons.md"
+    history:
+      - text_sha: "f10872ff1af8"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
+      - text_sha: "fedc2a6d60a8"
+        valid_until: "2026-10-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
     status: live
   - id: ctrl-capture.proposal-schema
     file: skills/ctrl-capture/SKILL.md
@@ -1293,11 +1381,17 @@ skill_sections:
   - id: ctrl-capture.change-and-history-invariants
     file: skills/ctrl-capture/SKILL.md
     heading: "Change and history invariants"
-    text_sha: "12aeb7040f08"
+    text_sha: "361c91710387"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+    history:
+      - text_sha: "12aeb7040f08"
+        valid_until: "2026-10-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: ctrl-capture.never-omit-result-envelope
     file: skills/ctrl-capture/SKILL.md
@@ -2495,11 +2589,17 @@ skill_sections:
   - id: mindmake-os.where-to-read-it
     file: skills/mindmake-os/SKILL.md
     heading: "Where to read it"
-    text_sha: "6d871f552c1b"
+    text_sha: "e76c8aaed17b"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "6c1c96d26649"
+    history:
+      - text_sha: "6d871f552c1b"
+        valid_until: "2026-10-15"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake-os.section-map
     file: skills/mindmake-os/SKILL.md

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "repository": "contentarchives",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "35ba0dcf783d9311e11b774b41197bb0dfc884ea",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 139913,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "RESUME.md",
+      "role": "state",
+      "label": "RESUME"
+    },
+    {
+      "path": "docs/LEARNINGS.md",
+      "role": "orientation",
+      "label": "LEARNINGS"
+    },
+    {
+      "path": "stages/13_app/STAGE.md",
+      "role": "orientation",
+      "label": "STAGE"
+    },
+    {
+      "path": "web/README.md",
+      "role": "orientation",
+      "label": "README"
+    },
+    {
+      "path": "docs/history/LOG.md",
+      "role": "orientation",
+      "label": "Required bootstrap source"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "consolidation",
+      "label": "Safe media consolidation through the owning stage",
+      "read": [
+        "RESUME.md",
+        "docs/LEARNINGS.md",
+        "README.md"
+      ],
+      "checks": [
+        "python3 -m unittest discover -s tests -p test_stage_contracts.py"
+      ]
+    },
+    {
+      "id": "application",
+      "label": "Application boundary and stage-owned implementation",
+      "read": [
+        "stages/13_app/STAGE.md",
+        "web/README.md",
+        "NOW.md"
+      ],
+      "checks": []
+    }
+  ]
+}
