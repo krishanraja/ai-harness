@@ -10,7 +10,8 @@ const digest = (value) => sha(JSON.stringify(canonical(value)))
 export const cloudSessionHash = (session) => sha(`claude-code-web\0${session}`)
 export const cloudEventHash = (event) => sha(`event\0${event}`)
 const sameKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).sort().join(',') === [...keys].sort().join(',')
-const timestamp = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value) && Number.isFinite(Date.parse(value))
+// Cloud provider events carry microseconds (six fractional digits).
+const timestamp = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$/.test(value) && Number.isFinite(Date.parse(value))
 
 export function validateCloudCheckpoint(checkpoint) {
   if (!sameKeys(checkpoint, ['schema_version', 'adapter', 'checkpoint_id', 'cursors', 'receipts']) || checkpoint.schema_version !== 1 || checkpoint.adapter !== 'cloud-events') throw new Error('invalid_cloud_checkpoint')
