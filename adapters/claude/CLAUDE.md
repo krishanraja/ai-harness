@@ -18,6 +18,8 @@ Use focused skills from the canonical `skills` directory. Load `mindmake-os` for
 
 For current mind/make OS facts, follow the source and freshness rules in `mindmake-os`; do not rely on remembered counts.
 
+For tool-relevant work in every session, follow the operating contract's Cloud tool access section: discover current connected tools, read `get_tool_value_catalog` when available, and apply relevant capabilities proactively. Attempt a capable MCP first; use an approved API when it lacks the needed controls. Read economics only when it affects the task. Ongoing cloud access uses remote connections or scoped runtime-injected credentials and never depends on this computer, an open browser, or unlocked KeePass. Never return raw keys to the model.
+
 When Krish overrules a decision, record it in the commit body as `Ruling (Krish, YYYY-MM-DD): the ruling, in one line`. The harness reads those lines across every repository.
 
 When `record_harness_observation` is available, follow the operating contract's Observation capture section.
