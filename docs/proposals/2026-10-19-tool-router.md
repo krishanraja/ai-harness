@@ -6,14 +6,14 @@ Ruling (Krish, 2026-10-19): create a reusable skill that invokes under relevant 
 
 The cloud adapter names the route in one sentence; personal identity and working preferences are preserved. An instruction pointer cannot guarantee a model will load a skill. Install/enabled evidence, independent simulated behavior and real fresh-client behavior are reported separately. No paid provider test or second-account inference test is authorized for this correction.
 
-## Evidence to complete
+## Evidence scope
 
 - Structural/security and complete harness checks.
 - Held-out trigger and behavior review, including domain collisions and exact-plan authority.
 - Repeat-identical package builds and source/package hashes.
 - Current Claude account: original personal instructions preserved, skill uploaded and enabled; model inference remains unmeasured under the user's no-credit-test instruction.
 - Codex installation: complete package bytes and implicit invocation metadata.
-- Other Claude account and ChatGPT: report actual installation or pending surface handoff; never infer cross-client parity.
+- Each Claude account and ChatGPT: record actual installation independently; never infer cross-client parity.
 
 Do not label this change universally behavior-proven or production-grade from structural checks or an upload alone.
 
@@ -30,4 +30,26 @@ Source package commit: `f987fa91d54ba560a5722cef1051f25eea30c817`.
 - Independent reviewer: 21 trigger and 23 behavior cases simulated, plus five analytical baseline comparisons. No hard authority violation found; full handoff clarification applied and adjacent cases rerun. These are not blind client measurements.
 - Full harness validation passed with 29 production skills and 3 candidates. Surface validation passed with the two existing warnings preserved.
 
-The candidate stays outside `production_active` and normal release packaging. Requested provisional installation does not certify production admission. First Claude account, ordinary ChatGPT and other cloud surfaces are not certified by this account's upload. Gemini remains parked. Remaining client canaries and formal admission are explicit pending gates; no paid provider call or second-account inference test was made.
+The candidate stays outside `production_active` and normal release packaging. Requested provisional installation does not certify production admission. Gemini remains parked. Behavioral canaries and formal admission are explicit pending gates; no paid provider call or second-account inference test was made.
+
+## Consolidated installation record
+
+The subsequently authorized first-account and ChatGPT installations are complete. Machine-readable evidence is in `state/cloud-checks/tool-router-2026-10-19.json`. This records observable installation and saved settings, not client behavior inferred from an upload.
+
+| Surface | Installation evidence | Personalization preservation | Behavior |
+|---|---|---|---|
+| Claude, first account | v1 enabled, `skill_01PuR5tcgPg29Wf3qCQZWfeh`; both files inspected | All 2,466 personal characters retained exactly; only old tool workflow replaced by a 117-character pointer; final 2,583 characters verified after reload | No inference test |
+| Claude, second account | v1 enabled, `skill_01R1x5w1UbzELmZ9GFvPGrd1`; both files inspected | Original 2,466 personal characters retained exactly plus the same pointer; final 2,583 characters verified after reload | No inference test |
+| ChatGPT | Tool Router installed, `6ad6961e1b5c819193c5f4a6061db3a6`; file contents and installed state checked after reload | All 3,017 personal instruction characters retained; only old tool paragraph replaced by pointer; final 3,134 characters. Nickname, occupation and More about you unchanged | No inference test |
+| Codex current | Both extracted files hash-exact; implicit invocation enabled | No account instruction replacement | No fresh-session execution test |
+
+All used the same archive hash recorded above. ChatGPT's importer added icon/products metadata; therefore identical upload source is verified, but stored cloud package byte parity is not claimed. Private instruction backups and screenshots remain in local evidence storage, outside this public repository. No raw personal instructions or credential values are published here.
+
+ChatGPT's existing Control Center app reports connected, with its existing Allow all permission. No connector permission, credential, grant, server, billing or unrelated skill was changed during these installations. No provider operation or gateway plan was executed. No new test prompt, model test run or paid lookup was submitted for either later account installation or this consolidation.
+
+### Verification and release boundary
+
+- Earlier CI checks passed on `b284808ee598bcfa0e50822653a9655050f20ffc`; those results remain tied to that exact head.
+- This evidence-only update uses local deterministic validation. Its commit skips automatic CI because the PR workflow would otherwise rerun an API-backed judge against the cumulative canon diff, contrary to the user's no-test-token restriction. No workflow or approval rule is weakened.
+- Installation/configuration rollout is complete on the four named surfaces. Blind trigger measurement, baseline comparisons using real client responses, provider execution and formal production admission remain unmeasured or pending. A settings-only verification cannot resolve those gates.
+- PR #150 remains a draft record of the reviewed candidate and requested provisional installations. It is not merged or represented as a production release. Merging must not silently convert configuration evidence into behavioral certification.

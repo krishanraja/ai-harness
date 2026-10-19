@@ -1,6 +1,6 @@
 schema_version: 1
 id: tool-router
-status: reviewed-provisional-install-requested-client-behavior-unmeasured
+status: reviewed-provisional-configuration-verified-behavior-unmeasured
 owner: Krish Raja
 created_at: 2026-10-19
 skill_path: candidates/tool-router
@@ -8,13 +8,16 @@ admission_path: skills/tool-router
 proposal: docs/proposals/2026-10-19-tool-router.md
 activation: false
 release_eligible: false
-requested_surface: current-claude-account-and-codex
+requested_surfaces: [claude-first-cloud, claude-secondary-cloud, chatgpt-cloud, codex-current]
+installation_evidence: state/cloud-checks/tool-router-2026-10-19.json
 provisional_canaries:
+  - {surface: claude-first-cloud, state: uploaded-enabled-v1, behavior: unmeasured-no-inference-requested}
   - {surface: claude-secondary-cloud, state: uploaded-enabled-v1, behavior: unmeasured-no-inference-requested}
+  - {surface: chatgpt-cloud, state: uploaded-installed-and-verified-after-reload, behavior: unmeasured-no-inference-requested}
   - {surface: codex-current, state: two-package-files-hash-exact, behavior: new-session-unmeasured}
 package_source_commit: f987fa91d54ba560a5722cef1051f25eea30c817
 user_authority: explicit-request-for-invocable-skill-and-preservation-of-personal-instructions
-test_boundary: no-further-credit-consuming-inference-in-second-claude-account-no-paid-provider-lookups
+test_boundary: no-paid-provider-lookups-or-model-test-runs-on-requested-surfaces
 remaining_gates:
   - blind-client-trigger-and-baseline-comparison
   - supported-client-behavior-canary
