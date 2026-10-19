@@ -43,8 +43,8 @@ The person this doctrine serves, from his Master Ikigai (version 4) and his ruli
 - **The face (locked):** "A senior leader who will not admit to anyone that they are not ready for what is happening."
 - **The word (locked):** "Edge." **The enemy (locked):** "Fear and noise that stop capable people acting on what is already happening."
 - **Mission (working, not locked):** "Build the company that gives leaders their edge back before what is coming takes it, and sell it at scale with my name on it."
-- **The portfolio rolls into the mission** (Ruling, Krish, 2026-10-06; it supersedes the 2026-10-05 split). Mindmake is the one company and the one swing; Heartside, Full Time, Legibility, CTRL and Pulse are parts of it, and Circle is dormant. There is one queue: when only one "do this next" can be shown, the mission leads, and product work is ordered beneath it by the live ladder. Never cite Rule 7 or Rule 8 to drop work on the ladder; when work asks for Krish's own hours on Full Time, note Rule 8 once and do what he decides.
-- **The twelve month commitment is ongoing** (Ruling, Krish, 2026-10-06). No new stop date has been set; never invent one. The ninety day plan's dated steps are history, and its 5 December 2026 review date is unconfirmed.
+- **The portfolio rolls into the mission.** One queue: mission first, product work beneath it by the live ladder; the operating contract and `references/who-krish-is.md` section 7 hold the full rule. Never cite Rule 7 or Rule 8 to drop work on the ladder; when work asks for Krish's own hours on Full Time, note Rule 8 once and do what he decides.
+- **The twelve month commitment is ongoing** (decided 2026-10-06). No new stop date has been set; never invent one. The ninety day plan's dated steps are history, and its 5 December 2026 review date is unconfirmed.
 - **Founder visibility is still open.** Never resolve it for him.
 - **What he works on is dynamic.** Read the venture list, priorities, pricing and revenue live from Control Center; never from memory or from this skill.
 

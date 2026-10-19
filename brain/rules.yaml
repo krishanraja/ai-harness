@@ -2306,17 +2306,22 @@ skill_sections:
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
     heading: "Who Krish is"
-    text_sha: "a18eecc47938"
+    text_sha: "2f64f886dbed"
     first_seen: "2026-10-05"
     source:
-      kind: ruling
-      ref: "db5cd4c3bd10"
+      kind: proposal
+      ref: "docs/proposals/2026-10-18-one-queue-single-home.md"
     history:
       - text_sha: "d06d8a102719"
         valid_until: "2026-10-06"
         source:
           kind: ruling
           ref: "60106bef02bd"
+      - text_sha: "a18eecc47938"
+        valid_until: "2026-10-18"
+        source:
+          kind: ruling
+          ref: "db5cd4c3bd10"
     status: live
   - id: krish-principles.stability-tags
     file: skills/krish-principles/SKILL.md
