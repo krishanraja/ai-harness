@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 109 rules across the two contracts.
+# 110 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -377,11 +377,25 @@ contract_rules:
     status: live
   - id: cloud-tool-access-in-every-session.on-the-first-task
     file: contract/krish-operating-contract.md
-    text_sha: "f1f766b3fb3b"
+    text_sha: "b56cf42bf193"
     first_seen: "2026-10-19"
     source:
       kind: ruling
-      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+      ref: "d350c56e6c2ca2a18fe92bf718de6ccdd9170007"
+    history:
+      - text_sha: "f1f766b3fb3b"
+        valid_until: "2026-10-19"
+        source:
+          kind: ruling
+          ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+    status: live
+  - id: cloud-tool-access-in-every-session.preparing-a-chargeable-operation
+    file: contract/krish-operating-contract.md
+    text_sha: "09f30d056e16"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "d350c56e6c2ca2a18fe92bf718de6ccdd9170007"
     status: live
   - id: cloud-tool-access-in-every-session.attempt-an-already-connected
     file: contract/krish-operating-contract.md
