@@ -9,6 +9,10 @@ proposal: docs/proposals/2026-10-19-tool-router.md
 activation: false
 release_eligible: false
 requested_surface: current-claude-account-and-codex
+provisional_canaries:
+  - {surface: claude-secondary-cloud, state: uploaded-enabled-v1, behavior: unmeasured-no-inference-requested}
+  - {surface: codex-current, state: two-package-files-hash-exact, behavior: new-session-unmeasured}
+package_source_commit: f987fa91d54ba560a5722cef1051f25eea30c817
 user_authority: explicit-request-for-invocable-skill-and-preservation-of-personal-instructions
 test_boundary: no-further-credit-consuming-inference-in-second-claude-account-no-paid-provider-lookups
 remaining_gates:
