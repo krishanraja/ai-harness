@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 104 rules across the two contracts.
+# 109 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -374,6 +374,46 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: cloud-tool-access-in-every-session.on-the-first-task
+    file: contract/krish-operating-contract.md
+    text_sha: "f1f766b3fb3b"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+    status: live
+  - id: cloud-tool-access-in-every-session.attempt-an-already-connected
+    file: contract/krish-operating-contract.md
+    text_sha: "f50e9ca9da42"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+    status: live
+  - id: cloud-tool-access-in-every-session.proactively-use-relevant-tools
+    file: contract/krish-operating-contract.md
+    text_sha: "86f9d69bcae8"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+    status: live
+  - id: cloud-tool-access-in-every-session.cloud-sessions-use-their
+    file: contract/krish-operating-contract.md
+    text_sha: "4721968403f7"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
+    status: live
+  - id: cloud-tool-access-in-every-session.verify-the-account-target
+    file: contract/krish-operating-contract.md
+    text_sha: "a49536b2b0c4"
+    first_seen: "2026-10-19"
+    source:
+      kind: ruling
+      ref: "9144a3c67b1aa1d72a9a2ea786b7d7649d459ddc"
     status: live
   - id: truth-and-freshness.prefer-live-state-for
     file: contract/krish-operating-contract.md
