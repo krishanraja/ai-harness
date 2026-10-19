@@ -1,0 +1,35 @@
+# Tool economics candidate, 2026-10-19
+
+## Finding and correct layer
+
+The active account router names domain skills and `tools-access`, but no owner compares available MCP/API tools against current allowance and marginal cost. `tools-access` proves identity and scope; it explicitly does not select a provider for task value. A narrow task-level context skill is justified by recurring cross-provider choices. It remains a candidate, not an active route.
+
+This work advances the North Star's repeated-correction and autonomous-fleet clauses: a durable choice method should be applied in future sessions, while volatile availability and quota data stay in the live cloud system.
+
+## Proposed architecture
+
+1. Control Center owns the twice-weekly service-economics snapshot and the live service registry. [PR #483](https://github.com/krishanraja/control-center/pull/483) merged and deployed on 2026-10-19. The first scheduled snapshot has not yet been observed; meter and price coverage remain partial.
+2. [PR #488](https://github.com/krishanraja/control-center/pull/488) merged to main on 2026-10-19 and adds read-only `get_service_economics_snapshot` and `get_tool_value_catalog` tools to the **existing** Claude, ChatGPT and Codex harness MCP connections. The same authenticated account connector grants can read registered service state, category, freshness, observed balances and spend, with explicit unknowns. This was Krish's correction to the separate-reader plan; no replacement links are needed for those accounts. A separately scoped economics reader endpoint remains available for Gemini where custom MCP apps are supported. The catalog gives 18 common connectors a curated contribution, best-fit use and example idea. It does not prove a connector is installed in the calling account, and the economics snapshot does not yet provide verified capability tags, live price verification, or the full credential catalog. No API key value enters either tool response.
+3. `tool-economics` routes among tools present in the session. `tools-access` still proves authenticated identity. Domain operators still execute. The skill stores no vendor balances or fixed prices.
+4. After admission, add a short trigger to the Claude/Codex account instructions and a separate Gemini instruction. The Gemini web app may apply account instructions to ordinary new chats, but availability and connected-tool behavior require a live account canary. A Gem is not equivalent to account-wide instructions.
+5. Gemini custom MCP access is region and account limited in [Google's current help](https://support.google.com/gemini/answer/17209137). On 2026-10-19, a Gemini custom-app attempt with the economics URL-token link was rejected because Gemini requires standard OAuth for server connections. The URL-token route is therefore **not an install path for Gemini web**. An OAuth-protected MCP endpoint with client discovery, consent and a fresh-chat tool-call canary is required before claiming parity with Claude or Codex. [Gemini account instructions](https://support.google.com/gemini/answer/16598625) apply to ordinary chats in eligible personal accounts, with stated feature exclusions.
+6. [OpenAI's MCP guidance](https://learn.chatgpt.com/docs/extend/mcp?surface=cli) distinguishes ChatGPT web plugins from a Codex host's local MCP configuration. A local Codex setting does not propagate automatically to other machines or hosted chats. [ChatGPT custom MCP connections](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt) require the account/workspace to permit creation and installation; new-chat canaries must prove tool calls after setup. The server now sends initialization instructions to clients that support them, but account-level instructions and observed usage are still necessary for reliable automatic routing.
+
+The current economics read contract is `get_service_economics_snapshot`: `as_of`, coverage and source status, registered category, retirement state, observed balance and unit, spend already incurred, relevant billing cycle, and unknown/stale findings. `get_tool_value_catalog` supplies static value and ideas for 18 common connectors. The session must pair these with its actual tool inventory and only suggest an idea that advances the current goal. Verified capability tags for every service, provider-specific prices and exact remaining allowances remain future source work. A retired route is excluded from tool choice but retained for charge monitoring. Neither tool returns key values, secret identifiers, or raw invoices, nor can either operate a provider. Gemini's optional separate reader has its own revocable identity and rate limit; the existing Claude, ChatGPT and Codex connectors retain their current identities.
+
+## Credential placement
+
+Krish already has a KeePass database in cloud storage. Metadata confirms revision history; a separate recoverable backup has not been verified. Use that existing encrypted database as the master inventory, with one entry per provider and account plus owner, purpose, scope, expiry and rotation date as non-secret fields. The twice-weekly cloud job must use its own runtime credentials; it cannot depend on KeePass being open or a local machine being on. Inject only a service's needed key into the consuming cloud runtime's encrypted environment; [Control Center's production Vercel sensitive environment variables](https://vercel.com/docs/environment-variables/sensitive-environment-variables) are the proposed destination for its own cloud collectors. Use [GitHub Actions secrets](https://docs.github.com/en/actions/concepts/security/secrets) only for Actions workflows that need them. The public ai-harness repository contains symbolic names and routing policy only.
+
+Do not paste credential values into chat, an issue, a PR, a skill, a repository file, or a general document. Official secure input surfaces and one provider at a time keep migration auditable. Provisioning, rotation and permission expansion each need exact action-time approval.
+
+## Admission and release gates
+
+- Review overlap and authority against `tools-access`, `evidence-research`, and provider skills.
+- Run held-out trigger and behavior suites, including stale snapshot, mismatched billing pools, quality-versus-cost, unmetered services, overage pressure, missing connector, and secret injection attempts.
+- Verify a read-only catalog tool on one client with a fresh session, then the other clients. Record actual tool call and readback, not just a listed skill name.
+- Keep account-instruction edits and cloud uploads out of production until the candidate passes the active-skill standard and Krish approves the exact surfaces.
+
+## Current status
+
+Candidate staged as inactive. Gemini web MCP installation is blocked by unsupported authentication on the current endpoint. Merging this proposal does not install the skill, change account instructions, connect Gemini, transfer a key, or mark the candidate `production_active`.

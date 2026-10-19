@@ -1,0 +1,22 @@
+schema_version: 1
+id: tool-economics
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-10-19
+source_branch: feat/tool-economics
+skill_path: candidates/tool-economics
+admission_path: skills/tool-economics
+proposal: docs/proposals/2026-10-19-tool-economics.md
+evaluation:
+  trigger_cases: evals/candidates/tool-economics-trigger-cases.jsonl
+  behavior_cases: evals/candidates/tool-economics-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - read-only-catalog-tool-and-fresh-session-canary
+  - named-human-admission
+  - governed-release-and-install-approval
