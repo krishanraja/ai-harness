@@ -51,6 +51,8 @@ Provenance for the three rows added 2026-09-09, `harness-maintainer`, `tools-acc
 
 ### Candidate route, inactive
 
+The operating contract's Cloud tool access section is active session-level doctrine owned by `tools-access` and the task's narrow provider. It does not depend on activating the separate economics candidate below. Tool discovery and useful application lead; cost review runs only when it affects the task.
+
 `tool-economics` is staged under `candidates/`, outside `production_active`. If admitted, it will advise on task-level choice among available MCP/API tools using live capability, allowance, and marginal-cost evidence. It will not replace `tools-access` for identity and scope or any provider/domain skill for execution. Do not advertise or load it as a production route before the admission and surface canaries in `docs/proposals/2026-10-19-tool-economics.md` pass.
 
 - `ux-foundations` replaces the retired generic cloud skills `strategy`, `ux-design`, `ux-concepts`, `ux-toolkit`, `design`, `ux`, `ux-principles`, `ab-test-plan`, and `design-system-builder`. Do not enable both generations.

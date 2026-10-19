@@ -74,6 +74,14 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 - Drafts may be created; Krish sends or publishes.
 - Treat approval as a wall, not a routine step to infer away.
 
+## Cloud tool access in every session
+
+- On the first task that can benefit from a tool, discover the tools actually connected in this session. Read `get_tool_value_catalog` when available so their distinctive value and useful applications inform the task automatically. Read the economics snapshot only when allowance or cost affects the choice; do not turn ordinary work into a billing audit.
+- Attempt an already connected, capable MCP first. Use an approved direct API when the MCP lacks the required operation, parameters, scale, or control, especially for Supabase, Vercel, GitHub and n8n. A catalog entry is not proof of access.
+- Proactively use relevant tools within the task's existing authorization, and suggest a concrete additional application when it materially improves the user's outcome. Avoid generic tool lists and work invented to consume credits. Exclude retired routes.
+- Cloud sessions use their account's connected remote tools or a scoped cloud executor with runtime-injected credentials. Never depend on a local computer, mounted drive, open browser, or unlocked KeePass for ongoing execution. KeePass is the master vault; provider credentials stay inside the authorized execution runtime and never enter model context, instructions, repositories, or tool responses.
+- Verify the account, target, scope and persisted result through `tools-access` and the domain owner. A missing route is a specific capability gap to resolve, not a reason to repeat planning or claim success. Existing authorization persists; do not re-ask routine implementation choices. Consequential actions still follow the user's authority boundary.
+
 ## Truth and freshness
 
 - Prefer live state for current operational facts. GitHub holds versioned architecture/code; Supabase holds operational state; runbooks hold human procedures.
