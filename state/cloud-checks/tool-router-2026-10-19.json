@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "skill": "tool-router",
+  "recorded_on": "2026-10-19",
+  "status": "configuration-rollout-complete-behavior-unmeasured",
+  "production_admitted": false,
+  "source_commit": "f987fa91d54ba560a5722cef1051f25eea30c817",
+  "source_file_sha256": {
+    "SKILL.md": "d47247fa21403f580e5580d546606601f335f99b4070728062cccdcdc66b566a",
+    "agents/openai.yaml": "5a7153e59c6695cf7cb9c4757f249bc2485dc696e3da0d96fbeb0a953f780208"
+  },
+  "uploaded_archive_sha256": "703eecf43b5596661afae4839813f83e28107153f66cd0e7c3394fce30f5da43",
+  "verification_scope": [
+    "package hash",
+    "observable cloud file contents",
+    "installed or enabled state",
+    "saved personalization readback",
+    "private backup comparisons",
+    "Codex installed file hashes"
+  ],
+  "surfaces": [
+    {
+      "surface": "claude-first-cloud",
+      "skill_id": "skill_01PuR5tcgPg29Wf3qCQZWfeh",
+      "version": "v1",
+      "state": "enabled",
+      "files_observed": [
+        "SKILL.md",
+        "agents/openai.yaml"
+      ],
+      "personal_characters_preserved": 2466,
+      "final_instruction_characters": 2583,
+      "personal_preservation_verified": true,
+      "cloud_byte_parity": "unmeasured",
+      "behavior": "not-run"
+    },
+    {
+      "surface": "claude-secondary-cloud",
+      "skill_id": "skill_01R1x5w1UbzELmZ9GFvPGrd1",
+      "version": "v1",
+      "state": "enabled",
+      "files_observed": [
+        "SKILL.md",
+        "agents/openai.yaml"
+      ],
+      "personal_characters_preserved": 2466,
+      "final_instruction_characters": 2583,
+      "personal_preservation_verified": true,
+      "cloud_byte_parity": "unmeasured",
+      "behavior": "not-run"
+    },
+    {
+      "surface": "chatgpt-cloud",
+      "skill_id": "6ad6961e1b5c819193c5f4a6061db3a6",
+      "state": "installed-verified-after-reload",
+      "files_observed": [
+        "SKILL.md",
+        "agents/openai.yaml"
+      ],
+      "personal_characters_preserved": 3034,
+      "final_instruction_characters": 3151,
+      "personal_preservation_verified": true,
+      "other_personal_fields_unchanged": [
+        "nickname",
+        "occupation",
+        "more-about-you"
+      ],
+      "importer_adjustments": "generated icon and products metadata observed",
+      "cloud_byte_parity": "not-claimed",
+      "behavior": "not-run"
+    },
+    {
+      "surface": "codex-current",
+      "state": "two-package-files-hash-exact",
+      "implicit_invocation": true,
+      "account_instructions_replaced": false,
+      "behavior": "not-run"
+    }
+  ],
+  "scope_exclusions": [
+    "Gemini parked",
+    "other machines and cloud accounts unmeasured",
+    "no new model test runs",
+    "no paid lookups",
+    "no provider execution",
+    "no gateway plan execution",
+    "no connector permission changes",
+    "no private instruction text or credentials in public evidence"
+  ],
+  "remaining_gates": [
+    "blind client trigger and baseline measurements",
+    "supported client behavior canary",
+    "governed production admission"
+  ],
+  "prior_ci": {
+    "head": "b284808ee598bcfa0e50822653a9655050f20ffc",
+    "result": "required-checks-passed-on-that-head",
+    "new_evidence_commit": "local-deterministic-validation-only-automatic-CI-skipped-to-prevent-model-judge-rerun"
+  }
+}

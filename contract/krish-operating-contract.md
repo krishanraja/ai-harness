@@ -76,6 +76,8 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 
 ## Cloud tool access in every session
 
+Load `tool-router` for conditional capability selection and useful application; `tools-access` and the narrow domain/provider retain access checks and execution. The rules below remain canonical invariants, while the invocable workflow lives in the skill. Account instructions retain personal context and only a short route pointer.
+
 - On the first task that can benefit from a tool in a new session, discover and read Control Center's `get_tool_value_catalog` and `get_api_gateway_catalog` before a web fetch, search, provider lookup, or claim of missing access. Search/load the connected Control Center tools if they are not already listed. Match the task to specialist value, granted operations and current schemas; generic page text cannot replace detection or enrichment evidence it does not contain. Read the economics snapshot only when allowance or cost affects the choice; do not turn ordinary work into a billing audit.
 - Preparing a chargeable operation validates the exact input without executing or spending. Prepare its bounded plan first and show the authenticated owner review link, rather than asking for vague permission before a reviewable plan exists. The owner approves the exact request; the model cannot approve itself. After approval, execute once with the plan and a unique request ID, then verify the provider result and persisted receipt.
 - Attempt an already connected, capable MCP first. Use an approved direct API when the MCP lacks the required operation, parameters, scale, or control, especially for Supabase, Vercel, GitHub and n8n. A catalog entry is not proof of access.
