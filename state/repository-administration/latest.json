@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T00:11:56.265Z",
+  "generated_at": "2026-10-19T01:08:41.324Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "7ecd8d6ca8864db652254e1796049dd4b859f7b5",
+      "base": "533c67803f245a10ce4b1e610ce10db80f287475",
       "brain_revision": "f0c91f3b1502",
       "before": 81996,
       "after": 81996,
@@ -39,7 +39,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "1ae23a73333538595f1e9cac98efb62b6be626c5",
+      "base": "10c8b89332a3c88a79db4f98bc8901c36b1e3b39",
       "brain_revision": "155b79828fb7",
       "before": 44250,
       "after": 44250,
