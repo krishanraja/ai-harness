@@ -11,7 +11,7 @@ Turn an outcome into a capable, available tool route. Help the task owner notice
 
 Use implicitly for the conditions in the description, or explicitly when the user says `tool-router` (including `$tool-router` on clients supporting that syntax). A provider name is not required. Run before selecting an external route; keep the selection brief and let the narrow task owner deliver the work.
 
-Input: the user's outcome, supplied artifacts, actual tools available in this session, constraints, and existing authorization. Output: a selected capability and route, why it adds value, exact operation/input, material cost or access uncertainty, and the next execution or approval action. This can remain internal unless a choice, limitation, or approval matters to the user.
+Receive the task owner's strategy context from `strategy-brief` for material work. Input: the user's outcome, supplied artifacts, actual tools available in this session, constraints, and existing authorization. Carry material facts, assumptions, source evidence, authority, unresolved questions and the observable success signal into the execution handoff. Output: a selected capability and route, why it adds value, exact operation/input, material cost or access uncertainty, and the next execution or approval action. This can remain internal unless a choice, limitation, or approval matters to the user.
 
 ## Discover what this session can actually do
 

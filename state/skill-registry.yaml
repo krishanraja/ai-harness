@@ -262,7 +262,6 @@ production_active:
   - n8n-operator
   - strategy-brief
   - take-the-brief
-  - tool-router
   - tools-access
   - ux-foundations
   - ux-testing-agent
@@ -270,7 +269,6 @@ production_active:
   - video-engine
 
 production:
-  - {name: tool-router, role: capability-selection-context, owner: Krish Raja, reviewed: 2026-10-19, freshness_sla_days: 30, status: provisional-client-behavior-unmeasured}
   - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
   - {name: mindmake, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 45}
   - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}

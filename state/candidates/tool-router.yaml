@@ -1,0 +1,17 @@
+schema_version: 1
+id: tool-router
+status: reviewed-provisional-install-requested-client-behavior-unmeasured
+owner: Krish Raja
+created_at: 2026-10-19
+skill_path: candidates/tool-router
+admission_path: skills/tool-router
+proposal: docs/proposals/2026-10-19-tool-router.md
+activation: false
+release_eligible: false
+requested_surface: current-claude-account-and-codex
+user_authority: explicit-request-for-invocable-skill-and-preservation-of-personal-instructions
+test_boundary: no-further-credit-consuming-inference-in-second-claude-account-no-paid-provider-lookups
+remaining_gates:
+  - blind-client-trigger-and-baseline-comparison
+  - supported-client-behavior-canary
+  - governed-production-admission

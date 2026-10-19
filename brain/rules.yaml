@@ -968,7 +968,7 @@ contract_rules:
       ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
 
-# 234 chapters across the installed skills.
+# 228 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -2911,60 +2911,6 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
-    status: live
-  - id: tool-router.trigger-and-role
-    file: skills/tool-router/SKILL.md
-    heading: "Trigger and role"
-    text_sha: "a4f40a6ecfd3"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
-    status: live
-  - id: tool-router.discover-what-this-session
-    file: skills/tool-router/SKILL.md
-    heading: "Discover what this session can actually do"
-    text_sha: "1ad60f33b624"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
-    status: live
-  - id: tool-router.match-value-to-the
-    file: skills/tool-router/SKILL.md
-    heading: "Match value to the task"
-    text_sha: "89b6883c78ca"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
-    status: live
-  - id: tool-router.reach-for-the-selected
-    file: skills/tool-router/SKILL.md
-    heading: "Reach for the selected capability"
-    text_sha: "637e85e1c3a5"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
-    status: live
-  - id: tool-router.cost-and-limits-without
-    file: skills/tool-router/SKILL.md
-    heading: "Cost and limits without derailing delivery"
-    text_sha: "6bf2aef9435a"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
-    status: live
-  - id: tool-router.cloud-access-and-authority
-    file: skills/tool-router/SKILL.md
-    heading: "Cloud access and authority"
-    text_sha: "108a8eeecaec"
-    first_seen: "2026-10-19"
-    source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
     status: live
   - id: tools-access.non-negotiable-rules
     file: skills/tools-access/SKILL.md
