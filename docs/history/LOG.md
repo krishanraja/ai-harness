@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-19
+
+- reconciled at `a84ea87`: `NOW.md` added three 2026-10-19 bullets (cloud catalogue-first discovery, Tool Router installation without paid test runs, tool economics candidate), recorded `tool-router` and `tool-economics` as candidates outside the 29 admitted skills, restated LORIMER's sync as `blocked` with four failing runs and the session miner as `blocked` with two, and re-counted expired reviews at 13 of 29 with days recomputed to 2026-10-19. Registry unchanged since the last reconcile. No document moved or archived; `AGENTS.md`, `docs/HARNESS_CONTEXT.md` and the registry were read and left alone.
+
 ## 2026-10-18
 
 - reconciled at `a2102fa`: `NOW.md` moved to release v2026.10.17.1 (published, registered, recorded on no surface), added five bullets (North Star, subscription-independent checks, two-layer cloud coverage, preserved proposal histories, central-brain repository administration), restated LORIMER's sync as `blocked` with reason `checkout-untracked` and the session miner as `blocked`, replaced the stale `cloud-surfaces-stale` note with the reworded verdict, and re-counted expired reviews at 13 of 29. No document moved or archived; `AGENTS.md`, `docs/HARNESS_CONTEXT.md` and the registry were read and left alone.
