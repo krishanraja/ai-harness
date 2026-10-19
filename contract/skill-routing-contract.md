@@ -49,6 +49,10 @@ Provenance for the three rows added 2026-09-09, `harness-maintainer`, `tools-acc
 
 ## Collision rules
 
+### Candidate route, inactive
+
+`tool-economics` is staged under `candidates/`, outside `production_active`. If admitted, it will advise on task-level choice among available MCP/API tools using live capability, allowance, and marginal-cost evidence. It will not replace `tools-access` for identity and scope or any provider/domain skill for execution. Do not advertise or load it as a production route before the admission and surface canaries in `docs/proposals/2026-10-19-tool-economics.md` pass.
+
 - `ux-foundations` replaces the retired generic cloud skills `strategy`, `ux-design`, `ux-concepts`, `ux-toolkit`, `design`, `ux`, `ux-principles`, `ab-test-plan`, and `design-system-builder`. Do not enable both generations.
 - `data-pipeline-architect` is the design/planning route; `data-pipeline` is the implementation route. If a request spans both, plan first and implement second.
 - `krish-voice` owns final prose voice. `krish-content-marketer` owns strategy and angle selection; it does not override the voice pass.
