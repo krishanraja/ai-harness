@@ -252,5 +252,11 @@
     "subject": "# lines in 1 files",
     "first_seen": "2026-10-18",
     "open": true
+  },
+  "freshness:krish-voice": {
+    "klass": "freshness",
+    "subject": "krish-voice",
+    "first_seen": "2026-10-20",
+    "open": true
   }
 }
