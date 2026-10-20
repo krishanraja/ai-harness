@@ -5,6 +5,12 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-20
+
+- stamped at `5e228d9`: commits since `a84ea87` were brain, heartbeat and observation ledger updates only. `NOW.md` head and date moved; the LORIMER sync heartbeat now shows five failing runs with the same `checkout-untracked` reason.
+
+- rolled from NOW.md: 2026-09-19 **The content-format canon moved from two channels to three, and the mandate authority moved out of the canon text into a database table.** `venture_formats.mandate` in Mindmaker OS is now the single source of format mandate truth for `split.the.bill`, `mind.the.gap` and `lift.the.lid`; the OpenClaw VPS was independently audited from the host the same day and the operator handoff was corrected against two verifiers after the first draft stated things to still go and check that had, in fact, already been checked twenty minutes earlier. Commit `748a1ce`.
+
 ## 2026-10-19
 
 - reconciled at `a84ea87`: `NOW.md` added three 2026-10-19 bullets (cloud catalogue-first discovery, Tool Router installation without paid test runs, tool economics candidate), recorded `tool-router` and `tool-economics` as candidates outside the 29 admitted skills, restated LORIMER's sync as `blocked` with four failing runs and the session miner as `blocked` with two, and re-counted expired reviews at 13 of 29 with days recomputed to 2026-10-19. Registry unchanged since the last reconcile. No document moved or archived; `AGENTS.md`, `docs/HARNESS_CONTEXT.md` and the registry were read and left alone.
