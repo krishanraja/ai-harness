@@ -1,11 +1,11 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-10-19T07:31:24.447Z",
+    "last_run": "2026-10-20T07:31:02.724Z",
     "status": "blocked",
     "release": "v2026.10.17.1",
     "reason": "checkout-untracked",
     "failing_since": "2026-10-16T07:45:36.839Z",
-    "failing_runs": 4,
+    "failing_runs": 5,
     "reasons": [
       {
         "reason": "checkout-untracked",
