@@ -1,14 +1,14 @@
 {
-  "ai-harness": "587c60450cc6",
-  "control-center": "82d6b2b79f40",
+  "ai-harness": "53c36b429cb6",
+  "control-center": "2897aeca221c",
   "mm-ctrl": "596a088bed0d",
-  "mindmake": "c4adcdf73389",
+  "mindmake": "47e869a5965b",
   "fractionl-circle": "6be4dd02f637",
-  "fractionl-pulse": "8afbf87ad48a",
-  "full-time": "526ee92a08d1",
+  "fractionl-pulse": "2a47ba0a28ab",
+  "full-time": "4b214fc19f9a",
   "mindmake-video-studio": "2e6cdda9bcd8",
-  "contentarchives": "a45ea17e6236",
-  "AEO-Engine": "f7b392e3120c",
-  "content-engine": "e8cde15ab95f",
-  "makeyourmindup": "664bfeae8b5e"
+  "contentarchives": "6d34699c96df",
+  "AEO-Engine": "96b81af3aa71",
+  "content-engine": "16bc1ea8fb24",
+  "makeyourmindup": "da0cac8b8667"
 }
