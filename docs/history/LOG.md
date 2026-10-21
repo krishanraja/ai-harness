@@ -5,6 +5,12 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-21
+
+- stamped at `737d620`: commits since `5e228d9` were brain, repository-administration view and observation ledger updates only. `NOW.md` head and date moved; no registry, heartbeat-sync or release state changed.
+
+- rolled from NOW.md: 2026-09-20 **A wrong operating claim about the VPS fleet was found and corrected in the same session that made it.** The retirement map had the gateway job count wrong by sixteen jobs and mischaracterized the Telegram exposure; both were corrected the same day after independent verification against the live host (git clean, live n8n not clean), rather than left standing. Nine of eleven previously "unknown" jobs were settled to retire, and Krish's override keeping `loz-api-monitor` running against the general retirement instruction was written in as a named exception, not left implicit. Commits `71dc30c`, `d62858f`, `c4c9c65`, `9bec007`.
+
 ## 2026-10-20
 
 - stamped at `5e228d9`: commits since `a84ea87` were brain, heartbeat and observation ledger updates only. `NOW.md` head and date moved; the LORIMER sync heartbeat now shows five failing runs with the same `checkout-untracked` reason.
