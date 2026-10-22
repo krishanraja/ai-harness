@@ -210,7 +210,7 @@ All by Krish, dated 2026-10-05 unless marked otherwise.
 
 ## 9. What he works on: live sources only
 
-Venture list, priorities, objectives, pricing, revenue and status change weekly. They are
+Venture list, priorities, objectives, pricing and revenue change weekly. They are
 never copied into this file or into any skill. A venture's status, numbers and next steps
 live only in its own repository: its `NOW.md` (current only when no product commit landed
 after it) and its `docs/NORTH_STAR.md`. Read the rest live, in this order:
