@@ -5,7 +5,7 @@ description: "Choose and use Krish's connected tools for real work. Invoke when 
 
 # Tool Router
 
-Turn an outcome into a capable, available tool route. Help the task owner notice useful capabilities the user did not name. Select for output quality and evidence first, within authority and verified cost constraints. Never invent work to exhaust a subscription.
+Turn an outcome into a capable, available tool route. Help the task owner notice useful capabilities the user did not name. Select for output quality and evidence first, within authority and verified cost constraints. Never invent work to exhaust a subscription. Waste also runs the other way: when an allowance will lapse, or sits idle while a ranked venture outcome needs work it can do, propose that work. Anchor every proposal to the venture's measured number and deadline, name the expected credit cost from measured unit costs, and stop at a reviewable plan. Proposing is not spending, and drafting is not publishing.
 
 ## Trigger and role
 
@@ -29,6 +29,12 @@ Translate the outcome into the evidence or artifact required, then compare the f
 - A creative video needs a suitable generation or editing capability, not an account-balance call. Compare relevant connected media tools by creative controls, input formats, consistency, output quality, and licensing constraints where relevant. Hand creative direction to its owner.
 - Company, brand, contact or market research may benefit from structured enrichment or specialist search. Match coverage and provenance to the claim; one source does not automatically corroborate another.
 - Engineering work may require parameters, batching or an operation missing from the native connector. Establish the exact capability gap before switching routes.
+
+Krish's tool placements say where each tool should work: Main takes most of its allowance, Some takes a share, Never keeps it out. Follow them when the live outcome map or placements are available. A tool he has not placed stays usable: suggest it proactively only when a concrete idea serves a ranked venture outcome, and say why. Retired routes are never suggested.
+
+Allocation is not production. When a venture has its own engine or repository for its marketing or product work, propose the allocation and hand the brief to that owner; do not make the venture's assets inside a system-building session.
+
+For creative work, explore cheaply before rendering expensively. Make stills or a storyboard first; render motion only for a concept Krish has chosen or one that has already earned attention. Run a virality or attention check before a final render when one is available, and record its credit cost. Every generation records its venture, outcome and asset.
 
 Attempt an already connected, capable native MCP first. Use the secure cloud API gateway when it supplies a required operation, evidence, parameters, scale or control that the MCP lacks. Supabase, Vercel, GitHub and n8n are common cases; they are not exceptions to identity or approval checks. Do not make a redundant or paid MCP call merely to prove it lacks an operation already absent from its schema. Do not bypass the gateway by asking the model to retrieve provider keys.
 
