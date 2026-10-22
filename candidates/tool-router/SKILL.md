@@ -32,7 +32,9 @@ Translate the outcome into the evidence or artifact required, then compare the f
 
 Krish's tool placements say where each tool should work: Main takes most of its allowance, Some takes a share, Never keeps it out. Follow them when the live outcome map or placements are available. A tool he has not placed stays usable: suggest it proactively only when a concrete idea serves a ranked venture outcome, and say why. Retired routes are never suggested.
 
-Allocation is not production. When a venture has its own engine or repository for its marketing or product work, propose the allocation and hand the brief to that owner; do not make the venture's assets inside a system-building session.
+A venture's status, numbers, deadlines and next steps come only from its own repository: its `NOW.md` (current only when no product commit landed after the last commit that touched it) and `docs/NORTH_STAR.md`. Read them live, through Control Center's `get_venture_state` where it is connected, or from the repository. Control Center and the harness hold only pointers, placements and rulings; never take a venture's state from a summary there, from a copy in another repository, or from memory. A venture with no current `NOW.md` is unknown, so say so. When several ventures compete for one allowance, the higher venture on the live priority ladder is served first.
+
+Allocation is not production. When a venture has its own engine or repository for its marketing or product work, propose the allocation and hand the brief to that owner, through Control Center's growth engine protocol when the venture has an engine; the engine reports what it spent and what moved. Do not make the venture's assets inside a system-building session.
 
 For creative work, explore cheaply before rendering expensively. Make stills or a storyboard first; render motion only for a concept Krish has chosen or one that has already earned attention. Run a virality or attention check before a final render when one is available, and record its credit cost. Every generation records its venture, outcome and asset.
 

@@ -210,13 +210,15 @@ All by Krish, dated 2026-10-05 unless marked otherwise.
 
 ## 9. What he works on: live sources only
 
-Venture list, priorities, objectives, pricing, revenue and status change weekly. They are
-never copied into this file or into any skill. Read them live, in this order:
+Venture list, priorities, objectives, pricing and revenue change weekly. They are
+never copied into this file or into any skill. A venture's status, numbers and next steps
+live only in its own repository: its `NOW.md` (current only when no product commit landed
+after it) and its `docs/NORTH_STAR.md`. Read the rest live, in this order:
 
 | What | Live source |
 |---|---|
 | Who Krish is and what he is working on now | https://controlcenter.krishraja.com/api/canon/KRISH.md |
-| The product portfolio, its objectives and the live priority ladder | https://controlcenter.krishraja.com/api/canon/PORTFOLIO.md |
+| The venture list, a pointer to each venture's repository, and the live priority ladder | https://controlcenter.krishraja.com/api/canon/PORTFOLIO.md |
 | The single code source of the priority ranking | `src/lib/portfolio.ts` in `krishanraja/control-center`, through the GitHub connector or a checkout |
 | The ikigai | `references/ikigai-v4.md` in this skill, the same sheet exported verbatim |
 | How the OS is built | `docs/MINDMAKE_OS_ARCHITECTURE.md` in `krishanraja/control-center`, routed by the `mindmake-os` skill |

@@ -23,7 +23,7 @@ assert.equal((await reconcileRepository({ profile, gh, history: [] })).status, '
 assert.equal(mutations, 0)
 const writtenResult = await reconcileRepository({ profile, gh, history: [], write: true })
 assert.equal(writtenResult.status, 'pull-request')
-assert.equal(Object.keys(written).length, 4)
+assert.deepEqual(Object.keys(written).sort(), [".claude/hooks/harness-closeout.mjs", ".claude/settings.json", ".github/workflows/harness-repository-context.yml", "AGENTS.md", "CLAUDE.md", "docs/HARNESS_CONTEXT.md"])
 assert.equal(mutations, 3)
 const candidate=structuredClone(written)
 const merging={...gh,

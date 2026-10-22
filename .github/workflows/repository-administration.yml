@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches: [main]
-    paths: ["brain/knowledge.jsonl", "brain/reviews.jsonl", "brain/repositories/**", "state/observations/*.jsonl", "contract/repository-administration.json", "scripts/repository-*.mjs", "scripts/reconcile-repository-admin.mjs", ".github/workflows/repository-administration.yml"]
+    paths: ["brain/knowledge.jsonl", "brain/reviews.jsonl", "brain/repositories/**", "state/observations/*.jsonl", "contract/repository-administration.json", "scripts/repository-*.mjs", "scripts/reconcile-repository-admin.mjs", "scripts/closeout/**", "contract/templates/repository-context-workflow.yml", ".github/workflows/repository-administration.yml"]
   workflow_run:
     # scripts/test-repository-workflow.mjs reproduces the report -> steward -> publisher cycle.
     # Intake and observation pushes cover learning without listening to the report's own steward run.
@@ -42,6 +42,7 @@ jobs:
           node scripts/test-learning-episodes.mjs
           node scripts/test-repository-brain.mjs
           node scripts/test-repository-admin.mjs
+          node scripts/closeout/test-check.mjs
           node scripts/test-repository-reconcile.mjs
           node scripts/test-repository-learning.mjs
           node scripts/test-repository-learning-loop.mjs

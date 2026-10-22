@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 110 rules across the two contracts.
+# 118 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -67,17 +67,22 @@ contract_rules:
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
-    text_sha: "1520cfd4a9cb"
+    text_sha: "d72803c2a175"
     first_seen: "2026-10-05"
     source:
-      kind: ruling
-      ref: "6c1c96d26649"
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     history:
       - text_sha: "753e74bacc3e"
         valid_until: "2026-10-15"
         source:
           kind: ruling
           ref: "60106bef02bd"
+      - text_sha: "1520cfd4a9cb"
+        valid_until: "2026-10-22"
+        source:
+          kind: ruling
+          ref: "6c1c96d26649"
     status: live
   - id: north-star.read-it-before-any
     file: contract/krish-operating-contract.md
@@ -118,6 +123,75 @@ contract_rules:
     source:
       kind: ruling
       ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: session-closeout.before-ending-update-the
+    file: contract/krish-operating-contract.md
+    text_sha: "e27cbd6d8c73"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+  - id: session-closeout.re-read-the-north
+    file: contract/krish-operating-contract.md
+    text_sha: "0443867b9a84"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+  - id: session-closeout.plan-and-handoff-documents
+    file: contract/krish-operating-contract.md
+    text_sha: "fd183eb0c416"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    history:
+      - text_sha: "90833093b487"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      - text_sha: "46f8cc1289e2"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+    supersedes: [session-closeout.documentation-only-work-needs]
+  - id: session-closeout.documentation-only-work-needs
+    file: contract/krish-operating-contract.md
+    text_sha: "3690d61afaaa"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    history:
+      - text_sha: "f81ec376b2f2"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: superseded
+    supersedes: [session-closeout.work-that-changes-nothing]
+    valid_until: "2026-10-22"
+  - id: session-closeout.work-that-changes-nothing
+    file: contract/krish-operating-contract.md
+    text_sha: "8e3590425601"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: superseded
+    valid_until: "2026-10-22"
+  - id: session-closeout.claude-code-s-stop
+    file: contract/krish-operating-contract.md
+    text_sha: "8f360e15d4a9"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
   - id: working-style.apply-krish-principles-to
     file: contract/krish-operating-contract.md
@@ -461,6 +535,25 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: truth-and-freshness.a-venture-s-status
+    file: contract/krish-operating-contract.md
+    text_sha: "279c404a2284"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    history:
+      - text_sha: "98904a6d2ac0"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+      - text_sha: "e3e9c094c5c6"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+    status: live
   - id: truth-and-freshness.do-not-claim-completion
     file: contract/krish-operating-contract.md
     text_sha: "a00883871848"
@@ -468,6 +561,30 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: one-system-where-each-fact-lives.write-a-fact-only
+    file: contract/krish-operating-contract.md
+    text_sha: "75da4f3b1bda"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+  - id: one-system-where-each-fact-lives.change-doctrine-in-ai
+    file: contract/krish-operating-contract.md
+    text_sha: "591bf78f8076"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+  - id: one-system-where-each-fact-lives.when-you-find-a
+    file: contract/krish-operating-contract.md
+    text_sha: "4be80d55e202"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
   - id: verification.use-deterministic-checks-first
     file: contract/krish-operating-contract.md

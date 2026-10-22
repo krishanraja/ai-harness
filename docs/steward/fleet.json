@@ -271,6 +271,64 @@
         "**/*.md"
       ],
       "bootstrap_head": "f3c8bfd"
+    },
+    {
+      "name": "heartside",
+      "product": "Heartside (heartside.io)",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/HANDOFF.md",
+      "history_dir": "docs/history",
+      "truth_files": [],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/SYNC.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "6710125"
+    },
+    {
+      "name": "legibility",
+      "product": "Legibility",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/OUTSTANDING.md",
+      "history_dir": "docs/history",
+      "truth_files": [],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "README.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "7e1f8b8"
+    },
+    {
+      "name": "growth-heartside",
+      "product": "Heartside growth engine",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/HANDOFF.md",
+      "history_dir": "docs/history",
+      "truth_files": [],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "PLAYBOOK.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "0303ffb"
     }
   ]
 }

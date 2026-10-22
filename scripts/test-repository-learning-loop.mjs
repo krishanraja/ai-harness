@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path'
 import { intake } from './intake-observations.mjs'
 import { consolidateKnowledge, effectiveKnowledge, knowledgeHistory, policyAt, ROOT, seal, validateKnowledge } from './repository-brain.mjs'
 import { openReviews, promoteOwnerReviews, repositoryCandidates, REVIEWS } from './repository-reviews.mjs'
-import { inspectRegion, planAdministration, renderAdministration, TARGET_CHECK } from './repository-admin.mjs'
+import { inspectRegion, planAdministration, renderAdministration, OWNED } from './repository-admin.mjs'
 import { reconcileRepository } from './reconcile-repository-admin.mjs'
 import { loadLedger } from './propose.mjs'
 
@@ -98,7 +98,7 @@ try {
   const contract = {
     schema_version: 1, owner: 'krishanraja', approval: 'isolated-learning-loop-fixture',
     targets: ['content-engine', 'AEO-Engine'], pilots: ['content-engine', 'AEO-Engine'], excluded: ['mindmake'],
-    families: ['repository-administration'], managed_words: 400, context_words: 1200, max_files: 4, acceptances: {},
+    families: ['repository-administration'], managed_words: 400, context_words: 1200, max_files: 6, acceptances: {},
   }
   put(join(root, 'contract/repository-administration.json'), JSON.stringify(contract))
   copyFileSync(join(ROOT, 'contract/learning-policy.yaml'), join(root, 'contract/learning-policy.yaml'))
@@ -208,7 +208,7 @@ try {
   assert.equal(delivered.rollback.base, target.initial)
   assert.equal(target.readbacks, delivered.files.length)
   assert.equal(target.git('rev-parse', 'main'), delivered.merge)
-  const deliveredFiles = Object.fromEntries(['AGENTS.md', 'CLAUDE.md', TARGET_CHECK, 'docs/HARNESS_CONTEXT.md', 'README.md'].map((path) => [path, target.objectText(delivered.merge, path)]))
+  const deliveredFiles = Object.fromEntries(['AGENTS.md', 'CLAUDE.md', ...OWNED, 'docs/HARNESS_CONTEXT.md', 'README.md'].map((path) => [path, target.objectText(delivered.merge, path)]))
   assert.equal(deliveredFiles['docs/HARNESS_CONTEXT.md'], rendered.context, 'Independent Git object readback matches the accepted scoped brain view')
   assert.ok(deliveredFiles['AGENTS.md'].startsWith(original), 'Native human instructions survive delivery')
   assert.equal(deliveredFiles['CLAUDE.md'], '@AGENTS.md\n')

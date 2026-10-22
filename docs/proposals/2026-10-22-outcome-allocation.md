@@ -6,7 +6,7 @@ Status: approved by Krish on 2026-10-22 (rulings below). Not yet built, active o
 
 - Ruling (Krish, 2026-10-22): generation within prepaid credits, inside an allocation he approved that week, counts as authorized; publication, ad spend, top-ups and plan changes still need their own approval.
 - Ruling (Krish, 2026-10-22): the router rule change in section 3 is approved.
-- Ruling (Krish, 2026-10-22): the outcome map lives in Control Center.
+- Ruling (Krish, 2026-10-22): the outcome map lives in Control Center. Superseded the same day by the ruling in section 1: there is no stored outcome map, and each venture's own repository holds its status and plan.
 - Ruling (Krish, 2026-10-22): Heartside takes most of the Runway and Higgsfield credits until December; Full Time also gets a share.
 - Ruling (Krish, 2026-10-22): HeyGen is for training his face clone and ElevenLabs for his voice clone, both for Mindmake outbound and makeyourmindup shorts. This closes founder visibility for those two uses. Creating each clone, and publishing or sending anything made with it, is still an action-time approval, and outbound still follows Rule 2: enough richness about the person, never a generic sequence.
 - Ruling (Krish, 2026-10-22): a reserve is held back each week; its size is set in the first weekly allocation.
@@ -46,20 +46,22 @@ The diagnosis: the system knows what each tool *can* do. It does not know what e
 
 Start from the outcome, never from the credit. A credit is worth spending only when it moves a venture's measured number. A credit that sits idle while a ranked outcome needs it is waste too. Today the router only guards against the first failure. This proposal guards against both.
 
-## 1. An outcome map per venture
+## 1. Where each venture's outcome comes from
 
-The router reads this before it suggests any creative or data work. It is ordered by the live priority ladder (`PORTFOLIO.md`), and every growth-agent rule there still applies: drafts only, no sends, no ad spend, no invented reviews, numbers or customers.
+Supersedes: the outcome map table that was section 1 at `dbde1f2` ("An outcome map per venture"). That table is history, not current. Its dated rulings are not lost: the clone ruling and the Descript and Fireflies retirements are in the Rulings list above and in Control Center's tool catalog, and the hard limits are the growth agent rules in `PORTFOLIO.md` and each venture's own repository.
 
-| Venture | The number that matters | Deadline | What creative or data work moves it | Best-fit tools | Hard limits |
-|---|---|---|---|---|---|
-| **Heartside** (P1) | One-off orders in USD, average order value | Last printed order 10 December (to be confirmed per product in Printful) | Product shots for all 11 products. Short organic clips for TikTok, Reels and Shorts in the plan's voice (`docs/V2-FROM-THE-DOG.md`, section 6). The 15-second "dog reads your review" video. "Who would your dog fire?" comment prompts | Higgsfield Marketing Studio for product shots and ads; Shorts Studio and Seedance for clips; virality check before final render; ElevenLabs for the dog's voice | Label AI-made ads as platforms require. No grief, illness or old age. No invented reviews, scarcity or "was" prices. No ad spend (Krish's action, and against Gate 4 until revenue flows) |
-| **Full Time** (P1) | Pilot listeners, target 100 (one counted 2026-10-06) | None set | Social clips cut from published editions. Audiograms of each pundit. A visual identity per pundit so listeners can pick one | ElevenLabs (already voices the show); Higgsfield stills for pundit art; Higgsfield or Runway for short motion clips (Descript retired 2026-10-22) | No betting, live-score or league-table framing. No Premier League mark. Rule 8 flag for Krish's own hours. Blocked in practice until editions publish again: none since 2026-09-05 per its repository |
-| **Legibility** (P2) | Weekly trusted reads per active account, 7 or more | Eight-week beta kill criteria | Developer content that shows real calls and real costs. Diagrams, not cinema | Little media spend. Canva or plain diagrams | No claims of coverage it lacks. No outbound engine before a design partner |
-| **Mindmake** (the mission) | A client who says the proof works and stands behind it | None set | Visuals for published thinking across the three channels. Possibly a presenter-led explainer | Higgsfield stills for article art; HeyGen face clone and a voice clone of Krish (ruled 2026-10-22) | Clones only for Mindmake outbound and makeyourmindup shorts; creating each clone and sending or publishing anything made with it needs his approval each time. No price, booking link or offer ladder |
-| **CTRL, Pulse** (P3) | Six measures; Pulse not for sale yet | None | Pulse weekly brief visuals at most | Minimal | No claims beyond evidence. No new price points |
-| **Circle** | Dormant | None | None | None | Not worked |
+Ruling (Krish, 2026-10-22): each venture's own repository is the only reference for where it is and what comes next. Its `NOW.md`, written by the docs steward and stamped with the commit it read, holds status and next steps; its `docs/NORTH_STAR.md` holds the ambition, which rarely changes. Control Center and the harness hold only pointers, placements and rulings. A session that needs a venture's number, deadline or next step reads that repository and treats its `NOW.md` as unknown unless no product commit landed after the last commit that touched it (the operating contract, Truth and freshness).
 
-The map is a proposal. Each venture's row should live where its owner can edit it: in Control Center beside `product_icp`, or in the venture's own repository. It should not live in a skill, because it changes weekly.
+| Venture | Repository (status, next steps, North Star) |
+|---|---|
+| Heartside | `krishanraja/heartside` (marketing: `krishanraja/growth-heartside`) |
+| Full Time | `krishanraja/full-time` |
+| Legibility | `krishanraja/legibility` |
+| Mindmake | `krishanraja/mindmake` |
+| CTRL | `krishanraja/mm-ctrl` |
+| Pulse | `krishanraja/fractionl-pulse` |
+
+Heartside, Legibility and growth-heartside were not in the docs steward's fleet, so nothing kept their `NOW.md` current. They were admitted on 2026-10-22; each needs its steward caller workflow and secret before the guarantee holds there. An earlier draft of this section carried each venture's goal, deadline and plan; it was removed under this ruling because nothing kept it current.
 
 ## 2. Unit economics per tool, not just balances
 
@@ -96,17 +98,11 @@ The 840-credit burst on 2026-10-21 cannot be linked to any venture or result. Ev
 
 A weekly line in the existing Sunday growth review then reads: credits spent per venture, assets published, and the venture's number over the same period. If a venture's creative has not moved its number in three weeks, the router shifts the next allocation to the next outcome on the ladder and says so.
 
-## 5. A weekly allocation proposal
+## 5. A weekly allocation through the growth engine protocol
 
-Once a week the fleet drafts one short allocation for Krish to approve or edit:
+Supersedes: the weekly allocation procedure that was section 5 at `dbde1f2` ("A weekly allocation proposal"), which drafted one fleet-wide allocation from the stored outcome map. That procedure is history, not current.
 
-1. Credits and allowances available, with reset dates.
-2. The outcome each venture is chasing, in ladder order, with its deadline.
-3. A proposed split, with a reserve held back. For the Heartside window to 10 December, most creative credits go to Heartside product shots and clips.
-4. The exact first assets to make, their measured unit cost, and the number each should move.
-5. Last week's result: what was made, what was published, what moved.
-
-Nothing generates until Krish approves the allocation. Nothing publishes without its own approval.
+There is no stored outcome map. Each venture's growth engine proposes its week through Control Center's existing growth engine protocol (ADR-038): the credits it wants by tool, the assets, their measured unit cost, and the number from its own repository it expects to move. The proposal reaches Krish's one list as a walled `spend` or `strategy` item; his approval of that exact payload authorises generation within prepaid credits. The engine reports what it spent and what moved. Freshness comes from the engine doing the work reporting it, not from a summary someone has to remember to update. Nothing publishes without its own approval.
 
 ## Decisions only Krish can make
 
@@ -166,7 +162,7 @@ Removal outside this repository, closed the same day: Krish disconnected the Fir
 
 Football data (API-Football, football-data.org) is placed on Full Time, which is in the mission by the 2026-10-06 ruling; Rule 8's flag still applies to any step that needs Krish's own hours on football.
 
-## First weekly allocation, 22 to 28 October
+## First weekly allocation, 22 to 28 October (history, not status)
 
 - Ruling (Krish, 2026-10-22): the first weekly allocation is approved: up to 773 of 1,413 Higgsfield credits, Heartside first, with the two video clips gated on his concept picks and 640 credits held in reserve.
 - Ruling (Krish, 2026-10-22): growth-heartside may record prepaid credits inside an approved allocation as no new money (krishanraja/growth-heartside#12).

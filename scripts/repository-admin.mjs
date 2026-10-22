@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /** Deterministic repository administration views. Only declared regions/files can change. */
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, join, resolve, posix } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -10,7 +11,40 @@ import { leaks } from './lib/redact.mjs'
 export const ADMIN = 'krish-repo-admin'
 export const CONTEXT = 'krish-repo-context'
 export const TARGET_CHECK = '.github/workflows/harness-repository-context.yml'
-export const targetCheck = () => readFileSync(join(ROOT, 'contract/templates/repository-context-workflow.yml'), 'utf8')
+// The closeout hook ships byte for byte from scripts/closeout/check.mjs; the
+// check workflow pins its hash, so a hand edit in a target fails that target's CI.
+export const TARGET_HOOK = '.claude/hooks/harness-closeout.mjs'
+export const TARGET_SETTINGS = '.claude/settings.json'
+export const HOOK_COMMAND = 'node "$CLAUDE_PROJECT_DIR/.claude/hooks/harness-closeout.mjs"'
+const sha256 = (s) => createHash('sha256').update(s, 'utf8').digest('hex')
+export const closeoutHook = () => readFileSync(join(ROOT, 'scripts/closeout/check.mjs'), 'utf8')
+export const targetCheck = () => readFileSync(join(ROOT, 'contract/templates/repository-context-workflow.yml'), 'utf8').replaceAll('{{CLOSEOUT_SHA256}}', sha256(closeoutHook()))
+export const OWNED = [TARGET_CHECK, TARGET_HOOK, TARGET_SETTINGS]
+
+/** A file the publisher owns outright: create it, keep it, or replace a version it delivered before. */
+function ownedFile(current, expected, prior, drift) {
+  if (current == null || current === expected) return expected
+  if ((prior || []).includes(sha256(current))) return expected
+  throw new Error(drift)
+}
+
+/**
+ * Register the Stop hook in .claude/settings.json without taking the file
+ * over. Settings the repository already has are kept; a file whose bytes the
+ * publisher cannot reproduce after parsing is left alone and reported, so a
+ * hand-formatted file never blocks the rest of the delivery.
+ */
+export function registerHook(current) {
+  const entry = { hooks: [{ type: 'command', command: HOOK_COMMAND }] }
+  if (current == null) return { text: JSON.stringify({ hooks: { Stop: [entry] } }, null, 2) + '\n' }
+  let parsed
+  try { parsed = JSON.parse(current) } catch { return { text: current, skipped: 'claude_settings_not_json' } }
+  if (current.includes('harness-closeout.mjs')) return { text: current }
+  if (JSON.stringify(parsed, null, 2) + '\n' !== current) return { text: current, skipped: 'claude_settings_format_unmanaged' }
+  const hooks = parsed.hooks && typeof parsed.hooks === 'object' ? parsed.hooks : {}
+  const next = { ...parsed, hooks: { ...hooks, Stop: [...(Array.isArray(hooks.Stop) ? hooks.Stop : []), entry] } }
+  return { text: JSON.stringify(next, null, 2) + '\n' }
+}
 export const words = (s) => String(s).trim().split(/\s+/).filter(Boolean).length
 const safePath = (s) => typeof s === 'string' && /^(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+$/.test(s) && !s.split('/').includes('..') && !s.startsWith('.')
 const sourcePath = (s) => safePath(s) || /^\.(?:agents|claude|github)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+$/.test(s) && !s.split('/').includes('..')
@@ -156,15 +190,17 @@ export function planAdministration(profile, files, history, { policy = policyAt(
     if (!found.present || !found.intact || previousContext.slice(0, found.start).trim() || previousContext.slice(found.end).trim()) throw new Error('repository_context_human_drift')
   }
   changes[profile.context_path] = rendered.context
-  if (read(TARGET_CHECK) == null) changes[TARGET_CHECK] = targetCheck()
-  else if (read(TARGET_CHECK) !== targetCheck()) throw new Error('repository_context_check_drift')
+  changes[TARGET_CHECK] = ownedFile(read(TARGET_CHECK), targetCheck(), policy.prior_owned?.[TARGET_CHECK], 'repository_context_check_drift')
+  changes[TARGET_HOOK] = ownedFile(read(TARGET_HOOK), closeoutHook(), policy.prior_owned?.[TARGET_HOOK], 'closeout_hook_drift')
+  const settings = registerHook(read(TARGET_SETTINGS))
+  changes[TARGET_SETTINGS] = settings.text
   const afterFiles = { ...files, ...changes }
   const after = bootstrapMeasure((p) => afterFiles[p] ?? null)
   if (after.missing.length) throw new Error(`bootstrap_source_missing:${after.missing[0]}`)
   if (after.chars > profile.bootstrap_limit_chars && after.chars > before.chars) throw new Error(`bootstrap_context_growth:${after.chars - Math.max(profile.bootstrap_limit_chars, before.chars)}`)
   for (const key of Object.keys(changes)) if (changes[key] === read(key)) delete changes[key]
   if (Object.keys(changes).length > policy.max_files) throw new Error('too_many_administration_files')
-  return { repository: profile.repository, ...rendered, changes, before, after, input_seal: seal(files), managed_before: Object.fromEntries(Object.keys(changes).map((p) => [p, digest(read(p) || '')])) }
+  return { repository: profile.repository, ...rendered, changes, skipped: settings.skipped ? [`${TARGET_SETTINGS}: ${settings.skipped}`] : [], before, after, input_seal: seal(files), managed_before: Object.fromEntries(Object.keys(changes).map((p) => [p, digest(read(p) || '')])) }
 }
 
 /** Restore an earlier managed view, preserving intervening human text or refusing an ambiguous migration. */
@@ -190,11 +226,11 @@ if (main) {
   const repository = flag('--repo'), dir = resolve(flag('--checkout') || '.')
   const profile = profiles().find((p) => p.repository.toLowerCase() === String(repository).toLowerCase())
   if (!profile) throw new Error('repository_not_admitted')
-  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', TARGET_CHECK, profile.context_path, ...profile.sources.map((s) => s.path)])]
+  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', ...OWNED, profile.context_path, ...profile.sources.map((s) => s.path)])]
   const files = Object.fromEntries(paths.map((p) => [p, existsSync(join(dir, p)) ? readFileSync(join(dir, p), 'utf8') : null]))
   const migrationPath = join(ROOT, 'state/repository-administration/migrations', `${profile.repository}.json`)
   const migration = !inspectRegion(files['AGENTS.md'] || '').present && existsSync(migrationPath) ? JSON.parse(readFileSync(migrationPath, 'utf8')) : null
   const plan = planAdministration(profile, files, knowledgeHistory(), { migration })
   if (args.includes('--write')) for (const [path, text] of Object.entries(plan.changes)) { mkdirSync(dirname(join(dir, path)), { recursive: true }); writeFileSync(join(dir, path), text) }
-  console.log(JSON.stringify({ repository: plan.repository, revision: plan.revision, files: Object.keys(plan.changes), bootstrap_before: plan.before.chars, bootstrap_after: plan.after.chars, mode: args.includes('--write') ? 'local-write' : 'plan' }))
+  console.log(JSON.stringify({ repository: plan.repository, revision: plan.revision, files: Object.keys(plan.changes), skipped: plan.skipped, bootstrap_before: plan.before.chars, bootstrap_after: plan.after.chars, mode: args.includes('--write') ? 'local-write' : 'plan' }))
 }
