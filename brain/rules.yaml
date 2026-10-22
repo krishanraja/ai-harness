@@ -140,6 +140,14 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
+  - id: session-closeout.documentation-only-work-needs
+    file: contract/krish-operating-contract.md
+    text_sha: "f81ec376b2f2"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
   - id: session-closeout.work-that-changes-nothing
     file: contract/krish-operating-contract.md
     text_sha: "8e3590425601"
@@ -147,7 +155,8 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
-    status: live
+    status: superseded
+    valid_until: "2026-10-22"
   - id: session-closeout.claude-code-s-stop
     file: contract/krish-operating-contract.md
     text_sha: "8f360e15d4a9"

@@ -68,7 +68,16 @@
         "growth-heartside"
       ],
       "source": "docs/proposals/2026-10-22-session-closeout-and-one-system.md",
-      "records": {}
+      "records": {},
+      "grants": {
+        "max_files": 6,
+        "owned_files": [
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/hooks/harness-closeout.mjs",
+          ".claude/settings.json"
+        ],
+        "settings_entry": "one Stop hook command running .claude/hooks/harness-closeout.mjs; every other setting is the repository's"
+      }
     }
   },
   "prior_owned": {
