@@ -1,6 +1,16 @@
 # Credits serve outcomes: an allocation layer for the tool router, 2026-10-22
 
-Status: proposal. Nothing here is active, released or spent. Every change below needs Krish's ruling first.
+Status: approved by Krish on 2026-10-22 (rulings below). Not yet built, active or released. Nothing has been spent.
+
+## Rulings (Krish, 2026-10-22)
+
+- Ruling (Krish, 2026-10-22): generation within prepaid credits, inside an allocation he approved that week, counts as authorized; publication, ad spend, top-ups and plan changes still need their own approval.
+- Ruling (Krish, 2026-10-22): the router rule change in section 3 is approved.
+- Ruling (Krish, 2026-10-22): the outcome map lives in Control Center.
+- Ruling (Krish, 2026-10-22): Heartside takes most of the Runway and Higgsfield credits until December; Full Time also gets a share.
+- Ruling (Krish, 2026-10-22): HeyGen is for training his face clone and ElevenLabs for his voice clone, both for Mindmake outbound and makeyourmindup shorts. This closes founder visibility for those two uses. Creating each clone, and publishing or sending anything made with it, is still an action-time approval, and outbound still follows Rule 2: enough richness about the person, never a generic sequence.
+- Ruling (Krish, 2026-10-22): a reserve is held back each week; its size is set in the first weekly allocation.
+- Next step, at his request: a map of every tool, which he marks with where he wants each one used. That marked map becomes the outcome map's tool column.
 
 ## What this moves
 
@@ -121,3 +131,9 @@ Until those pass, the record says proposed, not working.
 - It does not spend, publish, top up or change any plan.
 - It does not touch `control-center`. Section 2 is a request for that repository.
 - It does not change any approval boundary in the operating contract.
+
+## The tool map
+
+The map Krish marks is published as a private page: https://claude.ai/artifact/VyAyRMMBQQVPsZnwE1xtUj. It lists 76 tools by job, with route and known balance, against eight columns: Heartside, Full Time, Legibility, Mindmake outbound, makeyourmindup, CTRL, Pulse and operations. His marks are saved in the page's database (`placements`, one document per tool), where a session reads them back. The four tools he has already ruled on (Higgsfield, Runway, HeyGen, ElevenLabs) are recorded there. When he has marked the rest, the marks become the outcome map's tool column in Control Center.
+
+One gap the map surfaced: ElevenLabs is reachable only through the Control Center gateway, and only for voice listing and allowance reads. Training a voice clone or generating speech needs a new adapter or a native connector first.
