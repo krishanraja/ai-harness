@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 110 rules across the two contracts.
+# 111 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -460,6 +460,14 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: truth-and-freshness.a-venture-s-status
+    file: contract/krish-operating-contract.md
+    text_sha: "98904a6d2ac0"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     status: live
   - id: truth-and-freshness.do-not-claim-completion
     file: contract/krish-operating-contract.md

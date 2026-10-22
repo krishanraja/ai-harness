@@ -91,6 +91,7 @@ Load `tool-router` for conditional capability selection and useful application; 
 - Record source and retrieval time for dynamic claims. Use a revision/hash where available.
 - A “Last updated” label is evidence only when it agrees with the source revision and live state.
 - If sources disagree, stop destructive work, report the conflict, and create a reconciliation finding.
+- A venture's status and next steps live only in its own repository: the `NOW.md` the docs steward keeps current (check its `head` against the repository's latest commit) and its `docs/NORTH_STAR.md`, which rarely changes. Never take a venture's status or plan from Control Center, the harness, a portfolio summary or memory; anywhere else holds only a pointer to that repository.
 - Do not claim completion from prose alone. Verify with the relevant observable signal.
 
 ## Verification

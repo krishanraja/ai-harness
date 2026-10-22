@@ -11,7 +11,7 @@ Use the narrowest owner:
 - Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice.
 - Visuals: krish-design; its delegated search: design-intelligence-search. UX standards: ux-foundations. App QA: ux-testing-agent.
 - Code and pipelines: krish-build. New app or redesign journey: build-apps-with-krish. Approved revisions: locked-revision.
-- External evidence, enrichment, media generation or service operations: tool-router selects useful capabilities. Access: tools-access, then the provider; apify and n8n-operator own their mechanics. instantly-operator is for an explicitly requested legacy operation only; Instantly, Apollo, Fireflies and Descript are retired routes.
+- External evidence, enrichment, media generation or service operations: tool-router selects useful capabilities. Access: tools-access, then the provider; apify and n8n-operator own their mechanics. instantly-operator is for an explicitly requested legacy operation only; Instantly, Apollo, Fireflies and Descript are retired routes. A venture's status and next steps live only in its own repository (the steward's NOW.md, checked against the latest commit, and its North Star); never take them from a summary elsewhere or from memory.
 - Personal standards: ctrl-intake, ctrl-compile, ctrl-build, ctrl-check, ctrl-capture. Harness: harness-maintainer.
 - Exactly "Video engine" as the whole first message: video-engine.
 
