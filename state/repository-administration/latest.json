@@ -1,12 +1,33 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T18:39:23.938Z",
+  "generated_at": "2026-10-22T21:59:48.341Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "status": "blocked",
-      "reason": "bootstrap_source_missing:docs-REPO_MAP.md"
+      "base": "0062b6d142571a707ea41ec2fcfcbd35de21b3a6",
+      "brain_revision": "2ad79d5cf4f3",
+      "before": 312761,
+      "after": 312761,
+      "files": [
+        "AGENTS.md",
+        "docs/HARNESS_CONTEXT.md",
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs",
+        ".claude/settings.json"
+      ],
+      "skipped": [],
+      "source_seal": "f91e745290412b17861e11bb580de8680ff4deef5a5d586c973ee83d620c44db",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 137,
+      "head": "ef207b35e5a15adfa50bf9029fd4a44b26c87a19"
     },
     {
       "repository": "AEO-Engine",
@@ -28,9 +49,23 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 22,
-      "head": "88f605133e5df798f9881afa8311c0160c7ef627"
+      "head": "88f605133e5df798f9881afa8311c0160c7ef627",
+      "merge": "edfe4bb3ad8e93de94c625807142bc52b350584d",
+      "rollback": {
+        "base": "ff5d688f634ce11ba128038bef00b4ca5eaf14bc",
+        "managed_before": {
+          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
+          ".claude/hooks/harness-closeout.mjs": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".claude/settings.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/hooks/harness-closeout.mjs",
+          ".claude/settings.json"
+        ]
+      }
     },
     {
       "repository": "ai-harness",
