@@ -32,6 +32,18 @@
   "managed_words": 400,
   "context_words": 1200,
   "max_files": 6,
+  "max_files_history": [
+    {
+      "value": 4,
+      "valid_until": "2026-10-22",
+      "acceptance": "plan:brain-repository-administration-v1"
+    },
+    {
+      "value": 6,
+      "since": "2026-10-22",
+      "acceptance": "plan:closeout-and-one-system-v1"
+    }
+  ],
   "max_attempts": 3,
   "inventory_recheck": "Every reconciliation and nightly: source existence, current source hashes and named repository commands. Semantic architecture changes remain reviewable; a static profile never certifies current product facts.",
   "acceptances": {
