@@ -34,7 +34,7 @@ Let the docs steward write on every merge instead of nightly. It closes the lag 
 
 ## What Krish still decides
 
-- Merging, and with it the publisher's first rollout to the thirteen targets (its pull requests merge themselves once their checks pass, as they have since 2026-10-17).
+- Merging, and with it the publisher's first rollout to the thirteen targets. Its pull requests merge themselves once their checks pass, as they have since 2026-10-17; the bytes they may write are bound to this approval by hash in `contract/repository-administration.json` (`approved_sha256`), so a changed hook or check cannot ship until a new hash is merged. Krish may instead ask for this first rollout to open pull requests only, for him to merge.
 - The repository secret `CLAUDE_CODE_OAUTH_TOKEN` on heartside, legibility and growth-heartside for the nightly steward.
 - Every proposed recalibration. Nothing here edits a North Star.
 

@@ -76,7 +76,15 @@
           ".claude/hooks/harness-closeout.mjs",
           ".claude/settings.json"
         ],
-        "settings_entry": "one Stop hook command running .claude/hooks/harness-closeout.mjs; every other setting is the repository's"
+        "settings_entry": "one Stop hook command running .claude/hooks/harness-closeout.mjs; every other setting is the repository's",
+        "approved_sha256": {
+          ".claude/hooks/harness-closeout.mjs": [
+            "c9eb2acce54d54eb53555ed9ea8d6bc16b17db90f86ea67518460744ce23df3d"
+          ],
+          ".github/workflows/harness-repository-context.yml": [
+            "95915f30de951f014738a013e0970eea66049036049f58fab1af0e090d8dcc29"
+          ]
+        }
       }
     }
   },
