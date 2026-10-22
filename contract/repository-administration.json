@@ -102,12 +102,13 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "1abf0773c8d58120201eed78c8469e26daa1ff7c5459aafec3b0529d52390c9d"
+            "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "55ab2b9ac470a564cb209b81b685a656f7a02c440892fa606366d933f291b95f"
+            "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
           ]
-        }
+        },
+        "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's"
       }
     }
   },

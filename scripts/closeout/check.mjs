@@ -47,12 +47,15 @@ export const AUTOMATION = /^(docs\((steward|harness|canon)\)|chore\((heartbeat|b
 // used to skip the rule.
 const AUTOMATION_SCOPE = {
   steward: (p) => /\.md$/i.test(p) && p !== NORTH_STAR,
-  harness: (p) => ['AGENTS.md', 'CLAUDE.md', 'docs/HARNESS_CONTEXT.md', ...PUBLISHER_FILES].includes(p),
+  harness: (p) => ['AGENTS.md', 'CLAUDE.md', 'docs/HARNESS_CONTEXT.md', SETTINGS, ...PUBLISHER_FILES].includes(p),
   canon: (p) => ['AGENTS.md', 'CLAUDE.md'].includes(p),
   heartbeat: (p) => /^state\//.test(p),
   brain: (p) => /^(brain|state)\//.test(p),
 }
-export const PUBLISHER_FILES = ['.github/workflows/harness-repository-context.yml', '.claude/hooks/harness-closeout.mjs', '.claude/settings.json']
+export const SETTINGS = '.claude/settings.json'
+// Owned outright by the publisher. In .claude/settings.json it owns only its one
+// Stop hook entry; every other setting there is the repository's to change.
+export const PUBLISHER_FILES = ['.github/workflows/harness-repository-context.yml', '.claude/hooks/harness-closeout.mjs']
 export const isAutomation = (c) => { const m = c.subject.match(AUTOMATION); return !!m && c.files.every(AUTOMATION_SCOPE[m[2] || m[3]]) }
 export const DEPENDENCY_BOTS = new Set(['dependabot[bot]', 'renovate[bot]'])
 export const SKIP = /^Closeout: not needed, \S.{7,}/m
@@ -94,7 +97,7 @@ export const asOf = (text) => String(text || '').match(/^as_of:\s*(\d{4}-\d{2}-\
  * each { subject, body, files }. `pending` are uncommitted paths (the hook only).
  * Returns { ok, problems, reason }.
  */
-export function evaluate({ commits = [], body = '', author = '', nowText = null, nowExists = false, since = null, today }) {
+export function evaluate({ commits = [], body = '', author = '', nowText = null, nowExists = false, settingsText = null, since = null, today }) {
   const own = commits.filter((c) => !isAutomation(c))
   const messages = [body, ...own.map((c) => `${c.subject}\n${c.body}`)].join('\n')
   // Only dependency bots are exempt by author: their pull requests change no
@@ -106,6 +109,7 @@ export function evaluate({ commits = [], body = '', author = '', nowText = null,
   const problems = []
   const touched = PUBLISHER_FILES.filter((p) => files.has(p))
   if (touched.length) problems.push(`${touched.join(', ')} belong to the harness's repository administration publisher. Change them in krishanraja/ai-harness, never here; the publisher delivers them.`)
+  if (files.has(SETTINGS) && settingsText != null && !settingsText.includes('harness-closeout.mjs')) problems.push(`${SETTINGS} no longer registers the harness closeout hook. Keep its Stop entry; every other setting is this repository's to change.`)
   if (files.has(NORTH_STAR) && !RULING.test(messages)) problems.push(`${NORTH_STAR} changed without a "Ruling (Krish, YYYY-MM-DD): ..." line. Only Krish changes a North Star: revert it and propose the change in NOW.md instead.`)
   // A stated reason excuses an untouched NOW.md, never a malformed one.
   if (SKIP.test(messages) && !files.has(NOW)) return { ok: !problems.length, problems, reason: 'closeout not needed, by the stated reason' }
@@ -162,6 +166,12 @@ function defaultBase(cwd) {
 
 const dateOf = (cwd, sha) => tryGit(cwd, 'log', '-1', '--format=%cs', sha)
 
+function readSettings(cwd, ref) {
+  if (ref) return tryGit(cwd, 'show', `${ref}:${SETTINGS}`)
+  const p = join(cwd, SETTINGS)
+  return existsSync(p) ? readFileSync(p, 'utf8') : null
+}
+
 function readNow(cwd, ref) {
   if (ref) { const t = tryGit(cwd, 'show', `${ref}:${NOW}`); return { nowExists: t != null, nowText: t } }
   const p = join(cwd, NOW)
@@ -179,14 +189,14 @@ export function hook(input, today = new Date().toISOString().slice(0, 10)) {
   const commits = rangeCommits(cwd, base, 'HEAD')
   if (!commits?.length) return null
   // Committed work is what is handed on, so it is what the hook holds to the rule.
-  const result = evaluate({ commits, ...readNow(cwd, 'HEAD'), since: dateOf(cwd, base), today })
+  const result = evaluate({ commits, ...readNow(cwd, 'HEAD'), settingsText: readSettings(cwd, 'HEAD'), since: dateOf(cwd, base), today })
   return result.ok ? null : { decision: 'block', reason: instructions(result.problems, today) }
 }
 
 export function ci({ cwd = process.cwd(), base, head, body = '', author = '', today }) {
   const commits = rangeCommits(cwd, base, head)
   if (commits == null) return { ok: false, problems: [`Could not read commits ${base}..${head}; fetch full history (actions/checkout fetch-depth: 0).`] }
-  return evaluate({ commits, body, author, ...readNow(cwd, head), since: dateOf(cwd, base), today: today || dateOf(cwd, head) })
+  return evaluate({ commits, body, author, ...readNow(cwd, head), settingsText: readSettings(cwd, head), since: dateOf(cwd, base), today: today || dateOf(cwd, head) })
 }
 
 const main = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)

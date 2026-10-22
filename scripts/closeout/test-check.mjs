@@ -36,6 +36,9 @@ assert.equal(evaluate({ ...base, commits: [c('docs(canon): sync the canon block'
 assert.equal(evaluate({ ...base, commits: [c('docs(steward): quietly ship a feature', ['src/a.ts'])], nowText: good }).ok, false, 'an automation subject outside its scope is a session commit')
 assert.match(evaluate({ ...base, commits: [c('Loosen the check', ['.github/workflows/harness-repository-context.yml', 'NOW.md'])], nowText: good }).problems.join(), /belong to the harness/)
 assert.match(evaluate({ ...base, commits: [c('Edit the hook', ['.claude/hooks/harness-closeout.mjs'], 'Closeout: not needed, just a tweak here')], nowText: good }).problems.join(), /belong to the harness/, 'a stated reason never excuses it')
+const hookEntry = '{"hooks":{"Stop":[{"hooks":[{"type":"command","command":"node .claude/hooks/harness-closeout.mjs"}]}]},"permissions":{"allow":["Bash(npm test)"]}}'
+assert.equal(evaluate({ ...base, settingsText: hookEntry, commits: [c('Allow tests', ['.claude/settings.json'], 'Closeout: not needed, a local permission only')], nowText: good }).ok, true, 'the repository owns its other settings')
+assert.match(evaluate({ ...base, settingsText: '{"permissions":{}}', commits: [c('Drop hooks', ['.claude/settings.json'], 'Closeout: not needed, settings tidy up')], nowText: good }).problems.join(), /no longer registers the harness closeout hook/)
 assert.equal(evaluate({ ...base, author: 'dependabot[bot]', commits: [c('Bump', ['package.json'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, author: 'some-app[bot]', commits: [c('Write a store', ['src/a.ts'])], nowText: good }).ok, false, 'any other bot is held to the rule')
 assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout: not needed, lockfile refresh only')], nowText: good }).ok, true)
