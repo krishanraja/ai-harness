@@ -103,6 +103,11 @@
       "path": "package.json",
       "role": "verification",
       "label": "Repository commands"
+    },
+    {
+      "path": "docs/REPO_MAP.md",
+      "role": "workflow",
+      "label": "Required bootstrap source"
     }
   ],
   "workflows": [
