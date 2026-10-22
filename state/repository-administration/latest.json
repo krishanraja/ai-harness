@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T21:59:48.341Z",
+  "generated_at": "2026-10-22T22:05:47.096Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -31,17 +31,13 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "ff5d688f634ce11ba128038bef00b4ca5eaf14bc",
+      "base": "edfe4bb3ad8e93de94c625807142bc52b350584d",
       "brain_revision": "5ca09cc3df52",
       "before": 19776,
       "after": 19776,
-      "files": [
-        ".github/workflows/harness-repository-context.yml",
-        ".claude/hooks/harness-closeout.mjs",
-        ".claude/settings.json"
-      ],
+      "files": [],
       "skipped": [],
-      "source_seal": "e12d3bf68a46f8ed6062be9044e18e87067d00ff2d1d0b7e348a47213ac16a80",
+      "source_seal": "cb7660e11984728751ed1ba075aa6ec73c55cc6902b457956a1944b2319f42df",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -49,23 +45,7 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "verified",
-      "pr": 22,
-      "head": "88f605133e5df798f9881afa8311c0160c7ef627",
-      "merge": "edfe4bb3ad8e93de94c625807142bc52b350584d",
-      "rollback": {
-        "base": "ff5d688f634ce11ba128038bef00b4ca5eaf14bc",
-        "managed_before": {
-          ".github/workflows/harness-repository-context.yml": "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
-          ".claude/hooks/harness-closeout.mjs": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          ".claude/settings.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        "files": [
-          ".github/workflows/harness-repository-context.yml",
-          ".claude/hooks/harness-closeout.mjs",
-          ".claude/settings.json"
-        ]
-      }
+      "status": "current"
     },
     {
       "repository": "ai-harness",
