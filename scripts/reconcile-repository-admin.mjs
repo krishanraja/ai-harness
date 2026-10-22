@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
 import { parseYaml } from './lib/yaml.mjs'
 import { policyAt, profiles, knowledgeHistory, ROOT, seal } from './repository-brain.mjs'
-import { planAdministration, inspectRegion, rollbackFile, CONTEXT, TARGET_CHECK, renderAdministration } from './repository-admin.mjs'
+import { planAdministration, inspectRegion, rollbackFile, CONTEXT, OWNED, renderAdministration } from './repository-admin.mjs'
 
 export const BRANCH = 'harness/repository-administration'
 export function checksPassed(checks) {
@@ -20,7 +20,7 @@ export async function rollbackRepository({ receipt, gh, profile, write = false }
   const repo = receipt.repository, { branch } = await gh.defaultBranch(repo), head = await gh.headSha(repo, branch)
   const changes = {}
   for (const path of receipt.rollback.files) {
-    if (!['AGENTS.md', 'CLAUDE.md', profile.context_path, TARGET_CHECK].includes(path)) throw new Error('rollback_path_not_owned')
+    if (!['AGENTS.md', 'CLAUDE.md', profile.context_path, ...OWNED].includes(path)) throw new Error('rollback_path_not_owned')
     const prior = (await gh.getFile(repo, path, receipt.rollback.base))?.text ?? null
     const delivered = (await gh.getFile(repo, path, receipt.merge))?.text ?? null
     const current = (await gh.getFile(repo, path, head))?.text ?? null
@@ -40,12 +40,12 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   if (!policy.targets.includes(profile.repository) || policy.excluded.includes(profile.repository) || profile.enabled !== true) return { repository: profile.repository, status: 'excluded' }
   const repo = profile.repository, { branch } = await gh.defaultBranch(repo)
   const base = await gh.headSha(repo, branch)
-  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', TARGET_CHECK, profile.context_path, ...profile.sources.map((s) => s.path)])]
+  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', ...OWNED, profile.context_path, ...profile.sources.map((s) => s.path)])]
   const files = {}
   for (const path of paths) files[path] = (await gh.getFile(repo, path, base))?.text ?? null
   const initial = !inspectRegion(files['AGENTS.md'] || '').present
   const plan = planAdministration(profile, files, history, { policy, migration: initial ? migration : null })
-  const proof = { repository: repo, base, brain_revision: plan.revision, before: plan.before.chars, after: plan.after.chars, files: Object.keys(plan.changes), source_seal: plan.input_seal, source_check: 'current-source-paths-hashes-and-named-commands', accepted_ids: plan.accepted_ids }
+  const proof = { repository: repo, base, brain_revision: plan.revision, before: plan.before.chars, after: plan.after.chars, files: Object.keys(plan.changes), skipped: plan.skipped, source_seal: plan.input_seal, source_check: 'current-source-paths-hashes-and-named-commands', accepted_ids: plan.accepted_ids }
   if (!Object.keys(plan.changes).length) return { ...proof, status: 'current' }
   if (!write) return { ...proof, status: 'planned' }
   if (await gh.headSha(repo, branch) !== base) throw new Error('source_base_moved')

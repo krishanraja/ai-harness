@@ -26,6 +26,15 @@ Every repository Krish owns names one North Star: an ambition he set that is not
 - Only Krish changes a North Star. Record his ruling in the commit body.
 - A repository with no North Star asks Krish for one before material work. When one is reached, say so and ask him for the next.
 
+## Session closeout
+
+Every session that changes a repository leaves it saying where it is, without Krish asking (Ruling, Krish, 2026-10-22).
+
+- Before ending, update the repository's `NOW.md` in the same work: `as_of`, "Where it is right now", and "What is next and what is waiting on Krish" with the single next action. Leave `head` for the docs steward.
+- Re-read the North Star against what the work learned and keep exactly one line under "What is next and what is waiting on Krish": `- North Star check (YYYY-MM-DD): holds.` or `- North Star check (YYYY-MM-DD): recalibration proposed. <why>`. A recalibration is proposed there for Krish to decide; never edit the North Star to make it.
+- Work that changes nothing a reader of `NOW.md` needs says so in a commit body: `Closeout: not needed, <reason>`.
+- Claude Code's Stop hook and the `closeout` check on every pull request enforce this from one script (`scripts/closeout/check.mjs`); for any other client this rule is the enforcement.
+
 ## Working style
 
 - Apply `krish-principles` to every task, including routine and mechanical work. Compress the reasoning for simple tasks; do not skip it.
@@ -91,8 +100,27 @@ Load `tool-router` for conditional capability selection and useful application; 
 - Record source and retrieval time for dynamic claims. Use a revision/hash where available.
 - A “Last updated” label is evidence only when it agrees with the source revision and live state.
 - If sources disagree, stop destructive work, report the conflict, and create a reconciliation finding.
-- A venture's status and next steps live only in its own repository: the `NOW.md` the docs steward keeps current (check its `head` against the repository's latest commit) and its `docs/NORTH_STAR.md`, which rarely changes. Never take a venture's status or plan from Control Center, the harness, a portfolio summary or memory; anywhere else holds only a pointer to that repository. This is the venture case of preferring live state. `mindmake-os` still owns fleet identity, architecture and database state, which are not a venture's status or plan.
+- A venture's status and next steps live only in its own repository: its `NOW.md`, current when no product commit landed after the last commit that touched it (automation commits do not count), and its `docs/NORTH_STAR.md`, which rarely changes. A `NOW.md` that is not current is unknown, never assumed. Never take a venture's status or plan from Control Center, the harness, a portfolio summary or memory; anywhere else holds only a pointer to that repository. This is the venture case of preferring live state. `mindmake-os` still owns fleet identity, architecture and database state, which are not a venture's status or plan.
 - Do not claim completion from prose alone. Verify with the relevant observable signal.
+
+## One system: where each fact lives
+
+Each fact has one home and one writer (Ruling, Krish, 2026-10-22). Everything else reads it live from that home or carries a pointer to it. A copy is a defect even on the day it is right, because nothing keeps it right.
+
+| Fact | Its one home | Written by | Read by everything else as |
+|---|---|---|---|
+| Doctrine: authority, verification, secrets, routing, skills | `krishanraja/ai-harness` contracts and skills | a harness change Krish merges | the rendered `krish-canon` block; an edit inside it is proposed back, never kept |
+| Who Krish is | `krish-principles` and its references | the same | a pointer |
+| The venture list and the priority ladder | Control Center `docs/PORTFOLIO.md` and `src/lib/portfolio.ts` | control-center sessions | a live read |
+| A venture's status, numbers and next steps | that repository's `NOW.md` | the session that did the work, then the docs steward | a live read of the repository; never stored |
+| A repository's ambition | its `docs/NORTH_STAR.md` | Krish alone | the `north-star` block's pointer |
+| Tool placements, retired routes, unit costs | Control Center's tool catalog | control-center sessions | `get_tool_value_catalog` |
+| Which repositories exist | `state/fleet.yaml` in ai-harness | a harness change | every other fleet list, checked against it by `validate-surfaces` |
+| A repository's operating context and closeout check | the publisher-owned regions and files | the repository administration publisher | read-only |
+
+- Write a fact only in its home. When a task needs it elsewhere, link to the home or read it live.
+- Change doctrine in ai-harness, never only in a repository's canon block, Control Center's server instructions or a copied skill; those surfaces carry what the harness renders.
+- When you find a copy, replace it with a pointer and say where it went in the commit.
 
 ## Verification
 

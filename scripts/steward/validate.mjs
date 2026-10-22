@@ -176,6 +176,16 @@ if (!exists('NOW.md')) {
     if (whereIdx && fm.as_of && !whereIdx.includes(fm.as_of)) fail(`NOW.md: "Where it is right now (as of ...)" heading must carry as_of ${fm.as_of}`)
     if (!/^# .+/m.test(body)) fail('NOW.md: missing H1 title')
 
+    // The North Star check a session leaves (Ruling, Krish, 2026-10-22): optional
+    // until a session writes one, then exactly one, in this section, in this form.
+    const waiting = body.split(/\r?\n## /).find((s) => s.startsWith('What is next and what is waiting on Krish')) || ''
+    const checks = body.split(/\r?\n/).filter((l) => /^\s*- North Star check\b/.test(l))
+    if (checks.length > 1) fail('NOW.md: more than one "North Star check" line; keep exactly one, the current one')
+    for (const l of checks) {
+      if (!/^- North Star check \(\d{4}-\d{2}-\d{2}\): (holds\.|recalibration proposed\.\s+\S.*)$/.test(l.trim())) fail(`NOW.md: "${l.trim()}" is not "- North Star check (YYYY-MM-DD): holds." or "...: recalibration proposed. <why>"`)
+      if (!waiting.includes(l)) fail('NOW.md: the North Star check line belongs under "What is next and what is waiting on Krish"')
+    }
+
     // Rolling window: bullets under "What changed recently" older than 30 days.
     const recent = body.split(/\r?\n## /).find((s) => s.startsWith('What changed recently'))
     if (recent && fm.as_of) {
@@ -220,8 +230,17 @@ if (strict && fm && fm.head) {
     try { git('merge-base', '--is-ancestor', fm.head, 'HEAD') } catch { ancestor = false; fail(`NOW.md: head ${fm.head} is not an ancestor of HEAD`) }
   }
   if (ancestor) {
-    const after = git('log', '--format=%h %s', `${fm.head}..HEAD`).split('\n').filter(Boolean)
-    const foreign = after.filter((l) => !/^[0-9a-f]+ docs\(steward\):/.test(l))
+    // Automation commits (the steward's, the harness publisher's and canon sync's,
+    // heartbeats and brain consolidation) never make NOW.md stale.
+    const automation = (l) => /^[0-9a-f]+ (docs\((steward|harness|canon)\)|chore\((heartbeat|brain)\)):/.test(l)
+    let foreign = git('log', '--no-merges', '--format=%h %s', `${fm.head}..HEAD`).split('\n').filter(Boolean).filter((l) => !automation(l))
+    // Session closeout (Ruling, Krish, 2026-10-22): a session updates NOW.md with
+    // its own work, so NOW.md is also current when no product commit landed
+    // after the last commit that touched it. The head stamp stays the steward's.
+    if (foreign.length) {
+      const lastNow = git('log', '-1', '--no-merges', '--format=%H', '--', 'NOW.md')
+      if (lastNow) foreign = git('log', '--no-merges', '--format=%h %s', `${lastNow}..HEAD`).split('\n').filter(Boolean).filter((l) => !automation(l))
+    }
     for (const l of foreign) fail(`NOW.md: commit after head is not a steward commit, NOW.md is stale: ${l}`)
     const headDate = git('log', '-1', '--format=%cs', fm.head)
     if (fm.as_of && fm.as_of < headDate) fail(`NOW.md: as_of ${fm.as_of} is older than the head commit date ${headDate}`)
@@ -240,6 +259,7 @@ if (since) {
     if (code.startsWith('R') && !/\/history\/|\/_archive\//.test(b)) fail(`diff: ${a} renamed to ${b}, but renames are only allowed into the history or archive directory`)
     if (!allow.some((re) => re.test(path))) fail(`diff: ${path} is outside the write allowlist`)
     if (['docs/HARNESS_CONTEXT.md', '.github/workflows/harness-repository-context.yml'].includes(path)) fail(`diff: ${path} belongs to the repository-administration publisher`)
+    if (path === 'docs/NORTH_STAR.md') fail(`diff: ${path} is Krish's alone; the steward records a proposed recalibration in NOW.md and never edits the North Star`)
     if (path.endsWith('.md') && !code.startsWith('D') && exists(path)) {
       let old = ''; try { old = git('show', `${since}:${path}`) } catch { /* new file */ }
       for (const kind of ['krish-repo-admin', 'krish-repo-context']) {

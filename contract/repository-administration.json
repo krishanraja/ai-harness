@@ -12,7 +12,10 @@
     "content-engine",
     "contentarchives",
     "AEO-Engine",
-    "makeyourmindup"
+    "makeyourmindup",
+    "heartside",
+    "legibility",
+    "growth-heartside"
   ],
   "pilots": [
     "content-engine",
@@ -28,7 +31,7 @@
   ],
   "managed_words": 400,
   "context_words": 1200,
-  "max_files": 4,
+  "max_files": 6,
   "max_attempts": 3,
   "inventory_recheck": "Every reconciliation and nightly: source existence, current source hashes and named repository commands. Semantic architecture changes remain reviewable; a static profile never certifies current product facts.",
   "acceptances": {
@@ -54,6 +57,24 @@
         "administration.experimental-learning": "379312935291f5942881d1ba4ff508165359765abbb0005e7fc6d778e10c1b0f",
         "administration.evidence-and-acceptance": "f83d055047c201657ed2e938d94a4c48cf63bc51a43201e427b76d21a6fd31ea"
       }
+    },
+    "plan:closeout-and-one-system-v1": {
+      "actor": "Krish",
+      "date": "2026-10-22",
+      "extends": "plan:brain-repository-administration-v1",
+      "repositories": [
+        "heartside",
+        "legibility",
+        "growth-heartside"
+      ],
+      "source": "docs/proposals/2026-10-22-session-closeout-and-one-system.md",
+      "records": {}
     }
+  },
+  "prior_owned": {
+    ".github/workflows/harness-repository-context.yml": [
+      "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+    ],
+    ".claude/hooks/harness-closeout.mjs": []
   }
 }

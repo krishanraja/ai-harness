@@ -210,6 +210,35 @@ if (!fleetJsonPath || !existsSync(fleetJsonPath)) {
   O(`repo parity with docs/steward/fleet.json: ${docsNames.size} steward repos, ${hereNames.size} harness surfaces`)
 }
 
+// ------------------------------------------------------------- one fleet list
+//
+// state/fleet.yaml is the only list of repositories (Ruling, Krish, 2026-10-22:
+// one system, one writer per fact). Every other list that names the fleet is
+// checked against it here, so a repository can never be admitted to one
+// writer and missing from the others: the docs steward (above), the central
+// steward's dispatch options, the repository administration publisher and its
+// profiles. A repository the publisher does not administer is excluded by name.
+{
+  const lc = (n) => String(n).toLowerCase()
+  const names = (r) => [r.name, ...(r.aliases || [])].map(lc)
+  const known = new Map(fleet.repos.flatMap((r) => names(r).map((n) => [n, lc(r.name)])))
+  const policy = JSON.parse(read('contract/repository-administration.json'))
+  const admitted = new Set([...policy.targets, ...policy.excluded].map((n) => known.get(lc(n)) || `unknown:${n}`))
+  for (const n of admitted) if (n.startsWith('unknown:')) F(`contract/repository-administration.json names ${n.slice(8)}, which is not in state/fleet.yaml`)
+  for (const r of fleet.repos) if (!admitted.has(lc(r.name))) F(`${r.name} is in state/fleet.yaml but the repository administration publisher neither targets nor excludes it`)
+  const profileNames = new Set(readdirSync(join(HARNESS, 'brain/repositories')).filter((f) => f.endsWith('.json')).map((f) => lc(f.replace(/\.json$/, ''))))
+  for (const t of policy.targets) if (!profileNames.has(lc(t))) F(`${t} is an administration target with no brain/repositories profile`)
+  for (const n of profileNames) if (!policy.targets.some((t) => lc(t) === n)) F(`brain/repositories/${n}.json profiles a repository the publisher does not target`)
+  const central = read('.github/workflows/docs-steward-central.yml').match(/options:\s*\[([^\]]*)\]/)
+  if (!central) F('docs-steward-central.yml has no repository options list')
+  else {
+    const options = new Set(central[1].split(',').map((o) => known.get(lc(o.trim().replace(/^krishanraja\//, ''))) || `unknown:${o.trim()}`))
+    for (const o of options) if (o.startsWith('unknown:')) F(`docs-steward-central.yml offers ${o.slice(8)}, which is not in state/fleet.yaml`)
+    for (const t of policy.targets) if (!options.has(known.get(lc(t)))) F(`${t} is administered but missing from docs-steward-central.yml options`)
+  }
+  O(`one fleet list: ${fleet.repos.length} repos in state/fleet.yaml agree with the steward, the central steward, the publisher (${policy.targets.length} targets, ${policy.excluded.length} excluded) and its profiles`)
+}
+
 // ------------------------------------------------ blocks in the checkouts, if present
 const reposRoot = flag('--repos-root') || join(HARNESS, '..')
 let checked = 0

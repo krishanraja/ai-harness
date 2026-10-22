@@ -33,6 +33,14 @@ export const policyAt = (root = ROOT) => {
     if (policy.acceptances[proof.ref]) throw new Error('duplicate_owner_merge_proof')
     policy.acceptances[proof.ref] = { actor: 'Krish', repositories: [proof.repository], records: { [proof.knowledge_id]: proof.knowledge_hash } }
   }
+  // A later dated owner approval may admit more repositories to an earlier
+  // plan. The earlier record is never rewritten; the extension adds to it here.
+  for (const [ref, extension] of Object.entries(policy.acceptances)) {
+    if (!extension.extends) continue
+    const base = policy.acceptances[extension.extends]
+    if (extension.actor !== 'Krish' || !base || base.extends || !/^\d{4}-\d{2}-\d{2}$/.test(extension.date || '') || Object.keys(extension.records || {}).length) throw new Error(`invalid_acceptance_extension:${ref}`)
+    for (const r of extension.repositories) { if (!policy.targets.includes(r)) throw new Error(`invalid_acceptance_extension:${ref}`); if (!base.repositories.includes(r)) base.repositories.push(r) }
+  }
   return policy
 }
 export const canonical = (v) => Array.isArray(v) ? v.map(canonical) : v && typeof v === 'object' ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])])) : v

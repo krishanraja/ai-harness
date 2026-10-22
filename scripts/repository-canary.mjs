@@ -7,13 +7,13 @@ import {Gh} from './lib/github.mjs'
 import {redact} from './lib/redact.mjs'
 import {digest} from './lib/learning-episode.mjs'
 import {profiles,policyAt,knowledgeHistory,ROOT,seal} from './repository-brain.mjs'
-import {planAdministration,TARGET_CHECK} from './repository-admin.mjs'
+import {planAdministration,OWNED} from './repository-admin.mjs'
 import {privateTitleReplay} from './repository-title-replay.mjs'
 export async function prepareCanary({repository,kind,gh,root=ROOT,out='.canary'}) {
  const policy=policyAt(root),profile=profiles(root).find(p=>p.repository===repository)
  if(!policy.pilots.includes(repository)||!['orientation','iteration'].includes(kind))throw new Error('canary_outside_pilots')
  const {branch}=await gh.defaultBranch(repository),base=await gh.headSha(repository,branch),files={}
- for(const p of [...new Set(['AGENTS.md','CLAUDE.md',TARGET_CHECK,profile.context_path,...profile.sources.map(s=>s.path)])]) files[p]=(await gh.getFile(repository,p,base))?.text??null
+ for(const p of [...new Set(['AGENTS.md','CLAUDE.md',...OWNED,profile.context_path,...profile.sources.map(s=>s.path)])]) files[p]=(await gh.getFile(repository,p,base))?.text??null
  const mp=join(root,'state/repository-administration/migrations',repository+'.json')
  const migration=files['AGENTS.md']?.includes('<!-- krish-repo-admin:')?null:existsSync(mp)?JSON.parse(readFileSync(mp,'utf8')):null
  const plan=planAdministration(profile,files,knowledgeHistory(root),{policy,migration})

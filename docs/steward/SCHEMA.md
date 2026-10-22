@@ -2,7 +2,7 @@
 
 Status: Current
 Owner: Krish Raja
-Last verified: 2026-09-09 against `scripts/steward/validate.mjs`
+Last verified: 2026-10-22 against `scripts/steward/validate.mjs`
 
 The steward adds exactly two files to every repo in `fleet.json`. Everything
 else in a repo keeps its own structure, voice, naming, stamp form and archive
@@ -43,9 +43,15 @@ sheet ids, family names and credential names here. The registry in
 
 Rules the validator enforces:
 
-- `head` is an ancestor of `HEAD`, and every commit after it has a subject
-  starting `docs(steward):`. That is what makes `as_of` trustworthy: nothing
-  but the steward has touched the repo since the file was reconciled.
+- `head` is an ancestor of `HEAD`, and every commit after it is automation
+  (`docs(steward)`, `docs(harness)`, `docs(canon)`, `chore(heartbeat)`,
+  `chore(brain)`), or no product commit landed after the last commit that
+  touched NOW.md (a session closed out its own work). That is what makes
+  `as_of` trustworthy. Readers outside the repository use the same rule.
+- At most one `- North Star check (YYYY-MM-DD): holds.` or
+  `...: recalibration proposed. <why>` line, under "What is next and what is
+  waiting on Krish".
+- The steward never changes `docs/NORTH_STAR.md`.
 - `as_of` is not older than the date of the `head` commit.
 - `lifecycle` is one of the five words above.
 - `state_doc`, `history_log` and every `truth_files` entry exist. Entries in
@@ -82,7 +88,12 @@ the Content Engine's Built with AI and Money of AI lenses read
 or features is a bullet a writer cannot use.
 
 ## What is next and what is waiting on Krish
-Open decisions and the single next action.
+Open decisions and the single next action. Exactly one North Star check line,
+written by the session that last changed the repository (contract, "Session
+closeout"):
+- North Star check (YYYY-MM-DD): holds.
+- North Star check (YYYY-MM-DD): recalibration proposed. <one sentence: what
+  changed and the ambition it suggests; Krish decides>
 
 ## Read next
 The repo's own docs in its own authority order, one line each on what that

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "repository": "growth-heartside",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "16de7eaad2fab192a5306d5131282ae73e95077d",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 76000,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "BROWSER.md",
+      "role": "workflow",
+      "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/ENGINE.md",
+      "role": "workflow",
+      "label": "Required bootstrap source"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "role": "state",
+      "label": "Current handoff state"
+    },
+    {
+      "path": "PLAYBOOK.md",
+      "role": "workflow",
+      "label": "Growth playbook"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "growth",
+      "label": "Research, evidence, drafts and approved experiments for Heartside",
+      "read": [
+        "README.md",
+        "PLAYBOOK.md",
+        "docs/HANDOFF.md"
+      ],
+      "checks": [
+        "python growth.py --self-test",
+        "python -m unittest discover -s tests -v"
+      ]
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 name: Docs steward invariants
 on:
   pull_request:
-    paths: [".github/workflows/docs-steward.yml", ".github/workflows/docs-steward-checks.yml", "scripts/test-docs-steward-workflow.mjs"]
+    paths: [".github/workflows/docs-steward.yml", ".github/workflows/docs-steward-checks.yml", "scripts/test-docs-steward-workflow.mjs", "scripts/steward/**", "scripts/closeout/**"]
   push:
     branches: [main]
-    paths: [".github/workflows/docs-steward.yml", ".github/workflows/docs-steward-checks.yml", "scripts/test-docs-steward-workflow.mjs"]
+    paths: [".github/workflows/docs-steward.yml", ".github/workflows/docs-steward-checks.yml", "scripts/test-docs-steward-workflow.mjs", "scripts/steward/**", "scripts/closeout/**"]
 permissions:
   contents: read
 jobs:
@@ -20,3 +20,5 @@ jobs:
           node-version: "22"
           package-manager-cache: false
       - run: node scripts/test-docs-steward-workflow.mjs
+      - run: node scripts/steward/test-validate-closeout.mjs
+      - run: node scripts/closeout/test-check.mjs

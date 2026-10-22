@@ -132,6 +132,17 @@ Keep `never_publish` current: anything the repo's own docs mark private
 (client names, prices, machine names, sheet ids, credential names) goes on
 the list.
 
+Since 2026-10-22 every session closes out its own work in `NOW.md` (contract,
+"Session closeout"; enforced by `scripts/closeout/check.mjs` as Claude Code's
+Stop hook and as the `closeout` job on every pull request). So the steward is
+the backstop, not the first writer: keep what a session wrote unless the
+record contradicts it, then re-stamp `head`. Keep exactly one
+`- North Star check (YYYY-MM-DD): ...` line under "What is next and what is
+waiting on Krish". Carry a `recalibration proposed` line forward unchanged
+until Krish rules; never write `holds` yourself, because only a session that
+re-read the North Star against its work can say so. Never edit
+`docs/NORTH_STAR.md`: the validator fails a steward diff that touches it.
+
 ### Step 6: guards before anything is pushed
 
 All of these must pass. A single failure sends the run to the fallback.
@@ -210,9 +221,11 @@ The docs steward, canon sync and repository-administration publisher have disjoi
 | Lives in | `ai-harness/docs/steward/` and `ai-harness/scripts/steward/` | `ai-harness/scripts/` |
 | Owns | `NOW.md`, `docs/history/LOG.md`, banners on superseded docs | the text between the `krish-canon` markers in `AGENTS.md`, and the harness canon itself |
 | Writes by | committing to `main` | opening a pull request |
-| Never touches | `krish-canon`, `krish-repo-admin`, `krish-repo-context` regions; `docs/HARNESS_CONTEXT.md`; `.github/workflows/harness-repository-context.yml` | `NOW.md`, `docs/history/`, or anything outside its own markers |
+| Never touches | `krish-canon`, `krish-repo-admin`, `krish-repo-context` regions; `docs/HARNESS_CONTEXT.md`; `.github/workflows/harness-repository-context.yml`; `.claude/hooks/harness-closeout.mjs`; `.claude/settings.json`; `docs/NORTH_STAR.md` | `NOW.md`, `docs/history/`, or anything outside its own markers |
 
-The separate repository-administration publisher owns `krish-repo-admin` in `AGENTS.md`, the complete generated `docs/HARNESS_CONTEXT.md`, and its hash/budget check workflow. An approved, hash-bound initial migration may thin `CLAUDE.md` to `@AGENTS.md` and compress duplicated bootstrap explanation while preserving specific rules. Subsequent runs preserve every unmanaged byte. New meaning comes from accepted central brain records; the docs steward may report a finding but must never rewrite or archive these surfaces, even with a regenerated hash.
+A session is the third writer of `NOW.md`, and the first: it closes out its own work there before it ends. The steward reconciles after it; neither ever edits `docs/NORTH_STAR.md`, which changes only with Krish's ruling in the commit.
+
+The separate repository-administration publisher owns `krish-repo-admin` in `AGENTS.md`, the complete generated `docs/HARNESS_CONTEXT.md`, its hash/budget and closeout check workflow, the closeout hook `.claude/hooks/harness-closeout.mjs`, and that hook's single entry in `.claude/settings.json`. An approved, hash-bound initial migration may thin `CLAUDE.md` to `@AGENTS.md` and compress duplicated bootstrap explanation while preserving specific rules. Subsequent runs preserve every unmanaged byte. New meaning comes from accepted central brain records; the docs steward may report a finding but must never rewrite or archive these surfaces, even with a regenerated hash.
 
 The canon block is inside `AGENTS.md`, which is on the docs steward's markdown
 allowlist. The steward must leave it alone: it is rendered from
@@ -238,10 +251,16 @@ is the nightly run's work, not a broken merge. Failing on it would make every
 merge red for a reason nobody can fix at merge time, which is precisely how the
 push trigger came to be ignored.
 
-So documentation is reconciled once a day, not on every merge, and the push
+So the steward reconciles once a day, not on every merge, and the push
 trigger exists to catch a broken `NOW.md` immediately rather than to write one.
-Say "validated on every push, reconciled nightly" in any prose that describes
-this; "reconciled on every push" is wrong.
+Since 2026-10-22 the session that made a change updates `NOW.md` in the same
+pull request, so `NOW.md` is current at merge and the nightly run re-stamps it.
+Say "closed out by each session, validated on every push, reconciled nightly"
+in any prose that describes this; "reconciled on every push" is wrong. The
+strict validator counts `NOW.md` current when no product commit landed after
+the last commit that touched it; automation commits (`docs(steward)`,
+`docs(harness)`, `docs(canon)`, `chore(heartbeat)`, `chore(brain)`) never make
+it stale.
 
 Shipped 2026-09-07 with `push` in the trigger list and no mode split, which
 failed every push for a day. The nightly runs succeeded throughout, so the only

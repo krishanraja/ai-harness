@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "repository": "legibility",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "7e1f8b8f4eda9ffb8720cf6fe1bcb1b64207e85c",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 60000,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/OUTSTANDING.md",
+      "role": "state",
+      "label": "What is outstanding"
+    },
+    {
+      "path": "package.json",
+      "role": "verification",
+      "label": "Repository commands"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "product",
+      "label": "Site, dashboard, API and MCP server",
+      "read": [
+        "README.md",
+        "docs/OUTSTANDING.md",
+        "package.json"
+      ],
+      "checks": [
+        "bun run format:check",
+        "bunx tsc --noEmit",
+        "bun run lint",
+        "bunx vitest run --coverage",
+        "bun run build"
+      ]
+    }
+  ]
+}

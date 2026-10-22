@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "repository": "heartside",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "67101254a23e06a85361f978b12ab4e7ad34ae48",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 60000,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/HANDOFF.md",
+      "role": "state",
+      "label": "Current handoff state"
+    },
+    {
+      "path": "docs/SYNC.md",
+      "role": "workflow",
+      "label": "How the store, assets and growth engine stay in sync"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "store",
+      "label": "Products, assets and the Shopify store",
+      "read": [
+        "README.md",
+        "docs/HANDOFF.md",
+        "docs/SYNC.md"
+      ],
+      "checks": []
+    }
+  ]
+}
