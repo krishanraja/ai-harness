@@ -53,7 +53,7 @@ The router reads this before it suggests any creative or data work. It is ordere
 | Venture | The number that matters | Deadline | What creative or data work moves it | Best-fit tools | Hard limits |
 |---|---|---|---|---|---|
 | **Heartside** (P1) | One-off orders in USD, average order value | Last printed order 10 December (to be confirmed per product in Printful) | Product shots for all 11 products. Short organic clips for TikTok, Reels and Shorts in the plan's voice (`docs/V2-FROM-THE-DOG.md`, section 6). The 15-second "dog reads your review" video. "Who would your dog fire?" comment prompts | Higgsfield Marketing Studio for product shots and ads; Shorts Studio and Seedance for clips; virality check before final render; ElevenLabs for the dog's voice | Label AI-made ads as platforms require. No grief, illness or old age. No invented reviews, scarcity or "was" prices. No ad spend (Krish's action, and against Gate 4 until revenue flows) |
-| **Full Time** (P1) | Pilot listeners, target 100 (one counted 2026-10-06) | None set | Social clips cut from published editions. Audiograms of each pundit. A visual identity per pundit so listeners can pick one | ElevenLabs (already voices the show); Higgsfield stills for pundit art; Higgsfield or Runway for short motion clips; Descript to cut clips | No betting, live-score or league-table framing. No Premier League mark. Rule 8 flag for Krish's own hours. Blocked in practice until editions publish again: none since 2026-09-05 per its repository |
+| **Full Time** (P1) | Pilot listeners, target 100 (one counted 2026-10-06) | None set | Social clips cut from published editions. Audiograms of each pundit. A visual identity per pundit so listeners can pick one | ElevenLabs (already voices the show); Higgsfield stills for pundit art; Higgsfield or Runway for short motion clips (Descript retired 2026-10-22) | No betting, live-score or league-table framing. No Premier League mark. Rule 8 flag for Krish's own hours. Blocked in practice until editions publish again: none since 2026-09-05 per its repository |
 | **Legibility** (P2) | Weekly trusted reads per active account, 7 or more | Eight-week beta kill criteria | Developer content that shows real calls and real costs. Diagrams, not cinema | Little media spend. Canva or plain diagrams | No claims of coverage it lacks. No outbound engine before a design partner |
 | **Mindmake** (the mission) | A client who says the proof works and stands behind it | None set | Visuals for published thinking across the three channels. Possibly a presenter-led explainer | Higgsfield stills for article art; HeyGen only if Krish rules on founder visibility | Founder visibility is OPEN: no avatar, face or voice clone of Krish before he says yes. No price, booking link or offer ladder |
 | **CTRL, Pulse** (P3) | Six measures; Pulse not for sale yet | None | Pulse weekly brief visuals at most | Minimal | No claims beyond evidence. No new price points |
@@ -70,7 +70,7 @@ For every creative service, the economics snapshot gains the fields a decision n
 - Cost of a typical useful output, measured from receipts. Higgsfield already shows 210 credits for a Seedance clip and 2.75 for a GPT Image still.
 - Last used, and for which venture.
 
-This work belongs in `krishanraja/control-center`, not here. The services to add first: Higgsfield, HeyGen, Runway, Canva, Descript, Riverside. Higgsfield and HeyGen already expose read-only balance endpoints through their own connectors, so a collector reads them without spending anything.
+This work belongs in `krishanraja/control-center`, not here. The services to add first: Higgsfield, HeyGen, Runway, Canva, Riverside (Descript was retired the same day, so it was dropped). Higgsfield and HeyGen already expose read-only balance endpoints through their own connectors, so a collector reads them without spending anything.
 
 ## 3. A rule change in the router
 
@@ -162,7 +162,7 @@ Read from the map's `placements` collection after Krish said he was done. Main t
 
 Both rulings and the approved section 3 rule change are now in `candidates/tool-router/SKILL.md`. The candidate's installed copies on the cloud surfaces predate this edit and need a fresh upload before they carry it.
 
-Removal outside this repository is still open: disconnecting the Fireflies and Descript connectors in claude.ai (and the Fireflies sales plugin) is done in his connector settings, and Fireflies still appears in Control Center's tool value catalog and service registry, which live in `krishanraja/control-center`.
+Removal outside this repository, closed the same day: Krish disconnected the Fireflies and Descript connectors from his accounts and cancelled the Fireflies subscription. krishanraja/control-center#525 removed Fireflies from the tool value catalog, listed both as retired routes, and retired Fireflies in the service registry (row kept for charge matching; Descript had no row). With his approval the Fireflies key was deleted from Control Center's Vercel settings and read back as gone. This supersedes every earlier statement here that Fireflies is still listed.
 
 Football data (API-Football, football-data.org) is placed on Full Time, which is in the mission by the 2026-10-06 ruling; Rule 8's flag still applies to any step that needs Krish's own hours on football.
 
@@ -174,3 +174,7 @@ Football data (API-Football, football-data.org) is placed on Full Time, which is
 - Booked: HeyGen face and voice clone recording, 23 October, 10:00 to 10:30 London.
 
 - Ruling (Krish, 2026-10-22): this work builds the system; a venture's creative execution belongs to that venture's own engine or repository (for Heartside, `krishanraja/growth-heartside`). The 40 stills made in this session are recorded in Higgsfield and handed to growth-heartside as mocks; further Heartside production happens there. The tool router now says that allocation is not production.
+
+### How the prepaid-credit ruling relates to the existing approval rules
+
+The 2026-10-22 prepaid-credit ruling narrows the general approval rule (`authority`: anything that spends needs explicit approval immediately before the action) for one case only: generation paid from credits already bought, inside a weekly allocation Krish approved that week, within that allocation's credit limit. The weekly approval is the explicit approval; it names the provider, the credits and the work. Everything else keeps its gate unchanged: any request that spends new money (a top-up, a plan change, an overage, a paid gateway operation through Control Center's `prepare_*` and `execute_api_operation`), and every publication, post or send. A session that cannot point to the approved allocation and its remaining credits has no authority under this ruling.
