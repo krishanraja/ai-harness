@@ -102,10 +102,10 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "2d8392f6af5f182793dde14dd53e10a3802341b2ca31060ac39ea11596c2739c"
+            "1abf0773c8d58120201eed78c8469e26daa1ff7c5459aafec3b0529d52390c9d"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "98d0e0f1d49f679d10bfb21ea2194d41dad2f458c588e97182e6c3289452c5df"
+            "55ab2b9ac470a564cb209b81b685a656f7a02c440892fa606366d933f291b95f"
           ]
         }
       }

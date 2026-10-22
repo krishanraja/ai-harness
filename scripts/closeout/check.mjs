@@ -42,6 +42,18 @@ export const NOW = 'NOW.md'
 export const NORTH_STAR = 'docs/NORTH_STAR.md'
 export const WAITING = 'What is next and what is waiting on Krish'
 export const AUTOMATION = /^(docs\((steward|harness|canon)\)|chore\((heartbeat|brain)\)):/
+// What each automation may touch. A commit that claims an automation subject
+// but touches anything else is a session's own work, so the subject cannot be
+// used to skip the rule.
+const AUTOMATION_SCOPE = {
+  steward: (p) => /\.md$/i.test(p) && p !== NORTH_STAR,
+  harness: (p) => ['AGENTS.md', 'CLAUDE.md', 'docs/HARNESS_CONTEXT.md', ...PUBLISHER_FILES].includes(p),
+  canon: (p) => ['AGENTS.md', 'CLAUDE.md'].includes(p),
+  heartbeat: (p) => /^state\//.test(p),
+  brain: (p) => /^(brain|state)\//.test(p),
+}
+export const PUBLISHER_FILES = ['.github/workflows/harness-repository-context.yml', '.claude/hooks/harness-closeout.mjs', '.claude/settings.json']
+export const isAutomation = (c) => { const m = c.subject.match(AUTOMATION); return !!m && c.files.every(AUTOMATION_SCOPE[m[2] || m[3]]) }
 export const DEPENDENCY_BOTS = new Set(['dependabot[bot]', 'renovate[bot]'])
 export const SKIP = /^Closeout: not needed, \S.{7,}/m
 export const RULING = /Ruling \(Krish, \d{4}-\d{2}-\d{2}\)/
@@ -83,7 +95,7 @@ export const asOf = (text) => String(text || '').match(/^as_of:\s*(\d{4}-\d{2}-\
  * Returns { ok, problems, reason }.
  */
 export function evaluate({ commits = [], body = '', author = '', nowText = null, nowExists = false, since = null, today }) {
-  const own = commits.filter((c) => !AUTOMATION.test(c.subject))
+  const own = commits.filter((c) => !isAutomation(c))
   const messages = [body, ...own.map((c) => `${c.subject}\n${c.body}`)].join('\n')
   // Only dependency bots are exempt by author: their pull requests change no
   // status and cannot write NOW.md. Every other automation, the publisher
@@ -92,6 +104,8 @@ export function evaluate({ commits = [], body = '', author = '', nowText = null,
   if (!own.length) return { ok: true, problems: [], reason: 'no session commits' }
   const files = new Set(own.flatMap((c) => c.files))
   const problems = []
+  const touched = PUBLISHER_FILES.filter((p) => files.has(p))
+  if (touched.length) problems.push(`${touched.join(', ')} belong to the harness's repository administration publisher. Change them in krishanraja/ai-harness, never here; the publisher delivers them.`)
   if (files.has(NORTH_STAR) && !RULING.test(messages)) problems.push(`${NORTH_STAR} changed without a "Ruling (Krish, YYYY-MM-DD): ..." line. Only Krish changes a North Star: revert it and propose the change in NOW.md instead.`)
   // A stated reason excuses an untouched NOW.md, never a malformed one.
   if (SKIP.test(messages) && !files.has(NOW)) return { ok: !problems.length, problems, reason: 'closeout not needed, by the stated reason' }
