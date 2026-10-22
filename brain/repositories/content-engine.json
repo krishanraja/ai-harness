@@ -12,7 +12,7 @@
     "agents": "AGENTS.md",
     "claude": "CLAUDE.md"
   },
-  "bootstrap_limit_chars": 232887,
+  "bootstrap_limit_chars": 312761,
   "sources": [
     {
       "path": "README.md",
@@ -159,9 +159,16 @@
     {
       "date": "2026-10-22",
       "field": "sources",
-      "added": "docs/REPO_MAP.md",
-      "basis": "content-engine CLAUDE.md makes docs/REPO_MAP.md a mandatory first read, so the publisher's bootstrap measure needs it; without it every run since at least 2026-10-20 ended bootstrap_source_missing. It is read for the startup measure only; the delivered context does not mandate it.",
-      "measured": "plan against content-engine main: 312761 startup characters before and after delivery; the 232887 limit is unchanged because delivery adds no startup context"
+      "from": null,
+      "to": "docs/REPO_MAP.md",
+      "basis": "content-engine CLAUDE.md makes docs/REPO_MAP.md a mandatory first read; the publisher fetches only profile sources, so every run since at least 2026-10-20 ended bootstrap_source_missing (state/repository-administration/latest.json at 0019e00 and later)."
+    },
+    {
+      "date": "2026-10-22",
+      "field": "bootstrap_limit_chars",
+      "from": 232887,
+      "to": 312761,
+      "basis": "re-measured with scripts/repository-admin.mjs bootstrapMeasure against content-engine main once docs/REPO_MAP.md is counted; the old limit predates that file being read"
     }
   ]
 }
