@@ -172,3 +172,5 @@ Football data (API-Football, football-data.org) is placed on Full Time, which is
 - Ruling (Krish, 2026-10-22): growth-heartside may record prepaid credits inside an approved allocation as no new money (krishanraja/growth-heartside#12).
 - Done the same day: 40 Heartside stills (8 home moments × 5 breeds, dog and room only) on `gpt_image_2_5` at high quality, 2k, 9:16. Higgsfield's transaction log shows 40 charges of 2.75 credits, 110 in total, matching the reservation and receipts recorded in the engine. The Full Time stills were held back, because Krish is improving Full Time's product before inviting testers.
 - Booked: HeyGen face and voice clone recording, 23 October, 10:00 to 10:30 London.
+
+- Ruling (Krish, 2026-10-22): this work builds the system; a venture's creative execution belongs to that venture's own engine or repository (for Heartside, `krishanraja/growth-heartside`). The 40 stills made in this session are recorded in Higgsfield and handed to growth-heartside as mocks; further Heartside production happens there. The tool router now says that allocation is not production.
