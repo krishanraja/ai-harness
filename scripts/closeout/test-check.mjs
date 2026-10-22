@@ -34,6 +34,7 @@ assert.equal(evaluate({ ...base, commits: [c('docs(canon): sync the canon block'
 assert.equal(evaluate({ ...base, author: 'dependabot[bot]', commits: [c('Bump', ['package.json'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout: not needed, lockfile refresh only')], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout: not needed, x')], nowText: good }).ok, false, 'a reason has to say something')
+assert.equal(evaluate({ ...base, commits: [c('a', ['src/a.ts'], 'Closeout: not needed, a refactor only'), c('Close out', ['NOW.md'])], nowText: now(TODAY, null) }).ok, false, 'a stated reason never excuses a malformed NOW.md')
 // The North Star changes only with Krish's ruling, even with a skip line.
 assert.match(evaluate({ ...base, commits: [c('Retarget', ['docs/NORTH_STAR.md'], 'Closeout: not needed, wording only change')], nowText: good }).problems.join(), /Only Krish changes a North Star/)
 assert.equal(evaluate({ ...base, commits: [c('Retarget', ['docs/NORTH_STAR.md'], 'Ruling (Krish, 2026-10-22): the new ambition.')], nowText: good }).ok, true)

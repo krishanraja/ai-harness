@@ -82,7 +82,8 @@ export function evaluate({ commits = [], body = '', author = '', nowText = null,
   const files = new Set(own.flatMap((c) => c.files))
   const problems = []
   if (files.has(NORTH_STAR) && !RULING.test(messages)) problems.push(`${NORTH_STAR} changed without a "Ruling (Krish, YYYY-MM-DD): ..." line. Only Krish changes a North Star: revert it and propose the change in NOW.md instead.`)
-  if (SKIP.test(messages)) return { ok: !problems.length, problems, reason: 'closeout not needed, by the stated reason' }
+  // A stated reason excuses an untouched NOW.md, never a malformed one.
+  if (SKIP.test(messages) && !files.has(NOW)) return { ok: !problems.length, problems, reason: 'closeout not needed, by the stated reason' }
   if (![...files].some(isProduct)) return { ok: !problems.length, problems, reason: 'documentation only' }
   const floor = since || today
   if (!nowExists) problems.push(`${NOW} does not exist. Create it from the docs steward schema (ai-harness docs/steward/SCHEMA.md) so the repository says where it is.`)
