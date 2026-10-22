@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-22T00:40:10.918Z",
+  "generated_at": "2026-10-22T18:39:23.938Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -14,8 +14,13 @@
       "brain_revision": "5ca09cc3df52",
       "before": 19776,
       "after": 19776,
-      "files": [],
-      "source_seal": "c7f92827e10ff6d72408b34909a847340535f3bcebb38f185f3cefac5b002741",
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs",
+        ".claude/settings.json"
+      ],
+      "skipped": [],
+      "source_seal": "e12d3bf68a46f8ed6062be9044e18e87067d00ff2d1d0b7e348a47213ac16a80",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,7 +28,9 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "current"
+      "status": "awaiting-checks",
+      "pr": 22,
+      "head": "88f605133e5df798f9881afa8311c0160c7ef627"
     },
     {
       "repository": "ai-harness",
@@ -55,6 +62,18 @@
     },
     {
       "repository": "makeyourmindup",
+      "status": "awaiting-pilots"
+    },
+    {
+      "repository": "heartside",
+      "status": "awaiting-pilots"
+    },
+    {
+      "repository": "legibility",
+      "status": "awaiting-pilots"
+    },
+    {
+      "repository": "growth-heartside",
       "status": "awaiting-pilots"
     }
   ]

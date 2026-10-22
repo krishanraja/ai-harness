@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-22T00:40:11.044Z",
-  "measurement_verification_at": "2026-10-22T00:40:11.004Z",
+  "generated_at": "2026-10-22T18:39:24.061Z",
+  "measurement_verification_at": "2026-10-22T18:39:24.023Z",
   "sources": {
     "github": {
       "status": "available",
@@ -30,7 +30,7 @@
       "accepted": 4,
       "candidates": 7,
       "unknown_coverage": true,
-      "delivery": "current",
+      "delivery": "awaiting-checks",
       "brain_revision": "5ca09cc3df52",
       "source_base": "ff5d688f634ce11ba128038bef00b4ca5eaf14bc",
       "bootstrap_before": 19776,
@@ -260,6 +260,105 @@
       "last_delivered": null,
       "accepted": 4,
       "candidates": 25,
+      "unknown_coverage": true,
+      "delivery": "awaiting-pilots",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "growth-heartside",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-pilots",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "heartside",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-pilots",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "legibility",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
