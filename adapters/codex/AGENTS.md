@@ -14,7 +14,7 @@ Canonical user skills are exposed through `C:\Users\krish\.codex\skills`. Use `m
 
 For current mind/make OS facts, follow the source and freshness rules in `mindmake-os`; do not rely on remembered counts.
 
-For external evidence, enrichment, media generation or service operations, load `tool-router` to discover useful capabilities and choose a route; `tools-access` and the narrow provider retain access checks and execution.
+For external evidence, enrichment, media generation or service operations, load `tool-router` to discover useful capabilities and choose a route; `tools-access` and the narrow provider retain access checks and execution. Control Center's tool catalog is the one source for where each tool should be used and which routes are retired (Instantly, Apollo, Fireflies, Descript), so Claude and Codex follow the same placements.
 
 When Krish overrules a decision, record it in the commit body as `Ruling (Krish, YYYY-MM-DD): the ruling, in one line`. The harness reads those lines across every repository.
 
