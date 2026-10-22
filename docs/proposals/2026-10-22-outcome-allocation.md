@@ -165,3 +165,10 @@ Both rulings and the approved section 3 rule change are now in `candidates/tool-
 Removal outside this repository is still open: disconnecting the Fireflies and Descript connectors in claude.ai (and the Fireflies sales plugin) is done in his connector settings, and Fireflies still appears in Control Center's tool value catalog and service registry, which live in `krishanraja/control-center`.
 
 Football data (API-Football, football-data.org) is placed on Full Time, which is in the mission by the 2026-10-06 ruling; Rule 8's flag still applies to any step that needs Krish's own hours on football.
+
+## First weekly allocation, 22 to 28 October
+
+- Ruling (Krish, 2026-10-22): the first weekly allocation is approved: up to 773 of 1,413 Higgsfield credits, Heartside first, with the two video clips gated on his concept picks and 640 credits held in reserve.
+- Ruling (Krish, 2026-10-22): growth-heartside may record prepaid credits inside an approved allocation as no new money (krishanraja/growth-heartside#12).
+- Done the same day: 40 Heartside stills (8 home moments × 5 breeds, dog and room only) on `gpt_image_2_5` at high quality, 2k, 9:16. Higgsfield's transaction log shows 40 charges of 2.75 credits, 110 in total, matching the reservation and receipts recorded in the engine. The Full Time stills were held back, because Krish is improving Full Time's product before inviting testers.
+- Booked: HeyGen face and voice clone recording, 23 October, 10:00 to 10:30 London.
