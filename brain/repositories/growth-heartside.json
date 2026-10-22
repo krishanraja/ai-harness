@@ -11,7 +11,7 @@
     "agents": "AGENTS.md",
     "claude": "CLAUDE.md"
   },
-  "bootstrap_limit_chars": 80606,
+  "bootstrap_limit_chars": 80645,
   "sources": [
     {
       "path": "README.md",
@@ -62,6 +62,15 @@
         "python growth.py --self-test",
         "python -m unittest discover -s tests -v"
       ]
+    }
+  ],
+  "changes": [
+    {
+      "date": "2026-10-22",
+      "field": "bootstrap_limit_chars",
+      "from": 80606,
+      "to": 80645,
+      "basis": "re-measured with scripts/repository-admin.mjs bootstrapMeasure against growth-heartside main after PR 15 merged; the merge added 39 characters to its mandatory startup reads, so the limit pins the measured size after delivery"
     }
   ]
 }

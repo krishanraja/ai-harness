@@ -12,7 +12,7 @@
     "agents": "AGENTS.md",
     "claude": "CLAUDE.md"
   },
-  "bootstrap_limit_chars": 232887,
+  "bootstrap_limit_chars": 312761,
   "sources": [
     {
       "path": "README.md",
@@ -103,6 +103,11 @@
       "path": "package.json",
       "role": "verification",
       "label": "Repository commands"
+    },
+    {
+      "path": "docs/REPO_MAP.md",
+      "role": "workflow",
+      "label": "Required bootstrap source"
     }
   ],
   "workflows": [
@@ -149,5 +154,21 @@
   ],
   "bootstrap_notes": [
     "Before any work run `python3 scripts/check_failures.py`. At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
+  ],
+  "changes": [
+    {
+      "date": "2026-10-22",
+      "field": "sources",
+      "from": null,
+      "to": "docs/REPO_MAP.md",
+      "basis": "content-engine CLAUDE.md makes docs/REPO_MAP.md a mandatory first read; the publisher fetches only profile sources, so every run since at least 2026-10-20 ended bootstrap_source_missing (state/repository-administration/latest.json at 0019e00 and later)."
+    },
+    {
+      "date": "2026-10-22",
+      "field": "bootstrap_limit_chars",
+      "from": 232887,
+      "to": 312761,
+      "basis": "re-measured with scripts/repository-admin.mjs bootstrapMeasure against content-engine main once docs/REPO_MAP.md is counted; the old limit predates that file being read"
+    }
   ]
 }
