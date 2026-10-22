@@ -18,7 +18,7 @@ export const TARGET_SETTINGS = '.claude/settings.json'
 export const HOOK_COMMAND = 'node "$CLAUDE_PROJECT_DIR/.claude/hooks/harness-closeout.mjs"'
 const sha256 = (s) => createHash('sha256').update(s, 'utf8').digest('hex')
 export const closeoutHook = () => readFileSync(join(ROOT, 'scripts/closeout/check.mjs'), 'utf8')
-export const targetCheck = () => readFileSync(join(ROOT, 'contract/templates/repository-context-workflow.yml'), 'utf8').replace('{{CLOSEOUT_SHA256}}', sha256(closeoutHook()))
+export const targetCheck = () => readFileSync(join(ROOT, 'contract/templates/repository-context-workflow.yml'), 'utf8').replaceAll('{{CLOSEOUT_SHA256}}', sha256(closeoutHook()))
 export const OWNED = [TARGET_CHECK, TARGET_HOOK, TARGET_SETTINGS]
 
 /** A file the publisher owns outright: create it, keep it, or replace a version it delivered before. */

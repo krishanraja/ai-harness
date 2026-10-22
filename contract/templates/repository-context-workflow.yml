@@ -55,4 +55,9 @@ jobs:
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node .claude/hooks/harness-closeout.mjs --ci --base "$BASE_SHA" --head "$HEAD_SHA"
+        # Run the hook only after proving it is the harness copy: a pull request
+        # must never be able to grade itself with bytes it edited.
+        run: |
+          set -euo pipefail
+          echo "{{CLOSEOUT_SHA256}}  .claude/hooks/harness-closeout.mjs" | sha256sum --check --status || { echo "::error::.claude/hooks/harness-closeout.mjs is not the harness copy"; exit 1; }
+          node .claude/hooks/harness-closeout.mjs --ci --base "$BASE_SHA" --head "$HEAD_SHA"
