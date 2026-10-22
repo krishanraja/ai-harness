@@ -142,11 +142,17 @@ contract_rules:
     status: live
   - id: session-closeout.documentation-only-work-needs
     file: contract/krish-operating-contract.md
-    text_sha: "f81ec376b2f2"
+    text_sha: "3690d61afaaa"
     first_seen: "2026-10-22"
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    history:
+      - text_sha: "f81ec376b2f2"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
     supersedes: [session-closeout.work-that-changes-nothing]
   - id: session-closeout.work-that-changes-nothing
