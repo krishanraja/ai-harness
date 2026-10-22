@@ -6,7 +6,7 @@ Status: approved by Krish on 2026-10-22 (rulings below). Not yet built, active o
 
 - Ruling (Krish, 2026-10-22): generation within prepaid credits, inside an allocation he approved that week, counts as authorized; publication, ad spend, top-ups and plan changes still need their own approval.
 - Ruling (Krish, 2026-10-22): the router rule change in section 3 is approved.
-- Ruling (Krish, 2026-10-22): the outcome map lives in Control Center.
+- Ruling (Krish, 2026-10-22): the outcome map lives in Control Center. Superseded the same day by the ruling in section 1: there is no stored outcome map, and each venture's own repository holds its status and plan.
 - Ruling (Krish, 2026-10-22): Heartside takes most of the Runway and Higgsfield credits until December; Full Time also gets a share.
 - Ruling (Krish, 2026-10-22): HeyGen is for training his face clone and ElevenLabs for his voice clone, both for Mindmake outbound and makeyourmindup shorts. This closes founder visibility for those two uses. Creating each clone, and publishing or sending anything made with it, is still an action-time approval, and outbound still follows Rule 2: enough richness about the person, never a generic sequence.
 - Ruling (Krish, 2026-10-22): a reserve is held back each week; its size is set in the first weekly allocation.
@@ -47,6 +47,8 @@ The diagnosis: the system knows what each tool *can* do. It does not know what e
 Start from the outcome, never from the credit. A credit is worth spending only when it moves a venture's measured number. A credit that sits idle while a ranked outcome needs it is waste too. Today the router only guards against the first failure. This proposal guards against both.
 
 ## 1. Where each venture's outcome comes from
+
+Supersedes: the outcome map table that was section 1 at `dbde1f2` ("An outcome map per venture"). That table is history, not current. Its dated rulings are not lost: the clone ruling and the Descript and Fireflies retirements are in the Rulings list above and in Control Center's tool catalog, and the hard limits are the growth agent rules in `PORTFOLIO.md` and each venture's own repository.
 
 Ruling (Krish, 2026-10-22): each venture's own repository is the only reference for where it is and what comes next. Its `NOW.md`, written by the docs steward and stamped with the commit it read, holds status and next steps; its `docs/NORTH_STAR.md` holds the ambition, which rarely changes. Control Center and the harness hold only pointers, placements and rulings. A session that needs a venture's number, deadline or next step reads that repository, checks the `NOW.md` head against the repository's latest commit, and treats anything older as unknown.
 
@@ -97,6 +99,8 @@ The 840-credit burst on 2026-10-21 cannot be linked to any venture or result. Ev
 A weekly line in the existing Sunday growth review then reads: credits spent per venture, assets published, and the venture's number over the same period. If a venture's creative has not moved its number in three weeks, the router shifts the next allocation to the next outcome on the ladder and says so.
 
 ## 5. A weekly allocation through the growth engine protocol
+
+Supersedes: the weekly allocation procedure that was section 5 at `dbde1f2` ("A weekly allocation proposal"), which drafted one fleet-wide allocation from the stored outcome map. That procedure is history, not current.
 
 There is no stored outcome map. Each venture's growth engine proposes its week through Control Center's existing growth engine protocol (ADR-038): the credits it wants by tool, the assets, their measured unit cost, and the number from its own repository it expects to move. The proposal reaches Krish's one list as a walled `spend` or `strategy` item; his approval of that exact payload authorises generation within prepaid credits. The engine reports what it spent and what moved. Freshness comes from the engine doing the work reporting it, not from a summary someone has to remember to update. Nothing publishes without its own approval.
 

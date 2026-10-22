@@ -463,11 +463,17 @@ contract_rules:
     status: live
   - id: truth-and-freshness.a-venture-s-status
     file: contract/krish-operating-contract.md
-    text_sha: "98904a6d2ac0"
+    text_sha: "e3e9c094c5c6"
     first_seen: "2026-10-22"
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+    history:
+      - text_sha: "98904a6d2ac0"
+        valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     status: live
   - id: truth-and-freshness.do-not-claim-completion
     file: contract/krish-operating-contract.md
