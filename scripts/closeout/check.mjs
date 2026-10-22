@@ -16,7 +16,8 @@
  *     on every pull request: `--ci --base <sha> --head <sha>`. This is what
  *     holds Codex and any other client to the same rule.
  *
- * The rule. A range of commits that changes anything other than Markdown must
+ * The rule. A range of commits that changes anything but NOW.md, the history
+ * archive or a harness-generated file must
  * also change NOW.md, bump its `as_of`, and carry one line under
  * "What is next and what is waiting on Krish":
  *
@@ -46,8 +47,14 @@ export const SKIP = /^Closeout: not needed, \S.{7,}/m
 export const RULING = /Ruling \(Krish, \d{4}-\d{2}-\d{2}\)/
 const CHECK_LINE = /^- North Star check \((\d{4}-\d{2}-\d{2})\): (holds\.|recalibration proposed\.\s+\S.*)$/
 
-/** A product change is anything a reader of NOW.md could need to know about. */
-export const isProduct = (path) => !/\.md$/i.test(path)
+/**
+ * Work a reader of NOW.md could need to know about: anything but NOW.md itself,
+ * the history archive and files the harness generates. Plan and handoff
+ * documents count, because a session that rewrites a plan has moved the
+ * repository's state as surely as one that changes code.
+ */
+export const NOT_WORK = /^(NOW\.md|docs\/history\/.*|docs\/HARNESS_CONTEXT\.md)$/
+export const isProduct = (path) => !NOT_WORK.test(path)
 
 /** The section body under a `## ` heading, or null. */
 export function section(text, heading) {
@@ -88,7 +95,7 @@ export function evaluate({ commits = [], body = '', author = '', nowText = null,
   if (files.has(NORTH_STAR) && !RULING.test(messages)) problems.push(`${NORTH_STAR} changed without a "Ruling (Krish, YYYY-MM-DD): ..." line. Only Krish changes a North Star: revert it and propose the change in NOW.md instead.`)
   // A stated reason excuses an untouched NOW.md, never a malformed one.
   if (SKIP.test(messages) && !files.has(NOW)) return { ok: !problems.length, problems, reason: 'closeout not needed, by the stated reason' }
-  if (![...files].some(isProduct)) return { ok: !problems.length, problems, reason: 'documentation only' }
+  if (![...files].some(isProduct)) return { ok: !problems.length, problems, reason: 'nothing a reader of NOW.md needs changed' }
   const floor = since || today
   if (!nowExists) problems.push(`${NOW} does not exist. Create it from the docs steward schema (ai-harness docs/steward/SCHEMA.md) so the repository says where it is.`)
   else if (!files.has(NOW)) problems.push(`Product files changed but ${NOW} did not. Update "Where it is right now" and "${WAITING}" so the next session starts from the truth.`)

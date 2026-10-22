@@ -17,7 +17,7 @@ assert.deepEqual(northStarCheck(now(TODAY, `- North Star check (${TODAY}): recal
 assert.equal(northStarCheck(now(TODAY, null)), null)
 assert.equal(northStarCheck(now(TODAY, `- North Star check (${TODAY}): recalibration proposed.`)), null, 'a proposal must say why')
 assert.equal(northStarCheck(now(TODAY, `- North Star check (${TODAY}): holds.\n- North Star check (2026-10-01): holds.`)).verdict, 'duplicate')
-assert.equal(isProduct('src/a.ts'), true); assert.equal(isProduct('docs/a.md'), false)
+assert.equal(isProduct('src/a.ts'), true); assert.equal(isProduct('docs/HANDOFF.md'), true, 'a rewritten plan is work'); assert.equal(isProduct('docs/history/2026-10-22-OLD.md'), false); assert.equal(isProduct('NOW.md'), false)
 
 const base = { nowExists: true, since: '2026-10-20', today: TODAY }
 // Product work without NOW.md fails; with a full closeout it passes.
@@ -27,8 +27,10 @@ assert.equal(evaluate({ ...base, commits: [c('Add a thing', ['src/a.ts']), c('Cl
 assert.match(evaluate({ ...base, commits: [c('a', ['src/a.ts', 'NOW.md'])], nowText: now('2026-10-01', `- North Star check (${TODAY}): holds.`) }).problems.join(), /as_of is 2026-10-01/)
 assert.match(evaluate({ ...base, commits: [c('a', ['src/a.ts', 'NOW.md'])], nowText: now(TODAY, '- North Star check (2026-10-01): holds.') }).problems.join(), /before this work began/)
 assert.match(evaluate({ ...base, commits: [c('a', ['src/a.ts', 'NOW.md'])], nowText: now(TODAY, null) }).problems.join(), /no North Star check line/)
-// Documentation-only work, automation, bots and a stated reason pass.
-assert.equal(evaluate({ ...base, commits: [c('Docs', ['README.md'])], nowText: good }).ok, true)
+// History-only work, automation, dependency bots and a stated reason pass.
+assert.equal(evaluate({ ...base, commits: [c('Docs', ['README.md'])], nowText: good }).ok, false, 'a documentation change still closes out')
+assert.equal(evaluate({ ...base, commits: [c('Archive', ['docs/history/2026-10-22-OLD.md'])], nowText: good }).ok, true)
+assert.equal(evaluate({ ...base, commits: [c('Typo', ['README.md'], 'Closeout: not needed, a typo fix only')], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('docs(harness): maintain repository administration', ['.github/workflows/x.yml'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('docs(canon): sync the canon block', ['AGENTS.md'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, author: 'dependabot[bot]', commits: [c('Bump', ['package.json'])], nowText: good }).ok, true)
@@ -38,7 +40,7 @@ assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout
 assert.equal(evaluate({ ...base, commits: [c('a', ['src/a.ts'], 'Closeout: not needed, a refactor only'), c('Close out', ['NOW.md'])], nowText: now(TODAY, null) }).ok, false, 'a stated reason never excuses a malformed NOW.md')
 // The North Star changes only with Krish's ruling, even with a skip line.
 assert.match(evaluate({ ...base, commits: [c('Retarget', ['docs/NORTH_STAR.md'], 'Closeout: not needed, wording only change')], nowText: good }).problems.join(), /Only Krish changes a North Star/)
-assert.equal(evaluate({ ...base, commits: [c('Retarget', ['docs/NORTH_STAR.md'], 'Ruling (Krish, 2026-10-22): the new ambition.')], nowText: good }).ok, true)
+assert.equal(evaluate({ ...base, commits: [c('Retarget', ['docs/NORTH_STAR.md', 'NOW.md'], 'Ruling (Krish, 2026-10-22): the new ambition.')], nowText: good }).ok, true, 'his ruling changes it, and NOW.md says so')
 // A repository without NOW.md is told to create one.
 assert.match(evaluate({ ...base, nowExists: false, commits: [c('a', ['src/a.ts'])] }).problems.join(), /does not exist/)
 

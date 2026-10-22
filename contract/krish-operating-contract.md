@@ -32,7 +32,7 @@ Every session that changes a repository leaves it saying where it is, without Kr
 
 - Before ending, update the repository's `NOW.md` in the same work: `as_of`, "Where it is right now", and "What is next and what is waiting on Krish" with the single next action. Leave `head` for the docs steward.
 - Re-read the North Star against what the work learned and keep exactly one line under "What is next and what is waiting on Krish": `- North Star check (YYYY-MM-DD): holds.` or `- North Star check (YYYY-MM-DD): recalibration proposed. <why>`. A recalibration is proposed there for Krish to decide; never edit the North Star to make it.
-- Documentation-only work needs no closeout. Work that changes product files but nothing a reader of `NOW.md` needs says so in a commit body: `Closeout: not needed, <reason>`. The line covers only an untouched `NOW.md`: when the same work edits `NOW.md`, that edit is always checked.
+- Plan and handoff documents count as work. Only `NOW.md` itself, the history archive and harness-generated files need no closeout. Work that changes nothing a reader of `NOW.md` needs says so in a commit body: `Closeout: not needed, <reason>`. The line covers only an untouched `NOW.md`: when the same work edits `NOW.md`, that edit is always checked.
 - Claude Code's Stop hook and the `closeout` check on every pull request enforce this from one script (`scripts/closeout/check.mjs`); for any other client this rule is the enforcement.
 
 ## Working style
@@ -114,6 +114,7 @@ Each fact has one home and one writer (Ruling, Krish, 2026-10-22). Everything el
 | The venture list and the priority ladder | Control Center `docs/PORTFOLIO.md` and `src/lib/portfolio.ts` | control-center sessions | a live read |
 | A venture's status, numbers and next steps | that repository's `NOW.md` (Truth and freshness) | the session that did the work (Session closeout), then the docs steward | a live read |
 | A repository's ambition | its `docs/NORTH_STAR.md` (North Star) | Krish | the `north-star` block's pointer |
+| A finalized decision and its rationale | `decision-ledger` | the session recording it | a pointer; a decision's follow-up steps go to the venture's `NOW.md`, which the ledger never replaces |
 | Tool placements, retired routes, unit costs | Control Center's tool catalog | control-center sessions | `get_tool_value_catalog` |
 | Which repositories exist | `state/fleet.yaml` in ai-harness | a harness change | every other fleet list, checked against it by `validate-surfaces` |
 | A repository's operating context and closeout check | the publisher-owned regions and files | the repository administration publisher | read-only |

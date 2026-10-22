@@ -140,6 +140,15 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
+  - id: session-closeout.plan-and-handoff-documents
+    file: contract/krish-operating-contract.md
+    text_sha: "90833093b487"
+    first_seen: "2026-10-22"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+    supersedes: [session-closeout.documentation-only-work-needs]
   - id: session-closeout.documentation-only-work-needs
     file: contract/krish-operating-contract.md
     text_sha: "3690d61afaaa"
@@ -153,8 +162,9 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
-    status: live
+    status: superseded
     supersedes: [session-closeout.work-that-changes-nothing]
+    valid_until: "2026-10-22"
   - id: session-closeout.work-that-changes-nothing
     file: contract/krish-operating-contract.md
     text_sha: "8e3590425601"

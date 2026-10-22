@@ -2,7 +2,7 @@
 import {readFileSync,readdirSync} from 'node:fs'
 import {join} from 'node:path'
 import {ROOT,policyAt,knowledgeHistory,profiles} from './repository-brain.mjs'
-import {validateProfile,renderAdministration,OWNED,TARGET_HOOK,TARGET_CHECK,closeoutHook,targetCheck} from './repository-admin.mjs'
+import {validateProfile,renderAdministration,OWNED,TARGET_HOOK,TARGET_CHECK,closeoutHook,targetCheck,registerHook} from './repository-admin.mjs'
 import {createHash} from 'node:crypto'
 const policy=policyAt(), history=knowledgeHistory()
 const approved=new Set(Object.values(policy.acceptances).filter(a=>a.actor==='Krish'&&String(Object.keys(policy.acceptances).find(k=>policy.acceptances[k]===a)).startsWith('plan:')).flatMap(a=>a.repositories))
@@ -19,6 +19,8 @@ for(const f of Object.keys(policy.prior_owned||{})) if(!ownedGranted.has(f)) thr
 // bound to the grant: changing the hook or the check needs a new hash here,
 // in a reviewed commit Krish merges.
 const approvedBytes=Object.assign({},...grants.map(g=>g.approved_sha256||{}))
+const entry=grants.map(g=>g.settings_entry).find(e=>e&&typeof e==='object')
+if(!entry||JSON.stringify(JSON.parse(registerHook(null).text).hooks)!==JSON.stringify(entry))throw new Error('publisher_bytes_not_granted:.claude/settings.json entry')
 for(const [f,text] of [[TARGET_HOOK,closeoutHook()],[TARGET_CHECK,targetCheck()]]){const h=createHash('sha256').update(text,'utf8').digest('hex');if(!(approvedBytes[f]||[]).includes(h))throw new Error(`publisher_bytes_not_granted:${f}:${h}`)}
 for(const p of profiles()){validateProfile(p,policy);renderAdministration(p,history,policy)}
 for(const name of readdirSync(join(ROOT,'state/repository-administration/migrations'))){const m=JSON.parse(readFileSync(join(ROOT,'state/repository-administration/migrations',name),'utf8'));if(m.acceptance!==policy.approval || !policy.targets.includes(name.replace(/\.json$/,'')))throw new Error('unapproved_migration')}
