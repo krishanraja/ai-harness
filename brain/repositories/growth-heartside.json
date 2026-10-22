@@ -11,7 +11,7 @@
     "agents": "AGENTS.md",
     "claude": "CLAUDE.md"
   },
-  "bootstrap_limit_chars": 76000,
+  "bootstrap_limit_chars": 80606,
   "sources": [
     {
       "path": "README.md",

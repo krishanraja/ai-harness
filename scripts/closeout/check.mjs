@@ -41,6 +41,7 @@ export const NOW = 'NOW.md'
 export const NORTH_STAR = 'docs/NORTH_STAR.md'
 export const WAITING = 'What is next and what is waiting on Krish'
 export const AUTOMATION = /^(docs\((steward|harness|canon)\)|chore\((heartbeat|brain)\)):/
+export const DEPENDENCY_BOTS = new Set(['dependabot[bot]', 'renovate[bot]'])
 export const SKIP = /^Closeout: not needed, \S.{7,}/m
 export const RULING = /Ruling \(Krish, \d{4}-\d{2}-\d{2}\)/
 const CHECK_LINE = /^- North Star check \((\d{4}-\d{2}-\d{2})\): (holds\.|recalibration proposed\.\s+\S.*)$/
@@ -77,7 +78,10 @@ export const asOf = (text) => String(text || '').match(/^as_of:\s*(\d{4}-\d{2}-\
 export function evaluate({ commits = [], body = '', author = '', nowText = null, nowExists = false, since = null, today }) {
   const own = commits.filter((c) => !AUTOMATION.test(c.subject))
   const messages = [body, ...own.map((c) => `${c.subject}\n${c.body}`)].join('\n')
-  if (/\[bot\]$/.test(author) && author !== 'claude[bot]') return { ok: true, problems: [], reason: 'bot author' }
+  // Only dependency bots are exempt by author: their pull requests change no
+  // status and cannot write NOW.md. Every other automation, the publisher
+  // included, is exempt only by its own commit subjects, commit by commit.
+  if (DEPENDENCY_BOTS.has(author)) return { ok: true, problems: [], reason: 'dependency update' }
   if (!own.length) return { ok: true, problems: [], reason: 'no session commits' }
   const files = new Set(own.flatMap((c) => c.files))
   const problems = []

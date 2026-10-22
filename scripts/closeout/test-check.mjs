@@ -32,6 +32,7 @@ assert.equal(evaluate({ ...base, commits: [c('Docs', ['README.md'])], nowText: g
 assert.equal(evaluate({ ...base, commits: [c('docs(harness): maintain repository administration', ['.github/workflows/x.yml'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('docs(canon): sync the canon block', ['AGENTS.md'])], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, author: 'dependabot[bot]', commits: [c('Bump', ['package.json'])], nowText: good }).ok, true)
+assert.equal(evaluate({ ...base, author: 'some-app[bot]', commits: [c('Write a store', ['src/a.ts'])], nowText: good }).ok, false, 'any other bot is held to the rule')
 assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout: not needed, lockfile refresh only')], nowText: good }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('Bump', ['package.json'], 'Closeout: not needed, x')], nowText: good }).ok, false, 'a reason has to say something')
 assert.equal(evaluate({ ...base, commits: [c('a', ['src/a.ts'], 'Closeout: not needed, a refactor only'), c('Close out', ['NOW.md'])], nowText: now(TODAY, null) }).ok, false, 'a stated reason never excuses a malformed NOW.md')

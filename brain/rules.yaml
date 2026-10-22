@@ -148,6 +148,7 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
     status: live
+    supersedes: [session-closeout.work-that-changes-nothing]
   - id: session-closeout.work-that-changes-nothing
     file: contract/krish-operating-contract.md
     text_sha: "8e3590425601"
