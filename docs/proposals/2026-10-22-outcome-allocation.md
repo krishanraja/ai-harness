@@ -137,3 +137,31 @@ Until those pass, the record says proposed, not working.
 The map Krish marks is published as a private page: https://claude.ai/artifact/VyAyRMMBQQVPsZnwE1xtUj. It lists 73 tools by job, with route and known balance, against eight columns: Heartside, Full Time, Legibility, Mindmake outbound, makeyourmindup, CTRL, Pulse and operations. His marks are saved in the page's database (`placements`, one document per tool), where a session reads them back. The four tools he has already ruled on (Higgsfield, Runway, HeyGen, ElevenLabs) are recorded there. When he has marked the rest, the marks become the outcome map's tool column in Control Center.
 
 One gap the map surfaced: ElevenLabs is reachable only through the Control Center gateway, and only for voice listing and allowance reads. Training a voice clone or generating speech needs a new adapter or a native connector first.
+
+## Krish's placements, read back 2026-10-22
+
+Read from the map's `placements` collection after Krish said he was done. Main takes most of a tool's allowance; Some takes a share.
+
+| Tool | Main | Some |
+|---|---|---|
+| Higgsfield | Heartside | Full Time |
+| Runway | Heartside | Full Time |
+| HeyGen (face clone) | Mindmake outbound, makeyourmindup | |
+| ElevenLabs (voice clone) | Mindmake outbound, makeyourmindup | |
+| Canva | Full Time, Legibility, Mindmake outbound, makeyourmindup | |
+| Teleprompter | Mindmake outbound, makeyourmindup | |
+| Brandfetch | Mindmake outbound, makeyourmindup | |
+| NewsAPI | Mindmake outbound, makeyourmindup | |
+| Apify | Legibility, Mindmake outbound, makeyourmindup, CTRL, Pulse | |
+| 21st Dev | Legibility, CTRL, operations | Heartside, Full Time |
+| API-Football | Full Time | |
+| football-data.org | Full Time | |
+
+- Ruling (Krish, 2026-10-22): Fireflies and Descript are removed permanently, from the harness and from his Claude. They are retired routes in the cloud account adapter and are gone from the map.
+- Ruling (Krish, 2026-10-22): a tool he has not placed stays usable, and is suggested proactively only when a concrete idea gives a good reason to use it.
+
+Both rulings and the approved section 3 rule change are now in `candidates/tool-router/SKILL.md`. The candidate's installed copies on the cloud surfaces predate this edit and need a fresh upload before they carry it.
+
+Removal outside this repository is still open: disconnecting the Fireflies and Descript connectors in claude.ai (and the Fireflies sales plugin) is done in his connector settings, and Fireflies still appears in Control Center's tool value catalog and service registry, which live in `krishanraja/control-center`.
+
+Football data (API-Football, football-data.org) is placed on Full Time, which is in the mission by the 2026-10-06 ruling; Rule 8's flag still applies to any step that needs Krish's own hours on football.
