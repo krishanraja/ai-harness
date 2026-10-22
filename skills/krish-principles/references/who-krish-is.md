@@ -212,8 +212,8 @@ All by Krish, dated 2026-10-05 unless marked otherwise.
 
 Venture list, priorities, objectives, pricing, revenue and status change weekly. They are
 never copied into this file or into any skill. A venture's status, numbers and next steps
-live only in its own repository: its steward `NOW.md` (head checked against the latest
-commit) and its `docs/NORTH_STAR.md`. Read the rest live, in this order:
+live only in its own repository: its `NOW.md` (current only when no product commit landed
+after it) and its `docs/NORTH_STAR.md`. Read the rest live, in this order:
 
 | What | Live source |
 |---|---|

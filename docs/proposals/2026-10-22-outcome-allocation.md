@@ -50,7 +50,7 @@ Start from the outcome, never from the credit. A credit is worth spending only w
 
 Supersedes: the outcome map table that was section 1 at `dbde1f2` ("An outcome map per venture"). That table is history, not current. Its dated rulings are not lost: the clone ruling and the Descript and Fireflies retirements are in the Rulings list above and in Control Center's tool catalog, and the hard limits are the growth agent rules in `PORTFOLIO.md` and each venture's own repository.
 
-Ruling (Krish, 2026-10-22): each venture's own repository is the only reference for where it is and what comes next. Its `NOW.md`, written by the docs steward and stamped with the commit it read, holds status and next steps; its `docs/NORTH_STAR.md` holds the ambition, which rarely changes. Control Center and the harness hold only pointers, placements and rulings. A session that needs a venture's number, deadline or next step reads that repository, checks the `NOW.md` head against the repository's latest commit, and treats anything older as unknown.
+Ruling (Krish, 2026-10-22): each venture's own repository is the only reference for where it is and what comes next. Its `NOW.md`, written by the docs steward and stamped with the commit it read, holds status and next steps; its `docs/NORTH_STAR.md` holds the ambition, which rarely changes. Control Center and the harness hold only pointers, placements and rulings. A session that needs a venture's number, deadline or next step reads that repository and treats its `NOW.md` as unknown unless no product commit landed after the last commit that touched it (the operating contract, Truth and freshness).
 
 | Venture | Repository (status, next steps, North Star) |
 |---|---|
