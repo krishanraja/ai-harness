@@ -105,7 +105,7 @@ Load `tool-router` for conditional capability selection and useful application; 
 
 ## One system: where each fact lives
 
-Each fact has one home and one writer (Ruling, Krish, 2026-10-22). Everything else reads it live from that home or carries a pointer to it. A copy is a defect even on the day it is right, because nothing keeps it right.
+Each fact has one home and one primary writer (Ruling, Krish, 2026-10-22); as in routing, a reconciler may follow it (the docs steward after a session) but never competes with it. Everything else reads it live from that home or carries a pointer to it. A copy is a defect even on the day it is right, because nothing keeps it right.
 
 | Fact | Its one home | Written by | Read by everything else as |
 |---|---|---|---|
