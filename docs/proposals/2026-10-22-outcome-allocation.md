@@ -55,7 +55,7 @@ The router reads this before it suggests any creative or data work. It is ordere
 | **Heartside** (P1) | One-off orders in USD, average order value | Last printed order 10 December (to be confirmed per product in Printful) | Product shots for all 11 products. Short organic clips for TikTok, Reels and Shorts in the plan's voice (`docs/V2-FROM-THE-DOG.md`, section 6). The 15-second "dog reads your review" video. "Who would your dog fire?" comment prompts | Higgsfield Marketing Studio for product shots and ads; Shorts Studio and Seedance for clips; virality check before final render; ElevenLabs for the dog's voice | Label AI-made ads as platforms require. No grief, illness or old age. No invented reviews, scarcity or "was" prices. No ad spend (Krish's action, and against Gate 4 until revenue flows) |
 | **Full Time** (P1) | Pilot listeners, target 100 (one counted 2026-10-06) | None set | Social clips cut from published editions. Audiograms of each pundit. A visual identity per pundit so listeners can pick one | ElevenLabs (already voices the show); Higgsfield stills for pundit art; Higgsfield or Runway for short motion clips (Descript retired 2026-10-22) | No betting, live-score or league-table framing. No Premier League mark. Rule 8 flag for Krish's own hours. Blocked in practice until editions publish again: none since 2026-09-05 per its repository |
 | **Legibility** (P2) | Weekly trusted reads per active account, 7 or more | Eight-week beta kill criteria | Developer content that shows real calls and real costs. Diagrams, not cinema | Little media spend. Canva or plain diagrams | No claims of coverage it lacks. No outbound engine before a design partner |
-| **Mindmake** (the mission) | A client who says the proof works and stands behind it | None set | Visuals for published thinking across the three channels. Possibly a presenter-led explainer | Higgsfield stills for article art; HeyGen only if Krish rules on founder visibility | Founder visibility is OPEN: no avatar, face or voice clone of Krish before he says yes. No price, booking link or offer ladder |
+| **Mindmake** (the mission) | A client who says the proof works and stands behind it | None set | Visuals for published thinking across the three channels. Possibly a presenter-led explainer | Higgsfield stills for article art; HeyGen face clone and a voice clone of Krish (ruled 2026-10-22) | Clones only for Mindmake outbound and makeyourmindup shorts; creating each clone and sending or publishing anything made with it needs his approval each time. No price, booking link or offer ladder |
 | **CTRL, Pulse** (P3) | Six measures; Pulse not for sale yet | None | Pulse weekly brief visuals at most | Minimal | No claims beyond evidence. No new price points |
 | **Circle** | Dormant | None | None | None | Not worked |
 
@@ -113,7 +113,7 @@ Nothing generates until Krish approves the allocation. Nothing publishes without
 1. **Is spending prepaid credits "spend"?** `PORTFOLIO.md` says spend is Krish's action. Proposed: generation within prepaid credits, inside an allocation he approved that week, counts as authorized. Publication, ad spend, top-ups and plan changes never do.
 2. **The router rule change** in section 3.
 3. **Where the outcome map lives:** Control Center (proposed) or each venture's repository.
-4. **Founder visibility for HeyGen or any voice clone of Krish.** Still OPEN. Until he rules, Mindmake creative uses no face or voice of his.
+4. **Founder visibility for HeyGen or any voice clone of Krish.** Resolved 2026-10-22 for two uses only (see Rulings). This supersedes, for those uses, the open founder-visibility rule in `skills/krish-principles/references/who-krish-is.md`; updating that reference is a follow-up for its owner, `harness-maintainer`, not part of this proposal.
 5. **Reserve size**, and whether Heartside takes most of the creative credits until 10 December.
 
 ## Proof before it counts
@@ -130,7 +130,7 @@ Until those pass, the record says proposed, not working.
 - It does not activate or release `tool-router`. The candidate's own gates still stand.
 - It does not spend, publish, top up or change any plan.
 - It does not touch `control-center`. Section 2 is a request for that repository.
-- It does not change any approval boundary in the operating contract.
+- It narrows one approval boundary, for one case: prepaid credits inside an allocation Krish approved that week count as approved (see "How the prepaid-credit ruling relates to the existing approval rules"). It changes no other approval boundary in the operating contract.
 
 ## The tool map
 
