@@ -134,6 +134,6 @@ Until those pass, the record says proposed, not working.
 
 ## The tool map
 
-The map Krish marks is published as a private page: https://claude.ai/artifact/VyAyRMMBQQVPsZnwE1xtUj. It lists 76 tools by job, with route and known balance, against eight columns: Heartside, Full Time, Legibility, Mindmake outbound, makeyourmindup, CTRL, Pulse and operations. His marks are saved in the page's database (`placements`, one document per tool), where a session reads them back. The four tools he has already ruled on (Higgsfield, Runway, HeyGen, ElevenLabs) are recorded there. When he has marked the rest, the marks become the outcome map's tool column in Control Center.
+The map Krish marks is published as a private page: https://claude.ai/artifact/VyAyRMMBQQVPsZnwE1xtUj. It lists 73 tools by job, with route and known balance, against eight columns: Heartside, Full Time, Legibility, Mindmake outbound, makeyourmindup, CTRL, Pulse and operations. His marks are saved in the page's database (`placements`, one document per tool), where a session reads them back. The four tools he has already ruled on (Higgsfield, Runway, HeyGen, ElevenLabs) are recorded there. When he has marked the rest, the marks become the outcome map's tool column in Control Center.
 
 One gap the map surfaced: ElevenLabs is reachable only through the Control Center gateway, and only for voice listing and allowance reads. Training a voice clone or generating speech needs a new adapter or a native connector first.
