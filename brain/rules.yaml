@@ -67,17 +67,22 @@ contract_rules:
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
-    text_sha: "1520cfd4a9cb"
+    text_sha: "d72803c2a175"
     first_seen: "2026-10-05"
     source:
-      kind: ruling
-      ref: "6c1c96d26649"
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     history:
       - text_sha: "753e74bacc3e"
         valid_until: "2026-10-15"
         source:
           kind: ruling
           ref: "60106bef02bd"
+      - text_sha: "1520cfd4a9cb"
+        valid_until: "2026-10-22"
+        source:
+          kind: ruling
+          ref: "6c1c96d26649"
     status: live
   - id: north-star.read-it-before-any
     file: contract/krish-operating-contract.md
