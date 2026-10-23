@@ -11,7 +11,8 @@ import { fileURLToPath } from 'node:url'
 
 const VALIDATE = resolve(dirname(fileURLToPath(import.meta.url)), 'validate.mjs')
 const dir = mkdtempSync(join(tmpdir(), 'steward-closeout-'))
-const g = (...a) => execFileSync('git', a, { cwd: dir, encoding: 'utf8' }).trim()
+// Commit dates are pinned so the fixed as_of below never goes stale with the calendar.
+const g = (...a) => execFileSync('git', a, { cwd: dir, encoding: 'utf8', env: { ...process.env, GIT_AUTHOR_DATE: '2026-10-22T10:00:00Z', GIT_COMMITTER_DATE: '2026-10-22T10:00:00Z' } }).trim()
 const put = (p, t) => { mkdirSync(dirname(join(dir, p)), { recursive: true }); writeFileSync(join(dir, p), t) }
 const run = (...a) => spawnSync(process.execPath, [VALIDATE, dir, ...a], { encoding: 'utf8' })
 const now = (head, asOf, line = '- North Star check (2026-10-22): holds.') => `---

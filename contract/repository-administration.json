@@ -102,10 +102,10 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+            "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
+            "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"
           ]
         },
         "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's"
@@ -114,8 +114,11 @@
   },
   "prior_owned": {
     ".github/workflows/harness-repository-context.yml": [
-      "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+      "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
+      "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
     ],
-    ".claude/hooks/harness-closeout.mjs": []
+    ".claude/hooks/harness-closeout.mjs": [
+      "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+    ]
   }
 }
