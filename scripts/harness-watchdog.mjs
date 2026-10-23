@@ -22,7 +22,7 @@ const failure = (code) => { const error = new Error(code); error.code = code; re
 
 export function validateJobManifest(manifest) {
   if (manifest.schema_version !== 1 || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(manifest.repository || '') || manifest.default_branch !== 'main' || manifest.timezone !== 'Europe/London' || !Array.isArray(manifest.jobs)) throw failure('invalid-manifest')
-  if (manifest.watchdog?.activation !== 'manual-only-pending-approval' || manifest.watchdog.proposed_cron !== '17 * * * *') throw failure('invalid-watchdog-activation')
+  if (manifest.watchdog?.activation !== 'enabled' || manifest.watchdog.proposed_cron !== '17 * * * *') throw failure('invalid-watchdog-activation')
   const ids = new Set(), accounts = new Set()
   for (const job of manifest.jobs) {
     if (!ID.test(job.id || '') || ids.has(job.id) || !['workflow', 'source', 'heartbeat'].includes(job.kind) || typeof job.required !== 'boolean' || typeof job.enabled !== 'boolean' || !CLASSES.has(job.budget_class) || !integer(job.grace_seconds) || !integer(job.max_run_seconds) || job.max_run_seconds < 1 || job.cadence_seconds !== null && (!integer(job.cadence_seconds) || job.cadence_seconds < 1)) throw failure('invalid-job-manifest')
@@ -238,7 +238,7 @@ export async function collectWatchdogSnapshot(manifest, { token = process.env.GI
 }
 
 export function watchdogSummary(report) {
-  return [`# Harness watchdog`, '', `Observed: ${report.generated_at}. Central: ${report.central.status}. Required sources: ${report.required_sources.status} (${report.required_sources.healthy_accounts}/${report.required_sources.expected_accounts} healthy). Optional local adapters: ${report.optional_local.status}; they do not gate central work.`, '', '| Job | Required | Status | Reason |', '| --- | --- | --- | --- |', ...report.jobs.map((row) => `| ${row.id} | ${row.required ? 'yes' : 'no'} | ${row.status} | ${row.reason} |`), '', 'Manual observer only. Scheduled activation and notification delivery remain disabled. No source text, model output or provider error body is included.', ''].join('\n')
+  return [`# Harness watchdog`, '', `Observed: ${report.generated_at}. Central: ${report.central.status}. Required sources: ${report.required_sources.status} (${report.required_sources.healthy_accounts}/${report.required_sources.expected_accounts} healthy). Optional local adapters: ${report.optional_local.status}; they do not gate central work.`, '', '| Job | Required | Status | Reason |', '| --- | --- | --- | --- |', ...report.jobs.map((row) => `| ${row.id} | ${row.required ? 'yes' : 'no'} | ${row.status} | ${row.reason} |`), '', 'Scheduled hourly at :17 (Krish, 2026-10-23). Notification delivery remains disabled. No source text, model output or provider error body is included.', ''].join('\n')
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

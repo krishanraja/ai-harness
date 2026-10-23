@@ -5,7 +5,7 @@
   "timezone": "Europe/London",
   "watchdog": {
     "workflow": "harness-watchdog.yml",
-    "activation": "manual-only-pending-approval",
+    "activation": "enabled",
     "proposed_cron": "17 * * * *",
     "cadence_seconds": 3600,
     "grace_seconds": 1800,

@@ -1,9 +1,11 @@
 name: Harness watchdog
 
-# Prepared observer only. The manifest proposes "17 * * * *" after explicit
-# activation. Every hour has the same minute in UTC and Europe/London, including
-# daylight-saving changes. A manual run is not evidence of scheduled delivery.
+# Hourly at :17, activated by Krish on 2026-10-23. Every hour has the same
+# minute in UTC and Europe/London, including daylight-saving changes. A manual
+# run is not evidence of scheduled delivery.
 on:
+  schedule:
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:
