@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 118 rules across the two contracts.
+# 121 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -123,6 +123,36 @@ contract_rules:
     source:
       kind: ruling
       ref: "Ruling (Krish, 2026-10-18): every repository anchors to a North Star"
+    status: live
+  - id: north-star.every-north-star-carries
+    file: contract/krish-operating-contract.md
+    text_sha: "0e7e224fa89d"
+    first_seen: "2026-10-23"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-23): every North Star carries a number on a weekly ladder and an urgency rating"
+    status: live
+  - id: north-star.when-you-can-measure
+    file: contract/krish-operating-contract.md
+    text_sha: "1ae169ebc665"
+    first_seen: "2026-10-23"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-23): every North Star carries a number on a weekly ladder and an urgency rating"
+    history:
+      - text_sha: "124395da8f4d"
+        valid_until: "2026-10-23"
+        source:
+          kind: ruling
+          ref: "Ruling (Krish, 2026-10-23): every North Star carries a number on a weekly ladder and an urgency rating"
+    status: live
+  - id: north-star.urgency-raises-intensity-never
+    file: contract/krish-operating-contract.md
+    text_sha: "d953c266b6b9"
+    first_seen: "2026-10-23"
+    source:
+      kind: ruling
+      ref: "Ruling (Krish, 2026-10-23): every North Star carries a number on a weekly ladder and an urgency rating"
     status: live
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md

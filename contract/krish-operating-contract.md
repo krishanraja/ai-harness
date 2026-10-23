@@ -25,6 +25,9 @@ Every repository Krish owns names one North Star: an ambition he set that is not
 - Prefer the work that moves it furthest, and close by noting what moved.
 - Only Krish changes a North Star. Record his ruling in the commit body.
 - A repository with no North Star asks Krish for one before material work. When one is reached, say so and ask him for the next.
+- Every North Star carries a number on a weekly ladder and `NOW.md` carries where it stands and its urgency, U1 to U5, by `contract/north-star-metric.md` (Ruling, Krish, 2026-10-23). Read the urgency before choosing work and act at the intensity its level sets.
+- When you can measure the number, update the state line in `NOW.md` with the value, its source and its date, and recompute the urgency. A number nobody measures is U4, and measuring it comes first.
+- Urgency raises intensity, never authority: every send, post, publish, spend, delete and permission change still waits for Krish's yes.
 
 ## Session closeout
 
