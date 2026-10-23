@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-23T00:38:52.296Z",
+  "generated_at": "2026-10-23T08:27:58.036Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "87ca4c0dcd5227aa95ee03c5422a0e8e73a4a0b4",
+      "base": "e8d918844f4656ccd20cb494425a4e95b5c9a078",
       "brain_revision": "155b79828fb7",
       "before": 48306,
       "after": 48306,
@@ -203,7 +203,7 @@
     },
     {
       "repository": "legibility",
-      "base": "005a39f5cedeb439c5266c3dd2ea9d7de815fdb9",
+      "base": "2aea410e4f5c2d300dbdde8c6a3e51be0d1ed0b3",
       "brain_revision": "b059141972f8",
       "before": 3189,
       "after": 3698,
@@ -223,9 +223,27 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 38,
-      "head": "67128d3d736ca28a721feb5067826e6d7bd80e48"
+      "head": "52d77b87386ea723f81a6a08c5ca01a34528aa5b",
+      "merge": "0fac675c43da23898f1623c6308e0dfc23eb9504",
+      "rollback": {
+        "base": "2aea410e4f5c2d300dbdde8c6a3e51be0d1ed0b3",
+        "managed_before": {
+          "AGENTS.md": "6912c286b6edccb7630c440c62ba6944c9976e3b156b63e47a24aab66547f478",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".claude/hooks/harness-closeout.mjs": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".claude/settings.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/hooks/harness-closeout.mjs",
+          ".claude/settings.json"
+        ]
+      }
     },
     {
       "repository": "growth-heartside",

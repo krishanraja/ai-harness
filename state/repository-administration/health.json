@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T00:38:52.380Z",
-  "measurement_verification_at": "2026-10-23T00:38:52.356Z",
+  "generated_at": "2026-10-23T08:27:58.163Z",
+  "measurement_verification_at": "2026-10-23T08:27:58.122Z",
   "sources": {
     "github": {
       "status": "available",
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "87ca4c0dcd5227aa95ee03c5422a0e8e73a4a0b4",
+      "source_base": "e8d918844f4656ccd20cb494425a4e95b5c9a078",
       "bootstrap_before": 48306,
       "bootstrap_after": 48306,
       "observed_use": {
@@ -360,9 +360,9 @@
       "accepted": 4,
       "candidates": 0,
       "unknown_coverage": true,
-      "delivery": "awaiting-checks",
+      "delivery": "verified",
       "brain_revision": "b059141972f8",
-      "source_base": "005a39f5cedeb439c5266c3dd2ea9d7de815fdb9",
+      "source_base": "2aea410e4f5c2d300dbdde8c6a3e51be0d1ed0b3",
       "bootstrap_before": 3189,
       "bootstrap_after": 3698,
       "observed_use": {
