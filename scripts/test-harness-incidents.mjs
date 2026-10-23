@@ -54,7 +54,7 @@ assert.deepEqual(nextWeekly.incident_keys, later.incident_keys, 'Disabling extra
 
 const root = mkdtempSync(join(tmpdir(), 'harness-incidents-'))
 try {
-  const pending = writeDigest(incident, root), payloads = []
+  const pending = writeDigest(incident, root)
   const firstFile = readdirSync(join(root, 'state/digest')).find((name) => name.endsWith('.md'))
   assert.ok(firstFile.includes(incident.notification_key.slice(0, 40)))
   const firstBytes = readFileSync(join(root, 'state/digest', firstFile), 'utf8')
@@ -66,20 +66,12 @@ try {
   await assert.rejects(() => deliverPending({ root, notifications: { ...approved, approval_ref: 'different-fixture-approval' }, verifyDurable: async () => true }), /not_approved/)
   await assert.rejects(() => deliverPending({ root, notifications: approved, verifyDurable: async () => false, key: 'fixture-key', fetchImpl: async () => { calls++; return new Response('{}') } }), /not_committed/)
   assert.equal(calls, 0)
-  const delayed = async (_url, init) => {
-    if (init.method === 'POST') { payloads.push(init.body); return new Response(JSON.stringify({ ok: true, written: [pending.delivery.item.id] })) }
-    return new Response('{"ok":false}', { status: 503 })
-  }
-  await assert.rejects(() => deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: delayed }), /readback_mismatch/)
+  const read = (items) => async (_url, init) => { calls++; assert.equal(init.method, 'GET', 'The harness never writes the board'); return new Response(JSON.stringify({ ok: true, items })) }
+  await assert.rejects(() => deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: read([{ ...pending.delivery.item, title: 'other' }]) }), /readback_mismatch/)
   assert.deepEqual(pendingDigest(root), pending)
-  assert.equal(lastSent(root), null, 'POST success alone is not delivered')
-  const good = async (_url, init) => {
-    if (init.method === 'POST') { payloads.push(init.body); return new Response(JSON.stringify({ ok: true, written: [pending.delivery.item.id] })) }
-    return new Response(JSON.stringify({ ok: true, items: [pending.delivery.item] }))
-  }
-  await deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: good })
-  assert.equal(payloads.length, 2)
-  assert.equal(payloads[0], payloads[1], 'An uncertain delivery retries the exact same existing-board upsert')
+  assert.equal(lastSent(root), null, 'A differing board item is not delivered')
+  assert.equal((await deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: read([]) })).awaiting, true, 'Until Control Center writes it, the incident waits')
+  await deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: read([pending.delivery.item]) })
   assert.equal(lastSent(root).delivery.status, 'delivered')
   assert.deepEqual(lastSent(root).incident_keys, incident.incident_keys)
   assert.equal(pendingDigest(root), null)
@@ -89,7 +81,7 @@ try {
   const secondPending = writeDigest(newIncident, root)
   assert.notEqual(secondPending.delivery.item.id, pending.delivery.item.id)
   assert.equal(readFileSync(join(root, 'state/digest', firstFile), 'utf8'), firstBytes, 'A later same-day incident keeps the earlier linked report intact')
-  await deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: async () => new Response(JSON.stringify({ error: 'krish_closed_it', item: secondPending.delivery.item.id }), { status: 409 }) })
+  await deliverPending({ root, notifications: approved, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: read([{ ...secondPending.delivery.item, lane: 'done' }]) })
   assert.equal(lastSent(root).delivery.status, 'closed-by-owner')
   assert.equal(build({ lastSent: lastSent(root), blockers: [blocker('b')] }), null, 'The same closed occurrence never reopens')
   assert.ok(build({ lastSent: lastSent(root), blockers: [blocker('c')] }), 'A subsequent materially different occurrence remains visible after closure')
