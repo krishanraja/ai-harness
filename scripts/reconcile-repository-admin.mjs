@@ -50,8 +50,11 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   if (!write) return { ...proof, status: 'planned' }
   if (await gh.headSha(repo, branch) !== base) throw new Error('source_base_moved')
   // A new rendered view gets a fresh branch; squash merges need not retain ancestry with an old branch.
-  const publicationBranch = `${BRANCH}-${seal({ block: plan.block, context: plan.context }).slice(0, 12)}`
+  let publicationBranch = `${BRANCH}-${seal({ block: plan.block, context: plan.context }).slice(0, 12)}`
+  // Where a squash-merged branch of the same name is spent, the bytes name a fresh one.
+  const freshBranch = `${publicationBranch}-${seal(plan.changes).slice(0, 7)}`
   let pr = await gh.findPull(repo, publicationBranch, branch)
+  if (!pr && (pr = await gh.findPull(repo, freshBranch, branch))) publicationBranch = freshBranch
   if(!pr)pr=await gh.findPull(repo,BRANCH,branch) // adopt the already checked initial rollout PRs
   if (pr) {
     const prFiles = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/files?per_page=100`)
@@ -64,8 +67,18 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
       head = await gh.headSha(repo, publicationBranch)
       // A prior merge may leave the branch. Use a fresh commit from current main, never force-reset it.
       const compare = await gh.req('GET', `/repos/${gh.owner}/${repo}/compare/${head}...${base}`)
-      if (!['ahead', 'identical'].includes(compare.status)) throw new Error('administration_branch_has_unknown_drift')
-      if (head !== base) await gh.req('PATCH', `/repos/${gh.owner}/${repo}/git/refs/heads/${encodeURIComponent(publicationBranch)}`, { sha: base, force: false })
+      if (['ahead', 'identical'].includes(compare.status)) {
+        if (head !== base) await gh.req('PATCH', `/repos/${gh.owner}/${repo}/git/refs/heads/${encodeURIComponent(publicationBranch)}`, { sha: base, force: false })
+      } else {
+        // A squash merge leaves its branch diverged from main. Only when that exact
+        // head was merged is the branch spent; publish from a fresh name beside it,
+        // never resetting or deleting it. Any other divergence is a human edit.
+        const closed = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls?state=closed&head=${gh.owner}:${encodeURIComponent(publicationBranch)}&base=${branch}`)
+        if (!closed.some((p) => p.merged_at && p.head?.sha === head)) throw new Error('administration_branch_has_unknown_drift')
+        publicationBranch = freshBranch
+        if (await gh.branchExists(repo, publicationBranch)) throw new Error('administration_branch_has_unknown_drift')
+        await gh.createBranch(repo, publicationBranch, base)
+      }
     } else await gh.createBranch(repo, publicationBranch, base)
     const candidate = await gh.commitFiles(repo, publicationBranch, base, plan.changes, `docs(harness): maintain repository administration\n\nApproved plan: ${policy.approval}.\nBrain-View: ${plan.revision}\nSource-Base: ${base}\nInput-Seal: ${plan.input_seal}\nOnly declared administration regions and approved initial migrations changed.`)
     pr = await gh.openPull(repo, { title: 'Maintain the repository operating guide from the brain', head: publicationBranch, base: branch, body: `Generated from accepted knowledge under approved plan \`${policy.approval}\`.\n\nWhole-system sources, workflows and checks stay repository-specific. Evidence and inferred preferences cannot promote themselves.\n\n- Brain view: \`${plan.revision}\`\n- Source base: \`${base}\`\n- Bootstrap: ${plan.before.chars} -> ${plan.after.chars} characters\n- Changed files: ${Object.keys(plan.changes).map((p) => `\`${p}\``).join(', ')}\n- Input seal: \`${plan.input_seal}\`\n\nRollback restores only the managed content against this base; evidence remains append-only.` })
