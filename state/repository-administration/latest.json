@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-23T09:24:47.992Z",
+  "generated_at": "2026-10-23T09:39:07.776Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -22,35 +22,12 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
-      "pr": 140,
-      "head": "ca2cffb935457f8e1c2c57d5a00bb7ee559e55d8"
-    },
-    {
-      "repository": "AEO-Engine",
-      "base": "a90fcd654c5c6c41c0fa9c81a80b0cb27aaf577b",
-      "brain_revision": "5ca09cc3df52",
-      "before": 17694,
-      "after": 17694,
-      "files": [
-        ".github/workflows/harness-repository-context.yml",
-        ".claude/hooks/harness-closeout.mjs"
-      ],
-      "skipped": [],
-      "source_seal": "1bfbf6c037539bd4ee898a128a955b16103e35d62aa879a4c2567a9051dfe02b",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
       "status": "verified",
-      "pr": 23,
-      "head": "f50eee84d443f3070616a2c4cda8f8cc0c601782",
-      "merge": "0375bdfa983803eddcd49a62384d864631a10a12",
+      "pr": 140,
+      "head": "ca2cffb935457f8e1c2c57d5a00bb7ee559e55d8",
+      "merge": "890898d97f4d084519fde637143c794dd9b27058",
       "rollback": {
-        "base": "a90fcd654c5c6c41c0fa9c81a80b0cb27aaf577b",
+        "base": "e46dd85af2b3db52b7c1fd5168f77b0ec0be40b7",
         "managed_before": {
           ".github/workflows/harness-repository-context.yml": "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0",
           ".claude/hooks/harness-closeout.mjs": "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
@@ -62,48 +39,257 @@
       }
     },
     {
+      "repository": "AEO-Engine",
+      "base": "0375bdfa983803eddcd49a62384d864631a10a12",
+      "brain_revision": "5ca09cc3df52",
+      "before": 17694,
+      "after": 17694,
+      "files": [],
+      "skipped": [],
+      "source_seal": "1af107fe6190ee3941afe6f6bfd5969ebad196462a5b9dbabe174d34f7e761f3",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
+    },
+    {
       "repository": "ai-harness",
-      "status": "awaiting-pilots"
+      "base": "93765e572926d88c1cf52fd2514978af08feb14a",
+      "brain_revision": "155b79828fb7",
+      "before": 48936,
+      "after": 48936,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "a91e3416f4c37e4baf084209a10f016c9e895e86962df55a91ee9d84b316a862",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 157,
+      "head": "b68720a74caa80a1e87ee9e4c98b0989347ad8f1"
     },
     {
       "repository": "control-center",
-      "status": "awaiting-pilots"
+      "status": "blocked",
+      "reason": "administration_branch_has_unknown_drift"
     },
     {
       "repository": "mm-ctrl",
-      "status": "awaiting-pilots"
+      "base": "5612e48ff4a33798eb856b091a3fa26fb43da6ab",
+      "brain_revision": "4757d4458aee",
+      "before": 22645,
+      "after": 22645,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "1263e8600f0189a0c0e07f9654e5720be50d3f592408258096bf7ada68df4330",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 402,
+      "head": "544bf3b2a7fa7df4c816db11694e1ca27386e8b6"
     },
     {
       "repository": "fractionl-circle",
-      "status": "awaiting-pilots"
+      "base": "e54d183bdb286fe914cfb156cda68c2db0b751c8",
+      "brain_revision": "dddd1abc777c",
+      "before": 19277,
+      "after": 19277,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "962c2d21179f0d4ff8d7ac877a26893f520e8006a1c0c77668d3a8fe2348df83",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 170,
+      "head": "84559eac6de880decc0a0e3f231828cadab36243"
     },
     {
       "repository": "fractionl-pulse",
-      "status": "awaiting-pilots"
+      "base": "6b50c415f22b38776eaf2d350791bc33ffab38af",
+      "brain_revision": "c3389b60c708",
+      "before": 35738,
+      "after": 35738,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "05c1c244dc417ca5ac7636a07dd83c35aaa2912035786ff804af4048145ed87a",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 59,
+      "head": "cf113fb6ab4d78c70905a6b3f5dd8d1f0a4a8f0f"
     },
     {
       "repository": "full-time",
-      "status": "awaiting-pilots"
+      "base": "357a2aa3ce358cdf6adc91f507d9d162e238cb43",
+      "brain_revision": "cd43facd0779",
+      "before": 47819,
+      "after": 47819,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "ba81b6c08f724951a477fb2e5fde072ef05b0e1f2167f28ff630e6184edb3e18",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 98,
+      "head": "93381a5a1d7b584cc4a1f94fc5dc2ed64a638cf5"
     },
     {
       "repository": "contentarchives",
-      "status": "awaiting-pilots"
+      "base": "92edf98023fa4b2b64ec1017562badf89d180cee",
+      "brain_revision": "430ad4208f8a",
+      "before": 79380,
+      "after": 79380,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "a3d1cf39c1c8d9f64640a28ad18887d24334a09b6b77a2f47093d85f802df65e",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 18,
+      "head": "fea3c111eba0abe458b2eff59302069639a10338"
     },
     {
       "repository": "makeyourmindup",
-      "status": "awaiting-pilots"
+      "base": "5d4ee42cb1aad67902c2537118ee1d1011221df4",
+      "brain_revision": "13bd661431b5",
+      "before": 9503,
+      "after": 9503,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "6bd4ac4e9c5bef872878b46e07279553c138b6d6b665aaf0d93ccc7a2a6faee0",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 26,
+      "head": "7c1c352d10d6f339f32cfa81e7bab0ab576b4961"
     },
     {
       "repository": "heartside",
-      "status": "awaiting-pilots"
+      "base": "bb3530c571cb46ca82e8565b619c1067ccd799e3",
+      "brain_revision": "29049a88d851",
+      "before": 1006,
+      "after": 1006,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "4013b95a92ba38977af6b125d5b7d8e557bf0e26543629389594ac0731c32336",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 48,
+      "head": "a170dcc50207b9f5ed240c13da72ba662d3017ff"
     },
     {
       "repository": "legibility",
-      "status": "awaiting-pilots"
+      "base": "86f6772635348601e5240da4e124b518befdedeb",
+      "brain_revision": "b059141972f8",
+      "before": 3698,
+      "after": 3698,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "fd5c2f64c41debb1674181b70f041d44c373f3746de4bbaed192acb372365866",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 42,
+      "head": "68e74253105712c366e317e9a2db807908c20132"
     },
     {
       "repository": "growth-heartside",
-      "status": "awaiting-pilots"
+      "base": "6e7a2fa5fdf08120481d3926860d21403191c522",
+      "brain_revision": "4ca70efce153",
+      "before": 80686,
+      "after": 80686,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
+      "skipped": [],
+      "source_seal": "307b842ab12b1c82f5559d68e2c3c6d96f8b0ac9598ea0f859c56542bdfe89b5",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 18,
+      "head": "3787f7a71ba515c49d7cacbac1102c933c979ab9"
     }
   ]
 }
