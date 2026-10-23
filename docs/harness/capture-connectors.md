@@ -22,9 +22,11 @@ tool that reads the brain and writes nothing back.
    change, so no change request is ever marked ready, and the digest asks for
    this instead.
 2. **Arm the digest.** Repository secret `CONTENT_ENGINE_KEY` in
-   `krishanraja/ai-harness`, holding the content engine's board key. Without it
-   the weekly digest is still written to `state/digest/`, but it does not reach
-   the Control Center list.
+   `krishanraja/ai-harness`, holding the content engine's board key. It only
+   reads the board: Control Center's connections sweep puts the digest on his
+   list from `state/digest/latest.json` on main (2026-10-23), and housekeeping
+   reads it back to record delivery. Without the key the digest still reaches
+   the list, but the harness cannot confirm it.
 3. **Add the claude.ai connector**, once the endpoint accepts a connector (see
    Control Center below). In claude.ai: Settings, Connectors, Add custom
    connector, paste the endpoint address Control Center issues for the

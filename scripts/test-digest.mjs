@@ -5,7 +5,7 @@
  * when it was measured. No network: the board call is stubbed.
  */
 
-import { buildDigest, boardItem, sendBoard, writeDigest, pendingDigest, lastSent, deliverPending, verifyPublishedPending } from './digest.mjs'
+import { buildDigest, boardItem, confirmBoard, writeDigest, pendingDigest, lastSent, deliverPending, verifyPublishedPending } from './digest.mjs'
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
@@ -38,32 +38,29 @@ test('the digest never carries an em dash', !(many.md + blocked.md).includes('\u
 const item = boardItem(one, { date: '2026-10-14' })
 test('the board item passes the Control Center gate shape', item.lane === 'on_you' && item.closes_on === 'his_word' && /^https:\/\//.test(item.link) && item.only_you === 'permission' && /^[a-z0-9][a-z0-9-]{1,79}$/.test(item.id))
 
-let sentBody = null
-const fakeFetch = async (url, init) => {
-  if (init.method === 'GET') return new Response(JSON.stringify({ ok: true, items: [item] }))
-  sentBody = { url, init }
-  return new Response(JSON.stringify({ ok: true, written: [item.id] }))
+const board = (items, status = 200) => async (_url, init) => {
+  if (init?.method !== 'GET') throw new Error('the harness never writes the board')
+  return new Response(JSON.stringify({ ok: true, items }), { status })
 }
-const r = await sendBoard(item, { key: 'fixture-key', fetchImpl: fakeFetch })
-test('the board write is an upsert from claude_code with a bearer key', r.sent && JSON.parse(sentBody.init.body).action === 'upsert_items' && JSON.parse(sentBody.init.body).client === 'claude_code' && sentBody.init.headers.authorization === 'Bearer fixture-key' && sentBody.url.endsWith('/api/workbench'))
-test('with no key the board is skipped and says why', (await sendBoard(item, { key: '' })).sent === false)
-const closed = await sendBoard(item, { key: 'k', fetchImpl: async () => new Response('{"error":"krish_closed_it"}', { status: 409 }) })
-test('an item Krish already closed is not an error', closed.sent === false && /closed/.test(closed.reason))
-let threw = false
-try { await sendBoard(item, { key: 'k', fetchImpl: async () => new Response('nope', { status: 500 }) }) } catch { threw = true }
-test('a failed board write is loud', threw)
-
+let seen = null
+const r = await confirmBoard(item, { key: 'fixture-key', fetchImpl: async (url, init) => { seen = { url, init }; return board([item])(url, init) } })
+test('delivery is confirmed by a bearer read of the board, never a write', r.sent && r.readback && seen.init.method === 'GET' && seen.init.headers.authorization === 'Bearer fixture-key' && seen.url.endsWith('/api/workbench'))
+test('with no key delivery cannot be confirmed and says why', (await confirmBoard(item, { key: '' })).sent === false)
+const waiting = await confirmBoard(item, { key: 'k', fetchImpl: board([]) })
+test('an item Control Center has not written yet is awaited, not an error', waiting.sent === false && waiting.awaiting === true)
+const closed = await confirmBoard(item, { key: 'k', fetchImpl: board([{ ...item, lane: 'done' }]) })
+test('an item Krish already cleared is closed by him', closed.sent === false && closed.closed === true)
 for (const [label, response] of [
   ['a success page instead of JSON', new Response('<html>secret fixture</html>')],
-  ['a success body without exact acknowledgement', new Response('{"ok":true}')],
-  ['a string pretending to be the written id list', new Response(JSON.stringify({ ok: true, written: item.id }))],
+  ['a body without an items list', new Response('{"ok":true}')],
+  ['a failed read', new Response('nope', { status: 500 })],
 ]) {
   let refused = false
-  try { await sendBoard(item, { key: 'fixture-key', fetchImpl: async () => response }) } catch { refused = true }
+  try { await confirmBoard(item, { key: 'fixture-key', fetchImpl: async () => response }) } catch { refused = true }
   test(`${label} never proves delivery`, refused)
 }
 let mismatchRefused = false
-try { await sendBoard(item, { key: 'fixture-key', fetchImpl: async (_url, init) => new Response(JSON.stringify(init.method === 'POST' ? { ok: true, written: [item.id] } : { ok: true, items: [{ ...item, area: 'wrong' }] })) }) } catch { mismatchRefused = true }
+try { await confirmBoard(item, { key: 'fixture-key', fetchImpl: board([{ ...item, area: 'wrong' }]) }) } catch { mismatchRefused = true }
 test('readback checks every item-owned field', mismatchRefused)
 const digestRoot = mkdtempSync(join(tmpdir(), 'harness-digest-'))
 try {
@@ -78,24 +75,15 @@ try {
   let durableMismatch = false
   try { await verifyPublishedPending({ ...pending, date: 'wrong' }, { token: 'fixture-key', fetchImpl: publishedFetch }) } catch { durableMismatch = true }
   test('a different main payload cannot authorize delivery', durableMismatch)
-  const payloads = []
-  const delayed = async (_url, init) => {
-    payloads.push(init.body)
-    return new Response('{"ok":false}', { status: 503 })
-  }
-  try { await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: delayed }) } catch {}
-  test('failed delivery keeps the exact durable pending item for retry', JSON.stringify(pendingDigest(digestRoot)) === JSON.stringify(pending) && lastSent(digestRoot) === null)
-  const good = async (_url, init) => {
-    if (init.method === 'POST') { payloads.push(init.body); return new Response(JSON.stringify({ ok: true, written: [pending.delivery.item.id] })) }
-    return new Response(JSON.stringify({ ok: true, items: [pending.delivery.item] }))
-  }
-  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: good })
-  test('retry preserves id and payload, then records verified delivery', payloads.length === 2 && payloads[0] === payloads[1] && pendingDigest(digestRoot) === null && lastSent(digestRoot).delivery.readback === true)
+  const before = await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: board([]) })
+  test('until Control Center writes it the exact durable pending item waits', before.awaiting === true && JSON.stringify(pendingDigest(digestRoot)) === JSON.stringify(pending) && lastSent(digestRoot) === null)
+  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: board([pending.delivery.item]) })
+  test('once it is on the board, verified delivery is recorded', pendingDigest(digestRoot) === null && lastSent(digestRoot).delivery.readback === true)
   const repeat = await deliverPending({ root: digestRoot, verifyDurable: async () => { throw new Error('must not run') } })
-  test('delivered item is not sent twice', repeat.reason === 'no_pending_digest')
+  test('delivered item is not confirmed twice', repeat.reason === 'no_pending_digest')
   writeDigest(one, digestRoot)
-  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: async () => new Response('{"error":"krish_closed_it"}', { status: 409 }) })
-  test('an owner-closed item stays closed without repeated writes', lastSent(digestRoot).delivery.status === 'closed-by-owner' && pendingDigest(digestRoot) === null)
+  await deliverPending({ root: digestRoot, verifyDurable: async () => true, key: 'fixture-key', fetchImpl: board([{ ...pendingDigest(digestRoot).delivery.item, lane: 'done' }]) })
+  test('an owner-closed item stays closed', lastSent(digestRoot).delivery.status === 'closed-by-owner' && pendingDigest(digestRoot) === null)
   const workflow = readFileSync('.github/workflows/harness-steward.yml', 'utf8')
   test('workflow commits pending state before the only delivery step', workflow.indexOf('name: Commit the digest') < workflow.indexOf('node scripts/digest.mjs --deliver-pending'))
   test('housekeeping has no immediate delivery path', !readFileSync('scripts/steward-housekeeping.mjs', 'utf8').includes('deliverPending'))

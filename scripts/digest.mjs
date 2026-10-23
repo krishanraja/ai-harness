@@ -11,10 +11,13 @@
  *                              request, plus the scoreboard line
  *   state/digest/latest.json   what was sent, so a second run that week is silent
  *
- * and puts ONE item on his Control Center list through the content engine's
- * work board (lane on_you, closes on his word), the one way an agent reaches
- * that list (Control Center ADR-034). The board needs CONTENT_ENGINE_KEY; if it
- * is not set the digest file is still written and the run says so plainly.
+ * and leaves ONE item for his Control Center list (lane on_you, closes on his
+ * word) in latest.json on main. The engine's board takes such an item only
+ * from Krish or from Control Center, so Control Center's connections sweep
+ * reads the committed record and writes it (Control Center
+ * api/_harnessDigest.ts); this script only confirms it by reading the board
+ * back with CONTENT_ENGINE_KEY. Ruling (Krish, 2026-10-23): route the harness
+ * digest through Control Center.
  *
  * Called by scripts/steward-housekeeping.mjs; exported for its tests.
  */
@@ -131,25 +134,18 @@ export function boardItem(digest, { date }) {
   }
 }
 
-export async function sendBoard(item, { key, url = ENGINE_URL, fetchImpl = fetch } = {}) {
-  if (!key) return { sent: false, reason: 'CONTENT_ENGINE_KEY is not set, so the board item was not written' }
+/** Read the board for the item Control Center writes. Never writes. */
+export async function confirmBoard(item, { key, url = ENGINE_URL, fetchImpl = fetch } = {}) {
+  if (!key) return { sent: false, reason: 'CONTENT_ENGINE_KEY is not set, so delivery could not be confirmed' }
   const endpoint = `${url.replace(/\/+$/, '')}/api/workbench`
-  const headers = { authorization: `Bearer ${key}`, 'content-type': 'application/json' }
-  const res = await fetchImpl(endpoint, {
-    method: 'POST',
-    headers, signal: AbortSignal.timeout(30000),
-    body: JSON.stringify({ action: 'upsert_items', client: 'claude_code', items: [item] }),
-  })
-  let body
-  try { body = JSON.parse(await res.text()) } catch { throw new Error('board_response_invalid') }
-  if (res.status === 409 && body?.error === 'krish_closed_it') return { sent: false, closed: true, reason: 'Krish already closed this week\'s item' }
-  if (!res.ok || body?.ok !== true || !Array.isArray(body.written) || !body.written.includes(item.id)) throw new Error('board_write_unacknowledged')
-  const check = await fetchImpl(endpoint, { method: 'GET', headers, signal: AbortSignal.timeout(30000) })
+  const check = await fetchImpl(endpoint, { method: 'GET', headers: { authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(30000) })
   let data
   try { data = JSON.parse(await check.text()) } catch { throw new Error('board_readback_invalid') }
-  const found = Array.isArray(data?.items) && data.items.find(row => row.id === item.id)
-  if (!check.ok || data?.ok !== true || !found ||
-      !Object.keys(item).every(k => found[k] === item[k])) throw new Error('board_readback_mismatch')
+  if (!check.ok || data?.ok !== true || !Array.isArray(data.items)) throw new Error('board_readback_invalid')
+  const found = data.items.find(row => row?.id === item.id)
+  if (!found) return { sent: false, awaiting: true, reason: 'awaiting_control_center' }
+  if (['done', 'archived'].includes(found.lane)) return { sent: false, closed: true, reason: 'Krish already closed this item' }
+  if (!Object.keys(item).every(k => found[k] === item[k])) throw new Error('board_readback_mismatch')
   return { sent: true, readback: true }
 }
 
@@ -202,7 +198,7 @@ export async function deliverPending({ root = HARNESS, verifyDurable = verifyPub
   if (!record) return { sent: false, reason: 'no_pending_digest' }
   if (record.notification_kind === 'incident' && (!incidentGate(notifications) || record.notification_approval_ref !== notifications.approval_ref)) throw new Error('incident_notification_not_approved')
   if (await verifyDurable(record) !== true) throw new Error('digest_pending_not_committed')
-  const result = await sendBoard(record.delivery.item, transport)
+  const result = await confirmBoard(record.delivery.item, transport)
   if (result.sent || result.closed) {
     saveLatest({ ...record, delivery: { ...record.delivery,
       status: result.closed ? 'closed-by-owner' : 'delivered',
@@ -214,7 +210,8 @@ export async function deliverPending({ root = HARNESS, verifyDurable = verifyPub
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url) && process.argv.includes('--deliver-pending')) {
   try {
     const result = await deliverPending({ key: process.env.CONTENT_ENGINE_KEY, url: process.env.CONTENT_ENGINE_URL || undefined })
-    console.log(JSON.stringify({ sent: result.sent, closed: result.closed === true, pending: !result.sent && !result.closed && result.reason !== 'no_pending_digest' }))
-    if (!result.sent && !result.closed && result.reason !== 'no_pending_digest') process.exitCode = 1
+    console.log(JSON.stringify({ sent: result.sent, closed: result.closed === true, pending: !result.sent && !result.closed && result.reason !== 'no_pending_digest', awaiting_control_center: result.awaiting === true }))
+    // Waiting for Control Center's next sweep is normal; an unconfirmable board is not.
+    if (!result.sent && !result.closed && !result.awaiting && result.reason !== 'no_pending_digest') process.exitCode = 1
   } catch { console.error('digest_delivery_unverified'); process.exitCode = 1 }
 }
