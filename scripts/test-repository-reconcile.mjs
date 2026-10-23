@@ -66,4 +66,21 @@ await atomic.commitFiles('repo', 'branch', 'parent', { 'AGENTS.md': 'one', 'CLAU
 assert.equal(requests.filter((r) => r.path.endsWith('/git/commits')).length, 1)
 assert.equal(requests.find((r) => r.path.endsWith('/git/trees')).body.tree.length, 2)
 assert.equal(requests.at(-1).body.force, false)
-console.log('REPOSITORY RECONCILE OK: exclusion before reads, planning, atomic writes, measured checks and safe rollback')
+
+// A squash merge leaves the publication branch diverged from main. When that
+// exact head was merged, the publisher opens a fresh branch beside it; it
+// never resets or deletes the old one, and any other divergence still blocks.
+const leftover = (mergedHead) => {
+  const created = []
+  return { created, gh: { ...gh,
+    branchExists: async (repo, b) => !created.includes(b) && /^harness\/repository-administration-[0-9a-f]{12}$/.test(b),
+    headSha: async (repo, b) => b === 'main' ? 'a'.repeat(40) : 'd'.repeat(40),
+    createBranch: async (repo, b) => { created.push(b) },
+    req: async (method, path) => path.includes('/compare/') ? { status: 'diverged' } : path.includes('/pulls?state=closed') ? [{ merged_at: '2026-10-22T22:53:12Z', head: { sha: mergedHead } }] : (() => { throw new Error(`unexpected ${method} ${path}`) })(),
+  } }
+}
+const spent = leftover('d'.repeat(40))
+assert.equal((await reconcileRepository({ profile, gh: spent.gh, history: [], write: true })).status, 'pull-request')
+assert.match(spent.created[0], /^harness\/repository-administration-[0-9a-f]{12}-[0-9a-f]{7}$/, 'a spent squash-merged branch gets a fresh, content-named branch')
+await assert.rejects(() => reconcileRepository({ profile, gh: leftover('e'.repeat(40)).gh, history: [], write: true }), /unknown_drift/, 'a divergence no merged pull request explains still blocks')
+console.log('REPOSITORY RECONCILE OK: exclusion before reads, planning, atomic writes, measured checks, safe rollback and spent squash branches')
