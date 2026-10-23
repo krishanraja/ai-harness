@@ -42,7 +42,7 @@ const run = (data) => data.workflows['harness-steward.yml:schedule'].runs[0]
 validateJobManifest(full)
 assert.equal(full.jobs.filter((job) => job.kind === 'source' && job.required).length, 2)
 assert.ok(full.jobs.filter((job) => job.kind === 'source').every((job) => job.account_sha256 === null), 'No production account identity is invented')
-assert.equal(full.watchdog.activation, 'manual-only-pending-approval')
+assert.equal(full.watchdog.activation, 'enabled')
 assert.throws(() => validateJobManifest({ ...full, jobs: full.jobs.filter((job) => job.id !== 'claude-cloud-account-2') }), /required-account-removed/)
 const duplicate = manifest(); duplicate.jobs.find((job) => job.id === 'claude-cloud-account-2').account_sha256 = first
 assert.throws(() => validateJobManifest(duplicate), /invalid-source-manifest/)
@@ -185,8 +185,8 @@ assert.ok(!exposed.includes('PRIVATE_SENTINEL') && !exposed.includes('fixture-to
 
 const workflow = readFileSync(fileURLToPath(new URL('../.github/workflows/harness-watchdog.yml', import.meta.url)), 'utf8')
 assert.match(workflow, /workflow_dispatch:/)
-assert.doesNotMatch(workflow, /^\s+schedule:|^\s+- cron:/m, 'The proposed cron remains inactive')
-assert.doesNotMatch(workflow, /^  (?:push|pull_request|workflow_run|repository_dispatch):/m, 'Only the explicitly dispatched observer can run')
+assert.match(workflow, /^  schedule:\n    - cron: "17 \* \* \* \*"$/m, 'The approved hourly cron runs at :17, the same minute in UTC and Europe/London')
+assert.doesNotMatch(workflow, /^  (?:push|pull_request|workflow_run|repository_dispatch):/m, 'Only the schedule and an explicit dispatch can run the observer')
 assert.ok(full.watchdog.artifact_attempt_suffix)
 assert.ok(workflow.includes('harness-watchdog-status-${{ github.run_attempt }}'), 'A rerun gets its own immutable artifact without overwriting another attempt')
 assert.doesNotMatch(workflow, /needs:|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|FLEET_TOKEN|secrets: inherit|claude-code-action|npm install/)
