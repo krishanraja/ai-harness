@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
-import { evaluate, northStarCheck, hook, ci, isProduct } from './check.mjs'
+import { evaluate, northStarCheck, hook, ci, isProduct, defaultBase } from './check.mjs'
 
 const TODAY = '2026-10-22'
 const now = (asOf, line) => `---\nrepo: krishanraja/x\nas_of: ${asOf}\nhead: abc1234\n---\n# X: where it is right now\n\n## Where it is right now (as of ${asOf})\nLive.\n\n## What is next and what is waiting on Krish\n- Ship the next thing.\n${line ? line + '\n' : ''}\n## Read next\n`
@@ -70,5 +70,23 @@ try {
   assert.equal(ci({ cwd: dir, base: root, head: 'HEAD~1', today: TODAY }).ok, false)
   assert.equal(ci({ cwd: dir, base: 'nope', head, today: TODAY }).ok, false, 'an unreadable range is a failure, never a pass')
   assert.equal(hook({ cwd: join(tmpdir()) }, TODAY), null, 'outside a repository the hook stays out of the way')
+
+  // A stale origin/main (a container cloned days ago, then checked out the
+  // latest main) must not pull published NOW.md updates into the session.
+  g('update-ref', 'refs/remotes/origin/main', root)
+  g('checkout', '-q', '-b', 'session/work')
+  assert.equal(defaultBase(dir, { fetch: false }), head, 'local main beats a stale origin/main once HEAD has left it')
+  put('src/a.ts', '3\n'); g('commit', '-qam', 'Session change')
+  const stale = hook({ cwd: dir }, TODAY)
+  assert.equal(stale?.decision, 'block', 'published closeouts never excuse this session')
+  put('NOW.md', good.replace('Live.', 'Live, and changed.')); g('commit', '-qam', 'Close out')
+  assert.equal(hook({ cwd: dir }, TODAY), null)
+
+  // With a reachable remote, the hook refreshes the stale tracking ref first.
+  const remote = join(dir, '.remote.git')
+  g('clone', '-q', '--bare', dir, remote); g('remote', 'add', 'origin', remote)
+  g('push', '-q', remote, `${head}:refs/heads/main`); g('update-ref', 'refs/remotes/origin/main', root)
+  g('checkout', '-q', 'main')
+  assert.equal(defaultBase(dir), head, 'a fetch moves a stale origin/main before the range is read')
 } finally { rmSync(dir, { recursive: true, force: true }) }
 console.log('CLOSEOUT OK: parser, rule, exemptions, North Star guard, hook loop guard and CI range')

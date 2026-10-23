@@ -102,20 +102,34 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+            "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
+            "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"
           ]
         },
-        "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's"
+        "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's",
+        "byte_changes": [
+          {
+            "date": "2026-10-23",
+            "files": [".claude/hooks/harness-closeout.mjs", ".github/workflows/harness-repository-context.yml"],
+            "from_sha256": ["cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68", "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"],
+            "to_sha256": ["2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca", "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"],
+            "reason": "the hook measured from a stale origin/main and let a fresh cloud session stop without closing out; the workflow changes only because it pins the hook's hash",
+            "source": "docs/proposals/2026-10-22-session-closeout-and-one-system.md, Amendment 2026-10-23",
+            "verified_by": "scripts/closeout/test-check.mjs (stale-base case fails on the old bytes, passes on the new), scripts/validate-repository-brain.mjs"
+          }
+        ]
       }
     }
   },
   "prior_owned": {
     ".github/workflows/harness-repository-context.yml": [
-      "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d"
+      "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
+      "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
     ],
-    ".claude/hooks/harness-closeout.mjs": []
+    ".claude/hooks/harness-closeout.mjs": [
+      "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+    ]
   }
 }
