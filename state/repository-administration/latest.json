@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-23T09:23:36.686Z",
+  "generated_at": "2026-10-23T09:24:47.992Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -45,9 +45,21 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
+      "status": "verified",
       "pr": 23,
-      "head": "f50eee84d443f3070616a2c4cda8f8cc0c601782"
+      "head": "f50eee84d443f3070616a2c4cda8f8cc0c601782",
+      "merge": "0375bdfa983803eddcd49a62384d864631a10a12",
+      "rollback": {
+        "base": "a90fcd654c5c6c41c0fa9c81a80b0cb27aaf577b",
+        "managed_before": {
+          ".github/workflows/harness-repository-context.yml": "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0",
+          ".claude/hooks/harness-closeout.mjs": "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+        },
+        "files": [
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/hooks/harness-closeout.mjs"
+        ]
+      }
     },
     {
       "repository": "ai-harness",
