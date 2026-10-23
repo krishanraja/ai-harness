@@ -42,3 +42,9 @@ Let the docs steward write on every merge instead of nightly. It closes the lag 
 
 - `node scripts/closeout/test-check.mjs`, `node scripts/steward/test-validate-closeout.mjs`, `node scripts/test-repository-admin.mjs`, `node scripts/validate-surfaces.mjs`, `node scripts/validate-repository-brain.mjs`.
 - After rollout: a fresh session in a target that commits product work without touching `NOW.md` is stopped once with the closeout steps, and its pull request's `closeout` check fails until `NOW.md` is current.
+
+## Amendment 2026-10-23: the hook's base
+
+A canary session in a fresh cloud container committed product work to Heartside and was not stopped. The container's `origin/main` was two days behind its checkout, so the hook's range swept in commits that had already updated `NOW.md`, and the session passed without closing out. The first canary had blocked only because it ran `git fetch` first.
+
+The hook now fetches the default branch before reading the range (ten seconds, best effort) and also measures from the local default branch once HEAD has left it; the newest merge-base wins. `scripts/closeout/test-check.mjs` carries the stale-base case, which fails on the old bytes, and the fetch path against a real remote. The new hook and check bytes replace the approved hashes in `contract/repository-administration.json` (`byte_changes` records both pairs), and the old bytes are listed in `prior_owned` so every target upgrades in place. Krish's merge of this amendment is the approval, as for the original plan.
