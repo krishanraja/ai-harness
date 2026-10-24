@@ -26,6 +26,8 @@ AUTHORITY: [render/draft scope and exact approval walls]
 PROOF: [viewports, state range, accessibility, rendered evidence]
 ```
 
+Before a material design, read the craft rules Krish has approved from his saves and answers: `select statement, means, layer from taste_profile_form where lane in ('production', 'visibility') order by confidence desc limit 12` in the Mindmaker OS Supabase project, through whichever route the session already has (the Supabase connector, the Supabase management API, or Control Center's project database row read). Apply the ones about visual or interaction form; they are his approved taste, so they rank with the house system above and below truth, accessibility and the anti-defaults. If no route reaches the view, record "approved taste rules not read" under BRAND + VOICE and continue; never stand in for them from memory.
+
 If a load-bearing field is missing, discover it from current sources or state a bounded assumption. Ask Krish one focused question only when the answer is a material taste, product, positioning, or trade-off judgment he owns.
 
 For every output, name the artifact revision, rendered evidence, current approval state, downstream owner, and pending action. Never imply that a design lock is code, deployment, or release authority.
