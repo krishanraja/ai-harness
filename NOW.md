@@ -29,6 +29,7 @@ Session closeout and one fleet list merged on 2026-10-22 (PR 152): `scripts/clos
 
 ## What changed recently
 
+- 2026-10-24 **One model-written repository review that breaks the gate is now refused and named, instead of failing the whole weekly proposals run.** On 2026-10-19 a single `invalid_review_text` threw out of `openReviews`, so `repository-administration` proposals failed and the watchdog has held `central-repository-proposals` red since; valid proposals in the same batch were lost with it. GitHub failures still stop the run.
 - 2026-10-23 **The weekly digest reaches Krish's list through Control Center, because the engine refused the harness's own post every night.** The board takes an item that only he can close from Krish or Control Center, never from an agent's key, so housekeeping failed nightly from 2026-10-18 and the first watchdog run reported it. Control Center's connections sweep now writes the pending item from `state/digest/latest.json`; housekeeping only reads the board to record delivery, and waits without failing until it is there. Ruling (Krish, 2026-10-23): route the harness digest through Control Center.
 - 2026-10-23 **The independent harness watchdog now runs hourly at :17, because Control Center had been reporting harness-central as critically down for four days.** The watchdog was built as a manual-only observer awaiting approval, and Control Center read "never ran" as "down". Ruling (Krish, 2026-10-23): activate the harness watchdog hourly at :17. The manifest's `watchdog.activation` is now `enabled`, which is the value Control Center's reader counts as a normal schedule. Notification delivery stays disabled.
 - 2026-10-23 **The North Star now has a number, a weekly ladder and an urgency rating, so every session knows how far behind it is and how hard to push.** Ruling (Krish, 2026-10-23): every repository chases one aggressive number on a weekly ladder, and urgency U1 to U5 sets its intensity. The number and ladder are in `docs/NORTH_STAR.md`; where it stands is the first line under "Where it is right now". Contract: ai-harness `contract/north-star-metric.md`.
@@ -72,6 +73,7 @@ Session closeout and one fleet list merged on 2026-10-22 (PR 152): `scripts/clos
 
 ## What is next and what is waiting on Krish
 
+- Next: after Sunday's runs (steward propose 21:40 UTC, repository proposals 23:10 UTC), read the watchdog's `central-proposals` and `central-repository-proposals` rows back as healthy. Housekeeping and the digest are green as of 2026-10-23 23:27.
 - Next: after Control Center's sweep delivers the pending 2026-W42 digest, read back housekeeping, propose and the watchdog's `central-*` rows going green. The digest itself asks Krish to run `Repair-HarnessPc.ps1` on his PC.
 - Next: read back the first scheduled watchdog run (the next :17) and Control Center's `harness-central` row turning healthy.
 - Merge the content-engine profile fix so the pilots pass and the publisher delivers to the other 11 targets. Heartside, Legibility and growth-heartside each still need the `CLAUDE_CODE_OAUTH_TOKEN` repository secret for the nightly steward.
