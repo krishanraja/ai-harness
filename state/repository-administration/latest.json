@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-23T09:50:04.540Z",
+  "generated_at": "2026-10-24T00:36:31.210Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "7f59cc36ae7b446f16cabc9514babcede6783b76",
+      "base": "999092ca4d8d142f617b9bfb3edb8ba9b3881135",
       "brain_revision": "2ad79d5cf4f3",
-      "before": 313469,
-      "after": 313469,
+      "before": 411397,
+      "after": 411397,
       "files": [],
       "skipped": [],
-      "source_seal": "f2d19ba3fd8b428571ddb6f849bf409e48d2ba348ae1d171bd7d7b692d60d65d",
+      "source_seal": "3293ebc9458a4d54cb8310b912daf1a3e34a2397b6e557a0f8c4c76d99d403a1",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,13 +23,13 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "0375bdfa983803eddcd49a62384d864631a10a12",
+      "base": "322051d9cd81789ba1d6c422e802b34b876cf81f",
       "brain_revision": "5ca09cc3df52",
-      "before": 17694,
-      "after": 17694,
+      "before": 19116,
+      "after": 19116,
       "files": [],
       "skipped": [],
-      "source_seal": "1af107fe6190ee3941afe6f6bfd5969ebad196462a5b9dbabe174d34f7e761f3",
+      "source_seal": "1475380fa65cf4f0dc3645f32c6b750c802035a881cc575fc42b250033b58f68",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "166770275aac205946ef85be365919c6ae2ab653",
+      "base": "2bc39a17f18e13d5549a56de941e050fae90f2f1",
       "brain_revision": "155b79828fb7",
-      "before": 49474,
-      "after": 49474,
+      "before": 52702,
+      "after": 52702,
       "files": [],
       "skipped": [],
-      "source_seal": "c195f5e0369716b509d5b332981a7d9600eefa6493e5c4b994179342b3b2a12e",
+      "source_seal": "129fb102f202302dee6c63f085563bfc73f030e5754a868987a4585f7dd98b4e",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,16 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "ffac5cbdd9944aaf013914846bbccba6f54883c6",
+      "base": "35fb081dc21cf8ea69e4cd30c8e9d6721a48d135",
       "brain_revision": "ba41f521a760",
-      "before": 55692,
-      "after": 55692,
-      "files": [
-        ".github/workflows/harness-repository-context.yml",
-        ".claude/hooks/harness-closeout.mjs"
-      ],
+      "before": 148772,
+      "after": 148772,
+      "files": [],
       "skipped": [],
-      "source_seal": "ddf23bce156c82e0c15bbc7080ad5cb32eec688ee71742a74325662d3ad1d390",
+      "source_seal": "85ac75eebd16751e0bb12fda8ecf2e4c30b3e83c48800771cba2e8852059c6b3",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -76,31 +73,17 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "verified",
-      "pr": 536,
-      "head": "30acfa61c4daca3d97ece7991c672ee2d101c35b",
-      "merge": "336f4d719c46b0133c1860c78ecf21effa2f2ffa",
-      "rollback": {
-        "base": "ffac5cbdd9944aaf013914846bbccba6f54883c6",
-        "managed_before": {
-          ".github/workflows/harness-repository-context.yml": "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0",
-          ".claude/hooks/harness-closeout.mjs": "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
-        },
-        "files": [
-          ".github/workflows/harness-repository-context.yml",
-          ".claude/hooks/harness-closeout.mjs"
-        ]
-      }
+      "status": "current"
     },
     {
       "repository": "mm-ctrl",
-      "base": "34a1d97e49d44b338506630ae19b15784bee63fb",
+      "base": "1c2e017bcb1a812e1f3f85bc1deaca421c8f9784",
       "brain_revision": "4757d4458aee",
-      "before": 22645,
-      "after": 22645,
+      "before": 19135,
+      "after": 19135,
       "files": [],
       "skipped": [],
-      "source_seal": "a3550caf26286b69d8c26fb8819177a53743d1713f1727491626df184d0c6db6",
+      "source_seal": "5425608f25e64bac6a9b78d64a8d281fe2ceec5082726fa14ad7f1b1feb09ae3",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -112,13 +95,13 @@
     },
     {
       "repository": "fractionl-circle",
-      "base": "1b668cc959214461354f71664c5105c35b41545f",
+      "base": "fe0e84acb8a1bb70dc10cb1bf1841eb0ebe17f0e",
       "brain_revision": "dddd1abc777c",
-      "before": 19277,
-      "after": 19277,
+      "before": 20515,
+      "after": 20515,
       "files": [],
       "skipped": [],
-      "source_seal": "55f2d6c302a72fdad96194fb470eefea30dc77c2d8cb198331815c9873e1f2ab",
+      "source_seal": "d70beba3b581c0998ebf28a8e92194f74c1c3cfe1175e7771715a4d26c5c2d29",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -130,13 +113,13 @@
     },
     {
       "repository": "fractionl-pulse",
-      "base": "6fcfb8957844790183176a9f94dff36aa6e51cd7",
+      "base": "cc41a69359d0a689fc2db6c30dccd86c5d9c6c85",
       "brain_revision": "c3389b60c708",
-      "before": 35738,
-      "after": 35738,
+      "before": 46698,
+      "after": 46698,
       "files": [],
       "skipped": [],
-      "source_seal": "28296bb5616359e008713fe11d64d37b1cad4c36a38e9c1be7db69d12099e836",
+      "source_seal": "7185131176307eaa085d90b5fdd88b0c463b470531c7acf5e15808dd93460e25",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -148,13 +131,13 @@
     },
     {
       "repository": "full-time",
-      "base": "1a16f7cddd837b2aa2fa9618c5c2fcc659ff2d01",
+      "base": "d05c8d1d74d073351ff3e98890acc931aa5fe1fc",
       "brain_revision": "cd43facd0779",
-      "before": 47819,
-      "after": 47819,
+      "before": 47230,
+      "after": 47230,
       "files": [],
       "skipped": [],
-      "source_seal": "a36879a884c01859675a936be6ede34c9b360d268126a6638b02af35c3170bbf",
+      "source_seal": "eea10a76411ca4bb91e1fd1741a2f1454930dbc05381bf907a86d038145f37e3",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -166,13 +149,13 @@
     },
     {
       "repository": "contentarchives",
-      "base": "b2b2f5c38d5c501168d7fd5638e119d699c5830e",
+      "base": "d152018e4a2a810134f7b32ea92b90c38a29c064",
       "brain_revision": "430ad4208f8a",
-      "before": 79809,
-      "after": 79809,
+      "before": 83085,
+      "after": 83085,
       "files": [],
       "skipped": [],
-      "source_seal": "5c8688c80e9772923a66c5dc0238402aa1286a448e75ed61d9e9429a3f1a3fb7",
+      "source_seal": "f9d5c1469eac72444dc95870aa1c3406249b1f22908be060cb88f4c1c634a7b6",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -184,13 +167,13 @@
     },
     {
       "repository": "makeyourmindup",
-      "base": "c58b8af96ac66d808893ea5ad39d00bfba709ce2",
+      "base": "ac8737e3c54ba00c98ec9ec606d8e982326f0bcf",
       "brain_revision": "13bd661431b5",
-      "before": 9503,
-      "after": 9503,
+      "before": 21711,
+      "after": 21711,
       "files": [],
       "skipped": [],
-      "source_seal": "56a80fe6c50f0561a2e466f62232540927c7abe08767608643f3b080204deffa",
+      "source_seal": "fbccc383c62ec1c18945740d401f86064af32cca49f474408128c0956abce17b",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -202,13 +185,13 @@
     },
     {
       "repository": "heartside",
-      "base": "b786835842312194a7a4202f5994bd7fa715770d",
+      "base": "e78465438ae9e43c35d871e0d22ebafcbb78d631",
       "brain_revision": "29049a88d851",
-      "before": 1006,
-      "after": 1006,
+      "before": 20862,
+      "after": 20862,
       "files": [],
       "skipped": [],
-      "source_seal": "bfd4ef1d94e0959e4bca76e420b41a5982ebf2e62322b9ae00424ca5a6960c51",
+      "source_seal": "256b3b57b71ec5955eed19d33e900e50723b5b519efdafd8948e4f8d39a1feca",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -220,13 +203,13 @@
     },
     {
       "repository": "legibility",
-      "base": "2647c1e4ff2c9d83d429514907240c850e9adfe9",
+      "base": "65c99f949c83e5e2dce031319e6c9a809d8d08a1",
       "brain_revision": "b059141972f8",
-      "before": 3698,
-      "after": 3698,
+      "before": 21062,
+      "after": 21062,
       "files": [],
       "skipped": [],
-      "source_seal": "16936757167a828daefc19d95d9438ffe08e6d6bb600c64a64dd25e1f92699b6",
+      "source_seal": "e5898368051c38b0bdb9a000c02c577f3df50a7dac69d6c2b065afa004fb588a",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -238,13 +221,13 @@
     },
     {
       "repository": "growth-heartside",
-      "base": "844b5412206b5c807f160790a6968d99d345e9b1",
+      "base": "f6e538c30629353ea692f51669f56e6c9affda35",
       "brain_revision": "4ca70efce153",
-      "before": 80686,
-      "after": 80686,
+      "before": 87311,
+      "after": 87311,
       "files": [],
       "skipped": [],
-      "source_seal": "cb4a7c53638866f9426479a0652243ab0719a0e5dcdc93881399045a1214a38a",
+      "source_seal": "c6381eef0236fcd80b8983bb54bb694c5c4e41e5ef0c3a0f5d606c53570dc6e9",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
