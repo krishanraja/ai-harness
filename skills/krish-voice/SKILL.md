@@ -117,9 +117,9 @@ For legally or regulatorily reviewed text, isolate exact protected wording. If a
 
 Name the authorised artifact that earns the prose: something Krish built, shipped, observed, reversed, or watched fail; a recipient's cleared language; or a sourced external mechanism. If no operator artifact exists, say so. Ask for one high-signal input or offer a clearly labelled external-commentary treatment. Never fabricate first-person evidence.
 
-### 2a. Read his approved taste rules
+### 2a. Apply his approved taste rules
 
-Before drafting, read the craft rules Krish has approved from his saves and answers: `select statement, means, layer from taste_profile_form where lane in ('voice', 'strategy') order by confidence desc limit 12` in the Mindmaker OS Supabase project, through whichever route the session already has (the Supabase connector, the Supabase management API, or Control Center's project database row read). The view holds only rules he approved, and only about how a piece is made, never what it is about: apply them to form, never to choose a topic. This skill's truth, privacy and kill-list rules still win; when an approved rule conflicts with one, follow this skill and name the conflict. If no route reaches the view, say "approved taste rules not read" in the delivery and continue; never stand in for them from memory.
+Read `references/approved-taste.md` before drafting. It holds the craft rules Krish approved from what he saved and answered, and it changes only by a pull request he merges. Apply them to how the piece is made, never to choose its topic. This skill's truth, privacy and kill-list rules rank above them; when one conflicts, follow this skill and name the conflict. Say in the delivery which rules shaped the draft.
 
 ### 3. Choose posture and container
 
