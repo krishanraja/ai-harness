@@ -45,7 +45,14 @@ export async function openReviews({ gh, proposals, root = ROOT }) {
   const budget = Math.max(0, Number(loadPolicy(root).decision_budget || 3) - open.filter((p) => /^harness\/(?:change-|repository-learning-)/.test(p.head?.ref || '')).length)
   const results = []
   for (const proposal of proposals.slice(0, budget)) {
-    const r = validateReview(proposal, candidates, policy), branch = `${REVIEW_BRANCH}${r.id.slice(-20)}`
+    // One model-written proposal that breaks the gate is refused and named; it never takes
+    // the others down with it (a single invalid_review_text failed the whole 2026-10-19 run).
+    let r
+    try { r = validateReview(proposal, candidates, policy) } catch (e) {
+      results.push({ candidate_id: typeof proposal?.candidate_id === 'string' ? proposal.candidate_id : null, status: 'refused', reason: e instanceof Error ? e.message : 'invalid_review' })
+      continue
+    }
+    const branch = `${REVIEW_BRANCH}${r.id.slice(-20)}`
     if (await gh.branchExists('ai-harness', branch)) { results.push({ id: r.id, status: 'already-proposed' }); continue }
     const { branch: base } = await gh.defaultBranch('ai-harness'), head = await gh.headSha('ai-harness', base)
     const current = (await gh.getFile('ai-harness', REVIEWS, head))?.text || ''

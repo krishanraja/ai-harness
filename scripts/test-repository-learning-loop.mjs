@@ -178,7 +178,9 @@ try {
       return { merged_by: { login: mergedBy }, merge_commit_sha: reviewMerge }
     },
   }
-  assert.equal((await openReviews({ gh: reviews, proposals: [proposal], root }))[0].status, 'proposed')
+  const mixed = await openReviews({ gh: reviews, proposals: [{ ...proposal, why: 'https://example.invalid/link' }, proposal], root })
+  assert.deepEqual(mixed.map((x) => x.status), ['refused', 'proposed'], 'One proposal that breaks the gate is refused and the valid one is still drafted')
+  assert.equal(mixed[0].reason, 'invalid_review_text')
   assert.equal(knowledgeHistory(root).length, 2, 'Drafting a review never accepts its proposed meaning')
   assert.deepEqual(await promoteOwnerReviews({ gh: reviews, root, write: true }), [], 'A bot merge never accepts meaning')
   mergedBy = contract.owner // A mocked owner identity, in this disposable test policy only.
