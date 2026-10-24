@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-10-23
+as_of: 2026-10-24
 head: 801ad37
 lifecycle: live
 production_url: none
@@ -21,7 +21,7 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-10-23)
+## Where it is right now (as of 2026-10-24)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
@@ -86,7 +86,7 @@ Session closeout and one fleet list merged on 2026-10-22 (PR 152): `scripts/clos
 - The credential-exposure lifecycle opened 2026-09-12 remains open with approved remediation in progress; containment is not the same as provider-side revocation, and closure is Krish's call.
 - `tool-router` and `tool-economics` need Krish's decision too: `tool-router` still lacks a blind client trigger and baseline comparison, a supported-client behaviour canary and governed production admission; `tool-economics` lacks held-out trigger and behaviour evaluation, an independent overlap review, a fresh-session canary and named human admission (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`). Gemini rejected the economics link on 2026-10-19 because it requires standard OAuth.
 - `consumer-app-outcomes` is a validated candidate, not an admitted skill. It needs independent execution of its held-out trigger and behaviour suites, review against `krish-design`, `build-apps-with-krish`, `ux-foundations`, `evidence-research` and `ux-testing-agent` for overlap, and Krish's admit/revise/reject decision before the staged routing change in `docs/proposals/2026-09-25-consumer-app-outcomes.md` can be applied.
-- North Star check (2026-10-23): holds.
+- North Star check (2026-10-24): holds.
 
 ## Read next
 
