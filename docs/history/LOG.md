@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-24
+
+- stamped at `2948842`: `NOW.md` head moved from `801ad37`. Release v2026.10.24.1 (source `691ea40`, the taste-file change) was registered; the release sentence, the taste bullet and the LORIMER heartbeat counts (eight failing runs, still `checkout-untracked`) were corrected against `CURRENT.md` and `state/heartbeats.json`. No bullet passed 30 days.
+
 ## 2026-10-21
 
 - stamped at `737d620`: commits since `5e228d9` were brain, repository-administration view and observation ledger updates only. `NOW.md` head and date moved; no registry, heartbeat-sync or release state changed.
