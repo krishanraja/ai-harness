@@ -117,6 +117,10 @@ For legally or regulatorily reviewed text, isolate exact protected wording. If a
 
 Name the authorised artifact that earns the prose: something Krish built, shipped, observed, reversed, or watched fail; a recipient's cleared language; or a sourced external mechanism. If no operator artifact exists, say so. Ask for one high-signal input or offer a clearly labelled external-commentary treatment. Never fabricate first-person evidence.
 
+### 2a. Apply his approved taste rules
+
+Read `references/approved-taste.md` before drafting. It holds the craft rules Krish approved from what he saved and answered, and it changes only by a pull request he merges. Apply them to how the piece is made, never to choose its topic. This skill's truth, privacy and kill-list rules rank above them; when one conflicts, follow this skill and name the conflict. Say in the delivery which rules shaped the draft.
+
 ### 3. Choose posture and container
 
 Choose Gear A or B, audience altitude, and the smallest structure that carries the approved argument. For long-form, identify one fair antagonist and the strongest countercase. For correspondence, identify the exact next action. For slides, choose solo or transferable mode before writing.
