@@ -185,6 +185,8 @@ assert.ok(!exposed.includes('PRIVATE_SENTINEL') && !exposed.includes('fixture-to
 
 const workflow = readFileSync(fileURLToPath(new URL('../.github/workflows/harness-watchdog.yml', import.meta.url)), 'utf8')
 assert.match(workflow, /workflow_dispatch:/)
+assert.match(workflow, /^run-name: Harness watchdog \(\$\{\{ inputs\.trigger \|\| github\.event_name \}\}\)$/m, 'Each run names the knock that started it, so Control Center can tell its own clock from a manual run')
+assert.match(workflow, /options: \[manual, control-center-clock\]/, 'The trigger is a closed choice, never free text in a run name')
 assert.match(workflow, /^  schedule:\n    - cron: "17 \* \* \* \*"$/m, 'The approved hourly cron runs at :17, the same minute in UTC and Europe/London')
 assert.doesNotMatch(workflow, /^  (?:push|pull_request|workflow_run|repository_dispatch):/m, 'Only the schedule and an explicit dispatch can run the observer')
 assert.ok(full.watchdog.artifact_attempt_suffix)

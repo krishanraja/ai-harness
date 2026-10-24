@@ -1,12 +1,22 @@
 name: Harness watchdog
+run-name: Harness watchdog (${{ inputs.trigger || github.event_name }})
 
 # Hourly at :17, activated by Krish on 2026-10-23. Every hour has the same
-# minute in UTC and Europe/London, including daylight-saving changes. A manual
-# run is not evidence of scheduled delivery.
+# minute in UTC and Europe/London, including daylight-saving changes. GitHub
+# started this schedule late or not at all on its first night, so Control
+# Center's own cron dispatches it at :17 with trigger control-center-clock
+# (Krish, 2026-10-24), and the schedule stays as a backup. The run name says
+# which knock started it. A manual run is not evidence of scheduled delivery.
 on:
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
+    inputs:
+      trigger:
+        description: Who started this run
+        type: choice
+        options: [manual, control-center-clock]
+        default: manual
 
 permissions:
   contents: read
