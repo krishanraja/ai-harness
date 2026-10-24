@@ -2350,12 +2350,17 @@ skill_sections:
   - id: krish-design.design-task-contract
     file: skills/krish-design/SKILL.md
     heading: "Design task contract"
-    text_sha: "684c4cac33d1"
+    text_sha: "af5d82ad5d38"
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "6e2444ac5f40"
+      ref: "a2b0ec5a6830"
     history:
+      - text_sha: "684c4cac33d1"
+        valid_until: "2026-10-24"
+        source:
+          kind: ruling
+          ref: "6e2444ac5f40"
       - text_sha: "7d51a103b177"
         valid_until: "2026-10-24"
         source:
@@ -2606,12 +2611,17 @@ skill_sections:
   - id: krish-voice.workflow
     file: skills/krish-voice/SKILL.md
     heading: "Workflow"
-    text_sha: "e2502cf40460"
+    text_sha: "85d3907ff104"
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "6e2444ac5f40"
+      ref: "a2b0ec5a6830"
     history:
+      - text_sha: "e2502cf40460"
+        valid_until: "2026-10-24"
+        source:
+          kind: ruling
+          ref: "6e2444ac5f40"
       - text_sha: "e5e1edf721d2"
         valid_until: "2026-10-24"
         source:
