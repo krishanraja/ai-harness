@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T00:18:00.419Z",
+  "generated_at": "2026-10-25T00:19:00.563Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "7807faa9e6f05d059579228c4c7cb489e327a711",
+      "base": "837d3207764e9ed313627b935fa077e093e240d8",
       "brain_revision": "155b79828fb7",
       "before": 54375,
       "after": 54375,
