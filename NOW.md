@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-10-24
-head: 2948842
+as_of: 2026-10-25
+head: fc5d64c
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,7 +21,7 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-10-24)
+## Where it is right now (as of 2026-10-25)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
@@ -70,9 +70,6 @@ Session closeout and one fleet list merged on 2026-10-22 (PR 152): `scripts/clos
 - 2026-09-25 **The two supervised cloud accounts gained a routing floor after a claude.ai listing was found silently truncating skill descriptions.** On 2026-09-25 that catalog listed its last seven skills, including `strategy-brief`, `verification-loop` and `video-engine`, with no description at all, even though every `SKILL.md` and its description are valid and under the documented length limits. `adapters/cloud/account-instructions.md` is now a 1,884-character paste-in that forces the three always-on gates and names every production skill and its trigger directly, so cloud routing no longer depends on a description the catalog may not render. Commit `7d51b0b`.
 - 2026-09-25 **A canary-audit attribution bug overstated how many skills had never fired.** `audit-harness.mjs` credited every core-trigger case to a skill literally called "core", which does not exist, so it reported `krish-principles`, `strategy-brief` and `verification-loop` as uncanaried. The true count of skills with no positive canary on any surface is 2 of 29 (`apify`, `ctrl-build`), not 5; `canaries.mjs` now keeps every unproven skill on every sheet until it fires, and the sheet says so. Commit `abc2952`.
 - 2026-09-25 **The SURFACE machine identity resolver stopped exiting before it could record evidence.** Unrelated Claude and Cursor skill directories appeared on a Codex-only managed host, and identity resolution had been coupled to the absence of those unowned roots, so the run exited before writing anything. The resolver now binds SURFACE to its machine name and managed Codex root, records other roots without managing them, and carries a regression fixture proving they cannot make the host ambiguous. Commits `f8bcd22`, `b643a9a`.
-- 2026-09-24 **The experience-quality system became durable instead of session-local, on Krish's own ruling.** Ruling (Krish, 2026-09-24): "harden the quality system, make it durable across future work, finish the build-apps safeguards, and keep the fleet as autonomous as possible." Three changes landed together: a material review firewall makes it mechanically impossible inside the governed workflow to present an unverified candidate (Ruling, same day: "Future app and website work must make it mechanically impossible within the governed workflow to present an unverified material candidate"); scroll-build interactions now require causal evidence that progress follows user scroll and that a locked region only releases after its sequence completes (Ruling, same day: "fix the two sections to build with scroll lock until complete, then harden the underlying system for future use"); and project delivery is fail-closed when a repository has no real test, build or QA command, so a placeholder script can no longer manufacture readiness. Commits `06447cd`, `bcc8bdd`, `6ce37fa`.
-- 2026-09-24 **Release v2026.09.24.3 was registered and rolled out across every available local and cloud surface.** Ruling (Krish, 2026-09-24): "publish and roll out the hardened harness release across available local and cloud surfaces." The rollout sync was taught to consume already-approved reconciliations rather than re-litigate them, and to stop treating a provider-managed cloud cache as canonical drift when classifying what changed (Ruling, same day: "finish the governed rollout across available local clients without treating provider-managed cloud caches as canonical drift"). Commits `baf69e0`, `10d494d`, `b1ff8d1`, `f11caf9`.
-- 2026-09-24 **The canon block was synced two releases late.** PR #74 rendered the krish-canon markers in `AGENTS.md` up through v2026.09.13.8 and then v2026.09.15.2 in the same pass, having missed both releases when they shipped. The block is detected-and-proposed by design, never silently overwritten, which is exactly why the backlog was visible instead of silently lost.
 
 ## What is next and what is waiting on Krish
 

@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-25
+
+- stamped at `fc5d64c`: `NOW.md` head moved from `2948842`. Only automation commits landed (brain, intake, observe, digest state files); no documentation consequence. Three 2026-09-24 bullets rolled out of NOW.md below.
+
 ## 2026-10-24
 
 - stamped at `2948842`: `NOW.md` head moved from `801ad37`. Release v2026.10.24.1 (source `691ea40`, the taste-file change) was registered; the release sentence, the taste bullet and the LORIMER heartbeat counts (eight failing runs, still `checkout-untracked`) were corrected against `CURRENT.md` and `state/heartbeats.json`. No bullet passed 30 days.
@@ -129,6 +133,10 @@ moved. Nothing here is ever rewritten.
   and under 2026-09-24 and is no longer an open action.
 
 ## 2026-09-24
+
+- rolled from NOW.md: 2026-09-24 **The experience-quality system became durable instead of session-local, on Krish's own ruling.** Ruling (Krish, 2026-09-24): "harden the quality system, make it durable across future work, finish the build-apps safeguards, and keep the fleet as autonomous as possible." Three changes landed together: a material review firewall makes it mechanically impossible inside the governed workflow to present an unverified candidate (Ruling, same day: "Future app and website work must make it mechanically impossible within the governed workflow to present an unverified material candidate"); scroll-build interactions now require causal evidence that progress follows user scroll and that a locked region only releases after its sequence completes (Ruling, same day: "fix the two sections to build with scroll lock until complete, then harden the underlying system for future use"); and project delivery is fail-closed when a repository has no real test, build or QA command, so a placeholder script can no longer manufacture readiness. Commits `06447cd`, `bcc8bdd`, `6ce37fa`.
+- rolled from NOW.md: 2026-09-24 **Release v2026.09.24.3 was registered and rolled out across every available local and cloud surface.** Ruling (Krish, 2026-09-24): "publish and roll out the hardened harness release across available local and cloud surfaces." The rollout sync was taught to consume already-approved reconciliations rather than re-litigate them, and to stop treating a provider-managed cloud cache as canonical drift when classifying what changed (Ruling, same day: "finish the governed rollout across available local clients without treating provider-managed cloud caches as canonical drift"). Commits `baf69e0`, `10d494d`, `b1ff8d1`, `f11caf9`.
+- rolled from NOW.md: 2026-09-24 **The canon block was synced two releases late.** PR #74 rendered the krish-canon markers in `AGENTS.md` up through v2026.09.13.8 and then v2026.09.15.2 in the same pass, having missed both releases when they shipped. The block is detected-and-proposed by design, never silently overwritten, which is exactly why the backlog was visible instead of silently lost.
 
 - reconciled at `e1dae13`: `NOW.md`'s schema drift (see the 2026-09-25 entry above)
   was corrected: the strict validator had started failing on eleven counts. Restored
