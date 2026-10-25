@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T00:19:00.563Z",
+  "generated_at": "2026-10-25T16:17:37.551Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "bb5e0c11d5a9c4f8e01eb8d35c361b1cda726f7d",
+      "base": "7d3d94c6cac487d4a138301921f6bd480fc5e888",
       "brain_revision": "2ad79d5cf4f3",
-      "before": 428196,
-      "after": 428196,
+      "before": 428363,
+      "after": 428363,
       "files": [],
       "skipped": [],
-      "source_seal": "2c7e6a795d17bc73cf025800f986a5e4cb41824357163b70446e9eee101f72eb",
+      "source_seal": "2b7ec06b91e211ebbcc88e2a845baf56d9966fcad9b388970a7f32bf221f000d",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "837d3207764e9ed313627b935fa077e093e240d8",
+      "base": "e1a5bffc19e3da8df1ba19cd607985a1ae1172a7",
       "brain_revision": "155b79828fb7",
       "before": 54375,
       "after": 54375,
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "f4ef5bc2e9e79bb97b6c902fe739f83179d81f88",
+      "base": "12a1e053a8829697bbf6daf05f06e5f36ed91c51",
       "brain_revision": "ba41f521a760",
       "before": 152656,
       "after": 152656,
       "files": [],
       "skipped": [],
-      "source_seal": "a6e1b130419f3f7a1d6b909ca3a42a2b0388e6a4c7bb56cdb8222510b16e81fe",
+      "source_seal": "5d5e4b56a4e5bbf55aee71624a8d4f896b3379645839e66dbd179e266b62916c",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -149,13 +149,13 @@
     },
     {
       "repository": "contentarchives",
-      "base": "3ee16f4ce80f62e136e3b5ca65c6a57d3a5688e5",
+      "base": "c375b9a64d4ef66018833b58ce178519bf2754a0",
       "brain_revision": "430ad4208f8a",
-      "before": 83266,
-      "after": 83266,
+      "before": 84180,
+      "after": 84180,
       "files": [],
       "skipped": [],
-      "source_seal": "e967dc9bf94f07f3151e3b5abb8956d867730f642a4dd5489d8af0f1afa3b087",
+      "source_seal": "054008f42cf0ad49b5cadda6763a8f51e6271718593590535c952d23ca5a2231",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
