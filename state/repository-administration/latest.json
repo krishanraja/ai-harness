@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T16:18:30.250Z",
+  "generated_at": "2026-10-26T00:15:57.461Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "e44ebea097d34a4c4b3f63acde1b361f8bc66324",
+      "base": "b6d624f00cab29ae7674ca1e82512ad65adc1403",
       "brain_revision": "155b79828fb7",
-      "before": 54375,
-      "after": 54375,
+      "before": 52270,
+      "after": 52270,
       "files": [],
       "skipped": [],
-      "source_seal": "3daae682a69f7c8501433b6a512d38ea3c32b39b5fd360fc2b76849dbb22ad70",
+      "source_seal": "ae45bb2817f496d48c17980919114070942892e0cb647c7c445dc112915d8c3b",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "12a1e053a8829697bbf6daf05f06e5f36ed91c51",
+      "base": "280702ddb857076ad7096a901f30362f78e87b6b",
       "brain_revision": "ba41f521a760",
       "before": 152656,
       "after": 152656,
       "files": [],
       "skipped": [],
-      "source_seal": "5d5e4b56a4e5bbf55aee71624a8d4f896b3379645839e66dbd179e266b62916c",
+      "source_seal": "2273848cd85c7b7404116ae8a9f949d8c11d6f3713209f52889db9dfe9471c8c",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -149,13 +149,13 @@
     },
     {
       "repository": "contentarchives",
-      "base": "c375b9a64d4ef66018833b58ce178519bf2754a0",
+      "base": "4ce9325c34c182f363d524d690f4330f27027bad",
       "brain_revision": "430ad4208f8a",
-      "before": 84180,
-      "after": 84180,
+      "before": 79684,
+      "after": 79684,
       "files": [],
       "skipped": [],
-      "source_seal": "054008f42cf0ad49b5cadda6763a8f51e6271718593590535c952d23ca5a2231",
+      "source_seal": "4e244c79a1081e0e2da0837ba4006142987bb12ad2fa79ef05b18ceed12bbad9",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
