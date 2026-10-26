@@ -119,7 +119,7 @@ Name the authorised artifact that earns the prose: something Krish built, shippe
 
 ### 2a. Apply his approved taste rules
 
-Read `references/approved-taste.md` before drafting. It holds the craft rules Krish approved from what he saved and answered, and it changes only by a pull request he merges. Apply them to how the piece is made, never to choose its topic. This skill's truth, privacy and kill-list rules rank above them; when one conflicts, follow this skill and name the conflict. Say in the delivery which rules shaped the draft.
+Read his approved rules before drafting (where from: below). They are the craft rules Krish approved from what he saved and answered, and it changes only by a pull request he merges. Apply them to how the piece is made, never to choose its topic. This skill's truth, privacy and kill-list rules rank above them; when one conflicts, follow this skill and name the conflict. Say in the delivery which rules shaped the draft.
 
 When the Control Center connector is in the session, `get_approved_taste` (lane `voice`) is the live read of the same rules: use it, and fall back to `references/approved-taste.md` only without it. Empty means no rule is approved yet; never invent one.
 
