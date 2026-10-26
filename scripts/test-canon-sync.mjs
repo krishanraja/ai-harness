@@ -72,4 +72,11 @@ const control = run('--repo', 'control-center', '--dry-run')
 assert.notEqual(control.status, 0, 'a synced repository must attempt a request under the stub')
 assert.match(control.stdout, /network blocked by test-canon-sync/, 'the stub intercepted the synced repository')
 
+// Every repository learns the two-way taste procedure from one canon line (krishanraja/inspirationhouse
+// docs/TWO_WAY.md): read his approved taste, report his exact typed words, never act for him.
+const canon = readFileSync(join(HARNESS, 'contract/templates/canon-block.md'), 'utf8')
+assert.match(canon, /`get_approved_taste`/, 'the canon tells sessions to read his approved taste')
+assert.match(canon, /`report_to_taste_engine` with where and when he typed them/, 'the canon tells sessions to report his exact typed words with where and when')
+assert.match(canon, /only as an observation\. Never answer a card or approve a rule for him\./, 'the canon keeps everything else an observation and never acts for him')
+
 console.log('CANON SYNC TESTS PASSED: mindmake stays in the fleet, is excluded from the rollout, and the real reconciler makes no request for it; a synced repository still does')

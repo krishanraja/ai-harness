@@ -2350,11 +2350,11 @@ skill_sections:
   - id: krish-design.design-task-contract
     file: skills/krish-design/SKILL.md
     heading: "Design task contract"
-    text_sha: "af5d82ad5d38"
+    text_sha: "bff6cd967ed0"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "a2b0ec5a6830"
+      kind: proposal
+      ref: "docs/proposals/2026-10-26-two-way-taste.md"
     history:
       - text_sha: "684c4cac33d1"
         valid_until: "2026-10-24"
@@ -2366,15 +2366,26 @@ skill_sections:
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "af5d82ad5d38"
+        valid_until: "2026-10-26"
+        source:
+          kind: ruling
+          ref: "a2b0ec5a6830"
     status: live
   - id: krish-design.1-interaction-as-sequencing
     file: skills/krish-design/SKILL.md
     heading: "1. Interaction as sequencing (the weapon)"
-    text_sha: "78e9b25ede95"
+    text_sha: "e991816bb2e1"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-26-two-way-taste.md"
+    history:
+      - text_sha: "78e9b25ede95"
+        valid_until: "2026-10-26"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-design.2-house-design-systems
     file: skills/krish-design/SKILL.md
@@ -2611,11 +2622,11 @@ skill_sections:
   - id: krish-voice.workflow
     file: skills/krish-voice/SKILL.md
     heading: "Workflow"
-    text_sha: "85d3907ff104"
+    text_sha: "eb59ccc709df"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "a2b0ec5a6830"
+      kind: proposal
+      ref: "docs/proposals/2026-10-26-two-way-taste.md"
     history:
       - text_sha: "e2502cf40460"
         valid_until: "2026-10-24"
@@ -2627,6 +2638,11 @@ skill_sections:
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "85d3907ff104"
+        valid_until: "2026-10-26"
+        source:
+          kind: ruling
+          ref: "a2b0ec5a6830"
     status: live
   - id: krish-voice.kill-list
     file: skills/krish-voice/SKILL.md
