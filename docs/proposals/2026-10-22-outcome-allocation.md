@@ -153,6 +153,8 @@ Read from the map's `placements` collection after Krish said he was done. Main t
 | API-Football | Full Time | |
 | football-data.org | Full Time | |
 
+Added after this read-back: Epidemic Sound, Main on Heartside, Full Time and makeyourmindup (Ruling, Krish, 2026-10-26; `docs/proposals/2026-10-26-epidemic-sound-placement.md`).
+
 - Ruling (Krish, 2026-10-22): Fireflies and Descript are removed permanently, from the harness and from his Claude. They are retired routes in the cloud account adapter and are gone from the map.
 - Ruling (Krish, 2026-10-22): a tool he has not placed stays usable, and is suggested proactively only when a concrete idea gives a good reason to use it.
 
