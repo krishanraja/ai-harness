@@ -23,3 +23,10 @@ what I think you should do with that content"); everything else a session report
 never counted toward a rule; only he answers a card or approves a rule. The tools enforce all three (control-center
 `api/harness/_taste-mcp.ts`, content-engine `taste_reports`, inspirationhouse `src/collect/sessionReports.ts`).
 Judges and scorers never read taste; the read tool says so.
+
+## The approval wall
+
+The judge panel on #165 found the report instruction read against the canon's approval wall, with neither side named.
+Krish ruled on 2026-10-26, in his words: "reports to my taste ledger are exempt from the approval wall". The canon line
+now names the exemption with his ruling, so the two never read as current against each other. A report writes only to
+his own taste ledger; it is never a send, post or publish to anyone.
