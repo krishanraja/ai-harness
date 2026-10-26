@@ -16,6 +16,10 @@ through Control Center's report tool, and one canon line tells every session to 
 - **krish-design** (design task contract; interaction as sequencing): the same read (lane production), and his exact
   first reaction to a rejected mock goes to the report tool too.
 
+## Which part of the North Star it moves
+
+The first goal and its number: "no AI working for Krish ... needs the same correction twice", counted as corrections he had to give twice in a week. Today a voice or design correction he types in one repository is lost to every other session. With this change it is reported once, in his exact words, to his taste ledger; once he approves the rule it comes from, every session reads it before writing or designing, so the same correction is not needed again elsewhere. The number is still unmeasured (U4); this builds the path a correction takes, not the count.
+
 ## Why it is safe
 
 The rulings it rests on: his exact typed words are his (Krish, 2026-10-24: "exact typed quotes count as my opinions on
