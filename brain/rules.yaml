@@ -2643,11 +2643,6 @@ skill_sections:
         source:
           kind: ruling
           ref: "a2b0ec5a6830"
-      - text_sha: "eb59ccc709df"
-        valid_until: "2026-10-26"
-        source:
-          kind: proposal
-          ref: "docs/proposals/2026-10-26-two-way-taste.md"
     status: live
   - id: krish-voice.kill-list
     file: skills/krish-voice/SKILL.md
