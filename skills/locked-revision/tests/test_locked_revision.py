@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -130,6 +132,28 @@ class LockedRevisionTests(unittest.TestCase):
         tampered = self.run_script("release_manifest.py", "verify", "--manifest", str(manifest))
         self.assertNotEqual(tampered.returncode, 0)
         self.assertEqual(json.loads(tampered.stdout)["status"], "failed")
+
+    def test_entry_points_leave_no_bytecode_in_an_installed_copy(self) -> None:
+        # An installed skill is hashed file by file. On 2026-10-22 an ordinary
+        # run left scripts/__pycache__ in one, and the next harness install
+        # refused that surface as unknown drift. So no -B here, as in real use.
+        installed = self.root / "installed" / "scripts"
+        shutil.copytree(SCRIPTS, installed, ignore=shutil.ignore_patterns("__pycache__"))
+        environment = {
+            key: value
+            for key, value in os.environ.items()
+            if key not in {"PYTHONDONTWRITEBYTECODE", "PYTHONPYCACHEPREFIX"}
+        }
+        for script in sorted(installed.glob("*.py")):
+            ran = subprocess.run(
+                [sys.executable, str(script), "--help"],
+                text=True,
+                capture_output=True,
+                check=False,
+                env=environment,
+            )
+            self.assertEqual(ran.returncode, 0, f"{script.name}: {ran.stderr}")
+        self.assertEqual([str(path) for path in installed.rglob("__pycache__")], [])
 
 
 if __name__ == "__main__":

@@ -10,7 +10,12 @@ import os
 import sys
 from pathlib import Path
 
-from apply_revision import atomic_write_json, load_json, sha256_file
+# Importing the sibling module must not write __pycache__ into an installed
+# skill: the harness hashes every file there and refuses to replace a skill
+# whose bytes drifted from its release.
+sys.dont_write_bytecode = True
+
+from apply_revision import atomic_write_json, load_json, sha256_file  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
