@@ -5,6 +5,18 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-27
+
+- stamped at `5aa5e31`: `NOW.md` head moved from `fc5d64c`. Release v2026.10.26.1 (source `2de59f6`, PR 165) was registered, so the release sentence, the two-way taste bullet and the LORIMER heartbeat figures were brought to the registry and `state/heartbeats.json`. The Epidemic Sound bullets from the 2026-10-26 session were kept. Four 2026-09-25 bullets rolled out below.
+
+- rolled from NOW.md: 2026-09-25 **A consumer-app lifecycle skill was built as a candidate, then repaired after its own evidence failed a live check.** `consumer-app-outcomes` turns 73 live-read pages of the public Consumer App Studio taxonomy into 60 practitioner-hypothesis records with an append-only evidence log. Committed once under `skills/`, the release builder would have packaged it as a 30th skill on the next build; it moved to `candidates/` because that directory is evaluated but never packaged. A live readback then found all 15 onboarding, retention and trust-building records citing pages that do not exist, so those were rebuilt from the real pages and all 73 sources now sit in a checked source ledger. `Test-Harness.ps1` now validates every candidate package the same way it validates an admitted skill, including the append-only proof on the evidence log, without packaging it. Commits `519c7a2`, `6ff5514`, `59ff88b`, `d8bbcd4`, `02f29f3`, `4e32beb`.
+
+- rolled from NOW.md: 2026-09-25 **The two supervised cloud accounts gained a routing floor after a claude.ai listing was found silently truncating skill descriptions.** On 2026-09-25 that catalog listed its last seven skills, including `strategy-brief`, `verification-loop` and `video-engine`, with no description at all, even though every `SKILL.md` and its description are valid and under the documented length limits. `adapters/cloud/account-instructions.md` is now a 1,884-character paste-in that forces the three always-on gates and names every production skill and its trigger directly, so cloud routing no longer depends on a description the catalog may not render. Commit `7d51b0b`.
+
+- rolled from NOW.md: 2026-09-25 **A canary-audit attribution bug overstated how many skills had never fired.** `audit-harness.mjs` credited every core-trigger case to a skill literally called "core", which does not exist, so it reported `krish-principles`, `strategy-brief` and `verification-loop` as uncanaried. The true count of skills with no positive canary on any surface is 2 of 29 (`apify`, `ctrl-build`), not 5; `canaries.mjs` now keeps every unproven skill on every sheet until it fires, and the sheet says so. Commit `abc2952`.
+
+- rolled from NOW.md: 2026-09-25 **The SURFACE machine identity resolver stopped exiting before it could record evidence.** Unrelated Claude and Cursor skill directories appeared on a Codex-only managed host, and identity resolution had been coupled to the absence of those unowned roots, so the run exited before writing anything. The resolver now binds SURFACE to its machine name and managed Codex root, records other roots without managing them, and carries a regression fixture proving they cannot make the host ambiguous. Commits `f8bcd22`, `b643a9a`.
+
 ## 2026-10-25
 
 - stamped at `fc5d64c`: `NOW.md` head moved from `2948842`. Only automation commits landed (brain, intake, observe, digest state files); no documentation consequence. Three 2026-09-24 bullets rolled out of NOW.md below.
