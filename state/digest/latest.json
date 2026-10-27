@@ -13,7 +13,7 @@
   "title": "Harness: your pc cannot install the latest release",
   "only_you": "permission",
   "delivery": {
-    "status": "pending",
+    "status": "delivered",
     "item": {
       "id": "harness-digest-2026-w44",
       "lane": "on_you",
@@ -24,6 +24,8 @@
       "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-10-27.md",
       "link_label": "Open the digest",
       "closes_on": "his_word"
-    }
+    },
+    "readback": true,
+    "completed_at": "2026-10-27T23:59:18.336Z"
   }
 }
