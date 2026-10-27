@@ -29,9 +29,14 @@
       "label": "North Star"
     },
     {
-      "path": "docs/HANDOFF.md",
-      "role": "state",
-      "label": "Current handoff state"
+      "path": "docs/SCOPE.md",
+      "role": "orientation",
+      "label": "Product scope; current status and next action remain in NOW.md"
+    },
+    {
+      "path": "docs/history/HANDOFF-2026-10-21.md",
+      "role": "history",
+      "label": "Superseded handoff moved from docs/HANDOFF.md in heartside commit 82dd8a6"
     },
     {
       "path": "docs/SYNC.md",
@@ -45,7 +50,8 @@
       "label": "Products, assets and the Shopify store",
       "read": [
         "README.md",
-        "docs/HANDOFF.md",
+        "NOW.md",
+        "docs/SCOPE.md",
         "docs/SYNC.md"
       ],
       "checks": []
