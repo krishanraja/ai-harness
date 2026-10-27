@@ -14,8 +14,25 @@ provisional_canaries:
   - {surface: claude-first-cloud, state: uploaded-enabled-v1, behavior: unmeasured-no-inference-requested}
   - {surface: claude-secondary-cloud, state: uploaded-enabled-v1, behavior: unmeasured-no-inference-requested}
   - {surface: chatgpt-cloud, state: uploaded-installed-and-verified-after-reload, behavior: unmeasured-no-inference-requested}
-  - {surface: codex-current, state: two-package-files-hash-exact, behavior: new-session-unmeasured}
+  - {surface: codex-current, state: reinstalled-2026-10-27-from-cc6ffee-two-files-hash-exact, behavior: new-session-unmeasured}
 package_source_commit: f987fa91d54ba560a5722cef1051f25eea30c817
+# On 2026-10-27 the 2026-10-19 v1 was moved off Codex, with Krish's approval,
+# because the sync refused it. It sits byte-identical in that day's quarantine.
+# After PR 170 taught the sync to accept registered candidates, Krish had the
+# current candidate installed in its place, which differs from v1 in SKILL.md
+# only. The cloud surfaces above still hold v1 (package_source_commit).
+codex_current_installation:
+  installed_at: 2026-10-27
+  source_commit: cc6ffee719bb2011da7f511b8eb79c131571254b
+  read_from: c76bcf4626a2d21cf0a2e3f80edd233c4f08a986
+  source_file_sha256:
+    SKILL.md: 24edb92f178663e38fbaa41b405dc7ab424133c64ff7272bd7fd82bece40431c
+    agents/openai.yaml: 5a7153e59c6695cf7cb9c4757f249bc2485dc696e3da0d96fbeb0a953f780208
+  installed_directory_sha256: D8F35E5FF9F90B10AB1220AF94BF4BB9105B4D374C379EF001EF80F8852F8BFE
+  artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
+  replaced_skill_md_sha256: d47247fa21403f580e5580d546606601f335f99b4070728062cccdcdc66b566a
+  sync_guard: accepted-as-registered-candidate-by-a9d05e6-parity-29-of-29-exact-against-v2026.10.26.1
+  behavior: unmeasured
 user_authority: explicit-request-for-invocable-skill-and-preservation-of-personal-instructions
 test_boundary: no-paid-provider-lookups-or-model-test-runs-on-requested-surfaces
 remaining_gates:
