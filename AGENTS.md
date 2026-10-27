@@ -16,10 +16,10 @@ Read `CURRENT.md` first, then read `NOW.md`.
 
 Contracts: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`.
 
-<!-- krish-canon:start release=v2026.10.26.1 sha=bbf65ae59d2d rendered=2026-10-26 -->
+<!-- krish-canon:start release=v2026.10.27.2 sha=4a0574f33a36 rendered=2026-10-27 -->
 ## Krish canon
 
-Rendered from `krishanraja/ai-harness` at release v2026.10.26.1. Nothing inside these
+Rendered from `krishanraja/ai-harness` at release v2026.10.27.2. Nothing inside these
 markers is hand-maintained: an edit here is detected and proposed back to the canon,
 never silently overwritten, and never lost. This sync preserves all other text.
 Separately approved repository administration owns only its declared regions and context file.
