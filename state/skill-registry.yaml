@@ -193,6 +193,20 @@ surface_deployments:
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/claude-cloud.json
     status: stale-manual-cloud-upload-required-for-v2026.10.26.1
+  claude-secondary-cloud:
+    # Krish's second claude.ai account, governed as its own surface from
+    # 2026-10-27. No record says what it holds: claude-cloud above is the one
+    # account the 2026-10-07 check read back, and that check does not say which
+    # account it was. The release stays unknown until a supervised read-back
+    # of this account is committed. scripts/cloud-upload.mjs does not offer
+    # this surface yet, because it cannot tell which account the browser is
+    # signed into and could record one account's state under the other's name.
+    release_id: null
+    source_commit: null
+    installed_skill_count: null
+    deployed_at: null
+    evidence: null
+    status: unknown-baseline-manual-cloud-upload-required-for-v2026.10.26.1
   perplexity-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342

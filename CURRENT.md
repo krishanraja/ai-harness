@@ -25,6 +25,7 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | claude-code-user | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.26.1 |
 | codex-current | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.26.1 |
 | claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.26.1 |
+| claude-secondary-cloud | unknown | cloud inventory only | unknown-baseline-manual-cloud-upload-required-for-v2026.10.26.1 |
 | perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.26.1 |
 | codex-cloud | v2026.10.06.3 | cloud inventory only | awaiting-environment-refresh-for-v2026.10.26.1 |
 

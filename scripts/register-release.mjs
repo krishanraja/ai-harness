@@ -38,7 +38,7 @@ import { fileURLToPath } from 'node:url'
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const ALGORITHM = 'sha256-path-nul-file-sha256-ordinal-v1'
 const NUL = String.fromCharCode(0)
-const CLOUD_UPLOAD = new Set(['claude-cloud', 'perplexity-cloud'])
+const CLOUD_UPLOAD = new Set(['claude-cloud', 'claude-secondary-cloud', 'perplexity-cloud'])
 const FOLLOWS_MAIN = new Set(['codex-cloud'])
 
 /**

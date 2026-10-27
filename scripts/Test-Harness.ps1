@@ -70,8 +70,14 @@ else {
     if ($syncScriptRaw -notmatch 'target_guard_read') {
         Add-Failure 'Codex canaries do not distinguish an exclusion-guard read followed by the expected owner.'
     }
-    if ($syncScriptRaw -notmatch "'claude'\s*\{\s*@\('synced'\)\s*\}") {
-        Add-Failure 'Machine sync does not classify Claude skills/synced as a provider-managed cache namespace.'
+    if ($syncScriptRaw -notmatch "'claude'\s*\{\s*@\('synced',\s*'\.trash'\)\s*\}") {
+        Add-Failure 'Machine sync does not classify Claude skills/synced and skills/.trash as client-owned namespaces.'
+    }
+    if ($syncScriptRaw -notmatch 'Get-RegisteredCandidateNames\s+-SurfaceId\s+\$Surface\.Id') {
+        Add-Failure 'Machine sync does not accept directories registered as provisional candidates for their surface.'
+    }
+    if ($syncScriptRaw -notmatch '\$message\s*=\s*Get-EvidenceCommitMessage' -or $syncScriptRaw -notmatch "'-m',\s*\`$message\.body") {
+        Add-Failure 'Machine sync evidence commits do not carry the self-tested closeout line.'
     }
     if ($syncScriptRaw -notmatch 'state\\reconciliations' -or $syncScriptRaw -notmatch "'-ReconciliationRecordPath'") {
         Add-Failure 'Machine sync does not automatically consume release-bound surface reconciliation records.'
@@ -317,6 +323,37 @@ $packagedNodeModules = @(Get-ChildItem -LiteralPath $skillsRoot -Recurse -Direct
 foreach ($directory in $packagedNodeModules) {
     $relative = $directory.FullName.Substring($rootItem.FullName.Length).TrimStart('\')
     Add-Failure "$relative is a packaged dependency directory. Skills must ship auditable source files, not node_modules trees."
+}
+
+# A script an installed skill runs must not write bytecode beside it. Every
+# file in an installed skill is hashed, so the scripts/__pycache__ that
+# locked-revision's verify_revision.py wrote by importing apply_revision on
+# 2026-10-22 made the Codex surface refuse the next install as unknown drift.
+# Tests and vendored code are out of scope: this suite runs tests with -B, and
+# vendored bytes stay upstream's, loaded only after a first-party script has
+# set the flag.
+foreach ($skillDirectory in @(Get-ChildItem -LiteralPath $skillsRoot -Directory)) {
+    $pythonFiles = @(Get-ChildItem -LiteralPath $skillDirectory.FullName -Recurse -File -Filter '*.py')
+    if ($pythonFiles.Count -eq 0) { continue }
+    $siblingModules = @($pythonFiles | ForEach-Object BaseName | Sort-Object -Unique)
+    foreach ($scriptFile in $pythonFiles) {
+        $relativeInSkill = $scriptFile.FullName.Substring($skillDirectory.FullName.Length).TrimStart('\')
+        if ($relativeInSkill -match '(?:^|\\)(?:tests|vendor)\\') { continue }
+        $scriptLines = [IO.File]::ReadAllLines($scriptFile.FullName)
+        $bytecodeOff = $false
+        $loadsSiblingFirst = $false
+        foreach ($line in $scriptLines) {
+            if ($line -match '^\s*sys\.dont_write_bytecode\s*=\s*True\b') { $bytecodeOff = $true; break }
+            if ($line -match '\.exec_module\(' -or
+                ($line -match '^\s*(?:from|import)\s+([A-Za-z_]\w*)' -and $Matches[1] -cne $scriptFile.BaseName -and $Matches[1] -cin $siblingModules)) {
+                $loadsSiblingFirst = $true
+                break
+            }
+        }
+        if ($loadsSiblingFirst -and -not $bytecodeOff) {
+            Add-Failure "skills\$($skillDirectory.Name)\$relativeInSkill loads a sibling module before setting sys.dont_write_bytecode = True; the __pycache__ it writes makes an installed skill drift from its release."
+        }
+    }
 }
 
 $scanExtensions = @('.md', '.mdc', '.yaml', '.yml', '.json', '.jsonl', '.ps1', '.sql', '.js', '.cjs', '.mjs', '.ts', '.tsx', '.py', '.sh')

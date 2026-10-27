@@ -444,10 +444,51 @@ function Get-ArchiveRecords {
     return $records.ToArray()
 }
 
+# A provisional candidate Krish installed on purpose is registered, not unknown.
+# On 2026-10-27 LORIMER's sync threw on `tool-router` in .codex\skills: he had
+# installed it there on 2026-10-19 and recorded it in
+# state/candidates/tool-router.yaml with codex-current among its
+# requested_surfaces. The guard refused it as an unregistered skill, and the
+# only way through was to take the skill off the surface he asked for it on.
+#
+# A directory is registered only when a record names it as its id, lists this
+# exact surface id, and its skill_path, candidates/<id>, exists in this
+# checkout. Anything else, including a record the line parser cannot read,
+# leaves the directory unknown, so the refusal still holds for it. Accepting
+# one never brings it into parity or install: both walk the release manifest
+# only, and the installer writes nothing but manifest skill names.
+function Get-RegisteredCandidateNames {
+    param(
+        [Parameter(Mandatory = $true)][string]$SurfaceId,
+        [string]$HarnessRoot = $RepositoryRoot
+    )
+
+    $recordsRoot = Join-Path $HarnessRoot 'state\candidates'
+    if (-not (Test-Path -LiteralPath $recordsRoot -PathType Container)) { return @() }
+    $registered = New-Object System.Collections.Generic.List[string]
+    foreach ($recordFile in @(Get-ChildItem -LiteralPath $recordsRoot -File -Filter '*.yaml')) {
+        $text = [IO.File]::ReadAllText($recordFile.FullName)
+        if ($text -notmatch '(?m)^id:[ \t]*([a-z0-9][a-z0-9-]*)[ \t]*\r?$') { continue }
+        $id = $Matches[1]
+        if ($text -notmatch '(?m)^skill_path:[ \t]*(\S+)[ \t]*\r?$' -or $Matches[1] -cne "candidates/$id") { continue }
+        if (-not (Test-Path -LiteralPath (Join-Path $HarnessRoot "candidates\$id") -PathType Container)) { continue }
+        $surfaces = @()
+        if ($text -match '(?m)^requested_surfaces:[ \t]*\[([^\]\r\n]*)\][ \t]*\r?$') {
+            $surfaces = @($Matches[1] -split ',' | ForEach-Object { $_.Trim().Trim('"', "'") } | Where-Object { $_ })
+        }
+        elseif ($text -match '(?m)^requested_surfaces:[ \t]*\r?\n((?:[ \t]+-[^\r\n]*(?:\r?\n|$))+)') {
+            $surfaces = @($Matches[1] -split '\r?\n' | ForEach-Object { ($_ -replace '^\s*-\s*', '').Trim().Trim('"', "'") } | Where-Object { $_ })
+        }
+        if ($surfaces -ccontains $SurfaceId) { $registered.Add($id) }
+    }
+    return $registered.ToArray()
+}
+
 function Assert-NoUnknownSurfaceEntries {
     param(
         [Parameter(Mandatory = $true)]$Surface,
-        [Parameter(Mandatory = $true)]$Manifest
+        [Parameter(Mandatory = $true)]$Manifest,
+        [string]$HarnessRoot = $RepositoryRoot
     )
 
     $names = @($Manifest.skills | ForEach-Object { [string]$_.name })
@@ -456,14 +497,25 @@ function Assert-NoUnknownSurfaceEntries {
     # snapshot under `skills/synced`; treating it as unknown drift blocks every
     # governed release while protecting nothing, because the installer never
     # writes below that path. Keep the allowlist client-specific and exact.
+    #
+    # `.trash` is the same client's soft-delete staging: each entry is
+    # `.trash/<epoch-ms>-<pid>-<random>/<skill>/`. LORIMER's held mindmake,
+    # mindmake-os and n8n-operator from 2026-10-16 and setup-writing-style from
+    # 2026-10-23, byte-identical to copies installed elsewhere, and it stopped
+    # the 2026-10-27 install. The installer cannot write below it: manifest
+    # names must match ^[a-z0-9][a-z0-9-]*$, so none starts with a dot, and its
+    # backups go to the sibling skills.harness-backups.
     $allowedProviderDirectories = switch ($Surface.Client) {
         'codex' { @('.system') }
-        'claude' { @('synced') }
+        'claude' { @('synced', '.trash') }
         default { @() }
     }
-    $extraDirectories = @(Get-ChildItem -LiteralPath $Surface.SkillsRoot -Directory -Force |
+    $registeredCandidates = @(Get-RegisteredCandidateNames -SurfaceId $Surface.Id -HarnessRoot $HarnessRoot)
+    $surfaceDirectories = @(Get-ChildItem -LiteralPath $Surface.SkillsRoot -Directory -Force |
         Where-Object { $_.Name -notin $names -and $_.Name -notin $allowedProviderDirectories } |
         ForEach-Object Name)
+    $candidateDirectories = @($surfaceDirectories | Where-Object { $_ -cin $registeredCandidates })
+    $extraDirectories = @($surfaceDirectories | Where-Object { $_ -cnotin $registeredCandidates })
     # Loose FILES at a skills root are recorded, not refused. Ruled 2026-09-08.
     #
     # The installer replaces skill DIRECTORIES, so a stray .md or .skill archive
@@ -482,6 +534,7 @@ function Assert-NoUnknownSurfaceEntries {
     return [pscustomobject]@{
         unmanaged_root_files = $rootFiles.Count
         unmanaged_root_file_names = $rootFiles
+        registered_candidate_directories = $candidateDirectories
     }
 }
 
@@ -489,10 +542,11 @@ function Get-SurfaceParity {
     param(
         [Parameter(Mandatory = $true)]$Surface,
         [Parameter(Mandatory = $true)]$Manifest,
-        [Parameter(Mandatory = $true)][string]$ArtifactsDirectory
+        [Parameter(Mandatory = $true)][string]$ArtifactsDirectory,
+        [string]$HarnessRoot = $RepositoryRoot
     )
 
-    $unmanaged = Assert-NoUnknownSurfaceEntries -Surface $Surface -Manifest $Manifest
+    $unmanaged = Assert-NoUnknownSurfaceEntries -Surface $Surface -Manifest $Manifest -HarnessRoot $HarnessRoot
     $installedRecords = New-Object System.Collections.Generic.List[string]
     $releaseRecords = New-Object System.Collections.Generic.List[string]
     $comparisons = New-Object System.Collections.Generic.List[object]
@@ -551,6 +605,8 @@ function Get-SurfaceParity {
         # nothing governs, and this is the only place that would ever say so.
         unmanaged_root_files = $unmanaged.unmanaged_root_files
         unmanaged_root_file_names = $unmanaged.unmanaged_root_file_names
+        # Tolerated, never measured: a candidate's bytes are not in the release.
+        registered_candidate_directories = $unmanaged.registered_candidate_directories
     }
 }
 
@@ -1121,6 +1177,22 @@ function Copy-DeploymentEvidence {
     return $destination
 }
 
+# The `closeout` pull request check (scripts/closeout/check.mjs, since PR 152)
+# failed evidence PR 169 because this commit carried no closeout line. It stages
+# machine records only, nothing a reader of NOW.md needs, so it says so in the
+# form that check reads. The self-test runs this message through that check.
+function Get-EvidenceCommitMessage {
+    param(
+        [Parameter(Mandatory = $true)][string]$ReleaseId,
+        [Parameter(Mandatory = $true)][string]$HostName
+    )
+
+    return [pscustomobject]@{
+        subject = "chore(sync): record $ReleaseId on $HostName"
+        body = 'Closeout: not needed, machine evidence'
+    }
+}
+
 function Open-EvidencePullRequest {
     param(
         [Parameter(Mandatory = $true)]$HostDefinition,
@@ -1136,8 +1208,9 @@ function Open-EvidencePullRequest {
     $branch = "machine-sync/$($HostDefinition.HostSlug)/$ReleaseId-$RunId"
     Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('switch', '-c', $branch)) -Label 'Create evidence branch'
     Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('add', 'state/deployments', 'state/canaries', 'state/machine-runs', 'brain/usage.jsonl')) -Label 'Stage machine evidence and citation candidates'
+    $message = Get-EvidenceCommitMessage -ReleaseId $ReleaseId -HostName $HostDefinition.HostName
     $commit = Invoke-NativeCapture -FilePath 'git' -Arguments @(
-        'commit', '-m', "chore(sync): record $ReleaseId on $($HostDefinition.HostName)"
+        'commit', '-m', $message.subject, '-m', $message.body
     )
     Assert-NativeSuccess -Result $commit -Label 'Commit machine evidence'
     Assert-NativeSuccess -Result (Invoke-NativeCapture -FilePath 'git' -Arguments @('push', '-u', 'origin', $branch)) -Label 'Push evidence branch'
@@ -1154,7 +1227,7 @@ The installer applied only clean plans. Unknown drift, canary failures, and manu
         'api', '--method', 'POST',
         '-H', 'Accept: application/vnd.github+json',
         "repos/$Repository/pulls",
-        '-f', "title=chore(sync): record $ReleaseId on $($HostDefinition.HostName)",
+        '-f', "title=$($message.subject)",
         '-f', "head=$branch",
         '-f', 'base=main',
         '-f', "body=$body"
@@ -1217,7 +1290,105 @@ if ($SelfTest) {
             throw "Failure-reason self-test mapped '$message' to $(Get-FailureReason -Message $message)."
         }
     }
-    Write-Output 'HARNESS SYNC EVIDENCE SELF-TEST PASSED: repeated attempts are flat snapshots with no self-reference.'
+
+    # The surface guard, against the three directories that stopped LORIMER on
+    # 2026-10-27 and against everything that must still refuse.
+    $guardRoot = Join-Path ([IO.Path]::GetTempPath()) "harness-sync-guard-$([guid]::NewGuid().ToString('N'))"
+    try {
+        $fixtureHarness = Join-Path $guardRoot 'harness'
+        foreach ($directory in @('state\candidates', 'candidates\tool-router', 'candidates\block-listed', 'candidates\elsewhere')) {
+            New-Item -ItemType Directory -Force -Path (Join-Path $fixtureHarness $directory) | Out-Null
+        }
+        $candidateRecords = [ordered]@{
+            'tool-router.yaml' = "schema_version: 1`nid: tool-router`nskill_path: candidates/tool-router`nactivation: false`nrequested_surfaces: [claude-first-cloud, codex-current]`n"
+            'block-listed.yaml' = "id: block-listed`r`nskill_path: candidates/block-listed`r`nrequested_surfaces:`r`n  - claude-code-user`r`n  - codex-current`r`nactivation: false`r`n"
+            'no-source.yaml' = "id: no-source`nskill_path: candidates/no-source`nrequested_surfaces: [codex-current]`n"
+            'elsewhere.yaml' = "id: elsewhere`nskill_path: skills/elsewhere`nrequested_surfaces: [codex-current]`n"
+        }
+        foreach ($recordName in $candidateRecords.Keys) {
+            [IO.File]::WriteAllText((Join-Path $fixtureHarness "state\candidates\$recordName"), $candidateRecords[$recordName])
+        }
+
+        $skillSource = Join-Path $guardRoot 'source\alpha'
+        New-Item -ItemType Directory -Force -Path $skillSource | Out-Null
+        [IO.File]::WriteAllText((Join-Path $skillSource 'SKILL.md'), "---`nname: alpha`n---`n")
+        $guardArtifacts = Join-Path $guardRoot 'artifacts'
+        New-Item -ItemType Directory -Force -Path $guardArtifacts | Out-Null
+        [IO.Compression.ZipFile]::CreateFromDirectory($skillSource, (Join-Path $guardArtifacts 'alpha.skill'), [IO.Compression.CompressionLevel]::Optimal, $true)
+        $guardManifest = [pscustomobject]@{
+            skills = @([pscustomobject]@{
+                name = 'alpha'
+                artifact = 'alpha.skill'
+                source_skill_sha256 = Get-DirectoryArtifactSha256 -Directory (Get-Item -LiteralPath $skillSource)
+            })
+        }
+        $newGuardSurface = {
+            param([string]$Id, [string]$Client, [string[]]$Extra)
+            $root = Join-Path $guardRoot "surface-$([guid]::NewGuid().ToString('N'))\skills"
+            New-Item -ItemType Directory -Force -Path $root | Out-Null
+            Copy-Item -LiteralPath $skillSource -Destination (Join-Path $root 'alpha') -Recurse
+            foreach ($name in $Extra) {
+                $nested = Join-Path (Join-Path $root $name) 'nested\SKILL.md'
+                New-Item -ItemType Directory -Force -Path (Split-Path -Parent $nested) | Out-Null
+                [IO.File]::WriteAllText($nested, 'not in the release')
+            }
+            return [pscustomobject]@{ Id = $Id; Client = $Client; SkillsRoot = $root }
+        }
+        $expectRefusal = {
+            param($Surface, [string]$Name, [string]$Why)
+            $refusal = $null
+            try { Assert-NoUnknownSurfaceEntries -Surface $Surface -Manifest $guardManifest -HarnessRoot $fixtureHarness | Out-Null }
+            catch { $refusal = $_.Exception.Message }
+            if ($refusal -cne "Unclassified directories on $($Surface.Id): $Name") {
+                throw "Surface-guard self-test: $Why, so $Name on $($Surface.Id) must refuse; got '$refusal'."
+            }
+            if ((Get-FailureReason -Message $refusal) -ne 'unclassified-skill-directory') {
+                throw "Surface-guard self-test: the refusal for $Name lost its heartbeat reason."
+            }
+        }
+
+        $claudeSurface = & $newGuardSurface 'claude-code-user' 'claude' @('synced', '.trash')
+        $claudeParity = Get-SurfaceParity -Surface $claudeSurface -Manifest $guardManifest -ArtifactsDirectory $guardArtifacts -HarnessRoot $fixtureHarness
+        if ($claudeParity.file_count -ne 1 -or -not $claudeParity.aggregate_matches_release -or @($claudeParity.registered_candidate_directories).Count -ne 0) {
+            throw 'Surface-guard self-test: Claude synced and .trash must pass without entering parity.'
+        }
+        $codexSurface = & $newGuardSurface 'codex-current' 'codex' @('.system', 'tool-router', 'block-listed')
+        $codexParity = Get-SurfaceParity -Surface $codexSurface -Manifest $guardManifest -ArtifactsDirectory $guardArtifacts -HarnessRoot $fixtureHarness
+        if (($codexParity.registered_candidate_directories -join ',') -cne 'block-listed,tool-router') {
+            throw "Surface-guard self-test: registered candidates were not accepted and recorded; got '$($codexParity.registered_candidate_directories -join ',')'."
+        }
+        if ($codexParity.skill_count -ne 1 -or $codexParity.file_count -ne 1 -or -not $codexParity.aggregate_matches_release -or $codexParity.per_skill_match_count -ne 1) {
+            throw 'Surface-guard self-test: parity must measure manifest skills only, never a registered candidate.'
+        }
+
+        & $expectRefusal (& $newGuardSurface 'claude-code-user' 'claude' @('private-folder')) 'private-folder' 'nothing registers it'
+        & $expectRefusal (& $newGuardSurface 'codex-current' 'codex' @('.trash')) '.trash' 'the trash allowance belongs to the Claude client only'
+        & $expectRefusal (& $newGuardSurface 'codex-surface-07a67cda9f99' 'codex' @('tool-router')) 'tool-router' 'its record does not request this surface'
+        & $expectRefusal (& $newGuardSurface 'codex-current' 'codex' @('no-source')) 'no-source' 'its skill_path is absent from the checkout'
+        & $expectRefusal (& $newGuardSurface 'codex-current' 'codex' @('elsewhere')) 'elsewhere' 'its skill_path is not candidates/<id>'
+    }
+    finally {
+        $tempFull = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
+        if ($guardRoot.StartsWith($tempFull, [StringComparison]::OrdinalIgnoreCase) -and (Test-Path -LiteralPath $guardRoot)) {
+            Remove-Item -LiteralPath $guardRoot -Recurse -Force
+        }
+    }
+
+    # The evidence commit, read by the same closeout check that judges the pull
+    # request: with its line it passes, and the identical commit without it fails.
+    $evidenceMessage = Get-EvidenceCommitMessage -ReleaseId 'v2026.10.26.1' -HostName 'LORIMER'
+    $evidenceFiles = @('state/deployments/v2026.10.26.1-codex-current.json', 'state/canaries/v2026.10.26.1-codex-current.json', 'state/machine-runs/v2026.10.26.1-lorimer.json', 'brain/usage.jsonl')
+    $closeoutCases = @(
+        [ordered]@{ commits = @([ordered]@{ subject = $evidenceMessage.subject; body = $evidenceMessage.body; files = $evidenceFiles }); nowExists = $true; today = '2026-10-27' },
+        [ordered]@{ commits = @([ordered]@{ subject = $evidenceMessage.subject; body = ''; files = $evidenceFiles }); nowExists = $true; today = '2026-10-27' }
+    )
+    $checkModule = ([Uri](Join-Path $RepositoryRoot 'scripts\closeout\check.mjs')).AbsoluteUri
+    $closeoutProbe = "import { evaluate } from '$checkModule'; let raw = ''; for await (const chunk of process.stdin) raw += chunk; process.stdout.write(JSON.stringify(JSON.parse(raw).map((c) => evaluate(c).ok)))"
+    $closeoutVerdict = (ConvertTo-Json -InputObject $closeoutCases -Depth 6 -Compress) | & node --input-type=module -e $closeoutProbe
+    if ($LASTEXITCODE -ne 0 -or ($closeoutVerdict -join '') -ne '[true,false]') {
+        throw "Evidence-commit closeout self-test: scripts/closeout/check.mjs returned '$($closeoutVerdict -join '')', expected [true,false]."
+    }
+    Write-Output 'HARNESS SYNC EVIDENCE SELF-TEST PASSED: repeated attempts are flat snapshots with no self-reference; the surface guard accepts client trash and registered candidates and refuses the rest; evidence commits pass closeout.'
     exit 0
 }
 
