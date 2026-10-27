@@ -5,7 +5,7 @@
   "families": [
     "repository-administration"
   ],
-  "source_revision": "67101254a23e06a85361f978b12ab4e7ad34ae48",
+  "source_revision": "85471b76a8b10627a277e0b6815968c2c102c5c5",
   "context_path": "docs/HARNESS_CONTEXT.md",
   "entrypoints": {
     "agents": "AGENTS.md",
@@ -21,7 +21,7 @@
     {
       "path": "NOW.md",
       "role": "state",
-      "label": "Current repository state"
+      "label": "Current release state and next action; replaces docs/HANDOFF.md (verified at heartside 85471b7 on 2026-10-27)"
     },
     {
       "path": "docs/NORTH_STAR.md",
@@ -29,9 +29,14 @@
       "label": "North Star"
     },
     {
-      "path": "docs/HANDOFF.md",
-      "role": "state",
-      "label": "Current handoff state"
+      "path": "docs/SCOPE.md",
+      "role": "orientation",
+      "label": "Current product scope at heartside 85471b7; status and next action remain in NOW.md"
+    },
+    {
+      "path": "docs/history/HANDOFF-2026-10-21.md",
+      "role": "history",
+      "label": "Superseded handoff moved from docs/HANDOFF.md in heartside commit 82dd8a6"
     },
     {
       "path": "docs/SYNC.md",
@@ -45,7 +50,8 @@
       "label": "Products, assets and the Shopify store",
       "read": [
         "README.md",
-        "docs/HANDOFF.md",
+        "NOW.md",
+        "docs/SCOPE.md",
         "docs/SYNC.md"
       ],
       "checks": []
