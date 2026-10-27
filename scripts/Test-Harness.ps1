@@ -70,8 +70,14 @@ else {
     if ($syncScriptRaw -notmatch 'target_guard_read') {
         Add-Failure 'Codex canaries do not distinguish an exclusion-guard read followed by the expected owner.'
     }
-    if ($syncScriptRaw -notmatch "'claude'\s*\{\s*@\('synced'\)\s*\}") {
-        Add-Failure 'Machine sync does not classify Claude skills/synced as a provider-managed cache namespace.'
+    if ($syncScriptRaw -notmatch "'claude'\s*\{\s*@\('synced',\s*'\.trash'\)\s*\}") {
+        Add-Failure 'Machine sync does not classify Claude skills/synced and skills/.trash as client-owned namespaces.'
+    }
+    if ($syncScriptRaw -notmatch 'Get-RegisteredCandidateNames\s+-SurfaceId\s+\$Surface\.Id') {
+        Add-Failure 'Machine sync does not accept directories registered as provisional candidates for their surface.'
+    }
+    if ($syncScriptRaw -notmatch '\$message\s*=\s*Get-EvidenceCommitMessage' -or $syncScriptRaw -notmatch "'-m',\s*\`$message\.body") {
+        Add-Failure 'Machine sync evidence commits do not carry the self-tested closeout line.'
     }
     if ($syncScriptRaw -notmatch 'state\\reconciliations' -or $syncScriptRaw -notmatch "'-ReconciliationRecordPath'") {
         Add-Failure 'Machine sync does not automatically consume release-bound surface reconciliation records.'
