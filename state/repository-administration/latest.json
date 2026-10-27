@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-27T01:28:34.051Z",
+  "generated_at": "2026-10-27T16:54:39.559Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "922c2c1774602bf84fd36611480f03ef900bc285",
+      "base": "34f6be6482ea2bd577246cc7456015a54f2c19e8",
       "brain_revision": "2ad79d5cf4f3",
-      "before": 448699,
-      "after": 448699,
+      "before": 452643,
+      "after": 452643,
       "files": [],
       "skipped": [],
-      "source_seal": "148e98d807af069db37f87f5e75179f9c8bfd9e5a1bb321dad355d9742bf2e11",
+      "source_seal": "de8baaf1da198caed4028e59d9d64c4c12c6feb0bdec071a7dfe7fa0b2f266d6",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "cff32557774aad0f14a12ebd1a25897e807d915d",
+      "base": "6a8eef198a02bc43bb5e57a5a0ada7134f5c9de5",
       "brain_revision": "155b79828fb7",
-      "before": 51640,
-      "after": 51640,
+      "before": 55183,
+      "after": 55183,
       "files": [],
       "skipped": [],
-      "source_seal": "ce1c3db4d79ce943a1cc0c960bcbf9cbbd4c97ceceed6b3b1bc1624154623633",
+      "source_seal": "40c2113d31e173e71c4631c603c89930401544287f16132f1197a681e6fa1736",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "8c3d44fadd9e8a3336b3be7228b6da1b23f2d6b3",
+      "base": "4a4ed9bec84c60658174deaab551de0ec96327e5",
       "brain_revision": "ba41f521a760",
-      "before": 158542,
-      "after": 158542,
+      "before": 161953,
+      "after": 161953,
       "files": [],
       "skipped": [],
-      "source_seal": "6ee86471a0697874199092530054fa88c142473b65b249d3f0a940bf486dda2b",
+      "source_seal": "2ca1dabb0e950151b8a913bcde49fc6adab3bbf4f918c1a7e628d30775735e77",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -113,7 +113,7 @@
     },
     {
       "repository": "fractionl-pulse",
-      "base": "5963e117e0aafb7aab04966721c16fd7b3111003",
+      "base": "3130052e7d924aabb79600af0a8f3f3028511531",
       "brain_revision": "c3389b60c708",
       "before": 46429,
       "after": 46429,
@@ -131,13 +131,13 @@
     },
     {
       "repository": "full-time",
-      "base": "b27280fe8408cde9d5d310867b1ba9489bf30175",
+      "base": "0bbe7070489ca733adad132e70c15ec54847583b",
       "brain_revision": "cd43facd0779",
-      "before": 48935,
-      "after": 48935,
+      "before": 59207,
+      "after": 59207,
       "files": [],
       "skipped": [],
-      "source_seal": "51d20b93e6a79bf968fc50a5046e24e175181de3df5eff9203642eb5c0e02c1e",
+      "source_seal": "b323bddb82c8d4a0d5e0195e7aed2763211dfe2e2991c825aff9fa573179a74e",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -185,13 +185,15 @@
     },
     {
       "repository": "heartside",
-      "base": "e78465438ae9e43c35d871e0d22ebafcbb78d631",
-      "brain_revision": "29049a88d851",
-      "before": 20862,
-      "after": 20862,
-      "files": [],
+      "base": "415eb83478c507bcc01290ad83eae7145da2ee61",
+      "brain_revision": "d84cfdfa1507",
+      "before": 15125,
+      "after": 15125,
+      "files": [
+        "AGENTS.md"
+      ],
       "skipped": [],
-      "source_seal": "256b3b57b71ec5955eed19d33e900e50723b5b519efdafd8948e4f8d39a1feca",
+      "source_seal": "a72f7e7bf26f3663fed06c9486e7e6a66c26bad0554591c33069c8446fbc64be",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -199,7 +201,9 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "current"
+      "status": "awaiting-checks",
+      "pr": 53,
+      "head": "4cd7999c4e52680a7b23e1d7c3d7c28ea81f0e40"
     },
     {
       "repository": "legibility",
