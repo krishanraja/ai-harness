@@ -1,31 +1,29 @@
 {
-  "week": "2026-W43",
-  "date": "2026-10-24",
+  "week": "2026-W44",
+  "date": "2026-10-27",
   "decisions": [
     {
       "kind": "machine",
       "title": "Your PC cannot install the latest release",
-      "detail": "harness-sync-lorimer has been blocked 8 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex",
+      "detail": "harness-sync-lorimer has been blocked 9 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex",
       "only_you": "permission"
     }
   ],
-  "md": "# Harness digest, 2026-W43\n\nOne thing needs you this week.\n\n1. **Your PC cannot install the latest release.** harness-sync-lorimer has been blocked 8 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex\n\n## Scoreboard\n\n- Repeated corrections (same correction given twice, 28 days): 0.005\n- Change requests accepted: none decided yet\n- Always-on context: 117,420 characters\n- Real work signals captured this week: 66\n- Repository views verified or current: 10/10. History coverage remains unknown without source receipts.\n- AEO-Engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- ai-harness: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- content-engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- contentarchives: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- control-center: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-circle: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-pulse: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- full-time: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- makeyourmindup: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- mm-ctrl: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n",
+  "md": "# Harness digest, 2026-W44\n\nOne thing needs you this week.\n\n1. **Your PC cannot install the latest release.** harness-sync-lorimer has been blocked 9 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex\n\n## Scoreboard\n\n- Repeated corrections (same correction given twice, 28 days): 0.004\n- Change requests accepted: none decided yet\n- Always-on context: 128,889 characters (+11469 this week)\n- Real work signals captured this week: 133\n- Repository views verified or current: 13/13. History coverage remains unknown without source receipts.\n- AEO-Engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- ai-harness: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- content-engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- contentarchives: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- control-center: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-circle: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-pulse: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- full-time: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- growth-heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- legibility: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- makeyourmindup: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- mm-ctrl: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n",
   "title": "Harness: your pc cannot install the latest release",
   "only_you": "permission",
   "delivery": {
-    "status": "delivered",
+    "status": "pending",
     "item": {
-      "id": "harness-digest-2026-w43",
+      "id": "harness-digest-2026-w44",
       "lane": "on_you",
       "area": "Harness",
       "title": "Harness: your pc cannot install the latest release",
       "detail": "Your PC cannot install the latest release",
       "only_you": "permission",
-      "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-10-24.md",
+      "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-10-27.md",
       "link_label": "Open the digest",
       "closes_on": "his_word"
-    },
-    "readback": true,
-    "completed_at": "2026-10-25T22:47:52.911Z"
+    }
   }
 }
