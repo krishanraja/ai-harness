@@ -265,6 +265,10 @@ for (const [id, s] of Object.entries(surfaces)) {
   const age = s.deployed_at ? days(s.deployed_at, today) : null
   if (s.release_id && approved && s.release_id !== approved) {
     F('surface-parity', id, `Installed ${s.release_id} while the approved release is ${approved}${age === null ? '' : `, last deployed ${s.deployed_at}, ${age} days ago`}.`, 'This surface pulls its own release. Until it reports back, the gap is evidence, not a broken pipeline.')
+  } else if (!s.release_id && approved) {
+    // A governed surface nobody has read back is the widest gap of all, and it
+    // used to fall through both branches here without a word.
+    F('surface-parity', id, `No release has ever been recorded for this surface; the approved release is ${approved}.`, 'Read the surface back and commit what it holds before treating it as current or stale.')
   } else if (age !== null && age > 30) {
     N(`${id}: on the approved release, but its last report is ${age} days old.`)
   }

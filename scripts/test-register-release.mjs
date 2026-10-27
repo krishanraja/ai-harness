@@ -47,6 +47,7 @@ test('the new release is latest, approved by Krish under the standing ruling', a
 test('the old latest becomes the rollback baseline, the old rollback becomes superseded', after.previous_published_release.release_id === oldLatest && after.superseded_approved_release.release_id === oldPrevious && after.previous_published_release.status === 'immediate-immutable-rollback-baseline')
 test('the release coherence validator passes on the result', validateReleaseCoherence(after).length === 0)
 test('every surface behind says what it waits for', Object.values(after.surface_deployments).every((d) => /awaiting|stale/.test(d.status)) && after.surface_deployments['claude-cloud'].status.startsWith('stale-manual-cloud-upload-required'))
+test('the second Claude account waits for a manual upload, never an automatic install, and keeps its unknown release', after.surface_deployments['claude-secondary-cloud'].status === 'stale-manual-cloud-upload-required-for-v2099.01.01.1' && after.surface_deployments['claude-secondary-cloud'].release_id === null)
 test('nothing outside the release blocks and statuses changed', (() => {
   const strip = (t) => t.split('\n').filter((l) => !/^\s+status:/.test(l)).join('\n')
   for (const key of ['release_policy', 'production_active', 'canonical', 'deployed_release']) if (getBlock(strip(live), key) !== getBlock(strip(out), key)) return false

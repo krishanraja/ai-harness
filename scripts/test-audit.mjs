@@ -24,6 +24,10 @@ if (output.includes('**session-feed.**')) {
   failures.push('The retired local session-feed still appears as an expected heartbeat.')
 }
 
+if (!output.includes('**claude-secondary-cloud.** No release has ever been recorded for this surface')) {
+  failures.push('A governed surface with no recorded release does not open a surface-parity finding.')
+}
+
 if (failures.length) {
   console.error(`AUDIT TEST FAILED:\n- ${failures.join('\n- ')}`)
   process.exit(1)
