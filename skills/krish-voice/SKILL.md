@@ -121,7 +121,7 @@ Name the authorised artifact that earns the prose: something Krish built, shippe
 
 Read his approved rules before drafting (where from: below). They are the craft rules Krish approved from what he saved and answered, and it changes only by a pull request he merges. Apply them to how the piece is made, never to choose its topic. This skill's truth, privacy and kill-list rules rank above them; when one conflicts, follow this skill and name the conflict. Say in the delivery which rules shaped the draft.
 
-When the Control Center connector is in the session, `get_approved_taste` (lane `voice`) is the live read of the same rules: use it, and fall back to `references/approved-taste.md` only without it. Empty means no rule is approved yet; never invent one.
+When the Control Center connector is in the session, `get_approved_taste` (lane `voice`, with the repository you are in, and the venture when that repository serves several) is the live read of the same rules for that venture only: use it, and fall back to `references/approved-taste.md` only without it. Empty means no rule is approved yet; never invent one.
 
 When Krish corrects or judges the words (a line he cuts, a phrase he rewrites, "that's not me"), send his exact typed words to `report_to_taste_engine` with `kind: krish_words`, `lane: voice`, where he typed them (`said_where`) and when (`said_at`). Copy them verbatim, never tidied. A correction you inferred from his edits, or a summary of what he wanted, goes only as `kind: observation`. One report per correction; this never approves, rejects or rewords a rule.
 
