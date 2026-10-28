@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-28T01:16:49.827Z",
+  "generated_at": "2026-10-28T01:17:47.443Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "223b4667a40aa395be5f364db1768dc366885c0b",
+      "base": "68354e99d010e89e4a1c42f52d7973a4cd9108b8",
       "brain_revision": "155b79828fb7",
       "before": 56516,
       "after": 56516,
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "a48bb633f60db9352d2c94c346f7d12665429519",
+      "base": "5e221dc5bad7f57dd2d6af6f3ec1373961f6590c",
       "brain_revision": "ba41f521a760",
-      "before": 171314,
-      "after": 171314,
+      "before": 172058,
+      "after": 172058,
       "files": [],
       "skipped": [],
-      "source_seal": "ab0b0486a5f8e0bbe2c324b39c47a1e18d3963fb6c4be4dc23628db861fa1639",
+      "source_seal": "156a5f749f1bf2738eed207f6be35aadfcd4af6769e0465769bcca65752c7f7b",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
