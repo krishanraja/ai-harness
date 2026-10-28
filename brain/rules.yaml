@@ -19,7 +19,7 @@
 
 schema_version: 1
 
-# 121 rules across the two contracts.
+# 122 rules across the two contracts.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -154,6 +154,15 @@ contract_rules:
       kind: ruling
       ref: "Ruling (Krish, 2026-10-23): every North Star carries a number on a weekly ladder and an urgency rating"
     status: live
+  - id: session-closeout.before-ending-write-one
+    file: contract/krish-operating-contract.md
+    text_sha: "209ddcf39d65"
+    first_seen: "2026-10-28"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
+    status: live
+    supersedes: [session-closeout.before-ending-update-the]
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md
     text_sha: "e27cbd6d8c73"
@@ -161,22 +170,37 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
-    status: live
+    status: superseded
+    valid_until: "2026-10-28"
   - id: session-closeout.re-read-the-north
     file: contract/krish-operating-contract.md
-    text_sha: "0443867b9a84"
+    text_sha: "3f8b8ccd4bdf"
     first_seen: "2026-10-22"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
+    history:
+      - text_sha: "0443867b9a84"
+        valid_until: "2026-10-28"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+    status: live
+  - id: session-closeout.every-now-md-is
+    file: contract/krish-operating-contract.md
+    text_sha: "4d58c83c7d76"
+    first_seen: "2026-10-28"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
     status: live
   - id: session-closeout.plan-and-handoff-documents
     file: contract/krish-operating-contract.md
-    text_sha: "fd183eb0c416"
+    text_sha: "9189d06a24e2"
     first_seen: "2026-10-22"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
     history:
       - text_sha: "90833093b487"
         valid_until: "2026-10-22"
@@ -185,6 +209,11 @@ contract_rules:
           ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
       - text_sha: "46f8cc1289e2"
         valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      - text_sha: "fd183eb0c416"
+        valid_until: "2026-10-28"
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"

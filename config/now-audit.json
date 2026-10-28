@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "source": "Ruling (Krish, 2026-10-28): regular objective audits of the NOW files so they never fill with outdated content. Read by scripts/steward/audit-now.mjs; the rules are described there.",
+  "limits": {
+    "as_of_max_age_days": 7,
+    "north_star_check_max_age_days": 7,
+    "max_chars": 16000,
+    "max_lines": 200,
+    "max_line_chars": 1500,
+    "recent_max_age_days": 30,
+    "recent_max_bullets": 12,
+    "where_max_bullets": 8,
+    "unfolded_note_max_age_days": 1,
+    "unreconciled_max_age_days": 2,
+    "dated_claim_max_age_days": 14,
+    "escalate_after_days": 3
+  }
+}

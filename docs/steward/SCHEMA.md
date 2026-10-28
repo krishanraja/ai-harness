@@ -2,7 +2,7 @@
 
 Status: Current
 Owner: Krish Raja
-Last verified: 2026-10-22 against `scripts/steward/validate.mjs`
+Last verified: 2026-10-28 against `scripts/steward/validate.mjs`, `scripts/steward/audit-now.mjs` and `scripts/closeout/check.mjs`
 
 The steward adds exactly two files to every repo in `fleet.json`. Everything
 else in a repo keeps its own structure, voice, naming, stamp form and archive
@@ -44,9 +44,10 @@ sheet ids, family names and credential names here. The registry in
 Rules the validator enforces:
 
 - `head` is an ancestor of `HEAD`, and every commit after it is automation
-  (`docs(steward)`, `docs(harness)`, `docs(canon)`, `chore(heartbeat)`,
-  `chore(brain)`), or no product commit landed after the last commit that
-  touched NOW.md (a session closed out its own work). That is what makes
+  (`docs(steward)`, `docs(harness)`, `docs(canon)`, `docs(closeout)`,
+  `chore(heartbeat)`, `chore(brain)`, `chore(audit)`), or no product commit
+  landed after the last commit that touched NOW.md (a session closed out its
+  own work, directly or through the closeout fold). That is what makes
   `as_of` trustworthy. Readers outside the repository use the same rule.
 - At most one `- North Star check (YYYY-MM-DD): holds.` or
   `...: recalibration proposed. <why>` line, under "What is next and what is
@@ -88,9 +89,10 @@ the Content Engine's Built with AI and Money of AI lenses read
 or features is a bullet a writer cannot use.
 
 ## What is next and what is waiting on Krish
-Open decisions and the single next action. Exactly one North Star check line,
-written by the session that last changed the repository (contract, "Session
-closeout"):
+Open decisions and the single next action, as one `- Next` line. Exactly one
+North Star check line, written by the session that last changed the repository
+(contract, "Session closeout"), usually through its closeout note, which the
+fold places here as `- Next (YYYY-MM-DD): ...` and the check line:
 - North Star check (YYYY-MM-DD): holds.
 - North Star check (YYYY-MM-DD): recalibration proposed. <one sentence: what
   changed and the ambition it suggests; Krish decides>
@@ -107,6 +109,34 @@ present; "Nothing at the moment." is a valid body.
 
 Voice: plain English, specific, no motivational filler, no buzzwords, no
 em dashes. Product nouns stay. British spelling.
+
+Size and freshness are audited every night against `config/now-audit.json`
+(`scripts/steward/audit-now.mjs`; Ruling, Krish, 2026-10-28): at most 16,000
+characters and no line over 1,500, at most 12 "What changed recently" bullets
+and 8 in "Where it is right now", `as_of` no older than 7 days, exactly one
+North Star check (a warning past 7 days, since only a session may re-date it),
+no unfolded closeout note, and no sentence that calls a merged or
+closed pull request open.
+
+### Closeout notes: `now-notes/YYYY-MM-DD-<slug>.md`
+
+A session closes out by adding one note instead of editing `NOW.md`, so two
+open pull requests never conflict over it:
+
+```text
+Status: <what is true now that this work changed>
+Changed: <optional: the why, for "What changed recently">
+Next: <the single next action>
+North Star check (YYYY-MM-DD): holds.
+```
+
+When the note reaches main, the `fold` job of
+`.github/workflows/harness-repository-context.yml` runs
+`.claude/hooks/harness-closeout.mjs --fold`: the status goes on top of "Where
+it is right now", `Changed` on top of "What changed recently", the next action
+and check line under "What is next and what is waiting on Krish" (replacing
+every earlier top-level `- Next` item and the old check line), `as_of` moves forward, and the note
+is deleted in a `docs(closeout)` commit.
 
 ## 2. `docs/history/LOG.md`
 

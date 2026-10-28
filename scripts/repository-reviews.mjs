@@ -57,7 +57,7 @@ export async function openReviews({ gh, proposals, root = ROOT }) {
     const { branch: base } = await gh.defaultBranch('ai-harness'), head = await gh.headSha('ai-harness', base)
     const current = (await gh.getFile('ai-harness', REVIEWS, head))?.text || ''
     await gh.createBranch('ai-harness', branch, head)
-    await gh.commitFiles('ai-harness', branch, head, { [REVIEWS]: current + JSON.stringify(r) + '\n' }, `brain: propose scoped repository learning\n\nCandidate: ${r.candidate_id}. No acceptance or deployment occurs on this branch.`)
+    await gh.commitFiles('ai-harness', branch, head, { [REVIEWS]: current + JSON.stringify(r) + '\n' }, `brain: propose scoped repository learning\n\nCandidate: ${r.candidate_id}. No acceptance or deployment occurs on this branch.\n\nCloseout: not needed, a proposal awaiting review; the steward records it in NOW.md once merged`)
     const pr = await gh.openPull('ai-harness', { title: `Review operating knowledge for ${r.repository}`, head: branch, base, draft: true, body: `Proposed knowledge: ${r.statement}\n\nConditions: ${r.conditions.join('; ') || 'AWAITING, verify the proposed applicability.'}\n\nWhy: ${r.why}\n\nAlternative explanation: ${r.alternative_explanations}\n\nIf wrong: ${r.if_wrong}\n\nValidation: ${r.validation}\n\nRollback: ${r.rollback}\n\nEvidence: ${r.evidence_ids.join(', ')}\n\nMerging this change as the repository owner accepts this exact scoped proposal. The promotion worker verifies the owner merge before adding accepted knowledge. Closing it leaves the evidence unchanged.` })
     results.push({ id: r.id, status: 'proposed', pr: pr.number })
   }

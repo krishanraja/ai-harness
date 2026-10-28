@@ -163,7 +163,7 @@ if (isMain) {
       }
       sh('git', ['add', '--', ...guard.files.map((f) => f.path), proposalPath, 'brain/rules.yaml'])
       sh('git', ['-c', 'user.name=Claude', '-c', 'user.email=noreply@anthropic.com', 'commit', '--quiet', '-F', '-'], {
-        input: `${change.title}\n\n${change.why}\n\nCandidate ${change.candidate_id}; evidence ${change.evidence_ids.join(', ')}.\nAlways-on context ${guard.delta > 0 ? '+' : ''}${guard.delta} characters.${change.growth_justified ? `\nGrowth justified: ${change.growth_justified}` : ''}\n\nHarness-Steward: change-request\n`,
+        input: `${change.title}\n\n${change.why}\n\nCandidate ${change.candidate_id}; evidence ${change.evidence_ids.join(', ')}.\nAlways-on context ${guard.delta > 0 ? '+' : ''}${guard.delta} characters.${change.growth_justified ? `\nGrowth justified: ${change.growth_justified}` : ''}\n\nHarness-Steward: change-request\nCloseout: not needed, a proposal awaiting review; the steward records it in NOW.md once merged\n`,
       })
       if (local) { summary.push(`committed ${branch} locally (not pushed)`); opened++; continue }
       const remote = `https://x-access-token:${token}@github.com/${gh.owner}/ai-harness.git`

@@ -107,26 +107,30 @@ export function renderBody(repo) {
 }
 
 /** The block, markers and all. The stamp hashes the body it introduces. */
-export function renderBlock(repo, rendered = canonDate()) {
+export function renderBlock(repo, rendered = canonDate(), stampRelease = release) {
   const body = renderBody(repo)
   const sha = sha256(body).slice(0, 12)
-  return `<!-- ${START} release=${release} sha=${sha} rendered=${rendered} -->\n${body}\n${END}`
+  return `<!-- ${START} release=${stampRelease} sha=${sha} rendered=${rendered} -->\n${body}\n${END}`
 }
 
 /**
  * The block to write into a file that may already carry one.
  *
- * When the body is unchanged, the existing rendered date is kept. "rendered" is
- * the date this body was produced, not the date the renderer last ran, so a
- * canon commit that does not change a repository's block must not restamp ten
- * files with a new date. Churn drowns the signal, and the signal is the point.
+ * When the body is unchanged, the existing stamp is kept whole: its rendered
+ * date and its release. "rendered" is the date this body was produced, not the
+ * date the renderer last ran, so a canon commit that does not change a
+ * repository's block must not restamp ten files. The body does not name the
+ * release either, so a release that leaves the canon's wording alone opens no
+ * pull request anywhere: every release used to rewrite the block in every
+ * repository, a dozen stamp-only pull requests a release that nobody merged.
+ * Churn drowns the signal, and the signal is the point.
  */
 export function blockFor(existing, repo, date) {
   const next = renderBlock(repo, date)
   const had = inspect(existing || '')
   const now = inspect(next)
-  if (had.present && had.intact && now.present && had.sha === now.sha && had.release === now.release) {
-    return renderBlock(repo, had.rendered)
+  if (had.present && had.intact && now.present && had.sha === now.sha) {
+    return renderBlock(repo, had.rendered, had.release)
   }
   return next
 }
@@ -175,7 +179,7 @@ if (flag('--repo')) {
   if (!entry) { console.error(`render: ${name} is not in state/fleet.yaml`); process.exit(2) }
   const target = join(repoPath, entry.canon_target)
   const before = existsSync(target) ? readFileSync(target, 'utf8') : ''
-  const after = splice(before, renderBlock(entry, rendered))
+  const after = splice(before, blockFor(before, entry, rendered))
   if (has('--check')) {
     if (before === after) { console.log(`ok    ${name} ${entry.canon_target}`); process.exit(0) }
     console.error(`drift ${name} ${entry.canon_target}`); process.exit(1)

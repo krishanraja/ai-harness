@@ -20,6 +20,12 @@
  *   - So is a clock that keeps reporting blocked for guardian.blocked_runs,
  *     with the reason it sent in plain words: a PC that runs every night but
  *     cannot install is as stuck as one that never runs.
+ *   - So are the pull requests across the fleet that only Krish can move,
+ *     with their age and state: the harness's own merge themselves
+ *     (scripts/merge-bot-prs.mjs), and nothing else may sit unseen
+ *     (Ruling, Krish, 2026-10-28).
+ *   - So is a NOW.md the nightly audit has failed for three days or more
+ *     (state/now-audit/latest.json): its steward is not fixing it.
  *
  * Then scripts/digest.mjs decides whether this week has anything to say.
  *
@@ -36,6 +42,9 @@ import { Gh } from './lib/github.mjs'
 import { loadPolicy } from './propose.mjs'
 import { buildDigest, writeDigest, lastSent, pendingDigest } from './digest.mjs'
 import { REASONS } from './heartbeat-reasons.mjs'
+import { parseYaml } from './lib/yaml.mjs'
+import { waitingOnKrish, waitingBlocker } from './merge-bot-prs.mjs'
+import { auditBlocker, loadLimits } from './steward/audit-now.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -173,6 +182,17 @@ if (isMain) {
   const stuck = blockedClocks(heartbeats, { limits: policy.guardian?.blocked_runs || {} }).filter((b) => !silent.some((s) => s.clock === b.clock))
   const install = blockedBlocker(stuck)
   if (install) { blockers.unshift(install); log.push(`blocked: ${stuck.map((x) => `${x.clock} (${x.reason || 'no reason'})`).join(', ')}`) }
+  // What waits on Krish across the fleet, and NOW.md files their steward is not fixing.
+  try {
+    const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
+    const waiting = waitingBlocker(await waitingOnKrish(gh, fleet))
+    if (waiting) { blockers.push(waiting); log.push(`waiting on Krish: ${waiting.title}`) }
+  } catch (e) { log.push(`waiting list unavailable: ${String(e.status ? `github-${e.status}` : e.message).slice(0, 120)}`) }
+  const auditPath = join(HARNESS, 'state/now-audit/latest.json')
+  if (existsSync(auditPath)) {
+    const audit = auditBlocker(JSON.parse(readFileSync(auditPath, 'utf8')), today, loadLimits(HARNESS))
+    if (audit) { blockers.push(audit); log.push(`now audit: ${audit.title}`) }
+  }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
   const digest = pendingDigest() || buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })

@@ -231,8 +231,9 @@ if (strict && fm && fm.head) {
   }
   if (ancestor) {
     // Automation commits (the steward's, the harness publisher's and canon sync's,
-    // heartbeats and brain consolidation) never make NOW.md stale.
-    const automation = (l) => /^[0-9a-f]+ (docs\((steward|harness|canon)\)|chore\((heartbeat|brain)\)):/.test(l)
+    // the closeout fold's, heartbeats, brain consolidation and the NOW.md audit)
+    // never make NOW.md stale.
+    const automation = (l) => /^[0-9a-f]+ (docs\((steward|harness|canon|closeout)\)|chore\((heartbeat|brain|audit)\)):/.test(l)
     let foreign = git('log', '--no-merges', '--format=%h %s', `${fm.head}..HEAD`).split('\n').filter(Boolean).filter((l) => !automation(l))
     // Session closeout (Ruling, Krish, 2026-10-22): a session updates NOW.md with
     // its own work, so NOW.md is also current when no product commit landed

@@ -1,0 +1,74 @@
+name: Harness bot pull requests
+run-name: Harness bot pull requests (${{ github.event_name }})
+
+# The harness's own pull requests merge themselves when green, and replaced
+# ones close themselves (Ruling, Krish, 2026-10-28): the canon sync in every
+# fleet repository and the PC's machine evidence here. Everything else is
+# listed as waiting on Krish and never merged. Guards and reasons:
+# scripts/merge-bot-prs.mjs.
+#
+# Three knocks, because GitHub's schedule has started late or not at all
+# (2026-10-24): hourly at :41, when a machine evidence pull request opens or
+# moves here, and after the nightly reconcile, which also merges inline.
+on:
+  schedule:
+    - cron: "41 * * * *"
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Plan only; merge and close nothing
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-bot-prs
+  cancel-in-progress: false
+
+jobs:
+  bot-pr-merge:
+    # On a pull request, only machine evidence from this repository starts it.
+    if: github.event_name != 'pull_request' || (startsWith(github.head_ref, 'machine-sync/') && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: The fleet credential must exist
+        env:
+          HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
+        run: |
+          if [ "$HAS_TOKEN" != "true" ]; then
+            echo "::error::FLEET_TOKEN is not set. Bot pull requests cannot be merged without it."
+            exit 1
+          fi
+      - name: Merge green bot pull requests, close replaced ones
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run || false }}
+          ONLY: ${{ github.event_name == 'pull_request' && 'ai-harness' || '' }}
+        run: |
+          set -euo pipefail
+          args=(--out bot-prs.json)
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          if [ -n "$ONLY" ]; then args+=(--repo "$ONLY" --wait 900); else args+=(--wait 600); fi
+          node scripts/merge-bot-prs.mjs "${args[@]}" | tee bot-prs.log
+      - name: Put the outcome in the run summary
+        if: always()
+        run: |
+          { echo '```'; cat bot-prs.log 2>/dev/null || echo "no log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1, Node 24
+        if: always()
+        with:
+          name: bot-prs
+          path: bot-prs.json
+          retention-days: 30

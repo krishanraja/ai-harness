@@ -1,0 +1,61 @@
+name: Harness NOW.md audit
+run-name: Harness NOW.md audit (${{ github.event_name }})
+
+# Every NOW.md in the fleet against fixed rules, every night, before the docs
+# steward's 20:15 run (Ruling, Krish, 2026-10-28: "regular objective audits of
+# the NOW files to ensure they are not full of outdated crap"). Each steward
+# also audits its own repository before it writes and fixes what it finds; this
+# run keeps the record, so a NOW.md still failing after three days reaches
+# Krish's digest through the nightly housekeeping. Rules and limits:
+# scripts/steward/audit-now.mjs, config/now-audit.json. Findings name lines and
+# rules, never quote a file: some NOW.md files live in private repositories.
+on:
+  schedule:
+    - cron: "47 19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: harness-now-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - name: The fleet credential must exist
+        env:
+          HAS_TOKEN: ${{ secrets.FLEET_TOKEN != '' }}
+        run: |
+          if [ "$HAS_TOKEN" != "true" ]; then
+            echo "::error::FLEET_TOKEN is not set. An audit that reads nothing must not look like a clean night."
+            exit 1
+          fi
+      - name: Audit every NOW.md
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: |
+          set -euo pipefail
+          node scripts/steward/audit-now.mjs --fleet docs/steward/fleet.json --previous state/now-audit/latest.json --out-json state/now-audit/latest.json --out state/now-audit/latest.md > /dev/null
+          cat state/now-audit/latest.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit the audit
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- state/now-audit)" ]; then echo "Audit unchanged."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/now-audit
+          git commit -m "chore(audit): NOW.md audit $(date -u +%F)" -m "Written by scripts/steward/audit-now.mjs. Rules and counts only; no file is quoted."
+          for attempt in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 5)); git pull --rebase --quiet origin main
+          done
+          exit 1
