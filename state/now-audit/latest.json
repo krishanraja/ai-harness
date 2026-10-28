@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "limits": {
+    "as_of_max_age_days": 7,
+    "north_star_check_max_age_days": 7,
+    "max_chars": 16000,
+    "max_lines": 200,
+    "max_line_chars": 1500,
+    "recent_max_age_days": 30,
+    "recent_max_bullets": 12,
+    "where_max_bullets": 8,
+    "unfolded_note_max_age_days": 1,
+    "unreconciled_max_age_days": 2,
+    "dated_claim_max_age_days": 14,
+    "escalate_after_days": 3
+  },
+  "repos": [
+    {
+      "repo": "control-center",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "108743 characters (limit 16000); line 53 is 3256 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "70 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "49 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "3 line(s) speak of something open or pending with no date newer than 14 days (lines 64, 71, 73)."
+        }
+      ]
+    },
+    {
+      "repo": "mm-ctrl",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
+    },
+    {
+      "repo": "mindmake",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "north_star_check",
+          "severity": "fail",
+          "detail": "2 North Star check lines; keep exactly one."
+        },
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "211 lines (limit 200). Roll history into docs/history/LOG.md and keep what is current."
+        }
+      ]
+    },
+    {
+      "repo": "fractionl-circle",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        }
+      ]
+    },
+    {
+      "repo": "fractionl-pulse",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "41101 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "24 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "3 \"Next\" lines under \"What is next and what is waiting on Krish\"; keep the single next action."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "7 line(s) speak of something open or pending with no date newer than 14 days (lines 38, 43, 44, 46, 92)."
+        }
+      ]
+    },
+    {
+      "repo": "full-time",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "40201 characters (limit 16000); line 93 is 1732 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_old",
+          "severity": "fail",
+          "detail": "2 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-09-27); roll them into docs/history/LOG.md."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "16 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "17 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "6 \"Next\" lines under \"What is next and what is waiting on Krish\"; keep the single next action."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "7 line(s) speak of something open or pending with no date newer than 14 days (lines 66, 70, 72, 100, 102)."
+        }
+      ]
+    },
+    {
+      "repo": "content-engine",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "139608 characters (limit 16000); 290 lines (limit 200); line 257 is 3650 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_old",
+          "severity": "fail",
+          "detail": "1 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-09-27); roll them into docs/history/LOG.md."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "108 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "44 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "8 \"Next\" lines under \"What is next and what is waiting on Krish\"; keep the single next action."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "4 line(s) speak of something open or pending with no date newer than 14 days (lines 81, 84, 87, 258)."
+        }
+      ]
+    },
+    {
+      "repo": "contentarchives",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "76577 characters (limit 16000); line 82 is 2097 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "47 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "17 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "4 line(s) speak of something open or pending with no date newer than 14 days (lines 52, 65, 124, 127)."
+        }
+      ]
+    },
+    {
+      "repo": "ai-harness",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "47172 characters (limit 16000); line 34 is 5035 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "39 \"What changed recently\" bullets (limit 12)."
+        },
+        {
+          "rule": "stale_pr_claim",
+          "severity": "fail",
+          "detail": "Line 51 says PR 150 is open or waiting to merge, but it is merged."
+        },
+        {
+          "rule": "stale_pr_claim",
+          "severity": "fail",
+          "detail": "Line 73 says PR 104 is open or waiting to merge, but it is merged."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "2 line(s) speak of something open or pending with no date newer than 14 days (lines 99, 100)."
+        }
+      ]
+    },
+    {
+      "repo": "AEO-Engine",
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
+    },
+    {
+      "repo": "makeyourmindup",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "recent_too_old",
+          "severity": "fail",
+          "detail": "2 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-09-24); roll them into docs/history/LOG.md."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 47)."
+        }
+      ]
+    },
+    {
+      "repo": "heartside",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "16799 characters (limit 16000); line 57 is 1641 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        }
+      ]
+    },
+    {
+      "repo": "legibility",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "17465 characters (limit 16000); line 65 is 1894 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        }
+      ]
+    },
+    {
+      "repo": "growth-heartside",
+      "status": "fail",
+      "failing_since": "2026-10-28",
+      "findings": [
+        {
+          "rule": "next_step",
+          "severity": "fail",
+          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        }
+      ]
+    }
+  ]
+}
