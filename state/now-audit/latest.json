@@ -161,7 +161,7 @@
         {
           "rule": "too_long",
           "severity": "fail",
-          "detail": "139608 characters (limit 16000); 290 lines (limit 200); line 257 is 3650 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+          "detail": "139056 characters (limit 16000); 290 lines (limit 200); line 257 is 3650 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
         },
         {
           "rule": "recent_too_old",
@@ -318,15 +318,9 @@
     },
     {
       "repo": "growth-heartside",
-      "status": "fail",
-      "failing_since": "2026-10-28",
-      "findings": [
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     }
   ]
 }

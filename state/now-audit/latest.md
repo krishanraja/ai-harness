@@ -17,7 +17,7 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 | makeyourmindup | fail | 2026-10-28 | recent_too_old, next_step, old_dated_claims |
 | heartside | fail | 2026-10-28 | too_long, next_step |
 | legibility | fail | 2026-10-28 | too_long, where_too_many, next_step |
-| growth-heartside | fail | 2026-10-28 | next_step |
+| growth-heartside | pass |  | none |
 
 ## control-center
 
@@ -58,7 +58,7 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 
 ## content-engine
 
-- fail `too_long`: 139608 characters (limit 16000); 290 lines (limit 200); line 257 is 3650 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current.
+- fail `too_long`: 139056 characters (limit 16000); 290 lines (limit 200); line 257 is 3650 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current.
 - fail `recent_too_old`: 1 "What changed recently" bullet(s) older than 30 days (oldest 2026-09-27); roll them into docs/history/LOG.md.
 - fail `recent_too_many`: 108 "What changed recently" bullets (limit 12).
 - fail `where_too_many`: 44 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
@@ -95,8 +95,4 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 
 - fail `too_long`: 17465 characters (limit 16000); line 65 is 1894 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current.
 - fail `where_too_many`: 11 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
-- fail `next_step`: No "- Next" line under "What is next and what is waiting on Krish".
-
-## growth-heartside
-
 - fail `next_step`: No "- Next" line under "What is next and what is waiting on Krish".
