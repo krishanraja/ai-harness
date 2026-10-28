@@ -18,6 +18,8 @@
 #   reconcile     writes, and only ever through a pull request on a named branch.
 #                 Nightly. An edit made inside the markers in a repository is
 #                 NEVER overwritten; it becomes a proposal against the canon.
+#                 The sync pull requests then merge themselves once green
+#                 (scripts/merge-bot-prs.mjs; Ruling, Krish, 2026-10-28).
 #   observe       appends evidence to the ledger and the weekly scoreboard.
 #   propose       Sundays. Opens at most decision_budget DRAFT change requests,
 #                 each guarded, judged and merged only by Krish.
@@ -99,6 +101,12 @@ jobs:
       # make any request for an excluded repository.
       - name: Excluded repositories are never touched by the canon sync
         run: node scripts/test-canon-sync.mjs
+
+      - name: Bot pull requests merge only under their guards
+        run: node scripts/test-merge-bot-prs.mjs
+
+      - name: The NOW.md audit flags what it promises to
+        run: node scripts/test-audit-now.mjs
 
       - name: Publish fleet freshness in the run summary
         run: |
@@ -280,6 +288,15 @@ jobs:
           else
             node scripts/reconcile.mjs --out reconcile.md
           fi
+
+      # The sync pull requests just opened or rebuilt carry nothing a person
+      # needs to read, so they merge themselves once their checks pass
+      # (Ruling, Krish, 2026-10-28). Waits up to fifteen minutes for checks.
+      - name: Merge the green canon-sync pull requests
+        if: ${{ !inputs.dry_run }}
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: node scripts/merge-bot-prs.mjs --wait 900 --out bot-prs.json
 
       - name: Put the reconciliation in the run summary
         if: always()

@@ -174,6 +174,68 @@ export class Gh {
     return { statuses, runs: (runs.check_runs || []).map((r) => ({ name: r.name, status: r.status, conclusion: r.conclusion })) }
   }
 
+  async getPull(repo, number) {
+    return this.req('GET', `/repos/${this.owner}/${repo}/pulls/${number}`)
+  }
+
+  /** The paths a pull request changes, paged. */
+  async pullFiles(repo, number) {
+    const out = []
+    for (let page = 1; page <= 30; page++) {
+      const r = await this.req('GET', `/repos/${this.owner}/${repo}/pulls/${number}/files?per_page=100&page=${page}`)
+      out.push(...r.map((f) => f.filename))
+      if (r.length < 100) break
+    }
+    return out
+  }
+
+  /** The newest commits on a branch: [{ sha, subject, date }]. */
+  async recentCommits(repo, branch, count = 30) {
+    const r = await this.req('GET', `/repos/${this.owner}/${repo}/commits?sha=${encodeURIComponent(branch)}&per_page=${count}`)
+    return r.map((c) => ({ sha: c.sha, subject: String(c.commit?.message || '').split('\n')[0], date: String(c.commit?.committer?.date || '').slice(0, 10) }))
+  }
+
+  /**
+   * Point a branch at one fresh commit on top of `base` carrying `files`, creating
+   * the branch when it is missing. Only for branches the harness alone writes:
+   * whatever was on the branch before is replaced, and a pull request open on it
+   * stays open with the new head.
+   */
+  async rebuildBranch(repo, branch, base, files, message) {
+    if (this.dryRun) return { sha: base, dryRun: true }
+    const commit = await this.req('GET', `/repos/${this.owner}/${repo}/git/commits/${base}`)
+    const tree = []
+    for (const [path, text] of Object.entries(files)) {
+      const blob = await this.req('POST', `/repos/${this.owner}/${repo}/git/blobs`, { content: text, encoding: 'utf-8' })
+      tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha })
+    }
+    const nextTree = await this.req('POST', `/repos/${this.owner}/${repo}/git/trees`, { base_tree: commit.tree.sha, tree })
+    const next = await this.req('POST', `/repos/${this.owner}/${repo}/git/commits`, { message, tree: nextTree.sha, parents: [base] })
+    if (await this.branchExists(repo, branch)) await this.req('PATCH', `/repos/${this.owner}/${repo}/git/refs/heads/${encodeURIComponent(branch)}`, { sha: next.sha, force: true })
+    else await this.createBranch(repo, branch, next.sha)
+    return next
+  }
+
+  /** Merge base into a pull request's head (GitHub's "Update branch"); never rewrites it. */
+  async updateBranch(repo, number, expectedHead) {
+    if (this.dryRun) return { dryRun: true }
+    return this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/update-branch`, { expected_head_sha: expectedHead })
+  }
+
+  /**
+   * Merge a pull request at exactly `sha`, squashing where the repository allows
+   * it and merging where it only allows that. Returns GitHub's answer.
+   */
+  async mergePull(repo, number, { sha, title, message = '' }) {
+    if (this.dryRun) return { merged: true, sha: null, dryRun: true }
+    try {
+      return await this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, { sha, merge_method: 'squash', commit_title: title, commit_message: message })
+    } catch (e) {
+      if (e.status !== 405 || !/squash/i.test(e.message)) throw e
+      return this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, { sha, merge_method: 'merge', commit_title: title, commit_message: message })
+    }
+  }
+
   /** A draft pull request becomes ready for review. REST has no endpoint for it. */
   async markReady(nodeId) {
     if (this.dryRun) return { dryRun: true }

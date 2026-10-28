@@ -184,28 +184,26 @@ for (const repo of canonSyncRepos(fleet)) {
 
     const base = (await gh.defaultBranch(name)).branch
     const baseSha = await gh.headSha(name, base)
-    if (!(await gh.branchExists(name, BRANCH))) {
-      await gh.createBranch(name, BRANCH, baseSha)
-    } else if (!(await gh.findPull(name, BRANCH, base))) {
-      // The sync branch survives a merge, so on the next canon change it is
-      // still sitting on a base that has moved on, and the pull request opens
-      // with conflicts in a file this script is the sole author of. Its only
-      // content is the regenerated block, so resetting it to base loses
-      // nothing. Only ever done when no pull request is open on it, because
-      // that would be rewriting something a person may be reading.
-      await gh.resetBranch(name, BRANCH, baseSha)
+    // The sync branch is the harness's alone and holds one regenerated file, so
+    // it is rebuilt as one commit on the current base whenever its file differs:
+    // an open pull request then never conflicts and is never behind, and the bot
+    // pull request merger (scripts/merge-bot-prs.mjs) can merge it as soon as its
+    // checks pass (Ruling, Krish, 2026-10-28). A branch someone added other files
+    // to is left alone and reported, because rebuilding it would lose their work.
+    const open = await gh.findPull(name, BRANCH, base)
+    if (open) {
+      const files = await gh.pullFiles(name, open.number)
+      if (files.some((f) => f !== target)) {
+        findings.push({ name, state: 'hand-edited-sync-branch', detail: `${name}#${open.number} carries files other than ${target}; it was not rebuilt.` })
+        rows.push({ name, state, note: `sync branch carries other files, left alone (#${open.number})` })
+        continue
+      }
     }
+    const onBranch = (await gh.branchExists(name, BRANCH)) ? await gh.getFile(name, target, BRANCH) : null
+    if (onBranch && onBranch.text === after && open) { rows.push({ name, state, note: 'already on the sync branch' }); continue }
 
-    // Re-read on the sync branch so an open pull request updates rather than conflicts.
-    const onBranch = await gh.getFile(name, target, BRANCH)
-    const branchAfter = splice(onBranch ? onBranch.text : file.text, blockFor(onBranch ? onBranch.text : file.text, repo))
-    if (onBranch && branchAfter === onBranch.text) { rows.push({ name, state, note: 'already on the sync branch' }); continue }
-
-    await gh.putFile(name, target, branchAfter, {
-      branch: BRANCH,
-      sha: onBranch ? onBranch.sha : file.sha,
-      message: `docs(canon): sync the canon block to ${inspect(renderBlock(repo)).release}\n\nRendered from krishanraja/ai-harness. Only the text between the\nkrish-canon markers changed; everything outside them is untouched.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`,
-    })
+    await gh.rebuildBranch(name, BRANCH, baseSha, { [target]: after },
+      `docs(canon): sync the canon block to ${inspect(renderBlock(repo)).release}\n\nRendered from krishanraja/ai-harness. Only the text between the\nkrish-canon markers changed; everything outside them is untouched.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`)
 
     const existing = await gh.findPull(name, BRANCH, base)
     if (!existing) {
@@ -219,6 +217,8 @@ for (const repo of canonSyncRepos(fleet)) {
           `- Now: \`${wantedSha}\` at release \`${inspect(renderBlock(repo)).release}\``,
           '',
           'Everything outside the markers is byte-identical. The block carries the sha256 of its own body, so if you edit it here instead, the next run detects that and opens a proposal against the canon rather than overwriting your change.',
+          '',
+          'Nobody needs to review this: it merges itself once its checks pass (`scripts/merge-bot-prs.mjs`, Ruling, Krish, 2026-10-28).',
           '',
           `Rendered by \`scripts/reconcile.mjs\` in [krishanraja/ai-harness](https://github.com/krishanraja/ai-harness).`,
           '',

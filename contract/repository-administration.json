@@ -102,10 +102,10 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca"
+            "9d6d1ac460c0d45df9bbc7a10b6cd40badcee45d6fad9ee95d84139726cf8790"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"
+            "ab868dbff748a2b3db7fccf8377cdbc911c440a4a9f16d1acc9c3544a34cd361"
           ]
         },
         "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's",
@@ -118,6 +118,15 @@
             "reason": "the hook measured from a stale origin/main and let a fresh cloud session stop without closing out; the workflow changes only because it pins the hook's hash",
             "source": "docs/proposals/2026-10-22-session-closeout-and-one-system.md, Amendment 2026-10-23",
             "verified_by": "scripts/closeout/test-check.mjs (stale-base case fails on the old bytes, passes on the new), scripts/validate-repository-brain.mjs"
+          },
+          {
+            "date": "2026-10-28",
+            "files": [".claude/hooks/harness-closeout.mjs", ".github/workflows/harness-repository-context.yml"],
+            "from_sha256": ["2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca", "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"],
+            "to_sha256": ["9d6d1ac460c0d45df9bbc7a10b6cd40badcee45d6fad9ee95d84139726cf8790", "ab868dbff748a2b3db7fccf8377cdbc911c440a4a9f16d1acc9c3544a34cd361"],
+            "reason": "every session pull request edited NOW.md, which main also rewrote daily, so open pull requests conflicted within a day; sessions now close out with a note in now-notes/ that a new fold job writes into NOW.md on main, the check floor is the work's first commit so merging main never forces a new date, and the fold and the NOW.md audit commit as automation",
+            "source": "Ruling (Krish, 2026-10-28): closeout writes a note folded into NOW.md on merge, with regular objective audits of the NOW files; docs/proposals/2026-10-28-prs-merge-themselves.md",
+            "verified_by": "scripts/closeout/test-check.mjs (notes, fold on disk, work-began floor, proposal closeout lines), scripts/validate-repository-brain.mjs"
           }
         ]
       }
@@ -126,10 +135,12 @@
   "prior_owned": {
     ".github/workflows/harness-repository-context.yml": [
       "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
-      "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0"
+      "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0",
+      "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"
     ],
     ".claude/hooks/harness-closeout.mjs": [
-      "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68"
+      "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68",
+      "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca"
     ]
   }
 }

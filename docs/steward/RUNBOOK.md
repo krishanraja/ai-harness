@@ -2,7 +2,7 @@
 
 Status: Current
 Owner: Krish Raja
-Last verified: 2026-09-09 against `.github/workflows/docs-steward.yml` and `scripts/steward/`
+Last verified: 2026-10-28 against `.github/workflows/docs-steward.yml` and `scripts/steward/`
 
 This is the authoritative, versioned procedure. The GitHub Actions workflow
 points here and adds nothing of its own. It moved here, with the schema, the
@@ -68,6 +68,7 @@ not a reason to keep going.
 There is work if any of these is true: the digest lists at least one commit
 since `head` that touched something outside the steward's own files; the
 validator (`node .steward/scripts/steward/validate.mjs . --strict`) fails;
+`.steward/now-audit.md` lists a finding; `now-notes/` holds a closeout note;
 `NOW.md` has "What changed recently" bullets older than 30 days; the digest
 lists a stale stamp, an unlabelled duplicate, or two files claiming current.
 
@@ -112,6 +113,29 @@ For every pair of documents that both claim to be current and disagree:
   repo has none. Where the repo's archive is elsewhere, move there instead
   and record it in the LOG with an `archived` line.
 
+### Step 4b: fold closeout notes, then fix the audit
+
+Sessions close out with a note in `now-notes/`, and the repository's check
+workflow folds it into `NOW.md` the moment it reaches main (contract, "Session
+closeout"; Ruling, Krish, 2026-10-28). A note still there means that fold did
+not run. Run it first: `node .claude/hooks/harness-closeout.mjs --fold`. It
+writes the notes into `NOW.md` and removes them; those removals are the one
+deletion the steward makes. A note it reports as malformed stays for a person
+and goes in the job summary.
+
+Then fix every finding in `.steward/now-audit.md`, written before this run by
+`scripts/steward/audit-now.mjs` against the limits in `config/now-audit.json`
+(Ruling, Krish, 2026-10-28: regular objective audits so NOW.md never fills with
+outdated content). Each rule names its fix: roll old or surplus "What changed
+recently" bullets into the LOG, cut "Where it is right now" back to what is true
+now, keep one "Next" line, split or shorten any paragraph over the line limit,
+and correct every sentence that calls a merged or closed pull request open. Do
+not loosen a limit to pass; `config/now-audit.json` changes only in a reviewed
+commit. Re-run `node .steward/scripts/steward/audit-now.mjs .` before pushing;
+a finding it still reports goes in the job summary with the reason. The
+nightly fleet audit records the result, and a repository still failing after
+three days reaches Krish's digest.
+
 ### Step 5: write NOW.md
 
 Per `SCHEMA.md`. Roll every "What changed recently" bullet older than 30 days
@@ -132,10 +156,11 @@ Keep `never_publish` current: anything the repo's own docs mark private
 (client names, prices, machine names, sheet ids, credential names) goes on
 the list.
 
-Since 2026-10-22 every session closes out its own work in `NOW.md` (contract,
-"Session closeout"; enforced by `scripts/closeout/check.mjs` as Claude Code's
-Stop hook and as the `closeout` job on every pull request). So the steward is
-the backstop, not the first writer: keep what a session wrote unless the
+Since 2026-10-22 every session closes out its own work (contract, "Session
+closeout"; enforced by `scripts/closeout/check.mjs` as Claude Code's Stop hook
+and as the `closeout` job on every pull request), since 2026-10-28 with a note
+the fold writes into `NOW.md`. So the steward is the backstop, not the first
+writer: keep what a session wrote unless the
 record contradicts it, then re-stamp `head`. Keep exactly one
 `- North Star check (YYYY-MM-DD): ...` line under "What is next and what is
 waiting on Krish". Carry a `recalibration proposed` line forward unchanged
@@ -269,13 +294,14 @@ longest: it costs nothing except the habit of trusting the light.
 
 ## What the steward never does
 
-- Delete a file, rewrite the LOG, or edit anything in `docs/history/` other
-  than to add a banner on arrival.
+- Delete a file (except closeout notes the fold removes), rewrite the LOG, or
+  edit anything in `docs/history/` other than to add a banner on arrival.
 - Change prices, offers, ICP definitions, or commercial claims on its own
   judgement. Those come from `krishanraja/mindmake` canon
   (`project-documentation/00_NORTH_STAR.md`, `01_CANON.md`). If a repo doc
   contradicts canon, NOW.md says so and the run reports it.
 - Touch source, tests, config, lockfiles, workflows, or secrets.
 - Push to any branch but `main` (normal) or `steward/YYYY-MM-DD` (fallback).
-- Merge its own fallback pull request.
+- Merge its own fallback pull request. A fallback that a later steward run
+  replaced is closed by `scripts/merge-bot-prs.mjs` (Ruling, Krish, 2026-10-28).
 - Run longer than its budget to finish a repo. Report and stop.

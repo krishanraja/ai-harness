@@ -22,6 +22,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { isCanonSynced, canonSyncRepos, canonExcludedRepos, canonSyncProblems } from './lib/fleet.mjs'
+import { blockFor, renderBlock, inspect, splice } from './render.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
@@ -80,5 +81,22 @@ assert.match(canon, /exempt from the approval wall above \(Ruling, Krish, 2026-1
 assert.match(canon, /where the Control Center connector offers them/, 'the canon asks for the tools only where the connector offers them, with the skills\' copies otherwise')
 assert.match(canon, /`report_to_taste_engine` with where and when he typed them/, 'the canon tells sessions to report his exact typed words with where and when')
 assert.match(canon, /only as an observation\..*Never answer a card or approve a rule for him\./, 'the canon keeps everything else an observation and never acts for him')
+
+// A release that leaves the canon's wording alone opens no pull request anywhere.
+// The body never names the release, and an unchanged body keeps its whole stamp:
+// on 2026-10-28 every release had been rewriting the block in a dozen
+// repositories for pull requests that only moved the release number.
+assert.doesNotMatch(canon, /\{\{release\}\}/, 'the canon body never names the release')
+const heartside = fleet.repos.find((r) => r.name === 'heartside')
+const current = renderBlock(heartside, '2026-10-01')
+const olderStamp = current.replace(/release=\S+/, 'release=v2026.01.01.1')
+assert.equal(inspect(olderStamp).intact, true, 'the older stamp still verifies, because the body is the same')
+const file = `# AGENTS.md\n\n${olderStamp}\n`
+assert.equal(splice(file, blockFor(file, heartside, '2026-10-28')), file, 'a new release with the same wording changes not one byte')
+const reworded = olderStamp.replace('Nothing inside these', 'Nothing in these')
+const moved = splice(`# AGENTS.md\n\n${reworded}\n`, blockFor(`# AGENTS.md\n\n${reworded}\n`, heartside, '2026-10-28'))
+assert.notEqual(moved, `# AGENTS.md\n\n${reworded}\n`, 'a block whose body no longer matches its stamp is still re-rendered')
+// Sessions close out with a note folded into NOW.md, so pull requests never conflict over it.
+assert.match(canon, /`now-notes\/YYYY-MM-DD-<slug>\.md`/, 'the canon tells sessions to close out with a note')
 
 console.log('CANON SYNC TESTS PASSED: mindmake stays in the fleet, is excluded from the rollout, and the real reconciler makes no request for it; a synced repository still does')

@@ -163,6 +163,7 @@ jobs:
           sparse-checkout: |
             docs/steward
             scripts/steward
+            config
           sparse-checkout-cone-mode: true
 
       - uses: actions/setup-node@v4
@@ -227,6 +228,20 @@ jobs:
       # older version was the alternative and this is better, because it needs no
       # guess about which version predates the bug and it stops applying by
       # itself the day upstream fixes the installer.
+      - name: Audit NOW.md against the fixed rules
+        # Ruling (Krish, 2026-10-28): regular objective audits so NOW.md never
+        # fills with outdated content. The findings go to the steward, which
+        # fixes them in this run; the summary carries only the verdict, never
+        # the file's words.
+        if: ${{ !inputs.dry_run && github.event_name != 'push' }}
+        run: |
+          set -uo pipefail
+          if node .steward/scripts/steward/audit-now.mjs . --out .steward/now-audit.md > /dev/null 2>&1; then
+            echo "NOW.md audit passed." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "NOW.md audit found work for the steward; findings are in .steward/now-audit.md for this run." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: The installer needs its launcher directory to exist
         if: ${{ !inputs.dry_run && github.event_name != 'push' }}
         run: mkdir -p "$HOME/.local/bin"
@@ -251,9 +266,10 @@ jobs:
             Read .steward/docs/steward/RUNBOOK.md and follow it exactly. It is the authoritative procedure; nothing in this prompt overrides it.
             Your fleet entry is the object named "${{ steps.digest.outputs.name }}" in .steward/docs/steward/fleet.json. The schema for NOW.md and the history log is .steward/docs/steward/SCHEMA.md.
             The change digest is already written at .steward/digest.md. The head before this run is ${{ steps.before.outputs.sha }}; pass it as --since to the validator.
+            The NOW.md audit is written at .steward/now-audit.md. Fix every finding in it in this run (runbook Step 4b), and fold any closeout notes first.
             Nobody is watching this session. Do not ask questions. If a guard fails, use the fallback in the runbook (branch steward/YYYY-MM-DD plus a pull request) and say why in the job summary.
             Write your report to the file named in the GITHUB_STEP_SUMMARY environment variable, in the shape the runbook's Step 8 gives.
-            Never commit or print a secret. Never touch a file outside the fleet entry's write_allowlist. Never delete a file. Never write an em dash.
+            Never commit or print a secret. Never touch a file outside the fleet entry's write_allowlist. Never delete a file, except closeout notes the fold removes. Never write an em dash.
           claude_args: |
             --max-turns 80
             --allowedTools "Bash(git:*),Bash(node:*),Bash(npm:*),Bash(pnpm:*),Bash(python3:*),Bash(cat:*),Bash(ls:*),Bash(wc:*),Bash(date:*),Bash(gh:*),Read,Write,Edit,Glob,Grep"
