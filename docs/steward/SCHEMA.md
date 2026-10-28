@@ -113,8 +113,9 @@ em dashes. Product nouns stay. British spelling.
 Size and freshness are audited every night against `config/now-audit.json`
 (`scripts/steward/audit-now.mjs`; Ruling, Krish, 2026-10-28): at most 16,000
 characters and no line over 1,500, at most 12 "What changed recently" bullets
-and 8 in "Where it is right now", `as_of` and the North Star check no older
-than 7 days, no unfolded closeout note, and no sentence that calls a merged or
+and 8 in "Where it is right now", `as_of` no older than 7 days, exactly one
+North Star check (a warning past 7 days, since only a session may re-date it),
+no unfolded closeout note, and no sentence that calls a merged or
 closed pull request open.
 
 ### Closeout notes: `now-notes/YYYY-MM-DD-<slug>.md`

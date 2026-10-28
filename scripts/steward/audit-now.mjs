@@ -12,7 +12,8 @@
  * never a model's opinion, so two runs on the same input always agree:
  *
  *   as_of_stale           as_of older than as_of_max_age_days
- *   north_star_check      the check line missing, or older than north_star_check_max_age_days
+ *   north_star_check      the check line missing or duplicated; older than
+ *                         north_star_check_max_age_days is a warning, because only a session may re-date it
  *   too_long              over max_chars or max_lines, or one line over max_line_chars
  *   recent_too_old        a "What changed recently" bullet older than recent_max_age_days
  *                         (the schema's rolling 30 days: roll it into docs/history/LOG.md)
@@ -119,7 +120,10 @@ export function auditNow({ text, today, notes = [], unreconciled = null, prState
   const waiting = section(lines, WAITING) || []
   const check = waiting.map((l) => l.trim().match(/^- North Star check \((\d{4}-\d{2}-\d{2})\):/)).filter(Boolean)
   if (check.length !== 1) add('north_star_check', check.length ? `${check.length} North Star check lines; keep exactly one.` : 'No North Star check line under "What is next and what is waiting on Krish".')
-  else if (days(check[0][1], today) > L.north_star_check_max_age_days) add('north_star_check', `The North Star check is dated ${check[0][1]}, ${days(check[0][1], today)} days ago (limit ${L.north_star_check_max_age_days}).`)
+  // Only a session that re-read the North Star may re-date the line, never the
+  // steward, so an old one in a quiet repository is a warning: failing it would
+  // escalate to Krish something no automation is allowed to fix.
+  else if (days(check[0][1], today) > L.north_star_check_max_age_days) add('north_star_check', `The North Star check is dated ${check[0][1]}, ${days(check[0][1], today)} days ago (limit ${L.north_star_check_max_age_days}); the next session re-dates it.`, 'warn')
 
   const chars = String(text).length
   const longest = lines.reduce((m, l, i) => (l.length > m.len ? { len: l.length, at: i + 1 } : m), { len: 0, at: 0 })

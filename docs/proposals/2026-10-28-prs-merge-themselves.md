@@ -8,7 +8,7 @@
 
 ## What this moves
 
-The North Star's first part: "every ruling is learned once, shipped everywhere". A ruling reaches a repository only when that repository's canon-sync pull request merges, and nothing merged them but Krish. It also moves the second part, a fleet that runs without his hours, because he was the merge queue for pull requests nobody needed to read.
+The North Star's first part: "every ruling is learned once, shipped everywhere". A ruling reaches a repository only when that repository's canon-sync pull request merges, and nothing merged them but Krish. It also moves the second part, a fleet that runs without his hours, because he was the merge queue for pull requests nobody needed to read. Commercially it is capacity, not revenue: it takes Krish off a queue of a dozen or more mechanical merges a week so those hours go to taste, rooms and decisions, and it keeps every venture repository's NOW.md, the file content and lead agents read first, short and true.
 
 ## What was found
 

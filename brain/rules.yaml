@@ -162,6 +162,7 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
     status: live
+    supersedes: [session-closeout.before-ending-update-the]
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md
     text_sha: "e27cbd6d8c73"
@@ -195,11 +196,11 @@ contract_rules:
     status: live
   - id: session-closeout.plan-and-handoff-documents
     file: contract/krish-operating-contract.md
-    text_sha: "fd183eb0c416"
+    text_sha: "9189d06a24e2"
     first_seen: "2026-10-22"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
     history:
       - text_sha: "90833093b487"
         valid_until: "2026-10-22"
@@ -208,6 +209,11 @@ contract_rules:
           ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
       - text_sha: "46f8cc1289e2"
         valid_until: "2026-10-22"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"
+      - text_sha: "fd183eb0c416"
+        valid_until: "2026-10-28"
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-22-session-closeout-and-one-system.md"

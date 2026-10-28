@@ -66,7 +66,7 @@ jobs:
     # pull requests never edit NOW.md at once (Ruling, Krish, 2026-10-28).
     # Every attempt folds afresh from the newest main, so a steward or another
     # fold landing first never leaves a conflicted NOW.md.
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
