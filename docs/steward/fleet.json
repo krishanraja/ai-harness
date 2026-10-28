@@ -278,7 +278,7 @@
       "docs_roots": [
         "docs"
       ],
-      "state_doc": "docs/HANDOFF.md",
+      "state_doc": "NOW.md",
       "history_dir": "docs/history",
       "truth_files": [],
       "docs_check": null,

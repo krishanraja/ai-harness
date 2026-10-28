@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-10-28
+
+- stamped at `e7040e8`: `NOW.md` head moved from `5aa5e31`. PR 170 (sync guard, `locked-revision` bytecode), PR 141 (`tools-access` rule 11) and PR 172 (Heartside routing) merged; releases v2026.10.27.1 and v2026.10.27.2 registered. No bullets older than 30 days to roll.
+
 ## 2026-10-27
 
 - stamped at `5aa5e31`: `NOW.md` head moved from `fc5d64c`. Release v2026.10.26.1 (source `2de59f6`, PR 165) was registered, so the release sentence, the two-way taste bullet and the LORIMER heartbeat figures were brought to the registry and `state/heartbeats.json`. The Epidemic Sound bullets from the 2026-10-26 session were kept. Four 2026-09-25 bullets rolled out below.
