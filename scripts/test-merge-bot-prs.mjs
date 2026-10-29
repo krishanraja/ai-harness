@@ -12,7 +12,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { blockFor, splice } from './render.mjs'
-import { BotPrs, kindOf, checksGreen, canonPlan, machinePlan, stewardPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
+import { BotPrs, kindOf, checksGreen, canonPlan, machinePlan, stewardPlan, orphanPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
@@ -70,7 +70,7 @@ assert.ok(targets(fleet).some((r) => r.name === 'ai-harness') && !targets(fleet)
 const BASE_TEXT = '# AGENTS.md\n\nThe repository\'s own words.\n'
 const WANTED = splice(BASE_TEXT, blockFor(BASE_TEXT, heartside))
 
-function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {} }) {
+function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {}, branches = {}, allPulls = {} }) {
   const calls = []
   const key = (repo, n) => `${repo}#${n}`
   return {
@@ -83,6 +83,9 @@ function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {
     async pullFiles(repo, n) { return prFiles[key(repo, n)] || [] },
     async checksFor(repo, sha) { return checks[`${repo}:${sha}`] || { runs: [], statuses: {} } },
     async recentCommits(repo) { return commits[repo] || [] },
+    async branchesWithPrefix(repo, prefix) { return (branches[repo] || []).filter((b) => b.startsWith(prefix)) },
+    async listPulls(repo, { head }) { return (allPulls[repo] || []).filter((p) => p.head?.ref === head) },
+    async openPull(repo, opts) { calls.push(['open', repo, opts]); return { number: 999, html_url: `https://github.com/${OWNER}/${repo}/pull/999` } },
     async rebuildBranch(...a) { calls.push(['rebuild', ...a]); return { sha: 'rebuilt' } },
     async updateBranch(...a) { calls.push(['update-branch', ...a]) },
     async mergePull(repo, n, opts) { calls.push(['merge', repo, n, opts]); files[`${repo}:merged-${n}:${Object.keys(files).find((k) => k.startsWith(`${repo}:${opts.sha}:`))?.split(':')[2]}`] = undefined; return { merged: true, sha: `merged-${n}` } },
@@ -171,6 +174,20 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
   assert.equal(r.waiting.map((w) => w.number).includes(4), true, 'a fallback with no later run waits on Krish')
 }
 
+// Orphan steward fallback branches: the newest gets a pull request, older ones are only reported.
+assert.deepEqual(orphanPlan({ orphans: ['steward/2026-10-19', 'steward/2026-10-29', 'steward/2026-10-27-b'], commits: [] }), { open: 'steward/2026-10-29', superseded: ['steward/2026-10-19', 'steward/2026-10-27-b'] })
+assert.deepEqual(orphanPlan({ orphans: ['steward/2026-10-27'], commits: [{ sha: 'abcdef12', subject: 'docs(steward): 2026-10-28 re-stamp', date: '2026-10-28' }] }), { open: null, superseded: ['steward/2026-10-27'] }, 'a later steward commit replaces even the newest')
+assert.deepEqual(orphanPlan({ orphans: [], commits: [] }), { open: null, superseded: [] })
+{
+  const gh = fakeGh({ pulls: { 'content-engine': [] }, branches: { 'content-engine': ['steward/2026-10-19', 'steward/2026-10-29', 'steward/2026-10-27-b', 'claude/x'] }, allPulls: { 'content-engine': [{ number: 5, head: { ref: 'steward/2026-10-19' } }] } })
+  const r = new BotPrs(gh, { fleet, now: NOW }); await r.repo(fleet.repos.find((x) => x.name === 'content-engine'))
+  const opened = gh.calls.filter((c) => c[0] === 'open')
+  assert.equal(opened.length, 1, 'one pull request, for the newest orphan only')
+  assert.equal(opened[0][2].head, 'steward/2026-10-29'); assert.match(opened[0][2].title, /^docs\(steward\): 2026-10-29 needs review$/)
+  assert.deepEqual(r.results.filter((x) => x.action === 'orphan-superseded').map((x) => x.reason), ['steward/2026-10-27-b'], 'a branch that already had a pull request is not an orphan')
+  assert.equal(gh.calls.filter((c) => c[0] !== 'open').length, 0, 'nothing is deleted or closed')
+}
+
 // The wait loop merges what turns green, and stops at its deadline.
 {
   const files = { [`heartside:base1:${T}`]: BASE_TEXT, [`heartside:head58:${T}`]: WANTED, [`heartside:merged-58:${T}`]: WANTED }
@@ -187,4 +204,4 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
   assert.equal(stuck.awaiting.length, 1, 'no time, no waiting')
 }
 
-console.log('BOT PR MERGER OK: kinds, checks, canon, machine evidence and steward plans, merge at the checked head with read-back, holds, closes and the wait loop')
+console.log('BOT PR MERGER OK: kinds, checks, canon, machine evidence and steward plans, orphan fallbacks, merge at the checked head with read-back, holds, closes and the wait loop')

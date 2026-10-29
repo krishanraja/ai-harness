@@ -124,7 +124,10 @@ let entry = null
 if (fleetPath) {
   const fleet = JSON.parse(readFileSync(fleetPath, 'utf8'))
   const name = repoName || basename(git('rev-parse', '--show-toplevel'))
-  entry = fleet.repos.find((r) => r.name === name)
+  // A repository renamed on GitHub keeps its fleet name; the workflow passes the
+  // GitHub name, so an entry also answers to its aliases, ignoring case.
+  const key = String(name).toLowerCase()
+  entry = fleet.repos.find((r) => r.name.toLowerCase() === key || (r.aliases || []).some((a) => a.toLowerCase() === key))
   if (!entry) fail(`fleet: no entry named "${name}" in ${fleetPath}`)
   else entry = { ...fleet.defaults, ...entry }
 }
