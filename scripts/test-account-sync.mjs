@@ -58,12 +58,18 @@ test('every run starts from a fresh tab at the skills page, never the page a tab
   assert.match(sync, /never work from whatever page a tab happens to show/)
 })
 
-test('the routine proves the browser is signed in to its own account before changing anything', () => {
-  assert.match(sync, /Prove the browser is signed in to this same account/)
-  assert.match(sync, /stop with `wrong-account`/)
-  assert.match(sync, /Two empty lists prove nothing/)
+test('the routine acts only on an account Control Center confirms is Krish\'s, before changing anything', () => {
+  assert.match(sync, /Prove the browser is signed in to one of Krish's accounts/)
+  assert.match(sync, /Call Control Center `check_krish_account` with that email/)
+  assert.match(sync, /stop with `not-krish-account`/)
   assert.match(sync, /stop with `account-unproven`/)
   assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 4. Remove'), 'the account is proved before any deletion')
+  assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 5. Make'), 'the account is proved before the instructions change')
+})
+
+test('the report names the synced account by reference, never by email or task label', () => {
+  assert.match(sync, /the `account_ref` from step 3/)
+  assert.ok(!/account label from your own task prompt/.test(sync))
 })
 
 test('the routine handles a missing browser, a lazy list and a delete confirmation', () => {

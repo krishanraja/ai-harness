@@ -21,19 +21,17 @@ Every run starts from nothing. Assume no tab is open, no page is loaded, and not
 - Open a new tab at `https://claude.ai/customize/skills`. Never reuse a tab that was already open, and never work from whatever page a tab happens to show. If the page does not finish loading, reload once. If it still does not load, stop with `page-unavailable`.
 - If claude.ai shows a sign-in page instead, stop with `sign-in-needed`. Never type a password, a code or an email, and never sign in or out for Krish.
 
-## 3. Prove the browser is signed in to this same account
+## 3. Prove the browser is signed in to one of Krish's accounts
 
-The browser's sign-in can belong to a different claude.ai account from the one this routine runs in. Acting on the wrong account is the worst mistake this routine can make, so prove it is the same one before changing anything.
+Krish may be signed in to either of his two claude.ai accounts, in either browser, on any machine, and the account this task runs in may not be the one the browser shows. That is fine: both accounts get exactly the same treatment, so act on whichever of his accounts the browser shows. What must never happen is a change to an account that is not his.
 
-- **Account check.** If you know the email address of the account you are running in, open `https://claude.ai/settings/account` in your tab and read the email shown there.
-  - If the two match, the account is proved.
-  - If they differ, stop with `wrong-account`.
-- **Skill-list check.** If you do not know your own account's email, compare skill lists instead. List this session's own enabled skills with the skill-listing tool you have (for example `ListSkills`). Compare their names with the names on the skills page.
-  - Equal sets prove the account.
-  - Any difference means stop with `wrong-account`.
-  - Two empty lists prove nothing.
-- If neither check can be made, stop with `account-unproven`.
-- Never copy the email into a report or anywhere else.
+- In your tab, open `https://claude.ai/settings/account` and read the email address shown as signed in.
+- Call Control Center `check_krish_account` with that email.
+  - If it returns `krish: true`, keep its `account_ref`; that is the account you are syncing.
+  - If it returns `krish: false`, stop with `not-krish-account`.
+  - If you cannot read an email on the page, or the call fails, stop with `account-unproven`.
+- Never copy the email into a report or anywhere else. The `account_ref` names the account instead.
+- Return to `https://claude.ai/customize/skills` in the same tab.
 
 ## 4. Remove uploaded copies of harness skills
 
@@ -60,7 +58,7 @@ The browser's sign-in can belong to a different claude.ai account from the one t
 - Close the tabs you opened.
 - Call Control Center `record_harness_observation` once, with surface `claude-ai`:
   - kind `successful_pattern` when every step passed, or `failure` with the stop reason above;
-  - the account label from your own task prompt;
+  - the `account_ref` from step 3, so a run on either account on any machine is counted against the account it actually synced;
   - the harness commit from step 1;
   - how many skills you deleted;
   - whether the instructions changed.
@@ -69,6 +67,6 @@ The browser's sign-in can belong to a different claude.ai account from the one t
 
 ## Rules that always hold
 
-- Nothing here sends, posts or spends. Deletions happen only under the 2026-10-29 ruling above, and only for the names step 1 returned on this run, after step 3 proved the account.
+- Nothing here sends, posts or spends. Deletions happen only under the 2026-10-29 ruling above, and only for the names step 1 returned on this run, after step 3 proved the account is Krish's.
 - A run that stops part way is safe to repeat. The next run reads everything afresh and finishes what is left.
 - This file is the routine. The scheduled task only says to read it, so changing this file changes the routine, with no edit to the task.
