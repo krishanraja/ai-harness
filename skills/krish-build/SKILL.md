@@ -57,6 +57,9 @@ Reject anything that adds a paradigm without earning it. A system already runnin
 **Learn from wins, not just losses.** [IN-PLAY]
 Correction loops that fire only on failure are half a loop. When something works, capture why (a pattern, a skill candidate, a reusable engine) through the same proposal-and-approval lane as fixes.
 
+**Spend prepaid component credits first on interface work.** [IN-PLAY]
+When building or redesigning a UI, search 21st Dev for an existing component before hand-rolling one, and use its monthly AI generation credits (500, reset on the 1st, wiped if unused) before any other paid generator; `krish-design` still owns the taste call. Ruling (Krish, 2026-10-29): 21st Dev is routed to build work and reviewed on 30 Nov; if under a quarter of a month's credits are being used by then, recommend cancelling it.
+
 **Use a stage conveyor when the work earns one.** [IN-PLAY]
 For repeatable work with several derived artifacts, resumable or metered execution, independent gates, or several specialised responsibilities, make the repository an executable conveyor of bounded stages. Each stage owns its contract, implementation, checks, and learned failure classes. Keep one thin orchestrator and shared guards; do not accumulate the workflow in one Markdown file, duplicate the whole implementation for every revision, or patch identical downstream symptoms before checking their common upstream producer. For a simple app or one-step build, keep the direct path. Read `references/stage-conveyor.md` before designing or materially changing a qualifying pipeline, and run `scripts/check-stage-conveyor.mjs` when the repository adopts its manifest.
 
