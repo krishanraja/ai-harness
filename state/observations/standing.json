@@ -131,9 +131,8 @@
     "klass": "heartbeat",
     "subject": "harness-sync-lorimer",
     "first_seen": "2026-09-09",
-    "open": false,
-    "reopened": "2026-10-16",
-    "closed_at": "2026-10-27"
+    "open": true,
+    "reopened": "2026-10-29"
   },
   "heartbeat:harness-sync-surface": {
     "klass": "heartbeat",
@@ -265,6 +264,12 @@
     "klass": "surface-parity",
     "subject": "claude-secondary-cloud",
     "first_seen": "2026-10-27",
+    "open": true
+  },
+  "freshness:content-corpus": {
+    "klass": "freshness",
+    "subject": "content-corpus",
+    "first_seen": "2026-10-29",
     "open": true
   }
 }
