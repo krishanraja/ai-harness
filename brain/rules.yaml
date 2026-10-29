@@ -2533,11 +2533,17 @@ skill_sections:
   - id: krish-principles.working-with-krish
     file: skills/krish-principles/SKILL.md
     heading: "Working with Krish"
-    text_sha: "8f9d085a1d04"
+    text_sha: "7fed6dc7a449"
     first_seen: "2026-10-29"
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-29-working-with-krish.md"
+    history:
+      - text_sha: "8f9d085a1d04"
+        valid_until: "2026-10-29"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-29-working-with-krish.md"
     status: live
   - id: krish-principles.stability-tags
     file: skills/krish-principles/SKILL.md

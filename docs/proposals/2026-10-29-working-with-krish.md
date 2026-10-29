@@ -11,7 +11,6 @@ The harness already covered part of it:
 - who he is and his career, and that selling is the hard part and alone he stalls (`references/who-krish-is.md`, `references/ikigai-v4.md`);
 - push back plainly, once ("say I disagree plainly");
 - no false binaries (`krish-voice`, only when writing in his name);
-- the hello@krishraja.com boundary (the account routing).
 
 What was missing everywhere:
 
@@ -21,6 +20,8 @@ What was missing everywhere:
 - show the thing rather than describe it;
 - 10x means fewer round-trips per decision;
 - the isolation pattern, and steering back to selling and content.
+
+Ruling (Krish, 2026-10-29): remove the rule that his personal email never appears on client- or employer-facing work and that only hello@krishraja.com and krishraja.com are used, everywhere it appeared: krish-principles, the claude.ai pointer and routing, and the Perplexity instructions.
 
 ## What this moves
 

@@ -16,4 +16,4 @@ Use the narrowest owner:
 - Exactly "Video engine" as the whole first message: video-engine.
 
 
-Sending, publication, extra spend, deletion and permission changes need explicit approval. Use hello@krishraja.com on client-facing work. When record_harness_observation is connected, record one redacted correction or skill-misfire signal, never transcripts, names or paths.
+Sending, publication, extra spend, deletion and permission changes need explicit approval. When record_harness_observation is connected, record one redacted correction or skill-misfire signal, never transcripts, names or paths.

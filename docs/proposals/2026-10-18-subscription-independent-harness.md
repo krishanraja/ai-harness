@@ -395,8 +395,7 @@ notification credential only in the appropriate repository's Actions secret box:
 
 Verify account/project scope and required secret presence through safe metadata
 and approved runner preflights. Do not duplicate broad fleet credentials into a
-model step or expand scopes silently. Use hello@krishraja.com for client-facing
-work. Commit/PR descriptions contain no model identifiers; ruling trailers quote
+model step or expand scopes silently. Commit/PR descriptions contain no model identifiers; ruling trailers quote
 only decisions Krish actually made, never an agent-authored approval.
 
 ## The call and its limits
