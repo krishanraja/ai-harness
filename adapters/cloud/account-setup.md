@@ -39,7 +39,7 @@ Krish may be signed in to either of his two claude.ai accounts, in either browse
 
 - Return to `https://claude.ai/customize/skills` in the same tab. Scroll to the end of the list, so that skills loaded only as the list is scrolled are read too. Read every skill name.
 - A skill will be deleted only when its name exactly equals a name from step 1: whole name, same case. Every other skill stays, including the ones Anthropic provides and any Krish made himself.
-- Open `Settings > Profile` and read the Instructions for Claude field.
+- Open `Settings > Account` and read the Instructions for Claude field.
 - Show Krish, in this chat:
   - the exact list of skills that match and will be deleted;
   - the list of skills that will stay;
@@ -49,8 +49,8 @@ Krish may be signed in to either of his two claude.ai accounts, in either browse
 ## 5. Make the approved change and read it back
 
 - Delete each approved skill one at a time with that skill's own delete control.
-  - When a confirmation appears, check that it names that same skill, then confirm.
-  - If it names anything else, cancel and stop with `unexpected-confirmation`.
+  - The confirmation does not name the skill, so before confirming check that the open menu belongs to that skill's own row, and that the dialog only asks to remove a skill.
+  - After confirming, check that the list lost exactly that one name. If the dialog says anything else, or any other name disappears, stop with `unexpected-confirmation`.
   - If the page has no delete control where you expect one, or looks different from what is described here, stop with `page-changed`.
 - Reload the skills page, scroll to the end, and read the list again. If any approved name remains, stop with `delete-not-confirmed`.
 - If Krish approved the instructions change, replace the whole field with the fixed pointer, save, reload, and read it back. If it does not equal the pointer, stop with `instructions-not-confirmed`.

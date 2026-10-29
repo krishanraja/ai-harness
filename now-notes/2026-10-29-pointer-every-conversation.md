@@ -1,0 +1,3 @@
+Status: The claude.ai pointer now loads the live routing on every conversation, short tasks included, after an end-to-end test in one account showed that a one-line edit, a single-function fix, a correction and a decision recall all skipped routing under the old "substantive conversation" wording. The setup doc now matches the real page: the remove dialog does not name the skill, so each removal is checked by the list losing exactly that one name, and the field lives under Settings > Account.
+Next: After merge, replace the Instructions for Claude field in the set-up account with the new pointer and re-run the four missed cases.
+North Star check (2026-10-29): holds.
