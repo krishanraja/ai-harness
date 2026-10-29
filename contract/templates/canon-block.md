@@ -45,8 +45,7 @@ router. One primary writer; validators may stack after it, competing writers may
 {{who_krish}}
 
 **Where the rest lives.** The operating contract, the routing contract and the
-{{skill_count}} curated skills are in `krishanraja/ai-harness`. On a machine with the
-harness installed the same skills are under the user skills root, and the local copy is
-authoritative for reading; the repository is authoritative for what is correct.
+{{skill_count}} curated skills are in `krishanraja/ai-harness`. On a machine with the harness installed the same skills are under the user skills root, and the local copy is
+authoritative for reading; the repository is authoritative for what is correct. Where none is installed (claude.ai, a cloud session), read each skill live with Control Center `get_skill`.
 
 **This repository's own rules:** {{rules_files}}

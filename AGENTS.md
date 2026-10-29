@@ -16,7 +16,7 @@ Read `CURRENT.md` first, then read `NOW.md`.
 
 Contracts: `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`.
 
-<!-- krish-canon:start release=v2026.10.27.2 sha=fce18a042711 rendered=2026-10-28 -->
+<!-- krish-canon:start release=v2026.10.29.1 sha=ee033c696092 rendered=2026-10-29 -->
 ## Krish canon
 
 Rendered from `krishanraja/ai-harness`; the start marker names the release. Nothing inside these
@@ -70,9 +70,8 @@ in the harness. What he works on is live, never copied here; read it from Contro
 https://controlcenter.krishraja.com/api/canon/KRISH.md (and `PORTFOLIO.md` beside it).
 
 **Where the rest lives.** The operating contract, the routing contract and the
-30 curated skills are in `krishanraja/ai-harness`. On a machine with the
-harness installed the same skills are under the user skills root, and the local copy is
-authoritative for reading; the repository is authoritative for what is correct.
+30 curated skills are in `krishanraja/ai-harness`. On a machine with the harness installed the same skills are under the user skills root, and the local copy is
+authoritative for reading; the repository is authoritative for what is correct. Where none is installed (claude.ai, a cloud session), read each skill live with Control Center `get_skill`.
 
 **This repository's own rules:** `AGENTS.md`, `contract/krish-operating-contract.md`, `contract/skill-routing-contract.md`
 <!-- krish-canon:end -->
