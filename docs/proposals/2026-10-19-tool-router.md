@@ -1,5 +1,7 @@
 # Tool selection belongs in a skill
 
+> Superseded on 2026-10-29 for admission: tool-router is a production skill (Ruling, Krish, 2026-10-29: tool-router is included everywhere; commit `666252d3b25f`, record `docs/proposals/2026-10-29-skills-follow-main.md`). Where this file says the candidate stays outside `production_active` or must not be represented as admitted, that no longer governs; its pending canaries are now post-admission checks.
+
 Ruling (Krish, 2026-10-19): create a reusable skill that invokes under relevant conditions or explicitly; preserve personal account instructions instead of embedding the tool workflow there. This correction follows repeated requests to explain how new sessions discover, select and use available tools.
 
 `tool-router` owns capability selection and useful application. `tools-access` owns authenticated identity/scope/target checks; domain/provider skills own production; `verification-loop` owns proof. The inactive `tool-economics` proposal remains historical and is not a second active selector. Dynamic capabilities and execution stay in the existing Control Center MCP/gateway.
