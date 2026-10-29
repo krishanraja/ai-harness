@@ -3132,8 +3132,8 @@ skill_sections:
     text_sha: "fc9bcfd9a766"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tool-router.discover-what-this-session
     file: skills/tool-router/SKILL.md
@@ -3141,8 +3141,8 @@ skill_sections:
     text_sha: "1ad60f33b624"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tool-router.match-value-to-the
     file: skills/tool-router/SKILL.md
@@ -3150,8 +3150,8 @@ skill_sections:
     text_sha: "cfd698d645c3"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tool-router.reach-for-the-selected
     file: skills/tool-router/SKILL.md
@@ -3159,8 +3159,8 @@ skill_sections:
     text_sha: "637e85e1c3a5"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tool-router.cost-and-limits-without
     file: skills/tool-router/SKILL.md
@@ -3168,8 +3168,8 @@ skill_sections:
     text_sha: "6bf2aef9435a"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tool-router.cloud-access-and-authority
     file: skills/tool-router/SKILL.md
@@ -3177,8 +3177,8 @@ skill_sections:
     text_sha: "108a8eeecaec"
     first_seen: "2026-10-29"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-19-tool-router.md"
+      kind: ruling
+      ref: "666252d3b25f"
     status: live
   - id: tools-access.non-negotiable-rules
     file: skills/tools-access/SKILL.md
