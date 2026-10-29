@@ -2214,13 +2214,17 @@ skill_sections:
   - id: krish-build.1-build-doctrine
     file: skills/krish-build/SKILL.md
     heading: "1. Build doctrine"
-    text_sha: "87fa07821840"
+    text_sha: "5b9eafdf5243"
     first_seen: "2026-09-07"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
-      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+      kind: ruling
+      ref: "b1a1737e5774"
     history:
+      - text_sha: "87fa07821840"
+        valid_until: "2026-10-29"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
       - text_sha: "78abcd686990"
         valid_until: "2026-09-15"
         source:
