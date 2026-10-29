@@ -62,6 +62,13 @@ test('the instructions field is a fixed pointer that loads the routing live', ()
   for (const core of ['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief']) assert.ok(instructions.includes(core), core)
 })
 
+test('the pointer loads the routing on every conversation, short tasks included', () => {
+  // 2026-10-29 e2e: "substantive" let one-line edits, a code fix, a correction and a decision recall skip routing.
+  assert.match(instructions, /At the start of every conversation, short tasks included/)
+  assert.match(instructions, /skip it only when the whole message is a greeting or thanks/)
+  assert.doesNotMatch(instructions, /substantive/)
+})
+
 test('the served routing names every production skill, so the pointer never has to', () => {
   const registry = read('state/skill-registry.yaml')
   const block = registry.match(/^production_active:\n((?:  - .+\n)+)/m)
@@ -93,7 +100,7 @@ test('the report never carries the email', () => {
 test('the routine handles a missing browser, a lazy list and a delete confirmation', () => {
   assert.match(sync, /stop with `no-browser`/)
   assert.match(sync, /Scroll to the end of the list/)
-  assert.match(sync, /check that it names that same skill/)
+  assert.match(sync, /check that the list lost exactly that one name/)
   assert.match(sync, /safe to run again/)
 })
 
