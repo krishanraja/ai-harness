@@ -139,13 +139,11 @@ jobs:
       - name: The cloud upload still refuses what it should
         run: node scripts/test-cloud-upload.mjs
 
-      # The claude.ai accounts hold loaders, never skills (Ruling, Krish,
-      # 2026-10-29). A description change that skips its loader would leave
-      # an account routing on old words, so the committed loaders must match.
-      - name: The claude.ai loaders match skills/
-        run: |
-          node scripts/build-cloud-loaders.mjs --check
-          node scripts/test-cloud-loaders.mjs
+      # The claude.ai accounts hold no harness skills; a routine in each keeps
+      # them that way and pastes the served instructions (Ruling, Krish,
+      # 2026-10-29). Its steps must keep deleting exact harness names only.
+      - name: The claude.ai account routine stays within its authority
+        run: node scripts/test-account-sync.mjs
 
       - name: The shared event importer is deterministic and fail-closed
         run: node scripts/test-import-harness-events.mjs

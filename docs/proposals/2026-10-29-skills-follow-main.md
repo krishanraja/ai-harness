@@ -11,15 +11,18 @@ Both are recorded in commit `666252d3b25f`, which the six `tool-router.*` rows i
 
 The North Star's first part: "every ruling is learned once, shipped everywhere". On 2026-10-29, seven of the 29 skills in the one readable claude.ai account were behind main, because each skill had been uploaded by hand. The second account had never been read back. A ruling merged to main reached neither account until someone uploaded it.
 
-## Why loaders
+## How the accounts stay current
 
-- Both accounts are personal. claude.ai syncs plugins from GitHub only for Team and Enterprise organizations, and the Skills API writes only to API workspaces.
-- So the accounts hold one loader per production skill. Each loader carries the skill's own name and description, plus a body that reads the skill live through Control Center's `get_skill` (krishanraja/control-center#604), which reads ai-harness main at call time.
-- A loader changes only when a description does. `scripts/build-cloud-loaders.mjs --check` fails the steward check on drift, so that one upload is never silent.
+- Both accounts are personal. claude.ai syncs plugins from GitHub only for Team and Enterprise organizations, and the Skills API writes only to API workspaces. No tool in a Claude session writes to the account's skill catalogue.
+- So the accounts hold none of the harness skills. Control Center's `get_skill` (krishanraja/control-center#604) serves each skill, the account instructions and the routine's steps live from ai-harness main.
+- Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. It replaces the loader design merged in #180, which still needed an upload whenever a description changed.
+- Ruling (Krish, 2026-10-29): the routine may delete, from both accounts, uploaded skills whose names are exactly the harness production names, and nothing else.
 
 ## What is still owed
 
-A one-time cut-over in each account: replace the uploaded skills with the loaders, paste `adapters/cloud/account-instructions.md`, and commit the `get_skill` read-back to `state/cloud-checks/`. Until that record exists, both surfaces stay recorded as stale.
+Krish creates the scheduled task once in each account's Cowork (daily is enough), and signs that account's built-in browser in to claude.ai if it is not already. The task's whole prompt, with the label changed for the second account:
+
+> Account sync for the primary account. Call Control Center get_skill with name "account" and file "sync", and follow the returned text exactly, using your built-in browser. The routine's first run removes the old copies and pastes the instructions; its observation is the read-back.
 
 ## Known overlap, not resolved here
 
