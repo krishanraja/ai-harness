@@ -37,6 +37,7 @@
     },
     {
       "name": "mm-ctrl",
+      "aliases": ["mindmake-ctrl"],
       "product": "CTRL by Mindmake",
       "docs_roots": [
         "docs",

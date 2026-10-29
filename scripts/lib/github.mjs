@@ -189,6 +189,12 @@ export class Gh {
     return out
   }
 
+  /** Branch names under a prefix, e.g. "steward/". */
+  async branchesWithPrefix(repo, prefix) {
+    const r = await this.req('GET', `/repos/${this.owner}/${repo}/git/matching-refs/heads/${prefix.split('/').map(encodeURIComponent).join('/')}`)
+    return r.map((ref) => ref.ref.replace(/^refs\/heads\//, ''))
+  }
+
   /** The newest commits on a branch: [{ sha, subject, date }]. */
   async recentCommits(repo, branch, count = 30) {
     const r = await this.req('GET', `/repos/${this.owner}/${repo}/commits?sha=${encodeURIComponent(branch)}&per_page=${count}`)

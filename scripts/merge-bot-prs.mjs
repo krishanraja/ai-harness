@@ -29,7 +29,13 @@
  * Replaced bot pull requests close themselves: a canon sync whose base already
  * carries the current block, a machine-evidence pull request that conflicts
  * while a newer one for the same machine is open, and a docs steward fallback
- * (steward/YYYY-MM-DD) once a later steward commit landed on its base. A
+ * (steward/YYYY-MM-DD) once a later steward commit landed on its base.
+ *
+ * A steward fallback branch that never got a pull request is given one: the
+ * steward's own token cannot always open it, and on 2026-10-29 content-engine
+ * held eight such branches, a night of NOW.md work each, that nobody had seen.
+ * Only the newest one per repository gets a pull request, and only when no
+ * later steward commit replaced it; older ones are reported, never deleted. A
  * canon-sync branch that is behind or conflicts is rebuilt on the base: it is
  * the harness's own file, so nothing a person wrote is lost. A branch someone
  * added other files to is held and reported, never rebuilt.
@@ -107,6 +113,18 @@ export function stewardPlan({ ref, commits }) {
   return later ? { action: 'close', reason: 'later-steward-run', by: later.sha.slice(0, 7) } : { action: 'none' }
 }
 
+/**
+ * Which orphan steward fallback branches get a pull request. Pure. The newest
+ * one does, unless a later steward commit already landed; the older ones are
+ * replaced by it, and are only reported.
+ */
+export function orphanPlan({ orphans, commits }) {
+  const sorted = [...orphans].filter((b) => STEWARD_BRANCH.test(b)).sort()
+  const newest = sorted.at(-1)
+  const replaced = newest && stewardPlan({ ref: newest, commits }).action === 'close'
+  return { open: newest && !replaced ? newest : null, superseded: replaced ? sorted : sorted.slice(0, -1) }
+}
+
 const ageDays = (iso, now) => Math.max(0, Math.floor((now - Date.parse(iso)) / 86400000))
 
 export class BotPrs {
@@ -147,6 +165,23 @@ export class BotPrs {
         this.record(name, listed, kind, { action: 'error', reason: String(e.status ? `github-${e.status}` : e.message).slice(0, 160) })
       }
     }
+    try { await this.orphanFallbacks(name, base, stewardCommits || await this.gh.recentCommits(name, base, 50)) }
+    catch (e) { this.record(name, { number: 0 }, 'steward-fallback', { action: 'error', reason: String(e.status ? `github-${e.status}` : e.message).slice(0, 160) }) }
+  }
+
+  /** Steward fallback branches with no pull request: open one for the newest, report the rest. */
+  async orphanFallbacks(repo, base, commits) {
+    const branches = (await this.gh.branchesWithPrefix(repo, 'steward/')).filter((b) => STEWARD_BRANCH.test(b)).sort()
+    const orphans = []
+    for (const branch of branches) if (!(await this.gh.listPulls(repo, { state: 'all', head: branch, per_page: 1 })).length) orphans.push(branch)
+    const plan = orphanPlan({ orphans, commits })
+    for (const branch of plan.superseded) this.record(repo, { number: 0, html_url: null }, 'steward-fallback', { action: 'orphan-superseded', reason: branch })
+    if (!plan.open) return
+    const pr = await this.gh.openPull(repo, {
+      title: `docs(steward): ${plan.open.match(STEWARD_BRANCH)[1]} needs review`, head: plan.open, base,
+      body: `The nightly docs steward wrote \`${plan.open}\` as its fallback and no pull request was opened, so its work would sit unseen. Opened by \`scripts/merge-bot-prs.mjs\` in krishanraja/ai-harness (Ruling, Krish, 2026-10-28). A fallback means one of the steward's guards failed; it waits for a person, and closes itself once a later steward run lands on \`${base}\`.${FOOTER}`,
+    })
+    this.record(repo, { number: pr.number, html_url: pr.html_url }, 'steward-fallback', { action: 'opened', reason: plan.open })
   }
 
   async close(repo, pr, kind, plan, why) {

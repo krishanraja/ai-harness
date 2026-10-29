@@ -35,7 +35,9 @@ const fleetPath = flag('--fleet')
 if (fleetPath) {
   const fleet = JSON.parse(readFileSync(fleetPath, 'utf8'))
   const name = flag('--repo') || basename(git('rev-parse', '--show-toplevel'))
-  entry = fleet.repos.find((r) => r.name === name) || null
+  // The workflow passes the GitHub name; a renamed repository's entry answers to its aliases.
+  const key = String(name).toLowerCase()
+  entry = fleet.repos.find((r) => r.name.toLowerCase() === key || (r.aliases || []).some((a) => a.toLowerCase() === key)) || null
   if (entry) entry = { ...fleet.defaults, ...entry }
 }
 

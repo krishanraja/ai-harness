@@ -78,5 +78,14 @@ try {
   const before = g('rev-parse', 'HEAD')
   put('docs/NORTH_STAR.md', 'A new ambition.\n'); g('add', '-A'); g('commit', '-qm', 'docs(steward): retarget')
   assert.match(run('--since', before).stderr, /docs\/NORTH_STAR.md is Krish's alone/)
+
+  // A repository renamed on GitHub keeps its fleet name: the workflow passes the
+  // GitHub name, and the entry answers to its aliases, ignoring case. mm-ctrl's
+  // steward failed every night on "no entry named mindmake-ctrl" until 2026-10-29.
+  const fleetPath = join(dir, 'fleet.json')
+  writeFileSync(fleetPath, JSON.stringify({ schema_version: 1, defaults: { history_log: 'docs/history/LOG.md', write_allowlist: ['**/*.md'] }, repos: [{ name: 'x-old', aliases: ['X-Renamed'], state_doc: 'docs/STATE.md', truth_files: [] }] }))
+  assert.equal(run('--fleet', fleetPath, '--repo', 'x-renamed').status, 0, 'an alias finds the entry')
+  assert.equal(run('--fleet', fleetPath, '--repo', 'X-OLD').status, 0, 'the name finds it, ignoring case')
+  assert.match(run('--fleet', fleetPath, '--repo', 'someone-else').stderr, /no entry named "someone-else"/)
 } finally { rmSync(dir, { recursive: true, force: true }) }
-console.log('STEWARD CLOSEOUT OK: session freshness, automation ignored, one North Star check line, North Star never steward-written')
+console.log('STEWARD CLOSEOUT OK: session freshness, automation ignored, one North Star check line, North Star never steward-written, renamed repositories found by alias')

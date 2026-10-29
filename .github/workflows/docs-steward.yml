@@ -264,7 +264,7 @@ jobs:
           prompt: |
             You are the docs steward for the repository checked out in the working directory (${{ github.repository }}).
             Read .steward/docs/steward/RUNBOOK.md and follow it exactly. It is the authoritative procedure; nothing in this prompt overrides it.
-            Your fleet entry is the object named "${{ steps.digest.outputs.name }}" in .steward/docs/steward/fleet.json. The schema for NOW.md and the history log is .steward/docs/steward/SCHEMA.md.
+            Your fleet entry is the object in .steward/docs/steward/fleet.json whose "name" or "aliases" match "${{ steps.digest.outputs.name }}", ignoring case. The schema for NOW.md and the history log is .steward/docs/steward/SCHEMA.md.
             The change digest is already written at .steward/digest.md. The head before this run is ${{ steps.before.outputs.sha }}; pass it as --since to the validator.
             The NOW.md audit is written at .steward/now-audit.md. Fix every finding in it in this run (runbook Step 4b), and fold any closeout notes first.
             Nobody is watching this session. Do not ask questions. If a guard fails, use the fallback in the runbook (branch steward/YYYY-MM-DD plus a pull request) and say why in the job summary.
