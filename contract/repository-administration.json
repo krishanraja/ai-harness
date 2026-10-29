@@ -22,7 +22,11 @@
     "AEO-Engine"
   ],
   "excluded": [
-    "mindmake"
+    "mindmake",
+    "growth-makeyourmindup",
+    "growth-mindmake",
+    "growth-fulltime",
+    "growth-legibility"
   ],
   "families": [
     "repository-administration",
