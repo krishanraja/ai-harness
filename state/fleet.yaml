@@ -113,6 +113,34 @@ repos:
     rules_files: [AGENTS.md, PLAYBOOK.md]
     note: Heartside's growth engine. Admitted under the same 2026-10-22 ruling as heartside.
 
+  - name: growth-makeyourmindup
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, PLAYBOOK.md]
+    note: >-
+      Make Your Mind Up's growth engine. Admitted 2026-10-29 with the other three engines so
+      every engine receives the Engines section of contract/north-star-metric.md through the
+      canon. Out of the repository administration publisher (excluded in
+      contract/repository-administration.json) until Krish accepts it there by name.
+
+  - name: growth-mindmake
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/OWNERS.md]
+    note: Mindmake's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
+
+  - name: growth-fulltime
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, PLAYBOOK.md]
+    note: Full Time's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
+
+  - name: growth-legibility
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/BRIEF.md]
+    note: Legibility's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
+
 adapters:
   - id: claude
     template: contract/templates/adapter-claude.md

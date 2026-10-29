@@ -7,7 +7,7 @@ on:
         type: choice
         required: true
         default: krishanraja/ai-harness
-        options: [krishanraja/ai-harness, krishanraja/control-center, krishanraja/mindmake-ctrl, krishanraja/fractionl-circle, krishanraja/fractionl-pulse, krishanraja/full-time, krishanraja/content-engine, krishanraja/contentarchives, krishanraja/AEO-Engine, krishanraja/makeyourmindup, krishanraja/heartside, krishanraja/legibility, krishanraja/growth-heartside]
+        options: [krishanraja/ai-harness, krishanraja/control-center, krishanraja/mindmake-ctrl, krishanraja/fractionl-circle, krishanraja/fractionl-pulse, krishanraja/full-time, krishanraja/content-engine, krishanraja/contentarchives, krishanraja/AEO-Engine, krishanraja/makeyourmindup, krishanraja/heartside, krishanraja/legibility, krishanraja/growth-heartside, krishanraja/growth-makeyourmindup, krishanraja/growth-mindmake, krishanraja/growth-fulltime, krishanraja/growth-legibility]
       dry_run:
         description: Prepare source and validate the request cap only; no model call or pull request
         type: boolean
