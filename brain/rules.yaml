@@ -1144,7 +1144,7 @@ contract_rules:
       ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
 
-# 234 chapters across the installed skills.
+# 235 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -2529,6 +2529,15 @@ skill_sections:
         source:
           kind: ruling
           ref: "60106bef02bd"
+    status: live
+  - id: krish-principles.working-with-krish
+    file: skills/krish-principles/SKILL.md
+    heading: "Working with Krish"
+    text_sha: "8f9d085a1d04"
+    first_seen: "2026-10-29"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-10-29-working-with-krish.md"
     status: live
   - id: krish-principles.stability-tags
     file: skills/krish-principles/SKILL.md
