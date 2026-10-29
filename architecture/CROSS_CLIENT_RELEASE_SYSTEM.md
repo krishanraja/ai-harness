@@ -132,15 +132,25 @@ Use Windows Task Scheduler under Krish's normal account with a dedicated script 
 
 Claude account skills are a separate deployment surface. Anthropic explicitly states that custom skills do not automatically synchronize between claude.ai, the API, and Claude Code, and GitHub-synced plugin marketplaces are offered only to Team and Enterprise organizations. Both of Krish's accounts are personal, so no GitHub release or merge can write to their catalogues.
 
-Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. The accounts therefore hold none of the harness skills:
+Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. The accounts therefore hold none of the harness skills, and nothing in them ever needs changing after a one-time setup:
 
-1. Control Center's `get_skill` reads `skills/<name>/` from `krishanraja/ai-harness` main at call time, stores nothing, and returns the commit and blob sha it read. Name `index` lists every production skill with its live description; name `account` serves `adapters/cloud/account-instructions.md` (file `instructions`) and `adapters/cloud/account-sync.md` (file `sync`). Candidates are never served.
-2. The account instructions say every skill is served by the connector and is loaded with `get_skill`. A merge to main is live in both accounts on the next call. When Control Center is unreachable the session says so; it never falls back to a copy.
-3. A scheduled task in each account, created once in the Claude desktop app's Cowork, runs `adapters/cloud/account-sync.md` as read through `get_skill`. In its own built-in browser it deletes uploaded skills whose names exactly match the live index (approved by Krish on 2026-10-29), makes the instructions field equal the served text, reads both back, and reports through `record_harness_observation`. Because the task only says to read that file, changing the routine never needs an edit to the task.
-4. Nothing in either account can go stale: skills are never installed there, and the instructions are re-pasted whenever main changes them. `scripts/test-account-sync.mjs` holds the routine to exact-name deletion and no sign-in on Krish's behalf.
-5. Until a routine run's observation is read back for an account, that surface stays recorded as `stale-manual-cloud-upload-required-*`.
+1. Control Center's `get_skill` reads `skills/<name>/` from `krishanraja/ai-harness` main at call time, stores nothing, and returns the commit and blob sha it read. Name `index` lists every production skill with its live description. Name `account` serves three documents from `adapters/cloud/`:
+   - file `instructions`: `account-instructions.md`, the fixed pointer pasted into the account's Instructions for Claude field;
+   - file `routing`: `account-routing.md`, the full routing, which names every production skill;
+   - file `setup`: `account-setup.md`, the one-time setup.
 
-The Claude Skills API automates API/workspace-managed skills only, which are not the same catalog as claude.ai. Browser automation is held to the routine above: a Claude session that follows a served procedure, stops on anything it does not recognise, and only ever deletes exact harness names.
+   Candidates are never served.
+2. The pointer never changes. It names the always-on core and tells every conversation to load the routing with `get_skill`, so a change to routing or to any skill is live in both accounts on the next call. When Control Center is unreachable the session says so; it never falls back to a copy.
+3. Krish runs `account-setup.md` once in a chat in each account. It:
+   - proves the browser is signed in to one of his accounts, with `check_krish_account` or his confirmation in the chat;
+   - shows him the exact skills that match the live index, and the field's text beside the pointer;
+   - deletes and pastes only after his yes, then reads both back.
+
+   There is deliberately no recurring job. A Cowork scheduled task that deleted skills and rewrote the field unattended was refused by Claude's own safety check on 2026-10-29, and the design no longer needs one.
+4. `scripts/test-account-sync.mjs` holds the setup to exact-name deletion, approval before change, and no sign-in on Krish's behalf. `scripts/Test-Harness.ps1` requires the routing to name every production skill and the pointer to load it through `get_skill`.
+5. Until a setup's observation is read back for an account, that surface stays recorded as `stale-manual-cloud-upload-required-*`.
+
+The Claude Skills API automates API/workspace-managed skills only, which are not the same catalog as claude.ai. Browser automation is used once per account, in the setup above, with Krish approving the exact change in the chat.
 
 ## Perplexity Computer: account-level web and desktop surface
 

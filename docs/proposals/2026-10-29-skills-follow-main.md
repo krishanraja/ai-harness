@@ -14,17 +14,26 @@ The North Star's first part: "every ruling is learned once, shipped everywhere".
 ## How the accounts stay current
 
 - Both accounts are personal. claude.ai syncs plugins from GitHub only for Team and Enterprise organizations, and the Skills API writes only to API workspaces. No tool in a Claude session writes to the account's skill catalogue.
-- So the accounts hold none of the harness skills. Control Center's `get_skill` (krishanraja/control-center#604) serves each skill, the account instructions and the routine's steps live from ai-harness main.
-- Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. It replaces the loader design merged in #180, which still needed an upload whenever a description changed.
-- Ruling (Krish, 2026-10-29): the routine may delete, from both accounts, uploaded skills whose names are exactly the harness production names, and nothing else.
+- So the accounts hold none of the harness skills. Control Center's `get_skill` serves every skill and the account routing live from ai-harness main.
+- The Instructions for Claude field holds a fixed pointer that loads the routing through `get_skill`, so it never needs changing again.
+- Ruling (Krish, 2026-10-29): uploaded skills whose names are exactly the harness production names may be deleted from both accounts, and nothing else.
+
+### Why there is no scheduled routine
+
+Krish first ruled that a Claude routine in each account keep it in sync. On 2026-10-29 both attempts failed:
+
+- **Account krishanraja@gmail.com:** the Cowork safety check refused to create the task. Each run would have deleted skills and rewritten the field unattended, on authority read from a file at run time.
+- **Account krish@mindmake.co:** the task ran and stopped with `account-unproven` before changing anything, because that session's connector did not yet offer `check_krish_account` (observation 219).
+
+So the recurring part is removed rather than worked around. The pointer and live routing leave nothing to sync.
 
 ## What is still owed
 
-Krish creates the scheduled task once in each account's Cowork (daily is enough), set to run on his computer rather than remotely, since Cowork runs tasks remotely by default and a remote run may have no browser, and signs that account's built-in browser in to claude.ai if it is not already. The same prompt goes in both accounts. The routine acts on whichever of Krish's accounts the browser shows, and Control Center's `check_krish_account` refuses any other account (Krish, 2026-10-29: "I could be logged in to either account on either machine, on desktop or cloud, at any point."):
+Krish runs the setup once in a chat in each account, in the Claude desktop app, where the built-in browser is available:
 
-> Account sync. Call Control Center get_skill with name "account" and file "sync", and follow the returned text exactly, using your built-in browser.
+> Run my account setup: call Control Center get_skill with name "account" and file "setup", and follow it.
 
-The first runs remove the old copies and paste the instructions. Each run's observation names the account it synced by `account_ref`. An account the browser is never signed in to is not synced; that shows as one `account_ref` missing from the observations.
+It shows him the exact skills to delete and the field's new text, and changes nothing until he says yes. If Control Center does not yet offer `check_krish_account` in that chat, disconnecting and reconnecting the connector in claude.ai's settings refreshes its tools; otherwise the setup asks him to confirm the account in the chat.
 
 ## Known overlap, not resolved here
 
