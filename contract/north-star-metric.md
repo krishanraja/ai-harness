@@ -49,7 +49,7 @@ Computed each week from the current value against this week's ladder target.
 |---|---|---|
 | U1, on pace | at or above this week's target | Steady. One proposal a week that would raise the ceiling. |
 | U2, behind | 75% or more of this week's target | The North Star number leads every session's agenda. |
-| U3, well behind | 40% to 75% | Two experiments a week. The growth engine raises its volume to its repository's policy bounds (Engines, rule 2). Control Center keeps the repository in the top three of the daily move. |
+| U3, well behind | 40% to 75% | Two experiments a week. The growth engine raises its volume to its repository's policy bounds (Engines, rule 2; this supersedes "doubles its draft output", in force until 2026-10-29). Control Center keeps the repository in the top three of the daily move. |
 | U4, far behind | under 40%, or not measured, or the reading is more than 7 days old | A bold swing proposed every day. Work that does not move the number is dropped or deferred. If the number is not measured, measuring it is the first job. |
 | U5, stalled | under 40% two weeks running, or no movement for 14 days, or past the deadline off target | Everything else in the repository pauses unless it moves the number. Control Center pushes Krish once a day. The strategist brings three unconventional recovery plays within 24 hours. Once a week Krish is asked to change the plan or change the target. |
 
