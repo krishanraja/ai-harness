@@ -3167,11 +3167,17 @@ skill_sections:
   - id: tool-router.match-value-to-the
     file: skills/tool-router/SKILL.md
     heading: "Match value to the task"
-    text_sha: "cfd698d645c3"
+    text_sha: "223bf3fb5dbb"
     first_seen: "2026-10-29"
     source:
       kind: ruling
-      ref: "666252d3b25f"
+      ref: "b1a1737e5774"
+    history:
+      - text_sha: "cfd698d645c3"
+        valid_until: "2026-10-29"
+        source:
+          kind: ruling
+          ref: "666252d3b25f"
     status: live
   - id: tool-router.reach-for-the-selected
     file: skills/tool-router/SKILL.md
