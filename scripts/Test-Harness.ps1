@@ -136,11 +136,14 @@ foreach ($adapter in $adapterPaths) {
 }
 
 # claude.ai and Perplexity have no filesystem, so they cannot import the
-# contracts. Their adapter is pasted into the account's persistent instructions
-# and must carry the route itself. It also names every production skill,
-# because those catalogs can list a skill without its description, and a skill
-# that is neither described nor named cannot be routed to.
+# contracts. The claude.ai account holds a fixed pointer in its instructions
+# field (Ruling, Krish, 2026-10-29: skills stay current with zero
+# intervention): it names the always-on core and tells every conversation to
+# load the full routing live through Control Center's get_skill. The routing
+# itself, adapters/cloud/account-routing.md, names every production skill,
+# because a skill that is neither described nor named cannot be routed to.
 $cloudAdapter = Join-Path (Join-Path (Join-Path $Root 'adapters') 'cloud') 'account-instructions.md'
+$cloudRouting = Join-Path (Join-Path (Join-Path $Root 'adapters') 'cloud') 'account-routing.md'
 if (-not (Test-Path -LiteralPath $cloudAdapter -PathType Leaf)) {
     Add-Failure 'Missing cloud account adapter: adapters/cloud/account-instructions.md'
 }
@@ -151,14 +154,22 @@ else {
     }
     if ($cloudRaw -match '(?i)[A-Z]:\\|@C:|\.md`|contract/') { Add-Failure 'Cloud account adapter references a file path, which a cloud account cannot load.' }
     if ($cloudRaw.Length -gt 3000) { Add-Failure "Cloud account adapter is $($cloudRaw.Length) characters; keep it at or under 3000 so it fits an account instructions field." }
+    if ($cloudRaw -notmatch 'get_skill' -or $cloudRaw -notmatch '"routing"') { Add-Failure 'Cloud account adapter does not load the routing live through get_skill.' }
+}
+if (-not (Test-Path -LiteralPath $cloudRouting -PathType Leaf)) {
+    Add-Failure 'Missing served cloud routing: adapters/cloud/account-routing.md'
+}
+else {
+    $routingRaw = [IO.File]::ReadAllText($cloudRouting)
+    if ($routingRaw -match '(?i)[A-Z]:\\|@C:|\.md`|contract/') { Add-Failure 'Cloud routing references a file path, which a cloud account cannot load.' }
     $registryRaw = [IO.File]::ReadAllText((Join-Path (Join-Path $Root 'state') 'skill-registry.yaml'))
     $activeBlock = [regex]::Match($registryRaw, '(?m)^production_active:\r?\n((?:  - .+\r?\n)+)')
     if (-not $activeBlock.Success) { Add-Failure 'Cannot read production_active from state/skill-registry.yaml.' }
     else {
         foreach ($activeLine in ($activeBlock.Groups[1].Value -split '\r?\n' | Where-Object { $_.Trim() })) {
             $activeName = $activeLine.Trim().Substring(2).Trim()
-            if ($cloudRaw -notmatch ('(?<![a-z-])' + [regex]::Escape($activeName) + '(?![a-z-])')) {
-                Add-Failure "Cloud account adapter does not name production skill $activeName."
+            if ($routingRaw -notmatch ('(?<![a-z-])' + [regex]::Escape($activeName) + '(?![a-z-])')) {
+                Add-Failure "Cloud routing does not name production skill $activeName."
             }
         }
     }

@@ -18,18 +18,19 @@ function test(name, fn) {
   try { fn(); console.log(`ok     ${name}`) } catch (e) { failed++; console.error(`FAIL   ${name}\n       ${e.message}`) }
 }
 
-const sync = read('adapters/cloud/account-sync.md')
+const sync = read('adapters/cloud/account-setup.md')
+const routing = read('adapters/cloud/account-routing.md')
 const instructions = read('adapters/cloud/account-instructions.md')
 
 test('the routine reads its delete list live from get_skill index, and stops if it cannot', () => {
   assert.match(sync, /`get_skill` with name `index`/)
-  assert.match(sync, /only ones you may ever delete/)
+  assert.match(sync, /only ones that may be deleted/)
   assert.match(sync, /either call fails or returns `ok: false`, stop with `control-center-unavailable`/)
 })
 
 test('the routine deletes exact names only and leaves every other skill', () => {
   assert.match(sync, /exactly equals a name from step 1/)
-  assert.match(sync, /Leave every other skill alone/)
+  assert.match(sync, /Every other skill stays/)
 })
 
 test('the routine never signs in for Krish and never copies page text into a report', () => {
@@ -37,46 +38,63 @@ test('the routine never signs in for Krish and never copies page text into a rep
   assert.match(sync, /Never include names of people, email addresses, or text copied from the page/)
 })
 
-test('the routine pastes exactly the served instructions and reads them back', () => {
+test('the setup pastes exactly the served pointer and reads it back', () => {
   assert.match(sync, /name `account` and file `instructions`/)
-  assert.match(sync, /read the field back/)
+  assert.match(sync, /save, reload, and read it back/)
 })
 
-test('the routine carries both rulings that authorise it', () => {
-  assert.match(sync, /Ruling \(Krish, 2026-10-29\): a Claude routine in each account keeps it in sync/)
-  assert.match(sync, /Ruling \(Krish, 2026-10-29\): the routine may delete/)
+test('nothing changes until Krish says yes to the exact list in the chat', () => {
+  assert.match(sync, /Show Krish exactly what will change, and wait for his yes/)
+  assert.match(sync, /Change nothing until he says yes/)
+  assert.ok(sync.indexOf('## 4. Show Krish') < sync.indexOf('## 5. Make the approved change'), 'approval comes before any change')
+  assert.match(sync, /There is no recurring job/)
 })
 
-test('the account instructions load skills through get_skill, not installed copies', () => {
+test('the setup carries both rulings that authorise it', () => {
+  assert.match(sync, /Ruling \(Krish, 2026-10-29\): skills stay current on every surface with zero intervention/)
+  assert.match(sync, /Ruling \(Krish, 2026-10-29\): uploaded skills whose names are exactly the harness's production skills may be deleted/)
+})
+
+test('the instructions field is a fixed pointer that loads the routing live', () => {
   assert.match(instructions, /served live by the Control Center connector, not installed here/)
-  assert.match(instructions, /get_skill/)
+  assert.match(instructions, /this text never needs to change/)
+  assert.match(instructions, /name "account" and file "routing"/)
+  for (const core of ['krish-principles', 'strategy-brief', 'verification-loop', 'take-the-brief']) assert.ok(instructions.includes(core), core)
+})
+
+test('the served routing names every production skill, so the pointer never has to', () => {
+  const registry = read('state/skill-registry.yaml')
+  const block = registry.match(/^production_active:\n((?:  - .+\n)+)/m)
+  assert.ok(block, 'production_active readable')
+  for (const name of block[1].trim().split('\n').map((l) => l.trim().slice(2).trim())) {
+    assert.ok(new RegExp(`(?<![a-z-])${name}(?![a-z-])`).test(routing), `routing names ${name}`)
+  }
 })
 
 test('every run starts from a fresh tab at the skills page, never the page a tab happens to show', () => {
-  assert.match(sync, /Assume no tab is open/)
+  assert.match(sync, /no tab is open and no page is loaded/)
   assert.match(sync, /Open a new tab at `https:\/\/claude\.ai\/customize\/skills`/)
   assert.match(sync, /never work from whatever page a tab happens to show/)
 })
 
-test('the routine acts only on an account Control Center confirms is Krish\'s, before changing anything', () => {
+test('the setup acts only on an account proved to be Krish\'s, before changing anything', () => {
   assert.match(sync, /Prove the browser is signed in to one of Krish's accounts/)
-  assert.match(sync, /Call Control Center `check_krish_account` with that email/)
+  assert.match(sync, /If Control Center offers `check_krish_account`, call it with that email/)
+  assert.match(sync, /ask Krish to confirm, in this chat, that the account shown is his/)
   assert.match(sync, /stop with `not-krish-account`/)
   assert.match(sync, /stop with `account-unproven`/)
-  assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 4. Remove'), 'the account is proved before any deletion')
-  assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 5. Make'), 'the account is proved before the instructions change')
+  assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 5. Make'), 'the account is proved before any change')
 })
 
-test('the report names the synced account by reference, never by email or task label', () => {
-  assert.match(sync, /the `account_ref` from step 3/)
-  assert.ok(!/account label from your own task prompt/.test(sync))
+test('the report never carries the email', () => {
+  assert.match(sync, /Never copy the email into a report or anywhere else/)
 })
 
 test('the routine handles a missing browser, a lazy list and a delete confirmation', () => {
   assert.match(sync, /stop with `no-browser`/)
-  assert.match(sync, /scroll to the end of the list/)
+  assert.match(sync, /Scroll to the end of the list/)
   assert.match(sync, /check that it names that same skill/)
-  assert.match(sync, /safe to repeat/)
+  assert.match(sync, /safe to run again/)
 })
 
 test('no loader packages remain to go stale', () => {
