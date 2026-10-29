@@ -130,20 +130,18 @@ Use Windows Task Scheduler under Krish's normal account with a dedicated script 
 
 ## Claude account: web and Desktop
 
-Claude account skills are a separate deployment surface. Anthropic explicitly states that custom skills do not automatically synchronize between claude.ai, the API, and Claude Code. A GitHub release therefore cannot directly update the personal Claude skill catalog.
+Claude account skills are a separate deployment surface. Anthropic explicitly states that custom skills do not automatically synchronize between claude.ai, the API, and Claude Code, and GitHub-synced plugin marketplaces are offered only to Team and Enterprise organizations. Both of Krish's accounts are personal, so no GitHub release or merge can write to their catalogues.
 
-For the current personal-account setup, use this controlled bridge:
+Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. The accounts therefore hold a loader per production skill, never the skill:
 
-1. Select only skills approved for the Claude account bundle.
-2. Download the exact GitHub Release artifacts and verify hashes locally.
-3. Compare the account catalog against the deployment manifest by name, description, upload date, enabled state, and known release hash/record.
-4. Upload through `Customize > Skills` in a supervised browser session.
-5. Test the uploaded skill in a fresh Claude chat before enabling or replacing broader routes.
-6. Record the cloud upload, state, and behavioral proof. The record is the parity evidence because the personal catalog does not expose a local filesystem hash.
-7. Preserve the previous ZIP and do not delete the old entry until the replacement passes its observation window and deletion is explicitly approved.
-8. Paste `adapters/cloud/account-instructions.md` into `Settings > Profile > Instructions for Claude` whenever it changes. The account has no filesystem, so this text is its only router: it forces krish-principles, strategy-brief and verification-loop, and it names every production skill. That matters because the account catalog can list a skill without its description, as observed on 2026-09-25 for the last seven skills alphabetically.
+1. `scripts/build-cloud-loaders.mjs` writes `adapters/cloud/loaders/<name>/SKILL.md` for every directory under `skills/`. A loader carries the skill's own `name` and `description` lines byte for byte, so the account still routes to it, and a body that says only to read the instructions live through Control Center's `get_skill`.
+2. Control Center's `get_skill` reads `skills/<name>/` from `krishanraja/ai-harness` main at call time, stores nothing, and returns the commit and blob sha it read. `get_skill` with name `index` lists every production skill with its live description. Candidates are never served.
+3. A merge to main is therefore live in both accounts on the next call, with no upload. When Control Center is unreachable, the loader says so and the work it governs stops; it never falls back to a copy.
+4. A loader changes only when a skill's name or description changes. `node scripts/build-cloud-loaders.mjs --check` fails the steward check when a committed loader disagrees with `skills/`, so such a change cannot merge without its loader; each changed loader is one upload owed to each account, and the only one.
+5. The cut-over replaces each account's uploaded skills with the loaders once (`node scripts/build-cloud-loaders.mjs --pack <dir>` writes one upload zip per loader), records the read-back in `state/cloud-checks/`, and is proved by a fresh chat whose `get_skill` call returns the current main sha. Until that record exists, the surface status stays `stale-manual-cloud-upload-required-*`.
+6. Paste `adapters/cloud/account-instructions.md` into `Settings > Profile > Instructions for Claude` whenever it changes. It forces krish-principles, strategy-brief and verification-loop, names every production skill, and tells the account that each installed skill is a loader.
 
-The Claude Skills API can automate API/workspace-managed skills, but those API skills are not the same catalog as claude.ai. Browser automation can assist a supervised personal-account release, but it is too UI-dependent to be the unattended production updater.
+The Claude Skills API automates API/workspace-managed skills only, which are not the same catalog as claude.ai. Browser automation remains too UI-dependent to be an unattended updater, which is why the account holds stable loaders rather than changing bytes.
 
 ## Perplexity Computer: account-level web and desktop surface
 

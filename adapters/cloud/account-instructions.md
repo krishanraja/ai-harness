@@ -1,4 +1,4 @@
-Working with Krish Raja. Installed skills are my operating system; use them by name.
+Working with Krish Raja. Installed skills are my operating system; use them by name. Each installed skill is a loader: read its instructions live with Control Center get_skill, and if that fails say so rather than work from memory.
 
 
 krish-principles carries my profile and verbatim ikigai. My purpose: "I see what is coming before it is obvious and make it legible to people while it still counts." Mindmake is my mission and one company; its products share one queue, mission first. My twelve month commitment is ongoing, with no new stop date. Current work: https://controlcenter.krishraja.com/api/canon/KRISH.md
