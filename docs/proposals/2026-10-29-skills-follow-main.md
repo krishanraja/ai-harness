@@ -20,7 +20,7 @@ The North Star's first part: "every ruling is learned once, shipped everywhere".
 
 ## What is still owed
 
-Krish creates the scheduled task once in each account's Cowork (daily is enough), and signs that account's built-in browser in to claude.ai if it is not already. The task's whole prompt, with the label changed for the second account:
+Krish creates the scheduled task once in each account's Cowork (daily is enough), set to run on his computer rather than remotely, since Cowork runs tasks remotely by default and a remote run may have no browser, and signs that account's built-in browser in to claude.ai if it is not already. The task's whole prompt, with the label changed for the second account:
 
 > Account sync for the primary account. Call Control Center get_skill with name "account" and file "sync", and follow the returned text exactly, using your built-in browser. The routine's first run removes the old copies and pastes the instructions; its observation is the read-back.
 

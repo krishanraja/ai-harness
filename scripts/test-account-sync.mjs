@@ -24,7 +24,7 @@ const instructions = read('adapters/cloud/account-instructions.md')
 test('the routine reads its delete list live from get_skill index, and stops if it cannot', () => {
   assert.match(sync, /`get_skill` with name `index`/)
   assert.match(sync, /only ones you may ever delete/)
-  assert.match(sync, /If either call fails or returns `ok: false`, stop here/)
+  assert.match(sync, /either call fails or returns `ok: false`, stop with `control-center-unavailable`/)
 })
 
 test('the routine deletes exact names only and leaves every other skill', () => {
@@ -33,7 +33,7 @@ test('the routine deletes exact names only and leaves every other skill', () => 
 })
 
 test('the routine never signs in for Krish and never copies page text into a report', () => {
-  assert.match(sync, /Never type a password or sign in for Krish/)
+  assert.match(sync, /Never type a password, a code or an email, and never sign in or out for Krish/)
   assert.match(sync, /Never include names of people, email addresses, or text copied from the page/)
 })
 
@@ -50,6 +50,27 @@ test('the routine carries both rulings that authorise it', () => {
 test('the account instructions load skills through get_skill, not installed copies', () => {
   assert.match(instructions, /served live by the Control Center connector, not installed here/)
   assert.match(instructions, /get_skill/)
+})
+
+test('every run starts from a fresh tab at the skills page, never the page a tab happens to show', () => {
+  assert.match(sync, /Assume no tab is open/)
+  assert.match(sync, /Open a new tab at `https:\/\/claude\.ai\/customize\/skills`/)
+  assert.match(sync, /never work from whatever page a tab happens to show/)
+})
+
+test('the routine proves the browser is signed in to its own account before changing anything', () => {
+  assert.match(sync, /Prove the browser is signed in to this same account/)
+  assert.match(sync, /stop with `wrong-account`/)
+  assert.match(sync, /Two empty lists prove nothing/)
+  assert.match(sync, /stop with `account-unproven`/)
+  assert.ok(sync.indexOf('## 3. Prove') < sync.indexOf('## 4. Remove'), 'the account is proved before any deletion')
+})
+
+test('the routine handles a missing browser, a lazy list and a delete confirmation', () => {
+  assert.match(sync, /stop with `no-browser`/)
+  assert.match(sync, /scroll to the end of the list/)
+  assert.match(sync, /check that it names that same skill/)
+  assert.match(sync, /safe to repeat/)
 })
 
 test('no loader packages remain to go stale', () => {
