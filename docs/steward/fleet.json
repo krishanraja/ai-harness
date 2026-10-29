@@ -339,7 +339,9 @@
       ],
       "state_doc": "README.md",
       "history_dir": "docs/history",
-      "truth_files": [],
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
       "docs_check": null,
       "rules_files": [
         "AGENTS.md",
@@ -358,7 +360,9 @@
       ],
       "state_doc": "README.md",
       "history_dir": "docs/history",
-      "truth_files": [],
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
       "docs_check": null,
       "rules_files": [
         "AGENTS.md",
@@ -377,7 +381,9 @@
       ],
       "state_doc": "README.md",
       "history_dir": "docs/history",
-      "truth_files": [],
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
       "docs_check": null,
       "rules_files": [
         "AGENTS.md",
@@ -396,7 +402,9 @@
       ],
       "state_doc": "README.md",
       "history_dir": "docs/history",
-      "truth_files": [],
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
       "docs_check": null,
       "rules_files": [
         "AGENTS.md",

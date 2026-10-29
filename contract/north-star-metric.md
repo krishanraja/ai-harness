@@ -49,7 +49,7 @@ Computed each week from the current value against this week's ladder target.
 |---|---|---|
 | U1, on pace | at or above this week's target | Steady. One proposal a week that would raise the ceiling. |
 | U2, behind | 75% or more of this week's target | The North Star number leads every session's agenda. |
-| U3, well behind | 40% to 75% | Two experiments a week. The growth engine doubles its draft output. Control Center keeps the repository in the top three of the daily move. |
+| U3, well behind | 40% to 75% | Two experiments a week. The growth engine raises its volume to its repository's policy bounds (Engines, rule 2). Control Center keeps the repository in the top three of the daily move. |
 | U4, far behind | under 40%, or not measured, or the reading is more than 7 days old | A bold swing proposed every day. Work that does not move the number is dropped or deferred. If the number is not measured, measuring it is the first job. |
 | U5, stalled | under 40% two weeks running, or no movement for 14 days, or past the deadline off target | Everything else in the repository pauses unless it moves the number. Control Center pushes Krish once a day. The strategist brings three unconventional recovery plays within 24 hours. Once a week Krish is asked to change the plan or change the target. |
 
@@ -63,14 +63,14 @@ Urgency raises intensity, never authority. Nothing sends, posts, publishes, spen
 
 ## Engines
 
-A growth engine is a repository whose job is to move one product's number. These rules apply to every engine, at every level above U1, and in every run, scheduled or interactive. They raise intensity; the paragraph above still holds and no rule here widens authority.
+A growth engine is a repository whose job is to move one product's number. These rules apply to every engine, at every urgency level, and in every run, scheduled or interactive; only rule 2 waits for U3. They raise intensity; the paragraph above still holds and no rule here widens authority.
 
 ### What every engine does
 
 1. **Lead with the gap.** Every report, check-in and pack opens with one line: `X of Y, U-n, short by Z`, where X is the current reading, Y this week's ladder target, n the urgency and Z the distance to Y. An unmeasured number reads `not measured, U4` and measuring it is the run's first job.
 2. **Scale volume with urgency.** At U3 and above an engine raises its own volume (drafts, rows, invites, lookups, experiments) up to the bounds its repository's policy already sets, without waiting for a signed week spec (Ruling, Krish, 2026-10-29). This is volume only: the walls, the approval gate and every send, post, spend and permission rule are unchanged.
-3. **Every hold files its way out.** A hold (no booking address, no email, no contact, missing evidence, a failed source) files, in the same run, the bounded lookup or the ask to Krish that would clear it. A hold with nothing filed is a dead end and counts as a defect.
-4. **After a no, take another path to the same goal.** A decline closes that proposal, not the goal: the next run tries a different route (another person, stage, format or channel). It never re-asks a person Krish Purged (Ruling, Krish, 2026-10-26 stands), and it keeps one ask per engine on his list at a time (Ruling, Krish, 2026-10-21).
+3. **Every hold files its way out.** A hold (no booking address, no email, no contact, missing evidence, a failed source) files, in the same run, the bounded lookup that would clear it, or, when only Krish can clear it, queues the ask to him. Queued asks wait their turn behind rule 4's one ask per engine and reach his list one at a time. A hold with neither a lookup filed nor an ask queued is a dead end and counts as a defect.
+4. **After a no to one ask, take another path to the same goal.** A decline of a single ask or target (one person, stage, room, piece or draft) closes that proposal, not the goal: the next run tries a different route (another person, stage, format or channel). It never re-asks a person Krish Purged (Ruling, Krish, 2026-10-26 stands), and it keeps one ask per engine on his list at a time (Ruling, Krish, 2026-10-21). A Purge on a go-live, or a no on a check_in, is different: it ends that plan and its goal, and no run re-proposes the goal by any route until Krish reopens it.
 5. **Check in while a plan is open.** At least every other day while a plan is open, the engine proposes a `check_in` against that plan, measured where it can be. A repository's own rule may ask for more often, never less.
 6. **Learn from both sides.** Wins (bookings, replies, sales, good meetings) and declines both feed the next run's ranking. An engine that learns only from its declines learns only to shrink.
 
@@ -81,7 +81,7 @@ Control Center manages the engines; it never produces an engine's content or str
 - **Monitor.** It watches every engine. An engine that is stale, failing or unreadable for longer than one cadence reaches Krish's one list and Home, never only a log.
 - **Push.** The directive's intensity scales with urgency: a higher level carries a larger action budget, inside the same walls.
 - **Rank and sequence.** What the engines need from Krish is ordered by his weekly OS goals within the week, and the priority ladder stays the tie-break (Ruling, Krish, 2026-10-29).
-- **Hold.** An engine that is not ready is `held`: no wake, no asks on his list and no growth council move for its product, while its bearer stays valid (Ruling, Krish, 2026-10-29). Releasing the hold is his press.
+- **Hold.** An engine that is not ready is `held`: no wake, no asks on his list and no growth council move for its product, while its bearer stays valid (Ruling, Krish, 2026-10-29).
 
 ## Who updates what
 
