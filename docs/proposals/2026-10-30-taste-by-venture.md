@@ -6,6 +6,9 @@ venture to mindmake". Both are quoted in krishanraja/inspirationhouse `README.md
 taste") and recorded as `Ruling (Krish, 2026-10-28)` in commit 09a3800 (pull request 174), which landed through pull
 request 189.
 
+Krish confirmed it on 2026-10-30, after the judge found this proposal was written once the change had landed: "yes
+taste rules are kept separate per venture".
+
 This proposal is written after the change landed. The judge panel on pull request 189 found the canon edit had no
 proposal and no ledger row, and that the ruling was cited only as a paraphrase. It records the decision, the reasons and
 the fallback here, and is the source `brain/rules.yaml` gives for `canon.taste`. The two skill sections keep the ruling
