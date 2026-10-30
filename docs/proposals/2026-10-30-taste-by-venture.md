@@ -7,7 +7,7 @@ taste") and recorded as `Ruling (Krish, 2026-10-28)` in commit 09a3800 (pull req
 request 189.
 
 Krish confirmed it on 2026-10-30, after the judge found this proposal was written once the change had landed: "yes
-taste rules are kept separate per venture".
+taste rules are kept separate per venture", then "but able to be cross analyzed in the future".
 
 This proposal is written after the change landed. The judge panel on pull request 189 found the canon edit had no
 proposal and no ledger row, and that the ruling was cited only as a paraphrase. It records the decision, the reasons and
@@ -43,6 +43,14 @@ keeps the corrections that path carries from leaking into the wrong venture. The
   rule is approved yet. It never invents one.
 - A report with no venture is held by inspirationhouse and counted as `reports_unassigned`, never filed under a guess
   (krishanraja/inspirationhouse `README.md`, "Each venture reads only its own taste", and `AGENTS.md` rule 10, at c7e4733).
+
+## Separate, and still comparable
+
+Separate means what a session applies: it reads and reports only its own venture's rules. It does not mean separate
+stores. Every venture's evidence, claims and rules stay in one ledger, each row carrying the venture it was filed under
+(krishanraja/inspirationhouse `AGENTS.md` rule 10), so they can be analysed across ventures later, as Krish asked on
+2026-10-30. No such analysis exists yet. A change that splits the ledger into per-venture stores, or drops the venture
+column, would break this and needs his ruling first.
 
 ## Where each fact lives
 
