@@ -114,15 +114,18 @@ export function stewardPlan({ ref, commits }) {
 }
 
 /**
- * Which orphan steward fallback branches get a pull request. Pure. The newest
- * one does, unless a later steward commit already landed; the older ones are
- * replaced by it, and are only reported.
+ * Which orphan steward fallback branches get a pull request. Pure. Only the
+ * newest fallback branch of all, with or without a pull request, can; and only
+ * when it is an orphan no later steward commit replaced. Every other orphan is
+ * replaced and only reported. On 2026-10-29 the first version compared orphans
+ * with each other, so each hourly run opened a pull request for the next older
+ * branch in content-engine (#243, #244, #266), each then closed as replaced.
  */
-export function orphanPlan({ orphans, commits }) {
+export function orphanPlan({ orphans, branches = orphans, commits }) {
   const sorted = [...orphans].filter((b) => STEWARD_BRANCH.test(b)).sort()
-  const newest = sorted.at(-1)
-  const replaced = newest && stewardPlan({ ref: newest, commits }).action === 'close'
-  return { open: newest && !replaced ? newest : null, superseded: replaced ? sorted : sorted.slice(0, -1) }
+  const newest = [...branches, ...orphans].filter((b) => STEWARD_BRANCH.test(b)).sort().at(-1)
+  const open = newest && sorted.includes(newest) && stewardPlan({ ref: newest, commits }).action !== 'close' ? newest : null
+  return { open, superseded: sorted.filter((b) => b !== open) }
 }
 
 const ageDays = (iso, now) => Math.max(0, Math.floor((now - Date.parse(iso)) / 86400000))
@@ -156,7 +159,8 @@ export class BotPrs {
         if (kind === 'canon-sync') await this.canon(entry, listed, base)
         else if (kind === 'machine-evidence') await this.machine(name, listed, pulls)
         else if (kind === 'steward-fallback') {
-          stewardCommits ||= await this.gh.recentCommits(name, base, 50)
+          // Every steward run touches NOW.md; on a busy main the last fifty commits may hold none of them.
+          stewardCommits ||= await this.gh.recentCommits(name, base, 30, 'NOW.md')
           const plan = stewardPlan({ ref: listed.head.ref, commits: stewardCommits })
           if (plan.action === 'close') await this.close(name, listed, kind, plan, `A later docs steward run (${plan.by}) rewrote NOW.md on ${base}, so this fallback is replaced.`)
           else await this.person(name, listed, kind)
@@ -165,7 +169,7 @@ export class BotPrs {
         this.record(name, listed, kind, { action: 'error', reason: String(e.status ? `github-${e.status}` : e.message).slice(0, 160) })
       }
     }
-    try { await this.orphanFallbacks(name, base, stewardCommits || await this.gh.recentCommits(name, base, 50)) }
+    try { await this.orphanFallbacks(name, base, stewardCommits || await this.gh.recentCommits(name, base, 30, 'NOW.md')) }
     catch (e) { this.record(name, { number: 0 }, 'steward-fallback', { action: 'error', reason: String(e.status ? `github-${e.status}` : e.message).slice(0, 160) }) }
   }
 
@@ -174,12 +178,14 @@ export class BotPrs {
     const branches = (await this.gh.branchesWithPrefix(repo, 'steward/')).filter((b) => STEWARD_BRANCH.test(b)).sort()
     const orphans = []
     for (const branch of branches) if (!(await this.gh.listPulls(repo, { state: 'all', head: branch, per_page: 1 })).length) orphans.push(branch)
-    const plan = orphanPlan({ orphans, commits })
+    const plan = orphanPlan({ orphans, branches, commits })
     for (const branch of plan.superseded) this.record(repo, { number: 0, html_url: null }, 'steward-fallback', { action: 'orphan-superseded', reason: branch })
     if (!plan.open) return
+    // The steward records the guard that failed in its fallback commit (runbook Step 6), because it cannot always open the pull request itself.
+    const why = String(await this.gh.headMessage(repo, plan.open) || '').trim().slice(0, 3000)
     const pr = await this.gh.openPull(repo, {
       title: `docs(steward): ${plan.open.match(STEWARD_BRANCH)[1]} needs review`, head: plan.open, base,
-      body: `The nightly docs steward wrote \`${plan.open}\` as its fallback and no pull request was opened, so its work would sit unseen. Opened by \`scripts/merge-bot-prs.mjs\` in krishanraja/ai-harness (Ruling, Krish, 2026-10-28). A fallback means one of the steward's guards failed; it waits for a person, and closes itself once a later steward run lands on \`${base}\`.${FOOTER}`,
+      body: `The nightly docs steward wrote \`${plan.open}\` as its fallback and no pull request was opened, so its work would sit unseen. Opened by \`scripts/merge-bot-prs.mjs\` in krishanraja/ai-harness (Ruling, Krish, 2026-10-28). A fallback means one of the steward's guards failed; it waits for a person, and closes itself once a later steward run lands on \`${base}\`.${why ? `\n\nThe steward's commit message:\n\n${why.split('\n').map((l) => `> ${l}`).join('\n')}` : ''}${FOOTER}`,
     })
     this.record(repo, { number: pr.number, html_url: pr.html_url }, 'steward-fallback', { action: 'opened', reason: plan.open })
   }

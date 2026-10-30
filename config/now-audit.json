@@ -13,6 +13,7 @@
     "unfolded_note_max_age_days": 1,
     "unreconciled_max_age_days": 2,
     "dated_claim_max_age_days": 14,
-    "escalate_after_days": 3
+    "escalate_after_days": 3,
+    "fresh_bullet_days": 1
   }
 }

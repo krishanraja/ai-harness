@@ -182,7 +182,10 @@ All of these must pass. A single failure sends the run to the fallback.
 
 Fallback: commit to a branch `steward/YYYY-MM-DD`, push it, open a pull
 request titled `docs(steward): YYYY-MM-DD needs review`, and put the failing
-guard's output in the body. Never force anything onto main.
+guard's output in the body. Put the same in the fallback commit's body: the
+workflow's token cannot always open the pull request, and the harness's bot
+merger (`scripts/merge-bot-prs.mjs`) then opens it with that commit message.
+Never force anything onto main.
 
 ### Step 7: commit and push
 
