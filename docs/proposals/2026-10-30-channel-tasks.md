@@ -10,6 +10,14 @@ Correction, after the first version mapped one template onto every engine: "As l
 
 He also chose, in the same session, that the task library lives here and that growth-mindmake stays out of the first round.
 
+## Which engines are in
+
+This list is what Engines rule 7 refers to.
+
+- **In:** growth-heartside and growth-makeyourmindup.
+- **In, but waiting:** growth-fulltime. Its tasks wait for Krish to release its hold and clear D1.
+- **Out:** growth-mindmake, until Krish adds it.
+
 ## The source prompts
 
 Seven prompts from a carousel by the Instagram account getintoai ("Want to grow your Instagram faster? These 7 Ch..."). Krish saved them as screenshots to his Drive on 2026-10-30, and they were read that day. They are quoted here as the record. `contract/channel-tasks.md` supersedes their wording: they are not operating instructions.
