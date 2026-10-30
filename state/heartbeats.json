@@ -1,21 +1,8 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-10-29T08:26:05.555Z",
-    "status": "blocked",
-    "release": "v2026.10.29.1",
-    "reason": "canary-failed",
-    "failing_since": "2026-10-28T07:50:46.639Z",
-    "failing_runs": 2,
-    "reasons": [
-      {
-        "reason": "release-assets",
-        "since": "2026-10-28T07:50:46.639Z"
-      },
-      {
-        "reason": "canary-failed",
-        "since": "2026-10-29T08:26:05.555Z"
-      }
-    ],
+    "last_run": "2026-10-30T08:27:53.331Z",
+    "status": "ok",
+    "release": "v2026.10.30.1",
     "outages": [
       {
         "since": "2026-10-16T07:45:36.839Z",
@@ -25,6 +12,21 @@
           {
             "reason": "checkout-untracked",
             "since": "2026-10-17T07:31:04.843Z"
+          }
+        ]
+      },
+      {
+        "since": "2026-10-28T07:50:46.639Z",
+        "until": "2026-10-30T08:27:53.331Z",
+        "runs": 2,
+        "reasons": [
+          {
+            "reason": "release-assets",
+            "since": "2026-10-28T07:50:46.639Z"
+          },
+          {
+            "reason": "canary-failed",
+            "since": "2026-10-29T08:26:05.555Z"
           }
         ]
       }
