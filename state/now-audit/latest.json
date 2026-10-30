@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -13,20 +13,15 @@
     "unfolded_note_max_age_days": 1,
     "unreconciled_max_age_days": 2,
     "dated_claim_max_age_days": 14,
-    "escalate_after_days": 3
+    "escalate_after_days": 3,
+    "fresh_bullet_days": 1
   },
   "repos": [
     {
       "repo": "control-center",
-      "status": "fail",
-      "failing_since": "2026-10-28",
-      "findings": [
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "17 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "mm-ctrl",
@@ -78,25 +73,9 @@
     },
     {
       "repo": "ai-harness",
-      "status": "fail",
-      "failing_since": "2026-10-28",
-      "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "23237 characters (limit 16000); line 29 is 1655 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "19 \"What changed recently\" bullets (limit 12)."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "17 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "AEO-Engine",
@@ -123,59 +102,21 @@
     },
     {
       "repo": "heartside",
-      "status": "fail",
-      "failing_since": "2026-10-28",
-      "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "16733 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "legibility",
-      "status": "fail",
-      "failing_since": "2026-10-28",
-      "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "17465 characters (limit 16000); line 65 is 1894 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        },
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "growth-heartside",
-      "status": "fail",
-      "failing_since": "2026-10-29",
-      "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "17574 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "18 \"What changed recently\" bullets (limit 12)."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "10 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "growth-makeyourmindup",
@@ -186,11 +127,6 @@
           "rule": "north_star_check",
           "severity": "fail",
           "detail": "No North Star check line under \"What is next and what is waiting on Krish\"."
-        },
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "line 69 is 1986 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
         }
       ]
     },
@@ -199,11 +135,6 @@
       "status": "fail",
       "failing_since": "2026-10-29",
       "findings": [
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "20 \"What changed recently\" bullets (limit 12)."
-        },
         {
           "rule": "next_step",
           "severity": "fail",
@@ -220,6 +151,11 @@
           "rule": "next_step",
           "severity": "fail",
           "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        },
+        {
+          "rule": "unreconciled",
+          "severity": "fail",
+          "detail": "A product commit from 2026-10-27 landed after the last NOW.md update and NOW.md still does not reflect it."
         }
       ]
     },
@@ -232,11 +168,6 @@
           "rule": "north_star_check",
           "severity": "fail",
           "detail": "2 North Star check lines; keep exactly one."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "14 \"What changed recently\" bullets (limit 12)."
         },
         {
           "rule": "next_step",
