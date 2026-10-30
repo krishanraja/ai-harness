@@ -57,6 +57,8 @@ column, would break this and needs his ruling first.
 The canon clause `canon.taste` is the home of the rule that the read and the report are scoped to a venture. The two
 skills restate only the parameters their own call takes. The fallback files' headers are rendered, not written by hand:
 their text comes from inspirationhouse, so a change to it is made there and arrives by the taste-sync pull request.
+The header that again says how a rule is approved, and that each rule names its claim, was made there
+(krishanraja/inspirationhouse#32) and reaches these files by that route, not by a hand edit here.
 
 ## How approval of each rule is recorded
 

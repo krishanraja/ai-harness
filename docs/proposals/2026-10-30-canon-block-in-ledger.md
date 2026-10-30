@@ -1,5 +1,9 @@
 # The canon block joins the rules ledger
 
+Krish, 2026-10-30, after the judge panel's findings on pull request 189: "fix the judge findings in a follow-up PR",
+then "fix the underlying system that is allowed to cause such an issue in the first place too". This is the second half:
+the gap in the ledger that let the canon block change with no record.
+
 `contract/templates/canon-block.md` is rendered into the `AGENTS.md` or `CLAUDE.md` of every repository in the fleet,
 but until this change it was outside `brain/rules.yaml`. Its clauses had no hash and no source, so an edit to one
 passed every check. On pull request 189 that let the taste clause be rewritten in place with nothing recording which
