@@ -1,6 +1,6 @@
 # Channel tasks: seven prompts as tasks, said per venture
 
-This is the source `contract/channel-tasks.md` cites, and the source of Engines rule 7 in `contract/north-star-metric.md`. It was written after the judge panel on pull request 195 found that the contract's source did not resolve inside the repository.
+This is the source `contract/channel-tasks.md` cites. It was written after the judge panel on pull request 195 found that the contract's source did not resolve inside the repository.
 
 ## Krish's words, 2026-10-30, in a Claude Code session across the growth repositories
 
@@ -9,14 +9,6 @@ First ask: "how can we apply this level of thinking to the specialists in each g
 Correction, after the first version mapped one template onto every engine: "As long as each repository knows what it needs to accomplish, as opposed to just following a box standard template, these instructions are likely to be very specific for part side, which needs to produce very different outcomes to make your mind up." ("part side" is Heartside, as dictated.) It is recorded as `Ruling (Krish, 2026-10-30): channel tasks are said per venture and channel, never a shared template.`, and in his Heartside taste ledger.
 
 He also chose, in the same session, that the task library lives here and that growth-mindmake stays out of the first round.
-
-## Which engines are in
-
-This list is what Engines rule 7 refers to.
-
-- **In:** growth-heartside and growth-makeyourmindup.
-- **In, but waiting:** growth-fulltime. Its tasks wait for Krish to release its hold and clear D1.
-- **Out:** growth-mindmake, until Krish adds it.
 
 ## The source prompts
 
