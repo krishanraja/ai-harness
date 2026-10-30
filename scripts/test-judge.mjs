@@ -17,7 +17,7 @@
 import {
   loadBench, parseFindings, runBench, render, systemPrompt,
   hasDissent, blockingRegressions, clauseUniverse, BENCHES, salvage, TRUNCATED, recordedRulings,
-  rulingsFromLog, failureReport, groundedFiles, citedScripts, citedProposals,
+  rulingsFromLog, failureReport, groundedFiles, citedScripts, citedProposals, commitsFromLog, overrulings,
 } from './judge.mjs'
 
 let failures = 0
@@ -321,6 +321,42 @@ T('a steward commit cannot overrule the panel by quoting a ruling', () => {
   ].join('\u001e')
   const rulings = rulingsFromLog(log)
   assert(rulings.length === 1 && /keep the gate/.test(rulings[0]), `expected only the person's ruling, got ${JSON.stringify(rulings)}`)
+})
+
+// Pull request 189: a merge of a taste-by-venture change (with a ruling) and a
+// taste-sync change (without one). One ruling used to overrule every finding.
+const PR189_LOG = [
+  ['09a38003d129', 'p1', 'Taste by venture\n\nRuling (Krish, 2026-10-28): the taste ledger is keyed by venture, not repository.\n',
+    'NOW.md\ncontract/templates/canon-block.md\nskills/krish-design/SKILL.md\nskills/krish-voice/SKILL.md'],
+  ['1d7363108324', 'p2', 'Approved taste rules for krish-voice\n', 'skills/krish-voice/references/approved-taste.md'],
+  ['8252b8a4e2ae', 'p3 p4', 'Merge PRs 174 and 179\n\nRuling (Krish, 2026-10-28): the taste ledger is keyed by venture, not repository.\n', ''],
+].map(([h, p, b, f]) => `\u001e${h}\u001f${p}\u001f${b}\u001f\n${f}\n`).join('')
+const PR189_FILES = new Map([['krish-voice.workflow', 'skills/krish-voice/SKILL.md']])
+const blocker = (criterion_id, clause) => ({ criterion_id, clause, verdict: 'regresses', blocking: true })
+
+T('a ruling overrules only the findings whose file its own commit changed', () => {
+  const commits = commitsFromLog(PR189_LOG)
+  assert(commits.length === 3 && commits[2].merge && !commits[0].merge, `expected 3 commits, the last a merge, got ${JSON.stringify(commits)}`)
+  const { covered, uncovered } = overrulings([
+    blocker('write-gating', 'contract/templates/canon-block.md'),
+    blocker('provenance', 'skills/krish-voice/references/approved-taste.md'),
+    blocker('ghost-facts', 'krish-voice.workflow'),
+  ], commits, PR189_FILES)
+  assert(covered.length === 2, `the canon block and the voice skill were changed by the ruling's commit, got ${covered.length} covered`)
+  assert(uncovered.length === 1 && uncovered[0].finding.criterion_id === 'provenance',
+    `the taste-sync provenance regression must stay blocking, got ${JSON.stringify(uncovered)}`)
+})
+
+T('a ruling copied into a merge body overrules nothing', () => {
+  const merge = commitsFromLog(PR189_LOG).filter((c) => c.merge).map((c) => ({ ...c, files: ['skills/krish-voice/references/approved-taste.md'] }))
+  const { uncovered } = overrulings([blocker('provenance', 'skills/krish-voice/references/approved-taste.md')], merge, PR189_FILES)
+  assert(uncovered.length === 1, 'a merge commit must not carry an override, even when it names the file')
+})
+
+T('a steward commit still carries no ruling under the scoped override', () => {
+  const log = `\u001eabc\u001fp\u001fdocs: change\n\nRuling (Krish, 2026-10-14): approve.\n\nHarness-Steward: change-request\n\u001f\ncontract/templates/canon-block.md\n`
+  const { uncovered } = overrulings([blocker('write-gating', 'contract/templates/canon-block.md')], commitsFromLog(log), new Map())
+  assert(uncovered.length === 1, 'a steward commit must not overrule its own review')
 })
 
 T('an unmeasured run writes a report that says so and masks the key', () => {
