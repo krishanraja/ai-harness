@@ -23,7 +23,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { renderBlock, inspect, START } from './render.mjs'
-import { check as checkRuleProvenance, extract as extractRules } from './brain-rules.mjs'
+import { check as checkRuleProvenance, extract as extractRules, CANON_BLOCK } from './brain-rules.mjs'
 import { canonSyncProblems, canonExcludedRepos, isCanonSynced } from './lib/fleet.mjs'
 import { isInertKnowledgeLine, sourceEvidenceSeals, policyAt } from './repository-brain.mjs'
 import { loadLedger } from './propose.mjs'
@@ -171,7 +171,9 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
 {
   const STOP = new Set('a an and are as at be but by for from in into is it its no not of on or that the their this to with without you your never always must may can when where which what how who whom whose do does did done'.split(' '))
   const norm = (t) => [...new Set(String(t).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w)))]
-  const rules = extractRules().contractRules.map((r) => ({ id: r.id, file: r.file, toks: new Set(norm(r.text)) }))
+  // The canon block is the contracts' own summary for every other repository,
+  // so it overlaps them by design and is left out of this check.
+  const rules = extractRules().contractRules.filter((r) => r.file !== CANON_BLOCK).map((r) => ({ id: r.id, file: r.file, toks: new Set(norm(r.text)) }))
   const pairs = []
   for (let i = 0; i < rules.length; i++) {
     for (let j = i + 1; j < rules.length; j++) {

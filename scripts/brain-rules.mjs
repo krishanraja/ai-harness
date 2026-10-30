@@ -82,6 +82,48 @@ export function ruleLines(text) {
   return out
 }
 
+/**
+ * The canon block every repository renders into its AGENTS.md or CLAUDE.md.
+ *
+ * It was outside this ledger until pull request 189, so its taste clause was
+ * rewritten in place with no hash, no source and nothing saying which wording
+ * was current, and nothing failed. It is written as bold-labelled clauses
+ * (`**Authority.**`, `**Taste:**`), several to a paragraph, not as bullets, so
+ * each clause is a rule here: from its label to the next label or blank line.
+ */
+export const CANON_BLOCK = 'contract/templates/canon-block.md'
+
+export function canonClauses(text) {
+  const out = []
+  const lines = text.split('\n')
+  const LABEL = /\*\*([^*]+?)[.:]\*\*/gu
+  let para = []
+  const flush = () => {
+    if (!para.length) return
+    const joined = para.map((p) => p.text.trim()).join(' ')
+    const starts = []
+    for (const m of joined.matchAll(LABEL)) {
+      // A label opens a clause only at the start of the paragraph or of a sentence.
+      if (m.index === 0 || /[.;:)]\s$/u.test(joined.slice(0, m.index))) starts.push({ at: m.index, label: m[1], marker: m[0] })
+    }
+    if (!starts.length || starts[0].at !== 0) starts.unshift({ at: 0, label: null, marker: null })
+    starts.forEach((s, k) => {
+      const body = joined.slice(s.at, k + 1 < starts.length ? starts[k + 1].at : undefined).trim()
+      if (!body || /^\{\{[a-z_]+\}\}$/u.test(body)) return
+      const line = s.marker ? (para.find((p) => p.text.includes(s.marker)) || para[0]).line : para[0].line
+      out.push({ section: 'canon', line, text: body, label: s.label, needle: s.marker || para[0].text.trim().slice(0, 60) })
+    })
+    para = []
+  }
+  for (let i = 0; i < lines.length; i++) {
+    if (/^#/.test(lines[i])) { flush(); continue }
+    if (!lines[i].trim()) { flush(); continue }
+    para.push({ line: i + 1, text: lines[i] })
+  }
+  flush()
+  return out
+}
+
 export function slug(s) {
   return s.toLowerCase()
     .replace(/`[^`]*`/g, (m) => m.slice(1, -1))
@@ -123,6 +165,13 @@ export function extract(root = HARNESS) {
       const id = idFor(r.section, r.text, taken)
       taken.add(id)
       contractRules.push({ id, file, line: r.line, text: r.text, needle: r.needle, text_sha: textSha(r.text) })
+    }
+  }
+  if (existsSync(join(root, CANON_BLOCK))) {
+    for (const r of canonClauses(read(CANON_BLOCK, root))) {
+      const id = idFor(r.section, r.label || r.text, taken)
+      taken.add(id)
+      contractRules.push({ id, file: CANON_BLOCK, line: r.line, text: r.text, needle: r.needle, text_sha: textSha(r.text) })
     }
   }
 
@@ -250,7 +299,7 @@ function toYaml({ contractRules, skillSections }, prior, noGit = false) {
     L.push('')
   }
 
-  emit('contract_rules', contractRules, `${contractRules.length} rules across the two contracts.`)
+  emit('contract_rules', contractRules, `${contractRules.length} rules across the two contracts and the canon block.`)
   emit('skill_sections', skillSections, `${skillSections.length} chapters across the installed skills.`)
   return L.join('\n')
 }
@@ -488,7 +537,7 @@ export function revise(ledgerText, root = HARNESS, { kind, ref, today = TODAY, s
     }
   }
   let text = out.join('\n')
-  text = text.replace(/^# \d+ rules across the two contracts\.$/m, `# ${live.contractRules.length} rules across the two contracts.`)
+  text = text.replace(/^# \d+ rules across the two contracts(?: and the canon block)?\.$/m, `# ${live.contractRules.length} rules across the two contracts and the canon block.`)
   text = text.replace(/^# \d+ chapters across the installed skills\.$/m, `# ${live.skillSections.length} chapters across the installed skills.`)
   return { text, changed, added, superseded }
 }

@@ -60,7 +60,7 @@ Body of the limits chapter.
 
 function tree(contract = CONTRACT, skill = SKILL) {
   const root = mkdtempSync(join(tmpdir(), 'brain-rules-'))
-  mkdirSync(join(root, 'contract'), { recursive: true })
+  mkdirSync(join(root, 'contract/templates'), { recursive: true })
   mkdirSync(join(root, 'skills/fixture'), { recursive: true })
   writeFileSync(join(root, 'contract/krish-operating-contract.md'), contract)
   writeFileSync(join(root, 'skills/fixture/SKILL.md'), skill)
@@ -141,6 +141,36 @@ t('a rule edited in place without a new source fails', () => {
   writeFileSync(join(root, 'contract/krish-operating-contract.md'), edited)
   const { problems } = check(ledger, root)
   matches(problems, /has no entry|changed but brain\/rules\.yaml/, 'a silent edit must fail')
+})
+
+// Pull request 189 rewrote the canon block's taste clause in place, and nothing
+// failed, because the canon block was outside the ledger.
+const CANON = `## Krish canon
+
+**Authority.** Approval is needed before any send.
+
+**Route.** principles, then context. **Taste:** read his approved rules with \`get_approved_taste\`.
+
+{{who_krish}}
+`
+
+t('the canon block is a clause per label, each with its own entry', () => {
+  const root = fixture()
+  writeFileSync(join(root, 'contract/templates/canon-block.md'), CANON)
+  const ids = extract(root).contractRules.filter((r) => r.file === 'contract/templates/canon-block.md').map((r) => r.id)
+  assert(JSON.stringify(ids) === JSON.stringify(['canon.authority', 'canon.route', 'canon.taste']),
+    `expected authority, route and taste as separate clauses, got ${JSON.stringify(ids)}`)
+})
+
+t('a canon block clause rewritten in place without a new source fails', () => {
+  const root = fixture()
+  writeFileSync(join(root, 'contract/templates/canon-block.md'), CANON)
+  const ledger = ledgerFor(root)
+  writeFileSync(join(root, 'contract/templates/canon-block.md'),
+    CANON.replace('read his approved rules', 'read his approved rules for your venture'))
+  const { problems } = check(ledger, root)
+  matches(problems, /canon\.taste changed but brain\/rules\.yaml/, 'a silent canon block edit must fail')
+  assert(!problems.some((p) => /canon\.(authority|route) changed/.test(p)), `only the edited clause may fail, got ${problems.join(' | ')}`)
 })
 
 t('a skill chapter whose body changed fails', () => {

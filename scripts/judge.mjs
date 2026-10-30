@@ -267,6 +267,65 @@ export function rulingsFromLog(log) {
     .flatMap((body) => recordedRulings(body))
 }
 
+/** The `git log` format commitsFromLog reads: hash, parents, body, then the changed files. */
+export const COMMIT_LOG_FORMAT = '%x1e%H%x1f%P%x1f%B%x1f'
+
+/**
+ * Commits from `git log --format=COMMIT_LOG_FORMAT --name-only`: each with its
+ * rulings, the files it changed, and whether it is a merge. A steward commit
+ * carries no rulings, as in rulingsFromLog.
+ */
+export function commitsFromLog(log) {
+  return String(log).split('\u001e').filter((r) => r.trim()).map((record) => {
+    const [hash = '', parents = '', body = '', rest = ''] = record.split('\u001f')
+    const steward = /^Harness-Steward:/imu.test(body)
+    return {
+      hash: hash.trim(),
+      merge: parents.trim().split(/\s+/u).filter(Boolean).length > 1,
+      rulings: steward ? [] : recordedRulings(body),
+      files: rest.split(/\r?\n/u).map((l) => l.trim()).filter(Boolean),
+    }
+  })
+}
+
+/** Every rule id in brain/rules.yaml mapped to the file that holds it. */
+export function ruleFiles() {
+  const ledger = parseYaml(read('brain/rules.yaml'))
+  const files = new Map()
+  for (const key of Object.keys(ledger)) {
+    if (!Array.isArray(ledger[key])) continue
+    for (const e of ledger[key]) if (e && e.id && e.file) files.set(e.id, e.file)
+  }
+  return files
+}
+
+/** The file a finding's clause lives in: the rule's file, or the cited path itself. */
+export const clauseFile = (clause, files) => files.get(clause) || String(clause).replace(/:.*$/u, '')
+
+/**
+ * Which blocking findings a recorded ruling overrules.
+ *
+ * A ruling overrules a finding only when the commit that carries it changed the
+ * file the finding cites. Until pull request 189 any ruling anywhere in the
+ * range overruled every finding, so a ruling about keying the taste ledger by
+ * venture waived an unrelated provenance regression that a taste-sync pull
+ * request brought in beside it. A merge commit's rulings never count: its diff
+ * is everything it brings in, so a ruling copied into a merge body would cover
+ * work it never decided, which is how that one was carried.
+ */
+export function overrulings(blocked, commits, files) {
+  const deciding = commits.filter((c) => !c.merge && c.rulings.length)
+  const covered = []
+  const uncovered = []
+  for (const f of blocked) {
+    const file = clauseFile(f.clause, files)
+    const by = deciding.filter((c) => c.files.includes(file))
+    if (by.length) covered.push({ finding: f, file, rulings: [...new Set(by.flatMap((c) => c.rulings))] })
+    else uncovered.push({ finding: f, file })
+  }
+  return { covered, uncovered }
+}
+
 /**
  * The report for a run that could not measure. Exit 2 used to write nothing, so
  * a rejected key looked exactly like a quiet pass: green check, no comment.
@@ -359,7 +418,7 @@ export function render(results, { base, head }) {
   p.push(`## Judge panel: \`${base}\` against \`${head}\``)
   p.push('')
   if (blocked.length) {
-    p.push(`**${blocked.length} blocking regression${blocked.length === 1 ? '' : 's'}.** Each names the clause it regressed. Overrule with a commit body line \`Ruling (Krish, YYYY-MM-DD):\`, which the observer ledgers and which becomes that rule's new source.`)
+    p.push(`**${blocked.length} blocking regression${blocked.length === 1 ? '' : 's'}.** Each names the clause it regressed. Overrule one with a commit body line \`Ruling (Krish, YYYY-MM-DD):\` on a commit, not a merge, that changes the file the finding cites. The observer ledgers it and it becomes that rule's new source.`)
   } else if (unmeasured.length || lost.length) {
     // Never "clean" here. A bench that could not be read is unmeasured, not
     // passing, which is the same rule canaries use for a void negative result.
@@ -460,11 +519,15 @@ if (isMain) {
   }
 
   const blocked = blockingRegressions(results.flatMap((r) => r.findings))
-  const commitMessages = execFileSync('git', ['log', '--format=%B%x1e', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
-  const rulings = rulingsFromLog(commitMessages)
+  const commitLog = execFileSync('git', ['log', `--format=${COMMIT_LOG_FORMAT}`, '--name-only', `${base}..${head}`], { cwd: HARNESS, encoding: 'utf8' })
+  const { covered, uncovered } = overrulings(blocked, commitsFromLog(commitLog), ruleFiles())
   let report = render(results, { base, head })
-  if (blocked.length && rulings.length) {
-    report += `\n## Recorded Krish override\n\n${rulings.map((r) => `- ${r}`).join('\n')}\n\nThe blocking findings remain visible as review evidence, but the recorded owner ruling overrules this gate.\n`
+  if (covered.length) {
+    const rulings = [...new Set(covered.flatMap((c) => c.rulings))]
+    report += `\n## Recorded Krish override\n\n${rulings.map((r) => `- ${r}`).join('\n')}\n\nIt overrules ${covered.map((c) => `\`${c.finding.criterion_id}\` on \`${c.finding.clause}\``).join(', ')}, because a commit carrying it changed the file each cites. The findings remain visible as review evidence.\n`
+  }
+  if (blocked.length && uncovered.length) {
+    report += `\n## Not overruled\n\n${uncovered.map((u) => `- \`${u.finding.criterion_id}\` on \`${u.finding.clause}\`: no commit carrying a ruling, other than a merge, changed \`${u.file}\`.`).join('\n')}\n\nThese still block. Fix them, or overrule each with a ruling on a commit that changes its file.\n`
   }
   const out = flag('--out')
   if (out) { mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, report + '\n') }
@@ -497,5 +560,5 @@ if (isMain) {
   if (report.includes(EM_DASH)) { console.error('FAIL  the report carries an em dash after filtering'); process.exit(2) }
 
   const unusable = results.some((r) => r.empty || (r.lostBlocking || []).length)
-  process.exit((blocked.length && !rulings.length) || unusable ? 1 : 0)
+  process.exit(uncovered.length || unusable ? 1 : 0)
 }

@@ -783,7 +783,10 @@ jobs:
       # a "Ruling (Krish, DATE):" line in the commit body, which observe.mjs
       # already extracts into the ledger. The override is recorded rather than
       # silent, and a criterion that keeps getting overruled is evidence the
-      # criterion is wrong.
+      # criterion is wrong. A ruling overrules only the findings whose file its
+      # own commit changed, and a merge commit's rulings never count: pull
+      # request 189 merged a provenance regression on a ruling about something
+      # else, carried in a merge body.
       #
       # Exit 2 is a run that could not measure: a refused key, an exception. It
       # used to pass, which is how a rejected key kept every canon change green
@@ -796,5 +799,5 @@ jobs:
             exit 1
           fi
           echo "::error::The judge panel found a blocking regression. Read the review on this pull request."
-          echo "Overrule it with a 'Ruling (Krish, YYYY-MM-DD):' line in the commit body if the block is wrong."
+          echo "Overrule it with a 'Ruling (Krish, YYYY-MM-DD):' line in the body of a commit, not a merge, that changes the file the finding cites."
           exit 1
