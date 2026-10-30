@@ -1148,88 +1148,88 @@ contract_rules:
     text_sha: "e6dfaf326204"
     first_seen: "2026-10-28"
     source:
-      kind: founding
-      ref: "2e92b8618c9f"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.precedence
     file: contract/templates/canon-block.md
     text_sha: "a1ad2769ef7e"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.authority
     file: contract/templates/canon-block.md
     text_sha: "59eff15e7d06"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.verification
     file: contract/templates/canon-block.md
     text_sha: "df4776157bc1"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.truth-and-freshness
     file: contract/templates/canon-block.md
     text_sha: "afde473272e0"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.secrets
     file: contract/templates/canon-block.md
     text_sha: "a679d6f1ee81"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.corrections-are-the-training
     file: contract/templates/canon-block.md
     text_sha: "739559118458"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.route
     file: contract/templates/canon-block.md
     text_sha: "6369bfe2ca31"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.north-star
     file: contract/templates/canon-block.md
     text_sha: "951a603d5052"
     first_seen: "2026-10-18"
     source:
-      kind: founding
-      ref: "b37a7d0b70f3"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.close-out
     file: contract/templates/canon-block.md
     text_sha: "d6e9d202ff5d"
     first_seen: "2026-10-22"
     source:
-      kind: founding
-      ref: "cc6ffee719bb"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.one-home-per-fact
     file: contract/templates/canon-block.md
     text_sha: "3237c25b9ed1"
     first_seen: "2026-10-22"
     source:
-      kind: founding
-      ref: "cc6ffee719bb"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
@@ -1250,16 +1250,16 @@ contract_rules:
     text_sha: "ba98e2374686"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.this-repository-s-own
     file: contract/templates/canon-block.md
     text_sha: "3d7595b8729a"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
 # 235 chapters across the installed skills.
@@ -2500,8 +2500,8 @@ skill_sections:
     text_sha: "72e549a85141"
     first_seen: "2026-09-07"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-30-taste-by-venture.md"
+      kind: ruling
+      ref: "09a38003d129"
     history:
       - text_sha: "684c4cac33d1"
         valid_until: "2026-10-24"
@@ -2797,8 +2797,8 @@ skill_sections:
     text_sha: "96f27efa4c81"
     first_seen: "2026-09-07"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-30-taste-by-venture.md"
+      kind: ruling
+      ref: "09a38003d129"
     history:
       - text_sha: "e2502cf40460"
         valid_until: "2026-10-24"

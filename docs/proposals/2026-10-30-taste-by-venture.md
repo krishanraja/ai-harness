@@ -8,7 +8,8 @@ request 189.
 
 This proposal is written after the change landed. The judge panel on pull request 189 found the canon edit had no
 proposal and no ledger row, and that the ruling was cited only as a paraphrase. It records the decision, the reasons and
-the fallback here, and is the source `brain/rules.yaml` gives for the changed clauses.
+the fallback here, and is the source `brain/rules.yaml` gives for `canon.taste`. The two skill sections keep the ruling
+commit 09a3800 as their source.
 
 ## What changes
 
@@ -37,7 +38,8 @@ keeps the corrections that path carries from leaking into the wrong venture. The
 - "Before a material design, read his approved rules" and "a repository not listed reads none of these" do not
   conflict. The session reads, and for an unlisted repository the read is empty, which the skills already say means no
   rule is approved yet. It never invents one.
-- A report with no venture is held by inspirationhouse and counted as `reports_unassigned`, never filed under a guess.
+- A report with no venture is held by inspirationhouse and counted as `reports_unassigned`, never filed under a guess
+  (krishanraja/inspirationhouse `README.md`, "Each venture reads only its own taste", and `AGENTS.md` rule 10, at c7e4733).
 
 ## Where each fact lives
 
