@@ -1,6 +1,6 @@
 # Channel tasks
 
-Every growth engine's channel specialists run the same seven tasks. Krish asked for each one as a task in its own right, applied to every social channel his engines run (2026-10-30). This file is the one definition. Each engine keeps only a mapping table that says which of its specialists runs which task, plus the five-step loop below with its own numbers. It never keeps a copy of these contracts.
+Krish asked for each of seven growth prompts to be a task in its own right for the channel specialists in his growth engines (2026-10-30), and then for each repository to know what it needs to accomplish rather than follow a box-standard template: Heartside needs very different outcomes from Make Your Mind Up. So this file holds only what every engine shares: the rules below, a starting set of seven tasks, and the loop. What a task accomplishes belongs to the engine.
 
 The tasks began as seven Instagram growth prompts Krish saved on 2026-10-30. They are rewritten here for one change: a channel is never the goal. No engine's North Star counts followers. Every output names the North Star signal it serves.
 
@@ -12,7 +12,13 @@ The tasks began as seven Instagram growth prompts Krish saved on 2026-10-30. The
 4. **Nothing goes out.** Every task drafts, ranks or proposes. Posting, sending, spending and any change to a profile, bio, pin or setting keep the engine's approval route. A task output is never approval.
 5. **Never copy a creator.** A trend or a format is adapted to the venture's own product, voice and audience; another creator's words, footage or exact structure are not reused.
 
-## The seven tasks
+## An engine's own brief comes first
+
+For every task a specialist runs, the engine writes one sentence saying what that task accomplishes on that channel for that venture: who it is for, what counts as a win, and what this venture never does there. A gift shop's idea bank is gift moments by buyer and occasion, ending on the real product. A publication's idea bank is unused angles from published pieces. A sentence that would read the same in another engine, or for another channel in the same engine, is a template, and the engine's own check refuses it.
+
+An engine drops a task that does not serve a channel, and says why. It reshapes one to fit (an X idea bank of receipts from published work). It adds its own task when its outcome needs one this list lacks. The seven are a floor for thinking, not a quota.
+
+## The seven tasks, as a starting set
 
 | # | Task id | Reads | Hands back | Cadence | Gate |
 |---|---|---|---|---|---|
@@ -38,8 +44,8 @@ Each engine runs this loop each week, with its own numbers, and writes it into i
 
 ## What an engine keeps
 
-- A mapping table: specialist (or job), channels, the task ids it runs, its leading signal.
+- Its brief: for each specialist, the channels, its leading signal, and for each task it runs, what that task accomplishes there, with any dropped task and why.
 - The loop above, filled with its own ladder, channels and signals.
-- A deterministic check that every task id it names is one of the seven.
+- A deterministic check that refuses an unknown task, a missing or one-word outcome, and the same outcome on two specialists.
 
 Mindmake's own engine is outside the first round: its number is good meetings from warm paths, and none of its specialists owns a social channel (Krish, 2026-10-30).
