@@ -116,7 +116,9 @@ characters and no line over 1,500, at most 12 "What changed recently" bullets
 and 8 in "Where it is right now", `as_of` no older than 7 days, exactly one
 North Star check (a warning past 7 days, since only a session may re-date it),
 no unfolded closeout note, and no sentence that calls a merged or
-closed pull request open.
+closed pull request open. Bullets dated today or yesterday count toward none of
+the size limits: the closeout fold adds them during the day and the steward
+trims overnight.
 
 ### Closeout notes: `now-notes/YYYY-MM-DD-<slug>.md`
 

@@ -19,6 +19,12 @@
  *                         (the schema's rolling 30 days: roll it into docs/history/LOG.md)
  *   recent_too_many       more than recent_max_bullets bullets there
  *   where_too_many        more than where_max_bullets bullets in "Where it is right now"
+ *
+ * Bullets dated within fresh_bullet_days count toward neither the bullet limits
+ * nor the character limit: the closeout fold adds them during the day and the
+ * nightly steward trims overnight. On 2026-10-29 the audit ran between the two
+ * and failed every busy repository on a bullet folded hours earlier, which
+ * after three days would have reached Krish's digest for nothing.
  *   next_step             no "Next" line, or more than one, in "What is next and what is waiting on Krish"
  *   unfolded_notes        closeout notes in now-notes/ older than unfolded_note_max_age_days
  *   unreconciled          a product commit landed after the last NOW.md update and
@@ -54,7 +60,7 @@ const DEFAULT_LIMITS = {
   max_chars: 16000, max_lines: 200, max_line_chars: 1500,
   recent_max_age_days: 30, recent_max_bullets: 12, where_max_bullets: 8,
   unfolded_note_max_age_days: 1, unreconciled_max_age_days: 2,
-  dated_claim_max_age_days: 14, escalate_after_days: 3,
+  dated_claim_max_age_days: 14, escalate_after_days: 3, fresh_bullet_days: 1,
 }
 export function loadLimits(root = join(HERE, '../..')) {
   const p = join(root, 'config/now-audit.json')
@@ -125,7 +131,11 @@ export function auditNow({ text, today, notes = [], unreconciled = null, prState
   // escalate to Krish something no automation is allowed to fix.
   else if (days(check[0][1], today) > L.north_star_check_max_age_days) add('north_star_check', `The North Star check is dated ${check[0][1]}, ${days(check[0][1], today)} days ago (limit ${L.north_star_check_max_age_days}); the next session re-dates it.`, 'warn')
 
-  const chars = String(text).length
+  // Bullets the fold added in the last day: "- <status> (YYYY-MM-DD)" and "- YYYY-MM-DD <change>".
+  const freshDate = (l) => (l.match(/^- (\d{4}-\d{2}-\d{2})\b/) || l.match(/\((\d{4}-\d{2}-\d{2})\)\s*$/) || [])[1]
+  const isFresh = (l) => { const d = freshDate(l); return !!d && days(d, today) >= 0 && days(d, today) <= L.fresh_bullet_days }
+  const freshChars = [...(section(lines, 'Where it is right now') || []), ...(section(lines, 'What changed recently') || [])].filter((l) => l.startsWith('- ') && isFresh(l)).reduce((n, l) => n + l.length + 1, 0)
+  const chars = String(text).length - freshChars
   const longest = lines.reduce((m, l, i) => (l.length > m.len ? { len: l.length, at: i + 1 } : m), { len: 0, at: 0 })
   const sizes = []
   if (chars > L.max_chars) sizes.push(`${chars} characters (limit ${L.max_chars})`)
@@ -136,10 +146,11 @@ export function auditNow({ text, today, notes = [], unreconciled = null, prState
   const recent = (section(lines, 'What changed recently') || []).filter((l) => l.startsWith('- '))
   const old = recent.map((l) => l.match(/^- (\d{4}-\d{2}-\d{2})/)?.[1]).filter((d) => d && days(d, today) > L.recent_max_age_days)
   if (old.length) add('recent_too_old', `${old.length} "What changed recently" bullet(s) older than ${L.recent_max_age_days} days (oldest ${old.sort()[0]}); roll them into docs/history/LOG.md.`)
-  if (recent.length > L.recent_max_bullets) add('recent_too_many', `${recent.length} "What changed recently" bullets (limit ${L.recent_max_bullets}).`)
+  const recentCounted = recent.filter((l) => !isFresh(l)).length
+  if (recentCounted > L.recent_max_bullets) add('recent_too_many', `${recentCounted} "What changed recently" bullets older than a day (limit ${L.recent_max_bullets}).`)
 
   const where = section(lines, 'Where it is right now') || []
-  const whereBullets = where.filter((l) => l.startsWith('- ')).length
+  const whereBullets = where.filter((l) => l.startsWith('- ') && !isFresh(l)).length
   if (whereBullets > L.where_max_bullets) add('where_too_many', `${whereBullets} bullets in "Where it is right now" (limit ${L.where_max_bullets}); it says where things are, not how they got there.`)
 
   const nexts = waiting.filter((l) => /^- Next\b/.test(l)).length

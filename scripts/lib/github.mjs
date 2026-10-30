@@ -189,6 +189,12 @@ export class Gh {
     return out
   }
 
+  /** The full message of a branch's head commit. */
+  async headMessage(repo, branch) {
+    const r = await this.req('GET', `/repos/${this.owner}/${repo}/commits/${encodeURIComponent(branch)}`)
+    return r.commit?.message || ''
+  }
+
   /** Branch names under a prefix, e.g. "steward/". */
   async branchesWithPrefix(repo, prefix) {
     const r = await this.req('GET', `/repos/${this.owner}/${repo}/git/matching-refs/heads/${prefix.split('/').map(encodeURIComponent).join('/')}`)
@@ -196,8 +202,8 @@ export class Gh {
   }
 
   /** The newest commits on a branch: [{ sha, subject, date }]. */
-  async recentCommits(repo, branch, count = 30) {
-    const r = await this.req('GET', `/repos/${this.owner}/${repo}/commits?sha=${encodeURIComponent(branch)}&per_page=${count}`)
+  async recentCommits(repo, branch, count = 30, path = null) {
+    const r = await this.req('GET', `/repos/${this.owner}/${repo}/commits?sha=${encodeURIComponent(branch)}&per_page=${count}${path ? `&path=${encodeURIComponent(path)}` : ''}`)
     return r.map((c) => ({ sha: c.sha, subject: String(c.commit?.message || '').split('\n')[0], date: String(c.commit?.committer?.date || '').slice(0, 10) }))
   }
 

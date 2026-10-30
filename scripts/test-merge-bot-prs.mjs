@@ -83,6 +83,7 @@ function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {
     async pullFiles(repo, n) { return prFiles[key(repo, n)] || [] },
     async checksFor(repo, sha) { return checks[`${repo}:${sha}`] || { runs: [], statuses: {} } },
     async recentCommits(repo) { return commits[repo] || [] },
+    async headMessage(repo, branch) { return `docs(steward): fallback for ${branch}\n\nGuard 1 failed: validator said X.` },
     async branchesWithPrefix(repo, prefix) { return (branches[repo] || []).filter((b) => b.startsWith(prefix)) },
     async listPulls(repo, { head }) { return (allPulls[repo] || []).filter((p) => p.head?.ref === head) },
     async openPull(repo, opts) { calls.push(['open', repo, opts]); return { number: 999, html_url: `https://github.com/${OWNER}/${repo}/pull/999` } },
@@ -178,12 +179,15 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
 assert.deepEqual(orphanPlan({ orphans: ['steward/2026-10-19', 'steward/2026-10-29', 'steward/2026-10-27-b'], commits: [] }), { open: 'steward/2026-10-29', superseded: ['steward/2026-10-19', 'steward/2026-10-27-b'] })
 assert.deepEqual(orphanPlan({ orphans: ['steward/2026-10-27'], commits: [{ sha: 'abcdef12', subject: 'docs(steward): 2026-10-28 re-stamp', date: '2026-10-28' }] }), { open: null, superseded: ['steward/2026-10-27'] }, 'a later steward commit replaces even the newest')
 assert.deepEqual(orphanPlan({ orphans: [], commits: [] }), { open: null, superseded: [] })
+// The 2026-10-29 regression: an older orphan is never opened while a newer fallback branch, with a pull request, exists.
+assert.deepEqual(orphanPlan({ orphans: ['steward/2026-10-25', 'steward/2026-10-27'], branches: ['steward/2026-10-25', 'steward/2026-10-27', 'steward/2026-10-29', 'steward/2026-10-30'], commits: [] }), { open: null, superseded: ['steward/2026-10-25', 'steward/2026-10-27'] })
 {
   const gh = fakeGh({ pulls: { 'content-engine': [] }, branches: { 'content-engine': ['steward/2026-10-19', 'steward/2026-10-29', 'steward/2026-10-27-b', 'claude/x'] }, allPulls: { 'content-engine': [{ number: 5, head: { ref: 'steward/2026-10-19' } }] } })
   const r = new BotPrs(gh, { fleet, now: NOW }); await r.repo(fleet.repos.find((x) => x.name === 'content-engine'))
   const opened = gh.calls.filter((c) => c[0] === 'open')
   assert.equal(opened.length, 1, 'one pull request, for the newest orphan only')
   assert.equal(opened[0][2].head, 'steward/2026-10-29'); assert.match(opened[0][2].title, /^docs\(steward\): 2026-10-29 needs review$/)
+  assert.match(opened[0][2].body, /> Guard 1 failed: validator said X\./, 'the steward\'s own reason travels into the pull request')
   assert.deepEqual(r.results.filter((x) => x.action === 'orphan-superseded').map((x) => x.reason), ['steward/2026-10-27-b'], 'a branch that already had a pull request is not an orphan')
   assert.equal(gh.calls.filter((c) => c[0] !== 'open').length, 0, 'nothing is deleted or closed')
 }
