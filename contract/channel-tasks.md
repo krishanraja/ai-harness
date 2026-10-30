@@ -7,7 +7,7 @@ The source, with his words and the seven original prompts quoted, is `docs/propo
 ## The rules every task follows
 
 1. **The North Star signal.** Every idea, hook, caption, test and plan names the leading signal it is meant to move: sends, saves, follows from the right people, tracked link clicks, subscribes, orders or good meetings. It never names likes or reach alone. An output with no signal is refused.
-2. **Official apart from speculation.** A claim about how a platform ranks or distributes posts is labelled `official` only when it comes from the platform's own pages (creator centre, help centre, engineering or product announcement). Otherwise it is `speculation`. Its link and read date follow `truth-and-freshness.record-source-and-retrieval`; a claim without them is dropped.
+2. **Official apart from speculation.** A claim about how a platform ranks or distributes posts is labelled `official` only when it comes from the platform's own pages (creator centre, help centre, engineering or product announcement). Otherwise it is `speculation`, ranked below official sources as `evidence-research.source-hierarchy` ranks them. Its link and read date follow `truth-and-freshness.record-source-and-retrieval`; a claim without them is dropped.
 3. **Live inputs.** The placeholders (niche, audience, goal, capacity, followers) are filled by `truth-and-freshness.prefer-live-state-for`: the engine's own canon and live readings at run time.
 4. **Drafts only.** Every task drafts, ranks or proposes; `authority.never-publish-post-send` governs anything that goes out, and a task output is never approval.
 5. **Never copy a creator.** A trend or a format is adapted to the venture's own product, voice and audience; another creator's words, footage or exact structure are not reused.
@@ -24,7 +24,7 @@ An engine reshapes a task to fit, and adds its own task when its outcome needs o
 
 ## The seven tasks, as a starting set
 
-The counts (30 ideas, 5 hooks, 5 captions, 10 opportunities, 5 tests, the last 30 posts) are the saved prompts' own. They are starting values: an engine changes one when its measured results or its capacity say so, and records why.
+The counts (30 ideas, 5 hooks, 5 captions, 10 opportunities, 5 tests, the last 30 posts) are the saved prompts' own. They are defaults, not live values for any engine. An engine that sets a count in its own brief, with the measured result or capacity that set it, is governed by its brief from then on; this table governs only where an engine's brief is silent.
 
 | # | Task id | Reads | Hands back | Cadence | Gate |
 |---|---|---|---|---|---|
