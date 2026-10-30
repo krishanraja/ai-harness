@@ -1,0 +1,3 @@
+Status: `contract/channel-tasks.md` defines the seven channel tasks (platform truth, profile audit, idea bank, reel script, caption set, trend scan, channel plan) and the weekly loop from gap to North Star. The Engines section of `contract/north-star-metric.md` gains rule 7 pointing to it. growth-makeyourmindup, growth-heartside and growth-fulltime map their specialists to it on branch claude/wonderful-cori-mloll7.
+Next: Krish reviews the contract; once merged, each engine's next daily pack shows 5 hooks and 5 captions in its creative review.
+North Star check (2026-10-30): holds. This serves the second line (agents run daily operations to his standard); the number is not yet measured.
