@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-10-29
+as_of: 2026-10-30
 head: bb1c0ef
 lifecycle: live
 production_url: none
@@ -21,10 +21,11 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-10-29)
+## Where it is right now (as of 2026-10-30)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- the two open pull requests landed on main together: Krish's approved taste rules for krish-voice and krish-design (PR 179), and taste by venture (PR 174), so sessions pass their repository, and the venture from a multi-venture repository, to `get_approved_taste` and `report_to_taste_engine`; the canon line carries it at the next canon release and the skills at the next skill release. `brain/rules.yaml` records the new text of the two changed skill sections. The other nine branches were left as they are: four already on main, five superseded by later work on main (content-engine profile fix, tool-router and tool-economics staging, the one-queue consolidation and tool-router-on-codex). (2026-10-30)
 - tool-router now places 21st Dev's monthly AI credits on interface implementation once krish-design has decided the design, within the prepaid allowance only, with design lookups left to design-intelligence-search; Control Center (krishanraja/control-center#615, #617) tracks every prepaid credit pool wiped at its reset, gives each growth engine its placement share in its directive and emails Krish a week before a wipe and every Monday. (2026-10-29)
 - Every growth engine now has one doctrine: `contract/north-star-metric.md` gained an Engines section (lead with the gap line, scale volume to policy bounds at U3 and above, file the clearing lookup or queue the clearing ask with every hold, take another path after a no to one ask without re-asking a Purged person, check in every other day while a plan is open, learn from wins and declines) and Control Center's line-manager duties (monitor, push, rank by weekly goals, hold). The four missing engines (growth-makeyourmindup, growth-mindmake, growth-fulltime, growth-legibility) joined `state/fleet.yaml`, the docs steward fleet and the central steward's options, and stay out of the repository administration publisher until Krish accepts them there; the canon block points engines at the section. Rule 4's re-route covers a no to a single ask only: a Purge on a go-live or a no on a check_in ends the plan and its goal until Krish reopens it. Reconciliation finding for Krish: rule 5 asks for a check_in at least every other day, while growth-legibility (AGENTS.md, Autonomy) and growth-makeyourmindup (AGENTS.md) say at least twice a week; the canon lets a repository's rule win on repository matters, so which cadence binds those two is his call and neither side was changed. Steward readiness, open in those repositories: growth-fulltime's NOW.md names `history_log: docs/history/LOG.md` but has no `docs/history/`, and growth-legibility's NOW.md has `head: see Git HEAD` instead of a sha (its fleet `bootstrap_head` bde3bcf came from origin/main); `scripts/steward/validate.mjs` fails both until each repository fixes its own NOW.md. (2026-10-29)
 - krish-principles now carries "Working with Krish", his own instructions for how any AI works with him (decide don't defer, never hand the blank page back as a question, carry the why, match conviction to stakes, show don't tell, push back once like a peer, fewer round-trips per decision, watch the isolation pattern), in his words, so Claude, Codex and Cursor get them through get_skill and the release instead of one account's pasted settings. (2026-10-29)
@@ -67,11 +68,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-10-29): on 2026-11-30, read 21st Dev's usage and recommend keeping or cancelling it.
+- Next (2026-10-30): register the next release so the venture-scoped taste line reaches every surface and every repository's canon block.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish: whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-10-29): holds.
+- North Star check (2026-10-30): holds.
 
 ## Read next
 
