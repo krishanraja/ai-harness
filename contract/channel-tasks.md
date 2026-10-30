@@ -2,7 +2,7 @@
 
 Krish asked for each of seven growth prompts to be a task in its own right for the channel specialists in his growth engines, and then for each repository to know what it needs to accomplish rather than follow a box-standard template, because each venture needs very different outcomes (Ruling, Krish, 2026-10-30). So this file holds only what every engine shares: the rules below, a starting set of seven tasks, and the loop. What a task accomplishes, and which engines run it, belongs to each engine's own repository.
 
-The source is seven Instagram prompts Krish saved to Drive on 2026-10-30, screenshots kept as reference only. This file supersedes their wording. They are rewritten here for one change: a channel is never the goal. No engine's North Star counts followers. Every output names the North Star signal it serves.
+The source, with his words and the seven original prompts quoted, is `docs/proposals/2026-10-30-channel-tasks.md`. This file supersedes the prompts' wording. They are rewritten here for one change: a channel is never the goal. No engine's North Star counts followers. Every output names the North Star signal it serves.
 
 ## The rules every task follows
 
@@ -44,10 +44,10 @@ A task whose channel is held, unlocked by a pending ruling, or not configured st
 
 Each engine runs this loop each week, with its own numbers, and writes it into its own engine document.
 
-1. **Gap.** This week's ladder target minus the measured number, in the opening line the Engines section asks for (`X of Y, U-n, short by Z`). An unmeasured number is U4 and measuring it is the first job.
+1. **Gap.** The opening line Engines rule 1 sets, from the engine's own ladder.
 2. **Contribution.** Split the gap across the engine's channels by last week's measured results. With no baseline, split it evenly and label that split an assumption.
 3. **Leading signal.** Name, for each channel, the signal that comes before the number (for example sends per reach, tracked link clicks, subscribes from a post).
-4. **Tasks.** Choose the week's mix of tasks so each channel's leading signal moves. At U3 and above the volume rises to the engine's policy bounds, as the Engines section says.
+4. **Tasks.** Choose the week's mix of tasks so each channel's leading signal moves, at the volume Engines rule 2 sets.
 5. **Review.** Read each published post and test against its own channel median, at the windows the engine's channel rules already set, and keep or kill. Record what won and what Krish declined where the next draft reads it. Check in on the plan as Engines rule 5 says.
 
 ## What counts as done
