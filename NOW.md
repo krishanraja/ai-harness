@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- krish-voice's profile is v1.3: the Spoken script register is measured from 14 of Krish's recorded takes against their scripts (he keeps the length, says it plainer, adds an aside, tells his own part), with its limits; behaviour case 030 holds it. (2026-10-31)
 - krish-voice's profile is v1.2: Jonny's Mindmake emails take Krish's email style, as Jonny, with Krish in the third person (ruling 6); `outbound-email-voice.md` says the same, and behaviour case 029 holds it. (2026-10-31)
 - krish-voice has a measured voice profile (`references/voice-profile.md`, v1.1) with Krish's five channel rulings, and `evals/voice/fingerprint.mjs` scores a draft against it (9 of 10 held-out originals beat generic rewrites). (2026-10-31)
 - `contract/channel-tasks.md` defines the seven channel tasks (platform truth, profile audit, idea bank, reel script, caption set, trend scan, channel plan) and the weekly loop from gap to North Star. growth-makeyourmindup, growth-heartside and growth-fulltime link to it directly (their pull requests 45, 31 and 18, merged). (2026-10-30)
