@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- krish-voice's profile is v1.2: Jonny's Mindmake emails take Krish's email style, as Jonny, with Krish in the third person (ruling 6); `outbound-email-voice.md` says the same, and behaviour case 029 holds it. (2026-10-31)
 - krish-voice has a measured voice profile (`references/voice-profile.md`, v1.1) with Krish's five channel rulings, and `evals/voice/fingerprint.mjs` scores a draft against it (9 of 10 held-out originals beat generic rewrites). (2026-10-31)
 - `contract/channel-tasks.md` defines the seven channel tasks (platform truth, profile audit, idea bank, reel script, caption set, trend scan, channel plan) and the weekly loop from gap to North Star. growth-makeyourmindup, growth-heartside and growth-fulltime link to it directly (their pull requests 45, 31 and 18, merged). (2026-10-30)
 - Second night of the 2026-10-28 rollout: mm-ctrl's steward passed on its alias, 7 of 18 NOW.md files pass the audit (from 1 of 14), and the fold runs on every session's merge here. Two defects in that work are fixed: the bot merger opened and closed pull requests for older content-engine fallback branches one by one (#243, #244, #266), and the audit failed busy repositories on bullets the fold added hours before the steward trims. (2026-10-30)
@@ -40,6 +41,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-10-31 Krish ruled Jonny's Mindmake emails mimic his email style; the profile, the email doctrine and a behaviour case now say so.
 - 2026-10-31 the kill list names the two LinkedIn exceptions Krish ruled; a stale date in the measurements test fixture no longer fails CI.
 - 2026-10-30 **The audit stops failing repositories for bullets folded the same day, and the merger stops reopening old steward fallbacks.** Bullets dated today or yesterday count toward no size limit; only the newest fallback branch of all can get a pull request, judged against commits that touched NOW.md; and the steward's own reason travels into that pull request.
 - 2026-10-30 **Taste by venture and the approved taste rules reached main together (PR 174, PR 179).** Nine other branches were left as they are: four already on main, five superseded by later work on main.
@@ -57,7 +59,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-10-31): wire the profile and the fingerprint into content-engine's article and script drafting (Stage 2 of the plan).
+- Next (2026-10-31): Krish gives a voiceover example so the last open branch can be written down.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish: whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
