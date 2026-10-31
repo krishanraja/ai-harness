@@ -16,6 +16,8 @@ All of it is public, or his own recording. Private messages and other people's w
 | Long-form: makeyourmindup and tech0nomic Substacks, one LinkedIn article | 26 | 34,800 | 2020, 2025 to 2026 |
 | A live interview, his turns only (Scaleup podcast) | 1 | 3,800 | 2021 |
 
+Left out of the measurements: three pieces written in an AI agent's own voice ("Confessions of Your AI Coworker", the AI Chief of Staff post, and a February 2026 LinkedIn post signed by his coding agent). They are kept in the corpus and marked, but they are not his voice.
+
 Not yet in it: spoken scripts as he read them (the comparison of script and take is Stage 1 of the plan), talks, and his newer interviews.
 
 **One caution about the October 2026 articles.** The six makeyourmindup articles from October 2026 were drafted by the content engine and speak as "we" by ruling. They use "I" at 1 per 1,000 words against 3 to 23 in his own long-form, and no spaced hyphens or asides. They are kept as evidence of the house style, not of his own voice. Weight his own posts and his pre-engine writing above them.
@@ -104,10 +106,11 @@ Still open: the voiceover register, and Jonny's voice for Mindmake emails. Each 
 ## How to use it
 
 - Drafting: read the Core and the register you are writing in, then write. Do not imitate the quoted lines; they show a pattern, not phrasing to reuse.
-- Checking: `node evals/voice/fingerprint.mjs score <draft.txt> --register linkedin_post|long_form` gives a distance from 0 (as much like him as his typical piece) to 1. The test on 31 Oct 2026: on 10 held-out pieces of his, his original scored closer to him than a generic rewrite of the same piece 9 times out of 10. The rewrites were written by the model that built the test, and the measures were chosen after a first set of 10 failed at 5 of 10. Treat the score as a signal, not a verdict.
+- Checking: `node evals/voice/fingerprint.mjs score <draft.txt> --register linkedin_post|long_form` gives a distance from 0 (as much like him as his typical piece) to 1. The test on 31 Oct 2026: on 10 held-out pieces of his, his original scored closer to him than a generic rewrite of the same piece 9 times out of 10, and 10 of 10 once the agent-voice pieces were taken out of the corpus. The rewrites were written by the model that built the test, and the measures were chosen after a first set of 10 failed at 5 of 10. Treat the score as a signal, not a verdict.
 - Adding to it: a new piece of evidence goes in the corpus, then the fingerprint is rebuilt with `node evals/voice/fingerprint.mjs build <corpus.json>`. A change to this file is a suggestion with its evidence, and it lands only on Krish's yes.
 
 ## Changelog
 
 - 2026-10-31: v1 drafted from 295 posts, 26 long-form pieces and one interview.
+- 2026-10-31: corpus cleaned (page markup, a cut interview line, sign-up boxes) and agent-voice pieces left out of the measurements; saved to Drive `voice` > `Krish Voice Corpus`.
 - 2026-10-31: v1.1. Krish ruled on the five conflicts and set the channel map (one baseline, six branches). Voiceover and Jonny's voice are open.
