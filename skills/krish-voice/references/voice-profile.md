@@ -1,6 +1,6 @@
 # Krish voice profile
 
-Version 1.1, 31 October 2026. Status: **v1.1, merged on Krish's instruction on 31 Oct ("merge everything to main"). Two branches are open (voiceover, Jonny's voice). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
+Version 1.2, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
@@ -87,13 +87,13 @@ The Core above is the baseline. Each branch keeps it and changes only what is li
 | **On-camera scripts** (his face) | Krish, "I" in the spoken words | His natural spoken energy, exuberance included, even when arguing. Written for the mouth: contractions, short lines. No rhetorical-question pivots. | Ruling 4 |
 | **Voiceover scripts** | the publication's voice | Not ruled yet. Until then: the article register read aloud, with no on-camera exuberance. | Open |
 | **Mindmake outreach emails** (from Krish) | Krish, first person | `outbound-email-voice.md`. Ends on one low-friction next step. | Existing doctrine |
-| **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Jonny's own posture, which is not described here yet. Never Krish's voice under Jonny's name. | Open; Control Center drafts these in Jonny's box |
+| **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Krish's email style (`outbound-email-voice.md`): the point first, contractions, varied sentences, one low-friction ask. Jonny speaks as himself, Krish in the third person; never Krish's "I" or his name in the sign-off. | Ruling 6; Control Center drafts these in Jonny's box |
 
 **Everywhere:** a call to action, where the branch has one, is "humble, sincere, curious and observational" (ruling 2). It invites and never pushes.
 
 ## Rulings (Krish, 31 Oct 2026)
 
-These settle the five places where v1 found the evidence and the doctrine disagreeing.
+Rulings 1 to 5 settle the five places where v1 found the evidence and the doctrine disagreeing; ruling 6 settles Jonny's branch.
 
 1. **Rhetorical questions:** allowed on LinkedIn only, sparingly. Banned in articles, scripts and emails.
 2. **Calls to action:** "Humble, sincere, curious and observational".
@@ -101,7 +101,9 @@ These settle the five places where v1 found the evidence and the doctrine disagr
 4. **Energy:** dry in writing; on camera, his natural spoken energy, including when arguing.
 5. **Voice by channel:** "linkedin needs to remain first person and sincere, fun, insightful, humble, curious and observational. makeyourmindup more like a professional media channel".
 
-Still open: the voiceover register, and Jonny's voice for Mindmake emails. Each needs examples from Krish, or his words, before it is written down.
+6. **Jonny's emails:** "jonny just needs to mimic my email style".
+
+Still open: the voiceover register. It needs examples from Krish, or his words, before it is written down.
 
 ## How to use it
 
@@ -114,3 +116,4 @@ Still open: the voiceover register, and Jonny's voice for Mindmake emails. Each 
 - 2026-10-31: v1 drafted from 295 posts, 26 long-form pieces and one interview.
 - 2026-10-31: corpus cleaned (page markup, a cut interview line, sign-up boxes) and agent-voice pieces left out of the measurements; saved to Drive `voice` > `Krish Voice Corpus`.
 - 2026-10-31: v1.1. Krish ruled on the five conflicts and set the channel map (one baseline, six branches). Voiceover and Jonny's voice are open.
+- 2026-10-31: v1.2. Krish ruled that Jonny's emails take his email style (ruling 6). Voiceover is open.
