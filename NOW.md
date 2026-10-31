@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- krish-voice's profile is v1.4: it records where each kind of voice rule lives and how it gets better (doctrine and profile by reviewed pull request; written-voice rules from his words through the taste ledger, live; read-aloud rules he keeps through content-engine's learning proposals, live in its Scripts step). Behaviour case 031 holds that a measured pattern is never a rule without his yes. (2026-10-31)
 - krish-voice's profile is v1.3: the Spoken script register is measured from 14 of Krish's recorded takes against their scripts (he keeps the length, says it plainer, adds an aside, tells his own part), with its limits; behaviour case 030 holds it. (2026-10-31)
 - krish-voice's profile is v1.2: Jonny's Mindmake emails take Krish's email style, as Jonny, with Krish in the third person (ruling 6); `outbound-email-voice.md` says the same, and behaviour case 029 holds it. (2026-10-31)
 - krish-voice has a measured voice profile (`references/voice-profile.md`, v1.1) with Krish's five channel rulings, and `evals/voice/fingerprint.mjs` scores a draft against it (9 of 10 held-out originals beat generic rewrites). (2026-10-31)
@@ -60,7 +61,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-10-31): Krish gives a voiceover example so the last open branch can be written down.
+- Next (2026-10-31): Krish's voiceover take, so the last open branch can be written down.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish: whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
