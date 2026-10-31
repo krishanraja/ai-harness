@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-10-30",
+  "date": "2026-10-31",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -21,13 +21,29 @@
       "repo": "control-center",
       "status": "pass",
       "failing_since": null,
-      "findings": []
+      "findings": [
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 51)."
+        }
+      ]
     },
     {
       "repo": "mm-ctrl",
       "status": "fail",
       "failing_since": "2026-10-28",
       "findings": [
+        {
+          "rule": "as_of_stale",
+          "severity": "fail",
+          "detail": "as_of is 2026-10-23, 8 days old (limit 7)."
+        },
+        {
+          "rule": "north_star_check",
+          "severity": "warn",
+          "detail": "The North Star check is dated 2026-10-23, 8 days ago (limit 7); the next session re-dates it."
+        },
         {
           "rule": "where_too_many",
           "severity": "fail",
@@ -45,13 +61,25 @@
       "repo": "fractionl-circle",
       "status": "pass",
       "failing_since": null,
-      "findings": []
+      "findings": [
+        {
+          "rule": "north_star_check",
+          "severity": "warn",
+          "detail": "The North Star check is dated 2026-10-23, 8 days ago (limit 7); the next session re-dates it."
+        }
+      ]
     },
     {
       "repo": "fractionl-pulse",
       "status": "pass",
       "failing_since": null,
-      "findings": []
+      "findings": [
+        {
+          "rule": "north_star_check",
+          "severity": "warn",
+          "detail": "The North Star check is dated 2026-10-23, 8 days ago (limit 7); the next session re-dates it."
+        }
+      ]
     },
     {
       "repo": "full-time",
@@ -127,6 +155,11 @@
           "rule": "north_star_check",
           "severity": "fail",
           "detail": "No North Star check line under \"What is next and what is waiting on Krish\"."
+        },
+        {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "7 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold."
         }
       ]
     },
@@ -135,6 +168,11 @@
       "status": "fail",
       "failing_since": "2026-10-29",
       "findings": [
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "13 \"What changed recently\" bullets older than a day (limit 12)."
+        },
         {
           "rule": "next_step",
           "severity": "fail",
@@ -153,6 +191,11 @@
           "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
         },
         {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "3 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold."
+        },
+        {
           "rule": "unreconciled",
           "severity": "fail",
           "detail": "A product commit from 2026-10-27 landed after the last NOW.md update and NOW.md still does not reflect it."
@@ -168,6 +211,11 @@
           "rule": "north_star_check",
           "severity": "fail",
           "detail": "2 North Star check lines; keep exactly one."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "14 \"What changed recently\" bullets older than a day (limit 12)."
         },
         {
           "rule": "next_step",
