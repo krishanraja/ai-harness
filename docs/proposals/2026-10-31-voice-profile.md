@@ -60,3 +60,12 @@ copying them, and the doctrine still wins on every listed disagreement.
 ## Rollback
 
 Revert the pull request. Nothing else reads the profile or the tool yet.
+
+## Addendum, same day: Jonny's emails (profile v1.2)
+
+Krish, 2026-10-31: "jonny just needs to mimic my email style". The profile's Jonny branch, open in v1.1, closes on
+that ruling. The rule itself is one new row in `krish-voice` > Mandatory scenario safeguards ("Draft goes out under a
+sender other than Krish"): Krish's shared email voice, written as the sender, Krish in the third person, the sender's
+own sign-off, and never Krish's voice under another sender's name. It supersedes asking for a separate Jonny voice; any
+other sender with no ruling still needs their own posture. The profile and `outbound-email-voice.md` point to the row
+rather than restating it. Behaviour case `voice-behavior-029` holds it.

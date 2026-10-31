@@ -87,7 +87,7 @@ The Core above is the baseline. Each branch keeps it and changes only what is li
 | **On-camera scripts** (his face) | Krish, "I" in the spoken words | His natural spoken energy, exuberance included, even when arguing. Written for the mouth: contractions, short lines. No rhetorical-question pivots. | Ruling 4 |
 | **Voiceover scripts** | the publication's voice | Not ruled yet. Until then: the article register read aloud, with no on-camera exuberance. | Open |
 | **Mindmake outreach emails** (from Krish) | Krish, first person | `outbound-email-voice.md`. Ends on one low-friction next step. | Existing doctrine |
-| **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Krish's email style (`outbound-email-voice.md`): the point first, contractions, varied sentences, one low-friction ask. Jonny speaks as himself, Krish in the third person; never Krish's "I" or his name in the sign-off. | Ruling 6; Control Center drafts these in Jonny's box |
+| **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Krish's email style, as Jonny: the safeguard "Draft goes out under a sender other than Krish" in `SKILL.md` says how. Never Krish's voice under Jonny's name (kept from v1.1). | Ruling 6; Control Center drafts these in Jonny's box |
 
 **Everywhere:** a call to action, where the branch has one, is "humble, sincere, curious and observational" (ruling 2). It invites and never pushes.
 

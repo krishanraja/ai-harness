@@ -32,7 +32,7 @@ Length is not the failure; repeated ideas and throat-clearing are. Remove any pa
 
 ## Sender persona and signatures
 
-Confirm the actual sender persona before drafting. Do not infer a colleague's voice from title alone. Jonny, who sends Mindmake emails for Krish, writes in this same shared voice, as himself, with Krish in the third person and his own sign-off (Ruling, Krish, 2026-10-31: "jonny just needs to mimic my email style"). If any other non-Krish persona lacks authorised examples, ask for the distinguishing posture or deliver a provisional version labelled as such.
+Confirm the actual sender persona before drafting. Do not infer a colleague's voice from title alone. Jonny's Mindmake emails use this shared voice; the safeguard "Draft goes out under a sender other than Krish" in `SKILL.md` holds the rule. If any other non-Krish persona lacks authorised examples, ask for the distinguishing posture or deliver a provisional version labelled as such.
 
 For Instantly, end with the approved platform signature variable rather than writing a manual signature. For Gmail/manual drafting, omit a duplicate signature when the account auto-appends it. Verify the exact platform convention at execution time.
 
