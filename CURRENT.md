@@ -21,9 +21,9 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.30.1 |
-| cursor-primary | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.30.1 |
-| claude-code-user | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.30.1 |
-| codex-current | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.10.30.1 |
+| cursor-primary | v2026.10.30.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
+| claude-code-user | v2026.10.30.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
+| codex-current | v2026.10.30.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
 | claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.30.1 |
 | claude-secondary-cloud | unknown | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.30.1 |
 | perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.10.30.1 |
@@ -34,8 +34,8 @@ A local hash match proves installed bytes only. It does not prove client discove
 ## Behavioral evidence
 
 - **codex-surface-07a67cda9f99: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json).
-- **claude-code-user: partial.** [Evidence](state/canaries/v2026.10.06.3-claude-code-user.json).
-- **codex-current: partial.** [Evidence](state/canaries/v2026.10.06.3-codex-current.json).
+- **claude-code-user: partial.** [Evidence](state/canaries/v2026.10.30.1-claude-code-user.json).
+- **codex-current: partial.** [Evidence](state/canaries/v2026.10.30.1-codex-current.json).
 
 ## Machine clocks
 
