@@ -69,3 +69,24 @@ sender other than Krish"): Krish's shared email voice, written as the sender, Kr
 own sign-off, and never Krish's voice under another sender's name. It supersedes asking for a separate Jonny voice; any
 other sender with no ruling still needs their own posture. The profile and `outbound-email-voice.md` point to the row
 rather than restating it. Behaviour case `voice-behavior-029` holds it.
+
+## Addendum, same day: the script close and what a listener can hold (profile v1.5)
+
+Krish, 2026-10-31, after reading his voiceover scripts aloud: "I still feel like all my video scripts are a little
+bit hard to follow" and "the last paragraph of all my scripts still sounds a bit bossy and preachy". An audit of the
+scripts of 12 to 30 October (content-engine `docs/plans/2026-10-31-script-clarity-audit.md`) found sentences short
+enough to pass the reading gate but up to 24 figures and 27 names to hold, and closes of up to 11 sentences of orders
+after "Here's what I'd do with this info if I were you". Asked in the session, he answered "Yes, replace it" to a close
+of one short beat saying the one thing he would do, in his first person, and "Yes, a hard rule" to limits on what a
+listener holds.
+
+- Ruling 7 (the close) and Ruling 8 (a slow listener) are recorded in the profile as his words and a pointer. What the
+  close is and the limits live only in content-engine's `SCRIPT_CLOSE` and `LISTENING` house rules
+  (`apps/control-plane/api/_houseRules.ts`, krishanraja/content-engine#307), the one home for video-script production
+  rules.
+- The kill list gains one line, scoped to video scripts: no close that is a list of orders for the viewer, and never
+  the retired line. It applies Ruling 2 to a script's close; it does not replace Ruling 2 for any other channel.
+- Behaviour case `voice-behavior-032` holds it.
+
+If wrong: the limits are tuned in content-engine's `LISTENING` block without touching this profile. Rollback: revert
+the kill-list line and rulings 7 and 8; content-engine's rules stand on their own.

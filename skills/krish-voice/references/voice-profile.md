@@ -102,7 +102,7 @@ The Core above is the baseline. Each branch keeps it and changes only what is li
 
 ## Rulings (Krish, 31 Oct 2026)
 
-Rulings 1 to 5 settle the five places where v1 found the evidence and the doctrine disagreeing; ruling 6 settles Jonny's branch.
+Rulings 1 to 5 settle the five places where v1 found the evidence and the doctrine disagreeing; ruling 6 settles Jonny's branch; rulings 7 and 8 settle how a script closes and how much it asks a listener to hold.
 
 1. **Rhetorical questions:** allowed on LinkedIn only, sparingly. Banned in articles, scripts and emails.
 2. **Calls to action:** "Humble, sincere, curious and observational".
@@ -111,6 +111,8 @@ Rulings 1 to 5 settle the five places where v1 found the evidence and the doctri
 5. **Voice by channel:** "linkedin needs to remain first person and sincere, fun, insightful, humble, curious and observational. makeyourmindup more like a professional media channel".
 
 6. **Jonny's emails:** "jonny just needs to mimic my email style".
+7. **The script close:** "the last paragraph of all my scripts still sounds a bit bossy and preachy", then "Yes, replace it". What the close is lives only in content-engine's `SCRIPT_CLOSE` rule (krishanraja/content-engine#307); read it there. The retired line is on the kill list in `SKILL.md`. It applies Ruling 2 to a video script's close and does not replace it.
+8. **A slow listener follows every script, heard once:** "I still feel like all my video scripts are a little bit hard to follow", then "Yes, a hard rule". The rule and its limits live only in content-engine's `LISTENING` rule (krishanraja/content-engine#307); read them there.
 
 Still open: the voiceover register. It needs examples from Krish, or his words, before it is written down.
 
@@ -141,3 +143,4 @@ The last two rows are not doctrine. They are his approved taste for one venture,
 - 2026-10-31: v1.2. Krish ruled that Jonny's emails take his email style (ruling 6). Voiceover is open.
 - 2026-10-31: v1.3. The spoken script register, measured from 14 recorded takes against their scripts (Krish: "yes add the spoken script section to the profile").
 - 2026-10-31: v1.4. Where the voice rules live and how each kind gets better. Supersedes v1.3's "weekly voice learner (Saturdays)" that proposed changes to this section: the Saturday job is retired in its own home (content-engine: `.github/workflows/voice-learner.yml` and `scripts/voice/learner.py` deleted by krishanraja/content-engine#303), the spoken comparison runs on every take against the exact script, and content-engine's Sunday learning compiler proposes onto Krish's list instead of into this file.
+- 2026-10-31: v1.5. Rulings 7 and 8: the script close and what a slow listener can hold (content-engine `SCRIPT_CLOSE` and `LISTENING`, krishanraja/content-engine#307).
