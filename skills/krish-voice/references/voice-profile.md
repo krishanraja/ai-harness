@@ -18,7 +18,7 @@ All of it is public, or his own recording. Private messages and other people's w
 
 Left out of the measurements: three pieces written in an AI agent's own voice ("Confessions of Your AI Coworker", the AI Chief of Staff post, and a February 2026 LinkedIn post signed by his coding agent). They are kept in the corpus and marked, but they are not his voice.
 
-Also in it since v1.3: 14 of his recorded takes (7 pieces, 12 to 30 Oct 2026, 45 minutes) compared word by word with the scripts he was given (content-engine `scripts/voice/spoken_delta.py`; the counts are in the Drive corpus as `14-spoken-delta-2026-10-31.json`). Not yet in it: talks, and his newer interviews.
+Also in it since v1.3: 14 of his recorded takes (7 pieces, 12 to 30 Oct 2026, 45 minutes) compared word by word with the scripts he was given (content-engine `scripts/voice/spoken_delta.py` at commit a6dfc71; the counts are in the Drive corpus as `14-spoken-delta-2026-10-31.json`). Not yet in it: talks, and his newer interviews.
 
 **One caution about the October 2026 articles.** The six makeyourmindup articles from October 2026 were drafted by the content engine and speak as "we" by ruling. They use "I" at 1 per 1,000 words against 3 to 23 in his own long-form, and no spaced hyphens or asides. They are kept as evidence of the house style, not of his own voice. Weight his own posts and his pre-engine writing above them.
 
@@ -73,9 +73,9 @@ Measured on 14 takes of 7 pieces (12 to 30 Oct 2026): what he changed from the s
 - **He adds a short aside, often on "which is".** "Qwen, which is...", "which is OpenAI, now retired", "which is fair enough", "and you can guess who". Leave room for one aside where a name or a number needs explaining.
 - **He tells his own part of the story.** On Wed 21 Oct (Muse vs Grok) he rewrote most of the script around the scam email he received ("for me unfortunately it was a bit of a dodgy looking email"). When a piece has his own experience in it, script the beats and let him say it.
 - **He drops scripted throat-clearing.** "I have been following how money is changing", "I have been reading", "I am Krish" and "tell me in the comments" were left out.
-- **The gap is growing.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. That is evidence the scripts drift from how he talks, not that he drifts from the script.
+- **Later pieces moved more, and the cause is not settled.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. Either the scripts drifted from how he talks, or the scripts on file were edited after he read them (see Limits). Takes recorded against a signed script, whose hash the making record keeps, will tell which; until then, do not treat the rise as a finding.
 
-Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out; the Drive file names each with its reason. The comparison of script and take (Stage 1 of the plan) is done; content-engine's weekly voice learner (Saturdays) runs it on every new take and proposes changes to this section, each landing only on Krish's yes.
+Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out; the Drive file names each with its reason. The comparison of script and take (Stage 1 of the plan) is done; content-engine's weekly voice learner (Saturdays; Krish, 2026-10-31: "start the weekly voice learner too") runs it on every new take and proposes changes to this section, each landing only on Krish's yes. If its proposals stop arriving, read this section as a snapshot of 31 Oct 2026.
 
 ## How it has moved
 
