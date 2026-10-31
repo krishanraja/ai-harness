@@ -2844,8 +2844,8 @@ skill_sections:
     text_sha: "1498f4995eb0"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "9d601db87a46"
+      kind: proposal
+      ref: "docs/proposals/2026-10-31-voice-profile.md"
     history:
       - text_sha: "3f8e0476b869"
         valid_until: "2026-10-31"
@@ -2857,11 +2857,6 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-31-voice-profile.md"
-      - text_sha: "bb268bd2adf2"
-        valid_until: "2026-10-31"
-        source:
-          kind: ruling
-          ref: "9d601db87a46"
     status: live
   - id: krish-voice.voice-acceptance-record
     file: skills/krish-voice/SKILL.md
