@@ -131,8 +131,9 @@
     "klass": "heartbeat",
     "subject": "harness-sync-lorimer",
     "first_seen": "2026-09-09",
-    "open": true,
-    "reopened": "2026-10-29"
+    "open": false,
+    "reopened": "2026-10-29",
+    "closed_at": "2026-10-31"
   },
   "heartbeat:harness-sync-surface": {
     "klass": "heartbeat",
