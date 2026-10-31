@@ -1,6 +1,6 @@
 # Krish voice profile
 
-Version 1.3, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
+Version 1.4, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
@@ -73,9 +73,9 @@ Measured on 14 takes of 7 pieces (12 to 30 Oct 2026): what he changed from the s
 - **He adds a short aside, often on "which is".** "Qwen, which is...", "which is OpenAI, now retired", "which is fair enough", "and you can guess who". Leave room for one aside where a name or a number needs explaining.
 - **He tells his own part of the story.** On Wed 21 Oct (Muse vs Grok) he rewrote most of the script around the scam email he received ("for me unfortunately it was a bit of a dodgy looking email"). When a piece has his own experience in it, script the beats and let him say it.
 - **He drops scripted throat-clearing.** "I have been following how money is changing", "I have been reading", "I am Krish" and "tell me in the comments" were left out.
-- **Later pieces moved more, and the cause is not settled.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. Either the scripts drifted from how he talks, or the scripts on file were edited after he read them (see Limits). Takes recorded against a signed script, whose hash the making record keeps, will tell which; until then, do not treat the rise as a finding.
+- **Later pieces moved more, and the cause is not settled.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. Either the scripts drifted from how he talks, or the scripts on file were edited after he read them (see Limits). From 31 Oct 2026 every new take is compared with the exact script by its hash, so later numbers can settle it; the 12 to 30 Oct numbers above cannot, and the rise is not a finding.
 
-Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out; the Drive file names each with its reason. The comparison of script and take (Stage 1 of the plan) is done; content-engine's weekly voice learner (Saturdays; Krish, 2026-10-31: "start the weekly voice learner too") runs it on every new take and proposes changes to this section, each landing only on Krish's yes. If its proposals stop arriving, read this section as a snapshot of 31 Oct 2026.
+Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out; the Drive file names each with its reason. The comparison of script and take (Stage 1 of the plan) is done, and now runs on every take as it is placed, against the exact script whose hash the piece's record holds (content-engine place-takes). Content-engine's Sunday learning compiler proposes what repeats across three pieces onto Krish's list (Krish, 2026-10-31: "start the weekly voice learner too", then "build the learner proposals onto my list"). If its proposals stop arriving, read this section as a snapshot of 31 Oct 2026.
 
 ## How it has moved
 
@@ -114,6 +114,19 @@ Rulings 1 to 5 settle the five places where v1 found the evidence and the doctri
 
 Still open: the voiceover register. It needs examples from Krish, or his words, before it is written down.
 
+## Where the voice rules live, and how they get better
+
+Krish, 2026-10-31, handing over the call: "you know that I want the ability to make this better iteratively. You make the calls on those things." The decision:
+
+| What | Lives in | Changes by | Read by |
+|---|---|---|---|
+| Doctrine: how to write as him | `voice-doctrine.md`, this skill | a reviewed pull request | every drafter, through `get_skill` |
+| Evidence and his rulings: how he actually writes and talks, per channel | this profile | a reviewed pull request, on his yes | every drafter, through `get_skill` |
+| His approved taste for one venture, from his own words: a written-voice rule | the taste ledger (`taste_profile_form`, lane voice, by venture) | his yes on his list, the canon's existing Taste route | sessions through `get_approved_taste`; growth engines through Control Center's directive (`approved_voice_rules`) |
+| His approved taste for Make Your Mind Up's spoken scripts: a read-aloud rule he keeps from measured changes | content-engine's learning proposals (scope `spoken:*`, venture publication) | his keep or reword on his list, the same Taste route | content-engine's Scripts step (`scripts/voice/spoken_rules.py`), the only writer of spoken scripts |
+
+The last two rows are not doctrine. They are his approved taste for one venture, which the canon already lets a drafter read live on his yes (Taste, in the rendered canon); this file and `voice-doctrine.md` stay the doctrine and change only by reviewed pull request. Each approved rule has one home, its store: while it lives there, the store governs and this profile does not restate it. A measured pattern never becomes a rule on its own: a measurement proposes, and only his yes or his own words decide. When a kept rule should hold for every venture, it is proposed here as a doctrine change by pull request, and on his yes it moves here and its store entry is retired. Each growth repository reads the profile live and keeps no copy: content-engine in its drafting steps and voice score, growth-makeyourmindup in its post writer, and growth-mindmake through the approved rules on its directive and the Jonny row of `SKILL.md`'s safeguards.
+
 ## How to use it
 
 - Drafting: read the Core and the register you are writing in, then write. Do not imitate the quoted lines; they show a pattern, not phrasing to reuse.
@@ -127,3 +140,4 @@ Still open: the voiceover register. It needs examples from Krish, or his words, 
 - 2026-10-31: v1.1. Krish ruled on the five conflicts and set the channel map (one baseline, six branches). Voiceover and Jonny's voice are open.
 - 2026-10-31: v1.2. Krish ruled that Jonny's emails take his email style (ruling 6). Voiceover is open.
 - 2026-10-31: v1.3. The spoken script register, measured from 14 recorded takes against their scripts (Krish: "yes add the spoken script section to the profile").
+- 2026-10-31: v1.4. Where the voice rules live and how each kind gets better. Supersedes v1.3's "weekly voice learner (Saturdays)" that proposed changes to this section: the Saturday job is retired in its own home (content-engine: `.github/workflows/voice-learner.yml` and `scripts/voice/learner.py` deleted by krishanraja/content-engine#303), the spoken comparison runs on every take against the exact script, and content-engine's Sunday learning compiler proposes onto Krish's list instead of into this file.
