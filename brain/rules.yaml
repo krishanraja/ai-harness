@@ -2767,7 +2767,7 @@ skill_sections:
   - id: krish-voice.reference-routing
     file: skills/krish-voice/SKILL.md
     heading: "Reference routing"
-    text_sha: "df1a9e650c96"
+    text_sha: "b615e0e6cf49"
     first_seen: "2026-09-07"
     source:
       kind: proposal
@@ -2778,6 +2778,11 @@ skill_sections:
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "df1a9e650c96"
+        valid_until: "2026-10-31"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-31-voice-profile.md"
     status: live
   - id: krish-voice.source-and-privacy-contract
     file: skills/krish-voice/SKILL.md
@@ -2830,11 +2835,17 @@ skill_sections:
   - id: krish-voice.kill-list
     file: skills/krish-voice/SKILL.md
     heading: "Kill list"
-    text_sha: "3f8e0476b869"
+    text_sha: "74d18606cdaa"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-10-31-voice-profile.md"
+    history:
+      - text_sha: "3f8e0476b869"
+        valid_until: "2026-10-31"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-voice.voice-acceptance-record
     file: skills/krish-voice/SKILL.md

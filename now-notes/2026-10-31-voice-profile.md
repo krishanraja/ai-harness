@@ -1,10 +1,4 @@
-# Voice profile v1 for krish-voice
-
-Status: v1 drafted, a draft pull request is open for Krish's markup. `skills/krish-voice/references/voice-profile.md`
-measures how he writes and talks from 295 of his LinkedIn posts, 26 long-form pieces and one live interview, with a
-quoted source for every claim and five open disagreements with `voice-doctrine.md`. `evals/voice/fingerprint.mjs`
-scores a draft against it; on a fresh held-out set his own pieces beat generic rewrites 9 of 10. Nothing is approved.
-
-Next: Krish marks up the profile and rules on the five disagreements; his yes merges it.
-
+Status: krish-voice has a measured voice profile (`references/voice-profile.md`, v1.1) with Krish's five channel rulings, and `evals/voice/fingerprint.mjs` scores a draft against it (9 of 10 held-out originals beat generic rewrites).
+Changed: the kill list names the two LinkedIn exceptions Krish ruled; a stale date in the measurements test fixture no longer fails CI.
+Next: wire the profile and the fingerprint into content-engine's article and script drafting (Stage 2 of the plan).
 North Star check (2026-10-31): holds.

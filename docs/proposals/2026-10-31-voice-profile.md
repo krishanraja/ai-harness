@@ -8,15 +8,33 @@ Krish, 2026-10-31, in his words: "I want one clear voice profile that I can use 
 - **New reference** `skills/krish-voice/references/voice-profile.md`. It describes his voice measured from his own
   published words (295 LinkedIn posts, 26 long-form pieces, one live interview), with a quoted line and its source for
   every claim, numbers for each register, how the voice has moved since 2020, and five places where the evidence and
-  `voice-doctrine.md` disagree. It is marked a draft until Krish approves it, and where it disagrees with the doctrine
-  the doctrine wins until he rules.
+  `voice-doctrine.md` disagree. Krish ruled on all five the same day (below) and asked for it to be merged.
 - **One routing line** in `krish-voice` > Reference routing: read the matching register of the profile for a draft in
   his name or a voice check.
-- **A measuring tool** `evals/voice/fingerprint.mjs` and its output `evals/voice/fingerprint.json`: numbers only, no
+- **A measuring tool**, added in this same pull request (commits a448541 and 1e5f8d8): `evals/voice/fingerprint.mjs` and its output `evals/voice/fingerprint.json`: numbers only, no
   corpus text. It scores a draft's distance from his typical piece on eight habits drawn from the doctrine (short
   sentences, uneven rhythm, contractions, talking to the reader, spaced hyphens, brackets, no formal connectives, no
   model phrasing).
-- **One behaviour case**, `voice-behavior-028`.
+- **One behaviour case**, `voice-behavior-028` in `evals/krish-voice-behavior-cases.jsonl`, also in this pull request.
+- **Two kill-list lines** in `krish-voice` now name the LinkedIn exceptions Krish ruled (rulings 1 and 3), so the
+  doctrine and the profile no longer disagree.
+
+## Rulings (Krish, 2026-10-31, answered one by one in the session that built this)
+
+1. Rhetorical questions: "LinkedIn only".
+2. Calls to action: "Humble, sincere, curious and observational".
+3. Formatting: "One feeling emoji, LinkedIn".
+4. Energy: "Exuberant on camera too".
+5. Voice by channel: "linkedin needs to remain first person and sincere, fun, insightful, humble, curious and
+   observational. makeyourmindup more like a professional media channel".
+
+The measuring tool was built because his ask was for an anchor he can "add to over time": the tool is how a later
+addition is checked against the anchor. It reads no private data and sends nothing.
+
+## Which job it serves
+
+Selling and the publication: outreach emails, LinkedIn posts and makeyourmindup articles drafted in his name get an
+evidence-backed register instead of judgement alone.
 
 ## Why
 

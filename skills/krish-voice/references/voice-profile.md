@@ -1,6 +1,6 @@
 # Krish voice profile
 
-Version 1.1, 31 October 2026. Status: **draft. Krish ruled on the five conflicts on 31 Oct; the rest awaits his markup and his yes on the pull request.**
+Version 1.1, 31 October 2026. Status: **v1.1, merged on Krish's instruction on 31 Oct ("merge everything to main"). Two branches are open (voiceover, Jonny's voice). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
