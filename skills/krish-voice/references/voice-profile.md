@@ -1,10 +1,10 @@
 # Krish voice profile
 
-Version 1, 31 October 2026. Status: **draft for Krish's markup. Nothing here is approved until he says so.**
+Version 1.1, 31 October 2026. Status: **draft. Krish ruled on the five conflicts on 31 Oct; the rest awaits his markup and his yes on the pull request.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
-Where the two agree, the profile cites the doctrine and does not repeat it. Where they disagree, the profile lists the gap under "Where the evidence and the doctrine disagree" for Krish to rule on. The doctrine wins until he does.
+Where the two agree, the profile cites the doctrine and does not repeat it. Where they disagreed, Krish ruled (see Rulings); on anything not ruled, the doctrine wins.
 
 ## The evidence
 
@@ -27,7 +27,7 @@ Not yet in it: spoken scripts as he read them (the comparison of script and take
 3. **He proves things with his own time in the trade, specifically.** "I was one of the first programmatic traders at Microsoft in 2011 and 'automated trading' was hilariously counterproductive and manual." "I had to literally run seminars at Nine assuring sellers they still had a job in 2014." (tech0nomic, 13 Mar 2025). Agrees with the doctrine's "someone who has done the work".
 4. **He puts himself down before he puts anything else down.** "As usual, I took barely any decent pictures, so I snipped some out of the podcasts, and edited myself in" (LinkedIn, 30 Apr 2026). "studying at the same time as starting in a new business was potentially not the smartest decision I ever made for balance!" (LinkedIn, 7 May 2021). Live: "At the time I was just being lazy to be frank" (Scaleup, 2021). Agrees with the doctrine's "self-deprecating when earned".
 5. **His irony is short and dry, and it follows a long sentence.** "A new wave of businesses promising fast growth during a stagnant economic moment (but secretly mining your data)? Couldn't imagine it." "If it does it'll be far worse." (tech0nomic, 27 Mar 2025).
-6. **He lets enthusiasm show, in caps and exclamation marks.** "direct sales are BACK BABY!" (tech0nomic, 13 Mar 2025). "Pumped! Just ran my biggest AI cohort yet ... and it was FUN!" (LinkedIn, 6 May 2026). 36% of his posts end on an exclamation mark. This is wider than the doctrine's "dry British humour": see the gaps below.
+6. **He lets enthusiasm show, in caps and exclamation marks.** "direct sales are BACK BABY!" (tech0nomic, 13 Mar 2025). "Pumped! Just ran my biggest AI cohort yet ... and it was FUN!" (LinkedIn, 6 May 2026). 36% of his posts end on an exclamation mark. Ruling 4 places it: on camera he keeps this energy, even when arguing; in writing he stays dry, and on LinkedIn "fun" (ruling 5) is the ceiling.
 7. **He drops the subject when the feeling comes first.** "Pumped!", "Possible wrap!", "Loved this one!", "Incredibly relieved to have passed my Harvard Business Online courses!" Agrees with the doctrine's dropped subject pronouns.
 8. **His dash is a spaced hyphen, and his asides go in brackets.** "Here's to telling random people you like what they do - it leads to good things!" (LinkedIn, 26 Jun 2026). His own writing carries 5 to 8 spaced hyphens and 2 to 4 brackets per 1,000 words. Generic rewrites of the same pieces carried none. Never an em dash (house rule).
 9. **He writes the way he would say it.** He uses 22 to 33 contractions per 1,000 words, against about 4 in a polished rewrite. Live, he uses 53. He also uses casual coinages: "relatable AF" (2021), "Amirite? Or amiwrong?" (2026), "elbow grease".
@@ -50,7 +50,7 @@ Numbers are medians across his pieces, per 1,000 words unless marked. "Short" me
 - Middle: one argument, often a reframe, sometimes a numbered list of takeaways.
 - Closes on thanks, an invitation or an exclamation: "Love to hear different perspectives!", "Link in the comments!", "comment or DM me! It's what I love to do."
 - Since 2025 he talks to the reader more ("you" up from 9 to 14) and uses brackets for asides.
-- About one post in six uses Unicode bold headers, and some use 👉 or ✅ bullets.
+- About one post in six used Unicode bold headers or 👉 and ✅ bullets. Ruling 3 retires them: one emoji for feeling at most.
 
 ### Long-form
 - Shorter sentences than his posts (about 13 words), more of them short, and "you" at 15 to 16.
@@ -72,15 +72,34 @@ Not measured yet. It comes from Stage 1 of the plan, comparing each script with 
 - **2022 to 2024:** fewer posts, more "we" and company voice, and fewer contractions (17).
 - **2025 to 2026:** the commentator voice. Contrarian openers, reframes and more "you", with irony and asides back. This is the register to aim for now.
 
-## Where the evidence and the doctrine disagree
+## Channels: one baseline, six branches
 
-These are for Krish to rule on. Until he does, follow the doctrine.
+Krish, 31 Oct 2026: "outreach emails from mindmake, articles from makeyourmindup, video scripts with my face in them vs a voiceover all have slightly different rules, as does linkedin. Jonny's voice sending mindmake emails also has a certain voice. All spider out from similar baseline though".
 
-1. **Rhetorical questions.** The doctrine bans rhetorical-question pivots and closers. He uses both, sparingly. "And honestly? I believe..." (tech0nomic, 27 Mar 2025). "Amirite? Or amiwrong? Love to hear different perspectives!" (LinkedIn, 28 May 2026). 8% of his posts end on a question. Keep the ban, or allow one on LinkedIn?
-2. **Calls to action.** The doctrine bans a "cheesy CTA". His posts often end on "comment or DM me!" or "Link in the comments!". Is that his voice, or a habit to drop?
-3. **Emoji bullets and bold headers.** The doctrine bans emoji bullets. About one post in six uses Unicode bold headers or 👉 and ✅ bullets. Ban them, or allow them on LinkedIn only?
-4. **Dry or exuberant.** The doctrine says "dry British humour". The evidence is dry in argument and exuberant in celebration ("Pumped!", "FUN!", "BACK BABY!"). Should the doctrine name both?
-5. **Who speaks in the articles.** By ruling, makeyourmindup articles speak as "we", and the October engine drafts have lost his "I", his spaced hyphens and his asides. If the aim is pieces that sound like him, which of those may come back inside the "we" voice?
+The Core above is the baseline. Each branch keeps it and changes only what is listed. A branch with no ruling yet follows the baseline and the doctrine.
+
+| Branch | Speaks as | What changes from the baseline | Source |
+|---|---|---|---|
+| **LinkedIn** | Krish, first person | "first person and sincere, fun, insightful, humble, curious and observational". A rhetorical question is allowed here, sparingly, and nowhere else. One emoji for feeling is allowed, never as bullets and never Unicode bold. | Rulings 1, 3, 5 |
+| **Make Your Mind Up articles** | "we", the publication; never his name | "more like a professional media channel". His personal habits (I, exuberance, rhetorical questions, emoji) stay out. Ends on a verdict. | Ruling 5; the publication's own house rules |
+| **On-camera scripts** (his face) | Krish, "I" in the spoken words | His natural spoken energy, exuberance included, even when arguing. Written for the mouth: contractions, short lines. No rhetorical-question pivots. | Ruling 4 |
+| **Voiceover scripts** | the publication's voice | Not ruled yet. Until then: the article register read aloud, with no on-camera exuberance. | Open |
+| **Mindmake outreach emails** (from Krish) | Krish, first person | `outbound-email-voice.md`. Ends on one low-friction next step. | Existing doctrine |
+| **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Jonny's own posture, which is not described here yet. Never Krish's voice under Jonny's name. | Open; Control Center drafts these in Jonny's box |
+
+**Everywhere:** a call to action, where the branch has one, is "humble, sincere, curious and observational" (ruling 2). It invites and never pushes.
+
+## Rulings (Krish, 31 Oct 2026)
+
+These settle the five places where v1 found the evidence and the doctrine disagreeing.
+
+1. **Rhetorical questions:** allowed on LinkedIn only, sparingly. Banned in articles, scripts and emails.
+2. **Calls to action:** "Humble, sincere, curious and observational".
+3. **Formatting:** one emoji for feeling, on LinkedIn only. No emoji bullets and no Unicode bold anywhere.
+4. **Energy:** dry in writing; on camera, his natural spoken energy, including when arguing.
+5. **Voice by channel:** "linkedin needs to remain first person and sincere, fun, insightful, humble, curious and observational. makeyourmindup more like a professional media channel".
+
+Still open: the voiceover register, and Jonny's voice for Mindmake emails. Each needs examples from Krish, or his words, before it is written down.
 
 ## How to use it
 
@@ -90,4 +109,5 @@ These are for Krish to rule on. Until he does, follow the doctrine.
 
 ## Changelog
 
-- 2026-10-31: v1 drafted from 295 posts, 26 long-form pieces and one interview. Awaiting Krish's markup.
+- 2026-10-31: v1 drafted from 295 posts, 26 long-form pieces and one interview.
+- 2026-10-31: v1.1. Krish ruled on the five conflicts and set the channel map (one baseline, six branches). Voiceover and Jonny's voice are open.
