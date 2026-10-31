@@ -50,6 +50,7 @@ For a tiny edit, compress this mentally. For material external work, missing loc
 ## Reference routing
 
 - For every substantive draft or voice review, read `references/voice-doctrine.md`.
+- For a draft in Krish's name or a voice check, also read the matching register in `references/voice-profile.md`: how he actually writes and talks, measured from his own published words. It is a draft until Krish approves it; where it disagrees with the doctrine, follow the doctrine.
 - For long-form, social, correspondence, angle-expression, editing, or data/quote handling, read the matching section of `references/formats-and-workflow.md`.
 - For cold outreach, a named-prospect sales email, or an Instantly sequence, read `references/outbound-email-voice.md` after the approved strategy packet from `krish-content-marketer`.
 - For de-AI review, read `references/ai-tells-and-decks.md#the-ai-tell-taxonomy-detection-reference`.
