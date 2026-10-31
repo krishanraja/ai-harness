@@ -1,6 +1,6 @@
 # Krish voice profile
 
-Version 1.2, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
+Version 1.3, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
@@ -18,7 +18,7 @@ All of it is public, or his own recording. Private messages and other people's w
 
 Left out of the measurements: three pieces written in an AI agent's own voice ("Confessions of Your AI Coworker", the AI Chief of Staff post, and a February 2026 LinkedIn post signed by his coding agent). They are kept in the corpus and marked, but they are not his voice.
 
-Not yet in it: spoken scripts as he read them (the comparison of script and take is Stage 1 of the plan), talks, and his newer interviews.
+Also in it since v1.3: 14 of his recorded takes (7 pieces, 12 to 30 Oct 2026, 45 minutes) compared word by word with the scripts he was given (content-engine `scripts/voice/spoken_delta.py`; the counts are in the Drive corpus as `14-spoken-delta-2026-10-31.json`). Not yet in it: talks, and his newer interviews.
 
 **One caution about the October 2026 articles.** The six makeyourmindup articles from October 2026 were drafted by the content engine and speak as "we" by ruling. They use "I" at 1 per 1,000 words against 3 to 23 in his own long-form, and no spaced hyphens or asides. They are kept as evidence of the house style, not of his own voice. Weight his own posts and his pre-engine writing above them.
 
@@ -66,7 +66,16 @@ Numbers are medians across his pieces, per 1,000 words unless marked. "Short" me
 - What does transfer: luck and gratitude ("I've been a very lucky lad"), a single number that carries the point ("16 of the top 20 brands in Australia don't exist outside of Australia"), and the reframe.
 
 ### Spoken script
-Not measured yet. It comes from Stage 1 of the plan, comparing each script with the take he recorded.
+Measured on 14 takes of 7 pieces (12 to 30 Oct 2026): what he changed from the script on camera. Per 100 script words he swaps about 18, adds about 22 and cuts about 3. The 90-second cuts move more than the 5-minute ones (50 against 42 changes per 100 words).
+
+- **He keeps the length and changes the words.** He rarely drops a scripted line, so length is not the problem; the wording is. Write the script near the length it already is.
+- **He says it plainer.** "dollars" became "bucks", "firms" became "about the companies", "looking" became "having a look", "polished" became "really nice", "kinds" became "types". Write the casual word first.
+- **He adds a short aside, often on "which is".** "Qwen, which is...", "which is OpenAI, now retired", "which is fair enough", "and you can guess who". Leave room for one aside where a name or a number needs explaining.
+- **He tells his own part of the story.** On Wed 21 Oct (Muse vs Grok) he rewrote most of the script around the scam email he received ("for me unfortunately it was a bit of a dodgy looking email"). When a piece has his own experience in it, script the beats and let him say it.
+- **He drops scripted throat-clearing.** "I have been following how money is changing", "I have been reading", "I am Krish" and "tell me in the comments" were left out.
+- **The gap is growing.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. That is evidence the scripts drift from how he talks, not that he drifts from the script.
+
+Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out.
 
 ## How it has moved
 
@@ -117,3 +126,4 @@ Still open: the voiceover register. It needs examples from Krish, or his words, 
 - 2026-10-31: corpus cleaned (page markup, a cut interview line, sign-up boxes) and agent-voice pieces left out of the measurements; saved to Drive `voice` > `Krish Voice Corpus`.
 - 2026-10-31: v1.1. Krish ruled on the five conflicts and set the channel map (one baseline, six branches). Voiceover and Jonny's voice are open.
 - 2026-10-31: v1.2. Krish ruled that Jonny's emails take his email style (ruling 6). Voiceover is open.
+- 2026-10-31: v1.3. The spoken script register, measured from 14 recorded takes against their scripts (Krish: "yes add the spoken script section to the profile").
