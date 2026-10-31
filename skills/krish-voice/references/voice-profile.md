@@ -111,8 +111,8 @@ Rulings 1 to 5 settle the five places where v1 found the evidence and the doctri
 5. **Voice by channel:** "linkedin needs to remain first person and sincere, fun, insightful, humble, curious and observational. makeyourmindup more like a professional media channel".
 
 6. **Jonny's emails:** "jonny just needs to mimic my email style".
-7. **The script close:** one short beat saying the one thing he would do, in his first person, never a list of orders ("the last paragraph of all my scripts still sounds a bit bossy and preachy", then "Yes, replace it"). "Here's what I'd do with this info if I were you" is retired, and the kill list in `SKILL.md` now names it. This is Ruling 2 (humble, sincere, curious, observational calls to action) applied to the close of a video script; it does not replace Ruling 2. Rule in content-engine (`SCRIPT_CLOSE`).
-8. **A slow listener follows every script, heard once:** "I still feel like all my video scripts are a little bit hard to follow", then "Yes, a hard rule". Short sentences alone do not do it: what a listener can hold does. The limits live only in content-engine's `LISTENING` rule (krishanraja/content-engine#307); read them there, never from here.
+7. **The script close:** "the last paragraph of all my scripts still sounds a bit bossy and preachy", then "Yes, replace it". What the close is lives only in content-engine's `SCRIPT_CLOSE` rule (krishanraja/content-engine#307); read it there. The retired line is on the kill list in `SKILL.md`. It applies Ruling 2 to a video script's close and does not replace it.
+8. **A slow listener follows every script, heard once:** "I still feel like all my video scripts are a little bit hard to follow", then "Yes, a hard rule". The rule and its limits live only in content-engine's `LISTENING` rule (krishanraja/content-engine#307); read them there.
 
 Still open: the voiceover register. It needs examples from Krish, or his words, before it is written down.
 
