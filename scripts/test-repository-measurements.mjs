@@ -79,7 +79,7 @@ try {
  const sourceRun={...base(),id:'fixture.source',repository:null,kind:'source-run',brain_revision:null,view_sha256:null,workflow:null,condition_sha256:null,opportunity_id:null,knowledge_ids:[],details:{status:'failed',account_enumeration:'unverified',pagination:'partial',sessions_read:1,pages_read:1,cursor_sha256:null,acknowledged_payload_sha256:null}}
  validateMeasurement(sourceRun,{repository:null,targets:policy.targets})
  assert.equal(aggregateMeasurements([{...row(sourceRun),dated:'2026-01-01'}],{proofs:{[measurementSeal(sourceRun)]:{status:'source-receipt'}}}).sources[0].status,'stale')
- assert.equal(aggregateMeasurements([row(sourceRun)],{proofs:{[measurementSeal(sourceRun)]:{status:'source-receipt'}}}).sources[0].status,'failed')
+ assert.equal(aggregateMeasurements([{...row(sourceRun),dated:new Date().toISOString().slice(0,10)}],{proofs:{[measurementSeal(sourceRun)]:{status:'source-receipt'}}}).sources[0].status,'failed','a fresh source run reports its own status; the fixture date ages past the 14-day window')
  await assert.rejects(()=>verifyMeasurement(withReceipt,{gh,repository:'AEO-Engine',policy}),/repository_mismatch/)
  const wrong={...withReceipt,details:{...withReceipt.details,failure_class:'another'}};assert.equal((await verifyMeasurement(wrong,{gh,repository:'content-engine',policy})).status,'unverified')
  const ownerReceipt={...withReceipt,receipt:{...receipt,run_id:null,job_id:null,owner_pr:12}}

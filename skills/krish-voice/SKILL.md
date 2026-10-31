@@ -50,6 +50,7 @@ For a tiny edit, compress this mentally. For material external work, missing loc
 ## Reference routing
 
 - For every substantive draft or voice review, read `references/voice-doctrine.md`.
+- For a draft in Krish's name or a voice check, also read the matching register in `references/voice-profile.md`: how he actually writes and talks, measured from his own published words. Where Krish has ruled (its Rulings section, 31 Oct 2026), the ruling governs; on anything he has not ruled, where it disagrees with the doctrine, follow the doctrine.
 - For long-form, social, correspondence, angle-expression, editing, or data/quote handling, read the matching section of `references/formats-and-workflow.md`.
 - For cold outreach, a named-prospect sales email, or an Instantly sequence, read `references/outbound-email-voice.md` after the approved strategy packet from `krish-content-marketer`.
 - For de-AI review, read `references/ai-tells-and-decks.md#the-ai-tell-taxonomy-detection-reference`.
@@ -182,11 +183,11 @@ Any violation below fails the draft:
 - No em dashes. Use commas, periods, or parentheses.
 - No self-credentialing or company-name-dropping to manufacture authority.
 - No generic warm-up, context-setting opening, synthetic enthusiasm, listicle substitute for an argument, or consultant throat-clearing.
-- No AI-tell hook-line-gap openings, rhetorical-question pivots, drama commands, perfectly parallel filler, tricolon default, hedge sandwich, uniform paragraph grid, or forced callback.
+- No AI-tell hook-line-gap openings, rhetorical-question pivots (one, sparingly, is allowed on LinkedIn only: voice-profile Ruling 1), drama commands, perfectly parallel filler, tricolon default, hedge sandwich, uniform paragraph grid, or forced callback.
 - No passive voice. Rewrite the actor into the sentence unless exact quoted or protected language prevents it.
 - No reader insult. Point the spike at the tool, hype, vendor, mechanism, or Krish, and do not over-correct into saccharine reassurance.
 - No lingering sentiment, restored subject pronouns where dropping them sounds natural, or generic follow-up language.
-- No summary ending, rhetorical-question closer for long-form, cheesy CTA, or emoji bullets.
+- No summary ending, rhetorical-question closer for long-form, cheesy CTA, emoji bullets or Unicode bold (one emoji for feeling is allowed on LinkedIn only: voice-profile Ruling 3).
 - No banned vocabulary from the doctrine unless an exact quote, protected term, or proper framework name requires it.
 - No voice rule may override evidence, legal meaning, confidentiality, or the approved argument.
 
