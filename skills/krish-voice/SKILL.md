@@ -188,6 +188,7 @@ Any violation below fails the draft:
 - No passive voice. Rewrite the actor into the sentence unless exact quoted or protected language prevents it.
 - No reader insult. Point the spike at the tool, hype, vendor, mechanism, or Krish, and do not over-correct into saccharine reassurance.
 - No lingering sentiment, restored subject pronouns where dropping them sounds natural, or generic follow-up language.
+- No close that is a list of orders for the reader or viewer, and never "Here's what I'd do with this info if I were you", retired on 31 Oct 2026 (voice-profile Ruling 7).
 - No summary ending, rhetorical-question closer for long-form, cheesy CTA, emoji bullets or Unicode bold (one emoji for feeling is allowed on LinkedIn only: voice-profile Ruling 3).
 - No banned vocabulary from the doctrine unless an exact quote, protected term, or proper framework name requires it.
 - No voice rule may override evidence, legal meaning, confidentiality, or the approved argument.
