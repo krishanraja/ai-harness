@@ -75,7 +75,7 @@ Measured on 14 takes of 7 pieces (12 to 30 Oct 2026): what he changed from the s
 - **He drops scripted throat-clearing.** "I have been following how money is changing", "I have been reading", "I am Krish" and "tell me in the comments" were left out.
 - **The gap is growing.** Mon 12 Oct was near word for word (10 to 16 changes per 100 words); later pieces ran 30 to 90. That is evidence the scripts drift from how he talks, not that he drifts from the script.
 
-Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out.
+Limits: some swaps are the transcriber mishearing him ("Krish" heard as "Chris", "Qwen" as "Quinn"); the dated script on file may be a later edit than the one he read, which inflates the counts; and contractions are not settled, since the transcriber may write out ones he said. 19 takes had no matching script and are left out; the Drive file names each with its reason. The comparison of script and take (Stage 1 of the plan) is done; content-engine's weekly voice learner (Saturdays) runs it on every new take and proposes changes to this section, each landing only on Krish's yes.
 
 ## How it has moved
 
