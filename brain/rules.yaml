@@ -3323,11 +3323,11 @@ skill_sections:
   - id: tool-router.match-value-to-the
     file: skills/tool-router/SKILL.md
     heading: "Match value to the task"
-    text_sha: "84ee21b17c48"
+    text_sha: "8ff000765235"
     first_seen: "2026-10-29"
     source:
       kind: ruling
-      ref: "48bbeef74ac3"
+      ref: "35082e5bba77"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -3349,6 +3349,11 @@ skill_sections:
         source:
           kind: ruling
           ref: "0e639113e683"
+      - text_sha: "84ee21b17c48"
+        valid_until: "2026-11-01"
+        source:
+          kind: ruling
+          ref: "48bbeef74ac3"
     status: live
   - id: tool-router.reach-for-the-selected
     file: skills/tool-router/SKILL.md
