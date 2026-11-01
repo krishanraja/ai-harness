@@ -5,6 +5,32 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-01
+
+- stamped: `NOW.md` audit failures (13 recent bullets, 11 Where bullets) fixed by rolling the entries below here; head moved to 06e31ad.
+
+- rolled from NOW.md: krish-voice voice-profile v1.5 records rulings 7 and 8 (Krish, 2026-10-31): a script closes on the one thing he would do, never a list of orders, and a slow listener can hold it heard once; the rules and numbers live in content-engine (SCRIPT_CLOSE, LISTENING, krishanraja/content-engine#307). (2026-10-31)
+
+- rolled from NOW.md: krish-voice's profile is v1.4: it records where each kind of voice rule lives and how it gets better (doctrine and profile by reviewed pull request; written-voice rules from his words through the taste ledger, live; read-aloud rules he keeps through content-engine's learning proposals, live in its Scripts step). Behaviour case 031 holds that a measured pattern is never a rule without his yes. (2026-10-31)
+
+- rolled from NOW.md: krish-voice's profile is v1.3: the Spoken script register is measured from 14 of Krish's recorded takes against their scripts (he keeps the length, says it plainer, adds an aside, tells his own part), with its limits; behaviour case 030 holds it. (2026-10-31)
+
+- rolled from NOW.md: krish-voice's profile is v1.2: Jonny's Mindmake emails take Krish's email style, as Jonny, with Krish in the third person (ruling 6); `outbound-email-voice.md` says the same, and behaviour case 029 holds it. (2026-10-31)
+
+- rolled from NOW.md: krish-voice has a measured voice profile (`references/voice-profile.md`, v1.1) with Krish's five channel rulings, and `evals/voice/fingerprint.mjs` scores a draft against it (9 of 10 held-out originals beat generic rewrites). (2026-10-31)
+
+- rolled from NOW.md: `contract/channel-tasks.md` defines the seven channel tasks (platform truth, profile audit, idea bank, reel script, caption set, trend scan, channel plan) and the weekly loop from gap to North Star. growth-makeyourmindup, growth-heartside and growth-fulltime link to it directly (their pull requests 45, 31 and 18, merged). (2026-10-30)
+
+- rolled from NOW.md: Second night of the 2026-10-28 rollout: mm-ctrl's steward passed on its alias, 7 of 18 NOW.md files pass the audit (from 1 of 14), and the fold runs on every session's merge here. Two defects in that work are fixed: the bot merger opened and closed pull requests for older content-engine fallback branches one by one (#243, #244, #266), and the audit failed busy repositories on bullets the fold added hours before the steward trims. (2026-10-30)
+
+- rolled from NOW.md: the judge's PR 189 findings are fixed, and so are the two gaps that let them merge. A Krish ruling now overrules only the blocking findings whose file its own commit changed, and a ruling in a merge commit overrules nothing (`scripts/judge.mjs`; replayed on PR 189's range, it would have kept the taste-sync provenance regression blocking). The canon block's 14 clauses are now in `brain/rules.yaml` (recorded in `docs/proposals/2026-10-30-canon-block-in-ledger.md`), so an in-place edit to one fails `validate-surfaces` until it records a source; `canon.taste` cites the new `docs/proposals/2026-10-30-taste-by-venture.md`, which quotes his 2026-10-28 words and gives the reasons and the fallback. The approved-taste headers that again say how a rule was approved, and that each names its claim, are rendered by krishanraja/inspirationhouse#32 (merged) and arrive by the next taste-sync pull request, not by hand. Krish ruled on 2026-10-30 that taste rules stay separate per venture but able to be cross analysed later. (2026-10-30)
+
+- rolled from NOW.md: 2026-10-27 **A Drive file now has a registered home, because the Drive create and copy tools default to the top of his Drive when no parent is named.** `tools-access` rule 11 requires an explicit `parentId` inside CURRENT, ARCHIVE or Ventures, `CURRENT/00_INBOX` when the home is unknown, and a read-back of the file's parent; one behaviour case and one trigger case cover it (PR 141). Ruling (Krish, 2026-10-18): every Drive file has a registered home, always; no session saves a file loose at the top of his Drive.
+
+- rolled from NOW.md: 2026-10-27 **LORIMER's sync stopped needing hands: PR 170 merged.** The sync had stopped on 2026-10-27 over Claude's own `.trash`, an unregistered `tool-router` and a `__pycache__` that `locked-revision`'s scripts left in an installed skill on 2026-10-22; the hash algorithm was left alone because ignoring `__pycache__` would let a planted `.pyc`, which Python can load in place of verified source, go unmeasured. Registered as v2026.10.27.1, then v2026.10.27.2 after Heartside's context routing moved to its current docs (PR 172, a manifest change only).
+
+- rolled from NOW.md: 2026-10-26 **Epidemic Sound joins the tool map for Heartside, Full Time and makeyourmindup creative, on his own channels only.** Until now the map's only music route was Runway's `generate_music`, on Heartside and Full Time credits. It gives agents a licensed library with stems and edit-to-length. Its stock voiceover is never presented as Krish. Control Center's catalog carries the placement (krishanraja/control-center#565). Ruling (Krish, 2026-10-26): Epidemic Sound is a tool for his ventures, for Full Time and Heartside creatives and makeyourmindup content. Ruling (Krish, 2026-10-26): Heartside and Full Time creatives go on his own channels, not paid ads.
+
 ## 2026-10-30
 
 - stamped: `NOW.md` audit failures (23985 characters, 19 recent bullets, 18 Where bullets) fixed by rolling the entries below here and cutting "Where it is right now" to 8 bullets.
