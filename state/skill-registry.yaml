@@ -146,49 +146,49 @@ surface_deployments:
     status: awaiting-automatic-install-of-v2026.10.31.5
     previous_release: v2026.10.06.2
   cursor-primary:
-    release_id: v2026.10.30.1
-    source_commit: 795de8e4742c00e275ff7c3b9b57fc4530d68e97
+    release_id: v2026.10.31.5
+    source_commit: 1826c1a81710018bbe218baec0c3d8fb75176947
     installed_skill_count: 30
-    installed_file_count: 150
-    installed_ordinal_aggregate_sha256: A3D00DAACBE5EB1A7E422127528A3BD6CC2956EE270FF737F2CEFD056992882A
+    installed_file_count: 151
+    installed_ordinal_aggregate_sha256: 809BFA5467197D30F1C8F43D4FC5D9175BA8A6AD26A4700DFE64CF2BAFD8088B
     per_skill_hashes_exact: 30
-    deployed_at: 2026-10-30
-    deployed_at_utc: 2026-10-30T07:44:29.9005374Z
+    deployed_at: 2026-11-01
+    deployed_at_utc: 2026-11-01T07:43:03.7978025Z
     rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.3-20261006T212041Z-b93d1a7c
     evidence:
-      - state/deployments/v2026.10.30.1-cursor-primary.json
-    status: awaiting-automatic-install-of-v2026.10.31.5
-    previous_release: v2026.10.06.3
+      - state/deployments/v2026.10.31.5-cursor-primary.json
+    status: current-installed-hash-verified-automatic-install
+    previous_release: v2026.10.30.1
   claude-code-user:
-    release_id: v2026.10.30.1
-    source_commit: 795de8e4742c00e275ff7c3b9b57fc4530d68e97
+    release_id: v2026.10.31.5
+    source_commit: 1826c1a81710018bbe218baec0c3d8fb75176947
     installed_skill_count: 30
-    installed_file_count: 150
-    installed_ordinal_aggregate_sha256: A3D00DAACBE5EB1A7E422127528A3BD6CC2956EE270FF737F2CEFD056992882A
+    installed_file_count: 151
+    installed_ordinal_aggregate_sha256: 809BFA5467197D30F1C8F43D4FC5D9175BA8A6AD26A4700DFE64CF2BAFD8088B
     per_skill_hashes_exact: 30
-    deployed_at: 2026-10-30
-    deployed_at_utc: 2026-10-30T07:31:01.8020017Z
+    deployed_at: 2026-11-01
+    deployed_at_utc: 2026-11-01T07:31:12.8087770Z
     rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.3-20261006T210825Z-82f20902
     evidence:
-      - state/canaries/v2026.10.30.1-claude-code-user.json
-      - state/deployments/v2026.10.30.1-claude-code-user.json
-    status: awaiting-automatic-install-of-v2026.10.31.5
-    previous_release: v2026.10.06.3
+      - state/canaries/v2026.10.31.5-claude-code-user.json
+      - state/deployments/v2026.10.31.5-claude-code-user.json
+    status: current-installed-hash-verified-automatic-install
+    previous_release: v2026.10.30.1
   codex-current:
-    release_id: v2026.10.30.1
-    source_commit: 795de8e4742c00e275ff7c3b9b57fc4530d68e97
+    release_id: v2026.10.31.5
+    source_commit: 1826c1a81710018bbe218baec0c3d8fb75176947
     installed_skill_count: 30
-    installed_file_count: 150
-    installed_ordinal_aggregate_sha256: A3D00DAACBE5EB1A7E422127528A3BD6CC2956EE270FF737F2CEFD056992882A
+    installed_file_count: 151
+    installed_ordinal_aggregate_sha256: 809BFA5467197D30F1C8F43D4FC5D9175BA8A6AD26A4700DFE64CF2BAFD8088B
     per_skill_hashes_exact: 30
-    deployed_at: 2026-10-30
-    deployed_at_utc: 2026-10-30T07:44:35.6097410Z
+    deployed_at: 2026-11-01
+    deployed_at_utc: 2026-11-01T07:43:12.0326780Z
     rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.3-20261006T212047Z-3bb3bf3b
     evidence:
-      - state/canaries/v2026.10.30.1-codex-current.json
-      - state/deployments/v2026.10.30.1-codex-current.json
-    status: awaiting-automatic-install-of-v2026.10.31.5
-    previous_release: v2026.10.06.3
+      - state/canaries/v2026.10.31.5-codex-current.json
+      - state/deployments/v2026.10.31.5-codex-current.json
+    status: current-installed-hash-verified-automatic-install
+    previous_release: v2026.10.30.1
   claude-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
