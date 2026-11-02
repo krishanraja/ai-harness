@@ -1,31 +1,35 @@
 {
-  "week": "2026-W44",
-  "date": "2026-10-27",
+  "week": "2026-W45",
+  "date": "2026-11-02",
   "decisions": [
     {
-      "kind": "machine",
-      "title": "Your PC cannot install the latest release",
-      "detail": "harness-sync-lorimer has been blocked 9 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex",
+      "kind": "review",
+      "title": "5 pull requests wait on you",
+      "detail": "mm-ctrl#393 G20: context exchange material proof (54 days, conflicts); fractionl-pulse#57 Ratchet 2026-10-22: sec_exec_transitions evaluated, not promoted (10 days, ready); ai-harness#193 Approved taste rules for the voice and design skills (2 days, red: judge, harness/judge); content-engine#308 Board: Today's Approve lands on the button (1 days, red: closeout, verify (windows-latest)); growth-makeyourmindup#46 Piece kits for week 2026-W45 (1 days, ready). Merge, close or tell a session what to change; the harness's own pull requests merge themselves.",
+      "only_you": "permission"
+    },
+    {
+      "kind": "docs",
+      "title": "6 NOW.md files the steward has not fixed in 3 days",
+      "detail": "mm-ctrl (since 2026-10-28: as_of_stale, where_too_many); makeyourmindup (since 2026-10-28: too_long); growth-makeyourmindup (since 2026-10-29: north_star_check, unfolded_notes); growth-mindmake (since 2026-10-29: recent_too_many, next_step); growth-fulltime (since 2026-10-29: next_step, unfolded_notes, unreconciled); growth-legibility (since 2026-10-29: north_star_check, recent_too_many, next_step). The nightly docs steward fixes these; when it has not for days, it is usually not running there (a missing CLAUDE_CODE_OAUTH_TOKEN secret, or its workflow failing). Full findings: state/now-audit/latest.md.",
       "only_you": "permission"
     }
   ],
-  "md": "# Harness digest, 2026-W44\n\nOne thing needs you this week.\n\n1. **Your PC cannot install the latest release.** harness-sync-lorimer has been blocked 9 runs in a row since 2026-10-16 on v2026.10.24.1; its latest run said the harness folder on your PC holds files git does not track, so it will not install beside them. Open PowerShell on your PC, paste this line and press Enter: irm https://raw.githubusercontent.com/krishanraja/ai-harness/main/scripts/Repair-HarnessPc.ps1 | iex\n\n## Scoreboard\n\n- Repeated corrections (same correction given twice, 28 days): 0.004\n- Change requests accepted: none decided yet\n- Always-on context: 128,889 characters (+11469 this week)\n- Real work signals captured this week: 133\n- Repository views verified or current: 13/13. History coverage remains unknown without source receipts.\n- AEO-Engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- ai-harness: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- content-engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- contentarchives: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- control-center: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-circle: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-pulse: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- full-time: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- growth-heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- legibility: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- makeyourmindup: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- mm-ctrl: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n",
-  "title": "Harness: your pc cannot install the latest release",
+  "md": "# Harness digest, 2026-W45\n\n2 things need you this week.\n\n1. **5 pull requests wait on you.** mm-ctrl#393 G20: context exchange material proof (54 days, conflicts); fractionl-pulse#57 Ratchet 2026-10-22: sec_exec_transitions evaluated, not promoted (10 days, ready); ai-harness#193 Approved taste rules for the voice and design skills (2 days, red: judge, harness/judge); content-engine#308 Board: Today's Approve lands on the button (1 days, red: closeout, verify (windows-latest)); growth-makeyourmindup#46 Piece kits for week 2026-W45 (1 days, ready). Merge, close or tell a session what to change; the harness's own pull requests merge themselves.\n2. **6 NOW.md files the steward has not fixed in 3 days.** mm-ctrl (since 2026-10-28: as_of_stale, where_too_many); makeyourmindup (since 2026-10-28: too_long); growth-makeyourmindup (since 2026-10-29: north_star_check, unfolded_notes); growth-mindmake (since 2026-10-29: recent_too_many, next_step); growth-fulltime (since 2026-10-29: next_step, unfolded_notes, unreconciled); growth-legibility (since 2026-10-29: north_star_check, recent_too_many, next_step). The nightly docs steward fixes these; when it has not for days, it is usually not running there (a missing CLAUDE_CODE_OAUTH_TOKEN secret, or its workflow failing). Full findings: state/now-audit/latest.md.\n\n## Scoreboard\n\n- Repeated corrections (same correction given twice, 28 days): 0.004\n- Change requests accepted: none decided yet\n- Always-on context: 133,523 characters (+4634 this week)\n- Real work signals captured this week: 87\n- Repository views verified or current: 12/13. History coverage remains unknown without source receipts.\n- AEO-Engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- ai-harness: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- content-engine: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- contentarchives: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- control-center: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-circle: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- fractionl-pulse: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- full-time: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- growth-heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- heartside: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- legibility: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- makeyourmindup: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n- mm-ctrl: 0 observed loads; 0 application checks; comparable opportunities unmeasured; repeated avoidable failures unmeasured.\n",
+  "title": "Harness: 5 pull requests wait on you",
   "only_you": "permission",
   "delivery": {
-    "status": "delivered",
+    "status": "pending",
     "item": {
-      "id": "harness-digest-2026-w44",
+      "id": "harness-digest-2026-w45",
       "lane": "on_you",
       "area": "Harness",
-      "title": "Harness: your pc cannot install the latest release",
-      "detail": "Your PC cannot install the latest release",
+      "title": "Harness: 5 pull requests wait on you",
+      "detail": "5 pull requests wait on you; 6 NOW.md files the steward has not fixed in 3 days",
       "only_you": "permission",
-      "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-10-27.md",
+      "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-11-02.md",
       "link_label": "Open the digest",
       "closes_on": "his_word"
-    },
-    "readback": true,
-    "completed_at": "2026-10-27T23:59:18.336Z"
+    }
   }
 }
