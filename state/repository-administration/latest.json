@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T01:05:50.474Z",
+  "generated_at": "2026-11-02T01:29:47.436Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "40005cb5098a3f1fc0322e255b11407ceddbf2cf",
+      "base": "26fe2944f1a496524a4780a123adee4c4879f338",
       "brain_revision": "2ad79d5cf4f3",
-      "before": 350746,
-      "after": 350746,
+      "before": 352003,
+      "after": 352003,
       "files": [],
       "skipped": [],
-      "source_seal": "c0cee9865e7534514bb6e320548a1c394c0fbea6dcd0e3b1d86447dafc67ef24",
+      "source_seal": "f8d498e50c241dd7205be60b6a4dacb6c8203b118bbe2efafd903cb7db5dfce4",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "526aa9817457e8720d8ab574430422947dc42166",
+      "base": "41895dcf35819743444f8b8afa4becc58ed89f3d",
       "brain_revision": "155b79828fb7",
-      "before": 29034,
-      "after": 29034,
+      "before": 24072,
+      "after": 24072,
       "files": [],
       "skipped": [],
-      "source_seal": "e7bbbbacbc86a0b5835eee721089a88f30201e7c34b407c108ab672bf2ac8a37",
+      "source_seal": "60b24cec7cc60122192eb3516f2ae895c39396e014ad92e8b71793b36b075e64",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "969876df5361024febe3a8d82eb15b5c002684f4",
+      "base": "c4689bc6793853bce4a9c1c0154a233b86f34b76",
       "brain_revision": "ba41f521a760",
-      "before": 88293,
-      "after": 88293,
+      "before": 85705,
+      "after": 85705,
       "files": [],
       "skipped": [],
-      "source_seal": "e1b53628e3c18b3e262234a99cfcf7b945a232d4cc34caaaae7ebce0f65a4e50",
+      "source_seal": "0d00b8c5f89866dcc9b40094ece953d3479034178385dac78a8c2c77924c1f21",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -113,13 +113,13 @@
     },
     {
       "repository": "fractionl-pulse",
-      "base": "302af46c70ffaade631477e1ffb9056e08f68fd0",
+      "base": "d3b79de9556758ab7d6a4e840189e431d04ce231",
       "brain_revision": "c3389b60c708",
       "before": 21578,
       "after": 21578,
       "files": [],
       "skipped": [],
-      "source_seal": "cb09e882e32291d1e9783f3f2202b04734d592a7984bc22a764c98bfad0131d9",
+      "source_seal": "6b4ed868af5007a994958d0ca70f2c84f3748544b2b82397cc9c4cac4e534702",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -131,16 +131,16 @@
     },
     {
       "repository": "full-time",
-      "base": "1397f5a81c734acae75701dbec7f52ba114aefbd",
+      "base": "0e44f991d2b8915cf970cc77c7909c0f1de21784",
       "brain_revision": "cd43facd0779",
-      "before": 29260,
-      "after": 29260,
+      "before": 29840,
+      "after": 29840,
       "files": [
         ".github/workflows/harness-repository-context.yml",
         ".claude/hooks/harness-closeout.mjs"
       ],
       "skipped": [],
-      "source_seal": "ea5f54040d87605e273184114e131c6b3737baddb6911c13f40451add39dbc79",
+      "source_seal": "dd002139c3729d790b375d78dd94c4150ad3dd627014a01a58548930a372351a",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -190,13 +190,13 @@
     },
     {
       "repository": "heartside",
-      "base": "88203df211d777d29eb2ffc9fe8d9277461e0dfa",
+      "base": "9f3fe6613be9ff827cd12f3da55584428b965fff",
       "brain_revision": "d84cfdfa1507",
-      "before": 35073,
-      "after": 35073,
+      "before": 34709,
+      "after": 34709,
       "files": [],
       "skipped": [],
-      "source_seal": "edd38c6784814501adea261116ff163e2825984062ad44b83a388e968148e3db",
+      "source_seal": "ba02083af2215bc1409bda963184e8acf60d054b1b246d9bda4a23598c5f7caa",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
