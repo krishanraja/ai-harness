@@ -73,7 +73,7 @@ scope:
 consolidation:
   # Slots kept for consolidation every cycle, when any consolidation candidate exists.
   always_slot: true
-  slots: 1
+  slots: 2
   # Near-duplicate sentences between an always-on file and any skill.
   duplicate_jaccard: 0.6
   duplicate_min_chars: 80
