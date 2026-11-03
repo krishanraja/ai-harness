@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-01
-head: 06e31ad
+as_of: 2026-11-03
+head: a28653c
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,7 +21,7 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-01)
+## Where it is right now (as of 2026-11-03)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
@@ -47,15 +47,13 @@ This repository is not sold and carries no product name of its own; it is the in
 - 2026-10-29 **The account routine proves it is in the right account and the right page before it deletes anything.** The wrong-account case is real: Anthropic does not document whether the desktop app's built-in browser keeps one sign-in across accounts.
 - 2026-10-29 **A routine in each claude.ai account keeps it on main; the accounts hold no skill copies.** Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. Ruling (Krish, 2026-10-29): the routine may delete, from both accounts, uploaded skills whose names are exactly the harness production names, and nothing else.
 - 2026-10-29 **Skills follow main on every surface without uploads: loaders in claude.ai, bodies served live by Control Center, tool-router admitted.** `scripts/build-cloud-loaders.mjs` writes `adapters/cloud/loaders/` (30) and fails the steward check when a loader disagrees with `skills/`; the account instructions say every installed skill is a loader; `.claude/settings.json` allows Control Center's read tools without a prompt. Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. Ruling (Krish, 2026-10-29): tool-router is included everywhere.
-- 2026-10-29 **Steward fallbacks and renamed repositories stop failing silently.** content-engine's steward cut its NOW.md from 139,056 characters to 95 lines but pushed to steward/2026-10-29 with no pull request, the eighth such branch; mm-ctrl's steward could not find its own fleet entry since the repository was renamed. `scripts/merge-bot-prs.mjs` (orphanPlan) and the steward validator's alias lookup fix both.
-- 2026-10-28 **Pull requests stopped piling up: the harness's own merge themselves, and NOW.md can no longer conflict.** Ten canon-sync pull requests had sat open in the fleet for up to eleven days because nothing but Krish merged them, so fractionl-circle, full-time and mm-ctrl still ran the 10-15 and 10-17 canon without the North Star or taste rulings; every release opened another round, because the release id was inside the hashed block, and #173 changed only that number. Pull requests here conflicted within a day because every session edited NOW.md and main rewrote it daily. Bot change requests failed closeout by construction and expired unseen. Ruling (Krish, 2026-10-28): canon-sync and PC-evidence pull requests merge themselves when green and replaced ones close. Ruling (Krish, 2026-10-28): closeout writes a note folded into NOW.md on merge, with regular objective audits of the NOW files. `docs/proposals/2026-10-28-prs-merge-themselves.md`.
 
 ## What is next and what is waiting on Krish
 
 - Next (2026-10-31): Krish reads the rewritten 30 Oct script in content-engine docs/plans/2026-10-31-script-clarity-audit.md aloud once and says whether the limits stand.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
-- Waiting on Krish: whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
+- Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
 - North Star check (2026-10-31): holds.
 
 ## Read next

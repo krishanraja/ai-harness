@@ -5,6 +5,14 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-03
+
+- stamped: `NOW.md` audit failure (13 recent bullets, limit 12) fixed by rolling the two oldest entries below here; head moved to a28653c.
+
+- rolled from NOW.md: 2026-10-29 **Steward fallbacks and renamed repositories stop failing silently.** content-engine's steward cut its NOW.md from 139,056 characters to 95 lines but pushed to steward/2026-10-29 with no pull request, the eighth such branch; mm-ctrl's steward could not find its own fleet entry since the repository was renamed. `scripts/merge-bot-prs.mjs` (orphanPlan) and the steward validator's alias lookup fix both.
+
+- rolled from NOW.md: 2026-10-28 **Pull requests stopped piling up: the harness's own merge themselves, and NOW.md can no longer conflict.** Ten canon-sync pull requests had sat open in the fleet for up to eleven days because nothing but Krish merged them, so fractionl-circle, full-time and mm-ctrl still ran the 10-15 and 10-17 canon without the North Star or taste rulings; every release opened another round, because the release id was inside the hashed block, and #173 changed only that number. Pull requests here conflicted within a day because every session edited NOW.md and main rewrote it daily. Bot change requests failed closeout by construction and expired unseen. Ruling (Krish, 2026-10-28): canon-sync and PC-evidence pull requests merge themselves when green and replaced ones close. Ruling (Krish, 2026-10-28): closeout writes a note folded into NOW.md on merge, with regular objective audits of the NOW files. `docs/proposals/2026-10-28-prs-merge-themselves.md`.
+
 ## 2026-11-01
 
 - stamped: `NOW.md` audit failures (13 recent bullets, 11 Where bullets) fixed by rolling the entries below here; head moved to 06e31ad.
