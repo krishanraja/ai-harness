@@ -123,9 +123,8 @@
     "klass": "heartbeat",
     "subject": "session-miner-lorimer",
     "first_seen": "2026-10-14",
-    "open": false,
-    "reopened": "2026-10-18",
-    "closed_at": "2026-10-27"
+    "open": true,
+    "reopened": "2026-11-03"
   },
   "heartbeat:harness-sync-lorimer": {
     "klass": "heartbeat",
