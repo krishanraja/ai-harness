@@ -19,7 +19,7 @@
   "title": "Harness: 5 pull requests wait on you",
   "only_you": "permission",
   "delivery": {
-    "status": "pending",
+    "status": "delivered",
     "item": {
       "id": "harness-digest-2026-w45",
       "lane": "on_you",
@@ -30,6 +30,8 @@
       "link": "https://github.com/krishanraja/ai-harness/blob/main/state/digest/2026-11-02.md",
       "link_label": "Open the digest",
       "closes_on": "his_word"
-    }
+    },
+    "readback": true,
+    "completed_at": "2026-11-03T02:38:26.218Z"
   }
 }
