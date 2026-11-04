@@ -274,5 +274,65 @@
     "subject": "content-corpus",
     "first_seen": "2026-10-29",
     "open": true
+  },
+  "freshness:krish-principles": {
+    "klass": "freshness",
+    "subject": "krish-principles",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:take-the-brief": {
+    "klass": "freshness",
+    "subject": "take-the-brief",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:strategy-brief": {
+    "klass": "freshness",
+    "subject": "strategy-brief",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:verification-loop": {
+    "klass": "freshness",
+    "subject": "verification-loop",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:build-apps-with-krish": {
+    "klass": "freshness",
+    "subject": "build-apps-with-krish",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:ux-testing-agent": {
+    "klass": "freshness",
+    "subject": "ux-testing-agent",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:ctrl-compile": {
+    "klass": "freshness",
+    "subject": "ctrl-compile",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:ctrl-build": {
+    "klass": "freshness",
+    "subject": "ctrl-build",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:ctrl-check": {
+    "klass": "freshness",
+    "subject": "ctrl-check",
+    "first_seen": "2026-11-04",
+    "open": true
+  },
+  "freshness:ctrl-capture": {
+    "klass": "freshness",
+    "subject": "ctrl-capture",
+    "first_seen": "2026-11-04",
+    "open": true
   }
 }
