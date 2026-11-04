@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T03:28:51.947Z",
-  "measurement_verification_at": "2026-11-03T03:28:51.899Z",
+  "generated_at": "2026-11-04T02:16:06.371Z",
+  "measurement_verification_at": "2026-11-04T02:16:06.304Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 218,
+  "unknown_repository_observations": 226,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -32,7 +32,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "88eb757468b1b2eb67fffb3dfa081fa6023c09ba",
+      "source_base": "5bd7387f9b7858f2f0019c984002a35181ff97e3",
       "bootstrap_before": 26175,
       "bootstrap_after": 26175,
       "observed_use": {
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "1c32a13c207340fc4f8c302aafad599571e6dd30",
+      "source_base": "18ad48111cec0945cc2f352872f025359fba6442",
       "bootstrap_before": 22733,
       "bootstrap_after": 22733,
       "observed_use": {
@@ -94,13 +94,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 348,
+      "candidates": 379,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "2ad79d5cf4f3",
-      "source_base": "4a70858f7870d3fae95b1ea6f9d2dab94e8665f9",
-      "bootstrap_before": 353828,
-      "bootstrap_after": 353828,
+      "source_base": "320ad6a744b686a77a50826f64d680a37a926b80",
+      "bootstrap_before": 359160,
+      "bootstrap_after": 359160,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -131,7 +131,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "430ad4208f8a",
-      "source_base": "2f5f07acd7910fefe746bc8154bbc90ae0f36483",
+      "source_base": "a397fe643e3f8ab86f503cbc6ef28abf825383e6",
       "bootstrap_before": 23336,
       "bootstrap_after": 23336,
       "observed_use": {
@@ -160,13 +160,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 313,
+      "candidates": 318,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "e9a88f34cc9167b9adeaf4b88f38f91f79eec293",
-      "bootstrap_before": 85858,
-      "bootstrap_after": 85858,
+      "source_base": "c7f1638ffaff17006aa236e8b12d233a34937ad6",
+      "bootstrap_before": 87492,
+      "bootstrap_after": 87492,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -197,7 +197,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "dddd1abc777c",
-      "source_base": "a2524e173011ab3cc23ae0aef86fc08f6999ddcb",
+      "source_base": "d3e2f542c2e03ddc90c84b349280f9bb7083a44e",
       "bootstrap_before": 22676,
       "bootstrap_after": 22676,
       "observed_use": {
@@ -230,7 +230,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "c3389b60c708",
-      "source_base": "48ba470890b108fd564d89a9c164026f1005f0b2",
+      "source_base": "90d46a03cdf4e653f38822f66783d0db6170f8de",
       "bootstrap_before": 21578,
       "bootstrap_after": 21578,
       "observed_use": {
@@ -292,13 +292,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 26,
+      "candidates": 52,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "4ca70efce153",
-      "source_base": "12ab3499c08559c1955a5565b989b1764926a379",
-      "bootstrap_before": 95637,
-      "bootstrap_after": 95637,
+      "source_base": "4f90eaf4b6d1f9cb356a87cd4ff138ed4cae0465",
+      "bootstrap_before": 95285,
+      "bootstrap_after": 95285,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -325,13 +325,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 70,
+      "candidates": 82,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "d84cfdfa1507",
-      "source_base": "ac3078337f3737a287082394a8dab1710f0d3e67",
-      "bootstrap_before": 22197,
-      "bootstrap_after": 22197,
+      "source_base": "496e31b667eb483f2add6a2b6a2b92a516203c0a",
+      "bootstrap_before": 27311,
+      "bootstrap_after": 27311,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -395,9 +395,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "13bd661431b5",
-      "source_base": "3a6c176dcb45987d7cc130122bf9dd81fc421372",
-      "bootstrap_before": 27511,
-      "bootstrap_after": 27511,
+      "source_base": "6a51617a4d10c8132e1de9af1a87f5b8860787ee",
+      "bootstrap_before": 27560,
+      "bootstrap_after": 27560,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
