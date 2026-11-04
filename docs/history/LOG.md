@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-04
+
+- stamped: no documentation consequence in the six commits since a28653c (heartbeat, brain, audit and observation ledgers); head moved to 9a0fed3.
+
 ## 2026-11-03
 
 - stamped: `NOW.md` audit failure (13 recent bullets, limit 12) fixed by rolling the two oldest entries below here; head moved to a28653c.
