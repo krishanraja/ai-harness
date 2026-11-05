@@ -1,4 +1,4 @@
-# NOW.md audit 2026-11-04
+# NOW.md audit 2026-11-05
 
 Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. The docs steward fixes its repository's findings on its next run.
 
@@ -6,7 +6,7 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 |---|---|---|---|
 | control-center | fail | 2026-11-04 | where_too_many |
 | mm-ctrl | fail | 2026-10-28 | as_of_stale, north_star_check, where_too_many |
-| mindmake | pass |  | none |
+| mindmake | pass |  | north_star_check |
 | fractionl-circle | pass |  | north_star_check |
 | fractionl-pulse | pass |  | north_star_check |
 | full-time | pass |  | none |
@@ -16,38 +16,42 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 | AEO-Engine | pass |  | north_star_check |
 | makeyourmindup | fail | 2026-10-28 | too_long, old_dated_claims |
 | heartside | fail | 2026-11-01 | too_long |
-| legibility | pass |  | none |
-| growth-heartside | fail | 2026-11-04 | too_long, recent_too_many, where_too_many |
+| legibility | pass |  | north_star_check |
+| growth-heartside | fail | 2026-11-04 | unfolded_notes |
 | growth-makeyourmindup | fail | 2026-10-29 | north_star_check, unfolded_notes, unreconciled |
-| growth-mindmake | fail | 2026-10-29 | recent_too_many, next_step, unreconciled |
+| growth-mindmake | fail | 2026-10-29 | as_of_stale, north_star_check, recent_too_many, next_step, unreconciled |
 | growth-fulltime | fail | 2026-10-29 | as_of_stale, north_star_check, next_step, unfolded_notes, unreconciled |
 | growth-legibility | fail | 2026-10-29 | north_star_check, recent_too_many, next_step |
 
 ## control-center
 
-- fail `where_too_many`: 9 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
+- fail `where_too_many`: 10 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
 
 ## mm-ctrl
 
-- fail `as_of_stale`: as_of is 2026-10-23, 12 days old (limit 7).
-- warning `north_star_check`: The North Star check is dated 2026-10-23, 12 days ago (limit 7); the next session re-dates it.
+- fail `as_of_stale`: as_of is 2026-10-23, 13 days old (limit 7).
+- warning `north_star_check`: The North Star check is dated 2026-10-23, 13 days ago (limit 7); the next session re-dates it.
 - fail `where_too_many`: 9 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
+
+## mindmake
+
+- warning `north_star_check`: The North Star check is dated 2026-10-28, 8 days ago (limit 7); the next session re-dates it.
 
 ## fractionl-circle
 
-- warning `north_star_check`: The North Star check is dated 2026-10-23, 12 days ago (limit 7); the next session re-dates it.
+- warning `north_star_check`: The North Star check is dated 2026-10-23, 13 days ago (limit 7); the next session re-dates it.
 
 ## fractionl-pulse
 
-- warning `north_star_check`: The North Star check is dated 2026-10-23, 12 days ago (limit 7); the next session re-dates it.
+- warning `north_star_check`: The North Star check is dated 2026-10-23, 13 days ago (limit 7); the next session re-dates it.
 
 ## contentarchives
 
-- warning `north_star_check`: The North Star check is dated 2026-10-27, 8 days ago (limit 7); the next session re-dates it.
+- warning `north_star_check`: The North Star check is dated 2026-10-27, 9 days ago (limit 7); the next session re-dates it.
 
 ## AEO-Engine
 
-- warning `north_star_check`: The North Star check is dated 2026-10-27, 8 days ago (limit 7); the next session re-dates it.
+- warning `north_star_check`: The North Star check is dated 2026-10-27, 9 days ago (limit 7); the next session re-dates it.
 
 ## makeyourmindup
 
@@ -56,30 +60,34 @@ Fixed rules, config/now-audit.json; written by scripts/steward/audit-now.mjs. Th
 
 ## heartside
 
-- fail `too_long`: line 53 is 1917 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current.
+- fail `too_long`: 21501 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current.
+
+## legibility
+
+- warning `north_star_check`: The North Star check is dated 2026-10-28, 8 days ago (limit 7); the next session re-dates it.
 
 ## growth-heartside
 
-- fail `too_long`: 20570 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current.
-- fail `recent_too_many`: 21 "What changed recently" bullets older than a day (limit 12).
-- fail `where_too_many`: 20 bullets in "Where it is right now" (limit 8); it says where things are, not how they got there.
+- fail `unfolded_notes`: 3 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-03); run the fold.
 
 ## growth-makeyourmindup
 
 - fail `north_star_check`: No North Star check line under "What is next and what is waiting on Krish".
-- fail `unfolded_notes`: 22 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold.
+- fail `unfolded_notes`: 23 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold.
 - fail `unreconciled`: A product commit from 2026-11-01 landed after the last NOW.md update and NOW.md still does not reflect it.
 
 ## growth-mindmake
 
+- fail `as_of_stale`: as_of is 2026-10-28, 8 days old (limit 7).
+- warning `north_star_check`: The North Star check is dated 2026-10-28, 8 days ago (limit 7); the next session re-dates it.
 - fail `recent_too_many`: 16 "What changed recently" bullets older than a day (limit 12).
 - fail `next_step`: No "- Next" line under "What is next and what is waiting on Krish".
 - fail `unreconciled`: A product commit from 2026-10-31 landed after the last NOW.md update and NOW.md still does not reflect it.
 
 ## growth-fulltime
 
-- fail `as_of_stale`: as_of is 2026-10-27, 8 days old (limit 7).
-- warning `north_star_check`: The North Star check is dated 2026-10-27, 8 days ago (limit 7); the next session re-dates it.
+- fail `as_of_stale`: as_of is 2026-10-27, 9 days old (limit 7).
+- warning `north_star_check`: The North Star check is dated 2026-10-27, 9 days ago (limit 7); the next session re-dates it.
 - fail `next_step`: No "- Next" line under "What is next and what is waiting on Krish".
 - fail `unfolded_notes`: 4 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold.
 - fail `unreconciled`: A product commit from 2026-10-27 landed after the last NOW.md update and NOW.md still does not reflect it.
