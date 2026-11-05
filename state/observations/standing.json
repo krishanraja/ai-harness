@@ -334,5 +334,11 @@
     "subject": "ctrl-capture",
     "first_seen": "2026-11-04",
     "open": true
+  },
+  "freshness:ctrl-intake": {
+    "klass": "freshness",
+    "subject": "ctrl-intake",
+    "first_seen": "2026-11-05",
+    "open": true
   }
 }
