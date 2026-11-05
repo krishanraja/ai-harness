@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T02:21:27.269Z",
-  "measurement_verification_at": "2026-11-05T02:21:27.201Z",
+  "generated_at": "2026-11-05T02:22:30.474Z",
+  "measurement_verification_at": "2026-11-05T02:22:30.407Z",
   "sources": {
     "github": {
       "status": "available",
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "b757d86f45464c657c510dec8ba7325b2119649c",
+      "source_base": "643cc2027faebba04a43c046f2c7de68ad50bbe9",
       "bootstrap_before": 22733,
       "bootstrap_after": 22733,
       "observed_use": {
