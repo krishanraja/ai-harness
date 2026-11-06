@@ -59,18 +59,13 @@
     },
     {
       "repo": "fractionl-circle",
-      "status": "fail",
-      "failing_since": "2026-11-06",
+      "status": "pass",
+      "failing_since": null,
       "findings": [
         {
           "rule": "north_star_check",
           "severity": "warn",
           "detail": "The North Star check is dated 2026-10-23, 14 days ago (limit 7); the next session re-dates it."
-        },
-        {
-          "rule": "recent_too_old",
-          "severity": "fail",
-          "detail": "1 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-10-06); roll them into docs/history/LOG.md."
         }
       ]
     },
@@ -98,9 +93,9 @@
       "failing_since": "2026-11-06",
       "findings": [
         {
-          "rule": "too_long",
+          "rule": "next_step",
           "severity": "fail",
-          "detail": "line 40 is 1966 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+          "detail": "2 \"Next\" lines under \"What is next and what is waiting on Krish\"; keep the single next action."
         }
       ]
     },
@@ -171,15 +166,9 @@
     },
     {
       "repo": "growth-heartside",
-      "status": "fail",
-      "failing_since": "2026-11-04",
-      "findings": [
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "growth-makeyourmindup",
@@ -214,19 +203,9 @@
           "detail": "The North Star check is dated 2026-10-28, 9 days ago (limit 7); the next session re-dates it."
         },
         {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "16 \"What changed recently\" bullets older than a day (limit 12)."
-        },
-        {
           "rule": "next_step",
           "severity": "fail",
           "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        },
-        {
-          "rule": "unreconciled",
-          "severity": "fail",
-          "detail": "A product commit from 2026-10-31 landed after the last NOW.md update and NOW.md still does not reflect it."
         }
       ]
     },
