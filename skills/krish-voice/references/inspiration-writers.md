@@ -59,7 +59,7 @@ Cofounder and CEO of beehiiv. https://www.linkedin.com/in/tyler-denk/ . 21 posts
 
 ## Jerry Ralhan
 
-"Systems Thinker | AI, Automation & Commercial Ops". Evidence is **one post** (Krish's screenshot of 7 Nov 2026); his profile was not found publicly, so every move below is provisional until more of his posts are read.
+"Systems Thinker | AI, Automation & Commercial Ops". https://www.linkedin.com/in/jralhan (from Krish, 7 Nov 2026). Evidence is **one post** so far (Krish's screenshot of 7 Nov 2026): every move below is provisional until the weekly post read brings more.
 
 **Borrow (provisional)**
 - **The explainer by analogy.** A term people misuse ("harness"), defined in one plain analogy (the model is the brain, the harness is the hands, the rules, the memory and the loop). Krish's own lens "AI is the brain; automation and data are the machine" (doctrine, Argument lenses) is the same move; use his, not Jerry's.
