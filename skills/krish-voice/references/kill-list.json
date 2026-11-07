@@ -1,0 +1,426 @@
+{
+  "format": "krish-voice.kill-list/1",
+  "version": "2026-11-07",
+  "about": "The one machine-readable home of the krish-voice kill list and the per-channel scored checks. Control Center's voice check (api/_voiceCheck.ts, the check_voice connector tool and the engines' voice-check route) reads this file live from main. Hard rules hold a draft for rewrite; scored rules only advise. Prose rules live in voice-doctrine.md, voice-profile.md and linkedin-evidence.md; this file must agree with them (evals/voice/test-kill-list.mjs checks it). Characters that other guards scan for are written as \\u escapes.",
+  "rulings": [
+    "Ruling (Krish, 2026-11-07): British spelling everywhere, including krishraja.com.",
+    "Ruling (Krish, 2026-11-07): a hard fail holds the draft for one rewrite; style is scored with fixes beside every draft.",
+    "Ruling (Krish, 2026-11-07): the voice system covers emails from his box, Jonny's emails in his style, his personal LinkedIn and his other personal socials."
+  ],
+  "channels": {
+    "email": {
+      "register": "long_form",
+      "applies": [
+        "hard",
+        "email"
+      ]
+    },
+    "email_jonny": {
+      "register": "long_form",
+      "applies": [
+        "hard",
+        "email"
+      ]
+    },
+    "linkedin": {
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social",
+        "linkedin"
+      ]
+    },
+    "x": {
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ],
+      "max_chars": 280
+    },
+    "threads": {
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ],
+      "max_chars": 500
+    },
+    "substack_note": {
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ]
+    },
+    "instagram": {
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ],
+      "max_chars": 2200
+    }
+  },
+  "exempt": {
+    "about": "Matches inside these strings never count. Proper names and fixed framework labels only.",
+    "phrases": [
+      "leverage audit",
+      "Control Center",
+      "Morning Brew",
+      "Big Desk Energy",
+      "Dynamic Content"
+    ]
+  },
+  "hard": {
+    "em_dash": {
+      "chars": [
+        "\u2014",
+        "\u2015"
+      ],
+      "message": "No em dashes. Use a comma, a full stop or brackets."
+    },
+    "words": {
+      "source": "voice-doctrine.md, Words and phrases to avoid, and Canon banned language",
+      "list": [
+        "excited",
+        "thrilled",
+        "seamless",
+        "seamlessly",
+        "empower",
+        "empowers",
+        "empowering",
+        "journey",
+        "landscape",
+        "game-changer",
+        "game-changing",
+        "revolutionary",
+        "cutting-edge",
+        "robust",
+        "utilise",
+        "utilize",
+        "facilitate",
+        "paradigm",
+        "tapestry",
+        "moreover",
+        "furthermore",
+        "groundbreaking",
+        "innovative",
+        "synergy",
+        "holistic",
+        "spearhead",
+        "mission-critical",
+        "best-in-class",
+        "delve",
+        "delves",
+        "unpack",
+        "unleash",
+        "elevate",
+        "supercharge",
+        "foster",
+        "cultivate",
+        "crucial",
+        "pivotal",
+        "testament",
+        "boasts",
+        "underscores",
+        "realm",
+        "leverage",
+        "innovation"
+      ],
+      "message": "\"{match}\" is on the kill list. Name the mechanism, number or decision it hides."
+    },
+    "phrases": {
+      "list": [
+        "in today's world",
+        "in today's fast-moving landscape",
+        "in today's rapidly",
+        "rapidly evolving",
+        "at the end of the day",
+        "here's the thing",
+        "the truth is",
+        "let's dive in",
+        "deep dive",
+        "the bottom line is",
+        "it's worth noting",
+        "whether you're a",
+        "imagine a world where",
+        "what if i told you",
+        "i hope this message finds you",
+        "i hope this email finds you",
+        "this finds you well",
+        "ai transformation",
+        "ai literacy",
+        "capability building",
+        "leverage ai",
+        "time will tell",
+        "the future of work",
+        "paradigm shift"
+      ],
+      "message": "AI tell or banned phrase: \"{match}\"."
+    },
+    "us_spellings": {
+      "about": "US spellings that have a British form. Whole words, case-insensitive. Krish ruled British spelling everywhere on 2026-11-07.",
+      "map": {
+        "organize": "organise",
+        "organized": "organised",
+        "organizes": "organises",
+        "organizing": "organising",
+        "organization": "organisation",
+        "organizations": "organisations",
+        "organizational": "organisational",
+        "realize": "realise",
+        "realized": "realised",
+        "realizes": "realises",
+        "realizing": "realising",
+        "recognize": "recognise",
+        "recognized": "recognised",
+        "recognizes": "recognises",
+        "optimize": "optimise",
+        "optimized": "optimised",
+        "optimizes": "optimises",
+        "optimizing": "optimising",
+        "optimization": "optimisation",
+        "prioritize": "prioritise",
+        "prioritized": "prioritised",
+        "prioritizing": "prioritising",
+        "prioritization": "prioritisation",
+        "analyze": "analyse",
+        "analyzed": "analysed",
+        "analyzing": "analysing",
+        "commercialize": "commercialise",
+        "commercialized": "commercialised",
+        "commercializing": "commercialising",
+        "commercialization": "commercialisation",
+        "monetize": "monetise",
+        "monetized": "monetised",
+        "monetizing": "monetising",
+        "monetization": "monetisation",
+        "personalize": "personalise",
+        "personalized": "personalised",
+        "personalization": "personalisation",
+        "standardize": "standardise",
+        "standardized": "standardised",
+        "summarize": "summarise",
+        "summarized": "summarised",
+        "emphasize": "emphasise",
+        "apologize": "apologise",
+        "criticize": "criticise",
+        "democratize": "democratise",
+        "categorize": "categorise",
+        "customize": "customise",
+        "customized": "customised",
+        "minimize": "minimise",
+        "maximize": "maximise",
+        "behavior": "behaviour",
+        "behaviors": "behaviours",
+        "behavioral": "behavioural",
+        "color": "colour",
+        "colors": "colours",
+        "favorite": "favourite",
+        "favor": "favour",
+        "honor": "honour",
+        "labor": "labour",
+        "neighbor": "neighbour",
+        "rumor": "rumour",
+        "flavor": "flavour",
+        "center": "centre",
+        "centers": "centres",
+        "centered": "centred",
+        "defense": "defence",
+        "offense": "offence",
+        "catalog": "catalogue",
+        "dialog": "dialogue",
+        "traveling": "travelling",
+        "traveled": "travelled",
+        "modeling": "modelling",
+        "canceled": "cancelled",
+        "enrollment": "enrolment",
+        "fulfill": "fulfil",
+        "judgment": "judgement"
+      },
+      "message": "US spelling \"{match}\". Krish writes British: \"{fix}\"."
+    },
+    "engagement_bait": {
+      "about": "LinkedIn demotes it (linkedin-evidence.md rule 4, primary) and it pushes rather than invites (voice-profile ruling 2). Patterns run case-sensitive with the u flag; case is spelled out in each pattern.",
+      "patterns": [
+        "\\b[Cc]omment\\s+[\"'\\u201c]?[A-Z]{2,}[\"'\\u201d]?(?![a-z])",
+        "\\b[Cc]omment\\s+([Bb]elow|[Yy]es)\\b",
+        "\\b[Tt]ype\\s+[\"'\\u201c]?[A-Z]{2,}[\"'\\u201d]?\\s+(below|in the comments)",
+        "\\b([Tt]ag|[Mm]ention)\\s+(someone|a friend|a colleague)\\b",
+        "\\b([Ll]ike|[Rr]epost|[Ss]hare)\\s+(this\\s+)?if\\s+you\\b",
+        "(^|\\s)[Aa]gree\\?\\s*$",
+        "\\b[Dd]rop\\s+an?\\s+(\\p{Extended_Pictographic}|[\"'\\u201c][^\"'\\u201d]{1,12}[\"'\\u201d])\\s+(below|in the comments)"
+      ],
+      "message": "Engagement bait. Invite a real answer instead.",
+      "flags": "u"
+    },
+    "unicode_bold": {
+      "about": "Mathematical alphanumeric symbols used as fake bold or italic. Retired by voice-profile ruling 3.",
+      "range": [
+        "\\u{1D400}",
+        "\\u{1D7FF}"
+      ],
+      "message": "No Unicode bold or italic."
+    },
+    "emoji_bullets": {
+      "about": "A line that starts with an emoji used as a bullet. Retired by voice-profile ruling 3.",
+      "message": "No emoji bullets. One emoji for feeling, on LinkedIn only."
+    },
+    "self_name": {
+      "about": "Personal social posts are written as Krish and never name him (growth-makeyourmindup ACCOUNT-VOICE.md, Krish 2026-10-28: no content refers to Krish, ever). Emails may sign or mention him.",
+      "applies_to": [
+        "linkedin",
+        "x",
+        "threads",
+        "substack_note",
+        "instagram"
+      ],
+      "pattern": "\\bKrish(\\s+Raja)?\\b",
+      "message": "A personal post never names Krish.",
+      "flags": "u"
+    },
+    "emoji_count": {
+      "about": "At most one emoji, for feeling, on LinkedIn; none in emails (voice-profile ruling 3).",
+      "max": {
+        "linkedin": 1,
+        "x": 1,
+        "threads": 1,
+        "substack_note": 1,
+        "instagram": 1,
+        "email": 0,
+        "email_jonny": 0
+      },
+      "message": "Too many emoji: {count}. At most {max} here."
+    }
+  },
+  "warn": {
+    "context_words": {
+      "about": "Banned as metaphor only, so a human or the rewrite judges them.",
+      "list": [
+        "harness",
+        "navigate",
+        "navigating",
+        "ecosystem",
+        "transformative",
+        "unlock",
+        "unlocks",
+        "dynamic",
+        "boost"
+      ],
+      "message": "\"{match}\" is banned as a metaphor. Keep it only if it is literal."
+    },
+    "pronoun_openers": {
+      "list": [
+        "i hope this",
+        "i am reaching out",
+        "i'm reaching out",
+        "i wanted to reach",
+        "i wanted to share",
+        "i have been thinking",
+        "i've been thinking",
+        "i really enjoyed",
+        "thank you so much for taking",
+        "following up on our",
+        "just checking in",
+        "circling back"
+      ],
+      "message": "Drop the subject pronoun or generic opener. Start at the point."
+    },
+    "summary_endings": {
+      "patterns": [
+        "^(in summary|in conclusion|to sum up|to conclude|overall,|in short,)"
+      ],
+      "message": "End on a verdict, not a summary.",
+      "flags": "iu"
+    },
+    "soft_closers": {
+      "patterns": [
+        "\\b(i hope|let me know what you think|let me know your thoughts|thoughts\\?)[^.!?]*[.!?]?\\s*$"
+      ],
+      "message": "No soft closer. Land a verdict or one specific next step.",
+      "flags": "iu"
+    }
+  },
+  "scored": {
+    "linkedin": {
+      "first_line_length": {
+        "max_chars": 110,
+        "grade": "single-vendor",
+        "fix": "Make the first line a complete claim in about 110 characters."
+      },
+      "first_line_concrete": {
+        "grade": "multi-study",
+        "fix": "Open on a number, something you did or saw, or a defensible claim."
+      },
+      "no_setup_opener": {
+        "grade": "multi-study",
+        "patterns": [
+          "^(in|as|with|recently|lately|today|this week|over the past|i wanted|i've been|i have been|so,|here's|let's|we all know|everyone)\\b"
+        ],
+        "fix": "Cut the setup. Start where the point starts.",
+        "flags": "iu"
+      },
+      "length_band": {
+        "grade": "conflicting",
+        "short_max_words": 150,
+        "long_min_chars": 900,
+        "long_max_chars": 1500,
+        "fix": "One sharp idea under about 150 words, or a full argument of about 900 to 1,500 characters."
+      },
+      "blank_line_ratio": {
+        "max": 0.4,
+        "min_lines": 4,
+        "grade": "single-vendor",
+        "fix": "Join the one-line paragraphs. It reads as broetry."
+      },
+      "hashtags": {
+        "max": 3,
+        "grade": "single-vendor",
+        "fix": "Drop the hashtags; three at most."
+      },
+      "closing_question": {
+        "max_questions": 1,
+        "generic": [
+          "thoughts?",
+          "agree?",
+          "what do you think?",
+          "what are your thoughts?"
+        ],
+        "grade": "multi-study",
+        "fix": "One specific, easy-to-answer question at most, and never \"Thoughts?\"."
+      }
+    },
+    "social": {
+      "max_chars": {
+        "grade": "platform limit",
+        "fix": "Over the platform's limit."
+      }
+    },
+    "email": {
+      "email_length": {
+        "cold_min_words": 50,
+        "cold_max_words": 120,
+        "grade": "multi-study",
+        "fix": "Cold notes land at about 50 to 100 words. Cut what repeats."
+      },
+      "subject_words": {
+        "max": 4,
+        "grade": "multi-study",
+        "fix": "A subject of one to four words, like a note from a person."
+      },
+      "questions": {
+        "max": 1,
+        "grade": "multi-study",
+        "fix": "One question at most, and one ask."
+      }
+    }
+  },
+  "score": {
+    "about": "distance from 0 (reads like Krish and passes every scored check) to 1. It combines the fingerprint distance (evals/voice/fingerprint.mjs, his register) with the share of scored checks that fail. A signal, never a verdict (voice-profile.md).",
+    "weights": {
+      "fingerprint": 0.6,
+      "checks": 0.4
+    }
+  }
+}

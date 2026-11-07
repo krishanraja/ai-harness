@@ -57,7 +57,7 @@ does not leak into the written channel.
 
 Authority: `github.com/krishanraja/mindmake`, `project-documentation/00_NORTH_STAR.md`.
 
-- **British English.** Plain enough for a twelve-year-old. Short sentences. Any business term explained the moment it appears.
+- **British English,** in every channel and on krishraja.com (Ruling, Krish, 2026-11-07, which supersedes the site's US spelling of 12 Aug 2026). Plain enough for a twelve-year-old. Short sentences. Any business term explained the moment it appears.
 - **We, not I,** in the practice's voice. The practice is the subject of every claim, explanation and offer, and it never becomes one person talking about himself. Krish appears in exactly three places: the founder section at the foot of the homepage, where the bio is his own and in the first person; the framing of the proof, because a testimonial needs somebody to have worked with; and inside verbatim quotes.
 - **No em dashes anywhere.** Copy, docs, commits, chat, on-screen text and code.
 - **Never an eyebrow above a heading.** Never doom, commands, boasting, or a cryptic headline that makes the reader work for the point.

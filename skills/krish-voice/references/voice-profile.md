@@ -1,6 +1,6 @@
 # Krish voice profile
 
-Version 1.4, 31 October 2026. Status: **merged on Krish's instruction on 31 Oct ("merge everything to main"). One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
+Version 1.6, 7 November 2026. Status: **v1.5 merged on Krish's instruction on 31 Oct ("merge everything to main"); v1.6 (Amplifiers) lands on his merge. One branch is open (voiceover). Any change lands only on his yes; his markup of a live draft is the expected trigger.**
 
 `voice-doctrine.md` says how to write as Krish. This profile shows how he actually writes and talks, measured from his own published words with the source for every claim. Read it next to the doctrine when drafting anything in his name, and use the numbers to check a draft.
 
@@ -98,6 +98,8 @@ The Core above is the baseline. Each branch keeps it and changes only what is li
 | **Mindmake outreach emails** (from Krish) | Krish, first person | `outbound-email-voice.md`. Ends on one low-friction next step. | Existing doctrine |
 | **Mindmake emails from Jonny** | Jonny, for Krish, signed Jonny | Krish's email style, as Jonny: the safeguard "Draft goes out under a sender other than Krish" in `SKILL.md` says how. Never Krish's voice under Jonny's name (kept from v1.1). | Ruling 6; Control Center drafts these in Jonny's box |
 
+**Amplifiers (7 Nov 2026).** Krish asked for his own voice, amplified by the writers he admires and by what lands on LinkedIn. The moves are in `inspiration-writers.md` and the platform evidence in `linkedin-evidence.md`. They sharpen the LinkedIn, social and email branches above; they never replace the Core or a ruling. On LinkedIn a P.S. may carry a twist, a link or the offer (an Alex Lieberman move), never a keyword to comment. Spelling is British on every branch (Ruling, Krish, 2026-11-07).
+
 **Everywhere:** a call to action, where the branch has one, is "humble, sincere, curious and observational" (ruling 2). It invites and never pushes.
 
 ## Rulings (Krish, 31 Oct 2026)
@@ -143,4 +145,5 @@ The last two rows are not doctrine. They are his approved taste for one venture,
 - 2026-10-31: v1.2. Krish ruled that Jonny's emails take his email style (ruling 6). Voiceover is open.
 - 2026-10-31: v1.3. The spoken script register, measured from 14 recorded takes against their scripts (Krish: "yes add the spoken script section to the profile").
 - 2026-10-31: v1.4. Where the voice rules live and how each kind gets better. Supersedes v1.3's "weekly voice learner (Saturdays)" that proposed changes to this section: the Saturday job is retired in its own home (content-engine: `.github/workflows/voice-learner.yml` and `scripts/voice/learner.py` deleted by krishanraja/content-engine#303), the spoken comparison runs on every take against the exact script, and content-engine's Sunday learning compiler proposes onto Krish's list instead of into this file.
+- 2026-11-07: v1.6. Amplifiers: the inspiration writers and the LinkedIn evidence, British spelling on every branch, and the voice check before anything lands in his name (Krish, 7 Nov 2026).
 - 2026-10-31: v1.5. Rulings 7 and 8: the script close and what a slow listener can hold (content-engine `SCRIPT_CLOSE` and `LISTENING`, krishanraja/content-engine#307).
