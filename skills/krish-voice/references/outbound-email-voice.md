@@ -20,6 +20,8 @@ Do not invent familiarity, recipient research, proof, urgency, customer outcomes
 
 Keep the first step compressed and conversational. A subject should feel like a human note, not a campaign slogan. Use one observation, one problem, one relevance/proof signal, and one low-friction question or offer. Avoid product lists, two questions, compliment openings, apology, and “checking in.”
 
+Length and shape, from the evidence in `linkedin-evidence.md` (rule 14): a cold body of about 50 to 100 words (the voice check flags over 120), a subject of one to four words, one ask, and at most one question. An interest-based ask ("Worth a look?") suits a first touch; a specific time suits a live conversation.
+
 Follow-ups must contribute something new. The final bump is shortest and emotionally unburdened.
 
 ## Named-prospect mode

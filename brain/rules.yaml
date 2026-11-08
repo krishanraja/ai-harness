@@ -2767,12 +2767,17 @@ skill_sections:
   - id: krish-voice.reference-routing
     file: skills/krish-voice/SKILL.md
     heading: "Reference routing"
-    text_sha: "b615e0e6cf49"
+    text_sha: "a4658c7b48f8"
     first_seen: "2026-09-07"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-31-voice-profile.md"
+      kind: ruling
+      ref: "05097a95e961"
     history:
+      - text_sha: "b615e0e6cf49"
+        valid_until: "2026-11-07"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-31-voice-profile.md"
       - text_sha: "c62a0b556df7"
         valid_until: "2026-10-31"
         source:

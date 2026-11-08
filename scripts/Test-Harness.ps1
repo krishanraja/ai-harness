@@ -823,6 +823,16 @@ if ($LASTEXITCODE -ne 0) {
     Add-Failure "Scroll-build evidence regression suite failed: $($scrollBuildRegressionCheck -join ' | ')"
 }
 
+$voiceFingerprintCheck = @(& node (Join-Path $Root 'evals\voice\test-fingerprint.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Voice fingerprint regression suite failed: $($voiceFingerprintCheck -join ' | ')"
+}
+
+$voiceKillListCheck = @(& node (Join-Path $Root 'evals\voice\test-kill-list.mjs') 2>&1)
+if ($LASTEXITCODE -ne 0) {
+    Add-Failure "krish-voice kill-list.json is invalid or has drifted from the doctrine: $($voiceKillListCheck -join ' | ')"
+}
+
 $syncEvidenceRegressionCheck = @(& pwsh -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'scripts\Invoke-HarnessSync.ps1') -SelfTest 2>&1)
 if ($LASTEXITCODE -ne 0) {
     Add-Failure "Harness-sync evidence regression suite failed: $($syncEvidenceRegressionCheck -join ' | ')"
