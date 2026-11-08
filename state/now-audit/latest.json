@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -23,9 +23,9 @@
       "failing_since": "2026-11-07",
       "findings": [
         {
-          "rule": "unfolded_notes",
+          "rule": "where_too_many",
           "severity": "fail",
-          "detail": "1 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-05); run the fold."
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         }
       ]
     },
@@ -37,12 +37,12 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-23, 15 days old (limit 7)."
+          "detail": "as_of is 2026-10-23, 16 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 15 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 16 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "where_too_many",
@@ -59,7 +59,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 10 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 11 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -71,7 +71,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 15 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 16 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -83,7 +83,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 15 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 16 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -107,7 +107,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 11 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 12 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -125,7 +125,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 11 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 12 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -148,9 +148,20 @@
     },
     {
       "repo": "heartside",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-08",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "20578 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "legibility",
@@ -160,7 +171,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 10 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 11 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -189,6 +200,11 @@
           "rule": "unfolded_notes",
           "severity": "fail",
           "detail": "24 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold."
+        },
+        {
+          "rule": "unreconciled",
+          "severity": "fail",
+          "detail": "A product commit from 2026-11-05 landed after the last NOW.md update and NOW.md still does not reflect it."
         }
       ]
     },
@@ -200,12 +216,17 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-28, 10 days old (limit 7)."
+          "detail": "as_of is 2026-10-28, 11 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 10 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 11 days ago (limit 7); the next session re-dates it."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "16 \"What changed recently\" bullets older than a day (limit 12)."
         },
         {
           "rule": "next_step",
@@ -215,7 +236,7 @@
         {
           "rule": "unfolded_notes",
           "severity": "fail",
-          "detail": "2 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-05); run the fold."
+          "detail": "7 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-05); run the fold."
         }
       ]
     },
@@ -227,12 +248,12 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-27, 11 days old (limit 7)."
+          "detail": "as_of is 2026-10-27, 12 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 11 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 12 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "next_step",
@@ -259,7 +280,7 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-29, 9 days old (limit 7)."
+          "detail": "as_of is 2026-10-29, 10 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
