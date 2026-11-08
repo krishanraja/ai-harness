@@ -216,22 +216,22 @@
     "klass": "surface-parity",
     "subject": "cursor-primary",
     "first_seen": "2026-10-15",
-    "open": false,
-    "closed_at": "2026-11-02"
+    "open": true,
+    "reopened": "2026-11-08"
   },
   "surface-parity:claude-code-user": {
     "klass": "surface-parity",
     "subject": "claude-code-user",
     "first_seen": "2026-10-15",
-    "open": false,
-    "closed_at": "2026-11-02"
+    "open": true,
+    "reopened": "2026-11-08"
   },
   "surface-parity:codex-current": {
     "klass": "surface-parity",
     "subject": "codex-current",
     "first_seen": "2026-10-15",
-    "open": false,
-    "closed_at": "2026-11-02"
+    "open": true,
+    "reopened": "2026-11-08"
   },
   "surface-parity:claude-cloud": {
     "klass": "surface-parity",
