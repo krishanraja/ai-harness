@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T01:53:14.026Z",
-  "measurement_verification_at": "2026-11-07T01:53:13.978Z",
+  "generated_at": "2026-11-08T01:23:27.199Z",
+  "measurement_verification_at": "2026-11-08T01:23:27.142Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 248,
+  "unknown_repository_observations": 252,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "3e3a1b932a222743c0916ca4378b017bad113776",
+      "source_base": "f73ab6c77450eeeaae4b6f1ce44640125d5cffe5",
       "bootstrap_before": 22733,
       "bootstrap_after": 22733,
       "observed_use": {
@@ -94,13 +94,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 416,
+      "candidates": 419,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "2ad79d5cf4f3",
-      "source_base": "f32cc423a5a88c28f124f941b78b245c8f2a3cfe",
-      "bootstrap_before": 372755,
-      "bootstrap_after": 372755,
+      "source_base": "44e5bc27ca637a862889208f7c62e89c19a5c622",
+      "bootstrap_before": 373512,
+      "bootstrap_after": 373512,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -164,9 +164,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "e6d1ed6bcda908b3332bfd68094b254757e48a11",
-      "bootstrap_before": 89230,
-      "bootstrap_after": 89230,
+      "source_base": "23502bfa7e11746ad66af54ebec5b1d703a73115",
+      "bootstrap_before": 89447,
+      "bootstrap_after": 89447,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -230,9 +230,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "c3389b60c708",
-      "source_base": "318f7e7c297ed0aa40aaec7353138b900a973878",
-      "bootstrap_before": 21606,
-      "bootstrap_after": 21606,
+      "source_base": "4fa9d81a24246f723325e44a7c89a4b7f81bc3d2",
+      "bootstrap_before": 21654,
+      "bootstrap_after": 21654,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -263,7 +263,7 @@
       "unknown_coverage": true,
       "delivery": "awaiting-checks",
       "brain_revision": "cd43facd0779",
-      "source_base": "5141529a025b0d84fe109cc20a5ed1c99759e198",
+      "source_base": "f51c416bc78e0f88841c6e58be3a93b5b3df8b0e",
       "bootstrap_before": 29872,
       "bootstrap_after": 29872,
       "observed_use": {

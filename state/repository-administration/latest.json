@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T01:53:13.919Z",
+  "generated_at": "2026-11-08T01:23:27.069Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "f32cc423a5a88c28f124f941b78b245c8f2a3cfe",
+      "base": "44e5bc27ca637a862889208f7c62e89c19a5c622",
       "brain_revision": "2ad79d5cf4f3",
-      "before": 372755,
-      "after": 372755,
+      "before": 373512,
+      "after": 373512,
       "files": [],
       "skipped": [],
-      "source_seal": "b6c9b812dda64ad7da5060bdc03658136ba43d9e1741c31c5c6b2c829d2e4749",
+      "source_seal": "4b2b82f66f2eb1cf5a704aed067493494922b320587e1e3b31c9db12ca1013d1",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "3e3a1b932a222743c0916ca4378b017bad113776",
+      "base": "f73ab6c77450eeeaae4b6f1ce44640125d5cffe5",
       "brain_revision": "155b79828fb7",
       "before": 22733,
       "after": 22733,
       "files": [],
       "skipped": [],
-      "source_seal": "74049f5a7b7963d0de56bb09b80f26d2bb7a746345b676e425b69905bbacd75e",
+      "source_seal": "00053064c6e248965264275f7dd3a992c8e0ccfe6cad9415971808869a30792f",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "e6d1ed6bcda908b3332bfd68094b254757e48a11",
+      "base": "23502bfa7e11746ad66af54ebec5b1d703a73115",
       "brain_revision": "ba41f521a760",
-      "before": 89230,
-      "after": 89230,
+      "before": 89447,
+      "after": 89447,
       "files": [],
       "skipped": [],
-      "source_seal": "5b96f8004c8f4d9c8f916e41cc3642c5117fc51e14a480701eda26d4dae074ae",
+      "source_seal": "2e28bfa642e13a70ae6facb194fc539a90f93d2c208bd05ab4a539128fd5ec97",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -113,13 +113,13 @@
     },
     {
       "repository": "fractionl-pulse",
-      "base": "318f7e7c297ed0aa40aaec7353138b900a973878",
+      "base": "4fa9d81a24246f723325e44a7c89a4b7f81bc3d2",
       "brain_revision": "c3389b60c708",
-      "before": 21606,
-      "after": 21606,
+      "before": 21654,
+      "after": 21654,
       "files": [],
       "skipped": [],
-      "source_seal": "92a1453228f1edfb4650bf5bb072e32f6bb9503d80214ca58e5a8f063dc4c5a1",
+      "source_seal": "950ebff8448feb4179b86b412fd43d05ca926b9a817aed66787319fe33face50",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -131,7 +131,7 @@
     },
     {
       "repository": "full-time",
-      "base": "5141529a025b0d84fe109cc20a5ed1c99759e198",
+      "base": "f51c416bc78e0f88841c6e58be3a93b5b3df8b0e",
       "brain_revision": "cd43facd0779",
       "before": 29872,
       "after": 29872,
@@ -140,7 +140,7 @@
         ".claude/hooks/harness-closeout.mjs"
       ],
       "skipped": [],
-      "source_seal": "2e7c85d0e792f4c51413e3f1ecb5d57b703779ef5780766f546fd9bbca0312c9",
+      "source_seal": "90b8e86148ed9cc274d7e1bb3aa463c15d6219ecbcf8fb69278df9d3924f3fab",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
