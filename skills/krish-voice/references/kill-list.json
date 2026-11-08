@@ -268,9 +268,8 @@
       "message": "No emoji bullets. One emoji for feeling, on LinkedIn only."
     },
     "self_name": {
-      "about": "Personal social posts are written as Krish and never name him (growth-makeyourmindup ACCOUNT-VOICE.md, Krish 2026-10-28: no content refers to Krish, ever). Emails may sign or mention him.",
+      "about": "The personal accounts growth-makeyourmindup drafts for (X, Threads, Substack Notes, Instagram) never name him (its ACCOUNT-VOICE.md, Krish 2026-10-28: \"Remember, no content refers to Krish, ever.\"). His own LinkedIn is first person and is not covered; emails may sign or mention him.",
       "applies_to": [
-        "linkedin",
         "x",
         "threads",
         "substack_note",

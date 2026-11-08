@@ -1,6 +1,6 @@
 # Inspiration writers
 
-Version 1, 7 November 2026. Status: proposed to Krish in a pull request; it governs only once he merges it.
+Version 1, 7 November 2026. Status: merged on Krish's instruction on 8 November 2026 ("Merge to main"); it governs from main.
 
 These are the writers Krish named as voices he finds inspiring. They live in his Drive folder for that purpose (`voice` inspiration, the folder inspirationhouse reads as lane `voice`). This file holds **the moves they make, never their wording**. A move here is a technique Krish may borrow inside his own voice. Where a move conflicts with `voice-doctrine.md`, `voice-profile.md` or his rulings, the doctrine wins and the move is listed under "refuse".
 
@@ -9,7 +9,7 @@ Read it when drafting a LinkedIn post, a short social post or an email in his na
 ## How this file grows
 
 - A new screenshot in the folder becomes evidence in inspirationhouse and, on Krish's yes, an approved voice rule (`approved-taste.md`). That path is unchanged.
-- A new writer, or a new move for an existing writer, is added here only by a pull request Krish merges, with the posts that show it. The weekly post read for each writer (Control Center `content_creators`, Apify, capped by his ruling of 7 Nov 2026) supplies the evidence; it never edits this file.
+- A new writer, or a new move for an existing writer, is added here only by a pull request Krish merges, with the posts that show it. Evidence comes from his saved screenshots and from Control Center's weekly post read (`content_creators`); that read, and any spend it makes, is governed in Control Center under his approvals there, never by this file, and it never edits this file.
 - Every move cites at least two of the writer's own public posts, unless marked "one post".
 
 ## The shared moves
@@ -24,7 +24,7 @@ All three writers do these. Most already sit in Krish's own Core (`voice-profile
 6. **The company is proof, not the subject.** Their business appears as the evidence or the tool, rarely in the first line.
 7. **Plain words, contractions, no jargon left unexplained.**
 8. **A short close:** a principle in one line or a specific question that is easy to answer.
-9. **No hashtags.**
+9. **No hashtags, or very few.** None is best and three at most (`linkedin-evidence.md`, rule 9).
 
 ## Alex Lieberman
 
@@ -71,4 +71,5 @@ Move: Tyler's number-first opener. Krish version: a first line with a number Kri
 
 ## Changelog
 
-- 2026-11-07: v1. Alex Lieberman, Tyler Denk, Jerry Ralhan (provisional), from Krish's Drive folder and free public research; scraped post histories to follow under the $5 Apify ceiling he approved.
+- 2026-11-07: v1. Alex Lieberman, Tyler Denk, Jerry Ralhan (provisional), from Krish's Drive folder and free public research.
+- 2026-11-08: merged on Krish's instruction.

@@ -9,7 +9,7 @@ This file holds the platform evidence behind the scored checks in `kill-list.jso
 - **single-vendor**: one tool vendor's sample; correlation only.
 - **opinion**: practitioner guidance with no sample.
 
-Only primary and multi-study rules may become a hard fail or a scored check. The rest are advice. Where studies conflict, the file says so and no check enforces it.
+Only primary and multi-study rules may become a hard fail, which holds a draft. Any graded rule may be a scored check: advice shown beside a draft with its grade, which never holds anything. Where studies conflict, the file says so and the check stays advisory.
 
 ## What LinkedIn itself has said (primary)
 
