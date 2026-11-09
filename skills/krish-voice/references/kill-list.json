@@ -128,6 +128,14 @@
       "applies": [
         "hard"
       ]
+    },
+    "clip": {
+      "voice": "krish",
+      "register": "long_form",
+      "applies": [
+        "hard"
+      ],
+      "about": "A product clip's spoken script and title (Growth > clips), in the product's own voice under krish-voice's rules; never the publication's canon, which forbids naming the product."
     }
   },
   "exempt": {
