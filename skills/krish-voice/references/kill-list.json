@@ -5,7 +5,7 @@
   "rulings": [
     "Ruling (Krish, 2026-11-07): British spelling everywhere, including krishraja.com.",
     "Ruling (Krish, 2026-11-07): a hard fail holds the draft for one rewrite; style is scored with fixes beside every draft.",
-    "Ruling (Krish, 2026-11-07): the voice system covers emails from his box, Jonny's emails in his style, his personal LinkedIn and his other personal socials.",
+    "Ruling (Krish, 2026-11-07, superseded 2026-11-09 by the ruling below): the voice system covers emails from his box, Jonny's emails in his style, his personal LinkedIn and his other personal socials.",
     "Ruling (Krish, 2026-11-09): every word written for Krish, Jonny or the publication passes the one voice check."
   ],
   "channels": {
@@ -83,7 +83,8 @@
         "hard",
         "social"
       ],
-      "max_chars": 1250
+      "max_chars": 1250,
+      "max_chars_source": "LinkedIn's comment box limit (1,250 characters), the same platform limit as its other channel limits."
     },
     "form": {
       "voice": "krish",
@@ -135,7 +136,7 @@
       "applies": [
         "hard"
       ],
-      "about": "A product clip's spoken script and title (Growth > clips), in the product's own voice under krish-voice's rules; never the publication's canon, which forbids naming the product."
+      "about": "A product clip's spoken script and title (Growth > clips), in the product's own voice under krish-voice's rules; never the publication's canon, whose product_in_editorial veto (at the pinned hash) refuses a product name in an editorial piece."
     }
   },
   "exempt": {
@@ -499,7 +500,7 @@
     }
   },
   "voices": {
-    "about": "Who speaks on a channel. krish and jonny take krish-voice's rules; publication takes them too and adds Make Your Mind Up's own canon, which its repository owns and this file only points at by hash.",
+    "about": "Who speaks on a channel. krish and jonny take krish-voice's rules; publication takes them too and adds Make Your Mind Up's own canon, which its repository owns and this file admits only at the reviewed hash below.",
     "krish": {
       "speaks_as": "Krish, first person"
     },
@@ -513,7 +514,10 @@
         "path": "quality/panel/kill-list.v1.json",
         "sha256": "87f1698f78fc1cdaa36d93a259c7175c55a7215cc80a0eb7f4e4c481e48a40b0",
         "version": "kill-list.v1",
-        "applies": "its vetoes (patterns, words, phrases) are hard fails on publication channels; its warnings and front-matter scopes stay with its own gate"
+        "applies": "its vetoes (patterns, words, phrases) are hard fails on publication channels; its warnings and front-matter scopes stay with its own gate",
+        "admitted": "Only the bytes at this sha256 apply. They were read and reviewed in the pull request that pinned them (ai-harness #210, 2026-11-09). A newer upstream file applies nothing until a kill-list pull request re-pins its hash, through this canon's own review.",
+        "retrieved": "2026-11-09",
+        "recheck": "Control Center compares the live upstream hash with this one on every read and reports 'upstream moved, pinned copy applied' in the check's source line, so drift is visible the first time it happens."
       }
     }
   }
