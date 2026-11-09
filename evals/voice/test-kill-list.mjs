@@ -23,6 +23,13 @@ for (const [channel, spec] of Object.entries(list.channels)) {
   assert.ok(fingerprint.registers[spec.register], `${channel}: no fingerprint register ${spec.register}`)
 }
 
+// Every channel says who speaks on it, and the publication's own canon is named by repository, path and hash.
+for (const [channel, spec] of Object.entries(list.channels)) assert.ok(['krish', 'jonny', 'publication'].includes(spec.voice), `${channel}: no voice`)
+const ext = list.voices.publication.extends
+assert.match(ext.sha256, /^[0-9a-f]{64}$/)
+assert.ok(ext.repo && ext.path, 'the publication canon names where it lives')
+for (const ch of ['article', 'script', 'caption', 'carousel', 'substack']) assert.equal(list.channels[ch].voice, 'publication')
+
 // Every pattern compiles with the flags the file declares.
 const compile = (p, flags = 'iu') => new RegExp(p, flags)
 for (const p of list.hard.engagement_bait.patterns) compile(p, list.hard.engagement_bait.flags)

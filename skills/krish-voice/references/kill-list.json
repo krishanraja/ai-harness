@@ -1,11 +1,12 @@
 {
   "format": "krish-voice.kill-list/1",
-  "version": "2026-11-07",
+  "version": "2026-11-09",
   "about": "The one machine-readable home of the krish-voice kill list and the per-channel scored checks. Control Center's voice check (api/_voiceCheck.ts, the check_voice connector tool and the engines' voice-check route) reads this file live from main. Hard rules hold a draft for rewrite; scored rules only advise. Prose rules live in voice-doctrine.md, voice-profile.md and linkedin-evidence.md; this file must agree with them (evals/voice/test-kill-list.mjs checks it). Characters that other guards scan for are written as \\u escapes.",
   "rulings": [
     "Ruling (Krish, 2026-11-07): British spelling everywhere, including krishraja.com.",
     "Ruling (Krish, 2026-11-07): a hard fail holds the draft for one rewrite; style is scored with fixes beside every draft.",
-    "Ruling (Krish, 2026-11-07): the voice system covers emails from his box, Jonny's emails in his style, his personal LinkedIn and his other personal socials."
+    "Ruling (Krish, 2026-11-07): the voice system covers emails from his box, Jonny's emails in his style, his personal LinkedIn and his other personal socials.",
+    "Ruling (Krish, 2026-11-09): every word written for Krish, Jonny or the publication passes the one voice check."
   ],
   "channels": {
     "email": {
@@ -13,14 +14,16 @@
       "applies": [
         "hard",
         "email"
-      ]
+      ],
+      "voice": "krish"
     },
     "email_jonny": {
       "register": "long_form",
       "applies": [
         "hard",
         "email"
-      ]
+      ],
+      "voice": "jonny"
     },
     "linkedin": {
       "register": "linkedin_post",
@@ -28,7 +31,8 @@
         "hard",
         "social",
         "linkedin"
-      ]
+      ],
+      "voice": "krish"
     },
     "x": {
       "register": "linkedin_post",
@@ -36,7 +40,8 @@
         "hard",
         "social"
       ],
-      "max_chars": 280
+      "max_chars": 280,
+      "voice": "krish"
     },
     "threads": {
       "register": "linkedin_post",
@@ -44,14 +49,16 @@
         "hard",
         "social"
       ],
-      "max_chars": 500
+      "max_chars": 500,
+      "voice": "krish"
     },
     "substack_note": {
       "register": "linkedin_post",
       "applies": [
         "hard",
         "social"
-      ]
+      ],
+      "voice": "krish"
     },
     "instagram": {
       "register": "linkedin_post",
@@ -59,7 +66,68 @@
         "hard",
         "social"
       ],
+      "max_chars": 2200,
+      "voice": "krish"
+    },
+    "message": {
+      "voice": "krish",
+      "register": "linkedin_post",
+      "applies": [
+        "hard"
+      ]
+    },
+    "comment": {
+      "voice": "krish",
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ],
+      "max_chars": 1250
+    },
+    "form": {
+      "voice": "krish",
+      "register": "long_form",
+      "applies": [
+        "hard"
+      ]
+    },
+    "script": {
+      "voice": "publication",
+      "register": "long_form",
+      "applies": [
+        "hard"
+      ]
+    },
+    "article": {
+      "voice": "publication",
+      "register": "long_form",
+      "applies": [
+        "hard"
+      ]
+    },
+    "caption": {
+      "voice": "publication",
+      "register": "linkedin_post",
+      "applies": [
+        "hard",
+        "social"
+      ],
       "max_chars": 2200
+    },
+    "carousel": {
+      "voice": "publication",
+      "register": "linkedin_post",
+      "applies": [
+        "hard"
+      ]
+    },
+    "substack": {
+      "voice": "publication",
+      "register": "long_form",
+      "applies": [
+        "hard"
+      ]
     }
   },
   "exempt": {
@@ -420,6 +488,25 @@
     "weights": {
       "fingerprint": 0.6,
       "checks": 0.4
+    }
+  },
+  "voices": {
+    "about": "Who speaks on a channel. krish and jonny take krish-voice's rules; publication takes them too and adds Make Your Mind Up's own canon, which its repository owns and this file only points at by hash.",
+    "krish": {
+      "speaks_as": "Krish, first person"
+    },
+    "jonny": {
+      "speaks_as": "Jonny, for Krish, in Krish's email style (voice-profile ruling 6)"
+    },
+    "publication": {
+      "speaks_as": "Make Your Mind Up, the publication ('we'; scripts in Krish's own words to camera)",
+      "extends": {
+        "repo": "krishanraja/makeyourmindup",
+        "path": "quality/panel/kill-list.v1.json",
+        "sha256": "87f1698f78fc1cdaa36d93a259c7175c55a7215cc80a0eb7f4e4c481e48a40b0",
+        "version": "kill-list.v1",
+        "applies": "its vetoes (patterns, words, phrases) are hard fails on publication channels; its warnings and front-matter scopes stay with its own gate"
+      }
     }
   }
 }
