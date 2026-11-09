@@ -7,11 +7,11 @@ Rendered from registry reconciliation date **2026-10-07**.
 
 ## Release authority
 
-- Latest approved release: **v2026.11.08.1** (harness-v2026.11.08.1)
-- Immutable and published: **yes**, 2026-11-08T08:21:37Z
-- Release source commit: `a74615b1a2b02183ef6f0e999f1ac92cfa361558`
-- Manifest SHA-256: `4C4EA3D9420BF163194E4003AB0F4AB10D6CCF62C696B9B437535D9C78EDDEC3`
-- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.08.1
+- Latest approved release: **v2026.11.09.1** (harness-v2026.11.09.1)
+- Immutable and published: **yes**, 2026-11-09T12:02:58Z
+- Release source commit: `8d1caa875a7ff0e9046b5ed06633117d35e8771e`
+- Manifest SHA-256: `F2C32275C4B765EFCF01D132C87B0DC3E827CD5BA42489F977D133DD02884198`
+- Release: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.09.1
 - Current deployment verdict: **current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes**
 
 Repository HEAD and open pull requests are volatile and must not be cached here. Read them live with `git rev-parse HEAD` and `gh pr list --state open`. Main may legitimately be newer than the latest immutable release.
@@ -20,14 +20,14 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
-| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.11.08.1 |
-| cursor-primary | v2026.11.08.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
-| claude-code-user | v2026.11.08.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
-| codex-current | v2026.11.08.1 | 30/30 exact | current-installed-hash-verified-automatic-install |
-| claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.08.1 |
-| claude-secondary-cloud | unknown | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.08.1 |
-| perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.08.1 |
-| codex-cloud | v2026.10.06.3 | cloud inventory only | awaiting-environment-refresh-for-v2026.11.08.1 |
+| codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.11.09.1 |
+| cursor-primary | v2026.11.08.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.09.1 |
+| claude-code-user | v2026.11.08.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.09.1 |
+| codex-current | v2026.11.08.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.09.1 |
+| claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.09.1 |
+| claude-secondary-cloud | unknown | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.09.1 |
+| perplexity-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.09.1 |
+| codex-cloud | v2026.10.06.3 | cloud inventory only | awaiting-environment-refresh-for-v2026.11.09.1 |
 
 A local hash match proves installed bytes only. It does not prove client discovery, routing or behavior. Cloud names and dates are inventory evidence, not byte parity.
 
