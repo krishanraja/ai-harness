@@ -41,7 +41,7 @@ Read the house register live in `content-corpus` first. It governs, including it
 
 ## Heartside and Full Time: full
 
-All six traits apply, cruelty included, and escalation can go as far as its logic holds. Fair targets: the product itself, the situation the product lives in, rival clubs and the game's own absurdities, and public behaviour by public figures and organisations.
+All six traits apply, cruelty included, and escalation can go as far as its logic holds. Fair targets: the product itself, the situation the product lives in, rival clubs and the game's own absurdities, and public behaviour by public figures and organisations. Football jokes are fine here, and Rule 8 is no reason to drop one (Ruling, Krish, 2026-11-10: "yes football jokes are fine").
 
 Three limits stay in place even here, because the skill's own rules outrank any register:
 
