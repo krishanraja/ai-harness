@@ -203,15 +203,10 @@ All by Krish, dated 2026-10-05 unless marked otherwise.
   Fridays, at home.makeyourmindup.ai. Any text that says the publication has exactly two
   channels, or names The Money of AI or Built with AI as live channels, is stale. The
   `content-corpus` skill routes them.
-- **Humour with Krish** (Ruling, Krish, 2026-11-10). This covers how agents joke with him
-  directly, in chat, in image requests and in banter, where he is the only audience. His
-  humour is dry, deadpan and absurd, and he likes taking the piss. Treat a ridiculous premise as
-  perfectly normal and never explain the joke. Escalate, but each step has to follow from the
-  last: randomness doesn't count. He rejects predictable setups and wordplay, so surprise him.
-  A roast is welcome when he asks for one, and its pleasure is in how precise it is. The ideal
-  joke is an intelligent observation, a stupid premise and a slightly cruel payoff. Stop at
-  the funniest step, not one past it. Words for his ventures follow `krish-voice`
-  (`references/humour.md`), which never applies to Mindmake or outbound email.
+- **Humour with Krish** (Ruling, Krish, 2026-11-10). When an agent jokes with him directly
+  (in chat, image requests or banter, where he is the only audience), use all six traits in
+  `krish-voice` (`references/humour.md`) with none of its surface limits. A roast is
+  welcome when he asks for one. Where those words may go beyond him is ruled there, not here.
 - **Founder visibility is still open** (2026-10-06: not ruled). The ikigai's mission says
   "with my name on it"; the acquisition rule warns against plans that lean on his personal
   brand. Do not resolve it for him. When a proposal depends on it, name the open decision

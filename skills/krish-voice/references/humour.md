@@ -1,8 +1,12 @@
 # Humour
 
-Ruling (Krish, 2026-11-10): this file is the one home for how humour is used in words written for Krish's ventures. He ruled on each trait and on where it may be used. It started as an AI's reading of the jokes he asks for, so treat it as his ruling on that reading, not as measured evidence of how he writes. His measured humour is in `voice-profile.md` (items 4 and 5: self-deprecation first, then short dry irony after a long sentence).
+Ruling (Krish, 2026-11-10): which humour traits may be used, and on which surfaces. It started as an AI's reading of the jokes he asks for, so it is his ruling on that reading, not measured evidence of how he writes. It adds to what already holds and replaces none of it:
 
-How agents joke with Krish himself, in chat, is a different question. It lives in `krish-principles` (`references/who-krish-is.md`, "Humour with Krish"), not here.
+- **Measured humour** stays in `voice-profile.md` (items 4 and 5: self-deprecation first, then short dry irony). In anything written in Krish's own voice, those moves come first, and where a trait here pulls against them, the profile governs.
+- **Make Your Mind Up's register** stays in `content-corpus` (`references/editorial-channels.md`), read live. Where this file and that register differ, the register governs.
+- **The doctrine and the kill list** outrank everything here, on every surface.
+
+How agents joke with Krish himself, in chat, lives in `krish-principles` (`references/who-krish-is.md`, "Humour with Krish"), which points back to the traits below.
 
 ## Where it applies
 
@@ -30,12 +34,10 @@ When one piece crosses surfaces, for example a publication article quoted in a M
 
 ## Make Your Mind Up: integrated
 
-The house register already holds (`content-corpus`, `references/editorial-channels.md`): tongue in cheek, dark, dry rather than zany, and funny because of the gap between the claim and the evidence. Use the traits inside it:
+Read the house register live in `content-corpus` first. It governs, including its Kind Rule, Rigour Rule and no-preaching rule, and it is not restated here so that it can't go stale. Within it:
 
 - Traits 1, 3, 4, 5 and 6 apply in full.
-- Trait 2 applies only to claims, hype, incentives, pricing pages and decisions. Never to a named person's competence or character (the Kind Rule).
-- The joke can never be the finding (the Rigour Rule). Every load-bearing number keeps its source, and where the record runs out, the piece says so without a punchline.
-- No closing moral. If a joke carries the point, it carries it alone.
+- Trait 2 applies only to what the register lets irony target (claims, hype, incentives, decisions), never to a person.
 
 ## Heartside and Full Time: full
 
@@ -56,4 +58,4 @@ Three limits stay in place even here, because the skill's own rules outrank any 
 ## Checking
 
 - Every draft still goes through `check_voice`. A joke is no exemption from the kill list.
-- When Krish corrects a joke ("too predictable", "not funny", "too far"), send his exact words to `report_to_taste_engine` under the venture the piece is for, as with any voice correction. That's how the taste ledger learns his humour from evidence. Never report this file there: it is a ruling, and the ledger would only file it as an observation.
+- When Krish corrects a joke ("too predictable", "not funny", "too far"), send his exact words to `report_to_taste_engine` under the venture the piece is for, as with any voice correction (step 2a of the skill). A report only writes to his own taste ledger and needs no approval (Ruling, Krish, 2026-10-26: "reports to my taste ledger are exempt from the approval wall"). That's how the taste ledger learns his humour from evidence. Never report this file there: it is a ruling, and the ledger would only file it as an observation.
