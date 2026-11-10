@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-09
-head: ff15a80
+as_of: 2026-11-10
+head: 484d4f9
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,7 +21,7 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-09)
+## Where it is right now (as of 2026-11-10)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
@@ -47,9 +47,6 @@ This repository is not sold and carries no product name of its own; it is the in
 - 2026-10-30 **Taste by venture and the approved taste rules reached main together (PR 174, PR 179).** Nine other branches were left as they are: four already on main, five superseded by later work on main.
 - 2026-10-29 **The canon reaches all five growth engines.** The next canon sync renders the block, with its new pointer to the Engines section, into each engine's AGENTS.md; nothing was synced from this session.
 - 2026-10-29 **Krish's working-style instructions live in the harness, and the personal-email rule is gone everywhere.** Ruling (Krish, 2026-10-29): remove the rule that his personal email never appears on client-facing work and only hello@krishraja.com is used. Ruling (Krish, 2026-10-29): his instructions for how any AI works with him belong in the harness, served to every surface.
-- 2026-10-29 **The accounts need one supervised setup each and nothing after it; the routing is served live, not pasted.** `scripts/Test-Harness.ps1` now requires the served routing to name every production skill and the pointer to load it.
-- 2026-10-29 **The account routine proves it is in the right account and the right page before it deletes anything.** The wrong-account case is real: Anthropic does not document whether the desktop app's built-in browser keeps one sign-in across accounts.
-- 2026-10-29 **A routine in each claude.ai account keeps it on main; the accounts hold no skill copies.** Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. Ruling (Krish, 2026-10-29): the routine may delete, from both accounts, uploaded skills whose names are exactly the harness production names, and nothing else.
 - 2026-10-29 **Skills follow main on every surface without uploads: loaders in claude.ai, bodies served live by Control Center, tool-router admitted.** `scripts/build-cloud-loaders.mjs` writes `adapters/cloud/loaders/` (30) and fails the steward check when a loader disagrees with `skills/`; the account instructions say every installed skill is a loader; `.claude/settings.json` allows Control Center's read tools without a prompt. Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. Ruling (Krish, 2026-10-29): tool-router is included everywhere.
 
 ## What is next and what is waiting on Krish

@@ -5,6 +5,16 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-10
+
+- stamped: `NOW.md` audit failure (13 recent bullets, limit 12) fixed by rolling the three oldest entries below here; head moved to 484d4f9.
+
+- rolled from NOW.md: 2026-10-29 **The accounts need one supervised setup each and nothing after it; the routing is served live, not pasted.** `scripts/Test-Harness.ps1` now requires the served routing to name every production skill and the pointer to load it.
+
+- rolled from NOW.md: 2026-10-29 **The account routine proves it is in the right account and the right page before it deletes anything.** The wrong-account case is real: Anthropic does not document whether the desktop app's built-in browser keeps one sign-in across accounts.
+
+- rolled from NOW.md: 2026-10-29 **A routine in each claude.ai account keeps it on main; the accounts hold no skill copies.** Ruling (Krish, 2026-10-29): a Claude routine in each account keeps it in sync, opening its own Claude browser if needed. Ruling (Krish, 2026-10-29): the routine may delete, from both accounts, uploaded skills whose names are exactly the harness production names, and nothing else.
+
 ## 2026-11-04
 
 - stamped: no documentation consequence in the six commits since a28653c (heartbeat, brain, audit and observation ledgers); head moved to 9a0fed3.
