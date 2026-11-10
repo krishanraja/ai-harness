@@ -2,7 +2,9 @@
 #
 # Written by scripts/brain-rules.mjs, checked by scripts/validate-surfaces.mjs.
 # One entry per top-level rule in the two contracts, and one per chapter of
-# every skill. text_sha is the sha256 of the rule text (first 12 hex), so an
+# every skill. Skill reference files (skills/*/references/) sit outside this
+# index; their rulings live in the commit bodies that change them.
+# text_sha is the sha256 of the rule text (first 12 hex), so an
 # edit without a new source is arithmetic to detect rather than a judgement.
 #
 # source.kind:
