@@ -19,7 +19,8 @@ Read this table first. If the work is not in an allowed row, this file does not 
 | Make Your Mind Up, the publication (venture `publication`: its articles, scripts, captions, carousels and Substack) | **Integrated**, under its house register (below). |
 | Heartside (venture `heartside`) | **Full**, every trait below. |
 | Full Time (venture `full_time`) | **Full**, every trait below. |
-| Anything else (Legibility, CTRL, Pulse, Signal & Noise, Krish's personal LinkedIn and socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
+| Krish's personal LinkedIn | **Selective**, rarely and lightly (below). |
+| Anything else (Legibility, CTRL, Pulse, Signal & Noise, his other personal socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
 
 When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins.
 
@@ -38,6 +39,15 @@ Read the house register live in `content-corpus` first. It governs, including it
 
 - Traits 1, 3, 4, 5 and 6 apply in full.
 - Trait 2 applies only to what the register lets irony target (claims, hype, incentives, decisions), never to a person.
+
+## Krish's LinkedIn: selective
+
+Ruling (Krish, 2026-11-10): "Linkedin can use it very selectively, not intensely". LinkedIn stays first person and sincere, fun, insightful, humble, curious and observational (`voice-profile.md`, Ruling 5), and that register governs. Within it:
+
+- At most one humorous line in a post, and most posts need none. When it's in doubt, leave it out.
+- Self-deprecation and short dry irony after a long sentence (`voice-profile.md`, items 4 and 5) come first. Traits 1, 5 and 6 may sharpen that line.
+- No escalation (trait 4), no cruelty (trait 2) and no extended bit of intellectual stupidity (trait 3).
+- A post that sells, announces or links to Mindmake follows the Mindmake row: no humour from this file.
 
 ## Heartside and Full Time: full
 
