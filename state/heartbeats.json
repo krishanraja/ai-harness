@@ -40,8 +40,8 @@
     "source": "repository_dispatch"
   },
   "observer": {
-    "last_run": "2026-11-09T01:11:56.118Z",
-    "observations_added": 0,
+    "last_run": "2026-11-10T02:54:35.144Z",
+    "observations_added": 52,
     "repos_read": 18
   },
   "openclaw-vps": {
