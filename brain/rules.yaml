@@ -2769,11 +2769,11 @@ skill_sections:
   - id: krish-voice.reference-routing
     file: skills/krish-voice/SKILL.md
     heading: "Reference routing"
-    text_sha: "681a09a03895"
+    text_sha: "67650e625240"
     first_seen: "2026-09-07"
     source:
       kind: ruling
-      ref: "b07bd47182bf"
+      ref: "3ba7c4f4b4b3"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -2800,6 +2800,11 @@ skill_sections:
         source:
           kind: ruling
           ref: "4b08d0defcff"
+      - text_sha: "681a09a03895"
+        valid_until: "2026-11-10"
+        source:
+          kind: ruling
+          ref: "b07bd47182bf"
     status: live
   - id: krish-voice.source-and-privacy-contract
     file: skills/krish-voice/SKILL.md
