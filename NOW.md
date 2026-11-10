@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- krish-voice has references/humour.md, which sets where each of six humour traits may be used: never in Mindmake or any outbound email, integrated under the house register in Make Your Mind Up, in full for Heartside and Full Time; krish-principles has "Humour with Krish" for joking with him directly. (2026-11-10)
 - krish-voice's kill list names a voice for every channel and covers every surface: Krish's email and socials, Jonny's emails, DMs, comments and forms, and the publication's scripts, articles, captions, carousels and Substack, which also take Make Your Mind Up's own canon by hash. (2026-11-09)
 - krish-voice has a machine-readable kill list (references/kill-list.json, checked against the doctrine by evals/voice/test-kill-list.mjs in Test-Harness), the inspiration writers' moves (inspiration-writers.md: Alex Lieberman, Tyler Denk, Jerry Ralhan provisional) and the LinkedIn and email evidence (linkedin-evidence.md); British spelling holds on every channel by Krish's 7 Nov ruling. (2026-11-07)
 - Taste by venture and Krish's approved taste rules for krish-voice and krish-design landed on main together (PR 174, PR 179, 2026-10-30): sessions pass their repository, and the venture, to `get_approved_taste` and `report_to_taste_engine`. The canon block is synced to v2026.10.29.3; the skills follow at the next skill release. `brain/rules.yaml` records the new text.
@@ -37,6 +38,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-10 Krish ruled on the humour profile on 10 Nov; it went to the harness, not the taste ledger, because the ledger would file a model's reading of him as an uncounted observation.
 - 2026-11-09 Krish, 2026-11-09: "we need to make sure everything goes through the same voice system. Absolutely everything."
 - 2026-11-08 release v2026.11.08.1 was registered and LORIMER's sync of it recorded (#208); the krish-voice references answered the judge panel (PR 207).
 - 2026-11-07 Krish asked for one voice, amplified by writers he admires, enforced on everything sent or posted in his name.
@@ -51,11 +53,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-09): Control Center applies the new channels and serves the check to content-engine and n8n.
+- Next (2026-11-10): Krish rules whether Legibility, CTRL, Pulse, Signal & Noise and his personal LinkedIn may use humour.md.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-09): holds.
+- North Star check (2026-11-10): holds.
 
 ## Read next
 
