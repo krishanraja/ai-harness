@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-10
-head: 484d4f9
+as_of: 2026-11-11
+head: 96c8c08
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,7 +21,7 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-10)
+## Where it is right now (as of 2026-11-11)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
@@ -29,11 +29,10 @@ This repository is not sold and carries no product name of its own; it is the in
 - krish-voice has references/humour.md, which sets where each of six humour traits may be used: never in Mindmake or any outbound email, integrated under the house register in Make Your Mind Up, in full for Heartside and Full Time; krish-principles has "Humour with Krish" for joking with him directly. (2026-11-10)
 - krish-voice's kill list names a voice for every channel and covers every surface: Krish's email and socials, Jonny's emails, DMs, comments and forms, and the publication's scripts, articles, captions, carousels and Substack, which also take Make Your Mind Up's own canon by hash. (2026-11-09)
 - krish-voice has a machine-readable kill list (references/kill-list.json, checked against the doctrine by evals/voice/test-kill-list.mjs in Test-Harness), the inspiration writers' moves (inspiration-writers.md: Alex Lieberman, Tyler Denk, Jerry Ralhan provisional) and the LinkedIn and email evidence (linkedin-evidence.md); British spelling holds on every channel by Krish's 7 Nov ruling. (2026-11-07)
-- Taste by venture and Krish's approved taste rules for krish-voice and krish-design landed on main together (PR 174, PR 179, 2026-10-30): sessions pass their repository, and the venture, to `get_approved_taste` and `report_to_taste_engine`. The canon block is synced to v2026.10.29.3; the skills follow at the next skill release. `brain/rules.yaml` records the new text.
 - Growth engines have one doctrine: the Engines section of `contract/north-star-metric.md`, with Control Center as line manager. Four engines joined `state/fleet.yaml` and stay out of the repository administration publisher until Krish accepts them. Open for Krish: the canon asks a check_in at least every other day, while growth-legibility and growth-makeyourmindup say at least twice a week; neither side was changed. Detail: LOG 2026-10-30.
 - claude.ai accounts hold no skill copies and no recurring job. The Instructions field holds a fixed pointer (`adapters/cloud/account-instructions.md`) that loads the routing live through Control Center's `get_skill`; `adapters/cloud/account-setup.md` is a one-time supervised setup per account. Both claude.ai surfaces stay recorded as stale until a read-back. tool-router is production skill 30 and places 21st Dev's prepaid credits on interface work only.
 - The harness's own pull requests merge themselves when green, closeout notes fold into NOW.md on main, and NOW.md is audited nightly against `config/now-audit.json` (PR 175, Rulings, Krish, 2026-10-28). Steward fallbacks get a pull request and renamed repositories find their fleet entry (PR 178).
-- **Release and surfaces.** Read the latest approved release from `state/skill-registry.yaml` and the surface table from `CURRENT.md`, not from this line. The two supervised Claude accounts need the one-time setup, Codex Cloud an environment refresh, and `claude-secondary-cloud` is unknown. A hash match proves installed bytes only. `cursor-primary` has no headless canary. LORIMER's sync of v2026.11.08.1 was recorded on 2026-11-08 (#208); read `state/heartbeats.json`, not this line, before trusting it.
+- **Release and surfaces.** Read the latest approved release from `state/skill-registry.yaml` and the surface table from `CURRENT.md`, not from this line. The two supervised Claude accounts need the one-time setup, Codex Cloud an environment refresh, and `claude-secondary-cloud` is unknown. A hash match proves installed bytes only. `cursor-primary` has no headless canary. LORIMER's sync of v2026.11.09.1 was recorded on 2026-11-10 (#211); read `state/heartbeats.json`, not this line, before trusting it.
 - **Skill review dates.** As of the registry on 2026-10-19, 13 of 29 skills were past their freshness SLA, led by `krish-design` and `krish-content-marketer`. Not recomputed since. Candidates outside packaging: `consumer-app-outcomes` and `tool-economics` (staged, inactive); see `state/candidates/`.
 - **Credential exposure** opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`). Session closeout, one fleet list (`state/fleet.yaml`) and the North Star (`docs/NORTH_STAR.md`) are in force.
 

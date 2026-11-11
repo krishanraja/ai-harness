@@ -5,6 +5,12 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-11
+
+- stamped: `NOW.md` audit failure (9 bullets in "Where it is right now", limit 8) fixed by removing the taste-by-venture bullet from that section, as it was history and stays in "What changed recently" (2026-10-30); head moved to 96c8c08.
+
+- rolled from NOW.md: Taste by venture and Krish's approved taste rules for krish-voice and krish-design landed on main together (PR 174, PR 179, 2026-10-30): sessions pass their repository, and the venture, to `get_approved_taste` and `report_to_taste_engine`. The canon block was synced to v2026.10.29.3; the skills follow at the next skill release.
+
 ## 2026-11-10
 
 - stamped: `NOW.md` audit failure (13 recent bullets, limit 12) fixed by rolling the three oldest entries below here; head moved to 484d4f9.
