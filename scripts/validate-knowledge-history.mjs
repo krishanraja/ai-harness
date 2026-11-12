@@ -13,6 +13,6 @@ export function validateHistoryAppend(before,after){
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const base=process.argv[process.argv.indexOf('--base')+1]
  if(!/^[a-f0-9]{40}$/.test(base||''))throw new Error('expected_exact_history_base')
- const path='brain/knowledge.jsonl',before=execFileSync('git',['show',base+':'+path],{encoding:'utf8'})
+ const path='brain/knowledge.jsonl',before=execFileSync('git',['show',base+':'+path],{encoding:'utf8',maxBuffer:1<<28})
  console.log(JSON.stringify(validateHistoryAppend(before,readFileSync(path,'utf8'))))
 }
