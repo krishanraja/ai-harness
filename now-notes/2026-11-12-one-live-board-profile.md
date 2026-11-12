@@ -1,0 +1,3 @@
+Status: content-engine's administration profile sends sessions to the one live board: its bootstrap note reads this week's comments on Control Centre's Content tab, names content.krishraja.com/board as the read-only archive and says no session builds or publishes a board page, and its board workflow reads docs/PUBLISH_BOARDS.md first (brain/repositories/content-engine.json, scripts/repository-profile.mjs). Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive.
+Next: the repository administration run on main publishes the new region and context into content-engine's AGENTS.md and docs/HARNESS_CONTEXT.md.
+North Star check (2026-11-12): holds.

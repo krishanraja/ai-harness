@@ -90,6 +90,11 @@
       "label": "failures"
     },
     {
+      "path": "docs/PUBLISH_BOARDS.md",
+      "role": "workflow",
+      "label": "The one live publish board and how every actor uses it"
+    },
+    {
       "path": "config/boards.json",
       "role": "orientation",
       "label": "boards"
@@ -141,8 +146,9 @@
     },
     {
       "id": "board",
-      "label": "Weekly decisions, all account links and feedback continuity",
+      "label": "The one live publish board: its view, presses, sessions, materials and archive",
       "read": [
+        "docs/PUBLISH_BOARDS.md",
         ".agents/skills/plan-week/SKILL.md",
         "config/boards.json",
         "WORKBENCH.md"
@@ -153,7 +159,7 @@
     }
   ],
   "bootstrap_notes": [
-    "Before any work run `python3 scripts/check_failures.py`. At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
+    "Before any work run `python3 scripts/check_failures.py`. At session start read this week's comments on the one live board, Control Centre's Content tab (`board_web.py read` the week's Monday `comments`); content.krishraja.com/board is its read-only archive and no session builds or publishes a board page (`docs/PUBLISH_BOARDS.md`). Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
   ],
   "changes": [
     {
@@ -169,6 +175,42 @@
       "from": 232887,
       "to": 312761,
       "basis": "re-measured with scripts/repository-admin.mjs bootstrapMeasure against content-engine main once docs/REPO_MAP.md is counted; the old limit predates that file being read"
+    },
+    {
+      "date": "2026-11-12",
+      "field": "bootstrap_notes",
+      "from": "At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file.",
+      "to": "At session start read this week's comments on the one live board, Control Centre's Content tab (`board_web.py read` the week's Monday `comments`); content.krishraja.com/board is its read-only archive and no session builds or publishes a board page (`docs/PUBLISH_BOARDS.md`).",
+      "basis": "Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive. Krish, 2026-11-12: \"does every part of the engine know that this new publish board is the only place to put stuff and how to use it?\" The note still sent every session to read comments on every config/boards.json link and said each board publish updates every link (the two-account artifact era); the board workflow did not read docs/PUBLISH_BOARDS.md, the authority."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "workflows.board",
+      "from": {
+        "label": "Weekly decisions, all account links and feedback continuity",
+        "read": [
+          ".agents/skills/plan-week/SKILL.md",
+          "config/boards.json",
+          "WORKBENCH.md"
+        ]
+      },
+      "to": {
+        "label": "The one live publish board: its view, presses, sessions, materials and archive",
+        "read": [
+          "docs/PUBLISH_BOARDS.md",
+          ".agents/skills/plan-week/SKILL.md",
+          "config/boards.json",
+          "WORKBENCH.md"
+        ]
+      },
+      "basis": "Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive. Krish, 2026-11-12: \"does every part of the engine know that this new publish board is the only place to put stuff and how to use it?\" The note still sent every session to read comments on every config/boards.json link and said each board publish updates every link (the two-account artifact era); the board workflow did not read docs/PUBLISH_BOARDS.md, the authority."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "sources",
+      "from": null,
+      "to": "docs/PUBLISH_BOARDS.md",
+      "basis": "The board workflow reads the authority on the one live board (Ruling, Krish, 2026-11-11: one live board, in Control Centre; the old board is a read-only archive); a workflow may read only a profile source."
     }
   ]
 }
