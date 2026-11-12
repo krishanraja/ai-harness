@@ -30,7 +30,7 @@
     },
     {
       "path": "engine/ENGINE_SPEC.md",
-      "role": "orientation",
+      "role": "history",
       "label": "The superseded machine spec, history only"
     },
     {
@@ -46,7 +46,7 @@
     {
       "path": "apps/cover/README.md",
       "role": "workflow",
-      "label": "The cover: how it is built, checked and deployed"
+      "label": "The cover: how it is built and checked"
     }
   ],
   "workflows": [
@@ -100,10 +100,17 @@
     },
     {
       "date": "2026-11-12",
+      "field": "sources.engine/ENGINE_SPEC.md.role",
+      "from": "orientation",
+      "to": "history",
+      "basis": "The spec's label says history only; its role said orientation, so the two fields disagreed on whether a session should orient from it. The role now matches: the machine it specifies is superseded and will not be built (Ruling, Krish, 2026-10-28, quoted above; krishanraja/makeyourmindup engine/ENGINE_SPEC.md is marked superseded)."
+    },
+    {
+      "date": "2026-11-12",
       "field": "sources",
       "from": null,
       "to": "apps/cover/README.md",
-      "basis": "The cover is the one public page this repository owns and its README holds how it is built, checked and deployed (npm run verify in apps/cover); a workflow may read only a profile source."
+      "basis": "krishanraja/makeyourmindup README.md: \"The one public page this repo owns is the cover, in `apps/cover/`\", whose own README holds its sources and checks (`npm run verify` in apps/cover); that README was brought up to date by krishanraja/makeyourmindup#43 (merge f5bec843). A workflow may read only a profile source. Asked for by Krish, 2026-11-12: \"make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there\"."
     }
   ]
 }
