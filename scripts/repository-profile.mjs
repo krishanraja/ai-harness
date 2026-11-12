@@ -14,7 +14,7 @@ export function inventoryProfile(repo, read, source_revision, policy = policyAt(
   const bootstrap = bootstrapMeasure(read)
   const paths = ['README.md', 'NOW.md', ...(repo.rules_files || []).filter((p) => !['AGENTS.md', 'CLAUDE.md'].includes(p)), ...bootstrap.files.filter((p) => !['AGENTS.md', 'CLAUDE.md'].includes(p))]
   if (repo.name === 'ai-harness') paths.push('CURRENT.md')
-  if (repo.name === 'content-engine') paths.push('docs/NORTH_STAR.md', 'WORKBENCH.md', 'docs/CONTENT_ENGINE.md', 'docs/STUDIO.md', 'docs/ENGINE_SESSION.md', 'docs/SYSTEM_MAP.md', '.agents/skills/make-piece/SKILL.md', '.agents/skills/produce-video/SKILL.md', '.agents/skills/plan-week/SKILL.md', 'config/title-verdicts.json', 'config/failures.json', 'config/boards.json', 'scripts/check_failures.py')
+  if (repo.name === 'content-engine') paths.push('docs/NORTH_STAR.md', 'WORKBENCH.md', 'docs/CONTENT_ENGINE.md', 'docs/STUDIO.md', 'docs/ENGINE_SESSION.md', 'docs/SYSTEM_MAP.md', '.agents/skills/make-piece/SKILL.md', '.agents/skills/produce-video/SKILL.md', '.agents/skills/plan-week/SKILL.md', 'config/title-verdicts.json', 'config/failures.json', 'docs/PUBLISH_BOARDS.md', 'config/boards.json', 'scripts/check_failures.py')
   if (repo.name === 'AEO-Engine') paths.push('docs/NEVER-PUBLISH.md', 'src/index.ts', 'src/pipeline/run.ts')
   if (read('package.json')) paths.push('package.json')
   const sources = [...new Set(paths)].filter((p) => read(p) != null).map((path) => ({
@@ -27,14 +27,14 @@ export function inventoryProfile(repo, read, source_revision, policy = policyAt(
   if (repo.name === 'content-engine') workflows = [
     { id: 'content', label: 'Ideation, drafting, iteration and publication preparation', read: ['docs/NORTH_STAR.md', 'docs/CONTENT_ENGINE.md', '.agents/skills/make-piece/SKILL.md', 'config/title-verdicts.json', 'config/failures.json', 'WORKBENCH.md'], checks: ['python3 scripts/check_failures.py', 'npm run verify'] },
     { id: 'production', label: 'Tracked Studio and media production', read: ['docs/STUDIO.md', 'docs/ENGINE_SESSION.md', '.agents/skills/produce-video/SKILL.md'], checks: ['npm run verify'] },
-    { id: 'board', label: 'Weekly decisions, all account links and feedback continuity', read: ['.agents/skills/plan-week/SKILL.md', 'config/boards.json', 'WORKBENCH.md'], checks: ['python3 scripts/check_failures.py'] },
+    { id: 'board', label: 'The one live publish board: its view, presses, sessions, materials and archive', read: ['docs/PUBLISH_BOARDS.md', '.agents/skills/plan-week/SKILL.md', 'config/boards.json', 'WORKBENCH.md'], checks: ['python3 scripts/check_failures.py'] },
   ]
   if (repo.name === 'AEO-Engine') workflows = [
     { id: 'research', label: 'Question selection, probes, evidence and packet handoffs', read: ['README.md', 'docs/PACKET.md', 'docs/STATE.md', 'src/pipeline/run.ts', 'docs/NEVER-PUBLISH.md'], checks: ['npm test', 'npm run typecheck', 'npm run check:config'] },
     { id: 'experiment', label: 'Compare conditional findings and choose the next bounded test', read: ['README.md', 'docs/PACKET.md', 'docs/STATE.md'], checks: ['npm run run -- --offline --dry --subject ctrl'] },
   ]
   const profile = { schema_version: 1, repository: repo.name, enabled: true, families: ['repository-administration', ...(repo.name === 'content-engine' ? ['content'] : repo.name === 'AEO-Engine' ? ['growth'] : [])], source_revision, context_path: 'docs/HARNESS_CONTEXT.md', entrypoints: { agents: 'AGENTS.md', claude: 'CLAUDE.md' }, bootstrap_limit_chars: bootstrap.chars, sources, workflows }
-  if (repo.name === 'content-engine') profile.bootstrap_notes = ['Before any work run `python3 scripts/check_failures.py`. At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish\'s actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher.']
+  if (repo.name === 'content-engine') profile.bootstrap_notes = ['Before any work run `python3 scripts/check_failures.py`. At session start read this week\'s comments on the one live board in Control Centre, as `docs/PUBLISH_BOARDS.md` says. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish\'s actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher.']
   return profile
 }
 

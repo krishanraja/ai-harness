@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-11
+as_of: 2026-11-12
 head: 96c8c08
 lifecycle: live
 production_url: none
@@ -21,10 +21,12 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-11)
+## Where it is right now (as of 2026-11-12)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- The surfaces and verify checks are green again. brain/rules.yaml records the krish-voice reference routing line #214 added, citing that commit's own 11 Nov rulings, and the knowledge history validator reads brain/knowledge.jsonl (now past 1 MiB) with a bounded 64 MiB buffer instead of dying with ENOBUFS. (2026-11-12)
+- content-engine's administration profile sends sessions to the one live board: its bootstrap note reads this week's comments on the one live board in Control Centre as docs/PUBLISH_BOARDS.md says, its board workflow reads that authority first, and config/boards.json is labelled as the live board's address and the superseded archive (brain/repositories/content-engine.json, scripts/repository-profile.mjs). Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive. (2026-11-12)
 - krish-voice has comment-evidence.md (Krish's own Heartside, Make Your Mind Up and X comment lines beside the drafts he replaced), and humour.md has comment rules: choose the job first (warmth is valid), name puns allowed in comments, never at a person, and X replies follow them. (2026-11-11)
 - krish-voice humour.md lets Krish's personal LinkedIn use humour selectively: at most one light line a post, led by self-deprecation and dry irony, with no cruelty or escalation, and never in a post that sells Mindmake. (2026-11-10)
 - krish-voice has references/humour.md, which sets where each of six humour traits may be used: never in Mindmake or any outbound email, integrated under the house register in Make Your Mind Up, in full for Heartside and Full Time; krish-principles has "Humour with Krish" for joking with him directly. (2026-11-10)
@@ -54,11 +56,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-11): growth-heartside retires its docs/HUMOUR.md copy and stops its judge requiring a cruel payoff when a comment's job is not a joke.
+- Next (2026-11-12): A pull request that edits a skill chapter runs `node scripts/brain-rules.mjs --revise --kind ruling --ref <commit>` in the same change, so the provenance check never has to catch it after merge.
 - Waiting on Krish: replace the invalid `ANTHROPIC_API_KEY` secret (judge reported unmeasured at the PR 124 merge, 2026-10-14, carried forward and not rechecked 2026-10-29) and add `CONTENT_ENGINE_KEY` so the digest reaches the Control Center queue; add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-11): holds.
+- North Star check (2026-11-12): holds.
 
 ## Read next
 
