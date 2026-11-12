@@ -97,7 +97,7 @@
     {
       "path": "config/boards.json",
       "role": "orientation",
-      "label": "boards"
+      "label": "Live board address (live_board) and the archive, superseded multi-link pages"
     },
     {
       "path": "scripts/check_failures.py",
@@ -159,7 +159,7 @@
     }
   ],
   "bootstrap_notes": [
-    "Before any work run `python3 scripts/check_failures.py`. At session start read this week's comments on the one live board, Control Centre's Content tab (`board_web.py read` the week's Monday `comments`); content.krishraja.com/board is its read-only archive and no session builds or publishes a board page (`docs/PUBLISH_BOARDS.md`). Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
+    "Before any work run `python3 scripts/check_failures.py`. At session start read this week's comments on the one live board in Control Centre, as `docs/PUBLISH_BOARDS.md` says. Studio work requires `docs/ENGINE_SESSION.md`, `studio.session.open` and its tracked capability set; cloud Studio sessions stay read-only. Preserve observer attribution and Krish's actual decisions, keep exact feedback excerpts and never whole transcripts. `Video engine` remains the exact external launcher."
   ],
   "changes": [
     {
@@ -180,7 +180,7 @@
       "date": "2026-11-12",
       "field": "bootstrap_notes",
       "from": "At session start read comments on EVERY board link in `config/boards.json`; each board publish updates every link from the same engine-built file.",
-      "to": "At session start read this week's comments on the one live board, Control Centre's Content tab (`board_web.py read` the week's Monday `comments`); content.krishraja.com/board is its read-only archive and no session builds or publishes a board page (`docs/PUBLISH_BOARDS.md`).",
+      "to": "At session start read this week's comments on the one live board in Control Centre, as `docs/PUBLISH_BOARDS.md` says.",
       "basis": "Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive. Krish, 2026-11-12: \"does every part of the engine know that this new publish board is the only place to put stuff and how to use it?\" The note still sent every session to read comments on every config/boards.json link and said each board publish updates every link (the two-account artifact era); the board workflow did not read docs/PUBLISH_BOARDS.md, the authority."
     },
     {
@@ -211,6 +211,13 @@
       "from": null,
       "to": "docs/PUBLISH_BOARDS.md",
       "basis": "The board workflow reads the authority on the one live board (Ruling, Krish, 2026-11-11: one live board, in Control Centre; the old board is a read-only archive); a workflow may read only a profile source."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "sources.config/boards.json.label",
+      "from": "boards",
+      "to": "Live board address (live_board) and the archive, superseded multi-link pages",
+      "basis": "config/boards.json now names the one live board (live_board.url) and keeps the dated content.krishraja.com pages and the two-account Claude links only as the read-only archive and provenance (Ruling, Krish, 2026-11-11: one live board, in Control Centre; the old board is a read-only archive). Its label says so, so the board workflow does not read the multi-link model as current. docs/PUBLISH_BOARDS.md is a workflow source, not a bootstrap read: bootstrapMeasure over content-engine with this change counts 5 files, none of them it, so bootstrap_limit_chars is unaffected by it."
     }
   ]
 }
