@@ -1,3 +1,0 @@
-Status: content-engine's administration profile sends sessions to the one live board: its bootstrap note reads this week's comments on the one live board in Control Centre as docs/PUBLISH_BOARDS.md says, its board workflow reads that authority first, and config/boards.json is labelled as the live board's address and the superseded archive (brain/repositories/content-engine.json, scripts/repository-profile.mjs). Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive.
-Next: the repository administration run on main publishes the new region and context into content-engine's AGENTS.md and docs/HARNESS_CONTEXT.md.
-North Star check (2026-11-12): holds.
