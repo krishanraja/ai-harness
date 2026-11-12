@@ -120,14 +120,14 @@
     },
     {
       "id": "central-fresh-context", "kind": "workflow", "required": true, "enabled": true,
-      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "event": "pull_request",
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "head_branch_prefix": "harness/brain-repository-administration", "event": "pull_request",
       "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
       "credentials": ["ANTHROPIC_API_KEY", "GITHUB_TOKEN"], "budget_class": "context", "allowed_side_effects": ["synthetic-evaluation-receipt"],
       "outputs": [], "expected_jobs": 4, "completion_proof": "successful-named-job", "limits": "Job execution is distinct from production application and effectiveness."
     },
     {
       "id": "central-native-title-replay", "kind": "workflow", "required": true, "enabled": true,
-      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "event": "pull_request",
+      "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "head_branch_prefix": "harness/brain-repository-administration", "event": "pull_request",
       "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
       "credentials": ["ANTHROPIC_API_KEY", "FLEET_TOKEN"], "budget_class": "replay", "allowed_side_effects": ["sanitized-replay-receipt"],
       "outputs": [], "completion_proof": "containing-job-only-step-proof-unverified", "limits": "A containing matrix job does not independently prove that its conditional private replay step executed."
