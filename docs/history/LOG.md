@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-12
+
+- stamped: `NOW.md` audit failure (10 bullets in "Where it is right now", limit 8) fixed by merging the five krish-voice bullets there into two (humour and comment rules; kill list, writers and evidence), keeping their content and dates; head moved to 27e78c5.
+
 ## 2026-11-11
 
 - stamped: `NOW.md` audit failure (9 bullets in "Where it is right now", limit 8) fixed by removing the taste-by-venture bullet from that section, as it was history and stays in "What changed recently" (2026-10-30); head moved to 96c8c08.
