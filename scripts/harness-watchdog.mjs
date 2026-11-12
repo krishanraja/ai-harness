@@ -27,6 +27,8 @@ export function validateJobManifest(manifest) {
   for (const job of manifest.jobs) {
     if (!ID.test(job.id || '') || ids.has(job.id) || !['workflow', 'source', 'heartbeat'].includes(job.kind) || typeof job.required !== 'boolean' || typeof job.enabled !== 'boolean' || !CLASSES.has(job.budget_class) || !integer(job.grace_seconds) || !integer(job.max_run_seconds) || job.max_run_seconds < 1 || job.cadence_seconds !== null && (!integer(job.cadence_seconds) || job.cadence_seconds < 1)) throw failure('invalid-job-manifest')
     if (job.kind === 'workflow' && (!FILE.test(job.workflow_id || '') || !/^[a-z][a-z0-9_-]*$/.test(job.job_name || job.job_name_prefix || '') || !['schedule', 'pull_request', 'repository_dispatch', 'push', 'workflow_run', 'workflow_dispatch'].includes(job.event))) throw failure('invalid-workflow-manifest')
+    // A pull request job that runs only on one family of branches names it, so another branch's run is not its evidence.
+    if (job.head_branch_prefix !== undefined && (job.kind !== 'workflow' || job.event !== 'pull_request' || !/^[a-z0-9][a-z0-9/_.-]*$/.test(job.head_branch_prefix))) throw failure('invalid-workflow-manifest')
     if (job.kind === 'source') {
       if (job.provider !== 'claude-code-web' || job.account_sha256 !== null && (!HEX.test(job.account_sha256 || '') || accounts.has(job.account_sha256))) throw failure('invalid-source-manifest')
       if (job.account_sha256) accounts.add(job.account_sha256)
@@ -55,6 +57,7 @@ function workflowState(job, snapshot, now) {
   let skipped = false
   for (const run of runs) {
     if (run.event !== job.event) continue
+    if (job.head_branch_prefix && !String(run.head_branch || '').startsWith(job.head_branch_prefix)) continue
     const runAt = timestamp(run.run_started_at || run.created_at)
     if (!runAt || age(runAt, now) < -300) return result(job, 'inaccessible', 'invalid-run-clock')
     if (run.jobs_error) return result(job, 'inaccessible', 'job-evidence-unavailable')

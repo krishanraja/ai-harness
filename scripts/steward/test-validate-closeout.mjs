@@ -75,6 +75,21 @@ try {
   assert.match(run().stderr, /more than one "North Star check" line/)
   put('NOW.md', now(head, '2026-10-22')); g('commit', '-qam', 'Fix')
 
+  // The fold: a closeout note folded into NOW.md is the one file the steward may delete (2026-11-12: every run that
+  // folded notes was reported failed after its commit landed). A note deleted with NOW.md untouched, or any other
+  // file, is still a deletion.
+  put('now-notes/2026-10-22-a.md', 'Status: A.\nNext: B.\nNorth Star check (2026-10-22): holds.\n'); put('docs/OLD.md', 'Old.\n'); g('add', '-A'); g('commit', '-qm', 'Add a note')
+  const unfolded = g('rev-parse', 'HEAD')
+  g('rm', '-q', 'now-notes/2026-10-22-a.md'); put('NOW.md', now(head, '2026-10-22').replace('- 2026-10-22: started.', '- 2026-10-22: started.\n- 2026-10-22: A.')); g('add', '-A'); g('commit', '-qm', 'docs(closeout): fold closeout notes into NOW.md')
+  assert.doesNotMatch(run('--since', unfolded).stderr, /was deleted/, 'a note folded into NOW.md may go')
+  g('rm', '-q', 'docs/OLD.md'); g('commit', '-qm', 'docs(steward): drop a file')
+  assert.match(run('--since', unfolded).stderr, /docs\/OLD.md was deleted/)
+  g('reset', '-q', '--hard', unfolded)
+  g('rm', '-q', 'now-notes/2026-10-22-a.md'); g('commit', '-qm', 'docs(steward): drop a note')
+  assert.match(run('--since', unfolded).stderr, /now-notes\/2026-10-22-a.md was deleted/, 'a note deleted without being folded is a deletion')
+  g('reset', '-q', '--hard', unfolded)
+  g('rm', '-q', 'now-notes/2026-10-22-a.md', 'docs/OLD.md'); g('commit', '-qm', 'Tidy')
+
   const before = g('rev-parse', 'HEAD')
   put('docs/NORTH_STAR.md', 'A new ambition.\n'); g('add', '-A'); g('commit', '-qm', 'docs(steward): retarget')
   assert.match(run('--since', before).stderr, /docs\/NORTH_STAR.md is Krish's alone/)
@@ -88,4 +103,4 @@ try {
   assert.equal(run('--fleet', fleetPath, '--repo', 'X-OLD').status, 0, 'the name finds it, ignoring case')
   assert.match(run('--fleet', fleetPath, '--repo', 'someone-else').stderr, /no entry named "someone-else"/)
 } finally { rmSync(dir, { recursive: true, force: true }) }
-console.log('STEWARD CLOSEOUT OK: session freshness, automation ignored, one North Star check line, North Star never steward-written, renamed repositories found by alias')
+console.log('STEWARD CLOSEOUT OK: session freshness, automation ignored, one North Star check line, folded closeout notes the only deletion, North Star never steward-written, renamed repositories found by alias')

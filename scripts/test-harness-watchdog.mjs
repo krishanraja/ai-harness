@@ -128,6 +128,22 @@ assert.equal(row(report(data, config), 'central-repository-administration').stat
 data.evidence.administration.value.generated_at = '2026-10-18T09:00:00.000Z'
 assert.equal(row(report(data, config), 'central-repository-administration').status, 'missing', 'A recent prior output cannot stand in for the latest worker run')
 
+// A pull request job that runs only on its own branch family is judged only by that family's runs: another
+// branch's red pull request, where the job was skipped by its own condition, is neither its failure nor its success.
+config = manifest(); config.jobs.push(structuredClone(full.jobs.find((job) => job.id === 'central-fresh-context')))
+const prRun = (id, branch, conclusion, jobs) => ({ id, event: 'pull_request', head_branch: branch, status: 'completed', conclusion, created_at: at, run_started_at: at, head_sha: sha, jobs_complete: true, jobs })
+const matrix = (conclusion) => ['content-engine', 'AEO-Engine'].flatMap((r) => ['orientation', 'iteration'].map((k) => ({ name: `fresh-context (${r}, ${k})`, status: 'completed', conclusion })))
+data = snapshot(); data.workflows['repository-administration.yml:pull_request'] = { status: 'available', state: 'active', history_complete: true, runs: [prRun(31, 'claude/one-live-board', 'failure', matrix('skipped'))] }
+assert.equal(row(report(data, config), 'central-fresh-context').status, 'never-started', "Another branch's failed run is not this job's upstream failure")
+data.workflows['repository-administration.yml:pull_request'].runs.push({ ...prRun(30, 'harness/brain-repository-administration-2026-11-01', 'success', matrix('success')), created_at: old, run_started_at: old })
+assert.equal(row(report(data, config), 'central-fresh-context').status, 'healthy', 'Its own branch family still counts, however old')
+data.workflows['repository-administration.yml:pull_request'].runs[1].jobs[0].conclusion = 'failure'
+assert.equal(row(report(data, config), 'central-fresh-context').status, 'failed', 'and its failure still shows')
+const administration = readFileSync(fileURLToPath(new URL('../.github/workflows/repository-administration.yml', import.meta.url)), 'utf8')
+for (const job of full.jobs.filter((value) => value.head_branch_prefix)) assert.ok(administration.includes(`startsWith(github.head_ref, '${job.head_branch_prefix}')`), `${job.id} names the branch family its workflow condition runs on`)
+config = manifest(); config.jobs[0].head_branch_prefix = 'harness/x'
+assert.throws(() => validateJobManifest(config), /invalid-workflow-manifest/, 'A branch family belongs only to a pull request job')
+
 // The production collector is tested through its real injectable GET boundary.
 const calls = [], b64 = (value) => ({ encoding: 'base64', content: Buffer.from(typeof value === 'string' ? value : JSON.stringify(value)).toString('base64') })
 const fetchImpl = async (url, options) => {
