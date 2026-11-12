@@ -19,8 +19,9 @@ Read this table first. If the work is not in an allowed row, this file does not 
 | Make Your Mind Up, the publication (venture `publication`: its articles, scripts, captions, carousels and Substack) | **Integrated**, under its house register (below). |
 | Heartside (venture `heartside`) | **Full**, every trait below. |
 | Full Time (venture `full_time`) | **Full**, every trait below. |
-| Krish's personal LinkedIn | **Selective**, rarely and lightly (below). |
-| Anything else (Legibility, CTRL, Pulse, Signal & Noise, his other personal socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
+| Krish's personal LinkedIn | **Selective**, rarely and lightly (below). This includes his comments on LinkedIn. |
+| A comment or reply on someone else's post, from Heartside, Full Time, Make Your Mind Up, or Krish's X and other personal socials apart from LinkedIn | **Comment rules** (below). |
+| Anything else (Legibility, CTRL, Pulse, Signal & Noise, original posts on his other personal socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
 
 When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins.
 
@@ -31,7 +32,7 @@ When one piece crosses surfaces, for example a publication article quoted in a M
 3. **Intellectual stupidity.** Take something sophisticated, technical or self-serious and reduce it to something gloriously idiotic. It only works if the writer clearly understands the rules being broken.
 4. **Escalation with a logic.** Don't stop at the first level of a joke. Make it more disproportionate, but each step has to follow from the one before. Randomness is not escalation.
 5. **Puncturing pretension.** The comedy is in the gap between how something presents itself and what it actually does. Corporate self-importance and performative expertise are the richest ground.
-6. **Surprise over the setup.** No standard setup and punchline, no predictable wordplay, no pun that lands where the reader expected it. If a reader could guess the joke from its first half, cut it.
+6. **Surprise over the setup.** No standard setup and punchline, no predictable wordplay, no pun that lands where the reader expected it. If a reader could guess the joke from its first half, cut it. Comments have one exception (below): a short mutation of a famous name, title or product.
 
 ## Make Your Mind Up: integrated
 
@@ -59,11 +60,37 @@ Three limits stay in place even here, because the skill's own rules outrank any 
 - No invented fact or quote dressed up as a joke.
 - Nothing that would mislead about price, delivery or what the product does.
 
+## Comments on someone else's post
+
+These rules come from what Krish wrote himself when he replaced assistant drafts on 11 November 2026. The lines, the drafts he replaced and the counts are in `comment-evidence.md`. Read it before drafting a batch. The four rulings bind. The moves under them are an assistant's reading of his 16 lines, so treat them as a strong default, not as his words.
+
+The comment's surface still decides everything else. A Heartside comment follows Heartside's canon, a Make Your Mind Up comment its house register, and every comment goes through `check_voice` (channel `comment`, or the platform's own).
+
+**Rulings (Krish, 2026-11-11, choosing from options put to him):**
+
+1. **Choose the comment's job first.** The job can be a joke, a real question, speaking as the animal or character in the scene, a warm reaction, or no comment at all. A warm line with no punchline ("mummas boy 😍") is a valid Krish comment. "An intelligent observation, a stupid premise and a slightly cruel payoff" applies only when the job is a joke.
+2. **Name puns are allowed in comments.** A mutation of a famous name, title or product, one to three words long ("Codzilla", "Novak Dogovic", "Shed & Shoulders"), is allowed and never explained. Trait 6 still bans predictable puns in scripts, articles and captions.
+3. **Never at a person.** On someone else's post, the joke targets the object, the situation or the animal. Never the poster, never another commenter. Krish: "the joke is never at the person's expense, more the inanimate topic". Trait 2 stays available for Heartside's and Full Time's own content.
+4. **X and the other personal socials.** Replies and comments there follow these rules. His original posts there are still not ruled.
+
+**Moves, read from his lines:**
+
+- **Use what the viewer can see now.** That means the pose, the colour, the face, the motion and the post's own words. Six of the 13 drafts he replaced made up an off-screen job, payment or paperwork premise (royalties, forensics, a finance purchase order). None of his did. Use a bigger premise only when the picture is already showing it, as with the dog doing a retail job.
+- **Try one recognisable connection before writing a sentence.** That could be a name, a title or a product. If it lands, it is the whole comment.
+- **Speak from inside the scene.** Talk as the animal or character ("This color looks SLAY on me guys"), or as himself in a moment the reader has lived ("This is literally how I eat spaghetti at family dinner...").
+- **Let the beat choose the form.** Give a weary answer where the draft asked a question ("I ain't getting any sleep"). Ask a question only when it is real ("is the dog a boy or girl?") or when the question itself is the joke.
+- **Escalate along one track and stop at the laugh.** "First the laser robots go for the parasites, then the salmon, then the HUMANS".
+- **Don't aim for a length.** His comments ran 1 to 28 words, with a median no shorter than the drafts. A specific comparison earns more words, and a name pun needs one.
+- **Vary the register.** The drafts were all in lower case with the same deadpan, and that was the tell. He uses a capital to start, one word in capitals, an emoji, "tbh", "bro" or a swear word when the post calls for it, and never the same mix twice.
+- **No pitch and no link.** A comment from a brand account sounds like a person joining the conversation.
+- **Check the post as well as the joke.** Read the whole post and the conversation under it before choosing it. A dog on the cover of a carousel about something else is the wrong place ("wasnt really about dogs"). A good joke doesn't make a post a good place to comment.
+
 ## What makes a joke fall flat
 
 - **Too many jumps.** Krish makes three conceptual jumps while the audience is still on the first. In public, make one jump and let the reader land it.
 - **Pushed past its peak.** Escalation ends at the funniest step, not one after it. If you can't tell which step that is, cut the last one.
-- **A joke with no observation underneath.** The ideal joke is an intelligent observation, a stupid premise and a slightly cruel payoff. Leave out the observation and only the cruelty is left.
+- **A joke with no observation underneath.** The ideal joke is an intelligent observation, a stupid premise and a slightly cruel payoff. Leave out the observation and only the cruelty is left. In a comment, the job may not be a joke at all (Comment ruling 1).
+- **A premise from off screen.** If the joke needs a job, a contract or an invoice that the picture doesn't show, look again at what the picture does show.
 
 ## Checking
 
