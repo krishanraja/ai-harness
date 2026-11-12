@@ -30,8 +30,8 @@
     },
     {
       "path": "engine/ENGINE_SPEC.md",
-      "role": "orientation",
-      "label": "ENGINE SPEC"
+      "role": "history",
+      "label": "The superseded machine spec, history only"
     },
     {
       "path": "package.json",
@@ -42,22 +42,75 @@
       "path": "project-documentation/01_MEDIA_KIT.md",
       "role": "workflow",
       "label": "Repository-owned workflow source"
+    },
+    {
+      "path": "apps/cover/README.md",
+      "role": "workflow",
+      "label": "The cover: how it is built and checked"
     }
   ],
   "workflows": [
     {
       "id": "creative-strategy",
-      "label": "Watch, score, assemble and prepare editorial handoffs",
+      "label": "The cover at makeyourmindup.ai and the editorial canon content-engine runs (media kit, panel, kill list)",
       "read": [
-        "project-documentation/01_MEDIA_KIT.md",
+        "README.md",
         "project-documentation/02_REPO_BRIEF.md",
-        "engine/ENGINE_SPEC.md",
+        "project-documentation/01_MEDIA_KIT.md",
+        "apps/cover/README.md",
         "NOW.md"
       ],
       "checks": [
         "npm test",
         "npm run gate:canon"
       ]
+    }
+  ],
+  "changes": [
+    {
+      "date": "2026-11-12",
+      "field": "workflows.creative-strategy",
+      "from": {
+        "label": "Watch, score, assemble and prepare editorial handoffs",
+        "read": [
+          "project-documentation/01_MEDIA_KIT.md",
+          "project-documentation/02_REPO_BRIEF.md",
+          "engine/ENGINE_SPEC.md",
+          "NOW.md"
+        ]
+      },
+      "to": {
+        "label": "The cover at makeyourmindup.ai and the editorial canon content-engine runs (media kit, panel, kill list)",
+        "read": [
+          "README.md",
+          "project-documentation/02_REPO_BRIEF.md",
+          "project-documentation/01_MEDIA_KIT.md",
+          "apps/cover/README.md",
+          "NOW.md"
+        ]
+      },
+      "basis": "Ruling (Krish, 2026-10-28): \"Content-engine produces content for makeyourmindup.ai, which is hosted at makeyourmindup repo\"; content-engine's plan-week is the one ideation path and the Watch, Score, Assemble and Dispatch machine is superseded and will not be built (krishanraja/makeyourmindup AGENTS.md, \"The four systems\", and project-documentation/02_REPO_BRIEF.md, \"Who owns what\"). The workflow still sent sessions to build that machine from engine/ENGINE_SPEC.md, which the repository marks superseded. Krish, 2026-11-12: \"make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there\"."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "sources.engine/ENGINE_SPEC.md.label",
+      "from": "ENGINE SPEC",
+      "to": "The superseded machine spec, history only",
+      "basis": "Ruling (Krish, 2026-10-28): \"Content-engine produces content for makeyourmindup.ai, which is hosted at makeyourmindup repo\"; content-engine's plan-week is the one ideation path and the Watch, Score, Assemble and Dispatch machine is superseded and will not be built (krishanraja/makeyourmindup AGENTS.md, \"The four systems\", and project-documentation/02_REPO_BRIEF.md, \"Who owns what\"). The workflow still sent sessions to build that machine from engine/ENGINE_SPEC.md, which the repository marks superseded. Krish, 2026-11-12: \"make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there\"."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "sources.engine/ENGINE_SPEC.md.role",
+      "from": "orientation",
+      "to": "history",
+      "basis": "The spec's label says history only; its role said orientation, so the two fields disagreed on whether a session should orient from it. The role now matches: the machine it specifies is superseded and will not be built (Ruling, Krish, 2026-10-28, quoted above; krishanraja/makeyourmindup engine/ENGINE_SPEC.md is marked superseded)."
+    },
+    {
+      "date": "2026-11-12",
+      "field": "sources",
+      "from": null,
+      "to": "apps/cover/README.md",
+      "basis": "krishanraja/makeyourmindup README.md: \"The one public page this repo owns is the cover, in `apps/cover/`\", whose own README holds its sources and checks (`npm run verify` in apps/cover); that README was brought up to date by krishanraja/makeyourmindup#43 (merge f5bec843). A workflow may read only a profile source. Asked for by Krish, 2026-11-12: \"make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there\"."
     }
   ]
 }

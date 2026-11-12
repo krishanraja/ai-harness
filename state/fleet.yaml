@@ -211,30 +211,24 @@ surface_contracts:
     gap: Hosted observation emitter not provisioned. The mapped drive is discovery evidence only and the architecture does not depend on it.
 
   - id: claude-code-cloud
-    reads: canon block
-    writes: pull requests and Ruling lines in commit bodies
+    reads: canon block, and skills live through the Control Center connector's get_skill
+    writes: pull requests, Ruling lines in commit bodies, and hosted redacted observations through the Control Center connector
     event_surface: claude-code-web
-    gap: A correction made in a cloud session reaches the brain only if it ends in a merged commit with a Ruling line, until the claude.ai connector and the cloud session miner exist (docs/harness/capture-connectors.md).
+    gap: The weekly cloud session miner reads nothing yet (docs/harness/cloud-session-miner.md), so a correction a session did not send live reaches the brain only through a merged commit with a Ruling line.
 
   - id: claude-ai-chat
-    reads: cloud skill catalogue and the pasted account instructions
-    writes: nothing
+    reads: the account instructions' fixed pointer, which loads the routing and skills live through the Control Center connector's get_skill
+    writes: hosted redacted observations through the Control Center connector (control-center ADR-037)
     event_surface: claude-ai
-    gap: >
-      The biggest reader in the fleet, covering claude.ai and Claude Desktop. Its
-      write path is one custom connector to the hosted observation endpoint plus
-      one account-instruction line (docs/harness/capture-connectors.md). It needs
-      a connector-compatible endpoint first, then Krish adds the connector.
 
   - id: chatgpt-chat
     reads: nothing from the harness yet
-    writes: nothing
+    writes: hosted redacted observations through the same connector, best effort
     event_surface: chatgpt
     capture: best-effort
     gap: >
-      Its custom connectors are in beta, may be limited by plan, and ask for
-      confirmation on every write, so capture there cannot be silent. Best effort
-      through the same hosted endpoint; codex work is mined separately.
+      Its custom connectors ask for confirmation on every write, so capture there
+      cannot be silent; codex work is mined separately.
 
   - id: perplexity-computer
     reads: cloud skill catalogue
@@ -252,7 +246,7 @@ surface_contracts:
   - id: routines
     reads: installed skills
     writes: nothing
-    gap: Two live scheduled Routines with no path back into the ledger.
+    gap: Claude Code scheduled tasks with no path back into the ledger. Read from one account on 2026-11-12, four were live there (three hunter writers and the weekly session miner); the other account was not read.
 
   - id: openclaw-vps
     reads: >
