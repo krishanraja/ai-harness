@@ -256,10 +256,19 @@ if (since) {
   let status = ''
   try { status = git('diff', '--name-status', '-M', since, 'HEAD') } catch (e) { fail(`--since ${since}: git diff failed: ${e.message.split('\n')[0]}`) }
   const allow = (entry && entry.write_allowlist ? [...entry.write_allowlist, ...(entry.truth_files || [])] : ['**/*.md']).map(globToRegExp)
-  for (const line of status.split('\n').filter(Boolean)) {
+  const lines = status.split('\n').filter(Boolean)
+  // The closeout fold (harness-closeout.mjs --fold, which the runbook tells the
+  // steward to run first) writes each note into NOW.md and deletes it. That is
+  // the one deletion allowed: a closeout note, in a diff that also changes
+  // NOW.md. Until 2026-11-12 every steward run that folded notes was reported
+  // failed here after its commit had landed.
+  const nowChanged = lines.some((l) => { const [c, x, y] = l.split('\t'); return (y || x) === 'NOW.md' && !c.startsWith('D') })
+  const folded = (code, a) => code.startsWith('D') && nowChanged && /^now-notes\/[^/]+\.md$/.test(a)
+  for (const line of lines) {
     const [code, a, b] = line.split('\t')
     const path = b || a
-    if (code.startsWith('D')) fail(`diff: ${a} was deleted. The steward moves files to history, it never deletes.`)
+    if (folded(code, a)) continue
+    if (code.startsWith('D')) fail(`diff: ${a} was deleted. The steward moves files to history, it never deletes (a closeout note it folds into NOW.md is the one exception).`)
     if (code.startsWith('R') && !/\/history\/|\/_archive\//.test(b)) fail(`diff: ${a} renamed to ${b}, but renames are only allowed into the history or archive directory`)
     if (!allow.some((re) => re.test(path))) fail(`diff: ${path} is outside the write allowlist`)
     if (['docs/HARNESS_CONTEXT.md', '.github/workflows/harness-repository-context.yml'].includes(path)) fail(`diff: ${path} belongs to the repository-administration publisher`)
