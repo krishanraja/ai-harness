@@ -7,3 +7,10 @@ Thumbs.db
 changes/
 .intent/
 .claude/worktrees/
+# The steward's per-run reports, written at the root by harness-steward.yml and
+# uploaded as artifacts, never committed: a tracked copy makes its own
+# "rm -f audit.md reconcile.md" dirty the tree its push rebases.
+/audit.md
+/brief.md
+/reconcile.md
+/candidates.json

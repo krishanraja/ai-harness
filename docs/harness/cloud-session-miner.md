@@ -1,5 +1,14 @@
 # Cloud session miner
 
+**State on 2026-11-12: it reads nothing.** Read from one of the two accounts
+that day: a weekly scheduled task, "Session miner: weekly cloud sessions"
+(Sundays 17:47 UTC), exists there, but it holds an older prompt that starts a
+fresh session instead of waking a standing one. A fresh session gets no
+session-listing tools, so its last run, on 8 November, stopped at once with 0
+sessions read. The other account was not read. The watchdog reports both
+`claude-cloud-account-*` slots inaccessible. What would fix it, and the choice
+that is Krish's, are in `docs/harness/capture-connectors.md`, step 7.
+
 Claude Code cloud sessions (like the one that built this) leave no transcript on
 any machine Krish owns, so the PC's miner cannot read them. This is the prompt
 of the weekly Claude Code scheduled task that mines them the same way, under the
@@ -26,8 +35,9 @@ GitHub collector.
 No supported interface lets a GitHub runner list or read Claude Code cloud
 sessions. The Compliance API is Enterprise-only and excludes cloud sessions,
 a CLI OAuth token can only make model requests, and the session tools exist
-only inside a Claude session. The Control Center connector is write-only: its
-one tool records an observation and reads nothing. So the `claude-cloud-account-*`
+only inside a Claude session. The Control Center connector records
+observations and serves skills, taste and venture state, but has no tool that
+lists or reads Claude Code sessions. So the `claude-cloud-account-*`
 collector jobs in `config/harness-jobs.json` stay blocked until such an
 interface exists, and the watchdog keeps reporting them as inaccessible rather
 than letting this task stand in for them.

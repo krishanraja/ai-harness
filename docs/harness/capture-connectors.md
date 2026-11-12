@@ -9,32 +9,31 @@ tool that reads the brain and writes nothing back.
 | Tool | How it feeds the brain | State |
 |---|---|---|
 | Claude Code and Codex on LORIMER | The hosted `record_harness_observation` tool, Ruling lines in commits, and the private weekly session miner | Tool and Ruling lines live; the miner runs from the nightly sync and waits for a submission route (below) |
-| Claude Code cloud sessions | Ruling lines in merged commits today; the claude.ai connector and the cloud session miner once added | Ruling lines live |
-| claude.ai and Claude Desktop | One custom connector plus one line in the account instructions | Needs a connector-compatible endpoint, then Krish adds the connector |
-| ChatGPT | The same hosted endpoint as a custom connector | Best effort only: write tools are in beta, may be plan-limited, and ask for confirmation on every call |
+| Claude Code cloud sessions | Ruling lines in merged commits, and `record_harness_observation` through the Control Center connector | Both live: the ledger holds `[claude-code-web]` rows from 2026-10-15 to 2026-11-11. The weekly cloud session miner (step 7) reads nothing yet |
+| claude.ai and Claude Desktop | One custom connector plus the account instructions' fixed pointer (`adapters/cloud/account-instructions.md`) | Live: the endpoint takes a capability URL (control-center ADR-037, 2026-10-15) and the ledger holds `[claude-ai]` rows from 2026-10-20 to 2026-10-30 |
+| ChatGPT | The same hosted endpoint as a custom connector | Live, best effort: write tools ask for confirmation on every call; the ledger holds `[chatgpt]` rows from 2026-10-17 to 2026-11-11 |
 | Cursor | The hosted tool | Configured; its headless agent needs logging in again |
 | Perplexity | None | Out of scope by Krish's ruling of 2026-10-14: deep research only |
 
 ## What only Krish can do, once each
 
-1. **Replace the judge panel key.** Repository secret `ANTHROPIC_API_KEY` in
-   `krishanraja/ai-harness`. Until it is valid the judge cannot measure a canon
-   change, so no change request is ever marked ready, and the digest asks for
-   this instead.
+1. **The judge panel key.** Repository secret `ANTHROPIC_API_KEY` in
+   `krishanraja/ai-harness`. Done: the judge measured a verdict on pull request
+   209 on 2026-11-09. If it stops measuring, the digest asks for it again.
 2. **Arm the digest.** Repository secret `CONTENT_ENGINE_KEY` in
    `krishanraja/ai-harness`, holding the content engine's board key. It only
    reads the board: Control Center's connections sweep puts the digest on his
    list from `state/digest/latest.json` on main (2026-10-23), and housekeeping
    reads it back to record delivery. Without the key the digest still reaches
    the list, but the harness cannot confirm it.
-3. **Add the claude.ai connector**, once the endpoint accepts a connector (see
-   Control Center below). In claude.ai: Settings, Connectors, Add custom
-   connector, paste the endpoint address Control Center issues for the
-   `claude-ai` identity. The same connector is loaded into Claude Desktop and
-   into Claude Code cloud sessions.
-4. **Paste the updated account instructions** from
+3. **Add the claude.ai connector.** Done where the ledger shows it (above). In
+   claude.ai: Settings, Connectors, Add custom connector, paste the endpoint
+   address Control Center issues for the `claude-ai` identity. The same
+   connector is loaded into Claude Desktop and into Claude Code cloud sessions.
+4. **Paste the account instructions** from
    `adapters/cloud/account-instructions.md` into claude.ai's personal
-   instructions. The new last line tells it when to log a signal.
+   instructions, through the one-time `adapters/cloud/account-setup.md` in each
+   account. It is a fixed pointer that loads the routing live.
 5. **ChatGPT, if wanted.** Enable developer mode, add the same endpoint as a
    custom connector for the `chatgpt` identity, and accept that every write asks
    for confirmation.
@@ -42,9 +41,20 @@ tool that reads the brain and writes nothing back.
    once a week. Where its lessons go is Krish's call, recorded in
    `contract/learning-policy.yaml` (`miner.submit`); until he chooses, it reads
    nothing and its clock reports degraded.
-7. **Create the cloud session miner** as a weekly Claude Code scheduled task
-   from the prompt in `docs/harness/cloud-session-miner.md`, with the claude.ai
-   connector attached.
+7. **Fix or retire the cloud session miner.** It is a weekly Claude Code
+   scheduled task per account (`docs/harness/cloud-session-miner.md`). In the
+   account read on 2026-11-12 it exists with an older prompt that starts a
+   fresh session, which has no session-listing tools, so it reads nothing.
+   Fixing it is, in each account: open one session on this repository by hand
+   and title it "Session miner (standing)"; point the weekly task at that
+   session with the prompt in `docs/harness/cloud-session-miner.md`; then bind
+   the account's opaque identity (`account_sha256` in `config/harness-jobs.json`
+   and `source_accounts` in `config/session-extraction.json`, with its
+   approval reference) so its source-run receipts count. Until then the
+   watchdog's two required `claude-cloud-account-*` slots stay inaccessible and
+   it stays degraded. The other choice is a ruling that those two slots are not
+   required, since live capture through the connector (above) is the primary
+   route.
 
 ## If the PC stops checking in
 
@@ -59,10 +69,11 @@ It finds the checkout, brings it up to date, points the nightly task at it,
 runs it once and says in one line how that went. From then on the sync keeps
 its own checkout current every day.
 
-## What Control Center must change first
+## What Control Center had to change first (done)
 
-The hosted endpoint lives in `krishanraja/control-center` (`api/harness/*`). It
-authenticates each client with a static bearer token, which the claude.ai and
+Done by control-center ADR-037 on 2026-10-15; kept as the record. The hosted
+endpoint lives in `krishanraja/control-center` (`api/harness/*`). It
+authenticated each client with a static bearer token, which the claude.ai and
 ChatGPT connector screens cannot send. Before step 3:
 
 - accept a connector: a revocable per-identity capability URL (rate-limited,
