@@ -174,13 +174,15 @@
     "klass": "surface-contract",
     "subject": "claude-ai-chat",
     "first_seen": "2026-09-09",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-13"
   },
   "surface-contract:chatgpt-chat": {
     "klass": "surface-contract",
     "subject": "chatgpt-chat",
     "first_seen": "2026-10-14",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-13"
   },
   "surface-contract:n8n-agents": {
     "klass": "surface-contract",
@@ -216,22 +218,25 @@
     "klass": "surface-parity",
     "subject": "cursor-primary",
     "first_seen": "2026-10-15",
-    "open": true,
-    "reopened": "2026-11-10"
+    "open": false,
+    "reopened": "2026-11-10",
+    "closed_at": "2026-11-13"
   },
   "surface-parity:claude-code-user": {
     "klass": "surface-parity",
     "subject": "claude-code-user",
     "first_seen": "2026-10-15",
-    "open": true,
-    "reopened": "2026-11-10"
+    "open": false,
+    "reopened": "2026-11-10",
+    "closed_at": "2026-11-13"
   },
   "surface-parity:codex-current": {
     "klass": "surface-parity",
     "subject": "codex-current",
     "first_seen": "2026-10-15",
-    "open": true,
-    "reopened": "2026-11-10"
+    "open": false,
+    "reopened": "2026-11-10",
+    "closed_at": "2026-11-13"
   },
   "surface-parity:claude-cloud": {
     "klass": "surface-parity",
@@ -339,6 +344,18 @@
     "klass": "freshness",
     "subject": "ctrl-intake",
     "first_seen": "2026-11-05",
+    "open": true
+  },
+  "canary-stale:ux-foundations": {
+    "klass": "canary-stale",
+    "subject": "ux-foundations",
+    "first_seen": "2026-11-13",
+    "open": true
+  },
+  "heartbeat:observer": {
+    "klass": "heartbeat",
+    "subject": "observer",
+    "first_seen": "2026-11-13",
     "open": true
   }
 }
