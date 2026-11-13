@@ -61,11 +61,17 @@ contract_rules:
     status: live
   - id: who-krish-is.founder-visibility-is-an
     file: contract/krish-operating-contract.md
-    text_sha: "4559a6fb2461"
+    text_sha: "ff66508c49c0"
     first_seen: "2026-10-06"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
+      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+    history:
+      - text_sha: "4559a6fb2461"
+        valid_until: "2026-11-13"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
     status: live
   - id: who-krish-is.read-the-venture-list
     file: contract/krish-operating-contract.md
@@ -2649,17 +2655,22 @@ skill_sections:
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
     heading: "Who Krish is"
-    text_sha: "a18eecc47938"
+    text_sha: "eeeba21bb3a0"
     first_seen: "2026-10-05"
     source:
-      kind: ruling
-      ref: "db5cd4c3bd10"
+      kind: proposal
+      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     history:
       - text_sha: "d06d8a102719"
         valid_until: "2026-10-06"
         source:
           kind: ruling
           ref: "60106bef02bd"
+      - text_sha: "a18eecc47938"
+        valid_until: "2026-11-13"
+        source:
+          kind: ruling
+          ref: "db5cd4c3bd10"
     status: live
   - id: krish-principles.working-with-krish
     file: skills/krish-principles/SKILL.md
