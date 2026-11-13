@@ -157,6 +157,12 @@ jobs:
       - name: The observer records one row per piece of evidence
         run: node scripts/test-observe.mjs
 
+      # The North Star number: a taste-ledger repeat counts once, a harness
+      # correction cluster seen on two days counts once, and only the
+      # north-star-state line of NOW.md is ever rewritten.
+      - name: The North Star number is measured and written in place
+        run: node scripts/test-north-star.mjs
+
       # Workflow invariants a YAML edit could silently undo: what the observer
       # commits, and that an unmeasured judge run can never read as a pass.
       - name: The steward workflow keeps its own guarantees
@@ -377,6 +383,13 @@ jobs:
         if: ${{ !inputs.event_import_only }}
         run: node scripts/scoreboard.mjs --append
 
+      # The number docs/NORTH_STAR.md names, for the last whole week, written
+      # into NOW.md's north-star-state line where Control Center reads it
+      # (contract/north-star-metric.md). The ladder and urgency stay Krish's.
+      - name: Measure the North Star
+        if: ${{ !inputs.event_import_only }}
+        run: node scripts/north-star.mjs --write
+
       # Committed, so the ledger is diffable and cannot be quietly rewritten.
       # Append-only by construction: every line carries a stable id and the
       # script never rewrites an existing one.
@@ -388,13 +401,13 @@ jobs:
         run: |
           set -euo pipefail
           rm -f audit.md reconcile.md
-          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json state/scoreboard.jsonl brain/proposals.jsonl)" ]; then
+          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json state/scoreboard.jsonl brain/proposals.jsonl NOW.md)" ]; then
             echo "Nothing new observed. Committing nothing is the correct outcome."
             exit 0
           fi
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
-          git add state/observations state/heartbeats.json brain/proposals.jsonl
+          git add state/observations state/heartbeats.json brain/proposals.jsonl NOW.md
           [ -f state/scoreboard.jsonl ] && git add state/scoreboard.jsonl
           git commit \
             -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
