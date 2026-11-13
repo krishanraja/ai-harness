@@ -96,7 +96,20 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   const result = { ...proof, status: 'pull-request', pr: pr.number, head: pr.head.sha }
   if (!merge) return result
   const checks = await gh.checksFor(repo, pr.head.sha)
-  if (!checksPassed(checks)) return { ...result, status: 'awaiting-checks', checks: checksWaiting(checks) }
+  if (!checksPassed(checks)) {
+    const waiting = checksWaiting(checks)
+    // The publisher changes only its own files, so a check that failed against an older main says nothing about
+    // them. A held pull request behind main is brought up to date, once per main revision, so its checks run again
+    // against today's main (full-time #103 held a 28 Oct failure for 16 days). Nothing merges until they pass.
+    if (waiting.failed.length && !waiting.pending.length && !waiting.missing.length && waiting.statuses.every((s) => !s.endsWith(':pending'))) {
+      const behind = await gh.req('GET', `/repos/${gh.owner}/${repo}/compare/${pr.head.sha}...${base}`)
+      if (behind.ahead_by > 0) {
+        await gh.req('PUT', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/update-branch`, { expected_head_sha: pr.head.sha })
+        return { ...result, status: 'awaiting-checks', checks: waiting, refreshed: true }
+      }
+    }
+    return { ...result, status: 'awaiting-checks', checks: waiting }
+  }
   const latest = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls/${pr.number}`)
   if (latest.head.sha !== pr.head.sha || latest.base.ref !== branch || await gh.headSha(repo, branch) !== base) throw new Error('administration_merge_base_moved')
   const merged = await gh.req('PUT', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/merge`, { sha: pr.head.sha, merge_method: 'squash', commit_title: `docs(harness): maintain repository administration (#${pr.number})` })

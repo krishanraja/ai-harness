@@ -49,6 +49,24 @@ assert.equal(checksPassed({ runs: [{...integrityCheck,status:'in_progress',concl
 assert.equal(checksPassed({ runs: [{...integrityCheck,conclusion:'skipped'}], statuses: {} }), false)
 assert.equal(checksPassed({ runs: [integrityCheck,{name:'other',status:'completed',conclusion:'failure'}], statuses: {} }), false)
 assert.equal(checksPassed({ runs: [integrityCheck], statuses: { 'harness/judge': 'failure' } }), false)
+// A product check that failed against an older main is re-run against today's main, once per main revision.
+const refreshed = []
+const stale = (aheadBy, failure = { name: 'typecheck', status: 'completed', conclusion: 'failure' }) => ({ ...merging,
+  checksFor: async () => ({ runs: [integrityCheck, failure], statuses: {} }),
+  req: async (method, path, body) => {
+    if (path.includes('/compare/')) return { ahead_by: aheadBy }
+    if (path.endsWith('/update-branch')) { refreshed.push({ method, body }); return { message: 'Updating pull request branch.' } }
+    if (method === 'PUT') throw new Error('must not merge a held pull request')
+    return merging.req(method, path, body)
+  } })
+const behindMain = await reconcileRepository({ profile, gh: stale(3), history: [], write: true, merge: true })
+assert.equal(behindMain.status, 'awaiting-checks')
+assert.equal(behindMain.refreshed, true)
+assert.deepEqual(refreshed, [{ method: 'PUT', body: { expected_head_sha: 'c'.repeat(40) } }], 'Only its own branch is updated, at the head it read')
+const upToDate = await reconcileRepository({ profile, gh: stale(0), history: [], write: true, merge: true })
+assert.equal(upToDate.refreshed, undefined, 'A pull request already on today\'s main is not touched again')
+await reconcileRepository({ profile, gh: stale(3, { name: 'typecheck', status: 'in_progress', conclusion: null }), history: [], write: true, merge: true })
+assert.equal(refreshed.length, 1, 'Running checks are waited for, never restarted')
 assert.deepEqual(checksWaiting({ runs: [integrityCheck, { name: 'typecheck', status: 'completed', conclusion: 'failure' }, { name: 'closeout', status: 'queued', conclusion: null }], statuses: { 'Vercel': 'pending', ok: 'success' } }), { missing: [], pending: ['closeout'], failed: ['typecheck:failure'], statuses: ['Vercel:pending'] })
 const original = 'Human text\n' + region('Old instructions', '0'.repeat(12)) + '\n'
 const delivered = 'Human text\n' + region('New instructions', '1'.repeat(12)) + '\n'
