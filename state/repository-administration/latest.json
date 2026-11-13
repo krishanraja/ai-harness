@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T13:33:26.640Z",
+  "generated_at": "2026-11-13T02:36:29.037Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "3064e76984f18fd7ca145dd18f59bf364da03db3",
+      "base": "dc4ddbcdbd2af07eba18f16f62bb6fe5e183405c",
       "brain_revision": "379ce05f4241",
-      "before": 422467,
-      "after": 422467,
+      "before": 422317,
+      "after": 422317,
       "files": [],
       "skipped": [],
-      "source_seal": "ca7606d3175135ff1146060bccf374faacf21b392ed65c5b6cf519b3f522257a",
+      "source_seal": "9787cee8f1bea76c9c9e9318b508901d6d118257928c35c6e9c6845e30951fe8",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "36a5c6da2d5488b70bb2b68e8b4c2762a740cc43",
+      "base": "45df68686d53ca85122ebff63c80e33230553c9d",
       "brain_revision": "155b79828fb7",
       "before": 26945,
       "after": 26945,
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "f60ddde98a4e107ec31c3103223edad21e4c1272",
+      "base": "2df9400a7ae9a1f336d6dacac30cb6e5e4e7ea87",
       "brain_revision": "ba41f521a760",
-      "before": 112288,
-      "after": 112288,
+      "before": 113133,
+      "after": 113133,
       "files": [],
       "skipped": [],
-      "source_seal": "5d66edfd728b034609ad37ec1a08421cb8e1b548071ea13ef9a82a21905f0ddf",
+      "source_seal": "02296aea4b826968ca8fef29a53b59b9138fb502c1aa4b8cc8b89cf03e045096",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -113,7 +113,7 @@
     },
     {
       "repository": "fractionl-pulse",
-      "base": "0caf6c37a38a745b2fcb82e06a9cc090315e2ccd",
+      "base": "db34bd444aed714261f188a3c83db65c373bca1c",
       "brain_revision": "c3389b60c708",
       "before": 21722,
       "after": 21722,
@@ -172,16 +172,13 @@
     },
     {
       "repository": "makeyourmindup",
-      "base": "f5bec84362a5237f3775b3d1772e78d4d0b61403",
+      "base": "a8b40bcca491e9ac9e34697c6b7018487feeebae",
       "brain_revision": "0a88ee6c1f4a",
       "before": 28184,
       "after": 28184,
-      "files": [
-        "AGENTS.md",
-        "docs/HARNESS_CONTEXT.md"
-      ],
+      "files": [],
       "skipped": [],
-      "source_seal": "6ec13b99299da0a6c8568ac94f71baa0cae3d649d0058227ce65e108038fe16f",
+      "source_seal": "d12aae2f1b3805bd82b8ca0d5a7924a163d0b8190bc574656573c651e5ce76e4",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -189,9 +186,7 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
-      "pr": 44,
-      "head": "02767b1dd3958ba6ec956898e7ecd8f1757a5da4"
+      "status": "current"
     },
     {
       "repository": "heartside",
