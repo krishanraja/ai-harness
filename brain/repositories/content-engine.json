@@ -25,9 +25,9 @@
       "label": "Current repository state"
     },
     {
-      "path": "docs/CAROUSEL_ENGINE_STATE.md",
-      "role": "state",
-      "label": "CAROUSEL ENGINE STATE"
+      "path": "docs/CAROUSEL-STANDARD.md",
+      "role": "orientation",
+      "label": "CAROUSEL STANDARD"
     },
     {
       "path": "WORKBENCH.md",
