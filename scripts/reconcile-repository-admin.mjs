@@ -6,12 +6,23 @@ import { fileURLToPath } from 'node:url'
 import { Gh } from './lib/github.mjs'
 import { parseYaml } from './lib/yaml.mjs'
 import { policyAt, profiles, knowledgeHistory, ROOT, seal } from './repository-brain.mjs'
-import { planAdministration, inspectRegion, rollbackFile, CONTEXT, OWNED, renderAdministration } from './repository-admin.mjs'
+import { planAdministration, readAdministrationSources, inspectRegion, rollbackFile, CONTEXT, OWNED, renderAdministration } from './repository-admin.mjs'
 
 export const BRANCH = 'harness/repository-administration'
 export function checksPassed(checks) {
   const runs = checks.runs || [], statuses = Object.values(checks.statuses || {})
   return runs.some((r) => r.name === 'operating-context' && r.status === 'completed' && r.conclusion === 'success') && runs.every((r) => r.status === 'completed' && ['success', 'skipped', 'neutral'].includes(r.conclusion)) && statuses.every((s) => s === 'success')
+}
+
+/** What a held pull request waits on, by check name and state only, so the report says why without a second read. */
+export function checksWaiting(checks) {
+  const runs = checks.runs || [], name = (value) => String(value).replace(/[^a-zA-Z0-9 _:.()/-]/g, '-').slice(0, 80)
+  return {
+    missing: runs.some((r) => r.name === 'operating-context') ? [] : ['operating-context'],
+    pending: runs.filter((r) => r.status !== 'completed').map((r) => name(r.name)).sort(),
+    failed: runs.filter((r) => r.status === 'completed' && !['success', 'skipped', 'neutral'].includes(r.conclusion)).map((r) => `${name(r.name)}:${name(r.conclusion)}`).sort(),
+    statuses: Object.entries(checks.statuses || {}).filter(([, state]) => state !== 'success').map(([context, state]) => `${name(context)}:${name(state)}`).sort(),
+  }
 }
 
 export async function rollbackRepository({ receipt, gh, profile, write = false }) {
@@ -40,9 +51,7 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   if (!policy.targets.includes(profile.repository) || policy.excluded.includes(profile.repository) || profile.enabled !== true) return { repository: profile.repository, status: 'excluded' }
   const repo = profile.repository, { branch } = await gh.defaultBranch(repo)
   const base = await gh.headSha(repo, branch)
-  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', ...OWNED, profile.context_path, ...profile.sources.map((s) => s.path)])]
-  const files = {}
-  for (const path of paths) files[path] = (await gh.getFile(repo, path, base))?.text ?? null
+  const files = await readAdministrationSources(profile, async (path) => (await gh.getFile(repo, path, base))?.text ?? null)
   const initial = !inspectRegion(files['AGENTS.md'] || '').present
   const plan = planAdministration(profile, files, history, { policy, migration: initial ? migration : null })
   const proof = { repository: repo, base, brain_revision: plan.revision, before: plan.before.chars, after: plan.after.chars, files: Object.keys(plan.changes), skipped: plan.skipped, source_seal: plan.input_seal, source_check: 'current-source-paths-hashes-and-named-commands', accepted_ids: plan.accepted_ids }
@@ -86,7 +95,8 @@ export async function reconcileRepository({ profile, gh, policy = policyAt(), hi
   }
   const result = { ...proof, status: 'pull-request', pr: pr.number, head: pr.head.sha }
   if (!merge) return result
-  if (!checksPassed(await gh.checksFor(repo, pr.head.sha))) return { ...result, status: 'awaiting-checks' }
+  const checks = await gh.checksFor(repo, pr.head.sha)
+  if (!checksPassed(checks)) return { ...result, status: 'awaiting-checks', checks: checksWaiting(checks) }
   const latest = await gh.req('GET', `/repos/${gh.owner}/${repo}/pulls/${pr.number}`)
   if (latest.head.sha !== pr.head.sha || latest.base.ref !== branch || await gh.headSha(repo, branch) !== base) throw new Error('administration_merge_base_moved')
   const merged = await gh.req('PUT', `/repos/${gh.owner}/${repo}/pulls/${pr.number}/merge`, { sha: pr.head.sha, merge_method: 'squash', commit_title: `docs(harness): maintain repository administration (#${pr.number})` })

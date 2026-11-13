@@ -27,6 +27,8 @@ export function validateJobManifest(manifest) {
   for (const job of manifest.jobs) {
     if (!ID.test(job.id || '') || ids.has(job.id) || !['workflow', 'source', 'heartbeat'].includes(job.kind) || typeof job.required !== 'boolean' || typeof job.enabled !== 'boolean' || !CLASSES.has(job.budget_class) || !integer(job.grace_seconds) || !integer(job.max_run_seconds) || job.max_run_seconds < 1 || job.cadence_seconds !== null && (!integer(job.cadence_seconds) || job.cadence_seconds < 1)) throw failure('invalid-job-manifest')
     if (job.kind === 'workflow' && (!FILE.test(job.workflow_id || '') || !/^[a-z][a-z0-9_-]*$/.test(job.job_name || job.job_name_prefix || '') || !['schedule', 'pull_request', 'repository_dispatch', 'push', 'workflow_run', 'workflow_dispatch'].includes(job.event))) throw failure('invalid-workflow-manifest')
+    // A conditional step inside a job is proved by its own conclusion, which names the step it means.
+    if ((job.completion_proof === 'successful-named-step') !== (job.step_name !== undefined) || job.step_name !== undefined && (job.kind !== 'workflow' || !/^[A-Za-z0-9][A-Za-z0-9 ,.()'_-]{0,199}$/.test(job.step_name))) throw failure('invalid-workflow-manifest')
     // A pull request job that runs only on one family of branches names it, so another branch's run is not its evidence.
     if (job.head_branch_prefix !== undefined && (job.kind !== 'workflow' || job.event !== 'pull_request' || !/^[a-z0-9][a-z0-9/_.-]*$/.test(job.head_branch_prefix))) throw failure('invalid-workflow-manifest')
     if (job.kind === 'source') {
@@ -41,7 +43,7 @@ export function validateJobManifest(manifest) {
   for (const id of ['claude-cloud-account-1', 'claude-cloud-account-2']) if (!manifest.jobs.some((job) => job.id === id && job.kind === 'source')) throw failure('account-slot-removed')
   if (!manifest.jobs.some((job) => job.kind === 'workflow' && job.required && job.enabled && job.budget_class === 'free')) throw failure('required-central-check-removed')
   const e = manifest.evidence
-  if (!e || ['health_path', 'observation_directory', 'measurement_verification_path', 'checkpoints_path', 'heartbeats_path'].some((key) => !safePath(e[key])) || ['max_ledger_files', 'max_response_bytes', 'max_run_pages', 'runs_per_page', 'max_job_runs', 'max_job_pages'].some((key) => !integer(e[key]) || e[key] < 1) || e.max_ledger_files > 24 || e.max_response_bytes > 4194304 || e.max_run_pages > 3 || e.runs_per_page > 100 || e.max_job_runs > 20 || e.max_job_pages > 3) throw failure('invalid-evidence-limits')
+  if (!e || ['health_path', 'observation_directory', 'measurement_verification_path', 'checkpoints_path', 'heartbeats_path'].some((key) => !safePath(e[key])) || ['max_ledger_files', 'max_response_bytes', 'max_run_pages', 'runs_per_page', 'max_job_runs', 'max_job_pages', 'max_family_pulls'].some((key) => !integer(e[key]) || e[key] < 1) || e.max_ledger_files > 24 || e.max_response_bytes > 4194304 || e.max_run_pages > 3 || e.runs_per_page > 100 || e.max_job_runs > 20 || e.max_job_pages > 3 || e.max_family_pulls > 5) throw failure('invalid-evidence-limits')
   return manifest
 }
 
@@ -56,7 +58,10 @@ function workflowState(job, snapshot, now) {
   if (!stream || stream.status !== 'available') return result(job, 'inaccessible', stream?.reason || 'workflow-evidence-unavailable')
   if (stream.state !== 'active') return result(job, 'inaccessible', 'workflow-not-active')
   const runs = [...stream.runs].sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
-  let skipped = false
+  // A job skipped in a failed run was blocked by that failure only if it was due then. The newest such run is held
+  // until the job's own latest run is found: a weekly job that a daily run skipped by its own condition was not due.
+  let skipped = false, blockedAt = null
+  const due = (runAt) => job.cadence_seconds === null || (Date.parse(blockedAt) - Date.parse(runAt)) / 1000 >= job.cadence_seconds - job.grace_seconds
   for (const run of runs) {
     if (run.event !== job.event) continue
     if (job.head_branch_prefix && !String(run.head_branch || '').startsWith(job.head_branch_prefix)) continue
@@ -72,16 +77,23 @@ function workflowState(job, snapshot, now) {
     }
     if (jobs.every((value) => value.conclusion === 'skipped')) {
       skipped = true
-      if (run.conclusion === 'failure' || run.conclusion === 'timed_out') return result(job, 'failed', 'upstream-run-failed', { last_run_at: runAt })
+      if ((run.conclusion === 'failure' || run.conclusion === 'timed_out') && !blockedAt) blockedAt = runAt
       continue
     }
+    if (blockedAt && due(runAt)) return result(job, 'failed', 'upstream-run-failed', { last_run_at: blockedAt })
     const detail = { last_run_at: runAt, run_id: integer(run.id) ? run.id : null, execution_revision: SHA.test(run.head_sha || '') ? run.head_sha : null, schedule_evidence: job.event === 'schedule' ? 'scheduled-run-observed' : 'event-driven-run', output_verification: 'not-claimed' }
     if (jobs.some((value) => value.status !== 'completed')) return result(job, age(runAt, now) > job.max_run_seconds ? 'overlong' : 'running', 'named-job-running', detail)
     if (jobs.some((value) => !['success', 'skipped', 'neutral'].includes(value.conclusion))) return result(job, 'failed', 'named-job-failed', { ...detail, paid_work_availability: paused(job, snapshot.budget) ? 'budget-paused' : 'not-claimed' })
     if (job.expected_jobs && jobs.length !== job.expected_jobs) return result(job, 'partial', 'expected-job-matrix-incomplete', detail)
     if (!jobs.some((value) => value.conclusion === 'success')) return result(job, 'unverified', 'no-successful-named-job', detail)
     if (job.cadence_seconds !== null && age(runAt, now) > job.cadence_seconds + job.grace_seconds) return result(job, 'stale', 'scheduled-run-overdue', detail)
-    if (job.completion_proof === 'containing-job-only-step-proof-unverified') return result(job, 'unverified', 'conditional-step-proof-required', detail)
+    if (job.completion_proof === 'successful-named-step') {
+      // The jobs API reports each step's own conclusion, so a conditional step that never ran cannot pass as run.
+      const steps = jobs.flatMap((value) => (value.steps || []).filter((step) => step.name === job.step_name))
+      if (steps.some((step) => step.status !== 'completed' || !['success', 'skipped'].includes(step.conclusion))) return result(job, 'failed', 'named-step-failed', detail)
+      if (!steps.some((step) => step.conclusion === 'success')) return result(job, 'unverified', 'named-step-not-executed', detail)
+      detail.output_verification = 'named-step-observed'
+    }
     if (job.completion_proof === 'successful-named-job-and-observer-heartbeat') {
       const beat = snapshot.evidence?.heartbeats
       const last = timestamp(beat?.value?.observer?.last_run)
@@ -105,6 +117,7 @@ function workflowState(job, snapshot, now) {
     }
     return result(job, paused(job, snapshot.budget) ? 'budget-paused' : 'healthy', paused(job, snapshot.budget) ? 'next-paid-work-blocked-by-budget' : 'named-job-completed', detail)
   }
+  if (blockedAt) return result(job, 'failed', 'upstream-run-failed', { last_run_at: blockedAt })
   if (skipped && job.cadence_seconds === null) return result(job, 'not-applicable', 'conditional-jobs-skipped-no-measurement-claimed')
   return result(job, stream.history_complete === false ? 'partial' : 'never-started', stream.history_complete === false ? 'bounded-run-history-incomplete' : 'no-named-run-observed')
 }
@@ -195,6 +208,28 @@ export async function collectWatchdogSnapshot(manifest, { token = process.env.GI
       const ordered = stream.runs.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
       if (ordered.length > limits.max_job_runs) stream.history_complete = false
       stream.runs = ordered.slice(0, limits.max_job_runs)
+      // A pull request job that runs on one rare family of branches can fall out of the bounded history. Its latest
+      // family pull request is found by name prefix and that branch's own runs are read, so old evidence stays visible.
+      for (const branches of new Set(manifest.jobs.filter((value) => value.enabled && keyFor(value) === keyFor(job) && value.head_branch_prefix).map((value) => value.head_branch_prefix))) {
+        if (stream.runs.some((run) => String(run.head_branch || '').startsWith(branches))) continue
+        // A failed lookup leaves the bounded history as it was, which reads partial, never healthy.
+        try {
+          const found = await request(`/search/issues?q=${encodeURIComponent(`repo:${manifest.repository} is:pr head:${branches}`)}&sort=created&order=desc&per_page=${limits.max_family_pulls}`)
+          if (!Array.isArray(found.items)) throw failure('invalid-response')
+          for (const item of found.items.slice(0, limits.max_family_pulls)) {
+            if (!integer(item.number) || item.number < 1) throw failure('invalid-response')
+            const pull = await request(`${prefix}/pulls/${item.number}`)
+            const ref = pull.head?.ref
+            if (typeof ref !== 'string' || !ref.startsWith(branches) || pull.head?.repo?.full_name !== manifest.repository) continue
+            const data = await request(`${prefix}/actions/workflows/${job.workflow_id}/runs?event=pull_request&branch=${encodeURIComponent(ref)}&per_page=${limits.runs_per_page}`)
+            if (!Array.isArray(data.workflow_runs)) throw failure('invalid-response')
+            const family = data.workflow_runs.filter((run) => run.head_branch === ref && !stream.runs.some((seen) => seen.id === run.id)).slice(0, limits.max_job_runs)
+            if (!family.length) continue
+            stream.runs.push(...family)
+            break
+          }
+        } catch { /* the family stays unobserved */ }
+      }
       for (const run of stream.runs) {
         if (!integer(run.id) || run.id < 1) throw failure('invalid-response')
         run.jobs = []; run.jobs_complete = true

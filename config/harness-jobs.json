@@ -27,7 +27,8 @@
     "max_run_pages": 2,
     "runs_per_page": 30,
     "max_job_runs": 16,
-    "max_job_pages": 2
+    "max_job_pages": 2,
+    "max_family_pulls": 3
   },
   "jobs": [
     {
@@ -130,7 +131,7 @@
       "owner": "repository-administration", "workflow_id": "repository-administration.yml", "job_name_prefix": "fresh-context", "head_branch_prefix": "harness/brain-repository-administration", "event": "pull_request",
       "cadence_seconds": null, "grace_seconds": 0, "max_run_seconds": 1800,
       "credentials": ["ANTHROPIC_API_KEY", "FLEET_TOKEN"], "budget_class": "replay", "allowed_side_effects": ["sanitized-replay-receipt"],
-      "outputs": [], "completion_proof": "containing-job-only-step-proof-unverified", "limits": "A containing matrix job does not independently prove that its conditional private replay step executed."
+      "outputs": [], "completion_proof": "successful-named-step", "step_name": "Replay native title corrections without exposing private examples", "limits": "The step's own conclusion in the jobs API proves the conditional private replay executed; it does not prove what the replay found."
     },
     {
       "id": "claude-cloud-account-1", "kind": "source", "required": false, "enabled": true,
