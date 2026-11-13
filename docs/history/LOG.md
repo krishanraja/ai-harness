@@ -5,6 +5,28 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-13
+
+- stamped: `NOW.md` audit findings fixed (11 dated bullets in "Where it is right now", limit 8; one open item with no recent date) by rolling nine dated bullets below here and dating the open item; head moved to c9c23cb.
+
+- rolled from NOW.md: The three steward reports #221 committed at the root by accident (audit.md, brief.md, reconcile.md, one of them a run against GitHub with bad credentials) are gone and ignored, because the steward's own "rm -f audit.md reconcile.md" would have dirtied the tree its nightly ledger push rebases. The capture docs and surface contracts match the ledger: claude.ai, ChatGPT and Claude Code cloud sessions all send observations through the Control Center connector, so their surface-contract findings close. The cloud session miner reads nothing: the weekly task in the account read today starts a fresh session with no session-listing tools (8 November: 0 sessions read), so the two required claude-cloud-account slots keep the watchdog degraded until Krish fixes the miner per account or rules those slots not required. makeyourmindup's profile no longer sends sessions to build its superseded machine. (2026-11-12)
+
+- rolled from NOW.md: The docs steward's validator allows the one deletion the runbook asks for: a closeout note it folds into NOW.md, in a diff that also changes NOW.md. Any other deletion, or a note deleted without NOW.md changing, still fails. (2026-11-12)
+
+- rolled from NOW.md: The surfaces and verify checks are green again. brain/rules.yaml records the krish-voice reference routing line #214 added, citing that commit's own 11 Nov rulings, and the knowledge history validator reads brain/knowledge.jsonl (now past 1 MiB) with a bounded 64 MiB buffer instead of dying with ENOBUFS. (2026-11-12)
+
+- rolled from NOW.md: content-engine's administration profile sends sessions to the one live board: its bootstrap note reads this week's comments on the one live board in Control Centre as docs/PUBLISH_BOARDS.md says, its board workflow reads that authority first, and config/boards.json is labelled as the live board's address and the superseded archive (brain/repositories/content-engine.json, scripts/repository-profile.mjs). Ruling (Krish, 2026-11-11): one live board, in Control Centre; the old board is a read-only archive. (2026-11-12)
+
+- rolled from NOW.md: krish-voice has comment-evidence.md (Krish's own Heartside, Make Your Mind Up and X comment lines beside the drafts he replaced), and humour.md has comment rules: choose the job first (warmth is valid), name puns allowed in comments, never at a person, and X replies follow them. (2026-11-11)
+
+- rolled from NOW.md: krish-voice humour.md lets Krish's personal LinkedIn use humour selectively: at most one light line a post, led by self-deprecation and dry irony, with no cruelty or escalation, and never in a post that sells Mindmake. (2026-11-10)
+
+- rolled from NOW.md: krish-voice has references/humour.md, which sets where each of six humour traits may be used: never in Mindmake or any outbound email, integrated under the house register in Make Your Mind Up, in full for Heartside and Full Time; krish-principles has "Humour with Krish" for joking with him directly. (2026-11-10)
+
+- rolled from NOW.md: krish-voice's kill list names a voice for every channel and covers every surface: Krish's email and socials, Jonny's emails, DMs, comments and forms, and the publication's scripts, articles, captions, carousels and Substack, which also take Make Your Mind Up's own canon by hash. (2026-11-09)
+
+- rolled from NOW.md: krish-voice has a machine-readable kill list (references/kill-list.json, checked against the doctrine by evals/voice/test-kill-list.mjs in Test-Harness), the inspiration writers' moves (inspiration-writers.md: Alex Lieberman, Tyler Denk, Jerry Ralhan provisional) and the LinkedIn and email evidence (linkedin-evidence.md); British spelling holds on every channel by Krish's 7 Nov ruling. (2026-11-07)
+
 ## 2026-11-11
 
 - stamped: `NOW.md` audit failure (9 bullets in "Where it is right now", limit 8) fixed by removing the taste-by-venture bullet from that section, as it was history and stays in "What changed recently" (2026-10-30); head moved to 96c8c08.
