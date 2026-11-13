@@ -63,8 +63,8 @@ Do not turn any surface into a linear ladder. A person may enter through the pub
 ## Commercial motion
 
 - `mindmake.co` is the primary customer-facing decision surface. `themindmaker.ai` redirects to it and is infrastructure, never a name. `krish@themindmaker.ai` is the only published contact address.
-- **No cold email.** The only two sales motions are warm intros and published thinking. Cold contact is legitimate for exactly one purpose: booking podcast guests, which is an ask and not a sale.
-- Maven is the discovery and delivery surface for free Lightning Lessons. Verify the live lesson and destination before customer-facing work.
+- **Cold outbound is in scope** (Ruling, Krish, 2026-11-13: "Full cold multi-channel" for Mindmake's growth engine, on email, LinkedIn and calls). Warm intros, published thinking and the room still lead. Every send is his; no AI-voiced or auto-dialled cold calls; no LinkedIn automation; every cold first touch names the sender, a postal address, the data source and a way to object; recipients are allowed by country and recipient type. Until 2026-11-13 the canon said "No cold email", with booking podcast guests the one cold contact. The engine's own record is growth-mindmake `docs/RULINGS.md`, "The full-funnel engine".
+- Maven is the discovery and delivery surface for free Lightning Lessons, hosted every two weeks since 13 November 2026 (Ruling, Krish, 2026-11-13). Verify the live lesson and destination before customer-facing work.
 - The publication builds trust and literacy through its three subchannels; it feeds the business without becoming disguised sales copy.
 - Outbound and relationship channels move a specific opportunity forward using actual recipient context.
 - Enterprise work may use direct inquiry, proposal, invoice, or another approved transaction route. Verify the current mechanism.

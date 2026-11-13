@@ -88,9 +88,16 @@ because the request did not mention it. These supersede the version 3 rules in A
 
 ## 4. Acquisition doctrine
 
-- **No cold email and no cold outbound.** The motions are warm intros, the room and
-  published thinking (Rule 2; batch one E5 ranks cold outbound last). The one legitimate
-  cold contact is booking a podcast guest, which is an ask, not a sale (Mindmake canon).
+- **Cold outbound is in scope for Mindmake** (Ruling, Krish, 2026-11-13: he chose "Full
+  cold multi-channel" for Mindmake's growth engine: email, LinkedIn and calls). Rule 2
+  stays verbatim in the ikigai and still governs everything else; for Mindmake's outbound
+  it reads against this ruling, as Rules 7 and 8 read against the portfolio ruling
+  (section 7). The walls do not move: every send is still his. The law holds where his
+  ruling cannot reach: no AI-voiced or auto-dialled cold calls, no LinkedIn automation,
+  and every cold first touch names the sender, a postal address, the data source and a
+  way to object. Before 2026-11-13 the doctrine was "no cold email and no cold outbound",
+  with booking a podcast guest the one legitimate cold contact; read that as history.
+  The engine's own record is growth-mindmake `docs/RULINGS.md`, "The full-funnel engine".
 - **Publishing is the demand engine, not the swing.** It exists to fill the room (section 3
   of the sheet, "Public voice").
 - **Draft for approval.** Agents draft; Krish or a partner sends. No outbound tool has send
@@ -207,10 +214,15 @@ All by Krish, dated 2026-10-05 unless marked otherwise.
   (in chat, image requests or banter, where he is the only audience), use all six traits in
   `krish-voice` (`references/humour.md`) with none of its surface limits. A roast is
   welcome when he asks for one. Where those words may go beyond him is ruled there, not here.
-- **Founder visibility is still open** (2026-10-06: not ruled). The ikigai's mission says
-  "with my name on it"; the acquisition rule warns against plans that lean on his personal
-  brand. Do not resolve it for him. When a proposal depends on it, name the open decision
-  and let him choose.
+- **Founder visibility is open, except for his clone** (2026-10-06: not ruled). Ruling
+  (Krish, 2026-10-22): his HeyGen face clone and ElevenLabs voice clone are for Mindmake
+  outbound and makeyourmindup shorts, which closes founder visibility for those two uses;
+  creating each clone and sending anything made with it stay action-time approvals, and
+  taste rule s075bbc2d7d keeps the synthetic Krish on backup until it is convincing
+  (ai-harness `docs/proposals/2026-10-22-outcome-allocation.md`). Everything else stays
+  open: the ikigai's mission says "with my name on it"; the acquisition rule warns against
+  plans that lean on his personal brand. Do not resolve it for him. When a proposal depends
+  on it, name the open decision and let him choose.
 
 ## 9. What he works on: live sources only
 
