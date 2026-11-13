@@ -2,10 +2,10 @@
 /**
  * Accept redacted observation envelopes sent straight to this repository.
  *
- * The private session miners (scripts/mine-sessions.mjs on Krish's PC, and the
- * weekly cloud session miner) send their lessons with a GitHub
+ * The private session miner (scripts/mine-sessions.mjs on Krish's PC; the
+ * weekly cloud session miner was retired on 2026-11-13) sends its lessons with a GitHub
  * `repository_dispatch` of type `harness-observations`, using a GitHub login
- * that already exists where they run. No Control Center change and no new key
+ * that already exists where it runs. No Control Center change and no new key
  * stand between a lesson and the ledger.
  *
  * Only a writer to this repository can send a dispatch, and every envelope is

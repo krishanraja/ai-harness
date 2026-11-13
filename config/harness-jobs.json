@@ -133,20 +133,20 @@
       "outputs": [], "completion_proof": "containing-job-only-step-proof-unverified", "limits": "A containing matrix job does not independently prove that its conditional private replay step executed."
     },
     {
-      "id": "claude-cloud-account-1", "kind": "source", "required": true, "enabled": true,
+      "id": "claude-cloud-account-1", "kind": "source", "required": false, "enabled": true,
       "owner": "session-collector", "provider": "claude-code-web", "account_sha256": null,
       "cadence_seconds": 604800, "grace_seconds": 86400, "max_run_seconds": 3600,
       "credentials": ["SUPPORTED_SOURCE_ACCOUNT_ACCESS"], "budget_class": "extraction", "allowed_side_effects": ["authorized-distilled-event-intake"],
       "outputs": ["state/observations", "state/session-miner/checkpoints.jsonl"], "completion_proof": "independently-verified-account-source-run-receipt",
-      "identity_status": "unverified-binding", "limits": "The first required account remains blocked until supported source access and its opaque account identity are independently verified."
+      "identity_status": "unverified-binding", "limits": "Optional by Krish's ruling of 2026-11-13 (\"readers not required\"): live capture through the Control Center connector (record_harness_observation) is the route, and no Claude scheduled task reads sessions. The slot stays listed and enabled so a future reader can still report into it once supported source access and its opaque account identity are independently verified; until then it reads inaccessible and gates nothing."
     },
     {
-      "id": "claude-cloud-account-2", "kind": "source", "required": true, "enabled": true,
+      "id": "claude-cloud-account-2", "kind": "source", "required": false, "enabled": true,
       "owner": "session-collector", "provider": "claude-code-web", "account_sha256": null,
       "cadence_seconds": 604800, "grace_seconds": 86400, "max_run_seconds": 3600,
       "credentials": ["SUPPORTED_SOURCE_ACCOUNT_ACCESS"], "budget_class": "extraction", "allowed_side_effects": ["authorized-distilled-event-intake"],
       "outputs": ["state/observations", "state/session-miner/checkpoints.jsonl"], "completion_proof": "independently-verified-account-source-run-receipt",
-      "identity_status": "unverified-binding", "limits": "A healthy first account cannot stand in for this second required account."
+      "identity_status": "unverified-binding", "limits": "Optional by Krish's ruling of 2026-11-13 (\"readers not required\"): live capture through the Control Center connector (record_harness_observation) is the route, and no Claude scheduled task reads sessions. The slot stays listed and enabled so a future reader can still report into it; a healthy first account still cannot stand in for this second account."
     },
     {
       "id": "optional-local-sync", "kind": "heartbeat", "required": false, "enabled": true,

@@ -1,10 +1,10 @@
 name: Harness observation intake
 
 # Redacted lessons sent straight to this repository by the private session
-# miners (scripts/mine-sessions.mjs on the PC, and the weekly cloud session
-# miner), as repository_dispatch events of type harness-observations. Only a
-# writer to this repository can send one. Krish chose the public ledger for
-# these lessons on 2026-10-15.
+# miner (scripts/mine-sessions.mjs on the PC; the weekly cloud session miner
+# was retired on 2026-11-13), as repository_dispatch events of type
+# harness-observations. Only a writer to this repository can send one. Krish
+# chose the public ledger for these lessons on 2026-10-15.
 #
 # The payload is read from the event file, never interpolated into a shell or
 # echoed: the repository and its Actions logs are public, so the script prints

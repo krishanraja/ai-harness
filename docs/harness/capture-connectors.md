@@ -9,7 +9,7 @@ tool that reads the brain and writes nothing back.
 | Tool | How it feeds the brain | State |
 |---|---|---|
 | Claude Code and Codex on LORIMER | The hosted `record_harness_observation` tool, Ruling lines in commits, and the private weekly session miner | Tool and Ruling lines live; the miner runs from the nightly sync and waits for a submission route (below) |
-| Claude Code cloud sessions | Ruling lines in merged commits, and `record_harness_observation` through the Control Center connector | Both live: the ledger holds `[claude-code-web]` rows from 2026-10-15 to 2026-11-11. The weekly cloud session miner (step 7) reads nothing yet |
+| Claude Code cloud sessions | Ruling lines in merged commits, and `record_harness_observation` through the Control Center connector | Both live: the ledger holds `[claude-code-web]` rows from 2026-10-15 to 2026-11-11. Live capture is the route; the weekly cloud session miner is retired (step 7) |
 | claude.ai and Claude Desktop | One custom connector plus the account instructions' fixed pointer (`adapters/cloud/account-instructions.md`) | Live: the endpoint takes a capability URL (control-center ADR-037, 2026-10-15) and the ledger holds `[claude-ai]` rows from 2026-10-20 to 2026-10-30 |
 | ChatGPT | The same hosted endpoint as a custom connector | Live, best effort: write tools ask for confirmation on every call; the ledger holds `[chatgpt]` rows from 2026-10-17 to 2026-11-11 |
 | Cursor | The hosted tool | Configured; its headless agent needs logging in again |
@@ -41,20 +41,17 @@ tool that reads the brain and writes nothing back.
    once a week. Where its lessons go is Krish's call, recorded in
    `contract/learning-policy.yaml` (`miner.submit`); until he chooses, it reads
    nothing and its clock reports degraded.
-7. **Fix or retire the cloud session miner.** It is a weekly Claude Code
-   scheduled task per account (`docs/harness/cloud-session-miner.md`). In the
-   account read on 2026-11-12 it exists with an older prompt that starts a
-   fresh session, which has no session-listing tools, so it reads nothing.
-   Fixing it is, in each account: open one session on this repository by hand
-   and title it "Session miner (standing)"; point the weekly task at that
-   session with the prompt in `docs/harness/cloud-session-miner.md`; then bind
-   the account's opaque identity (`account_sha256` in `config/harness-jobs.json`
-   and `source_accounts` in `config/session-extraction.json`, with its
-   approval reference) so its source-run receipts count. Until then the
-   watchdog's two required `claude-cloud-account-*` slots stay inaccessible and
-   it stays degraded. The other choice is a ruling that those two slots are not
-   required, since live capture through the connector (above) is the primary
-   route.
+7. **Nothing to do for the cloud session miner: it is retired.** Ruling
+   (Krish, 2026-11-13: "readers not required"): the two cloud-account reader
+   slots are not required; live capture through the connector (above) is the
+   route, and no Claude scheduled task reads sessions, which keeps his
+   2026-10-29 ruling of zero Claude routines. The weekly "Session miner: weekly
+   cloud sessions" task in his main account was switched off (enabled false)
+   on 2026-11-13. `claude-cloud-account-1` and `claude-cloud-account-2` stay
+   in `config/harness-jobs.json`, enabled but `required: false`, so the
+   watchdog shows them as inaccessible without counting them toward its
+   health. `docs/harness/cloud-session-miner.md` keeps the old prompt as the
+   record.
 
 ## If the PC stops checking in
 

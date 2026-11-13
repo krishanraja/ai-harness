@@ -214,7 +214,7 @@ surface_contracts:
     reads: canon block, and skills live through the Control Center connector's get_skill
     writes: pull requests, Ruling lines in commit bodies, and hosted redacted observations through the Control Center connector
     event_surface: claude-code-web
-    gap: The weekly cloud session miner reads nothing yet (docs/harness/cloud-session-miner.md), so a correction a session did not send live reaches the brain only through a merged commit with a Ruling line.
+    gap: Live capture is the only route, because the weekly cloud session miner is retired (Ruling, Krish, 2026-11-13; docs/harness/cloud-session-miner.md), so a correction a session did not send live reaches the brain only through a merged commit with a Ruling line.
 
   - id: claude-ai-chat
     reads: the account instructions' fixed pointer, which loads the routing and skills live through the Control Center connector's get_skill
@@ -246,7 +246,7 @@ surface_contracts:
   - id: routines
     reads: installed skills
     writes: nothing
-    gap: Claude Code scheduled tasks with no path back into the ledger. Read from one account on 2026-11-12, four were live there (three hunter writers and the weekly session miner); the other account was not read.
+    gap: Claude Code scheduled tasks with no path back into the ledger. Read from one account on 2026-11-12, four were live there (three hunter writers and the weekly session miner); the session miner was switched off there on 2026-11-13 by Krish's ruling that no Claude scheduled task reads sessions, and the other account was not read.
 
   - id: openclaw-vps
     reads: >
