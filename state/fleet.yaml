@@ -68,7 +68,7 @@ repos:
   - name: content-engine
     canon_target: AGENTS.md
     entry: AGENTS.md
-    rules_files: [AGENTS.md, CLAUDE.md, docs/CAROUSEL_ENGINE_STATE.md]
+    rules_files: [AGENTS.md, CLAUDE.md, docs/CAROUSEL-STANDARD.md]
     note: >-
       Current GitHub identity for the Mindmake Video Engine. Repository-scoped skills
       under .agents/skills are deliberate and not drift: the engine is client-neutral
