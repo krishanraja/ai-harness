@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-12
+as_of: 2026-11-13
 head: 96c8c08
 lifecycle: live
 production_url: none
@@ -21,10 +21,11 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-12)
+## Where it is right now (as of 2026-11-13)
 
 <!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
 
+- The two claude-cloud-account reader slots are optional: config/harness-jobs.json keeps both listed and enabled with `required: false`, the watchdog only requires that they exist, and an optional slot no reader can reach shows as inaccessible without making the watchdog unhealthy, which settles the 2026-11-12 bullet's choice. Cloud sessions are covered by live capture through the Control Center connector (`record_harness_observation`); the cloud session miner is retired, and its weekly task "Session miner: weekly cloud sessions" in Krish's main account was switched off on 2026-11-13. (2026-11-13)
 - The three steward reports #221 committed at the root by accident (audit.md, brief.md, reconcile.md, one of them a run against GitHub with bad credentials) are gone and ignored, because the steward's own "rm -f audit.md reconcile.md" would have dirtied the tree its nightly ledger push rebases. The capture docs and surface contracts match the ledger: claude.ai, ChatGPT and Claude Code cloud sessions all send observations through the Control Center connector, so their surface-contract findings close. The cloud session miner reads nothing: the weekly task in the account read today starts a fresh session with no session-listing tools (8 November: 0 sessions read), so the two required claude-cloud-account slots keep the watchdog degraded until Krish fixes the miner per account or rules those slots not required. makeyourmindup's profile no longer sends sessions to build its superseded machine. (2026-11-12)
 - The harness watchdog judges a pull request job that runs on one family of branches only by that family's runs (head_branch_prefix in config/harness-jobs.json), so central-fresh-context and central-native-title-replay no longer read "failed" from another branch's red pull request in which they were skipped by their own condition. The watchdog stays red for three reasons it reports honestly: the 01:59 to 02:54 UTC scheduled runs of 12 Nov failed before #220 and #219 fixed their causes, so their next scheduled runs clear them; the two required claude-cloud accounts have no verified identity or source access, which is Krish's to grant; and no harness/brain-repository-administration pull request has run fresh-context recently. (2026-11-12)
 - The docs steward's validator allows the one deletion the runbook asks for: a closeout note it folds into NOW.md, in a diff that also changes NOW.md. Any other deletion, or a note deleted without NOW.md changing, still fails. (2026-11-12)
@@ -44,6 +45,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-13 Krish, 2026-11-13, asked whether to set up a weekly Claude scheduled task in each of his two accounts or rule them not required: "readers not required". It keeps his 2026-10-29 ruling of zero Claude routines.
 - 2026-11-12 Krish, 2026-11-12: "make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there".
 - 2026-11-12 scripts/harness-watchdog.mjs, config/harness-jobs.json, scripts/test-harness-watchdog.mjs.
 - 2026-11-12 Every steward run that folded closeout notes was reported failed after its commit landed (control-center's 2026-11-12 run: 17 "was deleted" failures, nothing else); the validator now passes that run. The knowledge history check's 1 MiB buffer (ENOBUFS once brain/knowledge.jsonl passed 1 MiB) was fixed on main first by #220, so this change keeps main's fix.
@@ -62,11 +64,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-12): read the watchdog after the 13 Nov scheduled Harness steward, Docs steward and Brain repository administration runs; central-checks, central-docs and central-repository-administration should be healthy, leaving only the two claude-cloud-account slots.
+- Next (2026-11-13): read the next scheduled watchdog run; with the slots optional it is healthy once central-checks, central-docs and central-repository-administration are.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, not rechecked 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-12): holds.
+- North Star check (2026-11-13): holds.
 
 ## Read next
 
