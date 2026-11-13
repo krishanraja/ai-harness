@@ -1,3 +1,0 @@
-Status: Krish's 13 November ruling that cold outbound is in scope for Mindmake (email, LinkedIn and calls, every send still his, the law held) and the 22 October clone ruling are carried into who-krish-is.md, the krish-principles skill, the operating contract's founder-visibility line and the mindmake skill's commercial canon; Rule 2 stays verbatim and reads against the ruling, as Rules 7 and 8 read against the portfolio ruling. brain/rules.yaml revised for the two changed texts.
-Next: Krish merges this pull request; the next release carries the changed skills to every client.
-North Star check (2026-11-13): holds.
