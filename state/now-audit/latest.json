@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -21,7 +21,13 @@
       "repo": "control-center",
       "status": "pass",
       "failing_since": null,
-      "findings": []
+      "findings": [
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 45)."
+        }
+      ]
     },
     {
       "repo": "mm-ctrl",
@@ -31,12 +37,12 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-23, 20 days old (limit 7)."
+          "detail": "as_of is 2026-10-23, 21 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 20 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "where_too_many",
@@ -53,7 +59,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 15 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 16 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -65,7 +71,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 20 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -77,7 +83,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 20 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -89,15 +95,26 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-11-01, 11 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-11-01, 12 days ago (limit 7); the next session re-dates it."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 71)."
         }
       ]
     },
     {
       "repo": "content-engine",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-13",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "line 43 is 1640 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+        }
+      ]
     },
     {
       "repo": "contentarchives",
@@ -107,7 +124,12 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 16 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 17 days ago (limit 7); the next session re-dates it."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "5 line(s) speak of something open or pending with no date newer than 14 days (lines 65, 66, 67, 68, 69)."
         }
       ]
     },
@@ -119,15 +141,31 @@
         {
           "rule": "where_too_many",
           "severity": "fail",
-          "detail": "10 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 67)."
         }
       ]
     },
     {
       "repo": "AEO-Engine",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-13",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "16682 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "makeyourmindup",
@@ -135,9 +173,9 @@
       "failing_since": "2026-10-28",
       "findings": [
         {
-          "rule": "too_long",
+          "rule": "where_too_many",
           "severity": "fail",
-          "detail": "218 lines (limit 200). Roll history into docs/history/LOG.md and keep what is current."
+          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         },
         {
           "rule": "old_dated_claims",
@@ -148,24 +186,9 @@
     },
     {
       "repo": "heartside",
-      "status": "fail",
-      "failing_since": "2026-11-11",
+      "status": "pass",
+      "failing_since": null,
       "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "18876 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "18 \"What changed recently\" bullets older than a day (limit 12)."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        },
         {
           "rule": "old_dated_claims",
           "severity": "warn",
@@ -181,154 +204,51 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 15 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 16 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
     {
       "repo": "growth-heartside",
-      "status": "fail",
-      "failing_since": "2026-11-10",
+      "status": "pass",
+      "failing_since": null,
       "findings": [
         {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "21893 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "24 \"What changed recently\" bullets older than a day (limit 12)."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "24 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        },
-        {
-          "rule": "unfolded_notes",
-          "severity": "fail",
-          "detail": "9 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-04); run the fold."
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 80)."
         }
       ]
     },
     {
       "repo": "growth-makeyourmindup",
-      "status": "fail",
-      "failing_since": "2026-10-29",
+      "status": "pass",
+      "failing_since": null,
       "findings": [
         {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "16201 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "2 \"Next\" lines under \"What is next and what is waiting on Krish\"; keep the single next action."
-        },
-        {
-          "rule": "unfolded_notes",
-          "severity": "fail",
-          "detail": "28 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold."
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 65)."
         }
       ]
     },
     {
       "repo": "growth-mindmake",
-      "status": "fail",
-      "failing_since": "2026-10-29",
-      "findings": [
-        {
-          "rule": "as_of_stale",
-          "severity": "fail",
-          "detail": "as_of is 2026-10-28, 15 days old (limit 7)."
-        },
-        {
-          "rule": "north_star_check",
-          "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 15 days ago (limit 7); the next session re-dates it."
-        },
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        },
-        {
-          "rule": "unfolded_notes",
-          "severity": "fail",
-          "detail": "11 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-05); run the fold."
-        },
-        {
-          "rule": "old_dated_claims",
-          "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 31)."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "growth-fulltime",
-      "status": "fail",
-      "failing_since": "2026-10-29",
-      "findings": [
-        {
-          "rule": "as_of_stale",
-          "severity": "fail",
-          "detail": "as_of is 2026-10-27, 16 days old (limit 7)."
-        },
-        {
-          "rule": "north_star_check",
-          "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 16 days ago (limit 7); the next session re-dates it."
-        },
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        },
-        {
-          "rule": "unfolded_notes",
-          "severity": "fail",
-          "detail": "5 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-10-29); run the fold."
-        },
-        {
-          "rule": "unreconciled",
-          "severity": "fail",
-          "detail": "A product commit from 2026-10-27 landed after the last NOW.md update and NOW.md still does not reflect it."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "growth-legibility",
-      "status": "fail",
-      "failing_since": "2026-10-29",
-      "findings": [
-        {
-          "rule": "as_of_stale",
-          "severity": "fail",
-          "detail": "as_of is 2026-10-29, 14 days old (limit 7)."
-        },
-        {
-          "rule": "north_star_check",
-          "severity": "fail",
-          "detail": "2 North Star check lines; keep exactly one."
-        },
-        {
-          "rule": "recent_too_many",
-          "severity": "fail",
-          "detail": "15 \"What changed recently\" bullets older than a day (limit 12)."
-        },
-        {
-          "rule": "next_step",
-          "severity": "fail",
-          "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
-        },
-        {
-          "rule": "unfolded_notes",
-          "severity": "fail",
-          "detail": "2 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-10); run the fold."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     }
   ]
 }
