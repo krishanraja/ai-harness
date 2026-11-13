@@ -88,6 +88,35 @@ data = snapshot(); run(data).jobs = []; data.workflows['harness-steward.yml:sche
 assert.equal(row(report(data), 'central-checks').status, 'partial', 'Bounded history cannot certify that a job never ran')
 data = snapshot(); run(data).jobs[0].conclusion = 'skipped'; run(data).conclusion = 'failure'
 assert.equal(row(report(data), 'central-checks').status, 'failed', 'An upstream failure cannot become healthy skipped work')
+// A weekly job inside a daily workflow is skipped by its own condition six days in seven. A failed daily run that
+// skipped it was not its failure unless the job was due then (2026-11-12: surfaces failed on a Thursday and
+// central-proposals read failed although its Sunday run had passed).
+config = manifest(); config.jobs.push(structuredClone(full.jobs.find((job) => job.id === 'central-proposals')))
+const daily = (id, when, conclusion, propose) => ({ id, event: 'schedule', status: 'completed', conclusion, created_at: when, run_started_at: when, head_sha: sha, jobs_complete: true, jobs: [{ name: 'surfaces', status: 'completed', conclusion: conclusion === 'failure' ? 'failure' : 'success' }, { name: 'propose', status: 'completed', conclusion: propose }] })
+const week = (runs) => { const value = snapshot(); value.workflows['harness-steward.yml:schedule'].runs = runs; return value }
+data = week([daily(43, '2026-10-18T11:00:00.000Z', 'success', 'skipped'), daily(42, '2026-10-17T02:00:00.000Z', 'failure', 'skipped'), daily(41, '2026-10-15T01:00:00.000Z', 'success', 'success')])
+assert.equal(row(report(data, config), 'central-proposals').status, 'healthy', 'A daily failure between weekly runs is not the weekly job\'s failure')
+assert.equal(row(report(data, config), 'central-checks').status, 'healthy', 'The daily job is judged by its newest run')
+data = week([daily(43, '2026-10-18T11:00:00.000Z', 'failure', 'skipped'), daily(41, '2026-10-11T01:00:00.000Z', 'success', 'success')])
+assert.equal(row(report(data, config), 'central-proposals').status, 'failed', 'A failure on the day the weekly job was due blocked it')
+assert.equal(row(report(data, config), 'central-proposals').reason, 'upstream-run-failed')
+data = week([daily(42, '2026-10-17T02:00:00.000Z', 'failure', 'skipped')])
+assert.equal(row(report(data, config), 'central-proposals').status, 'failed', 'With no run of its own in view, a blocked run still reads failed')
+data = week([daily(43, '2026-10-18T11:00:00.000Z', 'success', 'skipped'), daily(41, '2026-10-01T01:00:00.000Z', 'success', 'success')])
+assert.equal(row(report(data, config), 'central-proposals').status, 'stale', 'A weekly job not run for over a week is overdue')
+
+// A conditional step inside a matrix job is proved by its own conclusion in the jobs API.
+config = manifest(); config.jobs.push(structuredClone(full.jobs.find((job) => job.id === 'central-native-title-replay')))
+const replayStep = full.jobs.find((job) => job.id === 'central-native-title-replay').step_name
+const replay = (conclusion) => ['content-engine', 'AEO-Engine'].flatMap((r) => ['orientation', 'iteration'].map((k) => ({ name: `fresh-context (${r}, ${k})`, status: 'completed', conclusion: conclusion === 'failure' && !(r === 'content-engine' && k === 'iteration') ? 'success' : conclusion === 'failure' ? 'failure' : 'success', steps: [{ name: 'Check behaviour and observed context reads', status: 'completed', conclusion: 'success' }, { name: replayStep, status: 'completed', conclusion: r === 'content-engine' && k === 'iteration' ? conclusion : 'skipped' }] })))
+const replayData = (conclusion) => { const value = snapshot(); value.workflows['repository-administration.yml:pull_request'] = { status: 'available', state: 'active', history_complete: true, runs: [{ id: 40, event: 'pull_request', head_branch: 'harness/brain-repository-administration-v2', status: 'completed', conclusion: conclusion === 'failure' ? 'failure' : 'success', created_at: at, run_started_at: at, head_sha: sha, jobs_complete: true, jobs: replay(conclusion) }] }; return value }
+assert.equal(row(report(replayData('success'), config), 'central-native-title-replay').status, 'healthy')
+assert.equal(row(report(replayData('success'), config), 'central-native-title-replay').output_verification, 'named-step-observed')
+assert.equal(row(report(replayData('skipped'), config), 'central-native-title-replay').status, 'unverified', 'A step every matrix leg skipped never ran')
+assert.equal(row(report(replayData('failure'), config), 'central-native-title-replay').status, 'failed')
+config = manifest(); config.jobs.push({ ...structuredClone(full.jobs.find((job) => job.id === 'central-native-title-replay')), step_name: undefined })
+assert.throws(() => validateJobManifest(JSON.parse(JSON.stringify(config))), /invalid-workflow-manifest/, 'A step proof names its step')
+
 config = manifest(); config.jobs.push({ ...config.jobs[0], id: 'another-free-check' }); config.jobs[0].enabled = false
 assert.equal(row(report(snapshot(), config), 'central-checks').status, 'prepared')
 assert.notEqual(report(snapshot(), config).central.status, 'healthy', 'Preparing a required replacement is not proof it is active')
@@ -195,6 +224,31 @@ const observed = await collectWatchdogSnapshot(manifest(), { token: 'fixture-tok
 assert.equal(report(observed).status, 'healthy')
 assert.ok(calls.some((url) => url.includes('event=schedule')))
 assert.ok(calls.some((url) => url.includes(`ref=${sha}`)), 'Source receipts are read at an independently fetched immutable main revision')
+// A rare branch family that fell out of the bounded history is found by its pull requests and read from its own branch.
+const familyCalls = []
+const familyManifest = manifest(); familyManifest.jobs.push(structuredClone(full.jobs.find((job) => job.id === 'central-fresh-context')))
+const familyRun = { id: 77, event: 'pull_request', head_branch: 'harness/brain-repository-administration-v1', status: 'completed', conclusion: 'success', created_at: old, run_started_at: old, head_sha: sha }
+const familyFetch = (pulls = true) => async (url, options) => {
+  const target = new URL(url), path = target.pathname
+  let value
+  if (path.endsWith('/actions/workflows/repository-administration.yml')) value = { state: 'active' }
+  else if (path.endsWith('/actions/workflows/repository-administration.yml/runs') && target.searchParams.get('branch')) { familyCalls.push(target.searchParams.get('branch')); value = { total_count: 1, workflow_runs: [familyRun] } }
+  else if (path.endsWith('/actions/workflows/repository-administration.yml/runs')) value = { total_count: 1, workflow_runs: [{ ...familyRun, id: 78, head_branch: 'claude/elsewhere', created_at: at, run_started_at: at, conclusion: 'failure' }] }
+  else if (path === '/search/issues') { assert.equal(target.searchParams.get('q'), 'repo:krishanraja/ai-harness is:pr head:harness/brain-repository-administration'); value = { items: [{ number: 134 }] } }
+  else if (path.endsWith('/pulls/134')) { if (!pulls) return { ok: false, status: 403, text: async () => 'PRIVATE_SENTINEL' }; value = { head: { ref: 'harness/brain-repository-administration-v1', repo: { full_name: 'krishanraja/ai-harness' } } } }
+  else if (path.endsWith('/runs/77/jobs')) value = { total_count: 4, jobs: matrix('success') }
+  else if (path.endsWith('/runs/78/jobs')) value = { total_count: 4, jobs: matrix('skipped') }
+  else return fetchImpl(url, options)
+  assert.equal(options.method, 'GET')
+  return { ok: true, status: 200, text: async () => JSON.stringify(value) }
+}
+const familyObserved = await collectWatchdogSnapshot(familyManifest, { token: 'fixture-token', fetchImpl: familyFetch(), now })
+assert.deepEqual(familyCalls, ['harness/brain-repository-administration-v1'])
+assert.equal(row(report(familyObserved, familyManifest), 'central-fresh-context').status, 'healthy', 'The latest family run is the evidence, however old')
+const familyBlind = await collectWatchdogSnapshot(familyManifest, { token: 'fixture-token', fetchImpl: familyFetch(false), now })
+assert.equal(row(report(familyBlind, familyManifest), 'central-fresh-context').status, 'never-started', 'A failed lookup observes nothing and claims nothing')
+const familyConfig = structuredClone(familyManifest); familyConfig.evidence.max_family_pulls = 6
+assert.throws(() => validateJobManifest(familyConfig), /invalid-evidence-limits/)
 const policy = JSON.parse(readFileSync(fileURLToPath(new URL('../config/inference-policy.json', import.meta.url)), 'utf8'))
 Object.assign(policy, { enabled: true, approval_ref: 'fixture-only-approved-policy', monthly_limit_usd: 50, review_reserve_usd: 10 })
 const budgetFetch = (mismatch = false) => async (url, options) => {
@@ -237,4 +291,4 @@ assert.doesNotMatch(workflow, /needs:|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|
 assert.match(workflow, /actions: read/)
 assert.match(workflow, /persist-credentials: false/)
 assert.match(workflow, /retention-days: 1/)
-console.log('HARNESS WATCHDOG OK: missing and stale workers, source accounts, verified zero work, partial/inaccessible evidence, optional PC isolation, budget pauses and sanitized GET-only reporting')
+console.log('HARNESS WATCHDOG OK: weekly jobs between daily failures, named step proof, rare branch families, missing and stale workers, source accounts, verified zero work, partial/inaccessible evidence, optional PC isolation, budget pauses and sanitized GET-only reporting')

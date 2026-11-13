@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { reconcileRepository, checksPassed } from './reconcile-repository-admin.mjs'
+import { reconcileRepository, checksPassed, checksWaiting } from './reconcile-repository-admin.mjs'
 import { rollbackFile, region } from './repository-admin.mjs'
 import { Gh } from './lib/github.mjs'
 const profile = { schema_version: 1, repository: 'content-engine', enabled: true, families: ['repository-administration'], source_revision: 'a'.repeat(40), context_path: 'docs/HARNESS_CONTEXT.md', entrypoints: { agents: 'AGENTS.md', claude: 'CLAUDE.md' }, bootstrap_limit_chars: 10000, sources: [{ path: 'README.md', role: 'orientation', label: 'Purpose' }], workflows: [] }
@@ -38,6 +38,7 @@ assert.equal(merged.rollback.base,'a'.repeat(40))
 let uncheckedMerges = 0
 const unrelatedOnly = await reconcileRepository({profile,gh:{...merging,checksFor:async()=>({runs:[{name:'lint',status:'completed',conclusion:'success'}],statuses:{}}),req:async(method,path,...args)=>{if(method==='PUT')uncheckedMerges++;return merging.req(method,path,...args)}},history:[],write:true,merge:true})
 assert.equal(unrelatedOnly.status,'awaiting-checks','Unrelated successful CI cannot replace the managed integrity check')
+assert.deepEqual(unrelatedOnly.checks,{missing:['operating-context'],pending:[],failed:[],statuses:[]},'A held pull request says what it waits on')
 assert.equal(uncheckedMerges,0,'Missing integrity proof must stop before the merge API')
 await assert.rejects(()=>reconcileRepository({profile,gh:{...merging,getFile:async(repo,path,ref)=>({text:ref==='c'.repeat(40)&&path==='AGENTS.md'?'A human changed this branch.':(['c'.repeat(40),'merged'].includes(ref)?candidate[path]??source[path]:source[path])})},history:[],write:true,merge:true}),/source_moved/)
 assert.equal(checksPassed({ runs: [], statuses: {} }), false)
@@ -48,6 +49,7 @@ assert.equal(checksPassed({ runs: [{...integrityCheck,status:'in_progress',concl
 assert.equal(checksPassed({ runs: [{...integrityCheck,conclusion:'skipped'}], statuses: {} }), false)
 assert.equal(checksPassed({ runs: [integrityCheck,{name:'other',status:'completed',conclusion:'failure'}], statuses: {} }), false)
 assert.equal(checksPassed({ runs: [integrityCheck], statuses: { 'harness/judge': 'failure' } }), false)
+assert.deepEqual(checksWaiting({ runs: [integrityCheck, { name: 'typecheck', status: 'completed', conclusion: 'failure' }, { name: 'closeout', status: 'queued', conclusion: null }], statuses: { 'Vercel': 'pending', ok: 'success' } }), { missing: [], pending: ['closeout'], failed: ['typecheck:failure'], statuses: ['Vercel:pending'] })
 const original = 'Human text\n' + region('Old instructions', '0'.repeat(12)) + '\n'
 const delivered = 'Human text\n' + region('New instructions', '1'.repeat(12)) + '\n'
 const current = delivered.replace('Human text', 'New human text')

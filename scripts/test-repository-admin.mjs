@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import { policyAt, seal } from './repository-brain.mjs'
-import { planAdministration, renderAdministration, inspectRegion, bootstrapMeasure, spliceRegion, region, registerHook, closeoutHook, targetCheck, TARGET_CHECK, TARGET_HOOK, TARGET_SETTINGS, HOOK_COMMAND } from './repository-admin.mjs'
+import { planAdministration, readAdministrationSources, renderAdministration, inspectRegion, bootstrapMeasure, spliceRegion, region, registerHook, closeoutHook, targetCheck, TARGET_CHECK, TARGET_HOOK, TARGET_SETTINGS, HOOK_COMMAND } from './repository-admin.mjs'
 import { createHash } from 'node:crypto'
 import { digest } from './lib/learning-episode.mjs'
 const policy = policyAt()
@@ -70,4 +70,20 @@ assert.equal(planAdministration(profile, { ...files, [TARGET_CHECK]: priorCheck 
 assert.throws(() => planAdministration(profile, { ...files, [TARGET_CHECK]: 'name: edited by hand\n' }, [], { policy: upgradePolicy }), /repository_context_check_drift/)
 assert.throws(() => planAdministration(profile, { ...files, [TARGET_HOOK]: '// edited by hand\n' }, [], { policy }), /closeout_hook_drift/)
 assert.ok(policy.prior_owned[TARGET_CHECK].includes('85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d'), 'The check every admitted repository carries today upgrades in place')
-console.log('REPOSITORY ADMIN OK: closeout hook, pinned check, merged settings, upgrades and drift; exact preservation, deterministic reruns, drift, scopes, budgets, routes and migration seals')
+// A required read the repository added after its profile was inventoried is fetched, not reported missing
+// (growth-heartside, 2026-11-09 to 2026-11-13: codex/INDEX.md blocked every nightly run).
+const later = { ...after, 'AGENTS.md': after['AGENTS.md'].replace('Keep this human sentence exactly.', 'Keep this human sentence exactly.\n\nRead `NOW.md` first, then `codex/INDEX.md` before any Codex work.'), 'NOW.md': 'State.\n', 'codex/INDEX.md': 'Cards.\n', 'docs/unasked.md': 'Never fetched.\n' }
+const loaded = []
+const sources = await readAdministrationSources(profile, (path) => { loaded.push(path); return later[path] ?? null })
+assert.equal(sources['codex/INDEX.md'], 'Cards.\n')
+assert.ok(!loaded.includes('docs/unasked.md'), 'Only what the entry files tell an agent to read is fetched')
+assert.equal(loaded.filter((p) => p === 'codex/INDEX.md').length, 1)
+assert.deepEqual(planAdministration(profile, sources, [], { policy }).changes, {}, 'The later read is satisfied, so the view stays current')
+assert.throws(() => planAdministration(profile, Object.fromEntries(Object.entries(sources).filter(([p]) => p !== 'codex/INDEX.md')), [], { policy }), /bootstrap_source_missing:codex\/INDEX.md/, 'A plan that was never given the read still says so')
+const absent = await readAdministrationSources(profile, (path) => path === 'codex/INDEX.md' ? null : later[path] ?? null)
+assert.throws(() => planAdministration(profile, absent, [], { policy }), /bootstrap_source_missing:codex\/INDEX.md/, 'A read missing from the repository itself still blocks')
+const nested = { 'AGENTS.md': 'Read `docs/A.md` first.\n', 'docs/A.md': 'Read `B.md` first.\n', 'docs/B.md': 'Leaf.\n' }
+assert.deepEqual(bootstrapMeasure((p) => nested[p] ?? null).files, ['AGENTS.md', 'docs/A.md', 'docs/B.md'])
+assert.deepEqual(bootstrapMeasure((p) => ({ 'AGENTS.md': nested['AGENTS.md'], 'docs/A.md': nested['docs/A.md'] })[p] ?? null).wanted, ['B.md', 'docs/B.md'], 'An unread reference asks for both the root and the relative path')
+await assert.rejects(() => readAdministrationSources(profile, (path) => path === 'AGENTS.md' ? Array.from({ length: 40 }, (_, i) => `Read \`n${i}.md\` first.`).join('\n\n') : null), /bootstrap_sources_over_limit/)
+console.log('REPOSITORY ADMIN OK: required reads added after inventory, closeout hook, pinned check, merged settings, upgrades and drift; exact preservation, deterministic reruns, drift, scopes, budgets, routes and migration seals')

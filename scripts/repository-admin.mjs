@@ -87,7 +87,7 @@ export function spliceRegion(text, block, kind = ADMIN) {
 }
 
 export function bootstrapMeasure(read) {
-  const seen = new Set(), active = new Set(), missing = new Set()
+  const seen = new Set(), active = new Set(), missing = new Set(), wanted = new Set()
   let total = 0
   const visit = (path, nativeImport = false) => {
     if (active.has(path)) { if (nativeImport) throw new Error('instruction_import_cycle'); return }
@@ -100,13 +100,31 @@ export function bootstrapMeasure(read) {
       const native = [...line.matchAll(/(?:^|\s)@([A-Za-z0-9_.\/-]+\.md)\b/g)].map((m) => m[1])
       const mandatory = /^\s*(?:[-*]\s*)?(?:\*\*)?(?:read\b.*\bfirst\b|start every session\b|before doing anything\b)|\bmust then read\b|^\s*(?:\*\*)?read\b.*\bthen\b/i.test(line) ? [...line.matchAll(/`([A-Za-z0-9_.\/-]+\.md)`/g)].map((m) => m[1]) : []
       const relative = (next) => read(next) != null ? next : posix.normalize(posix.join(posix.dirname(path), next))
+      // An unread reference may name a path from the root or from this file; a reader fetches both before judging.
+      for (const next of [...native, ...mandatory]) if (sourcePath(next) && read(next) == null) for (const candidate of [next, relative(next)]) if (sourcePath(candidate)) wanted.add(candidate)
       for (const next of native) if (sourcePath(next)) visit(relative(next), true)
       for (const next of mandatory) if (sourcePath(next)) visit(relative(next))
     }
     active.delete(path)
   }
   for (const path of ['AGENTS.md', 'CLAUDE.md']) if (read(path) != null) visit(path)
-  return { chars: total, files: [...seen].sort(), missing: [...missing].sort() }
+  return { chars: total, files: [...seen].sort(), missing: [...missing].sort(), wanted: [...wanted].sort() }
+}
+
+/**
+ * The files a plan reads: the profile's own paths, then every file its entry files tell an agent to read. A profile
+ * is inventoried once, so a required read a repository adds later is fetched here instead of reported missing; only
+ * a file absent from the repository itself is missing.
+ */
+export async function readAdministrationSources(profile, load, { limit = 32 } = {}) {
+  const files = {}
+  for (const path of [...new Set(['AGENTS.md', 'CLAUDE.md', ...OWNED, profile.context_path, ...profile.sources.map((s) => s.path)])]) files[path] = await load(path)
+  for (let fetched = 0; ;) {
+    const next = bootstrapMeasure((p) => files[p] ?? null).wanted.filter((p) => !(p in files))
+    if (!next.length) return files
+    if ((fetched += next.length) > limit) throw new Error('bootstrap_sources_over_limit')
+    for (const path of next) files[path] = await load(path)
+  }
 }
 
 export function renderAdministration(profile, history, policy = policyAt()) {
@@ -226,8 +244,7 @@ if (main) {
   const repository = flag('--repo'), dir = resolve(flag('--checkout') || '.')
   const profile = profiles().find((p) => p.repository.toLowerCase() === String(repository).toLowerCase())
   if (!profile) throw new Error('repository_not_admitted')
-  const paths = [...new Set(['AGENTS.md', 'CLAUDE.md', ...OWNED, profile.context_path, ...profile.sources.map((s) => s.path)])]
-  const files = Object.fromEntries(paths.map((p) => [p, existsSync(join(dir, p)) ? readFileSync(join(dir, p), 'utf8') : null]))
+  const files = await readAdministrationSources(profile, (p) => existsSync(join(dir, p)) ? readFileSync(join(dir, p), 'utf8') : null)
   const migrationPath = join(ROOT, 'state/repository-administration/migrations', `${profile.repository}.json`)
   const migration = !inspectRegion(files['AGENTS.md'] || '').present && existsSync(migrationPath) ? JSON.parse(readFileSync(migrationPath, 'utf8')) : null
   const plan = planAdministration(profile, files, knowledgeHistory(), { migration })
