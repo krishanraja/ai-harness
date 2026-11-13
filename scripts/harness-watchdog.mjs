@@ -36,7 +36,9 @@ export function validateJobManifest(manifest) {
     if (job.kind === 'heartbeat' && (!/^[a-z][a-z0-9-]+$/.test(job.heartbeat_key || '') || job.required)) throw failure('local-adapter-cannot-gate-central')
     ids.add(job.id)
   }
-  for (const id of ['claude-cloud-account-1', 'claude-cloud-account-2']) if (!manifest.jobs.some((job) => job.id === id && job.kind === 'source' && job.required && job.enabled)) throw failure('required-account-removed')
+  // Both cloud-account slots stay listed so a future reader can report into them. Since Krish's ruling of 2026-11-13
+  // ("readers not required") neither has to be required: an optional slot is reported, never counted toward health.
+  for (const id of ['claude-cloud-account-1', 'claude-cloud-account-2']) if (!manifest.jobs.some((job) => job.id === id && job.kind === 'source')) throw failure('account-slot-removed')
   if (!manifest.jobs.some((job) => job.kind === 'workflow' && job.required && job.enabled && job.budget_class === 'free')) throw failure('required-central-check-removed')
   const e = manifest.evidence
   if (!e || ['health_path', 'observation_directory', 'measurement_verification_path', 'checkpoints_path', 'heartbeats_path'].some((key) => !safePath(e[key])) || ['max_ledger_files', 'max_response_bytes', 'max_run_pages', 'runs_per_page', 'max_job_runs', 'max_job_pages'].some((key) => !integer(e[key]) || e[key] < 1) || e.max_ledger_files > 24 || e.max_response_bytes > 4194304 || e.max_run_pages > 3 || e.runs_per_page > 100 || e.max_job_runs > 20 || e.max_job_pages > 3) throw failure('invalid-evidence-limits')

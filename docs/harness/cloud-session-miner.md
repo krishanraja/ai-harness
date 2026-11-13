@@ -1,5 +1,29 @@
 # Cloud session miner
 
+**Retired on 2026-11-13.** Asked whether to set up a weekly Claude scheduled
+task in each of his two Claude accounts or to rule them not required, Krish
+answered: "readers not required". Ruling (Krish, 2026-11-13): the two
+cloud-account reader slots are not required; live capture through the
+connector is the route, and no Claude scheduled task reads sessions. That also
+keeps his 2026-10-29 ruling: "I want zero Claude routines. No Claude schedules
+of any kind in this architecture".
+
+- **Live capture is the only route for cloud sessions.** Every session sends a
+  redacted lesson through the Control Center connector
+  (`record_harness_observation`) right after a correction, and Ruling lines in
+  merged commits reach the ledger as before.
+- **The scheduled task is off.** "Session miner: weekly cloud sessions" in
+  Krish's main account was switched off (enabled false) on 2026-11-13. The
+  other account was never read and holds no known copy. Do not recreate it.
+- **The watchdog slots stay, optional.** `claude-cloud-account-1` and
+  `claude-cloud-account-2` in `config/harness-jobs.json` are `required: false`
+  and still enabled, so a supported reader could report into them one day; an
+  unread optional slot shows as inaccessible and never makes the watchdog
+  unhealthy.
+
+Everything below is kept as the record of what the miner was and how it was
+meant to work. It describes no running job.
+
 **State on 2026-11-12: it reads nothing.** Read from one of the two accounts
 that day: a weekly scheduled task, "Session miner: weekly cloud sessions"
 (Sundays 17:47 UTC), exists there, but it holds an older prompt that starts a

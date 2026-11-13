@@ -28,16 +28,18 @@ source access, successful scheduled delivery or long-term effectiveness.
 | Fresh-context fixtures | Existing API action | `repository-api-context.mjs` with observed allowlisted reads | Approved accounting policy; labelled API fixture, never native client discovery |
 | Native title-history replay | Direct API and authorized pinned source read | Same comparison through shared API boundary | Approved accounting policy; private prose remains in memory |
 | Local session interpretation | Local `claude -p` | Explicit `--extractor api`, no fallback | Private execution/source approval and verified preflight; no cursor advancement on failure |
-| Two required cloud accounts | Live capture through the Control Center connector, plus one weekly Claude-scheduled miner per account (`cloud-session-miner.md`) | Supported collector/export feeding the existing durable intake, if one becomes available | No supported interface exists for a GitHub runner to read cloud sessions (Ruling, Krish, 2026-10-18); independently verified account identities, enumeration windows, pagination and real receipts |
+| Two cloud accounts (optional slots) | Live capture through the Control Center connector only. The weekly Claude-scheduled miner is retired and its task in the main account was switched off on 2026-11-13 (`cloud-session-miner.md`) | Supported collector/export feeding the existing durable intake, if one becomes available | None required: the slots are optional (Ruling, Krish, 2026-11-13: "readers not required"). No supported interface exists for a GitHub runner to read cloud sessions (Ruling, Krish, 2026-10-18); a future reader would still need independently verified account identities, enumeration windows, pagination and real receipts |
 | Local collection and installed-client probes | PC files/native clients | Explicitly local adapters | Their absence cannot stop central processing or certify API parity |
 | Independent central observation | Hourly GitHub observer, activated 2026-10-23 | `harness-watchdog.yml` and one runtime manifest | A normal scheduled run and its retained report |
 | Observation outside GitHub | Existing Control Center owner | Same check shared with existing six-hour health sweep | Private change review, deployed readback and actual scheduled evidence |
 | Weekly digest | Existing Control Center workbench route | Durable pending state, exact retry and authoritative readback | Existing credential; no new destination |
 | Later actionable incidents | Disabled notification policy | Same route with stable occurrence identities | Separate named activation; no watcher-to-notification wiring is active |
 
-`config/harness-jobs.json` is the observer's runtime manifest. Required account
-slots with no independently verified binding remain blocked. A healthy PC or
-one healthy account cannot stand in for missing required source coverage.
+`config/harness-jobs.json` is the observer's runtime manifest. Account slots
+with no independently verified binding remain blocked. Both cloud-account slots
+are optional since 2026-11-13, so they are reported but gate nothing; a slot
+made required again would count, and a healthy PC or one healthy account could
+not stand in for it.
 
 ## Shared API enforcement
 

@@ -9,11 +9,17 @@ import { measurementSeal } from './lib/repository-measurements.mjs'
 const full = JSON.parse(readFileSync(fileURLToPath(new URL('../config/harness-jobs.json', import.meta.url)), 'utf8'))
 const now = '2026-10-18T12:00:00.000Z', at = '2026-10-18T11:00:00.000Z', old = '2026-10-01T01:00:00.000Z'
 const sha = 'a'.repeat(40), first = '1'.repeat(64), second = '2'.repeat(64)
-const manifest = () => {
+// The production slots exactly as configured: optional, enabled, no account identity bound.
+const production = () => {
   const value = structuredClone(full)
   value.jobs = value.jobs.filter((job) => ['central-checks', 'claude-cloud-account-1', 'claude-cloud-account-2', 'optional-local-sync'].includes(job.id))
-  value.jobs.find((job) => job.id === 'claude-cloud-account-1').account_sha256 = first
-  value.jobs.find((job) => job.id === 'claude-cloud-account-2').account_sha256 = second
+  return value
+}
+// A manifest that makes both slots required again, with bound identities, so the required-source rules stay proven
+// for the day a supported reader exists and Krish asks for it to gate health.
+const manifest = () => {
+  const value = production()
+  for (const [id, account] of [['claude-cloud-account-1', first], ['claude-cloud-account-2', second]]) Object.assign(value.jobs.find((job) => job.id === id), { required: true, account_sha256: account })
   return value
 }
 const source = (account, details = {}) => ({
@@ -40,10 +46,15 @@ const row = (value, id) => value.jobs.find((job) => job.id === id)
 const run = (data) => data.workflows['harness-steward.yml:schedule'].runs[0]
 
 validateJobManifest(full)
-assert.equal(full.jobs.filter((job) => job.kind === 'source' && job.required).length, 2)
-assert.ok(full.jobs.filter((job) => job.kind === 'source').every((job) => job.account_sha256 === null), 'No production account identity is invented')
+// Ruling (Krish, 2026-11-13): the two cloud-account reader slots are not required. They stay listed and enabled.
+const slots = full.jobs.filter((job) => job.kind === 'source')
+assert.deepEqual(slots.map((job) => job.id), ['claude-cloud-account-1', 'claude-cloud-account-2'])
+assert.ok(slots.every((job) => job.required === false && job.enabled === true), 'Both slots are optional and still enabled, so a future reader reports into them')
+assert.ok(slots.every((job) => /2026-11-13/.test(job.limits) && /record_harness_observation/.test(job.limits)), 'Each slot says why it is optional and names the live capture route')
+assert.ok(slots.every((job) => job.account_sha256 === null), 'No production account identity is invented')
 assert.equal(full.watchdog.activation, 'enabled')
-assert.throws(() => validateJobManifest({ ...full, jobs: full.jobs.filter((job) => job.id !== 'claude-cloud-account-2') }), /required-account-removed/)
+for (const id of ['claude-cloud-account-1', 'claude-cloud-account-2']) assert.throws(() => validateJobManifest({ ...full, jobs: full.jobs.filter((job) => job.id !== id) }), /account-slot-removed/, `${id} must still exist`)
+validateJobManifest(manifest())
 const duplicate = manifest(); duplicate.jobs.find((job) => job.id === 'claude-cloud-account-2').account_sha256 = first
 assert.throws(() => validateJobManifest(duplicate), /invalid-source-manifest/)
 
@@ -80,6 +91,21 @@ assert.equal(row(report(data), 'central-checks').status, 'failed', 'An upstream 
 config = manifest(); config.jobs.push({ ...config.jobs[0], id: 'another-free-check' }); config.jobs[0].enabled = false
 assert.equal(row(report(snapshot(), config), 'central-checks').status, 'prepared')
 assert.notEqual(report(snapshot(), config).central.status, 'healthy', 'Preparing a required replacement is not proof it is active')
+
+// An optional slot no reader can reach is reported as it is, and the watchdog is still healthy; a required one is not.
+const readersOff = report(snapshot(), production())
+assert.equal(row(readersOff, 'claude-cloud-account-1').status, 'inaccessible', 'An unread optional slot still shows what it is')
+assert.equal(row(readersOff, 'claude-cloud-account-2').required, false)
+assert.equal(readersOff.status, 'healthy', 'An optional inaccessible slot does not make the watchdog unhealthy')
+assert.equal(readersOff.required_sources.expected_accounts, 0)
+assert.match(watchdogSummary(readersOff), /\| claude-cloud-account-1 \| no \| inaccessible \|/)
+data = snapshot(); data.evidence.observations.rows[1].measurement.observed_at = old
+config = manifest(); config.jobs.find((job) => job.id === 'claude-cloud-account-2').required = false
+assert.equal(row(report(data, config), 'claude-cloud-account-2').status, 'stale')
+assert.equal(report(data, config).status, 'healthy', 'Nor does an optional slot whose reader went quiet')
+config = production(); config.jobs.find((job) => job.id === 'claude-cloud-account-2').required = true
+assert.notEqual(report(snapshot(), config).status, 'healthy', 'A required inaccessible slot still would')
+assert.equal(report(snapshot(), config).required_sources.expected_accounts, 1)
 
 config = manifest(); config.jobs.find((job) => job.id === 'claude-cloud-account-2').account_sha256 = null
 assert.equal(row(report(snapshot(), config), 'claude-cloud-account-2').status, 'inaccessible')

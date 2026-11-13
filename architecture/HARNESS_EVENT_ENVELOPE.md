@@ -17,7 +17,8 @@ Content-Type: application/json
 Clients call the HTTPS endpoint directly through their native network or tool
 capability. There is one declared exception to "no installed helper": the
 opt-in weekly session miner (`scripts/Invoke-SessionMiner.ps1` on a named
-machine, and a cloud scheduled task for Claude Code cloud sessions). It reads
+machine; the cloud scheduled task for Claude Code cloud sessions was retired
+by Krish's ruling of 2026-11-13, so cloud sessions rely on live capture). It reads
 session logs where they already are, redacts locally before any model sees an
 excerpt, and submits only envelope events through this same endpoint (Ruling,
 Krish, 2026-10-14). Nothing raw leaves the machine and nothing raw enters the
