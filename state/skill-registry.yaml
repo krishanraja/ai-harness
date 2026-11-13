@@ -74,36 +74,47 @@ deployed_release:
   status: current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes
 
 latest_approved_release:
-  release_id: v2026.11.13.1
-  tag: harness-v2026.11.13.1
-  source_commit: 7dca81da8fe4208be2a7de667dceed5347f6ef46
+  release_id: v2026.11.13.2
+  tag: harness-v2026.11.13.2
+  source_commit: 3d81dc858b6ccf6ed804668b4814aef1e5f18e31
   published: true
   immutable: true
-  published_at: 2026-11-13T12:16:27Z
-  manifest_sha256: 3D2AB0E019BB703863EA2FEA19ABC30178118B344C0B25E662A2883A4932DCCC
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.13.1
-  skills_tree_aggregate_sha256: F1ED1DA6FB2055A20B0BEA8563D55C2591E3A72206273FEB937A2F5B55F38F76
+  published_at: 2026-11-13T14:21:42Z
+  manifest_sha256: D6A5B2818E2CC2FFCA8393CD77E5E8D3C2369DD2655B1B0BE505FCACEEEBB040
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.13.2
+  skills_tree_aggregate_sha256: 5A92D6BD0F64E381D6CCB42935A9EF685875A4FA642A868A43852B21F432BB1A
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - krish-design
-    - krish-voice
+    - krish-principles
+    - mindmake
   approved_at: 2026-11-13
   approved_by: Krish Raja
   approval_basis: >-
     Standing ruling (Krish, 2026-10-15): merging a change to main approves the release
-    built from it. Cut automatically from main at 7dca81da8fe4 after
+    built from it. Cut automatically from main at 3d81dc858b6c after
     validate-and-repeat-build passed; this record was written by
     scripts/register-release.mjs.
   supersedes_reason: >-
-    v2026.11.11.1 remains the immutable immediate rollback target.
+    v2026.11.13.1 remains the immutable immediate rollback target.
   hash_provenance: >-
-    manifest_sha256 is the SHA-256 of release-v2026.11.13.1.json downloaded from the
+    manifest_sha256 is the SHA-256 of release-v2026.11.13.2.json downloaded from the
     release. skills_tree_aggregate_sha256 was recomputed from the committed git objects
     at source_commit by scripts/register-release.mjs with the
     sha256-path-nul-file-sha256-ordinal-v1 record format.
 
 
 previous_published_release:
+  release_id: v2026.11.13.1
+  tag: harness-v2026.11.13.1
+  source_commit: 7dca81da8fe4208be2a7de667dceed5347f6ef46
+  immutable: true
+  published_at: 2026-11-13T12:16:27Z
+  manifest_sha256: 3D2AB0E019BB703863EA2FEA19ABC30178118B344C0B25E662A2883A4932DCCC
+  skills_tree_aggregate_sha256: F1ED1DA6FB2055A20B0BEA8563D55C2591E3A72206273FEB937A2F5B55F38F76
+  status: immediate-immutable-rollback-baseline
+
+
+superseded_approved_release:
   release_id: v2026.11.11.1
   tag: harness-v2026.11.11.1
   source_commit: 76f195441a1b23afa75ac668c872aaf403752f94
@@ -111,19 +122,8 @@ previous_published_release:
   published_at: 2026-11-11T08:09:42Z
   manifest_sha256: 0A5E4ECBFFAF0BBE495BF2DF79FF7E3D65A98C13DA331CAA368F6BF3B9679FA8
   skills_tree_aggregate_sha256: ED2461F88877C0994A85E2E1ED42A02E8F6F4D33A7B34AA8466CE31B9C2CC47B
-  status: immediate-immutable-rollback-baseline
-
-
-superseded_approved_release:
-  release_id: v2026.11.10.2
-  tag: harness-v2026.11.10.2
-  source_commit: 35eaa700b99ddd7e449d67e89ff14eb117bcc754
-  immutable: true
-  published_at: 2026-11-10T15:47:41Z
-  manifest_sha256: A38B3BE383040B24EA913C9596DD67897CA04227011465D50E93ED65E5BC56EF
-  skills_tree_aggregate_sha256: DA54DE8472C1B6EDF70831EC3080F197D0D92706D90088687383690E542DF0C0
   note: >-
-    Retained as the second immutable rollback target after v2026.11.11.1.
+    Retained as the second immutable rollback target after v2026.11.13.1.
 
 
 surface_deployments:
@@ -144,7 +144,7 @@ surface_deployments:
       - state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json
       - state/deployments/v2026.10.06.3-codex-surface-07a67cda9f99.json
       - state/machine-runs/v2026.10.06.3-surface.json
-    status: awaiting-automatic-install-of-v2026.11.13.1
+    status: awaiting-automatic-install-of-v2026.11.13.2
     previous_release: v2026.10.06.2
   cursor-primary:
     release_id: v2026.11.11.1
@@ -158,7 +158,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.3-20261006T212041Z-b93d1a7c
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.13.1
+    status: awaiting-automatic-install-of-v2026.11.13.2
     previous_release: v2026.11.08.1
   claude-code-user:
     release_id: v2026.11.11.1
@@ -172,7 +172,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.3-20261006T210825Z-82f20902
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.13.1
+    status: awaiting-automatic-install-of-v2026.11.13.2
     previous_release: v2026.11.08.1
   codex-current:
     release_id: v2026.11.11.1
@@ -186,7 +186,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.3-20261006T212047Z-3bb3bf3b
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.13.1
+    status: awaiting-automatic-install-of-v2026.11.13.2
     previous_release: v2026.11.08.1
   claude-cloud:
     release_id: v2026.10.06.3
@@ -194,7 +194,7 @@ surface_deployments:
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-manual-cloud-upload-required-for-v2026.11.13.1
+    status: stale-manual-cloud-upload-required-for-v2026.11.13.2
   claude-secondary-cloud:
     # Krish's second claude.ai account, governed as its own surface from
     # 2026-10-27. No record says what it holds: claude-cloud above is the one
@@ -208,21 +208,21 @@ surface_deployments:
     installed_skill_count: null
     deployed_at: null
     evidence: null
-    status: stale-manual-cloud-upload-required-for-v2026.11.13.1
+    status: stale-manual-cloud-upload-required-for-v2026.11.13.2
   perplexity-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-manual-cloud-upload-required-for-v2026.11.13.1
+    status: stale-manual-cloud-upload-required-for-v2026.11.13.2
   codex-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/codex-cloud.json
-    status: awaiting-environment-refresh-for-v2026.11.13.1
+    status: awaiting-environment-refresh-for-v2026.11.13.2
 
 canonical:
   repository: krishanraja/ai-harness
