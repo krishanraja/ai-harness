@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T02:37:30.694Z",
+  "generated_at": "2026-11-13T10:45:35.883Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "dc4ddbcdbd2af07eba18f16f62bb6fe5e183405c",
+      "base": "3dd8afdf2f506ec0e783f53fa56f7a00a0905870",
       "brain_revision": "379ce05f4241",
-      "before": 422317,
-      "after": 422317,
+      "before": 423618,
+      "after": 423618,
       "files": [],
       "skipped": [],
-      "source_seal": "9787cee8f1bea76c9c9e9318b508901d6d118257928c35c6e9c6845e30951fe8",
+      "source_seal": "2a5cf4beabc0ce215ec78c0a10c49a2fc2ab028ba0e02aa065d83018c9f82024",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "b062740589aa2d93cf20e64c407c32252ef04c60",
+      "base": "14b7b75221e86f7e9852b51fa5dfa1a4af2d78a0",
       "brain_revision": "155b79828fb7",
-      "before": 26945,
-      "after": 26945,
+      "before": 25391,
+      "after": 25391,
       "files": [],
       "skipped": [],
-      "source_seal": "4dbcc4fd2570b9b4f6c128417ebcc6e5a67a0778e25782afbc951fd193f7ef52",
+      "source_seal": "e2ea15c0f261e04ac996d7a64b31412d12172bc41234daecf18cea5b68e5750f",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "2df9400a7ae9a1f336d6dacac30cb6e5e4e7ea87",
+      "base": "c8b326b60c8f4fd5f7aed0a098866f4c212d3617",
       "brain_revision": "ba41f521a760",
-      "before": 113133,
-      "after": 113133,
+      "before": 113532,
+      "after": 113532,
       "files": [],
       "skipped": [],
-      "source_seal": "02296aea4b826968ca8fef29a53b59b9138fb502c1aa4b8cc8b89cf03e045096",
+      "source_seal": "7d9d507e6c32a504a9a9dde71f9c84ac50294d03e466771bd2d6ebb37cc79e63",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -150,7 +150,15 @@
       ],
       "status": "awaiting-checks",
       "pr": 103,
-      "head": "966cbf4eae5099effd38f8857e136e704235098c"
+      "head": "966cbf4eae5099effd38f8857e136e704235098c",
+      "checks": {
+        "missing": [],
+        "pending": [],
+        "failed": [
+          "typecheck:failure"
+        ],
+        "statuses": []
+      }
     },
     {
       "repository": "contentarchives",
@@ -226,8 +234,21 @@
     },
     {
       "repository": "growth-heartside",
-      "status": "blocked",
-      "reason": "bootstrap_source_missing:codex-INDEX.md"
+      "base": "338ea068db322e60d449a511c8c11ab88ecd5808",
+      "brain_revision": "4ca70efce153",
+      "before": 112594,
+      "after": 112594,
+      "files": [],
+      "skipped": [],
+      "source_seal": "6890ae71245a134f02217f1dd8dd394746ac842dec5e119fe3bb79ea8608e115",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "current"
     }
   ]
 }
