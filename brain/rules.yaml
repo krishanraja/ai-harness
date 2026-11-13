@@ -286,11 +286,17 @@ contract_rules:
     status: live
   - id: working-style.lead-with-the-conclusion
     file: contract/krish-operating-contract.md
-    text_sha: "3174f22dfde8"
+    text_sha: "847ed24fca77"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "5c5edd0b2480"
+    history:
+      - text_sha: "3174f22dfde8"
+        valid_until: "2026-11-13"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: working-style.make-reasonable-reversible-assumptions
     file: contract/krish-operating-contract.md
