@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T10:45:35.883Z",
+  "generated_at": "2026-11-13T10:52:35.206Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "3dd8afdf2f506ec0e783f53fa56f7a00a0905870",
+      "base": "4950ab7c43eda8c7c14632c0f8d4d13f29b9962f",
       "brain_revision": "379ce05f4241",
-      "before": 423618,
-      "after": 423618,
+      "before": 424312,
+      "after": 424312,
       "files": [],
       "skipped": [],
-      "source_seal": "2a5cf4beabc0ce215ec78c0a10c49a2fc2ab028ba0e02aa065d83018c9f82024",
+      "source_seal": "c8c70c061cd31b76d5c5b3f58a618516b03c2f3a83186d7dc0d7d2e746cf10d2",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "14b7b75221e86f7e9852b51fa5dfa1a4af2d78a0",
+      "base": "1a8a32e0ba9ec372f543c2deb5d3b290f0322941",
       "brain_revision": "155b79828fb7",
-      "before": 25391,
-      "after": 25391,
+      "before": 26049,
+      "after": 26049,
       "files": [],
       "skipped": [],
-      "source_seal": "e2ea15c0f261e04ac996d7a64b31412d12172bc41234daecf18cea5b68e5750f",
+      "source_seal": "8e7c05c751cf098871a0b9a7e5f363649f2effdc97a9f3d695338f0342eefef9",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -158,7 +158,8 @@
           "typecheck:failure"
         ],
         "statuses": []
-      }
+      },
+      "refreshed": true
     },
     {
       "repository": "contentarchives",
