@@ -1,6 +1,6 @@
 # Transcripts, recordings and existing writing
 
-What to do with call recordings, meeting notes, Fireflies or Granola transcripts, emails and documents someone wrote.
+What to do with call recordings, meeting notes, transcripts from your meeting recorder, emails and documents someone wrote.
 
 ## The one thing to understand before you start
 
