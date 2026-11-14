@@ -1223,11 +1223,17 @@ contract_rules:
     status: live
   - id: canon.north-star
     file: contract/templates/canon-block.md
-    text_sha: "951a603d5052"
+    text_sha: "fffb0b70a08b"
     first_seen: "2026-10-18"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+      ref: "docs/proposals/2026-11-14-engine-instructions.md"
+    history:
+      - text_sha: "951a603d5052"
+        valid_until: "2026-11-14"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.close-out
     file: contract/templates/canon-block.md
