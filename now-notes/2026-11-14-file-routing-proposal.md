@@ -1,0 +1,3 @@
+Status: Proposed, waiting on Krish: the operating contract's File routing names only folders that exist: personal under the Family Admin root, a venture's deliverable or knowledge at the folder its repository's Drive map names inside Ventures, and the unsure case in drive_destinations.inbox (Inbox from My AI), replacing the dissolved Personal, _Knowledge and Ventures/Active routes (I-15; docs/proposals/2026-11-14-drive-truth.md).
+Next: Krish accepts or rejects the File-routing change; contract/paths.yaml rules_file (a RULES.md from 2026-10-04, before the reorganisation) is his to re-point or retire.
+North Star check (2026-11-14): holds.
