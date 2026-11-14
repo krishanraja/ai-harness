@@ -1,6 +1,6 @@
 # Proposal: harness text names only Drive folders that exist
 
-Status: skills fixed 2026-11-14; the operating contract's File routing waits on Krish
+Status: skills fixed 2026-11-14; the operating contract's File routing was approved by Krish on 2026-11-14 (item 4.5 of his answers, recorded word for word in control-center `docs/audits/2026-11-14-fleet-integration/KRISH-ANSWERS.md`), and lands in this pull request with the skills
 Source: fleet integration plan I-15 (ai-harness half), "Drive by id".
 
 ## What was wrong
@@ -32,5 +32,6 @@ The harness still named the old tree:
 Name roots by what `drive_destinations` holds and folders by the owning
 repository's Drive map (content-engine `docs/DRIVE.md`, growth-heartside
 `docs/DRIVE-MAP.md`), never by a path restated here: Drive moves, IDs and the
-map follow it. The two skills change in one pull request; the contract's File
-routing is canon and goes to Krish as its own proposal.
+map follow it. The two skills and the contract's File routing change in one pull request.
+The File routing is canon, so it waited for Krish; he approved it on
+2026-11-14.
