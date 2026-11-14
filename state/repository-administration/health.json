@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T16:56:56.388Z",
-  "measurement_verification_at": "2026-11-14T16:56:56.305Z",
+  "generated_at": "2026-11-14T18:13:26.895Z",
+  "measurement_verification_at": "2026-11-14T18:13:26.815Z",
   "sources": {
     "github": {
       "status": "available",
@@ -32,9 +32,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "1df41eadadd3e761f9129b1f2c17c4a63d6a1129",
-      "bootstrap_before": 31004,
-      "bootstrap_after": 31004,
+      "source_base": "721e495de260faaf2294bd9cb2560fe193fde62d",
+      "bootstrap_before": 31319,
+      "bootstrap_after": 31319,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -65,9 +65,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "4c91d19585850f6dd192096cdf9cfef739ee3031",
-      "bootstrap_before": 30606,
-      "bootstrap_after": 30606,
+      "source_base": "4bb27faffce30135ed697b49e591d64b9aa6a535",
+      "bootstrap_before": 34150,
+      "bootstrap_after": 34150,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -98,9 +98,42 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "0ec86fa583e9b931c3b139377140f5abd51c1742",
-      "bootstrap_before": 417383,
-      "bootstrap_after": 417383,
+      "source_base": "b5bdd31b403ad0a5cc138f17aea911e0191cc3eb",
+      "bootstrap_before": 419386,
+      "bootstrap_after": 419386,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "content-watcher",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "blocked",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -164,9 +197,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "4f5cf045434185cc69ec91b2486fd962deaa4eea",
-      "bootstrap_before": 121183,
-      "bootstrap_after": 121183,
+      "source_base": "35ff8540d7d81149450f43aa4de2a120fa862c06",
+      "bootstrap_before": 120938,
+      "bootstrap_after": 120938,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -296,9 +329,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "4ca70efce153",
-      "source_base": "2482ecccf7c89f60791d0116837fa8f583751919",
-      "bootstrap_before": 117469,
-      "bootstrap_after": 117469,
+      "source_base": "ef97dda4f949a6b65e98da6162e1a5f85859d34e",
+      "bootstrap_before": 119958,
+      "bootstrap_after": 119958,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -332,6 +365,105 @@
       "source_base": "6cc68d784fde2ba44665db427da7d44394269425",
       "bootstrap_before": 20915,
       "bootstrap_after": 20915,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "inspirationhouse",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "72f9a61493dc",
+      "source_base": "3542a84449b081d87ae7c6767c594334dc1afc1c",
+      "bootstrap_before": 45152,
+      "bootstrap_after": 45661,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "krish-clone",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "c5bc0e51e137",
+      "source_base": "b7115bac74251e2f86909b32390d7de4c5245bd6",
+      "bootstrap_before": 1736,
+      "bootstrap_after": 2245,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "krish-raja",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "6010f5eab8de",
+      "source_base": "5e0f767f5fa4f57deaa2c674a595526f03f74349",
+      "bootstrap_before": 37406,
+      "bootstrap_after": 37915,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -431,6 +563,39 @@
       "source_base": "4e1db872b949039f5672e1dfacc999d6d3514396",
       "bootstrap_before": 21255,
       "bootstrap_after": 21255,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "sendlinks",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "blocked",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
