@@ -185,14 +185,22 @@ repos:
     rules_files: [CLAUDE.md, AGENTS.md]
     note: krishraja.com. CLAUDE.md is its operating contract. Admitted on the same terms as claude-archive.
 
+  - name: music-watcher
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      trackcard and Krish's Music Brain; runs on the worker server with the Music Inspo watcher.
+      Its North Star is not set yet. Admitted on the same terms as claude-archive (Krish, 2026-11-14).
+
   - name: sendlinks
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, docs/STATE.md]
     default_branch: main
     note: >-
-      Tracked file links (Supabase edge functions). Its default branch is not main until Krish
-      changes the repository setting. Admitted on the same terms as claude-archive.
+      Tracked file links (Supabase edge functions). One branch, main, its default since Krish
+      switched it on 2026-11-14. Admitted on the same terms as claude-archive.
 
 adapters:
   - id: claude
@@ -232,6 +240,11 @@ machines:
       reads the brain and writes to it every 15 minutes and was in no manifest,
       which is why five render logs could die at the 2026-08-29 rebrand and go
       unnoticed for eleven days. Evidence: state/vps-liveness-audit-2026-09-09.md.
+      MOVED 2026-11-14 20:08 UTC: the whole OpenClaw fleet (gateway, 15 jobs, 27
+      cron lines, family bots, clock, Heartside) now runs on the worker server
+      (Hetzner CPX32, Helsinki); the old box was DELETED the same night on
+      Krish's ruling (a Hetzner snapshot is the rollback). 12 items retired by
+      name. Report, checked at T0/T+24h/T+7d: state/vps/MIGRATION-2026-11-14.md.
 
 # What each surface takes from the brain, and what it gives back.
 #
