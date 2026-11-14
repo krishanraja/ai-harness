@@ -37,9 +37,6 @@ export const FORBIDDEN = [
   { label: 'an Anthropic key', pattern: /\bsk-ant-[A-Za-z0-9_-]{20,}/ },
 ]
 
-/** This file names the patterns, so it is the one place they may appear. */
-const SELF = 'scripts/check-public-leaks.mjs'
-
 /** The labels of every forbidden thing found in one text, empty when clean. Pure. */
 export const findLeaks = (text) => FORBIDDEN.filter((f) => f.pattern.test(text)).map((f) => f.label)
 
@@ -83,7 +80,6 @@ if (isMain) {
   }
   const hits = []
   for (const path of tracked()) {
-    if (path === SELF) continue
     let text
     try { text = readFileSync(resolve(ROOT, path)) } catch { continue }
     if (text.includes(0)) continue // binary
@@ -92,6 +88,6 @@ if (isMain) {
   }
   // Never print the match itself: the log of a public repository is public too.
   for (const h of hits) console.error(`::error::${h}. Move it to an environment variable or a symbolic name.`)
-  console.log(hits.length ? `\n${hits.length} leak(s) in tracked files.` : 'PUBLIC LEAK GUARD OK: no key, JWT or database address in tracked files.')
+  console.log(hits.length ? `\n${hits.length} leak(s) in tracked files.` : 'PUBLIC LEAK GUARD OK: no tracked file, this one included, matches a pattern above (a 20-letter Supabase ref, a database URL with a password, an sb_ key, a JWT, a GitHub token or an Anthropic key). It proves those patterns absent, nothing more.')
   process.exit(hits.length ? 1 : 0)
 }
