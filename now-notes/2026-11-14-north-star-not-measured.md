@@ -1,4 +1,0 @@
-Status: The North Star no longer reads a false 0. A week with no taste-ledger row at all, or with fewer repeat rows than the taste ledger's weekly reading marker announced, now reads "not measured, U4" with its reason in the state line, and the observation intake re-measures after every intake, so the number moves when the taste ledger's 05:47 UTC envelopes land instead of a night later. The proposer ignores the marker. The real reading for the week of 2026-11-02 is 18 (18 taste ledger, 0 harness).
-Changed: The steward measured at 01:00 UTC, before the taste ledger sent its 18 repeats at 05:47, and nothing told "0 repeats" from "not read yet" (fleet integration audit, harness-1, 2026-11-14).
-Next: inspirationhouse sends one marker envelope a week (event id taste-ledger:<week>:reading, evidence_ref ending in the week's total, also when 0); until it does, a week with no repeat reads "not measured", which is the honest reading.
-North Star check (2026-11-14): holds.

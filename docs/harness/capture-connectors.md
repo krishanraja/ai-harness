@@ -45,9 +45,12 @@ tool that reads the brain and writes nothing back.
    (Krish, 2026-11-13: "readers not required"): the two cloud-account reader
    slots are not required; live capture through the connector (above) is the
    route, and no Claude scheduled task reads sessions, which keeps his
-   2026-10-29 ruling of zero Claude routines. The weekly "Session miner: weekly
-   cloud sessions" task in his main account was switched off (enabled false)
-   on 2026-11-13. `claude-cloud-account-1` and `claude-cloud-account-2` stay
+   2026-10-29 ruling of zero Claude routines. One task still runs: "Session
+   miner" (`trig_01SGAM5qY3jYEbWCz97KtGEe`, Sundays 11:46 New York time),
+   still enabled on 2026-11-14, which wakes the standing session
+   `session_01AE3PvMNyhCbgp6vvPmrDYr`. Only Krish can switch it off. Until he
+   does, `scripts/mine-sessions.mjs --source cloud-events` reads and sends
+   nothing and says the miner is retired. `claude-cloud-account-1` and `claude-cloud-account-2` stay
    in `config/harness-jobs.json`, enabled but `required: false`, so the
    watchdog shows them as inaccessible without counting them toward its
    health. `docs/harness/cloud-session-miner.md` keeps the old prompt as the

@@ -12,9 +12,16 @@ of any kind in this architecture".
   redacted lesson through the Control Center connector
   (`record_harness_observation`) right after a correction, and Ruling lines in
   merged commits reach the ledger as before.
-- **The scheduled task is off.** "Session miner: weekly cloud sessions" in
-  Krish's main account was switched off (enabled false) on 2026-11-13. The
-  other account was never read and holds no known copy. Do not recreate it.
+- **One scheduled task is still on; it does nothing.** The task that
+  actually ran this miner is "Session miner" (`trig_01SGAM5qY3jYEbWCz97KtGEe`,
+  Sundays 11:46 New York time, 16:46 UTC), which wakes the standing session
+  `session_01AE3PvMNyhCbgp6vvPmrDYr`. It was still enabled on 2026-11-14:
+  the 2026-11-13 note that "Session miner: weekly cloud sessions" was switched
+  off named a different task. Only Krish can switch it off and archive the
+  standing session. Until he does, the script it calls,
+  `node scripts/mine-sessions.mjs --source cloud-events`, exits 0 at once and
+  says the miner is retired, reading and sending nothing, so a firing reports
+  zero counts and nothing to fix. Do not recreate a miner task.
 - **The watchdog slots stay, optional.** `claude-cloud-account-1` and
   `claude-cloud-account-2` in `config/harness-jobs.json` are `required: false`
   and still enabled, so a supported reader could report into them one day; an
