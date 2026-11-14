@@ -502,10 +502,28 @@
   "voices": {
     "about": "Who speaks on a channel. krish and jonny take krish-voice's rules; publication takes them too and adds Make Your Mind Up's own canon, which its repository owns and this file admits only at the reviewed hash below.",
     "krish": {
-      "speaks_as": "Krish, first person"
+      "speaks_as": "Krish, first person",
+      "extends": {
+        "repo": "krishanraja/krish-raja",
+        "path": "project-documentation/retired-names.json",
+        "sha256": "dab1ea9fc806efdd628b0632a057b53ab7ab4eb8503e5424aba06522d14d6780",
+        "applies": "each entry in names is a hard fail (retired_name, whole phrase, any case) on every channel spoken in Krish's name",
+        "admitted": "Only the bytes at this sha256 apply: the file on krish-raja main at ebc44e2 (#41), 10 names, read and reviewed in the pull request that pinned them. A newer upstream file applies nothing until a kill-list pull request re-pins its hash.",
+        "retrieved": "2026-11-14",
+        "recheck": "Control Center compares the live upstream hash with this one on every read and reports when upstream moved, so drift is visible the first time it happens."
+      }
     },
     "jonny": {
-      "speaks_as": "Jonny, for Krish, in Krish's email style (voice-profile ruling 6)"
+      "speaks_as": "Jonny, for Krish, in Krish's email style (voice-profile ruling 6)",
+      "extends": {
+        "repo": "krishanraja/krish-raja",
+        "path": "project-documentation/retired-names.json",
+        "sha256": "dab1ea9fc806efdd628b0632a057b53ab7ab4eb8503e5424aba06522d14d6780",
+        "applies": "each entry in names is a hard fail (retired_name, whole phrase, any case) on every channel spoken in Krish's name",
+        "admitted": "Only the bytes at this sha256 apply: the file on krish-raja main at ebc44e2 (#41), 10 names, read and reviewed in the pull request that pinned them. A newer upstream file applies nothing until a kill-list pull request re-pins its hash.",
+        "retrieved": "2026-11-14",
+        "recheck": "Control Center compares the live upstream hash with this one on every read and reports when upstream moved, so drift is visible the first time it happens."
+      }
     },
     "publication": {
       "speaks_as": "Make Your Mind Up, the publication ('we'; scripts in Krish's own words to camera)",
