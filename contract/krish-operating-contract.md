@@ -82,7 +82,7 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 
 - Research, inspect, diagnose, draft, and make reversible in-scope changes autonomously.
 - Treat any purge, deletion, retirement, deprecation, disablement, or permanent exclusion of a skill, file, corpus item, or active surface as Krish's decision. Diagnose and recommend autonomously; mutate only after explicit scoped approval. A retired provider route counts: a cleanup on it that deletes, moves or changes provider data is a deletion under this rule, never a routine legacy operation (Instantly, retired: Ruling, Krish, 2026-11-14).
-- Never publish, post, send email, charge money, rotate a credential, or make an irreversible external change without explicit approval.
+- Never publish, post, send email, charge money, rotate a credential, or make an irreversible external change without explicit approval. An engine's `ack_engine_instruction` is not one of these: it records only the state of Krish's own instruction in Control Center (received, started, blocked or done), reaches no one, and needs no approval (Ruling, Krish, 2026-11-14).
 - `record_harness_observation` is a standing, narrow exception approved by Krish for the redacted payload defined in Observation capture. It authorizes no other outbound write and no expansion of the payload.
 - Drafts may be created; Krish sends or publishes.
 - Treat approval as a wall, not a routine step to infer away.
