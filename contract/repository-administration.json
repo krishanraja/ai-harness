@@ -15,7 +15,12 @@
     "makeyourmindup",
     "heartside",
     "legibility",
-    "growth-heartside"
+    "growth-heartside",
+    "content-watcher",
+    "inspirationhouse",
+    "krish-clone",
+    "krish-raja",
+    "sendlinks"
   ],
   "pilots": [
     "content-engine",
@@ -28,12 +33,7 @@
     "growth-fulltime",
     "growth-legibility",
     "claude-archive",
-    "content-watcher",
-    "filearchives",
-    "inspirationhouse",
-    "krish-clone",
-    "krish-raja",
-    "sendlinks"
+    "filearchives"
   ],
   "families": [
     "repository-administration",
@@ -58,6 +58,14 @@
   "max_attempts": 3,
   "inventory_recheck": "Every reconciliation and nightly: source existence, current source hashes and named repository commands. Semantic architecture changes remain reviewable; a static profile never certifies current product facts.",
   "acceptances": {
+    "plan:fleet-kit-v1": {
+      "actor": "Krish",
+      "date": "2026-11-14",
+      "extends": "plan:brain-repository-administration-v1",
+      "repositories": ["content-watcher", "inspirationhouse", "krish-clone", "krish-raja", "sendlinks"],
+      "source": "control-center docs/audits/2026-11-14-fleet-integration/KRISH-ANSWERS.md (Batch 7, D24) and integration/SYNTHESIS.md I-33",
+      "records": {}
+    },
     "plan:brain-repository-administration-v1": {
       "actor": "Krish",
       "date": "2026-10-17",

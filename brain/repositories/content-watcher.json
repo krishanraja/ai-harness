@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "repository": "content-watcher",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "b185a865e10257bb57a9139905e5f8c1e3a07dfd",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 14514,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/STATE.md",
+      "role": "state",
+      "label": "Current state detail"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "role": "orientation",
+      "label": "Decisions"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "watch",
+      "label": "Content watching and video compression",
+      "read": [
+        "README.md",
+        "docs/STATE.md"
+      ],
+      "checks": [
+        "python -m unittest tests.test_layout -v",
+        "python scripts/check_paths.py"
+      ]
+    }
+  ]
+}
