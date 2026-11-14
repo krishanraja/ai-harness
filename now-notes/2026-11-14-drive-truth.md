@@ -1,0 +1,3 @@
+Status: tools-access and video-engine name only Drive folders that exist: roots from system_config drive_destinations (Ventures, --ARCHIVE, Family Admin), folders from the owning repository's Drive map, the fallback is Inbox from My AI, and the Video Engine is read by folder ID from content-engine docs/DRIVE.md. CURRENT and its 00_INBOX were dissolved on 2026-10-22 (filearchives D-031). The operating contract's File routing still names the old tree and is proposed to Krish separately (I-15).
+Next: Krish accepts or rejects the File-routing proposal for the operating contract.
+North Star check (2026-11-14): holds.
