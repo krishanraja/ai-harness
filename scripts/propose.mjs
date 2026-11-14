@@ -280,6 +280,13 @@ export const PRIORITY = { 'ineffective-change': 1, 'inbound-edit': 2, 'ruling-cl
 // The taste ledger's weekly reading marker (inspirationhouse src/publish/repeats.ts): one row a week that says the
 // ledger was read, sent also when it found no repeat. It is a receipt for scripts/north-star.mjs, not a lesson, so it
 // never becomes a proposal.
+// One partition per taste-ledger slug and owning skill (venture dropped: the same correction in two ventures is one
+// fix to one skill). Evidence: inbox:taste-ledger:<week>:<venture>:<slug>; the skill is the envelope's Related: name.
+export function tasteKey(r) {
+  const m = /^inbox:taste-ledger:\d{4}-\d{2}-\d{2}:[^:]+:(.+)$/.exec(String(r?.evidence || ''))
+  if (!m || m[1] === 'reading') return null
+  return `taste:${m[1]}:${(/Related: ([a-z0-9-]+)/.exec(String(r.quote || '')) || [])[1] || 'unknown'}`
+}
 export const isTasteReading = (r) => /^inbox:taste-ledger:\d{4}-\d{2}-\d{2}:reading$/.test(String(r?.evidence || ''))
 
 export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, all = false, ctx = scopeContext(root, rows) }) {
@@ -289,8 +296,10 @@ export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, a
   const rulings = normaliseRulings(windowRows, priorRows)
   const others = windowRows.filter((r) => TYPE_OF[r.class] && r.class !== 'ruling' && !(r.class === 'canary' && /is unmeasured on/.test(r.quote)))
   const partitions=new Map()
-  for(const r of [...rulings,...others]){const key=r.schema_version===2?`episode:${r.repo||'unknown'}`:'legacy';if(!partitions.has(key))partitions.set(key,[]);partitions.get(key).push(r)}
-  const clusters = [...partitions.values()].flatMap(rows=>cluster(rows, num(policy.cluster_jaccard, 0.35), (r) => TYPE_OF[r.class]))
+  for(const r of [...rulings,...others]){const key=tasteKey(r)||(r.schema_version===2?`episode:${r.repo||'unknown'}`:'legacy');if(!partitions.has(key))partitions.set(key,[]);partitions.get(key).push(r)}
+  // A taste-ledger repeat is already one counted correction with a fixed slug and owning skill, so its partition is
+  // one cluster: word overlap between the shared envelope template must never merge two slugs or two skills.
+  const clusters = [...partitions.entries()].flatMap(([key,rows])=>cluster(rows, key.startsWith('taste:') ? -1 : num(policy.cluster_jaccard, 0.35), (r) => TYPE_OF[r.class]))
 
   const local = {}
   const repositoryCandidates = []
