@@ -14,7 +14,7 @@ const blocker = (generation = 'a', extra = {}) => ({
   incident: { id: 'required-source-one', generation_sha256: generation.repeat(64), state: 'active', actionable: true }, ...extra,
 })
 const build = (extra = {}) => buildDigest({ today, policy, blockers: [blocker()], notifications: approved, ...extra })
-const ready = { number: 7, title: 'Ready change', html_url: 'https://github.com/krishanraja/ai-harness/pull/7', created_at: '2026-10-17T01:00:00.000Z' }
+const ready = { number: 7, title: 'Ready change', html_url: 'https://github.com/krishanraja/ai-harness/pull/7', created_at: '2026-10-17T01:00:00.000Z', head: { ref: 'harness/change-7', sha: '7'.repeat(40) } }
 const weekly = buildDigest({ today, policy, ready: [ready] })
 
 assert.equal(defaults.enabled, false)

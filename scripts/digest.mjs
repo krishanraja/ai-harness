@@ -33,6 +33,7 @@ const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v)
 export const ENGINE_URL = 'https://content-engine-flame-nu.vercel.app'
 const REPO_URL = 'https://github.com/krishanraja/ai-harness'
 const HEX = /^[a-f0-9]{64}$/
+const COMMIT = /^[a-f0-9]{40}$/
 const digestHash = (value) => createHash('sha256').update(value).digest('hex')
 export const loadNotificationPolicy = () => JSON.parse(readFileSync(join(HARNESS, 'config/harness-notifications.json'), 'utf8'))
 const incidentGate = (policy) => {
@@ -51,8 +52,8 @@ const digestFilename = (digest) => digest.notification_kind === 'incident'
   : `${digest.date}.md`
 
 /**
- * ready:    [{ number, title, html_url, created_at }] change requests whose checks
- *           passed and whose judge measured them
+ * ready:    [{ number, title, html_url, created_at, head: { ref, sha } }] change
+ *           requests whose checks passed and whose judge measured them
  * blockers: [{ kind, title, detail, only_you }] something only Krish can unblock
  */
 export function buildDigest({ ready = [], blockers = [], scoreboard = null, today, policy, lastSent = null, notifications = loadNotificationPolicy() }) {
@@ -76,7 +77,10 @@ export function buildDigest({ ready = [], blockers = [], scoreboard = null, toda
   const budget = num(policy?.decision_budget, 3)
   const decisions = [
     ...selectedBlockers.map((b) => ({ kind: b.kind, title: b.title, detail: b.detail, only_you: b.only_you || 'permission', ...(b.incident ? { incident_key: incidentKey(b.incident) } : {}) })),
-    ...(sameWeek ? [] : [...ready]).sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))).map((p) => ({ kind: 'merge', title: p.title.replace(/^Change request:\s*/, ''), pr: p.number, url: p.html_url, delivery: p.head?.ref?.startsWith('harness/repository-learning-') ? 'repository' : 'canon', only_you: 'permission' })),
+    // I-32: each merge decision names the exact head commit Krish approves, so
+    // Control Center's harness list source can merge that commit and refuse if
+    // the branch moved. A change without a readable head is not asked.
+    ...(sameWeek ? [] : ready.filter((p) => Number.isSafeInteger(p.number) && COMMIT.test(p.head?.sha || ''))).sort((a, b) => String(a.created_at).localeCompare(String(b.created_at))).map((p) => ({ kind: 'merge', title: p.title.replace(/^Change request:\s*/, ''), pr: p.number, head_sha: p.head.sha, head_ref: p.head.ref, url: p.html_url, delivery: p.head?.ref?.startsWith('harness/repository-learning-') ? 'repository' : 'canon', only_you: 'permission' })),
   ].slice(0, budget)
   if (!decisions.length) return null
   const newKeys = [...new Set(decisions.filter((decision) => decision.incident_key).map((decision) => decision.incident_key))].sort()
