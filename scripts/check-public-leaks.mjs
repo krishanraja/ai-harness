@@ -1,21 +1,22 @@
 #!/usr/bin/env node
 /**
  * What must never be in this public repository: a key, a JWT, or a database
- * address outside the config files listed below.
+ * address.
  *
- * On 14 Nov 2026 the fleet integration audit (I-01) found the main database's
- * project address in four public files here (brain/stores.yaml, a proposal, a
- * VPS declaration and a VPS audit dump). None of them was a key, but the
- * address is half of what an attacker needs, and the canon says "add the gate
- * that stops the next one". This is that gate, after krish-raja's
- * scripts/public-script-guard.ts, run over every tracked text file by CI.
+ * Asked for by the canon itself: its Secrets rule says a secret found in the
+ * tree is already exposed, and to "add the gate that stops the next one"
+ * (AGENTS.md, Krish canon, Secrets). On 14 Nov 2026 the fleet integration audit
+ * (I-01) found the main database's project address in tracked files here; every
+ * copy was replaced with a symbolic name in the same change that added this
+ * gate, and git history keeps the old copies (the security sweep owns history).
+ * The patterns follow krish-raja's scripts/public-script-guard.ts.
  *
  *   node scripts/check-public-leaks.mjs            scan the tracked tree
  *   node scripts/check-public-leaks.mjs --self-test prove each pattern can fail
  *
- * A config file that must keep an address goes in ALLOWED_CONFIG with why, and
- * reads the environment variable instead wherever its runtime can. Today none
- * does. Git history keeps the old copies; this stops new ones.
+ * There is no allowlist. A file that truly must keep an address is an
+ * exception to the canon, so it needs Krish's ruling, recorded on the commit
+ * that changes this script to except it; a runtime reads SUPABASE_URL instead.
  */
 
 import { execFileSync } from 'node:child_process'
@@ -35,11 +36,6 @@ export const FORBIDDEN = [
   { label: 'a GitHub token', pattern: /\b(?:ghp|gho|ghs|ghu|github_pat)_[A-Za-z0-9_]{20,}/ },
   { label: 'an Anthropic key', pattern: /\bsk-ant-[A-Za-z0-9_-]{20,}/ },
 ]
-
-/** Files that may keep an address, each with why. Keep it empty unless a runtime truly cannot read a variable. */
-export const ALLOWED_CONFIG = new Map([
-  // ['path/to/config', 'why the runtime cannot read SUPABASE_URL instead'],
-])
 
 /** This file names the patterns, so it is the one place they may appear. */
 const SELF = 'scripts/check-public-leaks.mjs'
@@ -87,7 +83,7 @@ if (isMain) {
   }
   const hits = []
   for (const path of tracked()) {
-    if (path === SELF || ALLOWED_CONFIG.has(path)) continue
+    if (path === SELF) continue
     let text
     try { text = readFileSync(resolve(ROOT, path)) } catch { continue }
     if (text.includes(0)) continue // binary
@@ -95,7 +91,7 @@ if (isMain) {
     lines.forEach((line, i) => { for (const label of findLeaks(line)) hits.push(`${path}:${i + 1}: ${label}`) })
   }
   // Never print the match itself: the log of a public repository is public too.
-  for (const h of hits) console.error(`::error::${h}. Move it to an environment variable or a symbolic name; list a config file in ALLOWED_CONFIG only if its runtime cannot read one.`)
+  for (const h of hits) console.error(`::error::${h}. Move it to an environment variable or a symbolic name.`)
   console.log(hits.length ? `\n${hits.length} leak(s) in tracked files.` : 'PUBLIC LEAK GUARD OK: no key, JWT or database address in tracked files.')
   process.exit(hits.length ? 1 : 0)
 }
