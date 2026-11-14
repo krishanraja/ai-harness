@@ -170,6 +170,11 @@ jobs:
       - name: The vault deposit follows its contract
         run: node scripts/deposit-transcripts.mjs --self-test
 
+      # Pins (I-11): exact, source moved, edited in place, not landed,
+      # unreadable and generated, against an in-memory fleet.
+      - name: The pin reconciler reports and never repairs
+        run: node scripts/reconcile-pins.mjs --self-test
+
       # Workflow invariants a YAML edit could silently undo: what the observer
       # commits, and that an unmeasured judge run can never read as a pass.
       - name: The steward workflow keeps its own guarantees
@@ -317,9 +322,21 @@ jobs:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
         run: node scripts/merge-bot-prs.mjs --wait 900 --out bot-prs.json
 
+      # Pins (I-11): report only. Exact is nothing, a moved source or a consumer
+      # edited in place is a finding to the source's owner, an unreadable side
+      # is "unreadable"; it writes nothing and opens no pull request.
+      - name: Report every pin
+        if: ${{ always() && !inputs.event_import_only }}
+        continue-on-error: true
+        env:
+          FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
+        run: node scripts/reconcile-pins.mjs --out pins.md > /dev/null
+
       - name: Put the reconciliation in the run summary
         if: always()
-        run: cat reconcile.md >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          cat reconcile.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -f pins.md ]; then cat pins.md >> "$GITHUB_STEP_SUMMARY"; fi
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1, Node 24
         if: always()
