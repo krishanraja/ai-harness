@@ -7,6 +7,7 @@
  */
 
 import { measure, writeState, mondayOf, TASTE_PREFIX, SOURCE } from './north-star.mjs'
+import { isTasteReading } from './propose.mjs'
 
 let passed = 0
 let failed = 0
@@ -23,8 +24,17 @@ const correction = (dated, quote) => ({ class: 'correction', source: 'harness-in
 test('mondayOf finds the Monday of a Friday, a Sunday and a Monday',
   mondayOf('2026-11-13') === '2026-11-09' && mondayOf('2026-11-15') === '2026-11-09' && mondayOf('2026-11-09') === '2026-11-09')
 
+const marker = (week, total) => ({ class: 'successful_pattern', source: 'harness-inbox', evidence: `${TASTE_PREFIX}${week}:reading`, evidence_ref: `inspirationhouse:taste_signals:${week}:reading:${total}`, dated: week, seen_at: '2026-11-13', quote: `[github-actions] The taste ledger read the week of ${week}: ${total} repeated corrections.` })
+
 const empty = measure([], { today })
-test('an empty ledger reads 0 for the last whole week, never the week still running', empty.week === '2026-11-02' && empty.current === 0)
+test('a ledger the taste ledger has not reached yet reads "not measured", never 0, for the last whole week',
+  empty.week === '2026-11-02' && empty.current === null && empty.reason === 'taste ledger not yet read for this week')
+const zero = measure([marker('2026-11-02', 0)], { today })
+test('the weekly marker with a total of 0 makes a true 0', zero.current === 0 && zero.taste === 0 && zero.reason === null)
+test('a marker for another week proves nothing about this one', measure([marker('2026-10-26', 0)], { today }).current === null)
+const partial = measure([marker('2026-11-02', 3), taste('2026-11-02', 'graphics.clarity')], { today })
+test('fewer repeat rows than the marker announced read "not measured", with the gap', partial.current === null && partial.reason === 'taste ledger partly received (1 of 3 repeats)')
+test('repeat rows recorded before the marker existed still count (week of 2 Nov)', measure([taste('2026-11-02', 'graphics.clarity')], { today }).current === 1)
 
 const rows = [
   taste('2026-11-02', 'production.polished_finish'),
@@ -58,6 +68,16 @@ test('the same reading the next night leaves NOW.md untouched', writeState(out, 
 const laddered = now.replace('"week_target": null', '"week_target": 2').replace('"urgency": 4', '"urgency": 2')
 const s2 = JSON.parse(/<!-- north-star-state (\{.*?\}) -->/.exec(writeState(laddered, r, { asOf: today }))[1])
 test('once Krish sets a ladder, the target and urgency are left to it', s2.week_target === 2 && s2.urgency === 2)
+
+const unmeasured = writeState(out, empty, { asOf: '2026-11-16' })
+const s3 = JSON.parse(/<!-- north-star-state (\{.*?\}) -->/.exec(unmeasured)[1])
+test('an unmeasured week writes current null, U4 and the reason, never 0',
+  s3.current === null && s3.urgency === 4 && s3.urgency_reason === 'not measured: taste ledger not yet read for this week' && unmeasured.includes('**North Star number: not measured, U4.**'))
+test('even with a ladder, an unmeasured number is U4', JSON.parse(/<!-- north-star-state (\{.*?\}) -->/.exec(writeState(laddered, empty, { asOf: today }))[1]).urgency === 4)
+test('the same unmeasured reading the next night leaves NOW.md untouched', writeState(unmeasured, empty, { asOf: '2026-11-17' }) === unmeasured)
+test('once the marker lands, the true reading replaces "not measured"', JSON.parse(/<!-- north-star-state (\{.*?\}) -->/.exec(writeState(unmeasured, zero, { asOf: '2026-11-16' }))[1]).current === 0)
+
+test('the proposer recognises the marker as a receipt, not a lesson', isTasteReading(marker('2026-11-02', 0)) && !isTasteReading(taste('2026-11-02', 'graphics.clarity')))
 
 let threw = false
 try { writeState('# no state line', r, { asOf: today }) } catch { threw = true }
