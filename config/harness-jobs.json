@@ -162,6 +162,13 @@
       "cadence_seconds": 604800, "grace_seconds": 172800, "max_run_seconds": 3600,
       "credentials": ["LOCAL_GITHUB_LOGIN"], "budget_class": "free", "allowed_side_effects": ["authorized-distilled-event-intake"],
       "outputs": ["state/heartbeats.json"], "completion_proof": "existing-machine-heartbeat", "limits": "Local-only transcript collection remains optional and cannot replace either required cloud account."
+    },
+    {
+      "id": "optional-local-vault-deposit", "kind": "heartbeat", "required": false, "enabled": true,
+      "owner": "local-adapter", "heartbeat_key": "vault-deposit-lorimer",
+      "cadence_seconds": 604800, "grace_seconds": 172800, "max_run_seconds": 3600,
+      "credentials": ["LOCAL_GITHUB_LOGIN"], "budget_class": "free", "allowed_side_effects": ["private-vault-deposit"],
+      "outputs": ["krishanraja/claude-archive claude-code-transcripts/"], "completion_proof": "existing-machine-heartbeat", "limits": "Whole transcripts go only to the private vault, never to this public repository; a failed deposit never blocks the miner."
     }
   ]
 }
