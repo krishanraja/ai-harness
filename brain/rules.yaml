@@ -484,11 +484,17 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "34509750179f"
+    text_sha: "830d5de86497"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "a2cb8f6903d4c41c1e3be829833e3f5558176a76"
+    history:
+      - text_sha: "34509750179f"
+        valid_until: "2026-11-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
@@ -1282,7 +1288,7 @@ contract_rules:
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
-# 235 chapters across the installed skills.
+# 236 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -2273,6 +2279,15 @@ skill_sections:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: instantly-operator.retired-route
+    file: skills/instantly-operator/SKILL.md
+    heading: "Retired route"
+    text_sha: "94d8e697cbf1"
+    first_seen: "2026-11-14"
+    source:
+      kind: ruling
+      ref: "a2cb8f6903d4c41c1e3be829833e3f5558176a76"
+    status: live
   - id: instantly-operator.role-and-chain
     file: skills/instantly-operator/SKILL.md
     heading: "Role and chain"
@@ -2285,11 +2300,17 @@ skill_sections:
   - id: instantly-operator.operation-contract
     file: skills/instantly-operator/SKILL.md
     heading: "Operation contract"
-    text_sha: "2e8d03b32bad"
+    text_sha: "8403723a383b"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "a2cb8f6903d4c41c1e3be829833e3f5558176a76"
+    history:
+      - text_sha: "2e8d03b32bad"
+        valid_until: "2026-11-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: instantly-operator.workflow
     file: skills/instantly-operator/SKILL.md
