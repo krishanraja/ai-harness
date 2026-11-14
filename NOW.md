@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-02","week_target":null,"current":18,"current_as_of":"2026-11-14","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"ladder pending baseline"} --> **North Star number: U4, ladder pending Krish.** Corrections Krish had to give twice in a week, across the fleet: 18 in the week of 2026-11-02 (18 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-14.
 
+- The weekly proposer keeps each taste-ledger repeat apart by slug and owning skill (the same slug in two ventures still joins): the 18 repeats of w/c 2 Nov now form 14 single-skill clusters instead of 3, one of which mixed krish-voice and krish-design. (2026-11-14)
 - The scheduled task that ran the cloud session miner, "Session miner" (trig_01SGAM5qY3jYEbWCz97KtGEe, Sundays 16:46 UTC), was still enabled on 2026-11-14; the 2026-11-13 switch-off named a different task. When it fires it now does nothing: scripts/mine-sessions.mjs --source cloud-events exits 0, reads and sends nothing, and says the miner is retired. The miner docs name the real task. (2026-11-14)
 - The North Star no longer reads a false 0. A week with no taste-ledger row at all, or with fewer repeat rows than the taste ledger's weekly reading marker announced, now reads "not measured, U4" with its reason in the state line, and the observation intake re-measures after every intake, so the number moves when the taste ledger's 05:47 UTC envelopes land instead of a night later. The proposer ignores the marker. The real reading for the week of 2026-11-02 is 18 (18 taste ledger, 0 harness). (2026-11-14)
 - content-engine's listed rule files name docs/CAROUSEL-STANDARD.md instead of the retired carousel engine's state document, so the canon block and the repository context stop pointing sessions at a retired route. (2026-11-13)
@@ -43,6 +44,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-14 The CLAUDE_CODE_OAUTH_TOKEN ask no longer names growth-heartside: the fleet integration audit (2026-11-14) read growth-heartside's docs-steward run 43538433695, where "Require the subscription token" succeeded and Claude ran. The steward cannot drop a done ask by itself; audit-now.mjs only warns when an ask is older than 14 days.
 - 2026-11-14 The steward measured at 01:00 UTC, before the taste ledger sent its 18 repeats at 05:47, and nothing told "0 repeats" from "not read yet" (fleet integration audit, harness-1, 2026-11-14).
 - 2026-11-13 Krish asked to measure the number the North Star names and to merge it (Ruling, Krish, 2026-11-13: do it all and merge to main).
 - 2026-11-13 Krish, 2026-11-13, asked whether to set up a weekly Claude scheduled task in each of his two accounts or rule them not required: "readers not required". It keeps his 2026-10-29 ruling of zero Claude routines.
@@ -56,7 +58,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-14): Krish switches off "Session miner" and archives its standing session session_01AE3PvMNyhCbgp6vvPmrDYr.
+- Next (2026-11-14): The next weekly proposer run shows one candidate per repeated slug and skill.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
