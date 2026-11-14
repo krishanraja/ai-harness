@@ -1,0 +1,52 @@
+# Pins: a file one repository owns and others carry a copy of (fleet
+# integration I-11, 2026-11-14). scripts/reconcile-pins.mjs reads every side
+# each night and reports only: exact is nothing; a source that moved is a
+# finding; a consumer edited in place is a finding to the source's owner,
+# never an overwrite; a side it cannot read is "unreadable", and nothing is
+# written. Opening re-pin pull requests waits on I-33.
+#
+# mode bytes: the consumer holds the source's bytes. A directory source holds
+# a bundle.json ({ version, files: { name: sha256 }, bundle_sha256 }, with
+# bundle_sha256 = sha256("version <v>\n" + "<file> <sha256>\n" per file in name
+# order)); its consumers hold the same files and the same bundle.json.
+# mode generated: the consumer is generated from the source; the source's own
+# drift check (check) compares them, and this reconciler only proves both are
+# readable.
+
+schema_version: 1
+pins:
+  - id: protocol-bundle
+    source:
+      repo: krishanraja/control-center
+      path: docs/app/growth/protocol-bundle/
+    consumers:
+      - repo: krishanraja/growth-mindmake
+        path: docs/control-center/
+        mode: bytes
+      - repo: krishanraja/growth-legibility
+        path: docs/control-center/
+        mode: bytes
+      - repo: krishanraja/growth-heartside
+        path: docs/control-center/
+        mode: bytes
+      - repo: krishanraja/growth-makeyourmindup
+        path: docs/control-center/
+        mode: bytes
+      - repo: krishanraja/growth-fulltime
+        path: docs/control-center/
+        mode: bytes
+      - repo: krishanraja/AEO-Engine
+        path: docs/control-center/
+        mode: bytes
+  - id: anthropic-prices
+    source:
+      repo: krishanraja/control-center
+      path: api/_prices.ts
+    check: control-center scripts/check-price-drift.mts (its CI)
+    consumers:
+      - repo: krishanraja/content-engine
+        path: apps/control-plane/api/_prices.ts
+        mode: generated
+      - repo: krishanraja/inspirationhouse
+        path: src/meter.ts
+        mode: generated
