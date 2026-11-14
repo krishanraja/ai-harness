@@ -8,7 +8,7 @@ import { copyFileSync, mkdtempSync, mkdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { buildCandidates, renderBrief, eligibility, classifyScope, loadPolicy, cluster, words } from './propose.mjs'
+import { buildCandidates, renderBrief, eligibility, classifyScope, loadPolicy, cluster, words, tasteKey } from './propose.mjs'
 import { repeatedCorrectionRate, changeOutcomes, isoWeek } from './scoreboard.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
@@ -107,6 +107,11 @@ test('change acceptance counts merged over decided, ignoring proposal documents'
 test('median hours to decision', outcomes.median_hours_to_decision === 173)
 test('ISO weeks roll over on Monday', isoWeek('2026-10-18') === '2026-W42' && isoWeek('2026-10-19') === '2026-W43')
 test('words() ignores stop words and short tokens', !words('the and of it').size)
+const tasteRow = (venture, slug, skill) => ({ class: 'correction', evidence: `inbox:taste-ledger:2026-11-02:${venture}:${slug}`, dated: '2026-11-02', quote: `[github-actions] Krish gave the same correction (${slug}) in 3 pieces of evidence in the week of 2026-11-02 (venture ${venture}), counted by the taste ledger. Related: ${skill}.` })
+test('a taste repeat is keyed by slug and owning skill, not venture; the reading marker has no key',
+  tasteKey(tasteRow('heartside', 'production.polished_finish', 'krish-design')) === tasteKey(tasteRow('publication', 'production.polished_finish', 'krish-design'))
+  && tasteKey(tasteRow('heartside', 'voice.no_hype', 'krish-voice')) !== tasteKey(tasteRow('heartside', 'production.polished_finish', 'krish-design'))
+  && tasteKey({ evidence: 'inbox:taste-ledger:2026-11-02:reading' }) === null && tasteKey({ evidence: 'inbox:e-1' }) === null)
 
 console.log(`\n${passed} passed, ${failed} failed`)
 if (failed) process.exit(1)
