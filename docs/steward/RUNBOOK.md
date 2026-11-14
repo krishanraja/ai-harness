@@ -67,8 +67,9 @@ not a reason to keep going.
 
 There is work if any of these is true: the digest lists at least one commit
 since `head` that touched something outside the steward's own files; the
-validator (`node .steward/scripts/steward/validate.mjs . --strict`) fails;
-`.steward/now-audit.md` lists a finding; `now-notes/` holds a closeout note;
+validator failed on the way in (`.steward/validation-before.log`);
+`.steward/now-audit.md` lists a finding; the workflow folded a closeout note
+(`.steward/fold.log`, and `NOW.md` differs from `HEAD`);
 `NOW.md` has "What changed recently" bullets older than 30 days; the digest
 lists a stale stamp, an unlabelled duplicate, or two files claiming current.
 
@@ -118,10 +119,12 @@ For every pair of documents that both claim to be current and disagree:
 Sessions close out with a note in `now-notes/`, and the repository's check
 workflow folds it into `NOW.md` the moment it reaches main (contract, "Session
 closeout"; Ruling, Krish, 2026-10-28). A note still there means that fold did
-not run. Run it first: `node .claude/hooks/harness-closeout.mjs --fold`. It
-writes the notes into `NOW.md` and removes them; those removals are the one
-deletion the steward makes. A note it reports as malformed stays for a person
-and goes in the job summary.
+not run, so the workflow runs it before you start
+(`node .claude/hooks/harness-closeout.mjs --fold`, output in
+`.steward/fold.log`): the notes are already in `NOW.md` and removed from the
+working tree. Commit those removals with your work; they are the one deletion
+the steward makes. A note the fold reports as malformed stays for a person and
+goes in the job summary.
 
 Then fix every finding in `.steward/now-audit.md`, written before this run by
 `scripts/steward/audit-now.mjs` against the limits in `config/now-audit.json`
@@ -131,8 +134,7 @@ recently" bullets into the LOG, cut "Where it is right now" back to what is true
 now, keep one "Next" line, split or shorten any paragraph over the line limit,
 and correct every sentence that calls a merged or closed pull request open. Do
 not loosen a limit to pass; `config/now-audit.json` changes only in a reviewed
-commit. Re-run `node .steward/scripts/steward/audit-now.mjs .` before pushing;
-a finding it still reports goes in the job summary with the reason. The
+commit. A finding you leave goes in the job summary with the reason. The
 nightly fleet audit records the result, and a repository still failing after
 three days reaches Krish's digest.
 
@@ -170,7 +172,10 @@ re-read the North Star against its work can say so. Never edit
 
 ### Step 6: guards before anything is pushed
 
-All of these must pass. A single failure sends the run to the fallback.
+Since 2026-11-14 the workflow runs these after you, never you (fleet
+integration audit AUTO-6): your session has no node, npm or gh and no write
+credential, and a separate job with no model publishes. Know them, because
+your diff must pass them. A single failure sends the run to the fallback.
 
 1. `node .steward/scripts/steward/validate.mjs . --strict --since <head-before-run> --fleet .steward/docs/steward/fleet.json --repo <name>`
 2. The repo's own gate from `docs_check`, if there is one.
@@ -180,18 +185,19 @@ All of these must pass. A single failure sends the run to the fallback.
 5. Read the diff of NOW.md and the LOG once more for em dashes, invented
    numbers, and claims with no pointer.
 
-Fallback: commit to a branch `steward/YYYY-MM-DD`, push it, open a pull
-request titled `docs(steward): YYYY-MM-DD needs review`, and put the failing
-guard's output in the body. Put the same in the fallback commit's body: the
-workflow's token cannot always open the pull request, and the harness's bot
-merger (`scripts/merge-bot-prs.mjs`) then opens it with that commit message.
-Never force anything onto main.
+Fallback (the publish job does it): the commits go to a branch
+`steward/YYYY-MM-DD` with a commit whose body names the failing guard, and a
+pull request titled `docs(steward): YYYY-MM-DD needs review`. The workflow's
+token cannot always open the pull request, and the harness's bot merger
+(`scripts/merge-bot-prs.mjs`) then opens it with that commit message. Nothing
+is ever forced onto main.
 
 ### Step 7: commit and push
 
 One commit: `docs(steward): YYYY-MM-DD <one line on what changed>`. Body:
-the drift table (file, disposition, why). Push to `main`. The workflow's
-`github_token` is the default token, which GitHub never uses to retrigger a
+the drift table (file, disposition, why). Commit it on the current branch and
+do not push: the publish job applies it, re-runs the validator, and pushes to
+`main` with the default token, which GitHub never uses to retrigger a
 workflow, so there is no loop; the caller workflows also skip any push whose
 message starts with `docs(steward):`.
 

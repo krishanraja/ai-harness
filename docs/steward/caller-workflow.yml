@@ -26,15 +26,22 @@ on:
         type: boolean
         default: false
 
+# The steward's write job runs with a read-only token and its publish job
+# pushes, so the caller grants contents and pull requests write; nothing needs
+# an OIDC token (fleet integration audit AUTO-6, 2026-11-14).
 permissions:
   contents: write
   pull-requests: write
-  id-token: write
 
 jobs:
   steward:
     if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'docs(steward):') }}
-    uses: krishanraja/ai-harness/.github/workflows/docs-steward.yml@main
+    # Pinned by commit, never @main: whoever can change ai-harness main must not
+    # run code with this repository's secrets the same night. Move the pin in a
+    # reviewed pull request when the steward changes.
+    uses: krishanraja/ai-harness/.github/workflows/docs-steward.yml@PINNED_SHA
     with:
       dry_run: ${{ inputs.dry_run || false }}
-    secrets: inherit
+    # Only the one secret the steward reads, never `secrets: inherit`.
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

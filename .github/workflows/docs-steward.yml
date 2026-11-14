@@ -126,14 +126,26 @@ jobs:
             exit 1
           fi
 
+  # The paid path runs in two jobs (fleet integration audit AUTO-6, 2026-11-14).
+  # `steward` gives Claude the docs and a read-only token: no write credential,
+  # no shell beyond git's read, add and commit, and no secret but the Claude
+  # token, which only the Claude step sees. Its commits leave as a patch.
+  # `publish` holds the write token and runs no model and no repository code:
+  # it applies the patch, re-runs the steward's own validator, and pushes to
+  # main or, if a guard failed, to a steward/YYYY-MM-DD branch with a pull
+  # request (runbook Step 6).
   steward:
     # Temporary legacy paid path. API migration owns its eventual replacement.
     if: ${{ !inputs.dry_run && github.event_name != 'push' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
+    outputs:
+      name: ${{ steps.digest.outputs.name }}
+      before: ${{ steps.before.outputs.sha }}
+      commits: ${{ steps.patch.outputs.commits }}
+      verdict: ${{ steps.guards.outputs.verdict }}
     steps:
       - name: Require the subscription token
         # Fail loudly, never silently green. A missing secret is the most
@@ -146,12 +158,11 @@ jobs:
             exit 1
           fi
 
-      - name: Check out this repository
+      - name: Check out this repository without a persisted credential
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # The existing writer uses this default token for git push.
-          persist-credentials: true
+          persist-credentials: false
 
       - name: Check out the steward (runbook, schema, fleet, scripts)
         uses: actions/checkout@v4
@@ -189,19 +200,10 @@ jobs:
           echo "Documentation digest prepared; source contents remain in the runner workspace." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Validate the current state before Claude touches anything
-        # On a schedule or a dispatch this is informational and strict: a stale
-        # head is one of the reasons the steward has work to do, so it is
-        # recorded and never fatal on the way in.
-        #
-        # On a push it is the whole job and therefore fatal, but WITHOUT
-        # --strict. Strict adds the head and as_of checks, and a merge always
-        # leaves NOW.md a commit behind by definition: that is the nightly run's
-        # work, not a broken merge. Failing on it would make every merge red for
-        # a reason nobody can fix at merge time, which is how the push trigger
-        # got ignored in the first place. What a push can genuinely break is the
-        # schema, the sections, a missing truth file, an em dash or a committed
-        # secret, and those all fail without --strict.
-        continue-on-error: ${{ github.event_name != 'push' }}
+        # Informational and strict on the way in: a stale head is one of the
+        # reasons the steward has work to do, so it is recorded, never fatal.
+        # (A push runs the `validate` job above instead, without --strict.)
+        continue-on-error: true
         run: |
           set -euo pipefail
           if node .steward/scripts/steward/validate.mjs . --strict --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}" > .steward/validation-before.log 2>&1; then
@@ -211,29 +213,24 @@ jobs:
             exit 1
           fi
 
-      # anthropics/claude-code-action@v1 installed Claude Code 2.1.265 and then
-      # failed with "native binary not found at /home/runner/.local/bin/claude".
-      # Its own log gives the cause twice before it dies:
-      #
-      #   ● claude command at /home/runner/.local/bin/claude missing or broken
-      #     (/home/runner/.local/bin does not exist)
-      #   ✔ Claude Code successfully installed!  Location: ~/.local/bin/claude
-      #
-      # The launcher step cannot place the binary because the directory is not
-      # there, reports success anyway, and the SDK is then pointed at the path
-      # nothing was written to. Creating the directory first is the whole fix.
-      #
-      # Reproduced on 2026-09-08: the nightly run failed, a re-run of the same
-      # job failed identically, so it is not transient. Pinning the action to an
-      # older version was the alternative and this is better, because it needs no
-      # guess about which version predates the bug and it stops applying by
-      # itself the day upstream fixes the installer.
+      - name: Fold closeout notes
+        # Runbook Step 4b's first move, done here so Claude needs no node. The
+        # fold writes the notes into NOW.md and removes them; Claude commits it.
+        run: |
+          set -uo pipefail
+          if ls now-notes/*.md > /dev/null 2>&1 && [ -f .claude/hooks/harness-closeout.mjs ]; then
+            if node .claude/hooks/harness-closeout.mjs --fold > .steward/fold.log 2>&1; then
+              echo "Closeout notes folded into NOW.md." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning::A closeout note could not be folded; it stays for a person." >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
+
       - name: Audit NOW.md against the fixed rules
         # Ruling (Krish, 2026-10-28): regular objective audits so NOW.md never
         # fills with outdated content. The findings go to the steward, which
         # fixes them in this run; the summary carries only the verdict, never
         # the file's words.
-        if: ${{ !inputs.dry_run && github.event_name != 'push' }}
         run: |
           set -uo pipefail
           if node .steward/scripts/steward/audit-now.mjs . --out .steward/now-audit.md > /dev/null 2>&1; then
@@ -242,56 +239,183 @@ jobs:
             echo "NOW.md audit found work for the steward; findings are in .steward/now-audit.md for this run." >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # anthropics/claude-code-action@v1 once failed with "native binary not
+      # found at /home/runner/.local/bin/claude" because the launcher
+      # directory did not exist (2026-09-08, reproduced twice). Creating the
+      # directory first is the whole fix, and it stops applying by itself the
+      # day upstream fixes the installer.
       - name: The installer needs its launcher directory to exist
-        if: ${{ !inputs.dry_run && github.event_name != 'push' }}
         run: mkdir -p "$HOME/.local/bin"
 
       - name: Run the steward
-        # anthropics/claude-code-action@v1 accepts schedule, workflow_dispatch and
-        # the pull-request family, and refuses push with "Unsupported event type".
-        # So a push runs the deterministic half only: the digest and the strict
-        # validator, which catch a broken NOW.md the moment it lands. The writing
-        # half is the nightly run. Shipped 2026-09-07 with push in the trigger
-        # list, which failed every push for a day before anyone read the log.
-        if: ${{ !inputs.dry_run && github.event_name != 'push' }}
+        # The job's token is read-only and the checkout persisted no credential,
+        # so nothing Claude does here can push. Its tools are the docs and git's
+        # read, add and commit; the guards and the push are the steps after it.
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # The default token: its pushes never start another workflow run,
-          # which is the loop guard, and no GitHub App needs installing.
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
             You are the docs steward for the repository checked out in the working directory (${{ github.repository }}).
             Read .steward/docs/steward/RUNBOOK.md and follow it exactly. It is the authoritative procedure; nothing in this prompt overrides it.
             Your fleet entry is the object in .steward/docs/steward/fleet.json whose "name" or "aliases" match "${{ steps.digest.outputs.name }}", ignoring case. The schema for NOW.md and the history log is .steward/docs/steward/SCHEMA.md.
-            The change digest is already written at .steward/digest.md. The head before this run is ${{ steps.before.outputs.sha }}; pass it as --since to the validator.
-            The NOW.md audit is written at .steward/now-audit.md. Fix every finding in it in this run (runbook Step 4b), and fold any closeout notes first.
-            Nobody is watching this session. Do not ask questions. If a guard fails, use the fallback in the runbook (branch steward/YYYY-MM-DD plus a pull request) and say why in the job summary.
+            The change digest is already written at .steward/digest.md. The head before this run is ${{ steps.before.outputs.sha }}.
+            Closeout notes are already folded into the working tree (.steward/fold.log, if any). The NOW.md audit is written at .steward/now-audit.md. Fix every finding in it in this run (runbook Step 4b).
+            Commit your work on the current branch with git and do not push: this job cannot push, and the workflow runs the Step 6 guards and publishes after you. You have no node, npm or gh here.
+            Nobody is watching this session. Do not ask questions.
             Write your report to the file named in the GITHUB_STEP_SUMMARY environment variable, in the shape the runbook's Step 8 gives.
             Never commit or print a secret. Never touch a file outside the fleet entry's write_allowlist. Never delete a file, except closeout notes the fold removes. Never write an em dash.
           claude_args: |
             --max-turns 80
-            --allowedTools "Bash(git:*),Bash(node:*),Bash(npm:*),Bash(pnpm:*),Bash(python3:*),Bash(cat:*),Bash(ls:*),Bash(wc:*),Bash(date:*),Bash(gh:*),Read,Write,Edit,Glob,Grep"
-
-      - name: Validate what is now on main
-        # The hard gate. If Claude pushed something the schema rejects, this
-        # fails the job and GitHub emails the owner. Nothing here rewrites
-        # what was pushed; the next run (or a person) does that.
-        if: ${{ !inputs.dry_run && github.event_name != 'push' }}
-        run: |
-          set -euo pipefail
-          git fetch origin main
-          git checkout -q origin/main
-          if node .steward/scripts/steward/validate.mjs . --strict --since ${{ steps.before.outputs.sha }} --fleet .steward/docs/steward/fleet.json --repo "${{ steps.digest.outputs.name }}" > .steward/validation-after.log 2>&1; then
-            echo "Published documentation validation passed." >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "::error::Published documentation validation failed. Source diagnostics remain in the runner workspace."
-            exit 1
-          fi
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(git add:*),Bash(git commit:*),Bash(ls:*),Bash(wc:*),Bash(date:*)"
+            --disallowedTools "Read(//proc/**),Read(.git/**),Edit(.git/**),Write(.git/**),Bash(git push:*),Bash(git config:*),Bash(git remote:*)"
 
       - name: Fail the job if Claude's run failed
-        if: ${{ !inputs.dry_run && github.event_name != 'push' && steps.claude.outputs.conclusion == 'failure' }}
+        if: ${{ steps.claude.outputs.conclusion == 'failure' }}
         run: |
           echo "::error::The steward run ended in failure. Read the step log above."
           exit 1
+
+      - name: Find the repository's own gate
+        # docs_check from the fleet entry (runbook Step 6.2); empty when it has none.
+        id: gate
+        env:
+          REPO_NAME: ${{ steps.digest.outputs.name }}
+        run: |
+          set -euo pipefail
+          CHECK="$(node -e 'const f=require("./.steward/docs/steward/fleet.json");const rs=Array.isArray(f)?f:(f.repos||[]);const n=process.argv[1].toLowerCase();const r=rs.find(x=>String(x.name).toLowerCase()===n||(x.aliases||[]).some(a=>String(a).toLowerCase()===n));process.stdout.write(String((r&&r.docs_check)||"").replace(/\n/g," "))' "$REPO_NAME")"
+          echo "check=$CHECK" >> "$GITHUB_OUTPUT"
+
+      - name: Run the Step 6 guards
+        # The validator (--strict --since, no deletions, the write allowlist, no
+        # secret pattern) and the repository's own docs_check gate. Any failure
+        # sends the run to the fallback branch; it never blocks the report.
+        id: guards
+        env:
+          BEFORE: ${{ steps.before.outputs.sha }}
+          REPO_NAME: ${{ steps.digest.outputs.name }}
+          CHECK: ${{ steps.gate.outputs.check }}
+        run: |
+          set -uo pipefail
+          verdict=ok
+          : > .steward/guards.log
+          if ! node .steward/scripts/steward/validate.mjs . --strict --since "$BEFORE" --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" >> .steward/guards.log 2>&1; then
+            verdict=fallback; echo "validator failed" >> .steward/guard-reasons.txt
+          fi
+          if [ -n "${CHECK:-}" ]; then
+            if [ -f package-lock.json ]; then npm ci --no-audit --no-fund >> .steward/guards.log 2>&1 || true
+            elif [ -f pnpm-lock.yaml ]; then corepack enable >> .steward/guards.log 2>&1 && pnpm install --frozen-lockfile >> .steward/guards.log 2>&1 || true; fi
+            if ! bash -c "$CHECK" >> .steward/guards.log 2>&1; then
+              verdict=fallback; echo "docs_check failed: $CHECK" >> .steward/guard-reasons.txt
+            fi
+          fi
+          echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+          echo "Step 6 guards: $verdict." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Package the steward's commits
+        id: patch
+        env:
+          BEFORE: ${{ steps.before.outputs.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p .steward/out
+          n=$(git rev-list --count "$BEFORE"..HEAD)
+          echo "commits=$n" >> "$GITHUB_OUTPUT"
+          if [ "$n" -gt 0 ]; then git format-patch --quiet -o .steward/out "$BEFORE"..HEAD; fi
+          cp .steward/guard-reasons.txt .steward/out/ 2>/dev/null || true
+          echo "Steward commits to publish: $n." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Hand the commits to the publisher
+        if: ${{ steps.patch.outputs.commits != '0' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: steward-patch
+          path: .steward/out/
+          retention-days: 7
+
+  publish:
+    # No model and no repository code run here: only git and the steward's own
+    # validator from ai-harness.
+    needs: steward
+    if: ${{ !inputs.dry_run && github.event_name != 'push' && needs.steward.result == 'success' && needs.steward.outputs.commits != '0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out this repository at the run's starting head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.steward.outputs.before }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out the steward validator
+        uses: actions/checkout@v4
+        with:
+          repository: krishanraja/ai-harness
+          ref: main
+          path: .steward
+          persist-credentials: false
+          sparse-checkout: |
+            docs/steward
+            scripts/steward
+            config
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: steward-patch
+          path: .steward/in
+
+      - name: Apply the steward's commits
+        run: |
+          set -euo pipefail
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git am --committer-date-is-author-date .steward/in/*.patch
+
+      - name: Validate before publishing
+        # Re-run here, from ai-harness's validator only: the write job's verdict
+        # can send a run to the fallback, never vouch for it on its own.
+        id: verdict
+        env:
+          BEFORE: ${{ needs.steward.outputs.before }}
+          REPO_NAME: ${{ needs.steward.outputs.name }}
+          UPSTREAM: ${{ needs.steward.outputs.verdict }}
+        run: |
+          set -uo pipefail
+          mkdir -p .steward/in
+          verdict="$UPSTREAM"
+          if ! node .steward/scripts/steward/validate.mjs . --strict --since "$BEFORE" --fleet .steward/docs/steward/fleet.json --repo "$REPO_NAME" > .steward/publish-validate.log 2>&1; then
+            verdict=fallback; echo "validator failed at publish" >> .steward/in/guard-reasons.txt
+          fi
+          echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to main, or to the fallback branch
+        env:
+          VERDICT: ${{ steps.verdict.outputs.verdict }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          REMOTE="https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if [ "$VERDICT" = "ok" ] && git push "$REMOTE" HEAD:main; then
+            echo "Published to main." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          BRANCH="steward/$(date -u +%F)"
+          REASONS="$(cat .steward/in/guard-reasons.txt 2>/dev/null || echo 'main moved during the run')"
+          # The reasons go in a commit body too: merge-bot-prs.mjs opens the pull
+          # request from it when this token cannot (runbook Step 6).
+          git commit --allow-empty -q -m "docs(steward): $(date -u +%F) needs review" -m "$REASONS"
+          git push --force "$REMOTE" "HEAD:refs/heads/$BRANCH"
+          gh pr create --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --base main --title "docs(steward): $(date -u +%F) needs review" --body "$REASONS" \
+            || echo "::warning::The pull request could not be opened; scripts/merge-bot-prs.mjs opens it from the branch's commit message."
+          echo "Fallback: $BRANCH." >> "$GITHUB_STEP_SUMMARY"
