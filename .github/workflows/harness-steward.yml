@@ -163,6 +163,13 @@ jobs:
       - name: The North Star number is measured and written in place
         run: node scripts/test-north-star.mjs
 
+      # The weekly vault deposit (I-16): whole transcripts into the private
+      # claude-archive, deflate zips at the contract's path, never overwriting,
+      # the cursor advanced only after the push. Exercised against a local bare
+      # repository; nothing leaves the runner.
+      - name: The vault deposit follows its contract
+        run: node scripts/deposit-transcripts.mjs --self-test
+
       # Workflow invariants a YAML edit could silently undo: what the observer
       # commits, and that an unmeasured judge run can never read as a pass.
       - name: The steward workflow keeps its own guarantees
