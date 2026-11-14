@@ -1,3 +1,0 @@
-Status: The nightly observer writes the overdue skill-review count on NOW.md's "Skill review dates" line (scripts/skill-reviews.mjs, behind a skill-review-state comment), and moves a skill's reviewed date in state/skill-registry.yaml to the date of Krish's ruling when a change to that skill carried one; a change without his ruling moves nothing (fleet integration audit harness-5). A dry run on 2026-11-14 moves 14 dates and the count from 26 of 30 overdue to 14 of 30, led by krish-content-marketer (41 days).
-Next: read the next nightly observe run: the "Skill review dates" line carries the skill-review-state comment and the registry commit names the moved skills.
-North Star check (2026-11-14): holds.
