@@ -182,6 +182,20 @@ Heartside, Caddy, Ollama stopped and disabled. **Nothing of the fleet runs.** On
 started before 19:40 is hung there (harmless upsert). The box is intact for rollback. It still holds a
 Codex login (`/root/.codex/auth.json`, since 4 May) and the read-write control-center deploy key.
 
+### The old box's end (same night, Krish's ruling; the 7-day wait was waived)
+
+| Step | Who | Verified |
+|---|---|---|
+| Its Codex login signed out (`codex logout` as root) | migration session | `codex login status` → "Not logged in"; `auth.json` gone; no other Codex `auth.json` on its disk. The worker's login unaffected ("Logged in using ChatGPT") |
+| Its **read-write** control-center deploy key removed | Krish (GitHub) | `GET /repos/krishanraja/control-center/keys` lists one key: `worker read-only`, `read_only=true` |
+| Hetzner snapshot of the old box | Krish (console) | Krish's word; it is now the only rollback path |
+| Old box **deleted** | Krish (console) | port 22 times out; `Host openclaw` removed from the laptop's `~/.ssh/config` and its host key from `known_hosts` |
+
+**Rollback from here** = restore the snapshot to a new server, then reverse `12a` (restore the dated crontab and
+`jobs.json.pre-switchover-*` backups, enable the gateway) **after** stopping the worker's gateway and crontab.
+The snapshot still holds every secret the old box held (incl. the service-role key in ~1,600 files), another
+reason to rotate after T+7d and then delete the snapshot.
+
 ### Failures and rollbacks
 
 1. **Attempt 1 rolled back (19:56:01–19:56:26).** After the 19:50 switch, test messages to the Loz and
@@ -200,8 +214,7 @@ Codex login (`/root/.codex/auth.json`, since 4 May) and the read-write control-c
 - **Rotation** of the service-role key after T+7d, and moving the inline `openclaw.json` secrets into the store.
 - **Heartside:** its address changed to the worker's `sslip.io` name; anyone who bookmarked the old one needs the new one.
 - **`controlcentre.krishraja.com` Caddy block:** serves nothing (DNS elsewhere); carried over, retire?
-- **Old box end:** snapshot, then delete; and before that, log out its Codex login and remove its read-write
-  deploy key from GitHub.
+- **Old box end:** done the same night (see above). Delete the snapshot once T+7d passes and the key is rotated.
 - **music-watcher** joining the fleet.
 
 ## T+24h

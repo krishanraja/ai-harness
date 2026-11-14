@@ -234,9 +234,9 @@ machines:
       unnoticed for eleven days. Evidence: state/vps-liveness-audit-2026-09-09.md.
       MOVED 2026-11-14 20:08 UTC: the whole OpenClaw fleet (gateway, 15 jobs, 27
       cron lines, family bots, clock, Heartside) now runs on the worker server
-      (Hetzner CPX32, Helsinki); the old box is stopped, intact, awaiting its
-      end. 12 items retired by name. Report, checked at T0/T+24h/T+7d:
-      state/vps/MIGRATION-2026-11-14.md.
+      (Hetzner CPX32, Helsinki); the old box was DELETED the same night on
+      Krish's ruling (a Hetzner snapshot is the rollback). 12 items retired by
+      name. Report, checked at T0/T+24h/T+7d: state/vps/MIGRATION-2026-11-14.md.
 
 # What each surface takes from the brain, and what it gives back.
 #
