@@ -141,6 +141,17 @@ repos:
     rules_files: [AGENTS.md, docs/BRIEF.md]
     note: Legibility's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
 
+  - name: inspirationhouse
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The taste ledger: it counts the corrections Krish gave twice in a week, the number this
+      repository's North Star is measured by. Admitted 2026-11-14 (fleet integration audit
+      harness-7) so it carries the canon and its closeout notes fold into its NOW.md. It has no
+      North Star of its own yet; only Krish sets one. Out of the repository administration
+      publisher (excluded in contract/repository-administration.json) until Krish accepts it there.
+
 adapters:
   - id: claude
     template: contract/templates/adapter-claude.md
