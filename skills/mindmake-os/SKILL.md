@@ -74,7 +74,7 @@ have already been retired and when.
 | How agents are supposed to behave | `## 7.` Agent operating contract |
 | How data actually moves | `## 8.` Data flows |
 | Schedules, and what each tick costs | `## 9.` Cron and scheduling |
-| Drive folders | `## 10.` Google Drive |
+| What agents may do in Drive (where Krish's own folders go is `rules_file` in `contract/paths.yaml`, not this doc) | `## 10.` Google Drive |
 | Ventures, domains, slugs | `## 11.` Portfolio context |
 | The rulebook | `## 12.` Standards |
 | What breaks and how it self-heals | `## 13.` Failure modes |
