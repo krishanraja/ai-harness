@@ -498,11 +498,17 @@ contract_rules:
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
-    text_sha: "2d9753efa37a"
+    text_sha: "f40903b61467"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-engine-instructions.md"
+    history:
+      - text_sha: "2d9753efa37a"
+        valid_until: "2026-11-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: authority.record-harness-observation-is
     file: contract/krish-operating-contract.md
@@ -1268,11 +1274,22 @@ contract_rules:
     status: live
   - id: canon.north-star
     file: contract/templates/canon-block.md
-    text_sha: "951a603d5052"
+    text_sha: "5269b79a1481"
     first_seen: "2026-10-18"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+      ref: "docs/proposals/2026-11-14-engine-instructions.md"
+    history:
+      - text_sha: "951a603d5052"
+        valid_until: "2026-11-14"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+      - text_sha: "fffb0b70a08b"
+        valid_until: "2026-11-14"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-14-engine-instructions.md"
     status: live
   - id: canon.close-out
     file: contract/templates/canon-block.md
