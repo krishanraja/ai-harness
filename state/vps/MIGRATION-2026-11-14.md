@@ -256,6 +256,22 @@ reason to rotate after T+7d and then delete the snapshot.
 - **Old box end:** done the same night (see above). Delete the snapshot once T+7d passes and the key is rotated.
 - **music-watcher** joining the fleet.
 
+## T0 check, by the OS session (2026-11-14, read 21:56 to 22:05 UTC)
+
+Read from outside the box, as the handover's section 8 asks. The report was read, not trusted.
+
+| Check | Reading | Result |
+|---|---|---|
+| `system_health`, all five rows under 20 min old | 5 rows, oldest `last_check` 11 min | pass |
+| `api_usage_state` updated within 70 min | 28 rows, newest 37 min | pass |
+| OpenClaw runs since cutover (20:08) | 0, and 0 in the same two hours a day earlier: no job is scheduled in that window | consistent, nothing missed |
+| No scheduled slot with two rows since cutover | 0 duplicate slots | pass |
+| `agents.last_run` moving | newest 159 min old, no agent has run since cutover | not yet measurable, re-read at T+24h |
+| content-watcher `cloud-vps` claims nothing that waited under 15 min | 0 claims by anyone since 20:00 | pass |
+| Control Center's n8n webhook header path (released the same evening) | proved without calling n8n by the n8n release session, independently of this move | pass |
+
+Not checkable from outside today: the Telegram channel proof, the worker's file counts and the secrets count. They rest on the migration session's own readings above. The first real tier 1 runs are T+24h's: A2 (07:00Z), A22 (15:00 London) and the clock's 06:30 dispatch.
+
 ## T+24h
 
 _To be added: A2 vera_audit row (07:00Z), A4, A11, B3, B6, B11, B16, B19, B20, B17, the clock's 06:30 dispatch,
