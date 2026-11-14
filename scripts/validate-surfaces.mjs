@@ -97,6 +97,12 @@ for (const t of [...fleet.adapters.map((a) => a.template), 'contract/templates/c
     if (!named.includes(n)) F(`template ${t} uses {{${n}}}, which is not a named root in contract/paths.yaml`)
   }
 }
+// 4.7: the 4 Oct Mindmaker-OS RULES.md predates the 22 Oct Drive layout. No
+// surface may route file placement through it again.
+const RETIRED_RULES = /Mindmaker-OS[\\/]architecture[\\/]RULES\.md/i
+for (const [id, s] of Object.entries(paths.surfaces)) {
+  if (s.rules_file && RETIRED_RULES.test(String(s.rules_file))) F(`surface ${id} rules_file still points at the retired 4 Oct RULES.md`)
+}
 O(`${Object.keys(paths.surfaces).length} surfaces define all ${named.length} named roots`)
 
 // --------------------------------------------- no absolute paths in the canon

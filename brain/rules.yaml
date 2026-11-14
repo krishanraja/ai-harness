@@ -3163,17 +3163,22 @@ skill_sections:
   - id: mindmake-os.section-map
     file: skills/mindmake-os/SKILL.md
     heading: "Section map"
-    text_sha: "19e2dca0e007"
+    text_sha: "ebfe41ad7ace"
     first_seen: "2026-09-07"
     source:
-      kind: proposal
-      ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
+      kind: ruling
+      ref: "e9f87ae5aea7"
     history:
       - text_sha: "0ccf0689e949"
         valid_until: "2026-10-06"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "19e2dca0e007"
+        valid_until: "2026-11-14"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-06-rulings-carry-and-mindmake-exclusion.md"
     status: live
   - id: mindmake-os.changing-the-architecture-doc
     file: skills/mindmake-os/SKILL.md
