@@ -618,6 +618,13 @@ if (isMain) {
   const flag = (f) => { const i = args.indexOf(f); return i === -1 ? null : args[i + 1] }
   const policy = loadPolicy()
   if (policy.miner?.enabled === false && !args.includes('--self-test')) { console.log('session miner: disabled in contract/learning-policy.yaml; nothing read.'); process.exit(0) }
+  // The cloud session miner is retired (Ruling, Krish, 2026-11-13: "readers not required"; no Claude scheduled task
+  // reads sessions). A scheduled task that still calls it reads and sends nothing, and that is not a failure: there is
+  // nothing to fix or retry. Only the test fixtures (MINER_FAKE_REMOTE) still drive this path. docs/harness/cloud-session-miner.md
+  if (flag('--source') === 'cloud-events' && !process.env.MINER_FAKE_REMOTE && !args.includes('--self-test')) {
+    console.log('session miner: the cloud session miner was retired on 2026-11-13 (Krish: "readers not required"); nothing read or sent. Sessions read 0, excerpts 0, lessons sent 0, lessons rejected 0. Nothing to fix or retry.')
+    process.exit(0)
+  }
   const names = flag('--names') && existsSync(flag('--names')) ? readFileSync(flag('--names'), 'utf8').split('\n').map((l) => l.trim()).filter(Boolean) : []
 
   if (args.includes('--self-test')) {
