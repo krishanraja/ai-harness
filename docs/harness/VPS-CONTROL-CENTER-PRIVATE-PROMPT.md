@@ -1,5 +1,7 @@
 # Prompt: keep the VPS checkout of control-center reading after it goes private
 
+> **Superseded on 2026-11-14.** This prompt was written for the old box and must not be run as written. The OpenClaw fleet moved that night from the old box (`openclaw-vps`) to the worker server, and the old box was deleted; a Hetzner snapshot is the rollback. What runs where now, and how it was proved, is `state/vps/MIGRATION-2026-11-14.md`. Kept as the record of what was done.
+
 Paste everything below the line into Claude Code on LORIMER (the `openclaw` ssh
 alias works there) or in a Claude Code session on the VPS itself. Run it BEFORE
 `krishanraja/control-center` is made private, then run step 6 again after.

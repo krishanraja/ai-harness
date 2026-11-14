@@ -321,8 +321,10 @@ surface_contracts:
       real, working brain-to-filesystem pump and the only one in the fleet.
     writes: >
       system_health, five rows every 15 minutes, currently the only thing
-      reporting DeepSeek balance as degraded. Also workflow_runs, and from
-      2026-09-09 an hourly heartbeat carrying the n8n execution counter.
+      reporting DeepSeek balance as degraded. Also workflow_runs. The hourly
+      heartbeat carrying the n8n execution counter ran from 2026-09-09 until it
+      was retired on 2026-11-14 (B21). Since 2026-11-14 all of this runs on the
+      worker server (state/vps/MIGRATION-2026-11-14.md).
     role: >
       The watchdog that sits outside the systems it watches. n8n-exec-governor.py
       runs here rather than in n8n precisely so it cannot be starved by the thing

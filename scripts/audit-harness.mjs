@@ -436,7 +436,7 @@ if (!canaryReports.length) N('state/canaries/ is empty. Nothing about trigger be
     // Declared 2026-09-09, retiring 2026-09-20. It stays in this set so the
     // surface stays declared per R7, and the retiring marker on its heartbeat
     // entry is what stops it being read as a failure. See state/heartbeats.json.
-    'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the OpenClaw VPS, declared 2026-09-09 and retiring since 2026-09-20', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
+    'openclaw-vps': { where: 'the hourly heartbeat posted by scripts/vps-heartbeat.sh on the old OpenClaw VPS, declared 2026-09-09, retiring since 2026-09-20, and retired with the box on 2026-11-14 (B21, state/vps/MIGRATION-2026-11-14.md)', declared: '2026-09-09', fix: 'Nothing. This clock is retiring by ruling and is expected to be silent. If it beats, find out what is still running on the host.' },
     // The session miner restored by Krish's ruling of 2026-10-14, the "new evidenced
     // decision" the note above asked for. It is opt-in and weekly.
     'session-miner-lorimer': { where: 'the weekly session miner, run by the nightly harness sync on LORIMER (scripts/Invoke-SessionMiner.ps1)', declared: '2026-10-15', stale_hours: 8 * 24, fix: 'It reports once the PC sync runs again. If the sync itself is silent, the one-line repair is scripts/Repair-HarnessPc.ps1. A degraded beat means no submission route is chosen in contract/learning-policy.yaml miner.submit.' },
