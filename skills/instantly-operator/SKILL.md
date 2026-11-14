@@ -7,6 +7,10 @@ description: "Exclusion gate first: NEVER invoke when Instantly is merely one hy
 
 Prepare and verify Instantly operations against the current official API contract while keeping targeting, copy, credentials, spend, and sends under their proper owners and gates.
 
+## Retired route
+
+Instantly is a retired route (Ruling, Krish, 2026-11-14): no skill routes a cold send, campaign, sequence, import or activation to it, because every cold send is Krish's own (Ruling, Krish, 2026-11-13). This skill now serves only an explicitly requested legacy operation: a read, or a cleanup. A cleanup that deletes, moves, pauses or otherwise changes provider data is a deletion under the operating contract's purge rule, so it waits for Krish's exact yes immediately before it, for that named resource. Everything below describes those legacy operations only; nothing in it authorises a new send.
+
 ## Role and chain
 
 Act as a narrow provider operator. Receive approved targeting and sequence intent from `krish-content-marketer`, approved final words from `krish-voice`, access context from `tools-access`, and any n8n implementation from `n8n-operator`. Return provider readback to `verification-loop`.
@@ -22,7 +26,7 @@ Read:
 ```text
 INSTANTLY OPERATION
 OUTCOME: [what must be learned or changed]
-MODE: [read / draft payload / mutate / send-capable]
+MODE: [read / cleanup, which waits for Krish's yes] (send-capable modes are retired)
 WORKSPACE: [verified non-secret identity]
 RESOURCE: [campaign/list/lead/email/webhook/job + stable identifier]
 API CONTRACT: [official page and retrieval time]
