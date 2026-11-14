@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T02:21:46.335Z",
-  "measurement_verification_at": "2026-11-14T02:21:46.274Z",
+  "generated_at": "2026-11-14T05:48:36.286Z",
+  "measurement_verification_at": "2026-11-14T05:48:36.212Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 273,
+  "unknown_repository_observations": 291,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -32,9 +32,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "d525aae3fe4fdc10e1579277df9314fde6dd30b1",
-      "bootstrap_before": 25841,
-      "bootstrap_after": 25841,
+      "source_base": "6dae4843ad3c9ad6abe75dca62fd30880f61337e",
+      "bootstrap_before": 26015,
+      "bootstrap_after": 26015,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "987e3f432df04ec9e1ce508aff814e0c385463f2",
+      "source_base": "291a7a7b6dd127e115d2738828c9250e967cfedb",
       "bootstrap_before": 25561,
       "bootstrap_after": 25561,
       "observed_use": {
@@ -98,9 +98,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "8bd711696d7f1d5d9b1f6a5c3043a988e7e49057",
-      "bootstrap_before": 413032,
-      "bootstrap_after": 413032,
+      "source_base": "e5427c0912af733cbf76d1a20fc755d1dabb76ea",
+      "bootstrap_before": 412761,
+      "bootstrap_after": 412761,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -164,9 +164,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "ecfed407abb2f2ab6a03491321cecf307956e7a9",
-      "bootstrap_before": 119146,
-      "bootstrap_after": 119146,
+      "source_base": "1536067c29e45dae87def5836dfd8269c31c063c",
+      "bootstrap_before": 118988,
+      "bootstrap_after": 118988,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,

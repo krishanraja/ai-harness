@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T02:21:46.200Z",
+  "generated_at": "2026-11-14T05:48:36.125Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "8bd711696d7f1d5d9b1f6a5c3043a988e7e49057",
+      "base": "e5427c0912af733cbf76d1a20fc755d1dabb76ea",
       "brain_revision": "aabfeac6c45f",
-      "before": 413032,
-      "after": 413032,
+      "before": 412761,
+      "after": 412761,
       "files": [],
       "skipped": [],
-      "source_seal": "f75f1fecb50eb7a97715d7806910148a6643aa68d96cb3ef5681e510221656ff",
+      "source_seal": "8281733961812fcd1a4030ce8ad38776fce7e4b88ff6b01822ae7390f3171c57",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,13 +23,13 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "d525aae3fe4fdc10e1579277df9314fde6dd30b1",
+      "base": "6dae4843ad3c9ad6abe75dca62fd30880f61337e",
       "brain_revision": "5ca09cc3df52",
-      "before": 25841,
-      "after": 25841,
+      "before": 26015,
+      "after": 26015,
       "files": [],
       "skipped": [],
-      "source_seal": "f017b0e72204236e910dfca44526e7bc86ea51c6470b2041e702e2722806e877",
+      "source_seal": "a846ba66058beb16e7505bad3c9fdc7067eeda063083a4c3835d7c4593a4f2ff",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "987e3f432df04ec9e1ce508aff814e0c385463f2",
+      "base": "291a7a7b6dd127e115d2738828c9250e967cfedb",
       "brain_revision": "155b79828fb7",
       "before": 25561,
       "after": 25561,
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "ecfed407abb2f2ab6a03491321cecf307956e7a9",
+      "base": "1536067c29e45dae87def5836dfd8269c31c063c",
       "brain_revision": "ba41f521a760",
-      "before": 119146,
-      "after": 119146,
+      "before": 118988,
+      "after": 118988,
       "files": [],
       "skipped": [],
-      "source_seal": "69987fa9d3b9500671abf54013341a208e4f96c1c43537e5dc6413abed1c840d",
+      "source_seal": "45d7a13050de427ecd7a302ff319f01578c05f03d27caeabf83ad41e19dad9ea",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
