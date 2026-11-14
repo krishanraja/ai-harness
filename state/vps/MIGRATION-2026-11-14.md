@@ -168,11 +168,50 @@ Remote Control (both accounts) is capped in `claude.slice` (4 GB, 3 cores) and c
 ### Installs
 
 - **Codex:** `codex login status` → "Logged in using ChatGPT" for the service user (`auth.json` owner-only,
-  600). One login, shared by both Claude accounts. Not copied from anywhere.
+  600). One login, shared by both Claude accounts and the Codex desktop app (Remote SSH as the service user,
+  which has no sudo). Not copied from anywhere. The old box's Codex login was signed out.
 - **The two Claude accounts:** each logged in separately (claude.ai, Max), each with its own config
   directory and its own Remote Control server; each reaches the box from its own Claude app. No credential
   was copied between users or machines. No inbound port opened for them.
-- **content-watcher, music-watcher:** **not installed yet.** Next session.
+- **content-watcher** (machine `cloud-vps`, `filing: engine`): `doctor` → "Ready to run the watcher"; tests OK;
+  a local `read` wrote `read.json` + `read.md`. **Switched on 2026-11-14 21:14:02Z** (every minute, like the home
+  task). Its engine key came from the laptop's Credential Manager straight into a root-only file, never printed;
+  no Apify key is held (`CONTENT_WATCH_APIFY_VIA_ENGINE=1`). **Drops** (Production/Content Inspo) reach it through a
+  read-only, new-files-only Drive mirror, switched on 21:45:53Z; its first pass reported `drop.held: 2` (both
+  recent drops already read by a home computer, so not read again). The home computers' task is untouched.
+- **music-watcher** (`trackcard`, stems + loudness): tests **85 passed** after declaring the undeclared
+  `matplotlib` (music-watcher #1); a card with Demucs stem activity written on CPU. New: **Music Inspo watcher**
+  (music-watcher #2, merged): every 15 min, each new drop in Drive's Music Inspo becomes a card in
+  `taste/inspo/` on one rolling PR. End-to-end on the folder's first drop (a Spotify link): measured with stems in
+  5 min 25 s from a SoundCloud recording within 6 s of Spotify's length → music-watcher #3, awaiting Krish.
+  Switched on 21:45:53Z.
+- Both repositories' `AGENTS.md` now tell any session to use the worker by default (content-watcher #33,
+  music-watcher #1).
+
+## Handback to the OS session (2026-11-14)
+
+What the worker now offers the OS, so the OS session can use it without asking:
+
+- **Reach it:** `ssh worker` (admin), `ssh worker-codex` (the service user, for Codex), `ssh worker offload '<cmd>'`
+  (a heavy job as the service user inside the Claude budget). From the Claude app or claude.ai, pick the **worker**
+  environment (both accounts). Cloud sessions cannot reach it (outbound SSH is blocked there).
+- **What runs there:** the whole OpenClaw fleet (15 jobs, 27 cron lines, family bots, clock, Heartside), Claude
+  Remote Control for both accounts, the one cloud Codex login, content-watcher as `cloud-vps` (board backup + Drive
+  drops), and the Music Inspo watcher. Budgets: `fleet.slice` has a guaranteed floor; Claude and watchers are capped.
+- **Reusable engines.** Krish, 2026-11-14: the music engine "will become peripherally useful for my content engine
+  as well, as we start making the audio treatment more sophisticated in my production content", used "in the same
+  way the content watcher is". What exists for that today, on the worker: `trackcard analyze <wav> --json` gives
+  tempo, key/Camelot, sections, drops, loudness (integrated LUFS, crest) and, with stems, Demucs drums / bass /
+  vocals / other activity per bar, as a JSON card; `trackcard mcp` serves it over stdio to a Claude session on the
+  box. Stem separation itself (the separated audio, not just activity) is Demucs and is installed. Nothing in the
+  content engine calls it yet; architecting that is the OS session's to propose.
+- **Limits to design around:** YouTube refuses the worker (datacenter IP); Drive access is **read-only** (a
+  writer would be a folder-scoped service account, not a broader token); no Claude Code on a timer (the
+  zero-routines ruling); secrets only in `/etc/worker/secrets.d/`; the fleet's state exists only on this box
+  (backups are an open decision).
+- **Open:** T+24h/T+7d evidence (the worker's timer writes it; append it here); rotate the service-role key after
+  T+7d, then delete the old box's snapshot; move `openclaw.json`'s inline tokens into the store; Hetzner backups
+  for the worker; StemDeck (not installed); 6.7 and the `controlcentre` Caddy block.
 
 ### The old box (T0)
 
