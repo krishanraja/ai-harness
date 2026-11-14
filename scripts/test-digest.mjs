@@ -21,7 +21,7 @@ const test = (name, condition) => {
 }
 
 const policy = loadPolicy()
-const pr = (n, created = '2026-10-12T00:00:00Z') => ({ number: n, title: `Change request: change ${n}`, html_url: `https://github.com/krishanraja/ai-harness/pull/${n}`, created_at: created })
+const pr = (n, created = '2026-10-12T00:00:00Z') => ({ number: n, title: `Change request: change ${n}`, html_url: `https://github.com/krishanraja/ai-harness/pull/${n}`, created_at: created, head: { ref: `harness/change-${n}`, sha: String(n).padStart(40, 'b') } })
 
 test('a week with nothing ready and nothing blocked is silent', buildDigest({ today: '2026-10-14', policy }) === null)
 const one = buildDigest({ ready: [pr(130)], today: '2026-10-14', policy })
@@ -33,6 +33,13 @@ test('never more than the decision budget', many.decisions.length === Number(pol
 test('the oldest ready change is asked first', many.decisions[0].pr === 2)
 const blocked = buildDigest({ blockers: [{ kind: 'credential', only_you: 'credential', title: 'Replace the judge panel key', detail: 'x' }], today: '2026-10-14', policy })
 test('a blocker alone speaks, as a credential ask', blocked && blocked.only_you === 'credential' && /judge panel key/i.test(blocked.title))
+// I-32: Control Center's harness list source merges a change request at the
+// exact head recorded here, and refuses if it moved. No head, no decision.
+const sha = (n) => String(n).padStart(40, 'a')
+const headed = (n) => ({ ...pr(n), head: { ref: `harness/change-${n}`, sha: sha(n) } })
+const pinned = buildDigest({ ready: [headed(140)], today: '2026-10-14', policy })
+test('a merge decision carries its pull request number and head commit', pinned.decisions[0].pr === 140 && pinned.decisions[0].head_sha === sha(140) && pinned.decisions[0].head_ref === 'harness/change-140')
+test('a ready change with no readable head commit is not asked', buildDigest({ ready: [{ ...pr(141), head: { ref: 'harness/change-141', sha: 'nothex' } }], today: '2026-10-14', policy }) === null)
 test('the digest never carries an em dash', !(many.md + blocked.md).includes('\u2014'))
 
 const item = boardItem(one, { date: '2026-10-14' })
@@ -100,7 +107,7 @@ test('a draft with a running check waits', decide(change(), { ...green, runs: [{
 test('a draft with a failed check is never marked ready', decide(change(), { ...green, runs: [{ name: 'validate', status: 'completed', conclusion: 'failure' }] }, { today, expiryDays: 14 }).action === 'none')
 test('a change request past expiry closes', decide(change({ created_at: '2026-10-01T00:00:00Z' }), green, { today, expiryDays: 14 }).action === 'close')
 test('a pull request that is not the steward\'s is left alone', decide({ head: { ref: 'feature/x' }, created_at: '2026-10-01T00:00:00Z' }, null, { today, expiryDays: 14 }).action === 'none')
-const scoped=change({head:{ref:'harness/repository-learning-example',sha:'abc'}})
+const scoped=change({head:{ref:'harness/repository-learning-example',sha:'c'.repeat(40)}})
 test('a measured repository learning proposal reaches the same review queue',decide(scoped,green,{today,expiryDays:14}).action==='mark-ready')
 test('repository learning digest explains the accepted-view delivery that follows a merge',buildDigest({ready:[{...pr(7),head:scoped.head}],today,policy}).md.includes('schedules checked repository delivery'))
 
