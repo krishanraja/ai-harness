@@ -2,6 +2,10 @@
 
 Status: approved by Krish on 2026-11-14 as part of wave 3 (cluster I-30, decision D21), recorded word for word in control-center `docs/audits/2026-11-14-fleet-integration/KRISH-ANSWERS.md` at control-center commit `38aa01edb670aa599b666f0515c4116c97838c3b` (his words: "I want wave 3 now"). The design is `integration/SYNTHESIS.md` I-30 in the same folder.
 Source: fleet integration plan I-30 (ai-harness half), "A research shelf for every venture".
+Ruling: on 2026-11-14 the judge panel on pull request 254 reported two blocking regressions against the operating
+contract (file routing's homes, and the approval wall for a filing). Krish ruled that the sentence goes in as written
+(his words: "merge ai-harness #254 with my ruling"). File routing and the authority wall are unchanged; reconciling
+their text with this sentence is a later change, if he asks for one.
 
 ## What was wrong
 
