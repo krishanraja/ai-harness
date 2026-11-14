@@ -1,5 +1,7 @@
 # Auditing the OpenClaw VPS before retiring it
 
+> **Superseded on 2026-11-14.** This audit describes the old box before its retirement was planned. The OpenClaw fleet moved that night from the old box (`openclaw-vps`) to the worker server, and Krish deleted the old box himself in the Hetzner console that night, on his ruling ("Full switchover tonight, then delete the old box when satisfied"); a Hetzner snapshot is the rollback. What runs where now, and how it was proved, is `state/vps/MIGRATION-2026-11-14.md`. Kept as the record of what was done.
+
 Krish ruled on 2026-09-09 that the VPS should be retired as orchestrator. Nothing
 here retires it. This establishes what it actually does first, because the
 premise that it "barely does much" is contradicted by the evidence available

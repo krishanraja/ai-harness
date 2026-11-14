@@ -219,7 +219,7 @@ stores:
       file's own rule is that nothing here is dropped.
 
   - id: openclaw-vps-host-state
-    where: the OpenClaw VPS, /root/.openclaw, 4.5 GB
+    where: the worker server, /root/.openclaw (moved from the old OpenClaw VPS on 2026-11-14)
     disposition: reference
     owner: mindmake-os
     holds: >
@@ -231,8 +231,21 @@ stores:
       agents.brief_content, pulled from Supabase every 15 minutes by
       render-identity.py. The only working brain-to-filesystem pump in the fleet.
     writes_to_brain: >
-      system_health every 15 minutes, workflow_runs, and from 2026-09-09 an
-      hourly heartbeat via scripts/vps-heartbeat.sh.
+      system_health every 15 minutes and workflow_runs. The hourly heartbeat
+      via scripts/vps-heartbeat.sh ran from 2026-09-09 and was retired on
+      2026-11-14 (B21).
+    moved: >
+      On 2026-11-14 the whole OpenClaw fleet moved to the worker server and the
+      old box was deleted by Krish himself in the Hetzner console, on his ruling of
+      2026-11-14 ("Full switchover tonight, then delete the old box when
+      satisfied", state/vps/MIGRATION-2026-11-14.md, Rulings and "Old box end");
+      a Hetzner snapshot is the rollback. render-identity.py
+      and write-system-health.py run there unchanged, proved on their first runs
+      (state/vps/MIGRATION-2026-11-14.md, B1 and B5).
+    superseded_wording: >
+      Until 2026-11-14 this row read "where: the OpenClaw VPS, /root/.openclaw,
+      4.5 GB" and listed the hourly heartbeat as a current write. The counts in
+      "holds" are the 2026-09-09 audit's, kept as its record.
     action: >
       Reference, not migrate. The host is declared as a surface in
       state/fleet.yaml rather than retired, because a watchdog outside the

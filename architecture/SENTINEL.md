@@ -16,7 +16,7 @@ Examples from the record:
   whatever the parse result.
 - **COMPOUND's knowledge refresh** exited "outside the window" and reported
   success, with nothing written since 2026-09-21.
-- **The `openclaw-vps` heartbeat** has returned 401 since 2026-09-19.
+- **The `openclaw-vps` heartbeat** returned 401 from 2026-09-19 until it was retired with the old box on 2026-11-14 (B21, `state/vps/MIGRATION-2026-11-14.md`).
 
 In every case the thing that failed was also the thing reporting on itself.
 The sentinel is a second opinion from a different provider. It checks
