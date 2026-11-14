@@ -27,7 +27,7 @@ counted: 2026-09-09
 # reads `stores` only. The counts below are from `counted` and were not
 # re-verified on 2026-11-14; only this key changed.
 project_address_env: SUPABASE_URL
-project_key_superseded: { key: project, on: "2026-11-14", by: project_address_env, why: "the literal ref was in a public repository" }
+project_key_superseded: { key: project, date: "2026-11-14", by: project_address_env, why: "the literal ref was in a public repository" }
 
 stores:
   # ------------------------------------------------------------------ canon
