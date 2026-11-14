@@ -150,7 +150,7 @@ nobody asked for. Re-enabling it is one line and Krish's call.
 ## 4. The service_role JWT is out of both scripts
 
 Prior state captured: both scripts carried the identical plaintext key. Fingerprint
-(sha256, first 16) `20a6b68cf2fab2d5`; payload `role=service_role`, `ref=gojpffsrxybbpbdzzrvs`,
+(sha256, first 16) `20a6b68cf2fab2d5`; payload `role=service_role`, `ref=<main database project>`,
 issued 2026-04-14, **valid until 2036-04-14**.
 
 Backed up to `sync-briefs-to-skills.sh.bak-jwt-2026-09-09` and

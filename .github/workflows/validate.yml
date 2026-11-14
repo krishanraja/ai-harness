@@ -31,6 +31,18 @@ jobs:
           git config core.autocrlf false
           git diff --check
 
+      # The repository is public: no key, JWT or database address may land in it
+      # outside a listed config file (fleet integration audit I-01, 2026-11-14).
+      # The self-test proves each pattern can still fail before the scan is trusted.
+      - name: Refuse keys and database addresses
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          node scripts/check-public-leaks.mjs --self-test
+          if ($LASTEXITCODE -ne 0) { throw 'The leak guard can no longer catch what it names.' }
+          node scripts/check-public-leaks.mjs
+          if ($LASTEXITCODE -ne 0) { throw 'A key, JWT or database address is in a tracked file.' }
+
       - name: Validate and prove deterministic packages
         shell: pwsh
         run: |

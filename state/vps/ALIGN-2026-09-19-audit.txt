@@ -147,31 +147,31 @@ Filenames only. Do NOT paste any matched line back.
 /root/.openclaw/cron/inbox-decay.sh
 
 ===== 7. WHAT THIS HOST WRITES TO =====
-  11464 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/tasks
-    813 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/workflow_runs
-    706 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/approvals
-    355 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/audit_log
-    322 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/agents
-    311 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/system_config
-    295 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/home_intelligence
-    184 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/feedback_queue
-    176 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/workflow_proposals
-    146 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/agent_plans
-    129 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/zara_signals
-    122 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/standards_registry
-    116 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/vera_audit
-    114 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/haro_queries
-    110 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/content_ideas
-     95 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/fleet_drift_report
-     93 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/system_health
-     89 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/decisions_waiting
-     86 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/rpc
-     73 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/hunter_seen_roles
-     65 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/product_health
-     62 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/apify_actor_registry
-     58 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/credential_health
-     43 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/silent_failures
-     41 https://gojpffsrxybbpbdzzrvs.supabase.co/rest/v1/hunter_search_urls
+  11464 https://<main-project>.supabase.co/rest/v1/tasks
+    813 https://<main-project>.supabase.co/rest/v1/workflow_runs
+    706 https://<main-project>.supabase.co/rest/v1/approvals
+    355 https://<main-project>.supabase.co/rest/v1/audit_log
+    322 https://<main-project>.supabase.co/rest/v1/agents
+    311 https://<main-project>.supabase.co/rest/v1/system_config
+    295 https://<main-project>.supabase.co/rest/v1/home_intelligence
+    184 https://<main-project>.supabase.co/rest/v1/feedback_queue
+    176 https://<main-project>.supabase.co/rest/v1/workflow_proposals
+    146 https://<main-project>.supabase.co/rest/v1/agent_plans
+    129 https://<main-project>.supabase.co/rest/v1/zara_signals
+    122 https://<main-project>.supabase.co/rest/v1/standards_registry
+    116 https://<main-project>.supabase.co/rest/v1/vera_audit
+    114 https://<main-project>.supabase.co/rest/v1/haro_queries
+    110 https://<main-project>.supabase.co/rest/v1/content_ideas
+     95 https://<main-project>.supabase.co/rest/v1/fleet_drift_report
+     93 https://<main-project>.supabase.co/rest/v1/system_health
+     89 https://<main-project>.supabase.co/rest/v1/decisions_waiting
+     86 https://<main-project>.supabase.co/rest/v1/rpc
+     73 https://<main-project>.supabase.co/rest/v1/hunter_seen_roles
+     65 https://<main-project>.supabase.co/rest/v1/product_health
+     62 https://<main-project>.supabase.co/rest/v1/apify_actor_registry
+     58 https://<main-project>.supabase.co/rest/v1/credential_health
+     43 https://<main-project>.supabase.co/rest/v1/silent_failures
+     41 https://<main-project>.supabase.co/rest/v1/hunter_search_urls
 
 ===== 8. HEARTBEAT: is this host reporting into the harness? =====
 [2026-09-19T15:05:01Z] heartbeat FAILED http=401 {
