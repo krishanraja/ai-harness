@@ -1159,11 +1159,17 @@ contract_rules:
     status: live
   - id: canon.rendered-from-krishanraja-ai
     file: contract/templates/canon-block.md
-    text_sha: "e6dfaf326204"
+    text_sha: "a59656493caa"
     first_seen: "2026-10-28"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+      ref: "docs/proposals/2026-10-28-prs-merge-themselves.md"
+    history:
+      - text_sha: "e6dfaf326204"
+        valid_until: "2026-11-14"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
   - id: canon.precedence
     file: contract/templates/canon-block.md
