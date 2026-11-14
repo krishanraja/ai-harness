@@ -501,8 +501,8 @@ contract_rules:
     text_sha: "f40903b61467"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "9a87b72528cbb788b46fe4b665d768c674c5e59d"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-engine-instructions.md"
     history:
       - text_sha: "2d9753efa37a"
         valid_until: "2026-11-14"
@@ -1277,8 +1277,8 @@ contract_rules:
     text_sha: "5269b79a1481"
     first_seen: "2026-10-18"
     source:
-      kind: ruling
-      ref: "9a87b72528cbb788b46fe4b665d768c674c5e59d"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-engine-instructions.md"
     history:
       - text_sha: "951a603d5052"
         valid_until: "2026-11-14"
