@@ -175,6 +175,11 @@ jobs:
       - name: The pin reconciler reports and never repairs
         run: node scripts/reconcile-pins.mjs --self-test
 
+      # Skill reviews (harness-5): overdue counted, a date moved only by a
+      # ruling on a change to that skill, never backwards, NOW.md line in place.
+      - name: The skill review count is honest
+        run: node scripts/skill-reviews.mjs --self-test
+
       # Workflow invariants a YAML edit could silently undo: what the observer
       # commits, and that an unmeasured judge run can never read as a pass.
       - name: The steward workflow keeps its own guarantees
@@ -354,6 +359,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+        with:
+          # Full history: the skill review count reads rulings back to the oldest review date.
+          fetch-depth: 0
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7, Node 24
         with:
           node-version: "22"
@@ -414,6 +422,14 @@ jobs:
         if: ${{ !inputs.event_import_only }}
         run: node scripts/north-star.mjs --write
 
+      # The overdue skill-review count, written on NOW.md's "Skill review
+      # dates" line, and a skill's review date moved to the date of Krish's
+      # ruling when a change to that skill carried one; nothing else moves it
+      # (fleet integration audit harness-5).
+      - name: Count the overdue skill reviews
+        if: ${{ !inputs.event_import_only }}
+        run: node scripts/skill-reviews.mjs --bump --write
+
       # Committed, so the ledger is diffable and cannot be quietly rewritten.
       # Append-only by construction: every line carries a stable id and the
       # script never rewrites an existing one.
@@ -425,13 +441,13 @@ jobs:
         run: |
           set -euo pipefail
           rm -f audit.md reconcile.md
-          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json state/scoreboard.jsonl brain/proposals.jsonl NOW.md)" ]; then
+          if [ -z "$(git status --porcelain -- state/observations state/heartbeats.json state/scoreboard.jsonl brain/proposals.jsonl NOW.md state/skill-registry.yaml)" ]; then
             echo "Nothing new observed. Committing nothing is the correct outcome."
             exit 0
           fi
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
-          git add state/observations state/heartbeats.json brain/proposals.jsonl NOW.md
+          git add state/observations state/heartbeats.json brain/proposals.jsonl NOW.md state/skill-registry.yaml
           [ -f state/scoreboard.jsonl ] && git add state/scoreboard.jsonl
           git commit \
             -m "chore(observe): $(date -u +%Y-%m-%d) ledger" \
