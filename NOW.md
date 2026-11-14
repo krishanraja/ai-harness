@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-02","week_target":null,"current":0,"current_as_of":"2026-11-14","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"ladder pending baseline"} --> **North Star number: U4, ladder pending Krish.** Corrections Krish had to give twice in a week, across the fleet: 0 in the week of 2026-11-02 (0 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-14.
 
+- The North Star no longer reads a false 0. A week with no taste-ledger row at all, or with fewer repeat rows than the taste ledger's weekly reading marker announced, now reads "not measured, U4" with its reason in the state line, and the observation intake re-measures after every intake, so the number moves when the taste ledger's 05:47 UTC envelopes land instead of a night later. The proposer ignores the marker. The real reading for the week of 2026-11-02 is 18 (18 taste ledger, 0 harness). (2026-11-14)
 - content-engine's listed rule files name docs/CAROUSEL-STANDARD.md instead of the retired carousel engine's state document, so the canon block and the repository context stop pointing sessions at a retired route. (2026-11-13)
 - Krish's 13 November ruling that cold outbound is in scope for Mindmake (email, LinkedIn and calls, every send still his, the law held) and the 22 October clone ruling are carried into who-krish-is.md, the krish-principles skill, the operating contract's founder-visibility line and the mindmake skill's commercial canon; Rule 2 stays verbatim and reads against the ruling, as Rules 7 and 8 read against the portfolio ruling. brain/rules.yaml revised for the two changed texts. (2026-11-13)
 - The North Star number is measured every night, for the first time; it is rising (9 on w/c 12 Oct to 18 on w/c 2 Nov in the taste ledger). `scripts/north-star.mjs`, which runs in the steward's observe job, counts corrections Krish had to give twice in the last whole week and writes the result into the north-star-state line above. It adds two counts. The first is the taste ledger's repeats: inspirationhouse sends each correction slug Krish gave in two or more pieces of evidence that week as one explicit_correction envelope naming the skill that owns it. The second is this ledger's own correction clusters seen on two days. Before this, the ledger never saw most of his corrections, and the scoreboard rate read 0.3%. The 18 repeats the taste ledger found for w/c 2 Nov passed this repository's intake in a dry run, and with them the number reads 18. The ladder and urgency stay Krish's: U4, ladder pending. (2026-11-13)
@@ -41,6 +42,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-14 The steward measured at 01:00 UTC, before the taste ledger sent its 18 repeats at 05:47, and nothing told "0 repeats" from "not read yet" (fleet integration audit, harness-1, 2026-11-14).
 - 2026-11-13 Krish asked to measure the number the North Star names and to merge it (Ruling, Krish, 2026-11-13: do it all and merge to main).
 - 2026-11-13 Krish, 2026-11-13, asked whether to set up a weekly Claude scheduled task in each of his two accounts or rule them not required: "readers not required". It keeps his 2026-10-29 ruling of zero Claude routines.
 - 2026-11-12 Krish, 2026-11-12: "make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there".
@@ -53,11 +55,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-13): Let the canon sync carry the new rule file into content-engine's AGENTS.md and HARNESS_CONTEXT.md.
+- Next (2026-11-14): inspirationhouse sends one marker envelope a week (event id taste-ledger:<week>:reading, evidence_ref ending in the week's total, also when 0); until it does, a week with no repeat reads "not measured", which is the honest reading.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside, Legibility and growth-heartside for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 13 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-13): holds.
+- North Star check (2026-11-14): holds.
 
 ## Read next
 
