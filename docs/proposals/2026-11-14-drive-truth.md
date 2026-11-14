@@ -26,6 +26,10 @@ The harness still named the old tree:
   `drive_root/Ventures/Active/`), and `contract/paths.yaml` `rules_file`
   (`Ventures\Active\Mindmaker-OS\architecture\RULES.md`; the one RULES.md on
   Drive dates from 2026-10-04, before the reorganisation).
+  This pull request does not change `rules_file`: Krish approved repointing it
+  on 2026-11-14 (item 4.7), and #249 does that on its own. Until #249 merges,
+  `rules_file` is the stale value and the skills' Drive authority is
+  `system_config drive_destinations`.
 
 ## The change
 

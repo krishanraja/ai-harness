@@ -3808,11 +3808,6 @@ skill_sections:
         source:
           kind: founding
           ref: "a3d2f3706a87"
-      - text_sha: "5889039f4762"
-        valid_until: "2026-11-14"
-        source:
-          kind: proposal
-          ref: "docs/proposals/2026-11-14-drive-truth.md"
     status: live
   - id: video-engine.authority-and-safety
     file: skills/video-engine/SKILL.md
