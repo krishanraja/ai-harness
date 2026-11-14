@@ -39,7 +39,7 @@ jobs:
     # Pinned by commit, never @main: whoever can change ai-harness main must not
     # run code with this repository's secrets the same night. Move the pin in a
     # reviewed pull request when the steward changes.
-    uses: krishanraja/ai-harness/.github/workflows/docs-steward.yml@PINNED_SHA
+    uses: krishanraja/ai-harness/.github/workflows/docs-steward.yml@ab9dfa6af13a5b778fc73950b65bbfdb1dcbab76 # 2026-11-14, AUTO-6 hardening (#237)
     with:
       dry_run: ${{ inputs.dry_run || false }}
     # Only the one secret the steward reads, never `secrets: inherit`.
