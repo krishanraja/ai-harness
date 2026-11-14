@@ -74,35 +74,46 @@ deployed_release:
   status: current-on-all-declared-local-surfaces-cloud-surfaces-stale-local-canaries-zero-failures-with-declared-unmeasured-routes
 
 latest_approved_release:
-  release_id: v2026.11.14.4
-  tag: harness-v2026.11.14.4
-  source_commit: df382a4054d1186c012c10a8add5c66d7915e98f
+  release_id: v2026.11.14.5
+  tag: harness-v2026.11.14.5
+  source_commit: 01461b0d95160d8179a1233de10d2f1404912291
   published: true
   immutable: true
-  published_at: 2026-11-14T18:24:20Z
-  manifest_sha256: EBF2A62FF3B55B05BC5F52DB00D72C10542B3518CFE7EE5292AE6F4BE7DD1AF2
-  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.14.4
-  skills_tree_aggregate_sha256: FC4EB52B2E489E986E73FDBF5B071A3558418022A0F306295FB9BFC312F45A81
+  published_at: 2026-11-14T22:17:43Z
+  manifest_sha256: FC991CE2832199C931AC95D4FDF89855CCBA8B1C12DADFD0E2FB7CC6F4CDC98A
+  release_url: https://github.com/krishanraja/ai-harness/releases/tag/harness-v2026.11.14.5
+  skills_tree_aggregate_sha256: EDA6A34B0AC9F6BDF441342DEB9276E01CA56419EE4C12EA84C746F469F9FD18
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   changed_skills:
-    - mindmake
+    - ctrl-intake
   approved_at: 2026-11-14
   approved_by: Krish Raja
   approval_basis: >-
     Standing ruling (Krish, 2026-10-15): merging a change to main approves the release
-    built from it. Cut automatically from main at df382a4054d1 after
+    built from it. Cut automatically from main at 01461b0d9516 after
     validate-and-repeat-build passed; this record was written by
     scripts/register-release.mjs.
   supersedes_reason: >-
-    v2026.11.14.3 remains the immutable immediate rollback target.
+    v2026.11.14.4 remains the immutable immediate rollback target.
   hash_provenance: >-
-    manifest_sha256 is the SHA-256 of release-v2026.11.14.4.json downloaded from the
+    manifest_sha256 is the SHA-256 of release-v2026.11.14.5.json downloaded from the
     release. skills_tree_aggregate_sha256 was recomputed from the committed git objects
     at source_commit by scripts/register-release.mjs with the
     sha256-path-nul-file-sha256-ordinal-v1 record format.
 
 
 previous_published_release:
+  release_id: v2026.11.14.4
+  tag: harness-v2026.11.14.4
+  source_commit: df382a4054d1186c012c10a8add5c66d7915e98f
+  immutable: true
+  published_at: 2026-11-14T18:24:20Z
+  manifest_sha256: EBF2A62FF3B55B05BC5F52DB00D72C10542B3518CFE7EE5292AE6F4BE7DD1AF2
+  skills_tree_aggregate_sha256: FC4EB52B2E489E986E73FDBF5B071A3558418022A0F306295FB9BFC312F45A81
+  status: immediate-immutable-rollback-baseline
+
+
+superseded_approved_release:
   release_id: v2026.11.14.3
   tag: harness-v2026.11.14.3
   source_commit: 397f8762ccc942b16a3a759d7df1df66a2b93050
@@ -110,19 +121,8 @@ previous_published_release:
   published_at: 2026-11-14T17:45:45Z
   manifest_sha256: 1508684EED94EEAB03039C08C976914BA7BCA356EDDEF3ECBFBFAB691812F8F5
   skills_tree_aggregate_sha256: 70C614B5CCC8DFFCE6269E0ABB661254D8140128073260B3C12CDCC16F792318
-  status: immediate-immutable-rollback-baseline
-
-
-superseded_approved_release:
-  release_id: v2026.11.14.2
-  tag: harness-v2026.11.14.2
-  source_commit: b020f4fc8ac2b298f5eed9a28b433f0b655a596e
-  immutable: true
-  published_at: 2026-11-14T17:45:00Z
-  manifest_sha256: C4EE5DCDA01A27284DBA688E0CF35CC1CB0EFF5C3F37D4C93BA5AA1D41B0F0F0
-  skills_tree_aggregate_sha256: 1B511E0F089A844BF4046B5BCCDB56815615464D4CD5B801EF0073B780B86461
   note: >-
-    Retained as the second immutable rollback target after v2026.11.14.3.
+    Retained as the second immutable rollback target after v2026.11.14.4.
 
 
 surface_deployments:
@@ -143,7 +143,7 @@ surface_deployments:
       - state/canaries/v2026.10.06.3-codex-surface-07a67cda9f99.json
       - state/deployments/v2026.10.06.3-codex-surface-07a67cda9f99.json
       - state/machine-runs/v2026.10.06.3-surface.json
-    status: awaiting-automatic-install-of-v2026.11.14.4
+    status: awaiting-automatic-install-of-v2026.11.14.5
     previous_release: v2026.10.06.2
   cursor-primary:
     release_id: v2026.11.11.1
@@ -157,7 +157,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.3-20261006T212041Z-b93d1a7c
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.14.4
+    status: awaiting-automatic-install-of-v2026.11.14.5
     previous_release: v2026.11.08.1
   claude-code-user:
     release_id: v2026.11.11.1
@@ -171,7 +171,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.claude\skills.harness-backups\claude-code-user\v2026.10.06.3-20261006T210825Z-82f20902
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.14.4
+    status: awaiting-automatic-install-of-v2026.11.14.5
     previous_release: v2026.11.08.1
   codex-current:
     release_id: v2026.11.11.1
@@ -185,7 +185,7 @@ surface_deployments:
     rollback_directory: C:\Users\krish\.codex\skills.harness-backups\codex-current\v2026.10.06.3-20261006T212047Z-3bb3bf3b
     evidence:
       - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.14.4
+    status: awaiting-automatic-install-of-v2026.11.14.5
     previous_release: v2026.11.08.1
   claude-cloud:
     release_id: v2026.10.06.3
@@ -193,7 +193,7 @@ surface_deployments:
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/claude-cloud.json
-    status: stale-manual-cloud-upload-required-for-v2026.11.14.4
+    status: stale-manual-cloud-upload-required-for-v2026.11.14.5
   claude-secondary-cloud:
     # Krish's second claude.ai account, governed as its own surface from
     # 2026-10-27. No record says what it holds: claude-cloud above is the one
@@ -207,21 +207,21 @@ surface_deployments:
     installed_skill_count: null
     deployed_at: null
     evidence: null
-    status: stale-manual-cloud-upload-required-for-v2026.11.14.4
+    status: stale-manual-cloud-upload-required-for-v2026.11.14.5
   perplexity-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/perplexity-cloud.json
-    status: stale-manual-cloud-upload-required-for-v2026.11.14.4
+    status: stale-manual-cloud-upload-required-for-v2026.11.14.5
   codex-cloud:
     release_id: v2026.10.06.3
     source_commit: 22a77d11cb77225ad3efd917dea6c3b553e4c342
     installed_skill_count: 29
     deployed_at: 2026-10-07
     evidence: state/cloud-checks/codex-cloud.json
-    status: awaiting-environment-refresh-for-v2026.11.14.4
+    status: awaiting-environment-refresh-for-v2026.11.14.5
 
 canonical:
   repository: krishanraja/ai-harness
@@ -285,35 +285,35 @@ production_active:
   - video-engine
 
 production:
-  - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
-  - {name: mindmake, role: commercial-context, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 45}
-  - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: mindmake-os, role: domain-router, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 30}
+  - {name: mindmake, role: commercial-context, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 45}
+  - {name: krish-principles, role: base-doctrine, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 90}
   - {name: take-the-brief, role: conditional-intent-briefing-gateway, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: strategy-brief, role: always-on-pre-execution-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 30}
+  - {name: verification-loop, role: always-on-post-execution-verification, owner: Krish Raja, reviewed: 2026-09-15, freshness_sla_days: 90}
+  - {name: harness-maintainer, role: harness-governance-and-release, owner: Krish Raja, reviewed: 2026-10-17, freshness_sla_days: 30}
   - {name: evidence-research, role: decision-grade-research-and-due-diligence, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: decision-ledger, role: consequential-decision-memory-and-lifecycle, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
-  - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-09-15, freshness_sla_days: 60}
-  - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
-  - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-08-20, freshness_sla_days: 60}
+  - {name: krish-build, role: technical-producer-doctrine, owner: Krish Raja, reviewed: 2026-10-29, freshness_sla_days: 60}
+  - {name: krish-design, role: design-producer-doctrine, owner: Krish Raja, reviewed: 2026-11-13, freshness_sla_days: 60}
+  - {name: build-apps-with-krish, role: founder-in-loop-app-delivery-orchestrator, owner: Krish Raja, reviewed: 2026-09-24, freshness_sla_days: 90}
+  - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 60}
   - {name: locked-revision, role: immutable-baseline-surgical-revision-controller, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 90}
-  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 45}
+  - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-10-06, freshness_sla_days: 45}
   - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
-  - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 30}
+  - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-09-24, freshness_sla_days: 90}
+  - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 30}
   - {name: design-intelligence-search, role: delegation-gated-design-data-tool, owner: Krish Raja, reviewed: 2026-09-13, freshness_sla_days: 30}
-  - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
+  - {name: tools-access, role: secure-authentication-contract, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 30}
   - {name: apify, role: approval-gated-web-data-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
   - {name: n8n-operator, role: approval-gated-n8n-producer-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
-  - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-09-12, freshness_sla_days: 30}
-  - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-08-06, freshness_sla_days: 90}
+  - {name: instantly-operator, role: approval-gated-instantly-provider-operator, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 30}
+  - {name: ctrl-intake, role: standards-stage-1-2, owner: Krish Raja, reviewed: 2026-10-22, freshness_sla_days: 90}
   - {name: ctrl-compile, role: standards-stage-3, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-build, role: standards-stage-4, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
   - {name: ctrl-check, role: standards-stage-5-7, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
-  - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 90}
+  - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-10-17, freshness_sla_days: 90}
   - {name: tool-router, role: conditional-capability-selection, owner: Krish Raja, reviewed: 2026-10-29, freshness_sla_days: 30}
 
 external_managed:
