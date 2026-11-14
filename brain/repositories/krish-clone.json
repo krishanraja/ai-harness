@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "repository": "krish-clone",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "b7115bac74251e2f86909b32390d7de4c5245bd6",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 2245,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "role": "workflow",
+      "label": "Architecture"
+    },
+    {
+      "path": "docs/RUNBOOK.md",
+      "role": "workflow",
+      "label": "Runbook"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "clone",
+      "label": "Capture, build and evaluate the clone",
+      "read": [
+        "README.md",
+        "docs/ARCHITECTURE.md",
+        "docs/RUNBOOK.md"
+      ],
+      "checks": [
+        "python -m unittest discover -s tests -t . -v"
+      ]
+    }
+  ]
+}

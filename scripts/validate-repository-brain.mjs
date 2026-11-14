@@ -6,7 +6,11 @@ import {validateProfile,renderAdministration,OWNED,TARGET_HOOK,TARGET_CHECK,clos
 import {createHash} from 'node:crypto'
 const policy=policyAt(), history=knowledgeHistory()
 const approved=new Set(Object.values(policy.acceptances).filter(a=>a.actor==='Krish'&&String(Object.keys(policy.acceptances).find(k=>policy.acceptances[k]===a)).startsWith('plan:')).flatMap(a=>a.repositories))
-if(policy.targets.length!==13 || policy.targets.some(t=>!approved.has(t)) || policy.targets.includes('mindmake') || !policy.excluded.includes('mindmake')) throw new Error('admission_policy_drift')
+// I-33 (Ruling, Krish, 2026-11-14, D24): the five repositories that had no
+// administered closeout fold join the targets by name. The four growth engines
+// follow only after each passes its own fold tests.
+const FLEET_KIT=['content-watcher','inspirationhouse','krish-clone','krish-raja','sendlinks']
+if(policy.targets.length!==18 || FLEET_KIT.some(t=>!policy.targets.includes(t)||policy.excluded.includes(t)) || policy.targets.some(t=>!approved.has(t)) || policy.targets.includes('mindmake') || !policy.excluded.includes('mindmake')) throw new Error('admission_policy_drift')
 for(const t of policy.targets) if(!profiles().some(p=>p.repository===t)) throw new Error(`admitted_target_without_profile:${t}`)
 // The publisher's write scope is only what a dated owner approval granted: the
 // 2026-10-17 plan's four files and its check workflow, widened only by a grant.
