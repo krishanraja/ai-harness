@@ -24,7 +24,7 @@ function check(fn) { fn(); assertions++ }
 try {
   git('init', '--initial-branch=main')
   git('config', 'user.name', 'Fixture')
-  git('config', 'user.email', 'hello@krishraja.com')
+  git('config', 'user.email', 'krish@mindmake.co')
   for (const path of sourcePaths.filter((p) => p !== 'NOW.md')) write(path, path === 'docs/history/LOG.md' ? log : '# Fixture evidence\n\nExisting accepted detail.\n')
   write('scripts/render.mjs', "process.stdout.write('fixture gate output stays private\\n')\n")
   write('scripts/validate-surfaces.mjs', 'process.exit(0)\n')
