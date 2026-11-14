@@ -26,7 +26,11 @@ roots:
   cursor_skills_root:
     what: Where Cursor reads installed user skills on this surface. Null where the client is absent.
   rules_file:
-    what: The file-routing rules the operating contract defers to.
+    what: >-
+      The file-routing rules the operating contract defers to. Since 14 Nov 2026
+      this is filearchives RESUME.md, whose LIVE sections hold Krish's folder rules
+      after the 22 Oct Drive reorganisation; read live on main, the same on every
+      surface. It replaced a Drive RULES.md last changed on 4 Oct.
 
 surfaces:
   windows-primary:
@@ -39,7 +43,7 @@ surfaces:
     claude_skills_root: C:\Users\krish\.claude\skills
     codex_skills_root: C:\Users\krish\.codex\skills
     cursor_skills_root: C:\Users\krish\.cursor\skills
-    rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
+    rules_file: https://github.com/krishanraja/filearchives/blob/main/RESUME.md
 
   windows-codex:
     what: SURFACE, the second Windows machine. Codex only; it has no Claude Code or Cursor skill surface at all, verified 2026-09-09.
@@ -51,7 +55,7 @@ surfaces:
     claude_skills_root: null
     codex_skills_root: C:\Users\krish\.codex\skills
     cursor_skills_root: null
-    rules_file: G:\My Drive\Ventures\Active\Mindmaker-OS\architecture\RULES.md
+    rules_file: https://github.com/krishanraja/filearchives/blob/main/RESUME.md
 
   cloud-linux:
     what: Claude Code on the web and GitHub Actions runners. Ephemeral, no Drive, one checkout per repository.
@@ -63,7 +67,7 @@ surfaces:
     claude_skills_root: null
     codex_skills_root: null
     cursor_skills_root: null
-    rules_file: null
+    rules_file: https://github.com/krishanraja/filearchives/blob/main/RESUME.md
 
 # Not a skills root, recorded so nobody mistakes it for one.
 #
