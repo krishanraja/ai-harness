@@ -19,7 +19,15 @@
 
 schema_version: 1
 counted: 2026-09-09
-project: main database (SUPABASE_URL; the address is never written in this public repository)
+# The project is named by the variable that holds its address, never the
+# address: this repository is public. Until 2026-11-14 this key was `project`
+# and held the main database's project ref literally; it was replaced, not
+# lost (fleet integration audit I-01; scripts/check-public-leaks.mjs now fails
+# CI on an address in a tracked file). Nothing reads the key: audit-harness.mjs
+# reads `stores` only. The counts below are from `counted` and were not
+# re-verified on 2026-11-14; only this key changed.
+project_address_env: SUPABASE_URL
+project_key_superseded: { key: project, on: "2026-11-14", by: project_address_env, why: "the literal ref was in a public repository" }
 
 stores:
   # ------------------------------------------------------------------ canon
