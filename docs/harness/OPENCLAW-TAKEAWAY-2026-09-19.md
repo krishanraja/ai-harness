@@ -7,7 +7,7 @@ Operator handoff for the OpenClaw VPS, written for someone with shell access to 
 **Sources.** Facts about the host are cited by fact number in square brackets, like `[F69]`, or by one of the markers below.
 
 - `docs/harness/VPS-FACTS-2026-09-19.md` in this repository (compiled 2026-09-19 from repository files only; nothing in it was read from the host). Where it disagrees with the audit, the audit wins, because the facts file never saw the machine.
-- `[OUT]` `state/vps/ALIGN-2026-09-19-audit.txt`: the verbatim audit output, 183 lines, completed 2026-09-19 15:09:19 UTC.
+- `[OUT]` `state/vps/ALIGN-2026-09-19-audit.txt`: the verbatim audit output, 183 lines, completed 2026-09-19 15:09:19 UTC. On 2026-11-14 its database project address was replaced with `<main-project>` (fleet integration audit I-01); nothing else in it changed.
 - `[RPT]` `state/vps/ALIGN-2026-09-19.md`: the audit and change report for the same run.
 - `[NOW]` `NOW.md` in this repository, which records the run.
 - `[CRON]` `/home/user/control-center/scripts/cron/crontab.txt`, the checked-in crontab snapshot, regenerated from this audit in control-center commit `69376a2`.

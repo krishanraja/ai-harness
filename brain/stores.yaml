@@ -19,7 +19,7 @@
 
 schema_version: 1
 counted: 2026-09-09
-project: gojpffsrxybbpbdzzrvs
+project: main database (SUPABASE_URL; the address is never written in this public repository)
 
 stores:
   # ------------------------------------------------------------------ canon

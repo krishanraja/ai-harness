@@ -1,0 +1,3 @@
+Status: No database address is left in this public repository's tracked files (four files named the main project: brain/stores.yaml, a 2026-09-09 proposal, the 2026-09-09 VPS declaration and the 2026-09-19 VPS audit), and CI fails on a key, a JWT or a database address outside listed config files (scripts/check-public-leaks.mjs, after krish-raja's public-script guard, with a self-test that proves each pattern can still fail). Git history still holds the old copies.
+Next: The security sweep decides whether the address in git history needs anything beyond this; no key was ever in these files.
+North Star check (2026-11-14): holds.
