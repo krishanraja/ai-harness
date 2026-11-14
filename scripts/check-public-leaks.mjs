@@ -45,13 +45,14 @@ function tracked() {
 }
 
 function selfTest() {
-  const ref = 'abcdefghijklmnopqrst'
+  // Built from parts so this file passes its own scan.
+  const ref = 'abcde'.repeat(4)
   const cases = [
     [`https://${ref}.supabase.co/rest/v1/tasks`, 'a Supabase project address'],
     [`host db.${ref}.supabase.co`, 'a Supabase database host'],
     [`project: ${ref}`, 'a Supabase project ref'],
     [`against project \`${ref}\` on 2026-09-09`, 'a Supabase project ref'],
-    ['postgresql://postgres:hunter2@localhost:5432/db', 'a database URL with a password'],
+    ['postgresql://postgres' + ':hunter2' + '@localhost:5432/db', 'a database URL with a password'],
     ['sb_secret_' + 'A'.repeat(24), 'a Supabase key (sb_)'],
     ['eyJhbGciOi' + 'J'.repeat(20) + '.' + 'x'.repeat(20) + '.' + 'y'.repeat(20), 'a JWT'],
     ['ghp_' + 'a'.repeat(36), 'a GitHub token'],
