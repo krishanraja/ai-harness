@@ -5,6 +5,26 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-14
+
+- stamped: `NOW.md` audit finding fixed (15 "What changed recently" bullets, limit 12) by rolling the eight bullets dated October below; one open item dated; head moved to c895eb0.
+
+- rolled from NOW.md: 2026-10-31 scripts were hard to follow and their closes bossy; the profile now carries both rulings.
+
+- rolled from NOW.md: 2026-10-31 Krish ruled Jonny's Mindmake emails mimic his email style; the profile, the email doctrine and a behaviour case now say so.
+
+- rolled from NOW.md: 2026-10-31 the kill list names the two LinkedIn exceptions Krish ruled; a stale date in the measurements test fixture no longer fails CI.
+
+- rolled from NOW.md: 2026-10-30 **The audit stops failing repositories for bullets folded the same day, and the merger stops reopening old steward fallbacks.** Bullets dated today or yesterday count toward no size limit; only the newest fallback branch of all can get a pull request, judged against commits that touched NOW.md; and the steward's own reason travels into that pull request.
+
+- rolled from NOW.md: 2026-10-30 **Taste by venture and the approved taste rules reached main together (PR 174, PR 179).** Nine other branches were left as they are: four already on main, five superseded by later work on main.
+
+- rolled from NOW.md: 2026-10-29 **The canon reaches all five growth engines.** The next canon sync renders the block, with its new pointer to the Engines section, into each engine's AGENTS.md; nothing was synced from this session.
+
+- rolled from NOW.md: 2026-10-29 **Krish's working-style instructions live in the harness, and the personal-email rule is gone everywhere.** Ruling (Krish, 2026-10-29): remove the rule that his personal email never appears on client-facing work and only hello@krishraja.com is used. Ruling (Krish, 2026-10-29): his instructions for how any AI works with him belong in the harness, served to every surface.
+
+- rolled from NOW.md: 2026-10-29 **Skills follow main on every surface without uploads: loaders in claude.ai, bodies served live by Control Center, tool-router admitted.** `scripts/build-cloud-loaders.mjs` writes `adapters/cloud/loaders/` (30) and fails the steward check when a loader disagrees with `skills/`; the account instructions say every installed skill is a loader; `.claude/settings.json` allows Control Center's read tools without a prompt. Ruling (Krish, 2026-10-29): skills stay current on every surface with zero intervention, following main. Ruling (Krish, 2026-10-29): tool-router is included everywhere.
+
 ## 2026-11-13
 
 - stamped: `NOW.md` audit findings fixed (11 dated bullets in "Where it is right now", limit 8; one open item with no recent date) by rolling nine dated bullets below here and dating the open item; head moved to c9c23cb.
