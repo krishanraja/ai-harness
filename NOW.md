@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-02","week_target":null,"current":18,"current_as_of":"2026-11-14","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"ladder pending baseline"} --> **North Star number: U4, ladder pending Krish.** Corrections Krish had to give twice in a week, across the fleet: 18 in the week of 2026-11-02 (18 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-14.
 
+- content-watcher, inspirationhouse, krish-clone, krish-raja and sendlinks are repository-administration targets (18 targets, 7 excluded) under plan:fleet-kit-v1, each with a measured profile, so the publisher delivers the hash-pinned closeout fold and shared hook to them; scripts/validate-repository-brain.mjs and validate-surfaces pass. (2026-11-14)
 - `contract/north-star-metric.md` says, under Urgency, that Control Center pushes Krish about a U5 only for a repository on the mission or the priority ladder, and that a never-measured number stays U4 past its deadline (Ruling, Krish, 2026-11-14, his yes to D25). Control Center enforces both: control-center #883. (2026-11-14)
 - contract/paths.yaml rules_file now points every surface at filearchives RESUME.md on main, whose LIVE sections hold Krish's folder rules after the 22 Oct Drive reorganisation; the 4 Oct Drive RULES.md is retired and scripts/validate-surfaces.mjs fails if any surface names it again. (2026-11-14)
 - each merge decision in state/digest/latest.json now carries its pull request number, head_sha and head_ref, and a ready change without a readable head commit is not asked (scripts/test-digest.mjs, 53 passed). This is ai-harness's half of I-32. (2026-11-14)
@@ -73,7 +74,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-14): none here; Control Center's daily refresh applies the rule from its next run once #883 is merged.
+- Next (2026-11-14): once each delivery lands, retire the local .github/workflows/closeout-fold.yml in inspirationhouse, krish-clone, krish-raja and sendlinks (and content-watcher's own fold) so each runs one fold.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
