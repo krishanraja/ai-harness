@@ -23,7 +23,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## Where it is right now (as of 2026-11-13)
 
-<!-- north-star-state {"week_of": "2026-10-26", "week_target": null, "current": null, "current_as_of": null, "current_source": null, "urgency": 4, "urgency_reason": "not measured yet"} --> **North Star number: U4, far behind.** Corrections Krish had to give twice in a week, across the fleet: not measured yet. A bold swing every day; work that does not move the number waits.
+<!-- north-star-state {"week_of":"2026-11-02","week_target":null,"current":0,"current_as_of":"2026-11-14","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"ladder pending baseline"} --> **North Star number: U4, ladder pending Krish.** Corrections Krish had to give twice in a week, across the fleet: 0 in the week of 2026-11-02 (0 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-14.
 
 - content-engine's listed rule files name docs/CAROUSEL-STANDARD.md instead of the retired carousel engine's state document, so the canon block and the repository context stop pointing sessions at a retired route. (2026-11-13)
 - Krish's 13 November ruling that cold outbound is in scope for Mindmake (email, LinkedIn and calls, every send still his, the law held) and the 22 October clone ruling are carried into who-krish-is.md, the krish-principles skill, the operating contract's founder-visibility line and the mindmake skill's commercial canon; Rule 2 stays verbatim and reads against the ruling, as Rules 7 and 8 read against the portfolio ruling. brain/rules.yaml revised for the two changed texts. (2026-11-13)
