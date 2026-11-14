@@ -247,6 +247,18 @@ reason to rotate after T+7d and then delete the snapshot.
    script edited while running (copy discarded and redone), a staging script that would have restored
    post-stop job flags (fixed: it now restores the pre-switchover backup and strips the dated prefixes).
 
+### Krish's answers (2026-11-14, asked by the OS session)
+
+He chose all three follow-ups:
+- **Retire the `controlcentre.krishraja.com` Caddy block** on the worker. It serves nothing, because that name's DNS is elsewhere.
+- **Move the inline secrets** in `openclaw.json` (both Telegram bot tokens, Discord, the AI provider keys, the gateway token) into `/etc/worker/secrets.d/`. This is a move, not a rotation.
+- **music-watcher joins the fleet.** Done by the OS session: music-watcher #4 (North Star stub, NOW.md, closeout fold) and ai-harness #259 (fleet entry).
+
+The first two need root on the worker, so the migration session does them over `ssh worker`.
+- Reload the gateway once, between scheduled jobs.
+- Prove the family bots still answer (pending updates 0) and that `openclaw.json` holds no secret value: count by `grep -cF` on each value, never printed.
+- Record both here with their readback.
+
 ### Questions for Krish
 
 - **6.7** (VPS role: only clock, outside watchdog, family agents): still unruled; everything moved as is.
