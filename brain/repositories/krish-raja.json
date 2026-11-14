@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "repository": "krish-raja",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "5e0f767f5fa4f57deaa2c674a595526f03f74349",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 37915,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "site",
+      "label": "The krishraja.com site",
+      "read": [
+        "README.md"
+      ],
+      "checks": [
+        "npm run lint",
+        "npm run typecheck",
+        "npm test"
+      ]
+    }
+  ]
+}

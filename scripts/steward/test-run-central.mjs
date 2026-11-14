@@ -77,7 +77,7 @@ function bundle(f, noChange = false) {
 try {
   git(source, 'init', '--initial-branch=main')
   git(source, 'config', 'user.name', 'Fixture')
-  git(source, 'config', 'user.email', 'hello@krishraja.com')
+  git(source, 'config', 'user.email', 'krish@mindmake.co')
   for (const path of sourcePaths.filter((path) => path !== 'NOW.md')) write(path, path === 'docs/history/LOG.md' ? `# History\n\n## ${today}\n\n- Existing accepted history.\n` : '# Fixture evidence\n')
   write('scripts/render.mjs', 'process.exit(0)\n')
   write('scripts/validate-surfaces.mjs', 'process.exit(0)\n')

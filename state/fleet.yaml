@@ -141,6 +141,67 @@ repos:
     rules_files: [AGENTS.md, docs/BRIEF.md]
     note: Legibility's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
 
+  - name: claude-archive
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The vault of Claude transcripts and research (private). Admitted to the fleet by Krish's
+      ruling in this change's commit; out of the repository administration publisher (excluded
+      in contract/repository-administration.json) until Krish accepts it there by name.
+
+  - name: content-watcher
+    # Renamed from video-compression on 2026-10-24; the former name redirects here.
+    aliases: [video-compression]
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/BRIEF.md]
+    note: Content Watcher and the Video Compression Engine. Admitted on the same terms as claude-archive.
+
+  - name: filearchives
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, RESUME.md]
+    note: The Drive folder record and consent guard. Admitted on the same terms as claude-archive.
+
+  - name: inspirationhouse
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The taste ledger, which counts the corrections Krish gave twice in a week (ai-harness's
+      North Star reading). It has no North Star of its own yet; only Krish sets one. Admitted on
+      the same terms as claude-archive (replaces closed #245).
+
+  - name: krish-clone
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/STRATEGY.md]
+    note: Voice and likeness training library; its North Star is not set yet. Admitted on the same terms as claude-archive.
+
+  - name: krish-raja
+    canon_target: AGENTS.md
+    entry: CLAUDE.md
+    rules_files: [CLAUDE.md, AGENTS.md]
+    note: krishraja.com. CLAUDE.md is its operating contract. Admitted on the same terms as claude-archive.
+
+  - name: music-watcher
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      trackcard and Krish's Music Brain; runs on the worker server with the Music Inspo watcher.
+      Its North Star is not set yet. Admitted on the same terms as claude-archive (Krish, 2026-11-14).
+
+  - name: sendlinks
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md, docs/STATE.md]
+    default_branch: main
+    note: >-
+      Tracked file links (Supabase edge functions). One branch, main, its default since Krish
+      switched it on 2026-11-14. Admitted on the same terms as claude-archive.
+
 adapters:
   - id: claude
     template: contract/templates/adapter-claude.md
@@ -179,6 +240,11 @@ machines:
       reads the brain and writes to it every 15 minutes and was in no manifest,
       which is why five render logs could die at the 2026-08-29 rebrand and go
       unnoticed for eleven days. Evidence: state/vps-liveness-audit-2026-09-09.md.
+      MOVED 2026-11-14 20:08 UTC: the whole OpenClaw fleet (gateway, 15 jobs, 27
+      cron lines, family bots, clock, Heartside) now runs on the worker server
+      (Hetzner CPX32, Helsinki); the old box was DELETED the same night on
+      Krish's ruling (a Hetzner snapshot is the rollback). 12 items retired by
+      name. Report, checked at T0/T+24h/T+7d: state/vps/MIGRATION-2026-11-14.md.
 
 # What each surface takes from the brain, and what it gives back.
 #

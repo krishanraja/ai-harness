@@ -232,4 +232,4 @@ For any guest, prospect, partner, or market intelligence job:
 - **krish-build**: build doctrine in practice, pipeline, secrets, gates. Inherits this file.
 - **krish-voice / content-corpus / krish-content-marketer / krish-outbound**: everything about words on the page. This file governs what to think; those govern how it reads.
 - **mindmake / mindmake-os**: business and architecture facts. Never restate their canon here.
-- **tools-access / apify / instantly / n8n**: tool mechanics. This file never documents an API.
+- **tools-access / apify / n8n** (and instantly, a retired route kept for explicitly requested legacy operations): tool mechanics. This file never documents an API.

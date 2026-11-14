@@ -53,6 +53,8 @@ Computed each week from the current value against this week's ladder target.
 | U4, far behind | under 40%, or not measured, or the reading is more than 7 days old | A bold swing proposed every day. Work that does not move the number is dropped or deferred. If the number is not measured, measuring it is the first job. |
 | U5, stalled | under 40% two weeks running, or no movement for 14 days, or past the deadline off target | Everything else in the repository pauses unless it moves the number. Control Center pushes Krish once a day. The strategist brings three unconventional recovery plays within 24 hours. Once a week Krish is asked to change the plan or change the target. |
 
+Control Center pushes Krish about a U5 only for a repository on the mission or the priority ladder; any other repository keeps its U5 in Control Center's numbers and is never pushed (Ruling, Krish, 2026-11-14). A number never measured stays U4 past its deadline, "not measured, and its deadline has passed", and never becomes U5 by the calendar alone.
+
 Milestones: U2 with more than 8 weeks left, U3 with 4 to 8, U4 with 1 to 4, U5 inside the final week or overdue. A countdown is on target only at or below the ladder value.
 
 `status: paused` (a dormant or retired product) means no urgency and no pushes until Krish revives it.

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T05:49:27.689Z",
-  "measurement_verification_at": "2026-11-14T05:49:27.606Z",
+  "generated_at": "2026-11-14T22:07:37.063Z",
+  "measurement_verification_at": "2026-11-14T22:07:37.007Z",
   "sources": {
     "github": {
       "status": "available",
@@ -32,9 +32,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "6dae4843ad3c9ad6abe75dca62fd30880f61337e",
-      "bootstrap_before": 26015,
-      "bootstrap_after": 26015,
+      "source_base": "cb4683d10d92afc05642bb38e99b91b2740092a9",
+      "bootstrap_before": 31183,
+      "bootstrap_after": 31183,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -65,9 +65,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "83e971ba4837e51ad0d7bfea6a10ca85ac7d918a",
-      "bootstrap_before": 25561,
-      "bootstrap_after": 25561,
+      "source_base": "24d7fb32e168721111a6a3b2a6eedcd92ffdcde1",
+      "bootstrap_before": 35681,
+      "bootstrap_after": 35681,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -98,9 +98,42 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "e5427c0912af733cbf76d1a20fc755d1dabb76ea",
-      "bootstrap_before": 412761,
-      "bootstrap_after": 412761,
+      "source_base": "f10fe3019aa18b4b6d4f1925521e90dbaac1dcc1",
+      "bootstrap_before": 418518,
+      "bootstrap_after": 418518,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "content-watcher",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "blocked",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -164,9 +197,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "ba41f521a760",
-      "source_base": "1536067c29e45dae87def5836dfd8269c31c063c",
-      "bootstrap_before": 118988,
-      "bootstrap_after": 118988,
+      "source_base": "43def09325a2b529d7dbe2b1eee4c2af8c03f3a4",
+      "bootstrap_before": 121044,
+      "bootstrap_after": 121044,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -230,7 +263,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "c3389b60c708",
-      "source_base": "a82ec7b359270989087b94dd860222e7c8625926",
+      "source_base": "3b097e3cfc555d40fc4bdacf8379a0da1df9b5f9",
       "bootstrap_before": 21760,
       "bootstrap_after": 21760,
       "observed_use": {
@@ -296,9 +329,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "4ca70efce153",
-      "source_base": "75599bde849a3e12f8087b24617aea8a0db3a045",
-      "bootstrap_before": 113139,
-      "bootstrap_after": 113139,
+      "source_base": "30ff6e86ccdacbfe40eaa4287188bc9c02c9558e",
+      "bootstrap_before": 119958,
+      "bootstrap_after": 119958,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -332,6 +365,105 @@
       "source_base": "6cc68d784fde2ba44665db427da7d44394269425",
       "bootstrap_before": 20915,
       "bootstrap_after": 20915,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "inspirationhouse",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "72f9a61493dc",
+      "source_base": "b90a71be0da57c29cc6dcf615fd52d34312eac87",
+      "bootstrap_before": 45661,
+      "bootstrap_after": 45661,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "krish-clone",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "current",
+      "brain_revision": "c5bc0e51e137",
+      "source_base": "a7ed173347867ce97f8a5c7a0808f7f1b4d5c0ad",
+      "bootstrap_before": 2245,
+      "bootstrap_after": 2245,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "krish-raja",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "awaiting-checks",
+      "brain_revision": "6010f5eab8de",
+      "source_base": "5e0f767f5fa4f57deaa2c674a595526f03f74349",
+      "bootstrap_before": 37406,
+      "bootstrap_after": 37915,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -431,6 +563,39 @@
       "source_base": "4e1db872b949039f5672e1dfacc999d6d3514396",
       "bootstrap_before": 21255,
       "bootstrap_after": 21255,
+      "observed_use": {
+        "loaded": 0,
+        "application_checks": 0,
+        "reported": 0,
+        "verified": 0,
+        "unverified": 0
+      },
+      "measurement_groups": [],
+      "synthetic_evaluation": {
+        "reported": 0,
+        "verified": 0,
+        "groups": []
+      },
+      "effectiveness": {
+        "opportunities": null,
+        "repeated_failures": null,
+        "avoidable_corrections": null,
+        "status": "awaiting-observed-work",
+        "basis": "Only verified production records; repeats grouped by exact source, brain, view, workflow and condition."
+      }
+    },
+    {
+      "repository": "sendlinks",
+      "delivered_episodes": 0,
+      "last_delivered": null,
+      "accepted": 4,
+      "candidates": 0,
+      "unknown_coverage": true,
+      "delivery": "blocked",
+      "brain_revision": null,
+      "source_base": null,
+      "bootstrap_before": null,
+      "bootstrap_after": null,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
