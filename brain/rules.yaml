@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 136 rules across the two contracts and the canon block.
+# 135 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -757,11 +757,17 @@ contract_rules:
     status: live
   - id: file-routing.personal-wealth-investments-family
     file: contract/krish-operating-contract.md
-    text_sha: "9fad5e965c4c"
+    text_sha: "43404e16fe1a"
     first_seen: "2026-09-08"
     source:
-      kind: founding
-      ref: "8d6a8cb77c83"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-drive-truth.md"
+    history:
+      - text_sha: "9fad5e965c4c"
+        valid_until: "2026-11-14"
+        source:
+          kind: founding
+          ref: "8d6a8cb77c83"
     status: live
   - id: file-routing.scratch-qa-temporary-files
     file: contract/krish-operating-contract.md
@@ -771,6 +777,24 @@ contract_rules:
       kind: founding
       ref: "8d6a8cb77c83"
     status: live
+  - id: file-routing.a-venture-s-deliverable
+    file: contract/krish-operating-contract.md
+    text_sha: "d780b508ed78"
+    first_seen: "2026-11-14"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-drive-truth.md"
+    status: live
+    supersedes: [file-routing.cross-venture-timeless-ip, file-routing.single-venture-deliverable-the]
+  - id: file-routing.if-unsure-file-it
+    file: contract/krish-operating-contract.md
+    text_sha: "367e6079c36d"
+    first_seen: "2026-11-14"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-drive-truth.md"
+    status: live
+    supersedes: [file-routing.if-unsure-ask-or]
   - id: file-routing.cross-venture-timeless-ip
     file: contract/krish-operating-contract.md
     text_sha: "c2712a37e819"
@@ -778,7 +802,8 @@ contract_rules:
     source:
       kind: founding
       ref: "8d6a8cb77c83"
-    status: live
+    status: superseded
+    valid_until: "2026-11-14"
   - id: file-routing.single-venture-deliverable-the
     file: contract/krish-operating-contract.md
     text_sha: "a825d748578f"
@@ -786,7 +811,8 @@ contract_rules:
     source:
       kind: founding
       ref: "8d6a8cb77c83"
-    status: live
+    status: superseded
+    valid_until: "2026-11-14"
   - id: file-routing.if-unsure-ask-or
     file: contract/krish-operating-contract.md
     text_sha: "86756d5fbfc4"
@@ -794,7 +820,8 @@ contract_rules:
     source:
       kind: founding
       ref: "a3d2f3706a87"
-    status: live
+    status: superseded
+    valid_until: "2026-11-14"
   - id: routing-principles.apply-krish-operating-contract
     file: contract/skill-routing-contract.md
     text_sha: "dcbfb08b63a3"
@@ -3409,17 +3436,22 @@ skill_sections:
   - id: tools-access.non-negotiable-rules
     file: skills/tools-access/SKILL.md
     heading: "Non-negotiable rules"
-    text_sha: "05c3648186c5"
+    text_sha: "25d5ef8e812f"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "48683aa0b21b"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-drive-truth.md"
     history:
       - text_sha: "505f75a49577"
         valid_until: "2026-10-18"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "05c3648186c5"
+        valid_until: "2026-11-14"
+        source:
+          kind: ruling
+          ref: "48683aa0b21b"
     status: live
   - id: tools-access.symbolic-credential-interface
     file: skills/tools-access/SKILL.md
@@ -3765,11 +3797,17 @@ skill_sections:
   - id: video-engine.start-every-session
     file: skills/video-engine/SKILL.md
     heading: "Start every session"
-    text_sha: "27e22fb5d568"
+    text_sha: "5889039f4762"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-14-drive-truth.md"
+    history:
+      - text_sha: "27e22fb5d568"
+        valid_until: "2026-11-14"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: video-engine.authority-and-safety
     file: skills/video-engine/SKILL.md
