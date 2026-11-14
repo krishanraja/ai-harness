@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-11-13",
+  "date": "2026-11-14",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -25,7 +25,7 @@
         {
           "rule": "old_dated_claims",
           "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 45)."
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 50)."
         }
       ]
     },
@@ -37,12 +37,12 @@
         {
           "rule": "as_of_stale",
           "severity": "fail",
-          "detail": "as_of is 2026-10-23, 21 days old (limit 7)."
+          "detail": "as_of is 2026-10-23, 22 days old (limit 7)."
         },
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 22 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "where_too_many",
@@ -53,13 +53,18 @@
     },
     {
       "repo": "mindmake",
-      "status": "pass",
-      "failing_since": null,
+      "status": "fail",
+      "failing_since": "2026-11-14",
       "findings": [
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 16 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 17 days ago (limit 7); the next session re-dates it."
+        },
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "207 lines (limit 200). Roll history into docs/history/LOG.md and keep what is current."
         }
       ]
     },
@@ -71,7 +76,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 22 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -83,7 +88,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 21 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 22 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
@@ -93,14 +98,9 @@
       "failing_since": null,
       "findings": [
         {
-          "rule": "north_star_check",
-          "severity": "warn",
-          "detail": "The North Star check is dated 2026-11-01, 12 days ago (limit 7); the next session re-dates it."
-        },
-        {
           "rule": "old_dated_claims",
           "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 71)."
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 78)."
         }
       ]
     },
@@ -112,7 +112,7 @@
         {
           "rule": "too_long",
           "severity": "fail",
-          "detail": "line 43 is 1640 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
+          "detail": "line 19 is 1604 characters (limit 1500). Roll history into docs/history/LOG.md and keep what is current."
         }
       ]
     },
@@ -124,7 +124,7 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 17 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 18 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "old_dated_claims",
@@ -139,14 +139,14 @@
       "failing_since": "2026-11-10",
       "findings": [
         {
-          "rule": "where_too_many",
+          "rule": "recent_too_many",
           "severity": "fail",
-          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+          "detail": "15 \"What changed recently\" bullets older than a day (limit 12)."
         },
         {
           "rule": "old_dated_claims",
           "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 67)."
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 35)."
         }
       ]
     },
@@ -158,12 +158,12 @@
         {
           "rule": "too_long",
           "severity": "fail",
-          "detail": "16682 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+          "detail": "18690 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
         },
         {
           "rule": "where_too_many",
           "severity": "fail",
-          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         }
       ]
     },
@@ -175,7 +175,7 @@
         {
           "rule": "where_too_many",
           "severity": "fail",
-          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+          "detail": "10 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         },
         {
           "rule": "old_dated_claims",
@@ -204,19 +204,29 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-28, 16 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-28, 17 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
     {
       "repo": "growth-heartside",
-      "status": "pass",
-      "failing_since": null,
+      "status": "fail",
+      "failing_since": "2026-11-14",
       "findings": [
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "15 \"What changed recently\" bullets older than a day (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
         {
           "rule": "old_dated_claims",
           "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 80)."
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 85)."
         }
       ]
     },
@@ -234,9 +244,15 @@
     },
     {
       "repo": "growth-mindmake",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-14",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "10 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "growth-fulltime",
@@ -246,9 +262,15 @@
     },
     {
       "repo": "growth-legibility",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-14",
+      "findings": [
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "13 \"What changed recently\" bullets older than a day (limit 12)."
+        }
+      ]
     }
   ]
 }
