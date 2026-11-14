@@ -2,6 +2,8 @@
 
 What to do with call recordings, meeting notes, transcripts from your meeting recorder, emails and documents someone wrote.
 
+Until 14 Nov 2026 this line named the meeting recorders by product. One of them, Fireflies, is a retired route, removed permanently from the harness on 22 Oct 2026 (`docs/proposals/2026-10-22-outcome-allocation.md`, Rulings), and the cloud account adapter keeps it closed. The leaf now names no product, so it stays true when the recorder changes; a transcript from any recorder is read the same way.
+
 ## The one thing to understand before you start
 
 **A transcript is a rich source of candidates and a poor source of truth.**
