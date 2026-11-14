@@ -1,6 +1,6 @@
 # Prompt: harden the VPS and install the clock
 
-> **Superseded on 2026-11-14.** This prompt was written for the old box and must not be run as written. The OpenClaw fleet moved that night from the old box (`openclaw-vps`) to the worker server, and the old box was deleted; a Hetzner snapshot is the rollback. What runs where now, and how it was proved, is `state/vps/MIGRATION-2026-11-14.md`. Kept as the record of what was done.
+> **Superseded on 2026-11-14.** This prompt was written for the old box and must not be run as written. The OpenClaw fleet moved that night from the old box (`openclaw-vps`) to the worker server, and Krish deleted the old box himself in the Hetzner console that night, on his ruling ("Full switchover tonight, then delete the old box when satisfied"); a Hetzner snapshot is the rollback. What runs where now, and how it was proved, is `state/vps/MIGRATION-2026-11-14.md`. Kept as the record of what was done.
 
 Paste everything below the line into Claude Code. LORIMER is preferred: the
 `openclaw` ssh alias already works there, and the session survives the reboot

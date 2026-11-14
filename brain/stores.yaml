@@ -236,7 +236,10 @@ stores:
       2026-11-14 (B21).
     moved: >
       On 2026-11-14 the whole OpenClaw fleet moved to the worker server and the
-      old box was deleted; a Hetzner snapshot is the rollback. render-identity.py
+      old box was deleted by Krish himself in the Hetzner console, on his ruling of
+      2026-11-14 ("Full switchover tonight, then delete the old box when
+      satisfied", state/vps/MIGRATION-2026-11-14.md, Rulings and "Old box end");
+      a Hetzner snapshot is the rollback. render-identity.py
       and write-system-health.py run there unchanged, proved on their first runs
       (state/vps/MIGRATION-2026-11-14.md, B1 and B5).
     superseded_wording: >
