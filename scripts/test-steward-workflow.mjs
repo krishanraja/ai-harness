@@ -59,6 +59,9 @@ test('the model step never sees the fleet token', draftStep.length > 0 && !/FLEE
 test('only the guarded opening step holds the fleet token', propose.split('\n').filter((l) => /FLEET_TOKEN/.test(l)).length === 1 && /open-changes\.mjs/.test(propose))
 test('housekeeping runs nightly and decides the digest', /node scripts\/steward-housekeeping\.mjs/.test(housekeeping) && /state\/digest/.test(housekeeping))
 for (const t of ['test-change-guard', 'test-digest', 'test-process-review', 'test-redact', 'test-session-miner', 'test-intake-observations', 'test-register-release', 'test-machine-heartbeat']) test(`${t} runs on every push`, new RegExp(`node scripts/${t}\\.mjs`).test(surfaces))
+test('the observer counts the overdue skill reviews', /node scripts\/skill-reviews\.mjs --bump --write/.test(observe))
+test('the observer commits the skill review dates it moved', /git add [^\n]*state\/skill-registry\.yaml/.test(observe) && /git status --porcelain -- [^\n]*state\/skill-registry\.yaml/.test(observe))
+test('the observer reads full history for the review rulings', /fetch-depth: 0/.test(observe))
 test('the observer retries its push instead of failing on a concurrent ledger write', /git pull --rebase --quiet origin main && git push origin HEAD:main/.test(observe))
 
 console.log(`\n${passed} passed, ${failed} failed`)
