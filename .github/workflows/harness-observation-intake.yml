@@ -44,11 +44,16 @@ jobs:
             git fetch --quiet origin main
             git reset --quiet --hard origin/main
             node scripts/intake-observations.mjs
-            if [ -z "$(git status --porcelain -- state/observations state/session-miner/checkpoints.jsonl)" ]; then
+            # Re-measure the North Star from the ledger as it now stands. The
+            # taste ledger's repeats arrive at 05:47 UTC, hours after the
+            # nightly steward measured, so without this the number read a
+            # false 0 until the next night (audit harness-1, 2026-11-14).
+            node scripts/north-star.mjs --write
+            if [ -z "$(git status --porcelain -- state/observations state/session-miner/checkpoints.jsonl NOW.md)" ]; then
               echo "Nothing new to record."
               exit 0
             fi
-            git add state/observations
+            git add state/observations NOW.md
             if [ -f state/session-miner/checkpoints.jsonl ]; then
               git add state/session-miner/checkpoints.jsonl
             fi

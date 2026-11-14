@@ -277,9 +277,14 @@ const TYPE_OF = {
 }
 export const PRIORITY = { 'ineffective-change': 1, 'inbound-edit': 2, 'ruling-cluster': 2, 'correction-cluster': 2, friction: 3, pattern: 3, 'standing-condition': 4, 'canary-failure': 5, consolidation: 6 }
 
+// The taste ledger's weekly reading marker (inspirationhouse src/publish/repeats.ts): one row a week that says the
+// ledger was read, sent also when it found no repeat. It is a receipt for scripts/north-star.mjs, not a lesson, so it
+// never becomes a proposal.
+export const isTasteReading = (r) => /^inbox:taste-ledger:\d{4}-\d{2}-\d{2}:reading$/.test(String(r?.evidence || ''))
+
 export function buildCandidates({ root = HARNESS, rows, policy, today, cutoff, all = false, ctx = scopeContext(root, rows) }) {
   const inWindow = (r) => all || when(r) >= cutoff
-  const windowRows = rows.filter(inWindow)
+  const windowRows = rows.filter((r) => inWindow(r) && !isTasteReading(r))
   const priorRows = all ? [] : rows.filter((r) => !inWindow(r))
   const rulings = normaliseRulings(windowRows, priorRows)
   const others = windowRows.filter((r) => TYPE_OF[r.class] && r.class !== 'ruling' && !(r.class === 'canary' && /is unmeasured on/.test(r.quote)))
