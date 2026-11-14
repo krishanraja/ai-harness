@@ -13,10 +13,6 @@
  *
  *   node scripts/check-public-leaks.mjs            scan the tracked tree
  *   node scripts/check-public-leaks.mjs --self-test prove each pattern can fail
- *
- * There is no allowlist. A file that truly must keep an address is an
- * exception to the canon, so it needs Krish's ruling, recorded on the commit
- * that changes this script to except it; a runtime reads SUPABASE_URL instead.
  */
 
 import { execFileSync } from 'node:child_process'
