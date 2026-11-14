@@ -414,6 +414,158 @@
         "**/*.md"
       ],
       "bootstrap_head": "bde3bcf"
+    },
+    {
+      "name": "claude-archive",
+      "product": "Vault of Claude transcripts and research",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "NOW.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "2ec4945"
+    },
+    {
+      "name": "content-watcher",
+      "product": "Content Watcher and the Video Compression Engine",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "NOW.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md",
+        "docs/DECISIONS.md"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "docs/BRIEF.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "b185a86"
+    },
+    {
+      "name": "filearchives",
+      "product": "filearchives",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "README.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md",
+        "policy/folder-preferences.json"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "RESUME.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "b5cb039"
+    },
+    {
+      "name": "inspirationhouse",
+      "product": "The taste ledger",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "NOW.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md",
+        "AGENTS.md"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "6be5686"
+    },
+    {
+      "name": "krish-clone",
+      "product": "Voice and likeness training library",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "README.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md",
+        "config/sources.json"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "docs/STRATEGY.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "507670c"
+    },
+    {
+      "name": "krish-raja",
+      "product": "krishraja.com",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "README.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/NORTH_STAR.md"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "CLAUDE.md",
+        "AGENTS.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "909de98"
+    },
+    {
+      "name": "sendlinks",
+      "product": "SendLinks",
+      "docs_roots": [
+        "docs"
+      ],
+      "state_doc": "docs/STATE.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "docs/STATE.md",
+        "docs/DECISIONS.md",
+        "docs/NORTH_STAR.md"
+      ],
+      "docs_check": null,
+      "rules_files": [
+        "AGENTS.md",
+        "docs/STATE.md"
+      ],
+      "write_allowlist": [
+        "**/*.md"
+      ],
+      "bootstrap_head": "11454a8",
+      "default_branch": "claude/drive-folder-rebuild-e0suzz"
     }
   ]
 }
