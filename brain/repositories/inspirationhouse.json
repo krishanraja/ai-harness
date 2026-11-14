@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "repository": "inspirationhouse",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "3542a84449b081d87ae7c6767c594334dc1afc1c",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 45661,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/TWO_WAY.md",
+      "role": "workflow",
+      "label": "Two-way taste loop"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "taste",
+      "label": "Taste cards, daily and weekly taste runs",
+      "read": [
+        "README.md",
+        "docs/TWO_WAY.md"
+      ],
+      "checks": [
+        "pnpm -s typecheck",
+        "pnpm -s test"
+      ]
+    }
+  ]
+}

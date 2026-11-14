@@ -189,7 +189,7 @@ repos:
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, docs/STATE.md]
-    default_branch: claude/drive-folder-rebuild-e0suzz
+    default_branch: main
     note: >-
       Tracked file links (Supabase edge functions). Its default branch is not main until Krish
       changes the repository setting. Admitted on the same terms as claude-archive.

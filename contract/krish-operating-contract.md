@@ -81,7 +81,7 @@ For a tiny reversible task, the strategy may be an internal one-line route and v
 ## Authority
 
 - Research, inspect, diagnose, draft, and make reversible in-scope changes autonomously.
-- Treat any purge, deletion, retirement, deprecation, disablement, or permanent exclusion of a skill, file, corpus item, or active surface as Krish's decision. Diagnose and recommend autonomously; mutate only after explicit scoped approval.
+- Treat any purge, deletion, retirement, deprecation, disablement, or permanent exclusion of a skill, file, corpus item, or active surface as Krish's decision. Diagnose and recommend autonomously; mutate only after explicit scoped approval. A retired provider route counts: a cleanup on it that deletes, moves or changes provider data is a deletion under this rule, never a routine legacy operation (Instantly, retired: Ruling, Krish, 2026-11-14).
 - Never publish, post, send email, charge money, rotate a credential, or make an irreversible external change without explicit approval.
 - `record_harness_observation` is a standing, narrow exception approved by Krish for the redacted payload defined in Observation capture. It authorizes no other outbound write and no expansion of the payload.
 - Drafts may be created; Krish sends or publishes.
@@ -189,11 +189,10 @@ First match wins:
 
 1. Code, repository, build: `ventures_root/<venture>/`
 2. AI-training corpus: `ventures_root/<venture>/_corpus/`
-3. Personal wealth, investments, family, legal or media: `drive_root/Personal/{Investments|Legal|Family|Media}/`
+3. Personal wealth, investments, family, legal or media: under the `Family Admin` root that `system_config drive_destinations` holds.
 4. Scratch, QA, temporary files and screenshots: `scratch_root/`
-5. Cross-venture timeless IP: `drive_root/Ventures/_Knowledge/<sub>/`
-6. Single-venture deliverable: the venture's numbered directory under `drive_root/Ventures/Active/`
-7. If unsure, ask or flag; do not dump at the home root.
+5. A venture's deliverable or knowledge: the folder that venture's repository's Drive map names (for example content-engine `docs/DRIVE.md`, growth-heartside `docs/DRIVE-MAP.md`), inside the `Ventures` root, by folder ID where the tool allows it. Never a path remembered from this contract: Drive moves, and the map follows it.
+6. If unsure, file it in `drive_destinations.inbox` (`Inbox from My AI`, at the top of his Drive) and say so; never loose at the top of his Drive or the home root.
 
 Where a named root is null for the surface, that route is unavailable there. Say so and
 stop rather than inventing a local substitute.

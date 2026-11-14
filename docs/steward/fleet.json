@@ -565,7 +565,7 @@
         "**/*.md"
       ],
       "bootstrap_head": "11454a8",
-      "default_branch": "claude/drive-folder-rebuild-e0suzz"
+      "default_branch": "main"
     }
   ]
 }

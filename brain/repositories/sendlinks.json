@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "repository": "sendlinks",
+  "enabled": true,
+  "families": [
+    "repository-administration"
+  ],
+  "source_revision": "a0b5c4a65a045a800a0522bbf54a6bebe4d06b21",
+  "context_path": "docs/HARNESS_CONTEXT.md",
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md"
+  },
+  "bootstrap_limit_chars": 3060,
+  "sources": [
+    {
+      "path": "README.md",
+      "role": "orientation",
+      "label": "Purpose and system boundaries"
+    },
+    {
+      "path": "NOW.md",
+      "role": "state",
+      "label": "Current repository state"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "role": "orientation",
+      "label": "North Star"
+    },
+    {
+      "path": "docs/STATE.md",
+      "role": "state",
+      "label": "Current state detail"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "role": "orientation",
+      "label": "Decisions"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "links",
+      "label": "Tracked links and uploads",
+      "read": [
+        "README.md",
+        "docs/STATE.md"
+      ],
+      "checks": [
+        "bash scripts/check-no-secrets.sh"
+      ]
+    }
+  ]
+}

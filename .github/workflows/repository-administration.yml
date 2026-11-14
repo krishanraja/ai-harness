@@ -100,7 +100,7 @@ jobs:
           node scripts/validate-knowledge-history.mjs --base "$(git rev-parse HEAD)"
           cat state/repository-administration/health.json >> "$GITHUB_STEP_SUMMARY"
           git config user.name "Krish Raja"
-          git config user.email "hello@krishraja.com"
+          git config user.email "krish@mindmake.co"
           git config credential.helper '!gh auth git-credential'
           # Only declared runtime outputs are staged; policy and validator code remain reviewed source.
           git add brain/knowledge.jsonl brain/acceptances.jsonl state/repository-administration/latest.json state/repository-administration/health.json state/repository-administration/deployments.jsonl state/repository-administration/measurement-verification.json

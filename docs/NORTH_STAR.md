@@ -2,7 +2,7 @@
 
 Status: Current
 Owner: Krish Raja
-Last verified: 2026-10-18
+Last verified: 2026-11-14
 
 > By 30 November 2026, no AI working for Krish, in any client or repository, needs the same correction twice: every ruling is learned once, shipped everywhere and proven by a canary.
 >
@@ -14,7 +14,7 @@ Set by Krish on 18 October 2026. It is not reached yet. It is what every session
 
 ## The number
 
-**Corrections Krish had to give twice in a week, across the fleet**: 0 by 30 November 2026, on a countdown weekly ladder. The first honest reading becomes week one, and the ladder is drawn from it.
+**Corrections Krish had to give twice in a week, across the fleet**: 0 by 30 November 2026, on a countdown weekly ladder. The first honest reading, 18 in the week of 2 November, is week one; the ladder cuts by more than half each week, reaches 0 on 23 November and holds it through the deadline week. Set by Krish on 14 November 2026.
 
 ```yaml north-star-metric
 metric: "Corrections Krish had to give twice in a week, across the fleet"
@@ -25,7 +25,12 @@ deadline: 2026-11-30
 ladder_shape: countdown
 source: "Ruling lines in commit bodies and harness observations, grouped by meaning"
 status: active
-ladder: pending-baseline
+ladder:
+  - [2026-11-02, 18]
+  - [2026-11-09, 8]
+  - [2026-11-16, 3]
+  - [2026-11-23, 0]
+  - [2026-11-30, 0]
 ```
 
 Urgency (U1 to U5) is worked out every week from where the number stands against that week's target, by [the harness contract](https://github.com/krishanraja/ai-harness/blob/main/contract/north-star-metric.md). Set by Krish on 23 October 2026.

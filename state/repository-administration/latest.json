@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T16:56:56.217Z",
+  "generated_at": "2026-11-14T18:23:03.063Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "0ec86fa583e9b931c3b139377140f5abd51c1742",
+      "base": "b5bdd31b403ad0a5cc138f17aea911e0191cc3eb",
       "brain_revision": "aabfeac6c45f",
-      "before": 417383,
-      "after": 417383,
+      "before": 419386,
+      "after": 419386,
       "files": [],
       "skipped": [],
-      "source_seal": "ea36d5b030b338b1ee04342c37015b612d165bce516b3fba12a8eeffefe2d6e0",
+      "source_seal": "295567d186bb88f3a4194d9434f155390de57aa2a2d392b77f6436a6ecac1ad7",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,13 +23,13 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "1df41eadadd3e761f9129b1f2c17c4a63d6a1129",
+      "base": "721e495de260faaf2294bd9cb2560fe193fde62d",
       "brain_revision": "5ca09cc3df52",
-      "before": 31004,
-      "after": 31004,
+      "before": 31319,
+      "after": 31319,
       "files": [],
       "skipped": [],
-      "source_seal": "acc66b25974632e63aa61198fa757105968848919b0f9c387532f0ec4f50b0fd",
+      "source_seal": "baa6221aa2d42aee7eccd3276c579fe748321111253ca4b5bfffa8f934d6a481",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,13 +41,13 @@
     },
     {
       "repository": "ai-harness",
-      "base": "4c91d19585850f6dd192096cdf9cfef739ee3031",
+      "base": "12e7d5287de51778afedcf51674a9e0cd9afb25a",
       "brain_revision": "155b79828fb7",
-      "before": 30606,
-      "after": 30606,
+      "before": 34496,
+      "after": 34496,
       "files": [],
       "skipped": [],
-      "source_seal": "7bf757a152b00f2fbfc475fcb51cfd87980d2d79e922597383bdcf21e247fa33",
+      "source_seal": "02323f1c303ebbbd3dd4a056a9611bf8125767fb0731c48e27d668ad6144756c",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -59,13 +59,13 @@
     },
     {
       "repository": "control-center",
-      "base": "4f5cf045434185cc69ec91b2486fd962deaa4eea",
+      "base": "61568f82406628f7022a852cb06ec054790b3459",
       "brain_revision": "ba41f521a760",
-      "before": 121183,
-      "after": 121183,
+      "before": 121189,
+      "after": 121189,
       "files": [],
       "skipped": [],
-      "source_seal": "62a6bcdb7f185c5bec30cbb2b552759b8611c7cba3fd8e0167306cee508167dc",
+      "source_seal": "cc7b2567b5d569804255895a3897a211cd2527b5baf06b0fea3d9f3514403bff",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -221,13 +221,13 @@
     },
     {
       "repository": "growth-heartside",
-      "base": "2482ecccf7c89f60791d0116837fa8f583751919",
+      "base": "ef97dda4f949a6b65e98da6162e1a5f85859d34e",
       "brain_revision": "4ca70efce153",
-      "before": 117469,
-      "after": 117469,
+      "before": 119958,
+      "after": 119958,
       "files": [],
       "skipped": [],
-      "source_seal": "59e7e977cd58499b6461d62b731a387ea5389a256bb626c27b32fe901bf6ecc7",
+      "source_seal": "0f487a831e711c0d6d2548930b04c2f224dab3a5df0cbe63ef0c774c6331ad8e",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -236,6 +236,131 @@
         "administration.evidence-and-acceptance"
       ],
       "status": "current"
+    },
+    {
+      "repository": "content-watcher",
+      "status": "blocked",
+      "reason": "bootstrap_context_growth:64"
+    },
+    {
+      "repository": "inspirationhouse",
+      "base": "3542a84449b081d87ae7c6767c594334dc1afc1c",
+      "brain_revision": "72f9a61493dc",
+      "before": 45152,
+      "after": 45661,
+      "files": [
+        "AGENTS.md",
+        "docs/HARNESS_CONTEXT.md",
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/settings.json"
+      ],
+      "skipped": [],
+      "source_seal": "29acca2d6fbe6d5b74b476412a6619f22a4d8f00720fedb9b1f0f41d7d68a86a",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "verified",
+      "pr": 44,
+      "head": "05c5bd3b3b704a147f5c12ab44ab5fffa47b985c",
+      "merge": "b90a71be0da57c29cc6dcf615fd52d34312eac87",
+      "rollback": {
+        "base": "3542a84449b081d87ae7c6767c594334dc1afc1c",
+        "managed_before": {
+          "AGENTS.md": "8afffa6505e8170dcca73cb3b3f053be6f345f16e25df0cbd9788f9dd0752e86",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".claude/settings.json": "502291d81adf5e19ab2d68a3042a4ff073ff4ee01e8157e57b9a0a623c6375fc"
+        },
+        "files": [
+          "AGENTS.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/settings.json"
+        ]
+      }
+    },
+    {
+      "repository": "krish-clone",
+      "base": "b7115bac74251e2f86909b32390d7de4c5245bd6",
+      "brain_revision": "c5bc0e51e137",
+      "before": 1736,
+      "after": 2245,
+      "files": [
+        "AGENTS.md",
+        "docs/HARNESS_CONTEXT.md",
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/settings.json"
+      ],
+      "skipped": [],
+      "source_seal": "a619c200fa7c3874dba4891c8b70c2d38abb889393fffb87a4298de67c18eaa5",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "verified",
+      "pr": 6,
+      "head": "1074ea11b7ea8376601b3525c1014f6b7daf8d5a",
+      "merge": "717be10e385bce4e5a030a22027512b30e4a6cc5",
+      "rollback": {
+        "base": "b7115bac74251e2f86909b32390d7de4c5245bd6",
+        "managed_before": {
+          "AGENTS.md": "09b948ffd8ae39b9bacbf942c441e199860b0db9dffc47a89f95236b564ec163",
+          "docs/HARNESS_CONTEXT.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".github/workflows/harness-repository-context.yml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          ".claude/settings.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "files": [
+          "AGENTS.md",
+          "docs/HARNESS_CONTEXT.md",
+          ".github/workflows/harness-repository-context.yml",
+          ".claude/settings.json"
+        ]
+      }
+    },
+    {
+      "repository": "krish-raja",
+      "base": "5e0f767f5fa4f57deaa2c674a595526f03f74349",
+      "brain_revision": "6010f5eab8de",
+      "before": 37406,
+      "after": 37915,
+      "files": [
+        "AGENTS.md",
+        "docs/HARNESS_CONTEXT.md",
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/settings.json"
+      ],
+      "skipped": [],
+      "source_seal": "4b71fc138d88856eb143da24d1374bdc4dc148468e74b19c4331b8396ea4443e",
+      "source_check": "current-source-paths-hashes-and-named-commands",
+      "accepted_ids": [
+        "administration.preserve-intent",
+        "administration.verify-owning-system",
+        "administration.experimental-learning",
+        "administration.evidence-and-acceptance"
+      ],
+      "status": "awaiting-checks",
+      "pr": 48,
+      "head": "3bf0934f43f45a1e1650b2c4f7e027f0add9fc00",
+      "checks": {
+        "missing": [],
+        "pending": [],
+        "failed": [
+          "operating-context:failure"
+        ],
+        "statuses": []
+      }
+    },
+    {
+      "repository": "sendlinks",
+      "status": "blocked",
+      "reason": "bootstrap_context_growth:211"
     }
   ]
 }

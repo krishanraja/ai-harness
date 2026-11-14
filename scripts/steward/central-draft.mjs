@@ -165,7 +165,7 @@ export function validateDraft({ repoDir, pack, draft, now = Date.now() }) {
     }
     if (draft.files.length) {
       git(checkout, ['add', '--', ...draft.files.map((file) => file.path)])
-      git(checkout, ['-c', 'user.name=Docs validation', '-c', 'user.email=hello@krishraja.com', '-c', 'commit.gpgsign=false', 'commit', '--no-verify', '-m', `docs(steward): ${new Date(now).toISOString().slice(0, 10)} validate draft`])
+      git(checkout, ['-c', 'user.name=Docs validation', '-c', 'user.email=krish@mindmake.co', '-c', 'commit.gpgsign=false', 'commit', '--no-verify', '-m', `docs(steward): ${new Date(now).toISOString().slice(0, 10)} validate draft`])
     }
     const env = { PATH: process.env.PATH || '/usr/bin:/bin', HOME: scratch, TMPDIR: scratch, CI: 'true', GIT_TERMINAL_PROMPT: '0', npm_config_ignore_scripts: 'true' }
     try {

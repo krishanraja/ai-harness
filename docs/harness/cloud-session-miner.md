@@ -8,6 +8,17 @@ connector is the route, and no Claude scheduled task reads sessions. That also
 keeps his 2026-10-29 ruling: "I want zero Claude routines. No Claude schedules
 of any kind in this architecture".
 
+**Scope of "zero Claude routines" (2026-11-14).** Ruling (Krish, 2026-11-14):
+"zero Claude routines" is content-engine's rule only, not fleet-wide, and no
+other repository's behaviour changes (his words: "I agree with everything else
+until Batch 6", agreeing to decision 4.14). The miner above stays retired on
+its own ruling of 2026-11-13, not because of this rule. Not covered by either
+ruling: every OpenClaw cron job on the VPS starts an agent session on a timer
+(control-center `docs/audits/2026-11-14-fleet-integration/vps-inventory.md`,
+section A and "Jobs that start agent sessions on a timer"); they run through
+the OpenClaw gateway, not as Claude scheduled tasks, and their role is Krish's
+separate decision.
+
 - **Live capture is the only route for cloud sessions.** Every session sends a
   redacted lesson through the Control Center connector
   (`record_harness_observation`) right after a correction, and Ruling lines in
