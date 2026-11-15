@@ -1,6 +1,13 @@
 # Proposal: Claude starts Codex only through codex_thread, in a session Krish can see
 
-Status: proposed, awaiting Krish. Nothing in the canon, the contracts or any skill changes until he approves it.
+Status: approved by Krish on 2026-11-15 (his words: "yes to the codex proposal"). The canon sentence below is now in
+`contract/templates/canon-block.md` (`canon.codex` in `brain/rules.yaml`), recorded as
+`Ruling (Krish, 2026-11-15): Claude starts Codex only through the codex_thread tool, from a session on his computer when he must see or share it; a failure to start is reported in one line, never worked around by editing MCP or Claude settings.`
+The canonical copy of the tool is now `scripts/codex_thread.mjs` here, and `scripts/codex-thread-copies.mjs` checks
+every fleet copy against it.
+The operating contract's purge and deletion rule now says what a thread's approval policy "never" does not widen: it
+runs read-only unless asked for workspace-write, workspace-write is for a worktree made for that one task, and any
+deletion outside it, send, post, spend or permission change keeps its own approval.
 Source: Krish's request of 2026-11-15 in a Claude Code session on his own computer, in his words: "I want Claude to
 spin up codex sessions I can actually see"; "The Claude session that spawned it needs to be able to continually write
 to it and read from it, but I also need to be able to do the same inside the Codex desktop app." Three repositories
@@ -53,7 +60,7 @@ cloud, a GitHub Actions job and the worker server each have their own Codex home
 session he sees in Desktop. Work that does not need him to see or share it may still run there by that repository's
 own route; work that does is started from his computer, or handed to a session there.
 
-## The change to the canon (proposed)
+## The change to the canon (approved)
 
 **The canon block (`contract/templates/canon-block.md`), after "Branches" (one sentence):**
 
@@ -66,12 +73,12 @@ The last clause closes a known detour: when a start fails, the fix that looks qu
 Claude setting so some other route works. That widens what a session can reach without his approval and hides the
 failure he needs to see. One line naming the failure lets him fix the real cause.
 
-## Copying the tool to every repository that dispatches Codex (proposed)
+## Copying the tool to every repository that dispatches Codex (approved)
 
 The canonical copy moves to ai-harness at `scripts/codex_thread.mjs`, the same path it has in every repository, the
 way the branch sweep is canonical here and copied byte for byte. A change is made here first, then copied unchanged;
-the header line "content-engine holds the source" changes to name ai-harness in the same copy. Until Krish approves,
-content-engine stays the source and nothing moves.
+the header line "content-engine holds the source" changes to name ai-harness in the same copy. Since his approval, ai-harness
+holds the source.
 
 Repositories that dispatch Codex today without it, read at `origin/main` on 2026-11-15:
 
