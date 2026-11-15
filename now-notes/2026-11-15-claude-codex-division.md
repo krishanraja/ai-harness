@@ -1,3 +1,0 @@
-Status: Proposed, for Krish's Yes: the canon names who does what between Claude and Codex (Codex never writes ai-harness or Google Drive; Codex does art direction, visual builds and browser legwork, visible in Codex Desktop), channel-tasks gains the social go-live check, and the Engines section gains a weekly what-worked loop (docs/proposals/2026-11-15-claude-codex-division.md). Nothing in the canon or contracts changed.
-Next: Krish says Yes or No to the proposal, and settles whether content-engine's Codex cards run where his Codex Desktop app can show them.
-North Star check (2026-11-15): holds.
