@@ -1,0 +1,4 @@
+interface:
+  display_name: "UGC Avatar"
+  short_description: "Plan and gate an AI person for a venture video"
+  default_prompt: "Use $ugc-avatar to check whether this venture may use an AI presenter, and plan the steps."

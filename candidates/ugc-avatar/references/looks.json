@@ -1,0 +1,134 @@
+{
+  "_about": "The pools the roller draws an AI person's look from. Every age it can draw is 18 or over. A pool grows by pull request, never at run time.",
+  "minimum_age": 18,
+  "default_age": [
+    25,
+    55
+  ],
+  "pools": {
+    "presentation": [
+      "woman",
+      "man",
+      "person"
+    ],
+    "hair": [
+      "short dark hair",
+      "long curly hair",
+      "a shaved head",
+      "grey hair tied back",
+      "straight shoulder-length hair",
+      "braids",
+      "a messy bun",
+      "cropped red hair",
+      "thinning hair",
+      "wavy brown hair"
+    ],
+    "skin": [
+      "deep brown skin",
+      "light skin with freckles",
+      "olive skin",
+      "medium brown skin",
+      "pale skin",
+      "tan skin",
+      "warm beige skin",
+      "dark skin"
+    ],
+    "wardrobe": {
+      "casual": [
+        "a faded hoodie",
+        "a plain t-shirt",
+        "a knitted jumper",
+        "a flannel shirt",
+        "a zip fleece"
+      ],
+      "work": [
+        "a plain shirt with rolled sleeves",
+        "a simple blazer over a t-shirt",
+        "a work polo"
+      ],
+      "outdoor": [
+        "a rain jacket",
+        "a puffer jacket",
+        "a cap and a gilet"
+      ]
+    },
+    "setting": {
+      "home": [
+        "a small kitchen",
+        "a living room sofa",
+        "a hallway by the front door",
+        "a cluttered spare room"
+      ],
+      "outdoor": [
+        "a park path",
+        "a quiet street corner",
+        "a car park at dusk"
+      ],
+      "work": [
+        "a desk by a window",
+        "a shop counter",
+        "a garage workbench"
+      ]
+    },
+    "framing": [
+      "a phone held at arm's length",
+      "a phone propped on a shelf",
+      "a phone on a cheap tripod at chest height"
+    ],
+    "light": [
+      "window daylight",
+      "a warm lamp in the evening",
+      "overcast daylight",
+      "harsh overhead kitchen light"
+    ]
+  },
+  "youth_words": [
+    "teen",
+    "teens",
+    "teenage",
+    "teenager",
+    "child",
+    "children",
+    "kid",
+    "kids",
+    "minor",
+    "minors",
+    "underage",
+    "schoolgirl",
+    "schoolboy",
+    "student uniform",
+    "young looking",
+    "youthful",
+    "girl",
+    "boy",
+    "baby face",
+    "petite young"
+  ],
+  "customer_words": [
+    "customer",
+    "buyer",
+    "bought",
+    "purchased",
+    "my order",
+    "unboxing",
+    "unbox",
+    "review",
+    "reviewer",
+    "testimonial",
+    "verified",
+    "client",
+    "user story",
+    "before and after"
+  ],
+  "credential_words": [
+    "doctor",
+    "vet",
+    "veterinarian",
+    "nurse",
+    "dentist",
+    "lawyer",
+    "certified",
+    "licensed",
+    "expert advice"
+  ]
+}

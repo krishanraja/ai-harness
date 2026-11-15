@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ad Copywriter"
+  short_description: "Captions for a venture's own posts, and their lint"
+  default_prompt: "Use $ad-copywriter to write three caption variations for this post and lint them."
