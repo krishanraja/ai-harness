@@ -484,17 +484,22 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "830d5de86497"
+    text_sha: "4364bacb69c5"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "a2cb8f6903d4c41c1e3be829833e3f5558176a76"
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-branch-hygiene.md"
     history:
       - text_sha: "34509750179f"
         valid_until: "2026-11-14"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "830d5de86497"
+        valid_until: "2026-11-15"
+        source:
+          kind: ruling
+          ref: "a2cb8f6903d4c41c1e3be829833e3f5558176a76"
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
@@ -1301,11 +1306,17 @@ contract_rules:
     status: live
   - id: canon.branches
     file: contract/templates/canon-block.md
-    text_sha: "28641b2547e1"
+    text_sha: "66984a889516"
     first_seen: "2026-11-15"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-15-branch-hygiene.md"
+    history:
+      - text_sha: "28641b2547e1"
+        valid_until: "2026-11-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-branch-hygiene.md"
     status: live
   - id: canon.one-home-per-fact
     file: contract/templates/canon-block.md

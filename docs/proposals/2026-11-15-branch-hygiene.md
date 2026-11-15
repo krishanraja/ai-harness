@@ -36,6 +36,13 @@ A change to it is made here first, then copied unchanged to every repository.
 > (`.github/workflows/branch-sweep.yml`, canonical in ai-harness), which deletes branches whose work is already on
 > main and lists the rest (Ruling, Krish, 2026-11-15).
 
+## How it sits with the approval wall
+
+The operating contract's purge and deletion rule (`authority.treat-any-purge-deletion`) names the sweep as a standing,
+narrow exception: it deletes only branches whose work is already on main and that no open pull request uses. Deleting a
+branch whose work is not on main stays Krish's decision; under the one-day rule a session either gives such a branch a
+pull request or names it to him for removal. Nothing else about the wall changes.
+
 ## What it does not do
 
 It never deletes unmerged work: the 114 branches with work not on main stay and are listed in each run's log for a
