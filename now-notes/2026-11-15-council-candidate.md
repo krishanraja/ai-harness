@@ -1,0 +1,3 @@
+Status: `council` is staged as an inactive candidate (`candidates/council/`): a read-only validator any session can use to put a decision or an idea to the same five seats and eight idea tests Control Center's council uses, with the chair's call as advice to Krish. Its gate holds the copied words to control-center byte for byte and refuses outside names, em dashes and outside links; one sentence of the `hard_to_copy` brief is new and waits for control-center to adopt it (`docs/proposals/2026-11-15-council.md`).
+Next: control-center adopts the new opening sentence of the `hard_to_copy` brief so the gate matches byte for byte; then Krish rules on admission.
+North Star check (2026-11-15): holds.

@@ -1,0 +1,29 @@
+schema_version: 1
+id: council
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-11-15
+source_branch: claude/elegant-pascal-juftv8
+skill_path: candidates/council
+admission_path: skills/council
+proposal: docs/proposals/2026-11-15-council.md
+role: validator-read-only
+wording_home:
+  repository: krishanraja/control-center
+  seats: src/lib/councilSeats.ts COUNCIL_SEATS
+  idea_tests: api/_councilRead.ts IDEA_TESTS
+  gate: candidates/council/scripts/validate.py
+  open_difference: idea test hard_to_copy, first sentence of its brief; control-center adopts the candidate's sentence, then the gate matches byte for byte
+evaluation:
+  trigger_cases: evals/candidates/council-trigger-cases.jsonl
+  behavior_cases: evals/candidates/council-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - control-center-byte-match
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - named-human-admission
+  - governed-release-and-install-approval

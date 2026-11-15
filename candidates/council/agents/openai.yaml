@@ -1,0 +1,4 @@
+interface:
+  display_name: "Council"
+  short_description: "Put a decision or an idea to Krish's five-seat council"
+  default_prompt: "Use $council to put this decision to Krish's council and give me the chair's call."
