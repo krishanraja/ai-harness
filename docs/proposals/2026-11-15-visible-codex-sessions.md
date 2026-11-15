@@ -5,6 +5,9 @@ Status: approved by Krish on 2026-11-15 (his words: "yes to the codex proposal")
 `Ruling (Krish, 2026-11-15): Claude starts Codex only through the codex_thread tool, from a session on his computer when he must see or share it; a failure to start is reported in one line, never worked around by editing MCP or Claude settings.`
 The canonical copy of the tool is now `scripts/codex_thread.mjs` here, and `scripts/codex-thread-copies.mjs` checks
 every fleet copy against it.
+The operating contract's purge and deletion rule now says what a thread's approval policy "never" does not widen: it
+runs read-only unless asked for workspace-write, workspace-write is for a worktree made for that one task, and any
+deletion outside it, send, post, spend or permission change keeps its own approval.
 Source: Krish's request of 2026-11-15 in a Claude Code session on his own computer, in his words: "I want Claude to
 spin up codex sessions I can actually see"; "The Claude session that spawned it needs to be able to continually write
 to it and read from it, but I also need to be able to do the same inside the Codex desktop app." Three repositories
