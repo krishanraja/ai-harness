@@ -1349,13 +1349,18 @@ contract_rules:
     status: live
   - id: canon.codex
     file: contract/templates/canon-block.md
-    text_sha: "53ea0d55bb66"
+    text_sha: "ebee4f6f97b0"
     first_seen: "2026-11-15"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-15-claude-codex-division.md"
     history:
       - text_sha: "1c24726cda32"
+        valid_until: "2026-11-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-claude-codex-division.md"
+      - text_sha: "53ea0d55bb66"
         valid_until: "2026-11-15"
         source:
           kind: proposal
