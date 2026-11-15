@@ -1,6 +1,6 @@
 # Proposal: the canon names who does what between Claude and Codex, and every engine closes a weekly loop
 
-Status: proposed. Waiting on Krish's Yes; nothing in the canon or the contracts changes until he gives it.
+Status: accepted. Ruling (Krish, 2026-11-15): "yes to #263". In force in the canon block, `contract/channel-tasks.md` and `contract/north-star-metric.md` (Engines rule 7). The conflict below was settled before the Yes: since content-engine PR #714 cards run under the Codex home his Desktop app reads, and since #727 and #728 they start Windows Codex from WSL.
 Source: Krish's instruction of 2026-11-15 (typed in a claude.ai/code session), recorded as
 `Ruling (Krish, 2026-11-15): Codex does a minimum of every video session and the social legwork, visible in Codex Desktop; Claude owns strategy, orchestration, verification and learnings; Codex never updates ai-harness or Google Drive.`
 in the commits of content-engine, growth-heartside and growth-makeyourmindup that put it into those repositories' own

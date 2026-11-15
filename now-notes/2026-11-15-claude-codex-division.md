@@ -1,3 +1,3 @@
-Status: Proposed, for Krish's Yes: the canon names who does what between Claude and Codex (Codex never writes ai-harness or Google Drive; Codex does art direction, visual builds and browser legwork, visible in Codex Desktop), channel-tasks gains the social go-live check, and the Engines section gains a weekly what-worked loop (docs/proposals/2026-11-15-claude-codex-division.md). Nothing in the canon or contracts changed.
-Next: Krish says Yes or No to the proposal, and settles whether content-engine's Codex cards run where his Codex Desktop app can show them.
+Status: Krish said yes to the Claude and Codex division (#263). It is in force in the canon block (after the Codex sentence), contract/channel-tasks.md (Codex does the social legwork) and contract/north-star-metric.md (Engines rule 7, close the loop every week).
+Next: The next canon sync renders the new canon sentence into every repository's AGENTS.md.
 North Star check (2026-11-15): holds.

@@ -40,6 +40,8 @@ A task whose channel is held, unlocked by a pending ruling, or not configured st
 
 **Krish's time.** The tasks add no new asks of their own. Profile and creative changes, plans and check-ins reach him through the engine's existing route, one ask per engine at a time (Engines rule 4 in `contract/north-star-metric.md`), batched with the work they belong to.
 
+**Codex does the social legwork** (Ruling, Krish, 2026-11-15). Scheduling, posting and the go-live check are Codex's legwork, inside each repository's own approval wall (an approved Sheet row, an approved edition): after each post Codex reads it back live and records whether its cover or thumbnail, caption and call to action match what was approved, then reads its numbers at the channel's judge windows and every paid boost's results in the ads manager. Claude checks the readings, records them and writes any Sheet or Drive file. Reading an ads manager is reading; changing a boost needs Krish's Yes on that boost.
+
 ## The loop from today to the North Star
 
 Each engine runs this loop each week, with its own numbers, and writes it into its own engine document.
