@@ -19,7 +19,7 @@ test('the canonical tool is in ai-harness at scripts/codex_thread.mjs', canon.st
 test('its header names ai-harness as the canonical copy', /Canonical copy: krishanraja\/ai-harness scripts\/codex_thread\.mjs/.test(canon.split('\n').slice(0, 20).join('\n')))
 test('it no longer says content-engine holds the source', !canon.includes('content-engine holds the source'))
 test('the canonical tool itself names no plugin server', !namesPluginServer(canon))
-test('the tool has no em dash', !canon.includes('—'))
+test('the tool has no em dash', !canon.includes(String.fromCharCode(0x2014)))
 
 test('a plugin background task is caught', namesPluginServer('node <plugin>/scripts/codex-companion.mjs task --background --fresh'))
 test('the broker is caught', namesPluginServer('starts app-server-broker on login'))
