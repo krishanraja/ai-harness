@@ -26,6 +26,10 @@
  *     (Ruling, Krish, 2026-10-28).
  *   - So is a NOW.md the nightly audit has failed for three days or more
  *     (state/now-audit/latest.json): its steward is not fixing it.
+ *   - So is a branch the weekly sweep keeps with work not on main and no pull
+ *     request for over a day, and every kept branch is listed in the digest
+ *     (scripts/kept-branches.mjs; Ruling, Krish, 2026-11-15). Read only on a
+ *     night the digest could still speak this week.
  *
  * Then scripts/digest.mjs decides whether this week has anything to say.
  *
@@ -45,6 +49,8 @@ import { REASONS } from './heartbeat-reasons.mjs'
 import { parseYaml } from './lib/yaml.mjs'
 import { waitingOnKrish, waitingBlocker } from './merge-bot-prs.mjs'
 import { auditBlocker, loadLimits } from './steward/audit-now.mjs'
+import { keptAcrossFleet, keptBlocker } from './kept-branches.mjs'
+import { isoWeek } from './scoreboard.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -188,6 +194,17 @@ if (isMain) {
     const waiting = waitingBlocker(await waitingOnKrish(gh, fleet))
     if (waiting) { blockers.push(waiting); log.push(`waiting on Krish: ${waiting.title}`) }
   } catch (e) { log.push(`waiting list unavailable: ${String(e.status ? `github-${e.status}` : e.message).slice(0, 120)}`) }
+  // The branches the sweep keeps: read once a week, on the nights the digest can still speak.
+  let branches = null
+  if (!pendingDigest() && lastSent()?.week !== isoWeek(today)) {
+    try {
+      const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
+      branches = await keptAcrossFleet(gh, fleet)
+      const kept = keptBlocker(branches)
+      if (kept) { blockers.push(kept); log.push(`kept branches: ${kept.title}`) }
+      else log.push(`kept branches: ${branches.repos.reduce((n, r) => n + r.rows.length, 0)}, none needing Krish`)
+    } catch (e) { log.push(`kept branches unavailable: ${String(e.status ? `github-${e.status}` : e.message).slice(0, 120)}`) }
+  }
   const auditPath = join(HARNESS, 'state/now-audit/latest.json')
   if (existsSync(auditPath)) {
     const audit = auditBlocker(JSON.parse(readFileSync(auditPath, 'utf8')), today, loadLimits(HARNESS))
@@ -195,7 +212,7 @@ if (isMain) {
   }
   const sbPath = join(HARNESS, 'state/scoreboard.jsonl')
   const scoreboard = existsSync(sbPath) ? readFileSync(sbPath, 'utf8').trim().split('\n').filter(Boolean).map((l) => JSON.parse(l)).at(-1) || null : null
-  const digest = pendingDigest() || buildDigest({ ready, blockers, scoreboard, today, policy, lastSent: lastSent() })
+  const digest = pendingDigest() || buildDigest({ ready, blockers, scoreboard, branches, today, policy, lastSent: lastSent() })
   if (!digest) log.push('digest: nothing needs Krish this week, or it was already sent; silent.')
   else if (dryRun) log.push(`digest (dry run): ${digest.title}`)
   else {
