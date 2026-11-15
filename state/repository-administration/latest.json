@@ -1,17 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T05:50:02.621Z",
+  "generated_at": "2026-11-15T21:40:53.194Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "a30e1df09616b8d806dd807b1050b2d2242d6490",
+      "base": "fbc0caba9c30d2e4c5707e4e777e8243a59510e2",
       "brain_revision": "aabfeac6c45f",
-      "before": 421136,
-      "after": 421136,
-      "files": [],
+      "before": 427753,
+      "after": 427753,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
       "skipped": [],
-      "source_seal": "eca99fbbc785ef53b356e9582856b0adb855037da31839f12ed75006f7d01c08",
+      "source_seal": "9da4a088b9e2f8267228adcefe33ed474a8216fdcc7dd9bd79cd7e8fd1e1c377",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -19,17 +22,30 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "current"
+      "status": "awaiting-checks",
+      "pr": 739,
+      "head": "2c3f44a4af147de5aeabaad25bfa47e30186e2a3",
+      "checks": {
+        "missing": [
+          "operating-context"
+        ],
+        "pending": [],
+        "failed": [],
+        "statuses": []
+      }
     },
     {
       "repository": "AEO-Engine",
-      "base": "b7bb682c5fd6415b05e0972986e5d26ad9989741",
+      "base": "5ca9a40c4515b72db6d946239aedccc5ac787b6a",
       "brain_revision": "5ca09cc3df52",
-      "before": 35693,
-      "after": 35693,
-      "files": [],
+      "before": 37944,
+      "after": 37944,
+      "files": [
+        ".github/workflows/harness-repository-context.yml",
+        ".claude/hooks/harness-closeout.mjs"
+      ],
       "skipped": [],
-      "source_seal": "1558fc513195c43dcb7137d8f31cc47be119e69125d4d416d68e9787b902c17e",
+      "source_seal": "429933206d267f6d789bdee79ad9dbf5a293e29adc1b37483ac2531b9d6c018a",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -37,256 +53,81 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "current"
+      "status": "awaiting-checks",
+      "pr": 63,
+      "head": "51699ed7a9a50da9e660829ad3926f5a7f0761ff",
+      "checks": {
+        "missing": [
+          "operating-context"
+        ],
+        "pending": [],
+        "failed": [],
+        "statuses": []
+      }
     },
     {
       "repository": "ai-harness",
-      "base": "76939fc4f2e0501e05c093b405575570d22bafbd",
-      "brain_revision": "155b79828fb7",
-      "before": 23238,
-      "after": 23238,
-      "files": [],
-      "skipped": [],
-      "source_seal": "28893681f9999a25babf423cfc621fc4b775a8f837b93bb8b1adb954c115c873",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "control-center",
-      "base": "00a17f95ae429226f8f4be0a11f46788103d4f1e",
-      "brain_revision": "ba41f521a760",
-      "before": 122264,
-      "after": 122264,
-      "files": [],
-      "skipped": [],
-      "source_seal": "a9482ca48d542f8205dc3314c949779a236625e08ecb5d091231b9420e067efd",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "mm-ctrl",
-      "base": "cba7302c5eccd8e9933f6f16156329405818c7d2",
-      "brain_revision": "4757d4458aee",
-      "before": 22294,
-      "after": 22294,
-      "files": [],
-      "skipped": [],
-      "source_seal": "ca273addc5a89bfa167e05ff7fd9dd7490ff5feeda9d996ef6e91f0202dcf14b",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "fractionl-circle",
-      "base": "dbfc9c1023f1e2de60a395c1f5e323b339d47602",
-      "brain_revision": "dddd1abc777c",
-      "before": 23604,
-      "after": 23604,
-      "files": [],
-      "skipped": [],
-      "source_seal": "dbfda56d4bf2d408e866c405d8dbbbc773213b54545c0d2ef1ea00396977af63",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "fractionl-pulse",
-      "base": "8c05612fb466c77dbe8549554d2c14b9044a8d8e",
-      "brain_revision": "c3389b60c708",
-      "before": 22804,
-      "after": 22804,
-      "files": [],
-      "skipped": [],
-      "source_seal": "871800d0e5beb30d321f76b0ef79808d852dc70f99ca88bc3a8295c3d222de0c",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "full-time",
-      "base": "3fbe8a9fbe79b1623dc83a922d467a0b84e98340",
-      "brain_revision": "cd43facd0779",
-      "before": 33945,
-      "after": 33945,
-      "files": [],
-      "skipped": [],
-      "source_seal": "14e8c8f5ddc911bbe556fdd6e8179778f5ac4ecee153087b54068002091a6050",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "contentarchives",
-      "base": "43093e63d0bbd24f80b39a07919e273f97b6cbf6",
-      "brain_revision": "430ad4208f8a",
-      "before": 24119,
-      "after": 24119,
-      "files": [],
-      "skipped": [],
-      "source_seal": "facb21e29ee83c0c732d022b52774aa5be0fe1055a91b8332534059de356bef8",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "makeyourmindup",
-      "base": "c24653c2ec48994618b2979ca70192ebf84e6dfc",
-      "brain_revision": "0a88ee6c1f4a",
-      "before": 29442,
-      "after": 29442,
-      "files": [],
-      "skipped": [],
-      "source_seal": "e56e906ef06d44a0436d20ac03c20c79a46b7788cb583bc0989c754d67420aa2",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "heartside",
-      "base": "b02728878d1c0d711fe315ac30957d6fd01d975c",
-      "brain_revision": "d84cfdfa1507",
-      "before": 21954,
-      "after": 21954,
-      "files": [],
-      "skipped": [],
-      "source_seal": "4bfa1ddeeb916ffe7c2d489c3840f324ef18e9bf511f2c5c49d677c91bf8b0bd",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "legibility",
-      "base": "56fe9079e2093262a34b7f86fa12d19fa2eac2cf",
-      "brain_revision": "b059141972f8",
-      "before": 24790,
-      "after": 24790,
-      "files": [],
-      "skipped": [],
-      "source_seal": "a12915e73d5e8e4695139d4bb267a9aa2ffcfa18f11d5c5c3cf1679bfb8573f9",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "growth-heartside",
-      "base": "c5fc47a5b024e04365080f60f96d643750557d5c",
-      "brain_revision": "4ca70efce153",
-      "before": 120622,
-      "after": 120622,
-      "files": [],
-      "skipped": [],
-      "source_seal": "d58a0c706b9c993b33cf130c4b0629cfe8ad76adaac0641ca4e2432f430f256c",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "content-watcher",
-      "status": "blocked",
-      "reason": "bootstrap_context_growth:509"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "inspirationhouse",
-      "base": "60a83c25ea6982975cc40f8a613ed981d354b6b8",
-      "brain_revision": "72f9a61493dc",
-      "before": 55209,
-      "after": 55209,
-      "files": [],
-      "skipped": [],
-      "source_seal": "b254572683d2c57fe0f42b727fdc7d5cd62ff00dee84327084459ae812abf907",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "krish-clone",
-      "base": "8d116928375865146c11e87bd381c4dae33c278f",
-      "brain_revision": "c5bc0e51e137",
-      "before": 9197,
-      "after": 9197,
-      "files": [],
-      "skipped": [],
-      "source_seal": "22b5b370c899d58245015eb45e88216a3a8849682077d62ccd7692f38b02ff5a",
-      "source_check": "current-source-paths-hashes-and-named-commands",
-      "accepted_ids": [
-        "administration.preserve-intent",
-        "administration.verify-owning-system",
-        "administration.experimental-learning",
-        "administration.evidence-and-acceptance"
-      ],
-      "status": "current"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "krish-raja",
-      "status": "blocked",
-      "reason": "instruction_import_cycle"
+      "status": "awaiting-pilots"
     },
     {
       "repository": "sendlinks",
-      "status": "blocked",
-      "reason": "bootstrap_context_growth:211"
+      "status": "awaiting-pilots"
     }
   ]
 }
