@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-02","week_target":18,"current":18,"current_as_of":"2026-11-14","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":1,"urgency_reason":"at the week's countdown target (18 of 18)"} --> **North Star number: U1, on the ladder.** Corrections Krish had to give twice in a week, across the fleet: 18 in the week of 2026-11-02 (18 from the taste ledger, 0 from the harness's own corrections), against a target of 18, measured 2026-11-14. The ladder (Krish, 2026-11-14) asks 8 for the week of 9 Nov, 3 for 16 Nov, then 0 on 23 and 30 Nov.
 
+- the canon-sync merger requires operating-context only where a repository's base runs the context workflow; in a repository the publisher does not administer it merges on that repository's own green checks once the pull request has been open ten minutes, so the first canon blocks into claude-archive, content-watcher, filearchives, music-watcher and sendlinks no longer wait on a check none of them runs. (2026-11-15)
 - The OpenClaw fleet runs on the worker server (Hetzner, Helsinki) since 20:08 UTC on 14 Nov; the old box was deleted that night on Krish's ruling, with a Hetzner snapshot as the only rollback, and 12 jobs were retired by name. The harness's records, SENTINEL and the superseded-banner prompts say so; the T0 report is in `state/vps/MIGRATION-2026-11-14.md`. (2026-11-14)
 - Proposed, waiting on Krish: the canon's engine-instruction paragraph (I-13, `docs/proposals/2026-11-14-engine-instructions.md`); the krish and jonny voices' pin on krish-raja's retired names (I-08); File routing naming only folders that exist (I-15, `docs/proposals/2026-11-14-drive-truth.md`); no cold outbound routed to Instantly (#233); the canon preamble's start-marker wording. (2026-11-14)
 - The canon's Route paragraph names the research library as a research document's home, cited by id (I-30; it reaches the fleet's blocks with the next release). The North Star number has its weekly countdown ladder, set by Krish on 14 Nov: 18 (w/c 2 Nov), 8 (9 Nov), 3 (16 Nov), 0 (23 Nov), 0 (30 Nov). The 14 Nov reading was 18 of 18. (2026-11-14)
@@ -51,11 +52,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-14): the migration session appends the T+24h evidence (15 Nov after 15:00 London) to state/vps/MIGRATION-2026-11-14.md.
+- Next (2026-11-15): the next nightly steward merges any canon sync these five open, with no hand merge.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-14): holds.
+- North Star check (2026-11-15): holds.
 
 ## Read next
 
