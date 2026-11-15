@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync, readFileSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
-import { evaluate, northStarCheck, hook, ci, isProduct, defaultBase, parseNote, foldNotes, foldRepository } from './check.mjs'
+import { evaluate, northStarCheck, hook, ci, isProduct, isAutomation, defaultBase, parseNote, foldNotes, foldRepository, capNow } from './check.mjs'
 
 const TODAY = '2026-10-22'
 const now = (asOf, line) => `---\nrepo: krishanraja/x\nas_of: ${asOf}\nhead: abc1234\n---\n# X: where it is right now\n\n## Where it is right now (as of ${asOf})\nLive.\n\n## What is next and what is waiting on Krish\n- Ship the next thing.\n${line ? line + '\n' : ''}\n## Read next\n`
@@ -69,6 +69,8 @@ assert.equal(evaluate({ ...base, since: '2026-10-23', commits: [{ ...c('Close ou
 // The fold's own commit is automation, inside its scope only.
 assert.equal(evaluate({ ...base, commits: [c('docs(closeout): fold closeout notes into NOW.md', ['NOW.md', NOTE_PATH])], nowText: good, notes: { [NOTE_PATH]: null } }).ok, true)
 assert.equal(evaluate({ ...base, commits: [c('docs(closeout): sneak a feature in', ['src/a.ts'])], nowText: good }).ok, false)
+assert.equal(isAutomation(c('docs(closeout): fold closeout notes into NOW.md', ['NOW.md', 'docs/history/NOW-changes.md'])), true, 'a capped fold may file status lines in the history archive')
+assert.equal(isAutomation(c('docs(closeout): fold closeout notes into NOW.md', ['NOW.md', 'docs/notes.md'])), false, 'and nowhere else')
 
 // The harness's own proposal pull requests (change requests, learning reviews)
 // say they need no closeout; before 2026-10-28 they failed this check by
@@ -102,6 +104,26 @@ assert.equal(foldNotes(full('2026-10-30'), [n1]).text.match(/^as_of: (.*)$/m)[1]
 assert.equal(foldNotes(full('2026-10-01'), [parseNote('now-notes/2026-10-22-bad.md', 'Status: x\n')]).folded.length, 0, 'a malformed note is left for a person')
 assert.ok(foldNotes('# no sections\n', [n1]).problems.length, 'a NOW.md without the sections is reported, not guessed at')
 assert.match(foldNotes(full('2026-10-01').replace(/\n/g, '\r\n'), [n1]).text, /\r\n- Next \(2026-10-21\)/, 'line endings are kept')
+
+// The cap (Ruling, Krish, 2026-11-15): a repository that caps NOW.md has the
+// fold move its oldest dated status lines to the history file until it fits.
+const st = (text, date) => `- ${text} (${date})`
+const capText = `# X\n\n## Where it is right now (as of 2026-11-15)\nProse stays.\n\n${[st('Newest status', '2026-11-15'), st('Middle status', '2026-11-03'), '- **Built and on main** (2026-10-01, by hand).', st('Upper of the oldest', '2026-10-29'), st('Lowest of the oldest', '2026-10-29'), '  - a detail under it.', '- **Undated** fact.'].join('\n')}\n\n## What is next and what is waiting on Krish\n- North Star check (2026-11-15): holds.\n`
+const capSize = Buffer.byteLength(capText)
+const hist = '# History\n\nNewest first.\n\n- 2026-11-01 Kept entry.\n- 2026-10-20 Older entry.\n'
+assert.deepEqual(capNow(capText, hist, capSize), { text: capText, history: hist, moved: [], problems: [] }, 'within the cap nothing moves')
+const one = capNow(capText, hist, capSize - 1)
+assert.deepEqual(one.moved.map((m) => m.lines), [['- 2026-10-29 Lowest of the oldest', '  - a detail under it.']], 'the oldest moves first, the lowest of equal dates, with its indented lines')
+assert.ok(Buffer.byteLength(one.text) <= capSize - 1); assert.deepEqual(one.problems, [])
+assert.match(one.history, /^- 2026-11-01 Kept entry\.\n- 2026-10-29 Lowest of the oldest\n {2}- a detail under it\.\n- 2026-10-20 Older entry\.$/m, 'filed in date order, newest first')
+const every = capNow(capText, hist, 10)
+assert.deepEqual(every.moved.map((m) => m.date), ['2026-10-29', '2026-10-29', '2026-11-03', '2026-11-15'])
+for (const kept of ['Prose stays.', '**Built and on main** (2026-10-01, by hand).', '**Undated** fact.']) assert.ok(every.text.includes(kept), `a line with no date at its end stays: ${kept}`)
+assert.match(every.problems.join(), /over its cap of 10/, 'a NOW.md that cannot fit is reported, not cut')
+assert.match(every.history, /^- 2026-11-15 Newest status\n- 2026-11-03 Middle status\n- 2026-11-01 Kept entry\.\n- 2026-10-29 Upper of the oldest\n- 2026-10-29 Lowest of the oldest\n {2}- a detail under it\.\n- 2026-10-20 Older entry\.$/m, 'equal dates keep their NOW.md order')
+assert.match(capNow(capText, null, capSize - 1).history, /^# NOW\.md history\n\nNewest first\..*\n\n- 2026-10-29 Lowest of the oldest\n {2}- a detail under it\.\n$/, 'a missing history file is created')
+const crlf = capText.replace(/\n/g, '\r\n')
+assert.ok(!/[^\r]\n/.test(capNow(crlf, hist.replace(/\n/g, '\r\n'), Buffer.byteLength(crlf) - 1).text), 'line endings are kept')
 
 // Against real git: the hook blocks once, then always lets the stop through.
 const dir = mkdtempSync(join(tmpdir(), 'closeout-'))
@@ -144,7 +166,17 @@ try {
   assert.deepEqual(onDisk.folded, [`now-notes/${TODAY}-ship.md`])
   assert.equal(existsSync(join(dir, `now-notes/${TODAY}-ship.md`)), false, 'the folded note is removed')
   assert.match(readFileSync(join(dir, 'NOW.md'), 'utf8'), /^- Next \(2026-10-22\): Merge it\.$/m)
-  assert.deepEqual(foldRepository(dir), { folded: [], problems: [] }, 'a second fold has nothing to do')
+  assert.deepEqual(foldRepository(dir), { folded: [], problems: [], moved: [] }, 'a second fold has nothing to do')
+  // A capped fold trims even with no note waiting, and files what it moved.
+  const capped = { cap: capSize - 1, history: 'docs/history/NOW-changes.md' }
+  put('NOW.md', capText)
+  assert.deepEqual(foldRepository(dir, capped).moved.map((m) => m.date), ['2026-10-29'], 'a cap trims with no note waiting')
+  assert.ok(Buffer.byteLength(readFileSync(join(dir, 'NOW.md'), 'utf8')) <= capSize - 1)
+  assert.match(readFileSync(join(dir, 'docs/history/NOW-changes.md'), 'utf8'), /^- 2026-10-29 Lowest of the oldest$/m, 'the history file is created where the repository keeps it')
+  assert.deepEqual(foldRepository(dir, capped), { folded: [], problems: [], moved: [] }, 'a second capped fold has nothing to do')
+  const before = readFileSync(join(dir, 'NOW.md'), 'utf8')
+  assert.match(foldRepository(dir, { cap: 1, history: '../outside.md' }).problems.join(), /under docs\/history/, 'the history file stays under docs/history/')
+  assert.equal(readFileSync(join(dir, 'NOW.md'), 'utf8'), before, 'a refused history path writes nothing')
   g('checkout', '-q', '--', '.'); g('clean', '-qfd')
 
   // With a reachable remote, the hook refreshes the stale tracking ref first.
@@ -154,4 +186,4 @@ try {
   g('checkout', '-q', 'main')
   assert.equal(defaultBase(dir), head, 'a fetch moves a stale origin/main before the range is read')
 } finally { rmSync(dir, { recursive: true, force: true }) }
-console.log('CLOSEOUT OK: parser, rule, exemptions, North Star guard, closeout notes and their fold, hook loop guard and CI range')
+console.log('CLOSEOUT OK: parser, rule, exemptions, North Star guard, closeout notes and their fold, the NOW.md cap, hook loop guard and CI range')

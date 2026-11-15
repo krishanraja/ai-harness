@@ -122,10 +122,10 @@
         },
         "approved_sha256": {
           ".claude/hooks/harness-closeout.mjs": [
-            "9d6d1ac460c0d45df9bbc7a10b6cd40badcee45d6fad9ee95d84139726cf8790"
+            "08dfe0930efcb802fb0eeafba2b650b843efa592a9c3370d0122cee6658467ae"
           ],
           ".github/workflows/harness-repository-context.yml": [
-            "682bbc3c51c8a962790a788629b0a51974213c4fc67501714e547a2315955f29"
+            "721b8ca109a5d23ec5796a6145f245d290c61c20aa116593dfab54766b0ce4a1"
           ]
         },
         "settings_scope": "only the Stop entry above; every other setting in .claude/settings.json stays the repository's",
@@ -147,6 +147,15 @@
             "reason": "every session pull request edited NOW.md, which main also rewrote daily, so open pull requests conflicted within a day; sessions now close out with a note in now-notes/ that a new fold job writes into NOW.md on main, the check floor is the work's first commit so merging main never forces a new date, and the fold and the NOW.md audit commit as automation",
             "source": "Ruling (Krish, 2026-10-28): closeout writes a note folded into NOW.md on merge, with regular objective audits of the NOW files; docs/proposals/2026-10-28-prs-merge-themselves.md",
             "verified_by": "scripts/closeout/test-check.mjs (notes, fold on disk, work-began floor, proposal closeout lines), scripts/validate-repository-brain.mjs"
+          },
+          {
+            "date": "2026-11-15",
+            "files": [".claude/hooks/harness-closeout.mjs", ".github/workflows/harness-repository-context.yml"],
+            "from_sha256": ["9d6d1ac460c0d45df9bbc7a10b6cd40badcee45d6fad9ee95d84139726cf8790", "682bbc3c51c8a962790a788629b0a51974213c4fc67501714e547a2315955f29"],
+            "to_sha256": ["08dfe0930efcb802fb0eeafba2b650b843efa592a9c3370d0122cee6658467ae", "721b8ca109a5d23ec5796a6145f245d290c61c20aa116593dfab54766b0ce4a1"],
+            "reason": "the fold had no size limit, so it pushed content-watcher's NOW.md past the 12,000-byte cap its own test enforces, and every pull request there inherited the failure; the fold now takes an optional --now-cap <bytes> (and --history <docs/history/file.md>) and moves the oldest dated status lines to the history file until NOW.md fits, notes or none; with no flag it behaves as before; the workflow changes only because it pins the hook's hash",
+            "source": "Ruling (Krish, 2026-11-15): the closeout fold trims NOW.md to a repository's byte cap itself, moving the oldest dated status lines to its history file",
+            "verified_by": "scripts/closeout/test-check.mjs (the cap: order, equal dates, undated lines kept, over-cap report, history created, path guard, capped fold on disk with no note), content-watcher main's NOW.md folded to 11,916 bytes with its tests/test_layout passing, scripts/validate-repository-brain.mjs"
           }
         ]
       }
@@ -156,11 +165,13 @@
     ".github/workflows/harness-repository-context.yml": [
       "85cc95b38c9680e5ff11de5101610957ad5975be5ec3af2234b6a82a90b3474d",
       "bc3919558a172c48b6cc21ffcb4670bc1b3f9fcf269fb2907dc73cc0c57629c0",
-      "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1"
+      "133f90e02f09484e38d2918a6256335dcca83e3c38503655e6e2e3e5ef5e03a1",
+      "682bbc3c51c8a962790a788629b0a51974213c4fc67501714e547a2315955f29"
     ],
     ".claude/hooks/harness-closeout.mjs": [
       "cfef79641c10db1c154600a3154cd788a971114f946100f24d8225f685eeae68",
-      "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca"
+      "2ab2bc3dbdc247ffe53cf4c7e6ba573ebae4a4aaaca22448ec2418439df878ca",
+      "9d6d1ac460c0d45df9bbc7a10b6cd40badcee45d6fad9ee95d84139726cf8790"
     ]
   }
 }
