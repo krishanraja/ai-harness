@@ -1,7 +1,9 @@
 # Proposal: one branch per pull request, and a weekly sweep in every repository
 
-Status: proposed. The sweep itself is approved and lands with this proposal; the canon sentence below waits on
-Krish's Yes, and nothing in the canon block or the contracts changes until he gives it.
+Status: approved by Krish on 2026-11-15 (his words: "yes to the branch hygiene proposal"). The canon sentence below
+is now in `contract/templates/canon-block.md`, recorded as
+`Ruling (Krish, 2026-11-15): every session works in its own worktree, one branch per pull request, a branch with no pull request after a day gets one or is removed, and every repository runs the weekly branch sweep.`
+The sweep itself was approved earlier the same day and landed with this proposal.
 Source: Krish's approval of 2026-11-15 in a claude.ai/code session ("yes to both": delete every remote branch whose
 work is already on main, now and weekly, never a branch with unmerged work or an open pull request), recorded as
 `Ruling (Krish, 2026-11-15): branches whose work is already on main are deleted now and weekly; branches with unmerged work or open pull requests are kept and listed.`
@@ -25,7 +27,7 @@ or a branch that is the head or base of an open pull request. It runs on the rep
 (contents write, pull requests read) and prints every deletion and every kept branch with its reason to the job log.
 A change to it is made here first, then copied unchanged to every repository.
 
-## The change to the canon (waits on Krish)
+## The change to the canon (approved 2026-11-15)
 
 **The canon block, after "Close out." (one sentence):**
 
