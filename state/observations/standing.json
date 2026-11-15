@@ -3,19 +3,22 @@
     "klass": "freshness",
     "subject": "harness-maintainer",
     "first_seen": "2026-09-08",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:video-engine": {
     "klass": "freshness",
     "subject": "video-engine",
     "first_seen": "2026-09-29",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:krish-design": {
     "klass": "freshness",
     "subject": "krish-design",
     "first_seen": "2026-09-08",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:krish-content-marketer": {
     "klass": "freshness",
@@ -33,7 +36,8 @@
     "klass": "freshness",
     "subject": "tools-access",
     "first_seen": "2026-09-08",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:apify": {
     "klass": "freshness",
@@ -51,19 +55,22 @@
     "klass": "freshness",
     "subject": "instantly-operator",
     "first_seen": "2026-09-08",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:mindmake-os": {
     "klass": "freshness",
     "subject": "mindmake-os",
     "first_seen": "2026-10-14",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:mindmake": {
     "klass": "freshness",
     "subject": "mindmake",
     "first_seen": "2026-10-14",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:decision-ledger": {
     "klass": "freshness",
@@ -262,7 +269,8 @@
     "klass": "freshness",
     "subject": "krish-voice",
     "first_seen": "2026-10-20",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "surface-parity:claude-secondary-cloud": {
     "klass": "surface-parity",
@@ -274,13 +282,15 @@
     "klass": "freshness",
     "subject": "content-corpus",
     "first_seen": "2026-10-29",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:krish-principles": {
     "klass": "freshness",
     "subject": "krish-principles",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:take-the-brief": {
     "klass": "freshness",
@@ -298,19 +308,22 @@
     "klass": "freshness",
     "subject": "verification-loop",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:build-apps-with-krish": {
     "klass": "freshness",
     "subject": "build-apps-with-krish",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:ux-testing-agent": {
     "klass": "freshness",
     "subject": "ux-testing-agent",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:ctrl-compile": {
     "klass": "freshness",
@@ -334,13 +347,15 @@
     "klass": "freshness",
     "subject": "ctrl-capture",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "freshness:ctrl-intake": {
     "klass": "freshness",
     "subject": "ctrl-intake",
     "first_seen": "2026-11-05",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-15"
   },
   "canary-stale:ux-foundations": {
     "klass": "canary-stale",
