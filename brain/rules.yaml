@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 137 rules across the two contracts and the canon block.
+# 138 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1034,6 +1034,14 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: collision-rules.council-judges-a-decision
+    file: contract/skill-routing-contract.md
+    text_sha: "d7c3216944b6"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
   - id: collision-rules.take-the-brief-captures
     file: contract/skill-routing-contract.md
     text_sha: "a44378ff880b"
@@ -1365,7 +1373,7 @@ contract_rules:
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
-# 236 chapters across the installed skills.
+# 242 chapters across the installed skills.
 skill_sections:
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
@@ -1676,6 +1684,60 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: council.role
+    file: skills/council/SKILL.md
+    heading: "Role"
+    text_sha: "c04f782112e9"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
+  - id: council.when-it-runs
+    file: skills/council/SKILL.md
+    heading: "When it runs"
+    text_sha: "a7ec474cf0ae"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
+  - id: council.when-it-does-not
+    file: skills/council/SKILL.md
+    heading: "When it does not run"
+    text_sha: "ee0d7d8eb727"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
+  - id: council.inputs
+    file: skills/council/SKILL.md
+    heading: "Inputs"
+    text_sha: "fd547028d713"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
+  - id: council.run-it
+    file: skills/council/SKILL.md
+    heading: "Run it"
+    text_sha: "509dfc32bfdc"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
+    status: live
+  - id: council.stop
+    file: skills/council/SKILL.md
+    heading: "Stop"
+    text_sha: "d3b403c245da"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-council.md"
     status: live
   - id: ctrl-build.read-both-references
     file: skills/ctrl-build/SKILL.md

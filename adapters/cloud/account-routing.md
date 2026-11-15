@@ -6,7 +6,7 @@ krish-principles carries my profile and verbatim ikigai. My purpose: "I see what
 Apply krish-principles to substantive work. Before material execution load strategy-brief; after execution or correction use verification-loop and observable evidence. take-the-brief runs only for an explicit interview or ambiguous high-stakes ownership transfer.
 
 Use the narrowest owner:
-- Research: evidence-research. Final decisions: decision-ledger.
+- Research: evidence-research. Final decisions: decision-ledger. A council read, only when I ask for the council or name one of its seats: council.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
 - Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice.
 - Visuals: krish-design; its delegated search: design-intelligence-search. UX standards: ux-foundations. App QA: ux-testing-agent.

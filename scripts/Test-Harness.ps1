@@ -444,11 +444,15 @@ $lockedRevisionTriggerCases = Join-Path $Root 'evals\locked-revision-trigger-cas
 $lockedRevisionBehaviorCases = Join-Path $Root 'evals\locked-revision-behavior-cases.jsonl'
 $videoEngineTriggerCases = Join-Path $Root 'evals\video-engine-trigger-cases.jsonl'
 $videoEngineBehaviorCases = Join-Path $Root 'evals\video-engine-behavior-cases.jsonl'
+$councilTriggerCases = Join-Path $Root 'evals\council-trigger-cases.jsonl'
+$councilBehaviorCases = Join-Path $Root 'evals\council-behavior-cases.jsonl'
 $designIntelligenceTests = Join-Path $Root 'skills\design-intelligence-search\scripts\tests'
 $designIntelligenceVendorRoot = Join-Path $Root 'skills\design-intelligence-search\scripts\vendor\ui-ux-pro-max'
 $designIntelligenceMetadata = Join-Path $Root 'skills\design-intelligence-search\agents\openai.yaml'
 $apifyHelperTests = Join-Path $Root 'skills\apify\tests'
 $lockedRevisionTests = Join-Path $Root 'skills\locked-revision\tests'
+$councilTests = Join-Path $Root 'skills\council\scripts\tests'
+$councilValidator = Join-Path $Root 'skills\council\scripts\validate.py'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -631,6 +635,11 @@ $apifyBehaviors = @(Read-JsonLines -Path $apifyBehaviorCases)
 Test-EvalCategoryMinimums -Records $apifyTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'apify trigger suite'
 Test-EvalCategoryMinimums -Records $apifyBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'apify behavior suite'
 
+$councilTriggers = @(Read-JsonLines -Path $councilTriggerCases)
+$councilBehaviors = @(Read-JsonLines -Path $councilBehaviorCases)
+Test-EvalCategoryMinimums -Records $councilTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'council trigger suite'
+Test-EvalCategoryMinimums -Records $councilBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'council behavior suite'
+
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
     @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },
@@ -731,6 +740,37 @@ else {
     }
     if ($lockedRevisionTestExitCode -ne 0) {
         Add-Failure "locked-revision offline tests failed: $($lockedRevisionTestOutput -join ' | ')"
+    }
+}
+
+# The council was admitted on 2026-11-15 (Ruling, Krish, 2026-11-15: admit the
+# council as a production skill). Its gate ran here as a candidate's; admission
+# moves the skill, not the gate, so the same tests and validator keep running.
+# Without a control-center checkout beside this one the validator says the
+# byte comparison was skipped; it never claims a match it did not make.
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the council offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $councilTests -PathType Container) -or -not (Test-Path -LiteralPath $councilValidator -PathType Leaf)) {
+    Add-Failure "Missing council tests or validator: $councilTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $councilTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $councilTests -p 'test_*.py' 2>&1)
+        $councilTestExitCode = $LASTEXITCODE
+        $councilValidationOutput = @(& $pythonCommand.Source -B $councilValidator --base auto 2>&1)
+        $councilValidationExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($councilTestExitCode -ne 0) {
+        Add-Failure "council offline tests failed: $($councilTestOutput -join ' | ')"
+    }
+    if ($councilValidationExitCode -ne 0) {
+        Add-Failure "council validation failed: $($councilValidationOutput -join ' | ')"
     }
 }
 
