@@ -1,15 +1,19 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-11-14T08:36:48.728Z",
+    "last_run": "2026-11-15T07:40:36.590Z",
     "status": "blocked",
-    "release": "v2026.11.13.2",
-    "reason": "canary-failed",
+    "release": "v2026.11.14.5",
+    "reason": "install-halted",
     "failing_since": "2026-11-14T08:36:48.728Z",
-    "failing_runs": 1,
+    "failing_runs": 2,
     "reasons": [
       {
         "reason": "canary-failed",
         "since": "2026-11-14T08:36:48.728Z"
+      },
+      {
+        "reason": "install-halted",
+        "since": "2026-11-15T07:40:36.590Z"
       }
     ],
     "outages": [
