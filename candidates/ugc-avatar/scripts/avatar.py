@@ -1,25 +1,42 @@
 #!/usr/bin/env python3
-"""ugc-avatar's roller and generation gate. Nothing here generates, uploads, posts or spends.
+"""ugc-avatar's roller and gates. Nothing here generates, uploads, posts or spends.
 
-  python scripts/avatar.py roll SCRIPT.json --workspace DIR [--new] [--seed N]
-      Pick an AI person's look from the script and keep it in the workspace's history.
+  python scripts/avatar.py roll SCRIPT.json --workspace DIR --approval USE.json [--new] [--seed N]
+      Pick an AI person's look from the script and keep it in the workspace's history. Needs Krish's
+      first yes: an AI person in this named piece.
   python scripts/avatar.py digest QUOTE.json
       The SHA-256 of a quote, the value Krish's yes and the credit reservation must both name.
-  python scripts/avatar.py gate LOOK.json QUOTE.json [--reservation R.json] [--approval A.json]
-      Is one generation ready to run? Exit 0 only when every condition holds. It still runs nothing.
+  python scripts/avatar.py gate LOOK.json QUOTE.json --use USE.json [--reservation R.json] [--approval A.json]
+      Is one paid step ready to run? Exit 0 only when every condition holds. It still runs nothing.
+  python scripts/avatar.py release FILE --use USE.json --verdict VERDICT.json --approval RELEASE.json
+      May the finished file go to the venture's go-live? Needs the judge's pass and Krish's second yes,
+      both on this exact file. It still posts nothing.
+
+Krish ruled on 2026-11-15 that AI people may be used anywhere, with his explicit yes before one is used
+and again on the finished file before it goes out, and with no AI label anywhere
+(references/approval-and-consent.md).
 
 A script file is one JSON object:
 
-  {"venture": "<venture>", "script_id": "<id>", "persona": "<persona id>",
-   "disclosure": "<the words that label this person as AI>",
+  {"venture": "<venture>", "piece": "<piece id>", "script_id": "<id>", "persona": "<persona id>",
    "speaker": {"role": "<what they do in the video>", "age_min": 25, "age_max": 40,
                "setting": "home|outdoor|work", "register": "casual|work|outdoor",
-               "presentation": "woman|man|person (optional)", "likeness_of": "(never filled today)"},
+               "presentation": "woman|man|person (optional)",
+               "likeness_of": "(only with consent_id)", "consent_id": "(their recorded consent)"},
    "lines": ["<what they say>", ...]}
 
-The roller refuses a minimum or maximum age under 18, words that describe a child, a role that
-makes the person a customer, buyer, reviewer or testimonial, a credential such as a vet, a real
-person's likeness, a missing disclosure, a venture whose rules do not allow AI people, and a
+A yes from Krish is one JSON object:
+
+  first yes:   {"by": "Krish", "stage": "use", "venture": "<venture>", "piece": "<piece id>", "words": "<his words>"}
+  on a quote:  {"by": "Krish", "quote_sha256": "<digest>", "words": "<his words>"}
+  second yes:  {"by": "Krish", "stage": "release", "piece": "<piece id>", "asset_sha256": "<file sha256>",
+                "words": "<his words>"}
+
+The judge's verdict: {"asset_sha256": "<file sha256>", "passed": true, "reviewer": "<who>", "maker": "<who made it>"}.
+
+The roller refuses a roll with no first yes for the piece, a minimum or maximum age under 18, words that
+describe a child, a role or line that makes the person a customer, buyer, reviewer or testimonial, a
+credential such as a vet, a real person's likeness without their recorded consent, an AI label, and a
 workspace git would commit.
 """
 import argparse
@@ -39,17 +56,18 @@ SKILL = SCRIPTS.parent
 REPO = SKILL.parent.parent
 REFS = SKILL / 'references'
 LOOKS = REFS / 'looks.json'
-RULES = REFS / 'venture-rules.json'
-CONSENT = REFS / 'disclosure-and-consent.md'
+RULE = REFS / 'approval-and-consent.md'
 HISTORY = pathlib.Path('ugc-avatar') / 'history.jsonl'
 EM_DASH = chr(0x2014)
 ATTRIBUTES = ('presentation', 'hair', 'skin', 'wardrobe', 'setting', 'framing', 'light')
+LABEL_FIELDS = ('disclosure', 'label', 'ai_label')
+NO_LABEL = 'Krish ruled no AI label anywhere, at any point (Ruling, Krish, 2026-11-15)'
 TRIES = 500
 
 # Names and credit phrases Krish ruled out of the OS on 2026-11-15, kept only as SHA-256 digests of the
 # phrase lowercased with everything but letters and digits removed, so this file names nothing it guards
-# against. The council candidate holds the first copy (candidates/council/scripts/council.py); the gate
-# fails when the two sets differ, so they stay one list.
+# against. The council holds the first copy (skills/council/scripts/council.py); the gate fails when the
+# two sets differ, so they stay one list.
 WINDOW = 5
 DENIED_DIGESTS = frozenset({
     '9b6e83594613cf9d47fd5bc3445ca5290f778ccb8ea7c6f0f38ff6bf8b026e41',
@@ -85,7 +103,7 @@ DENIED_DIGESTS = frozenset({
 
 
 class Refused(ValueError):
-    """A request the roller or the gate will not carry out, with every reason."""
+    """A request the roller or a gate will not carry out, with every reason."""
 
     def __init__(self, reasons):
         self.reasons = list(reasons)
@@ -140,28 +158,49 @@ def digest(quote):
     return hashlib.sha256(canonical(quote).encode('utf-8')).hexdigest()
 
 
-def consent_status(path=CONSENT):
-    """The first Status line of the disclosure and consent rule: 'approved', 'draft' or 'missing'."""
+def file_digest(path):
+    return hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
+
+
+def rule_status(path=RULE):
+    """The first Status line of the approval and consent rule: 'approved', 'draft' or 'missing'."""
     if not pathlib.Path(path).is_file():
         return 'missing'
     match = re.search(r'(?m)^Status:\s*(\w+)', pathlib.Path(path).read_text(encoding='utf-8'))
     return match.group(1).lower() if match else 'missing'
 
 
-def venture_allows(venture, rules):
-    entry = (rules.get('ventures') or {}).get(venture)
-    if not isinstance(entry, dict):
-        return False, f'no rule is on record for the venture {venture!r}; only Krish adds one'
-    if entry.get('allows_ai_people') is not True:
-        return False, f'{venture} does not allow AI people ({entry.get("source", "no source")})'
-    return True, ''
+def has_words(approval):
+    return isinstance(approval.get('words'), str) and bool(approval['words'].strip())
 
 
-def disclosure_problem(text):
-    if not isinstance(text, str) or not text.strip():
-        return 'every AI person needs a disclosure: the words that label them as AI where they are shown'
-    if not re.search(r'\bAI\b|artificial intelligence', text):
-        return 'the disclosure must say the person is AI, in those words'
+def use_problems(use, venture, piece):
+    """Every reason Krish's first yes does not cover an AI person in this venture's named piece."""
+    if not isinstance(use, dict):
+        return ['no first yes from Krish: ask him before an AI person is used in this piece, and record his words']
+    reasons = []
+    if use.get('by') != 'Krish':
+        reasons.append('the first yes is not Krish\'s')
+    if use.get('stage') != 'use':
+        reasons.append('the first yes must be his yes to using an AI person (stage "use")')
+    if not isinstance(piece, str) or not piece.strip():
+        reasons.append('the work names no piece, so no yes can cover it')
+    elif use.get('piece') != piece:
+        reasons.append(f'Krish\'s first yes is for another piece ({use.get("piece")!r}, not {piece!r}); a yes covers one piece')
+    if use.get('venture') != venture:
+        reasons.append(f'Krish\'s first yes is for another venture ({use.get("venture")!r}, not {venture!r})')
+    if not has_words(use):
+        reasons.append('the first yes needs Krish\'s own words')
+    return reasons
+
+
+def label_problem(script):
+    """An AI label anywhere in the script, which Krish ruled out."""
+    speaker = script.get('speaker') if isinstance(script.get('speaker'), dict) else {}
+    for where in (script, speaker):
+        for field in LABEL_FIELDS:
+            if where.get(field):
+                return f'{NO_LABEL}; take {field} out of the script'
     return ''
 
 
@@ -224,25 +263,22 @@ def append_history(workspace, record):
 # ---------------------------------------------------------------- the roller
 
 
-def script_refusals(script, looks, rules):
+def script_refusals(script, looks, use=None):
     reasons = []
     if not isinstance(script, dict):
         return ['the script must be a JSON object']
-    for field in ('venture', 'script_id', 'persona'):
+    for field in ('venture', 'piece', 'script_id', 'persona'):
         if not isinstance(script.get(field), str) or not script[field].strip():
             reasons.append(f'the script needs {field}')
     speaker = script.get('speaker')
     if not isinstance(speaker, dict):
         return reasons + ['the script needs a speaker']
-    if isinstance(script.get('venture'), str):
-        ok, why = venture_allows(script['venture'], rules)
-        if not ok:
-            reasons.append(why)
-    why = disclosure_problem(script.get('disclosure'))
+    reasons += use_problems(use, script.get('venture'), script.get('piece'))
+    why = label_problem(script)
     if why:
         reasons.append(why)
-    if speaker.get('likeness_of'):
-        reasons.append('a real person\'s likeness needs their recorded consent, and no consent rule is approved yet')
+    if speaker.get('likeness_of') and not (isinstance(speaker.get('consent_id'), str) and speaker['consent_id'].strip()):
+        reasons.append('a real person\'s likeness needs their recorded consent: give its id as consent_id')
     described = ' '.join(str(speaker.get(k, '')) for k in ('role', 'presentation', 'look')) + ' ' + ' '.join(
         str(line) for line in script.get('lines') or [])
     youth = has_phrase(described, looks['youth_words'])
@@ -272,11 +308,10 @@ def combination(attributes):
     return tuple(attributes[k] for k in ('presentation', 'hair', 'skin', 'wardrobe', 'setting'))
 
 
-def roll(script, workspace, looks=None, rules=None, new=False, seed=None, today=None):
+def roll(script, workspace, use=None, looks=None, new=False, seed=None, today=None):
     """Pick a look for the script's speaker, keep it in the workspace history, and return it."""
     looks = load(LOOKS) if looks is None else looks
-    rules = load(RULES) if rules is None else rules
-    reasons = script_refusals(script, looks, rules)
+    reasons = script_refusals(script, looks, use)
     where = workspace_problem(workspace)
     if where:
         reasons.append(where)
@@ -286,7 +321,7 @@ def roll(script, workspace, looks=None, rules=None, new=False, seed=None, today=
     if not new:
         for earlier in reversed(history):
             if earlier.get('persona') == script['persona']:
-                return dict(earlier, reused=True, script_id=script['script_id'])
+                return dict(earlier, reused=True, script_id=script['script_id'], piece=script['piece'])
     speaker, pools = script['speaker'], looks['pools']
     low, high = age_bounds(speaker, looks)
     used = {combination(h['attributes']) for h in history if isinstance(h.get('attributes'), dict)}
@@ -314,32 +349,31 @@ def roll(script, workspace, looks=None, rules=None, new=False, seed=None, today=
     record = {
         'look_id': hashlib.sha256(canonical({'venture': script['venture'], 'persona': script['persona'],
                                              'age': age, 'attributes': attributes}).encode()).hexdigest()[:16],
-        'venture': script['venture'], 'persona': script['persona'], 'script_id': script['script_id'],
-        'rolled_on': (today or datetime.date.today()).isoformat(), 'age': age, 'attributes': attributes,
-        'disclosure': script['disclosure'], 'prompt': prompt, 'reused': False,
+        'venture': script['venture'], 'piece': script['piece'], 'persona': script['persona'],
+        'script_id': script['script_id'], 'rolled_on': (today or datetime.date.today()).isoformat(), 'age': age,
+        'attributes': attributes, 'prompt': prompt, 'reused': False,
     }
+    if speaker.get('likeness_of'):
+        record['likeness_of'] = speaker['likeness_of']
+        record['consent_id'] = speaker['consent_id']
     append_history(workspace, record)
     return record
 
 
-# ---------------------------------------------------------------- the generation gate
+# ---------------------------------------------------------------- the paid-step gate
 
 
-def gate(look, quote, reservation=None, approval=None, rules=None, consent=None):
-    """Every reason one generation may not run. An empty list means ready; this function still runs nothing."""
-    rules = load(RULES) if rules is None else rules
-    consent = consent_status() if consent is None else consent
+def gate(look, quote, use=None, reservation=None, approval=None, rule=None):
+    """Every reason one paid step may not run. An empty list means ready; this function still runs nothing."""
+    rule = rule_status() if rule is None else rule
     reasons = []
     if not isinstance(look, dict) or not isinstance(quote, dict):
         return ['the look and the quote must be JSON objects']
-    ok, why = venture_allows(look.get('venture'), rules)
-    if not ok:
-        reasons.append(why)
-    if consent != 'approved':
-        reasons.append(f'the disclosure and consent rule is {consent}, not approved by Krish')
-    why = disclosure_problem(look.get('disclosure'))
-    if why:
-        reasons.append(why)
+    if rule != 'approved':
+        reasons.append(f'the approval and consent rule is {rule}, not approved by Krish')
+    reasons += use_problems(use, look.get('venture'), look.get('piece'))
+    if any(look.get(field) for field in LABEL_FIELDS):
+        reasons.append(f'{NO_LABEL}; roll the look again without one')
     age = look.get('age')
     if isinstance(age, bool) or not isinstance(age, int) or age < 18:
         reasons.append('the look has no adult age; roll it again')
@@ -365,17 +399,56 @@ def gate(look, quote, reservation=None, approval=None, rules=None, consent=None)
             reasons.append('the approval is not Krish\'s')
         if approval.get('quote_sha256') != want:
             reasons.append('Krish\'s yes is on a different quote')
-        if not isinstance(approval.get('words'), str) or not approval['words'].strip():
+        if not has_words(approval):
             reasons.append('the approval needs Krish\'s own words')
     return reasons
 
 
+# ---------------------------------------------------------------- the release gate
+
+
+def release(asset_sha256, piece, venture, use=None, verdict=None, approval=None, rule=None):
+    """Every reason the finished file may not go out. An empty list means ready; this function posts nothing."""
+    rule = rule_status() if rule is None else rule
+    reasons = []
+    if rule != 'approved':
+        reasons.append(f'the approval and consent rule is {rule}, not approved by Krish')
+    reasons += use_problems(use, venture, piece)
+    if not isinstance(verdict, dict):
+        reasons.append('no verdict from the independent judge on this file')
+    else:
+        if verdict.get('passed') is not True:
+            reasons.append('the independent judge did not pass this file; it is held with the judge\'s reason')
+        if verdict.get('asset_sha256') != asset_sha256:
+            reasons.append('the judge\'s verdict is on a different file')
+        reviewer, maker = verdict.get('reviewer'), verdict.get('maker')
+        if not isinstance(reviewer, str) or not reviewer.strip() or not isinstance(maker, str) or not maker.strip():
+            reasons.append('the verdict must name its reviewer and the file\'s maker')
+        elif reviewer.strip() == maker.strip():
+            reasons.append('the judge must be someone other than the file\'s maker')
+    if not isinstance(approval, dict):
+        reasons.append('no second yes from Krish: he says yes to the finished file, to his 10/10 bar, before it goes out')
+    else:
+        if approval.get('by') != 'Krish':
+            reasons.append('the second yes is not Krish\'s')
+        if approval.get('stage') != 'release':
+            reasons.append('the second yes must be his yes to the finished file (stage "release")')
+        if approval.get('piece') != piece:
+            reasons.append('Krish\'s second yes is for another piece')
+        if approval.get('asset_sha256') != asset_sha256:
+            reasons.append('Krish\'s second yes is on a different file; an edited file needs a new yes')
+        if not has_words(approval):
+            reasons.append('the second yes needs Krish\'s own words')
+    return reasons
+
+
 def main(cli_args=None):
-    cli = argparse.ArgumentParser(description='ugc-avatar: roll a look or check a generation is ready. It generates nothing.')
+    cli = argparse.ArgumentParser(description='ugc-avatar: roll a look, or check a paid step or a release is ready. It generates and posts nothing.')
     sub = cli.add_subparsers(dest='cmd', required=True)
     r = sub.add_parser('roll')
     r.add_argument('script')
     r.add_argument('--workspace', required=True)
+    r.add_argument('--approval', help='Krish\'s first yes for this piece')
     r.add_argument('--new', action='store_true', help='a new look even when the persona has one')
     r.add_argument('--seed', type=int)
     d = sub.add_parser('digest')
@@ -383,19 +456,35 @@ def main(cli_args=None):
     g = sub.add_parser('gate')
     g.add_argument('look')
     g.add_argument('quote')
+    g.add_argument('--use', help='Krish\'s first yes for this piece')
     g.add_argument('--reservation')
-    g.add_argument('--approval')
+    g.add_argument('--approval', help='Krish\'s yes on this exact quote')
+    o = sub.add_parser('release')
+    o.add_argument('file')
+    o.add_argument('--use', help='Krish\'s first yes for this piece')
+    o.add_argument('--verdict', help='the independent judge\'s verdict on this file')
+    o.add_argument('--approval', help='Krish\'s second yes, on this exact file')
     args = cli.parse_args(cli_args)
     try:
         if args.cmd == 'roll':
-            print(json.dumps(roll(load(args.script), args.workspace, new=args.new, seed=args.seed), indent=2))
+            use = load(args.approval) if args.approval else None
+            print(json.dumps(roll(load(args.script), args.workspace, use=use, new=args.new, seed=args.seed), indent=2))
             return 0
         if args.cmd == 'digest':
             print(digest(load(args.quote)))
             return 0
-        reasons = gate(load(args.look), load(args.quote),
-                       load(args.reservation) if args.reservation else None,
-                       load(args.approval) if args.approval else None)
+        use = load(args.use) if args.use else None
+        if args.cmd == 'gate':
+            reasons = gate(load(args.look), load(args.quote), use,
+                           load(args.reservation) if args.reservation else None,
+                           load(args.approval) if args.approval else None)
+            ready = 'READY: every condition holds. This check runs nothing; the generation is a separate, approved step.'
+        else:
+            second = load(args.approval) if args.approval else None
+            named = use if isinstance(use, dict) else second if isinstance(second, dict) else {}
+            reasons = release(file_digest(args.file), named.get('piece'), named.get('venture'), use,
+                              load(args.verdict) if args.verdict else None, second)
+            ready = 'READY: both of Krish\'s yeses and the judge\'s pass are on this file. Going live is the venture\'s own step.'
     except Refused as exc:
         print('REFUSED', file=sys.stderr)
         print('\n'.join(f'- {reason}' for reason in exc.reasons), file=sys.stderr)
@@ -404,10 +493,10 @@ def main(cli_args=None):
         print(f'REFUSED\n- cannot read an input: {exc}', file=sys.stderr)
         return 1
     if reasons:
-        print('NOT READY: nothing may be generated', file=sys.stderr)
+        print('NOT READY: nothing may run or go out', file=sys.stderr)
         print('\n'.join(f'- {reason}' for reason in reasons), file=sys.stderr)
         return 1
-    print('READY: every condition holds. This check runs nothing; the generation is a separate, approved step.')
+    print(ready)
     return 0
 
 

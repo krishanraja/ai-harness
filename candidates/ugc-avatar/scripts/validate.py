@@ -10,12 +10,11 @@ It checks that:
   - no file in the skill, its candidate record, its evals or its proposal names an outside source or
     carries an em dash, and no file in the skill links out;
   - the look pools can draw no age under 18 and no word that describes a child;
-  - every venture rule names its source, and one that allows AI people cites Krish's ruling;
-  - the disclosure and consent rule says whether Krish has approved it;
+  - the approval and consent rule says draft or approved, and an approved rule cites Krish's ruling;
   - no roll history sits in the skill: history lives only in a venture engine's ignored workspace;
-  - the set of denied names matches the council candidate's, when that candidate is present;
-  - the candidate record says activation false, release_eligible false, asks for no surface, and stays
-    outside admission while no venture allows AI people;
+  - the set of denied names matches the council's, when the council is present;
+  - a candidate record, while there is one, says activation false, release_eligible false and asks for
+    no surface;
   - the eval suites meet their minimums and are held out: no case shares an eight-word run with any
     file in the skill.
 
@@ -140,33 +139,16 @@ def check_looks(skill, errors):
                 errors.append(f'looks.json pool {name} holds {value!r}, which describes a child')
 
 
-def check_rules(skill, errors):
-    try:
-        rules = json.loads((skill / 'references' / 'venture-rules.json').read_text(encoding='utf-8'))
-    except (OSError, json.JSONDecodeError) as exc:
-        errors.append(f'cannot read references/venture-rules.json: {exc}')
-        return None
-    ventures = rules.get('ventures')
-    if not isinstance(ventures, dict) or not ventures:
-        errors.append('venture-rules.json lists no ventures')
-        return None
-    for name, entry in ventures.items():
-        if not isinstance(entry, dict) or not isinstance(entry.get('allows_ai_people'), bool):
-            errors.append(f'venture-rules.json {name}: allows_ai_people must be true or false')
-            continue
-        if not isinstance(entry.get('source'), str) or not entry['source'].strip():
-            errors.append(f'venture-rules.json {name}: needs the source of its rule')
-        if entry['allows_ai_people'] and not re.search(r'Ruling \(Krish, \d{4}-\d{2}-\d{2}\)', str(entry.get('ruling', ''))):
-            errors.append(f'venture-rules.json {name}: allowing AI people needs Krish\'s ruling, cited as Ruling (Krish, YYYY-MM-DD)')
-    return ventures
-
-
-def check_consent(skill, errors, notes):
-    status = A.consent_status(skill / 'references' / 'disclosure-and-consent.md')
+def check_rule(skill, errors, notes):
+    path = skill / 'references' / 'approval-and-consent.md'
+    status = A.rule_status(path)
     if status not in ('draft', 'approved'):
-        errors.append('references/disclosure-and-consent.md needs a Status line: draft or approved')
-    else:
-        notes.append(f'disclosure and consent rule: {status}')
+        errors.append('references/approval-and-consent.md needs a Status line: draft or approved')
+        return
+    if status == 'approved' and not re.search(r'Ruling \(Krish, \d{4}-\d{2}-\d{2}\)', path.read_text(encoding='utf-8')):
+        errors.append('references/approval-and-consent.md says approved but cites no Ruling (Krish, YYYY-MM-DD)')
+        return
+    notes.append(f'approval and consent rule: {status}')
 
 
 def council_digests(repo):
@@ -184,7 +166,7 @@ def council_digests(repo):
 def check_denied_set(repo, errors, notes):
     where, theirs = council_digests(repo)
     if where is None:
-        notes.append('council candidate not present: the denied-name set was not compared')
+        notes.append('council not present: the denied-name set was not compared')
     elif theirs is None:
         errors.append(f'{where} has no DENIED_DIGESTS set to compare with')
     elif theirs != A.DENIED_DIGESTS:
@@ -236,14 +218,11 @@ def check_evals(repo, skill_text, errors, notes):
         notes.append(f'held out: {sum(len(r) for r in suites.values())} cases share no eight-word run with the skill')
 
 
-def check_record(repo, ventures, errors):
+def check_record(repo, errors):
     path = repo / 'state' / 'candidates' / f'{NAME}.yaml'
     if not path.is_file():
         return
     text = path.read_text(encoding='utf-8')
-    allowed = sorted(name for name, entry in (ventures or {}).items() if isinstance(entry, dict) and entry.get('allows_ai_people') is True)
-    if not allowed and not re.search(r'(?m)^outside_admission:\s*true\s*$', text):
-        errors.append(f'state/candidates/{NAME}.yaml must say outside_admission: true while no venture allows AI people')
     for line in ('activation: false', 'release_eligible: false'):
         if not re.search(r'(?m)^' + re.escape(line) + r'\s*$', text):
             errors.append(f'state/candidates/{NAME}.yaml must say {line}')
@@ -263,10 +242,9 @@ def run(skill=A.SKILL, repo=A.REPO):
         check_text(path, False, errors)
     check_no_history(skill, companions, errors)
     check_looks(skill, errors)
-    ventures = check_rules(skill, errors)
-    check_consent(skill, errors, notes)
+    check_rule(skill, errors, notes)
     check_denied_set(repo, errors, notes)
-    check_record(repo, ventures, errors)
+    check_record(repo, errors)
     check_evals(repo, skill_text, errors, notes)
     notes.append(f'scanned {len(skill_files(skill))} skill files and {len(companions)} companion files')
     return errors, notes

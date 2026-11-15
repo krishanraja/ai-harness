@@ -8,24 +8,14 @@ skill_path: candidates/ugc-avatar
 admission_path: skills/ugc-avatar
 proposal: docs/proposals/2026-11-15-ugc-avatar.md
 role: planner-and-gate
-outside_admission: true
-outside_admission_until: a venture's own rules allow AI people, by Krish's ruling, and Krish approves references/disclosure-and-consent.md
-venture_rules_checked: 2026-11-15
-venture_rules:
-  heartside: no (growth-heartside AGENTS.md rule 4 forbids AI customers)
-  fulltime: no (growth-fulltime HANDOVER-2026-10-27-CREATIVES.md, video rejected for artificial faces and lip sync)
-  makeyourmindup: no rule allows one
-  mindmake: no rule allows one
-  legibility: no rule allows one
-disclosure_and_consent_rule: draft
+ruling: "Ruling (Krish, 2026-11-15): AI people may be used anywhere, with his explicit yes before one is used and again on the finished asset before it goes out; no AI labels anywhere."
+approval_and_consent_rule: approved
 evaluation:
   trigger_cases: evals/candidates/ugc-avatar-trigger-cases.jsonl
   behavior_cases: evals/candidates/ugc-avatar-behavior-cases.jsonl
 activation: false
 release_eligible: false
 admission_gates:
-  - a-venture-rule-allows-ai-people
-  - disclosure-and-consent-rule-approved
   - full-harness-validation
   - held-out-trigger-evaluation
   - held-out-behavior-evaluation

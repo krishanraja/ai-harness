@@ -1,41 +1,39 @@
 # UGC avatar candidate, 2026-11-15
 
+Status: ruled on by Krish on 2026-11-15. His words: "happy to use everywhere with my explicit approval before deciding to use it, and then my explicit approval before it goes out to ensure 10/10 quality. No need for AI labels anywhere, at any point." Recorded as `Ruling (Krish, 2026-11-15): AI people may be used anywhere, with his explicit yes before one is used and again on the finished asset before it goes out; no AI labels anywhere.` The draft disclosure and consent rule is replaced by the approved approval and consent rule, and the venture gate is gone. Admission follows in its own change.
+
 ## Finding and correct layer
 
-Short videos in which an ordinary-looking person talks to a phone camera are a common way to sell on social platforms, and the tools to generate such a person, their voice and their lip sync now exist and are paid for. Sooner or later a session will be asked for one. Without a written rule, that session decides on its own how old the person may look, whether they may pose as a customer, whether the video says it is AI, and whether a quote needs Krish's yes before credits go. Each of those is a correction Krish would have to give, possibly more than once and possibly after something went public.
+Short videos in which an ordinary-looking person talks to a phone camera are a common way to sell on social platforms, and the tools to generate such a person, their voice and their lip sync now exist and are paid for. Without a written rule, a session asked for one decides on its own how old the person may look, whether they may pose as a customer, whether Krish sees it before it is made and before it goes out, and whether a quote needs his yes before credits go. Each of those is a correction Krish would have to give, possibly more than once and possibly after something went public.
 
-Today no venture's rules allow an AI person:
+The first draft held the skill outside admission until a venture's own rules allowed AI people, and asked every AI person to carry an AI label. Krish ruled both out on 2026-11-15: any venture may use one, each use takes his two yeses, and no AI label goes anywhere.
 
-- Heartside: growth-heartside `AGENTS.md`, rule 4, lets AI make dogs and rooms but never AI customers holding or reviewing the product.
-- Full Time: growth-fulltime `HANDOVER-2026-10-27-CREATIVES.md` records the pundit video rejected for artificial faces, lip sync and excessive smiles.
-- Make Your Mind Up, Mindmake and Legibility: no rule allows one.
+So the correct layer is one narrow planner and gate: the rules exist and are approved before the first request, rather than invented during it. It is a planner and a gate, never a generator.
 
-So the correct layer is a candidate that is written, tested and kept out of admission: the rules exist and are approved before the first request, rather than invented during it. It is staged under `candidates/ugc-avatar/`, outside the release builder, and its record says `outside_admission: true`. It is a planner and a gate, never a generator.
-
-This moves the first part of the North Star: the age floor, the never-a-customer rule, the disclosure and the yes-before-spend are each learned once, in one place, before anyone has had to correct them.
+This moves the first part of the North Star: the two yeses, the age floor, the never-a-customer rule and the yes-before-spend are each learned once, in one place, before anyone has had to correct them.
 
 ## What the candidate is
 
-- `SKILL.md`: the role, when it runs (only for a venture whose rules allow AI people), the routes it hands to, and the stop conditions.
-- `references/pipeline.md`: the talking pipeline as written steps only. The venture's rule and the consent rule first; one designed voice per persona; one look per persona; the script through `check_voice` and the venture's claims gate; a still before any video; every paid step quoted, reserved and approved by Krish on its exact quote before it runs; an independent judge on contact sheets (passes for a real person on a phone, mouth in sync, disclosure present), bound to the file's SHA-256; then the venture's own review and go-live.
-- `references/disclosure-and-consent.md`: the disclosure and consent rule, `Status: draft`, for Krish to approve before first use.
+- `SKILL.md`: the role, when it runs, the routes it hands to, and the stop conditions.
+- `references/approval-and-consent.md`: the approved rule. Krish's two yeses, each with his words: before an AI person is used in a named piece, and on the finished file before it goes out, to his 10/10 bar. No AI label anywhere, at any point. What stays, each with its reason: never a customer, buyer, reviewer or testimonial (US rules ban fake reviews and testimonials, AI-generated ones included); never a real person's likeness without their recorded consent; adults only, 18 or over; no generation without a credit reservation and his yes on the quote; and no AI person playing a credentialed expert giving advice.
+- `references/pipeline.md`: the talking pipeline as written steps only. Krish's first yes and the approved rule first; one designed voice per persona; one look per persona; the script through `check_voice` and the venture's claims gate; a still before any video; every paid step quoted, reserved and approved by Krish on its exact quote before it runs; an independent judge on contact sheets (passes for a real person on a phone, mouth in sync, nothing that makes the person a customer or an expert), bound to the file's SHA-256; Krish's second yes on that file; then the venture's own go-live.
 - `references/looks.json`: the pools the roller draws from, with an 18 floor and the words it refuses (children, customers, credentials).
-- `references/venture-rules.json`: each venture's rule on AI people and where it lives. Only Krish changes an entry, and an entry that allows one must cite his ruling.
 - `scripts/avatar.py`:
-  - `roll`: picks a look from the script (setting and clothes by the script's scene and register, age inside the script's bounds), keeps each persona's look, never repeats an earlier look, and writes the history only into the venture's workspace, refusing a workspace git would commit. It refuses an age bound under 18 (never quietly raising it), words that describe a child, a customer, buyer, reviewer or testimonial, a credentialed expert, a real person's likeness, a missing or vague disclosure, and any venture whose rules do not allow AI people.
-  - `gate`: says whether one paid step may run. It needs the venture's rule, the approved consent rule, a disclosure that says AI, an adult age, a credit reservation for that exact quote covering its credits, and Krish's yes, in his words, on that exact quote. It runs nothing either way.
+  - `roll`: picks a look from the script, keeps each persona's look across pieces, never repeats an earlier look, and writes the history only into the venture's workspace, refusing a workspace git would commit. It refuses a roll without Krish's first yes for that venture's named piece, an age bound under 18 (never quietly raising it), words that describe a child, a customer, buyer, reviewer or testimonial, a credentialed expert, a real person's likeness without a consent id, and an AI label.
+  - `gate`: says whether one paid step may run. It needs the approved rule, the first yes, an adult age, no label, a credit reservation for that exact quote covering its credits, and Krish's yes, in his words, on that exact quote. It runs nothing either way.
+  - `release`: says whether the finished file may go to the venture's go-live. It reads the file's SHA-256 itself and needs the first yes, the independent judge's pass on that file from someone other than its maker, and Krish's second yes, in his words, on that file. Any edit after his yes needs a new one. It posts nothing.
   - `digest`: the quote digest his yes and the reservation must both name.
-- `scripts/validate.py` and `scripts/tests/`: the gate the harness runner calls. Beyond the usual checks it holds the 18 floor in the pools, the ruling an allowing venture must cite, the consent rule's status line, and `outside_admission: true` while no venture allows AI people.
+- `scripts/validate.py` and `scripts/tests/`: the skill's own gate. Beyond the usual checks it holds the 18 floor in the pools and an approved rule that cites Krish's ruling.
 
 ## Missing-skill test
 
-1. Does the need recur or carry consequence? Not yet recurring; high consequence the first time. A wrong age, a fake testimonial or an unlabelled AI person is public and hard to take back.
+1. Does the need recur or carry consequence? It will recur now any venture may use one, and it is high consequence the first time. A wrong age, a fake testimonial or an AI person Krish never saw is public and hard to take back.
 2. Is the trigger distinct? Yes: an AI person on camera for a venture. AI dogs, Krish's own likeness and real creators all route elsewhere.
 3. Is there a repeatable workflow? Yes: the twelve steps in `references/pipeline.md`.
-4. Is there an owned standard for good output? Yes: the consent rule once approved, and the judge's three checks.
-5. Can success be verified independently? Partly. The roller and the gate are deterministic and tested. Whether a video passes for real is the independent judge's call on contact sheets, never the maker's.
-6. Can its authority be bounded? Yes. It generates nothing, posts nothing and spends nothing; every paid step needs a reservation and Krish's yes on its exact quote.
-7. Would a chapter in an existing skill be materially worse? Yes. No production skill owns generated people. Putting this in `krish-design` or `tool-router` would make an always-loaded or broad skill carry rules that apply to almost no request.
+4. Is there an owned standard for good output? Yes: the approved rule, the judge's three checks and Krish's 10/10 bar on the finished file.
+5. Can success be verified independently? Partly. The roller and both gates are deterministic and tested. Whether a video passes for real is the independent judge's call on contact sheets, never the maker's, and whether it goes out is Krish's.
+6. Can its authority be bounded? Yes. It generates nothing, posts nothing and spends nothing; every paid step needs a reservation and Krish's yes on its exact quote, and every release needs his yes on the exact file.
+7. Would a chapter in an existing skill be materially worse? Yes. No production skill owns generated people. Putting this in `krish-design` or `tool-router` would make an always-loaded or broad skill carry rules that apply to few requests.
 
 ## Overlap review
 
@@ -52,29 +50,25 @@ This moves the first part of the North Star: the age floor, the never-a-customer
 
 Functional overlap with any production skill is well under the standard's 20 percent: none of them handles a generated person.
 
-## Proposed route row, not applied
+## Proposed route row
 
-Apply only in an admission change, and only after a venture's rule allows AI people.
+Apply only in an admission change.
 
 | Request | Context | Primary producer | Verification |
 |---|---|---|---|
-| An AI person on camera for a venture whose own rules allow one | the venture's rule and its claims gate; `references/disclosure-and-consent.md`, approved | the venture's production route, with `ugc-avatar` as planner and gate | `scripts/avatar.py gate` READY before each paid step; the independent judge on contact sheets |
+| An AI person on camera in a named piece for any venture, with Krish's yes before it is used and his yes on the finished file before it goes out | the venture's claims gate; `references/approval-and-consent.md` | the venture's production route, with `ugc-avatar` as planner and gate | `scripts/avatar.py gate` READY before each paid step; the independent judge on contact sheets; `scripts/avatar.py release` READY before the file goes out |
 
-Collision rule to add with it: `ugc-avatar` plans and gates AI people only. A venture's AI animals stay with that venture's roller; Krish's own likeness stays with the krish-clone repository; the words stay with the venture's writer and `check_voice`; posting stays with the venture's go-live. It never generates, posts or spends.
+Collision rule to add with it: `ugc-avatar` plans and gates AI people only. A venture's AI animals stay with that venture's roller; Krish's own likeness stays with the krish-clone repository; the words stay with the venture's writer and `check_voice`; posting stays with the venture's go-live. It never generates, posts or spends, and it adds no AI label anywhere.
 
-Registry, at admission: add `{name: ugc-avatar, role: generated-person-gate, owner: Krish Raja, reviewed: <admission date>, freshness_sla_days: 30}` (short, because provider tools and platform labelling rules move fast), raise `expected_skill_count` by one, move the two suites to `evals/`, and add two routing cases (an AI presenter request to `ugc-avatar`, a dog still to the venture's roller).
+Registry, at admission: add `{name: ugc-avatar, role: generated-person-gate, owner: Krish Raja, reviewed: <admission date>, freshness_sla_days: 30}` (short, because provider tools and platform rules move fast), raise `expected_skill_count` by one, move the two suites to `evals/`, and add two routing cases (an AI presenter request to `ugc-avatar`, a dog still to the venture's roller).
 
 ## Context budget
 
-Staging adds nothing to the always-on surface. Admission would add the description, 895 characters, to every session's catalogue.
+Admission adds the description, 872 characters, to every session's catalogue, 23 fewer than the first draft's 895.
 
-Growth justified: the 895 characters are the age floor, the never-a-customer rule and the yes-before-spend stated where every session sees them, which is the cheapest place to stop a public mistake; admission waits until a venture actually allows AI people, so the cost is not paid before there is a use.
+Growth justified: the 872 characters are Krish's two yeses, the no-label rule, the age floor, the never-a-customer rule and the yes-before-spend stated where every session sees them, which is the cheapest place to stop a public mistake now that any venture may use an AI person.
 
-## The decisions for Krish
+## Krish's decisions
 
-1. **The disclosure and consent rule.** Approve `references/disclosure-and-consent.md` as drafted, change it, or reject it. Its label words are "This person is AI-generated." Where the label shows: A, the platform's AI label and the first caption line only; B, as A plus on screen for the first three seconds the person is shown; or C, as B but on screen the whole time. Recommended: B.
-2. **Admission.** Keep it outside admission (recommended until a venture's rule allows AI people), or reject it. Admitting it now would put a skill in every catalogue that refuses every request.
-
-## Status
-
-Staged inactive and outside admission: `activation: false`, `release_eligible: false`, `outside_admission: true`, no requested surface. Gates still open: a venture rule that allows AI people, Krish's approval of the disclosure and consent rule, full harness validation on Windows, held-out trigger and behaviour runs, an independent overlap review, Krish's admission and a governed release.
+1. **The rule.** Decided 2026-11-15: two yeses, no AI label anywhere, every venture. The draft disclosure and consent rule and its label options A to C are retired unused.
+2. **Admission.** Follows from the ruling, now that no venture gate holds it back.
