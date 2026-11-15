@@ -1,6 +1,6 @@
 # UGC avatar candidate, 2026-11-15
 
-Status: ruled on by Krish on 2026-11-15. His words: "happy to use everywhere with my explicit approval before deciding to use it, and then my explicit approval before it goes out to ensure 10/10 quality. No need for AI labels anywhere, at any point." Recorded as `Ruling (Krish, 2026-11-15): AI people may be used anywhere, with his explicit yes before one is used and again on the finished asset before it goes out; no AI labels anywhere.` The draft disclosure and consent rule is replaced by the approved approval and consent rule, and the venture gate is gone. Admission follows in its own change.
+Status: admitted by Krish on 2026-11-15. His words: "happy to use everywhere with my explicit approval before deciding to use it, and then my explicit approval before it goes out to ensure 10/10 quality. No need for AI labels anywhere, at any point." Recorded as `Ruling (Krish, 2026-11-15): AI people may be used anywhere, with his explicit yes before one is used and again on the finished asset before it goes out; no AI labels anywhere.` The draft disclosure and consent rule is replaced by the approved approval and consent rule and the venture gate is gone. The skill is now `skills/ugc-avatar`, production skill 33: its two suites are in `evals/`, the route row and collision rule below are in `contract/skill-routing-contract.md`, both cloud routing texts name it, and `state/candidates/ugc-avatar.yaml` is retired. Still open, as post-admission checks: full harness validation on Windows, held-out trigger and behaviour runs, an independent overlap review, and the next governed release and install.
 
 ## Finding and correct layer
 
@@ -50,9 +50,7 @@ This moves the first part of the North Star: the two yeses, the age floor, the n
 
 Functional overlap with any production skill is well under the standard's 20 percent: none of them handles a generated person.
 
-## Proposed route row
-
-Apply only in an admission change.
+## Route row, applied at admission on 2026-11-15 (the contract carries it in shorter words)
 
 | Request | Context | Primary producer | Verification |
 |---|---|---|---|
@@ -64,11 +62,11 @@ Registry, at admission: add `{name: ugc-avatar, role: generated-person-gate, own
 
 ## Context budget
 
-Admission adds the description, 872 characters, to every session's catalogue, 23 fewer than the first draft's 895.
+Admission adds the description, 771 characters, to every session's catalogue, 124 fewer than the first draft's 895.
 
-Growth justified: the 872 characters are Krish's two yeses, the no-label rule, the age floor, the never-a-customer rule and the yes-before-spend stated where every session sees them, which is the cheapest place to stop a public mistake now that any venture may use an AI person.
+Growth justified: the 771 characters are Krish's two yeses, the no-label rule, the age floor, the never-a-customer rule and the yes-before-spend stated where every session sees them, which is the cheapest place to stop a public mistake now that any venture may use an AI person.
 
 ## Krish's decisions
 
 1. **The rule.** Decided 2026-11-15: two yeses, no AI label anywhere, every venture. The draft disclosure and consent rule and its label options A to C are retired unused.
-2. **Admission.** Follows from the ruling, now that no venture gate holds it back.
+2. **Admission.** Admitted 2026-11-15, following the ruling, now that no venture gate holds it back.

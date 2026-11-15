@@ -1,5 +1,12 @@
 # Ad copywriter candidate, 2026-11-15
 
+Status: admitted by Krish on 2026-11-15 (his words: "Admit it and hand over captions"), recorded as
+`Ruling (Krish, 2026-11-15): admit ad-copywriter, and krish-content-marketer hands venture-account captions to it.`
+The skill is now `skills/ad-copywriter`, its two suites are in `evals/`, the route row and collision rule below are in
+`contract/skill-routing-contract.md`, krish-content-marketer's description is narrowed to the wording below, and
+`state/candidates/ad-copywriter.yaml` is retired. Where this file says the candidate is inactive, outside every route or
+waiting on admission, that no longer governs.
+
 ## Finding and correct layer
 
 Heartside and the Make Your Mind Up publication account post every day, and a post's caption is the copy any boost later promotes: growth-heartside's `docs/PAID-BOOSTS.md` boosts the live post unchanged, and Krish's rule of 10 November allows a boost of up to $20 a day once organic reach shows a post deserves one. Today each engine writes its captions with its own rules and no shared method. Nothing asks what has already earned money for someone paying to show it, nothing reads the first seconds of the picture before the words are written, three "variations" are often one caption written three times, and nothing stops a caption from carrying another advertiser's sentence.
@@ -44,7 +51,7 @@ This moves two parts of the North Star. A caption method written once, with the 
 
 The closest neighbour is `krish-content-marketer`, whose description names campaign and ad angles and hooks. The functional overlap is the angle-and-hook step of a caption, about one step in four of this method, under the standard's 20 percent once the producer split below is applied. That split is the condition for admission.
 
-## Proposed route row, not applied
+## Route row, applied at admission on 2026-11-15 (the contract carries it in shorter words)
 
 Apply only in the admission change that moves the candidate into `skills/`, because the routing contract is live on every client.
 
@@ -57,7 +64,7 @@ Collision rule to add with it, under the existing `krish-voice` and `krish-conte
 - `krish-voice` stays the writer for anything in Krish's own name: his personal accounts, his email, his LinkedIn, and any caption in his first person. `ad-copywriter` writes only in a venture's own account voice, and may stack after `krish-voice` as a lint, never as a second writer.
 - `krish-content-marketer` keeps conversion strategy for Mindmake and Krish's own assets. `ad-copywriter` owns the short fields on a venture's own accounts and takes its angle rules from that venture's own doctrine. A request that needs both a buyer argument and a venture caption is planned first by `strategy-brief`, with one writer per artifact.
 
-Description change at admission, not applied here: narrow `krish-content-marketer`'s description so it no longer claims caption and ad fields on a venture's own social accounts. Proposed text, replacing its first sentence: "Conversion-strategy producer for assets whose job is to change reader behaviour: landing and sales pages, campaign angles, launch emails, cold sequences, hooks, headlines, positioning rewrites, and conversion diagnosis, for Mindmake and Krish's own assets; captions and ad fields on a venture's own social accounts belong to ad-copywriter." Its review date moves only with Krish's ruling in that change.
+Description change, applied at admission on 2026-11-15: narrow `krish-content-marketer`'s description so it no longer claims caption and ad fields on a venture's own social accounts. Proposed text, replacing its first sentence: "Conversion-strategy producer for assets whose job is to change reader behaviour: landing and sales pages, campaign angles, launch emails, cold sequences, hooks, headlines, positioning rewrites, and conversion diagnosis, for Mindmake and Krish's own assets; captions and ad fields on a venture's own social accounts belong to ad-copywriter." Its review date moves only with Krish's ruling in that change.
 
 Registry, at admission: add `{name: ad-copywriter, role: venture-copy-producer, owner: Krish Raja, reviewed: <admission date>, freshness_sla_days: 60}` to `production` and the name to `production_active`, raise `expected_skill_count` by one, move the two suites from `evals/candidates/` to `evals/`, and add two cases to `evals/skill-routing-cases.jsonl` (a Heartside caption to `ad-copywriter`, a caption on Krish's personal account to `krish-voice`).
 
@@ -76,4 +83,11 @@ This is Krish's decision, not this change's. The questions for him:
 
 ## Status
 
-Staged inactive: `activation: false`, `release_eligible: false`, no requested surface. It is not in any release, install, account instruction or route. Gates still open: full harness validation on Windows, held-out trigger and behaviour runs, an independent overlap review, the description narrowing in the admission change, Krish's admission and a governed release.
+Admitted 2026-11-15 as production skill 32: in `production_active`, routed in the contract and in both cloud routing
+texts, served by Control Center's `get_skill` from `skills/ad-copywriter` on main once this change merges. The
+narrowing of `krish-content-marketer`'s description is applied in the same change, with route cases that prove the split
+(a Heartside caption to `ad-copywriter`, a caption on Krish's own account to `krish-voice`, a Mindmake page's angle to
+`krish-content-marketer`). Still open, as post-admission checks: full harness validation on Windows, held-out trigger and
+behaviour runs, an independent overlap review, and the next governed release and install.
+
+Before admission it was staged inactive: `activation: false`, `release_eligible: false`, no requested surface.

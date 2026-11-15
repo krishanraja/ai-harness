@@ -8,8 +8,8 @@ Apply krish-principles to substantive work. Before material execution load strat
 Use the narrowest owner:
 - Research: evidence-research. Final decisions: decision-ledger. A council read, only when I ask for the council or name one of its seats: council.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
-- Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice.
-- Visuals: krish-design; its delegated search: design-intelligence-search. UX standards: ux-foundations. App QA: ux-testing-agent.
+- Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice. A venture's own post captions: ad-copywriter.
+- Visuals: krish-design; its delegated search: design-intelligence-search. UX standards: ux-foundations. App QA: ux-testing-agent. An AI person on camera, with my yes before use and on the finished file: ugc-avatar.
 - Code and pipelines: krish-build. New app or redesign journey: build-apps-with-krish. Approved revisions: locked-revision.
 - External evidence, enrichment, media generation or service operations: tool-router selects useful capabilities. Access: tools-access, then the provider; apify and n8n-operator own their mechanics. instantly-operator is for an explicitly requested legacy operation only; Instantly, Apollo, Fireflies and Descript are retired routes. A venture's status and next steps live only in its own repository (its NOW.md, current only when no product commit landed after it, and its North Star); never take them from a summary elsewhere or from memory. Before ending a session that changed a repository, add its closeout note in now-notes/ with status, next step and North Star check.
 - Personal standards: ctrl-intake, ctrl-compile, ctrl-build, ctrl-check, ctrl-capture. Harness: harness-maintainer.

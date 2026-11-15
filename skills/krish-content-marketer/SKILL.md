@@ -1,6 +1,6 @@
 ---
 name: krish-content-marketer
-description: "Conversion-strategy producer for assets whose job is to change reader behaviour: landing and sales pages, campaign and ad angles, launch emails, cold sequences, hooks, headlines, positioning rewrites, and conversion diagnosis. Use when Krish asks what an asset should argue, why copy is not landing or converting, or how to move a buyer to a decision. Pair with relevant domain context and content-corpus for named channels; use krish-voice for final prose. Exclude pure voice editing, factual research, channel-status decisions, and routine informative writing with no behavioural objective."
+description: "Conversion-strategy producer for assets whose job is to change reader behaviour: landing and sales pages, campaign angles, launch emails, cold sequences, hooks, headlines, positioning rewrites, and conversion diagnosis, for Mindmake and Krish's own assets; captions and ad fields on a venture's own social accounts belong to ad-copywriter. Use when Krish asks what an asset should argue, why copy is not landing or converting, or how to move a buyer to a decision. Pair with relevant domain context and content-corpus for named channels; use krish-voice for final prose. Exclude pure voice editing, factual research, channel-status decisions, and routine informative writing with no behavioural objective."
 ---
 
 # Krish content marketer
