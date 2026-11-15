@@ -1349,11 +1349,11 @@ contract_rules:
     status: live
   - id: canon.codex
     file: contract/templates/canon-block.md
-    text_sha: "af7b304806b3"
+    text_sha: "1c24726cda32"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-visible-codex-sessions.md"
+      ref: "docs/proposals/2026-11-15-claude-codex-division.md"
     status: live
   - id: canon.one-home-per-fact
     file: contract/templates/canon-block.md
