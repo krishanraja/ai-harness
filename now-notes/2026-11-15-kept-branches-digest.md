@@ -1,3 +1,0 @@
-Status: The weekly digest now lists every branch the weekly sweep keeps, per repository, oldest first, with its reason, last commit date and pull request (`scripts/kept-branches.mjs`, read-only on FLEET_TOKEN, by the sweep's own rules). A branch with work not on main and no open pull request for over a day is a digest decision, "needs a pull request or your yes to remove" (Ruling, Krish, 2026-11-15). A read-only run on 2026-11-15 found 122 kept branches in 11 of the 16 swept repositories, 86 of them needing him.
-Next: the first nightly housekeeping of ISO week 2026-W47 writes the digest with the section; check it on Krish's list.
-North Star check (2026-11-15): holds.
