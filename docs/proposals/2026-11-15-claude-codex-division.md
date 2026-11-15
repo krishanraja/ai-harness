@@ -1,6 +1,6 @@
 # Proposal: the canon names who does what between Claude and Codex, and every engine closes a weekly loop
 
-Status: accepted. Ruling (Krish, 2026-11-15): "yes to #263". In force in the canon block, `contract/channel-tasks.md` and `contract/north-star-metric.md` (Engines rule 7). The conflict below was settled before the Yes: since content-engine PR #714 cards run under the Codex home his Desktop app reads, and since #727 and #728 they start Windows Codex from WSL.
+Status: accepted, amended the same evening (see "Amended 2026-11-15" at the end). Ruling (Krish, 2026-11-15): "yes to #263". In force in the canon block, `contract/channel-tasks.md` and `contract/north-star-metric.md` (Engines rule 7). The conflict below was settled before the Yes: since content-engine PR #714 cards run under the Codex home his Desktop app reads, and since #727 and #728 they start Windows Codex from WSL.
 Source: Krish's instruction of 2026-11-15 (typed in a claude.ai/code session), recorded as
 `Ruling (Krish, 2026-11-15): Codex does a minimum of every video session and the social legwork, visible in Codex Desktop; Claude owns strategy, orchestration, verification and learnings; Codex never updates ai-harness or Google Drive.`
 in the commits of content-engine, growth-heartside and growth-makeyourmindup that put it into those repositories' own
@@ -74,3 +74,15 @@ Desktop app under the same tool profile.
   records), `jobs/report.md` step 4b, `docs/audits/2026-11-15-interest-vs-paid.md`.
 - growth-makeyourmindup: `AGENTS.md` "Claude and Codex: who does what", `jobs/report.md` step 4b,
   `jobs/measurement.md` (`paid_boost` readings), `docs/reviews/2026-11-15-interest-vs-paid.md`.
+
+## Amended 2026-11-15, the same evening: content production stays in the cloud
+
+Ruling (Krish, 2026-11-15): content production runs on Codex cards from the cloud and is never shown in Codex Desktop; social media legwork runs from a Claude session on his own computer, visible there.
+
+What happened: running every card under the Codex home his Desktop app reads (content-engine PR #714 and its follow-ups) made every Codex card queued from a cloud session fail on his PC from 16:24 UTC, and the fixes that evening bent the video lane to fit a route meant for social legwork. His words, in full:
+
+> In actual fact we should have kept video production rooted in the cloud and not accessible in the Codex desktop app, which is fine. All social media management tasks would be started on a local machine Claude session and go through the newly built route, which would enable me to see the session in the Codex desktop app.
+
+> Maybe just have all content production running on the cloud Codex cards. Make sure the content watcher and music watcher always go to the VPS worker and make sure that any social media tasks run through the local session, build through to Codex desktop.
+
+So the "visible in Codex Desktop" part of this proposal now holds for social media legwork only (scheduling, posting, checking a post live, reading its numbers), started from a Claude session on his own computer through codex_thread. Content production (video, stills, every Codex card queued from a cloud session) is built by his PC's lane under the Studio's own Codex home, as before 15 Nov, never shown in Desktop, and still counts towards the Codex minimum. The status line's "since content-engine PR #714 cards run under the Codex home his Desktop app reads" is superseded: content-engine PR #731 restored the split in code. The rest of this proposal (who owns what, the weekly loop) stands unchanged. The canon sentence now reads: "Codex does art direction, visual builds and browser legwork, a defined minimum of every video session (content production runs on Codex cards from the cloud and is never shown in his Codex Desktop app; social media legwork runs from a Claude session on his computer, in a session he can watch there; Ruling, Krish, 2026-11-15), ...".

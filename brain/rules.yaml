@@ -1352,8 +1352,8 @@ contract_rules:
     text_sha: "53ea0d55bb66"
     first_seen: "2026-11-15"
     source:
-      kind: ruling
-      ref: "9a7bf49a64e0"
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-claude-codex-division.md"
     history:
       - text_sha: "1c24726cda32"
         valid_until: "2026-11-15"

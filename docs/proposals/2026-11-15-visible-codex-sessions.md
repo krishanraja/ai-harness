@@ -108,3 +108,7 @@ The first part: a ruling given once (start Codex where he can see it) is learned
 that dispatches Codex, instead of being corrected again in growth-mindmake and growth-legibility when their first card
 runs invisibly. It also moves the second: Codex can only take the browser legwork off his hours if he can see the
 session and lend it his browser, and this is the route that lets him.
+
+## Amended 2026-11-15, the same evening
+
+Ruling (Krish, 2026-11-15): content production runs on Codex cards from the cloud and is never shown in Codex Desktop; social media legwork runs from a Claude session on his own computer, visible there. The codex_thread route this proposal built stands; what changed is who uses the visible home: only social media legwork started from his own computer. Video and every other card queued from a cloud session run under the Studio's own Codex home, never shown in Desktop (content-engine PR #731). His words and the reasoning are in `docs/proposals/2026-11-15-claude-codex-division.md`, "Amended 2026-11-15".
