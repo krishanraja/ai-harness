@@ -446,6 +446,10 @@ $videoEngineTriggerCases = Join-Path $Root 'evals\video-engine-trigger-cases.jso
 $videoEngineBehaviorCases = Join-Path $Root 'evals\video-engine-behavior-cases.jsonl'
 $councilTriggerCases = Join-Path $Root 'evals\council-trigger-cases.jsonl'
 $councilBehaviorCases = Join-Path $Root 'evals\council-behavior-cases.jsonl'
+$adCopywriterTriggerCases = Join-Path $Root 'evals\ad-copywriter-trigger-cases.jsonl'
+$adCopywriterBehaviorCases = Join-Path $Root 'evals\ad-copywriter-behavior-cases.jsonl'
+$ugcAvatarTriggerCases = Join-Path $Root 'evals\ugc-avatar-trigger-cases.jsonl'
+$ugcAvatarBehaviorCases = Join-Path $Root 'evals\ugc-avatar-behavior-cases.jsonl'
 $designIntelligenceTests = Join-Path $Root 'skills\design-intelligence-search\scripts\tests'
 $designIntelligenceVendorRoot = Join-Path $Root 'skills\design-intelligence-search\scripts\vendor\ui-ux-pro-max'
 $designIntelligenceMetadata = Join-Path $Root 'skills\design-intelligence-search\agents\openai.yaml'
@@ -453,6 +457,10 @@ $apifyHelperTests = Join-Path $Root 'skills\apify\tests'
 $lockedRevisionTests = Join-Path $Root 'skills\locked-revision\tests'
 $councilTests = Join-Path $Root 'skills\council\scripts\tests'
 $councilValidator = Join-Path $Root 'skills\council\scripts\validate.py'
+$adCopywriterTests = Join-Path $Root 'skills\ad-copywriter\scripts\tests'
+$adCopywriterValidator = Join-Path $Root 'skills\ad-copywriter\scripts\validate.py'
+$ugcAvatarTests = Join-Path $Root 'skills\ugc-avatar\scripts\tests'
+$ugcAvatarValidator = Join-Path $Root 'skills\ugc-avatar\scripts\validate.py'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -640,6 +648,16 @@ $councilBehaviors = @(Read-JsonLines -Path $councilBehaviorCases)
 Test-EvalCategoryMinimums -Records $councilTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'council trigger suite'
 Test-EvalCategoryMinimums -Records $councilBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'council behavior suite'
 
+$adCopywriterTriggers = @(Read-JsonLines -Path $adCopywriterTriggerCases)
+$adCopywriterBehaviors = @(Read-JsonLines -Path $adCopywriterBehaviorCases)
+Test-EvalCategoryMinimums -Records $adCopywriterTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ad-copywriter trigger suite'
+Test-EvalCategoryMinimums -Records $adCopywriterBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ad-copywriter behavior suite'
+
+$ugcAvatarTriggers = @(Read-JsonLines -Path $ugcAvatarTriggerCases)
+$ugcAvatarBehaviors = @(Read-JsonLines -Path $ugcAvatarBehaviorCases)
+Test-EvalCategoryMinimums -Records $ugcAvatarTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ugc-avatar trigger suite'
+Test-EvalCategoryMinimums -Records $ugcAvatarBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ugc-avatar behavior suite'
+
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
     @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },
@@ -771,6 +789,65 @@ else {
     }
     if ($councilValidationExitCode -ne 0) {
         Add-Failure "council validation failed: $($councilValidationOutput -join ' | ')"
+    }
+}
+
+# ad-copywriter and ugc-avatar were admitted on 2026-11-15 (Ruling, Krish,
+# 2026-11-15: admit ad-copywriter, and krish-content-marketer hands
+# venture-account captions to it; Ruling, Krish, 2026-11-15: AI people may be
+# used anywhere, with his explicit yes before one is used and again on the
+# finished asset before it goes out; no AI labels anywhere). As with the
+# council, admission moves each skill, not its gate: the same tests and
+# validator the candidate loop ran keep running here.
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the ad-copywriter offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $adCopywriterTests -PathType Container) -or -not (Test-Path -LiteralPath $adCopywriterValidator -PathType Leaf)) {
+    Add-Failure "Missing ad-copywriter tests or validator: $adCopywriterTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $adCopywriterTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $adCopywriterTests -p 'test_*.py' 2>&1)
+        $adCopywriterTestExitCode = $LASTEXITCODE
+        $adCopywriterValidationOutput = @(& $pythonCommand.Source -B $adCopywriterValidator --base auto 2>&1)
+        $adCopywriterValidationExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($adCopywriterTestExitCode -ne 0) {
+        Add-Failure "ad-copywriter offline tests failed: $($adCopywriterTestOutput -join ' | ')"
+    }
+    if ($adCopywriterValidationExitCode -ne 0) {
+        Add-Failure "ad-copywriter validation failed: $($adCopywriterValidationOutput -join ' | ')"
+    }
+}
+
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the ugc-avatar offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $ugcAvatarTests -PathType Container) -or -not (Test-Path -LiteralPath $ugcAvatarValidator -PathType Leaf)) {
+    Add-Failure "Missing ugc-avatar tests or validator: $ugcAvatarTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $ugcAvatarTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $ugcAvatarTests -p 'test_*.py' 2>&1)
+        $ugcAvatarTestExitCode = $LASTEXITCODE
+        $ugcAvatarValidationOutput = @(& $pythonCommand.Source -B $ugcAvatarValidator --base auto 2>&1)
+        $ugcAvatarValidationExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($ugcAvatarTestExitCode -ne 0) {
+        Add-Failure "ugc-avatar offline tests failed: $($ugcAvatarTestOutput -join ' | ')"
+    }
+    if ($ugcAvatarValidationExitCode -ne 0) {
+        Add-Failure "ugc-avatar validation failed: $($ugcAvatarValidationOutput -join ' | ')"
     }
 }
 

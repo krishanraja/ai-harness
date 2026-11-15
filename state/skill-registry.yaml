@@ -50,7 +50,7 @@ candidate_scroll_build_acceptance:
 provisional_overlays: []
 
 candidate_reconciliation:
-  expected_skill_count: 31
+  expected_skill_count: 33
   base_release: v2026.08.29.1
   base_source_commit: bf9861c9c2823866835b002b3fe8826a3694113f
   inbound_codex_surface: codex-surface-07a67cda9f99
@@ -253,6 +253,7 @@ release_policy:
   curated_only: true
 
 production_active:
+  - ad-copywriter
   - apify
   - build-apps-with-krish
   - content-corpus
@@ -280,6 +281,7 @@ production_active:
   - take-the-brief
   - tool-router
   - tools-access
+  - ugc-avatar
   - ux-foundations
   - ux-testing-agent
   - verification-loop
@@ -317,6 +319,8 @@ production:
   - {name: ctrl-capture, role: standards-stage-9, owner: Krish Raja, reviewed: 2026-10-17, freshness_sla_days: 90}
   - {name: tool-router, role: conditional-capability-selection, owner: Krish Raja, reviewed: 2026-10-29, freshness_sla_days: 30}
   - {name: council, role: council-read-validator, owner: Krish Raja, reviewed: 2026-11-15, freshness_sla_days: 90}
+  - {name: ad-copywriter, role: venture-copy-producer, owner: Krish Raja, reviewed: 2026-11-15, freshness_sla_days: 60}
+  - {name: ugc-avatar, role: generated-person-gate, owner: Krish Raja, reviewed: 2026-11-15, freshness_sla_days: 30}
 
 external_managed:
   - {name: skill-creator, provider: Anthropic, policy: Prefer current provider-managed release; do not fork without an evaluated Krish-specific need.}

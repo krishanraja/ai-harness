@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 138 rules across the two contracts and the canon block.
+# 140 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -964,6 +964,22 @@ contract_rules:
       kind: founding
       ref: "a3d2f3706a87"
     status: live
+  - id: collision-rules.ad-copywriter-writes-only
+    file: contract/skill-routing-contract.md
+    text_sha: "7c0635aa8382"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: collision-rules.ugc-avatar-plans-and
+    file: contract/skill-routing-contract.md
+    text_sha: "b8f0466a5b02"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
   - id: collision-rules.mindmake-os-owns-operating
     file: contract/skill-routing-contract.md
     text_sha: "ace98cebbf36"
@@ -1386,8 +1402,62 @@ contract_rules:
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
-# 242 chapters across the installed skills.
+# 254 chapters across the installed skills.
 skill_sections:
+  - id: ad-copywriter.role
+    file: skills/ad-copywriter/SKILL.md
+    heading: "Role"
+    text_sha: "d905a3949a22"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: ad-copywriter.when-it-runs
+    file: skills/ad-copywriter/SKILL.md
+    heading: "When it runs"
+    text_sha: "4169bacabc79"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: ad-copywriter.when-it-does-not
+    file: skills/ad-copywriter/SKILL.md
+    heading: "When it does not run"
+    text_sha: "622310636812"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: ad-copywriter.inputs
+    file: skills/ad-copywriter/SKILL.md
+    heading: "Inputs"
+    text_sha: "4efaec42a14a"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: ad-copywriter.run-it
+    file: skills/ad-copywriter/SKILL.md
+    heading: "Run it"
+    text_sha: "d0fd0a810632"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
+  - id: ad-copywriter.stop
+    file: skills/ad-copywriter/SKILL.md
+    heading: "Stop"
+    text_sha: "aedf7810a589"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ad-copywriter.md"
+    status: live
   - id: apify.route-the-request
     file: skills/apify/SKILL.md
     heading: "Route the request"
@@ -3701,6 +3771,60 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: ugc-avatar.role
+    file: skills/ugc-avatar/SKILL.md
+    heading: "Role"
+    text_sha: "c56feacb04c5"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
+  - id: ugc-avatar.when-it-runs
+    file: skills/ugc-avatar/SKILL.md
+    heading: "When it runs"
+    text_sha: "6fe1144802d9"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
+  - id: ugc-avatar.when-it-does-not
+    file: skills/ugc-avatar/SKILL.md
+    heading: "When it does not run"
+    text_sha: "98b46e73b586"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
+  - id: ugc-avatar.inputs
+    file: skills/ugc-avatar/SKILL.md
+    heading: "Inputs"
+    text_sha: "4315006689b2"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
+  - id: ugc-avatar.run-it
+    file: skills/ugc-avatar/SKILL.md
+    heading: "Run it"
+    text_sha: "855dac6dff6e"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
+    status: live
+  - id: ugc-avatar.stop
+    file: skills/ugc-avatar/SKILL.md
+    heading: "Stop"
+    text_sha: "b0d8f3cd6a6c"
+    first_seen: "2026-11-15"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-15-ugc-avatar.md"
     status: live
   - id: ux-foundations.route-before-answering
     file: skills/ux-foundations/SKILL.md
