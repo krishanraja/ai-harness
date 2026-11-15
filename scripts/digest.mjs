@@ -27,6 +27,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { isoWeek } from './scoreboard.mjs'
+import { keptSection } from './kept-branches.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const num = (v, d) => (v === undefined || v === null || v === '' ? d : Number(v))
@@ -55,8 +56,9 @@ const digestFilename = (digest) => digest.notification_kind === 'incident'
  * ready:    [{ number, title, html_url, created_at, head: { ref, sha } }] change
  *           requests whose checks passed and whose judge measured them
  * blockers: [{ kind, title, detail, only_you }] something only Krish can unblock
+ * branches: scripts/kept-branches.mjs keptAcrossFleet, shown whole when the digest speaks
  */
-export function buildDigest({ ready = [], blockers = [], scoreboard = null, today, policy, lastSent = null, notifications = loadNotificationPolicy() }) {
+export function buildDigest({ ready = [], blockers = [], scoreboard = null, branches = null, today, policy, lastSent = null, notifications = loadNotificationPolicy() }) {
   const week = isoWeek(today)
   const enabled = incidentGate(notifications), priorKeys = lastSent?.incident_keys || []
   if (!Array.isArray(priorKeys) || priorKeys.some((key) => !HEX.test(key))) throw new Error('incident_history_invalid')
@@ -94,6 +96,9 @@ export function buildDigest({ ready = [], blockers = [], scoreboard = null, toda
     else lines.push(`${i + 1}. **${d.title}.** ${d.detail}`)
   }
   lines.push('')
+  // Ruling (Krish, 2026-11-15): the branches the weekly sweep keeps are listed
+  // in his weekly report, whole, whatever the decision budget cut above.
+  lines.push(...keptSection(branches))
   if (scoreboard) {
     const s = scoreboard
     const acc = s.change_requests?.acceptance

@@ -215,6 +215,9 @@ jobs:
       - name: The digest stays silent unless only Krish can act
         run: node scripts/test-digest.mjs
 
+      - name: The branches the sweep keeps reach the weekly digest, read-only
+        run: node scripts/test-kept-branches.mjs
+
       # A blocked PC says why in one listed word, never free text, because the
       # ledger is public; the sync and the recorder must agree on the words.
       - name: A machine heartbeat says why it is blocked without leaking
