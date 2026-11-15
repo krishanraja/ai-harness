@@ -12,7 +12,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { blockFor, splice } from './render.mjs'
-import { BotPrs, kindOf, checksGreen, canonPlan, machinePlan, stewardPlan, orphanPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
+import { BotPrs, kindOf, checksGreen, canonPlan, canonGate, CONTEXT_WORKFLOW, SETTLE_MS, machinePlan, stewardPlan, orphanPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
@@ -47,6 +47,10 @@ assert.equal(canonPlan({ baseText: 'a', headText: 'w', files: [T], target: T, wa
 assert.equal(canonPlan({ baseText: 'a', headText: 'w', files: [T], target: T, wanted: 'w', mergeable: 'clean' }).action, 'merge')
 
 const M = ['state/deployments/lorimer.json', 'state/canaries/x.json', 'state/machine-runs/r.json', 'brain/usage.jsonl']
+// A canon sync requires operating-context only where the base runs it; elsewhere it waits ten minutes for its own checks.
+assert.deepEqual(canonGate({ runsContext: true, openedAt: '2026-11-14T22:19:00Z', now: Date.parse('2026-11-14T22:19:30Z') }), { required: ['operating-context'], settled: true })
+assert.deepEqual(canonGate({ runsContext: false, openedAt: '2026-11-14T22:19:00Z', now: Date.parse('2026-11-14T22:19:30Z') }), { required: [], settled: false }, 'too new to trust an empty check list')
+assert.deepEqual(canonGate({ runsContext: false, openedAt: '2026-11-14T22:19:00Z', now: Date.parse('2026-11-14T22:19:00Z') + SETTLE_MS }), { required: [], settled: true })
 assert.equal(machinePlan({ files: M, mergeable: 'clean' }).action, 'merge')
 assert.equal(machinePlan({ files: [...M, 'scripts/x.mjs'], mergeable: 'clean' }).action, 'hold', 'evidence that touches code is a person\'s to merge')
 assert.equal(machinePlan({ files: ['state/skill-registry.yaml'], mergeable: 'clean' }).action, 'hold')
@@ -99,7 +103,7 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
 
 // A green canon sync merges at the head it checked, and is read back from main.
 {
-  const files = { [`heartside:base1:${T}`]: BASE_TEXT, [`heartside:head58:${T}`]: WANTED, [`heartside:merged-58:${T}`]: WANTED }
+  const files = { [`heartside:base1:${T}`]: BASE_TEXT, [`heartside:base1:${CONTEXT_WORKFLOW}`]: 'on: pull_request', [`heartside:head58:${T}`]: WANTED, [`heartside:merged-58:${T}`]: WANTED }
   const gh = fakeGh({ pulls: { heartside: [open('heartside', 58, 'harness/canon-sync'), open('heartside', 65, 'claude/acceptance-fixes')] }, files, prFiles: { 'heartside#58': [T] }, checks: { 'heartside:head58': GREEN_CANON, 'heartside:head65': { runs: [run('closeout', 'failure')] } } })
   gh.mergePull = async (repo, n, opts) => { gh.calls.push(['merge', repo, n, opts]); return { merged: true, sha: `merged-${n}` } }
   const r = new BotPrs(gh, { fleet, now: NOW })
@@ -109,6 +113,28 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
   assert.match(merges[0][3].title, /^docs\(canon\): sync the canon block to \S+ \(#58\)$/)
   assert.equal(r.results.find((x) => x.number === 58).action, 'merged')
   assert.deepEqual(r.waiting.map((w) => [w.number, w.failing]), [[65, ['closeout']]], 'the person\'s pull request is listed, never merged')
+}
+
+// Where the base runs the context workflow, a canon sync with no operating-context run waits for it.
+{
+  const files = { [`heartside:base1:${T}`]: BASE_TEXT, [`heartside:base1:${CONTEXT_WORKFLOW}`]: 'on: pull_request', [`heartside:head58:${T}`]: WANTED }
+  const gh = fakeGh({ pulls: { heartside: [open('heartside', 58, 'harness/canon-sync')] }, files, prFiles: { 'heartside#58': [T] }, checks: { 'heartside:head58': { runs: [run('closeout', 'success')] } } })
+  const r = new BotPrs(gh, { fleet, now: NOW }); await r.repo(heartside)
+  assert.equal(gh.calls.filter((c) => c[0] === 'merge').length, 0); assert.equal(r.results[0].action, 'await-checks'); assert.match(r.results[0].reason, /operating-context/)
+}
+
+// Where the base runs no context workflow (a repository the publisher does not administer), its own green checks are enough once it has settled,
+// and a pull request opened a moment ago never merges on an empty check list.
+{
+  const files = { [`heartside:base1:${T}`]: BASE_TEXT, [`heartside:head58:${T}`]: WANTED, [`heartside:merged-58:${T}`]: WANTED }
+  const gh = fakeGh({ pulls: { heartside: [open('heartside', 58, 'harness/canon-sync')] }, files, prFiles: { 'heartside#58': [T] }, checks: { 'heartside:head58': { runs: [run('guard', 'success')] } } })
+  gh.mergePull = async (repo, n, opts) => { gh.calls.push(['merge', repo, n, opts]); return { merged: true, sha: `merged-${n}` } }
+  const r = new BotPrs(gh, { fleet, now: NOW }); await r.repo(heartside)
+  assert.equal(r.results[0].action, 'merged', 'no operating-context is required where the repository runs none')
+  const fresh = fakeGh({ pulls: { heartside: [open('heartside', 58, 'harness/canon-sync', { created_at: new Date(NOW - 60000).toISOString() })] }, files, prFiles: { 'heartside#58': [T] } })
+  const r2 = new BotPrs(fresh, { fleet, now: NOW }); await r2.repo(heartside)
+  assert.equal(fresh.calls.filter((c) => c[0] === 'merge').length, 0, 'an empty check list a minute after opening is not green')
+  assert.equal(r2.results[0].action, 'await-checks'); assert.match(r2.results[0].reason, /^settling/); assert.equal(r2.awaiting.length, 1)
 }
 
 // A read-back that disagrees with what was checked is an error, not a success.

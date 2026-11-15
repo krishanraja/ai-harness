@@ -15,7 +15,14 @@
  *   - it changes exactly one file, the repository's canon target, and that
  *     file on its head is exactly what the current canon renders onto the
  *     current base: nothing outside the markers, nothing stale;
- *   - every check finished green, the harness's operating-context among them.
+ *   - every check finished green, the harness's operating-context among them
+ *     where the repository's base runs it (.github/workflows/harness-repository-context.yml).
+ *     A repository the publisher does not administer runs no such check, so
+ *     there the pull request must also have been open ten minutes, long enough
+ *     for its own checks to register, before "no check is pending" counts as
+ *     green. Until 2026-11-14 operating-context was required everywhere, and
+ *     the first sync into seven newly admitted repositories waited on a check
+ *     none of them runs.
  * A machine-evidence pull request (machine-sync/<host>/<release>-<run>, here
  * only) merges when the fleet owner opened it from this repository, it changes
  * only machine records (state/deployments/, state/canaries/,
@@ -78,6 +85,20 @@ export function kindOf(pr, repo, owner) {
   // Change requests, learning reviews and the administration publisher have owners of their own.
   if (own && ref.startsWith('harness/')) return 'harness'
   return 'person'
+}
+
+export const CONTEXT_WORKFLOW = '.github/workflows/harness-repository-context.yml'
+export const SETTLE_MS = 10 * 60 * 1000
+
+/**
+ * What a canon sync waits for before it may merge. Pure. Where the base runs
+ * the operating-context workflow, that check is required; elsewhere nothing is
+ * required by name, but the pull request must have been open SETTLE_MS so a
+ * repository's own checks have had time to start.
+ */
+export function canonGate({ runsContext, openedAt, now }) {
+  if (runsContext) return { required: ['operating-context'], settled: true }
+  return { required: [], settled: now - Date.parse(openedAt) >= SETTLE_MS }
 }
 
 /** Whether every check finished green, with the named ones among them. Pure. */
@@ -226,7 +247,12 @@ export class BotPrs {
       this.awaiting.push({ kind: 'canon-sync', entry, number: pr.number, base })
       return this.record(name, pr, 'canon-sync', plan)
     }
-    return this.tryMerge(name, pr, 'canon-sync', ['operating-context'], async (merged) => {
+    const gate = canonGate({ runsContext: !!(await this.gh.getFile(name, CONTEXT_WORKFLOW, baseSha)), openedAt: pr.created_at, now: this.now })
+    if (!gate.settled) {
+      this.awaiting.push({ kind: 'canon-sync', entry, number: pr.number, base })
+      return this.record(name, pr, 'canon-sync', { action: 'await-checks', reason: 'settling: opened under ten minutes ago, its checks may not have started' })
+    }
+    return this.tryMerge(name, pr, 'canon-sync', gate.required, async (merged) => {
       const after = await this.gh.getFile(name, target, merged.sha || base)
       return after?.text === wanted
     }, { entry, base })
