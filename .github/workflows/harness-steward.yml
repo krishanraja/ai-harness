@@ -218,6 +218,11 @@ jobs:
       - name: The branches the sweep keeps reach the weekly digest, read-only
         run: node scripts/test-kept-branches.mjs
 
+      # Claude starts Codex only through codex_thread, canonical here (Ruling,
+      # Krish, 2026-11-15). The fleet read is scripts/codex-thread-copies.mjs.
+      - name: Every fleet copy of codex_thread matches the canonical one
+        run: node scripts/test-codex-thread-copies.mjs
+
       # A blocked PC says why in one listed word, never free text, because the
       # ledger is public; the sync and the recorder must agree on the words.
       - name: A machine heartbeat says why it is blocked without leaking
