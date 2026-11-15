@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "surface_id": "cursor-primary",
+  "target": "C:\\Users\\krish\\.cursor\\skills",
+  "release_id": "v2026.11.14.5",
+  "source_commit": "01461b0d95160d8179a1233de10d2f1404912291",
+  "artifact_hash_algorithm": "sha256-path-nul-file-sha256-ordinal-v1",
+  "deployed_at_utc": "2026-11-15T07:40:17.8828769Z",
+  "backup_directory": "C:\\Users\\krish\\.cursor\\skills.harness-backups\\cursor-primary\\v2026.11.14.5-20261115T074016Z-30ce344e",
+  "result": "installed-and-hash-verified",
+  "skills": [
+    {
+      "name": "apify",
+      "action": "exact",
+      "installed_sha256": "1A8B17C8E21E142DF49A5B54DC0A63795BD2807A326BC950C4DB4B7E9372EE10",
+      "package_sha256": "D5DA1B7FA5193B763D48FF724C0FF9BC7D36E55000576B00741A034A40C0775E"
+    },
+    {
+      "name": "build-apps-with-krish",
+      "action": "exact",
+      "installed_sha256": "978916DB207D0F6C9D6E197FDDE28917E446E39328EE56293A519D0EE2DB7892",
+      "package_sha256": "B01998C5F6B5F27ABC43F88D3AE7E4680D58585DB90877232ECFAC99006C9296"
+    },
+    {
+      "name": "content-corpus",
+      "action": "exact",
+      "installed_sha256": "DB1D805420B6759C80FE1DBC8DF1350044D39506089F983A49C76A8667FF0378",
+      "package_sha256": "9666F01BED79982FD8661E67002E786BAEA179F1A14C1005ACAF7B3CB311620D"
+    },
+    {
+      "name": "ctrl-build",
+      "action": "exact",
+      "installed_sha256": "CA30AA0875F127D6891B7D8C372D24B0536B1CD11B7500514B9EB1AD24B4D992",
+      "package_sha256": "8C137E3942E00A6AA12AECD109B6AC6D39BC77165EB7D753384AE71CFAF1773D"
+    },
+    {
+      "name": "ctrl-capture",
+      "action": "exact",
+      "installed_sha256": "5A9BD5EEC21571ABEC8A6DFA6127ED65A473176FBEEDBB4E2DF3705F453B5A9C",
+      "package_sha256": "35009FA7B1AD6DE3174FAD1615DD4E22FB92816F3E517B355AD27FCE1097CDFC"
+    },
+    {
+      "name": "ctrl-check",
+      "action": "exact",
+      "installed_sha256": "A2770FCD899EA9EADF61C2816DD09AE8E018F24677D1BF3D0A3501C9FA311938",
+      "package_sha256": "F2329CC8E70FFE0169A55E0EEA45483D5182FA7E0201D0DA3EAF15A2CF709227"
+    },
+    {
+      "name": "ctrl-compile",
+      "action": "exact",
+      "installed_sha256": "E9C0F09339C5212FFAA43DF935309D55022283CF65E28FB6E1F36FB25A5A830C",
+      "package_sha256": "1C516F731E4668269C1ED3BCBFCF959C5B77296D70043D025E83AC01D001E209"
+    },
+    {
+      "name": "ctrl-intake",
+      "action": "replace-known-baseline",
+      "installed_sha256": "E48C4CE9A3C412E90E383077A1751EBC7F2AD72545658FD9C3A706A51711A2CB",
+      "package_sha256": "A511FB62C476EA511BFD054FC58C3923F112B2AE94CE1B1E295FCCA0795C794D"
+    },
+    {
+      "name": "decision-ledger",
+      "action": "exact",
+      "installed_sha256": "B08C0BEB8858936DA62A105E14CBC42E5B42C187E6257676914F7192558618B9",
+      "package_sha256": "4E42383327EC2DA1882CFA182D875C05E0312FC2B2919AF8362C1CE0DCE35A08"
+    },
+    {
+      "name": "design-intelligence-search",
+      "action": "exact",
+      "installed_sha256": "64873CBF57285C8602711CC1017F351F7859DAEB21FCE3A950F14F0A76EFB36F",
+      "package_sha256": "204E037E429F9B5AB58E0DFD8CB776C241EC11CDDCD9658F1B0EEC0F9E7036D9"
+    },
+    {
+      "name": "evidence-research",
+      "action": "exact",
+      "installed_sha256": "85183A0608966288116481C2AD3833AF0073042C317A3C76D70826864905DEB1",
+      "package_sha256": "C47AFC1761122C9A403CDBA836508B5B06CA609711E0A8A4E50D2931376BD3A8"
+    },
+    {
+      "name": "harness-maintainer",
+      "action": "exact",
+      "installed_sha256": "5B9A84B0E88DC5D6A14C8AC135CAF248830879A7A5237DDF56DC3BED53B5C1F1",
+      "package_sha256": "4DABF29D4455DF64FDD6443F039C44CBE09A02BE828CED2853D4C0202DBF9279"
+    },
+    {
+      "name": "instantly-operator",
+      "action": "replace-known-baseline",
+      "installed_sha256": "0EE897F6B2CA48706B1FE1A75F0BCA9EEF3C57828B9C74D55DB403F163FF667F",
+      "package_sha256": "D046C6D967F1205E0F4A3A5A6AF69F1496ABFFA9E7C54B95D6543042CB6543B7"
+    },
+    {
+      "name": "krish-build",
+      "action": "exact",
+      "installed_sha256": "818AB09BF771E6789112350E417116794EB5D03DA6816824D4DF71307DB92506",
+      "package_sha256": "0FE776770D4B98A67C2DD09130025466E744D6557327392B12943745E1B284AA"
+    },
+    {
+      "name": "krish-content-marketer",
+      "action": "exact",
+      "installed_sha256": "CE5821C98CA846BB38A623DBC58508C1D2DCED8F872E6966212227205C08DF73",
+      "package_sha256": "E47424AA82E6838A46DF27F1400A54B7EC66BD2876422709A38EA20F3EC18831"
+    },
+    {
+      "name": "krish-design",
+      "action": "exact",
+      "installed_sha256": "CE81E35A0773E067478972AB2C08E5A1F56D55DD6EDC1CD1819FBECC9EA02162",
+      "package_sha256": "ED64DCBF3D645DDF31B540FA761F4E5FFA1E63D6812D598D4EEB99ADA0F7E18E"
+    },
+    {
+      "name": "krish-principles",
+      "action": "replace-known-baseline",
+      "installed_sha256": "86599ED56B536A6438FF201E6BF73BA6B7C115E95EC7415A0E4C412219A0035C",
+      "package_sha256": "53E9AA9886C5C8D630B9EA3839DB86196CCDC36D6DBDA0F1FDB0D2030FF77D76"
+    },
+    {
+      "name": "krish-voice",
+      "action": "replace-known-baseline",
+      "installed_sha256": "9DB8F264D1278D6DF73CA1F43FFD84E6FA49E966B3F9716B268F26DA9E54FB0F",
+      "package_sha256": "55F3B8A02260E16F1BF5697D61DDC30B4C29089FDD7CB9DD8CC5307AB3849E4C"
+    },
+    {
+      "name": "locked-revision",
+      "action": "exact",
+      "installed_sha256": "BD93E6DE2CAE4A22231193A2E15D6A642B355955CA2951AE0BB97DEEBC529F8C",
+      "package_sha256": "93B1B545303C90A1C2B5DBC5132AA4FDFECC2A763FC88676B5C3D203AB472A2C"
+    },
+    {
+      "name": "mindmake",
+      "action": "replace-known-baseline",
+      "installed_sha256": "8797F27965992EF0630B3AAC461A2AC29BA2B79810CC952E513AAC934E1AB880",
+      "package_sha256": "24C46FE995E341254AC6712449272CA8358FE49BDAD1A495D477DAA6C6EC8702"
+    },
+    {
+      "name": "mindmake-os",
+      "action": "replace-known-baseline",
+      "installed_sha256": "5B9ED60DDDBD5830F87BD69271D48FADB753DFDDB0908C8A8C9D7E41C77CFD8A",
+      "package_sha256": "09DBA2FE554399F36EE6F733803865B4AF32EA0323F1CA40A68E248E1FDB74CC"
+    },
+    {
+      "name": "n8n-operator",
+      "action": "exact",
+      "installed_sha256": "F1415E0EDF8A8E56D459836A14F19AECC7D43550DC1CBA701DFDBF9D7A105771",
+      "package_sha256": "2F4D257E1BE6F3E17FB93EBD1D9018648847BE7974D399559D170905A5EE0AAA"
+    },
+    {
+      "name": "strategy-brief",
+      "action": "exact",
+      "installed_sha256": "4B3CD9D2DFD17D4B39866D86C837ABA1748FD32F899B1F3DCDB98B0EDD9614A4",
+      "package_sha256": "4FE2B9994F64599E2A94B650A608AB30F1B8C80E2687753331710873205E5314"
+    },
+    {
+      "name": "take-the-brief",
+      "action": "exact",
+      "installed_sha256": "6B218519024D139196F718CF9F9327D5E30815B1379000D3FE960A5778EDE9A4",
+      "package_sha256": "E25A1D8AF52F5F6D7958BB6F08EDCBA98760936ABB3DAE48D4E41C5500AFCA6E"
+    },
+    {
+      "name": "tool-router",
+      "action": "exact",
+      "installed_sha256": "4055C8E0539C0566250CBFD53817C5404434051D4EBF752AABF4513AD2DCC61F",
+      "package_sha256": "8F34A6CB3B598EF30E6928ACE2B55D378239097F9FF872E9401D1D821155C9F1"
+    },
+    {
+      "name": "tools-access",
+      "action": "replace-known-baseline",
+      "installed_sha256": "8D517090C7A1349EEBA06BF31570FC9F402C6E18793BC7CA2615F10CD471905F",
+      "package_sha256": "90A604FEE02CE6B73501E7721A2ADF1D6985172C4F2A27E91774E37127D93C30"
+    },
+    {
+      "name": "ux-foundations",
+      "action": "exact",
+      "installed_sha256": "5842118673D4A88E2AF4E57FD92E32B9BAF91F76D73F023BD1454F19D4AF36C8",
+      "package_sha256": "DD78F2AC236486473FA758DC0C540165C496D3F82AE5CFF5A76FC3BFA641C02C"
+    },
+    {
+      "name": "ux-testing-agent",
+      "action": "exact",
+      "installed_sha256": "2627D9DACB6FB19A90D98051E6EEA5CB06619917C69E8D77F56283DD60B8351E",
+      "package_sha256": "FBAB5C20361CB591FB01D24D841AB7DA04CD913875563068D058BAB609BB4E91"
+    },
+    {
+      "name": "verification-loop",
+      "action": "exact",
+      "installed_sha256": "44B119837EE05429480AE543AFEC926078D4C1CAF5AA739FE286465B648EA8FE",
+      "package_sha256": "61B8CB98BCF684C63394B457E45F63598433925C15E5468A9A6B34FC64967B50"
+    },
+    {
+      "name": "video-engine",
+      "action": "replace-known-baseline",
+      "installed_sha256": "AE9476213DA46A7AC9E24A9976BEA487DB99551CE9D2C588D9973629BE03FA30",
+      "package_sha256": "C4FB1BE0DC835DE9A398D17393B3828C612373EB0B0A457C84D3805FB6AA7453"
+    }
+  ]
+}
