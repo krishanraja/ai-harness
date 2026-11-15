@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-15T01:51:55.891Z",
-  "measurement_verification_at": "2026-11-15T01:51:55.844Z",
+  "generated_at": "2026-11-15T05:48:44.033Z",
+  "measurement_verification_at": "2026-11-15T05:48:43.965Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 294,
+  "unknown_repository_observations": 295,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -65,7 +65,7 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "155b79828fb7",
-      "source_base": "9c1f28a1f4ca951644d0e8eaac5ed89a271ae969",
+      "source_base": "2627f3beb3a5b4222279a839cf05d9df9d3e0f6d",
       "bootstrap_before": 23238,
       "bootstrap_after": 23238,
       "observed_use": {
@@ -98,9 +98,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "c85e35916c812c496a7be8d158118931e14e1e57",
-      "bootstrap_before": 421037,
-      "bootstrap_after": 421037,
+      "source_base": "a30e1df09616b8d806dd807b1050b2d2242d6490",
+      "bootstrap_before": 421136,
+      "bootstrap_after": 421136,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -395,9 +395,9 @@
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "72f9a61493dc",
-      "source_base": "d2fba86421d61c7fff7c9e61f98795a03ac496da",
-      "bootstrap_before": 48277,
-      "bootstrap_after": 48277,
+      "source_base": "60a83c25ea6982975cc40f8a613ed981d354b6b8",
+      "bootstrap_before": 55209,
+      "bootstrap_after": 55209,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,

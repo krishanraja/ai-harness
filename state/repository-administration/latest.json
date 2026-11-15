@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T01:51:55.781Z",
+  "generated_at": "2026-11-15T05:48:43.853Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "c85e35916c812c496a7be8d158118931e14e1e57",
+      "base": "a30e1df09616b8d806dd807b1050b2d2242d6490",
       "brain_revision": "aabfeac6c45f",
-      "before": 421037,
-      "after": 421037,
+      "before": 421136,
+      "after": 421136,
       "files": [],
       "skipped": [],
-      "source_seal": "bcc891b1c86db3c8ff08042020125acc04802f381aa120f20825d80f639174e9",
+      "source_seal": "eca99fbbc785ef53b356e9582856b0adb855037da31839f12ed75006f7d01c08",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -41,7 +41,7 @@
     },
     {
       "repository": "ai-harness",
-      "base": "9c1f28a1f4ca951644d0e8eaac5ed89a271ae969",
+      "base": "2627f3beb3a5b4222279a839cf05d9df9d3e0f6d",
       "brain_revision": "155b79828fb7",
       "before": 23238,
       "after": 23238,
@@ -244,13 +244,13 @@
     },
     {
       "repository": "inspirationhouse",
-      "base": "d2fba86421d61c7fff7c9e61f98795a03ac496da",
+      "base": "60a83c25ea6982975cc40f8a613ed981d354b6b8",
       "brain_revision": "72f9a61493dc",
-      "before": 48277,
-      "after": 48277,
+      "before": 55209,
+      "after": 55209,
       "files": [],
       "skipped": [],
-      "source_seal": "088846fbcf30fcde43e0fec62455484422347ae01b3d707eef613a973065296b",
+      "source_seal": "b254572683d2c57fe0f42b727fdc7d5cd62ff00dee84327084459ae812abf907",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
