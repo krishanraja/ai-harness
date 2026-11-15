@@ -70,5 +70,10 @@
     "failing_runs": 6,
     "reasons": [],
     "source": "repository_dispatch"
+  },
+  "vault-deposit-lorimer": {
+    "last_run": "2026-11-15T07:39:29.343Z",
+    "status": "ok",
+    "source": "repository_dispatch"
   }
 }
