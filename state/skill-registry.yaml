@@ -305,7 +305,7 @@ production:
   - {name: krish-voice, role: outbound-voice, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 60}
   - {name: locked-revision, role: immutable-baseline-surgical-revision-controller, owner: Krish Raja, reviewed: 2026-08-29, freshness_sla_days: 90}
   - {name: content-corpus, role: channel-context, owner: Krish Raja, reviewed: 2026-10-06, freshness_sla_days: 45}
-  - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 60}
+  - {name: krish-content-marketer, role: conversion-strategy, owner: Krish Raja, reviewed: 2026-11-15, freshness_sla_days: 60}
   - {name: ux-foundations, role: generic-ux-reference, owner: Krish Raja, reviewed: 2026-08-05, freshness_sla_days: 180}
   - {name: ux-testing-agent, role: evidence-first-ux-validator, owner: Krish Raja, reviewed: 2026-09-24, freshness_sla_days: 90}
   - {name: video-engine, role: exact-phrase-mindmake-video-engine-launcher, owner: Krish Raja, reviewed: 2026-11-14, freshness_sla_days: 30}
