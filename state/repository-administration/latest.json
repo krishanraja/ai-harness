@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-16T01:57:22.471Z",
+  "generated_at": "2026-11-16T01:58:09.648Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
@@ -42,7 +42,7 @@
       ],
       "status": "awaiting-checks",
       "pr": 63,
-      "head": "51699ed7a9a50da9e660829ad3926f5a7f0761ff",
+      "head": "29a01470348a964f299bf8f9d32e0f7c6236efa0",
       "checks": {
         "missing": [],
         "pending": [],
@@ -51,8 +51,7 @@
           "verify:failure"
         ],
         "statuses": []
-      },
-      "refreshed": true
+      }
     },
     {
       "repository": "ai-harness",
