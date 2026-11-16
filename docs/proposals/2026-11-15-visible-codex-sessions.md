@@ -34,7 +34,14 @@ while the Claude session that started it keeps writing to it and reading from it
 | growth-heartside | commit `d03aa91` |
 | growth-makeyourmindup | commit `c372f00` |
 
-It drives `codex app-server` directly, one short-lived server per command, so nothing holds the thread between turns:
+**Correction, 16 Nov 2026.** As first built, each command spawned its own private `codex app-server`. The thread
+was saved to Krish's Codex home but never appeared in his Desktop sidebar, and its turns ran with no browser ("The
+browser access host is unavailable"). Krish, 16 Nov: "we need to fix your ability to open a codex desktop session I
+can see and use alongside you". Each command now connects to the app-server daemon Codex Desktop itself runs, through
+`codex app-server proxy` and its WebSocket control socket, so the thread is made in Desktop's own server with Desktop's
+tools. If that daemon is not reachable the command fails and says so; it never falls back to a private server.
+
+It connects to Desktop's daemon for one turn per command, so nothing holds the thread between turns:
 
 - `node scripts/codex_thread.mjs open [options] "<message>"` starts a permanent thread (`ephemeral: false`) in Krish's
   everyday Codex home, names it by the message's first line, runs that first message and prints the thread id.

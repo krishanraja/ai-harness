@@ -1,0 +1,3 @@
+Status: scripts/codex_thread.mjs now opens and runs every thread inside Codex Desktop's own app-server daemon (codex app-server proxy, WebSocket), so the thread is made where Desktop lists it and its turns get Desktop's tools, the in-app browser included; before, a private app-server kept the thread out of Desktop's sidebar and ran it with no browser. Proven 16 Nov: open, send and read through the daemon, and a clear failure when the daemon is unreachable.
+Next: copy the script unchanged to content-engine, growth-heartside, growth-makeyourmindup and growth-mindmake once Krish confirms a thread shows in his Desktop sidebar.
+North Star check (2026-11-16): holds.
