@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-15
-head: 5a34255
+as_of: 2026-11-16
+head: 91e44e4
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -15,13 +15,13 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 ## What it is
 
-The harness is Krish's canonical cross-client AI operating layer, published in a public repository: one operating contract, one skill-routing contract, 30 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
+The harness is Krish's canonical cross-client AI operating layer, published in a public repository: one operating contract, one skill-routing contract, 33 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
 
 ## Who it is for and why it matters for Mindmake
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-15)
+## Where it is right now (as of 2026-11-16)
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":18,"current":null,"current_as_of":"2026-11-16","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: not measured, U4.** Corrections Krish had to give twice in a week, across the fleet: not measured for the week of 2026-11-09 (taste ledger not yet read for this week; 0 from the harness's own corrections), checked 2026-11-16. Measuring it is the first job.
 
@@ -49,6 +49,8 @@ This repository is not sold and carries no product name of its own; it is the in
 - **Credential exposure** opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`). Session closeout, one fleet list (`state/fleet.yaml`) and the North Star (`docs/NORTH_STAR.md`) are in force.
 
 ## What changed recently
+
+- 2026-11-16 The canon block in AGENTS.md was synced to v2026.11.15.2 (#276), carrying "33 curated skills" after ad-copywriter and ugc-avatar were admitted as skills 32 and 33 on 2026-11-15; NOW.md still said 30, a count two admissions out of date (the registry is the source). Also folded this week: the branch sweep, the Claude and Codex division, and the codex_thread rule.
 
 - 2026-11-15 NOW.md's "Where it is right now" had grown to 39 bullets and 24,702 characters against limits of 8 and 16,000; 37 bullets rolled into the LOG, the rest condensed.
 - 2026-11-14 The CLAUDE_CODE_OAUTH_TOKEN ask no longer names growth-heartside: the fleet integration audit (2026-11-14) read growth-heartside's docs-steward run 43538433695, where "Require the subscription token" succeeded and Claude ran. The steward cannot drop a done ask by itself; audit-now.mjs only warns when an ask is older than 14 days.

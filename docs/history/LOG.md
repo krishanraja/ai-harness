@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-16
+
+- stamped: `NOW.md` reconciled against 91e44e4; the skill count in "What it is" corrected from 30 to 33 to match `state/skill-registry.yaml`; head moved to 91e44e4.
+
 ## 2026-11-15
 
 - stamped: `NOW.md` audit finding fixed (`where_too_many`, bullets in "Where it is right now" over limit 8, and size over 16000 characters) by rolling the bullets below and condensing seven into one-line summaries; head moved to 5a34255.
