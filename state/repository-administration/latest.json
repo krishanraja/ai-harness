@@ -1,20 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T21:40:53.194Z",
+  "generated_at": "2026-11-16T01:57:22.471Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "fbc0caba9c30d2e4c5707e4e777e8243a59510e2",
+      "base": "60e5849fdcee5d4ed6803c29e0dfffe63b7baf5b",
       "brain_revision": "aabfeac6c45f",
-      "before": 427753,
-      "after": 427753,
-      "files": [
-        ".github/workflows/harness-repository-context.yml",
-        ".claude/hooks/harness-closeout.mjs"
-      ],
+      "before": 430143,
+      "after": 430143,
+      "files": [],
       "skipped": [],
-      "source_seal": "9da4a088b9e2f8267228adcefe33ed474a8216fdcc7dd9bd79cd7e8fd1e1c377",
+      "source_seal": "b2f16a197753c36ab1ff179194cf6cc74baa988d757e8a0378323f249480c043",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -22,30 +19,20 @@
         "administration.experimental-learning",
         "administration.evidence-and-acceptance"
       ],
-      "status": "awaiting-checks",
-      "pr": 739,
-      "head": "2c3f44a4af147de5aeabaad25bfa47e30186e2a3",
-      "checks": {
-        "missing": [
-          "operating-context"
-        ],
-        "pending": [],
-        "failed": [],
-        "statuses": []
-      }
+      "status": "current"
     },
     {
       "repository": "AEO-Engine",
-      "base": "5ca9a40c4515b72db6d946239aedccc5ac787b6a",
+      "base": "f3bb734487c1cdb95a18c4db20bf5a91e5550310",
       "brain_revision": "5ca09cc3df52",
-      "before": 37944,
-      "after": 37944,
+      "before": 25372,
+      "after": 25372,
       "files": [
         ".github/workflows/harness-repository-context.yml",
         ".claude/hooks/harness-closeout.mjs"
       ],
       "skipped": [],
-      "source_seal": "429933206d267f6d789bdee79ad9dbf5a293e29adc1b37483ac2531b9d6c018a",
+      "source_seal": "4cfb3d017e72febdf7ce63e109d4809c5b75197b8142f0fad3583c0b0e872325",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -57,13 +44,15 @@
       "pr": 63,
       "head": "51699ed7a9a50da9e660829ad3926f5a7f0761ff",
       "checks": {
-        "missing": [
-          "operating-context"
-        ],
+        "missing": [],
         "pending": [],
-        "failed": [],
+        "failed": [
+          "verify:failure",
+          "verify:failure"
+        ],
         "statuses": []
-      }
+      },
+      "refreshed": true
     },
     {
       "repository": "ai-harness",
