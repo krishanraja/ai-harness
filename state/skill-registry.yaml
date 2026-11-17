@@ -148,19 +148,19 @@ surface_deployments:
     status: awaiting-automatic-install-of-v2026.11.15.2
     previous_release: v2026.10.06.2
   cursor-primary:
-    release_id: v2026.11.11.1
-    source_commit: 76f195441a1b23afa75ac668c872aaf403752f94
-    installed_skill_count: 30
-    installed_file_count: 154
-    installed_ordinal_aggregate_sha256: 6055B97C3E67D6FF95526904A3AC93A4B475FE9B04F14FC278AC7637D33EF454
-    per_skill_hashes_exact: 30
-    deployed_at: 2026-11-12
-    deployed_at_utc: 2026-11-08T08:40:21.8249342Z
+    release_id: v2026.11.15.2
+    source_commit: 8ac1be2ca33812b2d56313d882cb6c1f35e95892
+    installed_skill_count: 33
+    installed_file_count: 182
+    installed_ordinal_aggregate_sha256: 62D469A8370CAD71ABD94480FC9548EA237BC5279F35D161E89CF8A96A664D9E
+    per_skill_hashes_exact: 33
+    deployed_at: 2026-11-16
+    deployed_at_utc: 2026-11-16T07:31:17.5428336Z
     rollback_directory: C:\Users\krish\.cursor\skills.harness-backups\cursor-primary\v2026.10.06.3-20261006T212041Z-b93d1a7c
     evidence:
-      - state/heartbeats.json
-    status: awaiting-automatic-install-of-v2026.11.15.2
-    previous_release: v2026.11.08.1
+      - state/deployments/v2026.11.15.2-cursor-primary.json
+    status: current-installed-hash-verified-automatic-install
+    previous_release: v2026.11.11.1
   claude-code-user:
     release_id: v2026.11.11.1
     source_commit: 76f195441a1b23afa75ac668c872aaf403752f94

@@ -21,7 +21,7 @@ Repository HEAD and open pull requests are volatile and must not be cached here.
 | Surface | Release | Integrity evidence | Status |
 |---|---|---|---|
 | codex-surface-07a67cda9f99 | v2026.10.06.3 | 29/29 exact | awaiting-automatic-install-of-v2026.11.15.2 |
-| cursor-primary | v2026.11.11.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.15.2 |
+| cursor-primary | v2026.11.15.2 | 33/33 exact | current-installed-hash-verified-automatic-install |
 | claude-code-user | v2026.11.11.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.15.2 |
 | codex-current | v2026.11.11.1 | 30/30 exact | awaiting-automatic-install-of-v2026.11.15.2 |
 | claude-cloud | v2026.10.06.3 | cloud inventory only | stale-manual-cloud-upload-required-for-v2026.11.15.2 |
