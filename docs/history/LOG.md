@@ -5,6 +5,26 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-17
+
+- stamped: `NOW.md` audit findings fixed (`too_long` 17070 characters against 16000, `where_too_many` 22 bullets against 8) by rolling the bullets below and merging related ones; head moved to 4e71e38.
+
+- rolled from NOW.md: Proposed, for Krish's Yes: the canon names who does what between Claude and Codex (Codex never writes ai-harness or Google Drive; Codex does art direction, visual builds and browser legwork, visible in Codex Desktop), channel-tasks gains the social go-live check, and the Engines section gains a weekly what-worked loop (docs/proposals/2026-11-15-claude-codex-division.md). Nothing in the canon or contracts changed. (2026-11-15)
+
+- rolled from NOW.md: proposal written for Krish: Claude starts Codex only through codex_thread, from a session on his computer when he must see or share it, with the tool canonical here and copied to growth-mindmake and growth-legibility (docs/proposals/2026-11-15-visible-codex-sessions.md). No canon or contract changed. (2026-11-15)
+
+- rolled from NOW.md: `council` is staged as an inactive candidate (`candidates/council/`): a read-only validator any session can use to put a decision or an idea to the same five seats and eight idea tests Control Center's council uses, with the chair's call as advice to Krish. Its gate holds the copied words to control-center byte for byte and refuses outside names, em dashes and outside links; one sentence of the `hard_to_copy` brief is new and waits for control-center to adopt it (`docs/proposals/2026-11-15-council.md`). (2026-11-15)
+
+- rolled from NOW.md: the canon-sync merger requires operating-context only where a repository's base runs the context workflow; in a repository the publisher does not administer it merges on that repository's own green checks once the pull request has been open ten minutes, so the first canon blocks into claude-archive, content-watcher, filearchives, music-watcher and sendlinks no longer wait on a check none of them runs. (2026-11-15)
+
+- rolled from NOW.md: The canon's Route paragraph names the research library as a research document's home, cited by id (I-30; it reaches the fleet's blocks with the next release). The North Star number has its weekly countdown ladder, set by Krish on 14 Nov: 18 (w/c 2 Nov), 8 (9 Nov), 3 (16 Nov), 0 (23 Nov), 0 (30 Nov). The 14 Nov reading was 18 of 18. (2026-11-14)
+
+- rolled from NOW.md: Repository administration covers 18 targets (7 excluded) under plan:fleet-kit-v1; the docs steward's paid run is split in two, Claude writing with a read-only token and a model-free job publishing (AUTO-6); no database address or key is in this public repository, and CI fails on one (`scripts/check-public-leaks.mjs`). (2026-11-14)
+
+- rolled from NOW.md: The nightly jobs now measure more: the North Star reads "not measured, U4" instead of a false 0 (`scripts/north-star.mjs`), `state/pins.yaml` and `scripts/reconcile-pins.mjs` report what each repository copies, and `scripts/skill-reviews.mjs` writes the review count below. (2026-11-14)
+
+- condensed in NOW.md, originals not rolled: the council, ad-copywriter and ugc-avatar admissions and the Claude and Codex division (merged into one bullet), the codex_thread rule, the branch sweep, the branch rule and the kept-branches digest (merged into one), and the credential exposure line (merged with release and surfaces). (2026-11-15)
+
 ## 2026-11-16
 
 - stamped: `NOW.md` reconciled against 91e44e4; the skill count in "What it is" corrected from 30 to 33 to match `state/skill-registry.yaml`; head moved to 91e44e4.
