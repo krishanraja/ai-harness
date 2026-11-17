@@ -223,6 +223,11 @@ jobs:
       - name: Every fleet copy of codex_thread matches the canonical one
         run: node scripts/test-codex-thread-copies.mjs
 
+      # codex_thread never fails silently and queues for Codex Desktop when it
+      # holds the thread (Ruling, Krish, 2026-11-17).
+      - name: codex_thread fails loudly and reaches threads Desktop holds
+        run: node scripts/test-codex-thread.mjs
+
       # A blocked PC says why in one listed word, never free text, because the
       # ledger is public; the sync and the recorder must agree on the words.
       - name: A machine heartbeat says why it is blocked without leaking

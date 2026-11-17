@@ -49,6 +49,18 @@ workspace-write), `--json`, `--detach` with `--log` (the command runs on in the 
 first to its log; content-engine's `ve dispatch` uses this for background cards). Every run uses approval policy
 "never" and declines any request the server still sends. The plugin's long-running server is never used.
 
+Amended 2026-11-17 (Ruling, Krish, 2026-11-17: Claude keeps two-way access to every Codex thread it opens while Krish
+uses it in Desktop; fix codex_thread so this can never recur). Two defects on his new Windows PC blocked film work for
+hours. First, the tool spawned `codex` with no shell, and on Windows npm puts only `codex.cmd` on PATH, so the spawn
+failed and the tool exited 0 with no output. It now runs the native `codex.exe` (npm's, a `codex.exe` on PATH, or
+Codex Desktop's own app-server), and any spawn failure, early server exit or unsettled command exits non-zero with a
+one-line reason. Second, when Krish has the thread open, Desktop's own app-server is its one writer and refuses
+`thread/resume` ("already has an active writer"). `send` now queues the message with `codex queue` instead, and Desktop
+runs it as the thread's next turn, with its in-app browser; `--wait` (with `--timeout`, default 1800 seconds) waits for
+that turn in the session file and prints Codex's last message. A message too long for one Windows command line is
+written to `<home>/codex_thread-messages/` and the queued turn is told to read it. `scripts/test-codex-thread.mjs`
+holds both fixes against a fake codex.
+
 Proved live on 2026-11-15 (content-engine commit `5e1ccf4a`): a thread opened and showed in his Desktop recents,
 Claude sent a second turn, he typed in Desktop and Codex answered, and `read` printed all four turns.
 
