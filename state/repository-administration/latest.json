@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-16T05:48:54.061Z",
+  "generated_at": "2026-11-17T04:27:28.343Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "b90809952d535d28d82a55af2620be166f30d2a7",
+      "base": "3be1294bdf186010064107d5544101ade82319e0",
       "brain_revision": "aabfeac6c45f",
-      "before": 430163,
-      "after": 430163,
+      "before": 432822,
+      "after": 432822,
       "files": [],
       "skipped": [],
-      "source_seal": "f765c229d0aed1d12dfa87f4f3a216df780f6b04e644471eac64e213d58e04a5",
+      "source_seal": "5a441bef61bdb86690b9d072d2f80e3144547decba89c98b6c505bd1d53233c3",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,16 +23,16 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "f3bb734487c1cdb95a18c4db20bf5a91e5550310",
+      "base": "094623d56529ca96fb8577f4507ac2c6c0741efd",
       "brain_revision": "5ca09cc3df52",
-      "before": 25372,
-      "after": 25372,
+      "before": 25416,
+      "after": 25416,
       "files": [
         ".github/workflows/harness-repository-context.yml",
         ".claude/hooks/harness-closeout.mjs"
       ],
       "skipped": [],
-      "source_seal": "4cfb3d017e72febdf7ce63e109d4809c5b75197b8142f0fad3583c0b0e872325",
+      "source_seal": "045b640706b444adfbecb80f255d4d1014f0ae3993a41c001747c18f98f2a041",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -51,7 +51,8 @@
           "verify:failure"
         ],
         "statuses": []
-      }
+      },
+      "refreshed": true
     },
     {
       "repository": "ai-harness",
