@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-17T04:28:16.352Z",
+  "generated_at": "2026-11-17T05:48:12.348Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "3be1294bdf186010064107d5544101ade82319e0",
+      "base": "3c69e44f38e0fb1fec45dfefd22a8e51842e5e35",
       "brain_revision": "aabfeac6c45f",
       "before": 432822,
       "after": 432822,
       "files": [],
       "skipped": [],
-      "source_seal": "5a441bef61bdb86690b9d072d2f80e3144547decba89c98b6c505bd1d53233c3",
+      "source_seal": "a686aa30a64a650fcda2b1ddc19807a99285268cd80ef7689d7a2b788b393300",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
