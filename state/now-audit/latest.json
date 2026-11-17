@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-11-15",
+  "date": "2026-11-17",
   "limits": {
     "as_of_max_age_days": 7,
     "north_star_check_max_age_days": 7,
@@ -21,13 +21,7 @@
       "repo": "control-center",
       "status": "pass",
       "failing_since": null,
-      "findings": [
-        {
-          "rule": "old_dated_claims",
-          "severity": "warn",
-          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 46)."
-        }
-      ]
+      "findings": []
     },
     {
       "repo": "mm-ctrl",
@@ -37,12 +31,17 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 23 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 25 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "recent_too_old",
           "severity": "fail",
           "detail": "1 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-10-15); roll them into docs/history/LOG.md."
+        },
+        {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "1 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-14); run the fold."
         },
         {
           "rule": "old_dated_claims",
@@ -53,9 +52,15 @@
     },
     {
       "repo": "mindmake",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "1 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-15); run the fold."
+        }
+      ]
     },
     {
       "repo": "fractionl-circle",
@@ -65,43 +70,37 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 23 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 25 days ago (limit 7); the next session re-dates it."
         },
         {
           "rule": "recent_too_old",
           "severity": "fail",
-          "detail": "1 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-10-15); roll them into docs/history/LOG.md."
+          "detail": "2 \"What changed recently\" bullet(s) older than 30 days (oldest 2026-10-16); roll them into docs/history/LOG.md."
         }
       ]
     },
     {
       "repo": "fractionl-pulse",
-      "status": "pass",
-      "failing_since": null,
+      "status": "fail",
+      "failing_since": "2026-11-17",
       "findings": [
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-23, 23 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-23, 25 days ago (limit 7); the next session re-dates it."
+        },
+        {
+          "rule": "recent_too_many",
+          "severity": "fail",
+          "detail": "13 \"What changed recently\" bullets older than a day (limit 12)."
         }
       ]
     },
     {
       "repo": "full-time",
-      "status": "fail",
-      "failing_since": "2026-11-15",
-      "findings": [
-        {
-          "rule": "too_long",
-          "severity": "fail",
-          "detail": "18189 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
-        },
-        {
-          "rule": "where_too_many",
-          "severity": "fail",
-          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
-        }
-      ]
+      "status": "pass",
+      "failing_since": null,
+      "findings": []
     },
     {
       "repo": "content-engine",
@@ -117,21 +116,38 @@
         {
           "rule": "north_star_check",
           "severity": "warn",
-          "detail": "The North Star check is dated 2026-10-27, 19 days ago (limit 7); the next session re-dates it."
+          "detail": "The North Star check is dated 2026-10-27, 21 days ago (limit 7); the next session re-dates it."
         }
       ]
     },
     {
       "repo": "ai-harness",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "17070 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "22 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "AEO-Engine",
       "status": "pass",
       "failing_since": null,
-      "findings": []
+      "findings": [
+        {
+          "rule": "old_dated_claims",
+          "severity": "warn",
+          "detail": "1 line(s) speak of something open or pending with no date newer than 14 days (lines 33)."
+        }
+      ]
     },
     {
       "repo": "makeyourmindup",
@@ -139,9 +155,14 @@
       "failing_since": "2026-10-28",
       "findings": [
         {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "16201 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
           "rule": "where_too_many",
           "severity": "fail",
-          "detail": "11 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+          "detail": "12 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         },
         {
           "rule": "old_dated_claims",
@@ -158,9 +179,15 @@
     },
     {
       "repo": "legibility",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "growth-heartside",
@@ -182,15 +209,27 @@
     },
     {
       "repo": "growth-mindmake",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "9 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "growth-fulltime",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "4 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-15); run the fold."
+        }
+      ]
     },
     {
       "repo": "growth-legibility",
@@ -198,9 +237,19 @@
       "failing_since": "2026-11-14",
       "findings": [
         {
+          "rule": "too_long",
+          "severity": "fail",
+          "detail": "17793 characters (limit 16000). Roll history into docs/history/LOG.md and keep what is current."
+        },
+        {
           "rule": "recent_too_many",
           "severity": "fail",
           "detail": "13 \"What changed recently\" bullets older than a day (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "16 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         }
       ]
     },
@@ -213,14 +262,25 @@
           "rule": "next_step",
           "severity": "fail",
           "detail": "No \"- Next\" line under \"What is next and what is waiting on Krish\"."
+        },
+        {
+          "rule": "unfolded_notes",
+          "severity": "fail",
+          "detail": "2 closeout note(s) in now-notes/ not folded into NOW.md (oldest 2026-11-15); run the fold."
         }
       ]
     },
     {
       "repo": "content-watcher",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "15 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "filearchives",
@@ -236,20 +296,36 @@
           "rule": "recent_too_many",
           "severity": "fail",
           "detail": "15 \"What changed recently\" bullets older than a day (limit 12)."
+        },
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "14 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
         }
       ]
     },
     {
       "repo": "inspirationhouse",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "17 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     },
     {
       "repo": "krish-clone",
-      "status": "pass",
-      "failing_since": null,
+      "status": "fail",
+      "failing_since": "2026-11-17",
       "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "12 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        },
         {
           "rule": "old_dated_claims",
           "severity": "warn",
@@ -271,9 +347,15 @@
     },
     {
       "repo": "sendlinks",
-      "status": "pass",
-      "failing_since": null,
-      "findings": []
+      "status": "fail",
+      "failing_since": "2026-11-17",
+      "findings": [
+        {
+          "rule": "where_too_many",
+          "severity": "fail",
+          "detail": "14 bullets in \"Where it is right now\" (limit 8); it says where things are, not how they got there."
+        }
+      ]
     }
   ]
 }
