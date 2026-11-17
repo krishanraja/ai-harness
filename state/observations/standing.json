@@ -3,8 +3,8 @@
     "klass": "freshness",
     "subject": "harness-maintainer",
     "first_seen": "2026-09-08",
-    "open": false,
-    "closed_at": "2026-11-15"
+    "open": true,
+    "reopened": "2026-11-17"
   },
   "freshness:video-engine": {
     "klass": "freshness",
