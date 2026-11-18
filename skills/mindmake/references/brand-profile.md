@@ -1,6 +1,6 @@
 # Brand profile: what Krish is for, in the buyer's words
 
-Status: **proposed, 18 November 2026. It governs only once Krish merges it.**
+Status: **current, 18 November 2026, merged on Krish's instruction ("make sure everything is merged to main"). The one sentence is his choice of that day; the rest of the working pack, with every open decision, is `krishanraja/mindmake` `project-documentation/krishs-mission/`.**
 Owner: Krish Raja. Reviewed against: `krishanraja/mindmake` `project-documentation/00_NORTH_STAR.md` and `01_CANON.md` at `4149f82`, mindmake.co and krishraja.com read live on 18 November 2026, and his LinkedIn headline and about as he shared them that day.
 
 Krish, 18 November 2026: "I need to distill everything down to the simplest form of buyability" and keep it "clear and understandable by anyone for what they need, as opposed to what I want to sell".
@@ -13,10 +13,12 @@ Lead with what the person needs, never with what Krish sells. There is **one thi
 
 ## The one sentence
 
-- Said about him (Boardy, hosts, intros): **Krish builds leaders an AI that runs on their own judgement, around the biggest decision on their desk, in 30 days, and they keep it.**
-- Said by him: **I build leaders an AI that runs on their own judgement, around the biggest decision on their desk, in 30 days, and they keep it.**
+Chosen by Krish on 18 November 2026 (option A):
 
-It carries who (leaders), what (an AI that runs on their judgement), the anchor (their biggest decision), the time (30 days) and the outcome (they keep it). It matches the two doors on mindmake.co: the AI brain is the system, the decision is what it is built around first.
+- Said about him (Boardy, hosts, intros): **Most leaders now ask one AI chat about everything and get roughly the answer everyone else gets; Krish spends 30 days building them an AI Brain that lays out each big decision, shows its sources and carries their standards into every tool they use.**
+- Said by him: **Most leaders now ask one AI chat about everything and get roughly the answer everyone else gets. I spend 30 days building them an AI Brain that lays out each big decision, shows its sources and carries their standards into every tool they use.**
+
+It answers "I already use Claude for that" with what one chat cannot do, and frames the gap as a common habit, never a personal failing. "Roughly the answer everyone else gets" is Krish's own diagnosis (ctrl-mindmake `docs/current/sales-pack/positioning.md`), a view with no number. Rejected on 18 November, in his words: "an AI that runs on their own judgement" ("everyone will just say I use claude for that") and "argues back" ("absolutely wrong... not insult, put people down, be inflammatory"). A second line naming the skills a Brain builds is proposed in the working pack.
 
 The thesis goes second, never first: **AI makes strong judgement stronger and weak judgement weaker. Mindmake builds the strong kind.** (Ruling, Krish, 2026-11-17; evidence in growth-mindmake `docs/EVIDENCE.md`.)
 
