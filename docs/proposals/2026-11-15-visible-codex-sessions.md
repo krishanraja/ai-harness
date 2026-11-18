@@ -124,3 +124,8 @@ session and lend it his browser, and this is the route that lets him.
 ## Amended 2026-11-15, the same evening
 
 Ruling (Krish, 2026-11-15): content production runs on Codex cards from the cloud and is never shown in Codex Desktop; social media legwork runs from a Claude session on his own computer, visible there. The codex_thread route this proposal built stands; what changed is who uses the visible home: only social media legwork started from his own computer. Video and every other card queued from a cloud session run under the Studio's own Codex home, never shown in Desktop (content-engine PR #731). His words and the reasoning are in `docs/proposals/2026-11-15-claude-codex-division.md`, "Amended 2026-11-15".
+
+**Addition, 18 Nov 2026: name every session.** Krish, 16 Nov, ruled that whenever Claude starts or spawns a session
+he can open (a Codex thread, a Claude Code session, a cloud session), it tells him that session's exact name in the
+same message, with its id or link where it has one, because a session he cannot name is one he cannot find. The ruling
+was first drafted in ai-harness#278, whose daemon route #280 replaced; this carries only the ruling into the canon.
