@@ -7,9 +7,10 @@ Use only after `krish-content-marketer` has locked the recipient, mode, argument
 1. Shared voice
 2. Cold mode
 3. A cold pitch to a named writer or creator
-4. Named-prospect mode
-5. Sender persona and signatures
-6. Final smell test
+4. A batch of pitches
+5. Named-prospect mode
+6. Sender persona and signatures
+7. Final smell test
 
 ## Shared voice
 
@@ -31,14 +32,28 @@ For a first message, form or email to someone whose published work is the reason
 
 - Re-read their source live before drafting, every time. A draft built from a summary or an earlier read is rebuilt.
 - Quote their own words verbatim, taken from the raw text of the page, and confirm they wrote that passage (`evidence-research`, multi-author pages).
+- A verbatim quote still goes through the kill list, and a quote cannot be respelled. When their line carries a US spelling or another kill list hit ("organizations", "judgment"), pick another line of theirs or put the point fully in Krish's own words. Never alter a quote to pass the check.
+- Every claim about Krish must be true on the day it is sent: how often he publishes, what he teaches, what he has shipped. Check the live record (the publication's latest post date, the last session he ran) before the claim goes in, and drop or reword it when it is no longer current.
 - One offer and one ask. Nothing else competes with them.
 - Open with "Hey <first name>, Krish here." and sign off "Krish", then "krishraja.com" on the next line.
 - Confirm the route's kind from the live page before drafting (`evidence-research`, contact route). The channel decides the register, so it is fixed before the first line is written.
 - Humour depends on the channel (`humour.md`). An email pitch has none (Ruling, Krish, 2026-11-10). A message or form pitch leads with his personality, enthusiasm and fun, under that file's first impression rules (Ruling, Krish, 2026-11-18).
 - Never promise what a platform's own help pages do not say plainly, such as who gets notified. Check what the offer needs from them first (an account, a publication) before offering it.
 - Any position Krish would argue in public is his judgement. Flag it for his approval; never pick it for him.
+- A counter-position meets a specific claim the partner actually made, quoted or linked. "Take the other side" that restates their own prediction earns an "agreed", not a yes.
+- Give before asking where you can, especially to a bigger partner, rather than offering a conditional swap. Write it as a promise ("we'll add you either way") unless it is already done; never state it as done before it is. Tell Krish that approving the text also approves the public recommendation it promises.
+- The link is part of the message. A link preview shows the landing page's title and meta description inside the pitch, so check that page's live title and description against current rulings before the pitch is approved; one stale line there breaks every pitch that links to it.
 - Run `check_voice` with the real channel (`message`, `form` or `email`) and mode `cold`. The cold band in Cold mode above applies.
 - `check_voice` counts question marks. A question quoted inside the ask (a survey question, say) counts as a second question, so write the quoted one without its question mark.
+
+## A batch of pitches
+
+When several pitches are drafted together and approved side by side, check the batch as well as each pitch. These come from an adversarial review of twelve cold collaboration pitches on 18 November 2026; replies were not yet measured.
+
+- Give each pitch its own mission line, written for that partner. A shared boilerplate intro sentence is the flattest line in a cold note and uses up its energy.
+- Never repeat a sentence word for word across the batch.
+- Audit the structure across pitches: opening construction, ask verb, sign-off move. Independent writers converge, and a pattern repeated four or six times reads as a template. Vary it before approval.
+- To check openers for cliché, score them with `divergent_score` against an explicit list of the obvious openers for that kind of pitch. It costs nothing and shows distance from the obvious; it cannot judge kindness, truth or voice fit, so those still need a reader.
 
 ## Named-prospect mode
 

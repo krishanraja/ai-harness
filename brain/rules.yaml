@@ -2531,12 +2531,12 @@ skill_sections:
   - id: evidence-research.edge-cases
     file: skills/evidence-research/SKILL.md
     heading: "Edge cases"
-    text_sha: "102dfe2ee0a5"
+    text_sha: "103dd0a5e83c"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
-      sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
+      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -2554,6 +2554,12 @@ skill_sections:
           kind: proposal
           ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
           sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
+      - text_sha: "102dfe2ee0a5"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
+          sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
     status: live
   - id: evidence-research.handoff-and-verification
     file: skills/evidence-research/SKILL.md
@@ -3191,12 +3197,12 @@ skill_sections:
   - id: krish-voice.reference-routing
     file: skills/krish-voice/SKILL.md
     heading: "Reference routing"
-    text_sha: "5901eb00dfd4"
+    text_sha: "bcd9bd647ee6"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
-      sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
+      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -3249,6 +3255,12 @@ skill_sections:
           kind: proposal
           ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
           sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
+      - text_sha: "5901eb00dfd4"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
+          sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
     status: live
   - id: krish-voice.source-and-privacy-contract
     file: skills/krish-voice/SKILL.md
@@ -3806,12 +3818,12 @@ skill_sections:
   - id: tool-router.match-value-to-the
     file: skills/tool-router/SKILL.md
     heading: "Match value to the task"
-    text_sha: "8335b91e784f"
+    text_sha: "d80fd12cc27e"
     first_seen: "2026-10-29"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
-      sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
+      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -3829,6 +3841,12 @@ skill_sections:
           kind: proposal
           ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
           sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
+      - text_sha: "8335b91e784f"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
+          sha256: "73FF562B2DA636BD8DD3D9AF6EB8EF4DB626EA86F200A89054A53F726E25EF93"
     status: live
   - id: tool-router.reach-for-the-selected
     file: skills/tool-router/SKILL.md
@@ -4204,12 +4222,12 @@ skill_sections:
   - id: verification-loop.select-checks-by-artifact
     file: skills/verification-loop/SKILL.md
     heading: "Select checks by artifact"
-    text_sha: "42d8ae9146c1"
+    text_sha: "66fcd09d50d7"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
+      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
     history:
       - text_sha: "3c3df845de45"
         valid_until: "2026-09-15"
@@ -4222,6 +4240,12 @@ skill_sections:
           kind: proposal
           ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
           sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+      - text_sha: "42d8ae9146c1"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+          sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     status: live
   - id: verification-loop.correction-loop
     file: skills/verification-loop/SKILL.md
