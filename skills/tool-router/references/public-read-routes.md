@@ -21,7 +21,7 @@ They are reads only. Nothing here posts, reacts, follows or signs in.
 
 ## When the signed-in browser fails
 
-On 18 November 2026 one read-only Codex pass on the worker's signed-in Chromium timed out on X, on two Substack About pages and on four of five Instagram comment pages. Plan every browser task with the public route above as its fallback before it starts. An item neither route read is recorded as unverified, and a task with an unverified item is still open, not done.
+On 18 November 2026, by the growth push session's own report, one read-only Codex pass on the worker's signed-in Chromium timed out on X, on two Substack About pages and on four of five Instagram comment pages. Plan every browser task with the public route above as its fallback before it starts. An item neither route read is recorded as unverified, and a task with an unverified item is still open, not done.
 
 ## Rendering a public page without Playwright
 
