@@ -112,6 +112,7 @@ The matrix must preserve conflicting evidence, publication/event/data dates, ret
 
 - **Paywall or access block:** use an accessible primary copy, abstract, filing, repository, or report the limitation. Never imply the inaccessible source was read.
 - **Dynamic page:** record retrieval time and use the page's authoritative visible state; do not rely on a stale snippet.
+- **Multi-author page:** a roundup, predictions series or panel page may put each contributor's name after their entry, not before it, and extraction tools (a direct-quote extractor included) can then pin an entry on the wrong person. Confirm who wrote each passage from the raw page order, and take any quote from the raw text, before the quote is attributed or used to approach that person.
 - **PDF/table:** inspect the relevant page/table and its notes, definitions, and methodology, not extracted text alone.
 - **No evidence found:** report the negative search scope and remain inconclusive; absence of evidence is not evidence of absence.
 - **Vendor benchmark:** inspect cohort, exclusions, incentive, and whether the metric matches Krish's use case.

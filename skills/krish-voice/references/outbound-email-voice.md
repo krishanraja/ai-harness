@@ -6,9 +6,10 @@ Use only after `krish-content-marketer` has locked the recipient, mode, argument
 
 1. Shared voice
 2. Cold mode
-3. Named-prospect mode
-4. Sender persona and signatures
-5. Final smell test
+3. A cold pitch to a named writer or creator
+4. Named-prospect mode
+5. Sender persona and signatures
+6. Final smell test
 
 ## Shared voice
 
@@ -23,6 +24,20 @@ Keep the first step compressed and conversational. A subject should feel like a 
 Length and shape, from the evidence in `linkedin-evidence.md` (rule 14): a cold body of about 50 to 100 words (the voice check flags over 120), a subject of one to four words, one ask, and at most one question. An interest-based ask ("Worth a look?") suits a first touch; a specific time suits a live conversation.
 
 Follow-ups must contribute something new. The final bump is shortest and emotionally unburdened.
+
+## A cold pitch to a named writer or creator
+
+For a first message, form or email to someone whose published work is the reason for writing (a partner, a co-host, a guest). This shape passed review in the first round on 18 November 2026; replies were not yet measured, so treat it as the current method, not proven conversion.
+
+- Re-read their source live before drafting, every time. A draft built from a summary or an earlier read is rebuilt.
+- Quote their own words verbatim, taken from the raw text of the page, and confirm they wrote that passage (`evidence-research`, multi-author pages).
+- One offer and one ask. Nothing else competes with them.
+- Open with "Hey <first name>, Krish here." and sign off "Krish", then "krishraja.com" on the next line.
+- No humour in any outbound (`humour.md`; Ruling, Krish, 2026-11-10).
+- Never promise what a platform's own help pages do not say plainly, such as who gets notified. Check what the offer needs from them first (an account, a publication) before offering it.
+- Any position Krish would argue in public is his judgement. Flag it for his approval; never pick it for him.
+- Run `check_voice` with the real channel (`message`, `form` or `email`) and mode `cold`. The cold band in Cold mode above applies.
+- `check_voice` counts question marks. A question quoted inside the ask (a survey question, say) counts as a second question, so write the quoted one without its question mark.
 
 ## Named-prospect mode
 

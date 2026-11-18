@@ -1,0 +1,3 @@
+Status: Batch 1 of the Make Your Mind Up growth push findings is proposed as skill changes, waiting on Krish's merge: public read routes for engagement (tool-router reference), multi-author attribution (evidence-research), live-copy and stranger-view checks (verification-loop), a cold pitch to a named writer (krish-voice outbound reference), and the handover rule that keeps next-session texts where the next session runs (operating contract).
+Next: Krish reviews and merges the batch 1 pull request; the curator session then takes batch 2, the adversarial review of the round 1 pitches.
+North Star check (2026-11-18): holds.
