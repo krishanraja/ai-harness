@@ -19,6 +19,10 @@ They are reads only. Nothing here posts, reacts, follows or signs in.
 
 - Instagram comment likes. Record them as unknown unless a browser session already in the plan reads them; do not start one only for this count.
 
+## When the signed-in browser fails
+
+On 18 November 2026, by the growth push session's own report, one read-only Codex pass on the worker's signed-in Chromium timed out on X, on two Substack About pages and on four of five Instagram comment pages. Plan every browser read with a fallback before it starts. The order stays the one `tool-router` sets: a connected tool that reads the item first, then the public route above, then the browser. The public route is only as good as its last live read, so record the retrieval time and treat a failed or changed route as no route. Re-check this observation with the routes table, by 18 December 2026. An item whose route failed (a route exists but neither it nor the browser read the item) is recorded as unverified, and a task with an unverified item is still open, not done. An item with no route at all, listed under "No public route found yet", is recorded as unknown, as that section says, and does not hold the task open.
+
 ## Rendering a public page without Playwright
 
 `verification-loop` owns the rule (a stranger's view, never Krish's signed-in profile). Where Playwright is not installed, Chrome can dump the rendered page on its own:
