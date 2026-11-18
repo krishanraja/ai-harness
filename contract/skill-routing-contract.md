@@ -85,7 +85,7 @@ The CTRL chain is for creating or changing a reusable standard. It is not the de
 2. `ctrl-compile`: stage 3, COMPILE.
 3. `ctrl-build`: stage 4, GENERATE.
 4. `ctrl-check`: stages 5-7, SCRUB, CRITIQUE, and PROVENANCE + MEASURE.
-5. Stage 8, DELIVER, installs or publishes; Krish's merge approves a harness release, and no skill performs it silently.
+5. Stage 8, DELIVER, installs or publishes; a pull request merged into ai-harness approves a harness release, whether Krish merges it or it merges itself once green and judged (Ruling, Krish, 2026-11-18), and no skill performs it silently.
 6. `ctrl-capture`: stage 9, LEARN. It opens evidence-backed change requests; a named human merges or closes each one.
 
 Never skip from intake to build, let capture merge its own change, or treat self-critique as an independent verifier.

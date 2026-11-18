@@ -47,9 +47,20 @@
  * the harness's own file, so nothing a person wrote is lost. A branch someone
  * added other files to is held and reported, never rebuilt.
  *
+ * Every pull request in ai-harness itself merges itself when green (Ruling,
+ * Krish, 2026-11-18: "ai-harness always needs to auto merge, 100% of the
+ * time"). Until then a session's pull request there waited for his merge as
+ * the release approval (Ruling, Krish, 2026-10-15), and a green, judged
+ * batch could sit unmerged. A session pull request (the fleet owner's, from
+ * this repository, on any branch without a lifecycle of its own) merges at
+ * the head it checked when it is not a draft, has no conflict, no review
+ * asks for changes on that head, and every check finished green with
+ * closeout, the validation build and the judge panel among them. GitHub
+ * writes the squash body from the commits, so each Ruling line survives.
+ *
  * Every other open pull request is listed, with its age and state, as what
  * waits on Krish (`waitingOnKrish`, read by the nightly housekeeping for the
- * digest). Nothing here merges a person's work.
+ * digest). Nothing here merges a person's work outside ai-harness.
  *
  *   node scripts/merge-bot-prs.mjs [--dry-run] [--repo <name>] [--wait <seconds>] [--out <file.json>]
  *
@@ -74,6 +85,8 @@ const GREEN = new Set(['success', 'skipped', 'neutral'])
 // This merger's own job runs as a check on the machine-evidence pull request it
 // is waiting on; counting it would wait for itself forever.
 export const SELF_CHECK = 'bot-pr-merge'
+// What a session pull request in ai-harness must have passed, by name, before it merges.
+export const SESSION_CHECKS = ['closeout', 'validate-and-repeat-build', 'judge']
 
 /** Which lifecycle a pull request belongs to. Pure. */
 export function kindOf(pr, repo, owner) {
@@ -84,6 +97,7 @@ export function kindOf(pr, repo, owner) {
   if (own && STEWARD_BRANCH.test(ref)) return 'steward-fallback'
   // Change requests, learning reviews and the administration publisher have owners of their own.
   if (own && ref.startsWith('harness/')) return 'harness'
+  if (own && repo === 'ai-harness') return 'session'
   return 'person'
 }
 
@@ -123,6 +137,22 @@ export function canonPlan({ baseText, headText, files, target, wanted, mergeable
 export function machinePlan({ files, mergeable, newer }) {
   if (!files.length || files.some((f) => !MACHINE_FILES.test(f))) return { action: 'hold', reason: 'not-only-machine-records' }
   if (mergeable === 'dirty') return newer ? { action: 'close', reason: 'superseded-by-newer-evidence' } : { action: 'hold', reason: 'conflict' }
+  if (mergeable === 'behind') return { action: 'update-branch' }
+  return { action: 'merge' }
+}
+
+/**
+ * What to do with an open session pull request in ai-harness. Pure. A review
+ * asking for changes holds it only while it stands on the current head: a
+ * judge panel review on an earlier head was answered by the push after it.
+ */
+export function sessionPlan({ draft, mergeable, reviews = [], head }) {
+  if (draft) return { action: 'hold', reason: 'draft' }
+  const latest = new Map()
+  for (const r of reviews) if (r.state !== 'COMMENTED') latest.set(r.user, r)
+  const asks = [...latest.values()].filter((r) => r.state === 'CHANGES_REQUESTED' && r.commit_id === head)
+  if (asks.length) return { action: 'hold', reason: `changes requested: ${asks.map((r) => r.user).join(', ')}` }
+  if (mergeable === 'dirty') return { action: 'hold', reason: 'conflict' }
   if (mergeable === 'behind') return { action: 'update-branch' }
   return { action: 'merge' }
 }
@@ -179,6 +209,7 @@ export class BotPrs {
       try {
         if (kind === 'canon-sync') await this.canon(entry, listed, base)
         else if (kind === 'machine-evidence') await this.machine(name, listed, pulls)
+        else if (kind === 'session') await this.session(name, listed)
         else if (kind === 'steward-fallback') {
           // Every steward run touches NOW.md; on a busy main the last fifty commits may hold none of them.
           stewardCommits ||= await this.gh.recentCommits(name, base, 30, 'NOW.md')
@@ -279,6 +310,24 @@ export class BotPrs {
     }, { repo })
   }
 
+  async session(repo, listed) {
+    const pr = await this.gh.getPull(repo, listed.number)
+    const plan = sessionPlan({ draft: !!pr.draft, mergeable: pr.mergeable_state, reviews: await this.gh.pullReviews(repo, pr.number), head: pr.head.sha })
+    if (plan.action === 'hold') { this.waiting.push({ repo, number: pr.number, title: pr.title, url: pr.html_url, kind: 'session', age_days: ageDays(pr.created_at, this.now), draft: !!pr.draft, mergeable: pr.mergeable_state || 'unknown', failing: [], pending: false, held: plan.reason }); return this.record(repo, pr, 'session', plan) }
+    if (plan.action === 'update-branch') {
+      await this.gh.updateBranch(repo, pr.number, pr.head.sha)
+      this.awaiting.push({ kind: 'session', repo, number: pr.number })
+      return this.record(repo, pr, 'session', plan)
+    }
+    const files = (await this.gh.pullFiles(repo, pr.number)).slice(0, 40)
+    const expected = {}
+    for (const f of files) expected[f] = (await this.gh.getFile(repo, f, pr.head.sha))?.text ?? null
+    return this.tryMerge(repo, pr, 'session', SESSION_CHECKS, async (merged) => {
+      for (const [f, text] of Object.entries(expected)) if ((await this.gh.getFile(repo, f, merged.sha))?.text !== text) return false
+      return true
+    }, { repo })
+  }
+
   /** Merge when green; leave it for the wait loop while checks run; report red. */
   async tryMerge(repo, pr, kind, required, readBack, retry) {
     const state = checksGreen(await this.gh.checksFor(repo, pr.head.sha), required)
@@ -291,7 +340,8 @@ export class BotPrs {
       return this.record(repo, pr, kind, { action: 'await-checks', reason: [...state.pending, ...state.missing].join(', ') || 'pending' })
     }
     const title = kind === 'canon-sync' ? `docs(canon): sync the canon block to ${inspect((await this.gh.getFile(repo, retry.entry.canon_target, pr.head.sha))?.text || '').release} (#${pr.number})` : `${pr.title} (#${pr.number})`
-    const merged = await this.gh.mergePull(repo, pr.number, { sha: pr.head.sha, title, message: kind === 'canon-sync' ? 'Only the text between the krish-canon markers changed. Merged by scripts/merge-bot-prs.mjs.' : 'Closeout: not needed, machine evidence. Merged by scripts/merge-bot-prs.mjs.' })
+    const message = kind === 'canon-sync' ? 'Only the text between the krish-canon markers changed. Merged by scripts/merge-bot-prs.mjs.' : kind === 'session' ? null : 'Closeout: not needed, machine evidence. Merged by scripts/merge-bot-prs.mjs.'
+    const merged = await this.gh.mergePull(repo, pr.number, { sha: pr.head.sha, title, message })
     if (merged?.merged !== true) return this.record(repo, pr, kind, { action: 'error', reason: 'merge-not-confirmed' })
     if (!merged.dryRun && !(await readBack(merged))) return this.record(repo, pr, kind, { action: 'error', reason: 'readback-mismatch', merge: merged.sha })
     return this.record(repo, pr, kind, { action: 'merged', merge: merged.sha || null })
@@ -312,6 +362,7 @@ export class BotPrs {
           this.results = this.results.filter((r) => !(r.repo === repo && r.number === item.number))
           this.waiting = this.waiting.filter((r) => !(r.repo === repo && r.number === item.number))
           if (item.kind === 'canon-sync') await this.canon(item.entry, listed, item.base)
+          else if (item.kind === 'session') await this.session(repo, listed)
           else await this.machine(repo, listed, await this.gh.openPulls(repo))
         } catch (e) {
           this.record(repo, { number: item.number }, item.kind, { action: 'error', reason: String(e.status ? `github-${e.status}` : e.message).slice(0, 160) })
@@ -337,7 +388,8 @@ export async function waitingOnKrish(gh, fleet, { now = Date.now(), minAgeDays =
     try {
       for (const listed of await gh.openPulls(entry.name)) {
         const kind = kindOf(listed, entry.name, gh.owner)
-        if (kind === 'person' && !listed.draft && ageDays(listed.created_at, now) >= minAgeDays) await run.person(entry.name, listed, kind)
+        // A session pull request in ai-harness still open a day on is stuck: held, red or conflicting.
+        if ((kind === 'person' || kind === 'session') && !listed.draft && ageDays(listed.created_at, now) >= minAgeDays) await run.person(entry.name, listed, kind)
       }
     } catch { /* one unreadable repository never hides the rest */ }
   }
@@ -352,7 +404,7 @@ export function waitingBlocker(waiting, { max = 8 } = {}) {
   return {
     kind: 'review', only_you: 'permission',
     title: waiting.length === 1 ? '1 pull request waits on you' : `${waiting.length} pull requests wait on you`,
-    detail: `${shown.join('; ')}${waiting.length > max ? `; and ${waiting.length - max} more` : ''}. Merge, close or tell a session what to change; the harness's own pull requests merge themselves.`,
+    detail: `${shown.join('; ')}${waiting.length > max ? `; and ${waiting.length - max} more` : ''}. Merge, close or tell a session what to change; the harness's own pull requests, and every green one in ai-harness, merge themselves.`,
   }
 }
 

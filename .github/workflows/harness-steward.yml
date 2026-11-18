@@ -785,8 +785,8 @@ jobs:
           [ -f judge.md ] && cat judge.md >> "$GITHUB_STEP_SUMMARY"
           exit 0
 
-      # A blocking regression requests changes. There is no auto-merge here to
-      # stop, so the panel blocks the way any reviewer does. Krish overrules with
+      # A blocking regression requests changes and fails this check, which holds
+      # the auto-merge (scripts/merge-bot-prs.mjs) the way any reviewer would. Krish overrules with
       # a commit body line "Ruling (Krish, DATE):", which the observer already
       # ledgers and which becomes that rule's new source.
       - name: Post the review
