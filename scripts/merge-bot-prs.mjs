@@ -52,7 +52,8 @@
  * time"). Until then a session's pull request there waited for his merge as
  * the release approval (Ruling, Krish, 2026-10-15), and a green, judged
  * batch could sit unmerged. A session pull request (the fleet owner's, from
- * this repository, on any branch without a lifecycle of its own) merges at
+ * this repository, on any branch but the canon sync, machine evidence and
+ * steward fallbacks, so change requests on harness/ branches too) merges at
  * the head it checked when it is not a draft, has no conflict, no review
  * asks for changes on that head, and every check finished green with
  * closeout, the validation build and the judge panel among them. GitHub
@@ -95,9 +96,12 @@ export function kindOf(pr, repo, owner) {
   if (own && ref === CANON_BRANCH) return 'canon-sync'
   if (own && repo === 'ai-harness' && MACHINE_BRANCH.test(ref)) return 'machine-evidence'
   if (own && STEWARD_BRANCH.test(ref)) return 'steward-fallback'
-  // Change requests, learning reviews and the administration publisher have owners of their own.
-  if (own && ref.startsWith('harness/')) return 'harness'
+  // In ai-harness every other pull request of the owner's merges itself once green and judged, change
+  // requests on harness/ branches included (Rulings, Krish, 2026-11-18). A change request opens as a draft
+  // and housekeeping marks it ready only once every check passed and the judge measured it.
   if (own && repo === 'ai-harness') return 'session'
+  // Elsewhere, change requests, learning reviews and the administration publisher have owners of their own.
+  if (own && ref.startsWith('harness/')) return 'harness'
   return 'person'
 }
 

@@ -517,12 +517,12 @@ contract_rules:
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
-    text_sha: "d9c8a913b4a5"
+    text_sha: "1ee11439ba3c"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
-      sha256: "E98D62AA634A66DBE9C56463DDE3162820F203042AC60B3EDE0A33DD48B74259"
+      ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
+      sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
     history:
       - text_sha: "2d9753efa37a"
         valid_until: "2026-11-14"
@@ -534,6 +534,12 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-14-engine-instructions.md"
+      - text_sha: "d9c8a913b4a5"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
+          sha256: "E98D62AA634A66DBE9C56463DDE3162820F203042AC60B3EDE0A33DD48B74259"
     status: live
   - id: authority.record-harness-observation-is
     file: contract/krish-operating-contract.md
@@ -1182,17 +1188,23 @@ contract_rules:
     valid_until: "2026-10-15"
   - id: ctrl-standards-chain.ctrl-capture-stage-9
     file: contract/skill-routing-contract.md
-    text_sha: "d8b95d47214e"
+    text_sha: "a4ba796a8b75"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+      ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
+      sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
     history:
       - text_sha: "e46e8e692025"
         valid_until: "2026-10-14"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "d8b95d47214e"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
     status: live
   - id: required-route-evidence.selected-skills-and-why
     file: contract/skill-routing-contract.md
@@ -1282,18 +1294,24 @@ contract_rules:
     status: live
   - id: canon.authority
     file: contract/templates/canon-block.md
-    text_sha: "66b1ed582f65"
+    text_sha: "613581d569d5"
     first_seen: "2026-09-08"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
-      sha256: "E98D62AA634A66DBE9C56463DDE3162820F203042AC60B3EDE0A33DD48B74259"
+      ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
+      sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
     history:
       - text_sha: "59eff15e7d06"
         valid_until: "2026-11-18"
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+      - text_sha: "66b1ed582f65"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
+          sha256: "E98D62AA634A66DBE9C56463DDE3162820F203042AC60B3EDE0A33DD48B74259"
     status: live
   - id: canon.verification
     file: contract/templates/canon-block.md
@@ -2056,17 +2074,23 @@ skill_sections:
   - id: ctrl-capture.change-and-history-invariants
     file: skills/ctrl-capture/SKILL.md
     heading: "Change and history invariants"
-    text_sha: "361c91710387"
+    text_sha: "7f0e9c1238bb"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
+      ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
+      sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
     history:
       - text_sha: "12aeb7040f08"
         valid_until: "2026-10-14"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "361c91710387"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-14-merge-ready-change-requests.md"
     status: live
   - id: ctrl-capture.never-omit-result-envelope
     file: skills/ctrl-capture/SKILL.md
@@ -2559,11 +2583,18 @@ skill_sections:
   - id: harness-maintainer.maintenance-workflow
     file: skills/harness-maintainer/SKILL.md
     heading: "Maintenance workflow"
-    text_sha: "64796066f867"
+    text_sha: "622b14ef2205"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
+      sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
+    history:
+      - text_sha: "64796066f867"
+        valid_until: "2026-11-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: harness-maintainer.scheduled-audit-invariant
     file: skills/harness-maintainer/SKILL.md
