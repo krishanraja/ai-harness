@@ -3,18 +3,25 @@ run-name: Harness bot pull requests (${{ github.event_name }})
 
 # The harness's own pull requests merge themselves when green, and replaced
 # ones close themselves (Ruling, Krish, 2026-10-28): the canon sync in every
-# fleet repository and the PC's machine evidence here. Everything else is
-# listed as waiting on Krish and never merged. Guards and reasons:
+# fleet repository and the PC's machine evidence here. Every session pull
+# request in ai-harness merges itself too, once closeout, the validation build
+# and the judge panel are green (Ruling, Krish, 2026-11-18: "ai-harness always
+# needs to auto merge, 100% of the time"). Everything else is listed as
+# waiting on Krish and never merged. Guards and reasons:
 # scripts/merge-bot-prs.mjs.
 #
-# Three knocks, because GitHub's schedule has started late or not at all
+# Four knocks, because GitHub's schedule has started late or not at all
 # (2026-10-24): hourly at :41, when a machine evidence pull request opens or
-# moves here, and after the nightly reconcile, which also merges inline.
+# moves here, when the validation or the steward's judge panel finishes on a
+# pull request here, and after the nightly reconcile, which also merges inline.
 on:
   schedule:
     - cron: "41 * * * *"
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_run:
+    workflows: ["Validate harness", "Harness steward"]
+    types: [completed]
   workflow_dispatch:
     inputs:
       dry_run:
@@ -31,8 +38,12 @@ concurrency:
 
 jobs:
   bot-pr-merge:
-    # On a pull request, only machine evidence from this repository starts it.
-    if: github.event_name != 'pull_request' || (startsWith(github.head_ref, 'machine-sync/') && github.event.pull_request.head.repo.full_name == github.repository)
+    # On a pull request, only machine evidence from this repository starts it;
+    # a finished validation or judge run starts it only for a pull request here.
+    if: >-
+      (github.event_name != 'pull_request' && github.event_name != 'workflow_run') ||
+      (github.event_name == 'pull_request' && startsWith(github.head_ref, 'machine-sync/') && github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -55,7 +66,7 @@ jobs:
         env:
           FLEET_TOKEN: ${{ secrets.FLEET_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run || false }}
-          ONLY: ${{ github.event_name == 'pull_request' && 'ai-harness' || '' }}
+          ONLY: ${{ (github.event_name == 'pull_request' || github.event_name == 'workflow_run') && 'ai-harness' || '' }}
         run: |
           set -euo pipefail
           args=(--out bot-prs.json)

@@ -178,7 +178,7 @@ jobs:
             node scripts/render-current-state.mjs
             node scripts/validate-release-coherence.mjs > /dev/null
             git add state/skill-registry.yaml CURRENT.md
-            git commit --quiet -m "release: register $id" -m "Registered by scripts/register-release.mjs under the standing ruling of 2026-10-15: every release built from main after Krish merges a change counts as approved by him."
+            git commit --quiet -m "release: register $id" -m "Registered by scripts/register-release.mjs under the standing rulings of 2026-10-15 and 2026-11-18: every release built from main after a change merges, by Krish or by the green auto-merge, counts as approved by him."
             if git push --quiet origin HEAD:main; then echo "Registered $id."; exit 0; fi
             sleep $((attempt * 7))
           done

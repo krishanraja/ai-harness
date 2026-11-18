@@ -240,12 +240,20 @@ export class Gh {
    */
   async mergePull(repo, number, { sha, title, message = '' }) {
     if (this.dryRun) return { merged: true, sha: null, dryRun: true }
+    // message null leaves the body to GitHub: for a squash, every commit's message, so their Ruling lines survive.
+    const body = (method) => ({ sha, merge_method: method, commit_title: title, ...(message === null ? {} : { commit_message: message }) })
     try {
-      return await this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, { sha, merge_method: 'squash', commit_title: title, commit_message: message })
+      return await this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, body('squash'))
     } catch (e) {
       if (e.status !== 405 || !/squash/i.test(e.message)) throw e
-      return this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, { sha, merge_method: 'merge', commit_title: title, commit_message: message })
+      return this.req('PUT', `/repos/${this.owner}/${repo}/pulls/${number}/merge`, body('merge'))
     }
+  }
+
+  /** Reviews on a pull request: [{ user, state, commit_id }], oldest first. */
+  async pullReviews(repo, number) {
+    const r = await this.req('GET', `/repos/${this.owner}/${repo}/pulls/${number}/reviews?per_page=100`)
+    return r.map((v) => ({ user: v.user?.login || '', state: v.state, commit_id: v.commit_id }))
   }
 
   /** A draft pull request becomes ready for review. REST has no endpoint for it. */

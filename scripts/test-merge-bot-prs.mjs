@@ -12,7 +12,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseYaml } from './lib/yaml.mjs'
 import { blockFor, splice } from './render.mjs'
-import { BotPrs, kindOf, checksGreen, canonPlan, canonGate, CONTEXT_WORKFLOW, SETTLE_MS, machinePlan, stewardPlan, orphanPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
+import { BotPrs, kindOf, checksGreen, canonPlan, canonGate, CONTEXT_WORKFLOW, SETTLE_MS, machinePlan, sessionPlan, SESSION_CHECKS, stewardPlan, orphanPlan, waitingBlocker, SELF_CHECK, targets } from './merge-bot-prs.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 const fleet = parseYaml(readFileSync(join(HARNESS, 'state/fleet.yaml'), 'utf8'))
@@ -27,6 +27,19 @@ assert.equal(kindOf(pr('machine-sync/lorimer/v1-2'), 'heartside', OWNER), 'perso
 assert.equal(kindOf(pr('steward/2026-10-23'), 'x', OWNER), 'steward-fallback')
 assert.equal(kindOf(pr('harness/change-2026-10-18-x'), 'x', OWNER), 'harness', 'change requests keep their own lifecycle')
 assert.equal(kindOf(pr('claude/some-session'), 'x', OWNER), 'person')
+assert.equal(kindOf(pr('claude/some-session'), 'ai-harness', OWNER), 'session', 'every ai-harness pull request merges itself (Ruling, Krish, 2026-11-18)')
+assert.equal(kindOf({ ...pr('claude/x'), user: { login: 'someone-else' } }, 'ai-harness', OWNER), 'person', 'only the fleet owner\'s own pull requests')
+assert.equal(kindOf({ ...pr('claude/x'), head: { ref: 'claude/x', repo: { full_name: 'fork/ai-harness' } } }, 'ai-harness', OWNER), 'person', 'never a fork')
+assert.equal(kindOf(pr('harness/change-2026-10-18-x'), 'ai-harness', OWNER), 'harness', 'change requests keep their own lifecycle here too')
+
+assert.equal(sessionPlan({ mergeable: 'clean', head: 'h' }).action, 'merge')
+assert.deepEqual(sessionPlan({ draft: true, mergeable: 'clean', head: 'h' }), { action: 'hold', reason: 'draft' })
+assert.deepEqual(sessionPlan({ mergeable: 'dirty', head: 'h' }), { action: 'hold', reason: 'conflict' })
+assert.equal(sessionPlan({ mergeable: 'behind', head: 'h' }).action, 'update-branch')
+assert.equal(sessionPlan({ mergeable: 'clean', head: 'h2', reviews: [{ user: 'github-actions[bot]', state: 'CHANGES_REQUESTED', commit_id: 'h1' }] }).action, 'merge', 'a judge review on an earlier head was answered by the push after it')
+assert.match(sessionPlan({ mergeable: 'clean', head: 'h2', reviews: [{ user: 'github-actions[bot]', state: 'CHANGES_REQUESTED', commit_id: 'h2' }] }).reason, /changes requested: github-actions\[bot\]/)
+assert.equal(sessionPlan({ mergeable: 'clean', head: 'h2', reviews: [{ user: 'a', state: 'CHANGES_REQUESTED', commit_id: 'h2' }, { user: 'a', state: 'APPROVED', commit_id: 'h2' }] }).action, 'merge', 'a later approval by the same reviewer answers the ask')
+assert.equal(sessionPlan({ mergeable: 'clean', head: 'h2', reviews: [{ user: 'a', state: 'CHANGES_REQUESTED', commit_id: 'h2' }, { user: 'a', state: 'COMMENTED', commit_id: 'h2' }] }).action, 'hold', 'a comment does not withdraw an ask')
 assert.equal(kindOf({ ...pr('harness/canon-sync'), user: { login: 'someone-else' } }, 'x', OWNER), 'person', 'only the fleet owner opens bot pull requests')
 assert.equal(kindOf({ ...pr('harness/canon-sync'), head: { ref: 'harness/canon-sync', repo: { full_name: 'fork/x' } } }, 'x', OWNER), 'person', 'a fork is never a bot pull request')
 
@@ -74,7 +87,7 @@ assert.ok(targets(fleet).some((r) => r.name === 'ai-harness') && !targets(fleet)
 const BASE_TEXT = '# AGENTS.md\n\nThe repository\'s own words.\n'
 const WANTED = splice(BASE_TEXT, blockFor(BASE_TEXT, heartside))
 
-function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {}, branches = {}, allPulls = {} }) {
+function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {}, branches = {}, allPulls = {}, reviews = {} }) {
   const calls = []
   const key = (repo, n) => `${repo}#${n}`
   return {
@@ -95,6 +108,7 @@ function fakeGh({ pulls = {}, files = {}, checks = {}, prFiles = {}, commits = {
     async updateBranch(...a) { calls.push(['update-branch', ...a]) },
     async mergePull(repo, n, opts) { calls.push(['merge', repo, n, opts]); files[`${repo}:merged-${n}:${Object.keys(files).find((k) => k.startsWith(`${repo}:${opts.sha}:`))?.split(':')[2]}`] = undefined; return { merged: true, sha: `merged-${n}` } },
     async comment(...a) { calls.push(['comment', ...a]) },
+    async pullReviews(repo, n) { return reviews[key(repo, n)] || [] },
     async closePull(repo, n) { calls.push(['close', repo, n]); const p = pulls[repo].find((x) => x.number === n); p.state = 'closed' },
   }
 }
@@ -191,6 +205,31 @@ const GREEN_CANON = { runs: [run('operating-context', 'success'), run('closeout'
   const r3 = new BotPrs(both, { fleet, now: NOW }); await r3.repo(harness)
   assert.deepEqual(both.calls.filter((c) => c[0] === 'close').map((c) => c[2]), [9], 'the older conflicting evidence closes; the newer one waits for a person')
   assert.equal(r3.results.find((x) => x.number === 10).reason, 'conflict')
+}
+
+// A session pull request in ai-harness merges at the checked head once closeout, the build and the judge panel are green,
+// with GitHub writing the squash body so its Ruling lines survive; red, unjudged or asked-to-change ones wait.
+{
+  const S = 'claude/skill-curator-batch-3', F = 'skills/krish-voice/references/humour.md'
+  const GREEN_SESSION = { runs: [...SESSION_CHECKS.map((n) => run(n, 'success')), run('surfaces', 'success'), run(SELF_CHECK, null, 'in_progress')] }
+  const files = { [`ai-harness:head20:${F}`]: 'new\n', [`ai-harness:merged-20:${F}`]: 'new\n' }
+  const gh = fakeGh({ pulls: { 'ai-harness': [open('ai-harness', 20, S)] }, files, prFiles: { 'ai-harness#20': [F] }, checks: { 'ai-harness:head20': GREEN_SESSION }, reviews: { 'ai-harness#20': [{ user: 'github-actions[bot]', state: 'CHANGES_REQUESTED', commit_id: 'older' }] } })
+  gh.mergePull = async (repo, n, opts) => { gh.calls.push(['merge', repo, n, opts]); return { merged: true, sha: `merged-${n}` } }
+  const r = new BotPrs(gh, { fleet, now: NOW }); await r.repo(harness)
+  const m = gh.calls.find((c) => c[0] === 'merge')
+  assert.equal(r.results[0].action, 'merged'); assert.equal(m[3].sha, 'head20'); assert.equal(m[3].message, null, 'GitHub writes the body from the commits'); assert.equal(m[3].title, 't20 (#20)')
+  const red = fakeGh({ pulls: { 'ai-harness': [open('ai-harness', 21, S)] }, prFiles: { 'ai-harness#21': [F] }, checks: { 'ai-harness:head21': { runs: [...SESSION_CHECKS.filter((n) => n !== 'judge').map((n) => run(n, 'success')), run('judge', 'failure')] } } })
+  const r2 = new BotPrs(red, { fleet, now: NOW }); await r2.repo(harness)
+  assert.equal(red.calls.filter((c) => c[0] === 'merge').length, 0); assert.match(r2.results[0].reason, /judge/, 'a blocking judge panel holds it')
+  const unjudged = fakeGh({ pulls: { 'ai-harness': [open('ai-harness', 22, S)] }, prFiles: { 'ai-harness#22': [F] }, checks: { 'ai-harness:head22': { runs: [run('closeout', 'success'), run('validate-and-repeat-build', 'success')] } } })
+  const r3 = new BotPrs(unjudged, { fleet, now: NOW }); await r3.repo(harness)
+  assert.equal(r3.results[0].action, 'await-checks'); assert.match(r3.results[0].reason, /judge/, 'never merged before the judge panel has run')
+  const asked = fakeGh({ pulls: { 'ai-harness': [open('ai-harness', 23, S)] }, prFiles: { 'ai-harness#23': [F] }, checks: { 'ai-harness:head23': GREEN_SESSION }, reviews: { 'ai-harness#23': [{ user: 'krishanraja', state: 'CHANGES_REQUESTED', commit_id: 'head23' }] } })
+  const r4 = new BotPrs(asked, { fleet, now: NOW }); await r4.repo(harness)
+  assert.equal(asked.calls.length, 0); assert.match(r4.waiting[0].held, /changes requested/)
+  const someone = fakeGh({ pulls: { 'ai-harness': [open('ai-harness', 24, S, { user: { login: 'someone-else' } })] }, checks: { 'ai-harness:head24': GREEN_SESSION } })
+  const r5 = new BotPrs(someone, { fleet, now: NOW }); await r5.repo(harness)
+  assert.equal(someone.calls.filter((c) => c[0] === 'merge').length, 0, 'another person\'s pull request is never merged'); assert.equal(r5.waiting[0].number, 24)
 }
 
 // A docs steward fallback closes once a later steward run landed; a person's pull request never does.
