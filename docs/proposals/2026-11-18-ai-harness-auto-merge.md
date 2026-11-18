@@ -17,6 +17,7 @@ On 28 October (`docs/proposals/2026-10-28-prs-merge-themselves.md`) the merger i
 | `.github/workflows/harness-bot-prs.yml` | It also runs when the validation or the steward (whose job is the judge panel) finishes on a pull request here, so a green pull request merges within minutes, not at the next hourly knock. |
 | `contract/skill-routing-contract.md`, stage 8 | A pull request merged into ai-harness approves a harness release, whether Krish merges it or it merges itself once green and judged. |
 | `contract/krish-operating-contract.md`, Authority | The never-publish rule names this as a standing, scoped exception, as it already does for `ack_engine_instruction`: the merger's merge of the owner's own green, judged session pull request in ai-harness. `harness/` change requests and other repositories still wait for Krish. |
+| `contract/templates/canon-block.md`, Authority | One sentence names the standing exception and points to the operating contract for its terms, so the fleet's copy of the approval wall does not read as unqualified beside the contract's. It reaches every repository through the canon sync. |
 | `.github/workflows/release.yml` | The registration message names both rulings. |
 | `.github/workflows/harness-steward.yml` | The judge step's comment no longer says there is no auto-merge. |
 
