@@ -1384,7 +1384,7 @@ contract_rules:
     status: live
   - id: canon.divergence
     file: contract/templates/canon-block.md
-    text_sha: "3ad192d32eb8"
+    text_sha: "5b7debf8bc3f"
     first_seen: "2026-11-18"
     source:
       kind: proposal
@@ -1396,6 +1396,11 @@ contract_rules:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
       - text_sha: "c5a2e1d858c5"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "3ad192d32eb8"
         valid_until: "2026-11-18"
         source:
           kind: proposal
