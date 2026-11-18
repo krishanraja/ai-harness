@@ -39,3 +39,9 @@ Three new behaviour cases: `research-behavior-024`, `voice-behavior-041` and `ve
 - **Closeout handover.** The rule no longer sanctions an ignored folder outside the repository. What the next session needs goes through its normal route (committed, filed in the research library, or carried in full in the closing message), and never sits only in one machine's scratch.
 - **Native MCP first.** The tool-router line now applies only where no connected tool already reads the count, so it orders the fallbacks after a capable native MCP rather than competing with that contract clause.
 - **Left for Krish.** The pitch section's two asks of Krish (humour in a message or form pitch, and any position he would argue in public) stay. The first follows from the humour ruling naming email only; the second came from the growth session. He can rule either away.
+
+## Krish's ruling on humour in messages and forms
+
+Ruling (Krish, 2026-11-18): "extend the humour ruling to messages and forms too, I want to express personality, enthusiasm, hilarity, fun and a epic positive energy in the first impression, but not in a fake way - very me, and very positive about my mission of helping people to not feel left behind, and make it easy to grasp complex things".
+
+Read as: a first message or form from Krish to a named person takes a new "first impression" row in `humour.md`, with his personality and humour leading. Outbound email stays Never under the 2026-11-10 ruling, and a message that sells Mindmake still follows the Mindmake row. This replaces the earlier "ask Krish before humour in a message or form pitch".
