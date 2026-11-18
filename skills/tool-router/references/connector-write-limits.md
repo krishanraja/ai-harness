@@ -2,28 +2,28 @@
 
 What three connectors could and could not write when last used, and the safe pattern for each. Source: the Make Your Mind Up growth push session's brand sync of 18 November 2026, sent to the skill curator. Connectors change; re-check a limit against the tool's own schema before planning around it, and update this file when a limit lifts. Re-check by 2 December 2026.
 
-Every write, publish and deletion here still needs Krish's approval for that action and target, immediately before it, under the operating contract. These are mechanics for an approved action, never a standing permission. Nothing in this file widens it.
+This file records what each connector cannot do, and how to shape a change so Krish can decide on it. It grants no authority. Publishing, uploading, sending and deleting stay his decision under the operating contract (`authority.never-publish-post-send` and `authority.treat-any-purge-deletion`), taken on the prepared change, for that change only. Until he decides, the change stays prepared and unsent.
 
 ## Claude Design System artifacts
 
-- A `.d.ts` file is not a served type. Send it with `contentType` `text/plain`.
-- Retiring a component is a move in one call: send exact copies under `project/archived/` and set the old paths to `null`. Setting a path to `null` deletes it, so the call needs Krish's approval for that deletion, naming the paths, immediately before it is sent. Never delete first and copy later.
-- Upload assets first, then write their blob ids and stored sizes into the index, and send the index once, last. The store can change a file's size (an SVG was rewritten on upload), so take the size from the upload result, not from the local file.
-- Plan the whole tree before the one publish, and re-read the live index first (`verification-loop`, files and documents).
+- A `.d.ts` file is not a served type; a prepared change gives it `contentType` `text/plain`.
+- Shape a component's retirement as one move: exact copies under `project/archived/`, and the old paths set to `null`, which deletes them. Put the paths to be deleted in front of Krish by name. A change that deletes first and copies later is the wrong shape.
+- In the prepared order, assets come before the index, and the index carries the blob ids and stored sizes the store returned. The store can change a file's size (an SVG was rewritten on upload), so the size comes from the upload result, not the local file.
+- Prepare the whole tree first, and re-read the live index before the change is put to Krish (`verification-loop`, files and documents).
 
 ## Google Drive
 
 - The connector can create files and change metadata, but cannot rewrite a file's contents.
-- To update a text file, file a dated replacement beside it and set the old file's description to "Superseded on <date> by <new name>".
-- Never rename or move a file whose path other machines depend on.
-- `create_file` accepts a file reference, so content need not be pasted: set the content to `sha256:<hex>:<absolute path>`. It works for text and binary uploads.
-- Where the file goes is `tools-access` (rule 11) and the owning repository's Drive map.
+- So an update to a text file takes the shape of a dated replacement beside it, with the old file's description set to "Superseded on <date> by <new name>".
+- A file whose path other machines depend on is never renamed or moved.
+- `create_file` accepts a file reference instead of pasted content: `sha256:<hex>:<absolute path>`, for text and binary files.
+- Where a file goes is the Drive placement rule in `tools-access` and the owning repository's Drive map.
 - Who may write to Drive is the canon's Claude and Codex division. A Codex browser upload is not a route around this limit.
 
 ## Canva
 
 - Brand kit edits, font changes and page deletions are not possible through the connector.
-- For those, write a stand-alone prompt for a Claude Cowork session on Krish's computer, and tell him the session's exact name when it starts (canon). Its ground rules:
+- For those, write a stand-alone prompt Krish can give a Claude Cowork session on his computer if he chooses; when a session starts, tell him its exact name (canon). The prompt's ground rules:
   - no publish, share, export, spend or delete;
   - a backup copy before each change;
   - wait for the owner's yes after each template before the next;

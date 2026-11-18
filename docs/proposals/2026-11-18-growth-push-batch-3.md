@@ -49,3 +49,10 @@ Seven new behaviour cases: `voice-behavior-045` (quote and kill list), `voice-be
 - **Contradiction, fixed rather than overruled.** The panel recorded the relayed auto-merge ruling as overruling `contradiction-surfaced` on `evidence-research.edge-cases`, only because that commit changed the cited file. That ruling says nothing about contact routes, so the contradiction is fixed instead: the sincere opener no longer allows drafting before the route's kind is confirmed. It applies when a confirmed route may still change, or the row is unsettled.
 - **One home.** The pitch line on landing page previews now points to `verification-loop`'s live-page copy check instead of restating it.
 - **Not changed.** The Canva "wait for the owner's yes after each template" stays: it is the finding's own safeguard on brand assets, and loosening it would widen authority. Reference files staying outside the ledger is the ledger's design, as batch 2 recorded.
+
+## Judge panel, second round
+
+- **Blocking: approval walls (`authority.never-publish-post-send`).** The connector reference and the `verification-loop` bullet read as handing the agent publish, upload and delete mechanics. Both are rewritten: the reference records each connector's limits and the shape of a prepared change, says it grants no authority, and leaves publishing, uploading, sending and deleting as Krish's decision on the prepared change; the `verification-loop` bullet verifies the prepared change, not the live target, and names the publish as his decision.
+- **Pointer fixed.** The Drive placement pointer names the rule in `tools-access` instead of its position.
+- **One home.** The `krish-voice` routing line points to the opener rule in `humour.md` instead of restating it.
+- **Not changed.** Reference files stay outside the ledger by its design (the panel recorded the relayed ruling as overruling `ghost-facts`; that ruling is about auto-merge, so the batch relies on the ledger's documented design and this proposal's sha256 pin instead). The value test stays a clean next batch: whether pitches are sent is Krish's call, not the harness's.
