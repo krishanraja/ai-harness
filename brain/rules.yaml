@@ -33,17 +33,22 @@ contract_rules:
     status: live
   - id: who-krish-is.mindmake-the-mission-and
     file: contract/krish-operating-contract.md
-    text_sha: "fb8d39c337b4"
+    text_sha: "24380d87410f"
     first_seen: "2026-10-05"
     source:
       kind: ruling
-      ref: "db5cd4c3bd10"
+      ref: "b2db7d6a717b"
     history:
       - text_sha: "8df6b922b4eb"
         valid_until: "2026-10-06"
         source:
           kind: ruling
           ref: "60106bef02bd"
+      - text_sha: "fb8d39c337b4"
+        valid_until: "2026-11-18"
+        source:
+          kind: ruling
+          ref: "db5cd4c3bd10"
     status: live
   - id: who-krish-is.the-ikigai-s-twelve
     file: contract/krish-operating-contract.md
@@ -982,11 +987,17 @@ contract_rules:
     status: live
   - id: collision-rules.mindmake-os-owns-operating
     file: contract/skill-routing-contract.md
-    text_sha: "ace98cebbf36"
+    text_sha: "179c68cc0d5f"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "b2db7d6a717b"
+    history:
+      - text_sha: "ace98cebbf36"
+        valid_until: "2026-11-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: collision-rules.code-reviewer-ctrl-check
     file: contract/skill-routing-contract.md
