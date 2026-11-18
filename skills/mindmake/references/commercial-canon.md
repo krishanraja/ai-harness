@@ -1,5 +1,7 @@
 # Mindmake commercial canon
 
+For an intro, bio, headline, pitch, one-pager or one-line description of Krish or Mindmake, read `brand-profile.md` first: the one sentence, and what to offer each kind of person.
+
 ## Contents
 
 1. Identity and worldview
