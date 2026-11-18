@@ -1384,11 +1384,17 @@ contract_rules:
     status: live
   - id: canon.divergence
     file: contract/templates/canon-block.md
-    text_sha: "f56aa52ecfc4"
+    text_sha: "c5a2e1d858c5"
     first_seen: "2026-11-18"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+    history:
+      - text_sha: "f56aa52ecfc4"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
@@ -1597,7 +1603,7 @@ skill_sections:
   - id: build-apps-with-krish.material-visual-approval-boundary
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Material visual approval boundary"
-    text_sha: "5adc40a58d53"
+    text_sha: "db879464b9f0"
     first_seen: "2026-09-07"
     source:
       kind: proposal
@@ -1613,6 +1619,11 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+      - text_sha: "5adc40a58d53"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
     status: live
   - id: build-apps-with-krish.phase-orchestration
     file: skills/build-apps-with-krish/SKILL.md

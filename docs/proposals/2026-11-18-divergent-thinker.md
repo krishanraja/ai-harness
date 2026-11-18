@@ -1,6 +1,6 @@
 # divergent-thinker in the skill layer, 2026-11-18
 
-Status: admitted (Ruling, Krish, 2026-11-18: "I approve all of those"). The five skill edits and the canon sentence below are applied as written.
+Status: admitted (Ruling, Krish, 2026-11-18: "I approve all of those"). The five skill edits and the canon sentence below are applied as written, with three narrowing clarifications the judge panel asked for: the canon sentence keeps each repository in its own namespace and says recording is never a send, and the build-apps line is a judge-side check only, so generator blindness in krish-design is unchanged.
 
 ## Finding and correct layer
 
@@ -8,7 +8,7 @@ krishanraja/divergent-thinker is the fleet's divergent thinking engine (Rulings,
 
 Evidence so far:
 
-- **Benchmark.** Live, 18 November: it beat a prompt-matched single call on 3 of 3 problems on distance from the consensus, with judged usefulness held. Blind originality was mixed: one tie, one small loss, one clear win.
+- **Benchmark.** Live, 18 November: it beat a prompt-matched single call on 3 of 3 problems on distance from the consensus, with judged usefulness held. Blind originality was mixed: one tie, one small loss, one clear win. Source: krishanraja/divergent-thinker `docs/benchmarks/2026-11-18-three-arm.json`, reproduced by `npm run bench`.
 - **Phase 0.** Krish approved both of its first two plays, Heartside's realtor closing gifts and Mindmake's dated miss report.
 - **Hosting.** Control Center hosts it (control-center#963) behind the connector tools `divergent_score`, `divergent_record` and `divergent_run`, with the engine route and daily caps.
 
