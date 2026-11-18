@@ -2536,7 +2536,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
-      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
+      sha256: "F3AA909D1876D4CF4D3CFDBBC51CE2A6AA07350FC117EA9D208DD81B31378960"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -3197,12 +3197,12 @@ skill_sections:
   - id: krish-voice.reference-routing
     file: skills/krish-voice/SKILL.md
     heading: "Reference routing"
-    text_sha: "bcd9bd647ee6"
+    text_sha: "5df727366fad"
     first_seen: "2026-09-07"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
-      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
+      sha256: "F3AA909D1876D4CF4D3CFDBBC51CE2A6AA07350FC117EA9D208DD81B31378960"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -3823,7 +3823,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
-      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
+      sha256: "F3AA909D1876D4CF4D3CFDBBC51CE2A6AA07350FC117EA9D208DD81B31378960"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -4222,12 +4222,12 @@ skill_sections:
   - id: verification-loop.select-checks-by-artifact
     file: skills/verification-loop/SKILL.md
     heading: "Select checks by artifact"
-    text_sha: "66fcd09d50d7"
+    text_sha: "6f61aa3d0792"
     first_seen: "2026-09-07"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-3.md"
-      sha256: "D275F30046AFBAC8980028D2955EB7A98BAF5ED121BFB5A079AD1B95B16A4E33"
+      sha256: "F3AA909D1876D4CF4D3CFDBBC51CE2A6AA07350FC117EA9D208DD81B31378960"
     history:
       - text_sha: "3c3df845de45"
         valid_until: "2026-09-15"

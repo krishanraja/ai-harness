@@ -11,13 +11,13 @@ Asker: Krish, 18 November 2026, for the growth push ("spin off a sub session tha
 | Finding | Owner | Change |
 |---|---|---|
 | P1. Two of ten "forms" were not forms: one dead, one an email address | `evidence-research`, contact route | Batch 2 already confirms the route's kind from the live page, and the register by channel. The one gap was a dead route; the edge case now says a route can be dead and is recorded so. |
-| P2. A sincere, mission-pointed opener with no joke survives any route change and any stricter row | `krish-voice`, `references/humour.md`, first impression | Used only while the route or the row is unsettled. It keeps his energy, so it does not break the rule that a flat, careful note is the failure. Once settled, the first impression row applies in full. |
+| P2. A sincere, mission-pointed opener with no joke survives any route change and any stricter row | `krish-voice`, `references/humour.md`, first impression | Used only when a confirmed route may still change or the row is unsettled; the route's kind is still confirmed before drafting. It keeps his energy, so it does not break the rule that a flat, careful note is the failure. Once settled, the first impression row applies in full. |
 | P3. A verbatim quote can hit the kill list, and a quote cannot be respelled | `krish-voice`, `references/outbound-email-voice.md`, pitch section | Pick another line of theirs or put the point in Krish's words. Never alter a quote. |
 | P4. A shared boilerplate intro is the flattest line, and repeated sentences show across a batch | same file, new "A batch of pitches" section | Each pitch gets its own mission line; no sentence repeats word for word across a batch. |
 | P5. Independent writers converged on one opening construction four times and one ask verb six times | same section | Audit structure across the batch, not only within each pitch. |
 | P6. Strongest openers: a true, public, self-deprecating fact, or a one-jump twist on their own line aimed at the topic; size jokes depend on the reader | `humour.md`, first impression | Recorded as review evidence, not measured replies. |
 | P7. A counter-position that restates their own prediction earns "agreed" | pitch section | A counter-position meets a specific claim they made. |
-| P8. A link preview puts the landing page's meta description inside the message | pitch section | Check the linked page's live title and description against current rulings before approval. The live-page check itself stays in `verification-loop`. |
+| P8. A link preview puts the landing page's meta description inside the message | pitch section | Run `verification-loop`'s live-page copy check on the linked page before approval; the pitch line points there and does not restate it. |
 | P9. Give-first beats a conditional swap | pitch section | Written as a promise unless done; never stated as done early; Krish told that approving the text approves the public recommendation. |
 | P10. Divergence scoring against a list of obvious openers is free and confirms distance from cliché | "A batch of pitches" | Use `divergent_score` with an explicit obvious list; it cannot judge kindness, truth or voice fit. |
 | P11. Claims about the sender must be live | pitch section | Check cadence, teaching and shipped work against the live record on the day. |
@@ -42,3 +42,10 @@ Seven new behaviour cases: `voice-behavior-045` (quote and kill list), `voice-be
 ## Provenance of reference-file changes
 
 `brain/rules.yaml` tracks contract rules and skill chapters only. This proposal is the source of every reference-file change in the batch: `skills/krish-voice/references/outbound-email-voice.md`, `skills/krish-voice/references/humour.md` and the new `skills/tool-router/references/connector-write-limits.md`. Each is routed from a ledger-tracked chapter that takes this proposal as its source: `krish-voice.reference-routing` and `tool-router.match-value-to-the`. The chapter edits in `evidence-research` and `verification-loop` take it as their source too.
+
+## Judge panel, first round
+
+- **Blocking: approval walls.** The connector reference said a component is retired by setting old paths to `null`, and `verification-loop` ended a procedure with "publish once", without the per-action wall. Both now say the publish and any deletion need Krish's approval, naming the paths, immediately before; the reference says it holds mechanics for an approved action, never a standing permission.
+- **Contradiction, fixed rather than overruled.** The panel recorded the relayed auto-merge ruling as overruling `contradiction-surfaced` on `evidence-research.edge-cases`, only because that commit changed the cited file. That ruling says nothing about contact routes, so the contradiction is fixed instead: the sincere opener no longer allows drafting before the route's kind is confirmed. It applies when a confirmed route may still change, or the row is unsettled.
+- **One home.** The pitch line on landing page previews now points to `verification-loop`'s live-page copy check instead of restating it.
+- **Not changed.** The Canva "wait for the owner's yes after each template" stays: it is the finding's own safeguard on brand assets, and loosening it would widen authority. Reference files staying outside the ledger is the ledger's design, as batch 2 recorded.

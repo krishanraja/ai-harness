@@ -80,7 +80,7 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 - Open or render the final format, not just its source.
 - Check required sections, links, names, dates, claims, layout, and machine-readable structure.
 - Compare the delivered file's hash with the built artifact when crossing surfaces.
-- For a multi-file update published in one go (a design system, a brand kit), build the complete edited tree beside an untouched original with a hash list for each, check it independently (banned-word and em dash search, JSON validity, script syntax, rendered checks) and publish once. Re-read the live index just before publishing and confirm its version and hash are the ones the plan started from; if either moved, plan again.
+- For a multi-file update published in one go (a design system, a brand kit), build the complete edited tree beside an untouched original with a hash list for each, check it independently (banned-word and em dash search, JSON validity, script syntax, rendered checks), then publish once, with Krish's approval for that publish and any deletion in it. Re-read the live index just before publishing and confirm its version and hash are the ones the plan started from; if either moved, plan again.
 
 ### Cross-client harness releases
 

@@ -42,7 +42,7 @@ For a first message, form or email to someone whose published work is the reason
 - Any position Krish would argue in public is his judgement. Flag it for his approval; never pick it for him.
 - A counter-position meets a specific claim the partner actually made, quoted or linked. "Take the other side" that restates their own prediction earns an "agreed", not a yes.
 - Give before asking where you can, especially to a bigger partner, rather than offering a conditional swap. Write it as a promise ("we'll add you either way") unless it is already done; never state it as done before it is. Tell Krish that approving the text also approves the public recommendation it promises.
-- The link is part of the message. A link preview shows the landing page's title and meta description inside the pitch, so check that page's live title and description against current rulings before the pitch is approved; one stale line there breaks every pitch that links to it.
+- The link is part of the message: its preview puts the landing page's title and description inside the pitch. Run the live-page copy check in `verification-loop` (code and repositories) on that page before the pitch is approved.
 - Run `check_voice` with the real channel (`message`, `form` or `email`) and mode `cold`. The cold band in Cold mode above applies.
 - `check_voice` counts question marks. A question quoted inside the ask (a survey question, say) counts as a second question, so write the quoted one without its question mark.
 

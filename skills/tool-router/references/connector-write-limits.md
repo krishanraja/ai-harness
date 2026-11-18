@@ -2,12 +2,12 @@
 
 What three connectors could and could not write when last used, and the safe pattern for each. Source: the Make Your Mind Up growth push session's brand sync of 18 November 2026, sent to the skill curator. Connectors change; re-check a limit against the tool's own schema before planning around it, and update this file when a limit lifts. Re-check by 2 December 2026.
 
-Every write here still needs Krish's approval for that action and target, under the operating contract. Nothing in this file widens it.
+Every write, publish and deletion here still needs Krish's approval for that action and target, immediately before it, under the operating contract. These are mechanics for an approved action, never a standing permission. Nothing in this file widens it.
 
 ## Claude Design System artifacts
 
 - A `.d.ts` file is not a served type. Send it with `contentType` `text/plain`.
-- Retiring a component is a move in one call: send exact copies under `project/archived/` and set the old paths to `null`. Never delete first and copy later.
+- Retiring a component is a move in one call: send exact copies under `project/archived/` and set the old paths to `null`. Setting a path to `null` deletes it, so the call needs Krish's approval for that deletion, naming the paths, immediately before it is sent. Never delete first and copy later.
 - Upload assets first, then write their blob ids and stored sizes into the index, and send the index once, last. The store can change a file's size (an SVG was rewritten on upload), so take the size from the upload result, not from the local file.
 - Plan the whole tree before the one publish, and re-read the live index first (`verification-loop`, files and documents).
 
