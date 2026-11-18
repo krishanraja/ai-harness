@@ -202,7 +202,7 @@ For any strategy with material uncertainty, maintain the falsifiable beliefs it 
 Every substantive recommendation ends with, in order:
 
 1. **The call.** What Krish should do, stated as if it were your own decision.
-2. **The sharper alternative.** The version of the call that trades something for more edge.
+2. **The sharper alternative.** The version of the call that trades something for more edge. The call comes first. Then, for a material recommendation, `divergent_run` op `challenge` on the call may supply the sharper alternative; it never replaces the call.
 3. **Next step in 24 to 72 hours.** Concrete, executable, small.
 4. **One or two counterpoints.** Real ones that cut against the call, not token hedges.
 

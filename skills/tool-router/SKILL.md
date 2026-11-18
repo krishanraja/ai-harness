@@ -1,6 +1,6 @@
 ---
 name: tool-router
-description: "Choose and use Krish's connected tools for real work. Invoke when a task needs external evidence, website technology or company enrichment, search or scraping, media generation, authenticated service data, or engineering operations; also when asked which available tools could improve an outcome or explicitly asked to use tool-router. Discover specialist value even when the prompt names no provider. Skip greetings, rewriting supplied text, arithmetic, and reasoning that needs no external data or action. This is capability-selection context, not a research, creative, engineering, authentication, or billing owner."
+description: "Choose and use Krish's connected tools for real work. Invoke when a task needs external evidence, website technology or company enrichment, search or scraping, media generation, authenticated service data, or engineering operations, and ideas measurably outside the consensus, or a score of any output against it (divergent-thinker); also when asked which available tools could improve an outcome or explicitly asked to use tool-router. Discover specialist value even when the prompt names no provider. Skip greetings, rewriting supplied text, arithmetic, and reasoning that needs no external data or action. This is capability-selection context, not a research, creative, engineering, authentication, or billing owner."
 ---
 
 # Tool Router

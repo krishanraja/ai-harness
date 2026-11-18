@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 141 rules across the two contracts and the canon block.
+# 142 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1382,6 +1382,14 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-11-14-research-shelf-route.md"
     status: live
+  - id: canon.divergence
+    file: contract/templates/canon-block.md
+    text_sha: "f56aa52ecfc4"
+    first_seen: "2026-11-18"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+    status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
     text_sha: "e72ec05775d2"
@@ -1589,17 +1597,22 @@ skill_sections:
   - id: build-apps-with-krish.material-visual-approval-boundary
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Material visual approval boundary"
-    text_sha: "4e005fa9de4c"
+    text_sha: "5adc40a58d53"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-24-experience-control-plane.md"
+      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
     history:
       - text_sha: "b726bba2ff8f"
         valid_until: "2026-09-24"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "4e005fa9de4c"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-24-experience-control-plane.md"
     status: live
   - id: build-apps-with-krish.phase-orchestration
     file: skills/build-apps-with-krish/SKILL.md
@@ -2801,17 +2814,22 @@ skill_sections:
   - id: krish-design.1-interaction-as-sequencing
     file: skills/krish-design/SKILL.md
     heading: "1. Interaction as sequencing (the weapon)"
-    text_sha: "e991816bb2e1"
+    text_sha: "5e28eae384b1"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-26-two-way-taste.md"
+      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
     history:
       - text_sha: "78e9b25ede95"
         valid_until: "2026-10-26"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "e991816bb2e1"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-26-two-way-taste.md"
     status: live
   - id: krish-design.2-house-design-systems
     file: skills/krish-design/SKILL.md
@@ -3000,11 +3018,17 @@ skill_sections:
   - id: krish-principles.5-decision-artifacts-the
     file: skills/krish-principles/SKILL.md
     heading: "5. Decision artifacts: the formats calls come out in"
-    text_sha: "4213e789b186"
+    text_sha: "286da9e4137c"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+    history:
+      - text_sha: "4213e789b186"
+        valid_until: "2026-11-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: contested
     contested_by: assumption-ledger
   - id: krish-principles.6-epistemics-in-practice
@@ -3481,11 +3505,17 @@ skill_sections:
   - id: strategy-brief.build-the-route
     file: skills/strategy-brief/SKILL.md
     heading: "Build the route"
-    text_sha: "e04a9cda2bda"
+    text_sha: "ac6f78102104"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+    history:
+      - text_sha: "e04a9cda2bda"
+        valid_until: "2026-11-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: strategy-brief.full-brief-format
     file: skills/strategy-brief/SKILL.md
