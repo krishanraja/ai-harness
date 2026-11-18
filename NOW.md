@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":18,"current":21,"current_as_of":"2026-11-16","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 21 in the week of 2026-11-09 (21 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-16.
 
+- `skills/mindmake/references/brand-profile.md` is proposed in PR #285 and waits on Krish: the judge panel held it because a blanket merge instruction is not his approval of this content. It carries the one sentence he chose that day (option A), the four lanes, the need-to-offer table, proof in order and the open decisions. `commercial-canon.md` points to it. The working pack with every proposal and decision is krishanraja/mindmake `project-documentation/krishs-mission/`. (2026-11-18)
 - divergent-thinker is in the canon and the skill layer: one Divergence sentence in the canon block, and one line each in strategy-brief, krish-principles, build-apps-with-krish, krish-design and tool-router, with their entries in brain/rules.yaml. (2026-11-18)
 - codex_thread no longer fails silently on Windows (it runs the native codex.exe, and every spawn failure or early exit is a non-zero exit with a one-line reason), and `send` to a thread Codex Desktop holds is queued with `codex queue` and runs there as the next turn, with `--wait` to get Codex's reply; proven on a throwaway thread on Krish's PC and held by `scripts/test-codex-thread.mjs` in the steward. (2026-11-17)
 - Skills 31 to 33 (`council`, `ad-copywriter`, `ugc-avatar`) are admitted as production skills on Krish's rulings of 2026-11-15; the registry says 33 and is the source. `ugc-avatar` holds every AI person to Krish's two yeses, recorded each time, with no AI label anywhere. The Claude and Codex division is in force (#263): Claude owns strategy, orchestration, verification and the only writes to ai-harness and Google Drive; Codex does art direction, visual builds and browser legwork. The Perplexity account text changed, so one paste is owed there. (2026-11-15)
@@ -38,6 +39,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-18 Krish chose the pitch sentence on 18 Nov 2026 ("A is good") after rejecting "an AI that runs on their own judgement" and "argues back".
 - 2026-11-18 Krish admitted docs/proposals/2026-11-18-divergent-thinker.md as written, so every repository learns when to consult the engine at the next render.
 - 2026-11-17 Ruling (Krish, 2026-11-17): Claude keeps two-way access to every Codex thread it opens while Krish uses it in Desktop; fix codex_thread so this can never recur.
 - 2026-11-17 The NOW.md audit failed again on size and bullet count (17,070 characters against 16,000, 22 bullets in "Where it is right now" against 8) two days after the last trim, because each session adds a bullet and none retires one; 22 bullets became 8 and the superseded ones rolled into the LOG. "Where it is right now" says where things are, so a bullet that a later bullet replaces (the staged `council` candidate, the proposal that became the ruling) goes at the next closeout.
@@ -58,7 +60,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-18): cut the next release so the canon sentence and the skill lines reach every surface.
+- Next (2026-11-18): Krish answers the open decisions in the working pack (second door name, the skills line, mindmake.co copy, founder facts), then the profile and every surface take his answers.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
