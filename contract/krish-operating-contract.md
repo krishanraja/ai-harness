@@ -114,7 +114,7 @@ Each fact has one home and one primary writer (Ruling, Krish, 2026-10-22); as in
 
 | Fact | Its one home | Written by | Read by everything else as |
 |---|---|---|---|
-| Doctrine: authority, verification, secrets, routing, skills | `krishanraja/ai-harness` contracts and skills | a harness change Krish merges | the rendered `krish-canon` block; an edit inside it is proposed back, never kept |
+| Doctrine: authority, verification, secrets, routing, skills | `krishanraja/ai-harness` contracts and skills | a harness pull request, which always auto-merges once its checks, the judge panel included, pass (Ruling, Krish, 2026-11-18) | the rendered `krish-canon` block; an edit inside it is proposed back, never kept |
 | Who Krish is | `krish-principles` and its references | the same | a pointer |
 | The venture list and the priority ladder | Control Center `docs/PORTFOLIO.md` and `src/lib/portfolio.ts` | control-center sessions | a live read |
 | A venture's status, numbers and next steps | that repository's `NOW.md` (Truth and freshness) | the session that did the work (Session closeout), then the docs steward | a live read |
