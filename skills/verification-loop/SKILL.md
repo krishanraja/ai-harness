@@ -49,12 +49,14 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 - Inspect the relevant diff for unintended changes and user-owned work.
 - Exercise the original failure or requested behavior, not only the test suite.
 - Run secret scanning without printing matched values; report only type and location.
+- A copy change is not done when the repository is clean. Where the same words are also served from a hosted platform (a newsletter's hero text, the meta, Open Graph and Twitter descriptions built from it, an author bio), fetch the live public page, including any data embedded in its raw HTML, and search that too. "Repo clean" is not "live clean".
 
 ### Interfaces and browser flows
 
 - Attempt the named user task in the intended environment and viewports.
 - Verify visible result, persisted state, recovery behavior, and relevant console/network signals.
 - Reproduce a defect from a clean state before calling it confirmed.
+- Check a public page as a stranger sees it: a headless browser with a throwaway profile, never Krish's signed-in browser profile.
 - Use `ux-testing-agent` for a full UX audit.
 - For a deployed form or interaction change, explicitly exercise recovery from interruption, validation failure, and retry when those can affect the outcome.
 

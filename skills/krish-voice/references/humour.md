@@ -19,11 +19,12 @@ Read this table first. If the work is not in an allowed row, this file does not 
 | Make Your Mind Up, the publication (venture `publication`: its articles, scripts, captions, carousels and Substack) | **Integrated**, under its house register (below). |
 | Heartside (venture `heartside`) | **Full**, every trait below. |
 | Full Time (venture `full_time`) | **Full**, every trait below. |
+| A first message or form from Krish to a named person: a DM, a contact or pitch form, a co-host or guest invite (not email) | **First impression** (below). Ruling (Krish, 2026-11-18). |
 | Krish's personal LinkedIn | **Selective**, rarely and lightly (below). This includes his comments on LinkedIn. |
 | A comment or reply on someone else's post, from Heartside, Full Time, Make Your Mind Up, or Krish's X and other personal socials apart from LinkedIn | **Comment rules** (below). |
 | Anything else (Legibility, CTRL, Pulse, Signal & Noise, original posts on his other personal socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
 
-When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins.
+When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins. A message or form that sells Mindmake still follows the Mindmake row. A first message sent as a LinkedIn DM takes the first impression row, not the LinkedIn row, which covers his posts and comments.
 
 ## The six traits
 
@@ -40,6 +41,17 @@ Read the house register live in `content-corpus` first. It governs, including it
 
 - Traits 1, 3, 4, 5 and 6 apply in full.
 - Trait 2 applies only to what the register lets irony target (claims, hype, incentives, decisions), never to a person.
+
+## A first message or form: first impression
+
+Ruling (Krish, 2026-11-18): "extend the humour ruling to messages and forms too, I want to express personality, enthusiasm, hilarity, fun and a epic positive energy in the first impression, but not in a fake way - very me, and very positive about my mission of helping people to not feel left behind, and make it easy to grasp complex things".
+
+- Lead with real energy: personality, enthusiasm and fun from the first line. A flat, careful note is the failure here.
+- It must sound like him, not like a hype template. Use his measured moves first (`voice-profile.md`, self-deprecation then dry irony) and his own words where they fit. Forced exclamation, emoji runs and stock excitement are fake, so cut them.
+- Aim the joke at the topic, the situation or at Krish himself, never at the recipient or their work. Precise cruelty has no target in a first message.
+- Point the positive energy at the mission: helping people not feel left behind, and making complex things easy to grasp. The joke serves that point; it never replaces it.
+- The pitch method still holds: one offer, one ask, at most one question, inside the cold length band. A joke never costs the ask its clarity.
+- Outbound email is not covered by this row and stays **Never** (Ruling, Krish, 2026-11-10).
 
 ## Krish's LinkedIn: selective
 

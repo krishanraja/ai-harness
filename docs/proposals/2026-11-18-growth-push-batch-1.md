@@ -1,0 +1,54 @@
+# Growth push findings, batch 1, 2026-11-18
+
+Status: proposed. Krish merges changes to his skills; this takes effect only when he merges the pull request that carries it.
+
+Source: the first batch of findings from the Make Your Mind Up growth push session, 18 November 2026, sent to the skill curator session Krish asked for that day ("spin off a sub session that is constantly turning your findings, learnings and workflow experiments in to skills that enable future work to be best in class and progress everything forward consistently and with fewer issues"). Recipient names, addresses and pitch wording stay out of this file and the skills.
+
+## What changes, and where
+
+| Finding | Owner | Change |
+|---|---|---|
+| Engagement on posted comments can be read from public endpoints, with no signed-in browser | `tool-router` | One line in the skill and a new reference, `references/public-read-routes.md`, with the routes last seen working, what still needs a signed-in browser, and how to record a read. |
+| A multi-author page put each name after its entry, and an extractor credited a quote to the wrong person | `evidence-research` | A "Multi-author page" edge case: confirm authorship from raw page order and quote from raw text before attributing. |
+| A phrase removed from the repository still lived on the hosted newsletter in three places | `verification-loop` | A copy change is checked on the live hosted pages too, including data in the raw HTML. |
+| A public render check must not use the signed-in browser | `verification-loop` and the new `tool-router` reference | A stranger's view uses a throwaway profile; the reference gives a Chrome command for machines without Playwright. |
+| The next session could not read the last session's drafts, so Krish pasted them by hand | operating contract, Session closeout | Whatever the next session needs goes through its normal route where that session can read it (committed, filed in the research library, or carried in full in the closing message), never only in one machine's scratch. |
+| The cold pitch shape that passed review in round 1, and a `check_voice` gotcha | `krish-voice`, `references/outbound-email-voice.md`, routed from the skill | A new section for a cold pitch to a named writer or creator. |
+| Offer design for a co-hosted live session | same section | Only the general parts: never promise what a platform's help pages do not say plainly, check what the offer needs from the other side first, and flag any position Krish would argue for his approval. |
+
+## Refused, and why
+
+- **The `ugrep` regex limit on one machine.** A tool quirk on one machine, not a fleet rule. It belongs in that machine's notes.
+- **The engagement result from 16 November** (comments under big media accounts, read at about 47 hours). One trial in one venture. Under the experimental-learning rule it is evidence for that setting, not a fleet prohibition, so it belongs in the venture's own lessons.
+- **Co-hosting specifics** (account needed, publishers per live). Venture-specific, so they belong in the venture's own lessons.
+- **Removing dated-and-scored calls (Ruling, Krish, 2026-11-17).** A search of this repository for the phrases named found nothing concerning Make Your Mind Up, so there is nothing to remove here.
+
+## Evidence held
+
+Three new behaviour cases: `research-behavior-024`, `voice-behavior-041` and `verification-behavior-039`. No `tool-router` case was added, because that file records observed runs and none has been run.
+
+## Judge panel fixes, 2026-11-18
+
+This section and the next record how the text got here. Where they differ from the table above, the table is current; the humour lines below are superseded by Krish's ruling at the end.
+
+- **Humour scope.** The pitch section had widened the 10 November ruling from outbound email to every outbound. It now applies the ruling to email pitches only, and asks Krish before humour in a message or form pitch.
+- **Provenance.** The ledger rewrite had dropped the sha256 pin on the stage conveyor proposal for `verification-loop.select-checks-by-artifact`. The pin is restored in that history row, and every entry this proposal now sources carries its sha256.
+- **One home.** The stranger-view rule lives only in `verification-loop`; the routes reference keeps just the Chrome command and points there.
+- **Stall risk.** The routes reference no longer writes a manual Instagram step on Krish's computer. A count with no public route is recorded as unknown.
+
+## Judge panel fixes, second round
+
+- **Closeout handover.** The rule no longer sanctions an ignored folder outside the repository. What the next session needs goes through its normal route (committed, filed in the research library, or carried in full in the closing message), and never sits only in one machine's scratch.
+- **Native MCP first.** The tool-router line now applies only where no connected tool already reads the count, so it orders the fallbacks after a capable native MCP rather than competing with that contract clause.
+- **Left for Krish.** Any position Krish would argue in public stays his call; it came from the growth session. (The humour ask that stood here is superseded by his ruling below.)
+
+## Krish's ruling on humour in messages and forms
+
+Ruling (Krish, 2026-11-18): "extend the humour ruling to messages and forms too, I want to express personality, enthusiasm, hilarity, fun and a epic positive energy in the first impression, but not in a fake way - very me, and very positive about my mission of helping people to not feel left behind, and make it easy to grasp complex things".
+
+Read as: a first message or form from Krish to a named person takes a new "first impression" row in `humour.md`, with his personality and humour leading. Outbound email stays Never under the 2026-11-10 ruling, and a message that sells Mindmake still follows the Mindmake row. This replaces the earlier "ask Krish before humour in a message or form pitch". A first message sent as a LinkedIn DM takes the first impression row; the LinkedIn row keeps his posts and comments.
+
+## Third round
+
+- **One row per artifact.** `humour.md` now says a first LinkedIn DM takes the first impression row, and the LinkedIn row covers his posts and comments, so the two rows never both match one message.
+- **Freshness.** The public routes reference carries a re-check date, and its 17 of 23 figure is sourced to the growth session's own report.
