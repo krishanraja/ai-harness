@@ -39,3 +39,9 @@ None blocked. Fixed: the humour Checking line points to the rules' homes instead
 - **One home for hand-back.** The sub-session hand-back now points to the operating contract's Session closeout route instead of restating it.
 - **Freshness.** The browser observation carries the same re-check date as the routes table.
 - **Not changed: no ledger row for reference files.** `brain/rules.yaml` tracks contract rules and skill chapters only; reference files are recorded through this proposal, as batch 1's were.
+
+## Judge panel, third round
+
+- **Blocking: unverified versus unknown.** The browser section now separates an item whose route failed (unverified, the task stays open) from an item with no route at all (unknown, as the routes file already said), so the two lines no longer contradict.
+- **Blocking: provenance of reference files.** `brain/rules.yaml` says in its header that reference files sit outside the ledger and that their source lives in the commit bodies that change them. The commit that carries this round names this proposal and its sha256 as the source of every reference-file change in the batch: `skills/krish-voice/references/humour.md`, `skills/krish-voice/references/outbound-email-voice.md`, `skills/krish-build/references/long-running-run-safety.md` and `skills/tool-router/references/public-read-routes.md`. Adding ledger rows for reference files would change the ledger's design, which is not this batch's call.
+- **Advisories fixed.** The humour Checking line no longer lists the rules it points to. The fan-out figures name their sources and say to re-check the cap on each machine.
