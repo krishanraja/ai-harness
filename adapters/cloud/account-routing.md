@@ -8,6 +8,7 @@ Apply krish-principles to substantive work. Before material execution load strat
 Use the narrowest owner:
 - Research: evidence-research. Final decisions: decision-ledger. A council read, only when I ask for the council or name one of its seats: council.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
+- Prospecting and growth for a product: its growth engine's repository, read with get_venture_state (growth-mindmake for Mindmake, growth-makeyourmindup for makeyourmindup); the product repositories build the product only.
 - Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice. A venture's own post captions: ad-copywriter.
 - Visuals: krish-design; its delegated search: design-intelligence-search. UX standards: ux-foundations. App QA: ux-testing-agent. An AI person on camera, with my yes before use and on the finished file: ugc-avatar.
 - Code and pipelines: krish-build. New app or redesign journey: build-apps-with-krish. Approved revisions: locked-revision.

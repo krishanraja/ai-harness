@@ -77,6 +77,7 @@ Keep these principles stable unless Krish explicitly changes them:
 | Product implementation | this context -> `krish-build` |
 | Current external evidence | `evidence-research` or live first-party retrieval |
 | Final factual and outcome check | `verification-loop` |
+| Prospecting, outreach targets or growth work for Mindmake | the growth-mindmake repository (read it with `get_venture_state`); this skill supplies its commercial facts only (Ruling, Krish, 2026-11-18: growth-mindmake takes care of all prospecting and growth for Mindmake, and the `mindmake` repository is the product only) |
 
 If one task crosses Mindmake and mind/make OS, load both and label which facts belong to the commercial surface and which belong to internal operations. Never merge their identities, counts, or authorities.
 

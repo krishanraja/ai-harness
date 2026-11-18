@@ -84,6 +84,7 @@ Control Center manages the engines; it never produces an engine's content or str
 - **Monitor.** It watches every engine. An engine that is stale, failing or unreadable for longer than one cadence reaches Krish's one list and Home, never only a log.
 - **Push.** The directive's intensity scales with urgency: a higher level carries a larger action budget, inside the same walls.
 - **Rank and sequence.** What the engines need from Krish is ordered by his weekly OS goals within the week, and the priority ladder stays the tie-break (Ruling, Krish, 2026-10-29).
+- **Hold the tools, never hunt.** Where Krish has given a product's prospecting and growth to its growth engine (the products are named in `skills/krish-principles/references/who-krish-is.md`, section 8), the engine is their one owner and the product repository builds the product only. Control Center runs only the lookups that engine asks for, counted against its share of each allowance, and no other product or job spends an allowance placed on that product. A share is the most the engine may spend under the credits rules (Ruling, Krish, 2026-10-29), never new authority: every send, post and new spend keeps its own approval wall (Ruling, Krish, 2026-11-18).
 - **Hold.** An engine that is not ready is `held`: no wake, no asks on his list and no growth council move for its product, while its bearer stays valid (Ruling, Krish, 2026-10-29).
 
 ## Who updates what

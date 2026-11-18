@@ -1,0 +1,4 @@
+Status: The canon says a product's prospecting and growth live in its growth engine: growth-mindmake for Mindmake and growth-makeyourmindup for makeyourmindup, whose product repositories build the product only, with Control Center holding the tools and running only what the engine asks (who-krish-is section 8, north-star-metric.md "Engines", the cloud routing).
+Changed: Ruling (Krish, 2026-11-18): growth-mindmake takes care of all prospecting and growth for Mindmake, which is now just the product repository; the same for growth-makeyourmindup. Ruling (Krish, 2026-11-18): all Podchaser attention goes to growth-mindmake and growth-makeyourmindup, after Pulse spent 82% of November's Podchaser points.
+Next: Control Center retires its own Mindmake prospecting lanes and runs Podchaser lookups for the two engines on their research route.
+North Star check (2026-11-18): holds.
