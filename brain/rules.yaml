@@ -3362,11 +3362,17 @@ skill_sections:
   - id: mindmake.routing-and-collisions
     file: skills/mindmake/SKILL.md
     heading: "Routing and collisions"
-    text_sha: "9c44e0866bed"
+    text_sha: "46d578010c61"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: ruling
+      ref: "b2db7d6a717b"
+    history:
+      - text_sha: "9c44e0866bed"
+        valid_until: "2026-11-18"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: mindmake.authority-boundaries
     file: skills/mindmake/SKILL.md
