@@ -1,0 +1,4 @@
+Status: `skills/mindmake/references/brand-profile.md` is proposed in PR #285 and waits on Krish: the judge panel held it because a blanket merge instruction is not his approval of this content. It carries the one sentence he chose that day (option A), the four lanes, the need-to-offer table, proof in order and the open decisions. `commercial-canon.md` points to it. The working pack with every proposal and decision is krishanraja/mindmake `project-documentation/krishs-mission/`.
+Next: Krish answers the open decisions in the working pack (second door name, the skills line, mindmake.co copy, founder facts), then the profile and every surface take his answers.
+Changed: Krish chose the pitch sentence on 18 Nov 2026 ("A is good") after rejecting "an AI that runs on their own judgement" and "argues back".
+North Star check (2026-11-18): holds.
