@@ -1,0 +1,4 @@
+Status: proposed `skills/mindmake/references/brand-profile.md`, the one home for how Krish and Mindmake are introduced (the one sentence, a need-to-offer table, proof in order, where the sentence lives on each surface, and the decisions only Krish can make). `commercial-canon.md` points to it. It governs only once Krish merges it; nothing on any live surface has changed.
+Next: Krish confirms or rewords the one sentence and settles the second door's name, then the profile merges and LinkedIn, krishraja.com and mindmake.co take the sentence.
+Changed: proposal only, no ruling yet. Krish, 18 Nov 2026, asked for "a centralized place (perhaps in my ai-harness) that is constantly keeping my simplified brand profile clear and understandable by anyone for what they need, as opposed to what I want to sell".
+North Star check (2026-11-18): holds. Coherent positioning is the step before LinkedIn work can move good meetings.
