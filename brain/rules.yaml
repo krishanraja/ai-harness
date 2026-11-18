@@ -178,7 +178,7 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "756938915FCD7BA050F6734ABBA433ACF24376DFFA48908F399A0AC6F97F65CC"
+      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     status: live
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md
@@ -2481,7 +2481,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "756938915FCD7BA050F6734ABBA433ACF24376DFFA48908F399A0AC6F97F65CC"
+      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -3122,7 +3122,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "756938915FCD7BA050F6734ABBA433ACF24376DFFA48908F399A0AC6F97F65CC"
+      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -3725,7 +3725,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "756938915FCD7BA050F6734ABBA433ACF24376DFFA48908F399A0AC6F97F65CC"
+      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -4117,7 +4117,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "756938915FCD7BA050F6734ABBA433ACF24376DFFA48908F399A0AC6F97F65CC"
+      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     history:
       - text_sha: "3c3df845de45"
         valid_until: "2026-09-15"

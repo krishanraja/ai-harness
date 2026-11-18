@@ -24,7 +24,7 @@ Read this table first. If the work is not in an allowed row, this file does not 
 | A comment or reply on someone else's post, from Heartside, Full Time, Make Your Mind Up, or Krish's X and other personal socials apart from LinkedIn | **Comment rules** (below). |
 | Anything else (Legibility, CTRL, Pulse, Signal & Noise, original posts on his other personal socials, a venture not named here) | **Not ruled.** Do not apply it. Ask Krish before using it. |
 
-When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins. A message or form that sells Mindmake still follows the Mindmake row.
+When one piece crosses surfaces, for example a publication article quoted in a Mindmake email, the stricter row wins. A message or form that sells Mindmake still follows the Mindmake row. A first message sent as a LinkedIn DM takes the first impression row, not the LinkedIn row, which covers his posts and comments.
 
 ## The six traits
 

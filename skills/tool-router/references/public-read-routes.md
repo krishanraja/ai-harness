@@ -1,6 +1,6 @@
 # Public read routes
 
-Use for read-only measurement of engagement on posts and comments the fleet has made, and for reading a public publication or profile, when no signed-in browser is needed. These routes are undocumented public endpoints. They were seen working on 18 November 2026, when they read 17 of 23 posted comments with no Codex session. Treat each as a lead: read it live, record the retrieval time, and fall back to a browser session when it fails or its fields change.
+Use for read-only measurement of engagement on posts and comments the fleet has made, and for reading a public publication or profile, when no signed-in browser is needed. These routes are undocumented public endpoints. They were seen working on 18 November 2026, when, by the growth push session's own report, they read 17 of 23 posted comments with no Codex session. Re-check them by 18 December 2026; after that date treat the table as unverified until a live read confirms it. Treat each as a lead: read it live, record the retrieval time, and fall back to a browser session when it fails or its fields change.
 
 They are reads only. Nothing here posts, reacts, follows or signs in.
 
