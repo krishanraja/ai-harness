@@ -2476,12 +2476,12 @@ skill_sections:
   - id: evidence-research.edge-cases
     file: skills/evidence-research/SKILL.md
     heading: "Edge cases"
-    text_sha: "05e7dc74963a"
+    text_sha: "102dfe2ee0a5"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
+      sha256: "E701DD8DDC59FBC7428E0DA30408264E0F8A942CC0CF769E72FE4F55E783674A"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -2493,6 +2493,12 @@ skill_sections:
         source:
           kind: ruling
           ref: "e1953773a4361659f6ac06e6422175e308d5ef67"
+      - text_sha: "05e7dc74963a"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+          sha256: "DDD78F4D5B6A05AFC0B67D3DF6B8477B8A61E0147EAAF97888A61D9EDBB5F2F1"
     status: live
   - id: evidence-research.handoff-and-verification
     file: skills/evidence-research/SKILL.md
@@ -2701,18 +2707,24 @@ skill_sections:
   - id: krish-build.4-gates-and-validation
     file: skills/krish-build/SKILL.md
     heading: "4. Gates and validation"
-    text_sha: "4c4abe331554"
+    text_sha: "b6db5fd97774"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
-      sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
+      ref: "docs/proposals/2026-11-18-growth-push-batch-2.md"
+      sha256: "E701DD8DDC59FBC7428E0DA30408264E0F8A942CC0CF769E72FE4F55E783674A"
     history:
       - text_sha: "8634c51d1025"
         valid_until: "2026-09-15"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "4c4abe331554"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+          sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
     status: live
   - id: krish-build.5-environment-truth
     file: skills/krish-build/SKILL.md

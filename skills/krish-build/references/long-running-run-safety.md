@@ -30,6 +30,15 @@ RECOVERY ENTRYPOINT: [the real operating surface]
 - Bound retries by error class. Permanent contract, authority, or validation errors hold immediately; transient errors consume the shared attempt budget.
 - Recovery is not real until exercised through the same scheduler, API, CLI, or operator surface shape that will invoke it in practice. This does not grant authority to fire production or external effects: use a fixture, staging target, simulation, or authorised bounded canary unless the task separately authorises the real effect.
 
+## Sub-sessions and agent fan-out
+
+For a child session, a workflow of agents, or any batch split across agents on one machine.
+
+- **A child gets everything in its first prompt.** Never assume two-way messaging between sessions. On 18 November 2026 a cloud session could not message the child session it had created (the platform wanted a trusted device to vouch for the target), while the child could still message its parent. Put the full brief, the rules and the hand-back route in the child's first prompt. For a later batch, start a fresh child with its own full brief, or ask Krish to forward the batch from a trusted device.
+- **Size a fan-out to the machine's concurrency cap.** Read the cap before planning. On 18 November 2026 a 4-core worker ran at most two workflow agents at a time (the cap was the smaller of 16 and the CPU count minus two). Group items per agent, for example three or four drafts per verifier, rather than one agent per item.
+- **Resume reuses a finished stage only while its prompt is byte-identical.** Keep finished stages' prompts unchanged when relaunching. When a ruling changes mid-run, stop the run, leave the unaffected stages' prompts exactly as they were, put the new rule only into the affected stages, and relaunch.
+- **On a shared machine, keep agents inside the task's own folder.** Copy the evidence a run needs into that folder first, then point the agents at the copy. Agents never read other sessions' folders; the machine's own instructions file holds that rule where one exists.
+
 ## Checkpoint design
 
 A checkpoint records the last committed semantic boundary, not the last line executed. It should include the run id, stage, input seal, produced artifact identity, consumed budget, and any outstanding external effect whose result still needs reconciliation.

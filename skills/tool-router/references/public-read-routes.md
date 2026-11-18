@@ -19,6 +19,10 @@ They are reads only. Nothing here posts, reacts, follows or signs in.
 
 - Instagram comment likes. Record them as unknown unless a browser session already in the plan reads them; do not start one only for this count.
 
+## When the signed-in browser fails
+
+On 18 November 2026 one read-only Codex pass on the worker's signed-in Chromium timed out on X, on two Substack About pages and on four of five Instagram comment pages. Plan every browser task with the public route above as its fallback before it starts. An item neither route read is recorded as unverified, and a task with an unverified item is still open, not done.
+
 ## Rendering a public page without Playwright
 
 `verification-loop` owns the rule (a stranger's view, never Krish's signed-in profile). Where Playwright is not installed, Chrome can dump the rendered page on its own:

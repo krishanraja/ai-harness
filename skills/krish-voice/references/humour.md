@@ -52,6 +52,7 @@ Ruling (Krish, 2026-11-18): "extend the humour ruling to messages and forms too,
 - Point the positive energy at the mission: helping people not feel left behind, and making complex things easy to grasp. The joke serves that point; it never replaces it.
 - The pitch method still holds: one offer, one ask, at most one question, inside the cold length band. A joke never costs the ask its clarity.
 - Outbound email is not covered by this row and stays **Never** (Ruling, Krish, 2026-11-10).
+- The channel is part of the draft. Take it from the route's confirmed kind (`evidence-research`, contact route), not from a research note. When the route changes, form to email or email to form, write the piece again in the other register: an email is not the form draft with its jokes cut, and a form is not the email with jokes added.
 
 ## Krish's LinkedIn: selective
 
@@ -107,4 +108,5 @@ The comment's surface still decides everything else. A Heartside comment follows
 ## Checking
 
 - Every draft still goes through `check_voice`. A joke is no exemption from the kill list.
+- Where a venture's own humour check cannot run in this session (its engine token lives only on another runner, or the call needs Krish's approval each time), write "humour engine not run" beside the draft and never imply it passed. Apply its house rules by hand, all of which this file already holds: no joke at the poster or recipient, no humour on Mindmake, and no joke that needs more than one outside reference to land.
 - When Krish corrects a joke ("too predictable", "not funny", "too far"), send his exact words to `report_to_taste_engine` under the venture the piece is for, as with any voice correction (step 2a of the skill). A report only writes to his own taste ledger and needs no approval (Ruling, Krish, 2026-10-26: "reports to my taste ledger are exempt from the approval wall"). That's how the taste ledger learns his humour from evidence. Never report this file there: it is a ruling, and the ledger would only file it as an observation.

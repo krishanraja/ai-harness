@@ -115,7 +115,7 @@ A file marked done has no placeholders, no internal notes, no stale claims, and 
 Read `references/app-runtime-verification.md` when work involves a remote database mutation, a component fixture-render harness, an authenticated user path, an edge or serverless function, SPA shell caching, or a build-time environment flag. It supplies bounded procedures and evidence requirements; it never grants production authority or replaces a current provider-specific tool reference.
 
 **Use the long-running safety patterns when work can outlive one command.** [IN-PLAY]
-Read `references/long-running-run-safety.md` when work uses workers, leases, scheduled runs, retries, checkpoints, expensive batches, or external processes. Progress and completion must be separate signals, retry budgets must survive restarts, and recovery must be exercised from the same operational surface that will use it.
+Read `references/long-running-run-safety.md` when work uses workers, leases, scheduled runs, retries, checkpoints, expensive batches, external processes, child sessions, or a fan-out of agents. Progress and completion must be separate signals, retry budgets must survive restarts, and recovery must be exercised from the same operational surface that will use it.
 
 After every located failure, correct the smallest root cause within authority, rerun the failed and adjacent checks, and update resumable state. A false HTTP success must be rerun after repair. An incomplete persistence bug also requires the historical affected-record range to be assessed before old data is called valid.
 

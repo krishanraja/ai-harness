@@ -33,6 +33,7 @@ For a first message, form or email to someone whose published work is the reason
 - Quote their own words verbatim, taken from the raw text of the page, and confirm they wrote that passage (`evidence-research`, multi-author pages).
 - One offer and one ask. Nothing else competes with them.
 - Open with "Hey <first name>, Krish here." and sign off "Krish", then "krishraja.com" on the next line.
+- Confirm the route's kind from the live page before drafting (`evidence-research`, contact route). The channel decides the register, so it is fixed before the first line is written.
 - Humour depends on the channel (`humour.md`). An email pitch has none (Ruling, Krish, 2026-11-10). A message or form pitch leads with his personality, enthusiasm and fun, under that file's first impression rules (Ruling, Krish, 2026-11-18).
 - Never promise what a platform's own help pages do not say plainly, such as who gets notified. Check what the offer needs from them first (an account, a publication) before offering it.
 - Any position Krish would argue in public is his judgement. Flag it for his approval; never pick it for him.

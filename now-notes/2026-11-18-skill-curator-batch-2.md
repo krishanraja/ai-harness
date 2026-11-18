@@ -1,0 +1,3 @@
+Status: Batch 2 of the Make Your Mind Up growth push findings is proposed as skill changes: contact routes confirmed from the live page (evidence-research), the channel decides the register and a route change means a rewrite, plus "humour engine not run" (krish-voice), sub-sessions, fan-out sizing, resume and shared-machine hygiene (krish-build long-running run safety), and a browser fallback rule (tool-router public read routes). Proposal: docs/proposals/2026-11-18-growth-push-batch-2.md.
+Next: the batch 2 pull request lands through ai-harness auto-merge once its checks and the judge panel pass; a fresh curator session takes batch 3.
+North Star check (2026-11-18): holds.
