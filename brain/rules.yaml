@@ -517,17 +517,23 @@ contract_rules:
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
-    text_sha: "f40903b61467"
+    text_sha: "d9c8a913b4a5"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-14-engine-instructions.md"
+      ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
+      sha256: "BEE0105195A09824CFACED59D3BF7C3A5BCD6CF7E333E412E93AE65C42DA2C2E"
     history:
       - text_sha: "2d9753efa37a"
         valid_until: "2026-11-14"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "f40903b61467"
+        valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-14-engine-instructions.md"
     status: live
   - id: authority.record-harness-observation-is
     file: contract/krish-operating-contract.md
@@ -1156,7 +1162,7 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-ai-harness-auto-merge.md"
-      sha256: "C05CF8F1A9FB899D88682E2553A65D8F40AFA8022FD2F62A02E950439F57B6B2"
+      sha256: "BEE0105195A09824CFACED59D3BF7C3A5BCD6CF7E333E412E93AE65C42DA2C2E"
     history:
       - text_sha: "0a2b49ed2a71"
         valid_until: "2026-11-18"
