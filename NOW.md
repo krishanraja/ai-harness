@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":18,"current":21,"current_as_of":"2026-11-16","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 21 in the week of 2026-11-09 (21 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-16.
 
+- Change requests on harness/ branches in ai-harness now merge themselves too, once housekeeping marks them ready and closeout, the validation build and the judge panel are green; capture still never merges its own change. (2026-11-18)
 - Every session pull request in ai-harness now merges itself once closeout, the validation build and the judge panel are green, through scripts/merge-bot-prs.mjs, run when those checks finish and hourly; change requests on harness/ branches still wait for Krish. (2026-11-18)
 - Batch 2 of the Make Your Mind Up growth push findings is proposed as skill changes: contact routes confirmed from the live page (evidence-research), the channel decides the register and a route change means a rewrite, plus "humour engine not run" (krish-voice), sub-sessions, fan-out sizing, resume and shared-machine hygiene (krish-build long-running run safety), and a browser fallback rule (tool-router public read routes). Proposal: docs/proposals/2026-11-18-growth-push-batch-2.md. (2026-11-18)
 - The operating contract now records that every ai-harness pull request auto-merges once its checks, the judge panel included, pass. Krish no longer merges harness changes by hand. Batch 1 of the growth push skill changes is merged (#286). (2026-11-18)
@@ -43,6 +44,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-18 Krish extended the 18 November auto-merge ruling to harness/ change requests the same day.
 - 2026-11-18 Krish ruled on 18 November 2026 that ai-harness pull requests always auto-merge; until then a session's pull request waited for his merge as the release approval.
 - 2026-11-18 Krish chose the pitch sentence on 18 Nov 2026 ("A is good") after rejecting "an AI that runs on their own judgement" and "argues back".
 - 2026-11-18 Krish admitted docs/proposals/2026-11-18-divergent-thinker.md as written, so every repository learns when to consult the engine at the next render.
@@ -65,7 +67,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-18): Krish says whether "100%" also covers the harness/ change requests and learning reviews.
+- Next (2026-11-18): Watch the first change request the merger takes, after the next nightly housekeeping marks one ready.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
