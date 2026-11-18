@@ -59,8 +59,10 @@ Two further rules from the architecture canon (section `0a.1`, 2026-09-19) hold 
 three:
 
 - **Not us.** No channel's subject is ever Krish, Mindmake, CTRL or his own builds.
-- **One prediction.** Each piece ends with one dated, checkable prediction, and only Krish
-  sets the confidence number.
+- **No predictions.** No piece makes a dated or scored prediction or carries a confidence
+  number; mind.the.gap says where a pattern leads. Rulings (Krish, 2026-11-17): "I don't do
+  dated-and-scored make-your-mind-up pieces because it felt quite tacky and gimmicky"; (Krish,
+  2026-11-18): "i have abandoned the prediction format, it feels lame".
 
 Formats, diagrams and title patterns that were written for the retired names (The Money of
 AI, Built with AI, `split_the_bill`, `lift_the_lid`) do not carry over automatically. Read
