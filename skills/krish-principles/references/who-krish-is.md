@@ -197,6 +197,15 @@ the calendar sits under the one company.
 
 All by Krish, dated 2026-10-05 unless marked otherwise.
 
+- **A product's growth lives in its growth engine** (Ruling, Krish, 2026-11-18:
+  "growth-mindmake now takes care of all prospecting and growth for mindmake which is now
+  just the product repo. same with growth-makeyourmindup."). All prospecting and growth for
+  Mindmake belong to growth-mindmake, and all of it for the publication belongs to
+  growth-makeyourmindup. `mindmake` and `makeyourmindup` are product repositories only.
+  Control Center hunts for neither. It holds the tools and allowances and runs only what
+  the engine asks, counted against that engine's share (`contract/north-star-metric.md`,
+  "Engines"). Podchaser is theirs alone (Ruling, Krish, 2026-11-18: all Podchaser
+  attention goes to growth-mindmake and growth-makeyourmindup).
 - **Agents report to Control Center, never into his Drive.** Agent briefs, identity,
   action and synthesis documents never go to Google Drive. Krish pressing "Send to Google
   Docs" himself is fine; an agent writing unattended is not.

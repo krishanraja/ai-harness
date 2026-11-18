@@ -84,6 +84,7 @@ Control Center manages the engines; it never produces an engine's content or str
 - **Monitor.** It watches every engine. An engine that is stale, failing or unreadable for longer than one cadence reaches Krish's one list and Home, never only a log.
 - **Push.** The directive's intensity scales with urgency: a higher level carries a larger action budget, inside the same walls.
 - **Rank and sequence.** What the engines need from Krish is ordered by his weekly OS goals within the week, and the priority ladder stays the tie-break (Ruling, Krish, 2026-10-29).
+- **Hold the tools, never hunt.** A product with a growth engine has one owner for its prospecting and growth: the engine (Ruling, Krish, 2026-11-18, for growth-mindmake and growth-makeyourmindup). Its product repository builds the product only. Control Center runs only the lookups the engine asks for, counted against that engine's share of each allowance, and no other product or job spends an allowance placed on the engines.
 - **Hold.** An engine that is not ready is `held`: no wake, no asks on his list and no growth council move for its product, while its bearer stays valid (Ruling, Krish, 2026-10-29).
 
 ## Who updates what
