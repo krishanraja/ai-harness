@@ -74,7 +74,7 @@ Build from a clean commit. Smoke-test one canary client and record the source co
 
 ### 8. Learn without self-authoring
 
-Log failures and corrections. Route possible standard changes through `ctrl-capture`; require a named human decision and a regression test before release.
+Log failures and corrections. Route possible standard changes through `ctrl-capture`; require a merged change request (in ai-harness it merges itself once green and judged, Ruling, Krish, 2026-11-18) and a regression test before release.
 
 ## Scheduled-audit invariant
 
