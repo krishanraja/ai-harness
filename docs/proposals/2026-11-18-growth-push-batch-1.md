@@ -26,3 +26,10 @@ Source: the first batch of findings from the Make Your Mind Up growth push sessi
 ## Evidence held
 
 Three new behaviour cases: `research-behavior-024`, `voice-behavior-041` and `verification-behavior-039`. No `tool-router` case was added, because that file records observed runs and none has been run.
+
+## Judge panel fixes, 2026-11-18
+
+- **Humour scope.** The pitch section had widened the 10 November ruling from outbound email to every outbound. It now applies the ruling to email pitches only, and asks Krish before humour in a message or form pitch.
+- **Provenance.** The ledger rewrite had dropped the sha256 pin on the stage conveyor proposal for `verification-loop.select-checks-by-artifact`. The pin is restored in that history row, and every entry this proposal now sources carries its sha256.
+- **One home.** The stranger-view rule lives only in `verification-loop`; the routes reference keeps just the Chrome command and points there.
+- **Stall risk.** The routes reference no longer writes a manual Instagram step on Krish's computer. A count with no public route is recorded as unknown.

@@ -15,13 +15,13 @@ They are reads only. Nothing here posts, reacts, follows or signs in.
 | One post | `<publication url>/api/v1/posts/<slug>` | `body_html` when free; a cut-off preview when paid |
 | What a publication shows strangers | the raw HTML of `<publication url>/about` | hero text, the description used for meta, Open Graph and Twitter tags, and author bios, inside the page's embedded preload data |
 
-## Still needs a signed-in browser
+## No public route found yet
 
-- Instagram comment likes. That legwork runs in a Codex session on Krish's computer that he can watch, as the canon says; Claude records what it hands back.
+- Instagram comment likes. Record them as unknown unless a browser session already in the plan reads them; do not start one only for this count.
 
-## Checking a public page as a stranger
+## Rendering a public page without Playwright
 
-Use a headless browser with a throwaway profile, never Krish's signed-in profile. Where Playwright is not installed, Chrome can dump the rendered page on its own:
+`verification-loop` owns the rule (a stranger's view, never Krish's signed-in profile). Where Playwright is not installed, Chrome can dump the rendered page on its own:
 
 ```text
 google-chrome --headless=new --no-sandbox --user-data-dir=<new empty folder> --dump-dom <url>

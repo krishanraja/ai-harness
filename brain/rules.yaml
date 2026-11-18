@@ -178,6 +178,7 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
     status: live
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md
@@ -2480,6 +2481,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -3120,6 +3122,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -3722,6 +3725,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -4113,6 +4117,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
+      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
     history:
       - text_sha: "3c3df845de45"
         valid_until: "2026-09-15"
@@ -4124,6 +4129,7 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-09-15-stage-conveyor-v1.md"
+          sha256: "6B7A87C931037445ABD7301BE8A226180583A21DB2F6852C5A9FBA384581A0BE"
     status: live
   - id: verification-loop.correction-loop
     file: skills/verification-loop/SKILL.md

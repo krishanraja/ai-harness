@@ -33,7 +33,7 @@ For a first message, form or email to someone whose published work is the reason
 - Quote their own words verbatim, taken from the raw text of the page, and confirm they wrote that passage (`evidence-research`, multi-author pages).
 - One offer and one ask. Nothing else competes with them.
 - Open with "Hey <first name>, Krish here." and sign off "Krish", then "krishraja.com" on the next line.
-- No humour in any outbound (`humour.md`; Ruling, Krish, 2026-11-10).
+- No humour in an email pitch (`humour.md`; Ruling, Krish, 2026-11-10). That ruling names outbound email; a pitch by message or form is not covered by it, so ask Krish before using humour there.
 - Never promise what a platform's own help pages do not say plainly, such as who gets notified. Check what the offer needs from them first (an account, a publication) before offering it.
 - Any position Krish would argue in public is his judgement. Flag it for his approval; never pick it for him.
 - Run `check_voice` with the real channel (`message`, `form` or `email`) and mode `cold`. The cold band in Cold mode above applies.
