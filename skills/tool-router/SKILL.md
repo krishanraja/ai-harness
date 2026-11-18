@@ -40,7 +40,7 @@ Allocation is not production. When a venture has its own engine or repository fo
 
 For creative work, explore cheaply before rendering expensively. Make stills or a storyboard first; render motion only for a concept Krish has chosen or one that has already earned attention. Run a virality or attention check before a final render when one is available, and record its credit cost. Every generation records its venture, outcome and asset.
 
-For read-only measurement of public engagement (reactions, likes, replies, archives, profile counts), try the platform's public endpoint before opening a signed-in browser or a Codex browser session; `references/public-read-routes.md` holds the routes last seen working and what still needs a signed-in browser.
+For read-only measurement of public engagement (reactions, likes, replies, archives, profile counts) that no connected tool already reads, try the platform's public endpoint before opening a signed-in browser or a Codex browser session. This orders the fallbacks after a capable native MCP, as the next paragraph says, and does not replace it; `references/public-read-routes.md` holds the routes last seen working and what still needs a signed-in browser.
 
 Attempt an already connected, capable native MCP first. Use the secure cloud API gateway when it supplies a required operation, evidence, parameters, scale or control that the MCP lacks. Supabase, Vercel, GitHub and n8n are common cases; they are not exceptions to identity or approval checks. Do not make a redundant or paid MCP call merely to prove it lacks an operation already absent from its schema. Do not bypass the gateway by asking the model to retrieve provider keys.
 

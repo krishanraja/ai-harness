@@ -173,12 +173,12 @@ contract_rules:
     supersedes: [session-closeout.before-ending-update-the]
   - id: session-closeout.anything-the-next-session
     file: contract/krish-operating-contract.md
-    text_sha: "1d0f29fb94fb"
+    text_sha: "ce50f65766f9"
     first_seen: "2026-11-18"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
+      sha256: "174C8A3BFCEE6A47D4D52B8216D0B9D0CD5F17F2555839F6D3D7B2DF982BB2A9"
     status: live
   - id: session-closeout.before-ending-update-the
     file: contract/krish-operating-contract.md
@@ -2481,7 +2481,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
+      sha256: "174C8A3BFCEE6A47D4D52B8216D0B9D0CD5F17F2555839F6D3D7B2DF982BB2A9"
     history:
       - text_sha: "432a76ec95f6"
         valid_until: "2026-09-12"
@@ -3122,7 +3122,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
+      sha256: "174C8A3BFCEE6A47D4D52B8216D0B9D0CD5F17F2555839F6D3D7B2DF982BB2A9"
     history:
       - text_sha: "b615e0e6cf49"
         valid_until: "2026-11-07"
@@ -3720,12 +3720,12 @@ skill_sections:
   - id: tool-router.match-value-to-the
     file: skills/tool-router/SKILL.md
     heading: "Match value to the task"
-    text_sha: "5dbd0f7f89e9"
+    text_sha: "06b8664b8b78"
     first_seen: "2026-10-29"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
+      sha256: "174C8A3BFCEE6A47D4D52B8216D0B9D0CD5F17F2555839F6D3D7B2DF982BB2A9"
     history:
       - text_sha: "cfd698d645c3"
         valid_until: "2026-10-29"
@@ -4117,7 +4117,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-18-growth-push-batch-1.md"
-      sha256: "AD173860C824CCB3506C35270FEA9EB635A5CF14CA369BE947D005600B356027"
+      sha256: "174C8A3BFCEE6A47D4D52B8216D0B9D0CD5F17F2555839F6D3D7B2DF982BB2A9"
     history:
       - text_sha: "3c3df845de45"
         valid_until: "2026-09-15"

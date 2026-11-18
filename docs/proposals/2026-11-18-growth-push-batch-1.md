@@ -33,3 +33,9 @@ Three new behaviour cases: `research-behavior-024`, `voice-behavior-041` and `ve
 - **Provenance.** The ledger rewrite had dropped the sha256 pin on the stage conveyor proposal for `verification-loop.select-checks-by-artifact`. The pin is restored in that history row, and every entry this proposal now sources carries its sha256.
 - **One home.** The stranger-view rule lives only in `verification-loop`; the routes reference keeps just the Chrome command and points there.
 - **Stall risk.** The routes reference no longer writes a manual Instagram step on Krish's computer. A count with no public route is recorded as unknown.
+
+## Judge panel fixes, second round
+
+- **Closeout handover.** The rule no longer sanctions an ignored folder outside the repository. What the next session needs goes through its normal route (committed, filed in the research library, or carried in full in the closing message), and never sits only in one machine's scratch.
+- **Native MCP first.** The tool-router line now applies only where no connected tool already reads the count, so it orders the fallbacks after a capable native MCP rather than competing with that contract clause.
+- **Left for Krish.** The pitch section's two asks of Krish (humour in a message or form pitch, and any position he would argue in public) stay. The first follows from the humour ruling naming email only; the second came from the growth session. He can rule either away.
