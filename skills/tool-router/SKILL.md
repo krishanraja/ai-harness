@@ -42,6 +42,8 @@ For creative work, explore cheaply before rendering expensively. Make stills or 
 
 For read-only measurement of public engagement (reactions, likes, replies, archives, profile counts) that no connected tool already reads, try the platform's public endpoint before opening a signed-in browser or a Codex browser session. This orders the fallbacks after a capable native MCP, as the next paragraph says, and does not replace it; `references/public-read-routes.md` holds the routes last seen working, what still needs a signed-in browser, and what to record when a browser read fails.
 
+Some connectors cannot do every write their service offers. `references/connector-write-limits.md` holds the limits last seen and the safe pattern for each: Claude Design System artifacts, Google Drive and Canva. Read it before planning a write through one of them.
+
 Attempt an already connected, capable native MCP first. Use the secure cloud API gateway when it supplies a required operation, evidence, parameters, scale or control that the MCP lacks. Supabase, Vercel, GitHub and n8n are common cases; they are not exceptions to identity or approval checks. Do not make a redundant or paid MCP call merely to prove it lacks an operation already absent from its schema. Do not bypass the gateway by asking the model to retrieve provider keys.
 
 If two routes can both deliver, choose the one with the stronger task fit and verified marginal cost. Briefly explain a meaningful trade-off. Suggest one additional application only when it materially improves the current outcome. Exclude retired or explicitly unwanted routes. A request for quality is not authorization for unbounded spend.

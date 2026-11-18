@@ -50,6 +50,7 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 - Exercise the original failure or requested behavior, not only the test suite.
 - Run secret scanning without printing matched values; report only type and location.
 - A copy change is not done when the repository is clean. Where the same words are also served from a hosted platform (a newsletter's hero text, the meta, Open Graph and Twitter descriptions built from it, an author bio), fetch the live public page, including any data embedded in its raw HTML, and search that too. "Repo clean" is not "live clean".
+- A ruling that retires copy is applied only when whatever writes that copy is changed too: generators, builders, publish checks, house rules and templates, not only the pages already produced. Search the whole tree for the retired words and for the rule that demands them before calling the ruling applied; a missed generator puts the copy back on the next rebuild.
 
 ### Interfaces and browser flows
 
@@ -79,6 +80,7 @@ Model self-review is supplemental. It may propose where to look; it cannot indep
 - Open or render the final format, not just its source.
 - Check required sections, links, names, dates, claims, layout, and machine-readable structure.
 - Compare the delivered file's hash with the built artifact when crossing surfaces.
+- For a multi-file update meant to go out in one go (a design system, a brand kit), verify the prepared change, not the live target: the complete edited tree beside an untouched original with a hash list for each, checked independently (banned-word and em dash search, JSON validity, script syntax, rendered checks). Re-read the live index before the change is put to Krish, and confirm its version and hash are the ones the plan started from; if either moved, plan again. Whether and when it is published is his decision (`authority.never-publish-post-send`).
 
 ### Cross-client harness releases
 
