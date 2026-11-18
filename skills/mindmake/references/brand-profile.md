@@ -1,6 +1,6 @@
 # Brand profile: what Krish is for, in the buyer's words
 
-Status: **current, 18 November 2026, merged on Krish's instruction ("make sure everything is merged to main"). The one sentence is his choice of that day; the rest of the working pack, with every open decision, is `krishanraja/mindmake` `project-documentation/krishs-mission/`.**
+Status: **proposed, 18 November 2026; it governs once Krish approves this file and merges it. The one sentence is his choice of that day; the working pack, with every open decision, is `krishanraja/mindmake` `project-documentation/krishs-mission/`.**
 Owner: Krish Raja. Reviewed against: `krishanraja/mindmake` `project-documentation/00_NORTH_STAR.md` and `01_CANON.md` at `4149f82`, mindmake.co and krishraja.com read live on 18 November 2026, and his LinkedIn headline and about as he shared them that day.
 
 Krish, 18 November 2026: "I need to distill everything down to the simplest form of buyability" and keep it "clear and understandable by anyone for what they need, as opposed to what I want to sell".
@@ -69,7 +69,7 @@ Product or venture names (CTRL, the $59 parts, Heartside, Full Time, Legibility,
 | Surface | Owner | What it carries |
 |---|---|---|
 | Boardy brief | Krish sends it; drafted in Claude sessions | The third-person sentence first, then the four lanes, what counts as a good outcome, the before and after, what a Mindmake client gets, why him, what wastes his time, how to book him, next step |
-| LinkedIn headline and about | growth-mindmake (his personal LinkedIn since 13 Nov 2026) | Headline: "Founder, Mindmake \| I build leaders an AI that runs on their own judgement, around their biggest decision, in 30 days \| Keynote speaker". About opens with the first-person sentence, then the why, the career thread, the two ways to work together, the stage, and one call to action |
+| LinkedIn headline and about | growth-mindmake (his personal LinkedIn since 13 Nov 2026) | Headline (proposed): "Founder, Mindmake \| I build leaders an AI Brain that lays out their biggest decisions and carries their standards into every tool \| Keynote speaker". About opens with the first-person sentence above, then the why, the career thread, the two ways to work together, the stage, and one call to action |
 | krishraja.com | its own repository (`krishanraja/krish-raja`) | Keep the voice and the title Krish likes; put the first-person sentence directly under his name |
 | mindmake.co | `krishanraja/mindmake` | The sentence as the homepage lede, under the existing headline; copy changes go through that repository's approval gate |
 
@@ -78,7 +78,7 @@ Product or venture names (CTRL, the $59 parts, Heartside, Full Time, Legibility,
 1. The sentence itself: keep, or reword it in his own words.
 2. Sessions for leadership teams: are keynotes or team sessions sold, and under what name? "The AI Immersion" is on the canon's retired list, so the word stays out until he rules.
 3. The content programme for a company's staff. Krish, 17 November 2026: "people who'd want to have me build content programmes inside their businesses through Make Your Mind Up to educate their staff. That is probably a companion pitch alongside MindMake". As written it meets Make Your Mind Up's ruling that "CTRL beta access is the only visible connection between the channel and mind/make". He decides: sell it as Mindmake's (delivered with the publication's format and engine), or as the publication's own team offer with no Mindmake link. Until then Boardy notes such requests and passes them to him.
-4. The second door has three names: "Build your AI business" (mindmake.co, live), "Build your AI revenue engine" (`01_CANON.md`, 26 October) and "Build your AI GTM" (his LinkedIn about, and this skill's canon, although `01_CANON.md` keeps the acronym GTM internal). Recommended: "Build your AI business", the plainest and the one live on the site. Pick one and fix the others.
+4. The second door's name: the canon's (`krishanraja/mindmake` `01_CANON.md`) is the current one until Krish rules; the conflicting names on other surfaces are listed, with a recommendation, as decision D2 in the working pack.
 5. Facts that disagree across his surfaces: when the career thread starts (2008 on LinkedIn, 2010 and "sixteen years" on krishraja.com, 2011 and "twenty years" in the founder story draft); the Nine revenue figure named on krishraja.com against "Don't name it" (17 November, founder story); Make Your Mind Up called free (mindmake canon) against its paid tiers (the `mindmake` skill).
 6. Claims that need their evidence before reuse: "4000+ leaders" (its evidence trail is still open in `krishanraja/mindmake` NOW.md) and "100+ sprints" (no record found; it also uses a retired word).
 7. The written name: "Mindmake" in sentences (the canon), while his LinkedIn company page and headline read "mind/make", the name the canon keeps for the internal operating system.
