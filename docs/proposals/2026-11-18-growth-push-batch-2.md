@@ -32,3 +32,10 @@ Four new behaviour cases: `research-behavior-025` (contact route), `voice-behavi
 ## Judge panel advisories, first round
 
 None blocked. Fixed: the humour Checking line points to the rules' homes instead of restating them; the shared-machine line no longer restates the folder rule its machine file owns; Krish is no longer a planned route for forwarding a batch; this file names its asker and value test.
+
+## Judge panel, second round
+
+- **Blocking: tool order.** The browser fallback section now restates the order `tool-router` and the operating contract set (a connected tool first, then the public route, then the browser) instead of reading as a rival rule, and says a route is only as good as its last live read.
+- **One home for hand-back.** The sub-session hand-back now points to the operating contract's Session closeout route instead of restating it.
+- **Freshness.** The browser observation carries the same re-check date as the routes table.
+- **Not changed: no ledger row for reference files.** `brain/rules.yaml` tracks contract rules and skill chapters only; reference files are recorded through this proposal, as batch 1's were.
