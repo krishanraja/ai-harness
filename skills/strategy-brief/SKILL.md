@@ -26,7 +26,7 @@ Apply concentrated rigor at every scale: cover everything capable of changing or
 3. **Current truth:** identify which facts are durable, which are dynamic, and which sources can establish them.
 4. **Constraints:** apply Krish's authority, file-routing, safety, time, cost, and quality boundaries.
 5. **Assumptions:** expose only assumptions that could change the route or result. Discover what can be discovered instead of asking.
-6. **Alternatives:** consider at least one materially different route for standard or material work. State why the selected route wins now.
+6. **Alternatives:** consider at least one materially different route for standard or material work. State why the selected route wins now. For material work, `divergent_run` op `map` shows the consensus to diverge from; `challenge` on the selected route names its conventional twin and fatal flaw. Never for micro or standard briefs.
 7. **Skill chain:** select the minimum named context, producer, artifact producer, and validator skills. Suppress overlapping skills explicitly. A generic label such as "research," "writing," or "QA" is not a route when a named owner exists.
 8. **Execution shape:** divide the work into bounded stages with a checkpoint before expensive or irreversible actions.
 9. **Verification plan:** define the independent observable signal and explicit pass/fail threshold before execution starts. No execution begins while success is still being invented.
