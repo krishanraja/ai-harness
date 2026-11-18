@@ -5,6 +5,20 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-18
+
+- stamped: `NOW.md` audit findings fixed (`recent_too_many`, `old_dated_claims`); head moved to 1042ca2. The closeout note `now-notes/2026-11-18-name-every-session.md` was not folded (its North Star line must read exactly "North Star check (2026-11-18): holds." or "...: recalibration proposed. <why>"); it stays for a person.
+
+- rolled from NOW.md: 2026-11-12 Krish, 2026-11-12: "make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there".
+
+- rolled from NOW.md: 2026-11-10 Krish ruled on the humour profile on 10 Nov; it went to the harness, not the taste ledger, because the ledger would file a model's reading of him as an uncounted observation.
+
+- rolled from NOW.md: 2026-11-09 Krish, 2026-11-09: "we need to make sure everything goes through the same voice system. Absolutely everything."
+
+- rolled from NOW.md: 2026-11-08 release v2026.11.08.1 was registered and LORIMER's sync of it recorded (#208); the krish-voice references answered the judge panel (PR 207).
+
+- rolled from NOW.md: 2026-11-07 Krish asked for one voice, amplified by writers he admires, enforced on everything sent or posted in his name.
+
 ## 2026-11-17
 
 - stamped: `NOW.md` audit findings fixed (`too_long` 17070 characters against 16000, `where_too_many` 22 bullets against 8) by rolling the bullets below and merging related ones; head moved to 4e71e38.
