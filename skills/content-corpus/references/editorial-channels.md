@@ -55,12 +55,17 @@ wins.
 | **under.the.hood** | Wednesdays | what they build or buy |
 | **mind.the.gap** | Fridays, the hero | how they think or what they expect |
 
-Two further rules from the architecture canon (section `0a.1`, 2026-09-19) hold for all
-three:
+Two further rules hold for all three:
 
-- **Not us.** No channel's subject is ever Krish, Mindmake, CTRL or his own builds.
-- **One prediction.** Each piece ends with one dated, checkable prediction, and only Krish
-  sets the confidence number.
+- **Not us.** No channel's subject is ever Krish, Mindmake, CTRL or his own builds (architecture
+  canon, section `0a.1`, 2026-09-19).
+- **No predictions.** No piece makes a dated or scored prediction or carries a confidence
+  number; mind.the.gap says where a pattern leads. Ruling (Krish, 2026-11-18): "i have abandoned
+  the prediction format, it feels lame".
+  Supersedes: the architecture canon's section `0a.1` rule "One prediction" (each piece ends with
+  one dated, checkable prediction, and only Krish sets the confidence number), which held from
+  2026-09-19 to 2026-11-17. Until section `## 0a` of the architecture doc records this ruling,
+  the ruling governs and the canon's `0a.1` prediction clause is stale.
 
 Formats, diagrams and title patterns that were written for the retired names (The Money of
 AI, Built with AI, `split_the_bill`, `lift_the_lid`) do not carry over automatically. Read
