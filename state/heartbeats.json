@@ -1,11 +1,11 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-11-18T07:31:16.997Z",
+    "last_run": "2026-11-19T07:31:16.150Z",
     "status": "blocked",
-    "release": "v2026.11.15.2",
+    "release": "v2026.11.18.7",
     "reason": "unclassified-skill-directory",
     "failing_since": "2026-11-14T08:36:48.728Z",
-    "failing_runs": 5,
+    "failing_runs": 6,
     "reasons": [
       {
         "reason": "canary-failed",
@@ -57,8 +57,8 @@
     "source": "repository_dispatch"
   },
   "observer": {
-    "last_run": "2026-11-18T02:35:33.279Z",
-    "observations_added": 123,
+    "last_run": "2026-11-19T01:59:43.695Z",
+    "observations_added": 105,
     "repos_read": 26
   },
   "openclaw-vps": {
