@@ -3,8 +3,9 @@
     "klass": "freshness",
     "subject": "harness-maintainer",
     "first_seen": "2026-09-08",
-    "open": true,
-    "reopened": "2026-11-17"
+    "open": false,
+    "reopened": "2026-11-17",
+    "closed_at": "2026-11-20"
   },
   "freshness:video-engine": {
     "klass": "freshness",
@@ -31,7 +32,8 @@
     "klass": "freshness",
     "subject": "evidence-research",
     "first_seen": "2026-09-08",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-20"
   },
   "freshness:tools-access": {
     "klass": "freshness",
@@ -303,7 +305,8 @@
     "klass": "freshness",
     "subject": "strategy-brief",
     "first_seen": "2026-11-04",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-20"
   },
   "freshness:verification-loop": {
     "klass": "freshness",
