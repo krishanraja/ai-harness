@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-19T05:48:07.905Z",
-  "measurement_verification_at": "2026-11-19T05:48:07.806Z",
+  "generated_at": "2026-11-20T03:05:46.644Z",
+  "measurement_verification_at": "2026-11-20T03:05:46.575Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 336,
+  "unknown_repository_observations": 348,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -32,7 +32,7 @@
       "unknown_coverage": true,
       "delivery": "awaiting-checks",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "74cce06d4c8c408629cdc36b35347f2c51e68ca5",
+      "source_base": "b1eb620c6bb489d6b7922395a804c1f5163238e4",
       "bootstrap_before": 27128,
       "bootstrap_after": 27128,
       "observed_use": {
@@ -61,7 +61,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 202,
+      "candidates": 204,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
@@ -94,13 +94,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 586,
+      "candidates": 622,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "d9a2a0534061e3cba5249d5af1e0e6fe8d8a7a58",
-      "bootstrap_before": 461168,
-      "bootstrap_after": 461168,
+      "source_base": "af796d2158809ce5b55c74af97bae65e748ce329",
+      "bootstrap_before": 465150,
+      "bootstrap_after": 465150,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -193,7 +193,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 478,
+      "candidates": 486,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
@@ -259,7 +259,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 24,
+      "candidates": 25,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
@@ -325,7 +325,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 142,
+      "candidates": 147,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
@@ -523,7 +523,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 48,
+      "candidates": 53,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
