@@ -5,6 +5,32 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-20
+
+- stamped: `NOW.md` audit findings fixed (`too_long`, `recent_too_many`, `where_too_many`, `old_dated_claims`); head moved to fbf24ad.
+
+- rolled from NOW.md: 2026-11-13 Krish asked to measure the number the North Star names and to merge it (Ruling, Krish, 2026-11-13: do it all and merge to main).
+
+- rolled from NOW.md: 2026-11-13 Krish, 2026-11-13, asked whether to set up a weekly Claude scheduled task in each of his two accounts or rule them not required: "readers not required". It keeps his 2026-10-29 ruling of zero Claude routines.
+
+- rolled from NOW.md: 2026-11-12 Krish, 2026-11-12: "make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there".
+
+- rolled from NOW.md: 2026-11-12 scripts/harness-watchdog.mjs, config/harness-jobs.json, scripts/test-harness-watchdog.mjs.
+
+- rolled from NOW.md: 2026-11-12 Every steward run that folded closeout notes was reported failed after its commit landed (control-center's 2026-11-12 run: 17 "was deleted" failures, nothing else); the validator now passes that run. The knowledge history check's 1 MiB buffer (ENOBUFS once brain/knowledge.jsonl passed 1 MiB) was fixed on main first by #220, so this change keeps main's fix.
+
+- rolled from NOW.md: 2026-11-10 Krish ruled on the humour profile on 10 Nov; it went to the harness, not the taste ledger, because the ledger would file a model's reading of him as an uncounted observation.
+
+- rolled from NOW.md: 2026-11-09 Krish, 2026-11-09: "we need to make sure everything goes through the same voice system. Absolutely everything."
+
+- rolled from NOW.md: 2026-11-08 release v2026.11.08.1 was registered and LORIMER's sync of it recorded (#208); the krish-voice references answered the judge panel (PR 207).
+
+- rolled from NOW.md: 2026-11-07 Krish asked for one voice, amplified by writers he admires, enforced on everything sent or posted in his name.
+
+- rolled from NOW.md: The OpenClaw fleet runs on the worker server (Hetzner, Helsinki) since 20:08 UTC on 14 Nov; the old box was deleted that night on Krish's ruling, with a Hetzner snapshot as the only rollback, and 12 jobs were retired by name. The T0 report is in `state/vps/MIGRATION-2026-11-14.md`. (2026-11-14)
+
+- condensed in NOW.md, originals not rolled: the growth push batch proposals, the divergent-thinker, brand profile and name-every-session lines, the two auto-merge lines and the codex_thread and division lines (merged into five). (2026-11-20)
+
 ## 2026-11-17
 
 - stamped: `NOW.md` audit findings fixed (`too_long` 17070 characters against 16000, `where_too_many` 22 bullets against 8) by rolling the bullets below and merging related ones; head moved to 4e71e38.
