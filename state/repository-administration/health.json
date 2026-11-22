@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T05:48:15.343Z",
-  "measurement_verification_at": "2026-11-21T05:48:15.235Z",
+  "generated_at": "2026-11-22T02:09:09.541Z",
+  "measurement_verification_at": "2026-11-22T02:09:09.435Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 369,
+  "unknown_repository_observations": 376,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -457,7 +457,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 25,
+      "candidates": 26,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
