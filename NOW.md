@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":18,"current":21,"current_as_of":"2026-11-16","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 21 in the week of 2026-11-09 (21 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-16.
 
+- the operating contract now says internal-auditor's own fix pull requests merge themselves once every check is green at the head the fix queue checked, with a red, conflicted or unchecked fix labelled needs-krish; ai-harness keeps its own judged merge bot. (2026-11-23)
 - The canon now sends his preferences to the taste engine and defects and engine failures to record_harness_observation. (2026-11-23)
 - the canon now carries Krish's 16 Nov ruling that Claude names every session it starts or spawns (a Codex thread, a Claude Code session, a cloud session), with its id or link, in the same message. It was stranded in ai-harness#278, whose daemon route #280 replaced; #278 is closed and only this ruling was carried over. (2026-11-23)
 - krishanraja/internal-auditor and krishanraja/strategist joined the fleet (state/fleet.yaml and docs/steward/fleet.json, excluded from the repository administration publisher until Krish accepts them there). The contracts carry the three rulings of 23 Nov: the auditor's standing exception to close pull requests and delete branches idle 7 days or more (no commit, comment, review or label change), Krish's own included, after recording each head sha in its restore ledger, and never the default, a protected or a kept branch, anything labelled keep, an open pull request's base or anything with checks running; the strategist convening the council as Krish's weekly board and at once on any U5; and the U5 rule naming krishanraja/strategist. Proposal: docs/proposals/2026-11-23-auditor-and-strategist.md. (2026-11-23)
@@ -50,6 +51,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-23 Ruling (Krish, 2026-11-23): all auditor fixes auto merge. Ruling (Krish, 2026-11-23): merge and deploy.
 - 2026-11-23 Krish ruled that the taste system holds only preference and inspiration.
 - 2026-11-23 Ruling (Krish, 2026-11-16): whenever Claude starts or spawns a session Krish can open, it tells him that session's exact name in the same message. A session Krish cannot find is work he cannot steer, so this removes a repeat correction.
 - 2026-11-23 Ruling (Krish, 2026-11-23): internal-auditor may close pull requests and delete branches idle 7 days or more, recording each head sha in its restore ledger first.
@@ -77,7 +79,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-23): The next canon release renders this into every repository.
+- Next (2026-11-23): read the first auditor fix that merges itself and confirm the queue merged it at the head it checked.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
