@@ -498,7 +498,7 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "6e216282995b"
+    text_sha: "eb5e3fe785df"
     first_seen: "2026-09-07"
     source:
       kind: proposal
@@ -524,6 +524,11 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-15-visible-codex-sessions.md"
+      - text_sha: "6e216282995b"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
@@ -1404,7 +1409,7 @@ contract_rules:
     status: live
   - id: canon.branches
     file: contract/templates/canon-block.md
-    text_sha: "3676da6ca435"
+    text_sha: "5197707a0d42"
     first_seen: "2026-11-15"
     source:
       kind: proposal
@@ -1420,6 +1425,11 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-15-branch-hygiene.md"
+      - text_sha: "3676da6ca435"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
     status: live
   - id: canon.codex
     file: contract/templates/canon-block.md
