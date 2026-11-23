@@ -1492,17 +1492,22 @@ contract_rules:
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
-    text_sha: "e72ec05775d2"
+    text_sha: "9e7f7dceb9e7"
     first_seen: "2026-10-26"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-30-taste-by-venture.md"
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
     history:
       - text_sha: "23ba49bdae5c"
         valid_until: "2026-10-30"
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-26-two-way-taste.md"
+      - text_sha: "e72ec05775d2"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-30-taste-by-venture.md"
     status: live
   - id: canon.where-the-rest-lives
     file: contract/templates/canon-block.md
