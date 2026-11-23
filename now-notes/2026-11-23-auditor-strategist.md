@@ -1,0 +1,4 @@
+Status: krishanraja/internal-auditor and krishanraja/strategist joined the fleet (state/fleet.yaml and docs/steward/fleet.json, excluded from the repository administration publisher until Krish accepts them there). The contracts carry the three rulings of 23 Nov: the auditor's standing exception to close pull requests and delete branches idle 7 days or more after recording each head sha in its restore ledger; the strategist convening the council as Krish's weekly board and at once on any U5; and the U5 rule naming krishanraja/strategist. Proposal: docs/proposals/2026-11-23-auditor-and-strategist.md.
+Next: let the next release render the new branch clause into each fleet repository's canon block, then switch the auditor's sweep from dry run to live.
+Changed: Ruling (Krish, 2026-11-23): internal-auditor may close pull requests and delete branches idle 7 days or more, recording each head sha in its restore ledger first.
+North Star check (2026-11-23): holds.

@@ -6,7 +6,7 @@ krish-principles carries my profile and verbatim ikigai. My purpose: "I see what
 Apply krish-principles to substantive work. Before material execution load strategy-brief; after execution or correction use verification-loop and observable evidence. take-the-brief runs only for an explicit interview or ambiguous high-stakes ownership transfer.
 
 Use the narrowest owner:
-- Research: evidence-research. Final decisions: decision-ledger. A council read, only when I ask for the council or name one of its seats: council.
+- Research: evidence-research. Final decisions: decision-ledger. A council read, when I ask for the council or name one of its seats, or when the strategist convenes it as my weekly board or on a U5: council.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
 - Prospecting and growth for a product: its growth engine's repository, read with get_venture_state (growth-mindmake for Mindmake, growth-makeyourmindup for makeyourmindup); the product repositories build the product only.
 - Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice. A venture's own post captions: ad-copywriter.
