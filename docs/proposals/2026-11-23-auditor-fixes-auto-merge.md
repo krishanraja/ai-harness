@@ -26,11 +26,11 @@ The operating contract's Authority section said pull requests in any other repos
 
 ## Open risk, not settled here
 
-The gate is only as good as each repository's checks. The audit of 2026-11-23 found thin pull request checks in heartside, full-time, fractionl-pulse and sendlinks, so a green fix there is weaker evidence than one in a repository with a full suite, and it can reach production. Nothing in this change verifies those checks; the auditor reports thin CI as a finding each week, and raising it is each repository's own work. Until then, a merged fix there is not proof that it works.
+The gate is only as good as each repository's checks. The audit of 2026-11-23 found thin pull request checks in heartside, full-time, fractionl-pulse and sendlinks, so a green fix there is weaker evidence than one in a repository with a full suite, and it can reach production. Nothing in this change verifies those checks. The owner is internal-auditor: today its CI check flags only a repository with no pull request checks at all, so its next change adds a finding for checks that run no tests, and its fix queue can then take that finding like any other. A fix the queue holds as `needs-krish` stays an open, labelled pull request in its repository until Krish acts; it is never merged around him. Until a repository's checks are raised, a merged fix there is not proof that it works.
 
 ## What changes
 
 | File | Change |
 |---|---|
-| `contract/krish-operating-contract.md`, Authority | The sentence on other repositories' pull requests adds internal-auditor's own fix pull requests, their bounds, and what such a merge may start. |
+| `contract/krish-operating-contract.md`, Authority | The sentence on other repositories' pull requests names the class of merge Krish approved and points here; the branch name, label and checks stay in this proposal and in internal-auditor, their one home. |
 | `docs/proposals/2026-11-18-harness-change-requests-auto-merge.md` | Its "Unchanged" line on other repositories is marked superseded in part, pointing here. |
