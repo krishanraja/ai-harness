@@ -498,7 +498,7 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "cade592cb553"
+    text_sha: "eb5e3fe785df"
     first_seen: "2026-09-07"
     source:
       kind: proposal
@@ -525,11 +525,6 @@ contract_rules:
           kind: proposal
           ref: "docs/proposals/2026-11-15-visible-codex-sessions.md"
       - text_sha: "6e216282995b"
-        valid_until: "2026-11-23"
-        source:
-          kind: proposal
-          ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
-      - text_sha: "e9a2f8a4d81e"
         valid_until: "2026-11-23"
         source:
           kind: proposal
