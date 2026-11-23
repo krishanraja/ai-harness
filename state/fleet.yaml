@@ -202,6 +202,29 @@ repos:
       Tracked file links (Supabase edge functions). One branch, main, its default since Krish
       switched it on 2026-11-14. Admitted on the same terms as claude-archive.
 
+  - name: internal-auditor
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The standing auditor: scans every fleet repository each week and holds it to its North
+      Star, current docs, no stale pull requests or branches, and additions that compound
+      rather than sprawl. A Control Center specialist engine. It may close pull requests and
+      delete branches idle 7 days or more, recording each head sha in its restore ledger first
+      (Ruling, Krish, 2026-11-23; docs/proposals/2026-11-23-auditor-and-strategist.md). Out of
+      the repository administration publisher until Krish accepts it there by name.
+
+  - name: strategist
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The portfolio strategist: brings the recovery plays the U5 rule in
+      contract/north-star-metric.md asks for and convenes the council as Krish's weekly board,
+      and at once on any U5 (Ruling, Krish, 2026-11-23). A Control Center specialist engine; its
+      output lands on Control Center's one list, never on a surface of its own. Admitted on the
+      same terms as internal-auditor.
+
 adapters:
   - id: claude
     template: contract/templates/adapter-claude.md

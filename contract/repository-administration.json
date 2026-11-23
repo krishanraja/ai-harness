@@ -34,7 +34,9 @@
     "growth-legibility",
     "claude-archive",
     "filearchives",
-    "music-watcher"
+    "music-watcher",
+    "internal-auditor",
+    "strategist"
   ],
   "families": [
     "repository-administration",

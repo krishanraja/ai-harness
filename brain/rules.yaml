@@ -498,11 +498,11 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "1f245b43fadd"
+    text_sha: "6e216282995b"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-visible-codex-sessions.md"
+      ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
     history:
       - text_sha: "34509750179f"
         valid_until: "2026-11-14"
@@ -519,6 +519,11 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-15-branch-hygiene.md"
+      - text_sha: "1f245b43fadd"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-visible-codex-sessions.md"
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
@@ -1089,11 +1094,17 @@ contract_rules:
     status: live
   - id: collision-rules.council-judges-a-decision
     file: contract/skill-routing-contract.md
-    text_sha: "d7c3216944b6"
+    text_sha: "1fe442ab4fae"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-council.md"
+      ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
+    history:
+      - text_sha: "d7c3216944b6"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-council.md"
     status: live
   - id: collision-rules.take-the-brief-captures
     file: contract/skill-routing-contract.md
@@ -1393,14 +1404,19 @@ contract_rules:
     status: live
   - id: canon.branches
     file: contract/templates/canon-block.md
-    text_sha: "66984a889516"
+    text_sha: "3676da6ca435"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-branch-hygiene.md"
+      ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
     history:
       - text_sha: "28641b2547e1"
         valid_until: "2026-11-15"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-branch-hygiene.md"
+      - text_sha: "66984a889516"
+        valid_until: "2026-11-23"
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-15-branch-hygiene.md"
@@ -1888,11 +1904,17 @@ skill_sections:
   - id: council.when-it-runs
     file: skills/council/SKILL.md
     heading: "When it runs"
-    text_sha: "a7ec474cf0ae"
+    text_sha: "a0067d5963ae"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-council.md"
+      ref: "docs/proposals/2026-11-23-auditor-and-strategist.md"
+    history:
+      - text_sha: "a7ec474cf0ae"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-council.md"
     status: live
   - id: council.when-it-does-not
     file: skills/council/SKILL.md

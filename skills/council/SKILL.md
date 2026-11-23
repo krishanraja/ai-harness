@@ -1,6 +1,6 @@
 ---
 name: council
-description: Put one decision or one idea to Krish's council of five seats (Offer, Attention, Experience, Scale, Distribution) and return the chair's call. Use only when Krish explicitly asks for the council or a council read, or names one of the five seats. Not for a general "should I" (krish-principles), planning the work (strategy-brief), recording a decision (decision-ledger) or words in his name (krish-voice). It judges and never writes, sends or acts.
+description: Put one decision or one idea to Krish's council of five seats (Offer, Attention, Experience, Scale, Distribution) and return the chair's call. Use when Krish explicitly asks for the council or a council read, or names one of the five seats, or when krishanraja/strategist convenes it as his weekly board or at once on any U5. Not for a general "should I" (krish-principles), planning the work (strategy-brief), recording a decision (decision-ledger) or words in his name (krish-voice). It judges and never writes, sends or acts.
 ---
 
 # Council
@@ -13,7 +13,9 @@ It never writes a file or a record, never sends, posts, schedules or spends, and
 
 ## When it runs
 
-Only when Krish explicitly asks for the council or a council read, or names one of the five seats. A seat named alone gets that seat's view from its lane, with no call; offer the full read.
+In two cases only: when Krish explicitly asks for the council or a council read, or names one of the five seats; and when krishanraja/strategist convenes it, once a week as Krish's board and at once when any repository in the fleet reaches U5 (Ruling, Krish, 2026-11-23). A seat named alone gets that seat's view from its lane, with no call; offer the full read.
+
+When the strategist convenes it, the strategist brings the decision or idea, its options and the facts on record; the read is the same and the call is still advice for Krish. A convened read never approves, sends or records anything, and the strategist's own plays go to Control Center's one list, not here.
 
 ## When it does not run
 
