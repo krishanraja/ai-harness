@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-18
+as_of: 2026-11-23
 head: 4e71e38
 lifecycle: live
 production_url: none
@@ -21,10 +21,11 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-18)
+## Where it is right now (as of 2026-11-23)
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":18,"current":21,"current_as_of":"2026-11-16","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 21 in the week of 2026-11-09 (21 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-16.
 
+- krishanraja/internal-auditor and krishanraja/strategist joined the fleet (state/fleet.yaml and docs/steward/fleet.json, excluded from the repository administration publisher until Krish accepts them there). The contracts carry the three rulings of 23 Nov: the auditor's standing exception to close pull requests and delete branches idle 7 days or more (no commit, comment, review or label change), Krish's own included, after recording each head sha in its restore ledger, and never the default, a protected or a kept branch, anything labelled keep, an open pull request's base or anything with checks running; the strategist convening the council as Krish's weekly board and at once on any U5; and the U5 rule naming krishanraja/strategist. Proposal: docs/proposals/2026-11-23-auditor-and-strategist.md. (2026-11-23)
 - content-corpus's editorial channels reference no longer tells writers that each Make Your Mind Up piece ends with a dated, checkable prediction; it now says no piece makes a dated or scored prediction or carries a confidence number, and mind.the.gap says where a pattern leads (Rulings, Krish, 2026-11-17 and 2026-11-18). (2026-11-18)
 - Batch 3 of the Make Your Mind Up growth push findings is proposed as skill changes: pitch quotes against the kill list, live claims about Krish, landing page previews, counter-positions, give-first promises and a batch-level audit (krish-voice outbound reference), a sincere opener while the route or row is unsettled and review-evidence openers (krish-voice humour), dead contact routes (evidence-research), ruling sweeps that reach generators and one checked publish after a live re-read (verification-loop), and connector write limits for Claude Design System artifacts, Drive and Canva (tool-router). Proposal: docs/proposals/2026-11-18-growth-push-batch-3.md. (2026-11-18)
 - The canon says a product's prospecting and growth live in its growth engine: growth-mindmake for Mindmake and growth-makeyourmindup for makeyourmindup, whose product repositories build the product only, with Control Center holding the tools and running only what the engine asks (who-krish-is section 8, north-star-metric.md "Engines", the cloud routing). (2026-11-18)
@@ -47,6 +48,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-23 Ruling (Krish, 2026-11-23): internal-auditor may close pull requests and delete branches idle 7 days or more, recording each head sha in its restore ledger first.
 - 2026-11-18 Ruling (Krish, 2026-11-18): growth-mindmake takes care of all prospecting and growth for Mindmake, which is now just the product repository; the same for growth-makeyourmindup. Ruling (Krish, 2026-11-18): all Podchaser attention goes to growth-mindmake and growth-makeyourmindup, after Pulse spent 82% of November's Podchaser points.
 - 2026-11-18 Krish extended the 18 November auto-merge ruling to harness/ change requests the same day.
 - 2026-11-18 Krish ruled on 18 November 2026 that ai-harness pull requests always auto-merge; until then a session's pull request waited for his merge as the release approval.
@@ -71,11 +73,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-18): control-center records the ruling under ## 0a of docs/MINDMAKE_OS_ARCHITECTURE.md, closing the 0a.1 prediction clause (a brief to Krish, since sessions outside control-center pass briefs rather than edit it); content-engine drops the format in its own pull request.
+- Next (2026-11-23): let the next release render the new branch clause into each fleet repository's canon block, then switch the auditor's sweep from dry run to live.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-18): holds.
+- North Star check (2026-11-23): holds.
 
 ## Read next
 
