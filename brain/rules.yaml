@@ -751,11 +751,17 @@ contract_rules:
     status: live
   - id: observation-capture.immediately-after-an-explicit
     file: contract/krish-operating-contract.md
-    text_sha: "51a5966f06bf"
+    text_sha: "2067b80a34d8"
     first_seen: "2026-09-12"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
+    history:
+      - text_sha: "51a5966f06bf"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: observation-capture.at-task-completion-after
     file: contract/krish-operating-contract.md

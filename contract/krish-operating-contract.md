@@ -140,7 +140,7 @@ Each fact has one home and one primary writer (Ruling, Krish, 2026-10-22); as in
 When the `record_harness_observation` tool is available, use it for one small,
 redacted learning signal:
 
-- immediately after an explicit correction from Krish;
+- immediately after an explicit correction from Krish (a correction stating a preference also goes to `report_to_taste_engine`; a defect or engine failure is recorded here only);
 - at task completion after a material failure, missed or false skill trigger,
   repeated manual step, contradiction, or genuinely reusable successful
   pattern.

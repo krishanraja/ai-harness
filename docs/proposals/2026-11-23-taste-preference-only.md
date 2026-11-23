@@ -19,7 +19,11 @@ Evidence: `config/rejection-floor.json` in krishanraja/content-engine at commit 
 
 ## What does not change here
 
-The move of existing records is separate and has not run. It is held in krishanraja/inspirationhouse pull request 62 and content-engine branch `claude/defects-leave-taste`, whose migration is not applied. Those carry their own review and checks, and this canon wording does not depend on them: `record_harness_observation` already exists and already reaches the evidence intake.
+The move of existing records is separate, with its own review and checks, in krishanraja/inspirationhouse pull request 62 and content-engine branch `claude/defects-leave-taste`. Its migration is applied and changed nothing in the floor (568 standards before and after, same hash). Its dry run on live data (inspirationhouse Actions run 45247776616, commit `7cfa062`) reads 470 records and would move 109, log 14 that hold both a defect and a preference, and move 173 of 568 standards. This canon wording does not depend on that move: `record_harness_observation` already exists and already reaches the evidence intake.
+
+## How we will know it worked
+
+The move is done when `taste_floor` plus `engine_standards` still equals the 568 standards makers read through `production_floor`, every moved record has its row in `engine_incidents`, and the internal-auditor's weekly scorecard reports those failures.
 
 ## Bounds
 
