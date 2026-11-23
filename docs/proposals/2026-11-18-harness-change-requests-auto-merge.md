@@ -18,7 +18,7 @@ Asker: Krish, 18 November 2026, answering whether "100%" covers change requests:
 
 ## Unchanged
 
-Capture never merges, releases or writes a Ruling line. The judge panel still holds any change request it blocks, and a blocking finding is overruled only by Krish's own Ruling line. Pull requests in other repositories still wait for Krish, apart from the bot pull requests that already merge themselves.
+Capture never merges, releases or writes a Ruling line. The judge panel still holds any change request it blocks, and a blocking finding is overruled only by Krish's own Ruling line. Pull requests in other repositories still wait for Krish, apart from the bot pull requests that already merge themselves. (Superseded in part on 2026-11-23: internal-auditor's own fix pull requests also merge themselves, within the bounds in docs/proposals/2026-11-23-auditor-fixes-auto-merge.md. The operating contract's Authority section is current.)
 
 ## Rollback
 
