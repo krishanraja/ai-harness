@@ -128,7 +128,7 @@ Read his approved rules before drafting (where from: below). They are the craft 
 
 When the Control Center connector is in the session, `get_approved_taste` (lane `voice`, with the repository you are in, and the venture when that repository serves several) is the live read of the same rules for that venture only: use it, and fall back to `references/approved-taste.md` only without it. Empty means no rule is approved yet; never invent one.
 
-When Krish corrects or judges the words (a line he cuts, a phrase he rewrites, "that's not me"), send his exact typed words to `report_to_taste_engine` with `kind: krish_words`, `lane: voice`, where he typed them (`said_where`) and when (`said_at`). Copy them verbatim, never tidied. A correction you inferred from his edits, or a summary of what he wanted, goes only as `kind: observation`. One report per correction; this never approves, rejects or rewords a rule.
+When Krish states a preference about the words (a line he cuts, a phrase he rewrites, "that's not me"; a defect such as a wrong fact or a typo goes to `record_harness_observation` instead, Ruling, Krish, 2026-11-23), send his exact typed words to `report_to_taste_engine` with `kind: krish_words`, `lane: voice`, where he typed them (`said_where`) and when (`said_at`). Copy them verbatim, never tidied. A correction you inferred from his edits, or a summary of what he wanted, goes only as `kind: observation`. One report per correction; this never approves, rejects or rewords a rule.
 
 ### 3. Choose posture and container
 

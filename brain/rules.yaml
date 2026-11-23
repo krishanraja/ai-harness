@@ -751,11 +751,17 @@ contract_rules:
     status: live
   - id: observation-capture.immediately-after-an-explicit
     file: contract/krish-operating-contract.md
-    text_sha: "51a5966f06bf"
+    text_sha: "2067b80a34d8"
     first_seen: "2026-09-12"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
+    history:
+      - text_sha: "51a5966f06bf"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-12.md#hosted-observation-capture"
     status: live
   - id: observation-capture.at-task-completion-after
     file: contract/krish-operating-contract.md
@@ -1492,17 +1498,22 @@ contract_rules:
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
-    text_sha: "e72ec05775d2"
+    text_sha: "9e7f7dceb9e7"
     first_seen: "2026-10-26"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-30-taste-by-venture.md"
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
     history:
       - text_sha: "23ba49bdae5c"
         valid_until: "2026-10-30"
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-26-two-way-taste.md"
+      - text_sha: "e72ec05775d2"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-30-taste-by-venture.md"
     status: live
   - id: canon.where-the-rest-lives
     file: contract/templates/canon-block.md
@@ -2967,11 +2978,11 @@ skill_sections:
   - id: krish-design.1-interaction-as-sequencing
     file: skills/krish-design/SKILL.md
     heading: "1. Interaction as sequencing (the weapon)"
-    text_sha: "5e28eae384b1"
+    text_sha: "9fb0772173b1"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
     history:
       - text_sha: "78e9b25ede95"
         valid_until: "2026-10-26"
@@ -2983,6 +2994,11 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-26-two-way-taste.md"
+      - text_sha: "5e28eae384b1"
+        valid_until: "2026-11-23"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
     status: live
   - id: krish-design.2-house-design-systems
     file: skills/krish-design/SKILL.md
@@ -3321,11 +3337,11 @@ skill_sections:
   - id: krish-voice.workflow
     file: skills/krish-voice/SKILL.md
     heading: "Workflow"
-    text_sha: "96f27efa4c81"
+    text_sha: "e26790fa16c1"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "09a38003d129"
+      kind: proposal
+      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
     history:
       - text_sha: "e2502cf40460"
         valid_until: "2026-10-24"
@@ -3347,6 +3363,11 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-26-two-way-taste.md"
+      - text_sha: "96f27efa4c81"
+        valid_until: "2026-11-23"
+        source:
+          kind: ruling
+          ref: "09a38003d129"
     status: live
   - id: krish-voice.kill-list
     file: skills/krish-voice/SKILL.md
