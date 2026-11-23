@@ -27,8 +27,8 @@ On 2026-11-23 nine ventures sat at U4 only because their reading was more than 7
 |---|---|
 | `state/fleet.yaml`, `docs/steward/fleet.json` | Both repositories join the fleet, equal in both lists (`scripts/validate-surfaces.mjs` checks parity). They get the canon block, the weekly branch sweep and the docs steward. `bootstrap_head` is left out because neither repository had a commit when this was written; the steward's first reconciliation records the head in `NOW.md`. |
 | `contract/repository-administration.json` | Both are excluded from the repository administration publisher by name, on the same terms as filearchives and music-watcher, until Krish accepts them there. So no `brain/repositories` profile is added. |
-| `contract/krish-operating-contract.md`, Authority | A second standing exception beside the branch sweep: internal-auditor may close pull requests and delete branches idle 7 days or more, after recording each head sha in its restore ledger. Any other close or deletion of unmerged work stays Krish's decision. |
-| `contract/templates/canon-block.md`, Branches | One clause naming the same exception, so every repository knows a 7-day idle pull request or branch can be closed by the auditor. The template carries no version of its own: the release that next renders it stamps it, as with the divergence sentence on 2026-11-18. |
+| `contract/krish-operating-contract.md`, Authority | A second standing exception beside the branch sweep: internal-auditor may close pull requests and delete branches idle 7 days or more, Krish's own included, after recording each head sha in its restore ledger, within the bounds below. Any other close or deletion of unmerged work stays Krish's decision. |
+| `contract/templates/canon-block.md`, Branches | One short clause naming the same exception and its bounds, so every repository knows a 7-day idle pull request or branch can be closed by the auditor and which ones never are. The template carries no version of its own: the release that next renders it stamps it, as with the divergence sentence on 2026-11-18. |
 | `contract/skill-routing-contract.md` | The council's route row and collision rule add the convened read: `krishanraja/strategist` as Krish's weekly board, and at once on any U5. |
 | `skills/council/SKILL.md` | The description and "When it runs" add the same trigger. The read itself is unchanged: it stays advice, approves nothing, sends nothing and records nothing, and the strategist's own plays go to Control Center's one list. |
 | `contract/north-star-metric.md`, U5 row | "The strategist" is named as `krishanraja/strategist`, which also convenes the council at once. Control Center's strategist still carries the U5 plays into the daily move ("Who updates what"); it shows what the strategist brings, it does not replace it. |
@@ -38,7 +38,9 @@ On 2026-11-23 nine ventures sat at U4 only because their reading was more than 7
 
 ## Bounds
 
-- The auditor's close and delete exception is narrow: idle 7 days or more, the head sha recorded first, and restorable from that ledger. It deletes nothing else and merges nothing.
+- The auditor's close and delete exception covers Krish's own idle pull requests and branches too. He chose "close PRs and delete branches older than 7 days with no activity" over leaving his own alone, so a pull request he opened and left for 7 days is closed like any other.
+- Idle means no commit, comment, review or label change for 7 days. The head sha goes into the auditor's restore ledger before any delete, so every branch it removes can be restored from that ledger.
+- It never closes or deletes the default branch, a protected branch, a branch in the sweep's keep list (`scripts/kept-branches.mjs`, `KEEP_NAMES`), a branch or pull request labelled `keep`, the base of an open pull request, or anything with checks running. It deletes nothing else and merges nothing.
 - A convened council read is advice. "Go" approves nothing; Krish decides, and recording his decision stays with `decision-ledger`.
 - Both repositories propose through Control Center. Every send, post and spend keeps its own approval.
 

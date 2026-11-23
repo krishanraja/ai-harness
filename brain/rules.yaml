@@ -498,7 +498,7 @@ contract_rules:
     status: live
   - id: authority.treat-any-purge-deletion
     file: contract/krish-operating-contract.md
-    text_sha: "ae935055709b"
+    text_sha: "6e216282995b"
     first_seen: "2026-09-07"
     source:
       kind: proposal
@@ -1404,7 +1404,7 @@ contract_rules:
     status: live
   - id: canon.branches
     file: contract/templates/canon-block.md
-    text_sha: "5b46f8f06e22"
+    text_sha: "3676da6ca435"
     first_seen: "2026-11-15"
     source:
       kind: proposal
@@ -1904,7 +1904,7 @@ skill_sections:
   - id: council.when-it-runs
     file: skills/council/SKILL.md
     heading: "When it runs"
-    text_sha: "a9caeda89671"
+    text_sha: "a0067d5963ae"
     first_seen: "2026-11-15"
     source:
       kind: proposal
