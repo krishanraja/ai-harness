@@ -26,6 +26,7 @@ On 2026-11-24 the fleet held 20 open pull requests, most of them green. 15 of th
 
 | File | Change |
 |---|---|
-| `contract/krish-operating-contract.md`, Authority | One sentence after the auditor-fix exception names this class of merge and points here. |
+| `contract/krish-operating-contract.md`, Authority | One sentence after the auditor-fix exception names this class of merge and points here. The sentence before it no longer says other repositories' pull requests wait for his merge: only one held for him waits (labelled `needs-krish` or `keep`, red, or a docs steward run whose validator failed, which the merger never merges). |
+| `docs/proposals/2026-11-23-auditor-fixes-auto-merge.md` | Superseded in part: its bound "only internal-auditor's own fix pull requests" is widened here to every in-scope repository's green pull requests. |
 | krishanraja/internal-auditor | `src/prTriage.ts` and `pr-triage.yml` carry the rules; their tests hold them. |
 | krishanraja/control-center | Its engines' clock knocks `pr-triage.yml` hourly. |
