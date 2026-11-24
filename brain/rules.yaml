@@ -1421,7 +1421,7 @@ contract_rules:
     status: live
   - id: canon.folders
     file: contract/templates/canon-block.md
-    text_sha: "04f455fa6b2e"
+    text_sha: "1b465e772743"
     first_seen: "2026-11-24"
     source:
       kind: proposal
