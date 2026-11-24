@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- the registry's venture map is also rendered as state/ventures.json, a checked rendering beside the neighbours table, so readers with no YAML parser (control-center) can pin it as a generated file instead of keeping a copy. (2026-11-24)
 - the insight-desk routing paragraph now carries the U4 measurement-idea rule, and the proposal records which statements were withdrawn in #309. (2026-11-24)
 - the insight-desk proposal answers the judge panel on #308: readings cited with source and date, overlap labelled a judgement, route stated once, sheets scoped per venture, the candidate record kept with valid_until at admission. (2026-11-24)
 - the registry's venture for each repository now reproduces Control Center's live FLEET_VENTURE, so the four copied repo-to-venture maps can read the registry with no change in behaviour: AEO-Engine, krish-raja, dothinkdo and dothinkdo-skills serve mindmake and content-watcher publication, as the live rule says; control-center and strategist serve every venture, so they carry none; ctrl-mindmake, the live CTRL repository, is mm_ctrl, where the live rule only named OLD-ctrl-mindmake's old names. (2026-11-24)
@@ -55,7 +56,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-24): Krish decides admission of the insight-desk candidate and the provenance credit.
+- Next (2026-11-24): control-center pins state/ventures.json as a generated src/lib/fleetVentures.ts and FLEET_VENTURE reads it.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 33, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
