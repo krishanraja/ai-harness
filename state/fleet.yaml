@@ -415,8 +415,8 @@ registry:
     layer: specialist
     role: Ideas outside the consensus, and a free score of how familiar any output is.
     capability: Scores a draft or a plan for sameness for free, and maps or challenges an angle (paid, capped).
-    call: Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace.
-    when: Ideas keep coming back the same, a number sits at U4 or U5 with nothing proposed, or an angle is about to be committed.
+    call: Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace. Its package and the canon's Divergence rule still call it divergent-thinker; it is the same repository until the rename lands.
+    when: The canon's Divergence rule says when.
     rename: The package and the canon call it divergent-thinker; both become divergence-engine.
   - name: humour-engine
     scope: in

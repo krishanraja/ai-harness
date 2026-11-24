@@ -13,6 +13,14 @@ Status: admitted. Krish ruled it on 2026-11-24.
 
 The fleet list named only canon surfaces, held no scope, layer, role or venture, and said nothing about what each repository can do for the others. So nothing called humour-engine or divergence-engine unless a session already knew to, four repositories kept their own copy of which repository serves which venture, and the list's `mm-ctrl` entry resolves to GitHub id 1090040458, which is OLD-ctrl-mindmake, the repository Krish excluded, while the live CTRL repository (ctrl-mindmake) had no entry at all.
 
+## Which part of the North Star it moves
+
+ai-harness's number is the corrections Krish has to give twice in a week. One of the most repeated is a session doing a job another repository already owns (writing its own humour, its own divergence, its own strategy) or not knowing a capability exists. The neighbours table puts every capability in front of every session before it builds, so that correction is not needed a second time. Its proof is the map's calls and called edges in internal-auditor, which count real calls.
+
+## The walls
+
+A call through the table goes through the called repository's own walls. The table widens nothing any session may post, send or spend; a paid route (divergent_run) keeps its caps and spend rules, and a growth engine's route is its own dispatch, never a send.
+
 ## What changes
 
 | File | Change |
