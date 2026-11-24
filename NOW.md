@@ -23,7 +23,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## Where it is right now (as of 2026-11-23)
 
-<!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":null,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: not measured, U4.** Corrections Krish had to give twice in a week, across the fleet: not measured for the week of 2026-11-16 (taste ledger not yet read for this week; 0 from the harness's own corrections), checked 2026-11-24. Measuring it is the first job.
+<!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
 - the operating contract now says internal-auditor's own fix pull requests merge themselves once every check is green at the head the fix queue checked, with a red, conflicted or unchecked fix labelled needs-krish; ai-harness keeps its own judged merge bot. (2026-11-23)
 - The canon now sends his preferences to the taste engine and defects and engine failures to record_harness_observation. (2026-11-23)
