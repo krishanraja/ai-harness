@@ -36,6 +36,13 @@ repos:
     note: >-
       Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
+  - name: ctrl-mindmake
+    # The live CTRL repository (GitHub id 1418954003). Its canon block stopped at v2026.10.30.1 because canon sync
+    # wrote to mm-ctrl, a former name of OLD-ctrl-mindmake, which Krish excluded (2026-11-24).
+    canon_target: AGENTS.md
+    entry: CLAUDE.md
+    rules_files: [CLAUDE.md, docs/current/README.md]
+
   - name: mindmake
     canon_target: AGENTS.md
     entry: CLAUDE.md
@@ -621,34 +628,52 @@ registry:
     venture: fractionl_circle
     role: Circle, preserved and not worked.
   - name: claude-archive
-    scope: personal
-    confirm: true
-    role: Append-only vault of Claude exports and transcripts.
+    scope: in
+    layer: service
+    role: Where Claude session histories go, mainly to power learnings (Krish, 2026-11-24).
+    capability: The history of past Claude sessions, the raw material for what the fleet has learned.
+    call: Read only. The internal auditor reads it to keep the learnings fresh; read it the same way, never write to it.
+    when: You need what earlier sessions tried, decided or learned.
   - name: hunter
     scope: personal
-    confirm: true
     role: Krish's job search.
   - name: dothinkdo
-    scope: personal
+    scope: in
+    layer: product
     venture: mindmake
-    confirm: true
-    role: A private project.
+    role: A real-life organisation brain in action (Krish, 2026-11-24).
+    capability: A live organisation brain run the Mindmake way, the approach in daily use.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: You need evidence of how the approach works inside a real organisation.
   - name: dothinkdo-skills
-    scope: personal
+    scope: in
+    layer: product
     venture: mindmake
-    confirm: true
-    role: A private project.
+    role: The skills that organisation brain runs on (Krish, 2026-11-24).
+    capability: The skills a real organisation runs on, built the Mindmake way.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: You need a skill pattern already proven in a live organisation.
   - name: compound-finances
     scope: personal
-    confirm: true
     role: Private finances.
   - name: music-watcher
-    scope: personal
-    confirm: true
-    role: trackcard and Music Brain; music is protected by the Ikigai's rule 8.
+    scope: in
+    layer: service
+    role: >-
+      trackcard, the Music Brains and the production engine. In the fleet machinery by Krish's
+      choice on 2026-11-24, for its engines and his move into creative work, knowing the Ikigai's
+      rule 8 protects music.
+    capability: >-
+      Measures an audio bounce into a card (tempo, key, a bar-numbered section map, stems, loudness),
+      and keeps taste brains that learn only from evidence their owner approves.
+    call: >-
+      `trackcard analyze <file.wav>` from its package, on the machine that holds the audio; its approved
+      taste is read only, never written.
+    when: >-
+      You need an audio file measured, music or a sound bed chosen against measured taste, or a pattern
+      for learning someone's taste only from what they approve.
   - name: lorimer-pc-backup
     scope: personal
-    confirm: true
     role: A backup of the Lorimer PC.
   - name: higgsfield-generator
     scope: unplaced

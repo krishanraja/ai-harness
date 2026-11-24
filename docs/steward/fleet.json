@@ -63,6 +63,29 @@
       "bootstrap_head": "edd9045"
     },
     {
+      "name": "ctrl-mindmake",
+      "product": "CTRL by Mindmake",
+      "docs_roots": [
+        "docs",
+        "project-documentation"
+      ],
+      "state_doc": "docs/current/release-state.md",
+      "history_dir": "docs/history",
+      "truth_files": [
+        "public/.well-known/product.json"
+      ],
+      "docs_check": "node scripts/check-docs.mjs",
+      "rules_files": [
+        "CLAUDE.md",
+        "docs/current/README.md",
+        "docs/current/documentation-standards.md"
+      ],
+      "write_allowlist": [
+        "**/*.md",
+        "public/.well-known/product.json"
+      ]
+    },
+    {
       "name": "mindmake",
       "product": "Mindmake (mindmake.co)",
       "docs_roots": [
