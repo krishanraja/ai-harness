@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- A merged change to the canon block now releases itself, as skill changes already did; the folder-report rule was released by hand as v2026.11.24.1. (2026-11-24)
 - The canon now tells every session to report folder changes in Krish's Drive or dev folders to filearchives, with his words. (2026-11-24)
 - the operating contract now says internal-auditor's own fix pull requests merge themselves once every check is green at the head the fix queue checked, with a red, conflicted or unchecked fix labelled needs-krish; ai-harness keeps its own judged merge bot. (2026-11-23)
 - The canon now sends his preferences to the taste engine and defects and engine failures to record_harness_observation. (2026-11-23)
@@ -52,6 +53,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-24 Krish ruled that everything should happen automatically.
 - 2026-11-24 Krish asked that every repository report folder changes to filearchives.
 - 2026-11-23 Ruling (Krish, 2026-11-23): all auditor fixes auto merge. Ruling (Krish, 2026-11-23): merge and deploy.
 - 2026-11-23 Krish ruled that the taste system holds only preference and inspiration.
@@ -81,7 +83,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-24): The next canon release renders this into every repository.
+- Next (2026-11-24): The next canon change confirms the automatic release fires.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (still open 2026-11-03, not rechecked): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the 26 expired skill reviews; the manual cloud uploads; closing the credential-exposure lifecycle.
