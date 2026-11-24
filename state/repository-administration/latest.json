@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-24T05:57:34.036Z",
+  "generated_at": "2026-11-24T17:43:37.323Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "33519faf9b42e90314af7b2e1d66008031973c86",
+      "base": "96c840a437b84350fc3c24f3c7a752f81ca18170",
       "brain_revision": "aabfeac6c45f",
-      "before": 470142,
-      "after": 470142,
+      "before": 469619,
+      "after": 469619,
       "files": [],
       "skipped": [],
-      "source_seal": "c2c98dd28a7436b9710fcadfea8f98fb20a521ecb86fb8a892dbb449e78eaf85",
+      "source_seal": "572a67322fd1bc8e5ecae43c801d8dfc0ed458819542eaf6b493de804024487f",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -63,11 +63,11 @@
     },
     {
       "repository": "mm-ctrl",
-      "status": "awaiting-pilots"
+      "status": "excluded"
     },
     {
       "repository": "fractionl-circle",
-      "status": "awaiting-pilots"
+      "status": "excluded"
     },
     {
       "repository": "fractionl-pulse",
@@ -79,7 +79,7 @@
     },
     {
       "repository": "contentarchives",
-      "status": "awaiting-pilots"
+      "status": "excluded"
     },
     {
       "repository": "makeyourmindup",
