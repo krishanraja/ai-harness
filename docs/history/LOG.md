@@ -5,6 +5,86 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-24
+
+- stamped: `NOW.md` audit findings fixed (`too_long`, `recent_too_many`, `where_too_many`, `old_dated_claims`) by condensing "Where it is right now" to 8 bullets and rolling the older bullets below; head moved to 770cc3d.
+
+- rolled from NOW.md: the canon now carries Krish's 16 Nov ruling that Claude names every session it starts or spawns (a Codex thread, a Claude Code session, a cloud session), with its id or link, in the same message. It was stranded in ai-harness#278, whose daemon route #280 replaced; #278 is closed and only this ruling was carried over. (2026-11-23)
+
+- rolled from NOW.md: content-corpus's editorial channels reference no longer tells writers that each Make Your Mind Up piece ends with a dated, checkable prediction; it now says no piece makes a dated or scored prediction or carries a confidence number, and mind.the.gap says where a pattern leads (Rulings, Krish, 2026-11-17 and 2026-11-18). (2026-11-18)
+
+- rolled from NOW.md: Batch 3 of the Make Your Mind Up growth push findings is proposed as skill changes: pitch quotes against the kill list, live claims about Krish, landing page previews, counter-positions, give-first promises and a batch-level audit (krish-voice outbound reference), a sincere opener while the route or row is unsettled and review-evidence openers (krish-voice humour), dead contact routes (evidence-research), ruling sweeps that reach generators and one checked publish after a live re-read (verification-loop), and connector write limits for Claude Design System artifacts, Drive and Canva (tool-router). Proposal: docs/proposals/2026-11-18-growth-push-batch-3.md. (2026-11-18)
+
+- rolled from NOW.md: The canon says a product's prospecting and growth live in its growth engine: growth-mindmake for Mindmake and growth-makeyourmindup for makeyourmindup, whose product repositories build the product only, with Control Center holding the tools and running only what the engine asks (who-krish-is section 8, north-star-metric.md "Engines", the cloud routing). (2026-11-18)
+
+- rolled from NOW.md: Change requests on harness/ branches in ai-harness now merge themselves too, once housekeeping marks them ready and closeout, the validation build and the judge panel are green; capture still never merges its own change. (2026-11-18)
+
+- rolled from NOW.md: Every session pull request in ai-harness now merges itself once closeout, the validation build and the judge panel are green, through scripts/merge-bot-prs.mjs, run when those checks finish and hourly; change requests on harness/ branches still wait for Krish. (2026-11-18)
+
+- rolled from NOW.md: Batch 2 of the Make Your Mind Up growth push findings is proposed as skill changes: contact routes confirmed from the live page (evidence-research), the channel decides the register and a route change means a rewrite, plus "humour engine not run" (krish-voice), sub-sessions, fan-out sizing, resume and shared-machine hygiene (krish-build long-running run safety), and a browser fallback rule (tool-router public read routes). Proposal: docs/proposals/2026-11-18-growth-push-batch-2.md. (2026-11-18)
+
+- rolled from NOW.md: The operating contract now records that every ai-harness pull request auto-merges once its checks, the judge panel included, pass. Krish no longer merges harness changes by hand. Batch 1 of the growth push skill changes is merged (#286). (2026-11-18)
+
+- rolled from NOW.md: Batch 1 of the Make Your Mind Up growth push findings is proposed as skill changes, waiting on Krish's merge: public read routes for engagement (tool-router reference), multi-author attribution (evidence-research), live-copy and stranger-view checks (verification-loop), a cold pitch to a named writer (krish-voice outbound reference), and the handover rule that keeps next-session texts where the next session runs (operating contract). (2026-11-18)
+
+- rolled from NOW.md: `skills/mindmake/references/brand-profile.md` is proposed in PR #285 and waits on Krish: the judge panel held it because a blanket merge instruction is not his approval of this content. It carries the one sentence he chose that day (option A), the four lanes, the need-to-offer table, proof in order and the open decisions. `commercial-canon.md` points to it. The working pack with every proposal and decision is krishanraja/mindmake `project-documentation/krishs-mission/`. (2026-11-18)
+
+- rolled from NOW.md: divergent-thinker is in the canon and the skill layer: one Divergence sentence in the canon block, and one line each in strategy-brief, krish-principles, build-apps-with-krish, krish-design and tool-router, with their entries in brain/rules.yaml. (2026-11-18)
+
+- rolled from NOW.md: codex_thread no longer fails silently on Windows (it runs the native codex.exe, and every spawn failure or early exit is a non-zero exit with a one-line reason), and `send` to a thread Codex Desktop holds is queued with `codex queue` and runs there as the next turn, with `--wait` to get Codex's reply; proven on a throwaway thread on Krish's PC and held by `scripts/test-codex-thread.mjs` in the steward. (2026-11-17)
+
+- rolled from NOW.md: Skills 31 to 33 (`council`, `ad-copywriter`, `ugc-avatar`) are admitted as production skills on Krish's rulings of 2026-11-15; the registry says 33 and is the source. `ugc-avatar` holds every AI person to Krish's two yeses, recorded each time, with no AI label anywhere. The Claude and Codex division is in force (#263): Claude owns strategy, orchestration, verification and the only writes to ai-harness and Google Drive; Codex does art direction, visual builds and browser legwork. The Perplexity account text changed, so one paste is owed there. (2026-11-15)
+
+- rolled from NOW.md: Claude starts Codex only through `scripts/codex_thread.mjs` (canonical here), from a session on Krish's computer when he must see or share it; a start failure is reported in one line, never worked around by editing MCP or Claude settings. Content production runs as Codex cards from the cloud and is never shown in Codex Desktop; social media legwork runs from a Claude session on his computer, visible there (Ruling, Krish, 2026-11-15). `scripts/codex-thread-copies.mjs` reads every fleet copy. (2026-11-15)
+
+- rolled from NOW.md: Branch rule in the canon block: one worktree and one branch per pull request, and a branch with no pull request after a day gets one or is removed. The weekly sweep (`.github/workflows/branch-sweep.yml`, Sunday 03:17 UTC) deletes branches whose work is already on main and lists the rest; a hand run takes an approved `branch@sha` list. The weekly digest lists every kept branch (`scripts/kept-branches.mjs`); a read-only run on 2026-11-15 found 122 kept branches in 11 of 16 swept repositories, 86 needing Krish. (2026-11-15)
+
+- rolled from NOW.md: The closeout fold takes an optional `--now-cap <bytes>` and `--history <file>` (default `docs/history/LOG.md`): it moves the oldest dated status lines under "Where it is right now" to the history file until NOW.md fits; with no flag it behaves as before. (2026-11-15)
+
+- rolled from NOW.md: The OpenClaw fleet runs on the worker server (Hetzner, Helsinki) since 20:08 UTC on 14 Nov; the old box was deleted that night on Krish's ruling, with a Hetzner snapshot as the only rollback, and 12 jobs were retired by name. The T0 report is in `state/vps/MIGRATION-2026-11-14.md`. (2026-11-14)
+
+- rolled from NOW.md: Proposed, waiting on Krish: the canon's engine-instruction paragraph (I-13, `docs/proposals/2026-11-14-engine-instructions.md`); the krish and jonny voices' pin on krish-raja's retired names (I-08); File routing naming only folders that exist (I-15, `docs/proposals/2026-11-14-drive-truth.md`); no cold outbound routed to Instantly (#233); the canon preamble's start-marker wording. (2026-11-14)
+
+- rolled from NOW.md: 2026-11-18 Ruling (Krish, 2026-11-18): growth-mindmake takes care of all prospecting and growth for Mindmake, which is now just the product repository; the same for growth-makeyourmindup. Ruling (Krish, 2026-11-18): all Podchaser attention goes to growth-mindmake and growth-makeyourmindup, after Pulse spent 82% of November's Podchaser points.
+
+- rolled from NOW.md: 2026-11-18 Krish extended the 18 November auto-merge ruling to harness/ change requests the same day.
+
+- rolled from NOW.md: 2026-11-18 Krish ruled on 18 November 2026 that ai-harness pull requests always auto-merge; until then a session's pull request waited for his merge as the release approval.
+
+- rolled from NOW.md: 2026-11-18 Krish chose the pitch sentence on 18 Nov 2026 ("A is good") after rejecting "an AI that runs on their own judgement" and "argues back".
+
+- rolled from NOW.md: 2026-11-18 Krish admitted docs/proposals/2026-11-18-divergent-thinker.md as written, so every repository learns when to consult the engine at the next render.
+
+- rolled from NOW.md: 2026-11-17 Ruling (Krish, 2026-11-17): Claude keeps two-way access to every Codex thread it opens while Krish uses it in Desktop; fix codex_thread so this can never recur.
+
+- rolled from NOW.md: 2026-11-17 The NOW.md audit failed again on size and bullet count (17,070 characters against 16,000, 22 bullets in "Where it is right now" against 8) two days after the last trim, because each session adds a bullet and none retires one; 22 bullets became 8 and the superseded ones rolled into the LOG. "Where it is right now" says where things are, so a bullet that a later bullet replaces (the staged `council` candidate, the proposal that became the ruling) goes at the next closeout.
+
+- rolled from NOW.md: 2026-11-16 The canon block in AGENTS.md was synced to v2026.11.15.2 (#276), carrying "33 curated skills" after ad-copywriter and ugc-avatar were admitted as skills 32 and 33 on 2026-11-15; NOW.md still said 30, a count two admissions out of date (the registry is the source). Also folded this week: the branch sweep, the Claude and Codex division, and the codex_thread rule.
+
+- rolled from NOW.md: 2026-11-15 NOW.md's "Where it is right now" had grown to 39 bullets and 24,702 characters against limits of 8 and 16,000; 37 bullets rolled into the LOG, the rest condensed.
+
+- rolled from NOW.md: 2026-11-14 The CLAUDE_CODE_OAUTH_TOKEN ask no longer names growth-heartside: the fleet integration audit (2026-11-14) read growth-heartside's docs-steward run 43538433695, where "Require the subscription token" succeeded and Claude ran. The steward cannot drop a done ask by itself; audit-now.mjs only warns when an ask is older than 14 days.
+
+- rolled from NOW.md: 2026-11-14 The steward measured at 01:00 UTC, before the taste ledger sent its 18 repeats at 05:47, and nothing told "0 repeats" from "not read yet" (fleet integration audit, harness-1, 2026-11-14).
+
+- rolled from NOW.md: 2026-11-13 Krish asked to measure the number the North Star names and to merge it (Ruling, Krish, 2026-11-13: do it all and merge to main).
+
+- rolled from NOW.md: 2026-11-13 Krish, 2026-11-13, asked whether to set up a weekly Claude scheduled task in each of his two accounts or rule them not required: "readers not required". It keeps his 2026-10-29 ruling of zero Claude routines.
+
+- rolled from NOW.md: 2026-11-12 Krish, 2026-11-12: "make sure everything's a cohesive system and that the project documentation is 100% up to date with absolutely nothing old or misleading left in there".
+
+- rolled from NOW.md: 2026-11-12 scripts/harness-watchdog.mjs, config/harness-jobs.json, scripts/test-harness-watchdog.mjs.
+
+- rolled from NOW.md: 2026-11-12 Every steward run that folded closeout notes was reported failed after its commit landed (control-center's 2026-11-12 run: 17 "was deleted" failures, nothing else); the validator now passes that run. The knowledge history check's 1 MiB buffer (ENOBUFS once brain/knowledge.jsonl passed 1 MiB) was fixed on main first by #220, so this change keeps main's fix.
+
+- rolled from NOW.md: 2026-11-10 Krish ruled on the humour profile on 10 Nov; it went to the harness, not the taste ledger, because the ledger would file a model's reading of him as an uncounted observation.
+
+- rolled from NOW.md: 2026-11-09 Krish, 2026-11-09: "we need to make sure everything goes through the same voice system. Absolutely everything."
+
+- rolled from NOW.md: 2026-11-08 release v2026.11.08.1 was registered and LORIMER's sync of it recorded (#208); the krish-voice references answered the judge panel (PR 207).
+
+- rolled from NOW.md: 2026-11-07 Krish asked for one voice, amplified by writers he admires, enforced on everything sent or posted in his name.
+
 ## 2026-11-17
 
 - stamped: `NOW.md` audit findings fixed (`too_long` 17070 characters against 16000, `where_too_many` 22 bullets against 8) by rolling the bullets below and merging related ones; head moved to 4e71e38.
