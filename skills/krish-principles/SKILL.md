@@ -48,7 +48,7 @@ The person this doctrine serves, from his Master Ikigai (version 4) and his ruli
 - **Founder visibility is still open,** except his face and voice clone for Mindmake outbound and makeyourmindup shorts (Ruling, Krish, 2026-10-22). Never resolve the rest for him.
 - **What he works on is dynamic.** Read the venture list, priorities, pricing and revenue live from Control Center; never from memory or from this skill.
 
-Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full one-queue rule, his other standing rulings, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it.
+Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full one-queue rule, his other standing rulings, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it. Before building or deciding, read `references/capabilities.md`: what every other repository can do for you, how to call it and when, generated from the registry in `state/fleet.yaml`; call the one whose trigger fits rather than doing its job yourself.
 
 ## Working with Krish
 

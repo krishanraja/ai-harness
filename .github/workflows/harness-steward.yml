@@ -87,6 +87,9 @@ jobs:
       - name: Render is byte-stable
         run: node scripts/render.mjs --check
 
+      - name: The registry checker can still fail
+        run: node scripts/test-render-capabilities.mjs
+
       - name: Surfaces valid
         run: node scripts/validate-surfaces.mjs --fleet-json docs/steward/fleet.json
 

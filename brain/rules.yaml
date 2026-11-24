@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 144 rules across the two contracts and the canon block.
+# 145 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1483,6 +1483,15 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+    status: live
+  - id: canon.neighbours
+    file: contract/templates/canon-block.md
+    text_sha: "993c12b20665"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
+      sha256: "687B0E7F401F50AAC30F25F1930045FF086688D38ED1113D5126FC642EF82580"
     status: live
   - id: canon.research
     file: contract/templates/canon-block.md
@@ -3122,11 +3131,12 @@ skill_sections:
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
     heading: "Who Krish is"
-    text_sha: "eeeba21bb3a0"
+    text_sha: "ecd06c9fa293"
     first_seen: "2026-10-05"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+      ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
+      sha256: "687B0E7F401F50AAC30F25F1930045FF086688D38ED1113D5126FC642EF82580"
     history:
       - text_sha: "d06d8a102719"
         valid_until: "2026-10-06"
@@ -3138,6 +3148,11 @@ skill_sections:
         source:
           kind: ruling
           ref: "db5cd4c3bd10"
+      - text_sha: "eeeba21bb3a0"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-10-22-outcome-allocation.md"
     status: live
   - id: krish-principles.working-with-krish
     file: skills/krish-principles/SKILL.md
