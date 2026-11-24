@@ -1,32 +1,37 @@
 schema_version: 1
 id: insight-desk
-status: candidate-inactive
+status: closed-admitted
 owner: Krish Raja
 created_at: 2026-11-24
+valid_until: 2026-11-24
+closed_by: "Ruling (Krish, 2026-11-24): insight-desk is admitted."
 source_branch: claude/dazzling-turing-kabf0w
-skill_path: candidates/insight-desk
-admission_path: skills/insight-desk
+skill_path: skills/insight-desk
+candidate_path_during_candidacy: candidates/insight-desk
 proposal: docs/proposals/2026-11-24-insight-desk.md
 role: idea-producer
 provenance:
-  origin: an outside source named in the approved plan; not named in committed files until Krish rules
-  source_revision: unknown; the source was not read in this session
-  reviewed_at: null
-  freshness_sla: none set
-  license: not verified in this session
-  copied_text: unverified; the committed methods were written for this harness and no source text was compared
-  open_finding: the approved plan's credit conflicts with Ruling (Krish, 2026-11-15) that the OS mentions no outside influence; held for Krish (docs/proposals/2026-11-24-insight-desk.md)
-  gate_status: unmet
+  ruling: "Ruling (Krish, 2026-11-24): insight-desk names no outside source."
+  gate_status: met
 evaluation:
-  trigger_cases: evals/candidates/insight-desk-trigger-cases.jsonl
-  behavior_cases: evals/candidates/insight-desk-behavior-cases.jsonl
-activation: false
-release_eligible: false
+  trigger_cases: evals/insight-desk-trigger-cases.jsonl
+  behavior_cases: evals/insight-desk-behavior-cases.jsonl
+activation: true
+release_eligible: true
 admission_gates:
-  - full-harness-validation
-  - held-out-trigger-evaluation
-  - held-out-behavior-evaluation
-  - independent-overlap-review
-  - provenance-ruling
-  - named-human-admission
-  - governed-release-and-install-approval
+  - gate: named-human-admission
+    status: met
+    by: "Ruling (Krish, 2026-11-24): insight-desk is admitted."
+  - gate: provenance-ruling
+    status: met
+    by: "Ruling (Krish, 2026-11-24): insight-desk names no outside source."
+  - gate: held-out-trigger-evaluation
+    status: "suite minimums and the held-out check pass in scripts/validate.py; no model run is recorded"
+  - gate: held-out-behavior-evaluation
+    status: "suite minimums and the held-out check pass in scripts/validate.py; no model run is recorded"
+  - gate: independent-overlap-review
+    status: "the proposal's overlap table, a reviewer judgement and not a measurement"
+  - gate: full-harness-validation
+    status: "scripts/Test-Harness.ps1 on the admission pull request"
+  - gate: governed-release-and-install-approval
+    status: "open; the next governed release packages it for the local surfaces"

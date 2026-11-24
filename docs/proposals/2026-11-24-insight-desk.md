@@ -1,6 +1,6 @@
 # Insight desk candidate, 2026-11-24
 
-Status: staged as an inactive candidate under `candidates/insight-desk/` (`activation: false`, `release_eligible: false`). Admission is Krish's decision.
+Status: admitted by Krish on 2026-11-24 (his words, confirmed by him that day: "1. yes. 2. no."), recorded as `Ruling (Krish, 2026-11-24): insight-desk is admitted.` and `Ruling (Krish, 2026-11-24): insight-desk names no outside source.` The skill is now `skills/insight-desk`, its two suites are in `evals/`, the route row and collision rule are in `contract/skill-routing-contract.md`, and `state/candidates/insight-desk.yaml` is closed (`valid_until: 2026-11-24`) and kept as the record of the candidate period. Where this file says the candidate is inactive, staged, outside every route or waiting on admission, that no longer governs.
 
 Ruling (Krish, 2026-11-24): the creative director is the ai-harness insight-desk skill with a thin adapter in each growth engine, all five wired now; no separate repo until the graduation trigger fires.
 
@@ -43,26 +43,17 @@ The correct layer is one skill in ai-harness, read live, with a thin adapter in 
 
 Functional overlap with any one neighbour is small: this is the reviewer's judgement from the table above, not a measurement.
 
-## Route, applied in this change as a staged line
+## Route, applied at admission on 2026-11-24
 
-The route is the staged paragraph under "Inactive idea-producer candidate" in `contract/skill-routing-contract.md`; it is stated there once and not repeated here. At admission it becomes a route row and collision rule, as the council's did.
+The staged paragraph under "Inactive idea-producer candidate" is gone from `contract/skill-routing-contract.md`; the route row and the `insight-desk` collision rule there replace it. They are stated there once and not repeated here.
 
-## Open finding: provenance
+## Provenance
 
-The approved plan says some of the desk's methods are adapted from an outside source and asks for a credit to it in ai-harness only. The ai-harness record also carries `Ruling (Krish, 2026-11-15): purge all copied pack text and keep only the extracted engines; from this point on the OS makes zero mention of any outside influence.` The two disagree. Under the canon's truth and freshness rule this change does not pick one: it names no outside source in any committed file and holds the question for Krish. The source's name and address stay in the approved plan, outside this repository.
-
-What is not known, and keeps the provenance gate unmet:
-
-- the source revision (no commit was read) and the date it was reviewed;
-- a freshness SLA for re-reading it;
-- the licence, which was not checked in this session;
-- whether any committed text matches the source, since no comparison was possible without access to it.
-
-Krish rules before admission: keep the methods with no credit, add a credit (which would need his ruling over the 2026-11-15 one), or replace the borrowed methods. A session with access to the source then records its revision, review date and licence, and compares the text.
+Ruling (Krish, 2026-11-24): insight-desk names no outside source; the methods stay in this harness's own words and no committed file credits anyone else.
 
 ## Get_skill and the adapters
 
-Control Center's `get_skill` reads `skills/<name>/` on main, so a candidate under `candidates/` is not served. Until admission, the five engines' adapters read this skill from a local ai-harness checkout, or record `unavailable` and keep their default behaviour.
+Control Center's `get_skill` reads `skills/<name>/` on main, so once this admission merges it serves `insight-desk` from `skills/insight-desk/SKILL.md`. Before admission the candidate under `candidates/` was not served, and the five engines' adapters read it from a local ai-harness checkout or recorded `unavailable`.
 
 ## Venture isolation
 
@@ -70,12 +61,14 @@ Sheets are scoped per venture. Each engine writes its own sheets to its own priv
 
 ## Evidence path without Krish on every step
 
-Admission and the provenance ruling are his. The blind verdicts are not extra work: each engine already brings ideas to him through its existing review path, and the A/B (set 1 plain, set 2 from a sheet) rides on that path. The strategist's weekly board reads the yes rate and live results by `harness_skill_sha`, and the internal auditor watches use across the fleet.
+Admission and the provenance ruling were his, both given on 2026-11-24. The blind verdicts are not extra work: each engine already brings ideas to him through its existing review path, and the A/B (set 1 plain, set 2 from a sheet) rides on that path. The strategist's weekly board reads the yes rate and live results by `harness_skill_sha`, and the internal auditor watches use across the fleet.
 
 ## Admission ask
 
 1. Admit `insight-desk` as a production skill, keep it as a candidate, or reject it.
-2. Rule on provenance: keep the methods with no credit, add a credit, or replace the borrowed methods ("Open finding: provenance").
+2. Rule on provenance: keep the methods with no credit, add a credit, or replace the methods.
+
+Answered 2026-11-24: 1, admit; 2, no credit ("Provenance" above).
 
 At admission: move `candidates/insight-desk/` to `skills/insight-desk/`, move the two suites to `evals/`, close `state/candidates/insight-desk.yaml` with a `valid_until` date and keep it as the record of the candidate period, add the registry entry (role `idea-producer`, freshness 60 days) and the route row and collision rule, raise `expected_skill_count`, add routing cases, name it in both cloud routing texts, record the chapters in `brain/rules.yaml`, and keep its tests running in `scripts/Test-Harness.ps1`.
 
@@ -87,3 +80,4 @@ It stays a skill until all three hold: it beats the plain baseline on Krish's bl
 
 - 2026-11-24 (#309): withdrawn, not reworded, and removed from the body above in that same pull request: the claim that overlap with any one neighbour is "well under 20 percent" (it was never measured), and the route paragraph that repeated the routing contract. The contract paragraph is the route's only home.
 - 2026-11-24 (#311): the contract paragraph now also states the U4 measurement-idea rule. Not new behaviour: it is step 2 of `candidates/insight-desk/SKILL.md` since #308 and applies `contract/north-star-metric.md` ("Lead with the gap"). The skill step governs; the contract line summarises it and is corrected to match if they ever differ.
+- 2026-11-24 (admission): Krish admitted the skill and ruled that it names no outside source. The open provenance finding is replaced by the one-line ruling under "Provenance", the staged route paragraph by the route row and collision rule, and the Status line now records the admission.

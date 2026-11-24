@@ -130,9 +130,9 @@ def main(argv=None):
             errors.append(f'{path.name}: carries an em dash')
 
     if root:
-        evals = root / 'evals' / 'candidates'
-        if not evals.is_dir():
-            evals = root / 'evals'
+        evals = root / 'evals'
+        if not (evals / f'{NAME}-trigger-cases.jsonl').is_file():
+            evals = root / 'evals' / 'candidates'
         trigger = read_jsonl(evals / f'{NAME}-trigger-cases.jsonl', errors)
         behavior = read_jsonl(evals / f'{NAME}-behavior-cases.jsonl', errors)
         check_minimums(trigger, TRIGGER_MINIMUMS, 'trigger suite', errors)

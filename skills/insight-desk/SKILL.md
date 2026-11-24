@@ -80,4 +80,4 @@ This stays a skill until all three hold: it beats the plain baseline on Krish's 
 
 ## Provenance
 
-Held for Krish's ruling. The approved plan names an outside source for some of these methods; the standing ruling of 2026-11-15 says the OS mentions no outside influence. The two disagree, so this candidate names no outside source in any committed file until Krish rules, and its provenance gate stays unmet (`docs/proposals/2026-11-24-insight-desk.md`, "Open finding: provenance"). The methods are written in this harness's own words. Weighted scores, case libraries and triple scoring are not used.
+Ruling (Krish, 2026-11-24): insight-desk names no outside source; its methods are written in this harness's own words, with no weighted scores, case libraries or triple scoring.
