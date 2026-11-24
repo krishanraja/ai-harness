@@ -2026,7 +2026,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-24-council-discipline.md"
-      sha256: "A4E05D5A138F71D9FF30A1CFDB87103D0618C4750150D720327856484D5FD231"
+      sha256: "89D03BBD33889E709A1F771B195C17A60117F61265CAE94E928B480BA47FAAB7"
     history:
       - text_sha: "509dfc32bfdc"
         valid_until: "2026-11-24"
@@ -2049,12 +2049,6 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-15-council.md"
-      - text_sha: "a5c439ea12fb"
-        valid_until: "2026-11-24"
-        source:
-          kind: proposal
-          ref: "docs/proposals/2026-11-24-council-discipline.md"
-          sha256: "A4E05D5A138F71D9FF30A1CFDB87103D0618C4750150D720327856484D5FD231"
     status: live
   - id: ctrl-build.read-both-references
     file: skills/ctrl-build/SKILL.md
