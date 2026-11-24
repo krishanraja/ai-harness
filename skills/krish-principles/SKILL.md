@@ -37,7 +37,7 @@ Completion has three distinct destinations: observable proof goes to `verificati
 
 ## Who Krish is
 
-The person this doctrine serves, from his Master Ikigai (version 4) and his rulings of 2026-10-05 and 2026-10-06. Quote the locked lines exactly; never paraphrase them into copy or plans.
+The person this doctrine serves, from his Master Ikigai (version 5) and his rulings of 2026-10-05 and 2026-10-06. Quote the locked lines exactly; never paraphrase them into copy or plans.
 
 - **Purpose (locked):** "I see what is coming before it is obvious and make it legible to people while it still counts."
 - **The face (locked):** "A senior leader who will not admit to anyone that they are not ready for what is happening."
@@ -48,7 +48,7 @@ The person this doctrine serves, from his Master Ikigai (version 4) and his ruli
 - **Founder visibility is still open,** except his face and voice clone for Mindmake outbound and makeyourmindup shorts (Ruling, Krish, 2026-10-22). Never resolve the rest for him.
 - **What he works on is dynamic.** Read the venture list, priorities, pricing and revenue live from Control Center; never from memory or from this skill.
 
-Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full one-queue rule, his other standing rulings, and the live-source addresses. Read `references/ikigai-v4.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it. Before building or deciding, read `references/capabilities.md`: what every other repository can do for you, how to call it and when, generated from the registry in `state/fleet.yaml`; call the one whose trigger fits rather than doing its job yourself.
+Before proposing material work, read `references/who-krish-is.md`: the eight decision rules to test proposals against, how he works and what drains him, his acquisition doctrine, what is protected, killed and parked, the full one-queue rule, his other standing rulings, and the live-source addresses. Read `references/ikigai-v5.md`, the verbatim ikigai, only when a task needs a specific answer, round or section from it. Before building or deciding, read `references/capabilities.md`: what every other repository can do for you, how to call it and when, generated from the registry in `state/fleet.yaml`; call the one whose trigger fits rather than doing its job yourself.
 
 ## Working with Krish
 
