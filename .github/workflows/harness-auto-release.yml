@@ -4,12 +4,15 @@ name: Harness automatic release
 # a change counts as approved by him and installs on his PC automatically.
 #
 # After "Validate harness" passes on a push to main, this releases main if any
-# packaged bytes (skills/) changed since the latest release. It dispatches the
+# packaged bytes (skills/) or the canon block every repository renders
+# (contract/templates/canon-block.md) changed since the latest release. A canon
+# change that waited for a skill change reached no repository (Ruling, Krish,
+# 2026-11-24: "everything should happen automatically"). It dispatches the
 # existing release workflow, which still builds twice, compares the builds,
 # self-tests the installer, refuses an existing tag, and then registers the
 # release (scripts/register-release.mjs). The PC's nightly sync installs it.
-# Commits that change nothing under skills/ (ledgers, heartbeats, the
-# registration commit itself) release nothing, so this cannot loop.
+# Commits that change neither (ledgers, heartbeats, the registration commit
+# itself) release nothing, so this cannot loop.
 
 on:
   workflow_run:
@@ -37,7 +40,7 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Release main if a skill changed
+      - name: Release main if a skill or the canon changed
         env:
           GH_TOKEN: ${{ github.token }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
@@ -49,12 +52,12 @@ jobs:
             exit 0
           fi
           latest=$(git tag --list 'harness-v*' --sort=-v:refname | head -n 1)
-          if [ -n "$latest" ] && git diff --quiet "$latest" "$HEAD_SHA" -- skills/; then
-            echo "No skill changed since $latest; nothing to release." | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -n "$latest" ] && git diff --quiet "$latest" "$HEAD_SHA" -- skills/ contract/templates/canon-block.md; then
+            echo "No skill and no canon text changed since $latest; nothing to release." | tee -a "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           day=$(date -u +%Y.%m.%d)
           n=$(git tag --list "harness-v$day.*" | sed 's/.*\.//' | sort -n | tail -n 1)
           id="v$day.$(( ${n:-0} + 1 ))"
           gh workflow run release.yml --ref main -f release_id="$id" -f ref="$HEAD_SHA"
-          echo "Dispatched release $id from $HEAD_SHA (skills changed since ${latest:-the first release})." | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Dispatched release $id from $HEAD_SHA (skills or canon changed since ${latest:-the first release})." | tee -a "$GITHUB_STEP_SUMMARY"
