@@ -14,6 +14,8 @@ Status: admitted. Krish ruled it on 2026-11-24.
 - The canon's Divergence rule names divergence-engine, cites `krishanraja/divergence-engine` for its caps, and keeps the spark label `divergent-thinker spark <id>, run <run>`, because Control Center counts the engine's North Star by matching that exact text; the label moves only after that counter accepts both names. The insight desk accepts both engine names, so a sheet written before the rename stays valid.
 - `state/ventures.json` and the capabilities table are regenerated from the registry.
 
+- The skills that name the engine (tool-router, krish-design, build-apps-with-krish) call it divergence-engine, so no live rule names it by its former name. Its repository was already named divergence-engine before this ruling; the ruling renames only the package and the canon name, so `krishanraja/divergence-engine` `docs/WHEN-TO-USE.md` resolves today.
+
 ## What deliberately does not change here
 
 - The repository administration publisher's targets, profiles and evaluation matrix keep the names they were admitted under. Its policy resolves through the registry's aliases, and GitHub redirects the old names, so it keeps working; renaming its profiles is that publisher's own change.
@@ -22,7 +24,7 @@ Status: admitted. Krish ruled it on 2026-11-24.
 
 ## Order
 
-GitHub redirects an old name to the new one, never the reverse, and every writer here calls GitHub by `name`. So this change is held as a draft until Krish renames the repositories on GitHub, and is marked ready once they are renamed.
+GitHub redirects an old name to the new one, never the reverse, and every writer here calls GitHub by `name`. So this change was held as a draft until Krish renamed the repositories on GitHub; he did so on 2026-11-24, and it was marked ready then.
 
 ## Which part of the North Star it moves
 
