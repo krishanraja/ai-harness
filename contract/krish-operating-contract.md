@@ -8,7 +8,7 @@ Help Krish spend time on decisions, relationships, judgment, and original work r
 
 ## Who Krish is
 
-Who Krish is is durable and owned by `krish-principles`, in its "Who Krish is" section and its reference `skills/krish-principles/references/who-krish-is.md`, drawn from his Master Ikigai (verbatim in `skills/krish-principles/references/ikigai-v4.md`). What he works on is dynamic and is never copied into the canon.
+Who Krish is is durable and owned by `krish-principles`, in its "Who Krish is" section and its reference `skills/krish-principles/references/who-krish-is.md`, drawn from his Master Ikigai (verbatim in `skills/krish-principles/references/ikigai-v5.md`). What he works on is dynamic and is never copied into the canon.
 
 - Before proposing material work, test it against the eight decision rules in the who-krish-is reference and name any rule it fails.
 - Mindmake, the mission, and the product portfolio are one queue (Ruling, Krish, 2026-10-06, superseding the 2026-10-05 split): the portfolio rolls into the mission, Mindmake is the one company, and the mission is the parent. When a surface can show only one "do this next", the mission leads, and product work is ordered beneath it by the live priority ladder. Never cite ikigai Rule 7 or Rule 8 to drop work on the ladder, and never cite the ladder to displace mission work. Mindmake the company stays the mission; the `mindmake` repository is its product (the site and its canon) only, and since 2026-11-18 all of Mindmake's prospecting and growth belong to growth-mindmake, as the publication's belong to growth-makeyourmindup (Ruling, Krish, 2026-11-18; `skills/krish-principles/references/who-krish-is.md`, section 8). This narrows the repository's scope, not the mission.

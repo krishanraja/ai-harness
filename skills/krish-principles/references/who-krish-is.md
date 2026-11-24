@@ -4,8 +4,8 @@ The durable profile every tool loads before proposing work for Krish Raja. It sa
 is, how he decides and what is off limits. It deliberately does not say what he is working
 on this week: that is dynamic and lives in its live sources, listed at the end.
 
-Sources: his Master Ikigai, version 4 of 5 September 2026, built from 138 ranked answers
-and reproduced verbatim in `references/ikigai-v4.md`; and his rulings of 2026-10-05 and
+Sources: his Master Ikigai, version 5 of 12 September 2026, built from 144 ranked answers
+and reproduced verbatim in `references/ikigai-v5.md`; and his rulings of 2026-10-05 and
 2026-10-06. Where this file and the ikigai differ, a dated ruling wins over the sheet, a
 later ruling wins over an earlier one, and the sheet wins over anything older. Section numbers below ("section 4", "R12.5") point into the ikigai.
 
@@ -38,8 +38,8 @@ Quote these exactly. Never paraphrase them into copy or into a plan.
 | The word | "Edge." What the person keeps. | Locked |
 | The enemy | "Fear and noise that stop capable people acting on what is already happening." | Locked |
 | Mission (the decade) | "Build the company that gives leaders their edge back before what is coming takes it, and sell it at scale with my name on it." | **Working, not locked.** It passes only when he can say it to someone he respects without hedging (R12.6). |
-| The form | A builder who builds in public, with a partner, and sells what he built. The body of work is the demand engine; the fund is the endgame; neither is the mission. | Locked |
-| The binding | A partner or co-founder who owns the selling or polices it weekly, plus an autonomous engine underneath. | **Open.** No partner exists yet. |
+| The form | "A company he owns, delivered through the room." Writing and broadcasting "is the demand engine only." | Locked |
+| The binding | "A partner or co-founder who owns the selling or polices it weekly, plus an autonomous engine underneath, with enough evolution that he does not get bored." | **Supported, unbuilt.** No partner exists yet. |
 | Proof at ten years | What the company is worth, sold or held. Second: leaders who acted earlier because of him and will say so. | Locked |
 | Protected | Music and football stay out of the work until it runs without him. | Locked |
 
@@ -50,8 +50,9 @@ Leaders are the door; people are the point (the four circles, section 2 of the s
 Each line names its source in the ikigai. Treat them as working facts about him, not as
 traits to flatter.
 
-- **His love and fire is building.** Making something exist that did not exist yesterday
-  (R11.3). The failure mode is building alone and in private, not building itself (R12.2).
+- **"The room and the one person, ahead of building."** Teaching and changing minds is the
+  second strongest theme; building is polarising (section 2). The failure mode is building
+  alone and in private, not building itself (R12.2).
 - **His best days are a room changing its mind** and one person seeing their situation for
   the first time (A2, R5.4, R11.2). Repetition to a hungry room was his best day.
 - **The drain is teaching people who do not want to learn** (R1.1). Anything that pushes
@@ -61,7 +62,7 @@ traits to flatter.
   is selling something unproven, not selling itself.
 - **Money is the first thing to solve** (R1.4, R1.6). Do not treat it as a background
   concern.
-- **Alone, he stalls** (E1, R4.5). A partner who owns or polices selling is a precondition.
+- **Alone, he stalls** (E1, R4.5). Build toward a partner who owns or polices selling, but never wait on one to start (Rule 4).
 - **Ten things, not two.** With ten tasks he finishes them; with two he finishes nothing
   (R5.5). He gets bored without evolution (R6.5).
 - **He wants evidence fast** (D5: four weeks) and abandons things when something shinier
@@ -80,7 +81,7 @@ because the request did not mention it. These supersede the version 3 rules in A
 | 1 | If the learner is being pushed rather than pulled, it is wrong. | Is anyone in this being made to learn against their will? |
 | 2 | If it needs cold outbound, it will not happen. Warm intros, the room, and published thinking only. | Does it depend on cold sequences or paid ads to strangers? |
 | 3 | If it does not pay inside 90 days, it cannot be the main thing. Load-bearing. | If this is the main thing, where is the cash inside 90 days? |
-| 4 | If he is alone in it, expect it to stall. A partner who owns or polices selling is a precondition, not a nice to have. | Who besides Krish carries it? |
+| 4 | If he is alone in it, expect it to stall. A partner who owns or polices selling is well supported (59.4% across 32 contests, rising). Build toward one deliberately. Do not make finding one a precondition to starting, because the selling problem is behavioural and starts with him. | Who besides Krish carries it? Does anything wait on a partner? |
 | 5 | If it only produces income and never ownership, it is a job with extra steps. | Does it build something he owns? |
 | 6 | If it is built in private, it is hiding. Every build is announced, shown, or sold before it is finished. | Who asked for it, and when will it be shown? |
 | 7 | If it does not put a leader's edge back, it is off mission. | Does it give a leader their edge back? (See section 7 before applying this to work on the product ladder.) |
@@ -245,7 +246,7 @@ after it) and its `docs/NORTH_STAR.md`. Read the rest live, in this order:
 | Who Krish is and what he is working on now | https://controlcenter.krishraja.com/api/canon/KRISH.md |
 | The venture list, a pointer to each venture's repository, and the live priority ladder | https://controlcenter.krishraja.com/api/canon/PORTFOLIO.md |
 | The single code source of the priority ranking | `src/lib/portfolio.ts` in `krishanraja/control-center`, through the GitHub connector or a checkout |
-| The ikigai | `references/ikigai-v4.md` in this skill, the same sheet exported verbatim |
+| The ikigai | `references/ikigai-v5.md` in this skill, the same sheet exported verbatim (`ikigai-v4.md` is history) |
 | How the OS is built | `docs/MINDMAKE_OS_ARCHITECTURE.md` in `krishanraja/control-center`, routed by the `mindmake-os` skill |
 | What the business is | `krishanraja/mindmake`, `project-documentation/00_NORTH_STAR.md` then `01_CANON.md`, through the `mindmake` skill |
 

@@ -3275,12 +3275,12 @@ skill_sections:
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
     heading: "Who Krish is"
-    text_sha: "ecd06c9fa293"
+    text_sha: "9a8e692c27de"
     first_seen: "2026-10-05"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
-      sha256: "C41A24EC1C9622344F92205285CFFE25D59B700E536FC946FE702555BBC2DE58"
+      ref: "docs/proposals/2026-11-24-ikigai-v5.md"
+      sha256: "79BA3731CF634DE5B5EE775493E84A4F48D945CA8CC2A2F9AC82AE261667E0F5"
     history:
       - text_sha: "d06d8a102719"
         valid_until: "2026-10-06"
@@ -3297,6 +3297,12 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-10-22-outcome-allocation.md"
+      - text_sha: "ecd06c9fa293"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
+          sha256: "C41A24EC1C9622344F92205285CFFE25D59B700E536FC946FE702555BBC2DE58"
     status: live
   - id: krish-principles.working-with-krish
     file: skills/krish-principles/SKILL.md
