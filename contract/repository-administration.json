@@ -36,7 +36,8 @@
     "filearchives",
     "music-watcher",
     "internal-auditor",
-    "strategist"
+    "strategist",
+    "ctrl-mindmake"
   ],
   "families": [
     "repository-administration",

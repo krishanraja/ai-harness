@@ -41,6 +41,7 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | content-watcher | Reads a pasted post or screenshot and files the reading. | Control Center's inspiration queue, or content-engine api/watch. | A link or screenshot should become a reading Krish can use. |
 | inspirationhouse | Holds Krish's approved taste rules, by venture, and records each preference he states. | get_approved_taste and report_to_taste_engine through the Control Center connector. | Before writing or designing for Krish, and whenever he states a preference. |
 | krish-clone | Supplies approved voice and likeness material for content. | content-engine's takes intake (board/_takesIn.ts). | A piece needs Krish's approved voice or likeness. |
+| claude-archive | The history of past Claude sessions, the raw material for what the fleet has learned. | Read only. The internal auditor reads it to keep the learnings fresh; read it the same way, never write to it. | You need what earlier sessions tried, decided or learned. |
 
 ## Producers
 
@@ -66,8 +67,10 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | makeyourmindup | The publication's site. | Its own repository's issues; the fix queue takes auditor-fix. | The publication's site changes. |
 | fractionl-pulse | The Pulse product. | Its own repository's issues; the fix queue takes auditor-fix. | Pulse changes. |
 | krish-raja | Krish's public site and its enquiries. | Its own repository's issues; the fix queue takes auditor-fix. | Krish's site changes. |
+| dothinkdo | A live organisation brain run the Mindmake way, the approach in daily use. | Its own repository's issues; the fix queue takes auditor-fix. | You need evidence of how the approach works inside a real organisation. |
+| dothinkdo-skills | The skills a real organisation runs on, built the Mindmake way. | Its own repository's issues; the fix queue takes auditor-fix. | You need a skill pattern already proven in a live organisation. |
 
 ## Outside the OS
 
-Not part of the OS, so never called for OS work: fractionl-circle, claude-archive, hunter, dothinkdo, dothinkdo-skills, compound-finances, music-watcher, lorimer-pc-backup, higgsfield-generator, mindmake-kits, OLD-ctrl-mindmake, contentarchives, conclusiv, merciless, kimon, dipti-health, lozatron, legacy-ascend, fractionl-homepage, getaround.london.
+Not part of the OS, so never called for OS work: fractionl-circle, hunter, compound-finances, music-watcher, lorimer-pc-backup, higgsfield-generator, mindmake-kits, OLD-ctrl-mindmake, contentarchives, conclusiv, merciless, kimon, dipti-health, lozatron, legacy-ascend, fractionl-homepage, getaround.london.
 
