@@ -34,7 +34,10 @@ assert(mindmake, 'mindmake must stay in state/fleet.yaml for parity with the doc
 assert.equal(mindmake.canon_sync, false, 'mindmake must carry canon_sync: false')
 assert(String(mindmake.canon_sync_reason || '').includes('Ruling (Krish, 2026-10-06)'), 'the exclusion must cite the ruling')
 assert(!names(canonSyncRepos(fleet)).includes('mindmake'), 'mindmake must not be a sync target')
-assert.deepEqual(names(canonExcludedRepos(fleet)), ['mindmake'], 'mindmake is the only excluded repository')
+// Krish's exclusions, each by his ruling: mindmake (2026-10-06); OLD-ctrl-mindmake (the mm-ctrl entry), contentarchives
+// and the dormant fractionl-circle (2026-11-24). No other repository is out of the rollout.
+assert.deepEqual(names(canonExcludedRepos(fleet)).sort(), ['contentarchives', 'fractionl-circle', 'mindmake', 'mm-ctrl'], 'only the repositories Krish ruled out are excluded')
+for (const r of canonExcludedRepos(fleet)) assert.match(String(r.canon_sync_reason || ''), /Ruling \(Krish, \d{4}-\d{2}-\d{2}\)/, `${r.name}'s exclusion must cite his ruling`)
 assert(names(canonSyncRepos(fleet)).includes('ai-harness'), 'the canon repository is never exempt from its own treatment')
 assert.deepEqual(canonSyncProblems(fleet), [], 'the live flags are well formed')
 

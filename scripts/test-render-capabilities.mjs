@@ -25,6 +25,11 @@ ok('an excluded or dormant surface warns, never passes silently', () => {
   assert.match(registryProblems(fleet([row({ name: 'old', scope: 'excluded', aliases: ['demo'] })])).warnings[0], /resolves to old, which Krish excluded/)
   assert.match(registryProblems(fleet([row({ scope: 'dormant' })])).warnings[0], /dormant/)
 })
+ok('a retired surface (canon_sync false) for an excluded or dormant repository is quiet; a live one still warns', () => {
+  assert.deepEqual(registryProblems(fleet([row({ scope: 'excluded' })], [{ name: 'demo', canon_sync: false }])), { errors: [], warnings: [] })
+  assert.deepEqual(registryProblems(fleet([row({ scope: 'dormant' })], [{ name: 'demo', canon_sync: false }])).warnings, [])
+  assert.equal(registryProblems(fleet([row({ scope: 'excluded' })], [{ name: 'demo' }])).warnings.length, 1)
+})
 ok('the table lists in-scope rows by layer and names the rest as outside', () => {
   const t = renderCapabilities([row(), row({ name: 'hub-x', layer: 'hub' }), row({ name: 'mine', scope: 'personal' }), row({ name: 'p|ipe', capability: 'a | b' })])
   assert.ok(t.indexOf('## The hub') < t.indexOf('## Specialists'))
