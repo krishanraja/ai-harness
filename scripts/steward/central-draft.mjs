@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url'
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const FLEET = join(ROOT, 'docs/steward/fleet.json')
 export const LIMITS = Object.freeze({ files: 24, sourceBytes: 192 * 1024, fileBytes: 96 * 1024, responseBytes: 192 * 1024, maxTokens: 12000 })
-const TARGETS = new Set(['ai-harness', 'control-center', 'mindmake-ctrl', 'fractionl-circle', 'fractionl-pulse', 'full-time', 'content-engine', 'contentarchives', 'AEO-Engine', 'makeyourmindup'])
+const TARGETS = new Set(['ai-harness', 'control-center', 'fractionl-pulse', 'full-time', 'content-engine', 'AEO-Engine', 'makeyourmindup'])
 const PROTECTED = /^(?:(?:AGENTS\.md|CLAUDE\.md|docs\/HARNESS_CONTEXT\.md|docs\/MINDMAKE_OS_ARCHITECTURE\.md|project-documentation\/(?:00_NORTH_STAR|01_CANON)\.md)$|(?:contract|skills|adapters|\.github|\.agents)\/)/
 const SECRET = /(?:\bsk-(?:ant-|proj-)?[A-Za-z0-9_-]{20,}|\bgh[pousr]_[A-Za-z0-9]{30,}|\bsbp_[a-f0-9]{30,}|\bvcp_[A-Za-z0-9]{30,}|eyJhbGciOi[A-Za-z0-9_.-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)/
 const sha = (value) => createHash('sha256').update(value).digest('hex')

@@ -30,6 +30,11 @@ repos:
     canon_target: AGENTS.md
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, project-documentation/AGENT_BRIEFING.md]
+    canon_sync: false
+    canon_sync_reason: >-
+      Ruling (Krish, 2026-11-24): OLD-ctrl-mindmake is excluded from the map. This entry is that repository (GitHub id 1090040458, formerly mm-ctrl and mindmake-ctrl); the live CTRL repository is ctrl-mindmake. Canon sync, the seeder and the publisher skip it.
+    note: >-
+      Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
   - name: mindmake
     canon_target: AGENTS.md
@@ -54,6 +59,11 @@ repos:
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, AGENT_BRIEFING.md, docs/DELIVERY_STATE.md]
+    canon_sync: false
+    canon_sync_reason: >-
+      Ruling (Krish, 2026-11-24): fractionl-circle is dormant, preserved and not worked. Canon sync, the seeder and the publisher skip it.
+    note: >-
+      Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
   - name: fractionl-pulse
     canon_target: AGENTS.md
@@ -78,6 +88,11 @@ repos:
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, RESUME.md]
+    canon_sync: false
+    canon_sync_reason: >-
+      Ruling (Krish, 2026-11-24): contentarchives is Krish's personal photos and videos, excluded from the map. Canon sync, the seeder and the publisher skip it.
+    note: >-
+      Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
   - name: AEO-Engine
     checkout: aeo-engine

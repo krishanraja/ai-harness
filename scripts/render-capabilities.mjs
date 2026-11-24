@@ -74,6 +74,8 @@ export function registryProblems(fleet) {
   for (const s of fleet.repos || []) {
     const r = byName.get(lc(s.name)) || (s.aliases || []).map((a) => byName.get(lc(a))).find(Boolean)
     if (!r) { errors.push(`${s.name} is a canon surface with no registry row`); continue }
+    // A surface with canon_sync false is retired: kept only for parity with the steward's fleet and old observations.
+    if (s.canon_sync === false) continue
     if (r.scope === 'excluded') warnings.push(`${s.name} is a canon surface but resolves to ${r.name}, which Krish excluded; retire it from the surfaces in its own change`)
     else if (r.scope === 'dormant') warnings.push(`${s.name} is a canon surface but dormant`)
   }
