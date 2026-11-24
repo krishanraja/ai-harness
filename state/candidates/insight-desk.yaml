@@ -1,0 +1,32 @@
+schema_version: 1
+id: insight-desk
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-11-24
+source_branch: claude/dazzling-turing-kabf0w
+skill_path: candidates/insight-desk
+admission_path: skills/insight-desk
+proposal: docs/proposals/2026-11-24-insight-desk.md
+role: idea-producer
+provenance:
+  origin: an outside source named in the approved plan; not named in committed files until Krish rules
+  source_revision: unknown; the source was not read in this session
+  reviewed_at: null
+  freshness_sla: none set
+  license: not verified in this session
+  copied_text: unverified; the committed methods were written for this harness and no source text was compared
+  open_finding: the approved plan's credit conflicts with Ruling (Krish, 2026-11-15) that the OS mentions no outside influence; held for Krish (docs/proposals/2026-11-24-insight-desk.md)
+  gate_status: unmet
+evaluation:
+  trigger_cases: evals/candidates/insight-desk-trigger-cases.jsonl
+  behavior_cases: evals/candidates/insight-desk-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - provenance-ruling
+  - named-human-admission
+  - governed-release-and-install-approval

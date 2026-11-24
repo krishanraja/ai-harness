@@ -1,0 +1,4 @@
+interface:
+  display_name: "Insight desk"
+  short_description: "Turn a growth goal into up to three tested ideas"
+  default_prompt: "Use $insight-desk to turn this engine's growth goal into an insight sheet of up to three ideas."
