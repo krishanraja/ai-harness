@@ -1546,11 +1546,12 @@ contract_rules:
     status: live
   - id: canon.divergence
     file: contract/templates/canon-block.md
-    text_sha: "5b7debf8bc3f"
+    text_sha: "a93aa2621f54"
     first_seen: "2026-11-18"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "83CB55C3B749F6D1F502AEBD15F5D069C0EDF0F7D32707F3E7D97C28189FB218"
     history:
       - text_sha: "f56aa52ecfc4"
         valid_until: "2026-11-18"
@@ -1567,6 +1568,23 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "5b7debf8bc3f"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "f7a90f599f7e"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-fleet-renames.md"
+          sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
+      - text_sha: "ea968f2fbad6"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-fleet-renames.md"
+          sha256: "4AB79DD2825CBD4D05F36FD0994F8672B60BC71AE1FF758D439A1B2838E8E2AC"
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md
@@ -1780,11 +1798,12 @@ skill_sections:
   - id: build-apps-with-krish.material-visual-approval-boundary
     file: skills/build-apps-with-krish/SKILL.md
     heading: "Material visual approval boundary"
-    text_sha: "b6feebc5699a"
+    text_sha: "dbc9847d8b64"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "83CB55C3B749F6D1F502AEBD15F5D069C0EDF0F7D32707F3E7D97C28189FB218"
     history:
       - text_sha: "b726bba2ff8f"
         valid_until: "2026-09-24"
@@ -1803,6 +1822,11 @@ skill_sections:
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
       - text_sha: "db879464b9f0"
         valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "b6feebc5699a"
+        valid_until: "2026-11-24"
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
@@ -2832,12 +2856,19 @@ skill_sections:
   - id: insight-desk.engines
     file: skills/insight-desk/SKILL.md
     heading: "Engines"
-    text_sha: "217a46970eba"
+    text_sha: "74805a7ecb1f"
     first_seen: "2026-11-24"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-24-insight-desk.md"
-      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
+    history:
+      - text_sha: "217a46970eba"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-insight-desk.md"
+          sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
     status: live
   - id: insight-desk.approval-walls
     file: skills/insight-desk/SKILL.md
@@ -3174,11 +3205,12 @@ skill_sections:
   - id: krish-design.1-interaction-as-sequencing
     file: skills/krish-design/SKILL.md
     heading: "1. Interaction as sequencing (the weapon)"
-    text_sha: "9fb0772173b1"
+    text_sha: "bf5b868fe05b"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-23-taste-preference-only.md"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "83CB55C3B749F6D1F502AEBD15F5D069C0EDF0F7D32707F3E7D97C28189FB218"
     history:
       - text_sha: "78e9b25ede95"
         valid_until: "2026-10-26"
@@ -3195,6 +3227,11 @@ skill_sections:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "9fb0772173b1"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-23-taste-preference-only.md"
     status: live
   - id: krish-design.2-house-design-systems
     file: skills/krish-design/SKILL.md

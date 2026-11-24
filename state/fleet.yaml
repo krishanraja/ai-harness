@@ -36,8 +36,10 @@ repos:
     note: >-
       Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
-  - name: ctrl-mindmake
-    # The live CTRL repository (GitHub id 1418954003). Its canon block stopped at v2026.10.30.1 because canon sync
+  - name: ctrl
+    # The live CTRL repository (GitHub id 1418954003), renamed from ctrl-mindmake by Krish's pick of 2026-11-24.
+    aliases: [ctrl-mindmake]
+    # Its canon block stopped at v2026.10.30.1 because canon sync
     # wrote to mm-ctrl, a former name of OLD-ctrl-mindmake, which Krish excluded (2026-11-24).
     canon_target: AGENTS.md
     entry: CLAUDE.md
@@ -101,12 +103,13 @@ repos:
     note: >-
       Stays in this list for parity with the docs steward's fleet.json and so observations that name it stay readable.
 
-  - name: AEO-Engine
+  - name: answers-engine
+    # Renamed from AEO-Engine by Krish's pick of 2026-11-24; the former name redirects here.
+    aliases: [AEO-Engine]
     checkout: aeo-engine
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, docs/PACKET.md, docs/STATE.md]
-    note: The docs steward fleet spells it AEO-Engine; the repository itself is aeo-engine. Parity is compared case-insensitively rather than one manifest quietly renaming the other.
 
   - name: makeyourmindup
     canon_target: AGENTS.md
@@ -151,7 +154,9 @@ repos:
     rules_files: [AGENTS.md, docs/OWNERS.md]
     note: Mindmake's growth engine. Admitted 2026-10-29 on the same terms as growth-makeyourmindup.
 
-  - name: growth-fulltime
+  - name: growth-full-time
+    # Renamed from growth-fulltime by Krish's pick of 2026-11-24; the former name redirects here.
+    aliases: [growth-fulltime]
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md, PLAYBOOK.md]
@@ -186,7 +191,9 @@ repos:
     rules_files: [AGENTS.md, RESUME.md]
     note: The Drive folder record and consent guard. Admitted on the same terms as claude-archive.
 
-  - name: inspirationhouse
+  - name: taste-engine
+    # Renamed from inspirationhouse by Krish's pick of 2026-11-24; the former name redirects here.
+    aliases: [inspirationhouse]
     canon_target: AGENTS.md
     entry: AGENTS.md
     rules_files: [AGENTS.md]
@@ -201,7 +208,9 @@ repos:
     rules_files: [AGENTS.md, docs/STRATEGY.md]
     note: Voice and likeness training library; its North Star is not set yet. Admitted on the same terms as claude-archive.
 
-  - name: krish-raja
+  - name: krishraja-site
+    # Renamed from krish-raja by Krish's pick of 2026-11-24; the former name redirects here.
+    aliases: [krish-raja]
     canon_target: AGENTS.md
     entry: CLAUDE.md
     rules_files: [CLAUDE.md, AGENTS.md]
@@ -445,9 +454,9 @@ registry:
     layer: specialist
     role: Ideas outside the consensus, and a free score of how familiar any output is.
     capability: Scores a draft or a plan for sameness for free, and maps or challenges an angle (paid, capped).
-    call: Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace. Its package and the canon's Divergence rule still call it divergent-thinker; it is the same repository until the rename lands.
+    aliases: [divergent-thinker]
+    call: Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace.
     when: The canon's Divergence rule says when.
-    rename: The package and the canon call it divergent-thinker; both become divergence-engine.
   - name: humour-engine
     scope: in
     layer: specialist
@@ -455,7 +464,8 @@ registry:
     capability: Makes copy funny the way Krish means it, and checks a joke against the definition.
     call: Control Center /api/humour/<caller> or the engine route /api/growth/engines/<slug>/humour, or the pinned package.
     when: Public copy should land with humour, or a line needs a humour check before it goes out.
-  - name: AEO-Engine
+  - name: answers-engine
+    aliases: [AEO-Engine]
     scope: in
     layer: specialist
     venture: mindmake
@@ -463,7 +473,6 @@ registry:
     capability: Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win.
     call: POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers.
     when: You need to know how AI assistants answer your buyers, or which cited pages are worth winning.
-    rename: answers-engine
   - name: filearchives
     scope: in
     layer: specialist
@@ -495,14 +504,14 @@ registry:
     capability: Reads a pasted post or screenshot and files the reading.
     call: Control Center's inspiration queue, or content-engine api/watch.
     when: A link or screenshot should become a reading Krish can use.
-  - name: inspirationhouse
+  - name: taste-engine
+    aliases: [inspirationhouse]
     scope: in
     layer: service
     role: The taste ledger.
     capability: Holds Krish's approved taste rules, by venture, and records each preference he states.
     call: get_approved_taste and report_to_taste_engine through the Control Center connector.
     when: Before writing or designing for Krish, and whenever he states a preference.
-    rename: taste-engine
   - name: krish-clone
     scope: in
     layer: service
@@ -542,7 +551,8 @@ registry:
     capability: Organic sales growth for Heartside.
     call: Control Center dispatch on its own bearer.
     when: Heartside needs organic sales.
-  - name: growth-fulltime
+  - name: growth-full-time
+    aliases: [growth-fulltime]
     scope: in
     layer: producer
     venture: full_time
@@ -550,7 +560,6 @@ registry:
     capability: Growth for Full Time.
     call: Control Center dispatch on its own bearer.
     when: Full Time needs growth.
-    rename: growth-full-time
   - name: growth-legibility
     scope: in
     layer: producer
@@ -568,7 +577,8 @@ registry:
     capability: The company's public site.
     call: Its own repository's issues; the fix queue takes auditor-fix.
     when: The company site changes.
-  - name: ctrl-mindmake
+  - name: ctrl
+    aliases: [ctrl-mindmake]
     scope: in
     layer: product
     venture: mm_ctrl
@@ -576,7 +586,6 @@ registry:
     capability: CTRL, the product.
     call: Its own repository's issues; the fix queue takes auditor-fix.
     when: CTRL changes.
-    rename: ctrl
   - name: heartside
     scope: in
     layer: product
@@ -625,7 +634,8 @@ registry:
     capability: The Pulse product.
     call: Its own repository's issues; the fix queue takes auditor-fix.
     when: Pulse changes.
-  - name: krish-raja
+  - name: krishraja-site
+    aliases: [krish-raja]
     scope: in
     figures: private
     layer: product
@@ -634,7 +644,6 @@ registry:
     capability: Krish's public site and its enquiries.
     call: Its own repository's issues; the fix queue takes auditor-fix.
     when: Krish's site changes.
-    rename: krishraja-site
   - name: fractionl-circle
     scope: dormant
     venture: fractionl_circle
@@ -646,8 +655,9 @@ registry:
     capability: The history of past Claude sessions, the raw material for what the fleet has learned.
     call: Read only. The internal auditor reads it to keep the learnings fresh; read it the same way, never write to it.
     when: You need what earlier sessions tried, decided or learned.
-  - name: hunter
+  - name: personal-hunter
     scope: personal
+    aliases: [hunter]
     role: Krish's job search.
   - name: dothinkdo
     scope: in
@@ -667,8 +677,9 @@ registry:
     capability: The skills a real organisation runs on, built the Mindmake way.
     call: Its own repository's issues; the fix queue takes auditor-fix.
     when: You need a skill pattern already proven in a live organisation.
-  - name: compound-finances
+  - name: personal-compound-finances
     scope: personal
+    aliases: [compound-finances]
     figures: private
     role: Private finances.
   - name: music-watcher
@@ -687,8 +698,9 @@ registry:
     when: >-
       You need an audio file measured, music or a sound bed chosen against measured taste, or a pattern
       for learning someone's taste only from what they approve.
-  - name: lorimer-pc-backup
+  - name: personal-lorimer-pc-backup
     scope: personal
+    aliases: [lorimer-pc-backup]
     role: A backup of the Lorimer PC.
   - name: higgsfield-generator
     scope: unplaced

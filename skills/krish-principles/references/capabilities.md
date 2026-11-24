@@ -27,9 +27,9 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | Repository | What it can do for you | How to call it | When |
 |---|---|---|---|
 | strategist | Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules. | It reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall. | A number is at U4 or U5, growth and product disagree, or an idea needs a test rather than a plan. |
-| divergence-engine | Scores a draft or a plan for sameness for free, and maps or challenges an angle (paid, capped). | Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace. Its package and the canon's Divergence rule still call it divergent-thinker; it is the same repository until the rename lands. | The canon's Divergence rule says when. |
+| divergence-engine | Scores a draft or a plan for sameness for free, and maps or challenges an angle (paid, capped). | Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace. | The canon's Divergence rule says when. |
 | humour-engine | Makes copy funny the way Krish means it, and checks a joke against the definition. | Control Center /api/humour/<caller> or the engine route /api/growth/engines/<slug>/humour, or the pinned package. | Public copy should land with humour, or a line needs a humour check before it goes out. |
-| AEO-Engine | Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win. | POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers. | You need to know how AI assistants answer your buyers, or which cited pages are worth winning. |
+| answers-engine | Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win. | POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers. | You need to know how AI assistants answer your buyers, or which cited pages are worth winning. |
 | filearchives | Follows every Drive and dev folder by id, and protects the Ikigai and its doctrine from being moved, renamed or changed without his ruling. | Report a folder change with its tools/report_folder_change.ps1; its protected files are in policy/protected-files.json. | You create, move, rename or remove a folder in Krish's Drive or dev folders, or touch a protected file. |
 | software-qa | A QA pass on code and UI (its route is not yet read from its own README). | Not recorded yet. Until it is, open an auditor-fix issue in your own repository and the internal auditor routes the QA work. | A fix touches code or UI that needs a QA pass beyond the repository's own checks. |
 
@@ -39,7 +39,7 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 |---|---|---|---|
 | sendlinks | Sends one of Krish's files as a link that says when it was opened. | The Control Center connector make_send_link and read_send_link. | A file goes to someone and you need to know they opened it. |
 | content-watcher | Reads a pasted post or screenshot and files the reading. | Control Center's inspiration queue, or content-engine api/watch. | A link or screenshot should become a reading Krish can use. |
-| inspirationhouse | Holds Krish's approved taste rules, by venture, and records each preference he states. | get_approved_taste and report_to_taste_engine through the Control Center connector. | Before writing or designing for Krish, and whenever he states a preference. |
+| taste-engine | Holds Krish's approved taste rules, by venture, and records each preference he states. | get_approved_taste and report_to_taste_engine through the Control Center connector. | Before writing or designing for Krish, and whenever he states a preference. |
 | krish-clone | Supplies approved voice and likeness material for content. | content-engine's takes intake (board/_takesIn.ts). | A piece needs Krish's approved voice or likeness. |
 | claude-archive | The history of past Claude sessions, the raw material for what the fleet has learned. | Read only. The internal auditor reads it to keep the learnings fresh; read it the same way, never write to it. | You need what earlier sessions tried, decided or learned. |
 | music-watcher | Measures an audio bounce into a card (tempo, key, a bar-numbered section map, stems, loudness), and keeps taste brains that learn only from evidence their owner approves. | `trackcard analyze <file.wav>` from its package, on the machine that holds the audio; its approved taste is read only, never written. | You need an audio file measured, music or a sound bed chosen against measured taste, or a pattern for learning someone's taste only from what they approve. |
@@ -52,7 +52,7 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | growth-makeyourmindup | Posting, carousels, memes, Notes and subscriber growth for Make Your Mind Up. | Control Center dispatch on its own bearer; Krish instructs it with his Instruct press. | Make Your Mind Up needs reach or subscribers. |
 | growth-mindmake | Outreach rows, pitches, visibility, guests and events for Mindmake. | Control Center dispatch on its own bearer. | Mindmake needs meetings, visibility or a pitch. |
 | growth-heartside | Organic sales growth for Heartside. | Control Center dispatch on its own bearer. | Heartside needs organic sales. |
-| growth-fulltime | Growth for Full Time. | Control Center dispatch on its own bearer. | Full Time needs growth. |
+| growth-full-time | Growth for Full Time. | Control Center dispatch on its own bearer. | Full Time needs growth. |
 | growth-legibility | Weekly builders and outreach for Legibility. | Control Center dispatch on its own bearer. | Legibility needs builders. |
 
 ## Products
@@ -60,18 +60,18 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | Repository | What it can do for you | How to call it | When |
 |---|---|---|---|
 | mindmake | The company's public site. | Its own repository's issues; the fix queue takes auditor-fix. | The company site changes. |
-| ctrl-mindmake | CTRL, the product. | Its own repository's issues; the fix queue takes auditor-fix. | CTRL changes. |
+| ctrl | CTRL, the product. | Its own repository's issues; the fix queue takes auditor-fix. | CTRL changes. |
 | heartside | The Heartside shop. | Its own repository's issues; the fix queue takes auditor-fix. | The shop changes. |
 | full-time | The Full Time product. | Its own repository's issues; the fix queue takes auditor-fix. | Full Time changes. |
 | legibility | The Legibility product. | Its own repository's issues; the fix queue takes auditor-fix. | Legibility changes. |
 | legibility-worker | Legibility's background jobs. | Its own repository's issues; the fix queue takes auditor-fix. | Legibility's background jobs change. |
 | makeyourmindup | The publication's site. | Its own repository's issues; the fix queue takes auditor-fix. | The publication's site changes. |
 | fractionl-pulse | The Pulse product. | Its own repository's issues; the fix queue takes auditor-fix. | Pulse changes. |
-| krish-raja | Krish's public site and its enquiries. | Its own repository's issues; the fix queue takes auditor-fix. | Krish's site changes. |
+| krishraja-site | Krish's public site and its enquiries. | Its own repository's issues; the fix queue takes auditor-fix. | Krish's site changes. |
 | dothinkdo | A live organisation brain run the Mindmake way, the approach in daily use. | Its own repository's issues; the fix queue takes auditor-fix. | You need evidence of how the approach works inside a real organisation. |
 | dothinkdo-skills | The skills a real organisation runs on, built the Mindmake way. | Its own repository's issues; the fix queue takes auditor-fix. | You need a skill pattern already proven in a live organisation. |
 
 ## Outside the OS
 
-Not part of the OS, so never called for OS work: fractionl-circle, hunter, compound-finances, lorimer-pc-backup, higgsfield-generator, mindmake-kits, OLD-ctrl-mindmake, contentarchives, conclusiv, merciless, kimon, dipti-health, lozatron, legacy-ascend, fractionl-homepage, getaround.london.
+Not part of the OS, so never called for OS work: fractionl-circle, personal-hunter, personal-compound-finances, personal-lorimer-pc-backup, higgsfield-generator, mindmake-kits, OLD-ctrl-mindmake, contentarchives, conclusiv, merciless, kimon, dipti-health, lozatron, legacy-ascend, fractionl-homepage, getaround.london.
 

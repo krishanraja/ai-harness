@@ -14,7 +14,10 @@ Each consult records `engine`, `op`, `result` and `ref` (the run id or the comma
 
 Exit 2 from any engine command means unavailable. It is never a pass, and a test that depends on it is `unavailable`, not `pass`.
 
-## divergent-thinker
+## divergence-engine
+
+Formerly divergent-thinker (Krish's pick, 2026-11-24); sheets that name the old engine stay valid.
+
 
 - Runs in the venture's own namespace only, as the adapter names it (for example `<repository>:ideas`), never another venture's.
 - `score` with the three obvious ideas as the obvious set: free. Run it every sheet.

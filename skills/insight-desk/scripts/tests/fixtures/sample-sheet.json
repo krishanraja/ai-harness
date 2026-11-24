@@ -122,7 +122,7 @@
   ],
   "consults": [
     {
-      "engine": "divergent-thinker",
+      "engine": "divergence-engine",
       "op": "score",
       "result": "unavailable",
       "ref": "fixture: not served"
@@ -147,5 +147,5 @@
       "lead": "own-date"
     }
   ],
-  "sheet_sha256": "0f56af5e3286b97a2b91d36030bfbdef78a1d6636e508b09d581a58ab4bbe76c"
+  "sheet_sha256": "00e57a995c5c11095372b964f333a53a88a231aa13793b8be9b0c89cb9fee5cd"
 }

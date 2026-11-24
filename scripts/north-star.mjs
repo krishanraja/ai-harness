@@ -8,7 +8,7 @@
  * week, across the fleet. It is read for the last whole ISO week, Monday to
  * Sunday UTC, never a week still running, and it adds two counts:
  *
- *   - the taste ledger's repeats. krishanraja/inspirationhouse counts, per
+ *   - the taste ledger's repeats. krishanraja/taste-engine counts, per
  *     venture, each correction slug from its fixed vocabulary that Krish gave
  *     in two or more pieces of evidence about machine work in one week, and
  *     sends each as one explicit_correction envelope (event id
@@ -20,7 +20,7 @@
  *
  * A week with no taste-ledger row at all is not a 0: the ledger may simply not
  * have been read yet (it runs at 05:47 UTC, after the nightly steward), or its
- * clock may have failed. inspirationhouse therefore sends one reading marker a
+ * clock may have failed. taste-engine therefore sends one reading marker a
  * week (event id taste-ledger:<week>:reading, evidence_ref ending in the
  * week's total), also when the total is 0. Without the marker and without any
  * repeat row, or with fewer repeat rows than the marker's total, the reading is

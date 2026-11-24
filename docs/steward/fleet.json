@@ -63,7 +63,10 @@
       "bootstrap_head": "edd9045"
     },
     {
-      "name": "ctrl-mindmake",
+      "name": "ctrl",
+      "aliases": [
+        "ctrl-mindmake"
+      ],
       "product": "CTRL by Mindmake",
       "docs_roots": [
         "docs",
@@ -248,7 +251,10 @@
       "bootstrap_head": "a3d2f37"
     },
     {
-      "name": "AEO-Engine",
+      "name": "answers-engine",
+      "aliases": [
+        "AEO-Engine"
+      ],
       "product": "AEO research machine (weekly answer-engine research for the ventures, the buyers and the benchmarks)",
       "docs_roots": [
         "docs"
@@ -399,7 +405,10 @@
       "bootstrap_head": "5d2877d"
     },
     {
-      "name": "growth-fulltime",
+      "name": "growth-full-time",
+      "aliases": [
+        "growth-fulltime"
+      ],
       "product": "Full Time growth engine",
       "docs_roots": [
         "docs"
@@ -505,7 +514,10 @@
       "bootstrap_head": "b5cb039"
     },
     {
-      "name": "inspirationhouse",
+      "name": "taste-engine",
+      "aliases": [
+        "inspirationhouse"
+      ],
       "product": "The taste ledger",
       "docs_roots": [
         "docs"
@@ -548,7 +560,10 @@
       "bootstrap_head": "507670c"
     },
     {
-      "name": "krish-raja",
+      "name": "krishraja-site",
+      "aliases": [
+        "krish-raja"
+      ],
       "product": "krishraja.com",
       "docs_roots": [
         "docs"

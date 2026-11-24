@@ -30,7 +30,9 @@ export function validateEpisode(event) {
   if (event.schema_version !== 2) return
   const keys = new Set(['event_id', 'schema_version', 'occurred_at', 'surface', 'kind', 'summary', 'evidence_ref', 'related_skill_or_rule', 'outcome', 'severity', 'confidence', 'repository', 'episode_id', 'knowledge_type', 'episode', 'source_revision', 'measurement', 'inbox_id', 'received_at', 'payload_sha256'])
   if (Object.keys(event).some((k) => !keys.has(k))) throw new Error('unknown_episode_field')
-  if (event.repository !== null && (typeof event.repository !== 'string' || !fleet.repos.some((r) => r.name === event.repository))) throw new Error('invalid_repository')
+  // A renamed repository's former name is an alias and stays valid as sent: the repository administration
+  // publisher keys its profiles and knowledge scopes on the name it admitted, so the name is not rewritten here.
+  if (event.repository !== null && (typeof event.repository !== 'string' || !fleet.repos.some((r) => r.name === event.repository || (r.aliases || []).includes(event.repository)))) throw new Error('invalid_repository')
   if (!/^episode:[a-f0-9]{16,64}$/.test(event.episode_id || '')) throw new Error('invalid_episode_id')
   if (!KNOWLEDGE_TYPES.has(event.knowledge_type)) throw new Error('invalid_knowledge_type')
   if (event.source_revision != null && !/^[a-f0-9]{40}$/.test(event.source_revision)) throw new Error('invalid_source_revision')
