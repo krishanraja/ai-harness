@@ -1,0 +1,26 @@
+{
+  "_generated": "by scripts/render-capabilities.mjs from the registry in state/fleet.yaml. Do not edit by hand: change the registry.",
+  "ventures": {
+    "aeo-engine": "mindmake",
+    "content-engine": "publication",
+    "content-watcher": "publication",
+    "ctrl-mindmake": "mm_ctrl",
+    "dothinkdo": "mindmake",
+    "dothinkdo-skills": "mindmake",
+    "fractionl-circle": "fractionl_circle",
+    "fractionl-pulse": "fractionl_pulse",
+    "full-time": "full_time",
+    "growth-fulltime": "full_time",
+    "growth-heartside": "heartside",
+    "growth-legibility": "legibility",
+    "growth-makeyourmindup": "publication",
+    "growth-mindmake": "mindmake",
+    "heartside": "heartside",
+    "krish-raja": "mindmake",
+    "legibility": "legibility",
+    "legibility-worker": "legibility",
+    "makeyourmindup": "publication",
+    "mindmake": "mindmake",
+    "video-compression": "publication"
+  }
+}
