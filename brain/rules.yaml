@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 145 rules across the two contracts and the canon block.
+# 146 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1147,6 +1147,15 @@ contract_rules:
           kind: proposal
           ref: "docs/proposals/2026-11-15-council.md"
     status: live
+  - id: collision-rules.insight-desk-writes-ideas
+    file: contract/skill-routing-contract.md
+    text_sha: "faada33ec2e4"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
   - id: collision-rules.take-the-brief-captures
     file: contract/skill-routing-contract.md
     text_sha: "a44378ff880b"
@@ -1586,7 +1595,7 @@ contract_rules:
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
-# 254 chapters across the installed skills.
+# 265 chapters across the installed skills.
 skill_sections:
   - id: ad-copywriter.role
     file: skills/ad-copywriter/SKILL.md
@@ -2736,6 +2745,116 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: insight-desk.role
+    file: skills/insight-desk/SKILL.md
+    heading: "Role"
+    text_sha: "6baeb74a268c"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.when-it-runs
+    file: skills/insight-desk/SKILL.md
+    heading: "When it runs"
+    text_sha: "50e21170b158"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.when-it-does-not
+    file: skills/insight-desk/SKILL.md
+    heading: "When it does not run"
+    text_sha: "ce1603371438"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.inputs
+    file: skills/insight-desk/SKILL.md
+    heading: "Inputs"
+    text_sha: "6206ac02f928"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.the-pipeline
+    file: skills/insight-desk/SKILL.md
+    heading: "The pipeline"
+    text_sha: "f30ad404d01d"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.output
+    file: skills/insight-desk/SKILL.md
+    heading: "Output"
+    text_sha: "124e04fec2b7"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.engines
+    file: skills/insight-desk/SKILL.md
+    heading: "Engines"
+    text_sha: "217a46970eba"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.approval-walls
+    file: skills/insight-desk/SKILL.md
+    heading: "Approval walls"
+    text_sha: "61917f822b9b"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.stop
+    file: skills/insight-desk/SKILL.md
+    heading: "Stop"
+    text_sha: "2e3fab1b2120"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.graduation
+    file: skills/insight-desk/SKILL.md
+    heading: "Graduation"
+    text_sha: "3e7bd34a58e9"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: insight-desk.provenance
+    file: skills/insight-desk/SKILL.md
+    heading: "Provenance"
+    text_sha: "4b50cdc7f88b"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-insight-desk.md"
+      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
     status: live
   - id: instantly-operator.retired-route
     file: skills/instantly-operator/SKILL.md

@@ -8,7 +8,7 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 
 | Repository | What it can do for you | How to call it | When |
 |---|---|---|---|
-| ai-harness | Rules, skills and the council for every repository; renders the canon block and the neighbours table. | A pull request here, merged through the judge panel; read any skill with Control Center get_skill. | A rule, skill or contract should change, a correction keeps repeating, or a decision needs the council. |
+| ai-harness | Rules, skills, the council and the insight desk for every repository; renders the canon block and the neighbours table. | A pull request here, merged through the judge panel; read any skill with Control Center get_skill. | A rule, skill or contract should change, a correction keeps repeating, a decision needs the council, or a growth engine needs its week's ideas (insight-desk, through get_skill). |
 
 ## The hub
 
