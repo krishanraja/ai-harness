@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- state/fleet.yaml carries a registry of every repository Krish owns (scope, layer, role, venture, and what each in-scope one can do, how to call it and when); its rendering, krish-principles references/capabilities.md, is the neighbours table every canon block now tells sessions to read before building or deciding. (2026-11-24)
 - the contract lets internal-auditor merge every fleet repository's green pull request by Krish or his bots, close superseded bot pull requests and file a fix issue for a red one. (2026-11-24)
 - A merged change to the canon block now releases itself, as skill changes already did; the folder-report rule (sessions report folder changes in Krish's Drive or dev folders to filearchives, with his words) was released by hand as v2026.11.24.1. (2026-11-24)
 - The operating contract says internal-auditor's own fix pull requests merge themselves once every check is green at the head the fix queue checked, with a red, conflicted or unchecked fix labelled needs-krish; the canon sends his preferences to the taste engine and defects to record_harness_observation. ai-harness keeps its own judged merge bot. (2026-11-23)
@@ -37,6 +38,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-24 Ruling (Krish, 2026-11-24): every repository knows what the others can do, so collaboration is proactive at all times.
 - 2026-11-24 Ruling (Krish, 2026-11-24): all repos should also be auto merge; the auditor merges centrally.
 - 2026-11-24 Krish ruled that everything should happen automatically.
 - 2026-11-24 Krish asked that every repository report folder changes to filearchives.
@@ -47,7 +49,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-24): build the merger in internal-auditor (src/prTriage.ts, pr-triage.yml) and add its hourly knock to Control Center's clock.
+- Next (2026-11-24): retire the excluded and dormant canon surfaces (mm-ctrl is OLD-ctrl-mindmake, contentarchives, fractionl-circle) and admit ctrl-mindmake, across the docs steward fleet, the central steward's options and the administration publisher.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 33, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
