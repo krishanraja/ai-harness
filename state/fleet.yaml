@@ -657,9 +657,21 @@ registry:
     scope: personal
     role: Private finances.
   - name: music-watcher
-    scope: personal
-    confirm: true
-    role: trackcard and Music Brain; music is protected by the Ikigai's rule 8.
+    scope: in
+    layer: service
+    role: >-
+      trackcard, the Music Brains and the production engine. In the fleet machinery by Krish's
+      choice on 2026-11-24, for its engines and his move into creative work, knowing the Ikigai's
+      rule 8 protects music.
+    capability: >-
+      Measures an audio bounce into a card (tempo, key, a bar-numbered section map, stems, loudness),
+      and keeps taste brains that learn only from evidence their owner approves.
+    call: >-
+      `trackcard analyze <file.wav>` from its package, on the machine that holds the audio; its approved
+      taste is read only, never written.
+    when: >-
+      You need an audio file measured, music or a sound bed chosen against measured taste, or a pattern
+      for learning someone's taste only from what they approve.
   - name: lorimer-pc-backup
     scope: personal
     role: A backup of the Lorimer PC.
