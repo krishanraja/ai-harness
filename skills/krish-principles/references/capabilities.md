@@ -31,7 +31,7 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 | humour-engine | Makes copy funny the way Krish means it, and checks a joke against the definition. | Control Center /api/humour/<caller> or the engine route /api/growth/engines/<slug>/humour, or the pinned package. | Public copy should land with humour, or a line needs a humour check before it goes out. |
 | AEO-Engine | Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win. | POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers. | You need to know how AI assistants answer your buyers, or which cited pages are worth winning. |
 | filearchives | Follows every Drive and dev folder by id, and protects the Ikigai and its doctrine from being moved, renamed or changed without his ruling. | Report a folder change with its tools/report_folder_change.ps1; its protected files are in policy/protected-files.json. | You create, move, rename or remove a folder in Krish's Drive or dev folders, or touch a protected file. |
-| software-qa | A QA pass on code and UI that a fix needs before it merges. | An issue in its repository, or the auditor's routing, once its own route is read and recorded here. | A fix touches code or UI that needs a QA pass beyond the repository's own checks. |
+| software-qa | A QA pass on code and UI (its route is not yet read from its own README). | Not recorded yet. Until it is, open an auditor-fix issue in your own repository and the internal auditor routes the QA work. | A fix touches code or UI that needs a QA pass beyond the repository's own checks. |
 
 ## Services
 

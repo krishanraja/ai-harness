@@ -213,7 +213,7 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
   for (const w of warnings) W(w)
   const want = renderCapabilities(fleet.registry || []) + '\n'
   const have = existsSync(join(HARNESS, CAPABILITIES_PATH)) ? readFileSync(join(HARNESS, CAPABILITIES_PATH), 'utf8') : null
-  if (have !== want) F(`${CAPABILITIES_PATH} differs from the registry; run node scripts/render-capabilities.mjs`)
+  if (have !== want) F(`${CAPABILITIES_PATH} differs from the registry; run node scripts/render-capabilities.mjs --write`)
   else O(`registry: ${(fleet.registry || []).length} repositories, ${(fleet.registry || []).filter((r) => r.scope === 'in').length} in the OS, neighbours table current`)
 }
 

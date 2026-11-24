@@ -1495,14 +1495,14 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
-      sha256: "65064CB36BF4BE6B28DCFE6CE1E696ABF45CAC19AC23D4E6CD141F08C0D4C5CC"
+      sha256: "C41A24EC1C9622344F92205285CFFE25D59B700E536FC946FE702555BBC2DE58"
     history:
       - text_sha: "993c12b20665"
         valid_until: "2026-11-24"
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
-          sha256: "65064CB36BF4BE6B28DCFE6CE1E696ABF45CAC19AC23D4E6CD141F08C0D4C5CC"
+          sha256: "C41A24EC1C9622344F92205285CFFE25D59B700E536FC946FE702555BBC2DE58"
     status: live
   - id: canon.research
     file: contract/templates/canon-block.md
@@ -3147,7 +3147,7 @@ skill_sections:
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-24-registry-and-neighbours.md"
-      sha256: "65064CB36BF4BE6B28DCFE6CE1E696ABF45CAC19AC23D4E6CD141F08C0D4C5CC"
+      sha256: "C41A24EC1C9622344F92205285CFFE25D59B700E536FC946FE702555BBC2DE58"
     history:
       - text_sha: "d06d8a102719"
         valid_until: "2026-10-06"

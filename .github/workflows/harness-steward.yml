@@ -90,6 +90,9 @@ jobs:
       - name: The registry checker can still fail
         run: node scripts/test-render-capabilities.mjs
 
+      - name: The neighbours table is the registry's rendering
+        run: node scripts/render-capabilities.mjs
+
       - name: Surfaces valid
         run: node scripts/validate-surfaces.mjs --fleet-json docs/steward/fleet.json
 

@@ -8,11 +8,11 @@
  * The one home is the `registry` in state/fleet.yaml. This writes its in-scope
  * rows to skills/krish-principles/references/capabilities.md, which every
  * session reads (the canon block names it) or fetches with Control Center
- * get_skill. The file is a checked rendering, never edited by hand:
- * `--check` fails when it differs from what the registry renders.
+ * get_skill. The file is a checked rendering, never edited by hand: by default
+ * the script only checks, and fails when the file differs from the registry.
  *
- *   node scripts/render-capabilities.mjs          write it
- *   node scripts/render-capabilities.mjs --check  fail on drift
+ *   node scripts/render-capabilities.mjs          check: fail on a registry problem or drift (the default, so a gate can never write)
+ *   node scripts/render-capabilities.mjs --write  write it after a registry change
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
@@ -89,9 +89,9 @@ if (isMain) {
   const text = renderCapabilities(fleet.registry) + '\n'
   const abs = join(HARNESS, CAPABILITIES_PATH)
   const before = existsSync(abs) ? readFileSync(abs, 'utf8') : null
-  if (process.argv.includes('--check')) {
+  if (!process.argv.includes('--write')) {
     if (before === text) { console.log(`ok    ${CAPABILITIES_PATH}`); process.exit(0) }
-    console.error(`drift ${CAPABILITIES_PATH}: run node scripts/render-capabilities.mjs`); process.exit(1)
+    console.error(`drift ${CAPABILITIES_PATH}: run node scripts/render-capabilities.mjs --write`); process.exit(1)
   }
   writeFileSync(abs, text)
   console.log(`${before === text ? 'ok   ' : 'wrote'} ${CAPABILITIES_PATH}`)

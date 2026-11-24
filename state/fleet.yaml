@@ -445,8 +445,8 @@ registry:
     layer: specialist
     confirm: true
     role: Code and UI quality checks (to be confirmed against its own README).
-    capability: A QA pass on code and UI that a fix needs before it merges.
-    call: An issue in its repository, or the auditor's routing, once its own route is read and recorded here.
+    capability: A QA pass on code and UI (its route is not yet read from its own README).
+    call: Not recorded yet. Until it is, open an auditor-fix issue in your own repository and the internal auditor routes the QA work.
     when: A fix touches code or UI that needs a QA pass beyond the repository's own checks.
   - name: sendlinks
     scope: in

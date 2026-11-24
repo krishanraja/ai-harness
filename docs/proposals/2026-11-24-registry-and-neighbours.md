@@ -26,7 +26,7 @@ A call through the table goes through the called repository's own walls. The tab
 | File | Change |
 |---|---|
 | `state/fleet.yaml` | A `registry` section: every repository Krish owns, with its scope (in, personal, unplaced, dormant, excluded), layer, role, venture, and for each in-scope one what it can do, how to call it and when. Approved renames are recorded as `rename`, applied later one pull request at a time. `repos` stays the list of canon surfaces. |
-| `scripts/render-capabilities.mjs` | Renders the in-scope rows into `skills/krish-principles/references/capabilities.md`, and checks the registry against the canon surfaces. |
+| `scripts/render-capabilities.mjs` | Checks by default, so a gate can never write: fails on a registry problem or when `skills/krish-principles/references/capabilities.md` differs from the registry. `--write` renders it after a registry change. The steward's checks run it. |
 | `scripts/validate-surfaces.mjs` | Fails on a canon surface with no registry row, an in-scope row missing what it can do, how to call it or when, or a neighbours table that differs from the registry. Warns on a canon surface that is excluded or dormant. |
 | `contract/templates/canon-block.md` | One sentence, **Neighbours:** every session reads the table before building or deciding and calls the repository whose trigger fits. |
 | `skills/krish-principles/SKILL.md` | Names the new reference. |
