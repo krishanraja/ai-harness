@@ -32,10 +32,10 @@ pins:
       - repo: krishanraja/growth-makeyourmindup
         path: docs/control-center/
         mode: bytes
-      - repo: krishanraja/growth-fulltime
+      - repo: krishanraja/growth-full-time
         path: docs/control-center/
         mode: bytes
-      - repo: krishanraja/AEO-Engine
+      - repo: krishanraja/answers-engine
         path: docs/control-center/
         mode: bytes
   - id: anthropic-prices
@@ -47,6 +47,6 @@ pins:
       - repo: krishanraja/content-engine
         path: apps/control-plane/api/_prices.ts
         mode: generated
-      - repo: krishanraja/inspirationhouse
+      - repo: krishanraja/taste-engine
         path: src/meter.ts
         mode: generated

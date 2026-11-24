@@ -58,7 +58,7 @@ One insight sheet, `insight-sheet/1`, in the engine's private `local/` or `runti
 
 ## Engines
 
-`references/engines.md` holds the rules for the humour engine and divergent-thinker: exit 2 is never a pass, an unavailable engine is recorded as `unavailable` and never as passed, paid calls stay inside Control Center's caps, and each call runs in the venture's own namespace.
+`references/engines.md` holds the rules for the humour engine and divergence-engine: exit 2 is never a pass, an unavailable engine is recorded as `unavailable` and never as passed, paid calls stay inside Control Center's caps, and each call runs in the venture's own namespace.
 
 ## Approval walls
 

@@ -9,7 +9,7 @@
  * (I-01) found the main database's project address in tracked files here; every
  * copy was replaced with a symbolic name in the same change that added this
  * gate, and git history keeps the old copies (the security sweep owns history).
- * The patterns follow krish-raja's scripts/public-script-guard.ts.
+ * The patterns follow krishraja-site's scripts/public-script-guard.ts.
  *
  *   node scripts/check-public-leaks.mjs            scan the tracked tree
  *   node scripts/check-public-leaks.mjs --self-test prove each pattern can fail

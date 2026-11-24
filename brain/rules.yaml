@@ -1537,11 +1537,12 @@ contract_rules:
     status: live
   - id: canon.divergence
     file: contract/templates/canon-block.md
-    text_sha: "5b7debf8bc3f"
+    text_sha: "f7a90f599f7e"
     first_seen: "2026-11-18"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
     history:
       - text_sha: "f56aa52ecfc4"
         valid_until: "2026-11-18"
@@ -1555,6 +1556,11 @@ contract_rules:
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
       - text_sha: "3ad192d32eb8"
         valid_until: "2026-11-18"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "5b7debf8bc3f"
+        valid_until: "2026-11-24"
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
@@ -2823,12 +2829,19 @@ skill_sections:
   - id: insight-desk.engines
     file: skills/insight-desk/SKILL.md
     heading: "Engines"
-    text_sha: "217a46970eba"
+    text_sha: "74805a7ecb1f"
     first_seen: "2026-11-24"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-24-insight-desk.md"
-      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+      ref: "docs/proposals/2026-11-24-fleet-renames.md"
+      sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
+    history:
+      - text_sha: "217a46970eba"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-insight-desk.md"
+          sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
     status: live
   - id: insight-desk.approval-walls
     file: skills/insight-desk/SKILL.md

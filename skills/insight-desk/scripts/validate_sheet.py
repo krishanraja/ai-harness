@@ -44,7 +44,8 @@ LEVELS = ('execution', 'campaign', 'platform', 'business', 'measurement')
 TEST_KEYS = ('specificity', 'share', 'analogue', 'floor', 'kill_the_favourite')
 RESULTS = ('pass', 'fail', 'unavailable')
 CONSULT_RESULTS = ('pass', 'flagged', 'unavailable')
-ENGINES = ('divergent-thinker', 'humour-engine')
+# divergent-thinker is the engine's former name (Krish's pick, 2026-11-24); sheets written before the rename stay valid.
+ENGINES = ('divergence-engine', 'divergent-thinker', 'humour-engine')
 IDEA_KEYS = ('id', 'claim', 'mechanic', 'idea_level', 'method', 'channel_role', 'conversion_path',
              'kill_condition', 'tests')
 ID_RE = re.compile(r'^[a-z0-9][a-z0-9-]{0,39}$')

@@ -504,7 +504,7 @@
     "krish": {
       "speaks_as": "Krish, first person",
       "extends": {
-        "repo": "krishanraja/krish-raja",
+        "repo": "krishanraja/krishraja-site",
         "path": "project-documentation/retired-names.json",
         "sha256": "dab1ea9fc806efdd628b0632a057b53ab7ab4eb8503e5424aba06522d14d6780",
         "applies": "each entry in names is a hard fail (retired_name, whole phrase, any case) on every channel spoken in Krish's name",

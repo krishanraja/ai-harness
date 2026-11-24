@@ -70,7 +70,7 @@ Product or venture names (CTRL, the $59 parts, Heartside, Full Time, Legibility,
 |---|---|---|
 | Boardy brief | Krish sends it; drafted in Claude sessions | The third-person sentence first, then the four lanes, what counts as a good outcome, the before and after, what a Mindmake client gets, why him, what wastes his time, how to book him, next step |
 | LinkedIn headline and about | growth-mindmake (his personal LinkedIn since 13 Nov 2026) | Headline (proposed): "Founder, Mindmake \| I build leaders an AI Brain that lays out their biggest decisions and carries their standards into every tool \| Keynote speaker". About opens with the first-person sentence above, then the why, the career thread, the two ways to work together, the stage, and one call to action |
-| krishraja.com | its own repository (`krishanraja/krish-raja`) | Keep the voice and the title Krish likes; put the first-person sentence directly under his name |
+| krishraja.com | its own repository (`krishanraja/krishraja-site`) | Keep the voice and the title Krish likes; put the first-person sentence directly under his name |
 | mindmake.co | `krishanraja/mindmake` | The sentence as the homepage lede, under the existing headline; copy changes go through that repository's approval gate |
 
 ## Still open (only Krish decides)

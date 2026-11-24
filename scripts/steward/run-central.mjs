@@ -9,7 +9,7 @@ import { Gh } from '../lib/github.mjs'
 import { buildSourcePack, validateDraft } from './central-draft.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
-export const TARGETS = ['ai-harness', 'control-center', 'fractionl-pulse', 'full-time', 'content-engine', 'AEO-Engine', 'makeyourmindup'].map((name) => 'krishanraja/' + name)
+export const TARGETS = ['ai-harness', 'control-center', 'fractionl-pulse', 'full-time', 'content-engine', 'answers-engine', 'makeyourmindup'].map((name) => 'krishanraja/' + name)
 const hash = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex')
 const plain = (value) => value && typeof value === 'object' && !Array.isArray(value)
 function fail(code) { const error = new Error(code); error.code = code; throw error }
