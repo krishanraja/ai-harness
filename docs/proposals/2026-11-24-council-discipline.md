@@ -1,6 +1,6 @@
 # Council discipline, 2026-11-24
 
-Status: proposed, step 17 of the fleet architecture plan Krish approved for this session. It changes only `skills/council` and its behavior suite, and merges through the judge panel like any session pull request. No ruling is claimed here.
+Status: proposed. Asked by Krish: step 17 of the fleet architecture plan he approved on 2026-11-24, and "sort out the remainder" (Krish, 2026-11-24) when the session reported back. It changes only `skills/council`, its behavior suite and the two council rows in `brain/rules.yaml`; the humour-engine lines in the same pull request have their own proposal, `docs/proposals/2026-11-24-humour-engine-canon-sync.md`. It merges through the judge panel like any session pull request. No ruling is claimed here.
 
 ## Finding and correct layer
 
@@ -19,6 +19,10 @@ ai-harness's number is the corrections Krish has to give twice in a week. The se
 | `skills/council/references/protocol.md` | A "Discipline" section with seven rules (steel-man first; the evidence rule; severity has to be earned; the ledger of settled decisions; anonymous drafts; a cap of two rounds; ground the winning claim), wired into the decision and idea steps and into both answer shapes (a "Settled already" line, a "Steel-man" line, and a call that names its claim and that claim's evidence). |
 | `skills/council/SKILL.md` | Step 1 names the seven rules; two new stops: a settled question with no newer fact, and a third round. |
 | `evals/council-behavior-cases.jsonl` | Seven held-out cases, 027 to 033, one per rule, each failing a read that skips it. |
+
+## How often it hands back to Krish
+
+Two rules can return a read to Krish: a question two rounds cannot settle (rule 6), and a settled decision due for review (rule 4). Both already happen today by hand, when Krish corrects a read that went round in circles or reopened something he had decided; the rules make that one explicit line instead of a long read. The expected rate is low: at most one a week from the strategist's weekly board, which is the council's most frequent caller. If it fires more than twice in a week, that is the signal to revisit rule 6.
 
 ## The walls
 
