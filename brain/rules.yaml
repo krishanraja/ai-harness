@@ -1537,12 +1537,12 @@ contract_rules:
     status: live
   - id: canon.divergence
     file: contract/templates/canon-block.md
-    text_sha: "f7a90f599f7e"
+    text_sha: "ea968f2fbad6"
     first_seen: "2026-11-18"
     source:
       kind: proposal
       ref: "docs/proposals/2026-11-24-fleet-renames.md"
-      sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
+      sha256: "4AB79DD2825CBD4D05F36FD0994F8672B60BC71AE1FF758D439A1B2838E8E2AC"
     history:
       - text_sha: "f56aa52ecfc4"
         valid_until: "2026-11-18"
@@ -1564,6 +1564,12 @@ contract_rules:
         source:
           kind: proposal
           ref: "docs/proposals/2026-11-18-divergent-thinker.md"
+      - text_sha: "f7a90f599f7e"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-fleet-renames.md"
+          sha256: "6F2D37CB9C40798A129852F90AB9BAB358194252187B848A4CA25C25AE8F6C1A"
     status: live
   - id: canon.taste
     file: contract/templates/canon-block.md

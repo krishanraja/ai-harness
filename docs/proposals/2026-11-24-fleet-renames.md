@@ -11,7 +11,7 @@ Status: admitted. Krish ruled it on 2026-11-24.
 
 - `state/fleet.yaml`, both the surface list and the registry, names each repository by its new name and keeps the old name as an alias, so every reader that matches by name or alias resolves either one.
 - `docs/steward/fleet.json`, the central steward's dispatch options and targets, the docs steward rollout list and the pins use the new names.
-- The canon's Divergence rule names divergence-engine, cites `krishanraja/divergence-engine` for its caps, and labels a spark `divergence-engine spark <id>, run <run>`. The insight desk accepts both engine names, so a sheet written before the rename stays valid.
+- The canon's Divergence rule names divergence-engine, cites `krishanraja/divergence-engine` for its caps, and keeps the spark label `divergent-thinker spark <id>, run <run>`, because Control Center counts the engine's North Star by matching that exact text; the label moves only after that counter accepts both names. The insight desk accepts both engine names, so a sheet written before the rename stays valid.
 - `state/ventures.json` and the capabilities table are regenerated from the registry.
 
 ## What deliberately does not change here
