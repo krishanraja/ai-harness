@@ -532,12 +532,12 @@ contract_rules:
     status: live
   - id: authority.never-publish-post-send
     file: contract/krish-operating-contract.md
-    text_sha: "73b1f65238b0"
+    text_sha: "077e6029c280"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-23-auditor-fixes-auto-merge.md"
-      sha256: "F8DB23E8B1877F1E636C2FCAA222A5E2FFED9C83065D93CD5F6116165DA1421F"
+      ref: "docs/proposals/2026-11-24-auditor-merges-the-fleet.md"
+      sha256: "7119B714822126982EFFC1C8C0C8793E888BD3A490D1EE1801280872D4822C38"
     history:
       - text_sha: "2d9753efa37a"
         valid_until: "2026-11-14"
@@ -561,6 +561,12 @@ contract_rules:
           kind: proposal
           ref: "docs/proposals/2026-11-18-harness-change-requests-auto-merge.md"
           sha256: "B7F8261673230431C9F0D79D1D51C157CD881132C3D6ADD2351D45B1B0E64C7F"
+      - text_sha: "73b1f65238b0"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-23-auditor-fixes-auto-merge.md"
+          sha256: "F8DB23E8B1877F1E636C2FCAA222A5E2FFED9C83065D93CD5F6116165DA1421F"
     status: live
   - id: authority.record-harness-observation-is
     file: contract/krish-operating-contract.md
