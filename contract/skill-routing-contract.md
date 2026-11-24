@@ -79,7 +79,7 @@ Provenance for the three rows added 2026-09-09, `harness-maintainer`, `tools-acc
 
 ### Inactive idea-producer candidate
 
-`insight-desk` is staged under `candidates/`. It runs after `strategy-brief` and before the venture's producer, turns a growth engine's goal into up to three ideas, and writes ideas, never copy. Not a production route before admission (`docs/proposals/2026-11-24-insight-desk.md`). Staged 2026-11-24; valid until admission or withdrawal.
+`insight-desk` is staged under `candidates/`. It runs after `strategy-brief` and before the venture's producer, turns a growth engine's goal into up to three ideas (at U4 with nothing measured, only a measurement idea), and writes ideas, never copy. Not a production route before admission (`docs/proposals/2026-11-24-insight-desk.md`). Staged 2026-11-24; the U4 clause added 2026-11-24 in #311 (see the proposal's Revisions); valid until admission or withdrawal.
 
 ## CTRL standards chain
 
