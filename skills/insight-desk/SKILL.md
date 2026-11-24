@@ -80,4 +80,4 @@ This stays a skill until all three hold: it beats the plain baseline on Krish's 
 
 ## Provenance
 
-Ruling (Krish, 2026-11-24): insight-desk names no outside source; its methods are written in this harness's own words, with no weighted scores, case libraries or triple scoring.
+Ruling (Krish, 2026-11-24): insight-desk names no outside source; its methods are written in this harness's own words.

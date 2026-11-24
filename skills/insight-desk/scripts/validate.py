@@ -9,7 +9,8 @@ It checks that:
   - methods-by-category.md has at least four categories, each with three to five methods,
     and method ids are unique;
   - the sample sheet in scripts/tests/fixtures passes scripts/validate_sheet.py;
-  - no file in the skill, its candidate record, its evals or its proposal carries an em dash;
+  - no file in the skill, the closed record of its candidate period, its evals or its proposal
+    carries an em dash;
   - the eval suites meet their minimums and are held out: no case shares an eight-word run with
     any file in the skill.
 """
@@ -123,7 +124,7 @@ def main(argv=None):
         if proposals:
             others += proposals
         else:
-            errors.append(f'no docs/proposals/*-{NAME}.md found; the candidate needs its proposal')
+            errors.append(f'no docs/proposals/*-{NAME}.md found; the skill needs its proposal')
     skill_files = [p for p in SKILL.rglob('*') if p.is_file() and p.suffix in TEXT_SUFFIXES]
     for path in skill_files + others:
         if EM_DASH in path.read_text(encoding='utf-8'):
@@ -131,8 +132,6 @@ def main(argv=None):
 
     if root:
         evals = root / 'evals'
-        if not (evals / f'{NAME}-trigger-cases.jsonl').is_file():
-            evals = root / 'evals' / 'candidates'
         trigger = read_jsonl(evals / f'{NAME}-trigger-cases.jsonl', errors)
         behavior = read_jsonl(evals / f'{NAME}-behavior-cases.jsonl', errors)
         check_minimums(trigger, TRIGGER_MINIMUMS, 'trigger suite', errors)
