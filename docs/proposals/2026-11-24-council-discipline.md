@@ -1,6 +1,6 @@
 # Council discipline, 2026-11-24
 
-Status: proposed. Asked by Krish: step 17 of the fleet architecture plan he approved on 2026-11-24, and "sort out the remainder" (Krish, 2026-11-24) when the session reported back. It changes only `skills/council`, its behavior suite and the two council rows in `brain/rules.yaml`; the humour-engine lines in the same pull request have their own proposal, `docs/proposals/2026-11-24-humour-engine-canon-sync.md`. It merges through the judge panel like any session pull request. No ruling is claimed here.
+Status: proposed. Asked by Krish: step 17 of the fleet architecture plan he approved on 2026-11-24, and "sort out the remainder" (Krish, 2026-11-24) when the session reported back. It changes only `skills/council`, its behavior suite and the two council rows in `brain/rules.yaml`. It merges through the judge panel like any session pull request. No ruling is claimed here.
 
 ## Finding and correct layer
 
