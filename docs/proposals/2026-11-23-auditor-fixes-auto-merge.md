@@ -14,6 +14,7 @@ The operating contract's Authority section said pull requests in any other repos
 ## What it allows, and its bounds
 
 - Only internal-auditor's own fix pull requests, branch `auditor/fix-<n>`, opened by its fix queue (`.github/workflows/fix-queue.yml`, `src/fixMerge.ts`).
+  (Superseded in part on 2026-11-24: green pull requests that Krish or his bots open in any fleet repository other than ai-harness now also merge themselves, through internal-auditor's hourly merger, within the bounds in docs/proposals/2026-11-24-auditor-merges-the-fleet.md. The operating contract's Authority section is current.)
 - The queue merges one only when every check on it is green at the exact head it checked. A red, conflicted or unchecked fix is labelled `needs-krish` and stays open for him.
 - A fix never touches `.github`, a NORTH_STAR file, a secret or a deleting migration; the finish step refuses such a change before it is pushed. So a merge can start only what that repository already runs when its default branch moves, deploys included, and Krish approved that in advance.
 - ai-harness is excluded.

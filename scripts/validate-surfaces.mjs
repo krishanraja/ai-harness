@@ -202,6 +202,21 @@ if (!existsSync(join(HARNESS, 'brain/rules.yaml'))) {
   if (!pairs.length) O(`no live rule in one contract restates a live rule in the other above the 70 percent overlap bar (${rules.length} rules compared)`)
 }
 
+// ------------------------------------------------------- the registry and its table
+// Every canon surface has a registry row, every in-scope row says what it can do,
+// how to call it and when, and the neighbours table is the registry's rendering
+// (Krish, 2026-11-24). scripts/render-capabilities.mjs holds the rules.
+{
+  const { registryProblems, renderCapabilities, CAPABILITIES_PATH } = await import('./render-capabilities.mjs')
+  const { errors, warnings } = registryProblems(fleet)
+  for (const e of errors) F(e)
+  for (const w of warnings) W(w)
+  const want = renderCapabilities(fleet.registry || []) + '\n'
+  const have = existsSync(join(HARNESS, CAPABILITIES_PATH)) ? readFileSync(join(HARNESS, CAPABILITIES_PATH), 'utf8') : null
+  if (have !== want) F(`${CAPABILITIES_PATH} differs from the registry; run node scripts/render-capabilities.mjs --write`)
+  else O(`registry: ${(fleet.registry || []).length} repositories, ${(fleet.registry || []).filter((r) => r.scope === 'in').length} in the OS, neighbours table current`)
+}
+
 // ------------------------------------------------- fleet parity with the docs steward
 const fleetJsonPath = flag('--fleet-json')
   || [join(HARNESS, 'docs/steward/fleet.json')].find((p) => existsSync(p))

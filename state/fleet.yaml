@@ -357,3 +357,307 @@ surface_contracts:
       Until 2026-09-09 it had no heartbeat and appeared in no manifest, so nothing
       could tell a healthy host from a dead one. An external check that nobody
       audits is a single point of failure wearing the costume of a safeguard.
+
+# ------------------------------------------------------------------ registry
+#
+# Every repository krishanraja owns, placed on the architecture map (Krish,
+# 2026-11-24: "ikigai is the layer above the north stars ... drawing out a map
+# of exactly what this architecture looks like"; "every single repo must be able
+# to understand what other repos (capabilities) exist around it so
+# collaboration is proactive at all times"). One home: everything that needs a
+# repository's scope, layer, role, venture or capability reads it here.
+# `repos` above stays the list of canon surfaces; every surface must appear
+# here, and scripts/render-capabilities.mjs renders the in-scope rows into
+# skills/krish-principles/references/capabilities.md, the table every
+# repository reads before building or deciding.
+#
+#   scope    in        part of the OS: scored, triaged, fixed, and on the table
+#            personal  Krish's own project, outside the OS: not scored
+#            unplaced  no caller found yet; Krish decides in or personal
+#            dormant   kept, not worked (Krish, 2026-11-24: fractionl-circle)
+#            excluded  outside the map by Krish's word (2026-11-24)
+#   layer    doctrine | hub | keeper | specialist | service | producer | product
+#   confirm  true where Krish has still to confirm the scope
+#   rename   an approved new name, applied by its own pull request (Krish, 2026-11-24)
+registry:
+  - name: ai-harness
+    scope: in
+    layer: doctrine
+    role: The canon. The Ikigai and who Krish is, the contracts, the 33 skills, the council, the brain, this registry.
+    capability: Rules, skills and the council for every repository; renders the canon block and the neighbours table.
+    call: A pull request here, merged through the judge panel; read any skill with Control Center get_skill.
+    when: A rule, skill or contract should change, a correction keeps repeating, or a decision needs the council.
+  - name: control-center
+    scope: in
+    layer: hub
+    venture: mindmake
+    role: Krish's one surface and the clock. The one list, the engine protocol, the North Star readers, the model routes.
+    capability: Gets a decision in front of Krish, reads any venture's state and number, and runs the humour, divergent and research routes.
+    call: The engine protocol on your engine's bearer, or the Control Center connector tools (get_venture_state, get_skill, divergent_*, report_to_taste_engine, record_harness_observation).
+    when: Anything needs Krish's yes, a live number, another venture's state, or a paid model route under a cap.
+  - name: internal-auditor
+    scope: in
+    layer: keeper
+    role: Keeper of the architecture map. Scores every repository, merges green pull requests, fixes, sweeps, and curates OS > Systems.
+    capability: Fixes code through its fix queue, merges your green pull requests, and routes work to the specialist that should do it.
+    call: Open an issue labelled auditor-fix in your own repository; the fix queue takes it. Read docs/scorecards for where you stand.
+    when: Something is broken that this session cannot fix, a red check is not yours, or your repository drifts from the map.
+  - name: strategist
+    scope: in
+    layer: specialist
+    venture: mindmake
+    role: The one strategy brain, anchored on the Ikigai. Weekly board through the council, three recovery plays for any U5.
+    capability: Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules.
+    call: It reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall.
+    when: A number is at U4 or U5, growth and product disagree, or an idea needs a test rather than a plan.
+  - name: divergence-engine
+    scope: in
+    layer: specialist
+    role: Ideas outside the consensus, and a free score of how familiar any output is.
+    capability: Scores a draft or a plan for sameness for free, and maps or challenges an angle (paid, capped).
+    call: Control Center /api/divergent/<caller>, or the connector tools divergent_score and divergent_record (free) and divergent_run (paid, capped), in your own namespace. Its package and the canon's Divergence rule still call it divergent-thinker; it is the same repository until the rename lands.
+    when: The canon's Divergence rule says when.
+    rename: The package and the canon call it divergent-thinker; both become divergence-engine.
+  - name: humour-engine
+    scope: in
+    layer: specialist
+    role: The fleet's one definition of humour, its prompts, ontology and validators.
+    capability: Makes copy funny the way Krish means it, and checks a joke against the definition.
+    call: Control Center /api/humour/<caller> or the engine route /api/growth/engines/<slug>/humour, or the pinned package.
+    when: Public copy should land with humour, or a line needs a humour check before it goes out.
+  - name: AEO-Engine
+    scope: in
+    layer: specialist
+    role: The one AI-answers specialist for every venture.
+    capability: Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win.
+    call: POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers.
+    when: You need to know how AI assistants answer your buyers, or which cited pages are worth winning.
+    rename: answers-engine
+  - name: filearchives
+    scope: in
+    layer: specialist
+    role: Krish's folder record and consent guard, and custodian of the files that matter most.
+    capability: Follows every Drive and dev folder by id, and protects the Ikigai and its doctrine from being moved, renamed or changed without his ruling.
+    call: Report a folder change with its tools/report_folder_change.ps1; its protected files are in policy/protected-files.json.
+    when: You create, move, rename or remove a folder in Krish's Drive or dev folders, or touch a protected file.
+  - name: software-qa
+    scope: in
+    layer: specialist
+    confirm: true
+    role: Code and UI quality checks (to be confirmed against its own README).
+    capability: A QA pass on code and UI (its route is not yet read from its own README).
+    call: Not recorded yet. Until it is, open an auditor-fix issue in your own repository and the internal auditor routes the QA work.
+    when: A fix touches code or UI that needs a QA pass beyond the repository's own checks.
+  - name: sendlinks
+    scope: in
+    layer: service
+    role: Tracked file links.
+    capability: Sends one of Krish's files as a link that says when it was opened.
+    call: The Control Center connector make_send_link and read_send_link.
+    when: A file goes to someone and you need to know they opened it.
+  - name: content-watcher
+    scope: in
+    layer: service
+    aliases: [video-compression]
+    role: Turns pasted links and screenshots into readings in Krish's inspiration folders.
+    capability: Reads a pasted post or screenshot and files the reading.
+    call: Control Center's inspiration queue, or content-engine api/watch.
+    when: A link or screenshot should become a reading Krish can use.
+  - name: inspirationhouse
+    scope: in
+    layer: service
+    role: The taste ledger.
+    capability: Holds Krish's approved taste rules, by venture, and records each preference he states.
+    call: get_approved_taste and report_to_taste_engine through the Control Center connector.
+    when: Before writing or designing for Krish, and whenever he states a preference.
+    rename: taste-engine
+  - name: krish-clone
+    scope: in
+    layer: service
+    role: Krish's voice and likeness library.
+    capability: Supplies approved voice and likeness material for content.
+    call: content-engine's takes intake (board/_takesIn.ts).
+    when: A piece needs Krish's approved voice or likeness.
+  - name: content-engine
+    scope: in
+    layer: producer
+    venture: publication
+    role: Make Your Mind Up's hero assets, the video engine, the research library.
+    capability: Makes finished articles, cuts, thumbnails and covers, and finds or files research.
+    call: Control Center's ideas gate; find_research and add_piece_material for the research library.
+    when: A Make Your Mind Up piece is made, or research should be found before paying for it.
+  - name: growth-makeyourmindup
+    scope: in
+    layer: producer
+    venture: publication
+    role: Make Your Mind Up growth.
+    capability: Posting, carousels, memes, Notes and subscriber growth for Make Your Mind Up.
+    call: Control Center dispatch on its own bearer; Krish instructs it with his Instruct press.
+    when: Make Your Mind Up needs reach or subscribers.
+  - name: growth-mindmake
+    scope: in
+    layer: producer
+    venture: mindmake
+    role: Mindmake growth.
+    capability: Outreach rows, pitches, visibility, guests and events for Mindmake.
+    call: Control Center dispatch on its own bearer.
+    when: Mindmake needs meetings, visibility or a pitch.
+  - name: growth-heartside
+    scope: in
+    layer: producer
+    venture: heartside
+    role: Heartside growth.
+    capability: Organic sales growth for Heartside.
+    call: Control Center dispatch on its own bearer.
+    when: Heartside needs organic sales.
+  - name: growth-fulltime
+    scope: in
+    layer: producer
+    venture: full_time
+    role: Full Time growth.
+    capability: Growth for Full Time.
+    call: Control Center dispatch on its own bearer.
+    when: Full Time needs growth.
+    rename: growth-full-time
+  - name: growth-legibility
+    scope: in
+    layer: producer
+    venture: legibility
+    role: Legibility growth.
+    capability: Weekly builders and outreach for Legibility.
+    call: Control Center dispatch on its own bearer.
+    when: Legibility needs builders.
+  - name: mindmake
+    scope: in
+    layer: product
+    venture: mindmake
+    role: mind/make, the company site.
+    capability: The company's public site.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: The company site changes.
+  - name: ctrl-mindmake
+    scope: in
+    layer: product
+    venture: mm_ctrl
+    role: CTRL by Mindmake, the live product repository.
+    capability: CTRL, the product.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: CTRL changes.
+    rename: ctrl
+  - name: heartside
+    scope: in
+    layer: product
+    venture: heartside
+    role: Heartside, the shop.
+    capability: The Heartside shop.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: The shop changes.
+  - name: full-time
+    scope: in
+    layer: product
+    venture: full_time
+    role: Full Time.
+    capability: The Full Time product.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: Full Time changes.
+  - name: legibility
+    scope: in
+    layer: product
+    venture: legibility
+    role: Legibility.
+    capability: The Legibility product.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: Legibility changes.
+  - name: legibility-worker
+    scope: in
+    layer: product
+    venture: legibility
+    role: Legibility's background worker.
+    capability: Legibility's background jobs.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: Legibility's background jobs change.
+  - name: makeyourmindup
+    scope: in
+    layer: product
+    venture: publication
+    role: Make Your Mind Up, the publication's site.
+    capability: The publication's site.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: The publication's site changes.
+  - name: fractionl-pulse
+    scope: in
+    layer: product
+    venture: fractionl_pulse
+    role: Pulse.
+    capability: The Pulse product.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: Pulse changes.
+  - name: krish-raja
+    scope: in
+    layer: product
+    role: krishraja.com, Krish's own site.
+    capability: Krish's public site and its enquiries.
+    call: Its own repository's issues; the fix queue takes auditor-fix.
+    when: Krish's site changes.
+    rename: krishraja-site
+  - name: fractionl-circle
+    scope: dormant
+    venture: fractionl_circle
+    role: Circle, preserved and not worked.
+  - name: claude-archive
+    scope: personal
+    confirm: true
+    role: Append-only vault of Claude exports and transcripts.
+  - name: hunter
+    scope: personal
+    confirm: true
+    role: Krish's job search.
+  - name: dothinkdo
+    scope: personal
+    confirm: true
+    role: A private project.
+  - name: dothinkdo-skills
+    scope: personal
+    confirm: true
+    role: A private project.
+  - name: compound-finances
+    scope: personal
+    confirm: true
+    role: Private finances.
+  - name: music-watcher
+    scope: personal
+    confirm: true
+    role: trackcard and Music Brain; music is protected by the Ikigai's rule 8.
+  - name: lorimer-pc-backup
+    scope: personal
+    confirm: true
+    role: A backup of the Lorimer PC.
+  - name: higgsfield-generator
+    scope: unplaced
+    role: No caller found.
+  - name: mindmake-kits
+    scope: unplaced
+    role: No caller found.
+  - name: OLD-ctrl-mindmake
+    scope: excluded
+    aliases: [mm-ctrl, mindmake-ctrl]
+    role: The old CTRL repository (GitHub id 1090040458). The canon surface named mm-ctrl above resolves here.
+  - name: contentarchives
+    scope: excluded
+    role: Krish's personal photos and videos (Krish, 2026-11-24).
+  - name: conclusiv
+    scope: excluded
+  - name: merciless
+    scope: excluded
+  - name: kimon
+    scope: excluded
+  - name: dipti-health
+    scope: excluded
+  - name: lozatron
+    scope: excluded
+  - name: legacy-ascend
+    scope: excluded
+  - name: fractionl-homepage
+    scope: excluded
+  - name: getaround.london
+    scope: excluded
