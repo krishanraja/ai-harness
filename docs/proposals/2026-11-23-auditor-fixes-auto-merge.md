@@ -1,6 +1,6 @@
 # internal-auditor's fixes merge themselves, 2026-11-23
 
-Status: admitted; superseded in part on 2026-11-24 by docs/proposals/2026-11-24-auditor-merges-the-fleet.md, which widens the merge from the auditor's own fix pull requests to every in-scope repository's green pull requests. Krish ruled it on 2026-11-23. internal-auditor #10 was built to that ruling and merged before this contract change, so for a time the auditor merged under a ruling the contract did not yet carry. This change closes that gap: the contract is the authority, and if it does not merge, the auditor's merge step is switched off rather than the contract read loosely.
+Status: admitted. Krish ruled it on 2026-11-23. internal-auditor #10 was built to that ruling and merged before this contract change, so for a time the auditor merged under a ruling the contract did not yet carry. This change closes that gap: the contract is the authority, and if it does not merge, the auditor's merge step is switched off rather than the contract read loosely.
 
 ## The rulings
 
