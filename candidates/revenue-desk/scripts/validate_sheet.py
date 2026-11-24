@@ -3,6 +3,7 @@
 
   python scripts/validate_sheet.py <sheet.json>
   python scripts/validate_sheet.py <sheet.json> --print-sha    print the sheet_sha256 the sheet should carry
+  python scripts/validate_sheet.py <sheet.json> --registry <ai-harness>/state/fleet.yaml   outside this checkout
 
 Standard library only, so any engine can call it or copy its rules. It checks the shape in
 references/revenue-sheet.schema.json by hand, then the rules in references/rules.md that a schema
@@ -40,9 +41,10 @@ TRIGGERS = ('none', 'sunday-board', 'newly-blind', 'newly-breached')
 ASKS_PER_VENTURE_A_WEEK = 1
 ASKS_ACROSS_THE_FLEET_A_WEEK = 3
 REVIEW_DAYS = (1, 14)
-# Repositories whose money never appears outside their owner. The strategist's scope rule
-# keeps the same list; a change there is made here in the same week.
-PRIVATE_FIGURES = frozenset({'mindmake', 'krish-raja', 'dothinkdo', 'dothinkdo-skills', 'compound-finances'})
+# Repositories whose money never appears outside their owner: the rows of state/fleet.yaml's
+# registry marked `figures: private`, the one home of that list (the strategist reads the same
+# rows). Read from this checkout, or from --registry; never a copy kept here.
+REGISTRY = pathlib.Path(__file__).resolve().parents[3] / 'state' / 'fleet.yaml'
 CARD_TEXT = ('step', 'hypothesis', 'variable', 'primary_metric', 'guardrail_metric', 'stop_rule',
              'kill_rule', 'review_date', 'owner')
 PROSE = (('stage', 'reason'), ('constraint', 'reason'), ('constraint', 'slice'), ('recalibration', 'reason'),
@@ -89,7 +91,49 @@ def as_date(value):
         return None
 
 
+def private_figures(text):
+    """The registry names (and aliases) marked `figures: private`. Standard library only, so it reads
+    the registry's own two-space row layout; an empty answer is an error, never an empty list."""
+    names, inside, row = set(), False, None
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith('#'):
+            continue
+        if not line.startswith(' '):
+            inside = line.rstrip() == 'registry:'
+            row = None
+            continue
+        if not inside:
+            continue
+        m = re.match(r'^  - name: (\S+)\s*$', line)
+        if m:
+            row = {'names': [m.group(1)], 'private': False}
+            continue
+        if row is None:
+            continue
+        m = re.match(r'^    aliases: \[(.*)\]\s*$', line)
+        if m:
+            row['names'] += [a.strip() for a in m.group(1).split(',') if a.strip()]
+        if re.match(r'^    figures: private\s*$', line):
+            row['private'] = True
+        if row['private']:
+            names.update(n.lower() for n in row['names'])
+    if not names:
+        raise ValueError('state/fleet.yaml marks no registry row figures: private')
+    return frozenset(names)
+
+
+PRIVATE_FIGURES = None
+
+
+def load_private(path=None):
+    global PRIVATE_FIGURES
+    PRIVATE_FIGURES = private_figures(pathlib.Path(path or REGISTRY).read_text(encoding='utf-8'))
+    return PRIVATE_FIGURES
+
+
 def repo_private(repo):
+    if PRIVATE_FIGURES is None:
+        load_private()
     name = str(repo).split('/')[-1].lower()
     return name in PRIVATE_FIGURES
 
@@ -520,7 +564,13 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description='Check a revenue sheet (revenue-sheet/1).')
     parser.add_argument('sheet')
     parser.add_argument('--print-sha', action='store_true')
+    parser.add_argument('--registry', help="ai-harness state/fleet.yaml, when the script runs outside this checkout")
     args = parser.parse_args(argv)
+    try:
+        load_private(args.registry)
+    except (OSError, ValueError) as error:
+        print(f'UNAVAILABLE  cannot read which repositories keep their figures private: {error}', file=sys.stderr)
+        return 2
     try:
         sheet = json.loads(pathlib.Path(args.sheet).read_text(encoding='utf-8'))
     except (OSError, ValueError) as error:

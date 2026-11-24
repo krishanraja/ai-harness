@@ -253,5 +253,30 @@ class ExitTests(unittest.TestCase):
         self.assertEqual(self.run_cli(json.dumps({'schema': 'insight-sheet/1'})), 2)
 
 
+class RegistryTests(unittest.TestCase):
+    """The private-figures list is read from state/fleet.yaml's registry, its one home."""
+
+    def test_the_registry_marks_the_private_repositories(self):
+        names = S.load_private()
+        for repo in ('mindmake', 'krish-raja', 'dothinkdo', 'dothinkdo-skills', 'compound-finances'):
+            self.assertIn(repo, names)
+        self.assertNotIn('heartside', names)
+
+    def test_a_row_and_its_aliases_read_private(self):
+        text = 'repos: []\nregistry:\n  - name: a\n    aliases: [b, c]\n    scope: in\n    figures: private\n  - name: d\n    scope: in\nother:\n  - name: e\n    figures: private\n'
+        self.assertEqual(S.private_figures(text), frozenset({'a', 'b', 'c'}))
+
+    def test_no_private_row_is_an_error_never_an_empty_list(self):
+        with self.assertRaises(ValueError):
+            S.private_figures('registry:\n  - name: a\n    scope: in\n')
+
+    def test_an_unreadable_registry_is_unavailable(self):
+        with tempfile.TemporaryDirectory() as d:
+            sheet = pathlib.Path(d) / 'sheet.json'
+            sheet.write_text(json.dumps(SAMPLE), encoding='utf-8')
+            out = subprocess.run([sys.executable, str(SCRIPTS / 'validate_sheet.py'), str(sheet), '--registry', str(pathlib.Path(d) / 'none.yaml')], capture_output=True, text=True)
+            self.assertEqual(out.returncode, 2)
+
+
 if __name__ == '__main__':
     unittest.main()

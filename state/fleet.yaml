@@ -401,6 +401,8 @@ surface_contracts:
 #   layer    doctrine | hub | keeper | specialist | service | producer | product
 #   confirm  true where Krish has still to confirm the scope
 #   rename   an approved new name, applied by its own pull request (Krish, 2026-11-24)
+#   figures  private where the repository's money never appears outside its owner: the one home of
+#            that list, read by the strategist (src/scope.ts) and the revenue desk's validate_sheet.py
 registry:
   - name: ai-harness
     scope: in
@@ -551,6 +553,7 @@ registry:
     when: Legibility needs builders.
   - name: mindmake
     scope: in
+    figures: private
     layer: product
     venture: mindmake
     role: mind/make, the company site.
@@ -616,6 +619,7 @@ registry:
     when: Pulse changes.
   - name: krish-raja
     scope: in
+    figures: private
     layer: product
     venture: mindmake
     role: krishraja.com, Krish's own site.
@@ -639,6 +643,7 @@ registry:
     role: Krish's job search.
   - name: dothinkdo
     scope: in
+    figures: private
     layer: product
     venture: mindmake
     role: A real-life organisation brain in action (Krish, 2026-11-24).
@@ -647,6 +652,7 @@ registry:
     when: You need evidence of how the approach works inside a real organisation.
   - name: dothinkdo-skills
     scope: in
+    figures: private
     layer: product
     venture: mindmake
     role: The skills that organisation brain runs on (Krish, 2026-11-24).
@@ -655,6 +661,7 @@ registry:
     when: You need a skill pattern already proven in a live organisation.
   - name: compound-finances
     scope: personal
+    figures: private
     role: Private finances.
   - name: music-watcher
     scope: in
