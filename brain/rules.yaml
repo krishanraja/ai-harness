@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 143 rules across the two contracts and the canon block.
+# 144 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1418,6 +1418,14 @@ contract_rules:
     source:
       kind: proposal
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
+    status: live
+  - id: canon.folders
+    file: contract/templates/canon-block.md
+    text_sha: "04f455fa6b2e"
+    first_seen: "2026-11-24"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-24-folder-change-reports.md"
     status: live
   - id: canon.branches
     file: contract/templates/canon-block.md
