@@ -405,10 +405,10 @@ registry:
   - name: ai-harness
     scope: in
     layer: doctrine
-    role: The canon. The Ikigai and who Krish is, the contracts, the 33 skills, the council, the brain, this registry.
-    capability: Rules, skills and the council for every repository; renders the canon block and the neighbours table.
+    role: The canon. The Ikigai and who Krish is, the contracts, the 34 skills, the council, the insight desk, the brain, this registry.
+    capability: Rules, skills, the council and the insight desk for every repository; renders the canon block and the neighbours table.
     call: A pull request here, merged through the judge panel; read any skill with Control Center get_skill.
-    when: A rule, skill or contract should change, a correction keeps repeating, or a decision needs the council.
+    when: A rule, skill or contract should change, a correction keeps repeating, a decision needs the council, or a growth engine needs its week's ideas (insight-desk, through get_skill).
   - name: control-center
     scope: in
     layer: hub

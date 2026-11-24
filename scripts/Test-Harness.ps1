@@ -450,6 +450,8 @@ $adCopywriterTriggerCases = Join-Path $Root 'evals\ad-copywriter-trigger-cases.j
 $adCopywriterBehaviorCases = Join-Path $Root 'evals\ad-copywriter-behavior-cases.jsonl'
 $ugcAvatarTriggerCases = Join-Path $Root 'evals\ugc-avatar-trigger-cases.jsonl'
 $ugcAvatarBehaviorCases = Join-Path $Root 'evals\ugc-avatar-behavior-cases.jsonl'
+$insightDeskTriggerCases = Join-Path $Root 'evals\insight-desk-trigger-cases.jsonl'
+$insightDeskBehaviorCases = Join-Path $Root 'evals\insight-desk-behavior-cases.jsonl'
 $designIntelligenceTests = Join-Path $Root 'skills\design-intelligence-search\scripts\tests'
 $designIntelligenceVendorRoot = Join-Path $Root 'skills\design-intelligence-search\scripts\vendor\ui-ux-pro-max'
 $designIntelligenceMetadata = Join-Path $Root 'skills\design-intelligence-search\agents\openai.yaml'
@@ -461,6 +463,8 @@ $adCopywriterTests = Join-Path $Root 'skills\ad-copywriter\scripts\tests'
 $adCopywriterValidator = Join-Path $Root 'skills\ad-copywriter\scripts\validate.py'
 $ugcAvatarTests = Join-Path $Root 'skills\ugc-avatar\scripts\tests'
 $ugcAvatarValidator = Join-Path $Root 'skills\ugc-avatar\scripts\validate.py'
+$insightDeskTests = Join-Path $Root 'skills\insight-desk\scripts\tests'
+$insightDeskValidator = Join-Path $Root 'skills\insight-desk\scripts\validate.py'
 
 foreach ($required in @($decisionConfig, $decisionStorageReference, $snapshotExporter, $snapshotFixture, $snapshotExpected)) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
@@ -658,6 +662,11 @@ $ugcAvatarBehaviors = @(Read-JsonLines -Path $ugcAvatarBehaviorCases)
 Test-EvalCategoryMinimums -Records $ugcAvatarTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'ugc-avatar trigger suite'
 Test-EvalCategoryMinimums -Records $ugcAvatarBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'ugc-avatar behavior suite'
 
+$insightDeskTriggers = @(Read-JsonLines -Path $insightDeskTriggerCases)
+$insightDeskBehaviors = @(Read-JsonLines -Path $insightDeskBehaviorCases)
+Test-EvalCategoryMinimums -Records $insightDeskTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'insight-desk trigger suite'
+Test-EvalCategoryMinimums -Records $insightDeskBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'insight-desk behavior suite'
+
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
     @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },
@@ -848,6 +857,36 @@ else {
     }
     if ($ugcAvatarValidationExitCode -ne 0) {
         Add-Failure "ugc-avatar validation failed: $($ugcAvatarValidationOutput -join ' | ')"
+    }
+}
+
+# insight-desk was admitted on 2026-11-24 (Ruling, Krish, 2026-11-24:
+# insight-desk is admitted). As with the council, admission moves the skill,
+# not its gate: the same tests and validator the candidate loop ran keep
+# running here.
+if ($null -eq $pythonCommand) {
+    Add-Failure 'Python is unavailable for the insight-desk offline regression suite.'
+}
+elseif (-not (Test-Path -LiteralPath $insightDeskTests -PathType Container) -or -not (Test-Path -LiteralPath $insightDeskValidator -PathType Leaf)) {
+    Add-Failure "Missing insight-desk tests or validator: $insightDeskTests"
+}
+else {
+    $priorErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $insightDeskTestOutput = @(& $pythonCommand.Source -B -m unittest discover -s $insightDeskTests -p 'test_*.py' 2>&1)
+        $insightDeskTestExitCode = $LASTEXITCODE
+        $insightDeskValidationOutput = @(& $pythonCommand.Source -B $insightDeskValidator --base auto 2>&1)
+        $insightDeskValidationExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $priorErrorActionPreference
+    }
+    if ($insightDeskTestExitCode -ne 0) {
+        Add-Failure "insight-desk offline tests failed: $($insightDeskTestOutput -join ' | ')"
+    }
+    if ($insightDeskValidationExitCode -ne 0) {
+        Add-Failure "insight-desk validation failed: $($insightDeskValidationOutput -join ' | ')"
     }
 }
 

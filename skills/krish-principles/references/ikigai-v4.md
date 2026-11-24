@@ -1,5 +1,7 @@
 # Krish Raja: Master Ikigai, version 4 (verbatim)
 
+> Harness annotation, 2026-11-24: SUPERSEDED. Version 5 of 12 September 2026 is the current ikigai, in `ikigai-v5.md` (Krish, 2026-11-24: "v5 Ikigai is the most recent"). This copy is history, and the last home of the Mindmake Positioning, CTRL Evolution and Control Center Evolution tabs, which version 5 no longer has.
+
 This is the full ikigai Krish built from 138 ranked answers, exported verbatim on
 2026-10-05 from the Google Sheet `Krish_Master_Ikigai_2026_v4` (8 sheets, version 4 of
 5 September 2026). Every cell is reproduced in order. Krish chose to publish it here
