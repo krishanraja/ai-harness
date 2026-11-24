@@ -2021,20 +2021,34 @@ skill_sections:
   - id: council.run-it
     file: skills/council/SKILL.md
     heading: "Run it"
-    text_sha: "509dfc32bfdc"
+    text_sha: "dd202170b5a7"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-council.md"
+      ref: "docs/proposals/2026-11-24-council-discipline.md"
+      sha256: "A4E05D5A138F71D9FF30A1CFDB87103D0618C4750150D720327856484D5FD231"
+    history:
+      - text_sha: "509dfc32bfdc"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-council.md"
     status: live
   - id: council.stop
     file: skills/council/SKILL.md
     heading: "Stop"
-    text_sha: "d3b403c245da"
+    text_sha: "a5c439ea12fb"
     first_seen: "2026-11-15"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-15-council.md"
+      ref: "docs/proposals/2026-11-24-council-discipline.md"
+      sha256: "A4E05D5A138F71D9FF30A1CFDB87103D0618C4750150D720327856484D5FD231"
+    history:
+      - text_sha: "d3b403c245da"
+        valid_until: "2026-11-24"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-15-council.md"
     status: live
   - id: ctrl-build.read-both-references
     file: skills/ctrl-build/SKILL.md
