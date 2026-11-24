@@ -407,6 +407,8 @@ function emitEntry(e) {
   L.push('    source:')
   L.push(`      kind: ${e.source?.kind || 'founding'}`)
   L.push(`      ref: ${q(e.source?.ref || 'unknown')}`)
+  // The digest of the document a source cites, as it stood when it became the source; never dropped on a rewrite.
+  if (e.source?.sha256) L.push(`      sha256: ${q(e.source.sha256)}`)
   if (e.history?.length) {
     L.push('    history:')
     for (const h of e.history) {
@@ -415,6 +417,7 @@ function emitEntry(e) {
       L.push('        source:')
       L.push(`          kind: ${h.source?.kind || 'unknown'}`)
       L.push(`          ref: ${q(h.source?.ref || 'unknown')}`)
+      if (h.source?.sha256) L.push(`          sha256: ${q(h.source.sha256)}`)
     }
   }
   L.push(`    status: ${e.status || 'live'}`)
@@ -454,6 +457,12 @@ export function revise(ledgerText, root = HARNESS, { kind, ref, today = TODAY, s
     ...live.skillSections.map((r) => ({ ...r, key: 'skill_sections' })),
   ]
   const liveIds = new Set(liveRows.map((r) => r.id))
+  // A proposal source is pinned to its document as it stands now (uppercase SHA-256, the ledger's form since
+  // 2026-11-18), so a later edit to the proposal cannot change what authorised this text. Other kinds carry none.
+  const refPath = join(root, ref)
+  const source = kind === 'proposal' && existsSync(refPath)
+    ? { kind, ref, sha256: createHash('sha256').update(readFileSync(refPath)).digest('hex').toUpperCase() }
+    : { kind, ref }
   const mergedInto = {}
   for (const [oldId, newId] of Object.entries(supersedes)) (mergedInto[newId] = mergedInto[newId] || []).push(oldId)
 
@@ -470,7 +479,7 @@ export function revise(ledgerText, root = HARNESS, { kind, ref, today = TODAY, s
     if (!was) {
       inserts.push({ after: prevByKey[r.key], key: r.key, entry: {
         id: r.id, file: r.file, heading: r.heading, text_sha: r.text_sha, first_seen: today,
-        source: { kind, ref }, status: 'live', supersedes: extra.length ? extra : undefined,
+        source, status: 'live', supersedes: extra.length ? extra : undefined,
       } })
       added.push(r.id)
     } else {
@@ -482,7 +491,7 @@ export function revise(ledgerText, root = HARNESS, { kind, ref, today = TODAY, s
         if (moved) {
           next.history = [...(was.history || []), { text_sha: was.text_sha, valid_until: today, source: was.source }]
           next.text_sha = r.text_sha
-          next.source = { kind, ref }
+          next.source = source
           changed.push(r.id)
         }
         if (revived) { next.status = 'live'; delete next.valid_until }

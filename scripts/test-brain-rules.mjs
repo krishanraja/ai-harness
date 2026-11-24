@@ -13,6 +13,7 @@
  *   node scripts/test-brain-rules.mjs
  */
 
+import { createHash } from 'node:crypto'
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
@@ -363,6 +364,25 @@ t('revise moves a changed chapter body into history and passes the gate', () => 
   assert(/history:\n      - text_sha: "[0-9a-f]{12}"\n        valid_until: "2026-10-19"\n        source:\n          kind: founding/.test(r.text), 'the old hash and source move into history')
   assert(/kind: proposal\n      ref: "docs\/proposals\/2026-10-19-change\.md"/.test(r.text), 'the new source is the proposal')
   const { problems } = check(r.text, root)
+  assert(problems.length === 0, `gate must pass, got: ${problems.join(' | ')}`)
+})
+
+t('revise pins a proposal source to its document and never drops a digest already in the ledger', () => {
+  const root = withProposal(fixture())
+  const proposal = join(root, 'docs/proposals/2026-10-19-change.md')
+  const digest = (p) => createHash('sha256').update(readFileSync(p)).digest('hex').toUpperCase()
+  const first = digest(proposal)
+  writeFileSync(join(root, 'skills/fixture/SKILL.md'), SKILL.replace('Body of the limits chapter.', 'A tighter limits chapter.'))
+  const once = revise(ledgerFor(fixture()), root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-19' }).text
+  assert(once.includes(`ref: "docs/proposals/2026-10-19-change.md"\n      sha256: "${first}"`), 'the new source carries the proposal\'s digest as it stands')
+  // The proposal is edited, and the chapter changes again: the closed row keeps the digest it was ruled against.
+  writeFileSync(proposal, '# change\n\nSuperseded in part on 2026-10-20.\n')
+  writeFileSync(join(root, 'skills/fixture/SKILL.md'), SKILL.replace('Body of the limits chapter.', 'The tightest limits chapter.'))
+  const twice = revise(once, root, { kind: 'proposal', ref: 'docs/proposals/2026-10-19-change.md', today: '2026-10-20' }).text
+  assert(twice.includes(`valid_until: "2026-10-20"\n        source:\n          kind: proposal\n          ref: "docs/proposals/2026-10-19-change.md"\n          sha256: "${first}"`), 'the history row keeps the first digest')
+  assert(twice.includes(`sha256: "${digest(proposal)}"`) && digest(proposal) !== first, 'the current source carries the edited proposal\'s digest')
+  assert((twice.match(/sha256: "/g) || []).length === (once.match(/sha256: "/g) || []).length + 1, 'no digest is dropped')
+  const { problems } = check(twice, root)
   assert(problems.length === 0, `gate must pass, got: ${problems.join(' | ')}`)
 })
 
