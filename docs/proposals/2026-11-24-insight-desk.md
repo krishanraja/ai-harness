@@ -82,3 +82,7 @@ At admission: move `candidates/insight-desk/` to `skills/insight-desk/`, move th
 ## Graduation trigger
 
 It stays a skill until all three hold: it beats the plain baseline on Krish's blind verdicts in two or more ventures over four or more weeks; three or more repositories need it in scheduled runs with no Claude session; its deterministic checks exist in both Python and Node. Only the taste-free checks would move.
+
+## Revisions
+
+- 2026-11-24 (#309): withdrawn, not reworded: the claim that overlap with any one neighbour is "well under 20 percent" (it was never measured), and the route paragraph that repeated the routing contract. The contract paragraph is the route's only home; it now also carries the U4 measurement-idea rule.
