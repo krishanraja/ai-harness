@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- The list of repositories whose money never appears outside their owner lives once, as `figures: private` on their rows in state/fleet.yaml's registry (mindmake, krish-raja, dothinkdo, dothinkdo-skills, compound-finances); the revenue desk's validate_sheet.py and the strategist both read it there, and neither keeps a copy. (2026-11-24)
 - Krish settled the personal list: hunter, compound-finances and lorimer-pc-backup stay personal; dothinkdo and dothinkdo-skills, a real-life organisation brain in action, and claude-archive, the session-history source for learnings, are in scope. ctrl-mindmake, the live CTRL repository, is a canon surface, so canon sync brings its block current from v2026.10.30.1; the publisher excludes it until it has an administration profile. (2026-11-24)
 - the harness carries version 5 of Krish's Master Ikigai (12 September 2026, 144 answers) in skills/krish-principles/references/ikigai-v5.md, every cell verbatim; who-krish-is quotes its changed form, binding, Rule 4 and love circle, and version 4 stays as history. (2026-11-24)
 - `revenue-desk` is staged as an inactive candidate (`candidates/revenue-desk/`): one method that turns each growth engine's own counts into a revenue sheet (blind readings named, the stage check, the constraint, the reach check with its assumption block, at most one 7-day test, the ask caps, the day-14 score), with the `revenue-sheet/1` schema, a standard-library sheet validator (exit 0 pass, 1 held, 2 unavailable), fifteen checkable rules, held-out suites, an outside-name gate and one staged paragraph in the routing contract (`docs/proposals/2026-11-24-revenue-desk.md`). The code is strategist `src/revenue.ts`; the adapters are `config/revenue-desk.json` in each growth engine. Not served by `get_skill` until admitted. (2026-11-24)
@@ -49,6 +50,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-24 two copies of a privacy rule had to be changed in the same week by hand; now a registry row is the only place to change it.
 - 2026-11-24 music-watcher is in scope as a service (trackcard, the Music Brains and the production engine), by Krish's choice, knowing the Ikigai's rule 8 protects music.
 - 2026-11-24 Ruling (Krish, 2026-11-24): every repository knows what the others can do, so collaboration is proactive at all times.
 - 2026-11-24 Ruling (Krish, 2026-11-24): all repos should also be auto merge; the auditor merges centrally.
@@ -61,7 +63,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-24): internal-auditor reads claude-archive to keep learnings fresh, and adds 'personal' to its off-map scopes now the list is confirmed.
+- Next (2026-11-24): add or remove a private repository by changing its registry row only.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 33, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
