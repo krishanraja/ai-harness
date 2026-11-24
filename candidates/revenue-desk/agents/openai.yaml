@@ -1,0 +1,4 @@
+interface:
+  display_name: "Revenue desk"
+  short_description: "Find where a venture's money is stuck, then one test"
+  default_prompt: "Use $revenue-desk to read this engine's money path and write its revenue sheet."

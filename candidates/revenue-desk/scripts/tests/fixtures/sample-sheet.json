@@ -1,0 +1,150 @@
+{
+  "schema": "revenue-sheet/1",
+  "venture": "sample-venture",
+  "repo": "krishanraja/growth-sample",
+  "harness_skill_sha": "0123456789abcdef0123456789abcdef01234567",
+  "made_on": "2026-11-24",
+  "adapter": {
+    "path": "config/revenue-desk.json",
+    "read": true,
+    "held": false
+  },
+  "stage": {
+    "verdict": "run",
+    "buyer_seen": true,
+    "reason": "Two fresh counted steps and a booked call in the window.",
+    "reading_plan": []
+  },
+  "readings": [
+    {
+      "id": "drafts_sent",
+      "step": "Drafts sent",
+      "unit": "count",
+      "value": 12,
+      "share": null,
+      "source": "the engine's sends record, synthetic",
+      "as_of": "2026-11-23",
+      "better": "up",
+      "sight": "fresh",
+      "blind_reason": null,
+      "owner": "krishanraja/growth-sample"
+    },
+    {
+      "id": "replied",
+      "step": "A reply to a sent draft",
+      "unit": "count",
+      "value": 3,
+      "share": null,
+      "source": "the engine's sends record, synthetic",
+      "as_of": "2026-11-23",
+      "better": "up",
+      "sight": "fresh",
+      "blind_reason": null,
+      "owner": "krishanraja/growth-sample"
+    },
+    {
+      "id": "booked",
+      "step": "A reply that books a call",
+      "unit": "count",
+      "value": 1,
+      "share": null,
+      "source": "the engine's sends record, synthetic",
+      "as_of": "2026-11-23",
+      "better": "up",
+      "sight": "fresh",
+      "blind_reason": null,
+      "owner": "krishanraja/growth-sample"
+    },
+    {
+      "id": "sale",
+      "step": "A sale",
+      "unit": "usd",
+      "value": null,
+      "share": null,
+      "source": null,
+      "as_of": null,
+      "better": "up",
+      "sight": "blind",
+      "blind_reason": "no read exists in this engine yet; blind by design",
+      "owner": "krishanraja/sample-store"
+    }
+  ],
+  "standing": "blind",
+  "constraint": {
+    "step": "drafts_sent",
+    "slice": "the second box, which sent none of its waiting drafts",
+    "reason": "The strategy assumes 25 sends a day; the week shows 12 in all."
+  },
+  "reach": {
+    "unit": "count",
+    "volume": 125,
+    "steps": [
+      {
+        "name": "replied",
+        "rate": 0.25
+      },
+      {
+        "name": "booked",
+        "rate": 0.33
+      }
+    ],
+    "target": 12,
+    "floor": 6.19,
+    "expected": 10.31,
+    "stretch": 14.44,
+    "verdict": "gap",
+    "assumptions": {
+      "rates_source": "replies and bookings over sends, the last two weeks of synthetic reports",
+      "window": "the next 7 days",
+      "sample": 12,
+      "trust_band": 0.4
+    }
+  },
+  "recalibration": null,
+  "test_card": {
+    "step": "drafts_sent",
+    "unit": "count",
+    "hypothesis": "Sending the drafts already waiting lifts sends from 12 toward 125 in the week, because the words are written and only the send is missing.",
+    "variable": "whether the waiting drafts are sent",
+    "primary_metric": "drafts sent across both boxes",
+    "guardrail_metric": "replies that ask to stop",
+    "prediction": {
+      "floor": 40,
+      "expected": 80,
+      "stretch": 125
+    },
+    "stop_rule": "Stop if any reply asks to stop twice in one day.",
+    "kill_rule": "Archive if fewer than 40 are sent by the review date.",
+    "review_date": "2026-12-01",
+    "touches_offer": false,
+    "council_unanimous": false,
+    "owner": "Krish sends; the desk proposes the plan only"
+  },
+  "offer_terms": {
+    "result": "not-applicable",
+    "rules_checked": [],
+    "reason": "The test changes no price, discount or code."
+  },
+  "dissent": null,
+  "ask": {
+    "raise": true,
+    "trigger": "sunday-board",
+    "open_ask": false,
+    "venture_asks_this_week": 0,
+    "fleet_asks_this_week": 1,
+    "stage": "plan",
+    "wall": "strategy",
+    "why": "Send the drafts already waiting before any new lane."
+  },
+  "outcome": null,
+  "figures": [
+    {
+      "label": "assumed sends a day",
+      "value": 25,
+      "unit": "count",
+      "source": "the engine's strategy document, synthetic",
+      "as_of": "2026-11-24"
+    }
+  ],
+  "sheet_sha256": "4584caf562414800a400545a21a14932f62e481453ce193e4e60ca0f6525d65b"
+}

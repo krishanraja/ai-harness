@@ -1,0 +1,29 @@
+schema_version: 1
+id: revenue-desk
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-11-24
+source_branch: claude/revenue-desk-candidate
+skill_path: candidates/revenue-desk
+admission_path: skills/revenue-desk
+proposal: docs/proposals/2026-11-24-revenue-desk.md
+role: revenue-analyst
+code_home: krishanraja/strategist src/revenue.ts
+adapters: config/revenue-desk.json in each growth engine
+provenance:
+  basis: "the OS mentions no outside influence (Ruling, Krish, 2026-11-15), and Krish's approval on 2026-11-24 that the method names no outside source"
+  copied_text: none; the method and rules were written for this harness
+  gate_status: met
+evaluation:
+  trigger_cases: evals/candidates/revenue-desk-trigger-cases.jsonl
+  behavior_cases: evals/candidates/revenue-desk-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - one-scored-day-14-cycle
+  - named-human-admission
+  - governed-release-and-install-approval
