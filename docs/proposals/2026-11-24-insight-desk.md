@@ -6,7 +6,7 @@ Ruling (Krish, 2026-11-24): the creative director is the ai-harness insight-desk
 
 ## Finding and correct layer
 
-Each growth engine turns its number into ideas differently, and none has an insight-first step before the words: Heartside's joke lab starts at jokes, makeyourmindup binds approval to a concept it never makes, Full Time and Mindmake start from copy doctrine, and Legibility has three fixed angles. Four of the five numbers sit at U5 with a reading of 0 and the fifth is at U4 because nothing measures it. The same correction ("this is not an idea, it is a template") would otherwise be given in five places, which is what this repository's North Star counts.
+Each growth engine turns its number into ideas differently, and none has an insight-first step before the words: Heartside's joke lab starts at jokes, makeyourmindup binds approval to a concept it never makes, Full Time and Mindmake start from copy doctrine, and Legibility has three fixed angles. Four of the five numbers sit at U5 with a reading of 0 and the fifth is at U4 because nothing measures it. Source: each engine's `north-star-state` line in its own NOW.md, read 2026-11-24 (growth-heartside as of 2026-11-12, growth-legibility 2026-11-14, growth-makeyourmindup 2026-11-15, growth-mindmake 2026-11-08; growth-fulltime unmeasured). Those readings are the instruments the desk is judged against; the desk does not wait for them, but at U4 with nothing measured its only allowed idea is a measurement idea, so the fix never runs ahead of the measurement it needs. The same correction ("this is not an idea, it is a template") would otherwise be given in five places, which is what this repository's North Star counts.
 
 The correct layer is one skill in ai-harness, read live, with a thin adapter in each engine. A separate repository would either hold taste, which breaks the 2026-10-28 ruling that the taste ledger is keyed by venture, or hold prose with nothing to run, which is a skill.
 
@@ -41,11 +41,11 @@ The correct layer is one skill in ai-harness, read live, with a thin adapter in 
 | `council` | judging a decision or idea on an explicit ask | the desk generates and screens; the council judges if Krish asks |
 | strategist (repository) | recovery plays across ventures | the desk reads its diagnosis and stops when the stall is not the idea |
 
-Functional overlap with any one neighbour is well under 20 percent.
+Functional overlap with any one neighbour is small: this is the reviewer's judgement from the table above, not a measurement.
 
 ## Route, applied in this change as a staged line
 
-The routing contract carries one paragraph: the desk runs after `strategy-brief` and before the venture's producer, writes ideas and never copy, and is not advertised as a production route before admission. At admission it becomes a route row and collision rule, as the council's did.
+The route is the staged paragraph under "Inactive idea-producer candidate" in `contract/skill-routing-contract.md`; it is stated there once and not repeated here. At admission it becomes a route row and collision rule, as the council's did.
 
 ## Open finding: provenance
 
@@ -64,12 +64,20 @@ Krish rules before admission: keep the methods with no credit, add a credit (whi
 
 Control Center's `get_skill` reads `skills/<name>/` on main, so a candidate under `candidates/` is not served. Until admission, the five engines' adapters read this skill from a local ai-harness checkout, or record `unavailable` and keep their default behaviour.
 
+## Venture isolation
+
+Sheets are scoped per venture. Each engine writes its own sheets to its own private path (`local/` or `runtime/`, never committed), reads only its own, and names its own namespace for divergent-thinker (`growth-<venture>:ideas`). The skill holds no sheet, no verdict and no taste; taste stays in the venture-keyed ledger (Ruling, Krish, 2026-10-28). No engine reads another engine's sheet.
+
+## Evidence path without Krish on every step
+
+Admission and the provenance ruling are his. The blind verdicts are not extra work: each engine already brings ideas to him through its existing review path, and the A/B (set 1 plain, set 2 from a sheet) rides on that path. The strategist's weekly board reads the yes rate and live results by `harness_skill_sha`, and the internal auditor watches use across the fleet.
+
 ## Admission ask
 
 1. Admit `insight-desk` as a production skill, keep it as a candidate, or reject it.
 2. Rule on provenance: keep the methods with no credit, add a credit, or replace the borrowed methods ("Open finding: provenance").
 
-At admission: move `candidates/insight-desk/` to `skills/insight-desk/`, move the two suites to `evals/`, retire `state/candidates/insight-desk.yaml`, add the registry entry (role `idea-producer`, freshness 60 days) and the route row and collision rule, raise `expected_skill_count`, add routing cases, name it in both cloud routing texts, record the chapters in `brain/rules.yaml`, and keep its tests running in `scripts/Test-Harness.ps1`.
+At admission: move `candidates/insight-desk/` to `skills/insight-desk/`, move the two suites to `evals/`, close `state/candidates/insight-desk.yaml` with a `valid_until` date and keep it as the record of the candidate period, add the registry entry (role `idea-producer`, freshness 60 days) and the route row and collision rule, raise `expected_skill_count`, add routing cases, name it in both cloud routing texts, record the chapters in `brain/rules.yaml`, and keep its tests running in `scripts/Test-Harness.ps1`.
 
 ## Graduation trigger
 
