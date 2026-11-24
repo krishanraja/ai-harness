@@ -405,7 +405,6 @@ registry:
   - name: control-center
     scope: in
     layer: hub
-    venture: mindmake
     role: Krish's one surface and the clock. The one list, the engine protocol, the North Star readers, the model routes.
     capability: Gets a decision in front of Krish, reads any venture's state and number, and runs the humour, divergent and research routes.
     call: The engine protocol on your engine's bearer, or the Control Center connector tools (get_venture_state, get_skill, divergent_*, report_to_taste_engine, record_harness_observation).
@@ -420,7 +419,6 @@ registry:
   - name: strategist
     scope: in
     layer: specialist
-    venture: mindmake
     role: The one strategy brain, anchored on the Ikigai. Weekly board through the council, three recovery plays for any U5.
     capability: Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules.
     call: It reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall.
@@ -443,6 +441,7 @@ registry:
   - name: AEO-Engine
     scope: in
     layer: specialist
+    venture: mindmake
     role: The one AI-answers specialist for every venture.
     capability: Tells a venture whether AI assistants cite it first for its buyers' questions, and which pages to win.
     call: POST /api/growth/engines/<slug>/answers with your product's buyer questions; read your standing in your directive's ai_answers.
@@ -473,6 +472,7 @@ registry:
   - name: content-watcher
     scope: in
     layer: service
+    venture: publication
     aliases: [video-compression]
     role: Turns pasted links and screenshots into readings in Krish's inspiration folders.
     capability: Reads a pasted post or screenshot and files the reading.
@@ -610,6 +610,7 @@ registry:
   - name: krish-raja
     scope: in
     layer: product
+    venture: mindmake
     role: krishraja.com, Krish's own site.
     capability: Krish's public site and its enquiries.
     call: Its own repository's issues; the fix queue takes auditor-fix.
@@ -629,10 +630,12 @@ registry:
     role: Krish's job search.
   - name: dothinkdo
     scope: personal
+    venture: mindmake
     confirm: true
     role: A private project.
   - name: dothinkdo-skills
     scope: personal
+    venture: mindmake
     confirm: true
     role: A private project.
   - name: compound-finances
