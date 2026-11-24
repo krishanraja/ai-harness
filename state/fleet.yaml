@@ -246,6 +246,14 @@ repos:
       and at once on any U5 (Ruling, Krish, 2026-11-23). A Control Center specialist engine; its
       output lands on Control Center's one list, never on a surface of its own. Admitted on the
       same terms as internal-auditor.
+  - name: humour-engine
+    canon_target: AGENTS.md
+    entry: AGENTS.md
+    rules_files: [AGENTS.md]
+    note: >-
+      The fleet's one definition of humour, its prompts, ontology and validators. A registry
+      specialist, admitted to the canon sync so the block humour-engine#1 adds stays current
+      (plan step 15). Its North Star is drafted there and waits on Krish.
 
 adapters:
   - id: claude
