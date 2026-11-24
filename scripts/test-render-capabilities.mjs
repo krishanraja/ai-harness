@@ -6,7 +6,7 @@
  *   node scripts/test-render-capabilities.mjs
  */
 import assert from 'node:assert/strict'
-import { registryProblems, renderCapabilities } from './render-capabilities.mjs'
+import { registryProblems, renderCapabilities, renderVentures } from './render-capabilities.mjs'
 
 const row = (over = {}) => ({ name: 'demo', scope: 'in', layer: 'specialist', capability: 'Does a thing.', call: 'An issue.', when: 'You need the thing.', ...over })
 const fleet = (registry, repos = [{ name: 'demo' }]) => ({ registry, repos })
@@ -29,6 +29,12 @@ ok('a retired surface (canon_sync false) for an excluded or dormant repository i
   assert.deepEqual(registryProblems(fleet([row({ scope: 'excluded' })], [{ name: 'demo', canon_sync: false }])), { errors: [], warnings: [] })
   assert.deepEqual(registryProblems(fleet([row({ scope: 'dormant' })], [{ name: 'demo', canon_sync: false }])).warnings, [])
   assert.equal(registryProblems(fleet([row({ scope: 'excluded' })], [{ name: 'demo' }])).warnings.length, 1)
+})
+ok('the venture map carries every name and alias with a venture, lowercased and sorted, and nothing else', () => {
+  const v = JSON.parse(renderVentures([row({ name: 'Zed', venture: 'z', aliases: ['Old-Zed'] }), row({ name: 'alpha', venture: 'a' }), row({ name: 'hub' })])).ventures
+  assert.deepEqual(Object.keys(v), ['alpha', 'old-zed', 'zed'])
+  assert.deepEqual([v.zed, v['old-zed'], v.alpha], ['z', 'z', 'a'])
+  assert.equal('hub' in v, false)
 })
 ok('the table lists in-scope rows by layer and names the rest as outside', () => {
   const t = renderCapabilities([row(), row({ name: 'hub-x', layer: 'hub' }), row({ name: 'mine', scope: 'personal' }), row({ name: 'p|ipe', capability: 'a | b' })])

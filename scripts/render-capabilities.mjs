@@ -21,6 +21,7 @@ import { parseYaml } from './lib/yaml.mjs'
 
 const HARNESS = resolve(fileURLToPath(import.meta.url), '../..')
 export const CAPABILITIES_PATH = 'skills/krish-principles/references/capabilities.md'
+export const VENTURES_PATH = 'state/ventures.json'
 export const LAYERS = ['doctrine', 'hub', 'keeper', 'specialist', 'service', 'producer', 'product']
 export const SCOPES = ['in', 'personal', 'unplaced', 'dormant', 'excluded']
 const LAYER_TITLE = {
@@ -51,6 +52,23 @@ export function renderCapabilities(registry) {
   const outside = registry.filter((r) => r.scope !== 'in').map((r) => r.name)
   out.push('## Outside the OS', '', `Not part of the OS, so never called for OS work: ${outside.join(', ')}.`, '')
   return out.join('\n')
+}
+
+/**
+ * Which venture each repository serves, as JSON for readers with no YAML parser (control-center pins it as a generated
+ * file). Every registry name and alias, lowercased, to its venture; rows with none are left out. Pure.
+ */
+export function renderVentures(registry) {
+  const ventures = {}
+  for (const r of registry) {
+    if (!r.venture) continue
+    for (const n of [r.name, ...(r.aliases || [])]) ventures[String(n).toLowerCase()] = r.venture
+  }
+  const sorted = Object.fromEntries(Object.keys(ventures).sort().map((k) => [k, ventures[k]]))
+  return JSON.stringify({
+    _generated: 'by scripts/render-capabilities.mjs from the registry in state/fleet.yaml. Do not edit by hand: change the registry.',
+    ventures: sorted,
+  }, null, 2) + '\n'
 }
 
 /** Problems with the registry against the canon surfaces. Pure. Errors fail; warnings are said. */
@@ -88,13 +106,17 @@ if (isMain) {
   const { errors, warnings } = registryProblems(fleet)
   for (const w of warnings) console.log(`warn  ${w}`)
   if (errors.length) { for (const e of errors) console.error(`FAIL  ${e}`); process.exit(1) }
-  const text = renderCapabilities(fleet.registry) + '\n'
-  const abs = join(HARNESS, CAPABILITIES_PATH)
-  const before = existsSync(abs) ? readFileSync(abs, 'utf8') : null
-  if (!process.argv.includes('--write')) {
-    if (before === text) { console.log(`ok    ${CAPABILITIES_PATH}`); process.exit(0) }
-    console.error(`drift ${CAPABILITIES_PATH}: run node scripts/render-capabilities.mjs --write`); process.exit(1)
+  // Two checked renderings of the one registry: the neighbours table and the venture map.
+  const outputs = [[CAPABILITIES_PATH, renderCapabilities(fleet.registry) + '\n'], [VENTURES_PATH, renderVentures(fleet.registry)]]
+  const write = process.argv.includes('--write')
+  let drift = false
+  for (const [path, text] of outputs) {
+    const abs = join(HARNESS, path)
+    const before = existsSync(abs) ? readFileSync(abs, 'utf8') : null
+    if (before === text) { console.log(`ok    ${path}`); continue }
+    if (!write) { console.error(`drift ${path}: run node scripts/render-capabilities.mjs --write`); drift = true; continue }
+    writeFileSync(abs, text)
+    console.log(`wrote ${path}`)
   }
-  writeFileSync(abs, text)
-  console.log(`${before === text ? 'ok   ' : 'wrote'} ${CAPABILITIES_PATH}`)
+  if (drift) process.exit(1)
 }
