@@ -1,0 +1,3 @@
+Status: the registry's venture for each repository now reproduces Control Center's live FLEET_VENTURE, so the four copied repo-to-venture maps can read the registry with no change in behaviour: AEO-Engine, krish-raja, dothinkdo and dothinkdo-skills serve mindmake and content-watcher publication, as the live rule says; control-center and strategist serve every venture, so they carry none; ctrl-mindmake, the live CTRL repository, is mm_ctrl, where the live rule only named OLD-ctrl-mindmake's old names.
+Next: the strategist's src/scope.ts reads the registry's ventures instead of its own copy, with a test that every repository maps as before.
+North Star check (2026-11-24): holds.
