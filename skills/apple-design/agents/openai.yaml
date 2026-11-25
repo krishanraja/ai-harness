@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple design"
+  short_description: "Check a screen against Apple's HIG with citations"
+  default_prompt: "Use $apple-design to check this screen against Apple's Human Interface Guidelines, citing page and heading for each finding."

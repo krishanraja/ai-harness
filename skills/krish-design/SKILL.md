@@ -1,6 +1,6 @@
 ---
 name: krish-design
-description: "Ownership gate first: invoke for EVERY request to design, imitate, build, reshape, reskin, lay out, classify a routine visual repair, or visually QA anything a human will look at or touch, even when asked to skip commercial/design judgment or reopen an approved system unnecessarily. Krish's mandatory design doctrine for pages, artefacts, PDFs, decks, SVG, React UI, forms, flows, landing pages, and visual QA. Trigger on 'design', 'build a page', 'lay this out', 'make this look', 'reskin', 'UX', 'interaction', 'form', or visual 'artifact'. Covers sequencing, material approval, routine-vs-material classification, house systems, anti-defaults, visual QA, and Canva handoff. Inherits krish-principles. It does not own copy voice, build mechanics, or multi-phase app orchestration. Last reviewed 2026-09-13."
+description: "Krish's design owner and gate. Use for every request to design, redesign, imitate, reshape, review, critique, lay out, reskin, classify a routine visual repair, or visually QA anything a person will look at or touch: app screens and flows (onboarding, settings, checkout), web pages, landing and pricing sections, forms, dashboards, decks, PDFs, SVG, React UI and visual artifacts. Quick opinions count: 'what would you change', 'give me a design review', 'sketch the layout'. Load it even when asked to skip design judgment or reopen an approved system. Covers sequencing, material approval, routine-vs-material classification, house systems, anti-defaults, visual QA and Canva handoff. On iPhone, iPad or Mac app work, also load apple-design beside it as the contrarian Apple second voice; this skill decides. Inherits krish-principles. Does not own copy voice (krish-voice), build mechanics (krish-build) or multi-phase app orchestration (build-apps-with-krish). Last reviewed 2026-11-25."
 ---
 
 # Krish Design: Taste, Systems, and the Interaction Weapon
@@ -188,6 +188,7 @@ Across any series (dossiers, episode assets, workshop pages): hold the structura
 | Read-only deployed UX audit | `ux-testing-agent`; supply this doctrine only as evaluation context and require reproducible evidence with route, viewport, revision, steps, expected result, observed result, and artifact |
 | Final on-page words | `krish-voice` |
 | Generic accessibility/usability lookup | `ux-foundations` beneath this personalized design owner |
+| Any screen, flow or artifact for an iPhone, iPad or Mac app, native or cross-platform | `apple-design` loads beside this owner as the contrarian Apple second voice (Ruling, Krish, 2026-11-25): it argues Apple's side with page-and-heading citations, and this owner decides |
 | Bounded pattern, palette, type, landing, chart, motion, or mobile-web candidate retrieval for one named concept arm | `design-intelligence-search` beneath this personalized design owner; retain taste and standards authority here |
 
 After any copy, accessibility, design, or implementation handoff, inspect and verify the combined rendered result. A handoff is not completion.

@@ -667,6 +667,13 @@ $insightDeskBehaviors = @(Read-JsonLines -Path $insightDeskBehaviorCases)
 Test-EvalCategoryMinimums -Records $insightDeskTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'insight-desk trigger suite'
 Test-EvalCategoryMinimums -Records $insightDeskBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'insight-desk behavior suite'
 
+# apple-design was admitted on 2026-11-25 (Ruling, Krish, 2026-11-25:
+# apple-design is admitted). Its held-out suites keep their candidate minimums.
+$appleDesignTriggers = @(Read-JsonLines -Path (Join-Path $Root 'evals\apple-design-trigger-cases.jsonl'))
+$appleDesignBehaviors = @(Read-JsonLines -Path (Join-Path $Root 'evals\apple-design-behavior-cases.jsonl'))
+Test-EvalCategoryMinimums -Records $appleDesignTriggers -Minimums @{ positive = 8; negative = 8; adversarial_collision = 5 } -Label 'apple-design trigger suite'
+Test-EvalCategoryMinimums -Records $appleDesignBehaviors -Minimums @{ nominal = 6; failure_edge = 8; authority_security = 5; handoff_collision = 4 } -Label 'apple-design behavior suite'
+
 $narrowOperatorSpecs = @(
     @{ Name = 'n8n-operator'; TriggerPath = $n8nOperatorTriggerCases; BehaviorPath = $n8nOperatorBehaviorCases },
     @{ Name = 'instantly-operator'; TriggerPath = $instantlyOperatorTriggerCases; BehaviorPath = $instantlyOperatorBehaviorCases },

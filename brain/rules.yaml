@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 147 rules across the two contracts and the canon block.
+# 148 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1103,6 +1103,15 @@ contract_rules:
           kind: founding
           ref: "a3d2f3706a87"
     status: live
+  - id: collision-rules.apple-design-is-the
+    file: contract/skill-routing-contract.md
+    text_sha: "37679b2ee3f3"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
   - id: collision-rules.mindmake-os-owns-current
     file: contract/skill-routing-contract.md
     text_sha: "8763aeffae31"
@@ -1622,7 +1631,7 @@ contract_rules:
       ref: "docs/proposals/2026-10-30-canon-block-in-ledger.md"
     status: live
 
-# 265 chapters across the installed skills.
+# 272 chapters across the installed skills.
 skill_sections:
   - id: ad-copywriter.role
     file: skills/ad-copywriter/SKILL.md
@@ -1749,6 +1758,76 @@ skill_sections:
     source:
       kind: founding
       ref: "a3d2f3706a87"
+    status: live
+  - id: apple-design.role-and-boundaries
+    file: skills/apple-design/SKILL.md
+    heading: "Role and boundaries"
+    text_sha: "a01c3a23a57b"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.inputs
+    file: skills/apple-design/SKILL.md
+    heading: "Inputs"
+    text_sha: "0fb817bc4aa1"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.workflow
+    file: skills/apple-design/SKILL.md
+    heading: "Workflow"
+    text_sha: "cfd7e084a3e6"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.output
+    file: skills/apple-design/SKILL.md
+    heading: "Output"
+    text_sha: "5e2c3648d4ec"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.authority
+    file: skills/apple-design/SKILL.md
+    heading: "Authority"
+    text_sha: "1dbd2c1395f5"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.completion
+    file: skills/apple-design/SKILL.md
+    heading: "Completion"
+    text_sha: "a7ecb64696af"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    status: live
+  - id: apple-design.provenance
+    file: skills/apple-design/SKILL.md
+    heading: "Provenance"
+    text_sha: "33c2298ba0fe"
+    first_seen: "2026-11-25"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
     status: live
   - id: build-apps-with-krish.role-and-chain
     file: skills/build-apps-with-krish/SKILL.md
@@ -3290,11 +3369,18 @@ skill_sections:
   - id: krish-design.routing-and-handoffs
     file: skills/krish-design/SKILL.md
     heading: "Routing and handoffs"
-    text_sha: "d81df9279a56"
+    text_sha: "62732e73ffea"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-25-apple-design.md"
+      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+    history:
+      - text_sha: "d81df9279a56"
+        valid_until: "2026-11-25"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-design.7-visual-qa-the
     file: skills/krish-design/SKILL.md

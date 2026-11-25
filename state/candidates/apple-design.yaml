@@ -1,11 +1,13 @@
 schema_version: 1
 id: apple-design
-status: candidate-inactive
+status: closed-admitted
 owner: Krish Raja
 created_at: 2026-11-25
+valid_until: 2026-11-25
+closed_by: "Ruling (Krish, 2026-11-25): apple-design is admitted."
 source_branch: claude/zen-shannon-7qy5vb
-skill_path: candidates/apple-design
-admission_path: skills/apple-design
+skill_path: skills/apple-design
+candidate_path_during_candidacy: candidates/apple-design
 proposal: docs/proposals/2026-11-25-apple-design.md
 provenance:
   source: https://github.com/dickwu/apple-design-skill
@@ -26,15 +28,25 @@ also_installed_at:
     commit: 6a46242
     note: installed 2026-11-25 at Krish's request before this candidate; not a harness surface
 evaluation:
-  trigger_cases: evals/candidates/apple-design-trigger-cases.jsonl
-  behavior_cases: evals/candidates/apple-design-behavior-cases.jsonl
-activation: false
-release_eligible: false
+  trigger_cases: evals/apple-design-trigger-cases.jsonl
+  behavior_cases: evals/apple-design-behavior-cases.jsonl
+activation: true
+release_eligible: true
 admission_gates:
-  - full-harness-validation
-  - held-out-trigger-evaluation
-  - held-out-behavior-evaluation
-  - independent-overlap-review
-  - fresh-session-canary
-  - named-human-admission
-  - governed-release-and-install-approval
+  - gate: named-human-admission
+    status: met
+    by: "Ruling (Krish, 2026-11-25): apple-design is admitted."
+  - gate: full-harness-validation
+    status: "met locally (no new failure against main's Linux baseline); Windows CI on the admission commit"
+  - gate: held-out-trigger-evaluation
+    status: "met: precision 1.00, recall 1.00 on 30 cases, 8 unseen (docs/proposals/2026-11-25-apple-design.md)"
+  - gate: held-out-behavior-evaluation
+    status: "met: 23 of 23, no hard failures; baseline without the skill 8 of 23"
+  - gate: independent-overlap-review
+    status: "met: blind routing against krish-design, ux-foundations, ux-testing-agent, krish-build, design-intelligence-search, krish-content-marketer"
+  - gate: fresh-session-canary
+    status: "met in round 3: iPad and iPhone design reviews loaded krish-design and apple-design, web loaded krish-design only, control loaded nothing"
+  - gate: governed-release-and-install-approval
+    status: "admission merged to main; get_skill serves main; local installs follow the normal release"
+open_findings:
+  - "On short prompts the skill searches its always-load pages instead of reading them, and says so."

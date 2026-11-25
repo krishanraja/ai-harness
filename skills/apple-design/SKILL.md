@@ -1,9 +1,9 @@
 ---
 name: apple-design
-description: "Candidate validator that checks an app design against Apple's Human Interface Guidelines and cites the page and heading for every finding. Use when the request names Apple's HIG, iOS, iPadOS or macOS conventions, an App Review rejection over design or branding, Apple Pay buttons or marks, Liquid Glass, SF Symbols, widgets or Live Activities, or asks whether a SwiftUI, UIKit, AppKit, Flutter, React Native, Tauri or Electron screen follows Apple's guidance. Also loads beside krish-design or ux-foundations whenever the screen or question is for an Apple platform, as a second, contrarian voice: it states where Apple's guidance disagrees with their direction, and they keep ownership of the decision. Never the owner of taste, 'make this less generic', WCAG, testing a running app (ux-testing-agent) or writing the fix (krish-build). Not a production route before admission."
+description: "Validator that checks an app design against Apple's Human Interface Guidelines and cites the page and heading for every finding. Use when the request names Apple's HIG, iOS, iPadOS or macOS conventions, an App Review rejection over design or branding, Apple Pay buttons or marks, Liquid Glass, SF Symbols, widgets or Live Activities, or asks whether a SwiftUI, UIKit, AppKit, Flutter, React Native, Tauri or Electron screen follows Apple's guidance. Also loads beside krish-design or ux-foundations whenever the screen or question is for an Apple platform, as a second, contrarian voice: it states where Apple's guidance disagrees with their direction, and they keep ownership of the decision. Never the owner of taste, 'make this less generic', WCAG, testing a running app (ux-testing-agent) or writing the fix (krish-build)."
 ---
 
-# Apple Design (candidate)
+# Apple Design
 
 Check a design against Apple's Human Interface Guidelines and say, for every finding, which page and heading it comes from. This is a validator, not a producer: it reports where a screen departs from Apple's guidance and stops there.
 
@@ -70,4 +70,4 @@ Done when every finding has a citation or a `judgment` label, the pages read are
 
 ## Provenance
 
-Upstream: dickwu/apple-design-skill, commit `91e1566`, read 2026-11-25. `references/` and `scripts/pull-hig.mjs` are upstream's bytes unchanged; `references/upstream-workflow.md` is upstream's `SKILL.md` unchanged. This file is the harness wrapper. No licence file upstream; its README says the skill is provided as is. Full record: `state/candidates/apple-design.yaml`.
+Upstream: dickwu/apple-design-skill, commit `91e1566`, read 2026-11-25. `references/` and `scripts/pull-hig.mjs` are upstream's bytes unchanged; `references/upstream-workflow.md` is upstream's `SKILL.md` unchanged. This file is the harness wrapper. No licence file upstream; its README says the skill is provided as is. Admitted 2026-11-25 (Ruling, Krish, 2026-11-25: apple-design is admitted); record: `state/candidates/apple-design.yaml`.

@@ -1,6 +1,6 @@
 # Apple design candidate, 2026-11-25
 
-Status: staged as an inactive candidate under `candidates/apple-design/`, with `state/candidates/apple-design.yaml` at `activation: false` and `release_eligible: false`. Not a production route and not served by `get_skill` until Krish admits it.
+Status: admitted 2026-11-25 as production skill 35 (Ruling, Krish, 2026-11-25: apple-design is admitted). It moved from `candidates/apple-design/` to `skills/apple-design/`; its suites moved to `evals/`; `state/candidates/apple-design.yaml` is closed (`valid_until: 2026-11-25`) and kept.
 
 Krish asked to install dickwu/apple-design-skill "for my purposes", then to "figure out the rest". It went into krishanraja/software-qa as a project skill first (commit `6a46242` on main). This candidate is the rest: the harness-governed path, staged rather than activated, as `harness-maintainer` requires for imported material.
 
@@ -124,9 +124,17 @@ Also at admission: the Visuals line of `adapters/cloud/account-routing.md` gains
 
 **krish-design loaded in 0 of 3 design prompts** (iPad, iPhone, web), even though its description makes it mandatory for every design request. Co-loading beside the owner cannot be observed while the owner does not fire. That is a krish-design trigger defect, not this candidate's. It is recorded as harness observation 364 (missed_trigger, krish-design).
 
-## Remaining before admission
+## krish-design trigger fix and admission, 2026-11-25
 
-- Krish's admission decision. The evidence: trigger 30 of 30, behaviour 23 of 23, citations 14 of 14 verbatim against 0 of 10 without the skill, and the canary firing on a plain iPad design review.
-- Open, with an owner: krish-design does not load on plain design prompts (observation 364), so the co-load the ruling wants depends on fixing krish-design's own trigger.
-- Open, minor: the always-load rule was followed by targeted search, not full reads, on a short prompt.
-- At admission: apply the staged routing diff, rerun the krish-design suite, then a governed release and install.
+Krish: "fix and then admit".
+
+**krish-design fix.** Its description opened with gate language ("Ownership gate first: invoke for EVERY request") and named no ordinary review words. In round 2, three fresh agents asked for a design review, an onboarding redesign and a pricing layout loaded no skill. The new description leads with what it owns and when: design, redesign, review, critique, lay out, reskin or visual QA of app screens and flows, web pages, pricing sections, forms, dashboards, decks and artifacts. It names quick opinions ("what would you change", "give me a design review", "sketch the layout") as in scope, and keeps the old verbs (imitate, reshape, classify a routine visual repair) and every exclusion. It also names apple-design as the Apple second voice, and the routing table gains that row.
+- Blind routing on krish-design's 21-case suite plus 8 plain design prompts, with all 34 production descriptions plus apple-design as the catalogue: the old description scored precision 0.90 and recall 1.00; the new one scored precision 0.947 and recall 1.00. The one false positive (012, a full app build, where krish-design loads beside build-apps-with-krish) is present in both.
+- Canary round 3, the same three design prompts plus a control. iPad settings review: krish-design, then apple-design. iPhone onboarding: krish-design, then apple-design. Web pricing: krish-design only. Git question: nothing. **4 of 4.** Every quote checked was verbatim in its cited page.
+
+**Admission.** The candidate moved to `skills/apple-design/` (with `agents/openai.yaml`), and its suites moved to `evals/`. The registry lists it in `production` and `production_active` with `expected_skill_count` 35. The routing contract carries its route row and collision rule in place of the staged paragraph. Both cloud routing texts name it (the Perplexity text was trimmed to stay at or under 1,500 characters). Routing cases 038 and 039 cover the co-load and its absence on web work. `scripts/Test-Harness.ps1` keeps the suite minimums, `brain/rules.yaml` records the new and changed chapters, and the neighbours table is re-rendered.
+
+## Open after admission
+
+- On short prompts apple-design searches its always-load pages instead of reading them in full, and says so in its output.
+- Observation 364 (krish-design missed plain design prompts) is answered by this fix; the round 3 canary is the evidence.
