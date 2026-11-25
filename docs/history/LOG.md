@@ -5,6 +5,10 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-25
+
+- stamped: `NOW.md` re-stamped to head ad373fd after 46 non-steward commits; skill count corrected from 33 to 34 (insight-desk admitted), the council bullet rewritten as a why, and the Next line no longer calls merged #319 an open pull request.
+
 ## 2026-11-24
 
 - stamped: `NOW.md` audit findings fixed (`too_long`, `recent_too_many`, `where_too_many`, `old_dated_claims`) by condensing "Where it is right now" to 8 bullets and rolling the older bullets below; head moved to 770cc3d.

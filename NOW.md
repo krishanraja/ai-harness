@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-24
-head: 770cc3d
+as_of: 2026-11-25
+head: ad373fd
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -15,13 +15,13 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 ## What it is
 
-The harness is Krish's canonical cross-client AI operating layer, published in a public repository: one operating contract, one skill-routing contract, 33 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
+The harness is Krish's canonical cross-client AI operating layer, published in a public repository: one operating contract, one skill-routing contract, 34 curated production skills, deterministic release packaging, per-surface deployment evidence, behavioral canaries and a controlled learning path, delivered the same way to Claude, Codex and Cursor so a rule written once is enforced everywhere instead of copied by hand and left to drift.
 
 ## Who it is for and why it matters for Mindmake
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-24)
+## Where it is right now (as of 2026-11-25)
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
@@ -53,7 +53,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
-- 2026-11-24 skills/council/SKILL.md, skills/council/references/protocol.md, evals/council-behavior-cases.jsonl, docs/proposals/2026-11-24-council-discipline.md.
+- 2026-11-24 the council protocol gained seven discipline rules (steel-man first, evidence rule, earned severity, ledger of settled decisions, anonymous drafts, two-round cap, grounded winning claim), each backed by a held-out behavior case (`docs/proposals/2026-11-24-council-discipline.md`).
 - 2026-11-24 two copies of a privacy rule had to be changed in the same week by hand; now a registry row is the only place to change it.
 - 2026-11-24 music-watcher is in scope as a service (trackcard, the Music Brains and the production engine), by Krish's choice, knowing the Ikigai's rule 8 protects music.
 - 2026-11-24 Ruling (Krish, 2026-11-24): every repository knows what the others can do, so collaboration is proactive at all times.
@@ -67,10 +67,10 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-24): Krish renames the repositories on GitHub, then this pull request is marked ready.
+- Next (2026-11-25): Krish renames the repositories on GitHub; the registry already carries the approved names with each old name kept as an alias (#319, merged 2026-11-24).
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
-- Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 33, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
+- Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 34, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
 - North Star check (2026-11-24): holds.
 
 ## Read next
