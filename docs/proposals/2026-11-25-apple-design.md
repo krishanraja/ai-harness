@@ -46,7 +46,16 @@ The overlap estimate with `ux-foundations` is a judgement, not a measurement. It
 - Structural: the description is 803 characters, `SKILL.md` is 72 lines and every referenced file exists. The harness validator, run locally on Linux, adds no failure beyond the 11 that main already shows there (all Windows path assumptions). Windows CI on the pull request is the real check.
 - Security: the content is Markdown, plus one script that fetches only `developer.apple.com`. It contains no credentials and no embedded instructions to the model.
 - Held-out suites: 22 trigger cases (8 positive, 8 negative, 6 adversarial or collision) and 23 behaviour cases (6, 8, 5, 4), written but not yet run blind.
-- Not run: the blind trigger classification, the behaviour comparison against a baseline, the fresh-session canary and the named-human admission.
+- Held-out run, 2026-11-25. The method follows `scripts/Invoke-ClaudeHeldOutEval.ps1` (a blind executor, then a fresh judge), run as Sonnet subagents inside the session because the script reads only `skills/` and bills its own CLI budget. The executor saw only the prompts and seven skill descriptions (this candidate, `krish-design`, `ux-foundations`, `ux-testing-agent`, `krish-build`, `design-intelligence-search` and `krish-content-marketer`), shuffled and without expected answers.
+  - Trigger: **failed the gate.** apple-design loaded on 13 prompts, 3 of them wrongly (precision 0.77 against the 0.95 bar), and missed none (recall 1.00). The main owner was right on 21 of 22; the one miss (020, visual QA at phone sizes) went to `krish-design` instead of `ux-testing-agent` and does not involve this candidate. All three false positives were co-loads, not wrong owners. On 017 ("Review this iPhone screen") and 019 ("make our macOS app look more Apple-like") `krish-design` stayed the owner and apple-design loaded beside it as a validator. On 021 (whether 44-point targets are a rule or advice) it loaded beside `ux-foundations`, the overlap this proposal predicted.
+  - Behaviour: **passed.** 23 of 23 (nominal 6, failure-edge 8, authority-security 5, handoff 4), with no hard failures.
+- Not run: a behaviour comparison against a baseline, the fresh-session canary and the named-human admission.
+
+## Decision needed
+
+The suite counts loading beside the owner as a false positive. Whether a validator that `krish-design` calls on an Apple-platform screen should count that way is Krish's call, and the expected labels were not changed after the run.
+- If loading beside the owner is wrong: narrow the description so the skill loads only when Apple's guidance is named or when `krish-design` calls it by name, write fresh held-out cases (these have been seen) and run again.
+- If it is right for `krish-design`: relabel 017 and 019 under his ruling. 021 still fails, so the `ux-foundations` boundary needs narrowing either way.
 
 ## Next
 
