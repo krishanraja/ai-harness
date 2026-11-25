@@ -371,13 +371,15 @@
     "klass": "heartbeat",
     "subject": "observer",
     "first_seen": "2026-11-13",
-    "open": true,
-    "reopened": "2026-11-24"
+    "open": false,
+    "reopened": "2026-11-24",
+    "closed_at": "2026-11-25"
   },
   "heartbeat:vault-deposit-lorimer": {
     "klass": "heartbeat",
     "subject": "vault-deposit-lorimer",
     "first_seen": "2026-11-18",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-25"
   }
 }
