@@ -1,6 +1,6 @@
 # software-qa's route in the registry, 2026-11-25
 
-Status: proposed. Krish asked for it on 2026-11-25 ("you are welcome to do the rest", after internal-auditor's neighbours check named software-qa's unrecorded route as its one major finding).
+Status: admitted with this change. Krish asked for it on 2026-11-25, in writing: "you are welcome to do the rest", after internal-auditor's neighbours check named software-qa's unrecorded route as its one major finding and he was told recording it was the next step. The row and this record land together; the judge panel and the merge bot remain the gate.
 
 ## What it supersedes
 
