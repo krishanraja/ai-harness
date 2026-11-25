@@ -78,6 +78,13 @@ test('creative work in a cloud session reads the neighbours, taste and divergenc
   assert.match(routing, /Paid divergence and humour calls follow the spend rule/)
 })
 
+test('every neighbour the auditor found named by no router is named at its moment', () => {
+  // 2026-11-25: internal-auditor's neighbours check found these reachable only through the capabilities table.
+  for (const repo of ['answers-engine', 'sendlinks', 'content-watcher', 'krish-clone', 'claude-archive', 'music-watcher', 'software-qa', 'find_research']) {
+    assert.ok(routing.includes(repo), `routing names ${repo}`)
+  }
+})
+
 test('the served routing names every production skill, so the pointer never has to', () => {
   const registry = read('state/skill-registry.yaml')
   const block = registry.match(/^production_active:\n((?:  - .+\n)+)/m)
