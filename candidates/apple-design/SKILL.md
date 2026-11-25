@@ -27,10 +27,10 @@ If the platform or framework is missing and changes the answer, ask once. Otherw
 ## Workflow
 
 1. **Load the upstream review workflow.** Read `references/upstream-workflow.md`. It routes each kind of screen to the guideline pages to open and gives the review steps and report shape. Follow its loading rules: read before you cite, about 8 to 12 pages per review, never the whole folder.
-2. **Always load** `references/hig/accessibility.md`, `references/hig/layout.md`, `references/hig/typography.md`, `references/hig/color.md`, and `references/hig/designing-for-ios.md` or `references/hig/designing-for-macos.md` for the platform. Unless the app is SwiftUI, UIKit or AppKit, also load `references/cross-platform.md`.
+2. **Always load, however short the answer asked for.** A request for "the top three problems" limits how many findings you report, not what you read; steps 2 and 4 are never skipped. Load `references/hig/accessibility.md`, `references/hig/layout.md`, `references/hig/typography.md`, `references/hig/color.md`, and `references/hig/designing-for-ios.md` or `references/hig/designing-for-macos.md` for the platform. Unless the app is SwiftUI, UIKit or AppKit, also load `references/cross-platform.md`.
 3. **Load by what is on screen** using the upstream workflow's table, then any specialised guide: `references/hig/liquid-glass.md` for glass and translucency, `references/code-audit.md` for a codebase or pull request, `references/heritage.md` only to explain why a current rule exists, labelled historical every time it is quoted, and never as the citation that decides a finding.
 4. **Check freshness.** `references/hig-lookup.md` gives the date Apple last changed each page as of the pull. If a cited page is a load-bearing finding and the pull is older than the page's likely revision cycle, say the reference may be stale. Never refresh it yourself (see Authority).
-5. **Write findings.** One finding per departure, each with: what is on screen, the guideline it departs from quoted in Apple's words, the citation `file › heading`, severity (critical, improvement, note), and the framework-specific fix direction. A point no page covers is labelled `judgment`, not cited.
+5. **Write findings.** One finding per departure, each with: what is on screen, the guideline it departs from quoted in Apple's words, the citation `file › heading`, severity (critical, improvement, note), and the framework-specific fix direction. A point no page covers is labelled `judgment`, not cited. A claim about what a framework does on its own (how SwiftUI renders a symbol, what a default style sets) is not in these pages: label it `unverified framework behaviour` and never tell the user to change code for it unless the code itself shows the problem.
 6. **Hand off.** Return the findings. Do not redesign the screen, rank aesthetic options or edit files.
 
 ## Output
@@ -38,7 +38,7 @@ If the platform or framework is missing and changes the answer, ask once. Otherw
 ```text
 APPLE HIG CHECK: <screen or flow>
 Platform: <iPhone | iPad | Mac>, framework: <name>. Assumptions: <any>.
-Pages read: <list of references/hig/*.md actually opened>
+Pages read: <list of references/hig/*.md actually opened; must include the always-load set>
 
 CRITICAL
 - <finding> | <quote> | <file › heading> | fix direction: <framework terms>
