@@ -51,12 +51,22 @@ The overlap estimate with `ux-foundations` is a judgement, not a measurement. It
   - Behaviour: **passed.** 23 of 23 (nominal 6, failure-edge 8, authority-security 5, handoff 4), with no hard failures.
 - Not run: a behaviour comparison against a baseline, the fresh-session canary and the named-human admission.
 
-## Decision needed
+## Ruling and rerun
 
-The suite counts loading beside the owner as a false positive. Whether a validator that `krish-design` calls on an Apple-platform screen should count that way is Krish's call, and the expected labels were not changed after the run.
-- If loading beside the owner is wrong: narrow the description so the skill loads only when Apple's guidance is named or when `krish-design` calls it by name, write fresh held-out cases (these have been seen) and run again.
-- If it is right for `krish-design`: relabel 017 and 019 under his ruling. 021 still fails, so the `ux-foundations` boundary needs narrowing either way.
+Ruling (Krish, 2026-11-25): apple-design should work together with krish-design, not be kept out of its way; he wants contrarian views and tension to get the best results.
 
-## Next
+Applied as follows:
+- The description now has apple-design load beside `krish-design` or `ux-foundations` whenever the screen or question is for an Apple platform, as a second, contrarian voice. The owner keeps the decision.
+- A "Second voice, on purpose" rule: argue Apple's side, name every departure with its citation, never soften a disagreement.
+- Cases 017 and 019 relabelled to `should_trigger: true` under the ruling. 021 (beside `ux-foundations`) was relabelled on the same principle, which extends his answer from krish-design to ux-foundations. That extension is an interpretation, flagged for him.
+- Eight new cases added after the ruling, unseen by anyone before the run: four negatives (Android, web marketing site, PDF, WCAG), two Apple-platform co-loads, one Android adversarial case and one positive.
 
-Run the blind trigger suite against `krish-design` and `ux-foundations`. If precision holds at 95% or better, propose admission. If not, fold the pages into `ux-foundations` as a reference and withdraw this candidate.
+Rerun, same blind method, new description:
+- Trigger: precision 1.00 and recall 1.00 on all 30 cases. The 8 unseen cases: 3 true positives, 5 true negatives, no errors. Two owner labels differ from the expected route without involving whether apple-design loads: 020 (`krish-design` against `ux-testing-agent`, as before) and 022, where `krish-design` took the owner role and called apple-design, which the ruling allows.
+- Behaviour: 22 of 23 on the first rerun. Case 012 failed because the `heritage.md` content was not labelled historical; the wrapper now requires that label. Case 012 reran blind and passed, so 23 of 23 with no hard failures.
+
+## Remaining before admission
+
+- The behaviour comparison against a baseline (without the skill).
+- A fresh-session canary.
+- Named-human admission by Krish, then a governed release and install.

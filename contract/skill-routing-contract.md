@@ -86,7 +86,7 @@ Provenance for the three rows added 2026-09-09, `harness-maintainer`, `tools-acc
 
 ### Staged 2026-11-25; valid until admission or withdrawal
 
-`apple-design` is staged under `candidates/`, outside `production_active` (`docs/proposals/2026-11-25-apple-design.md`). It checks a screen, mockup or UI code against Apple's Human Interface Guidelines and cites the page and heading for every finding. It fires only when Apple's guidance or a native Apple-platform convention is named. A generic design review, taste and "less generic" stay with `krish-design`, which remains the gate; WCAG and platform-neutral rules stay with `ux-foundations`; a running app goes to `ux-testing-agent`. Not a production route before admission.
+`apple-design` is staged under `candidates/`, outside `production_active` (`docs/proposals/2026-11-25-apple-design.md`). It checks a screen, mockup or UI code against Apple's Human Interface Guidelines and cites the page and heading for every finding. It owns requests that name Apple's guidance, and it loads beside `krish-design` or `ux-foundations` on any Apple-platform screen as a contrarian second voice, while they keep the decision (Ruling, Krish, 2026-11-25). Taste and "less generic" stay with `krish-design`, which remains the gate; WCAG and platform-neutral rules stay with `ux-foundations`; a running app goes to `ux-testing-agent`. Not a production route before admission.
 
 ## CTRL standards chain
 
