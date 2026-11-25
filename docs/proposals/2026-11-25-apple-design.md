@@ -65,8 +65,28 @@ Rerun, same blind method, new description:
 - Trigger: precision 1.00 and recall 1.00 on all 30 cases. The 8 unseen cases: 3 true positives, 5 true negatives, no errors. Two owner labels differ from the expected route without involving whether apple-design loads: 020 (`krish-design` against `ux-testing-agent`, as before) and 022, where `krish-design` took the owner role and called apple-design, which the ruling allows.
 - Behaviour: 22 of 23 on the first rerun. Case 012 failed because the `heritage.md` content was not labelled historical; the wrapper now requires that label. Case 012 reran blind and passed, so 23 of 23 with no hard failures.
 
+## Baseline comparison and canary, 2026-11-25
+
+**Planted-defect review.** A SwiftUI iPhone checkout screen with seven planted HIG defects: a hand-built Apple Pay button, a 24pt tap target, fixed 11pt type, low-contrast hard-coded colour, an "OK" destructive alert, glass on every content row and six tabs. It was reviewed twice by Sonnet, once with the candidate and once without any skill, and a fresh judge scored them blind (labels A/B).
+- Detection: 7 of 7 in both arms. The skill adds no detection on defects this common.
+- Citations, checked mechanically against the bundled pages: with the skill, 14 of 14 cited files exist, 14 of 14 headings are found, and 14 of 14 quotes appear word for word in the cited file. Without it, 9 of 10 files exist, 4 of 10 headings are found and 0 of 10 quotes appear in Apple's text. Every quote the baseline gave was paraphrased or invented.
+- False claims: one with the skill (tab-bar symbols should be filled, which SwiftUI already does) and none without.
+
+**Behaviour suite without the skill:** 8 of 23, against 23 of 23 with it. The gap is inflated: the six nominal cases require reading the skill's files, which a run without the skill cannot do. The meaningful failures without the skill were invented visionOS rules, an unscoped overall verdict, an offer to patch the code itself, and missed handoffs to ux-testing-agent, ux-foundations and krish-design.
+
+**Fresh-session canary.** The candidate was installed at the user skill root of a cloud container. Installed hash `f2a86d2b...` matched the candidate; the prior copy was hashed (`c7780b72...`), kept and restored afterwards. Three fresh agents got natural prompts that did not name the skill, and their transcripts were checked for Skill calls:
+- A SwiftUI "OK by Apple's rules, or will App Review push back?" request **loaded apple-design. Pass.** It gave cited findings with a handoff, but read only 5 pages and skipped the always-load set and the freshness check (it said so).
+- An Android Material 3 question **loaded nothing. Pass.**
+- An iPad settings-screen design review **loaded nothing. Fail.** The co-load did not happen. It only offered apple-design at the end. In that container krish-design is not installed (it is served by get_skill), so neither owner nor validator loaded.
+
+## Findings to fix before admission
+
+1. The co-load beside krish-design depends on the router, not only on this description. When admitted, the routing line for Visuals (and krish-design's own text) must name apple-design as the Apple-platform second voice. Otherwise the ruling does not happen in practice.
+2. A short prompt let the skill skip its always-load pages and freshness check. Make those steps a hard requirement of a full check, or say when a three-finding answer may skip them.
+3. One false claim in 15 findings: a finding about how a framework renders must be checked against the framework, not inferred.
+
 ## Remaining before admission
 
-- The behaviour comparison against a baseline (without the skill).
-- A fresh-session canary.
+- Fix findings 1 to 3 above.
+- Rerun the co-load canary (an iPad or iPhone design review with no Apple wording) and get a pass.
 - Named-human admission by Krish, then a governed release and install.

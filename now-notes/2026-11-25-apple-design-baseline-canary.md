@@ -1,0 +1,5 @@
+# Apple design candidate: baseline and canary
+
+Status: the baseline comparison ran. Detection on a planted-defect screen was equal (7 of 7 in both arms). Citation accuracy was not: with the skill, 14 of 14 quotes were verbatim from the cited page; without it, 0 of 10 were. Behaviour: 23 of 23 with the skill, 8 of 23 without. Canary: 2 of 3 passed. The iPad design review did not load apple-design beside krish-design, so the ruling needs a routing line before admission. The candidate stays inactive.
+Next: on admission, add apple-design as the Apple-platform second voice to the Visuals routing and krish-design's text, then rerun the co-load canary.
+North Star check (2026-11-25): holds; nothing admitted.
