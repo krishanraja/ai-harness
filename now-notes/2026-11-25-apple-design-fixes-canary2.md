@@ -1,0 +1,5 @@
+# Apple design candidate: fixes and canary round 2
+
+Status: fixes for the always-load skip and framework claims are in the candidate. The krish-design routing change is staged in the proposal for the admission commit, because apple-design is not served yet. Canary round 2: the iPad design review that failed before now loads apple-design; the iPhone onboarding review loaded nothing; the web page correctly left it out. krish-design itself loaded in 0 of 3 design prompts (harness observation 364). The candidate stays inactive.
+Next: Krish decides admission; separately, fix krish-design's own trigger so the second voice has an owner to sit beside.
+North Star check (2026-11-25): holds; nothing admitted, and the krish-design miss is logged once.

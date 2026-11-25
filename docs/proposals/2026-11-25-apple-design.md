@@ -85,8 +85,48 @@ Rerun, same blind method, new description:
 2. A short prompt let the skill skip its always-load pages and freshness check. Make those steps a hard requirement of a full check, or say when a three-finding answer may skip them.
 3. One false claim in 15 findings: a finding about how a framework renders must be checked against the framework, not inferred.
 
+## Fixes and canary round 2, 2026-11-25
+
+Krish said yes to all three fixes on 2026-11-25.
+- **Finding 2 (always-load skipped):** a short answer now limits findings, not reading. The output must list the always-load set.
+- **Finding 3 (framework claim):** framework behaviour the references do not cover is labelled `unverified framework behaviour`, and the skill never asks for a code change on it alone.
+- **Finding 1 (routing):** staged, not applied. apple-design is not served by `get_skill` until admitted, so pointing live krish-design at it now would send every Apple-platform design session to a skill that cannot load. The exact change, applied at admission with the admission commit:
+
+```diff
+@@ -1,6 +1,6 @@
+ ---
+ name: krish-design
+-description: "Ownership gate first: invoke for EVERY request to design, imitate, build, reshape, reskin, lay out, classify a routine visual repair, or visually QA anything a human will look at or touch, even when asked to skip commercial/design judgment or reopen an approved system unnecessarily. Krish's mandatory design doctrine for pages, artefacts, PDFs, decks, SVG, React UI, forms, flows, landing pages, and visual QA. Trigger on 'design', 'build a page', 'lay this out', 'make this look', 'reskin', 'UX', 'interaction', 'form', or visual 'artifact'. Covers sequencing, material approval, routine-vs-material classification, house systems, anti-defaults, visual QA, and Canva handoff. Inherits krish-principles. It does not own copy voice, build mechanics, or multi-phase app orchestration. Last reviewed 2026-09-13."
++description: "Ownership gate first: invoke for EVERY request to design, imitate, build, reshape, reskin, lay out, classify a routine visual repair, or visually QA anything a human will look at or touch, even when asked to skip commercial/design judgment or reopen an approved system unnecessarily. Krish's mandatory design doctrine for pages, artefacts, PDFs, decks, SVG, React UI, forms, flows, landing pages, and visual QA. Trigger on 'design', 'build a page', 'lay this out', 'make this look', 'reskin', 'UX', 'interaction', 'form', or visual 'artifact'. Covers sequencing, material approval, routine-vs-material classification, house systems, anti-defaults, visual QA, and Canva handoff. Inherits krish-principles. On iPhone, iPad or Mac app work, also load apple-design beside this skill as the contrarian Apple second voice; this skill decides. It does not own copy voice, build mechanics, or multi-phase app orchestration. Last reviewed 2026-09-13."
+ ---
+
+ # Krish Design: Taste, Systems, and the Interaction Weapon
+@@ -188,6 +188,7 @@
+ | Read-only deployed UX audit | `ux-testing-agent`; supply this doctrine only as evaluation context and require reproducible evidence with route, viewport, revision, steps, expected result, observed result, and artifact |
+ | Final on-page words | `krish-voice` |
+ | Generic accessibility/usability lookup | `ux-foundations` beneath this personalized design owner |
++| Any screen, flow or artifact for an iPhone, iPad or Mac app, native or cross-platform | `apple-design` loads beside this owner as the contrarian Apple second voice (Ruling, Krish, 2026-11-25): it argues Apple's side with page-and-heading citations, and this owner decides |
+ | Bounded pattern, palette, type, landing, chart, motion, or mobile-web candidate retrieval for one named concept arm | `design-intelligence-search` beneath this personalized design owner; retain taste and standards authority here |
+
+ After any copy, accessibility, design, or implementation handoff, inspect and verify the combined rendered result. A handoff is not completion.
+```
+
+Also at admission: the Visuals line of `adapters/cloud/account-routing.md` gains "with apple-design beside it on iPhone, iPad or Mac app work", the staged routing-contract paragraph becomes a route row, and the krish-design trigger suite is rerun because its description changes.
+
+**Canary round 2.** The candidate (hash `d9807920...`, equal to the source) and the patched krish-design (hash `49f89146...`) were installed together at the user skill root. Four fresh Sonnet agents got natural prompts, and their transcripts were checked for Skill calls. The prior copy was restored afterwards (hash `c7780b72...`).
+
+| Prompt | Skills loaded | Result |
+|---|---|---|
+| iPad settings design review (the prompt that failed in round 1) | apple-design | Pass. It fired with no Apple wording; 6 quotes, all verbatim in the cited pages; handed off to krish-design, krish-build and ux-testing-agent |
+| iPhone onboarding redesign | none | Fail |
+| "Is this SwiftUI screen OK by Apple's rules?", three problems | apple-design | Partial. Quotes verbatim and the freshness check ran, but the always-load pages were only searched, not read; the output said so |
+| Web pricing-section layout | none | Pass for apple-design (correctly absent) |
+
+**krish-design loaded in 0 of 3 design prompts** (iPad, iPhone, web), even though its description makes it mandatory for every design request. Co-loading beside the owner cannot be observed while the owner does not fire. That is a krish-design trigger defect, not this candidate's. It is recorded as harness observation 364 (missed_trigger, krish-design).
+
 ## Remaining before admission
 
-- Fix findings 1 to 3 above.
-- Rerun the co-load canary (an iPad or iPhone design review with no Apple wording) and get a pass.
-- Named-human admission by Krish, then a governed release and install.
+- Krish's admission decision. The evidence: trigger 30 of 30, behaviour 23 of 23, citations 14 of 14 verbatim against 0 of 10 without the skill, and the canary firing on a plain iPad design review.
+- Open, with an owner: krish-design does not load on plain design prompts (observation 364), so the co-load the ruling wants depends on fixing krish-design's own trigger.
+- Open, minor: the always-load rule was followed by targeted search, not full reads, on a short prompt.
+- At admission: apply the staged routing diff, rerun the krish-design suite, then a governed release and install.
