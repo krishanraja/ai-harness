@@ -24,9 +24,9 @@ provenance:
     sha256_of_sorted_file_hashes: b85fd9442009bfdc778292fae0f8cac17d745a173bffcca1eec313f2529b6f3e
   excluded_from_upstream: [README.md, AGENTS.md, GEMINI.md, .cursorrules, .github/, .gitignore]
 also_installed_at:
-  - surface: krishanraja/software-qa .claude/skills/apple-design (project skill, upstream SKILL.md unwrapped)
-    commit: 6a46242
-    note: installed 2026-11-25 at Krish's request before this candidate; not a harness surface
+  - surface: krishanraja/software-qa .claude/skills/apple-design
+    commit: dfa149d
+    note: the unwrapped upstream copy installed at 6a46242 was replaced on 2026-11-25, with Krish's yes, by a pointer that loads this skill with get_skill; no copy remains there
 evaluation:
   trigger_cases: evals/apple-design-trigger-cases.jsonl
   behavior_cases: evals/apple-design-behavior-cases.jsonl
