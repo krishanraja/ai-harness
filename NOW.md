@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- the cloud account routing now sends creative, brand and brainstorming work to the neighbours table, approved taste, divergence, the council, the strategist and the humour engine before the first idea. (2026-11-25)
 - the registry, steward manifest, dispatch lists, pins and the canon's Divergence rule carry Krish's approved names (growth-full-time, answers-engine, taste-engine, ctrl, krishraja-site, personal-hunter, personal-compound-finances, personal-lorimer-pc-backup, divergence-engine), each old name kept as an alias; held as a draft until the GitHub renames land. (2026-11-24)
 - humour-engine is admitted to the canon sync: state/fleet.yaml repos, the docs steward fleet, and excluded from the repository administration publisher like the other specialists, so the canon block humour-engine#1 adds stays current. (2026-11-24)
 - the council protocol now carries seven discipline rules (steel-man first, the evidence rule, earned severity, the ledger of settled decisions, anonymous drafts, a two-round cap, a grounded winning claim), wired into both answer shapes, with seven new held-out behavior cases. (2026-11-24)
@@ -67,11 +68,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-25): Krish renames the repositories on GitHub; the registry already carries the approved names with each old name kept as an alias (#319, merged 2026-11-24).
+- Next (2026-11-25): start a fresh claude.ai brainstorm on the makeyourmindup rebrand and check it names those neighbours unprompted.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 34, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-24): holds.
+- North Star check (2026-11-25): holds.
 
 ## Read next
 
