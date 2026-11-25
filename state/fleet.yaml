@@ -483,11 +483,10 @@ registry:
   - name: software-qa
     scope: in
     layer: specialist
-    confirm: true
-    role: Code and UI quality checks (to be confirmed against its own README).
-    capability: A QA pass on code and UI (its route is not yet read from its own README).
-    call: Not recorded yet. Until it is, open an auditor-fix issue in your own repository and the internal auditor routes the QA work.
-    when: A fix touches code or UI that needs a QA pass beyond the repository's own checks.
+    role: Venture QA harness, per its README; whether the journeys that move a venture's North Star work and whether its North Star counter tells the truth.
+    capability: Runs a venture's journeys on a real database with its own migrations and seeded fixtures, plus visual UI and UX QA at phone and desktop sizes, and gives one release gate with evidence per scenario. Adapters today are CTRL and Legibility.
+    call: Its qa-manual workflow (workflow_dispatch, inputs adapter ctrl or legibility, suite pr, nightly or demo, and seed), which the internal auditor's specialist routing dispatches; for a venture with no adapter yet, open an auditor-fix issue in your own repository and the internal auditor routes it.
+    when: A change touches CTRL's or Legibility's journeys, UI or North Star counter, or a venture needs a QA pass beyond its own repository's checks.
   - name: sendlinks
     scope: in
     layer: service
