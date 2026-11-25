@@ -84,6 +84,10 @@ Provenance for the three rows added 2026-09-09, `harness-maintainer`, `tools-acc
 
 `revenue-desk` is staged under `candidates/`, outside `production_active` (`docs/proposals/2026-11-24-revenue-desk.md`). It runs inside the strategist's U5 watch and Sunday board, reads each growth engine's `config/revenue-desk.json`, and writes one revenue sheet: blind readings named, the constraint, the reach check with its assumptions, and at most one 7-day test. It reads, computes and proposes, and never sends, posts or spends. Which play to back stays with the strategist and `council`, ideas with `insight-desk`, every word with the copy owners. Not a production route before admission.
 
+### Staged 2026-11-25; valid until admission or withdrawal
+
+`apple-design` is staged under `candidates/`, outside `production_active` (`docs/proposals/2026-11-25-apple-design.md`). It checks a screen, mockup or UI code against Apple's Human Interface Guidelines and cites the page and heading for every finding. It fires only when Apple's guidance or a native Apple-platform convention is named. A generic design review, taste and "less generic" stay with `krish-design`, which remains the gate; WCAG and platform-neutral rules stay with `ux-foundations`; a running app goes to `ux-testing-agent`. Not a production route before admission.
+
 ## CTRL standards chain
 
 The CTRL chain is for creating or changing a reusable standard. It is not the default route for routine work.

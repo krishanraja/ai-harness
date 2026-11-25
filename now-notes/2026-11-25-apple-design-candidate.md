@@ -1,0 +1,5 @@
+# Apple design candidate staged
+
+Status: `apple-design` (from dickwu/apple-design-skill at `91e1566`) is staged as an inactive candidate under `candidates/apple-design/`, with upstream bytes unchanged, a harness wrapper that narrows its trigger to Apple-guidance questions, held-out suites, a manifest at `release_eligible: false` and a staged routing paragraph (`docs/proposals/2026-11-25-apple-design.md`). It is also a project skill in krishanraja/software-qa (`6a46242`). Not served by `get_skill`.
+Next: run the blind trigger suite against krish-design and ux-foundations, then either propose admission or fold the pages into ux-foundations as a reference.
+North Star check (2026-11-25): holds; this work does not move the corrections number and is staged so it cannot add a mis-route.
