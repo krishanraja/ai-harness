@@ -1,0 +1,40 @@
+schema_version: 1
+id: apple-design
+status: candidate-inactive
+owner: Krish Raja
+created_at: 2026-11-25
+source_branch: claude/zen-shannon-7qy5vb
+skill_path: candidates/apple-design
+admission_path: skills/apple-design
+proposal: docs/proposals/2026-11-25-apple-design.md
+provenance:
+  source: https://github.com/dickwu/apple-design-skill
+  revision: 91e15664896f6f27e75dcf1414d1226cb95fa167
+  read_at: 2026-11-25
+  license: none published; README says provided as is, use at your own discretion
+  guideline_text_owner: Apple Inc. (Human Interface Guidelines, quoted for review)
+  dependencies: none at review time; scripts/pull-hig.mjs needs Node 18 and network access to developer.apple.com
+  requested_authority: read-only
+  security_findings: none; Markdown plus one network fetch script that reviews never run
+  upstream_bytes_unchanged:
+    paths: [references/, scripts/pull-hig.mjs]
+    upstream_skill_md_copied_to: references/upstream-workflow.md
+    sha256_of_sorted_file_hashes: b85fd9442009bfdc778292fae0f8cac17d745a173bffcca1eec313f2529b6f3e
+  excluded_from_upstream: [README.md, AGENTS.md, GEMINI.md, .cursorrules, .github/, .gitignore]
+also_installed_at:
+  - surface: krishanraja/software-qa .claude/skills/apple-design (project skill, upstream SKILL.md unwrapped)
+    commit: 6a46242
+    note: installed 2026-11-25 at Krish's request before this candidate; not a harness surface
+evaluation:
+  trigger_cases: evals/candidates/apple-design-trigger-cases.jsonl
+  behavior_cases: evals/candidates/apple-design-behavior-cases.jsonl
+activation: false
+release_eligible: false
+admission_gates:
+  - full-harness-validation
+  - held-out-trigger-evaluation
+  - held-out-behavior-evaluation
+  - independent-overlap-review
+  - fresh-session-canary
+  - named-human-admission
+  - governed-release-and-install-approval
