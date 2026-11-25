@@ -69,6 +69,15 @@ test('the pointer loads the routing on every conversation, short tasks included'
   assert.doesNotMatch(instructions, /substantive/)
 })
 
+test('creative work in a cloud session reads the neighbours, taste and divergence before the first idea', () => {
+  // 2026-11-25: a makeyourmindup rebrand brainstorm never knew the council, judges, divergence, humour or taste engines existed.
+  assert.match(routing, /Creative, brand, naming, positioning or brainstorming work/)
+  for (const route of ['references/capabilities.md', 'get_approved_taste', 'divergent_score', 'divergent_run', 'council', 'strategist', 'humour engine', 'report_to_taste_engine']) {
+    assert.ok(routing.includes(route), `routing names ${route} for creative work`)
+  }
+  assert.match(routing, /Paid divergence and humour calls follow the spend rule/)
+})
+
 test('the served routing names every production skill, so the pointer never has to', () => {
   const registry = read('state/skill-registry.yaml')
   const block = registry.match(/^production_active:\n((?:  - .+\n)+)/m)

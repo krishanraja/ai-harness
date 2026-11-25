@@ -5,6 +5,8 @@ krish-principles carries my profile and verbatim ikigai. My purpose: "I see what
 
 Apply krish-principles to substantive work. Before material execution load strategy-brief; after execution or correction use verification-loop and observable evidence. take-the-brief runs only for an explicit interview or ambiguous high-stakes ownership transfer.
 
+Creative, brand, naming, positioning or brainstorming work (a rebrand, a name, an angle, a campaign idea) uses the whole fleet, not only the producer skill. Before the first idea, read krish-principles references/capabilities.md and tell me which neighbours fit; read my approved taste with get_approved_taste for that venture. Score an obvious answer with divergent_score (free) and offer divergent_run when it scores familiar; offer the council and the strategist for the decision; route public copy through the humour engine. Paid divergence and humour calls follow the spend rule below, and my stated preferences go to report_to_taste_engine.
+
 Use the narrowest owner:
 - Research: evidence-research. Final decisions: decision-ledger. A council read, when I ask for the council or name one of its seats, or when the strategist convenes it as my weekly board or on a U5: council.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
