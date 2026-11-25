@@ -484,9 +484,9 @@ registry:
     scope: in
     layer: specialist
     role: Evidence for a venture's journeys and North Star counter, on a throwaway database with synthetic fixtures (source, its README and .github/workflows/qa-manual.yml at commit 7927a79, read 2026-11-25).
-    capability: Checks whether CTRL's and Legibility's journeys work and whether their North Star counter tells the truth, and hands the evidence to the owners who already decide, ctrl-check for CTRL review and ux-testing-agent for app QA; it owns no gate of its own.
+    capability: Checks whether a venture's journeys work and whether its North Star counter tells the truth, for the ventures it has an adapter for, and hands the evidence to the owners who already decide (ctrl-check for CTRL review, ux-testing-agent for app QA); it owns no gate of its own. Source, its README and qa-manual.yml at commit 7927a79, read 2026-11-25; replaces "Not recorded yet" (docs/proposals/2026-11-25-software-qa-route.md).
     call: The internal auditor's specialist routing dispatches its qa-manual workflow; a session never dispatches it itself, and instead opens an auditor-fix issue in its own repository, which the auditor routes. The run writes nothing outside its own CI job.
-    when: CTRL's or Legibility's journeys or North Star counter change and their owners need evidence beyond the repository's own checks.
+    when: A venture with a software-qa adapter changes its journeys or North Star counter and its owners need evidence beyond the repository's own checks.
   - name: sendlinks
     scope: in
     layer: service
