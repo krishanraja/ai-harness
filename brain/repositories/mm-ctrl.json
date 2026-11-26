@@ -59,5 +59,28 @@
         "npm run standards:check"
       ]
     }
+  ],
+  "changes": [
+    {
+      "date": "2026-11-26",
+      "field": "sources",
+      "from": "project-documentation/AGENT_BRIEFING.md",
+      "to": "docs/NORTH_STAR.md",
+      "basis": "krishanraja/ctrl#53 (merged at 4d8279b1) moved the North Star to docs/NORTH_STAR.md, which resolves at that revision, and reduced project-documentation/AGENT_BRIEFING.md to a three-line pointer to docs/current/README.md, itself already a source here. krishanraja/ctrl#54 deletes the pointer; nothing else in the repository references it. docs/NORTH_STAR.md supersedes it as the orientation source. Approved by Krish on 2026-11-26 with the cleanup."
+    },
+    {
+      "date": "2026-11-26",
+      "field": "workflows.product.read",
+      "from": "project-documentation/AGENT_BRIEFING.md",
+      "to": "docs/NORTH_STAR.md",
+      "basis": "Same supersession as the orientation source: the product workflow reads the North Star the canon says to read first."
+    },
+    {
+      "date": "2026-11-26",
+      "field": "source_revision",
+      "from": "d2483fdbe866dfcebc6f42643c97bdabd9da6b36",
+      "to": "4d8279b1a9891e85688e9c700392bab9d5741771",
+      "basis": "Inventory re-taken from mm-ctrl main after the documentation set merged; re-pin whenever a source path in this entry moves."
+    }
   ]
 }
