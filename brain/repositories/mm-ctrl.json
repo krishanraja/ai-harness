@@ -5,7 +5,7 @@
   "families": [
     "repository-administration"
   ],
-  "source_revision": "d2483fdbe866dfcebc6f42643c97bdabd9da6b36",
+  "source_revision": "4d8279b1a9891e85688e9c700392bab9d5741771",
   "context_path": "docs/HARNESS_CONTEXT.md",
   "entrypoints": {
     "agents": "AGENTS.md",
@@ -24,9 +24,9 @@
       "label": "Current repository state"
     },
     {
-      "path": "project-documentation/AGENT_BRIEFING.md",
+      "path": "docs/NORTH_STAR.md",
       "role": "orientation",
-      "label": "AGENT BRIEFING"
+      "label": "North Star"
     },
     {
       "path": "package.json",
@@ -50,7 +50,7 @@
       "label": "Briefing, decisions, evidence and contained delivery",
       "read": [
         "docs/current/README.md",
-        "project-documentation/AGENT_BRIEFING.md",
+        "docs/NORTH_STAR.md",
         "NOW.md"
       ],
       "checks": [
