@@ -48,8 +48,8 @@ Read this before you build or decide anything (Krish, 2026-11-24: "every single 
 
 | Repository | What it can do for you | How to call it | When |
 |---|---|---|---|
-| content-engine | Makes finished articles, cuts, thumbnails and covers, and finds or files research. | Control Center's ideas gate; find_research and add_piece_material for the research library. | A Make Your Mind Up piece is made, or research should be found before paying for it. |
-| growth-makeyourmindup | Posting, carousels, memes, Notes and subscriber growth for Make Your Mind Up. | Control Center dispatch on its own bearer; Krish instructs it with his Instruct press. | Make Your Mind Up needs reach or subscribers. |
+| content-engine | Makes every Make Your Mind Up asset (articles, cuts, carousels, memes, Notes, captions, covers and thumbnails), and finds or files research. Since 2026-11-26, replacing hero pieces only (Ruling, Krish, 2026-11-26; docs/proposals/2026-11-26-one-engine.md). | Control Center's ideas gate; find_research and add_piece_material for the research library. | A Make Your Mind Up piece is made, or research should be found before paying for it. |
+| growth-makeyourmindup | Posting, scheduling, distribution, measurement and subscriber growth for Make Your Mind Up; makes no assets. Since 2026-11-26, replacing its carousels, memes and Notes (Ruling, Krish, 2026-11-26; docs/proposals/2026-11-26-one-engine.md). | Control Center dispatch on its own bearer; Krish instructs it with his Instruct press. | Make Your Mind Up needs reach or subscribers. |
 | growth-mindmake | Outreach rows, pitches, visibility, guests and events for Mindmake. | Control Center dispatch on its own bearer. | Mindmake needs meetings, visibility or a pitch. |
 | growth-heartside | Organic sales growth for Heartside. | Control Center dispatch on its own bearer. | Heartside needs organic sales. |
 | growth-full-time | Growth for Full Time. | Control Center dispatch on its own bearer. | Full Time needs growth. |

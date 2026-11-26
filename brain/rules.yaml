@@ -2048,18 +2048,24 @@ skill_sections:
   - id: content-corpus.collision-and-handoff-rules
     file: skills/content-corpus/SKILL.md
     heading: "Collision and handoff rules"
-    text_sha: "c33707311b5d"
+    text_sha: "2bf0779460e7"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
-      sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
+      ref: "docs/proposals/2026-11-26-one-engine.md"
+      sha256: "855407032C0EA27CE4E278EECD6715E3118812C8BB470478F0B2C76B289D2FD8"
     history:
       - text_sha: "5053812f3906"
         valid_until: "2026-09-12"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "c33707311b5d"
+        valid_until: "2026-11-26"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-09-12-live-canary-follow-up.md"
+          sha256: "5B408BB1908C577A3A827C68C2A2DF66E4F0D69262E2E5461B254996B0C42B00"
     status: live
   - id: content-corpus.controlled-learning
     file: skills/content-corpus/SKILL.md
