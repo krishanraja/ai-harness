@@ -23,7 +23,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## Where it is right now (as of 2026-11-26)
 
-<!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
+<!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
 - the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
 - apple-design is admitted as production skill 35, a contrarian second voice beside krish-design; krish-design's trigger now leads with ordinary review and redesign words, which took blind routing precision from 0.90 to 0.947 with recall 1.00, and canary round 3 passed 4 of 4. The Perplexity account text changed, so one paste is owed there. (2026-11-25)
