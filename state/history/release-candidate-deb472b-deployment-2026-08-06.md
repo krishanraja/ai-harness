@@ -25,7 +25,7 @@ The release preserves the complete multi-file skill. Standard archives use a top
 
 ## Independent behavior evaluation
 
-Fresh Claude Code executor and judge contexts first exposed three gaps: failure to load the transcript leaf beside the voice leaf, omission of withdrawal terms, and an underspecified downstream voice owner. The corrected candidate passed both held-out trigger cases and all four rerun behavior cases with zero hard failures. Full evidence is in `state/results-ctrl-intake-voice-independent-2026-08-06.md`.
+Fresh Claude Code executor and judge contexts first exposed three gaps: failure to load the transcript leaf beside the voice leaf, omission of withdrawal terms, and an underspecified downstream voice owner. The corrected candidate passed both held-out trigger cases and all four rerun behavior cases with zero hard failures. Full evidence is in `state/history/results-ctrl-intake-voice-independent-2026-08-06.md`.
 
 ## Local deployment
 

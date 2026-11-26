@@ -301,7 +301,7 @@ machines:
       was idle. 31 root cron entries, 33 gateway jobs, 196 days uptime. It already
       reads the brain and writes to it every 15 minutes and was in no manifest,
       which is why five render logs could die at the 2026-08-29 rebrand and go
-      unnoticed for eleven days. Evidence: state/vps-liveness-audit-2026-09-09.md.
+      unnoticed for eleven days. Evidence: state/history/vps-liveness-audit-2026-09-09.md.
       MOVED 2026-11-14 20:08 UTC: the whole OpenClaw fleet (gateway, 15 jobs, 27
       cron lines, family bots, clock, Heartside) now runs on the worker server
       (Hetzner CPX32, Helsinki); the old box was DELETED the same night on

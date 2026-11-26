@@ -629,12 +629,12 @@ moved. Nothing here is ever rewritten.
 - Design-intelligence search evaluated and deliberately narrowed to a
   manual-only, read-only subordinate of `krish-design`, with the upstream
   installer, auto-trigger language and generic stack authority suppressed
-  (`state/design-intelligence-search-evaluation-2026-08-07.md`,
-  `state/import-review-ui-ux-pro-max-2026-08-07.md`).
+  (`state/history/design-intelligence-search-evaluation-2026-08-07.md`,
+  `state/history/import-review-ui-ux-pro-max-2026-08-07.md`).
 
 ## 2026-08-05
 
 - The curated set was established: independent per-skill evaluations across 18
   skills, a quality readiness matrix, and the first release proof
-  (`state/quality-readiness-matrix-2026-08-05.md`,
-  `state/release-proof-2026-08-05.md`).
+  (`state/history/quality-readiness-matrix-2026-08-05.md`,
+  `state/history/release-proof-2026-08-05.md`).

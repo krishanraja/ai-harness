@@ -263,7 +263,7 @@ stores:
       since the documented model puts durable memory in MEMORY.md and Postgres
       and no document mentions these files, but it is not proven. Reading the
       table names settles it.
-    evidence: state/vps-liveness-audit-2026-09-09.md
+    evidence: state/history/vps-liveness-audit-2026-09-09.md
     declared: 2026-09-09
 
   # ----------------------------------------------------------------- retire

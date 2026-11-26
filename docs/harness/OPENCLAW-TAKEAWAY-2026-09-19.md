@@ -30,7 +30,7 @@ Independent verification on 2026-09-19 refuted several lines of the first draft.
 - `[GOV]` `/home/user/ai-harness/scripts/n8n-exec-governor.py`
 - `[HBSH]` `/home/user/ai-harness/scripts/vps-heartbeat.sh`
 - `[HB]` `/home/user/ai-harness/state/heartbeats.json` (lines 19 to 24)
-- `[LIVE]` `/home/user/ai-harness/state/vps-liveness-audit-2026-09-09.md` (lines 101 to 119)
+- `[LIVE]` `/home/user/ai-harness/state/history/vps-liveness-audit-2026-09-09.md` (lines 101 to 119)
 - `[AUDIT]` `/home/user/ai-harness/docs/harness/VPS-AUDIT.md` (line 127)
 
 Where something about the host was not covered by the audit, this document says so and names what would cover it. Nothing about the host has been invented.
