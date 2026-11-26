@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-25
+as_of: 2026-11-26
 head: ad373fd
 lifecycle: live
 production_url: none
@@ -21,10 +21,11 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-25)
+## Where it is right now (as of 2026-11-26)
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":28,"current_as_of":"2026-11-24","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 28 in the week of 2026-11-16 (28 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-24.
 
+- the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
 - software-qa's route is recorded in the registry from its own README (its qa-manual workflow, adapters ctrl and legibility), so the neighbours table and the cloud routing name a real route for it. (2026-11-25)
 - the cloud account routing now names every neighbour the internal auditor found reachable only through the capabilities table, each at the moment it should be called. (2026-11-25)
 - the cloud account routing now sends creative, brand and brainstorming work to the neighbours table, approved taste, divergence, the council, the strategist and the humour engine before the first idea. (2026-11-25)
@@ -56,6 +57,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-26 state/ split into truth files, evidence folders and history, so a stranger can tell what the harness reads from what it keeps as evidence; the README design list now names brain/, config/, docs/ and now-notes/. This moves the public-reference part of the North Star, not the corrections number.
 - 2026-11-24 the council protocol gained seven discipline rules (steel-man first, evidence rule, earned severity, ledger of settled decisions, anonymous drafts, two-round cap, grounded winning claim), each backed by a held-out behavior case (`docs/proposals/2026-11-24-council-discipline.md`).
 - 2026-11-24 two copies of a privacy rule had to be changed in the same week by hand; now a registry row is the only place to change it.
 - 2026-11-24 music-watcher is in scope as a service (trackcard, the Music Brains and the production engine), by Krish's choice, knowing the Ikigai's rule 8 protects music.
@@ -70,11 +72,11 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-25): confirm the internal auditor's next run shows no unrecorded route.
+- Next (2026-11-26): decide whether the finished VPS prompts in docs/harness/ move to docs/history/vps/; they are cited from append-only observation logs, so they stayed put.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 34, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-25): holds.
+- North Star check (2026-11-26): holds.
 
 ## Read next
 
