@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T05:48:07.727Z",
+  "generated_at": "2026-11-26T04:07:08.232Z",
   "approval": "brain-repository-administration-v1",
   "results": [
     {
       "repository": "content-engine",
-      "base": "6829ada8b1e944e809351e4b9996d98cc320a8a9",
+      "base": "28b91e85c759fdeff7fa66cb2c08057bd564ba30",
       "brain_revision": "aabfeac6c45f",
-      "before": 470813,
-      "after": 470813,
+      "before": 470257,
+      "after": 470257,
       "files": [],
       "skipped": [],
-      "source_seal": "a6489d305aa78ab61cfa76bce401da0cfd0c12f79fb8efb4455df8542b03f02d",
+      "source_seal": "ce9817801067d8f1a13b35db4edbe49f9dc52bce6352af515938fcc68392a896",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -23,7 +23,7 @@
     },
     {
       "repository": "AEO-Engine",
-      "base": "0fe0b0c9f6fe25b9fa071ce8f8402d65a6772650",
+      "base": "0d54262b5f772348bbeecb5578cdf73ee8240d43",
       "brain_revision": "5ca09cc3df52",
       "before": 28804,
       "after": 28804,
@@ -32,7 +32,7 @@
         ".claude/hooks/harness-closeout.mjs"
       ],
       "skipped": [],
-      "source_seal": "5ded0634a665d7458509647f3e0c541b7ee9cdeb9eb5ca942b483cc3cc9f1eba",
+      "source_seal": "1f7cd812675ea02ae691389234a9eeda406506f0fd73ffd2dd25823d26faf89e",
       "source_check": "current-source-paths-hashes-and-named-commands",
       "accepted_ids": [
         "administration.preserve-intent",
@@ -51,7 +51,8 @@
           "verify:failure"
         ],
         "statuses": []
-      }
+      },
+      "refreshed": true
     },
     {
       "repository": "ai-harness",
