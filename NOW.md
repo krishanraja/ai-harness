@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
+- content-engine makes every Make Your Mind Up asset (carousels, memes, Notes and captions included) and growth-makeyourmindup only grows the channel, in state/fleet.yaml, the neighbours table and content-corpus's collision rules, per Krish's ruling of 2026-11-26 (docs/proposals/2026-11-26-one-engine.md). (2026-11-26)
 - The mm-ctrl entry reads docs/NORTH_STAR.md, with dated change rows recording that it supersedes the retired AGENT_BRIEFING.md pointer. (2026-11-26)
 - the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
 - apple-design is admitted as production skill 35, a contrarian second voice beside krish-design; krish-design's trigger now leads with ordinary review and redesign words, which took blind routing precision from 0.90 to 0.947 with recall 1.00, and canary round 3 passed 4 of 4. The Perplexity account text changed, so one paste is owed there. (2026-11-25)
@@ -37,6 +38,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-26 two repositories made assets, so carousels, memes, Notes, covers and captions had two routes, two looks and two sets of checks, and nobody could tell which was current; Krish: "I want everything to be one harmonious engine."
 - 2026-11-25 apple-design was staged, tested on held-out cases (trigger failed, behaviour passed), repaired and admitted in one day: the first routing run missed because krish-design's description crowded out the second voice, so the fix was to the other skill's trigger, not apple-design's.
 - 2026-11-26 state/ split into truth files, evidence folders and history, so a stranger can tell what the harness reads from what it keeps as evidence; the README design list now names brain/, config/, docs/ and now-notes/. This moves the public-reference part of the North Star, not the corrections number.
 - 2026-11-24 the council protocol gained seven discipline rules (steel-man first, evidence rule, earned severity, ledger of settled decisions, anonymous drafts, two-round cap, grounded winning claim), each backed by a held-out behavior case (`docs/proposals/2026-11-24-council-discipline.md`).
@@ -49,7 +51,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-26): Merge krishanraja/ctrl#54 so the rendered context lands in mm-ctrl.
+- Next (2026-11-26): control-center regenerates src/lib/fleetRegistry.ts from the registry once this merges.
 - Waiting on a person: seven now-notes of 2026-11-25 on apple-design have a heading line the fold cannot place, so they stay in now-notes/ unfolded; their content is in the apple-design bullet above.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
