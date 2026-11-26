@@ -114,6 +114,12 @@ unmanaged_directories:
     valid_until: 2026-09-12
     superseded_by: agents-skills-empty-20260912
 
+  # Where the evidence below lives (2026-11-26): dated one-off reports moved from
+  # the root of state/ into state/history/, kept unchanged, so the root holds only
+  # files the harness reads to decide current state. state/README.md is the map.
+  # The credential exposure record is the one dated report still in the root,
+  # because its gate is open and scripts/render-current-state.mjs reads it; it
+  # moves to state/history/ when that gate closes. Both paths below are current.
   - id: agents-skills-empty-20260912
     path: C:\Users\krish\.agents\skills
     surface: windows-primary
@@ -151,7 +157,7 @@ unmanaged_directories:
     surface: windows-primary
     observed: 2026-09-12
     entries: 2
-    detail: Malformed legacy N8N and fleet-ops skills. A plaintext value was redacted from the inactive N8N copy before quarantine. This redaction is containment only, not credential rotation or incident closure; see state/credential-exposure-2026-09-12.md.
+    detail: Malformed legacy N8N and fleet-ops skills. A plaintext value was redacted from the inactive N8N copy before quarantine. This redaction is containment only, not credential rotation or incident closure; see state/credential-exposure-2026-09-12.md, which stays in the state/ root while that gate is open.
     status: quarantined-not-discoverable
     ruled: 2026-09-12
     source: state/history/gap-closure-2026-09-12.md
