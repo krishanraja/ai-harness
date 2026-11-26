@@ -522,8 +522,8 @@ registry:
     scope: in
     layer: producer
     venture: publication
-    role: Make Your Mind Up's hero assets, the video engine, the research library.
-    capability: Makes finished articles, cuts, thumbnails and covers, and finds or files research.
+    role: Make Your Mind Up's one maker, the video engine, the research library.
+    capability: Makes every Make Your Mind Up asset (articles, cuts, carousels, memes, Notes, captions, covers and thumbnails) and hands Growth finished, approved assets with captions in the piece manifest; finds or files research.
     call: Control Center's ideas gate; find_research and add_piece_material for the research library.
     when: A Make Your Mind Up piece is made, or research should be found before paying for it.
   - name: growth-makeyourmindup
@@ -531,7 +531,7 @@ registry:
     layer: producer
     venture: publication
     role: Make Your Mind Up growth.
-    capability: Posting, carousels, memes, Notes and subscriber growth for Make Your Mind Up.
+    capability: Posting, scheduling, distribution, measurement and subscriber growth for Make Your Mind Up; posts the finished assets content-engine makes and reports performance back.
     call: Control Center dispatch on its own bearer; Krish instructs it with his Instruct press.
     when: Make Your Mind Up needs reach or subscribers.
   - name: growth-mindmake
