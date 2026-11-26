@@ -5,6 +5,68 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-26
+
+- stamped: `NOW.md` audit findings fixed (`too_long`, `where_too_many`) by condensing "Where it is right now" to 7 bullets and rolling the older ones below; head moved to a2ed707; skill count corrected to 35 (apple-design admitted).
+
+- rolled from NOW.md: software-qa's route is recorded in the registry from its own README (its qa-manual workflow, adapters ctrl and legibility), so the neighbours table and the cloud routing name a real route for it. (2026-11-25)
+
+- rolled from NOW.md: the cloud account routing now names every neighbour the internal auditor found reachable only through the capabilities table, each at the moment it should be called. (2026-11-25)
+
+- rolled from NOW.md: the cloud account routing now sends creative, brand and brainstorming work to the neighbours table, approved taste, divergence, the council, the strategist and the humour engine before the first idea. (2026-11-25)
+
+- rolled from NOW.md: the registry, steward manifest, dispatch lists, pins and the canon's Divergence rule carry Krish's approved names (growth-full-time, answers-engine, taste-engine, ctrl, krishraja-site, personal-hunter, personal-compound-finances, personal-lorimer-pc-backup, divergence-engine), each old name kept as an alias; held as a draft until the GitHub renames land. (2026-11-24)
+
+- rolled from NOW.md: humour-engine is admitted to the canon sync: state/fleet.yaml repos, the docs steward fleet, and excluded from the repository administration publisher like the other specialists, so the canon block humour-engine#1 adds stays current. (2026-11-24)
+
+- rolled from NOW.md: the council protocol now carries seven discipline rules (steel-man first, the evidence rule, earned severity, the ledger of settled decisions, anonymous drafts, a two-round cap, a grounded winning claim), wired into both answer shapes, with seven new held-out behavior cases. (2026-11-24)
+
+- rolled from NOW.md: The list of repositories whose money never appears outside their owner lives once, as `figures: private` on their rows in state/fleet.yaml's registry (mindmake, krish-raja, dothinkdo, dothinkdo-skills, compound-finances); the revenue desk's validate_sheet.py and the strategist both read it there, and neither keeps a copy. (2026-11-24)
+
+- rolled from NOW.md: Krish settled the personal list: hunter, compound-finances and lorimer-pc-backup stay personal; dothinkdo and dothinkdo-skills, a real-life organisation brain in action, and claude-archive, the session-history source for learnings, are in scope. ctrl-mindmake, the live CTRL repository, is a canon surface, so canon sync brings its block current from v2026.10.30.1; the publisher excludes it until it has an administration profile. (2026-11-24)
+
+- rolled from NOW.md: the harness carries version 5 of Krish's Master Ikigai (12 September 2026, 144 answers) in skills/krish-principles/references/ikigai-v5.md, every cell verbatim; who-krish-is quotes its changed form, binding, Rule 4 and love circle, and version 4 stays as history. (2026-11-24)
+
+- rolled from NOW.md: `revenue-desk` is staged as an inactive candidate (`candidates/revenue-desk/`): one method that turns each growth engine's own counts into a revenue sheet (blind readings named, the stage check, the constraint, the reach check with its assumption block, at most one 7-day test, the ask caps, the day-14 score), with the `revenue-sheet/1` schema, a standard-library sheet validator (exit 0 pass, 1 held, 2 unavailable), fifteen checkable rules, held-out suites, an outside-name gate and one staged paragraph in the routing contract (`docs/proposals/2026-11-24-revenue-desk.md`). The code is strategist `src/revenue.ts`; the adapters are `config/revenue-desk.json` in each growth engine. Not served by `get_skill` until admitted. (2026-11-24)
+
+- rolled from NOW.md: `insight-desk` is admitted as production skill 34 (Ruling, Krish, 2026-11-24: insight-desk is admitted; Ruling, Krish, 2026-11-24: insight-desk names no outside source). It moved from `candidates/insight-desk/` to `skills/insight-desk/`, its two suites moved to `evals/`, `state/candidates/insight-desk.yaml` is closed (`valid_until: 2026-11-24`) and kept, the registry lists it in `production` and `production_active` with `expected_skill_count` 34, the routing contract carries its route row and collision rule in place of the staged paragraph, both cloud routing texts name it, the neighbours table's ai-harness row names it, `brain/rules.yaml` records its chapters and the rule, and `scripts/Test-Harness.ps1` keeps running its tests and validator. The open provenance finding is replaced by the one-line ruling. The Perplexity account text changed (1,500 characters), so one paste is owed there. (2026-11-24)
+
+- rolled from NOW.md: the registry's venture map is also rendered as state/ventures.json, a checked rendering beside the neighbours table, so readers with no YAML parser (control-center) can pin it as a generated file instead of keeping a copy. (2026-11-24)
+
+- rolled from NOW.md: the insight-desk routing paragraph now carries the U4 measurement-idea rule, and the proposal records which statements were withdrawn in #309. (2026-11-24)
+
+- rolled from NOW.md: the insight-desk proposal answers the judge panel on #308: readings cited with source and date, overlap labelled a judgement, route stated once, sheets scoped per venture, the candidate record kept with valid_until at admission. (2026-11-24)
+
+- rolled from NOW.md: the registry's venture for each repository now reproduces Control Center's live FLEET_VENTURE, so the four copied repo-to-venture maps can read the registry with no change in behaviour: AEO-Engine, krish-raja, dothinkdo and dothinkdo-skills serve mindmake and content-watcher publication, as the live rule says; control-center and strategist serve every venture, so they carry none; ctrl-mindmake, the live CTRL repository, is mm_ctrl, where the live rule only named OLD-ctrl-mindmake's old names. (2026-11-24)
+
+- rolled from NOW.md: `insight-desk` is staged as an inactive candidate (`candidates/insight-desk/`): one method that turns a growth engine's North Star goal into an insight sheet of up to three screened ideas, with the `insight-sheet/1` schema, a standard-library sheet validator, held-out suites and one staged line in the routing contract (`docs/proposals/2026-11-24-insight-desk.md`). Not served by `get_skill` until admitted. The validator now refuses scores written in words, a reader named as the writer, methods from fewer than three categories, an analogue not read that day and close paraphrases of the obvious ideas. No outside source is named in committed files while provenance waits on Krish. (2026-11-24)
+
+- rolled from NOW.md: canon sync, the seeder, the publisher and the central docs steward no longer write to OLD-ctrl-mindmake (the mm-ctrl entry), contentarchives or the dormant fractionl-circle: each carries canon_sync false with Krish's ruling, and stays listed for parity and readable history. (2026-11-24)
+
+- rolled from NOW.md: brain-rules.mjs --revise no longer drops source digests: every sha256 already in the ledger is kept on its row, history rows included, and a new proposal source is pinned to its document as it stands (uppercase SHA-256, the ledger's form since 2026-11-18). Three judge findings on ai-harness#305 came from this. (2026-11-24)
+
+- rolled from NOW.md: state/fleet.yaml carries a registry of every repository Krish owns (scope, layer, role, venture, and what each in-scope one can do, how to call it and when); its rendering, krish-principles references/capabilities.md, is the neighbours table every canon block now tells sessions to read before building or deciding. (2026-11-24)
+
+- rolled from NOW.md: the contract lets internal-auditor merge every fleet repository's green pull request by Krish or his bots, close superseded bot pull requests and file a fix issue for a red one. (2026-11-24)
+
+- rolled from NOW.md: A merged change to the canon block now releases itself, as skill changes already did; the folder-report rule (sessions report folder changes in Krish's Drive or dev folders to filearchives, with his words) was released by hand as v2026.11.24.1. (2026-11-24)
+
+- rolled from NOW.md: The operating contract says internal-auditor's own fix pull requests merge themselves once every check is green at the head the fix queue checked, with a red, conflicted or unchecked fix labelled needs-krish; the canon sends his preferences to the taste engine and defects to record_harness_observation. ai-harness keeps its own judged merge bot. (2026-11-23)
+
+- rolled from NOW.md: krishanraja/internal-auditor and krishanraja/strategist joined the fleet (state/fleet.yaml, docs/steward/fleet.json), excluded from the repository administration publisher until Krish accepts them there. The contracts carry the auditor's standing exception (close pull requests and delete branches idle 7 days or more, recording each head sha first, never the default, a protected or a kept branch) and the strategist convening the council as the weekly board. Proposal: docs/proposals/2026-11-23-auditor-and-strategist.md. (2026-11-23)
+
+- rolled from NOW.md: Every ai-harness pull request, change requests on harness/ branches included, merges itself once closeout, the validation build and the judge panel are green (`scripts/merge-bot-prs.mjs`); capture never merges its own change. The Claude and Codex division is in force: Claude owns strategy, verification and the only writes to ai-harness and Google Drive, and starts Codex only through `scripts/codex_thread.mjs`. (2026-11-18)
+
+- rolled from NOW.md: Branch rule in the canon block: one worktree and one branch per pull request; the weekly sweep (`.github/workflows/branch-sweep.yml`, Sunday 03:17 UTC) deletes branches whose work is already on main and lists the rest. Skills 31 to 33 (`council`, `ad-copywriter`, `ugc-avatar`) are production skills; the registry says 33. (2026-11-15)
+
+- rolled from NOW.md: 2026-11-23 Ruling (Krish, 2026-11-23): all auditor fixes auto merge. Ruling (Krish, 2026-11-23): merge and deploy.
+
+- rolled from NOW.md: 2026-11-23 Krish ruled that the taste system holds only preference and inspiration.
+
+- rolled from NOW.md: 2026-11-23 Ruling (Krish, 2026-11-16): whenever Claude starts or spawns a session Krish can open, it tells him that session's exact name in the same message. A session Krish cannot find is work he cannot steer, so this removes a repeat correction.
+
+- rolled from NOW.md: 2026-11-23 Ruling (Krish, 2026-11-23): internal-auditor may close pull requests and delete branches idle 7 days or more, recording each head sha in its restore ledger first.
+
 ## 2026-11-25
 
 - stamped: `NOW.md` re-stamped to head ad373fd after 46 non-steward commits; skill count corrected from 33 to 34 (insight-desk admitted), the council bullet rewritten as a why, and the Next line no longer calls merged #319 an open pull request.
