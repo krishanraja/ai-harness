@@ -24,9 +24,9 @@ mutations.
 
 ## Repository evidence
 
-- Local validation and reconciliation: `state/gap-closure-2026-09-12.md`
+- Local validation and reconciliation: `state/history/gap-closure-2026-09-12.md`
 - Historical corpus classification:
-  `state/reconciliation-2026-09-12-historical-harness.md`
+  `state/history/reconciliation-2026-09-12-historical-harness.md`
 - Pull request: `krishanraja/ai-harness#38`
 
 The approval is the action gate. The evidence files remain responsible for proving

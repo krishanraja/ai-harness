@@ -13,7 +13,7 @@ Apply a class 3 routing fix plus canary-instrument repair. The accepted change i
 - synthetic canary citation evidence produced by the authenticated v2026.09.12.3 run and its explicit store lifecycle in `brain/stores.yaml`;
 - release registry and explanatory documentation required to publish and verify v2026.09.12.4.
 
-The four long descriptions in `krish-design`, `build-apps-with-krish`, `ctrl-intake`, and `krish-voice` are explicitly excluded. A shorter rewrite was already rejected in `state/routing-description-eval-2026-09-12.md`, and PR 42's judge correctly found that a description-budget finding did not prove the removed phrases were non-load-bearing. Their prior wording and review dates remain live.
+The four long descriptions in `krish-design`, `build-apps-with-krish`, `ctrl-intake`, and `krish-voice` are explicitly excluded. A shorter rewrite was already rejected in `state/history/routing-description-eval-2026-09-12.md`, and PR 42's judge correctly found that a description-budget finding did not prove the removed phrases were non-load-bearing. Their prior wording and review dates remain live.
 
 ## Evidence
 

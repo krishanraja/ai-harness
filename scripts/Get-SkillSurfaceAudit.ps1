@@ -1,6 +1,6 @@
 param(
     [string]$Root = (Split-Path -Parent $PSScriptRoot),
-    [string]$OutputPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'state\surface-audit-2026-08-05.json')
+    [string]$OutputPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'state\history\surface-audit-2026-08-05.json')
 )
 
 $ErrorActionPreference = 'Stop'

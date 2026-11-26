@@ -129,7 +129,7 @@ unmanaged_directories:
     # remains empty so no consumer mistakes absence for a missing mount.
     status: empty-auto-discovery-root
     ruled: 2026-09-12
-    source: state/gap-closure-2026-09-12.md
+    source: state/history/gap-closure-2026-09-12.md
     approval: state/approvals/2026-09-12-harness-gap-closure.md
     supersedes: agents-skills-inert-20260908
 
@@ -143,7 +143,7 @@ unmanaged_directories:
     status: archived-inactive-review-only-on-evidenced-need
     owner: harness-maintainer
     ruled: 2026-09-12
-    source: state/gap-closure-2026-09-12.md
+    source: state/history/gap-closure-2026-09-12.md
     approval: state/approvals/2026-09-12-harness-gap-closure.md
 
   - id: agents-quarantine-legacy-forbidden-20260912
@@ -154,7 +154,7 @@ unmanaged_directories:
     detail: Malformed legacy N8N and fleet-ops skills. A plaintext value was redacted from the inactive N8N copy before quarantine. This redaction is containment only, not credential rotation or incident closure; see state/credential-exposure-2026-09-12.md.
     status: quarantined-not-discoverable
     ruled: 2026-09-12
-    source: state/gap-closure-2026-09-12.md
+    source: state/history/gap-closure-2026-09-12.md
     approval: state/approvals/2026-09-12-harness-gap-closure.md
 
   # These two are different in kind: loose FILES sitting inside release-managed roots,

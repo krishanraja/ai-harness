@@ -59,7 +59,7 @@ candidate_reconciliation:
   candidate_artifact_set_sha256: DDD4AD8EAC617B34C6FEBA17D38E5210DCAF87CEB06076D0EA10EFBF32FAE018
   artifact_hash_algorithm: sha256-path-nul-file-sha256-ordinal-v1
   status: approved-released-and-deployed
-  evidence: state/release-v2026.08.29.3-deployment-2026-08-29.md
+  evidence: state/history/release-v2026.08.29.3-deployment-2026-08-29.md
   admitted: source-backed Mindmake rename, commercial canon, publication routing, voice doctrine, current design-contract routing, and compatible mechanical references
   suppressed: unproven design-intelligence-search vendor-byte drift and broad ui-ux-pro-max collision
 
@@ -379,11 +379,11 @@ temporary_cloud_extraction:
 
 evaluation_evidence:
   routing_description_comparison_2026_09_12:
-    record: state/routing-description-eval-2026-09-12.md
+    record: state/history/routing-description-eval-2026-09-12.md
     skills: [build-apps-with-krish, ctrl-intake, krish-design, krish-voice]
     result: no-classification-regression-in-one-blind-baseline-candidate-comparison
   provider_review_2026_09_12:
-    record: state/provider-review-2026-09-12.md
+    record: state/history/provider-review-2026-09-12.md
     skills: [apify, n8n-operator, instantly-operator, design-intelligence-search]
     result: current-primary-sources-checked-and-bounded-tests-passed
   n8n-operator:

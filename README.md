@@ -20,7 +20,11 @@ Read `CURRENT.md` first. It is generated from the registry, heartbeats, deployme
 - `candidates/`: candidate skill packages under evaluation. They are validated but never packaged; each has a manifest in `state/candidates/` and moves into `skills/` only on named admission.
 - `evals/`: trigger, routing, and behavior fixtures.
 - `scripts/`: validation and deterministic release tooling.
-- `state/`: lifecycle registry and cross-surface release evidence.
+- `state/`: lifecycle registry and cross-surface release evidence. `state/README.md` names the truth files, the evidence folders and `state/history/`, where dated one-off reports live.
+- `brain/`: the learning brain: accepted knowledge, rules, decisions, proposals and their reviews.
+- `config/`: settings for the scheduled harness jobs, notifications, inference and session extraction.
+- `docs/`: the North Star, the history log, proposals behind each change, steward runbooks and harness explainers.
+- `now-notes/`: session closeout notes, folded into `NOW.md` on main.
 - `architecture/`: the governed GitHub-to-client release, rollback, freshness, and learning design.
 
 Dynamic operational facts are retrieved from their live sources. They are not copied into skill bodies merely to make the harness feel complete.

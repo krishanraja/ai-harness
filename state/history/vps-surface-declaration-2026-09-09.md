@@ -1,6 +1,6 @@
 # Declaring the OpenClaw VPS: four changes, 2026-09-09
 
-Follow-on from `state/vps-liveness-audit-2026-09-09.md`, which was read-only. This one
+Follow-on from `state/history/vps-liveness-audit-2026-09-09.md`, which was read-only. This one
 changes things. Every change was preceded by a capture of the prior state and followed by
 reading the result back. Nothing was deleted. Backups are named in each section.
 
