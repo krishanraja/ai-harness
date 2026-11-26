@@ -266,7 +266,8 @@
     "klass": "em-dash",
     "subject": "# lines in 1 files",
     "first_seen": "2026-10-18",
-    "open": true
+    "open": false,
+    "closed_at": "2026-11-26"
   },
   "freshness:krish-voice": {
     "klass": "freshness",
@@ -381,5 +382,17 @@
     "first_seen": "2026-11-18",
     "open": false,
     "closed_at": "2026-11-25"
+  },
+  "description-budget:krish-design": {
+    "klass": "description-budget",
+    "subject": "krish-design",
+    "first_seen": "2026-11-26",
+    "open": true
+  },
+  "em-dash:# lines in 97 files": {
+    "klass": "em-dash",
+    "subject": "# lines in 97 files",
+    "first_seen": "2026-11-26",
+    "open": true
   }
 }
