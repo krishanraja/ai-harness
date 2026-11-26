@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
+- The mm-ctrl entry reads docs/NORTH_STAR.md, with dated change rows recording that it supersedes the retired AGENT_BRIEFING.md pointer. (2026-11-26)
 - the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
 - apple-design is admitted as production skill 35, a contrarian second voice beside krish-design; krish-design's trigger now leads with ordinary review and redesign words, which took blind routing precision from 0.90 to 0.947 with recall 1.00, and canary round 3 passed 4 of 4. The Perplexity account text changed, so one paste is owed there. (2026-11-25)
 - the cloud account routing names every neighbour in the capabilities table at the moment it should be called, and sends creative, brand and brainstorming work to approved taste, divergence, the council, the strategist and the humour engine before the first idea; software-qa's route is in the registry. (2026-11-25)
@@ -48,7 +49,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-26): replace the stale upstream apple-design copy in krishanraja/software-qa with a pointer to the harness skill (needs Krish's yes, since it deletes files); then decide whether the finished VPS prompts in docs/harness/ move to docs/history/vps/; they are cited from append-only observation logs, so they stayed put.
+- Next (2026-11-26): Merge krishanraja/ctrl#54 so the rendered context lands in mm-ctrl.
 - Waiting on a person: seven now-notes of 2026-11-25 on apple-design have a heading line the fold cannot place, so they stay in now-notes/ unfolded; their content is in the apple-design bullet above.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (not rechecked 2026-11-12; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
