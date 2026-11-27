@@ -4,6 +4,8 @@ This contract is the reusable quality floor for a materially new or materially c
 
 `build-apps-with-krish` owns orchestration of this contract. `krish-design` still owns taste and material visual approval, `krish-build` owns implementation, `ux-testing-agent` owns observed task evidence, and `verification-loop` owns the completion verdict. A panel never replaces Krish's approval of a material surface.
 
+`krishanraja/software-qa` is the executable layer every build may attach: a UI library whose components carry their own floor result, a static floor scan for any codebase, and a rendered visual lane for ventures with an adapter. A project may name those commands among its deterministic checks. They cover part of the human-review readiness gate below, mapped item by item in that repository's `docs/BUILD-FLOOR.md`; they never stand in for the presentation firewall, continuity guardians, the blind panel, the brief-fidelity trace, the feedback ledger or physical-device evidence. This contract stays the authority: where the two disagree, the repository is wrong.
+
 ## Required project adapter
 
 Each governed project must keep one machine-readable experience-quality profile in its repository and validate it in the project's normal QA entry point. The profile must conform to `experience-quality-profile.schema.json` and name:
