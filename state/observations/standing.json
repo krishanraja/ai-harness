@@ -380,8 +380,8 @@
     "klass": "heartbeat",
     "subject": "vault-deposit-lorimer",
     "first_seen": "2026-11-18",
-    "open": false,
-    "closed_at": "2026-11-25"
+    "open": true,
+    "reopened": "2026-11-27"
   },
   "description-budget:krish-design": {
     "klass": "description-budget",
