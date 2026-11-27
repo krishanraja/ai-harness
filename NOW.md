@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
+- software-qa's registry row, the rendered neighbours table, the cloud routing and the experience quality contract now send every build to software-qa: its UI library before writing UI from scratch, its floor scan and render before presenting. No skill text changed; krish-design keeps taste and approval (docs/proposals/2026-11-27-software-qa-build-floor.md). (2026-11-27)
 - content-engine makes every Make Your Mind Up asset (carousels, memes, Notes and captions included) and growth-makeyourmindup only grows the channel, in state/fleet.yaml, the neighbours table and content-corpus's collision rules, per Krish's ruling of 2026-11-26 (docs/proposals/2026-11-26-one-engine.md). (2026-11-26)
 - The mm-ctrl entry reads docs/NORTH_STAR.md, with dated change rows recording that it supersedes the retired AGENT_BRIEFING.md pointer. (2026-11-26)
 - the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
@@ -38,6 +39,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What changed recently
 
+- 2026-11-27 every build now has a library and a floor to check against before Krish sees it; the anti-defaults he rejects on sight are caught by a command.
 - 2026-11-26 two repositories made assets, so carousels, memes, Notes, covers and captions had two routes, two looks and two sets of checks, and nobody could tell which was current; Krish: "I want everything to be one harmonious engine."
 - 2026-11-25 apple-design was staged, tested on held-out cases (trigger failed, behaviour passed), repaired and admitted in one day: the first routing run missed because krish-design's description crowded out the second voice, so the fix was to the other skill's trigger, not apple-design's.
 - 2026-11-26 state/ split into truth files, evidence folders and history, so a stranger can tell what the harness reads from what it keeps as evidence; the README design list now names brain/, config/, docs/ and now-notes/. This moves the public-reference part of the North Star, not the corrections number.
@@ -51,12 +53,12 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-26): control-center regenerates src/lib/fleetRegistry.ts from the registry once this merges.
+- Next (2026-11-27): measure whether the floor cuts repeat design corrections, by tagging which corrections in the taste ledger and harness observations a floor rule would have caught.
 - Waiting on a person: seven now-notes of 2026-11-25 on apple-design have a heading line the fold cannot place, so they stay in now-notes/ unfolded; their content is in the apple-design bullet above.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (carried forward, unverified since 2026-11-12, reviewed for this page 2026-11-27; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
 - Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 35, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
-- North Star check (2026-11-26): holds.
+- North Star check (2026-11-27): holds.
 
 ## Read next
 
