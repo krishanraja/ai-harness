@@ -1167,12 +1167,19 @@ contract_rules:
     status: live
   - id: collision-rules.insight-desk-writes-ideas
     file: contract/skill-routing-contract.md
-    text_sha: "faada33ec2e4"
+    text_sha: "09bf547481da"
     first_seen: "2026-11-24"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-24-insight-desk.md"
-      sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+      ref: "docs/proposals/2026-11-28-strategist-on-demand.md"
+      sha256: "7300B1AAB9BCA409A2B1BFF629C4005F40A3A9E33B2E9D90E27A23C47250CB3F"
+    history:
+      - text_sha: "faada33ec2e4"
+        valid_until: "2026-11-28"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-24-insight-desk.md"
+          sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
     status: live
   - id: collision-rules.krishanraja-strategist-builds-a
     file: contract/skill-routing-contract.md
