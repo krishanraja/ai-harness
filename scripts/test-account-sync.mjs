@@ -71,8 +71,9 @@ test('the pointer loads the routing on every conversation, short tasks included'
 
 test('any strategy job in a cloud session goes to the strategist and its router', () => {
   // 2026-11-28: Krish runs the strategist on the Mindmake site and value proposition rebuild; a session must reach it for any job, big or small.
-  assert.match(routing, /Strategy for any venture, big or small/)
-  for (const route of ['krishanraja/strategist', 'src/cli.ts route', 'qualify check', 'value proposition', 'site rebuild', 'MVP', 'qualify from-sheet', 'calls insight-desk first']) assert.ok(routing.includes(route), `routing names ${route} for strategy work`)
+  assert.match(routing, /A venture's strategy argument and its test/)
+  assert.match(routing, /A design-only or copy-only job goes straight to its producer/)
+  for (const route of ['krishanraja/strategist', 'src/cli.ts route', 'qualify check', 'value proposition', 'MVP', 'qualify from-sheet', 'calls insight-desk first']) assert.ok(routing.includes(route), `routing names ${route} for strategy work`)
 })
 
 test('creative work in a cloud session reads the neighbours, taste and divergence before the first idea', () => {

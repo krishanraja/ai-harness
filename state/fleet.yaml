@@ -446,9 +446,9 @@ registry:
     scope: in
     layer: specialist
     role: The one strategy brain, anchored on the Ikigai. Weekly board through the council, three recovery plays for any U5.
-    capability: Answers any strategy job, big or small, with its own methods (positioning, value proposition, offer and pricing, buyer evidence, page review, unit economics, pre-mortem, a site and value proposition rebuild), qualifies every MVP before it gets a week of build, and turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules.
-    call: Attach krishanraja/strategist to the session and run npx tsx src/cli.ts route "<the job>" from its root, then follow the methods it names; MVP cards go in its state/mvps and pass qualify check. It also reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall.
-    when: A value proposition, positioning, an offer or price, a page or site rebuild, an MVP or idea to qualify, a number at U4 or U5, or growth and product disagree.
+    capability: Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules; and, since 2026-11-28, builds the strategy argument for a venture (positioning, the value proposition's argument, an offer or price to test) and qualifies every MVP before it gets a week of build. It ends in a test Krish approves and a verdict read from the venture's own number, never in a document. It writes no final words or designs and replaces neither strategy-brief nor the producers (widened from stalled numbers and ideas only, Ruling, Krish, 2026-11-28; docs/proposals/2026-11-28-strategist-on-demand.md; route and gate at krishanraja/strategist b163cd7, read 2026-11-28).
+    call: Attach krishanraja/strategist and follow its AGENTS.md, "Using the strategist from any session"; an MVP card is proposed in a pull request there and reaches Krish as an engine proposal behind the strategy wall, and a passing gate is never his yes. It also reads every North Star weekly and any U5 within 24 hours.
+    when: A number is at U4 or U5; an idea or MVP needs a test rather than a plan; or a venture's positioning, value proposition, offer or price needs its argument and test before the producers write or design it.
   - name: divergence-engine
     scope: in
     layer: specialist

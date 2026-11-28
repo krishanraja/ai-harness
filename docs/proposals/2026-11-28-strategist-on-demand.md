@@ -22,6 +22,14 @@ Krish, 2026-11-28: "can we make sure the insight-desk in ai-harness is integrate
 
 It stays here: `get_skill` serves it to every surface and every growth engine's `config/insight-desk.json` points at it, and one writer of ideas with the strategist as their judge is the routing contract's shape. krishanraja/strategist#24 makes the strategist's router call it first for any job that needs ideas, and `qualify from-sheet` brings each idea back to be judged. The cloud routing line for insight-desk widens from growth engines only to any venture's ideas, including a strategist route.
 
+## What the row replaces
+
+The strategist's capability row read, until 2026-11-28: "Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules." That sentence is kept as the row's first clause; the strategy argument and the MVP gate are added after it, marked as widened on 2026-11-28, so the earlier scope reads as extended, not overwritten. The U4 or U5 trigger stays first in its when.
+
+## Where it stops
+
+The judge panel's first read (2026-11-28) found the first wording ("any strategy job, big or small") contradicted the narrowest-skill rule and overlapped krish-design. The routing contract now names the boundary: the strategist owns the argument and the test; design-only and copy-only jobs go to their producers, and strategy-brief still plans each session. The router and gate are pinned to the strategist revision read on 2026-11-28.
+
 ## Walls
 
 Nothing widens. The strategist proposes; it never writes a venture's final words or designs, and never ships, sends, posts or spends.
