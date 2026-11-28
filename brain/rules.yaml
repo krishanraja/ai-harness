@@ -21,7 +21,7 @@
 
 schema_version: 1
 
-# 148 rules across the two contracts and the canon block.
+# 149 rules across the two contracts and the canon block.
 contract_rules:
   - id: who-krish-is.before-proposing-material-work
     file: contract/krish-operating-contract.md
@@ -1173,6 +1173,15 @@ contract_rules:
       kind: proposal
       ref: "docs/proposals/2026-11-24-insight-desk.md"
       sha256: "AB6B2FEC97B283A1AEE719D28182763BA049BD457993CF978732D4BBD7F07B7C"
+    status: live
+  - id: collision-rules.krishanraja-strategist-builds-a
+    file: contract/skill-routing-contract.md
+    text_sha: "40a5686c99a8"
+    first_seen: "2026-11-28"
+    source:
+      kind: proposal
+      ref: "docs/proposals/2026-11-28-strategist-on-demand.md"
+      sha256: "3A3F47537464171127CB550758BBD9967A87833F421AF6B115AA775724E198D7"
     status: live
   - id: collision-rules.take-the-brief-captures
     file: contract/skill-routing-contract.md
