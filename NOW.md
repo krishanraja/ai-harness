@@ -1,8 +1,8 @@
 ---
 repo: krishanraja/ai-harness
 product: The harness
-as_of: 2026-11-27
-head: 46de221
+as_of: 2026-11-28
+head: 794b774
 lifecycle: live
 production_url: none
 state_doc: state/skill-registry.yaml
@@ -21,17 +21,13 @@ The harness is Krish's canonical cross-client AI operating layer, published in a
 
 This repository is not sold and carries no product name of its own; it is the infrastructure every other Mindmake surface runs on. It is the evidence behind the sales claim the rest of the fleet makes to a buyer: that AI agents can carry consistent judgment, bounded authority and verified execution across tools and sessions, not just inside one chat window. The harness proves that claim on Krish's own agents first, including its own governance of itself (it was added to the fleet the docs steward maintains on 2026-09-08 specifically so the canon repository is not exempt from the discipline it imposes on every other repo).
 
-## Where it is right now (as of 2026-11-27)
+## Where it is right now (as of 2026-11-28)
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
 - software-qa's registry row, the rendered neighbours table, the cloud routing and the experience quality contract now send every build to software-qa: its UI library before writing UI from scratch, its floor scan and render before presenting. No skill text changed; krish-design keeps taste and approval (docs/proposals/2026-11-27-software-qa-build-floor.md). (2026-11-27)
 - content-engine makes every Make Your Mind Up asset (carousels, memes, Notes and captions included) and growth-makeyourmindup only grows the channel, in state/fleet.yaml, the neighbours table and content-corpus's collision rules, per Krish's ruling of 2026-11-26 (docs/proposals/2026-11-26-one-engine.md). (2026-11-26)
-- The mm-ctrl entry reads docs/NORTH_STAR.md, with dated change rows recording that it supersedes the retired AGENT_BRIEFING.md pointer. (2026-11-26)
-- the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
 - apple-design is admitted as production skill 35, a contrarian second voice beside krish-design; krish-design's trigger now leads with ordinary review and redesign words, which took blind routing precision from 0.90 to 0.947 with recall 1.00, and canary round 3 passed 4 of 4. The Perplexity account text changed, so one paste is owed there. (2026-11-25)
-- the cloud account routing names every neighbour in the capabilities table at the moment it should be called, and sends creative, brand and brainstorming work to approved taste, divergence, the council, the strategist and the humour engine before the first idea; software-qa's route is in the registry. (2026-11-25)
-- state/fleet.yaml carries a registry of every repository Krish owns (scope, layer, role, venture, what each can do and when), rendered as krish-principles references/capabilities.md and state/ventures.json; the registry, steward manifest and canon carry Krish's approved names, each old name kept as an alias. (2026-11-24)
 - internal-auditor merges every fleet repository's green pull request by Krish or his bots and its own green fixes, and may close and delete branches idle 7 days or more with each head sha recorded first; the council protocol carries seven discipline rules; insight-desk is production skill 34 and revenue-desk is a staged candidate. (2026-11-23 to 2026-11-24)
 - **Release, surfaces and credentials.** Read the latest approved release from `state/skill-registry.yaml` and the surface table from `CURRENT.md`, not from this line; read `state/heartbeats.json` before trusting a sync. The two supervised Claude accounts need the one-time setup, Codex Cloud an environment refresh, and `claude-secondary-cloud` is unknown. The credential exposure opened 2026-09-12 is in approved remediation, not closed (`state/credential-exposure-2026-09-12.md`). (2026-11-15)
 - <!-- skill-review-state {"as_of":"2026-11-28","overdue":9,"total":35,"oldest":[{"name":"apify","days":47},{"name":"n8n-operator","days":47},{"name":"decision-ledger","days":46},{"name":"design-intelligence-search","days":46}]} --> **Skill review dates.** Written by `scripts/skill-reviews.mjs` from `state/skill-registry.yaml` on 2026-11-28: 9 of 35 skills are past their freshness SLA, led by `apify` (47 days), `n8n-operator` (47 days), `decision-ledger` (46 days), `design-intelligence-search` (46 days). A date moves only when a change to the skill carries Krish's ruling.
@@ -54,10 +50,10 @@ This repository is not sold and carries no product name of its own; it is the in
 ## What is next and what is waiting on Krish
 
 - Next (2026-11-27): measure whether the floor cuts repeat design corrections, by tagging which corrections in the taste ledger and harness observations a floor rule would have caught.
-- Waiting on a person: seven now-notes of 2026-11-25 on apple-design have a heading line the fold cannot place, so they stay in now-notes/ unfolded; their content is in the apple-design bullet above.
+- Waiting on a person: none. The seven now-notes of 2026-11-25 on apple-design had a heading line the fold could not place; the heading lines are removed so the next fold takes them.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (carried forward, unverified since 2026-11-12, reviewed for this page 2026-11-27; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
-- Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
-- Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (8 of 35, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
+- Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29, reviewed for this page 2026-11-28; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
+- Waiting on Krish (carried forward from 2026-11-03, unverified since; reviewed for this page 2026-11-24): whether `tool-router` goes back on Codex from the current `candidates/tool-router`, and admission decisions for `tool-router`, `tool-economics` and `consumer-app-outcomes` (`docs/proposals/2026-10-19-tool-router.md`, `docs/proposals/2026-10-19-tool-economics.md`, `docs/proposals/2026-09-25-consumer-app-outcomes.md`); the expired skill reviews (9 of 35, per the Skill review dates line above); the manual cloud uploads; closing the credential-exposure lifecycle.
 - North Star check (2026-11-27): holds.
 
 ## Read next

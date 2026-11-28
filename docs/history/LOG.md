@@ -5,6 +5,18 @@ rolls entries out of `NOW.md`'s "What changed recently" into this file when they
 pass 30 days, and adds a line whenever a document is superseded, banners or
 moved. Nothing here is ever rewritten.
 
+## 2026-11-28
+
+- stamped: `NOW.md` audit findings fixed (`where_too_many`, `unfolded_notes`, `old_dated_claims`): "Where it is right now" cut to 7 bullets, the 4 older ones rolled below; head moved to 794b774; heading lines removed from seven malformed 2026-11-25 closeout notes so the fold can place them.
+
+- rolled from NOW.md: The mm-ctrl entry reads docs/NORTH_STAR.md, with dated change rows recording that it supersedes the retired AGENT_BRIEFING.md pointer. (2026-11-26)
+
+- rolled from NOW.md: the root of state/ holds only the truth files and the open credential exposure record; 50 dated one-off reports from August and September 2026 live in state/history/, every citing path is rewritten, and state/README.md maps truth files, evidence folders and history. (2026-11-26)
+
+- rolled from NOW.md: the cloud account routing names every neighbour in the capabilities table at the moment it should be called, and sends creative, brand and brainstorming work to approved taste, divergence, the council, the strategist and the humour engine before the first idea; software-qa's route is in the registry. (2026-11-25)
+
+- rolled from NOW.md: state/fleet.yaml carries a registry of every repository Krish owns (scope, layer, role, venture, what each can do and when), rendered as krish-principles references/capabilities.md and state/ventures.json; the registry, steward manifest and canon carry Krish's approved names, each old name kept as an alias. (2026-11-24)
+
 ## 2026-11-26
 
 - stamped: `NOW.md` audit findings fixed (`too_long`, `where_too_many`) by condensing "Where it is right now" to 7 bullets and rolling the older ones below; head moved to a2ed707; skill count corrected to 35 (apple-design admitted).
