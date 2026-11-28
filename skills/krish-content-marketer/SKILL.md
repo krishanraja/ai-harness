@@ -91,6 +91,7 @@ Do not treat a familiar example or old successful asset as proof that its volati
 | Problem | Owner |
 |---|---|
 | What the asset should argue or how it should convert | this skill |
+| The strategy argument upstream (positioning, value proposition, brand narrative, offer, the test a change must pass) | `krishanraja/strategist`, before this skill shapes the conversion structure |
 | How final prose should sound | `krish-voice` |
 | What a named channel is for | `content-corpus` |
 | Current Mindmake/CTRL offer or ICP truth | `mindmake` |

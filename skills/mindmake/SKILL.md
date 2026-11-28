@@ -71,6 +71,7 @@ Keep these principles stable unless Krish explicitly changes them:
 |---|---|
 | Live mind/make OS state | `mindmake-os`, not this skill |
 | Commercial strategy or angle | this context -> `strategy-brief` -> `krish-content-marketer` |
+| The strategy argument and test for a Mindmake change (positioning, value proposition, offer, the site rebuild, MVP qualification) | this context -> `krishanraja/strategist`, which reads these facts and never restates them |
 | Named-channel context | this context when relevant -> `content-corpus` |
 | Final prose in Krish's voice | `krish-voice` |
 | Product/interface design | this context -> `krish-design` |

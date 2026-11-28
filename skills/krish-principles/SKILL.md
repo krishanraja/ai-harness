@@ -28,6 +28,7 @@ Route ownership precisely:
 - prose in Krish's name -> `krish-voice`, which owns the mechanics and kill list; channel intent -> `content-corpus`; conversion intent -> `krish-content-marketer`;
 - interface direction -> pass the commercial outcome, downside lane, and smallest useful surface to `krish-design`, which owns taste and interaction decisions;
 - implementation -> pass the intended outcome and mechanism-level assumptions to the narrow producer/tool chosen by `strategy-brief`; `krish-build` owns technical production and observed-behavior proof follows it;
+- a venture's strategy argument and its test (positioning, a value proposition, a brand narrative, an offer or price to test, MVP qualification, a stalled number) -> `krishanraja/strategist`, through its router (`npx tsx src/cli.ts route "<the job>"`, its AGENTS.md); principles frames the call, the strategist builds the argument and the test, and the producers here write and design it;
 - outcome proof and correction -> `verification-loop`;
 - a finalized consequential choice worth remembering -> `decision-ledger` after the decision, never as a substitute for deciding.
 
