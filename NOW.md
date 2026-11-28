@@ -25,6 +25,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 <!-- north-star-state {"week_of":"2026-11-16","week_target":18,"current":29,"current_as_of":"2026-11-26","current_source":"state/observations: taste ledger repeats + harness correction clusters","urgency":4,"urgency_reason":"not measured: taste ledger not yet read for this week"} --> **North Star number: U4.** Corrections Krish had to give twice in a week, across the fleet: 29 in the week of 2026-11-16 (29 from the taste ledger, 0 from the harness's own corrections), measured 2026-11-26.
 
+- The insight-desk collision rule names the strategist as the grader of each idea a sheet returns (`qualify from-sheet`), so it agrees with the strategist rule added in #331. (2026-11-28)
 - The cloud routing and the neighbours table send any strategy job, big or small, to the strategist's router (`src/cli.ts route`) and its MVP gate (`qualify check`), per docs/proposals/2026-11-28-strategist-on-demand.md. (2026-11-28)
 - with Krish's yes, krishanraja/software-qa's vendored upstream apple-design copy (131 files) is replaced by a one-file pointer that loads the live skill and its references through get_skill (dfa149d). One home now holds the skill, and the candidate record is updated. (2026-11-25)
 - software-qa's registry row, the rendered neighbours table, the cloud routing and the experience quality contract now send every build to software-qa: its UI library before writing UI from scratch, its floor scan and render before presenting. No skill text changed; krish-design keeps taste and approval (docs/proposals/2026-11-27-software-qa-build-floor.md). (2026-11-27)
@@ -51,7 +52,7 @@ This repository is not sold and carries no product name of its own; it is the in
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-28): krishanraja/strategist#23 merges, then the Mindmake site and value proposition rebuild runs through it.
+- Next (2026-11-28): run the Mindmake site and value proposition rebuild through the strategist's router.
 - Waiting on a person: none. The seven now-notes of 2026-11-25 on apple-design had a heading line the fold could not place; the heading lines are removed so the next fold takes them.
 - Waiting on Krish: add `CONTENT_ENGINE_KEY` so the harness can confirm the digest reached the Control Center queue (carried forward, unverified since 2026-11-12, reviewed for this page 2026-11-27; `ANTHROPIC_API_KEY` works, the judge measured pull request 209 on 2026-11-09); add `CLAUDE_CODE_OAUTH_TOKEN` to Heartside and Legibility for the nightly steward.
 - Waiting on Krish: rule on `docs/harness/VPS-ROLE-2026-10-03.md` (carried forward from 2026-10-03, still open per the last record on 2026-11-13, not rechecked since 2026-10-29, reviewed for this page 2026-11-28; the Lozatron sandbox container was stopped then), and on founder visibility (commit `88a059d`).
