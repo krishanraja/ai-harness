@@ -446,9 +446,9 @@ registry:
     scope: in
     layer: specialist
     role: The one strategy brain, anchored on the Ikigai. Weekly board through the council, three recovery plays for any U5.
-    capability: Turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules.
-    call: It reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall.
-    when: A number is at U4 or U5, growth and product disagree, or an idea needs a test rather than a plan.
+    capability: Answers any strategy job, big or small, with its own methods (positioning, value proposition, offer and pricing, buyer evidence, page review, unit economics, pre-mortem, a site and value proposition rebuild), qualifies every MVP before it gets a week of build, and turns a stalled number or an idea into plays and one-week tests, tested against the Ikigai's decision rules.
+    call: Attach krishanraja/strategist to the session and run npx tsx src/cli.ts route "<the job>" from its root, then follow the methods it names; MVP cards go in its state/mvps and pass qualify check. It also reads every North Star weekly and any U5 within 24 hours; put a decision for the board to Control Center as an engine proposal behind the strategy wall.
+    when: A value proposition, positioning, an offer or price, a page or site rebuild, an MVP or idea to qualify, a number at U4 or U5, or growth and product disagree.
   - name: divergence-engine
     scope: in
     layer: specialist

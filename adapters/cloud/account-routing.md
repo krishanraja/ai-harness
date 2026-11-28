@@ -9,6 +9,7 @@ Creative, brand, naming, positioning or brainstorming work (a rebrand, a name, a
 
 Use the narrowest owner:
 - Research: evidence-research. Final decisions: decision-ledger. A council read, when I ask for the council or name one of its seats, or when the strategist convenes it as my weekly board or on a U5: council.
+- Strategy for any venture, big or small (a value proposition, positioning, an offer or price, a page or site rebuild, an MVP or idea to qualify, a stalled number): the strategist repository. Attach krishanraja/strategist, run `npx tsx src/cli.ts route "<the job>"` from its root and follow the methods it names; every MVP passes its `qualify check` before a week of build. It proposes; the producers below write and design.
 - Commercial Mindmake: mindmake. OS, fleet, Supabase and live state: mindmake-os.
 - Prospecting and growth for a product: its growth engine's repository, read with get_venture_state (growth-mindmake for Mindmake, growth-makeyourmindup for makeyourmindup); the product repositories build the product only.
 - Conversion strategy: krish-content-marketer. Channel fit: content-corpus. My final prose: krish-voice. A venture's own post captions: ad-copywriter. A growth engine's weekly ideas behind its number, before any words: insight-desk.
