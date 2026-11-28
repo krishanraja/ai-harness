@@ -394,5 +394,11 @@
     "subject": "# lines in 97 files",
     "first_seen": "2026-11-26",
     "open": true
+  },
+  "freshness:locked-revision": {
+    "klass": "freshness",
+    "subject": "locked-revision",
+    "first_seen": "2026-11-28",
+    "open": true
   }
 }
