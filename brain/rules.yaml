@@ -3240,11 +3240,18 @@ skill_sections:
   - id: krish-content-marketer.routing-and-collisions
     file: skills/krish-content-marketer/SKILL.md
     heading: "Routing and collisions"
-    text_sha: "a46ffe1a7846"
+    text_sha: "c5000d6e8ae9"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-28-skills-name-the-strategist.md"
+      sha256: "C58C70AAC088CE3B52742F952ABDC783982F025D12CE452482D8001FE5DE1836"
+    history:
+      - text_sha: "a46ffe1a7846"
+        valid_until: "2026-11-28"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-content-marketer.authority-boundaries
     file: skills/krish-content-marketer/SKILL.md
@@ -3391,18 +3398,24 @@ skill_sections:
   - id: krish-design.routing-and-handoffs
     file: skills/krish-design/SKILL.md
     heading: "Routing and handoffs"
-    text_sha: "62732e73ffea"
+    text_sha: "ea18b03abc61"
     first_seen: "2026-09-07"
     source:
       kind: proposal
-      ref: "docs/proposals/2026-11-25-apple-design.md"
-      sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
+      ref: "docs/proposals/2026-11-28-skills-name-the-strategist.md"
+      sha256: "C58C70AAC088CE3B52742F952ABDC783982F025D12CE452482D8001FE5DE1836"
     history:
       - text_sha: "d81df9279a56"
         valid_until: "2026-11-25"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "62732e73ffea"
+        valid_until: "2026-11-28"
+        source:
+          kind: proposal
+          ref: "docs/proposals/2026-11-25-apple-design.md"
+          sha256: "AF5DC48E3B09A5F938C3B64CAB12950FE837A19C9733F2F8079B1275B4DCAEEF"
     status: live
   - id: krish-design.7-visual-qa-the
     file: skills/krish-design/SKILL.md
@@ -3434,11 +3447,18 @@ skill_sections:
   - id: krish-principles.application-contract
     file: skills/krish-principles/SKILL.md
     heading: "Application contract"
-    text_sha: "e49a2d41ae2e"
+    text_sha: "0d4bae110b1f"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-28-skills-name-the-strategist.md"
+      sha256: "C58C70AAC088CE3B52742F952ABDC783982F025D12CE452482D8001FE5DE1836"
+    history:
+      - text_sha: "e49a2d41ae2e"
+        valid_until: "2026-11-28"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: krish-principles.who-krish-is
     file: skills/krish-principles/SKILL.md
@@ -3870,17 +3890,23 @@ skill_sections:
   - id: mindmake.routing-and-collisions
     file: skills/mindmake/SKILL.md
     heading: "Routing and collisions"
-    text_sha: "46d578010c61"
+    text_sha: "58b6e6dd8ab9"
     first_seen: "2026-09-07"
     source:
-      kind: ruling
-      ref: "b2db7d6a717b"
+      kind: proposal
+      ref: "docs/proposals/2026-11-28-skills-name-the-strategist.md"
+      sha256: "C58C70AAC088CE3B52742F952ABDC783982F025D12CE452482D8001FE5DE1836"
     history:
       - text_sha: "9c44e0866bed"
         valid_until: "2026-11-18"
         source:
           kind: founding
           ref: "a3d2f3706a87"
+      - text_sha: "46d578010c61"
+        valid_until: "2026-11-28"
+        source:
+          kind: ruling
+          ref: "b2db7d6a717b"
     status: live
   - id: mindmake.authority-boundaries
     file: skills/mindmake/SKILL.md
@@ -4089,11 +4115,18 @@ skill_sections:
   - id: strategy-brief.routing-rules-for-common
     file: skills/strategy-brief/SKILL.md
     heading: "Routing rules for common collisions"
-    text_sha: "930821f05717"
+    text_sha: "b049f8a411e9"
     first_seen: "2026-09-07"
     source:
-      kind: founding
-      ref: "a3d2f3706a87"
+      kind: proposal
+      ref: "docs/proposals/2026-11-28-skills-name-the-strategist.md"
+      sha256: "C58C70AAC088CE3B52742F952ABDC783982F025D12CE452482D8001FE5DE1836"
+    history:
+      - text_sha: "930821f05717"
+        valid_until: "2026-11-28"
+        source:
+          kind: founding
+          ref: "a3d2f3706a87"
     status: live
   - id: strategy-brief.access-and-policy-boundaries
     file: skills/strategy-brief/SKILL.md

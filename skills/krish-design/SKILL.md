@@ -187,6 +187,7 @@ Across any series (dossiers, episode assets, workshop pages): hold the structura
 | Locked implementation or routine visual repair | `krish-build` with artifact revision, state fixtures, viewports, and visual checks -> `verification-loop` |
 | Read-only deployed UX audit | `ux-testing-agent`; supply this doctrine only as evaluation context and require reproducible evidence with route, viewport, revision, steps, expected result, observed result, and artifact |
 | Final on-page words | `krish-voice` |
+| What a page, site or brand must argue, and whether a change earns a test | `krishanraja/strategist` (its value proposition, brand narrative and page review methods) before design; this owner keeps taste and interaction decisions, and the strategist's page review hands its design findings here |
 | Generic accessibility/usability lookup | `ux-foundations` beneath this personalized design owner |
 | Any screen, flow or artifact for an iPhone, iPad or Mac app, native or cross-platform | `apple-design` loads beside this owner as the contrarian Apple second voice (Ruling, Krish, 2026-11-25): it argues Apple's side with page-and-heading citations, and this owner decides |
 | Bounded pattern, palette, type, landing, chart, motion, or mobile-web candidate retrieval for one named concept arm | `design-intelligence-search` beneath this personalized design owner; retain taste and standards authority here |
