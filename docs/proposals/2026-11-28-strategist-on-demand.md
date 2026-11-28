@@ -30,6 +30,10 @@ The strategist's capability row read, until 2026-11-28: "Turns a stalled number 
 
 The judge panel's first read (2026-11-28) found the first wording ("any strategy job, big or small") contradicted the narrowest-skill rule and overlapped krish-design. The routing contract now names the boundary: the strategist owns the argument and the test; design-only and copy-only jobs go to their producers, and strategy-brief still plans each session. The router and gate are pinned to the strategist revision read on 2026-11-28.
 
+## Follow-up after merge
+
+krishanraja/strategist#23 and #24 merged to its main on 2026-11-28 (main at b163cd7 that day), so the route the row pins is on main. The insight-desk collision rule now names the strategist as the grader of each idea a sheet returns, so the two rules agree on who judges an idea.
+
 ## Walls
 
 Nothing widens. The strategist proposes; it never writes a venture's final words or designs, and never ships, sends, posts or spends.
