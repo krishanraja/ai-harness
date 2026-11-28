@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-27T05:48:20.738Z",
-  "measurement_verification_at": "2026-11-27T05:48:20.594Z",
+  "generated_at": "2026-11-28T03:51:54.019Z",
+  "measurement_verification_at": "2026-11-28T03:51:53.905Z",
   "sources": {
     "github": {
       "status": "available",
@@ -21,7 +21,7 @@
       "status": "configured-unverified"
     }
   },
-  "unknown_repository_observations": 438,
+  "unknown_repository_observations": 441,
   "repositories": [
     {
       "repository": "AEO-Engine",
@@ -32,9 +32,9 @@
       "unknown_coverage": true,
       "delivery": "awaiting-checks",
       "brain_revision": "5ca09cc3df52",
-      "source_base": "f770071b08126e53ffdf98e7ccd9645e31d3d6da",
-      "bootstrap_before": 28804,
-      "bootstrap_after": 28804,
+      "source_base": "6388eb07d68526e972a0a3b4f0cd4d1a546536b7",
+      "bootstrap_before": 28841,
+      "bootstrap_after": 28841,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -61,7 +61,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 236,
+      "candidates": 237,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
@@ -94,13 +94,13 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 657,
+      "candidates": 661,
       "unknown_coverage": true,
       "delivery": "current",
       "brain_revision": "aabfeac6c45f",
-      "source_base": "e16387c8b79870aa2db9f1455de5d3b65d091742",
-      "bootstrap_before": 486048,
-      "bootstrap_after": 486048,
+      "source_base": "631c058bbaccde0d0c72d59c123d1409dfb27f21",
+      "bootstrap_before": 487387,
+      "bootstrap_after": 487387,
       "observed_use": {
         "loaded": 0,
         "application_checks": 0,
@@ -523,7 +523,7 @@
       "delivered_episodes": 0,
       "last_delivered": null,
       "accepted": 4,
-      "candidates": 56,
+      "candidates": 57,
       "unknown_coverage": true,
       "delivery": "awaiting-pilots",
       "brain_revision": null,
