@@ -16,6 +16,12 @@ This change records that route where sessions look:
 - `adapters/cloud/account-routing.md`: one line under "Use the narrowest owner" sends any strategy job to the strategist, and keeps the producers as the writers and designers.
 - `scripts/test-account-sync.mjs`: a case holds the line.
 
+## The insight desk, wired in
+
+Krish, 2026-11-28: "can we make sure the insight-desk in ai-harness is integrated automatically in to this too? I feel like it is powerful but is hidden away. Maybe it needs to be moved in to the strategist repo?"
+
+It stays here: `get_skill` serves it to every surface and every growth engine's `config/insight-desk.json` points at it, and one writer of ideas with the strategist as their judge is the routing contract's shape. krishanraja/strategist#24 makes the strategist's router call it first for any job that needs ideas, and `qualify from-sheet` brings each idea back to be judged. The cloud routing line for insight-desk widens from growth engines only to any venture's ideas, including a strategist route.
+
 ## Walls
 
 Nothing widens. The strategist proposes; it never writes a venture's final words or designs, and never ships, sends, posts or spends.
