@@ -1,11 +1,11 @@
 {
   "harness-sync-lorimer": {
-    "last_run": "2026-11-27T07:31:36.498Z",
+    "last_run": "2026-11-28T07:31:37.019Z",
     "status": "blocked",
-    "release": "v2026.11.26.1",
+    "release": "v2026.11.27.1",
     "reason": "unclassified-skill-directory",
     "failing_since": "2026-11-14T08:36:48.728Z",
-    "failing_runs": 12,
+    "failing_runs": 13,
     "reasons": [
       {
         "reason": "canary-failed",
